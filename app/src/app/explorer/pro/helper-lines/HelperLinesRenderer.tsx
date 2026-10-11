@@ -31,10 +31,14 @@ function HelperLinesRenderer({ horizontal, vertical }: HelperLinesProps) {
     }
 
     const dpi = window.devicePixelRatio;
-    canvas.width = width * dpi;
-    canvas.height = height * dpi;
-
-    ctx.scale(dpi, dpi);
+    // Only resize when the pane size really changes; resizing a canvas wipes and reallocates it (that flashed in Chrome).
+    if (canvas.width !== Math.round(width * dpi) || canvas.height !== Math.round(height * dpi)) {
+      canvas.width = Math.round(width * dpi);
+      canvas.height = Math.round(height * dpi);
+    }
+    ctx.setTransform(dpi, 0, 0, dpi, 0, 0);
+    ctx.clearRect(0, 0, width, height);
+    if (!vertical && !horizontal) return;
     ctx.strokeStyle = DEFAULT_COLOR;
 
     if (vertical) {
@@ -65,7 +69,10 @@ function HelperLinesRenderer({ horizontal, vertical }: HelperLinesProps) {
     }
   }, [width, height, transform, horizontal, vertical]);
 
-  return <canvas ref={canvasRef} className="react-flow__canvas" />;
+  return (
+    <canvas ref={canvasRef} className="react-flow__canvas" aria-hidden
+      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', zIndex: 10, pointerEvents: 'none' }} />
+  );
 }
 
 export default HelperLinesRenderer;
