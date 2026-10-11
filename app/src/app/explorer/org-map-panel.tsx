@@ -1,8 +1,16 @@
 'use client';
 
-import { Background, Controls, MiniMap, Panel, ReactFlow, type Edge, type Node, type ReactFlowInstance } from '@xyflow/react';
+import {
+  Background, Controls, Handle, MiniMap, Panel, Position, ReactFlow, ReactFlowProvider, applyEdgeChanges, applyNodeChanges, useReactFlow,
+  type Edge, type Node, type NodeProps, type OnEdgesChange, type OnNodesChange, type ReactFlowInstance,
+} from '@xyflow/react';
+import Shape from './pro/shape';
+import type { ShapeType } from './pro/shape/types';
+import { useHelperLines } from './pro/helper-lines/useHelperLines';
+import { RoutableEdgeComponent } from './pro/edge-routing/RoutableEdge';
+import { useLibavoid } from './pro/edge-routing/use-libavoid';
 import { useTheme } from 'next-themes';
-import { useCallback, useMemo, useRef, useState, type CSSProperties } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState, type ComponentProps, type CSSProperties, type ReactNode } from 'react';
 
 import { Button } from '@/components/ui/button';
 import { usePoll } from '@/hooks/use-poll';
@@ -66,6 +74,54 @@ function card(n: OrgNode) {
   );
 }
 
+/** React Flow Pro "Shapes": each kind of box gets its own outline so you can tell them apart at a glance. */
+const SHAPE: Record<string, [ShapeType, number, number, string]> = {
+  director: ['diamond', 320, 132, '30px 70px'],
+  conductor: ['hexagon', 290, 96, '14px 40px'],
+  hub: ['circle', W, 86, '18px 34px'],
+  toolkit: ['cylinder', W, 84, '20px 14px 6px'],
+  local: ['cylinder', W, 84, '20px 14px 6px'],
+  skill: ['parallelogram', W, 72, '8px 30px'],
+  rule: ['arrow-rectangle', W, 76, '8px 30px 8px 12px'],
+  hook: ['arrow-rectangle', W, 76, '8px 30px 8px 12px'],
+  check: ['arrow-rectangle', W, 76, '8px 30px 8px 12px'],
+};
+type OrgNodeData = { label: ReactNode; shape?: ShapeType; stroke?: string; fill?: string; open?: boolean; pad?: string };
+function OrgNodeView({ data, width, height }: NodeProps) {
+  const d = data as OrgNodeData;
+  return (
+    <div className="relative h-full w-full">
+      {d.shape && width && height ? (
+        <div className="pointer-events-none absolute" style={{ left: 0, top: 0 }} aria-hidden>
+          <Shape type={d.shape} width={width} height={height} strokeWidth={1.5} style={{ fill: d.fill, stroke: d.stroke }} />
+        </div>
+      ) : null}
+      <div className="relative" style={d.pad ? { padding: d.pad } : undefined}>{d.label}</div>
+      <Handle id="1" type="target" position={Position.Top} isConnectable={false} style={{ opacity: 0, pointerEvents: 'none' }} />
+      <Handle id="2" type="source" position={Position.Bottom} isConnectable={false} style={{ opacity: 0, pointerEvents: 'none' }} />
+    </div>
+  );
+}
+const NODE_TYPES = { org: OrgNodeView };
+const EDGE_TYPES = { routable: RoutableEdgeComponent };
+
+function finish(nodes: Node[], byId: Map<string, OrgNode>) {
+  for (const n of nodes) {
+    if (n.id.startsWith('lane:')) continue;
+    n.type = 'org';
+    const o = byId.get(n.id);
+    const sh = o ? SHAPE[o.kind] : undefined;
+    if (!sh) continue;
+    const st = (n.style ?? {}) as CSSProperties;
+    const [type, w, h, pad] = sh;
+    n.data = { ...n.data, shape: type, pad, stroke: String(st.border ?? '').match(/#[0-9a-f]{3,8}/i)?.[0] ?? '#3a3a3a',
+      fill: ['director', 'conductor', 'hub'].includes(o!.kind) ? 'rgba(255,0,113,0.10)' : 'hsl(var(--card))' };
+    n.style = { ...st, width: w, height: h, padding: 0, border: 'none', background: 'transparent', borderRadius: 0,
+      filter: st.boxShadow ? 'drop-shadow(0 0 10px rgba(255,0,113,0.55))' : undefined, boxShadow: undefined };
+  }
+  return nodes;
+}
+
 function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
   const nodes: Node[] = [];
   const bandY: Record<string, number> = {};
@@ -81,7 +137,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
     const bad = n.status === 'broken' || n.status === 'conflict';
     return {
       width: W, borderRadius: ['director', 'conductor'].includes(n.kind) ? 999 : ['hub', 'toolkit', 'local'].includes(n.kind) ? 22 : 10, padding: '6px 9px', color: 'inherit',
-      background: ['you', 'director', 'conductor', 'hub'].includes(n.kind) ? 'rgba(255,0,113,0.10)' : 'var(--card, #1a1a1a)',
+      background: ['you', 'director', 'conductor', 'hub'].includes(n.kind) ? 'rgba(255,0,113,0.10)' : 'hsl(var(--card))',
       border: `1.5px solid ${hot ? '#ff0071' : bad ? '#ff0071' : n.status === 'you' || n.status === 'watch' ? '#f5a524' : '#3a3a3a'}`,
       boxShadow: hot ? '0 0 18px rgba(255,0,113,0.45)' : undefined,
       opacity: dim && !hot && !near ? 0.25 : 1,
@@ -89,6 +145,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
     };
   };
   let y = 0;
+  const placedX = new Map<string, number>();
   for (const [layer, title] of map.layers) {
     const list = map.nodes.filter((n) => n.layer === layer);
     if (layer === 'engine') {
@@ -142,8 +199,8 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
         const bad = ms.filter((m) => m.status === 'broken' || m.status === 'you').length;
         const gid = `project:${name}`;
         nodes.push({
-          id: gid, position: { x: gx, y: gy }, draggable: false,
-          data: { label: (
+          id: gid, position: { x: gx, y: gy },
+          data: { open: isOpen, label: (
             <div className="text-left">
               <div className="flex items-center gap-2 text-[12px] font-semibold"><span aria-hidden>{isOpen ? '▾' : '▸'}</span>{name}</div>
               <div className="text-muted-foreground text-[10px] tabular-nums">{ms.length} mission{ms.length === 1 ? '' : 's'}{bad ? ` · ${bad} stuck or need you` : ''}{isOpen ? '' : ' · click to open'}</div>
@@ -154,7 +211,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
             opacity: focus.size && !focus.has(gid) && !ms.some((m) => focus.has(m.id) || neighbors.has(m.id)) ? 0.35 : 1 },
         });
         if (isOpen) ms.forEach((m, i) => nodes.push({
-          id: m.id, parentId: gid, extent: 'parent', draggable: false,
+          id: m.id, parentId: gid, extent: 'parent',
           position: { x: GAP + (i % cols) * (W + GAP), y: 40 + Math.floor(i / cols) * ROW },
           data: { label: card(m) }, style: style(m),
         }));
@@ -166,15 +223,27 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
     nodes.push({ id: `lane:${layer}`, position: { x: 0, y: y - 24 }, selectable: false, draggable: false, data: { label: title },
       style: { width: 600, border: 'none', background: 'transparent', padding: 0, fontSize: 12, color: '#ff4d9a', textAlign: 'left' } });
     const order = ['rule', 'hook', 'check', 'card', 'director', 'conductor', 'mission', 'skill', 'agent', 'hub', 'toolkit', 'local'];
-    const sorted = [...list].sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind));
+    // Auto-layout ordering (the idea behind the Pro "Auto Layout" layered engines): put each box under the
+    // boxes it connects to above it, so lines run short and straight instead of crossing the whole map.
+    const bary = (n: OrgNode) => {
+      const xs = map.edges.filter((e) => e.source === n.id || e.target === n.id)
+        .map((e) => placedX.get(e.source === n.id ? e.target : e.source)).filter((v): v is number => v !== undefined);
+      return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : Number.POSITIVE_INFINITY;
+    };
+    const sorted = [...list].sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind) || bary(a) - bary(b) || a.label.localeCompare(b.label));
     const rows = Math.ceil(sorted.length / PER_ROW);
+    const rowH = Math.max(ROW, ...sorted.map((n) => (SHAPE[n.kind]?.[2] ?? 72) + 18));
     sorted.forEach((n, i) => {
       const r = Math.floor(i / PER_ROW);
       const inRow = r === rows - 1 ? sorted.length - r * PER_ROW : PER_ROW;
-      const offset = ((PER_ROW - inRow) * (W + GAP)) / 2; // center short rows so the chart reads top-down
-      nodes.push({ id: n.id, position: { x: offset + (i % PER_ROW) * (W + GAP), y: y + r * ROW }, data: { label: card(n) }, style: style(n) });
+      // Short rows are centred on the same column grid, so every column lines up top to bottom.
+      const offset = Math.floor((PER_ROW - inRow) / 2) * (W + GAP);
+      const w = SHAPE[n.kind]?.[1] ?? W;
+      const x = offset + (i % PER_ROW) * (W + GAP) - (w - W) / 2;
+      placedX.set(n.id, x + w / 2);
+      nodes.push({ id: n.id, position: { x, y: y + r * rowH }, data: { label: card(n) }, style: style(n) });
     });
-    y += rows * ROW + BAND_GAP;
+    y += rows * rowH + BAND_GAP;
   }
   // Shared rules and guards: one column on the left, the same for every app (no wires to each app).
   const shared = map.nodes.filter((n) => n.layer === 'rail-rules')
@@ -205,7 +274,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
           </div>
         </div>
       ) },
-      style: { width: 250, borderRadius: 10, padding: 8, border: '1px solid #3a3a3a', background: 'var(--card, #1a1a1a)', color: 'inherit' },
+      style: { width: 250, borderRadius: 10, padding: 8, border: '1px solid #3a3a3a', background: 'hsl(var(--card))', color: 'inherit' },
     });
   }
   const ids = new Set(nodes.map((n) => n.id));
@@ -234,7 +303,62 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
         labelStyle: red ? { fill: '#ff4d9a', fontSize: 11 } : { fontSize: 10 },
       };
     })];
-  return { nodes, edges };
+  return { nodes: finish(nodes, new Map(map.nodes.map((n) => [n.id, n]))), edges };
+}
+
+/** Draggable map with Pro helper lines (snap guides) and Pro edge routing (lines go around boxes). */
+function MapFlow({ graph, routed, onReady, children, ...rest }: {
+  graph: { nodes: Node[]; edges: Edge[] }; routed: boolean; onReady: (i: ReactFlowInstance) => void; children: ReactNode;
+} & Partial<ComponentProps<typeof ReactFlow>>) {
+  const [nodes, setNodes] = useState<Node[]>(graph.nodes);
+  const [edges, setEdges] = useState<Edge[]>(graph.edges);
+  const moved = useRef(new Map<string, { x: number; y: number }>());
+  const { rebuildIndex, updateHelperLines, HelperLines } = useHelperLines();
+  const { getNodes } = useReactFlow();
+  useEffect(() => {
+    const target = graph.nodes.map((n) => (moved.current.has(n.id) ? { ...n, position: moved.current.get(n.id)! } : n));
+    let frame = 0;
+    setNodes((prev) => {
+      const old = new Map(prev.map((n) => [n.id, n]));
+      // Keep each box's measured size so React Flow does not hide and re-measure it (that was the flashing).
+      const keep = target.map((n) => { const o = old.get(n.id); return o?.measured ? { ...n, measured: o.measured } : n; });
+      const reduce = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const moves = keep.filter((n) => { const o = old.get(n.id); return o && (o.position.x !== n.position.x || o.position.y !== n.position.y); });
+      if (reduce || !moves.length || !prev.length) return keep;
+      // Slide boxes to their new spot over 300ms instead of jumping.
+      const start = performance.now();
+      const step = (t: number) => {
+        const k = Math.min(1, (t - start) / 300), e = 1 - (1 - k) ** 3;
+        setNodes((cur) => cur.map((n) => {
+          const o = old.get(n.id), to = keep.find((x) => x.id === n.id);
+          if (!o || !to) return n;
+          return { ...n, position: { x: o.position.x + (to.position.x - o.position.x) * e, y: o.position.y + (to.position.y - o.position.y) * e } };
+        }));
+        if (k < 1) frame = requestAnimationFrame(step);
+      };
+      frame = requestAnimationFrame(step);
+      return keep.map((n) => { const o = old.get(n.id); return o ? { ...n, position: o.position } : n; });
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [graph.nodes]);
+  useEffect(() => {
+    setEdges((prev) => {
+      const pts = new Map(prev.map((e) => [e.id, e.data]));
+      return graph.edges.map((e) => ({ ...e, sourceHandle: '2', targetHandle: '1', type: routed ? 'routable' : 'default', data: routed ? pts.get(e.id) : undefined }));
+    });
+  }, [graph.edges, routed]);
+  useLibavoid(routed);
+  const onNodesChange: OnNodesChange = useCallback((ch) => setNodes((ns) => applyNodeChanges(updateHelperLines(ch, ns), ns)), [updateHelperLines]);
+  const onEdgesChange: OnEdgesChange = useCallback((ch) => setEdges((es) => applyEdgeChanges(ch, es)), []);
+  return (
+    <ReactFlow {...rest} nodes={nodes} edges={edges} nodeTypes={NODE_TYPES} edgeTypes={EDGE_TYPES}
+      onNodesChange={onNodesChange} onEdgesChange={onEdgesChange} nodesConnectable={false}
+      onInit={onReady}
+      onNodeDragStop={(_, n) => { moved.current.set(n.id, n.position); rebuildIndex(getNodes()); }}>
+      {children}
+      <HelperLines />
+    </ReactFlow>
+  );
 }
 
 export function OrgMapPanel() {
@@ -244,6 +368,7 @@ export function OrgMapPanel() {
   const [busy, setBusy] = useState(false);
   const [focus, setFocus] = useState<Set<string>>(new Set());
   const [open, setOpen] = useState<Set<string>>(new Set());
+  const [routed, setRouted] = useState(true);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const flow = useRef<ReactFlowInstance | null>(null);
 
@@ -257,7 +382,8 @@ export function OrgMapPanel() {
       const res = await fetch('/api/org-map', { cache: 'no-store' });
       const body = await res.json();
       if (!res.ok) throw new Error(body.error ?? 'Map unavailable');
-      setMap(body as OrgMap);
+      const next = body as OrgMap;
+      setMap((prev) => (prev && prev.built_at === next.built_at && prev.nodes.length === next.nodes.length ? prev : next));
       setError(null);
     } catch (e) {
       setError((e as Error).message);
@@ -310,6 +436,11 @@ export function OrgMapPanel() {
             onClick={() => { setFocus(new Set()); setSelectedId(null); void flow.current?.fitView({ padding: 0.05, duration: 300 }); }}>
             Clear highlight
           </Button>
+          <Button size="sm" variant="outline" onClick={() => setRouted((r) => !r)} aria-pressed={routed}>
+            {routed ? 'Lines go around boxes' : 'Straight lines'}
+          </Button>
+          <Button size="sm" variant="outline" onClick={() => setOpen(new Set(map.nodes.map((n) => n.meta.project).filter((p): p is string => typeof p === 'string')))}>Open all customers</Button>
+          <Button size="sm" variant="outline" disabled={open.size === 0} onClick={() => setOpen(new Set())}>Close all</Button>
         </div>
 
         {map.needs_me.length > 0 && (
@@ -337,16 +468,17 @@ export function OrgMapPanel() {
           <span>Click any box for what it is, should I care, what to do.</span>
         </div>
 
-        <ReactFlow
+        <ReactFlowProvider>
+        <MapFlow
           className="min-h-0 flex-1"
-          nodes={graph.nodes}
-          edges={graph.edges}
+          graph={graph}
+          routed={routed}
           colorMode={resolvedTheme === 'dark' ? 'dark' : 'light'}
           fitView
           fitViewOptions={{ padding: 0.05 }}
           minZoom={0.05}
           proOptions={{ hideAttribution: true }}
-          onInit={(i) => { flow.current = i; }}
+          onReady={(i) => { flow.current = i; }}
           onNodeClick={(_, n) => {
             if (n.id.startsWith('project:')) {
               const name = n.id.slice(8);
@@ -418,7 +550,8 @@ export function OrgMapPanel() {
               </div>
             </Panel>
           )}
-        </ReactFlow>
+        </MapFlow>
+        </ReactFlowProvider>
       </div>
 
       <aside className="min-h-0 space-y-4 overflow-auto border-t p-4 text-sm 2xl:border-t-0 2xl:border-l">

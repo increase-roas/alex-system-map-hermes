@@ -103,6 +103,11 @@ async function layoutTopDown(nodes: Node[], edges: { id: string; source: string;
   });
 }
 
+const VIEW_LABEL: Partial<Record<ExplorerView, string>> = {
+  map: 'Map', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
+  tracing: 'Tracing', reliability: 'Reliability', maintained: 'Maintained', live: 'Live',
+};
+
 export function SystemExplorer() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [bundle, setBundle] = useState<CatalogBundle | null>(null);
@@ -305,7 +310,7 @@ export function SystemExplorer() {
                 variant={view === item ? 'default' : 'outline'}
                 onClick={() => setView(item)}
               >
-                {item === 'overview' ? 'full catalog' : item}
+                {VIEW_LABEL[item] ?? item}
               </Button>
             ),
           )}

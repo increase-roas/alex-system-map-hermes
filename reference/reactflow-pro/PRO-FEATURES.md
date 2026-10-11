@@ -1,18 +1,18 @@
 # React Flow Pro: what we have and what the map uses
 
 Downloaded 2026-10-11 from reactflow.dev (Alex's Pro account). Source zips in `zips/`, unzipped next to this file.
-Map today uses only free parts: Background, Controls, MiniMap, elkjs.
+Map uses (2026-10-11): Parent Child, Expand/Collapse, Edge Routing (vendored libavoid), Helper Lines, Shapes. Code in app/src/app/explorer/pro/.
 
 | Pro feature | Here? | Map status | Why |
 |---|---|---|---|
-| Parent Child Relation | yes | PLANNED | Customer boxes with missions inside |
-| Selection Grouping | yes | PLANNED | Group/ungroup boxes by hand |
-| Expand and Collapse | yes | PLANNED | Open or close a customer's missions |
-| Auto Layout | yes | PLANNED | Neat placement (dagre/elk/d3) |
-| Dynamic Layouting | yes | PLANNED | Layout reflows when boxes are added |
-| Edge Routing | yes | PLANNED | Lines go around boxes (libavoid) |
-| Helper Lines | yes | PLANNED | Snap guides when dragging |
-| Shapes | yes | PLANNED | Diamond = Director, circle = connector, etc |
+| Parent Child Relation | yes | IN MAP | Customer boxes with missions inside |
+| Selection Grouping | yes | NOT NEEDED YET | Groups come from Director data, not hand grouping |
+| Expand and Collapse | yes | IN MAP | Open or close a customer's missions |
+| Auto Layout | yes | NOT NEEDED YET | Map already places boxes in fixed rows; revisit if rows get crowded |
+| Dynamic Layouting | yes | NOT NEEDED YET | Layout reflows when boxes are added |
+| Edge Routing | yes | IN MAP | Lines go around boxes (libavoid) |
+| Helper Lines | yes | IN MAP | Snap guides when dragging |
+| Shapes | yes | IN MAP | Diamond = Director, circle = connector, etc |
 | AI Workflow Editor | yes (older download) | LATER | Full editor app; idea source, not needed now |
 | Node Position Animation | no | LATER | Smooth slide on layout change |
 | Undo and Redo | no | LATER | Undo a bad drag |
