@@ -1,0 +1,68 @@
+{
+  "at": "2026-10-10T13:20:33.384887+00:00",
+  "event": "cache_false_success_removed_bound_helper_written",
+  "delivery_id": "browser-build-bound-correction-20261010-1320",
+  "session_id": 59873,
+  "transcript_records": 1304,
+  "verified_source_changes": [
+    "SKIP_ACCEPTANCE_BUILD marker absent from acceptance runner",
+    "test_build_quality now invokes run_npm_build_bounded and returns failure without fabricated build exit",
+    "lint/type remain null if build fails; not synthesized as success",
+    "new tools/bounded_npm_build.py exists"
+  ],
+  "bounds_source": [
+    {
+      "file": "tools/bounded_npm_build.py",
+      "line": 45,
+      "text": "combined, _ = proc.communicate(timeout=timeout_s)"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 19,
+      "text": "BUILD_DEADLINE_S = 600"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 20,
+      "text": "ACCEPTANCE_OVERALL_DEADLINE_S = 3600"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 26,
+      "text": "BROWSER_TIMEOUT_S = 900"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 98,
+      "text": "timeout_s=BUILD_DEADLINE_S,"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 112,
+      "text": "lint = run_bounded(['npm', 'run', 'lint'], cwd=str(APP), timeout=600, env=env)"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 113,
+      "text": "tsc = run_bounded(['npx', 'tsc', '-p', 'tsconfig.json', '--noEmit'], cwd=str(APP), timeout=600, env=env)"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 131,
+      "text": "proc.wait(timeout=2)"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 145,
+      "text": "timeout=BROWSER_TIMEOUT_S,"
+    },
+    {
+      "file": "tools/browser_sync_recovery_acceptance.py",
+      "line": 222,
+      "text": "if time.monotonic() - acceptance_started > ACCEPTANCE_OVERALL_DEADLINE_S:"
+    }
+  ],
+  "verification_limit": "Source inspection only, runtime bounds/cleanup incl exited leader and successful build/lint/type/served binding still unverified. Old sleep-helper timeout test and plain browser subprocess remain insufficient full cleanup proof.",
+  "next_action": "Leave active owner implementation; verify actual bounded result then independent browser/backend review.",
+  "full_completion": false
+}

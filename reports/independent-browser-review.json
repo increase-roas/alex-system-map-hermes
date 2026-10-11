@@ -1,0 +1,130 @@
+{
+  "review_id": "independent-browser-review-20261010-0548",
+  "reviewed_at": "2026-10-10T05:48:26.188292+00:00",
+  "owner_receipt_at": "2026-10-10T05:47:12.193Z",
+  "owner_receipt_sha256": "77f81bd9f8216ebaed58b1c82e513ed233d24e05aa10f36c85f9913e0d4f4f79",
+  "disposition": "PARTIAL_BROWSER_SMOKE_PROOF_ONLY",
+  "method": "Source/receipt/hash verification plus direct inspection of overview-light, reliability and tracing screenshots; no active browser control or app mutation.",
+  "source_binding": true,
+  "screenshots": [
+    {
+      "path": "reports/browser-proof/01-explorer-overview-light.png",
+      "sha256": "58e0ccfe4a9e03c5dc3c3174ede02a4ce829129747fd45d97ce2f6f8e9480b77",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/02-explorer-overview-dark.png",
+      "sha256": "ef0e738cbddc078b758f44ab85f67f856d7864ba38eb76b2d007ec7225506724",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/view-subsystem.png",
+      "sha256": "2755a03d13ea4b7062b85c4def24c693fb61e2e985481a014847f51a340c2b21",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/view-files.png",
+      "sha256": "9c456d51965a25b709c856942b9fed395884b2156a7ecd46392f4d7cd666529a",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/view-problems.png",
+      "sha256": "8d5db0fe2a96a555288a7295207b11097ee8f9af755c84edfcf9c86ced1a9eba",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/view-workflows.png",
+      "sha256": "6c473cd96170f6292eb50566c52400180e729d64f0396fbfc23d8cfb8c25236b",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/view-tracing.png",
+      "sha256": "ea6646acbfa632b46ff8aeba5284565cd3ea9bb96fab7e37ff5d5ad47b19e8ae",
+      "hash_matches": true,
+      "bytes_match": true
+    },
+    {
+      "path": "reports/browser-proof/view-reliability.png",
+      "sha256": "115e57e0e8a56190a1970f2b5b5484286e63c473a60f0f31df78c191c27681a6",
+      "hash_matches": true,
+      "bytes_match": true
+    }
+  ],
+  "accepted": [
+    "Installed Chrome route produced8 matching screenshot files and owner count checks2351components/59relationships.",
+    "Visible overview shell, evidence content, navigation and screenshots produced.",
+    "Current REL01 evidence screenshot is visibly nonempty; runtime auto-skill status remains UNVERIFIED."
+  ],
+  "evidence_assertion_change": {
+    "transcript_records": [
+      240,
+      242
+    ],
+    "assessment": "Selector made specific, but count-only test weaker than visible/content assertion; cannot accept as complete behavior fix. Screenshot proves current visible content only."
+  },
+  "failure_history": [
+    {
+      "at": "2026-10-10T05:44:10.432Z",
+      "status": "FAIL",
+      "failed_check": "reliability_shows_evidence",
+      "provenance": "Earlier supervisor direct report observation; original report overwritten. This is retained observation, not full original report bytes."
+    },
+    {
+      "at": "2026-10-10T05:47:12.193Z",
+      "status": "PASS",
+      "scope": "Owner receipt current; independent overall acceptance withheld."
+    }
+  ],
+  "findings": [
+    {
+      "id": "BROWSER-01",
+      "finding": "Evidence assertion changed from REL01/evidence text checks to count()>0 on REL-01-evidence test id; this only tests DOM existence, not visibility/nonempty contents or requirement matching. No substantive evidence-render fix in reviewed change beyond test id.",
+      "next": "Assert visible nonempty actual evidence fields and requirement identity; ensure hidden/empty/failed evidence cannot pass. Keep current nonempty screenshot as narrow proof."
+    },
+    {
+      "id": "BROWSER-02",
+      "finding": "Overview screenshot has You/direction, Models, Files/evidence, Agents, SDK across first row; Apps precedes Infrastructure. Does not meet specified direction->agents->SDK->access->infrastructure->models->apps->files hierarchy.",
+      "next": "Enforce explicit layer order independently of factual relationships; validate rank/coordinates and readable zoom. No invented factual edges."
+    },
+    {
+      "id": "BROWSER-03",
+      "finding": "Tracing screenshot is empty with Select a trace. Runner never selects trace or checks timeline/spans/evidence/response contract.",
+      "next": "Use project synthetic observed receipt for local UI selection/contract regression now; keep real-source acceptance separately blocked."
+    },
+    {
+      "id": "BROWSER-04",
+      "finding": "Workflow recovery check only looks for Recover packet text; does not execute correction recovery or assert displayed permitted next action.",
+      "next": "Run actual workflow/correction/restart UI path and compare displayed next action with governing correction and backend."
+    },
+    {
+      "id": "BROWSER-05",
+      "finding": "Search/detail selection is conditional and not required; no component-detail screenshot in receipt. Subsystem expansion, accessible list, impact traversal and sync refresh not proved by screenshots.",
+      "next": "Make requested interactions required with real IDs, matching detail assertions and accessible list coverage."
+    },
+    {
+      "id": "BROWSER-06",
+      "finding": "required[] excludes catalog_complete, stats_show_complete and dark_theme_toggled; component assertion only nonempty. No pageerror listener, errors[] only captures launch errors.",
+      "next": "Require exact catalog reconciliation and theme checks; collect/fail unexpected page/runtime errors and request failures."
+    },
+    {
+      "id": "BROWSER-07",
+      "finding": "Reliability screenshot is2171px wide despite1400px viewport and displays tiny10px raw evidence; likely horizontal content overflow. Narrow screenshot acceptance does not satisfy readable14-16px design.",
+      "next": "Constrain evidence panel, wrap/scroll contained content, use readable body text and test no page-level horizontal overflow at chosen viewports."
+    },
+    {
+      "id": "BROWSER-08",
+      "finding": "Server command npx next start -p3200 omits hostname; loopback URL alone does not prove server binds only loopback. Isolated-profile directory is created but not passed to chromium.launch.",
+      "next": "Bind server explicitly127.0.0.1 and verify listener; configure project-local browser artifact/profile storage correctly without installation or broader changes."
+    }
+  ],
+  "source_identity_limit": "Only runner source hash bound by owner receipt; rendered app build/commit not bound. Current file hashes/images verify receipt consistency, not full executed application source identity.",
+  "independent_acceptance": "withheld",
+  "real_source_input": "blocked; no outside-project search/read",
+  "owner_session": 74810
+}

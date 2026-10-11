@@ -1,0 +1,136 @@
+{
+  "at": "2026-10-10T08:01:30+00:00",
+  "cases": {
+    "browser": {
+      "exit": -9
+    },
+    "diagnostic_screening": {
+      "applied": true,
+      "marker": "LOCAL-SCREENING-OK",
+      "notes": []
+    },
+    "emission_boundaries": {
+      "diagnose_text": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "events_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "list_jobs_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "raw_event_contains_canary": true,
+      "raw_trace_label_contains_canary": true,
+      "read_source_error_boundary": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 1,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "recover_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "stderr_read_source_screened": true,
+      "trace_get_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "trace_list_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      }
+    },
+    "independent_ack": {
+      "browser_review": "reports/independent-recovery-browser-review.json (07:35:34)",
+      "controlled_producer_scope": "local action only; prior acceptance preserved",
+      "screening_review": "reports/independent-recovery-screening-review.json (pending path in supervisor queue)"
+    },
+    "node_bridge": {
+      "benign_required": true,
+      "canary_removed": true,
+      "exit": 0,
+      "nonempty_required": true,
+      "parsed": {
+        "benign": true,
+        "init_ok": true,
+        "invalid_command_benign": true,
+        "invalid_command_canary_removed": true,
+        "invalid_command_json_stdout": true,
+        "invalid_command_nonempty": true,
+        "nonempty": true,
+        "nonzero_exit": 1,
+        "nonzero_json_rejected": true,
+        "read_source_benign": true,
+        "read_source_canary_removed": true,
+        "read_source_intended_error": true,
+        "screened": true
+      },
+      "screened_required": true
+    },
+    "prior_attempts_preserved": [
+      "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+      "reports/independent-recovery-browser-review.json"
+    ],
+    "recovery_dependency": {
+      "blockers_include_t1": true,
+      "corrected_task_blocked": true,
+      "diagnostic_marker": true,
+      "next_not_corrected_downstream": true
+    }
+  },
+  "delivery_id": "recovery-screening-real-paths-20261010-0738",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-88082493.json",
+      "sha256": "402ec3f073dc8dca90a01680b62a318f11ac2c3323aadd23b2c65416560236a1"
+    }
+  ],
+  "failures": [
+    "browser_required"
+  ],
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": true,
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-88082493-f05b-47ac-aab5-b94ae3e7d533.json"
+  },
+  "run_id": "88082493-f05b-47ac-aab5-b94ae3e7d533",
+  "source_identity": {
+    "app/src/app/api/health/route.ts": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+    "app/src/app/api/workflow/route.ts": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b",
+    "app/src/app/explorer/workflow-panel.tsx": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78",
+    "app/src/lib/server/paths.ts": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed",
+    "app/src/lib/server/python.ts": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+    "tools/browser_recovery_screening.mjs": "5043bfa1ebc8e35102fbaaa6160d2354d4a73d2d6d5fad949bb36cda44bdeb29",
+    "tools/job_recovery.py": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a",
+    "tools/local_service.py": "0d52c9260b64068d3d1b58be642deeb50dd2210355ba65ef3878272d878023f1",
+    "tools/node_bridge_screen_probe.ts": "d75fdd205b28124e819f28dd1f2354847e61e9969e2c92431ab3d95b139d0fb1",
+    "tools/output_screening.py": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+    "tools/recovery_screening_real_paths_acceptance.py": "d8817cfbe713db17e642d35261f925aaa72ba296b5b9307bedb13d058ba9592a",
+    "tools/trace_store.py": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+  }
+}

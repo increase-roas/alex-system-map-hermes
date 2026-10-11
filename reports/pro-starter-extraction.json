@@ -1,0 +1,363 @@
+{
+  "status": "source prepared; not installed or run",
+  "source": "inputs/pro-ai-workflow-editor.zip",
+  "destination": "app",
+  "archive_sha256": "5b69062bfdf61535125bfb64c75f68aae3e7e5ba363553d84146645c153e7ec3",
+  "files": [
+    {
+      "path": "tsconfig.json",
+      "sha256": "83d292a6930a317ea31ef48e220097d2ca10c6c505f41d5954795acef48ca3b9",
+      "bytes": 602
+    },
+    {
+      "path": "tailwind.config.ts",
+      "sha256": "469f0f9ffd2fbe45d764d8791c5341324d62b03246f437c7cae292a94c8a1fe3",
+      "bytes": 2293
+    },
+    {
+      "path": "postcss.config.mjs",
+      "sha256": "3aac0d047d7dd505eea362c918e2ddd0436428682c5de5cb18feda70d46aa5cb",
+      "bytes": 146
+    },
+    {
+      "path": "pnpm-lock.yaml",
+      "sha256": "9fa085266ccd6a65da928d3fe55bd3b5d7e30c67552c9dbbb4d2d9a79bd9feff",
+      "bytes": 260184
+    },
+    {
+      "path": "package.json",
+      "sha256": "4604316712a21a9d6563845d8cfb0f26ac30768bcc61c6636fbd5f7d55313966",
+      "bytes": 1499
+    },
+    {
+      "path": "next.config.ts",
+      "sha256": "0d3b8e6e33f26c3b0064e8ec6fb068d942ad2fedee425cc20156059b34506217",
+      "bytes": 286
+    },
+    {
+      "path": "components.json",
+      "sha256": "120efaee47fceb34a7777b2edc1ee5751080787fbfd61dd15d7dd639c7f339a9",
+      "bytes": 450
+    },
+    {
+      "path": "README.md",
+      "sha256": "9e4da542408f94633ead0261ff553e7c5dcb6b1cc90005b3f47834f141f8f4ae",
+      "bytes": 7501
+    },
+    {
+      "path": "LICENSE.md",
+      "sha256": "3d15485fe5df03dba218bec6fab7e2a17dcd2cdf583343e8eaf86f95684bdd97",
+      "bytes": 2035
+    },
+    {
+      "path": ".prettierrc",
+      "sha256": "f5c852cea1bca3697666f5b1a7cea157818f6e6796817332224917de728472cd",
+      "bytes": 63
+    },
+    {
+      "path": ".gitignore",
+      "sha256": "52a8ef36d05fa62de50a1a7298a91b0320abb140ad6495534997ff2a70aaa161",
+      "bytes": 463
+    },
+    {
+      "path": ".eslintrc.json",
+      "sha256": "8d4a8d81dab1c22bcb28635249606f2e59fa816e8e58c56eecf6d2430949847a",
+      "bytes": 61
+    },
+    {
+      "path": "src/pages/_error.tsx",
+      "sha256": "104689aae62cd8b55cae91c369ddcfeab4eb79eb3fd60f4bbd49b1fcdbb47119",
+      "bytes": 432
+    },
+    {
+      "path": "src/lib/utils.ts",
+      "sha256": "9304a861c8673bee09e0f12de31773abbde503b02e59dfd74763ddec2e37cf05",
+      "bytes": 169
+    },
+    {
+      "path": "src/hooks/use-mobile.ts",
+      "sha256": "82bff42ff087bd5dc90a5d17609cc428b8688de92d1333073a839af5ad3c9cbd",
+      "bytes": 585
+    },
+    {
+      "path": "src/hooks/use-dropdown.tsx",
+      "sha256": "05fa22b12ab846c095f970416b73901061df5dce5914d523c49f82fdecac03dc",
+      "bytes": 730
+    },
+    {
+      "path": "src/components/zoom-slider.tsx",
+      "sha256": "727b6fcaccea71e94f50a680064ec06f73db960cefbcba3ff6bb0d018f2ef720",
+      "bytes": 2315
+    },
+    {
+      "path": "src/components/theme-provider.tsx",
+      "sha256": "53bf97cbee663984596914ae5a5fc757d9eedda13dcb91b0c1057565188a5b90",
+      "bytes": 378
+    },
+    {
+      "path": "src/components/node-status-indicator.tsx",
+      "sha256": "a1b1541fd4644c95335183fa3c3a40e148df9fab5f4520e29c2c6ea665197c20",
+      "bytes": 3010
+    },
+    {
+      "path": "src/components/node-appendix.tsx",
+      "sha256": "8722ad6b69b4fa5459a069107faa1d97716b5041077ab684d03e63958b889380",
+      "bytes": 958
+    },
+    {
+      "path": "src/components/markdown-content.tsx",
+      "sha256": "6833733b1c10efad4de9081708b6d846ad006cb76ec781ced3ae54684f5be8fb",
+      "bytes": 5816
+    },
+    {
+      "path": "src/components/labeled-handle.tsx",
+      "sha256": "7871221d65f3a4ae52e3c3808bde92a3fa16d5a3df4840fc0d15f7a92f6373ff",
+      "bytes": 1047
+    },
+    {
+      "path": "src/components/connection-limit-handle.tsx",
+      "sha256": "fa0bbdd7799c7b78c59e36fbd82e81d0f3e1b85df4fde73acb6336e49e11c9b5",
+      "bytes": 725
+    },
+    {
+      "path": "src/components/base-node.tsx",
+      "sha256": "a8b2fa9c36e17a87a24ebe058190abcd6d50b1b6a91bc53bfa11f08fab2f8ad0",
+      "bytes": 2246
+    },
+    {
+      "path": "src/components/base-handle.tsx",
+      "sha256": "4bff41b6445f8719e6e1a0e9baaf73a1218d2f854c8f9e56d068029f0b3481d9",
+      "bytes": 547
+    },
+    {
+      "path": "src/components/ui/tooltip.tsx",
+      "sha256": "a0121411c916e152442ff885c77ca0089813e1a98d0ed33bcca865df18d2a01e",
+      "bytes": 1902
+    },
+    {
+      "path": "src/components/ui/textarea.tsx",
+      "sha256": "d68baea486092002f343c555995b169c02e8be138dc194fc5bf1121a58ccc698",
+      "bytes": 764
+    },
+    {
+      "path": "src/components/ui/slider.tsx",
+      "sha256": "93b49f83715a7686169d446a6e3e77f552b6268876e5d9c6db99b3a36e7d4211",
+      "bytes": 2007
+    },
+    {
+      "path": "src/components/ui/skeleton.tsx",
+      "sha256": "0a6067d30c7bbe7fb8790318757f236cd3e4f979f13d480ee98e7ab45977050f",
+      "bytes": 279
+    },
+    {
+      "path": "src/components/ui/sidebar.tsx",
+      "sha256": "c2e7210a222a51787e529eb24eefc0a7eae1d8ad62ab8a2a140e5a13b13706f7",
+      "bytes": 21762
+    },
+    {
+      "path": "src/components/ui/sheet.tsx",
+      "sha256": "3e198351925532850947fe77e96b9424874010b9e4a46c2e7ba6de8f29d2c819",
+      "bytes": 4109
+    },
+    {
+      "path": "src/components/ui/separator.tsx",
+      "sha256": "cc1279a5a60df330c5bf132c9a1080c322c7542607ab37b4c1086b7b03e04a08",
+      "bytes": 706
+    },
+    {
+      "path": "src/components/ui/select.tsx",
+      "sha256": "4e9e4e91d212ad9f610982c4793ba899b866cb84896b952fd09220c747da1583",
+      "bytes": 6318
+    },
+    {
+      "path": "src/components/ui/input.tsx",
+      "sha256": "42ad1ea33b8f21b11a1387394f517fd7070d79de78d99d06c61db3f3bea2c1ae",
+      "bytes": 967
+    },
+    {
+      "path": "src/components/ui/dropdown-menu.tsx",
+      "sha256": "d69c46f0edb74e93ec371056cd5ee52cd7703086f18427429aaa3cff7ccc62bf",
+      "bytes": 8457
+    },
+    {
+      "path": "src/components/ui/dialog.tsx",
+      "sha256": "c369cfe7224426104a7a028485a1da8fc8ce8c7e797484856860204a18e12ba9",
+      "bytes": 4002
+    },
+    {
+      "path": "src/components/ui/button.tsx",
+      "sha256": "3604d70bbbbd5509091be241fae00ebe91f238f464a30a08afc1c443aaa4f2ab",
+      "bytes": 2152
+    },
+    {
+      "path": "src/components/ui/alert-dialog.tsx",
+      "sha256": "26a23408ee2fca218c5bd6badd450e29b1eb870564ab25fd1c9ae9bf0d7688f9",
+      "bytes": 3884
+    },
+    {
+      "path": "src/app/page.tsx",
+      "sha256": "b860f553b7ddda06c98b4004d6317936c36531958ab1f3c31b326714dfdc0747",
+      "bytes": 302
+    },
+    {
+      "path": "src/app/layout.tsx",
+      "sha256": "5dc5ad3faeecf6f213482566a7f858162d96cb071a009cfa2249711b8fdda8d7",
+      "bytes": 1560
+    },
+    {
+      "path": "src/app/globals.css",
+      "sha256": "0f18421a7dcae1bcddb2c20823345e42a8c870a4b690ddb1297a9d6f12c8c7de",
+      "bytes": 3746
+    },
+    {
+      "path": "src/app/workflow/page.tsx",
+      "sha256": "df4d8bd1684dc5ee483be6f8da7c50a78ca823fa95017c2bcdbcd107135235f5",
+      "bytes": 473
+    },
+    {
+      "path": "src/app/workflow/openai-data.ts",
+      "sha256": "f083665a60363bc49c8d86feb15be55fd1a98ede3fccbb466fe845ad13097da4",
+      "bytes": 1047
+    },
+    {
+      "path": "src/app/workflow/mock-data.ts",
+      "sha256": "ddd1e14a96beb779b137a709d4049b9ca56b221d70eb54e070989b21f632ec2a",
+      "bytes": 1027
+    },
+    {
+      "path": "src/app/workflow/config.ts",
+      "sha256": "9168309e5c050f3bb636ec27bc60d34ae1eb135769479c9d85845ad1e8d2c7b8",
+      "bytes": 1873
+    },
+    {
+      "path": "src/app/workflow/utils/layout-helper.ts",
+      "sha256": "bb8b0ed7eb3e0bc3beb5afbed2552e7f0f221baf2deb5638af6a8697de1a575b",
+      "bytes": 2977
+    },
+    {
+      "path": "src/app/workflow/utils/icon-mapping.ts",
+      "sha256": "146a39e86733a1f153e6fb7dc59de66ebdb16b5e4d5a7fae35f45a6a16db2e5b",
+      "bytes": 484
+    },
+    {
+      "path": "src/app/workflow/store/index.tsx",
+      "sha256": "26897abc450d4091fd2664ef40af9286f961acab8e95336ee4ea1764ed962313",
+      "bytes": 1053
+    },
+    {
+      "path": "src/app/workflow/store/app-store.ts",
+      "sha256": "af215c9da50f53f3272aae599868a8a8b2b7dfee55e097fac68e1ff0c7eb7f1d",
+      "bytes": 3699
+    },
+    {
+      "path": "src/app/workflow/layouts/sidebar-layout/index.tsx",
+      "sha256": "98a5fb718cea06164cab4a2f4fe538b0af4c47faf88cf0ae6d94e4692d68387c",
+      "bytes": 516
+    },
+    {
+      "path": "src/app/workflow/layouts/sidebar-layout/app-sidebar.tsx",
+      "sha256": "61df6dbb4fe26d15d3dc370447b81d1fa64c2f2ce046be624c02a10afad8f18d",
+      "bytes": 3782
+    },
+    {
+      "path": "src/app/workflow/hooks/useDragAndDrop.ts",
+      "sha256": "881684e0f2abacb3cfaacce124f524c919137837bac38c6732232e62cf4cab52",
+      "bytes": 1207
+    },
+    {
+      "path": "src/app/workflow/hooks/use-workflow-runner.tsx",
+      "sha256": "582c2a42239fe9bb0a775bc4d6140c912428e4e710c13793c4a5ed1ab0f92dcc",
+      "bytes": 5913
+    },
+    {
+      "path": "src/app/workflow/hooks/use-layout.tsx",
+      "sha256": "b30c34d2782a38f0c8c31e2dc3b3d982e9a3d6cd5b3cd278363335b0b2136d06",
+      "bytes": 694
+    },
+    {
+      "path": "src/app/workflow/components/workflow.tsx",
+      "sha256": "a3f855a227a393f9a8dbdf167759ba460ce96dac26578e9892a07a732674fa2d",
+      "bytes": 2571
+    },
+    {
+      "path": "src/app/workflow/components/settings-dialog.tsx",
+      "sha256": "4717952eadc840aa90a539ede037a2b61db88ba47a8a79e7fa742add43df2a0b",
+      "bytes": 6689
+    },
+    {
+      "path": "src/app/workflow/components/runnable-node-header.tsx",
+      "sha256": "eec5aee15ce6e2b065e2ab83195390fd3628dcec4fbd31716b470b4b6ff564b8",
+      "bytes": 2728
+    },
+    {
+      "path": "src/app/workflow/components/model-selector.tsx",
+      "sha256": "09e033694c61b66a4dba9f228ae83d0a646f6d7f45dcc9dc92c4abdaafbbce75",
+      "bytes": 4810
+    },
+    {
+      "path": "src/app/workflow/components/flow-context-menu.tsx",
+      "sha256": "ad4a78569af19067021ace1cc93e57265a8f696ccad28642d4b61f432510b7bb",
+      "bytes": 2974
+    },
+    {
+      "path": "src/app/workflow/components/controls.tsx",
+      "sha256": "c4c7144bca42631c6c55027246fd106286d6a48435cce17663c51b59afe21d77",
+      "bytes": 633
+    },
+    {
+      "path": "src/app/workflow/components/nodes/workflow-trigger-node.tsx",
+      "sha256": "f6401f31550087f7d9fe088e319794bea6c0e8f5599eaa27de3bbc97bfb59a8b",
+      "bytes": 5252
+    },
+    {
+      "path": "src/app/workflow/components/nodes/text-input-node.tsx",
+      "sha256": "323afef4ed7b9cc9d073d5448943d25e3b6c1ea2506899ee40d0cb8d89c81400",
+      "bytes": 4595
+    },
+    {
+      "path": "src/app/workflow/components/nodes/index.tsx",
+      "sha256": "33cbf97d15c87bf38f1ef257d37f12396d932d5186a7f51716ef6ec8c596aa70",
+      "bytes": 3292
+    },
+    {
+      "path": "src/app/workflow/components/nodes/generate-text-node.tsx",
+      "sha256": "1691f7e824845098c29d676fa22f8c4ba59fd1b2ab14acd35d15a0ea81644471",
+      "bytes": 5025
+    },
+    {
+      "path": "src/app/workflow/components/nodes/generate-image-node.tsx",
+      "sha256": "998a2db7b99107cecb6ece7afa8bdc6ccb714d36d9745813054d02b92126b342",
+      "bytes": 5394
+    },
+    {
+      "path": "src/app/workflow/components/nodes/processors/generate-text-processor.ts",
+      "sha256": "8f10949518c36d241d6cd78da09fd50da10f0cf99c36d401c72c761ac6999fbb",
+      "bytes": 2810
+    },
+    {
+      "path": "src/app/workflow/components/nodes/processors/generate-image-processor.ts",
+      "sha256": "66a0d95261ed6e1ab42b60e04dd6bfeed39d3d85252a44b00e1d5087f0be06f6",
+      "bytes": 2094
+    },
+    {
+      "path": "src/app/workflow/components/edges/index.tsx",
+      "sha256": "9f451c7a4c8908963e29f0428303075b22f0afc52d489590a7a6aac020fcf259",
+      "bytes": 446
+    },
+    {
+      "path": "src/app/api/generate-text/route.ts",
+      "sha256": "c2f40db7b8343ff3a03f530744cccf9bdd4d36d0d8923957ede9f4df27b70bba",
+      "bytes": 1578
+    },
+    {
+      "path": "src/app/api/generate-image/route.ts",
+      "sha256": "40357267e699224b3cc1dfad272e9f1afef0ecd7f0109a0472a4b71c1971d428",
+      "bytes": 1983
+    },
+    {
+      "path": "src/app/actions/cookies.ts",
+      "sha256": "3a58fe2ddb2b27375c2983ba18626955b6ae0b4061247682ed21d96860c7f81f",
+      "bytes": 305
+    }
+  ]
+}

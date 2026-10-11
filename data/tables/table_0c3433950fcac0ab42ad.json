@@ -1,0 +1,387 @@
+{
+  "id": "table_0c3433950fcac0ab42ad",
+  "sheet": "S05-11 DIRECTOR PLAN",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DIRECTOR / FOUR CONTROLLER ROLES"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "mission → authority/scope → project rules → skills → Prime/internal knowledge → runtime/tool schemas → official provider docs → Observatory history → Evidence/Exa → safe test → Alex only if genuinely blocked."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Route"
+        },
+        {
+          "column": "B",
+          "value": "Dependency"
+        },
+        {
+          "column": "C",
+          "value": "Existing / Proposed Owner"
+        },
+        {
+          "column": "D",
+          "value": "Deliverable"
+        },
+        {
+          "column": "E",
+          "value": "Stop Boundary"
+        },
+        {
+          "column": "F",
+          "value": "Status"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "D0"
+        },
+        {
+          "column": "B",
+          "value": "Before dispatch"
+        },
+        {
+          "column": "C",
+          "value": "Canonical Director"
+        },
+        {
+          "column": "D",
+          "value": "Read the frozen v1.0 baseline; verify current authority/state/owners and Prime contract. Record the existing mission graph, then execute; no further architecture or scope expansion without evidence."
+        },
+        {
+          "column": "E",
+          "value": "Reuse current controllers. Existing proposal-only tune-up reused; paused fleet/off-Mac/updater migrations stay held. No blanket historic $1/test authority."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Oct 5, 11:05 PM Detroit: manual current-state check requested by Alex. DIRECTOR (01a10c74) remains the bound owner. OpenAI Controller, OpenAI Controller 2 and Improve Director controller reliably are idle/paused. OpenAI Director — Fresh recovery, OpenAI Controller — Fresh recovery and OpenAI Controller 2 — Fresh recovery are idle/read-only candidates with saved receipts, not activated replacements. Current binding/ledger/graph/ownership hashes match the pause-completion receipt; 20 play receipt hashes match. No unconsumed results or ownership collisions are recorded. Cutover validation remains unproved; next plays are recorded only. Evidence: work/gameplan-updater/manual-check-20261006T0305Z/evidence.json. Current checkpoint SHA256 e4d98df644a08ab23dd4a7e41e18ec08e9f2aa835a5af6c66a42d21ee2ddb841."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "L1"
+        },
+        {
+          "column": "B",
+          "value": "D0; parallel S/R"
+        },
+        {
+          "column": "C",
+          "value": "Lab controller"
+        },
+        {
+          "column": "D",
+          "value": "Checklist1–7 + Gate1: Lab/baseline and all-agent Observatory intake. Name existing storage, prove delivery/dedupe/outage/missing reports and fresh retrieval."
+        },
+        {
+          "column": "E",
+          "value": "Existing Observatory owner remains implementation owner. Production secrets/config isolated; exact run budget/stop first."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Mission PAUSED by Alex; route held. Director owns canonical reconciliation; existing resource ownership retained. Source workers and recovery candidates are idle; no handoff/cutover. Gate blockers match DEFINITION OF DONE. Next eligible plays are recorded only, not dispatched. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "R1"
+        },
+        {
+          "column": "B",
+          "value": "D0; parallel L/S"
+        },
+        {
+          "column": "C",
+          "value": "Research / Intelligence"
+        },
+        {
+          "column": "D",
+          "value": "Prime contract + thin Evidence MCP: internal-first research, current version-matched docs, contrary evidence and tested lessons. Operational raw history stays separate."
+        },
+        {
+          "column": "E",
+          "value": "Existing Prime pipeline, semantic receipts and source pointers. No manual derived-evidence edits or new brain; protected raw/tenant scope."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Mission PAUSED by Alex; route held. Director owns canonical reconciliation; existing resource ownership retained. Source workers and recovery candidates are idle; no handoff/cutover. Gate blockers match DEFINITION OF DONE. Next eligible plays are recorded only, not dispatched. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "S1"
+        },
+        {
+          "column": "B",
+          "value": "D0; parallel L/R"
+        },
+        {
+          "column": "C",
+          "value": "Sales Data controller"
+        },
+        {
+          "column": "D",
+          "value": "Freeze provider-independent SALES_CONVERSATION_SCHEMA_V1. Validate a sample and downstream transformers for Fireworks/Prime/SalesBench before scoped backfill and incremental ingestion."
+        },
+        {
+          "column": "E",
+          "value": "Preserve raw records and source pointers. Canonical master is provider-independent; export copies match current provider formats. One owner; outcomes UNKNOWN when missing; no CRM edits/sends."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Mission PAUSED by Alex; route held. Director owns canonical reconciliation; existing resource ownership retained. Source workers and recovery candidates are idle; no handoff/cutover. Gate blockers match DEFINITION OF DONE. Next eligible plays are recorded only, not dispatched. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "L2"
+        },
+        {
+          "column": "B",
+          "value": "Baseline + R evidence"
+        },
+        {
+          "column": "C",
+          "value": "Lab controller"
+        },
+        {
+          "column": "D",
+          "value": "Fresh Composio discovery/schema cluster experiment after timestamp experiment; eval/holdout/regression/KEEP-KILL Gate1."
+        },
+        {
+          "column": "E",
+          "value": "Bounded candidate from real failure; reviewed eval, experiment and proven fix linked. Two failed fixes without new evidence → focused diagnosis. Production unchanged."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Mission PAUSED by Alex; route held. Director owns canonical reconciliation; existing resource ownership retained. Source workers and recovery candidates are idle; no handoff/cutover. Gate blockers match DEFINITION OF DONE. Next eligible plays are recorded only, not dispatched. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SA1"
+        },
+        {
+          "column": "B",
+          "value": "Gate3 + controls + intake proof"
+        },
+        {
+          "column": "C",
+          "value": "Sales Agent controller"
+        },
+        {
+          "column": "D",
+          "value": "Commercial baseline + historical/hidden eval + no-send shadow Gate4. Sales passes the shared outcome/failure/blocker/correction/UNKNOWN intake contract first."
+        },
+        {
+          "column": "E",
+          "value": "Qualify/objections/appointment/follow-up/handoff only. All critical STOP/DND/tenant/authority checks; compare actual shadow outcomes."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Mission PAUSED by Alex; route held. Director owns canonical reconciliation; existing resource ownership retained. Source workers and recovery candidates are idle; no handoff/cutover. Gate blockers match DEFINITION OF DONE. Next eligible plays are recorded only, not dispatched. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "D1"
+        },
+        {
+          "column": "B",
+          "value": "Gate receipts available"
+        },
+        {
+          "column": "C",
+          "value": "Director / reviewer"
+        },
+        {
+          "column": "D",
+          "value": "Director accepts all four gates from fresh execution evidence against current versions, including read-back and independent negative checks; all eight mission criteria met."
+        },
+        {
+          "column": "E",
+          "value": "Installed/configured ≠ working; UNKNOWN ≠ PASS. Deferred IDEAS cannot block without required-gate evidence. Preserve frozen scope and existing release/spend/authority gates."
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Mission PAUSED by Alex; route held. Director owns canonical reconciliation; existing resource ownership retained. Source workers and recovery candidates are idle; no handoff/cutover. Gate blockers match DEFINITION OF DONE. Next eligible plays are recorded only, not dispatched. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OPT"
+        },
+        {
+          "column": "B",
+          "value": "After Gate1; optional"
+        },
+        {
+          "column": "C",
+          "value": "Lab controller"
+        },
+        {
+          "column": "D",
+          "value": "AHO custom Benchmark adapter; compare bounded optimizer against current Astra/manual process with same evaluator."
+        },
+        {
+          "column": "E",
+          "value": "Inner/outer models/checkpoints/approval flag supported in README; current fit/cost unverified. Preserve final untouched test; AHO must earn adoption."
+        },
+        {
+          "column": "F",
+          "value": "Deferred"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EVENT"
+        },
+        {
+          "column": "B",
+          "value": "If ingestion needs it"
+        },
+        {
+          "column": "C",
+          "value": "Sales Data controller"
+        },
+        {
+          "column": "D",
+          "value": "Use existing incremental route; event replay only if needed for selected workflow."
+        },
+        {
+          "column": "E",
+          "value": "Optional mechanics, not mission dependency. Dedupe/checkpoint/tenant proof; no new scheduler or broad webhook activation implied."
+        },
+        {
+          "column": "F",
+          "value": "Deferred"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "D2"
+        },
+        {
+          "column": "B",
+          "value": "Shadow proven"
+        },
+        {
+          "column": "C",
+          "value": "Director + Alex"
+        },
+        {
+          "column": "D",
+          "value": "Prepare controlled pilot packet: audience/channel/spend/limits/stop/handoff/success window; then await exact launch authority."
+        },
+        {
+          "column": "E",
+          "value": "Real customer messaging, spending and production remain gated. Shadow build done is not live revenue success."
+        },
+        {
+          "column": "F",
+          "value": "Blocked"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EXECUTION DIRECTOR • Current Codex chat “DIRECTOR”: 01a10c74-2d49-7980-b5b8-db6832053a8b. Team state: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/DIRECTOR_STATE.md. Reconcile current state before dispatch."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OWNERSHIP • Observatory source remains under its existing owner: 01a103c6-3ad6-7171-8069-a0102ca15fc5. Historical Claude/Hermes missions are references; do not import their controller IDs, credentials or approvals into the current team."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CONTRACT / STATUS: this team uses team/roles/openai-team-director and team/roles/openai-team-conductor; current primary model router remains canonical. “Astra” means gpt-6-astra, not a new role. Frozen planned routes unchanged; actual enrolled roles and pause state: team/TEAM_BINDING.json and CURRENT_MISSION_STATE.md. No dispatch or ownership transfer.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/TEAM_BINDING.json\nPrior cell note (historical unless independently current):\n"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "PRIME • Read /Users/alexlobaito/Downloads/Prim biz intelligence/README.md + AGENTS.md. v2.4 bounded historical synthesis; no PROVEN capabilities, outcome linkage UNKNOWN, Goal-to-Plan NOT_READY. Local Git is engineering authority; Drive mirrors inspection only."
+        }
+      ]
+    }
+  ]
+}

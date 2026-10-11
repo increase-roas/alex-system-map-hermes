@@ -1,0 +1,30 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "fa89a29e-8390-4af9-acbb-93fdb1be629b",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "truth-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "orr-wrong-op-record",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T06:35:18+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "9ee396bb14d47fc2f9b5ac71e99cbb7208e1c7fb1f8a1db1186f2a2d9dbca78e"
+}

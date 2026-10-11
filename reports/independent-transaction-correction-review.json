@@ -1,0 +1,191 @@
+{
+  "at": "2026-10-10T11:42:12.217154+00:00",
+  "scope": "Bounded TS02/03/05/07/08/09/11 retest; no app mutation or acceptance rerun",
+  "overall": "failed",
+  "blocker_type": "goal_not_met_yet",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/canonical-transaction-correction-20261010-0730-9d6d37e2-6983-44c4-9412-cb892fe39b9a.json",
+    "run_id": "9d6d37e2-6983-44c4-9412-cb892fe39b9a",
+    "at": "2026-10-10T11:35:52+00:00",
+    "sha256": "a8d55053b111eec9cbbfc848a7b0b62e9e27947898c189d22653b403c2499d3c",
+    "pointer_hash_matches": true
+  },
+  "snapshot_stable": true,
+  "source_identity": {
+    "tools/canonical_maintained_edit.py": {
+      "expected_sha256": "caea6584b63eb4e6166d569de46e350ea4c7a4b4b20330658e70222e45741c68",
+      "actual_sha256": "caea6584b63eb4e6166d569de46e350ea4c7a4b4b20330658e70222e45741c68",
+      "matches": true
+    },
+    "tools/canonical_transaction_regression.py": {
+      "expected_sha256": "38b53a0b540498260d5930fbbe39b53c2f2f2a57cabecaddc295cf1a407828fb",
+      "actual_sha256": "38b53a0b540498260d5930fbbe39b53c2f2f2a57cabecaddc295cf1a407828fb",
+      "matches": true
+    },
+    "tools/catalog_fixture_clone.py": {
+      "expected_sha256": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "actual_sha256": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "matches": true
+    },
+    "tools/catalog_reference_validation.py": {
+      "expected_sha256": "07ca9551c4b9bf6818fda333a90cf920200aa660fb6637af27a6399938883d25",
+      "actual_sha256": "07ca9551c4b9bf6818fda333a90cf920200aa660fb6637af27a6399938883d25",
+      "matches": true
+    },
+    "tools/local_service.py": {
+      "expected_sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "actual_sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "matches": true
+    },
+    "tools/subprocess_bounded.py": {
+      "expected_sha256": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c",
+      "actual_sha256": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c",
+      "matches": true
+    },
+    "schemas/components.schema.json": {
+      "expected_sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e",
+      "actual_sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e",
+      "matches": true
+    }
+  },
+  "acceptance_prompt": "work/supervision/transaction-proof-restore-correction-20261010-1125.txt",
+  "prior_review": "reports/independent-canonical-transaction-review.json",
+  "checks": [
+    {
+      "id": "TS02",
+      "status": "VERIFIED",
+      "accepted": "The actual apply path waits at a two-process filesystem barrier before the shared catalog transaction lock. The harness launches both Popen children before waiting. This run reports component and metadata exits0/revisions1; distinct records reports first B exit1, explicit fresh-SHA retry and both final revisions1. This is real overlapping launch with honest stale retry, rather than sequential calls.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:98-125,485-487",
+        "tools/canonical_transaction_regression.py:292-304,341-419",
+        "receipt cases.dual_lock / cases.distinct_records"
+      ],
+      "limits": "Historical final bytes and sidecars for these two tests are not retained for independent readback; see TS11. The harness assumes A wins when retrying B; it does not retry A if B wins."
+    },
+    {
+      "id": "TS03",
+      "status": "FAILED",
+      "accepted": "Same-op one_commit now counts committed ledger rows ==1 and invalidated rows ==0, with receipt final_revision1 and matching nonempty result hashes. Replay remains inside the shared lock before CAS. Changed-payload collision is rejected; post-oplog rollback appends invalidation and allows a real retry commit.",
+      "defect": "Distinct-op loser_zero_effect is still defined only as loser exit!=0, not absence of loser ledger/journal/canonical/revision effects. Real ledger/revision/hash counts are stored but omitted from required typed verdict, so changed count/revision/hash/exit values can still PASS. Historical ledger/journal rows cannot be reopened after clone reset.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:423-485,533-592,878-945",
+        "tools/canonical_maintained_edit.py:474-516",
+        "receipt cases.same_op_concurrent / cases.distinct_op_same_record / cases.post_oplog_rollback_retry"
+      ],
+      "correction": "Retain exact per-operation ledger and journal rows and revision delta; prove the winning operation committed once and the losing operation produced zero effects. Require those values and hash lineage in the verdict."
+    },
+    {
+      "id": "TS05",
+      "status": "UNVERIFIED",
+      "accepted": "Persistent state equality replaces the invalid action-list equality. Saved first/second snapshots agree across canonical, metadata, complete revision sidecar hash, ledger hash, three derived hashes and pending-journal count for nonzero-revision rollback and five edit crash cases. Different first and second action lists are legitimate.",
+      "gap": "Snapshot omits complete journal bytes/status identity; only a pending count is measured. Earlier per-test files are not retained (TS11), and recovery interruption does not preserve its interrupted state or prove a post-write fault (TS07). Per-stage crash/nonzero/revision/hash/equality fields are not individually required by the aggregate (TS09).",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:203-261,314-337,655-688",
+        "receipt cases.rollback_preserves / cases.crash_stages"
+      ],
+      "correction": "Keep first/second state files plus journal identities for each case and require their comparisons. Do not require action lists to be equal."
+    },
+    {
+      "id": "TS07",
+      "status": "FAILED",
+      "accepted": "Restore creates a pre-restore backup and forward revision, rather than copying an old revision number. This receipt reports2\u21923. restore_pending now has a forward completion path under the shared lock; ordinary restore crash and second reconciliation preserve the new state.",
+      "defect": "The recovery injector reconcile_mid_restore raises before recovery copies canonical bytes, regenerates views or writes revisions. The test does not save/assert that recovery attempt exit was nonzero or save its interrupted state, and can pass if the injector stops firing. It therefore does not prove genuine interruption after a recovery write or every restore write gap. Only state_after_second survives for the interrupted-recovery test.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:356-379,616-697",
+        "tools/canonical_transaction_regression.py:746-769",
+        "receipt cases.restore_handler / cases.restore_crash_and_recovery / cases.restore_recovery_interrupt"
+      ],
+      "correction": "Inject after an actual recovery write, retain exact pre/interrupted/first/second state and journal evidence, assert the fault occurred, and require forward revision and later-commit protection without rewriting old history."
+    },
+    {
+      "id": "TS08",
+      "status": "FAILED",
+      "accepted": "Purpose and boundary nulls reject; aliases/evidence/source arrays enforce uniqueness and canonical references. Saved isolated negatives show no snapshot effects; inventory audit remains2351/no violations.",
+      "defect": "Present fit=null is accepted because the guard checks only fit is not None, while schemas/components.schema.json declares fit type string. Pure actual validator call accepted this counterexample. observed_condition={} rejects by unhashable TypeError before the field-specific validation; the receipt records reason_contains=false but ignores it in all_rejected_with_zero_effect.",
+      "evidence": [
+        "tools/catalog_reference_validation.py:88-160 (especially101,150-152)",
+        "schemas/components.schema.json records.items.properties.fit",
+        "tools/canonical_transaction_regression.py:772-841",
+        "receipt cases.schema_negatives object_observed_condition.reason_contains=false"
+      ],
+      "correction": "Check presence separately from null for optional string fit; type-check enums before set membership. Require exact expected rejection reason with zero effects and preserve legitimate positive control."
+    },
+    {
+      "id": "TS09",
+      "status": "FAILED",
+      "accepted": "The saved final baseline genuinely passes summarize_focused. All29 declared Boolean paths independently reject false/missing/string values in pure checks against that final baseline.",
+      "defect": "Stored negative flips are generated before negative_flips exists (main974), while that self-field is required907. Each stored flip carries an unrelated missing-self-field failure, so the controls are circular. Required specs contain only29 Boolean summaries; nested revision/count/exit/hash/schema-row/crash/interrupted-recovery evidence remains fail-open.",
+      "pure_counterexamples_accepted": [
+        "same_op_concurrent.final_revision=99",
+        "same_op_concurrent.committed_ledger_rows=2",
+        "dual_lock.component_revision=0",
+        "crash_stages.stages.pending_before_rename.recovery_state_idempotent=false",
+        "restore_recovery_interrupt.second_reconcile_idempotent=false",
+        "schema_negatives.cases=[]",
+        "same_op_concurrent.after_hash_a=null",
+        "same_op_concurrent.exit_a=false"
+      ],
+      "evidence": [
+        "tools/canonical_transaction_regression.py:878-945,958-979",
+        "receipt cases.negative_flips.per_flip"
+      ],
+      "correction": "First construct and independently validate a complete passing baseline. Define all required nested effect/count/hash/status/schema invariants with exact types, then separately remove/false/wrong-type each and require only its intended failure; keep negative-control metadata outside the controls being generated."
+    },
+    {
+      "id": "TS11",
+      "status": "FAILED",
+      "accepted": "All six modified module hashes plus schema hash are now bound, including local_service.py. Immutable final receipt hash matches pointer, every declared source matches at start and end, and failed8fed1394 bytes remain intact. Current final clone matches the final schema fixture snapshot, including intentionally absent revision/ledger files.",
+      "defect": "Every test reuses and resets the same clone (setup_clone123-132); snapshots capture hashes only and the final receipt contains no per-test immutable state handles. The final clone is the last schema-negative fixture with revisions/ledger null. Earlier dual-lock, distinct-record and restore-handler components/revisions/ledger hashes differ or are absent on current disk; their historical state cannot be independently read back. Journal snapshot identity is also absent.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:123-132,203-242,974-975,1008-1014",
+        "receipt isolated_clone / cases.final_effect_snapshot / prior cases.effect_snapshot"
+      ],
+      "correction": "Before resetting each fixture, preserve uniquely named immutable canonical/metadata/revisions/ledger/journal/derived files with a manifest and paths in the receipt. Bind before/interrupted/recovered/final states and exact per-operation effects."
+    }
+  ],
+  "pure_baseline_passes": true,
+  "declared_negative_controls": {
+    "paths": 29,
+    "independent_false_missing_wrongtype_all_reject": true,
+    "stored_controls_have_unrelated_missing_self_field": true
+  },
+  "history": [
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-8fed1394.json",
+      "sha256": "fe94115255b18bba0d983ab2b27e5a7845730c7f85bfe10346eeeadbaad1b5b3",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-b0f104b3.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-c3bbd1c0.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+      "sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3",
+      "hash_matches": true
+    },
+    {
+      "prior_milestone_pointer": "reports/canonical-transaction-schema-receipt.json",
+      "sha256": "d6af32263292a5a4d589229226034a1c66f7edef4e90f80416fbce6365a17024",
+      "hash_matches": true
+    }
+  ],
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "next_action": "Same owner: correct full schema optional-string/enum guard, complete strict noncircular nested controls, prove real post-write recovery interruption and zero-effect loser, save immutable per-test state/journal/derived evidence. Preserve accepted transaction improvements and all broader gates."
+}

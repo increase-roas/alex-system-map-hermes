@@ -1,0 +1,264 @@
+{
+  "review_id": "independent-consolidated-app-review-20261010-0558",
+  "reviewed_at": "2026-10-10T05:58:51.845150+00:00",
+  "scope": "APP-REVIEW-01..04 only. Browser, controlled edits, REL01 and synthetic/real-source milestones are separate reviewers/owner scope.",
+  "method": "Read-only sources/receipts and SQLite mode=ro SELECTs; pure in-memory gate/guard/regex counterexamples with Python -B. No tests rerun, shared DB/source writes, browser control, secrets, outside services or helpers.",
+  "owner_receipt": {
+    "path": "reports/consolidated-local-corrections-receipt.json",
+    "at": "2026-10-10T05:55:11+00:00",
+    "sha256": "e0d010d788b44ac307c983d32d5418290e9534f5cb9511c98e1c4022ad0e1507",
+    "self_report_not_acceptance": true
+  },
+  "snapshot": {
+    "stable": true,
+    "first_at": "2026-10-10T05:55:27.577536+00:00",
+    "last_at": "2026-10-10T05:58:51.845150+00:00",
+    "changed_paths": [],
+    "source_sha256": {
+      "tools/workflow_apply_guard.py": "ad2b89f3d6b556ad809be4e8e4db46cb25158e11de6ba0251179c26b4796af79",
+      "tools/reliability_gate.py": "ff3d29faf6f10738011bfb85cb4c743fd7346e4ba6cdda770e22b4b15e25fd49",
+      "tools/reliability_store.py": "f6d51bbcc9b578ceee6029703fdf2cc9aeebff64f451940d1dac96c3494f265f",
+      "tools/local_service.py": "ae32de4dd2157a11acb5a4403552d46683503f9715a20fb8abe102db0cb6e85e",
+      "tools/output_screening.py": "0eb76a1131b1baf6c6e1b7b5b614cb0fe1833de25993191e969ff64dfb7c97f2",
+      "tools/trace_store.py": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189",
+      "tools/app_path_corrections_acceptance.py": "1344f348141559e41e96b13749a6ce51c6147e86893f99c35c1c8c105e370130",
+      "tools/consolidated_local_corrections_acceptance.py": "090fbf4b46259d509ef7a117b0ad10be479834691cb94a93d084d28799078343",
+      "app/src/app/explorer/workflow-panel.tsx": "2a9b8eac16065a82f4fdfa20ab51eb492c6d570d07d22734ba69c17320ef639f",
+      "app/src/lib/server/python.ts": "40484cd330c4184588c90f0bd382d46d35b4f4c37ec071d30655f9a39b7afb39",
+      "reports/consolidated-local-corrections-receipt.json": "e0d010d788b44ac307c983d32d5418290e9534f5cb9511c98e1c4022ad0e1507",
+      "reports/app-path-corrections-receipt.json": "347552c0adb2aeb8c7f9e164a4f725bcb4d05b1d6b174acb8f3018bcd5f466dd",
+      "tools/workflow_engine.py": "55244927489bd365229697d5a636a1790d0e5e99f1dea9f55f1b4078b2536f3e",
+      "app/src/app/api/workflow/route.ts": "30f6017b50e4e680fc2d3b4d5c87373b12a345fd5fdebde7357255acbef6484f",
+      "app/src/app/api/workflow/recover/[jobId]/route.ts": "37211b5ddeacfec7fc9bac71e56a557c64ad99d233fabbcc85cdc63e1340a7d0",
+      "app/src/app/api/traces/[traceId]/route.ts": "7ba10337f8c571d097affc24feb79dcf5d7ba8f1e1804bd281cb7fda16025c1a",
+      "app/src/app/explorer/tracing-panel.tsx": "d03476f3d19b478eaad6c5d54d9268938ec47e5bd85222dbcdc0163388ea5bbc",
+      "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+    },
+    "receipt_recorded_three_scoped_source_hashes_match": true,
+    "limitation": "Receipt records workflow_apply_guard/reliability_gate/trace_store hashes, not all relevant consumers. Current independent snapshot hashes bind remaining sources; not proof of receipt execution against those exact bytes."
+  },
+  "overall": "FAILED; four application acceptance items not fully proven",
+  "items": [
+    {
+      "id": "APP-REVIEW-01",
+      "status": "FAILED",
+      "accepted": [
+        "Actual reliability-complete command invokes requirement gate; previously failed independent-app-path-review.json now rejected as independent_proof_not_success. REL02 skills_verified=false is rejected; supplied omitted requirement set/stale hash and proof hash mismatch have guards."
+      ],
+      "remaining": [
+        "Proof content checker accepts prior independent-reliability-corrected-detail.json despite FAILED items and no fully proven requirements, because overall is absent. Non-JSON proof is always accepted. Missing requirement_set/hash and 2001 timestamp still accepted; actually_used/skills_verified are client assertions.",
+        "Actual POST /api/workflow→local_service apply→guard→Engine verify/checkpoint never invokes requirement completion/proof gate. UI generates explorer-manual-verify strings and manual check booleans; Engine requires string evidence/check booleans, not valid proof handles.",
+        "Receipt does not exercise all four actual REL05 regressions. Positive app-path test itself uses failed corrected-detail report as successful proof."
+      ],
+      "sources": [
+        "tools/reliability_gate.py:36-77,102-138,191-199",
+        "tools/local_service.py:336-353,415-426",
+        "tools/workflow_apply_guard.py:72",
+        "tools/workflow_engine.py:156-165",
+        "app/src/app/explorer/workflow-panel.tsx:256-282",
+        "tools/app_path_corrections_acceptance.py:68-93"
+      ],
+      "required_check": "Reject failed/partial/unbound proof content independent of file name; bind successful dated requirement-specific proof identity/use to real workflow verify/checkpoint; run actual missing-requirement, skipped-skill, stale-source and false-completion negatives."
+    },
+    {
+      "id": "APP-REVIEW-02",
+      "status": "UNVERIFIED",
+      "accepted": [
+        "VERIFIED narrow source repair: recover-enhanced overwrites next_permitted_action with governing correction; API calls enhanced recovery; UI renders both governing_next_action and correction-aware next_permitted_action. Owner fresh subprocess receipt shows governing_applied=true and one recheck row."
+      ],
+      "remaining": [
+        "Consolidated receipt has no APP-REVIEW-02 entry. Saved recovery suite asserts governing_next, not equality of actual next_permitted_action.",
+        "API always supplies one hardcoded old note. Recovery selects global correction and queue, applies only on exact supersedes_note match; broad job/output affected-scope and application restart/action enforcement are unproved."
+      ],
+      "sources": [
+        "tools/reliability_store.py:118-140,199-213",
+        "tools/local_service.py:427-433",
+        "app/src/app/api/workflow/recover/[jobId]/route.ts:7-16",
+        "app/src/app/explorer/workflow-panel.tsx:396-410",
+        "tools/app_path_corrections_acceptance.py:97-123"
+      ],
+      "required_check": "Retain accepted displayed-action fix; assert actual permitted action from fresh API/application recovery with older conflicting note, history and each affected output queued; bind correction to intended job scope."
+    },
+    {
+      "id": "APP-REVIEW-03",
+      "status": "FAILED",
+      "accepted": [
+        "Mutation guard now always looks up handoff for non-create action; explicit mismatched nonempty checkpoint job_id rejected; revision advances after successful apply. Transfer retains acceptance and uses conditional owner/revision UPDATE. UI sends owner and handoff ID."
+      ],
+      "remaining": [
+        "Missing actor_owner defaults to stored handoff owner; nonmutating DummyEngine check with omitted actor+handoff invokes Engine as owner-b. Actor identity is client asserted. Explicit checkpoint lacking job_id is accepted.",
+        "Guard/check and Engine transaction are separate from reliability DB write; post-apply handoff revision update has no owner/revision CAS. Transfer accepts supplied job_revision/job_id without Engine state validation. Multiple checkpoint rows per job exist; automatic lookup returns first.",
+        "Replay is rejected by handoff revision guard before Engine operation reconciliation. Saved app-path receipt replay_ok=false, but summary still passed.",
+        "Consolidated omission case is invalid proof: isolated consolidated-job revision1, shared consolidated-job-handoff revision2. Nonzero result can be revision conflict; test checks only exit!=0 and misses wrapped error (receipt error=null)."
+      ],
+      "sources": [
+        "tools/workflow_apply_guard.py:36-73,77-92",
+        "tools/reliability_store.py:170-196,216-239",
+        "tools/workflow_engine.py:93-114",
+        "tools/consolidated_local_corrections_acceptance.py:64-95",
+        "tools/app_path_corrections_acceptance.py:409-414"
+      ],
+      "readback": [
+        "app/.data/reliability-tests/consolidated-handoff.sqlite jobs consolidated-job revision1; only consolidated-create operation",
+        "app/.data/reliability.sqlite reliability_handoffs consolidated-job-handoff owner-a revision2",
+        "app/.data/reliability-tests/app-path-rel04.sqlite app-path-op-0514 persisted revision2; app-path receipt replay_ok=false",
+        "app/.data/reliability.sqlite multiple checkpoint rows job_id=app-path-handoff"
+      ],
+      "required_check": "Require authoritative actor and job binding with no fallback; isolate ownership state in tests; enforce mutation/transfer/revision atomically or recoverably; replay recorded operation before rejecting advanced revision and require replay_ok in summary."
+    },
+    {
+      "id": "APP-REVIEW-04",
+      "status": "FAILED",
+      "accepted": [
+        "VERIFIED narrow response contract repair: export_trace_safe returns top-level trace/spans plus screening_notes; trace API passes through; TracingPanel accepts top-level and legacy envelope. Owner fixture receipt has2 spans. Actual Python trace export and diagnostic redaction paths exist."
+      ],
+      "remaining": [
+        "Real canary error test still requests missing-trace-id without a canary; asserts absence in output without required content/exit status. No actual stdout/stderr canary injection coverage.",
+        "Node bridge screening regex does not match existing hyphenated fake canary; pure regex check leaks=true. payload.error and spawn error forwarding remain unscreened, and trace-list/workflow/events output paths print raw values.",
+        "Consolidated trace shape check is ordinary fixture, not canary screening. Owner canary summary ignores empty/malformed/error outputs and stderr."
+      ],
+      "sources": [
+        "tools/trace_store.py:215-224",
+        "app/src/app/api/traces/[traceId]/route.ts:7-17",
+        "app/src/app/explorer/tracing-panel.tsx:140-153",
+        "app/src/lib/server/python.ts:7-10,42-66",
+        "tools/local_service.py:407-414,434-437,448-451",
+        "tools/app_path_corrections_acceptance.py:285-321"
+      ],
+      "required_check": "Inject fake canary into actual error/stdout/stderr/trace/export emitters; assert expected nonempty shape and exit behavior plus no canary; screen Node errors and remaining supported outputs with the same coverage."
+    }
+  ],
+  "nonmutating_checks": [
+    {
+      "case": "failed_report_old_date_omitted_set_hash",
+      "accepted": true,
+      "reason": "ok"
+    },
+    {
+      "case": "actor_and_handoff_omitted",
+      "engine_called": true,
+      "effective_owner": "owner-b"
+    },
+    {
+      "case": "replay_after_advanced_revision",
+      "engine_called": false,
+      "error": "handoff revision conflict"
+    },
+    {
+      "case": "explicit_checkpoint_missing_job_id",
+      "engine_called": true
+    },
+    {
+      "case": "Node_regex_existing_fake_canary",
+      "canary_leaks": true
+    }
+  ],
+  "checks_evidence": "Read-only exec output chunk f10aac; related DB readback chunk895d50; no mutating acceptance scripts rerun.",
+  "prior_16_findings": [
+    {
+      "id": "01",
+      "prior_finding": "gate proof-content truth",
+      "status": "FAILED",
+      "result": "APP-REVIEW-01"
+    },
+    {
+      "id": "02",
+      "prior_finding": "old timestamp/omitted claims",
+      "status": "FAILED",
+      "result": "APP-REVIEW-01; skills=false rejection improved"
+    },
+    {
+      "id": "03",
+      "prior_finding": "workflow completion bypass",
+      "status": "FAILED",
+      "result": "APP-REVIEW-01"
+    },
+    {
+      "id": "04",
+      "prior_finding": "REL05 four real regressions absent",
+      "status": "UNVERIFIED",
+      "result": "APP-REVIEW-01"
+    },
+    {
+      "id": "05",
+      "prior_finding": "actual next_permitted_action ignored correction",
+      "status": "VERIFIED",
+      "result": "Narrow source repair APP-REVIEW-02"
+    },
+    {
+      "id": "06",
+      "prior_finding": "hardcoded note/global affected outputs",
+      "status": "UNVERIFIED",
+      "result": "APP-REVIEW-02"
+    },
+    {
+      "id": "07",
+      "prior_finding": "optional handoff/actor bypass",
+      "status": "FAILED",
+      "result": "APP-REVIEW-03 actor fallback"
+    },
+    {
+      "id": "08",
+      "prior_finding": "job binding/client identity",
+      "status": "FAILED",
+      "result": "APP-REVIEW-03 missing job binding passes"
+    },
+    {
+      "id": "09",
+      "prior_finding": "cross-DB atomicity/revision/replay",
+      "status": "FAILED",
+      "result": "APP-REVIEW-03 replay=false"
+    },
+    {
+      "id": "10",
+      "prior_finding": "omission/concurrency/recoverability test coverage",
+      "status": "FAILED",
+      "result": "APP-REVIEW-03 stale state invalid omission proof"
+    },
+    {
+      "id": "11",
+      "prior_finding": "vacuous error canary/empty output acceptance",
+      "status": "FAILED",
+      "result": "APP-REVIEW-04"
+    },
+    {
+      "id": "12",
+      "prior_finding": "raw Node/output surfaces",
+      "status": "FAILED",
+      "result": "APP-REVIEW-04 regex leaks fake canary"
+    },
+    {
+      "id": "13",
+      "prior_finding": "trace response consumer mismatch",
+      "status": "VERIFIED",
+      "result": "Narrow source repair APP-REVIEW-04"
+    },
+    {
+      "id": "14",
+      "prior_finding": "synthetic CLI lacks app refresh",
+      "status": "UNVERIFIED",
+      "result": "Outside this bounded retest; prior result retained"
+    },
+    {
+      "id": "15",
+      "prior_finding": "synthetic actual metadata/real-source proof",
+      "status": "UNVERIFIED",
+      "result": "Outside this bounded retest; prior result retained"
+    },
+    {
+      "id": "16",
+      "prior_finding": "synthetic restart/cursor acceptance incomplete",
+      "status": "UNVERIFIED",
+      "result": "Outside this bounded retest; prior result retained"
+    }
+  ],
+  "proof_integrity": {
+    "consolidated_runner_exit": "Always returns0 at tools/consolidated_local_corrections_acceptance.py:193; does not assert all findings",
+    "handoff_summary": "tools/app_path_corrections_acceptance.py:409-414 omits replay_ok; retained receipt replay_ok=false"
+  },
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Real workflow evidence enforcement; mandatory authoritative owner/job and atomic recoverable replay; correction-aware fresh application proof; actual emitted error/stdout/stderr canary screening.",
+    "outside_dependency": "None for reviewed local fixes. Other milestone dependencies remain outside this bounded review."
+  }
+}

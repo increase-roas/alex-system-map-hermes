@@ -1,0 +1,120 @@
+{
+  "at": "2026-10-10T06:52:49+00:00",
+  "cases": {
+    "bounded_artifact_contract": {
+      "handler_positive_once": {
+        "error": "",
+        "exit": 0,
+        "matching_event_count": 1,
+        "observed_proofs_in_record": [
+          {
+            "byte_length": 18,
+            "content_matches_declaration": true,
+            "contract_revision": 1,
+            "contract_sha256": "34598d8bef5c6cb4d67f47fc310bcdb61ec3106786cc531b3758b9c82fe1a87a",
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+            "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8"
+          }
+        ],
+        "operation_count": 1
+      },
+      "pending_task_no_artifact": {
+        "checks": {
+          "artifact_present": false
+        },
+        "reason": "artifact_missing"
+      },
+      "plain_string_output_rejected": {
+        "checks": {
+          "artifact_descriptor_valid": false
+        },
+        "reason": "artifact_descriptor_invalid"
+      },
+      "real_artifact_measured": {
+        "descriptor_sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8",
+        "proofs": [
+          {
+            "byte_length": 18,
+            "content_matches_declaration": true,
+            "contract_revision": 1,
+            "contract_sha256": "34598d8bef5c6cb4d67f47fc310bcdb61ec3106786cc531b3758b9c82fe1a87a",
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+            "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8"
+          }
+        ],
+        "reason": null
+      },
+      "wrong_hash_rejected": {
+        "checks": {
+          "artifact_hash_matches": false
+        },
+        "reason": "artifact_sha256_mismatch"
+      }
+    },
+    "handler_scope_negatives": {
+      "wrong_operation": {
+        "error": "verification_record_operation_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "wrong_task": {
+        "error": "verification_record_task_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "wrong_verifier": {
+        "error": "verification_record_verifier_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      }
+    }
+  },
+  "delivery_id": "artifact-outcome-final-bytes-20261010-0639",
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": false,
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/artifact-outcome-final-bytes-20261010-0639-dbef4a91-c385-4a88-9346-e874aa908dcb.json",
+    "prior_receipt_reconciliation": [
+      {
+        "actual_sha256": "bf0728e2b8fd5f551ce2dde213c40d34f771fb8c35d4e816589ac8f7414c28cb",
+        "exists": true,
+        "hash_matches_declared": false,
+        "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-935f027b-6ab4-490c-8239-0d40b98c6475.json",
+        "previously_declared_sha256": "1a9229d667fe95150ab1015cbcf838df8d3f4a47aaa5de31a4dbfdd8e4501b10"
+      },
+      {
+        "actual_sha256": "e3b48368b0cae27046c7c82629f170f70c78bb5a31d6cd5f6fe00a4177e03b69",
+        "exists": true,
+        "hash_matches_declared": false,
+        "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-77770cf8-5b70-4c96-bd79-481c1e8725e8.json",
+        "previously_declared_sha256": "93c89af9fc428924df7ed60cee3c66645f21a14f1bbe8c7dd3164a0efdfe21ce"
+      },
+      {
+        "actual_sha256": "2671f8843743a1256f7110cb2ef62eecba64ff90371858135b290d386162e31d",
+        "exists": true,
+        "hash_matches_declared": false,
+        "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-1b203773-a375-42fe-8817-90698dc0b48e.json",
+        "previously_declared_sha256": "c001934242a85058c763ca77cf4bb652e6e18eca39bfdf80b015541ec8e80ea1"
+      }
+    ]
+  },
+  "run_id": "dbef4a91-c385-4a88-9346-e874aa908dcb",
+  "source_identity": {
+    "tools/artifact_outcome_final_bytes_acceptance.py": "2cb31312115ae809c0556883673ff92f29823271f28bd31d31b2cdbd6a1067d1",
+    "tools/bounded_acceptance.py": "07401ea75d8e24bb31e270073ceb4d997c6dec25df66f1e4f0dba8dac0f8dbd9",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "de05c154a0be7ce0f851c0909fe17a54cb8fe9ba4d3cdb2cf4d84803c92602b1"
+  }
+}

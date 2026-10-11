@@ -1,0 +1,44 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "13c79b68-de15-445f-8699-c8267daac34f",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "cpr-legit-job",
+    "job_revision": 5,
+    "task_id": "t1",
+    "operation_id": "cpr-legit-verify",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "artifact_hash_matches": true,
+    "declared_outcome_verified": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T07:16:29+00:00",
+  "max_age_seconds": 604800,
+  "observed_proofs": [
+    {
+      "criterion": "proof-bound",
+      "relative_path": "work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt",
+      "sha256": "d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f",
+      "byte_length": 26,
+      "production_id": "1b0c204b25cb14519c5dabf3541562469d9af99300551a50035b60b0cce94097",
+      "contract_revision": 2,
+      "contract_sha256": "dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2",
+      "content_matches_declaration": true
+    }
+  ],
+  "record_sha256": "2f8df647ee933311a9b46da8c0e648663eb0b30bb41ec2eb38db28f588630fb8"
+}

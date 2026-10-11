@@ -1,0 +1,414 @@
+{
+  "id": "table_6d751091535feadc47e9",
+  "sheet": "S04-23 Coverage & Sources",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Area"
+        },
+        {
+          "column": "B",
+          "value": "Coverage / limitation"
+        },
+        {
+          "column": "C",
+          "value": "Evidence pointer"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare routing and AI Search"
+        },
+        {
+          "column": "B",
+          "value": "5 custom domains; 5 zone routes across all 13 zones; account Worker subdomain increase-roas. AI Search uploaded-item counts:6/540/739 from completed1/11/15-page lists. Runtime serving untested; original local upload filenames unknown."
+        },
+        {
+          "column": "C",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd | log_EuSQgnMusiXY"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Successful read-only lists: access_apps=2, accounts=1, ai_search=3, d1=16, durable_objects=1, kv=9, pages=18, queues=2, r2=6, tunnels=4, vectorize=0, workers=30, workflows=0, zones=13. All returned pages captured; runtime requests untested."
+        },
+        {
+          "column": "C",
+          "value": "work/cloudflare-base.json"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GA4 accounts/85177518"
+        },
+        {
+          "column": "B",
+          "value": "No properties returned by successful query"
+        },
+        {
+          "column": "C",
+          "value": "work/read-ga4-85177518.json | log_0fFlk0wXEsA0"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer and Hermes counting"
+        },
+        {
+          "column": "B",
+          "value": "9 actual computers = 7 Orgo machines + 2 Macs. Orgo Workspaces contains 8 containers, not machines. Host Observations preserves dated details and directories, not extra machines. Hermes Configurations contains 8 saved model-config records, not verified running agents. Hermes by Computer maps the same 9 machines without adding inventory assets."
+        },
+        {
+          "column": "C",
+          "value": "work/orgo-metadata.json | work/original-comments.json"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace"
+        },
+        {
+          "column": "B",
+          "value": "198 My Drive root folders counted; only 3 selected business roots included. Shared-drive root folders only; file contents uninspected."
+        },
+        {
+          "column": "C",
+          "value": "work/workspace-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Account boundary"
+        },
+        {
+          "column": "B",
+          "value": "Only supplied evidence accounts inspected. Other connected SaaS resource contents may be uninspected; configured connections are not runtime proof. No client records or message content read."
+        },
+        {
+          "column": "C",
+          "value": "work/brief.md"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Freshness"
+        },
+        {
+          "column": "B",
+          "value": "READ VERIFIED means the exact read/list/probe in Proven scope succeeded, not that the service runtime works. CONFIGURED is settings/account metadata only. STALE is historical evidence at the row’s recorded date, without a current re-read. UNKNOWN means evidence absent."
+        },
+        {
+          "column": "C",
+          "value": "work/brief.md"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Evidence location"
+        },
+        {
+          "column": "B",
+          "value": "Relative work/ paths in this workbook resolve under: /Users/alexlobaito/Documents/Codex/2026-10-06/ce-handoff-resume-tmp-compound-engineering. Raw provider replies remain local in work/; this workbook contains resource metadata and concise coverage only."
+        },
+        {
+          "column": "C",
+          "value": "work/brief.md"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace list depth"
+        },
+        {
+          "column": "B",
+          "value": "16 directory users; 3 shared drives; 16 selected folder containers. Directory and drive pagination completed; only root folders listed. No documents/file contents read."
+        },
+        {
+          "column": "C",
+          "value": "work/workspace-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub list depth"
+        },
+        {
+          "column": "B",
+          "value": "29 organization repositories and 38 accessible-account repositories listed; repository metadata only, contents uninspected. Named authenticated identity: increaseroasir."
+        },
+        {
+          "column": "C",
+          "value": "work/workspace-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "notion / notion_lepas-limbie"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: pages=54, databases=8. Pagination: has_more=false, next_cursor=null; 62 returned items. Boundary: Integration-accessible scope only; workspace identity/name not exposed by list; no content fetched"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "asana / asana_logie-fratch"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: workspaces=1, projects=34. Pagination: next_page=null on both lists. Boundary: Visibility only for connected account; tasks/content not inspected"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "linear / linear_flap-urtica"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: teams=1, projects=0. Pagination: hasNextPage=false on both lists. Boundary: first=250 teams failed complexity; first=50 succeeded; project-empty may reflect visibility/scopes"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "sentry / sentry_venada-dama"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: organizations_returned=1, projects_returned=1. Pagination: BOUNDARY: wrapper exposes no cursor or Link headers. Boundary: Global completeness NOT_PROVEN; returned list only; no issues/events/content inspected"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "make / make_gerbe-ashake"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: organizations=1, teams=1, scenarios=1. Pagination: Org/scenario offset=1 returned empty; team 1<10000 page limit. Boundary: Scenario metadata only; no blueprint, logs or execution fetched"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "apify / apify_ruby-asor"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: listed_actors=23, datasets=0. Pagination: actor count=total=23; dataset count=total=0; dataset unnamed=true. Boundary: Ownership NOT_PROVEN; vendor usernames despite my=true; no runs, task inputs or dataset items fetched"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hugging_face / hugging_face_pricer-drongo"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: identity=1, organizations=0, models=0, datasets=0, spaces=0. Pagination: Own author-filtered repository lists returned [] (limit=1000). Boundary: Repos lists via card-authorized Composio proxy GET; metadata only"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "heygen / heygen_plower-ceiler"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: videos=203. Pagination: HeyGen pages 100+100+3, final cursor null. Boundary: Counts only; no assets/content retained; no generation"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "elevenlabs / elevenlabs_rangle-malo"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: voices=52. Pagination: GET_VOICES non-paginated list count=52. Boundary: Counts only; no assets/content retained; no generation"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "higgsfield / higgsfield_belout-embus"
+        },
+        {
+          "column": "B",
+          "value": "Returned counts: . Pagination: Not attempted. Boundary: Lower priority media provider beyond tested counts scope; no generation"
+        },
+        {
+          "column": "C",
+          "value": "work/supplemental-coverage.json"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Inventory row counting"
+        },
+        {
+          "column": "B",
+          "value": "883 inventory records include resources, accounts, routes, references, observations and two collection-count summaries. This is not a count of 883 distinct owned assets. AI surface references may group tools; QuickBooks local record labels are not company realm IDs."
+        },
+        {
+          "column": "C",
+          "value": "work/build_inventory.py | work/normalized-assets.json"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Relationship counting"
+        },
+        {
+          "column": "B",
+          "value": "59 configured target links/references; 201 target-unexposed binding fields and 4 tunnel fallback response rules are separate. All 264 original configuration records preserved. A listed field is not a proven service connection; localhost origins are local to the tunnel host, whose machine mapping was not proven."
+        },
+        {
+          "column": "C",
+          "value": "work/cloudflare-worker-bindings.json | work/cloudflare-base.json | work/normalized-assets.json"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical disk measurements"
+        },
+        {
+          "column": "B",
+          "value": "The Oct6 bounded probe did not measure disk. Oct5 original disk records are preserved in Computers notes and Orgo by Workspace; allocated GB and measured filesystem GiB are different measures. Historical free space is not current free space."
+        },
+        {
+          "column": "C",
+          "value": "work/original-target-backup.xlsx / COMPUTER INVENTORY"
+        }
+      ]
+    }
+  ]
+}

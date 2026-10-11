@@ -1,0 +1,745 @@
+{
+  "id": "table_5dbf4dcc34e48d746ac6",
+  "sheet": "S03-14 Evidence",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "area",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        },
+        {
+          "column": "B",
+          "value": "our rule"
+        },
+        {
+          "column": "C",
+          "value": "verdict"
+        },
+        {
+          "column": "D",
+          "value": "the test and its key number"
+        },
+        {
+          "column": "E",
+          "value": "sources"
+        },
+        {
+          "column": "F",
+          "value": "what we do because of it"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "One way in per app; remove overlapping connectors"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "GitHub cut Copilot from 40 to 13 tools: success +2–5 points, ~400 ms faster. Look-alike options cause most errors: at 120 items accuracy fell to ~45–63%; with two identical tools the AI picked by list order and wording, not correctness."
+        },
+        {
+          "column": "E",
+          "value": "github.blog/ai-and-ml/github-copilot/how-were-making-github-copilot-smarter-with-fewer-tools/ ; arxiv.org/abs/2601.04748 ; arxiv.org/abs/2505.18135"
+        },
+        {
+          "column": "F",
+          "value": "Keep. Strongest-backed rule we have. Applied 2026-10-01: every AI app is down to Composio plus its named built-ins, and Claude Code and Codex also keep their 1Password route (the op CLI and connectors-sync scripts; SOP D4); Claude Code, Cursor and Codex had their local copies removed; GA4 went from 2 routes to 1; Google Workspace from a login per person plus a Workspace Admin login to one robot; Meta and Cloudflare each got one route. Claude Desktop's old config: finished 2026-10-02 (its 2 duplicates removed, spp-c21)."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "Load tools on demand (Composio search) instead of all at once"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "Anthropic Tool Search: tokens −85%, accuracy 49%→74% (Opus 4). But outside tests with thousands of tools: built-in search missed the right tool 36–66% of the time."
+        },
+        {
+          "column": "E",
+          "value": "anthropic.com/engineering/advanced-tool-use ; arcade.dev/blog/anthropic-tool-search-4000-tools-test/ ; stacklok.com (head-to-head, Dec 2025)"
+        },
+        {
+          "column": "F",
+          "value": "Changed: name the exact Composio toolkit in tool cards and instructions, so the AI isn't relying on search across 1,000+ apps. Done 2026-10-01: 9 tool cards, a one-line index per card built into every AI's instructions, and a hosted copy (Composio CUSTOM_IR_NOTES_GET_APP_RULES). Still open: our own first-pick test on 20 real tasks (none recorded yet)."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "Clear, specific connector names"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "Wording changes which tool gets picked (7–11x usage shifts). Fixing vague tool descriptions: median +5.85 points, but worse in 1 of 6 cases and +67% steps. Connector names like ghl-oauth-crm vs ghl never tested."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2505.18135 ; arxiv.org/abs/2602.14878 ; anthropic.com/engineering/writing-tools-for-agents"
+        },
+        {
+          "column": "F",
+          "value": "Keep, and keep descriptions short and clear."
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "One central hub (Composio) instead of per-Mac servers"
+        },
+        {
+          "column": "C",
+          "value": "No hard data"
+        },
+        {
+          "column": "D",
+          "value": "No head-to-head test exists. Indirect: many real MCP bug reports come from local setup (app can't launch or find the local server)."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/html/2603.05637v1"
+        },
+        {
+          "column": "F",
+          "value": "Keep for sharing with partners; it's a team decision, not a proven accuracy gain. Not off the Mac yet (2026-10-01): the 8-hour tune-up and the key mover still run on the Mac."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "One tool card per app, with a one-line index of the cards in every AI's instructions"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "Vercel test: an always-loaded index pointing to docs scored 100%; an on-demand skill scored 53% (79% with explicit instructions). Anthropic: short, clear tool descriptions help. claude.ai drops MCP server instructions, so notes can't ride on the connector alone. Our own tiny test (2026-10-01, not a study): the notes tool showed up in 2 of 4 task searches, and in 5 of 6 after its description named the tasks."
+        },
+        {
+          "column": "E",
+          "value": "vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals ; anthropic.com/engineering/writing-tools-for-agents ; system/run-log.md (2026-10-01 notes line)"
+        },
+        {
+          "column": "F",
+          "value": "Keep. Cards live in ~/.agents/tools/cards (9 on 2026-10-01); a commit syncs them to Composio, every AI's instructions and the Tool cards tab. Golden task G14 (name the Google Ads route, ask before a budget change) passed 3 of 3 runs."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "Judge a route by testing what it can do, not by reading its tool list (lesson L-002)"
+        },
+        {
+          "column": "C",
+          "value": "No hard data"
+        },
+        {
+          "column": "D",
+          "value": "Our own tests, 2026-10-01: Composio's Google Analytics login saw 10 GA4 properties but was read-only (403 on create); the custom GA4 route created and deleted a key event. The tool list alone could not show that. No outside study."
+        },
+        {
+          "column": "E",
+          "value": "system/run-log.md (2026-10-01 GA4 lines); system/lessons.md L-002"
+        },
+        {
+          "column": "F",
+          "value": "Keep. Before picking a route: list what it reaches, make one small change you undo, and count the operator's clicks."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connectors"
+        },
+        {
+          "column": "B",
+          "value": "A health check, so a connector can't fail silently"
+        },
+        {
+          "column": "C",
+          "value": "No hard data"
+        },
+        {
+          "column": "D",
+          "value": "Our own incident, 2026-10-01: 14 Composio logins had expired and nobody was told; the Orgo hub had no check. Now 18 checks run every 30 minutes and alert Alex and Manny by text and email only on a break or recovery. No outside study."
+        },
+        {
+          "column": "E",
+          "value": "system/run-log.md (2026-10-01 gap review and health check lines)"
+        },
+        {
+          "column": "F",
+          "value": "Keep. Watch the alert volume: the first run sent one false alarm (a bug in our check), fixed and cleared within 2 minutes."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Instruction files"
+        },
+        {
+          "column": "B",
+          "value": "Keep the map short (Anthropic: under 200 lines)"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "More rules lowers the chance ALL are followed (best model 68% at 500 rules; GPT-4o 94%→21% from 1 to 10 rules). But the only Claude Code test (1,650 sessions) found file length had no effect: 60–68% compliance at 25 to 500 lines."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2507.11538 ; arxiv.org/html/2509.21051v1 ; arxiv.org/abs/2605.10039"
+        },
+        {
+          "column": "F",
+          "value": "Changed: cut rules that don't earn their place; stop treating 200 lines as a magic number."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Instruction files"
+        },
+        {
+          "column": "B",
+          "value": "No contradicting rules between global and project files"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "Lab tests: when two rules conflict the intended one wins only 9.6–45.8% of the time and models rarely say so. Claude Code test: a conflict didn't lower overall compliance (63.7% vs 64.1%)."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2502.15851 ; arxiv.org/abs/2605.10039"
+        },
+        {
+          "column": "F",
+          "value": "Keep: conflicts make WHICH rule wins a coin flip, and removing them is cheap."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Instruction files"
+        },
+        {
+          "column": "B",
+          "value": "Keep week-to-week facts out of the map (STATUS.md)"
+        },
+        {
+          "column": "C",
+          "value": "No hard data"
+        },
+        {
+          "column": "D",
+          "value": "Indirect: models trust wrong information placed in front of them over 60% of the time (ClashEval). These files grow ~57 words per edit and rarely get pruned."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2404.10198 ; arxiv.org/html/2511.12884v2"
+        },
+        {
+          "column": "F",
+          "value": "Keep (logic + indirect data)."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Instruction files"
+        },
+        {
+          "column": "B",
+          "value": "Rules in AGENTS.md, CLAUDE.md = @AGENTS.md"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "Claude Code test: the import cost nothing (68.2% vs 67.7%). Anthropic recommends the import; a sentence pointer only works if the AI chooses to open the file."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2605.10039 ; code.claude.com/docs/en/memory"
+        },
+        {
+          "column": "F",
+          "value": "Keep. repo-conform should enforce it."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Instruction files"
+        },
+        {
+          "column": "B",
+          "value": "Do map files help at all? Who writes them?"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "ETH Zurich: AI-written map files changed success −0.5% to −2% and cost 20–23% more; hand-written +2.4% (not statistically sure), and no gain for Claude Code. Another study: agents ran 28.6% faster with the file."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2602.11988 ; arxiv.org/abs/2601.20404"
+        },
+        {
+          "column": "F",
+          "value": "Changed: maps stay minimal and human-reviewed. Don't let an AI write a long map from scratch (applies to repo-conform)."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Instruction files"
+        },
+        {
+          "column": "B",
+          "value": "Must-never-break rules go in hooks/permissions, not prose"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "A plain written rule was followed only ~60–68% of the time, dropping ~5.6% per extra function in a session. Hard enforcement blocked over 90% of unsafe runs (AgentSpec); prompt-injection success 39.9%→2.5% (Progent)."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2605.10039 ; arxiv.org/abs/2503.18666 ; arxiv.org/abs/2504.11703"
+        },
+        {
+          "column": "F",
+          "value": "Keep the principle. Where we stand 2026-10-01: the spend rule is written down, not enforced. Alex chose no app-wide spend gate; spend follows each project's \"Spend approval:\" line (words in AGENTS.md). Google Ads runs \"always allow\" in Composio, so only the AI's own rules stop a budget change. Composio's Enhanced Control, a hard block, was switched off because it blocked Slack and Notion in Claude Code. Update, later 2026-10-01: Claude Code now has a hard stop. A guard hook holds Composio spend, client-send and delete calls until Alex types the guard code or names the target, in bypass mode too (proven live with three stopped calls and 27 unit tests; agents-home a8959c7). Codex: the same guard is installed (agents-home 26ee11c) and trusted (2026-10-01); Run H passed, and with no release path gated calls stay blocked there."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills"
+        },
+        {
+          "column": "B",
+          "value": "Procedures in on-demand skills, not the map"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "Tokens: saved. Results: Vercel test, an on-demand skill scored 53% (same as no docs) because it went unopened in 56% of runs; a short always-loaded index pointing to docs scored 100%."
+        },
+        {
+          "column": "E",
+          "value": "vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals ; anthropic.com/engineering/advanced-tool-use"
+        },
+        {
+          "column": "F",
+          "value": "Changed: every map keeps a short \"which skill for which job\" table so the AI actually opens the skill. Same idea used for app notes (2026-10-01): a one-line index per card in every AI's instructions, the full card on demand."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills"
+        },
+        {
+          "column": "B",
+          "value": "Human-reviewed skills beat AI-written ones"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "SkillsBench (87 tasks): curated skills +16.6 points. Skills the AI wrote for itself from scratch scored 8–11.5 points BELOW no skills. Exception: workflows written from runs that passed a check beat human-written (35.5% vs 33.0%)."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2602.12670 ; arxiv.org/abs/2409.07429"
+        },
+        {
+          "column": "F",
+          "value": "Changed: make a skill only from a run that passed its checks, and have a person review it before installing."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills"
+        },
+        {
+          "column": "B",
+          "value": "A few focused skills, not one giant skill or a huge library"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "1 skill +17.8, 2–3 skills +18.6, 4+ skills +5.9; \"comprehensive\" skills −2.9. Picking the right skill: over 90% with 20 or fewer, about 20% at 200; ~3 points lost every time the library doubles."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/html/2602.12670v1 ; arxiv.org/pdf/2601.04748 ; arxiv.org/html/2605.16508v1"
+        },
+        {
+          "column": "F",
+          "value": "Changed: this Claude sees about 320 skills (count of this session's list). Turn off unused plugin skill packs; that is the biggest skills lever. (Count taken earlier on 2026-10-01; not recounted.)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills"
+        },
+        {
+          "column": "B",
+          "value": "One shared copy of each skill, linked into each tool"
+        },
+        {
+          "column": "C",
+          "value": "No hard data"
+        },
+        {
+          "column": "D",
+          "value": "No benchmark. Docs: Codex doesn't merge two same-name skills (both show). Look-alike skills hurt picking (see above)."
+        },
+        {
+          "column": "E",
+          "value": "developers.openai.com/codex/skills ; cursor.com/docs/skills"
+        },
+        {
+          "column": "F",
+          "value": "Keep as housekeeping; it also removes look-alikes."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills"
+        },
+        {
+          "column": "B",
+          "value": "Composio's plans + pitfalls in search help"
+        },
+        {
+          "column": "C",
+          "value": "No hard data"
+        },
+        {
+          "column": "D",
+          "value": "Composio's own 31-task test tied Opus (26/31) at ~1/12 the cost, but bundled plans with other features. Closest analog: usage examples raised Anthropic tool accuracy 72%→90%."
+        },
+        {
+          "column": "E",
+          "value": "composio.dev (2026-07-14 eval post) ; anthropic.com/engineering/advanced-tool-use"
+        },
+        {
+          "column": "F",
+          "value": "Keep; unproven on its own."
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agents"
+        },
+        {
+          "column": "B",
+          "value": "One agent for step-by-step work; parallel helpers only for independent parts"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "Google/MIT, 260 setups: every multi-agent setup did 39–70% worse on sequential planning; split-up financial work +80.8%. Anthropic multi-agent research +90.2% on wide research at ~15x tokens."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2512.08296 ; anthropic.com/engineering/multi-agent-research-system"
+        },
+        {
+          "column": "F",
+          "value": "Keep."
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agents"
+        },
+        {
+          "column": "B",
+          "value": "Fresh session for each new task"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "Indirect: same task fed over several turns scored 39% lower across 15 models, and they rarely recovered from a wrong turn. Claude Code rule-following fell ~5.6% per extra function written."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2505.06120 ; arxiv.org/abs/2605.10039 ; research.trychroma.com/context-rot"
+        },
+        {
+          "column": "F",
+          "value": "Keep. 2026-10-01: the long connector chat was closed and replaced by a handoff file (system/handoff/2026-10-01_connectors-handoff.md) so a fresh chat could carry on."
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agents"
+        },
+        {
+          "column": "B",
+          "value": "Keys never in chat; password manager loads them"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "Indirect: all 13 frontier models could be hijacked (0.5–8.5%). In 17,022 agent skills, 73.5% of key leaks came from scripts printing keys into logs the AI reads."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2603.15714 ; arxiv.org/abs/2604.03070"
+        },
+        {
+          "column": "F",
+          "value": "Changed: added \"scripts never print keys\" (the key mover already doesn't). Our own slip, 2026-10-01: a redaction step printed an old Foreplay key into a session log (BSD sed has no \\s); we now redact in Python, never sed, and that key still has to be rotated (open). Key flow now: Alex copies the key, the agent saves it to 1Password and pushes it to Composio; never in chat, files or logs. A key sweep left 6 keys in shell history and .env files in 3 project folders still to move (open)."
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agents"
+        },
+        {
+          "column": "B",
+          "value": "A fresh checker reviews the work, not the agent itself"
+        },
+        {
+          "column": "C",
+          "value": "Supported"
+        },
+        {
+          "column": "D",
+          "value": "Models can't reliably fix their own reasoning without outside feedback, rate their own work higher, and kept their own wrong answer 86% of the time."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2310.01798 ; arxiv.org/abs/2404.13076 ; arxiv.org/abs/2504.03846"
+        },
+        {
+          "column": "F",
+          "value": "Keep."
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agents"
+        },
+        {
+          "column": "B",
+          "value": "Ask a person before spend / send / delete"
+        },
+        {
+          "column": "C",
+          "value": "Mixed"
+        },
+        {
+          "column": "D",
+          "value": "Agents take risky actions often (23.9–72.7% across 3 safety tests). But people clicking \"approve\" caught a planted dangerous command only 13.6% of the time (Anthropic, 1,053 testers), falling to ~5% after 50 prompts."
+        },
+        {
+          "column": "E",
+          "value": "arxiv.org/abs/2507.06134 ; anthropic.com/engineering/claude-code-auto-mode"
+        },
+        {
+          "column": "F",
+          "value": "Keep, but only for rare, high-stakes actions so approvals stay meaningful. 2026-10-01: Alex's standing yes covers routine clean-up (remove proven duplicate or dead logins and configs, enable Google APIs in our own Cloud projects, push 1Password keys into Composio, fix settings to his checklists), so asks are left for spend, real-customer messages and client-data deletes."
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Notes"
+        },
+        {
+          "column": "B",
+          "value": "Verdicts: Supported = tests back it; Mixed = some tests for, some against or it depends; No hard data = logic and indirect evidence only. Many sources are vendors grading their own approach, and most tests use coding tasks, not business work. Full tables: master-connector-repo/work/2026-10-01_evidence-check/notes/. Entries dated 2026-10-01 under \"what we do\" come from our own run log, not from outside studies."
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Current connectors reconciliation"
+        },
+        {
+          "column": "B",
+          "value": "Workbook reconciliation Oct5: canonical local/Drive hash baseline matched; publication proof saved after final write"
+        },
+        {
+          "column": "C",
+          "value": "Apps/accounts/route truth stays here; mission/inventory/budget/gates cross-linked"
+        },
+        {
+          "column": "D",
+          "value": "https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        },
+        {
+          "column": "E",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/work/connectors-reconciliation-20261005/sync-receipt.json"
+        },
+        {
+          "column": "F",
+          "value": "2026-10-05; no agent or infrastructure change"
+        }
+      ]
+    }
+  ]
+}

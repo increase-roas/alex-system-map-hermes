@@ -1,0 +1,188 @@
+{
+  "review_id": "independent-actual-ui-baseline-browser-review",
+  "reviewed_at": "2026-10-10T08:28:22.496542+00:00",
+  "scope": "Exact prior strict-verdict browser gaps only; source/safe metadata and pure no-write in-memory gate controls.",
+  "owner_run": "c1207d5a-d1bf-44bf-971c-738a6e36dc17",
+  "owner_at": "2026-10-10T08:24:32+00:00",
+  "owner_pass_self_report": "passed",
+  "receipt_sha256": "d660056727fbf2f6aedbc82d658458d7182c9825eb71773a8ce2835160564918",
+  "pointer_sha256": "05fa1a7c2de13f1784350695d60a4f95c5f30ff43a47dbbb7df80235bfbf72d2",
+  "source_sha256": {
+    "app/.next/BUILD_ID": "487bbc690d08fba5577533541f6827a99f9067a78d55f5ac24c8c9a3b81df0c4",
+    "app/src/app/explorer/workflow-panel.tsx": "984f9be60b80bc24188dedc69a612aee2b7f867eaede3f02d80ccf9a78012d41",
+    "app/src/lib/server/python.ts": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+    "tools/acceptance_summarize_strict.py": "a544ea6e97b3772ef93de120efb9734d5c6f9db13f1a3122172af15498aeb50e",
+    "tools/actual_ui_valid_baseline_acceptance.py": "df0a2516c9703dab9adfad832056e3c2000a72c998015b105165404884439088",
+    "tools/browser_recovery_screening.mjs": "444c0182cc189fe62239bdc1e7efb1a0ca2c01f1b4463067cd00a0d7c6e1d633",
+    "tools/catalog_io.py": "04e1c1b0cdf2ea7bd40ff63621ddf5bf1106408c8779331267ca4d0c51e25393",
+    "tools/catalog_screening_probe.py": "cc305e58115850311acc03e99b43cca3ffacffce3f0c6e9e6b97f448e5839e71",
+    "tools/emitted_boundaries_served_restart_acceptance.py": "1246dfaad7ef01ac462e17a861a81dbbd2cfa7d951e54c8fdce6a34e2812d1ce",
+    "tools/job_recovery.py": "6d547f54040d98f867253539dadb46466a256ab179e56ec1b536de60b8506eed",
+    "tools/local_service.py": "c381f113218dff924d68e51be42cfcfdafbb82b365a9292772cb927515ddbfd9",
+    "tools/recovery_screening_real_paths_acceptance.py": "e1172a9432e5965def1160b037ba73b4be2749b1e1ea0858e6d9d5bf44c1c0d2"
+  },
+  "prior_review_sha256": "3113271ff20be926cb4e2f3e2e5a3433a95b38bee2f5fa126465ec429d5b581f",
+  "capture_binding": {
+    "network": {
+      "path": "reports/browser-proof/actual-ui-valid-baseline-20261010-0820/capture-c1207d5ad1bf/network-log-c1207d5ad1bf.json",
+      "sha256": "fca8d7cb41a45777590eb9adca5737981258172ff09f4bac0e2b0f8d9934f1dc",
+      "suffix": "c1207d5ad1bf"
+    },
+    "screenshot": {
+      "bytes": 84852,
+      "path": "reports/browser-proof/actual-ui-valid-baseline-20261010-0820/capture-c1207d5ad1bf/recovery-c1207d5ad1bf.png",
+      "sha256": "11328a26952df07a53df92bac5c1d200be36441863984ff88c28b5261995ec9d"
+    },
+    "raster_opened": false
+  },
+  "safe_observations": {
+    "blocked_dom_nonempty": true,
+    "blocked_task_dep_correction_identity": true,
+    "retained_exact_output_record_in_recheck_container": true,
+    "exact_stale_history": true,
+    "tcp_refused_code_matches": true,
+    "served_pid_before": 72472,
+    "served_pid_after": 72977,
+    "database_path_stable": true
+  },
+  "pure_controls": {
+    "positive_valid_baseline_pass": true,
+    "tested_control_count": 21,
+    "items": {
+      "build_id_stable": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      },
+      "ui_a_history_ok": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      },
+      "ui_b_no_history": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      },
+      "ui_t2_downstream_blocked_ok": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      },
+      "ui_a_affected_output_ok": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      },
+      "restart_stop.listenerReleased": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      },
+      "restart_stop.portRefusedObserved": {
+        "false_fails": true,
+        "empty_fails": true,
+        "missing_fails": true
+      }
+    }
+  },
+  "items": [
+    {
+      "id": "Exact final receipt/source/runner/build binding",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json",
+        "reports/actual-ui-valid-baseline-receipt.json"
+      ],
+      "finding": "Reviewed final run c1207d5a-d1bf-44bf-971c-738a6e36dc17 at 08:24:32 UTC. Pointer hash matches immutable receipt; all twelve recorded source hashes match current bytes, runner hash matches browser source, served build before/after equals current BUILD_ID. Owner passed was treated as self-report until these checks."
+    },
+    {
+      "id": "Actual corrected-dependent DOM without API fallback",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:421",
+        "app/src/app/explorer/workflow-panel.tsx:454",
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json"
+      ],
+      "finding": "Source applies t2 correction with unmet t1 dependency and waits for actual blocked DOM. Saved nonempty UI text contains t2, t1, corr-t2 and correction reason marker. Old count/API fallback removed. Served API independently confirms active t2 correction and pending t1; next permitted task remains t1."
+    },
+    {
+      "id": "Retained output identity and recheck status",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:409",
+        "app/src/app/explorer/workflow-panel.tsx:443",
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json"
+      ],
+      "finding": "Saved nonempty output-record DOM identifies t1 and exact fixture output marker. That exact captured record is contained in captured affected-output DOM under the explicit Affected outputs needing recheck heading. API queue count is 1 with retained matching output; earlier count-only UI gap closed. This is retained fixture output-record proof, not external agent-produced artifact proof."
+    },
+    {
+      "id": "Historical note and job isolation",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:414",
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json"
+      ],
+      "finding": "Saved A history contains exact stale baseline; A actionable excludes stale instruction. Both A and B actual UI action strings contain full respective API actions; B has no A correction/history leakage. Earlier narrow two-job and history acceptance preserved."
+    },
+    {
+      "id": "Required build/history/output/listener gates",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:460",
+        "tools/acceptance_summarize_strict.py:28"
+      ],
+      "finding": "Browser pass requires build stability, A/B history, actual blocked UI and retained-output identity, listenerReleased and portRefusedObserved. Independent pure strict aggregate positive baseline passes; each of these seven booleans individually false, empty string or absent makes aggregate fail (21 controls). Correct portRefusedObserved camel-case key tested; no unknown-field control used as proof."
+    },
+    {
+      "id": "Actual connection-refused interval",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:93",
+        "tools/browser_recovery_screening.mjs:126",
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json"
+      ],
+      "finding": "Probe uses TCP net.connect to 127.0.0.1 and exact error code ECONNREFUSED. Successful connection and timeout explicitly return false. Stop waits for port refusal plus old served PID exit before new server starts. Saved port_probe_code is ECONNREFUSED and portRefusedObserved/listenerReleased/oldPidExited true; previous HTTP/error/timeout alias removed."
+    },
+    {
+      "id": "Preserved served PID and isolated DB continuity",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:345",
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json"
+      ],
+      "finding": "Actual served PID changes 72472 to 72977 independently of launcher IDs; served build and isolated DB path stable. A governing/stale/retained output state and B independent action survive restart. False bare-init DB hash does not invalidate logical continuity because initialization writes sync/trace data; no byte-identical DB claim."
+    },
+    {
+      "id": "Final run capture integrity and safe review",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/browser-proof/actual-ui-valid-baseline-20261010-0820/capture-c1207d5ad1bf/network-log-c1207d5ad1bf.json",
+        "reports/browser-proof/actual-ui-valid-baseline-20261010-0820/capture-c1207d5ad1bf/recovery-c1207d5ad1bf.png"
+      ],
+      "finding": "Capture suffix c1207d5ad1bf matches final run; saved network bytes/hash equal final receipt entries and binding. Screenshot hash/size match metadata; network parse errors zero. Used source and safe Boolean projections only, no raw capture/credential output and no screenshot opened. Screened raster safety/usability not independently claimed."
+    },
+    {
+      "id": "Narrow acceptance boundary",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/independent-strict-verdict-browser-review.json"
+      ],
+      "finding": "All exact prior scoped browser gaps now closed. Review performed no browser launch, app rerun/mutation, network, install or helper delegation. This acceptance preserves previous narrow passes and leaves original broader browser matrix/real SDK proof separate."
+    },
+    {
+      "id": "Broader original browser matrix and real SDK input",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "reports/independent-consolidated-browser-review.json"
+      ],
+      "finding": "No broader visual audit or real SDK execution included. Their earlier open evidence requirements remain outside this narrow retest."
+    }
+  ],
+  "verdict": "VERIFIED: exact scoped prior browser defects closed; broader original matrix and real SDK remain outside scope.",
+  "scoped_blocker": null,
+  "remaining_broader_blocker": {
+    "type": "missing_evidence",
+    "exact_missing": "Original broader visual/browser matrix and real SDK input proof, not exercised by this bounded retest."
+  }
+}

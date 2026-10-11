@@ -1,0 +1,70 @@
+{
+  "evidence": {
+    "reject_unrelated_trace_fixture": {
+      "exit": 1,
+      "rejected": true,
+      "reason": "verification_record_schema_mismatch"
+    },
+    "reject_future_via_record_validation": {
+      "rejected": true,
+      "reason": "verification_record_future_observed_at"
+    },
+    "reject_stale_observed_via_max_age": {
+      "rejected": true,
+      "reason": "verification_record_stale"
+    },
+    "reject_wrong_job_revision_scope": {
+      "rejected": true,
+      "reason": "verification_record_job_mismatch"
+    },
+    "fixture_positive_control": {
+      "accepted": true,
+      "reason": "ok"
+    },
+    "verify_handler_with_issued_record": {
+      "exit": 1,
+      "accepted": false,
+      "operation_count": 0,
+      "matching_event_count": 0,
+      "error": "verification_record_not_registered"
+    }
+  },
+  "txn": {
+    "reject_intruder_transfer_actor": {
+      "exit": 1,
+      "rejected": true,
+      "error": "transfer actor must match expected_owner"
+    },
+    "reject_foreign_handoff_operation": {
+      "exit": 1,
+      "rejected": true,
+      "error": "handoff job_id mismatch"
+    },
+    "cas_fault_rolls_back_engine": {
+      "first_apply_failed": true,
+      "operation_count_after_fault": 0,
+      "handoff_revision_after_fault": 1,
+      "error": "handoff revision advance lost race"
+    },
+    "replay_after_fault_succeeds_once": {
+      "replay_exit": 1,
+      "operation_count": 1,
+      "matching_event_count": 1,
+      "handoff_owner": "owner-b",
+      "acceptance_retained": [
+        "check"
+      ]
+    },
+    "concurrent_transfer_vs_mutate": {
+      "transfer": {
+        "exit": 0,
+        "error": ""
+      },
+      "mutate": {
+        "exit": 1,
+        "error": "handoff revision conflict"
+      },
+      "one_succeeded": true
+    }
+  }
+}

@@ -1,0 +1,1554 @@
+{
+  "id": "table_181c0344a40e81855ff6",
+  "sheet": "S03-26 Composio custom routes",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Every custom toolkit in Composio: what it reaches, its endpoint, its auth scheme and header, and its login (values never shown); how a route is registered; the exact register bodies; and the GHL builder and gateway addresses. It closes retest gap G12. Its own tab next to the Composio tab, so each tab has one writer. Read 2026-10-01 through Composio's REST API with GET calls only (notes/gap-facts.md §4). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/composio-routes.json; never edit this tab by hand.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Every custom toolkit in Composio (read 2026-10-01 through Composio's REST API with GET calls only; no key printed; custom_hf_mcp added 2026-10-02 (spp-p40a) and deleted the same day (CG-QWAA))"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "toolkit slug"
+        },
+        {
+          "column": "B",
+          "value": "what it reaches"
+        },
+        {
+          "column": "C",
+          "value": "endpoint URL (app_url)"
+        },
+        {
+          "column": "D",
+          "value": "auth scheme and header"
+        },
+        {
+          "column": "E",
+          "value": "login and what it holds"
+        },
+        {
+          "column": "F",
+          "value": "auth config"
+        },
+        {
+          "column": "G",
+          "value": "tools (version)"
+        },
+        {
+          "column": "H",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "B",
+          "value": "GA4 Admin and Data API on the hub, acting as alex@ through the Google robot"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/ga4-admin/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_RjAXt_4X2K28 (ACTIVE) holds the shared MCP hub token (item qhzv4z3vflmqdi64rx3wfh7sji): this route has no token file of its own, so the hub accepts only that token. Hub health check 2026-10-01 20:30:55Z: route up (25 tools) and the Composio read check passed."
+        },
+        {
+          "column": "F",
+          "value": "ac_isJQ_B2CDqN_ (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "25 tools, version 20261001_02"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json ; workbook All connections R137"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_google_tag_manager"
+        },
+        {
+          "column": "B",
+          "value": "Google Tag Manager on the hub, acting as alex@"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/gtm/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_Z9l2oNsyCPgI (ACTIVE) holds the shared MCP hub token (item qhzv4z3vflmqdi64rx3wfh7sji): this route has no token file of its own, so the hub accepts only that token. Hub health check 2026-10-01 20:30:55Z: route up and the Composio read check passed."
+        },
+        {
+          "column": "F",
+          "value": "ac_hujC8wCcfQQg (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "18 tools, version 20261001_00"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json ; workbook All connections R172"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_xai_research"
+        },
+        {
+          "column": "B",
+          "value": "xAI search and research on the hub (paid per call)"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/xai-research/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_xmSIwBg2NqDS (ACTIVE) holds the shared MCP hub token (item qhzv4z3vflmqdi64rx3wfh7sji): this route has no token file of its own, so the hub accepts only that token. Hub health check 2026-10-01 20:30:55Z: route up. Login ACTIVE; not in the health check's watch list and not read-tested in this play."
+        },
+        {
+          "column": "F",
+          "value": "ac_EhazG9rsK2BU (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "4 tools, version 20261001_00"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json ; workbook All connections R260"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_prime_intellect"
+        },
+        {
+          "column": "B",
+          "value": "Prime Intellect on the hub"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/prime-intellect/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_ev--jZjkn41E (ACTIVE) holds the shared MCP hub token (item qhzv4z3vflmqdi64rx3wfh7sji): this route has no token file of its own, so the hub accepts only that token. Hub health check 2026-10-01 20:30:55Z: route up. Login ACTIVE; not in the health check's watch list and not read-tested in this play."
+        },
+        {
+          "column": "F",
+          "value": "ac_7i7x8XEnA0DH (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "10 tools, version 20261001_00"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_spyfu"
+        },
+        {
+          "column": "B",
+          "value": "SpyFu on the hub"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/spyfu/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_-fHucw9xAqkE (ACTIVE) holds the shared MCP hub token (item qhzv4z3vflmqdi64rx3wfh7sji): this route has no token file of its own, so the hub accepts only that token. Hub health check 2026-10-01 20:30:55Z: route up. Login ACTIVE; not in the health check's watch list and not read-tested in this play."
+        },
+        {
+          "column": "F",
+          "value": "ac_DGIOkVQzj2lq (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "22 tools, version 20261001_01"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_ir_notes"
+        },
+        {
+          "column": "B",
+          "value": "The app-rules notes (tool cards) on the hub: CUSTOM_IR_NOTES_GET_APP_RULES"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/ir-notes/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_zTNUL9d6xZDl (ACTIVE) holds the shared MCP hub token (item qhzv4z3vflmqdi64rx3wfh7sji): this route has no token file of its own, so the hub accepts only that token (its auth config is named 'ir-notes hub token'). Hub health check 2026-10-01 20:30:55Z: route up and the Composio read check passed."
+        },
+        {
+          "column": "F",
+          "value": "ac_Ypwo60n-AhHy (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "1 tool, version 20261001_19"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json ; workbook All connections R296"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_google_robot"
+        },
+        {
+          "column": "B",
+          "value": "Google Workspace (Gmail, Drive, Docs, Sheets, Calendar, Admin) as any increaseroas.com user, on the hub"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/google-robot/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}} (Composio's documented form; the hub proxy accepts Bearer or x-api-key, and Composio's API doesn't return the header each toolkit was registered with)"
+        },
+        {
+          "column": "E",
+          "value": "ca_vm6rcasgNEIk (ACTIVE) holds the MCP Google robot token (item ol4f26ki7hgrsv6g5l6ik2dxwq): this route has its own token file. Hub health check 2026-10-01 20:30:55Z: route up and the Composio read check passed."
+        },
+        {
+          "column": "F",
+          "value": "ac_C7r5BFqlpABK (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "13 tools, version 20261001_02"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_atlas_cloud"
+        },
+        {
+          "column": "B",
+          "value": "Atlas Cloud image, video and audio generation, on the hub"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.increaseroas.com/atlas-cloud/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header recorded at registration: Authorization: Bearer {{generic_api_key}}"
+        },
+        {
+          "column": "E",
+          "value": "ca_lc_OOuJPDa_0 (ACTIVE) holds the MCP atlas-cloud route token (item ldtridi67bgehcpbojgmnxdwoy), not the Atlas key: this route has its own token file. Hub health check 2026-10-01 20:30:55Z: route up. Login ACTIVE; not in the health check's watch list and not read-tested in this play."
+        },
+        {
+          "column": "F",
+          "value": "ac_TJum5L1s4wds (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "15 tools, version 20261001_01"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_director-finish/notes/atlas-cloud.md L29–L31 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L21"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_cloudflare_api"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare's own MCP server: the whole Cloudflare API through search, execute and docs tools"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.cloudflare.com/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key (the Cloudflare account token). Header (Cloudflare's README): Authorization: Bearer <token>; section 5"
+        },
+        {
+          "column": "E",
+          "value": "ca_IUuu0MrmsQya (ACTIVE) holds the Cloudflare account token (item tgdnkyzk22vvgx4pw3uimsm5b4). Health check read passed 20:30:55Z."
+        },
+        {
+          "column": "F",
+          "value": "ac_HtZpGVMV98y6 (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "3 tools, version 20261001_01"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G12-addendum.json"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_foreplay"
+        },
+        {
+          "column": "B",
+          "value": "Foreplay's ad library MCP"
+        },
+        {
+          "column": "C",
+          "value": "https://public.api.foreplay.co/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header (Foreplay's API docs): Authorization: <key>, with no Bearer prefix; section 5"
+        },
+        {
+          "column": "E",
+          "value": "ca_Ewk5F5TGN7Yg (ACTIVE) holds the Foreplay API key (item ieop2kwq2eoixdkybc4qb7kdp4; usage call passed after the 2026-10-01 rotation). Login ACTIVE; not in the health check's watch list and not read-tested in this play."
+        },
+        {
+          "column": "F",
+          "value": "ac_NdXoG925_gVY (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "31 tools, version 20261001_01"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; system/run-log.md \"Foreplay key rotated\" ; work/2026-10-01_setup-playbook/tabs/gap-facts/G12-addendum.json"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_ghl_oauth_crm"
+        },
+        {
+          "column": "B",
+          "value": "GHL CRM through the gateway Worker increase-roas-oauth-gateway (agency OAuth, all sub-accounts)"
+        },
+        {
+          "column": "C",
+          "value": "https://increase-roas-oauth-gateway.increase-roas.workers.dev/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. The gateway accepts only Authorization: Bearer <key> and compares it with its Worker secret GHL_MCP_INTERNAL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "ca_OIfo_F6scXwN (ACTIVE) holds the gateway key (item 3yxpnoxi2xd7o76whc6onu522a). Health check read passed 20:30:55Z."
+        },
+        {
+          "column": "F",
+          "value": "ac_MxmZOGrUKdIN (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "10 tools, version 20261001_01"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L110–L113"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_ghl_command_builder"
+        },
+        {
+          "column": "B",
+          "value": "GHL builds (workflows, funnels, forms, pipelines) through the builder Worker ghl-command-universal and its origin on the hub"
+        },
+        {
+          "column": "C",
+          "value": "https://ghl-command-universal.increase-roas.workers.dev/mcp"
+        },
+        {
+          "column": "D",
+          "value": "DCR_OAUTH. Discovery: https://ghl-command-universal.increase-roas.workers.dev/.well-known/oauth-authorization-server (endpoints /authorize, /token, /register; scopes mcp:read, mcp:write, offline_access; PKCE S256). The sign-in page asks for the connection password"
+        },
+        {
+          "column": "E",
+          "value": "ca_o1-FA70PbU3x (ACTIVE) holds OAuth tokens from that sign-in; the password is item yxvess6diezoy7lgrnhqrmct5i. Health check read passed 20:30:55Z."
+        },
+        {
+          "column": "F",
+          "value": "ac_Qzw5lTeEJoqW (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "5 tools, version 20261001_01"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/Development/ghl-command-universal/worker/src/index.ts L119 ; https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_htl_google_tracking"
+        },
+        {
+          "column": "B",
+          "value": "HTL Google tracking, read-only (a separate Worker)"
+        },
+        {
+          "column": "C",
+          "value": "https://htl-google-tracking-readonly-mcp.increase-roas.workers.dev/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key"
+        },
+        {
+          "column": "E",
+          "value": "No login (0 connections): the empty setup was kept on purpose on 2026-10-01. Its Worker code is the private repo increaseroasir/htl-google-tracking-mcp (pushed 2026-10-02, spp-p35a; its service-account JSON stays a Worker secret)."
+        },
+        {
+          "column": "F",
+          "value": "ac_CeVs2EDDRo9N (custom, tool router on)"
+        },
+        {
+          "column": "G",
+          "value": "5 tools, version 20261001_00"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; ~/Development/htl-google-tracking-mcp/wrangler.jsonc L2 ; work/2026-10-01_setup-playbook/workbook-updates.md \"kept: _1password, firecrawl, custom_htl_google_tracking\" ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §6 ; work/2026-10-01_setup-playbook/workbook-updates.md L162"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_context7"
+        },
+        {
+          "column": "B",
+          "value": "Context7 (docs reader, keyless)"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.context7.com/mcp"
+        },
+        {
+          "column": "D",
+          "value": "NO_AUTH: no header, no key"
+        },
+        {
+          "column": "E",
+          "value": "No login by design: Composio refuses an auth config for a no-auth toolkit, and the tools run without one"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "2 tools: RESOLVE_LIBRARY_ID, QUERY_DOCS"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_openai_docs"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI Docs (docs reader, keyless)"
+        },
+        {
+          "column": "C",
+          "value": "https://developers.openai.com/mcp"
+        },
+        {
+          "column": "D",
+          "value": "NO_AUTH: no header, no key"
+        },
+        {
+          "column": "E",
+          "value": "No login by design: Composio refuses an auth config for a no-auth toolkit, and the tools run without one"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "5 tools, e.g. SEARCH_OPENAI_DOCS, FETCH_OPENAI_DOC"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_astro_docs"
+        },
+        {
+          "column": "B",
+          "value": "Astro Docs (docs reader, keyless)"
+        },
+        {
+          "column": "C",
+          "value": "https://mcp.docs.astro.build/mcp"
+        },
+        {
+          "column": "D",
+          "value": "NO_AUTH: no header, no key"
+        },
+        {
+          "column": "E",
+          "value": "No login by design: Composio refuses an auth config for a no-auth toolkit, and the tools run without one"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "1 tool: SEARCH_ASTRO_DOCS"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_qt_docs"
+        },
+        {
+          "column": "B",
+          "value": "Qt Docs (docs reader, keyless)"
+        },
+        {
+          "column": "C",
+          "value": "https://qt-docs-mcp.qt.io/mcp"
+        },
+        {
+          "column": "D",
+          "value": "NO_AUTH: no header, no key"
+        },
+        {
+          "column": "E",
+          "value": "No login by design: Composio refuses an auth config for a no-auth toolkit, and the tools run without one"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "2 tools: QT_DOCUMENTATION_SEARCH, QT_DOCUMENTATION_READ"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_skillsmp"
+        },
+        {
+          "column": "B",
+          "value": "SkillsMP (docs reader, keyless)"
+        },
+        {
+          "column": "C",
+          "value": "https://skillsmp.com/mcp"
+        },
+        {
+          "column": "D",
+          "value": "NO_AUTH: no header, no key"
+        },
+        {
+          "column": "E",
+          "value": "No login by design: Composio refuses an auth config for a no-auth toolkit, and the tools run without one"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "3 tools: SEARCH_SKILLS, GET_SKILL, LIST_CATEGORIES"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_hf_mcp"
+        },
+        {
+          "column": "B",
+          "value": "Hugging Face's hosted MCP (Hub search, repo details, files, whoami), set up only to compare with the native hugging_face toolkit"
+        },
+        {
+          "column": "C",
+          "value": "https://huggingface.co/mcp"
+        },
+        {
+          "column": "D",
+          "value": "API_KEY, field generic_api_key. Header: Authorization: Bearer {{generic_api_key}}"
+        },
+        {
+          "column": "E",
+          "value": "ca_YEECCwwIMmni (custom_hf_mcp_invite-alose) held the Hugging Face token (item u4gavrfzax27phth755upip3lq). Deleted with the toolkit 2026-10-02 after Alex's yes naming CG-QWAA (the guard allowed the call at 23:04:45Z); no custom_hf_mcp login is live (2026-10-03). The native hugging_face toolkit is the route."
+        },
+        {
+          "column": "F",
+          "value": "ac_1vMgmmQKh5an (custom; deleted with the toolkit 2026-10-02)"
+        },
+        {
+          "column": "G",
+          "value": "4 tools, version 20261002_00"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/huggingface-connector.md §3 ; work/2026-10-01_setup-playbook/notes/huggingface-connector.md §4 ; work/2026-10-01_setup-playbook/workbook-updates.md L239 ; work/2026-10-03_claims-audit/notes/verify-workbook-other.md §3 ; system/run-log.md \"yes CG-QWAA CG-C8HP CG-SZRA\" ; work/2026-10-02_mission-sync/notes/reconcile.csv \"CUSTOM_HF_MCP delete allowed on Alex's yes CG-QWAA\""
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. How a route is registered (Composio's documented steps, as done here)"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Register the toolkit"
+        },
+        {
+          "column": "B",
+          "value": "POST https://backend.composio.dev/api/v3.1/custom/toolkits/upsert with the body in section 3. Composio adds the CUSTOM_ prefix. app_url and auth_schemes can't change later: a change returns 409, so delete the toolkit and register it again."
+        },
+        {
+          "column": "C",
+          "value": "The response names CUSTOM_<SLUG>."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Create its auth config (API key and OAuth routes only)"
+        },
+        {
+          "column": "B",
+          "value": "POST https://backend.composio.dev/api/v3.1/auth_configs with {\"toolkit\": {\"slug\": \"CUSTOM_<SLUG>\"}, \"auth_config\": {\"type\": \"use_custom_auth\", \"authScheme\": \"API_KEY\", \"credentials\": {}, \"is_enabled_for_tool_router\": true}}. Without the tool-router flag, calls fail with NoActiveConnection."
+        },
+        {
+          "column": "C",
+          "value": "GET /api/v3/auth_configs lists it ENABLED with is_enabled_for_tool_router true (all 13 of ours are)."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Create the login from 1Password"
+        },
+        {
+          "column": "B",
+          "value": "python3 ~/.agents/tools/connectors/push_key_to_composio.py --item \"<1Password item>\" --toolkit custom_<slug>. It reads the key with the read-write robot and creates an ACTIVE API_KEY login with generic_api_key. Composio doesn't test the key. For the GHL builder (OAuth), connect through Composio's sign-in link instead."
+        },
+        {
+          "column": "C",
+          "value": "The login shows ACTIVE."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py L1–L14 ; ~/.agents/tools/cards/composio.md \"Composio doesn't test the key\""
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Sync the tools"
+        },
+        {
+          "column": "B",
+          "value": "The first sync starts by itself when the first login becomes ACTIVE (at registration for no-auth readers). After the server's tools change: POST /api/v3.1/custom/toolkits/sync with {\"slug\": \"CUSTOM_<SLUG>\", \"connected_account_id\": \"<ca_...>\"} (no account id for a no-auth reader)."
+        },
+        {
+          "column": "C",
+          "value": "The reply gives a version and synced_count."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Prove it"
+        },
+        {
+          "column": "B",
+          "value": "Run one read-only tool with composio execute, naming the account when an app has several logins."
+        },
+        {
+          "column": "C",
+          "value": "successful: true, with the account's own data."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/cards/composio.md \"Composio doesn't test the key\" ; workbook SOP R38"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "REST host and headers"
+        },
+        {
+          "column": "B",
+          "value": "Host https://backend.composio.dev. Our scripts send x-user-api-key (\"api_key\" in ~/.composio/user_data.json, written by composio login), x-org-id (\"org_id\" in the same file) and x-project-id pr_JDtrNq9tUa_i (the For You project of org wearenumber1; the scripts get it from composio_project.py: --project, then COMPOSIO_PROJECT_ID, then the CLI cache; how a new org finds its own: section 6). Composio's docs show x-api-key with a project API key instead; with the CLI's user key, plain x-api-key returns 401."
+        },
+        {
+          "column": "C",
+          "value": "A GET /api/v3/auth_configs answers 200."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py docstring ; ~/.agents/tools/connectors/composio_project.py docstring ; ~/.agents/tools/connectors/push_key_to_composio.py L37 ; ~/.agents/tools/cards/composio.md \"x-project-id: pr_JDtrNq9tUa_i\" ; https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_setup-playbook/tabs/gap-facts/G12-addendum.json"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Exact register (upsert) bodies"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "for"
+        },
+        {
+          "column": "B",
+          "value": "request body"
+        },
+        {
+          "column": "C",
+          "value": "note"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "A hub route (example: atlas-cloud)"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"atlas_cloud\", \"toolkit_config\": {\"name\": \"Atlas Cloud (image, video, audio generation)\", \"app_url\": \"https://mcp.increaseroas.com/atlas-cloud/mcp\", \"auth_schemes\": [{\"mode\": \"API_KEY\", \"headers\": {\"Authorization\": \"Bearer {{generic_api_key}}\"}}]}}"
+        },
+        {
+          "column": "C",
+          "value": "The same shape for every hub route: change slug, name and the route in app_url (the 8 routes are in routes.json)."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_director-finish/notes/atlas-cloud.md L29 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/routes.json"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The GHL builder (sign-in with OAuth)"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"ghl_command_builder\", \"toolkit_config\": {\"name\": \"ghl-command-builder\", \"app_url\": \"https://ghl-command-universal.increase-roas.workers.dev/mcp\", \"auth_schemes\": [{\"mode\": \"DCR_OAUTH\", \"discovery_url\": \"https://ghl-command-universal.increase-roas.workers.dev/.well-known/oauth-authorization-server\"}]}}"
+        },
+        {
+          "column": "C",
+          "value": "Inferred from Composio's DCR example and the Worker's live discovery document; the body used on 2026-10-01 isn't on record. Its auth config (DCR_OAUTH) and a create body: section 7."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G12-addendum.json"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs reader Context7"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"context7\", \"toolkit_config\": {\"name\": \"Context7\", \"app_url\": \"https://mcp.context7.com/mcp\", \"auth_schemes\": [{\"mode\": \"NO_AUTH\"}]}}"
+        },
+        {
+          "column": "C",
+          "value": "Composio returns CUSTOM_CONTEXT7 and syncs the tools at once. Resync later with {\"slug\": \"CUSTOM_CONTEXT7\"} and no account id."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs reader OpenAI Docs"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"openai_docs\", \"toolkit_config\": {\"name\": \"OpenAI Docs\", \"app_url\": \"https://developers.openai.com/mcp\", \"auth_schemes\": [{\"mode\": \"NO_AUTH\"}]}}"
+        },
+        {
+          "column": "C",
+          "value": "Composio returns CUSTOM_OPENAI_DOCS and syncs the tools at once. Resync later with {\"slug\": \"CUSTOM_OPENAI_DOCS\"} and no account id."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs reader Astro Docs"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"astro_docs\", \"toolkit_config\": {\"name\": \"Astro Docs\", \"app_url\": \"https://mcp.docs.astro.build/mcp\", \"auth_schemes\": [{\"mode\": \"NO_AUTH\"}]}}"
+        },
+        {
+          "column": "C",
+          "value": "Composio returns CUSTOM_ASTRO_DOCS and syncs the tools at once. Resync later with {\"slug\": \"CUSTOM_ASTRO_DOCS\"} and no account id."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs reader Qt Docs"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"qt_docs\", \"toolkit_config\": {\"name\": \"Qt Docs\", \"app_url\": \"https://qt-docs-mcp.qt.io/mcp\", \"auth_schemes\": [{\"mode\": \"NO_AUTH\"}]}}"
+        },
+        {
+          "column": "C",
+          "value": "Composio returns CUSTOM_QT_DOCS and syncs the tools at once. Resync later with {\"slug\": \"CUSTOM_QT_DOCS\"} and no account id."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs reader SkillsMP"
+        },
+        {
+          "column": "B",
+          "value": "{\"slug\": \"skillsmp\", \"toolkit_config\": {\"name\": \"SkillsMP\", \"app_url\": \"https://skillsmp.com/mcp\", \"auth_schemes\": [{\"mode\": \"NO_AUTH\"}]}}"
+        },
+        {
+          "column": "C",
+          "value": "Composio returns CUSTOM_SKILLSMP and syncs the tools at once. Resync later with {\"slug\": \"CUSTOM_SKILLSMP\"} and no account id."
+        },
+        {
+          "column": "D",
+          "value": "https://docs.composio.dev/docs/extending-sessions/custom-mcp.md (read 2026-10-01) ; work/2026-10-01_director-finish/notes/docs-readers.md L3–L5 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. GHL builder and gateway addresses"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what"
+        },
+        {
+          "column": "B",
+          "value": "address"
+        },
+        {
+          "column": "C",
+          "value": "how it works"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder MCP endpoint (what Composio calls)"
+        },
+        {
+          "column": "B",
+          "value": "https://ghl-command-universal.increase-roas.workers.dev/mcp"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare Worker ghl-command-universal: OAuth sign-in with the connection password, then passes calls to the origin"
+        },
+        {
+          "column": "D",
+          "value": "~/Development/ghl-command-universal/README.md \"One implementation for the private-password MCP endpoint\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder sign-in discovery"
+        },
+        {
+          "column": "B",
+          "value": "https://ghl-command-universal.increase-roas.workers.dev/.well-known/oauth-authorization-server"
+        },
+        {
+          "column": "C",
+          "value": "Read 2026-10-01: issuer is the Worker; /authorize, /token, /register; scopes mcp:read, mcp:write, offline_access; PKCE S256"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder origin (on the hub)"
+        },
+        {
+          "column": "B",
+          "value": "https://ghl-command-origin.increaseroas.com"
+        },
+        {
+          "column": "C",
+          "value": "Remote-managed Cloudflare tunnel 9b09467d-9c1c-4f4c-9b00-021ad8239f20 to 127.0.0.1:8789 on the hub. The Worker sends Authorization: Bearer <origin key>"
+        },
+        {
+          "column": "D",
+          "value": "~/Development/ghl-command-universal/README.md \"Tunnel: remote-managed Cloudflare Tunnel\" ; ~/Development/ghl-command-universal/worker/src/index.ts L190"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gateway MCP endpoint (what Composio calls)"
+        },
+        {
+          "column": "B",
+          "value": "https://increase-roas-oauth-gateway.increase-roas.workers.dev/mcp"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare Worker increase-roas-oauth-gateway with D1 database increase-roas-ghl-oauth-gateway-db; Bearer key checked against GHL_MCP_INTERNAL_API_KEY"
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L1 ; ~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L11 ; ~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L110–L113"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Header names for the two upstream API-key routes (G12 addendum, spp-c13)"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "toolkit slug"
+        },
+        {
+          "column": "B",
+          "value": "upstream URL (Composio base_url)"
+        },
+        {
+          "column": "C",
+          "value": "header the upstream documents"
+        },
+        {
+          "column": "D",
+          "value": "what Composio records"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_cloudflare_api"
+        },
+        {
+          "column": "B",
+          "value": "https://mcp.cloudflare.com/mcp"
+        },
+        {
+          "column": "C",
+          "value": "Authorization: Bearer <Cloudflare API token>. User and account tokens both work; account tokens need Account Resources : Read; tokens with Client IP Address Filtering are not supported."
+        },
+        {
+          "column": "D",
+          "value": "API_KEY with one field, generic_api_key. Composio's API doesn't return the header template the toolkit was registered with."
+        },
+        {
+          "column": "E",
+          "value": "https://github.com/cloudflare/mcp/blob/main/README.md (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §1"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "custom_foreplay"
+        },
+        {
+          "column": "B",
+          "value": "https://public.api.foreplay.co/mcp"
+        },
+        {
+          "column": "C",
+          "value": "Authorization: <Foreplay API key>, with no Bearer prefix."
+        },
+        {
+          "column": "D",
+          "value": "API_KEY with one field, generic_api_key. Composio's API doesn't return the header template the toolkit was registered with."
+        },
+        {
+          "column": "E",
+          "value": "https://public.api.foreplay.co/docs (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §1"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Finding the For You project ID (x-project-id) on a new org, and every place to change it (G12 addendum, spp-c13 and spp-c14)"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "question"
+        },
+        {
+          "column": "B",
+          "value": "answer"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which project holds the connector logins?"
+        },
+        {
+          "column": "B",
+          "value": "The For You project (here pr_JDtrNq9tUa_i). Platform and For You are separate dashboard surfaces."
+        },
+        {
+          "column": "C",
+          "value": "https://docs.composio.dev/kb/guide/dashboard-navigation-overview (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §2"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Where does it NOT show?"
+        },
+        {
+          "column": "B",
+          "value": "The For You dashboard's Settings page shows only the org name, Enhanced Control and Delete organization. composio whoami and composio orgs list show no project. GET /api/v3/org/project/list and GET /api/v3/auth/session/info return only the Platform project (here alex_workspace_first_project)."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §1"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What is Composio's documented lookup?"
+        },
+        {
+          "column": "B",
+          "value": "POST https://backend.composio.dev/api/v3.1/org/consumer/project/resolve with x-user-api-key and x-org-id returns project_nano_id, the value to send as x-project-id. It provisions the consumer project if it's missing, so it's a new org's first step; it wasn't called on our org. The documented read-only listing (GET /api/v3.1/org/consumer/connected_toolkits?user_id=…) returned no project fields on our org (live, 2026-10-01)."
+        },
+        {
+          "column": "C",
+          "value": "https://docs.composio.dev/docs/consumer-agents (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §1"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Where is it on an existing org (read-only)?"
+        },
+        {
+          "column": "B",
+          "value": "In the composio CLI's own cache, after composio login and one composio execute: the entry in ~/.composio/tool-permissions-cache.json whose key contains :consumer- holds orgId, projectId and consumerUserId. Print them with: python3 -c 'import json,os;d=json.load(open(os.path.expanduser(\"~/.composio/tool-permissions-cache.json\")));[print(v[\"orgId\"],v[\"projectId\"],v[\"consumerUserId\"]) for k,v in d[\"entries\"].items() if \":consumer-\" in k]'"
+        },
+        {
+          "column": "C",
+          "value": "~/.composio/tool-permissions-cache.json \"consumerUserId\" ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §1"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What must a newcomer change?"
+        },
+        {
+          "column": "B",
+          "value": "Nothing in the Mac scripts: push_key_to_composio.py, ir_notes/sync_notes.py and the tune-up's tuneup.py find the project themselves through composio_project.py (--project, then COMPOSIO_PROJECT_ID, then the composio CLI cache) and stop with a message when none is set; a new org sets COMPOSIO_PROJECT_ID. The hub's health check reads composio_project from health/config.json, so put the same ID there (Rebuild from zero, section 10a). The composio card's REST line is text only, queued for the card rebuild."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/tools/connectors/composio_project.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L134 ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §1"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The GHL builder's DCR auth config (G12 addendum, spp-c13)"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "item"
+        },
+        {
+          "column": "B",
+          "value": "value"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Live auth config for custom_ghl_command_builder"
+        },
+        {
+          "column": "B",
+          "value": "DCR_OAUTH, not Composio-managed. Scopes: mcp:read, mcp:write, offline_access. oauth_redirect_uri: https://backend.composio.dev/api/v1/auth-apps/add"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §3"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Create body (derived from this tab's API_KEY body plus the live values)"
+        },
+        {
+          "column": "B",
+          "value": "{\"toolkit\": {\"slug\": \"custom_ghl_command_builder\"}, \"auth_config\": {\"type\": \"use_custom_auth\", \"authScheme\": \"DCR_OAUTH\", \"credentials\": {\"scopes\": [\"mcp:read\", \"mcp:write\", \"offline_access\"]}, \"is_enabled_for_tool_router\": true}}"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §3"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The header template each toolkit was registered with (Composio's API doesn't return it); only atlas-cloud's is on record. For Cloudflare and Foreplay, the header each upstream documents is in section 5, and both routes answer live calls (spp-c13)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_setup-playbook/notes/gap-facts-c13.md"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The exact upsert body used for the GHL builder on 2026-10-01 (the row is inferred from the docs and the live discovery document)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "That the prime-intellect, spyfu, xai-research, atlas-cloud and foreplay logins work today: they are ACTIVE but not read-tested in this play (no free read call chosen)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "That the CLI cache layout (tool-permissions-cache.json) stays the same across composio CLI versions; it's an undocumented cache."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §1"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "That Composio accepts the derived create body for DCR_OAUTH. No create call was run."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c13.md"
+        }
+      ]
+    }
+  ]
+}

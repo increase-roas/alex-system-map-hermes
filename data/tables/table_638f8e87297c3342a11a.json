@@ -1,0 +1,465 @@
+{
+  "id": "table_638f8e87297c3342a11a",
+  "sheet": "S05-08 BUDGET",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "BUDGET / MAXIMUM ENVELOPE"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "$300/day ceiling • Not a spend target, purchase approval, or recurring-job authorization."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Allocation"
+        },
+        {
+          "column": "B",
+          "value": "Max / Day (USD)"
+        },
+        {
+          "column": "C",
+          "value": "Share of Envelope"
+        },
+        {
+          "column": "D",
+          "value": "Guardrail / Use"
+        },
+        {
+          "column": "E",
+          "value": "Status"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "sales-prod"
+        },
+        {
+          "column": "B",
+          "value": 100
+        },
+        {
+          "column": "C",
+          "value": 0.3333333333333333,
+          "comment": "Original formula (preserved as source evidence):\n=B5/$B$10\n\n"
+        },
+        {
+          "column": "D",
+          "value": "Sales daily allocation; native cap unverified."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javar-prod"
+        },
+        {
+          "column": "B",
+          "value": 50
+        },
+        {
+          "column": "C",
+          "value": 0.1666666666666667,
+          "comment": "Original formula (preserved as source evidence):\n=B6/$B$10\n\n"
+        },
+        {
+          "column": "D",
+          "value": "Javar daily allocation; native cap unverified."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Lab: both providers"
+        },
+        {
+          "column": "B",
+          "value": 90
+        },
+        {
+          "column": "C",
+          "value": 0.3,
+          "comment": "Original formula (preserved as source evidence):\n=B7/$B$10\n\n"
+        },
+        {
+          "column": "D",
+          "value": "Combined OpenRouter + Fireworks ceiling; never $90 each."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javar-research"
+        },
+        {
+          "column": "B",
+          "value": 40
+        },
+        {
+          "column": "C",
+          "value": 0.1333333333333333,
+          "comment": "Original formula (preserved as source evidence):\n=B8/$B$10\n\n"
+        },
+        {
+          "column": "D",
+          "value": "Research daily allocation; native cap unverified."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Held buffer"
+        },
+        {
+          "column": "B",
+          "value": 20
+        },
+        {
+          "column": "C",
+          "value": 0.06666666666666667,
+          "comment": "Original formula (preserved as source evidence):\n=B9/$B$10\n\n"
+        },
+        {
+          "column": "D",
+          "value": "Held; not automatically assigned."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "TOTAL ENVELOPE"
+        },
+        {
+          "column": "B",
+          "value": 300,
+          "comment": "Original formula (preserved as source evidence):\n=SUM(B5:B9)\n\n"
+        },
+        {
+          "column": "C",
+          "value": 1,
+          "comment": "Original formula (preserved as source evidence):\n=SUM(C5:C9)\n\n"
+        },
+        {
+          "column": "D",
+          "value": "Maximum only; spending still requires approval."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "FIREWORKS"
+        },
+        {
+          "column": "B",
+          "value": "Small prepaid Lab balance; exact initial amount requires Alex approval. Auto-reload OFF. No prepaid amount is approved by this workbook."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ENFORCEMENT"
+        },
+        {
+          "column": "B",
+          "value": "Native hard stop, alert and account-wide aggregation are different. If no hard stop exists, bound each experiment and prove stop before unattended paid runs."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MORE BUDGET"
+        },
+        {
+          "column": "B",
+          "value": "More budget needs measured results + current Alex approval. Historical $1/test must be confirmed in canonical mission. Inventory fixed subscriptions/Orgo separately; buffer remains held."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ORGO / ACCOUNT SNAPSHOT",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex-supplied account screenshot • October 5, 2026, 4:14 PM Detroit • Monthly summary shown, not an invoice readback.",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MONTHLY SUMMARY"
+        },
+        {
+          "column": "B",
+          "value": "USD / MONTH"
+        },
+        {
+          "column": "C",
+          "value": "EVIDENCE / LIMIT"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Startup plan",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "B",
+          "value": 99,
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "C",
+          "value": "Startup plan shown in summary",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computers (3 × Medium)",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "B",
+          "value": 75,
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "C",
+          "value": "3 × Medium computers in summary; not an added purchase",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "RAM",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "B",
+          "value": 40,
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "C",
+          "value": "Summary says $40; adjustment control separately says $100",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "vCPU",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "B",
+          "value": 50,
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "C",
+          "value": "Summary says $50; adjustment control separately says $57.50",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Storage",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "B",
+          "value": 0,
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "C",
+          "value": "Summary says $0; adjustment control separately says $6",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Usage credits",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "B",
+          "value": 50,
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "C",
+          "value": "Includes the $50/month credit refill; do not count it again",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MONTHLY TOTAL SHOWN"
+        },
+        {
+          "column": "B",
+          "value": 314
+        },
+        {
+          "column": "C",
+          "value": "99 + 75 + 40 + 50 + 0 + 50 = $314; includes usage-credit refill."
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "RENEWAL SHOWN • October 6, 2026. Monthly AI credit refill shown: $50. These are observed account settings; no setting changed.",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CREDIT DISCREPANCY • Headline balance: $56.75. Smaller “available for hourly computers and AI” label: $56.40. Actual spendable balance remains unreconciled.",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CONTROL / SUMMARY DISCREPANCY • Controls show 40 GB extra RAM at $100, 11.5 extra vCPU at $57.50, 120 GB extra storage at $6, and 3 additional computers at $165/month. Summary differs; do not treat controls as confirmed charges.",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SCOPE • Existing $300/day ceiling and its allocations remain unchanged. This records the current bill/credit snapshot separately. No purchase, upgrade, refill change or new spend approved. Custom-machine offers are not owned inventory.",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SOURCE • FireShot Capture 039 — Account · Orgo, supplied by Alex. Capacity snapshot is in COMPUTER INVENTORY. Invoices and discrepancies need reconciliation before cost changes.",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4404 @@
+{
+  "id": "table_e0dd145d28938fdd63d0",
+  "sheet": "S02-20 App decisions",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One row per app, built by work/2026-10-01_app-decisions/build_decisions.py from All connections (status, notes, target_home), the tool cards in ~/.agents/tools/cards and the Route power tab. Rerun the script; don't hand-edit this tab. Keeper = the route marked THE route in All connections, else the working Composio route (one per account). ADD TO COMPOSIO = no proven keeper yet: run tool-card; nothing is removable until one is proven."
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Removal lists are proposals checked against the tool cards, not authorization. A route is proposed only when All connections marks it Remove and a duplicate, it reaches the same account as a proven keeper, and the app's tool card names that keeper. Composio routes, plugins and connectors, 1Password, hub plumbing, local CLIs, Javar's fence and anything marked Stays, Keep, Leave off or Decide are never proposed. Before removing a proposed route, re-read its tool card and its All connections row, prove the keeper still works and back it up to ~/Backups. Only then does the standing yes apply, and only to CUT DUPLICATES rows."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app"
+        },
+        {
+          "column": "B",
+          "value": "status"
+        },
+        {
+          "column": "C",
+          "value": "live routes"
+        },
+        {
+          "column": "D",
+          "value": "accounts reached"
+        },
+        {
+          "column": "E",
+          "value": "keeper"
+        },
+        {
+          "column": "F",
+          "value": "why"
+        },
+        {
+          "column": "G",
+          "value": "to remove"
+        },
+        {
+          "column": "H",
+          "value": "routes to remove: proposals, not authorization [All connections row, where, status]"
+        },
+        {
+          "column": "I",
+          "value": "removal check (keeper it duplicates, same account, tool card)"
+        },
+        {
+          "column": "J",
+          "value": "not removable yet [row: why it waits]"
+        },
+        {
+          "column": "K",
+          "value": "stays: All connections K says so [row, K]"
+        },
+        {
+          "column": "L",
+          "value": "kept as Javar fence"
+        },
+        {
+          "column": "M",
+          "value": "1Password keys and routes (stay)"
+        },
+        {
+          "column": "N",
+          "value": "hubs behind Composio (stay)"
+        },
+        {
+          "column": "O",
+          "value": "local CLIs (stay until Alex decides)"
+        },
+        {
+          "column": "P",
+          "value": "Composio routes and other logins (stay; verify other accounts first)"
+        },
+        {
+          "column": "Q",
+          "value": "keeper power (Route power tab, column L)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 5
+        },
+        {
+          "column": "D",
+          "value": 5
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Javar 1Password loader (Orgo)"
+        },
+        {
+          "column": "M",
+          "value": "op CLI | Cursor plugin 1password [K: Decide (duplicate of the Cursor 1password MCP)] | Service account connectors-sync (read-only, … | Service account connectors-sync-rw (read + w…"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R7 Composio apify (apify_ruby-asor)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R34)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Asana"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R16 Composio asana_logie-fratch"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R37)"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Astro Docs"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R284 Composio CUSTOM_ASTRO_DOCS (keyless, vendor MCP)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R65)"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R293 Composio custom_atlas_cloud (ca_lc_OOuJPDa_0) -> hub /atlas…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Atlas Cloud API key'"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub atlas-cloud (port 8109)"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R56)"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 12
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R275 Composio custom_cloudflare_api ca_IUuu0MrmsQya (account tok…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "1Password 'Cloudflare Access — EA-Javar RAG … | 1Password 'Cloudflare — EA-Javar — PROD'"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Cloudflare - DEV RAG - Hermes DEV… | 1Password 'Cloudflare Access — CSM RAG Query… | 1Password 'Cloudflare Access — Media RAG Que… | 1Password 'Cloudflare Access — Ops Shared Se… | 1Password 'Cloudflare Access — Setter RAG Qu… | 1Password 'Cloudflare Access — Setter RAG Qu… | 1Password 'Sun Pool – Website & Cloudflare C… | 1Password 'Cloudflare API — Composio (accoun…"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "wrangler"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R36)"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 16
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "R51 Codex browser@openai-bundled [K: Stays local] | R52 Codex chrome@openai-bundled [K: Stays local] | R53 Codex code-review@openai-bundled [K: Leave off (D07)] | R54 Codex codex-app-tools@openai-bundled [K: Stays local] | R55 Codex compound-engineering [K: Leave off (D07; ~/.agents/tools/unify/codex-plugins.json)] | R56 Codex computer-use (MCP) [K: Stays local] | R57 Codex computer-use@openai-bundled [K: Stays local] | R58 Codex documents@openai-primary-runtime [K: Leave off (D07)] | R59 Codex messages@openai-bundled [K: Stays local] | R60 Codex node_repl [K: Stays local] | R61 Codex pdf@openai-primary-runtime [K: Leave off (D07)] | R62 Codex record-and-replay@openai-bundled [K: Leave off (D07)] | R63 Codex spreadsheets@openai-primary-runtime [K: Leave off (D07)] | R64 Codex superpowers@openai-curated [K: Stays local] | R65 Codex template-creator@openai-primary-runtime [K: Leave off (D07)] | R66 Codex unified-computer-use@openai-bundled [K: Stays local]"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex plugin"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 6
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "R67 Codex data-analytics@openai-curated [K: Leave off] | R68 Codex finances@openai-curated [K: Leave off] | R69 Codex openai-developers@openai-curated [K: Leave off] | R70 Codex presentations@openai-primary-runtime [K: Leave off] | R71 Codex sales@openai-curated [K: Leave off] | R72 Codex visualize@openai-bundled [K: Leave off]"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 5
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R74 Codex: the official Composio plugin (ChatGPT plugin directo… | R76 Cursor plugin composio | R276 Claude app: Composio Connect (custom connector https://conn…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections); platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "Claude Code Composio plugin | Mac CLI composio CLI"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Context7"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R286 Composio CUSTOM_CONTEXT7 (keyless)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R65)"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 5
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "R79 Cursor cursor (built-in) [K: Stays local] | R80 Cursor cursor-app-control [K: Stays local] | R81 Cursor cursor-first-party [K: Stays local] | R82 Cursor cursor-origin-readonly [K: Stays local] | R83 Cursor cursor-subscriptions [K: Stays local]"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Desktop Commander"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R84 Claude app desktop-commander plugin"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discord"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R85 Composio discord_brainy-haired"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "WEAKER (Route power R38)"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ElevenLabs"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R89 Composio elevenlabs (elevenlabs_rangle-malo)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R39)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exa"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R91 Composio exa (exa_beode-vain)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R40)"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R313 Composio firecrawl (firecrawl_che-aday)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "Firecrawl CLI (~/.local/bin/firecrawl, firec…"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R68)"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireflies"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R98 Composio fireflies_kiyi-agaze"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R41)"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foreplay"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R289 Composio custom_foreplay (custom_foreplay_sain-cogue, ca_Ew…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Foreplay API key'"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R61)"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R101 Composio \"GITHUB\" (github_lipase-modern) | R102 Composio \"JAVANTE GITHUB\" (github_tina-inwit)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route, one per account (2)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "gh CLI"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R33)"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R277 Composio custom_google_robot (ca_vm6rcasgNEIk) -> hub /goog…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Composio GMAIL gmail_ziffs-thoric \"Javar Wor…"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "Composio GMAIL gmail_redry-illeck \"Javante's…"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R12)"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 5
+        },
+        {
+          "column": "D",
+          "value": 5
+        },
+        {
+          "column": "E",
+          "value": "R271 Composio custom MCP ghl-command-builder (custom_ghl_command… | R272 Composio custom MCP ghl-oauth-crm (custom_ghl_oauth_crm, ac…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Hermes/Javar javar_ghl"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo ir-ghl-command-universal + ir-ghl-comma…"
+        },
+        {
+          "column": "O",
+          "value": "ghl CLI @gohighlevel/marketplace-cli 1.0.0"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R8) | STRONGEST (Route power R7)"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R133 Composio GOOGLEADS googleads_maned-sprack (always_allow)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R6)"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R137 Composio custom_ga4_admin_arundo-sower"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub ga4-admin"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R4)"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Calendar"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R281 Composio custom_google_robot (ca_vm6rcasgNEIk) -> hub /goog…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R12)"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Cloud"
+        },
+        {
+          "column": "B",
+          "value": "ADD TO COMPOSIO"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "no proven keeper yet: add one through tool-card; nothing is removable until it is proven"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "gcloud CLI"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "docker-credential-gcloud"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R279 Composio custom_google_robot (ca_vm6rcasgNEIk) -> hub /goog…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Composio GOOGLEDOCS googledocs_defer-knar \"J…"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "Composio GOOGLEDOCS googledocs_tabby-phosis …"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R12)"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R278 Composio custom_google_robot (ca_vm6rcasgNEIk) -> hub /goog…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Composio GOOGLEDRIVE googledrive_prover-wore…"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "Composio GOOGLEDRIVE googledrive_gaily-perit…"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R12)"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R280 Composio custom_google_robot (ca_vm6rcasgNEIk) -> hub /goog…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Composio GOOGLESHEETS googlesheets_incur-agh…"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "Composio GOOGLESHEETS googlesheets_paga-swur…"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R12)"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Tag Manager"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R172 Composio custom_google_tag_manager_bardel-serau"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub gtm"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (one limit left) (Route power R9)"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R282 Composio custom_google_robot (ca_vm6rcasgNEIk) -> hub /goog…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Google service account — tagging-…"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub google-robot (port 8108)"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R12)"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "javar_composio_execute"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "HeyGen"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R185 Composio heygen_plower-ceiler"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R42)"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Higgsfield"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R294 Composio higgsfield (higgsfield_belout-embus, ca_yDkZXqXVoU…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Higgsfield API key' (key_id + sec…"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R64)"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R316 Composio hugging_face (hugging_face_pricer-drongo)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R71)"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "IR Notes"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R296 Composio custom_ir_notes (ca_zTNUL9d6xZDl, custom_ir_notes_…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub ir-notes (port 8107)"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jobber"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R187 Composio jobber_clunk-fient"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R43)"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Linear"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R291 Composio linear (linear_flap-urtica)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN (Route power R62)"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mac tools"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 8
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "Mac CLI claude | Mac CLI codex | Mac CLI cursor-agent | Mac CLI herdr | Mac CLI hermes | Mac CLI mco | Mac CLI npx | Mac CLI pipx"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R295 Composio make (make_gerbe-ashake, ca_nkMxaCSYt2gD)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Make API key'"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R60)"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 5
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "R274 Composio metaads ca_7i7CdMbStKc9 (API key: system user toke…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "javar_meta (Hermes/Javar)"
+        },
+        {
+          "column": "M",
+          "value": "1Password 'Meta Ads — Javante — PROD (shared… | 1Password 'Meta Ads — system user token (IR …"
+        },
+        {
+          "column": "N",
+          "value": "Orgo ir-mcp-increase-roas-meta (service on O… [K: Decide after checking]"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R26)"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Modal"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R315 ~/.agents/tools/connectors/modal_op.py -> modal CLI 1.5.3 i…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Notion"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R283 Composio notion_lepas-limbie (Notion full workspace)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R32)"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenAI Docs"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R285 Composio CUSTOM_OPENAI_DOCS (keyless, developers.openai.com…"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R65)"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "R211 Cursor orgo MCP: Alex decides (Decide (no Composio route for Orgo))"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub plumbing: mcp-hub-proxy + mcp-hub-t…"
+        },
+        {
+          "column": "O",
+          "value": "orgo CLI"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "PDF viewer"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R213 Claude app pdf (pdf-viewer plugin)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Playwright"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R214 Claude Code playwright"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime Intellect"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R216 Composio custom_prime_intellect_lave-outact"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub prime-intellect"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R47)"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qt docs"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R287 Composio CUSTOM_QT_DOCS (keyless)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R65)"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "QuickBooks"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R221 Composio quickbooks_arris-bigamy | R222 Composio quickbooks_genre-lapsed"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route, one per account (2)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R44)"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Retell AI"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R227 Composio retellai_testes-devil"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R45)"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sentry"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R292 Composio sentry (sentry_venada-dama)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN (Route power R63)"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shopify"
+        },
+        {
+          "column": "B",
+          "value": "ADD TO COMPOSIO"
+        },
+        {
+          "column": "C",
+          "value": 0
+        },
+        {
+          "column": "D",
+          "value": 0
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "no proven keeper yet: add one through tool-card; nothing is removable until it is proven"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SkillsMP"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R288 Composio CUSTOM_SKILLSMP (keyless)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R65)"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 10
+        },
+        {
+          "column": "D",
+          "value": 8
+        },
+        {
+          "column": "E",
+          "value": "R237 Composio \"Alex Slack Account\" (slack_rehood-hinney)"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "Hermes javar_inbox | Hermes javar_propose_message | 1Password 'Slack User Inbox — EA-Javar — PRO…"
+        },
+        {
+          "column": "M",
+          "value": "1Password \"Slack — Increase ROAS CSM — PROD\" | 1Password \"Slack — Increase ROAS Media — PRO… | 1Password \"Slack — Increase ROAS Ops — PROD\" | 1Password 'Slack Socket — Finance — PROD' | 1Password 'Slack — Finance — PROD'"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "Composio \"Lonestar Slack Account\" (slack_eas…"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R29)"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SpyFu"
+        },
+        {
+          "column": "B",
+          "value": "DONE"
+        },
+        {
+          "column": "C",
+          "value": 3
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R248 Composio custom_spyfu_crural-myaria | R290 Composio custom_spyfu (hub, 22 tools)"
+        },
+        {
+          "column": "F",
+          "value": "proven one way in (marked THE route in All connections)"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub spyfu"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R48)"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R318 Composio tailscale (tailscale_eaved-netter, login ca_Qr4XRw…"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "not in Route power"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Unknown app"
+        },
+        {
+          "column": "B",
+          "value": "PLATFORM"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "platform tools and plumbing: never get a removal list"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "R255 Codex app asdk_app_69431e6d26b88191b4029488a… [K: Leave off]"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Zoom"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "R264 Composio zoom_dour-dusk"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "—"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "WEAKER on writes; complete on reach (Route power R46)"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xAI Research"
+        },
+        {
+          "column": "B",
+          "value": "KEEP AS IS"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "R260 Composio custom_xai_research_mir-borgh"
+        },
+        {
+          "column": "F",
+          "value": "working Composio route"
+        },
+        {
+          "column": "G",
+          "value": 0
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "—"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        },
+        {
+          "column": "N",
+          "value": "Orgo hub xai-research"
+        },
+        {
+          "column": "O",
+          "value": "—"
+        },
+        {
+          "column": "P",
+          "value": "—"
+        },
+        {
+          "column": "Q",
+          "value": "STRONGEST (Route power R49)"
+        }
+      ]
+    }
+  ]
+}

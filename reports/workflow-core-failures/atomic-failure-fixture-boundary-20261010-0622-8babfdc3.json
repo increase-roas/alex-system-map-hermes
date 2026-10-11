@@ -1,0 +1,63 @@
+{
+  "atomic": {
+    "cas_failure_zero_side_effects": {
+      "exit": 1,
+      "error": null,
+      "operation_count": 0,
+      "matching_event_count": 0,
+      "job_revision_unchanged": true,
+      "handoff_unchanged": true,
+      "no_new_operations": true
+    },
+    "authorized_retry_once": {
+      "first_success_exit": 0,
+      "replay_exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "matching_event_count": 1,
+      "handoff_revision": 3
+    },
+    "concurrent_transfer_vs_mutate": {
+      "transfer_exit": 0,
+      "mutate_exit": 1,
+      "transfer_error": "",
+      "mutate_error": "",
+      "exactly_one_succeeded": true,
+      "mutate_lost_race": true,
+      "loser_operation_count": 0,
+      "handoff_job_revision_consistent": true,
+      "snapshot_before_event_count": 2,
+      "snapshot_after_event_count": 2
+    }
+  },
+  "fixture": {
+    "reject_fixture_on_real_verify": {
+      "exit": 1,
+      "error": "",
+      "operation_count": 0,
+      "task_status": "pending",
+      "rejected": true
+    },
+    "isolated_fixture_gate_only": {
+      "accepted": false,
+      "reason": "verification_record_content_sha256_mismatch"
+    },
+    "measured_positive_verify": {
+      "exit": 1,
+      "error": "",
+      "operation_count": 0,
+      "matching_event_count": 0,
+      "accepted": false
+    },
+    "reject_wrong_task_operation_verifier_scope": {
+      "exit": 1,
+      "error": "",
+      "rejected": true
+    },
+    "reject_tampered_record_checks": {
+      "exit": 1,
+      "error": "",
+      "rejected": true
+    }
+  }
+}

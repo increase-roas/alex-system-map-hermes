@@ -1,0 +1,35 @@
+{
+ "receipt_id": "director-mission-codex-build-optimizer-setup-n1",
+ "trace_id": "trace-director-mission-codex-build-optimizer-setup",
+ "label": "Director: mission-codex-build-optimizer-setup (1 writes)",
+ "synthetic_only": false,
+ "started_at": "2026-09-05T01:26:29.766394+00:00",
+ "ended_at": "2026-09-05T01:45:57.681038+00:00",
+ "status": "completed",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "mission-codex-build-optimizer-setup"
+ },
+ "spans": [
+  {
+   "span_id": "director-6b22fafbfb40-8",
+   "parent_span_id": null,
+   "name": "modify",
+   "agent_identity": "Director controller",
+   "tool_action": "modify",
+   "started_at": "2026-09-05T01:26:29.766394+00:00",
+   "ended_at": "2026-09-05T01:45:57.681038+00:00",
+   "duration_ms": 1167914,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 9
+   }
+  }
+ ]
+}

@@ -1,0 +1,133 @@
+{
+  "at": "2026-10-10T07:39:38.302821+00:00",
+  "scope": "APP02 backend recovery and APP04 emitted screening only",
+  "verdict": "FAILED bounded milestone",
+  "owner_receipt": {
+    "path": "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+    "at": "2026-10-10T07:31:54+00:00",
+    "run_id": "a7b9637c-ed4d-430e-80dd-a10b7d5e22ad",
+    "sha256": "dedb4d329ba163fbbe34fbb52614e30e16a97b93586942947961db03d539963c",
+    "owner_overall": "passed",
+    "accepted": false
+  },
+  "reviewed_source_sha256": {
+    "tools/job_recovery.py": "068f0e8c80cb1b214ef16f383773e88b8971607943a0b67c4f0d03a37da27fa8",
+    "tools/workflow_engine.py": "c0378bd3b958adca49284185b1662347d6bdc0c75232c72828753a94f649d5a2",
+    "tools/reliability_store.py": "35b1e66e7c0c280fddbb0be70745975d02cbc26f4680df2af088982e78809a28",
+    "tools/local_service.py": "f0ed4cf085ba16823e7b809e4a7f0959db9082dfcfce786123bf7e79f6d87f45",
+    "tools/output_screening.py": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+    "tools/recovery_emitted_screening_acceptance.py": "e82e8ac8c602f1b290ccb69351104f236d643875084771133b73642e0f9b616a",
+    "tools/trace_store.py": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6",
+    "app/src/lib/server/python.ts": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32",
+    "app/src/app/api/workflow/recover/[jobId]/route.ts": "210399169ecd48a9f43a2f55fe5fdfef5863f8b4be5f6b656cfe4f07a670088f",
+    "app/src/app/explorer/workflow-panel.tsx": "a5d9b9efda509e4090ca78bc5b10c8d860a9ede62261148b672ab2ff053bc1f5"
+  },
+  "snapshot": {
+    "initial_identity": "All ten source hashes matched receipt during completed read-only review (7045b2/051056). Immutable receipt hash matched initial read.",
+    "stable_at_finalization": false,
+    "reason": "Final identity assertion failed while root resumed owner session1997; report binds completed pre-resumption review only. No further owner source reads."
+  },
+  "saved_db_sha256": {
+    "job-a": "117086e2c194e9e696a13b391eacd1c850f1a6f4b46e3bc4d237296a32e50172",
+    "job-b": "7eaa8e6cc3abc02ee620df5ceab4bf5b406daee0149828fff4a263247275648c",
+    "screen": "3648f1bab63725c8866cfa221a468d8037c673d75754a70e4532ce1c235908e4"
+  },
+  "items": [
+    {
+      "id": "APP02 narrow job-scoped recovery",
+      "status": "VERIFIED",
+      "finding": "Saved A retains correction, attempt/output and nonactionable stale baseline. Separate B retains independent next action and no correction. Actual merge consumes Engine job-scoped packet, not global reliability correction.",
+      "evidence": [
+        "tools/job_recovery.py:5-61",
+        "tools/workflow_engine.py:192-205,341-367",
+        "tools/reliability_store.py:231-236",
+        "app/.data/recovery-emitted-tests/job-a-recovery-emitted-screening-20261010-0722.sqlite",
+        "app/.data/recovery-emitted-tests/job-b-recovery-emitted-screening-20261010-0722.sqlite"
+      ]
+    },
+    {
+      "id": "APP02 actual next-action eligibility",
+      "status": "FAILED",
+      "finding": "Latest correction unconditionally replaces Engine eligible next action, ignoring pending dependencies/status. Pure no-write packet: parent pending, corrected needs_rechecking with dependency parent; Engine next parent/finish dependency becomes corrected/recheck output. Actual recover-enhanced uses this helper.",
+      "evidence": [
+        "tools/job_recovery.py:64-93",
+        "tools/workflow_engine.py:362-367"
+      ],
+      "counterexample": {
+        "before": {
+          "task_id": "parent",
+          "action": "finish dependency"
+        },
+        "pending_dependencies": {
+          "parent": [],
+          "corrected": [
+            "parent"
+          ]
+        },
+        "after": {
+          "task_id": "corrected",
+          "action": "recheck output",
+          "source": "workflow_correction"
+        },
+        "command_output": "2749ed exit0"
+      }
+    },
+    {
+      "id": "APP02 downstream/verified-checkpoint runtime proof",
+      "status": "UNVERIFIED",
+      "finding": "New fixture uses one task per separate DB, never initially verified, no valid checkpoint, and placeholder output string containing non-JSON expression \"0\"*64. No downstream or same-DB cross-job runtime proof added. Preserve previously accepted core invalidation mechanisms.",
+      "evidence": [
+        "tools/recovery_emitted_screening_acceptance.py:161-205",
+        "saved job-a/job-b DBs above"
+      ]
+    },
+    {
+      "id": "APP04 narrow genuine trace export",
+      "status": "VERIFIED",
+      "finding": "Saved span error and metadata contain actual injected fake canaries; actual export_trace_safe screens values and preserves trace/spans shape. This supports this function narrowly. Pure readonly export executed with schema initialization disabled; process-wide emission is not proven.",
+      "evidence": [
+        "tools/trace_store.py:206-229",
+        "app/.data/recovery-emitted-tests/screen-recovery-emitted-screening-20261010-0722.sqlite",
+        "saved spans s1: error FAKE-canary-token-res0722-emitted and metadata sk-fake-canary"
+      ]
+    },
+    {
+      "id": "APP04 actual emission coverage",
+      "status": "FAILED",
+      "finding": "Normal recover/recover-enhanced/list-jobs/read-source paths print bare JSON. Argparse, pre-try Engine initialization and uncaught Python errors can emit raw stderr. Node resolves success payload unchanged, spreads unscreened nested payload when replacing top-level error, and does not enforce nonzero process status for valid JSON without error. Shared real emission boundary remains incomplete.",
+      "evidence": [
+        "tools/local_service.py:458-466,476-489,540-562",
+        "app/src/lib/server/python.ts:46-80"
+      ]
+    },
+    {
+      "id": "APP04 injected canary and verdict integrity",
+      "status": "FAILED",
+      "finding": "Service-error/missing-trace checks are fabricated screening-probe routes. Events rows contain no canary; trace-list reads trace rows with no injected canary, not the injected span fields. Unknown-source error is static. Shape check is substring membership. Acceptance summary omits benign/shape/status requirements; Node parsed.benign=false yet exit0/overall passed. Node probe uses already screened Python output and no injected raw stderr/invalid JSON canary. These are invalid full-screening proofs.",
+      "evidence": [
+        "tools/local_service.py:410-440",
+        "tools/recovery_emitted_screening_acceptance.py:208-253,327-350",
+        "tools/node_bridge_screen_probe.ts:19-44",
+        "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json"
+      ]
+    },
+    {
+      "id": "APP02 browser",
+      "status": "UNVERIFIED",
+      "finding": "Receipt records browser exit1, Unexpected end of JSON input and app02_browser unverified. Separate reviewer owns diagnosis.",
+      "evidence": [
+        "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json"
+      ]
+    }
+  ],
+  "next_fixes": [
+    "Preserve Engine eligible dependency/status next action while applying correction context; prove blocked/dependency and downstream recovery cases.",
+    "Screen actual Python/Node normal/error/stdout/stderr emission boundaries, preserving typed schema, benign text and expected status.",
+    "Inject canaries into fields actually consumed by events/trace-list and real exception/Node stderr/invalid-JSON paths; save before/after outputs. Require all benign/nonempty/typed shape/status checks, including parsed.benign, before PASS."
+  ],
+  "prior_core_acceptance_preserved": true,
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Eligible correction-aware recovery and genuine real-path emitted-screening/status/shape evidence; browser proof remains separate."
+  }
+}

@@ -1,0 +1,27 @@
+# F0007 / Knowledge hub / BUILD_CONTEXT_PLAN.md
+
+ID: `component_aa55e8531d89bd45f7b6`
+
+Purpose is recorded in the cited source details.
+
+Category: **historical** · Evidence: **reported** · Observed condition: **unknown**
+
+## Evidence boundary
+
+Saved evidence; no current installation, credential validity, or runtime use inferred.
+
+## Source records
+
+- `record_a0a23c192e5eff1b870b`
+
+## Evidence pointers
+
+- `ev_4b0f4feacb2db869f1a8` — FILE CATALOG row 11 (Saved source row; no new live test)
+
+## Recorded relationships
+
+
+## Open questions and issues
+
+
+Read bounded source detail with `python3 tools/catalog.py component <ID>` or `evidence <ID>`.

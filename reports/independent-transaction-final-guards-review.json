@@ -1,0 +1,317 @@
+{
+  "at": "2026-10-10T12:47:21.958213+00:00",
+  "scope": "ONLY four exact residual guards from independent-transaction-relations-review; pure no-write controls and valid-baseline retained-file readback",
+  "overall": "verified",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/transaction-final-four-guards-20261010-1240-86b6ee03-b7cb-4b96-81f1-de847391eacc.json",
+    "run_id": "86b6ee03-b7cb-4b96-81f1-de847391eacc",
+    "at": "2026-10-10T12:44:37+00:00",
+    "sha256": "b7ca04bd5ae5e4653a8e1e062d4d8dcc193a10906104967b7117b8be1ba41cfe",
+    "pointer_hash_matches": true
+  },
+  "snapshot_stable": true,
+  "source_identity": {
+    "tools/canonical_maintained_edit.py": {
+      "receipt_sha256": "9359b2b6e68adc42259868a55496b6cd5d1982963de912c7c81ae7128f309136",
+      "start_matches": true,
+      "end_sha256": "9359b2b6e68adc42259868a55496b6cd5d1982963de912c7c81ae7128f309136",
+      "end_matches": true
+    },
+    "tools/canonical_transaction_evidence.py": {
+      "receipt_sha256": "5b0a92d3374beb8524f407acdd5a595b4f256f67debbed065d7ee7ed0e1a3a82",
+      "start_matches": true,
+      "end_sha256": "5b0a92d3374beb8524f407acdd5a595b4f256f67debbed065d7ee7ed0e1a3a82",
+      "end_matches": true
+    },
+    "tools/canonical_transaction_guard_mocks.py": {
+      "receipt_sha256": "caf33ca768c764b16bcdc39d77993a40b5e86c726f4bb8b3a29ef4768ad1b5d7",
+      "start_matches": true,
+      "end_sha256": "caf33ca768c764b16bcdc39d77993a40b5e86c726f4bb8b3a29ef4768ad1b5d7",
+      "end_matches": true
+    },
+    "tools/canonical_transaction_invariants.py": {
+      "receipt_sha256": "514501ae87d205c3dfc91d5b921ee5a28d01185961b63cc8ca2631c973bddec8",
+      "start_matches": true,
+      "end_sha256": "514501ae87d205c3dfc91d5b921ee5a28d01185961b63cc8ca2631c973bddec8",
+      "end_matches": true
+    },
+    "tools/canonical_transaction_registry.py": {
+      "receipt_sha256": "9ee07c0d3eb1009a35efcccf1925b02f8233eabbf0421ca195636deb9aa96f8e",
+      "start_matches": true,
+      "end_sha256": "9ee07c0d3eb1009a35efcccf1925b02f8233eabbf0421ca195636deb9aa96f8e",
+      "end_matches": true
+    },
+    "tools/canonical_transaction_regression.py": {
+      "receipt_sha256": "db91e718e38e9d40495e9074d3a7a98c2d7f8ce5ecd90f7efe4837f145d72356",
+      "start_matches": true,
+      "end_sha256": "db91e718e38e9d40495e9074d3a7a98c2d7f8ce5ecd90f7efe4837f145d72356",
+      "end_matches": true
+    },
+    "tools/canonical_transaction_spec.py": {
+      "receipt_sha256": "736cc7633648b1e5f91213d39d094e158e7be06c8a89e17cb986ec197e3a41bf",
+      "start_matches": true,
+      "end_sha256": "736cc7633648b1e5f91213d39d094e158e7be06c8a89e17cb986ec197e3a41bf",
+      "end_matches": true
+    },
+    "tools/catalog_fixture_clone.py": {
+      "receipt_sha256": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "start_matches": true,
+      "end_sha256": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "end_matches": true
+    },
+    "tools/catalog_reference_validation.py": {
+      "receipt_sha256": "9785469eb101c019a78a83f546890311d2df1456ee67129ca675e5237ae442fd",
+      "start_matches": true,
+      "end_sha256": "9785469eb101c019a78a83f546890311d2df1456ee67129ca675e5237ae442fd",
+      "end_matches": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "start_matches": true,
+      "end_sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "end_matches": true
+    },
+    "tools/subprocess_bounded.py": {
+      "receipt_sha256": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c",
+      "start_matches": true,
+      "end_sha256": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c",
+      "end_matches": true
+    },
+    "schemas/components.schema.json": {
+      "receipt_sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e",
+      "start_matches": true,
+      "end_sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e",
+      "end_matches": true
+    }
+  },
+  "prior_review": "reports/independent-transaction-relations-review.json",
+  "checks": [
+    {
+      "id": "TS09-INTENDED-FAILURE",
+      "status": "VERIFIED",
+      "check": "Replace first baseline control failures with [unrelated failure], keep target claim true.",
+      "observed": "Rejected: failures do not name intended invariant/path; targets_path inconsistent with failures.",
+      "evidence": [
+        "tools/canonical_transaction_invariants.py:330,472-525",
+        "pure no-write _verify_control_inventory mutation against receipt cases baseline"
+      ]
+    },
+    {
+      "id": "TS09-EXACT-TARGET-TYPE",
+      "status": "VERIFIED",
+      "check": "Replace targets_path with integer1 on otherwise legitimate control.",
+      "observed": "Rejected: targets_path must be exactlyTrue.",
+      "evidence": [
+        "tools/canonical_transaction_invariants.py:519",
+        "pure no-write _verify_control_inventory mutation"
+      ]
+    },
+    {
+      "id": "TS11-REQUIRED-MARKDOWN-ENTRY",
+      "status": "VERIFIED",
+      "check": "Pure read_text mock removes required component Markdown derived entry and recomputes manifest SHA; no files modified.",
+      "observed": "Rejected: required derived manifest entry missing: components/component_6f112167c8a413f0f3ab.md.",
+      "evidence": [
+        "tools/canonical_transaction_spec.py:93",
+        "tools/canonical_transaction_evidence.py:192-206",
+        "app/.data/transaction-final-four-guards-20261010-1240/evidence/86b6ee03-b7cb-4b96-81f1-de847391eacc/same_op_concurrent/final/manifest.json"
+      ]
+    },
+    {
+      "id": "TS11-EXACT-CASE-STAGE-SETS",
+      "status": "VERIFIED",
+      "check": "Independently add/remove evidence case and add/remove same-op stage on copied baseline dictionaries; actual full acceptance readback path used.",
+      "observed": "All4 mutations reject with extra/missing case/stage reasons.",
+      "variants": {
+        "extra_case": "rejected",
+        "missing_case": "rejected",
+        "extra_stage": "rejected",
+        "missing_stage": "rejected"
+      },
+      "evidence": [
+        "tools/canonical_transaction_evidence.py:347-372",
+        "tools/canonical_transaction_invariants.py:560 actual full acceptance",
+        "receipt cases.evidence_index"
+      ]
+    }
+  ],
+  "valid_baseline": {
+    "actual_full_acceptance_passed": true,
+    "failures": [],
+    "retained_stage_manifests": 46,
+    "owner_four_guard_labels_match_independent_results": true
+  },
+  "history": [
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-8fed1394.json",
+      "sha256": "fe94115255b18bba0d983ab2b27e5a7845730c7f85bfe10346eeeadbaad1b5b3",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-b0f104b3.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-c3bbd1c0.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-enforcement-20261010-0816-69b8e37b.json",
+      "sha256": "cc0794636461a7b9142fa15bfec7640b79643df1d2631d5e5f5e186cd8d4e5d4",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-enforcement-20261010-0828-4dcad8cc.json",
+      "sha256": "b42f8b45f726701ec5963ff5426aca67d6f7787a0b3941dc25688d097ec06975",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-0d0fb50f.json",
+      "sha256": "3f1c4adebd09192bbca129cbbafe1e9d1afb4ece3c83e0827ec74a40f4271655",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-1631ab1f.json",
+      "sha256": "6d1084c8348201747f21f2c5bfc0790b7796ab6d4f52a957e30b25e88fd9d966",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-84e07696.json",
+      "sha256": "a8a3c29bff9334eda4be9b8c8a86b3d8a69bb6b4ff30b70686e639ecf0140da9",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-015378f4.json",
+      "sha256": "7b1484d85c654ae6dcd7ff1f13de2dd1ffff80f7c5c9dc501d377f05cfa17dc7",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-57bc53b6.json",
+      "sha256": "fc33acc86ad9417dc70cb57d93a19698606a8b5d457a2a22fc25deb4a418c9ff",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-63725caa.json",
+      "sha256": "648739ae9f3930b6d0b3a7345ac48094ba01a1ba02825414b9a0d66b4aec3e8a",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-8aff89eb.json",
+      "sha256": "a6cd86a364998991da9f7c5fa29686f432c92c463df0457f6e88062db1938603",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+      "sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3",
+      "immutable_file_readback_hash_matches": true,
+      "qualification": null
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-schema-receipt.json",
+      "sha256": "d6af32263292a5a4d589229226034a1c66f7edef4e90f80416fbce6365a17024",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-correction-receipt.json",
+      "sha256": "a8e94cee8da6c79cce0a4c1e5c22095b685e450db16e185ae4d0c37c8a7ffed7",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-proof-receipt.json",
+      "sha256": "1bd243b6768beeb6b5b69860ac94cabe74e288ffecf6b873099c9e9a5a04036a",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "delivery": "canonical-transaction-proof-20261010-0743",
+      "note": "historical_owner_pass_with_independent_defects",
+      "run_id": "7126aeb3-c121-4c48-b3d3-1bf888fcf8fb",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "delivery": "canonical-transaction-enforcement-20261010-0816",
+      "note": "owner_pass_independent_ts09_ts11_failed_guard_mocks_post_receipt",
+      "run_id": "246af411-a713-435c-b872-ae32c044ab6c",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "delivery": "canonical-transaction-enforcement-20261010-0816",
+      "note": "owner_failed_control_invalid_nonzero",
+      "run_id": "69b8e37b-3f91-4350-8125-4f2ccc94ca3e",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "delivery": "canonical-transaction-enforcement-20261010-0828",
+      "note": "owner_pass_independent_relation_guards_residual",
+      "run_id": "40ded520-af4a-4452-9da5-4cab8b320d7a",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "b2194176",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "8aff89eb",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "57bc53b6",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "63725caa",
+      "immutable_file_readback_hash_matches": null,
+      "qualification": "Historical mutable pointer snapshot; not treated as immutable byte proof."
+    }
+  ],
+  "preserved_verified": [
+    "TS03",
+    "TS05",
+    "TS07",
+    "TS08",
+    "prior46 retained artifact proof"
+  ],
+  "no_writing_guardmock_execution": true,
+  "remaining_defects_within_four_guard_scope": [],
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "whole_edit_promotion": "Four residual TS09/TS11 guards may be promoted in their exact scope. Whole EDIT and full_completion remain false; broader browser/draft/restart/sync/LKG/derived/serveridentity/cleanup/freshagent/trace/visual gates are not waived.",
+  "release_next_broader_work": true,
+  "next_action": "Release the sole implementation owner to the next prepared broader browser/sync milestone. Do not expand or repeat this closed four-guard audit."
+}

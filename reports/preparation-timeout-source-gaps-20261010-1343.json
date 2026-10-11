@@ -1,0 +1,12 @@
+{
+  "at": "2026-10-10T13:42:51.590946+00:00",
+  "event": "preparation_timeout_source_defects",
+  "source": "tools/catalog_preparation_bounded.py",
+  "findings": [
+    "TimeoutExpired handler reads stdout synchronously before terminating child, which can block indefinitely.",
+    "pids_in_group returns [] on enumeration timeout/error, falsely representing verified cleanup.",
+    "stdout_tail_sanitized contains raw combined tail without sanitization."
+  ],
+  "next_action": "Combine with exact required file-set/hash and isolated copy findings at next safe owner boundary. Withhold preparation and all downstream acceptance.",
+  "full_completion": false
+}

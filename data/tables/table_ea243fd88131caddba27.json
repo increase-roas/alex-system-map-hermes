@@ -1,0 +1,1161 @@
+{
+  "id": "table_ea243fd88131caddba27",
+  "sheet": "S02-18 Plan",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "#"
+        },
+        {
+          "column": "B",
+          "value": "phase"
+        },
+        {
+          "column": "C",
+          "value": "step"
+        },
+        {
+          "column": "D",
+          "value": "who"
+        },
+        {
+          "column": "E",
+          "value": "time"
+        },
+        {
+          "column": "F",
+          "value": "needs your OK?"
+        },
+        {
+          "column": "G",
+          "value": "rows affected (filter target_home / setup_step)"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": 1
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Delete dead and broken Composio logins: 11 expired Google, 2 expired Meta Ads, ClickUp, WhatsApp, Supabase, the broken Workspace Admin, and the Vercel login (Alex chose to remove it)"
+        },
+        {
+          "column": "D",
+          "value": "Agent (browser pane)"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Was yes (permanent). Done"
+        },
+        {
+          "column": "G",
+          "value": "Composio tab"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": 2
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Remove dead config: the LeadConnector MCP in the Paradise project (never signed in; removed 2026-09-30). Codex increase-roas-ghl removed too, because Codex now reaches GHL through Composio (backup in ~/Backups/codex-config-2026-10-01)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No (backed up). Done"
+        },
+        {
+          "column": "G",
+          "value": "All connections tab; GoHighLevel tab"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": 3
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "GHL CRM gateway added to Composio as ghl-oauth-crm (key moved by script, 303 locations verified)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "GoHighLevel tab"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": 4
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "GHL builder added to Composio as ghl-command-builder (custom MCP, OAuth). Live read of HTL B2B passed"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex signed in"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "GoHighLevel tab"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": 5
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-09-30)"
+        },
+        {
+          "column": "C",
+          "value": "Natural Sanitation Private Integration key saved and registered in ghl-command-builder (139 workflows readable and writable). LONESTAR CUSTOMER SERVICE: dropped 2026-10-02 (Alex)"
+        },
+        {
+          "column": "D",
+          "value": "Alex created the key; agent registered it"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done for Natural Sanitation"
+        },
+        {
+          "column": "G",
+          "value": "GoHighLevel tab"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": 6
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Meta Ads: the system user token from 1Password pushed into Composio (metaads, 57 ad accounts, never expires). The health check watches it"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "Meta Ads rows on All connections and Composio tabs"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": 7
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Make added to Composio (us1, all scopes, proven). Parallel and Convex dropped by Alex. Foreplay added (custom_foreplay, 31 tools); its key was rotated later that day (step 15)"
+        },
+        {
+          "column": "D",
+          "value": "Agent (Alex copied the Make key)"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "Composio tab"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": 8
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Cursor and Codex reach apps through Composio, each proven with live calls; Claude Code (live calls) and the Claude phone (T1, T2, T4 PASS; Tests R31–R33) are proven; desktop chat, web and Cowork wait on live-tests (Tests R65). ChatGPT is in the ChatGPT cleanup step"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex signed in"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "Composio tab; Claude app connectors tab"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": 9
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-09-30)"
+        },
+        {
+          "column": "C",
+          "value": "Old ChatGPT GHL tunnel service (ir-mcp-revstead-ghl) stopped and removed from OpenClaw. 'Point ChatGPT at Universal' was dropped: ChatGPT keeps only Composio. The hub services ir-ghl-command-tunnel and ir-ghl-command-universal still run; whether either can stop: not checked"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Was yes (stops a running service). Done"
+        },
+        {
+          "column": "G",
+          "value": "GoHighLevel tab"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": 10
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Duplicate servers removed from the Claude Code, Cursor (mcp.json) and Codex configs (backups in ~/Backups). Claude Desktop's 2 were removed 2026-10-02 (spp-c21); Cursor plugins are still to uninstall (see the next steps)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No (backed up). Done 2026-10-02 (spp-c21)"
+        },
+        {
+          "column": "G",
+          "value": "All connections tab"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": 11
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Atlas Cloud added to Composio (hub route, 15 tools). Shopify is its own step below"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "Composio tab"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": 12
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Tailscale: all 7 Orgo computers tagged tag:server, Chrome on each browses through Sasha's Mac mini (Comcast home IP), Tailscale SSH on all 7 (SSH rule saved by Alex), hub has shields-up"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex (SSH rule)"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Was yes. Done"
+        },
+        {
+          "column": "G",
+          "value": "Tailscale tab"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": 13
+        },
+        {
+          "column": "B",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Beyond the old plan: one route each for GA4 and GTM, Google Ads, Cloudflare, Google Workspace (the robot), Notion, Linear, Sentry, Higgsfield and the docs readers; connector health check live (hub routes, Composio logins, home exit node; texts and emails Alex and Manny); all 44 Composio logins ACTIVE at the live pull (Vercel deleted after)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No. Done"
+        },
+        {
+          "column": "G",
+          "value": "Composio tab; Route power tab"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": 14
+        },
+        {
+          "column": "B",
+          "value": "1 now"
+        },
+        {
+          "column": "C",
+          "value": "Shopify: Alex creates the store app (Settings > Apps > Develop apps > 'Composio', all Admin API scopes) and fills 1Password 'Shopify API key (paste here)'. Agent then connects it in Composio and proves it with a read"
+        },
+        {
+          "column": "D",
+          "value": "Alex, then agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "To do tab; Composio tab"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": 15
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "C",
+          "value": "Foreplay key rotation: the old key leaked into a session log. Alex rotates it and saves it in 1Password 'Foreplay API key (ROTATE...)'; agent pushes it into Composio Done 2026-10-01: rotated, saved in 1Password 'Foreplay API key', pushed into Composio custom_foreplay and proven; the old key returns 401."
+        },
+        {
+          "column": "D",
+          "value": "Alex, then agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": 16
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "C",
+          "value": "ChatGPT and Claude app cleanup. ChatGPT: remove 'Increase ROAS — GoHighLevel', Notion, Slack and Google Drive (keep Composio). Claude app: remove Ref (Qt docs plugin is Alex's call); the cut list of Composio duplicates (Exa, Cloudflare Developer Platform, ElevenLabs, GHL Command Universal, Gmail, Google Drive) is with Alex, status not checked Update 2026-10-01: the Claude app part is done (app batch: Ref and 4 other connectors, and 12 plugins with Qt among them, removed). The ChatGPT part is done too (AI apps r11, r14)."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No (he does it himself)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab; Claude app connectors tab"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "17"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "C",
+          "value": "Google Admin: delete the dead delegation entry for client ID 114216599725767886067 (the old workspace-admin account). Keep 112417209265494842557, the live robot Done 2026-10-01: Alex removed it at 20:51:11Z, and spp-p27a verified it (notes/k02-verify.md)."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No (his security setting)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "18"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-02"
+        },
+        {
+          "column": "C",
+          "value": "Tailscale: remove user Kanwal Singh if present Done 2026-10-02: Alex removed the user. Still open: javante's share with his outside account (To do R10)."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "To do tab; Tailscale tab"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "19"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-03"
+        },
+        {
+          "column": "C",
+          "value": "Orgo exposure decision: 6 agent machines answered tailnet peers on desktop-api 8080, VNC 6080/5999, Chrome debug 9223 (CSM), Hermes 8644-8646/9119. Done 2026-10-03: Alex chose 'fix properly'; policy v4 saved at 00:15:55Z (Tailscale R15; Decisions D30; To do R2)."
+        },
+        {
+          "column": "D",
+          "value": "Alex (saved it); agents built and checked it"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Done (Alex's save)"
+        },
+        {
+          "column": "G",
+          "value": "Tailscale tab; To do tab"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "20"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-02 (Alex's trash clicks; spp-c21)"
+        },
+        {
+          "column": "C",
+          "value": "Remove the leftover duplicates in the Claude Desktop config (google-workspace-admin and ghl-oauth-crm, back up first)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No (backed up first)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab; All connections tab"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "21"
+        },
+        {
+          "column": "B",
+          "value": "2 next"
+        },
+        {
+          "column": "C",
+          "value": "Cursor plugins: uninstall any of Supabase, Appwrite, ClickUp, Vercel, GitHub, Google Drive, Higgsfield, 1Password plugin, Exa, GitLab, Linear, Sentry, Notion, Slack, Cloudflare (keep Composio, Superpowers, Compound Engineering, Cursor kits). Alex declined computer use on Cursor, so he does it in Cursor > Settings > Plugins, or lets the agent drive Cursor"
+        },
+        {
+          "column": "D",
+          "value": "Alex (or agent with his OK)"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes (computer use on Cursor)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab; All connections tab"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "22"
+        },
+        {
+          "column": "B",
+          "value": "2 next"
+        },
+        {
+          "column": "C",
+          "value": "Done for 10 of 15 on 2026-10-01 (52 → 42 setups, 43 logins unchanged). Checked 2026-10-03 (ccf-dc1, ccf-dc2): custom_htl_google_tracking stays for the G01 member test; YouTube and People Data Labs wait on Alex's keep or drop; Vercel's empty setup and the 9 dead leftovers (_1password's disabled config among them) are ready to delete behind Alex's codes; _1password's 2 logins were deleted 2026-10-02 (To do R59)."
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No (dead config, standing yes)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab; Composio tab"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "23"
+        },
+        {
+          "column": "B",
+          "value": "2 next"
+        },
+        {
+          "column": "C",
+          "value": "Alex's yes/no decisions: Owner role for the robot at the Google Cloud org; move Javar's and Javante's Google logins to the robot. Decided 2026-10-02: GTM (read only in 'Increase Roas', build only in 'Increase Roas (Official)'; To do R12) and Zoom (no admin app; To do R13)."
+        },
+        {
+          "column": "D",
+          "value": "Alex decides"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "24"
+        },
+        {
+          "column": "B",
+          "value": "2 next"
+        },
+        {
+          "column": "C",
+          "value": "Google Ads admins: franky@ or Angel@ approve the invites for contact@ and anthony@; then the partners approve removing franky@ and Angel@"
+        },
+        {
+          "column": "D",
+          "value": "Alex + partners"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes (partner approval)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "25"
+        },
+        {
+          "column": "B",
+          "value": "Dropped 2026-10-02 (Alex)"
+        },
+        {
+          "column": "C",
+          "value": "LONESTAR CUSTOMER SERVICE key (location DnKxVDxzEmWMCIzJVfg6): Alex creates a Private Integration key with all scopes and saves it in 1Password; agent registers it in ghl-command-builder"
+        },
+        {
+          "column": "D",
+          "value": "Alex creates; agent registers"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "GoHighLevel tab; To do tab"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "26"
+        },
+        {
+          "column": "B",
+          "value": "2 next"
+        },
+        {
+          "column": "C",
+          "value": "Google Business Profile API access request (needs business details and project 750448852155): agent drafts, Alex approves the send"
+        },
+        {
+          "column": "D",
+          "value": "Agent drafts; Alex approves"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes (a message to Google)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "27"
+        },
+        {
+          "column": "B",
+          "value": "2 next"
+        },
+        {
+          "column": "C",
+          "value": "First live client Google Ads account: proves the conversion upload (Data Manager API) and campaign writes. Agent opens the account or sends an invite; Alex or the client adds the card; agent asks before spend"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes (spend follows the project's 'Spend approval:' line)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "28"
+        },
+        {
+          "column": "B",
+          "value": "3 later"
+        },
+        {
+          "column": "C",
+          "value": "Access register: one row per asset (who has access, owner, last verified), reviewed quarterly. Alex decides ownership moves, such as the 4 client GA4 properties"
+        },
+        {
+          "column": "D",
+          "value": "Agent builds; Alex decides moves"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes for ownership moves"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "29"
+        },
+        {
+          "column": "B",
+          "value": "done"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01: the Orgo hub is rebuildable from agents-home tools/connectors/hub (commit 73a494e) with rebuild_hub.py and 1Password; 32 of 32 files matched the live hub"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "30"
+        },
+        {
+          "column": "B",
+          "value": "3 later"
+        },
+        {
+          "column": "C",
+          "value": "Move OpenClaw hub keys from files to the 1Password service account. The service account exists (2026-10-01); whether the hub's route keys load from it now: not checked"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Not checked (a new service account was needed originally)"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "31"
+        },
+        {
+          "column": "B",
+          "value": "3 later"
+        },
+        {
+          "column": "C",
+          "value": "Key sweep leftovers into 1Password: 6 keys in ~/.zsh_history, .env files in ~/ssa-sales-dashboard, ~/retell-ghl-secretaries and ~/site-launchpad-source, Orgo service-account key files"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "To do tab"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "32"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01: one copy per skill in ~/.agents/skills (skills cap and vendoring, spp-p11a and spp-p16a). Live counts: Limits R18 and the 'Skills, where they live' tab (check.py prints them)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "No"
+        },
+        {
+          "column": "G",
+          "value": "Skills tab"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "33"
+        },
+        {
+          "column": "B",
+          "value": "On hold (Alex said hold)"
+        },
+        {
+          "column": "C",
+          "value": "Mission A, Orgo agents on one route: all 7 Orgo agents reach apps through Composio, keys in 1Password, same app notes, no duplicate or dead connectors, covered by health alerts. Javar's fence stays. Steps: audit each computer (read-only), Alex approves a cut list, wire, prove with one real read per agent, watch with the health check"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes: Alex says go, then approves the cut list"
+        },
+        {
+          "column": "G",
+          "value": "Plan: work/2026-10-01_fleet-and-offmac/plan.md"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "34"
+        },
+        {
+          "column": "B",
+          "value": "On hold (Alex said hold)"
+        },
+        {
+          "column": "C",
+          "value": "Mission B, Shared brain off the MacBook: notes sync, the 8-hour tune-up, shared instructions and the connectors workbook (as a Google Sheet) keep working with the MacBook closed. Alex would be asked for: read-only GitHub deploy keys for the hub, an every-8-hours cloud tune-up, and which Drive folder holds the workbook Sheet"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Yes: Alex says go, then each ask above"
+        },
+        {
+          "column": "G",
+          "value": "Plan: work/2026-10-01_fleet-and-offmac/plan.md"
+        }
+      ]
+    }
+  ]
+}

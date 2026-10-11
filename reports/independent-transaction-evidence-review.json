@@ -1,0 +1,502 @@
+{
+  "at": "2026-10-10T12:15:06.643185+00:00",
+  "scope": "TS05/09/11 only; read-only files/pure controls; preserved VERIFIED TS03/07/08",
+  "overall": "failed",
+  "blocker_type": "goal_not_met_yet",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/canonical-transaction-evidence-20261010-0802-d64fd4b9-ff78-44a6-b20c-221e4d751f5a.json",
+    "run_id": "d64fd4b9-ff78-44a6-b20c-221e4d751f5a",
+    "at": "2026-10-10T12:10:57+00:00",
+    "sha256": "728a96f7c49d05f766356e6919ae712e3e8765d697da95deafa0d8ba09936e20",
+    "pointer_hash_matches": true
+  },
+  "snapshot_stable": true,
+  "source_identity": {
+    "tools/canonical_maintained_edit.py": {
+      "sha256": "9359b2b6e68adc42259868a55496b6cd5d1982963de912c7c81ae7128f309136",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_evidence.py": {
+      "sha256": "fee4c59469a0852d24f3fd82b308e869d358dc81ce67b0a3c29b7a22dfcca6ff",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_invariants.py": {
+      "sha256": "7ebaee5c3e5a2b23e05e546ef5e8644a8a6938ceda5bb49be17134e371dcd4b7",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_regression.py": {
+      "sha256": "53198b5df1adbe87e565597910f58dec7463d0969c5c64ec065711aa6a9b268c",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_spec.py": {
+      "sha256": "24b4453128e7b033a7be9783f4da511247830288b0ecc4d0ffaaadefc1d2a5ec",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/catalog_fixture_clone.py": {
+      "sha256": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/catalog_reference_validation.py": {
+      "sha256": "9785469eb101c019a78a83f546890311d2df1456ee67129ca675e5237ae442fd",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/local_service.py": {
+      "sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/subprocess_bounded.py": {
+      "sha256": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "schemas/components.schema.json": {
+      "sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e",
+      "start_matches": true,
+      "end_matches": true
+    }
+  },
+  "prior_review": "reports/independent-transaction-proof-review.json",
+  "acceptance_prompt": "work/supervision/transaction-final-proof-contract-20261010-1202.txt",
+  "checks": [
+    {
+      "id": "TS05",
+      "status": "VERIFIED",
+      "scope": "Five bounded edit crash cases now retain before/interrupted/first/second recovery files and compare real persistent effects, not action lists.",
+      "proof": "Readback confirms original canonical bytes and complete revision key/number/hash identity restored at first recovery in all5 cases. Four pre/first sidecars differ only in at timestamp; they are not byte-identical. First/second complete manifests equal. All44 saved canonical/derived/manifest and raw-journal hashes independently match.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py crash matrix / evidence stage saves",
+        "tools/canonical_transaction_spec.py:62-68",
+        "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a"
+      ],
+      "limits": "This promotes the exact persisted-state recovery evidence gap. Acceptance enforcement remains incomplete under TS09/11; no broader crash/UI/LKG acceptance."
+    },
+    {
+      "id": "TS09",
+      "status": "FAILED",
+      "accepted": "Exact stage presence, schema label cardinality, additional integer outcomes, both response hashes and several prior omitted flags now validate. Baseline passes without circular control metadata.",
+      "defect": "Coverage is39 mutations:10 selected invariants\u00d73 plus9 examples, not each required invariant. The independent validator and coverage list are different specifications. Full acceptance trusts control_coverage.complete=true without requiring nonempty exact inventory, required_mutations, targets_path or every intended failure. Empty inventory and required_mutations0 still PASS. Required duplicate_source_refs label was removed to shrink the schema set to9; source uniqueness implementation remains accepted, but requested negative proof is missing. Several required value/effect relations are still omitted.",
+      "pure_counterexamples_accepted": [
+        "same_op_concurrent.final_after_sha256=\"0\"*64 (unrelated to actual result)",
+        "post_oplog_rollback_retry.final_revision=99",
+        "replay_after_newer.same_result_hash=false",
+        "crash_stages.stages.pending_before_rename.revision_restored=false",
+        "control_coverage.inventory=[]",
+        "control_coverage.required_mutations=0",
+        "evidence_index.run_id=\"wrong-run\""
+      ],
+      "evidence": [
+        "tools/canonical_transaction_spec.py:12-22,24-38,71-81",
+        "tools/canonical_transaction_invariants.py:157-226,229-240,269-327",
+        "receipt cases.control_coverage required_mutations39 / schema_negatives.cases9"
+      ],
+      "correction": "Restore duplicate_source_refs as mandatory negative using a legitimate source-record ID. Use one complete field/invariant specification for validation and controls; require all missing/wrongtype/invalid variants with exact intended failures and cardinality. Enforce control inventory instead of complete Boolean. Tie final response hash, rollback revision, replay result and crash restoration relations to retained bytes/sidecars."
+    },
+    {
+      "id": "TS11",
+      "status": "FAILED",
+      "accepted": "Original named raw journal files are now preserved, individually hashed and recomputable with newline-joined sorted filename algorithm. All44 retained snapshots verify independently, including collision final, post-oplog before/rollback/retry, replay first/newer/replayed and distinct-record first-overlap/final. EvidenceStore refuses stage overwrite.",
+      "defect": "Actual verification still ignores derived file hashes/existence; does not recompute/require manifest_sha256, file SHA or relation between journal bundle and stage manifest; missing journals/_manifest can be ignored. Root validation uses only a string prefix, not resolved run identity; supplied evidence_root argument is unused and wrong evidence_index.run_id passes. Pure no-write mocks show a missing saved XLSX and forged manifest hash with missing canonical SHA both accept. Scope specification also retains only before/second recovery for rollback_preserves, omitting interrupted/first files required by prompt.",
+      "evidence": [
+        "tools/canonical_transaction_evidence.py:112-148,192-195,211-232",
+        "tools/canonical_transaction_invariants.py:315-327",
+        "tools/canonical_transaction_spec.py:41-60",
+        "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a"
+      ],
+      "pure_no_write_checks": {
+        "missing_saved_xlsx_accepted": true,
+        "forged_manifest_hash_plus_missing_canonical_sha_accepted": true,
+        "wrong_evidence_run_id_accepted": true
+      },
+      "correction": "Require and recompute manifest and each canonical/derived/raw-journal hash at save and acceptance; validate explicit absences and manifest relation, exact case/stage sets, resolved expected in-project run root and run_id. Retain interrupted/first rollback evidence and required missing/forged-evidence controls. No implementation changes to accepted transaction mechanics are needed."
+    }
+  ],
+  "baseline_passes": true,
+  "control_summary": {
+    "required_mutations": 39,
+    "selected_spec_fields": 10,
+    "stored_rows": 39,
+    "each_required_invariant_covered": false
+  },
+  "recovery_readback": [
+    {
+      "case": "crash_stage_committed_before_oplog",
+      "canonical_restored": true,
+      "complete_revisions_restored": false,
+      "first_second_complete_manifests_equal": true,
+      "revision_keys_numbers_and_sha_restored": true,
+      "timestamp_only_difference": true
+    },
+    {
+      "case": "crash_stage_pending_before_rename",
+      "canonical_restored": true,
+      "complete_revisions_restored": true,
+      "first_second_complete_manifests_equal": true,
+      "revision_keys_numbers_and_sha_restored": true,
+      "timestamp_only_difference": false
+    },
+    {
+      "case": "crash_stage_post_derived_pre_revision",
+      "canonical_restored": true,
+      "complete_revisions_restored": false,
+      "first_second_complete_manifests_equal": true,
+      "revision_keys_numbers_and_sha_restored": true,
+      "timestamp_only_difference": true
+    },
+    {
+      "case": "crash_stage_post_oplog_pre_journal_commit",
+      "canonical_restored": true,
+      "complete_revisions_restored": false,
+      "first_second_complete_manifests_equal": true,
+      "revision_keys_numbers_and_sha_restored": true,
+      "timestamp_only_difference": true
+    },
+    {
+      "case": "crash_stage_post_rename_pre_derived",
+      "canonical_restored": true,
+      "complete_revisions_restored": false,
+      "first_second_complete_manifests_equal": true,
+      "revision_keys_numbers_and_sha_restored": true,
+      "timestamp_only_difference": true
+    }
+  ],
+  "immutable_evidence_readback": [
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/changed_payload_collision/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_committed_before_oplog/before_crash",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_committed_before_oplog/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_committed_before_oplog/interrupted",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_committed_before_oplog/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_pending_before_rename/before_crash",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_pending_before_rename/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_pending_before_rename/interrupted",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_pending_before_rename/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_derived_pre_revision/before_crash",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_derived_pre_revision/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_derived_pre_revision/interrupted",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_derived_pre_revision/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_oplog_pre_journal_commit/before_crash",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_oplog_pre_journal_commit/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_oplog_pre_journal_commit/interrupted",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_oplog_pre_journal_commit/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_rename_pre_derived/before_crash",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_rename_pre_derived/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_rename_pre_derived/interrupted",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/crash_stage_post_rename_pre_derived/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/distinct_op_same_record/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/distinct_records/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/distinct_records/first_overlap",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/dual_lock/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/post_oplog_rollback_retry/after_retry",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/post_oplog_rollback_retry/after_rollback",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/post_oplog_rollback_retry/before_reconcile",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/replay_after_newer/after_first_commit",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/replay_after_newer/after_newer_commit",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/replay_after_newer/after_replay",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_crash_and_recovery/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_crash_and_recovery/interrupted",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_crash_and_recovery/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_handler/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_recovery_interrupt/before_restore",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_recovery_interrupt/first_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_recovery_interrupt/interrupted_recovery",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_recovery_interrupt/interrupted_restore",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/restore_recovery_interrupt/second_recovered",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/rollback_preserves/after_second_recovery",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/rollback_preserves/before_crash",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/same_op_concurrent/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/d64fd4b9-ff78-44a6-b20c-221e4d751f5a/schema_negatives/final",
+      "file_and_manifest_hashes_match": true,
+      "raw_named_journal_hashes_match": true
+    }
+  ],
+  "history": [
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-8fed1394.json",
+      "sha256": "fe94115255b18bba0d983ab2b27e5a7845730c7f85bfe10346eeeadbaad1b5b3",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-b0f104b3.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-c3bbd1c0.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-0d0fb50f.json",
+      "sha256": "3f1c4adebd09192bbca129cbbafe1e9d1afb4ece3c83e0827ec74a40f4271655",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-1631ab1f.json",
+      "sha256": "6d1084c8348201747f21f2c5bfc0790b7796ab6d4f52a957e30b25e88fd9d966",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-84e07696.json",
+      "sha256": "a8a3c29bff9334eda4be9b8c8a86b3d8a69bb6b4ff30b70686e639ecf0140da9",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-015378f4.json",
+      "sha256": "7b1484d85c654ae6dcd7ff1f13de2dd1ffff80f7c5c9dc501d377f05cfa17dc7",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-57bc53b6.json",
+      "sha256": "fc33acc86ad9417dc70cb57d93a19698606a8b5d457a2a22fc25deb4a418c9ff",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-63725caa.json",
+      "sha256": "648739ae9f3930b6d0b3a7345ac48094ba01a1ba02825414b9a0d66b4aec3e8a",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-8aff89eb.json",
+      "sha256": "a6cd86a364998991da9f7c5fa29686f432c92c463df0457f6e88062db1938603",
+      "readback_hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+      "sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3",
+      "readback_hash_matches": true
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-schema-receipt.json",
+      "sha256": "d6af32263292a5a4d589229226034a1c66f7edef4e90f80416fbce6365a17024",
+      "readback_hash_matches": true
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-correction-receipt.json",
+      "sha256": "a8e94cee8da6c79cce0a4c1e5c22095b685e450db16e185ae4d0c37c8a7ffed7",
+      "readback_hash_matches": true
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-proof-receipt.json",
+      "sha256": "1bd243b6768beeb6b5b69860ac94cabe74e288ffecf6b873099c9e9a5a04036a",
+      "readback_hash_matches": true
+    },
+    {
+      "delivery": "canonical-transaction-proof-20261010-0743",
+      "note": "historical_owner_pass_with_independent_defects",
+      "run_id": "7126aeb3-c121-4c48-b3d3-1bf888fcf8fb",
+      "readback_hash_matches": false
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "b2194176",
+      "readback_hash_matches": false
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "8aff89eb",
+      "readback_hash_matches": false
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "57bc53b6",
+      "readback_hash_matches": false
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "63725caa",
+      "readback_hash_matches": false
+    }
+  ],
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "next_action": "Promote bounded TS05 recovery evidence and raw-journal retention portion of TS11; preserve TS03/07/08. Same owner: restore duplicate-source negative, complete unified invariant/control inventory, and enforce saved derived/manifest/journal/run identity before accepting TS09/11. Full completion remains false."
+}

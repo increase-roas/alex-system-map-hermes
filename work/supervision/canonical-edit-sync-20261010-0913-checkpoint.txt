@@ -1,0 +1,35 @@
+Owner checkpoint canonical-edit-sync-20261010-0913 (2026-10-10T10:36:15+00:00)
+Owner chat: 4f32e74a-58e3-4abb-ba6f-fb151ba80cd7
+Status: owner delivery PASS at safe review point — NOT full project completion; independent verification not claimed.
+Scope: original correction — real canonical catalog + maintained doc editing (prior maintained-edit-cas staging-only path not relabeled complete).
+
+Receipt pointer: reports/canonical-edit-sync-receipt.json
+Immutable: reports/run-receipts/canonical-edit-sync-20261010-0913-9fe2b9db-db45-4ab5-8b69-4a988899cee0.json
+content_sha256: a5346a4ae14b2d7fb99abaa08aeca0144a5548f8a9fc73cf50ee93a4262832c4
+full_completion: false
+
+Acceptance mapping (docs/BUILD_SUPERVISION.md §2, owner run):
+1. Canonical data/components.json + catalog-metadata.json via tools/canonical_maintained_edit.py, UI MaintainedEditPanel, /api/catalog/edit*; isolated complete clone (CATALOG_FIXTURE_ROOT); production inspection 2351 components; production immutable hashes unchanged.
+2. Lock before idempotency; mutation digest bound to base revision + expected_sha256 + document; retry same op+payload; payload collision rejected; subprocess concurrent 1 commit / 1 conflict.
+3. Journal + atomic replace; injected crash post_canonical_pre_derived; catalog-edit-reconcile restores pre-mutation sha.
+4. build_catalog.render derived MD/XLSX/index; proof under reports/derived-proof/canonical-edit-sync-20261010-0913/; value-level purpose checks in XLSX/MD.
+5. Browser preview diff + apply on clone; list/readback agree; sync poll refresh; metadata doc edit case in acceptance.
+6. browser_canonical_edit_sync.mjs: npm build, next start, PID/ECONNREFUSED restart, AbortController deadlines, SUBPROCESS/BROWSER 600s caps.
+7. strict_types regression on typed-controls baseline preserved.
+
+Prior failed owner attempts (preserved, not edited):
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-2ba0a016.json
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-2e60e975.json
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-261dfbee.json
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-fb3e9271.json
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-bea9d002.json
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-419b54e9.json
+- reports/workflow-core-failures/canonical-edit-sync-20261010-0913-a886a750.json
+
+Blocked / out of scope:
+- Real SDK trace input BLOCKED
+- REL-01 / full observer sync / independent maintained-edit reviews (prior JSON findings still apply until re-run)
+- Drive publication (local-only)
+- Staging-only maintained-edit-cas not claimed as §2 complete
+
+Next: independent backend/browser review on canonical-edit-sync receipt; supervisor continues visual/observer/REL-01 gates; full_completion remains false.

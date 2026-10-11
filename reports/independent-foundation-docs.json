@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "item": "single_authoritative_catalog_and_workflow_store",
+      "status": "VERIFIED",
+      "evidence": [
+        "docs/AGENT_PROTOCOL.md: Every workflow mutation; catalog JSON read-only browser; authorized single-editor patch process explicitly allowed.",
+        "docs/AGENT_PROTOCOL.md: factual proposal uses before-file hash; v1 catalog has no per-record revision/API; before/after patch readback is separate from workflow receipt.",
+        "docs/DESIGN_SPEC.md: canonical facts in JSON, workflow SQLite single writer; only v1 catalog-write path authorized single-editor patch/validate/regenerate; browser facts read-only.",
+        "docs/CURSOR_HANDOFF.md and UI skill agree on review-task then patch/validate/reload."
+      ]
+    },
+    {
+      "item": "five_main_views_and_history_tab",
+      "status": "VERIFIED",
+      "evidence": "docs/DESIGN_SPEC.md states five main views; Workflows contains directly accessible History tab. CURSOR_HANDOFF.md visual acceptance matches."
+    },
+    {
+      "item": "file_browser_requirement_and_tests",
+      "status": "VERIFIED",
+      "evidence": "CURSOR_HANDOFF Actual files section and three pending acceptance rows require real current or labeled archive contents, two-way use links with proof labels, read-only approved roots and rejection of credential/traversal paths. DESIGN file browser panel matches; START_HERE links exact section."
+    },
+    {
+      "item": "ui_runtime_proof_boundary",
+      "status": "UNVERIFIED",
+      "evidence": "Cursor application remains pending; handoff entries are executable test placeholders, not passing tests."
+    }
+  ],
+  "checked_sha256": {
+    "docs/AGENT_PROTOCOL.md": "8ea69df82f2c8081e982a8bffa394dddb3125450d1dd088e19943cf71b66a694",
+    "docs/DESIGN_SPEC.md": "2fa2a5a3a6aa3f476eb136adb5f4be5c86ea4a90127808a7622e40ddd036b855",
+    "docs/CURSOR_HANDOFF.md": "385a51b407204d58dc14be2120df0e435681abd1f29bf174aa793066f4639d98",
+    "START_HERE.md": "6bbee674778e19bc77df00dc34d37eb1cce7cd8156510371cc08114a77b4ed87",
+    "docs/PRO_TEMPLATE_INTAKE.md": "b0580db2c632b3873a4bfadf5ee56d05cfa7a6826e156227ebff6f92fca10222"
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "f6d16c65-9a3b-4b6d-829e-3be8f578f634",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "real-verify-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "ab-verify-good",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "artifact_hash_matches": true,
+    "declared_outcome_verified": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T06:52:55+00:00",
+  "max_age_seconds": 604800,
+  "observed_proofs": [
+    {
+      "criterion": "proof-bound",
+      "relative_path": "work/task-artifacts/real-verify-job/t1-b6eccd4837af.txt",
+      "sha256": "b6eccd4837af0f09a72fc92e286755689a51a92030293f803e6edafe9c667777",
+      "byte_length": 31,
+      "contract_revision": 1,
+      "contract_sha256": "32d106f408ad51abab719e9abba70fd3101bbda14a73426f30f936cad99c2d6f",
+      "content_matches_declaration": true
+    }
+  ],
+  "record_sha256": "4b4eb9e36c6dbbda1d7b3d19153ef8bfc23d0228dacdbd20a3e9064172b264e9"
+}

@@ -1,0 +1,483 @@
+{
+  "id": "table_693ab3462a6a9ee4f6ab",
+  "sheet": "COVERAGE & RULES",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Coverage, evidence and maintenance"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Professional standard: traceable source ownership, dated evidence, reversible packaging and complete file accounting."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Item"
+        },
+        {
+          "column": "B",
+          "value": "Result / rule"
+        },
+        {
+          "column": "C",
+          "value": "Evidence / limitation"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Compilation date"
+        },
+        {
+          "column": "B",
+          "value": "9 October 2026, America/Detroit"
+        },
+        {
+          "column": "C",
+          "value": "Source modification dates and historical audit dates are separately retained."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source boundary"
+        },
+        {
+          "column": "B",
+          "value": "Original packages + October 9 SDK source set + scoped 1Password metadata map."
+        },
+        {
+          "column": "C",
+          "value": "Includes five additional 1Password source records; other vaults and all secret field contents are excluded from this map."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source files"
+        },
+        {
+          "column": "B",
+          "value": 1009
+        },
+        {
+          "column": "C",
+          "value": "Count of on-disk files in the bounded source set; nested ZIP members are separately indexed."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Primary workbook tabs"
+        },
+        {
+          "column": "B",
+          "value": 82
+        },
+        {
+          "column": "C",
+          "value": "Original 72 primary tabs + 10 AI Money reference tabs. Historical embedded workbook tabs also retained."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All imported workbook tabs"
+        },
+        {
+          "column": "B",
+          "value": 154
+        },
+        {
+          "column": "C",
+          "value": "SOURCE SHEET INDEX enumerates every imported sheet, including historical embedded workbooks."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Unique text bodies"
+        },
+        {
+          "column": "B",
+          "value": 919
+        },
+        {
+          "column": "C",
+          "value": "Identical bytes may share a reading location. Every original file still has its own catalog row and archive member."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Original ZIP members"
+        },
+        {
+          "column": "B",
+          "value": 256
+        },
+        {
+          "column": "C",
+          "value": "ARCHIVE MEMBERS enumerates all original ZIP and wheel package members, including SDK release artifacts."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source preservation"
+        },
+        {
+          "column": "B",
+          "value": "Every original file byte is included in Alex_Master_Source_Files.zip."
+        },
+        {
+          "column": "C",
+          "value": "SHA-256 values in FILE CATALOG and the archive manifest allow verification. No original source was edited."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Spreadsheet preservation"
+        },
+        {
+          "column": "B",
+          "value": "All source values, original formulas, comments and hyperlinks are preserved."
+        },
+        {
+          "column": "C",
+          "value": "Reading copies show stored formula results; original formulas are in comments and exact original files. Missing saved results are labeled, not invented."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Text preservation"
+        },
+        {
+          "column": "B",
+          "value": "Every UTF-8 source is retained as exact ordered chunks."
+        },
+        {
+          "column": "C",
+          "value": "Reconstruction checks compare SHA-256 against the original file. Excel-invalid terminal controls use reversible JSON-string encoding, labeled per row."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Binary preservation"
+        },
+        {
+          "column": "B",
+          "value": "Original XLSX and ZIP binaries are preserved in the companion archive."
+        },
+        {
+          "column": "C",
+          "value": "XLSX additionally has imported reading tabs. Original ZIP contents are member-indexed."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Authority and conflicts"
+        },
+        {
+          "column": "B",
+          "value": "The maintained owning source governs its own subject."
+        },
+        {
+          "column": "C",
+          "value": "Connector routes → connector source/card; Javar mission/gates → Javar plan; infrastructure → dated inventory; implementation → owning source. Do not merge historical claims into live facts."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Readability"
+        },
+        {
+          "column": "B",
+          "value": "Arial 11 body, restrained bold, 17-point titles, subtle row shading."
+        },
+        {
+          "column": "C",
+          "value": "Frozen headings, filters and internal links. Dense source evidence is deliberately placed behind the guide."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Known gaps"
+        },
+        {
+          "column": "B",
+          "value": "Existing missing/private/remote/excluded source dispositions are retained."
+        },
+        {
+          "column": "C",
+          "value": "This cannot prove that no other files exist or that every referenced file is captured. Read BUILD_SOURCE_COVERAGE and GAPS."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Current behavior"
+        },
+        {
+          "column": "B",
+          "value": "1Password metadata listing freshly read; no fresh credential-validity or runtime tests."
+        },
+        {
+          "column": "C",
+          "value": "Other connector/runtime/billing/remote-installation evidence remains dated. Listed, configured, installed and currently working remain distinct."
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Publication"
+        },
+        {
+          "column": "B",
+          "value": "Local deliverable only."
+        },
+        {
+          "column": "C",
+          "value": "No Drive upload, source replacement or recurring synchronization was requested or performed."
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Maintenance"
+        },
+        {
+          "column": "B",
+          "value": "Update owning sources first, regenerate, then verify coverage and final bytes."
+        },
+        {
+          "column": "C",
+          "value": "Do not manually edit the archived reading copies and call them newly verified. Capture any new source/version explicitly."
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Verification"
+        },
+        {
+          "column": "B",
+          "value": "See Alex_Master_Verification.json for measured acceptance."
+        },
+        {
+          "column": "C",
+          "value": "File counts, original hashes, source-cell checks, exact text reconstruction and internal links are independently checkable."
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK addition scope"
+        },
+        {
+          "column": "B",
+          "value": "October 9 report + all 13 cited source files + complete 1.5.1 release folder + extracted package + AI Money workbook."
+        },
+        {
+          "column": "C",
+          "value": "162 additional records; release receipt is shared with its cited-source entry, without dropping its content."
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source package integrity"
+        },
+        {
+          "column": "B",
+          "value": "136 packaged source files plus PACKAGE_MANIFEST.json are included."
+        },
+        {
+          "column": "C",
+          "value": "Archive, wheel and external manifest match release SHA256SUMS; source members match the embedded release manifest."
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Earlier master preserved"
+        },
+        {
+          "column": "B",
+          "value": "The original 842 source records are retained byte-for-byte from the pre-update archive."
+        },
+        {
+          "column": "C",
+          "value": "Previous XLSX, archive, verification and build manifest are backed up locally. Earlier dates/status claims are retained as history."
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Scope still bounded"
+        },
+        {
+          "column": "B",
+          "value": "This adds the report and its explicit supporting sources; it does not recursively ingest every linked course download or host-specific configuration."
+        },
+        {
+          "column": "C",
+          "value": "The report itself retains missing/private/remote and adoption gaps. No new installation, SDK execution or cloud publication."
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password map added"
+        },
+        {
+          "column": "B",
+          "value": "Fresh approved LIST_VAULTS and LIST_ITEMS calls; names/IDs/categories only."
+        },
+        {
+          "column": "C",
+          "value": "One accessible Connectors vault;51 returned items;35 unique IDs link to37 historical catalog rows;16 lack a saved match;one older ID not returned."
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password source preservation"
+        },
+        {
+          "column": "B",
+          "value": "Five new source records: sanitized vault list, sanitized item list, map data, complete saved catalog tab snapshot and route card."
+        },
+        {
+          "column": "C",
+          "value": "Original1004 source records preserved byte-for-byte from pre-update archive. No GET_ITEM, secret field read, write or scope change."
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password distinction"
+        },
+        {
+          "column": "B",
+          "value": "Fresh item presence is separate from saved purpose, consumers and rotation advice."
+        },
+        {
+          "column": "C",
+          "value": "All36 catalog entries and2 historical save receipts retained with their original column meanings. Title-based groups are explicitly inferred. Other vaults, permissions, contents and live credential use are unverified."
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Long original cells"
+        },
+        {
+          "column": "B",
+          "value": 538
+        },
+        {
+          "column": "C",
+          "value": "Original source cells can exceed a comfortable row height. Their full value is retained; use the formula bar or the original workbook in the ZIP for extended text."
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "34bb1b9c-5f03-4a64-9fc8-3a1fcffd2ff5",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "wt-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "dolp-record-wt",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "artifact_hash_matches": true,
+    "declared_outcome_verified": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T07:01:00+00:00",
+  "max_age_seconds": 604800,
+  "observed_proofs": [
+    {
+      "criterion": "proof-bound",
+      "relative_path": "work/task-artifacts/wt-job/t1-0e3b0d4bfd2c.txt",
+      "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd",
+      "byte_length": 23,
+      "contract_revision": 1,
+      "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+      "content_matches_declaration": true
+    }
+  ],
+  "record_sha256": "21dddc574bdfd25259ce61a056cd1b49e14f4156ef8173dc5ee0c8c3297ed035"
+}

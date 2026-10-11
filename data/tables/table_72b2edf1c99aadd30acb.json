@@ -1,0 +1,930 @@
+{
+  "id": "table_72b2edf1c99aadd30acb",
+  "sheet": "S04-07 Access Routes",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Resource name"
+        },
+        {
+          "column": "B",
+          "value": "Type"
+        },
+        {
+          "column": "C",
+          "value": "Account / container"
+        },
+        {
+          "column": "D",
+          "value": "Purpose / capability"
+        },
+        {
+          "column": "E",
+          "value": "Evidence state"
+        },
+        {
+          "column": "F",
+          "value": "Access route"
+        },
+        {
+          "column": "G",
+          "value": "Proven scope"
+        },
+        {
+          "column": "H",
+          "value": "Provider status"
+        },
+        {
+          "column": "I",
+          "value": "Notes"
+        },
+        {
+          "column": "J",
+          "value": "URL"
+        },
+        {
+          "column": "K",
+          "value": "Provider"
+        },
+        {
+          "column": "L",
+          "value": "Evidence date"
+        },
+        {
+          "column": "M",
+          "value": "Resource ID / reference"
+        },
+        {
+          "column": "N",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "O",
+          "value": "Asset key"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "node_repl"
+        },
+        {
+          "column": "B",
+          "value": "MCP server"
+        },
+        {
+          "column": "C",
+          "value": "Codex local config"
+        },
+        {
+          "column": "D",
+          "value": "Capability: MCP server; intended business purpose unknown"
+        },
+        {
+          "column": "E",
+          "value": "CONFIGURED"
+        },
+        {
+          "column": "F",
+          "value": "stdio: node_repl"
+        },
+        {
+          "column": "G",
+          "value": "Config projection only; no tool/runtime probe"
+        },
+        {
+          "column": "H",
+          "value": "enabled=True"
+        },
+        {
+          "column": "I",
+          "value": "Environment field names: NODE_REPL_NATIVE_PIPE_CONNECT_TIMEOUT_MS, NODE_REPL_NODE_MODULE_DIRS, NODE_REPL_NODE_PATH, NODE_REPL_TRUSTED_CODE_PATHS, CODEX_HOME, BROWSER_USE_AVAILABLE_BACKENDS, BROWSER_USE_TINYSKY_ENABLED, NODE_REPL_INSTRUCTIONS_USE_CASE_BROWSER, NODE_REPL_INSTRUCTIONS_USE_CASE_CHROME, NODE_REPL_INSTRUCTIONS_USE_CASE_COMPUTER_USE, BROWSER_USE_CODEX_APP_BUILD_FLAVOR, BROWSER_USE_CODEX_APP_VERSION, NODE_REPL_TRUSTED_SERVICES, SKY_CUA_SERVICE_PATH, CODEX_CLI_PATH"
+        },
+        {
+          "column": "K",
+          "value": "Local MCP"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "node_repl"
+        },
+        {
+          "column": "N",
+          "value": "work/local-mcp.json"
+        },
+        {
+          "column": "O",
+          "value": "Local MCP|MCP server|node_repl"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "director-observatory"
+        },
+        {
+          "column": "B",
+          "value": "MCP server"
+        },
+        {
+          "column": "C",
+          "value": "Codex local config"
+        },
+        {
+          "column": "D",
+          "value": "Capability: MCP server; intended business purpose unknown"
+        },
+        {
+          "column": "E",
+          "value": "CONFIGURED"
+        },
+        {
+          "column": "F",
+          "value": "stdio: python3"
+        },
+        {
+          "column": "G",
+          "value": "Config projection only; no tool/runtime probe"
+        },
+        {
+          "column": "H",
+          "value": "enabled=True"
+        },
+        {
+          "column": "I",
+          "value": "Environment field names: "
+        },
+        {
+          "column": "K",
+          "value": "Local MCP"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "director-observatory"
+        },
+        {
+          "column": "N",
+          "value": "work/local-mcp.json"
+        },
+        {
+          "column": "O",
+          "value": "Local MCP|MCP server|director-observatory"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code (desktop + CLI)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac (cloud sessions possible)"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Claude Code (desktop + CLI)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Claude Code (desktop + CLI)"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac + cloud tasks"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Codex"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Codex"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Cursor"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Cursor"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes / Javar (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Cloud (Orgo)"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Hermes / Javar (Orgo)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Hermes / Javar (Orgo)"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenClaw hub (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Cloud (Orgo)"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "OpenClaw hub (Orgo)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|OpenClaw hub (Orgo)"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app (claude.ai / desktop chat)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Cloud + Mac app"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Claude app (claude.ai / desktop chat)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Claude app (claude.ai / desktop chat)"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Desktop legacy config"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Claude Desktop legacy config"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Claude Desktop legacy config"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT connectors (Increase ROAS GoHighLevel, Notion, Slack, Google Drive)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Cloud"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "ChatGPT connectors (Increase ROAS GoHighLevel, Notion, Slack, Google Drive)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|ChatGPT connectors (Increase ROAS GoHighLevel, Notion, Slack, Google Drive)"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mac CLIs (meta, op, gcloud, orgo, composio; Parallel dropped)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Mac CLIs (meta, op, gcloud, orgo, composio; Parallel dropped)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Mac CLIs (meta, op, gcloud, orgo, composio; Parallel dropped)"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT (desktop app, web, phone, Work, dots)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Cloud + Mac app + phone"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "ChatGPT (desktop app, web, phone, Work, dots)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|ChatGPT (desktop app, web, phone, Work, dots)"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex on the Mac mini (agency-mini)"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac mini (Javante's Mac), in its ChatGPT app and through the MacBook app's SSH remote"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Codex on the Mac mini (agency-mini)"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Codex on the Mac mini (agency-mini)"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javante / Hermes Mac mini"
+        },
+        {
+          "column": "B",
+          "value": "AI surface / route reference"
+        },
+        {
+          "column": "C",
+          "value": "Mac mini sashairis; fixed Observatory SSH home /Users/sashairis/.hermes"
+        },
+        {
+          "column": "D",
+          "value": "Canonical AI surface or tool-route reference; may group several tools"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Composio; named native built-ins per canonical AI apps tab"
+        },
+        {
+          "column": "G",
+          "value": "Dated canonical surface/route row; not a count of distinct applications; current runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "See authoritative AI apps tab for exact built-ins and per-surface routes; no combined live-tool count inferred"
+        },
+        {
+          "column": "K",
+          "value": "AI app"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Javante / Hermes Mac mini"
+        },
+        {
+          "column": "N",
+          "value": "/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx | AI apps"
+        },
+        {
+          "column": "O",
+          "value": "AI app|AI surface / route reference|Javante / Hermes Mac mini"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Nous / Hermes"
+        },
+        {
+          "column": "B",
+          "value": "Historical provider connection"
+        },
+        {
+          "column": "D",
+          "value": "Historical Hermes provider connection"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Existing approved route; exact item title unknown"
+        },
+        {
+          "column": "G",
+          "value": "Original source describes existing connection; no current provider call"
+        },
+        {
+          "column": "I",
+          "value": "Credential title UNKNOWN; no new item inferred"
+        },
+        {
+          "column": "K",
+          "value": "Nous / Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "nous-hermes-existing"
+        },
+        {
+          "column": "N",
+          "value": "work/original-target-backup.xlsx | MCP & CONNECTIONS row 9"
+        },
+        {
+          "column": "O",
+          "value": "Nous / Hermes|Historical provider connection|nous-hermes-existing"
+        }
+      ]
+    }
+  ]
+}

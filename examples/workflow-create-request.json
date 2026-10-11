@@ -1,0 +1,13 @@
+{
+  "job_id": "cli-synthetic-job",
+  "expected_revision": 0,
+  "operation_id": "cli-synthetic-create-1",
+  "action": "create",
+  "payload": {
+    "goal": "Illustrate local workflow persistence with a synthetic job",
+    "scope": ["synthetic example only"],
+    "constraints": ["no external services", "no real job completion claim"],
+    "owner": "demo-builder",
+    "acceptance": ["contains:examples/workflow-recovery-synthetic.json::synthetic_only"]
+  }
+}

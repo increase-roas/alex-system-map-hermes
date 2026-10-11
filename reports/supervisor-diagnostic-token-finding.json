@@ -1,0 +1,9 @@
+{
+  "at": "2026-10-10T07:42:15.945818+00:00",
+  "finding_id": "DIAGNOSTIC-LOCAL-TOKEN",
+  "status": "failed",
+  "scope": "project-local browser diagnostic capture",
+  "finding": "Browser networkLog health bodyPreview persists a raw local mutation token. Do not print token or copy unsanitized receipt. Owner must sanitize keys/values before persistence, remove exposed value from project test diagnostics/receipts using redacted replacements with hash/provenance metadata, and rotate only the isolated project test token. Do not touch unrelated application credentials. Preserve nonsecret failure history.",
+  "owner_delivery": "recovery-screening-real-paths-20261010-0738",
+  "next_action": "At safe owner exit include urgent diagnostic sanitization and isolated token rotation in next same-owner correction."
+}

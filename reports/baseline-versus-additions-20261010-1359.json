@@ -1,0 +1,55 @@
+{
+  "at": "2026-10-10T13:58:59.928902+00:00",
+  "scope": "Read-only baseline versus additions; no rebuild or restart",
+  "supplied_template": {
+    "archive": "inputs/pro-ai-workflow-editor.zip",
+    "framework": "Next.js",
+    "capabilities": [
+      "React Flow workflow canvas and node/edge components",
+      "Drag/drop, zoom controls, sidebar, ELK layout",
+      "shadcn/Radix components and theme provider",
+      "Example text/image generation workflow and runner requiring provider setup"
+    ],
+    "evidence": [
+      "docs/PRO_TEMPLATE_INTAKE.md",
+      "reports/independent-foundation-pro-template.json"
+    ],
+    "limitations": "Source inspection; original paid template is not itself Alex catalog, durable recovery, file sync or real SDK trace importer."
+  },
+  "historical_adapted_viewer": {
+    "observed_at": "2026-10-10T05:47:12Z",
+    "evidence": "reports/browser-original-milestone-receipt.json",
+    "owner_reported_build_exit": 0,
+    "owner_reported_browser_status": "PASS",
+    "owner_reported_counts": {
+      "components": 2351,
+      "relationships": 59
+    },
+    "screenshots": [
+      "overview light/dark",
+      "subsystem",
+      "files",
+      "problems",
+      "workflows",
+      "tracing",
+      "reliability"
+    ],
+    "proof_level": "Historical owner browser receipt; does not establish all views functionally independently accepted or current availability."
+  },
+  "added_scope": [
+    "Catalog-backed explorer and evidence/file relationships",
+    "Durable workflow correction/recovery/verification",
+    "Controlled maintained-record edits and generated derived views",
+    "Automatic source observation/sync",
+    "Actual SDK/tool/file tracing and impact views"
+  ],
+  "current_availability": {
+    "at": "2026-10-10T13:58:59.929207+00:00",
+    "known_loopback": "127.0.0.1:3200",
+    "tcp_result": "connection_refused",
+    "meaning": "Known viewer address not currently serving; no restart attempted; does not prove original source loss or a viewer regression.",
+    "source_entry": "app/src/app/page.tsx links /explorer; sample AI workflow routes disabled"
+  },
+  "regression_status": "Build timeout and runner proof defects are observed. No controlled before/after proof that original visual canvas regressed. Broad new capability acceptance remains unfinished.",
+  "correction": "reports/pro-template-intake.json contains stale Vite adaptation prose superseded by docs/PRO_TEMPLATE_INTAKE.md and explicit Alex Next.js correction; do not treat it as current direction."
+}

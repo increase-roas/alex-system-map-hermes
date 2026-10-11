@@ -1,0 +1,545 @@
+{
+  "id": "table_9b8bfe4a4d925817d6a1",
+  "sheet": "S05-12 SCOPE & SOURCES",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SCOPE / COMPLETE SOURCE COVERAGE"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Complete shared text + latest pasted mission brief + dated local/Prime source records. Claims and live proof are separate."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Topic"
+        },
+        {
+          "column": "B",
+          "value": "User Prompts"
+        },
+        {
+          "column": "C",
+          "value": "Disposition"
+        },
+        {
+          "column": "D",
+          "value": "Scope / Interpretation"
+        },
+        {
+          "column": "E",
+          "value": "Evidence / Gate"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Harness / failure first"
+        },
+        {
+          "column": "B",
+          "value": "1–9"
+        },
+        {
+          "column": "C",
+          "value": "NOW"
+        },
+        {
+          "column": "D",
+          "value": "Reuse existing machinery, freeze eval and improve real failures."
+        },
+        {
+          "column": "E",
+          "value": "Full source text; G1.2/G1.4"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo / identity"
+        },
+        {
+          "column": "B",
+          "value": "10–12, 25–27"
+        },
+        {
+          "column": "C",
+          "value": "NOW"
+        },
+        {
+          "column": "D",
+          "value": "Reconcile live state against COMPUTER INVENTORY: 7 Orgo computers + 2 local Macs as of Oct 5. API first/UI last mile. Historical role slots do not set the current fleet count."
+        },
+        {
+          "column": "E",
+          "value": "Current chat decisions; G1.1"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Observatory"
+        },
+        {
+          "column": "B",
+          "value": "13–14, 18, 40–42"
+        },
+        {
+          "column": "C",
+          "value": "EXISTING—VERIFY"
+        },
+        {
+          "column": "D",
+          "value": "Existing 10-tool Observatory readers/evals; automatic all-agent intake is a foundation requirement, not yet proved. See FAILURES & BLOCKERS."
+        },
+        {
+          "column": "E",
+          "value": "Live native reads and current README Oct 5; Alex’s shared failure-history proposal. Historical clock improvement remains a bounded offline result."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Evidence / knowledge"
+        },
+        {
+          "column": "B",
+          "value": "15–24"
+        },
+        {
+          "column": "C",
+          "value": "NOW"
+        },
+        {
+          "column": "D",
+          "value": "Existing Prime/Cloudflare/raw store reused; name exact destinations before write/read proof. Raw events stay operational; distilled tested lessons feed knowledge."
+        },
+        {
+          "column": "E",
+          "value": "Latest pasted mission Gate2; Prime contract"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Providers / keys / budget"
+        },
+        {
+          "column": "B",
+          "value": "28, 30–38"
+        },
+        {
+          "column": "C",
+          "value": "NOW PLAN"
+        },
+        {
+          "column": "D",
+          "value": "One account each; named keys; expiry recommendations are not promises. Combined 300 ceiling; funding gate."
+        },
+        {
+          "column": "E",
+          "value": "Live Connectors check, Oct 5: all five tagged key fields populated and distinct. Provider acceptance, account mapping, caps and runtime connections unverified."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fine-tuning / Batch"
+        },
+        {
+          "column": "B",
+          "value": "29, 34"
+        },
+        {
+          "column": "C",
+          "value": "LATER"
+        },
+        {
+          "column": "D",
+          "value": "Preserve dataset now; batch only justified offline work; no fine-tuning build."
+        },
+        {
+          "column": "E",
+          "value": "Assistant options, unverified fit/cost"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AHO"
+        },
+        {
+          "column": "B",
+          "value": "17, 25, 42"
+        },
+        {
+          "column": "C",
+          "value": "OPTIONAL NEXT"
+        },
+        {
+          "column": "D",
+          "value": "OPTIONAL after Gate1. Compare AHO candidate to current Astra/manual process using same Observatory/JavarBench; preserve untouched final test."
+        },
+        {
+          "column": "E",
+          "value": "Optional after G1; AHO primary README"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sales"
+        },
+        {
+          "column": "B",
+          "value": "29, 31, 43"
+        },
+        {
+          "column": "C",
+          "value": "PARALLEL"
+        },
+        {
+          "column": "D",
+          "value": "Scoped inbound + reactivation→qualify/objection/appointment/follow-up/handoff. Historical+hidden eval then LIVE no-send shadow; Gate4."
+        },
+        {
+          "column": "E",
+          "value": "Latest mission brief; G3/G4"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL miner"
+        },
+        {
+          "column": "B",
+          "value": "44"
+        },
+        {
+          "column": "C",
+          "value": "PARALLEL"
+        },
+        {
+          "column": "D",
+          "value": "SALES_CONVERSATION_SCHEMA_V1 stays provider-independent. Fireworks/Prime/SalesBench use transformers; current docs + representative sample/export validated before bulk collection."
+        },
+        {
+          "column": "E",
+          "value": "Alex clarified Oct 5: know conversation/training-data requirements before scraping. Original conversation message 98d8ef2e; G3.1; DIRECTOR PLAN S1."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tool gateway / Aperture"
+        },
+        {
+          "column": "B",
+          "value": "45–46"
+        },
+        {
+          "column": "C",
+          "value": "KEEP / OPTIONAL"
+        },
+        {
+          "column": "D",
+          "value": "Aperture in IDEAS only; adoption requires measured pain/compatibility. Composio remains gateway; does not block Lab/Sales."
+        },
+        {
+          "column": "E",
+          "value": "MCP & CONNECTIONS: Fireworks docs/catalog checked Oct 5; old web-search MCP retired. Exa route seen working; new connections unverified."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Current findings / teams"
+        },
+        {
+          "column": "B",
+          "value": "47"
+        },
+        {
+          "column": "C",
+          "value": "NOW"
+        },
+        {
+          "column": "D",
+          "value": "All roles, including Director: outcomes/failures/blockers/corrections/UNKNOWNs; fresh retrieval, clusters, reviewed eval promotion and linked experiments."
+        },
+        {
+          "column": "E",
+          "value": "Alex’s final Oct 5 definition pass: structured mission records, exact resolution order, provider-independent master/transformers, fresh four-gate proof; frozen v1.0 execution baseline."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director / CE / authority"
+        },
+        {
+          "column": "B",
+          "value": "48–52"
+        },
+        {
+          "column": "C",
+          "value": "NOW"
+        },
+        {
+          "column": "D",
+          "value": "Four controller roles under current Director; first3 concurrent resource-isolated, Sales waits dataset. Gate1–4 + eight final criteria supersede older three-line staging."
+        },
+        {
+          "column": "E",
+          "value": "D0; history is not current approval"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Manus / DeerFlow"
+        },
+        {
+          "column": "B",
+          "value": "53–55"
+        },
+        {
+          "column": "C",
+          "value": "OPTIONAL"
+        },
+        {
+          "column": "D",
+          "value": "Manus remains bounded research/QA; DeerFlow deferred; neither is required infrastructure. Prime preserves useful findings. Comparison found no missing major step in the nine-step Javar Lab Loop. Two measurable external gaps: variance control and candidate intervention taxonomy; most unmatched elements are intentionally stricter."
+        },
+        {
+          "column": "E",
+          "value": "Alex-provided Manus comparison summary, Oct 5: GEPA, AutoSaddler, Meta-Harness, AHO, HarnessOpt-Bench. Three clarifications authorized here; full research report not independently inspected. No other suggestions promoted."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Publication / truth"
+        },
+        {
+          "column": "B",
+          "value": "Current chat"
+        },
+        {
+          "column": "C",
+          "value": "NOW"
+        },
+        {
+          "column": "D",
+          "value": "Registered Drive IDs updated in place, local masters retained, final-byte receipt. No scheduler claimed."
+        },
+        {
+          "column": "E",
+          "value": "Director verifies final Drive read-back."
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SHARED CONVERSATION  •  https://chatgpt.com/share/6ac1b2e0-5598-83ea-b6b1-67ed7b2b38c3",
+          "link": "https://chatgpt.com/share/6ac1b2e0-5598-83ea-b6b1-67ed7b2b38c3"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DIRECTOR STATE  •  /Users/alexlobaito/Alex-Director/DIRECTOR_STATE.md",
+          "link": "/Users/alexlobaito/Alex-Director/DIRECTOR_STATE.md"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DATED STATUS  •  /Users/alexlobaito/Projects/master-connector-repo/STATUS.md",
+          "link": "/Users/alexlobaito/Projects/master-connector-repo/STATUS.md"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OBSERVATORY REPORT  •  /Users/alexlobaito/Documents/Codex/2026-10-03/i-want-you-to-improve-my/outputs/director-observatory/REPORT.md",
+          "link": "/Users/alexlobaito/Documents/Codex/2026-10-03/i-want-you-to-improve-my/outputs/director-observatory/REPORT.md"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GOLDEN EVAL README  •  /Users/alexlobaito/Projects/master-connector-repo/system/evals/README.md",
+          "link": "/Users/alexlobaito/Projects/master-connector-repo/system/evals/README.md"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "JAVAR DRIVE MASTER  •  https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit",
+          "link": "https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CONNECTORS DRIVE MASTER  •  https://docs.google.com/spreadsheets/d/1V8Q_v4nA7LaIaJoisvB0Jr2-MQsuTxi7/edit",
+          "link": "https://docs.google.com/spreadsheets/d/1V8Q_v4nA7LaIaJoisvB0Jr2-MQsuTxi7/edit"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AHO README  •  https://github.com/airbnb/agent-harness-optimizer",
+          "link": "https://github.com/airbnb/agent-harness-optimizer"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MANUS API V2  •  https://open.manus.ai/docs/v2/introduction",
+          "link": "https://open.manus.ai/docs/v2/introduction"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "APERTURE DOCS  •  https://tailscale.com/docs/aperture/what-is-aperture",
+          "link": "https://tailscale.com/docs/aperture/what-is-aperture"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DEERFLOW ARCHITECTURE  •  https://github.com/bytedance/deer-flow/blob/main/docs/ARCHITECTURE.md",
+          "link": "https://github.com/bytedance/deer-flow/blob/main/docs/ARCHITECTURE.md"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "RECONCILE • Current eval count and slot inventory differ across dated records. Recheck current suite/hosts before dispatch. Existing tune-up is reusable; fleet/off-Mac migrations remain held. Two source images uninspected; current vendor access/cost, keys/caps and runtime still need proof."
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "LATEST MISSION BRIEF • User-pasted “Agent Improvement + Sales Intelligence Platform” (current chat): four gates, concurrent Lab/Sales Data/Research, Sales after data, AHO optional after Gate1, live no-send shadow before separate customer-launch approval."
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "PRIME CONTRACT • /Users/alexlobaito/Downloads/Prim biz intelligence/README.md + AGENTS.md — v2.4 bounded historical synthesis verified in dated record; no PROVEN capabilities, outcome linkage UNKNOWN, Goal-to-Plan NOT_READY. Read contract before integration; protected raw data/per-company scope/semantic receipts preserved."
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "STATUS: To do = written only. Configured—untested / Existing—verify = proof due. Seen working requires a real receipt. Blocked = exact gate outstanding. Deferred/Parked = optional future work. Prime has no approved live GHL/Meta/finance write route; this plan changes no source data."
+        }
+      ]
+    }
+  ]
+}

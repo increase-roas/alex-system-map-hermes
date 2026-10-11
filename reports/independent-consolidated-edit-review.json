@@ -1,0 +1,47 @@
+{
+  "review_id": "independent-consolidated-edit-review-20261010",
+  "recorded_at": "2026-10-10T06:05:59.688742+00:00",
+  "reviewer": "audit_build_sources",
+  "report_writer": "root",
+  "provenance": "Compiled faithfully from independent reviewer final response; reviewer performed read-only inspection but did not write artifacts. Not a new root test.",
+  "owner_receipt_at": "2026-10-10T05:55:11+00:00",
+  "items": [
+    {
+      "id": "CONTROLLED-01",
+      "status": "PARTIAL",
+      "finding": "POST edit API now exists; allowlist remains2fixtures and no frontend edit call. Maintained catalog/docs UI acceptance fails."
+    },
+    {
+      "id": "CONTROLLED-02",
+      "status": "PARTIAL",
+      "finding": "Only nonnegative integer revision and optional string label checked; maintained schema/stable IDs/refs/monotonic revision not validated."
+    },
+    {
+      "id": "CONTROLLED-03",
+      "status": "UNVERIFIED",
+      "finding": "No lock or final CAS; simultaneous stale writes, crash/restore and verified backup invariants missing."
+    },
+    {
+      "id": "CONTROLLED-04",
+      "status": "UNVERIFIED",
+      "finding": "Fixture freshCLI/hash proof only; no app restart or maintained canonical/derived view agreement."
+    },
+    {
+      "id": "CONTROLLED-05",
+      "status": "UNVERIFIED",
+      "finding": "Rename/delete/unreadable/malformed/original identity cases not tested."
+    },
+    {
+      "id": "CONTROLLED-06",
+      "status": "PARTIAL",
+      "finding": "Preview screened, lexical allowlist remains symlink escape risk; no endpoint-specific canary tests."
+    },
+    {
+      "id": "CONTROLLED-07",
+      "status": "PARTIAL",
+      "finding": "New proof only preview hash/negative revision; module/test/API source hashes omitted; prior fixture subproof not full acceptance."
+    }
+  ],
+  "overall": "PARTIAL full acceptance withheld",
+  "outside_dependency": "None established for local corrections"
+}

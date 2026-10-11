@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.0.0",
+  "snapshot_date": "2026-10-09",
+  "identity_policy": "Immutable IDs after initial assignment; never recompute IDs on rename.",
+  "source_workbook_sha256": "f6ed4ed1cdfdb69af85d54af8c0efd83e2a46c768ce1d96e38916f4bae0673ef",
+  "source_zip_sha256": "a588a2836179075f11ad393d5c9d8bf43dc9e094f21af98b9cdfe63632f8ce6a",
+  "category_policy": "Documented current means the saved map snapshot only; historical catalogs retain dates. Raw claims remain in source tables. No automatic promotion to live truth.",
+  "default_observed_condition": "unknown",
+  "update_policy": "Initial import is reproducible. Future edits target stable IDs in JSON; do not reimport older workbook over maintained catalog."
+}

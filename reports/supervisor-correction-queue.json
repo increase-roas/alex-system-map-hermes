@@ -1,0 +1,347 @@
+{
+  "schema_version": 1,
+  "queue_id": "app-path-independent-corrections-20261010-0526",
+  "created_at": "2026-10-10T05:30:29.343550+00:00",
+  "updated_at": "2026-10-10T10:32:09.424402+00:00",
+  "source_review": "reports/independent-app-path-review.json",
+  "source_review_id": "independent-app-path-review-20261010-0526",
+  "source_review_sha256": "0ffb40fdb7a7ebca8701767cc603f3a52ab989844688bd5176f9cdd42ad65ec8",
+  "sole_owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "status": "recovery_screening_actual_paths_correction",
+  "active_delivery": "recovery-screening-real-paths-20261010-0738",
+  "active_session_id": 1997,
+  "items": [
+    {
+      "id": "APP-REVIEW-01",
+      "requirement": "REL-02_gate_and_REL-05_negatives",
+      "status": "pending_owner_correction_and_independent_retest",
+      "independent_disposition": "FAILED",
+      "accepted_evidence_to_preserve": [
+        "Actual local_service reliability-complete now invokes gate and upserts evidence; invalid timestamp and missing proof path rejected; proof SHA mismatch checked when supplied; canonical skill installation paths checked."
+      ],
+      "all_findings": [
+        "Positive test uses prior independent-reliability-corrected-detail.json (which explicitly FAILED/UNVERIFIED items) as proof, and gate accepts based on file existence/hash alone. It never binds proof content/result to requirement or dated source identity.",
+        "Pure read-only check accepted REL-02 with a 2001 timestamp, prior failure report as proof, omitted other requirements, skills_verified=false and no proof_sha256. Matching labels still substitute for actual-use proof.",
+        "Requirement-set and skills_verified omission checks exist only in evaluate_negative_case; real completion does not call them. Local_service workflow verify/checkpoint still routes to Engine through guard, never to requirement completion gate; UI fabricates checks=true and evidence local-explorer-evidence (workflow-panel.tsx:254-265).",
+        "New receipt does not cover REL-05 four regressions; existing helper/source change is not application regression proof."
+      ],
+      "source_refs": [
+        "tools/reliability_gate.py:35-47,58-154,157-214",
+        "tools/local_service.py:325-342,390-401",
+        "tools/app_path_corrections_acceptance.py:50-94",
+        "tools/workflow_apply_guard.py:32",
+        "app/src/app/explorer/workflow-panel.tsx:254-265"
+      ],
+      "required_correction": "Parse and bind requirement-specific successful proof/results/freshness; enforce all required claims/skills in real completion and workflow verification path; run four actual application negative cases.",
+      "verification_rule": "Retest actual application/API/UI entrypoint including each negative case; preserve failed attempts. No label-only proof or weaker tests. Independent review required."
+    },
+    {
+      "id": "APP-REVIEW-02",
+      "requirement": "REL-03_recovery",
+      "status": "pending_owner_correction_and_independent_retest",
+      "independent_disposition": "UNVERIFIED",
+      "accepted_evidence_to_preserve": [
+        "API now calls recover-enhanced; fresh local_service subprocess merges persisted active correction, governing_next_action and affected-output queue. Owner receipt now records successful corrected text and one recheck row."
+      ],
+      "all_findings": [
+        "merge_recover_packet adds governing_next_action but retains original next_permitted_action. UI still displays/uses that original field and ignores governing_next_action/reliability_recovery; correction governs an extra field, not proven actual selected next action.",
+        "API hardcodes one old-note string, and correction/recheck helper remains global/hardcoded to supervision state; generalized affected outputs and acceptance restart case remain unproved."
+      ],
+      "source_refs": [
+        "app/src/app/api/workflow/recover/[jobId]/route.ts:7-16",
+        "tools/reliability_store.py:199-207",
+        "tools/app_path_corrections_acceptance.py:97-123",
+        "app/src/app/explorer/workflow-panel.tsx:373-385"
+      ],
+      "required_correction": "Make the actual displayed/permitted action correction-aware; retain old note/history; demonstrate conflicting note through intended restart path with affected outputs for recheck.",
+      "verification_rule": "Retest actual application/API/UI entrypoint including each negative case; preserve failed attempts. No label-only proof or weaker tests. Independent review required."
+    },
+    {
+      "id": "APP-REVIEW-03",
+      "requirement": "REL-04_handoff",
+      "status": "pending_owner_correction_and_independent_retest",
+      "independent_disposition": "FAILED",
+      "accepted_evidence_to_preserve": [
+        "Application apply now has owner/revision guard when both client fields supplied, transfer uses SQL conditional update, transferred checkpoint retains acceptance. Read-only app-path-rel04.sqlite has task owner-b, exactly one operation and one event for app-path-op-0514; durable handoff owner-b/revision1/acceptance check retained."
+      ],
+      "all_findings": [
+        "Guard is conditional on handoff_operation_id AND actor_owner. Omitting either falls through directly to engine.apply; ordinary UI request omits both. Nonmutating DummyEngine check confirms omitted fields invoke unguarded engine.",
+        "Guard does not verify handoff checkpoint job_id matches request job_id. Actor identity remains client supplied.",
+        "Handoff transfer is in separate reliability DB from workflow task mutation; guard/check and apply are not atomic, handoff revision is not advanced after workflow write, and retry replay is checked only after handoff revision/owner guard.",
+        "Receipt tests conditional field path only; lacks omission/foreign-job/concurrent transfer/recoverability negatives. Summary omits replay_ok from acceptance."
+      ],
+      "source_refs": [
+        "tools/workflow_apply_guard.py:11-32,35-50",
+        "tools/reliability_store.py:170-196",
+        "tools/app_path_corrections_acceptance.py:126-281,408-413",
+        "app/src/app/explorer/workflow-panel.tsx:229-243,275-289"
+      ],
+      "required_correction": "Derive active handoff/current owner from authoritative job state; require/enforce identity without optional bypass, bind job ID, synchronize revision atomically, and reconcile retries before rejecting stale revision.",
+      "verification_rule": "Retest actual application/API/UI entrypoint including each negative case; preserve failed attempts. No label-only proof or weaker tests. Independent review required."
+    },
+    {
+      "id": "APP-REVIEW-04",
+      "requirement": "REL-06_screening",
+      "status": "pending_owner_correction_and_independent_retest",
+      "independent_disposition": "FAILED",
+      "accepted_evidence_to_preserve": [
+        "Actual trace-get now invokes export_trace_safe\u2192export_json_safe; values recursively screened. Actual diagnose-text and caught service errors now call redaction path. Saved fake-canary trace import exists in isolated DB."
+      ],
+      "all_findings": [
+        "Error canary test requests missing-trace-id without injecting a canary into the error, so error_no_leak is vacuous. Test ignores command exit statuses and output shape/content; empty output could pass.",
+        "Node stderr/invalid-JSON error bridge remains raw (python.ts:38-58). trace-list, workflow events and other outputs still print raw values; full supported diagnostic/error/trace/export proof missing.",
+        "Output wrapper changes trace-get shape to {payload:{trace,spans},screening_notes}; API passes through, TracingPanel setsDetail(response) then reads detail.trace.label. Source proves consumer contract mismatch, likely runtime crash; no browser action taken."
+      ],
+      "source_refs": [
+        "tools/trace_store.py:215-221",
+        "tools/output_screening.py:21-46",
+        "tools/local_service.py:344-347,382-389,423-425",
+        "tools/app_path_corrections_acceptance.py:284-320",
+        "app/src/lib/server/python.ts:38-58",
+        "app/src/app/api/traces/[traceId]/route.ts:7-15",
+        "app/src/app/explorer/tracing-panel.tsx:140-149,180-185"
+      ],
+      "required_correction": "Preserve/unpack trace response contract; inject fake canary into actual emitted error/stdout/stderr/export paths, assert nonempty expected shape/screened content and no leaks, and cover remaining supported outputs.",
+      "verification_rule": "Retest actual application/API/UI entrypoint including each negative case; preserve failed attempts. No label-only proof or weaker tests. Independent review required."
+    },
+    {
+      "id": "APP-REVIEW-05",
+      "requirement": "combined_synthetic_sync_trace",
+      "status": "pending_owner_correction_and_independent_retest",
+      "independent_disposition": "VERIFIED bounded CLI sequence; UNVERIFIED full application refresh",
+      "accepted_evidence_to_preserve": [
+        "Unlike prior prerecorded fixture, test observes baseline before mutation, performs actual local marker change, observes again, generates same-run linked SYNTHETIC/TEST receipt with before/after hashes, imports through local_service, starts fresh status subprocess and repeat import.",
+        "Current marker SHA matches owner receipt and isolated catalog_watch: 0db0b4016236b3800518fd0ff3e7b218d917fe304f561f33b171f185f89554a9. live receipt file SHA matches trace_imports payload SHA: 3c07c2871b2398707eda13a97f001c2987e893223cca7ec85ac694dd861b713c.",
+        "Read-only app-path-sync.sqlite retains one import/trace/span and matching source cursor, proving bounded local persistence/dedup mechanics."
+      ],
+      "all_findings": [
+        "No browser/automatic UI refresh/observer lifecycle proof; test exercises manual CLI observe and fresh status reader.",
+        "Generated span lacks actual start/end times and agent/source/evidence IDs; it hardcodes status ok instead of recording subprocess result. Broader tracing schema/real-source acceptance remains open.",
+        "Summary does not require restart_subprocess_ok; no receipt cursor-before/after assertion. This review supports current stored cursor, not equivalence across runtime restart."
+      ],
+      "source_refs": [
+        "tools/app_path_corrections_acceptance.py:324-385,418-423",
+        "work/reliability/live-mutation-receipt.json",
+        "app/.data/reliability-tests/app-path-sync.sqlite"
+      ],
+      "required_correction": "Keep accepted CLI test; add actual observed action metadata/status/timestamps and application observer/UI restart/cursor invariants. Do not substitute this synthetic proof for original real-source tracing.",
+      "verification_rule": "Retest actual application/API/UI entrypoint including each negative case; preserve failed attempts. No label-only proof or weaker tests. Independent review required."
+    }
+  ],
+  "separate_unverified_requirements": [
+    {
+      "id": "REL-01",
+      "status": "UNVERIFIED",
+      "needed": "Fresh-agent automatic current context/skill loading and correct action recovery; file existence/Python helper alone insufficient."
+    },
+    {
+      "id": "full_application_sync_tracing",
+      "status": "UNVERIFIED",
+      "needed": "Automatic UI refresh, actual observer/application restart, cursor invariants, timestamps and IDs/status from observed action, original real SDK receipt source matching; accepted synthetic CLI mechanics preserved."
+    },
+    {
+      "id": "browser_visual",
+      "status": "NOT_RUN_at_review",
+      "needed": "Current owner to produce actual installed-Chrome assertions; awaiting new evidence."
+    }
+  ],
+  "next_permitted_action": "Leave combined actual-path correction active; after exit independently check recovery dependency/restart/UI and real emission canary boundaries. All other matrix gates remain required.",
+  "constraints": [
+    "Project-only changes and test artifacts",
+    "Already-installed supported Chrome only; no installs/security changes",
+    "No outside-project mutations, credential actions, paid calls, services/timer, hosting, broader SDK repair or customer mutations"
+  ],
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Mandatory actual ownership/proof enforcement; correction-aware actionable recovery; supported error/trace screening and response-shape repair; full regression/application refresh evidence.",
+    "outside_dependency": "None needed for reviewed local corrections. Browser/controlled-edit/real-source milestones remain separate authorized owner work."
+  },
+  "history": [],
+  "real_source_input_boundary": "reports/real-trace-input-boundary.json",
+  "real_source_tracing_status": "blocked_missing_sanitized_input_pending_reported_user_decision",
+  "active_owner_status": "browser_attempt_running",
+  "pending_independent_controlled_edit_review": "reports/independent-controlled-edit-review.json",
+  "controlled_edit_review": "reports/independent-controlled-edit-review.json",
+  "controlled_edit_findings": [
+    {
+      "id": "Maintained catalog records and editable project documents through API/UI",
+      "status": "FAILED",
+      "finding": "Only two synthetic fixture files can be edited. No data/*.json records or project docs are editable. Current app API route list and targeted source search reveal no catalog edit route/client. CLI-only paths do not meet maintained record in UI -> server persists acceptance.",
+      "source": [
+        "tools/catalog_controlled_edit.py:12-15",
+        "tools/local_service.py:288-297,361-373",
+        "tools/browser_original_milestone.py:31-32",
+        "docs/BUILD_SUPERVISION.md:23-25"
+      ],
+      "next": "Implement narrow registered record/document edit API and UI; preserve source boundaries and show preview/diff/evidence."
+    },
+    {
+      "id": "Schema/ID validation and revision contract",
+      "status": "FAILED",
+      "finding": "preview_patch serializes arbitrary supplied JSON and unconditionally valid=True; no schema/version/stable ID/reference validation or numeric revision rule. Pure preview of empty {} against current SHA returned valid=True without writing. Full maintained record validation is absent.",
+      "source": [
+        "tools/catalog_controlled_edit.py:48-59"
+      ],
+      "next": "Validate intended schema, required fields/IDs and references before any write; use explicit expected source revision/hash and reject invalid proposal while preserving last good bytes."
+    },
+    {
+      "id": "Concurrent stale edits and crash/backup integrity",
+      "status": "UNVERIFIED",
+      "finding": "Expected SHA is checked once before backup/write, no lock or commit-time CAS. Both concurrent writers can pass initial check and share fixed .tmp path; backup could copy bytes changed after preview. Sequential stale rejection is supported; concurrent conflict/kill/recovery tests missing. Existing file-name replacement alone does not establish crash durability.",
+      "source": [
+        "tools/catalog_controlled_edit.py:62-75",
+        "tools/browser_original_milestone.py:67-79"
+      ],
+      "next": "Serialize one write transaction or implement lock/CAS at commit with unique temp and verified backup; prove two stale writers, partial write/crash and restore/readback invariants."
+    },
+    {
+      "id": "Restart, regeneration and derived-view agreement",
+      "status": "UNVERIFIED",
+      "finding": "Helper starts another read-state subprocess and manually observes SHA. No app/observer restart, render-only regeneration, companion XLSX/Markdown/map reconciliation or derived-view assertion occurs. Fixture does not belong to maintained catalog source records.",
+      "source": [
+        "tools/browser_original_milestone.py:80-104",
+        "tools/catalog_controlled_edit.py:62-83"
+      ],
+      "next": "Exercise actual maintained record edit -> commit/readback -> restart -> render-only derived views -> canonical/map/derived agreement."
+    },
+    {
+      "id": "Rename/delete/unreadable/invalid source and original identity",
+      "status": "UNVERIFIED",
+      "finding": "Controlled edit test covers only ordinary fixture and sequential stale SHA. No source rename/delete/unreadable/malformed JSON handling, last-known-good/history restoration or before/after immutable-original hash assertions.",
+      "source": [
+        "docs/BUILD_SUPERVISION.md:25",
+        "tools/browser_original_milestone.py:31-105"
+      ],
+      "next": "Add isolated safe failure cases and readbacks preserving last-known-good state/history; compare immutable original hashes."
+    },
+    {
+      "id": "Allowlist and secret/export boundary",
+      "status": "UNVERIFIED complete boundary",
+      "finding": "Narrow lexical allowlist avoids normal edits to originals, but resolve_editable does not resolve/reject symlink targets. No traversal/symlink negative tests. Service preview/state returns supplied documents directly without schema or output screening; no fake-canary secret/export test for edit surfaces.",
+      "source": [
+        "tools/catalog_controlled_edit.py:26-33",
+        "tools/local_service.py:361-373"
+      ],
+      "next": "Resolve/restrict actual editable paths, reject symlink escape, and test allowed/denied paths and fake-canary outputs without real credentials."
+    },
+    {
+      "id": "Integrity of owner PASS",
+      "status": "FAILED as full acceptance",
+      "finding": "Helper passed only checks preview/apply exit0, any stale nonzero and delivery_id after write. It does not require backup existence/content, matching readback revision, equality of observed SHA, derived views or restart/UI. backup_written is truthiness of returned path, not file check. Receipt admits full controlled edit beyond fixtures is open. Helper current SHA differs from receipt run, so current script cannot be treated as exact executed version.",
+      "source": [
+        "tools/browser_original_milestone.py:92-104",
+        "reports/browser-original-milestone-receipt.json controlled_catalog_edit/original_still_open"
+      ],
+      "next": "Persist exact command outputs/backup/updated records and bind all checks/source hashes; require every acceptance invariant in aggregate verdict."
+    }
+  ],
+  "browser_review": "reports/independent-browser-review.json",
+  "browser_findings": [
+    {
+      "id": "BROWSER-01",
+      "finding": "Evidence assertion changed from REL01/evidence text checks to count()>0 on REL-01-evidence test id; this only tests DOM existence, not visibility/nonempty contents or requirement matching. No substantive evidence-render fix in reviewed change beyond test id.",
+      "next": "Assert visible nonempty actual evidence fields and requirement identity; ensure hidden/empty/failed evidence cannot pass. Keep current nonempty screenshot as narrow proof."
+    },
+    {
+      "id": "BROWSER-02",
+      "finding": "Overview screenshot has You/direction, Models, Files/evidence, Agents, SDK across first row; Apps precedes Infrastructure. Does not meet specified direction->agents->SDK->access->infrastructure->models->apps->files hierarchy.",
+      "next": "Enforce explicit layer order independently of factual relationships; validate rank/coordinates and readable zoom. No invented factual edges."
+    },
+    {
+      "id": "BROWSER-03",
+      "finding": "Tracing screenshot is empty with Select a trace. Runner never selects trace or checks timeline/spans/evidence/response contract.",
+      "next": "Use project synthetic observed receipt for local UI selection/contract regression now; keep real-source acceptance separately blocked."
+    },
+    {
+      "id": "BROWSER-04",
+      "finding": "Workflow recovery check only looks for Recover packet text; does not execute correction recovery or assert displayed permitted next action.",
+      "next": "Run actual workflow/correction/restart UI path and compare displayed next action with governing correction and backend."
+    },
+    {
+      "id": "BROWSER-05",
+      "finding": "Search/detail selection is conditional and not required; no component-detail screenshot in receipt. Subsystem expansion, accessible list, impact traversal and sync refresh not proved by screenshots.",
+      "next": "Make requested interactions required with real IDs, matching detail assertions and accessible list coverage."
+    },
+    {
+      "id": "BROWSER-06",
+      "finding": "required[] excludes catalog_complete, stats_show_complete and dark_theme_toggled; component assertion only nonempty. No pageerror listener, errors[] only captures launch errors.",
+      "next": "Require exact catalog reconciliation and theme checks; collect/fail unexpected page/runtime errors and request failures."
+    },
+    {
+      "id": "BROWSER-07",
+      "finding": "Reliability screenshot is2171px wide despite1400px viewport and displays tiny10px raw evidence; likely horizontal content overflow. Narrow screenshot acceptance does not satisfy readable14-16px design.",
+      "next": "Constrain evidence panel, wrap/scroll contained content, use readable body text and test no page-level horizontal overflow at chosen viewports."
+    },
+    {
+      "id": "BROWSER-08",
+      "finding": "Server command npx next start -p3200 omits hostname; loopback URL alone does not prove server binds only loopback. Isolated-profile directory is created but not passed to chromium.launch.",
+      "next": "Bind server explicitly127.0.0.1 and verify listener; configure project-local browser artifact/profile storage correctly without installation or broader changes."
+    }
+  ],
+  "next_delivery_id": "consolidated-local-corrections-20261010-0550",
+  "latest_retest_reports": [
+    "reports/independent-consolidated-app-review.json",
+    "reports/independent-consolidated-browser-review.json",
+    "reports/independent-consolidated-edit-review.json"
+  ],
+  "accepted_narrow_progress": [
+    "BROWSER02 exact8-layer top-down order",
+    "BROWSER03 bounded trace selection/response contract",
+    "Correction replaces actual next_permitted_action in source/UI",
+    "Screenshot widths1400 fixed; remaining readability unaccepted"
+  ],
+  "active_scope": [
+    "APP-REVIEW-01",
+    "APP-REVIEW-03"
+  ],
+  "all_other_items": "required_pending_not_optional",
+  "history_gap": "reports/workflow-core-history-check.json",
+  "latest_core_review": "reports/independent-controlled-producer-review.json",
+  "latest_changed_core_receipt": "reports/atomic-failure-fixture-boundary-receipt.json",
+  "additional_core_findings_pending_retest": [],
+  "accepted_core_findings": [
+    "implicit schema commit removed",
+    "saved concurrent loser zero effects",
+    "fixture exclusion",
+    "exact registry and individual scope validators",
+    "actual post-Engine-write bounded rollback",
+    "historical replay preserves newer state",
+    "transfer ledger retries and transaction current-read",
+    "artifact existence and hash",
+    "exact operation/verifier handler negatives",
+    "final-byte immutable hash and failure retention",
+    "declared UTF8 matching",
+    "actual live artifact/contract consumption recheck",
+    "single-variable wrong-task handler",
+    "monotonic declaration correction and history",
+    "strict recursive JSON equality",
+    "resolved read issuance consumption containment",
+    "D06 materialization prewrite containment",
+    "D04 actual wrong-result issuance"
+  ],
+  "latest_application_reviews": [
+    "reports/independent-recovery-browser-review.json",
+    "reports/independent-recovery-screening-review.json"
+  ],
+  "canonical_repeat_diagnosis_pending_delivery": {
+    "id": "canonical-repeated-failures-1030",
+    "at": "2026-10-10T10:30:16.999309+00:00",
+    "reviewer": "/root/check_live_build",
+    "report": "reports/canonical-repeat-failure-diagnosis.json",
+    "report_saved_at_observation": true,
+    "replay": {
+      "status": "reviewer_verified_current_snapshot",
+      "finding": "Same saved original first_sha/document/next_revision/op on retry; handler digest incorporates CURRENT read_state revision before lock, so initial rev0 vs retry rev1 mismatches and throws operation_id reused with different payload.",
+      "correction": "Derive operation payload digest from immutable request expected/next revision. Keep collision guard. Lookup/compare/replay under lock; verify replay after newer writes preserves newer state."
+    },
+    "browser": {
+      "status": "inference_needs_request_capture",
+      "finding": "Saved APIs agree with each other but return pre-browser purpose despite revision increment. Panel sync refresh may reset purpose between preview and apply.",
+      "correction": "Capture sanitized actual submitted purpose/record/revision plus actual DOM draft, then fix confirmed cause. Preserve true DOM/API equivalence checks."
+    },
+    "boundary": "Same owner only; do not interrupt active browser correction or deliver duplicate instruction. Incorporate at next safe continuation. No acceptance promotion.",
+    "report_sha256": "b38bad23167f04c616a017fba7dcf1ed7a699ced6a8e9f14aa0e17e927ed7c51",
+    "report_saved_at": "2026-10-10T10:30:17.771910+00:00",
+    "delivery_status": "pending_safe_boundary_not_sent_to_active_owner"
+  }
+}

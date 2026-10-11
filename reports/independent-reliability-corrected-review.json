@@ -1,0 +1,56 @@
+{
+  "review_id": "independent-reliability-corrected-review-20261010-0511",
+  "reviewed_at": "2026-10-10T05:11:49.233999+00:00",
+  "owner_receipt_at": "2026-10-10T05:07:58+00:00",
+  "disposition": "partial_independent_acceptance_withheld",
+  "method": "Read-only source and saved receipt review; no test reruns, browser launch, installation or application changes. Separate from prior 05:02 receipt review.",
+  "source_hashes": {
+    "reports/reliability-verification.json": "a54d5289900d531e260a6c538f98322c457f89aa323c7f1e958fb33efe24e8ca",
+    "tools/project_context_loader.py": "f900780bff04045c8ea07aa0827ae34e0cd8ab951b883e57ae37a28f7a9ea109",
+    "tools/reliability_verification.py": "549c64e1b3a5b2e5cf6b88bfc72340cb2db86a6835692c9da4007182c86bc98f",
+    "tools/browser_acceptance.mjs": "15d036d8dd3a52189ed9284ea8087ceeffc6edc7b8cd5973e4d37ba677beb727"
+  },
+  "REL-01": {
+    "status": "partial",
+    "accepted_subproof": "Saved receipt shows a fresh Python subprocess resolved project paths and revisions.",
+    "missing": "Loader stats entry docs and skills rather than loading their contents; next action copied from checkpoint. No fresh Cursor runtime context/skill selection and recovery proof.",
+    "source": "tools/project_context_loader.py:28-60",
+    "authority_blocker": false,
+    "resume_condition": "Existing owner supplies fresh-agent runtime receipt using current project entrypoint and existing authorized settings; any actual billing or outside-project dependency must be reported separately."
+  },
+  "REL-02_through_REL-06": {
+    "status": "review_complete_acceptance_withheld",
+    "reviewer": "check_live_build",
+    "detail_report": "reports/independent-reliability-corrected-detail.json",
+    "findings_received": "Final stable detail saved; application enforcement, restart recovery, actual-output screening and same-action instrumentation gaps remain.",
+    "items": {
+      "REL-02": "FAILED",
+      "REL-03": "UNVERIFIED",
+      "REL-04": "FAILED",
+      "REL-05": "FAILED",
+      "REL-06": "FAILED"
+    }
+  },
+  "synthetic": {
+    "status": "partial",
+    "accepted_subproof": "Owner receipt now includes expected/observed/restart hashes, sync-status result and cursor/dedup checks.",
+    "missing": "Reviewer found static fixture rather than tracing the actual observed mutation; does not prove combined instrumented action or real SDK tracing."
+  },
+  "browser": {
+    "status": "not_run",
+    "installed_candidate": "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome",
+    "executable_exists": true,
+    "runtime_compatibility": "not_tested",
+    "assessment_gap": "assess_system_chrome returns project executable solely on existence before examining system Chrome; browser runner has no system Chrome fallback.",
+    "actual_dependency": "Project Chromium reported incomplete; no valid browser report. Existing system browser remains untested.",
+    "authority_blocker": "No demonstrated permission denial for existing installed route. New install outside current bounded scope.",
+    "resume_condition": "Assess/use supported already-installed browser route without install and record actual launch/browser checks; report concrete failure if unavailable."
+  },
+  "owner_runtime": {
+    "session_id": 80149,
+    "status": "exited",
+    "exit_code": 0,
+    "continued_or_interrupted": false
+  },
+  "next_permitted_action": "Finish independent detail and bundle defects for sole Cursor owner at next authorized continuation. Preserve original open real tracing, edit roundtrip, browser and impact requirements."
+}

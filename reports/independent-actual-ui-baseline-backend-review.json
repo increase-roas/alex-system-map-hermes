@@ -1,0 +1,204 @@
+{
+  "at": "2026-10-10T08:30:49.227816+00:00",
+  "scope": "Exact prior baseline/control/types/catalog-process gaps only; browser excluded",
+  "verdict": "PARTIAL \u2014 real baseline and actual export/preview repaired; strict types/control-set and actual edit-error proof fail",
+  "owner_receipt": {
+    "pointer": "reports/actual-ui-valid-baseline-receipt.json",
+    "path": "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json",
+    "run_id": "c1207d5a-d1bf-44bf-971c-738a6e36dc17",
+    "at": "2026-10-10T08:24:32+00:00",
+    "sha256": "d660056727fbf2f6aedbc82d658458d7182c9825eb71773a8ce2835160564918",
+    "actual_sha256": "d660056727fbf2f6aedbc82d658458d7182c9825eb71773a8ce2835160564918",
+    "manifest_match": true,
+    "history_match": true,
+    "owner_overall": "passed",
+    "full_acceptance": false
+  },
+  "source_identity": {
+    "app/.next/BUILD_ID": {
+      "receipt_sha256": "487bbc690d08fba5577533541f6827a99f9067a78d55f5ac24c8c9a3b81df0c4",
+      "observed_sha256": "487bbc690d08fba5577533541f6827a99f9067a78d55f5ac24c8c9a3b81df0c4",
+      "match": true
+    },
+    "app/src/app/explorer/workflow-panel.tsx": {
+      "receipt_sha256": "984f9be60b80bc24188dedc69a612aee2b7f867eaede3f02d80ccf9a78012d41",
+      "observed_sha256": "984f9be60b80bc24188dedc69a612aee2b7f867eaede3f02d80ccf9a78012d41",
+      "match": true
+    },
+    "app/src/lib/server/python.ts": {
+      "receipt_sha256": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+      "observed_sha256": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+      "match": true
+    },
+    "tools/acceptance_summarize_strict.py": {
+      "receipt_sha256": "a544ea6e97b3772ef93de120efb9734d5c6f9db13f1a3122172af15498aeb50e",
+      "observed_sha256": "a544ea6e97b3772ef93de120efb9734d5c6f9db13f1a3122172af15498aeb50e",
+      "match": true
+    },
+    "tools/actual_ui_valid_baseline_acceptance.py": {
+      "receipt_sha256": "df0a2516c9703dab9adfad832056e3c2000a72c998015b105165404884439088",
+      "observed_sha256": "df0a2516c9703dab9adfad832056e3c2000a72c998015b105165404884439088",
+      "match": true
+    },
+    "tools/browser_recovery_screening.mjs": {
+      "receipt_sha256": "444c0182cc189fe62239bdc1e7efb1a0ca2c01f1b4463067cd00a0d7c6e1d633",
+      "observed_sha256": "444c0182cc189fe62239bdc1e7efb1a0ca2c01f1b4463067cd00a0d7c6e1d633",
+      "match": true
+    },
+    "tools/catalog_io.py": {
+      "receipt_sha256": "04e1c1b0cdf2ea7bd40ff63621ddf5bf1106408c8779331267ca4d0c51e25393",
+      "observed_sha256": "04e1c1b0cdf2ea7bd40ff63621ddf5bf1106408c8779331267ca4d0c51e25393",
+      "match": true
+    },
+    "tools/catalog_screening_probe.py": {
+      "receipt_sha256": "cc305e58115850311acc03e99b43cca3ffacffce3f0c6e9e6b97f448e5839e71",
+      "observed_sha256": "cc305e58115850311acc03e99b43cca3ffacffce3f0c6e9e6b97f448e5839e71",
+      "match": true
+    },
+    "tools/emitted_boundaries_served_restart_acceptance.py": {
+      "receipt_sha256": "1246dfaad7ef01ac462e17a861a81dbbd2cfa7d951e54c8fdce6a34e2812d1ce",
+      "observed_sha256": "1246dfaad7ef01ac462e17a861a81dbbd2cfa7d951e54c8fdce6a34e2812d1ce",
+      "match": true
+    },
+    "tools/job_recovery.py": {
+      "receipt_sha256": "6d547f54040d98f867253539dadb46466a256ab179e56ec1b536de60b8506eed",
+      "observed_sha256": "6d547f54040d98f867253539dadb46466a256ab179e56ec1b536de60b8506eed",
+      "match": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "c381f113218dff924d68e51be42cfcfdafbb82b365a9292772cb927515ddbfd9",
+      "observed_sha256": "c381f113218dff924d68e51be42cfcfdafbb82b365a9292772cb927515ddbfd9",
+      "match": true
+    },
+    "tools/recovery_screening_real_paths_acceptance.py": {
+      "receipt_sha256": "e1172a9432e5965def1160b037ba73b4be2749b1e1ea0858e6d9d5bf44c1c0d2",
+      "observed_sha256": "e1172a9432e5965def1160b037ba73b4be2749b1e1ea0858e6d9d5bf44c1c0d2",
+      "match": true
+    }
+  },
+  "snapshot_stable": true,
+  "prior_failure_preserved": {
+    "path": "reports/independent-strict-verdict-backend-review.json",
+    "sha256": "480ebb5e591017be66455a9ef12fd629d2f20d7587077079706219690564cf0a",
+    "exists_nonempty": true
+  },
+  "items": [
+    {
+      "id": "AB01 genuine positive baseline",
+      "status": "VERIFIED",
+      "finding": "Control generation now calls core summarizer that excludes control-report requirement, explicitly proves baseline core pass, then flips one field at a time. Independent saved-positive reproduction confirms core/final pass and all ten listed emitted flips fail. Empty control case list now rejects. This closes earlier circular/missing-control baseline defect.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:201-239",
+        "tools/actual_ui_valid_baseline_acceptance.py:77-103,106-124",
+        "pure output fb08d7"
+      ]
+    },
+    {
+      "id": "AB02 exact control-set validation",
+      "status": "FAILED",
+      "finding": "Validator checks list nonempty/count and all_must_fail, but does not validate exact unique paths/flip identities, count field, must_fail or per-row expected failure. Repeating first control row ten times passes final summary. Missing/empty controls fixed; exact independent set remains unproved.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:174-189",
+        "pure duplicate_control_paths result fb08d7"
+      ]
+    },
+    {
+      "id": "AB03 strict Boolean/status/schema assertions",
+      "status": "FAILED",
+      "finding": "Required flags remain truthiness checks: Node screened=\"false\" accepted. Exit=False compares equal to zero and accepted; nonzero_exit=\"0\" also accepted. Catalog eval regards generic dict containing marker/error as json_shape and its state/preview checks do not require success exits/consumer schemas. Prior requirement for strict types and actual result shapes remains incomplete.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:10-25,52-89",
+        "tools/catalog_screening_probe.py:58-70,112-121",
+        "pure wrong_boolean_type/wrong_exit_type/wrong_nonzero_exit_type fb08d7"
+      ]
+    },
+    {
+      "id": "AB04 actual catalog-export canary",
+      "status": "VERIFIED",
+      "finding": "Saved isolated catalog components contain fake canary before export; probe now passes fixture root through real subprocess loader. Independent read-only correctly formed catalog-export removes canary, returns exit0, benign marker and one redaction note. No helper substitution for this narrow export proof.",
+      "evidence": [
+        "tools/catalog_screening_probe.py:22-44,74-89",
+        "tools/catalog_io.py:13-17,61-69",
+        "app/.data/catalog-fixture-actual-ui-0820-catalog/data/components.json",
+        "safe source fixture projection fb08d7",
+        "actual readonly process metadata b80116"
+      ],
+      "fixture_sha256": "a797cb3389f4377917b8093a13f2a38c455628cfa814654c1f3719db083aee4b"
+    },
+    {
+      "id": "AB05 edit probe wrong-handler claim",
+      "status": "FAILED",
+      "finding": "Probe edit-state/preview/error calls omit required --db. They hit ScreeningArgumentParser, not edit handler. State/preview result flags ignore exit status, so argparse exit2 plus marker is counted as real handler pass. Independent identical state invocation confirms exit2, error JSON and no document schema. Owner flags are invalid actual-edit evidence.",
+      "evidence": [
+        "tools/catalog_screening_probe.py:47-55,97-108,117-121",
+        "tools/local_service.py:322-337",
+        "independent parser-only safe metadata"
+      ],
+      "safe_parser_readback": {
+        "exit": 2,
+        "marker": true,
+        "has_error": true,
+        "actual_edit_state_shape": false,
+        "stderr_empty": true
+      }
+    },
+    {
+      "id": "AB06 independent edit preview/error",
+      "status": "VERIFIED",
+      "finding": "Correctly formed read-only preview with --db and canary in request reaches actual handler: exit0, preview dict and redacted note, marker retained. Existing marker bytes unchanged. This supplies narrow normal-preview proof independently; state/apply and injected error reflection are not proven by flawed owner probes.",
+      "evidence": [
+        "actual readonly preview metadata b80116 and 450d7e",
+        "tools/local_service.py:505-508"
+      ],
+      "safe_checks": {
+        "request_canary_present": true,
+        "response_canary_absent": true,
+        "preview_note_redacted": true,
+        "preview_dict": true,
+        "exit": 0,
+        "benign_marker": true,
+        "marker_bytes_unchanged": true
+      }
+    },
+    {
+      "id": "AB07 genuine stale-edit error marker",
+      "status": "FAILED",
+      "finding": "Correctly formed stale preview with --db reaches actual error handler and returns exit1/error JSON with empty stderr, but no required benign diagnostic marker. Error itself is static revision-conflict text, so canary absence does not prove error-text redaction. Owner error flag instead observes argparse marker at exit2.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:62-66",
+        "tools/local_service.py:658-661",
+        "actual readonly error metadata b80116"
+      ]
+    },
+    {
+      "id": "AB08 final identity/history",
+      "status": "VERIFIED",
+      "finding": "Final c1207d5a receipt dated08:24:32 matches pointer/manifest/history; all twelve source hashes match current bytes. Prior failed review preserved and hash-bound. Existing accepted code/core retained. Browser acceptance excluded.",
+      "evidence": [
+        "reports/run-receipts/actual-ui-valid-baseline-20261010-0820-c1207d5a-d1bf-44bf-971c-738a6e36dc17.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl",
+        "reports/independent-strict-verdict-backend-review.json"
+      ]
+    }
+  ],
+  "prior_accepted_core_preserved": true,
+  "next_fixes": [
+    "Validate Boolean flags with is True, statuses as actual integer values, and per-consumer parsed schemas.",
+    "Validate exact unique control path/value set and intended failure cause against independently passing core baseline; duplicate/malformed/empty sets must reject.",
+    "Supply --db for actual edit subprocesses; require state/preview/apply success statuses and schemas, error expected status/shape/benign marker. Keep source-bound input/output proof and restoration receipt.",
+    "Add benign diagnostic marker to genuine early catalog error handler. Do not label static errors/parser errors as injected edit-error screening proof."
+  ],
+  "security": {
+    "app_writes": false,
+    "marker_hash_unchanged": true,
+    "raw_diagnostics_or_token_values_printed": false,
+    "credential_operations": false,
+    "outside_reads_network_installs_helpers_browser": false,
+    "tests": "Pure summarize tests plus read-only early-return catalog-export/preview/error/parser subprocesses with python -B; no Engine initialization/mutating acceptance scripts."
+  },
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Strict typed/status/exact-control-set assertions and genuine catalog-edit normal/error process proof with required benign error marker."
+  }
+}

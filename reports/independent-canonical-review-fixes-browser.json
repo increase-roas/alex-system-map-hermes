@@ -1,0 +1,216 @@
+{
+  "review_id": "independent-canonical-review-fixes-browser",
+  "reviewed_at": "2026-10-10T11:16:53.306493+00:00",
+  "owner_run": "ae094cc8-5a7f-425e-9f4b-5deb31afeec8",
+  "owner_at": "2026-10-10T11:11:30+00:00",
+  "owner_pass_self_report": "passed",
+  "receipt_path": "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json",
+  "receipt_sha256": "6a14ca90496ac42588e2cd7593dce18b953fecdbcc3d72dfe82c7e115aef0cfb",
+  "scope": "ALL prior independent-canonical-edit-browser defects and exact1044 correction requirements; no broad original visual audit. Read-only source/safe projections and pure no-write checks.",
+  "source_initial": {
+    "app/.next/BUILD_ID": "dd4bbb100d258a44dbfcff3a25377a3f6aa038746f1b4e9742d0420002d8fab3",
+    "app/src/app/api/catalog/edit/route.ts": "8577c4558f1effc42a57ca7fb691c67ec44beb9062a243a832624e82444d4042",
+    "app/src/app/api/catalog/edit/state/route.ts": "03fb4fca81d4696988217841b023fc66373c3db3232509b7fc47fd3ddd2034ca",
+    "app/src/app/api/health/route.ts": "b653f12219dc32571bf6a1e0476f6fe1e97ff1dedc6d9203a0b9b67aa9d00ddb",
+    "app/src/app/api/sync/status/route.ts": "8ce7e7422ecd93515f4d96ff6cdf6daca19f58aedd17a11bff91ae0c60446e3c",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "5b26d06467582a1aca9e2bb0717a40ed7a4f0d842a3958ea9d35d05a3206c497",
+    "app/src/lib/server/python.ts": "477ac57adfaec274ef5fd89fba6838e0cc6f460ea6b68906ee007485d8b5075f",
+    "tools/browser_canonical_edit_sync.mjs": "a6900295086601ebfd54776776e7fd925504744dde658bf77cec0fbee2cfdcac",
+    "tools/browser_canonical_review_fixes.mjs": "1f31aa0fb80396f886794bee124a494b8649078c4dadaff3ac3bd86ad0ec3ab8",
+    "tools/build_catalog.py": "4b65359742dd7f26e52fceb11d062c2718a9887df8f790bfe07689de15403703",
+    "tools/canonical_acceptance_summarize.py": "48d50e9eabc815e5d0443f61cda887f6e50fc42fe6347e2186cfca2076b14a4e",
+    "tools/canonical_derived_render.py": "cfc80bb1f764f22aa46ada561a5cbcb0a412c2450ab0db0e54e81db175d2ac78",
+    "tools/canonical_edit_sync_acceptance.py": "2132d4c0bada4c9b22c8d24fa10af80d6b3930e257b7773df185d2bde5a6cf93",
+    "tools/canonical_maintained_edit.py": "fed9447f7eb245a8fdb0d1642ce7aa309b6eeb72669db69737e01e17a415fcdd",
+    "tools/canonical_review_fixes_acceptance.py": "7dec238880d9ee247884f4199361604fa3a2d0a23ff7c44c58d2067081fd44e9",
+    "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+    "tools/catalog_reference_validation.py": "716dc9d2007e44bae84022a25f4ca9fe66e614e12b0002cfb171a9afebc42bd7",
+    "tools/catalog_sync.py": "8fd8bdc7c90b7630ef2b66b2674e6f7acdbba395cc810813352b4d4be5cef73f",
+    "tools/local_service.py": "8a198bf7874d53cb56a5243b9bc02bd02be310d799bb3aaaf8837b73f86fc5bd",
+    "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+  },
+  "source_final": {
+    "app/.next/BUILD_ID": "dd4bbb100d258a44dbfcff3a25377a3f6aa038746f1b4e9742d0420002d8fab3",
+    "app/src/app/api/catalog/edit/route.ts": "8577c4558f1effc42a57ca7fb691c67ec44beb9062a243a832624e82444d4042",
+    "app/src/app/api/catalog/edit/state/route.ts": "03fb4fca81d4696988217841b023fc66373c3db3232509b7fc47fd3ddd2034ca",
+    "app/src/app/api/health/route.ts": "b653f12219dc32571bf6a1e0476f6fe1e97ff1dedc6d9203a0b9b67aa9d00ddb",
+    "app/src/app/api/sync/status/route.ts": "8ce7e7422ecd93515f4d96ff6cdf6daca19f58aedd17a11bff91ae0c60446e3c",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "5b26d06467582a1aca9e2bb0717a40ed7a4f0d842a3958ea9d35d05a3206c497",
+    "app/src/lib/server/python.ts": "477ac57adfaec274ef5fd89fba6838e0cc6f460ea6b68906ee007485d8b5075f",
+    "tools/browser_canonical_edit_sync.mjs": "a6900295086601ebfd54776776e7fd925504744dde658bf77cec0fbee2cfdcac",
+    "tools/browser_canonical_review_fixes.mjs": "1f31aa0fb80396f886794bee124a494b8649078c4dadaff3ac3bd86ad0ec3ab8",
+    "tools/build_catalog.py": "4b65359742dd7f26e52fceb11d062c2718a9887df8f790bfe07689de15403703",
+    "tools/canonical_acceptance_summarize.py": "48d50e9eabc815e5d0443f61cda887f6e50fc42fe6347e2186cfca2076b14a4e",
+    "tools/canonical_derived_render.py": "cfc80bb1f764f22aa46ada561a5cbcb0a412c2450ab0db0e54e81db175d2ac78",
+    "tools/canonical_edit_sync_acceptance.py": "2132d4c0bada4c9b22c8d24fa10af80d6b3930e257b7773df185d2bde5a6cf93",
+    "tools/canonical_maintained_edit.py": "fed9447f7eb245a8fdb0d1642ce7aa309b6eeb72669db69737e01e17a415fcdd",
+    "tools/canonical_review_fixes_acceptance.py": "7dec238880d9ee247884f4199361604fa3a2d0a23ff7c44c58d2067081fd44e9",
+    "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+    "tools/catalog_reference_validation.py": "716dc9d2007e44bae84022a25f4ca9fe66e614e12b0002cfb171a9afebc42bd7",
+    "tools/catalog_sync.py": "8fd8bdc7c90b7630ef2b66b2674e6f7acdbba395cc810813352b4d4be5cef73f",
+    "tools/local_service.py": "8a198bf7874d53cb56a5243b9bc02bd02be310d799bb3aaaf8837b73f86fc5bd",
+    "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+  },
+  "source_changed_while_reading": [],
+  "source_map_binding": {
+    "path": "app/.next/static/chunks/app/explorer/page-69ce5c713be59292.js.map",
+    "sha256": "8b32d7ee44d84de171c62d7831c975211e18347f5090dfcc68dfa062839b5560",
+    "panel_exact_current": true,
+    "all_server_exact_binding": false
+  },
+  "prior_browser_review_sha256": "355ca3351efe86e800d43d1d68ef752401e71ff4a473adff9aa4e04d7e44ec2f",
+  "focused_diagnosis_sha256": "a4221c4a67142c6fe34f6247dff033cf484f8cab276d6c6cece5a1036e8ee975",
+  "safe_observations": {
+    "metadata_current_policy_exact": true,
+    "metadata_ui_revision1": true,
+    "current_component_purpose_exact": true,
+    "run_snapshot_hashes_match": true,
+    "run_snapshot_browser_purpose_exact": false,
+    "build_lint_typecheck_exit0_recorded": true,
+    "browser_build_current": true,
+    "no_raster_opened": true
+  },
+  "pure_controls": {
+    "current_positive_pass": true,
+    "pre_owner_flip_baseline_pass": false,
+    "pre_owner_flip_failure": [
+      "each_flip_fails"
+    ],
+    "all_owner_flip_results_contain_missing_self_gate": true,
+    "wrongtype_checked_bool_rejected": true,
+    "missing_required_subchecks_rejected": false,
+    "missing_evidence_hashes_rejected": false
+  },
+  "items": [
+    {
+      "id": "Final receipt and source stability",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json",
+        "work/supervision/canonical-review-fixes-20261010-1044.txt",
+        "work/supervision/canonical-review-fixes-20261010-1044-checkpoint.txt"
+      ],
+      "finding": "Final ae094cc8 receipt hash matches supplied SHA6a14ca90496ac42588e2cd7593dce18b953fecdbcc3d72dfe82c7e115aef0cfb. All20 declared files match at start/end; no drift. Editor/browser same read-time hashes as focused diagnosis. Owner passed remains self-report; full_completion false preserved."
+    },
+    {
+      "id": "Frozen canonical success-path request and readback",
+      "status": "VERIFIED",
+      "evidence": [
+        "app/src/app/explorer/maintained-edit-panel.tsx:151",
+        "app/src/app/explorer/maintained-edit-panel.tsx:198",
+        "tools/browser_canonical_review_fixes.mjs:168",
+        "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json"
+      ],
+      "finding": "Preview now stores path/record/expected hash/next revision/document; Apply uses that frozen request. Runner fills actual component purpose, reads frozen projection, compares exact desired value with API document and canonical disk. Saved equality flags true; current component disk/Markdown contain browser purpose. Narrow frozen success-path improvement accepted. Projected purpose DOM is hidden test span; full submitted ID/hash/revision and actual visible field/API/derived equality after restart are not captured."
+    },
+    {
+      "id": "Dirty draft, mode selection and late-response races",
+      "status": "FAILED",
+      "evidence": [
+        "app/src/app/explorer/maintained-edit-panel.tsx:75",
+        "app/src/app/explorer/maintained-edit-panel.tsx:108",
+        "app/src/app/explorer/maintained-edit-panel.tsx:120",
+        "reports/metadata-ui-repeat-diagnosis.json"
+      ],
+      "finding": "New dirty/frozen guard protects refresh at invocation and Apply rejects changed draft; useful narrow repairs. Already-in-flight refresh responses still install state and clear frozen/draft without generation or active-target check. Forced mode-refresh leaves old requests pending, while preview combines mode-selected field with state-selected target. No dirty-external-update, preview-then-draft-change or late-response/mode race cases. Same source-supported race remains; not claimed sole runtime cause of prior metadata failure."
+    },
+    {
+      "id": "Maintained document UI success",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_canonical_review_fixes.mjs:141",
+        "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json"
+      ],
+      "finding": "Runner selects actual catalog-metadata path, fills policy, freezes/applies, waits revision and reads disk. Current metadata update_policy exactly equals intended full policy; saved UI revision1 and metadata_ui_passed true. No test-only file overwrite in runner. Narrow actual doc UI-to-disk path accepted. Frozen policy/API policy and fresh post-restart doc readback are not retained, so full semantic equivalence remains unverified."
+    },
+    {
+      "id": "Genuine observer integration and full automatic sync/LKG proof",
+      "status": "FAILED",
+      "evidence": [
+        "app/src/app/api/sync/status/route.ts:7",
+        "app/src/app/explorer/maintained-edit-panel.tsx:124",
+        "tools/catalog_sync.py:56"
+      ],
+      "finding": "Status endpoint now calls sync-observe; prior status-only gap closed at implementation level. No actual disk-change auto-refresh, malformed/missing/rename/unreadable/partial-write DOM/LKG/recovery/reconnect tests or gates. Observer reads bytes, so malformed JSON still readable until editing read fails; UI refresh lacks fetch/json exception catch. Polls may overlap and are not aborted on unmount. Original complete sync acceptance cannot be excluded as broader scope."
+    },
+    {
+      "id": "Actual persisted UI/API state after restart",
+      "status": "FAILED",
+      "evidence": [
+        "tools/browser_canonical_review_fixes.mjs:183",
+        "tools/browser_canonical_review_fixes.mjs:188"
+      ],
+      "finding": "After restart runner waits revision DOM already present before shutdown, without navigation, reload, fresh state API or response synchronization. persisted_after_restart can be satisfied immediately by old DOM. New health PID is reduced to a Boolean and not retained; before/after DB/hash/fixture/build identity absent. Current clone disk durability is narrow evidence, not fresh served readback after restart."
+    },
+    {
+      "id": "Final run-specific canonical/derived browser snapshots",
+      "status": "FAILED",
+      "evidence": [
+        "tools/canonical_review_fixes_acceptance.py:249",
+        "tools/canonical_review_fixes_acceptance.py:383",
+        "reports/derived-proof/canonical-review-fixes-20261010-1044/run-ae094cc85a7f"
+      ],
+      "finding": "Run-specific canonical/revision/component-MD/index/map/XLSX snapshots now exist; six hashes match. However copied before browser setup/reset/edit; snapshot canonical purpose and component Markdown differ from final browser purpose. Metadata document not included. Full component coverage in clone improved, but immutable final browser/restart/concurrency/replay desired values are not proved by earlier CLI snapshot."
+    },
+    {
+      "id": "Explicit build/lint/type results and frontend binding",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/canonical_review_fixes_acceptance.py:280",
+        "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json",
+        "app/.next/static/chunks/app/explorer/page-69ce5c713be59292.js.map"
+      ],
+      "finding": "Saved actual build_quality command returncodes build/lint/tsc each0; build ID SHA matches current and browser-served ID. Browser skips duplicate build and uses preceding quality build. Panel source map sourcesContent exactly equals current editor bytes. These close prior missing separate exit results and frontend binding."
+    },
+    {
+      "id": "Exact all-server source-to-served-build and runtime identity",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json",
+        "tools/canonical_edit_sync_acceptance.py:62"
+      ],
+      "finding": "All changed server/backend files now declared and stable, improving source identity. No pre/post build source manifest or compiled server artifact hashes/source maps tying exact python.ts/health/routes to served build; health before/after runtime source identities and DB/build binding not retained. Source hashes plus BUILD_ID establish snapshot identity but not exact complete server compilation/runtime agreement."
+    },
+    {
+      "id": "Production request/probe bounds and owned cleanup",
+      "status": "FAILED",
+      "evidence": [
+        "tools/browser_canonical_review_fixes.mjs:74",
+        "tools/browser_canonical_review_fixes.mjs:63",
+        "tools/canonical_review_fixes_acceptance.py:318",
+        "tools/subprocess_bounded.py:20"
+      ],
+      "finding": "fetchJsonDeadline keeps original abort timer through body text; TCP probe has5s timer; CLI uses bounded helper without exc.process. Narrow deadline repairs accepted. UI fetches and server Python children still unbounded. Startup does not fail fast on server exit. Node build deadline rejects without killing build; pipes undrained. Parent browser/build uses ordinary subprocess.run, kills direct process on timeout, cannot ensure detached Next/Chromium cleanup. stopServer signals group then fixed1.5s without reap/escalation; helper skips group cleanup if leader already exited. No actual hung HTTP/body/build/browser descendant path proof; timeout_production_path still sleeps unrelated Python through helper."
+    },
+    {
+      "id": "Current strict typed fields versus meaningful negative baseline",
+      "status": "FAILED",
+      "evidence": [
+        "tools/canonical_acceptance_summarize.py:27",
+        "tools/canonical_review_fixes_acceptance.py:348"
+      ],
+      "finding": "Current summarizer rejects wrong-type truthy strings for checked canonical/browser/doc booleans and exact numeric exits: prior truthiness gap narrowed. However field-flip tests run before canonical_field_flips exists, so baseline already fails each_flip_fails; every flip inherits unrelated failure. Independently reconstructed pre-flip baseline confirms this. Only6 mutations, no passing-baseline/remove/wrongtype coverage of EACH requirement."
+    },
+    {
+      "id": "Required current subcheck and evidence enforcement",
+      "status": "FAILED",
+      "evidence": [
+        "tools/canonical_acceptance_summarize.py:70"
+      ],
+      "finding": "Independent pure current positive baseline passes. Removing runtime_fixture_matches, metadata_ui_passed, persisted_after_restart, restart_pid_changed, port_refused_after_stop, run_snapshot_hashes, build_id_sha256, per_flip results, or strict regression each_declared_flip_fails still passes. Owner browser overall does not enforce port_refused flag. No dirty/sync/error/LKG/cleanup/evidence identity gates. Typed controls from older baseline remain insufficient for omitted scope."
+    },
+    {
+      "id": "Broader visual/trace boundaries and backend ownership",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "docs/BUILD_SUPERVISION.md:41"
+      ],
+      "finding": "No broad visual audit, screenshot exposure, raw captures, app/browser/server runs/writes, network/install/credential operations or helpers. Backend transaction/journal/schema verification remains separate. Real SDK/full project completion not claimed; prior narrow recovery evidence preserved historically."
+    }
+  ],
+  "verdict": "PARTIAL: document UI, frozen success path, observer integration and explicit build/lint/type improved; original full correction acceptance still unmet.",
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Late-response/draft/mode protection and race tests; actual automatic disk/error/LKG/reconnect proof; fresh target/value/API/DOM/derived readback after restart with final immutable snapshots; exact server/runtime binding; production timeout descendant cleanup; genuine positive-baseline current negative controls and all required gates."
+  }
+}

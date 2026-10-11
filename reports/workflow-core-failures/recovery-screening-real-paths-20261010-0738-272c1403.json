@@ -1,0 +1,212 @@
+{
+  "recovery_dependency": {
+    "corrected_task_blocked": true,
+    "blockers_include_t1": true,
+    "next_not_corrected_downstream": true,
+    "diagnostic_marker": true
+  },
+  "emission_boundaries": {
+    "raw_event_contains_canary": true,
+    "raw_trace_label_contains_canary": true,
+    "events_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "trace_list_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "trace_get_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "list_jobs_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "recover_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "read_source_error_boundary": {
+      "exit": 1,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "diagnose_text": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "stderr_read_source_screened": true
+  },
+  "node_bridge": {
+    "exit": 0,
+    "parsed": {
+      "read_source_canary_removed": true,
+      "read_source_benign": true,
+      "read_source_intended_error": true,
+      "invalid_command_json_stdout": true,
+      "invalid_command_canary_removed": true,
+      "invalid_command_nonempty": true,
+      "invalid_command_benign": true,
+      "init_ok": true,
+      "nonzero_json_rejected": true,
+      "nonzero_exit": 1,
+      "benign": true,
+      "screened": true,
+      "nonempty": true
+    },
+    "benign_required": true,
+    "screened_required": true,
+    "nonempty_required": true,
+    "canary_removed": true
+  },
+  "browser": {
+    "delivery": "recovery-screening-real-paths-20261010-0738",
+    "runner_sha256": "a974355cf39de14826efc40dc86e7e6572a423ae2a4600637686cf7d6f70e5de",
+    "networkLog": [
+      {
+        "label": "health-before",
+        "url": "http://127.0.0.1:3202/api/health",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 1404,
+        "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":27627},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+        "parsedKeys": [
+          "ok",
+          "loopback_only",
+          "local_token_hint",
+          "build_id",
+          "process",
+          "runtime",
+          "completeness",
+          "sync",
+          "token_redacted"
+        ],
+        "screening_notes": [
+          "local-mutation-token withheld"
+        ],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619162930-create",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 213,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619162930\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791619162930-create\",\"handoff_operation_id\":\"rec-ui-a-1791619162930-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "handoff_operation_id",
+          "diagnostic_marker",
+          "screening_notes"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619162930-add-t1",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 157,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619162930\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791619162930-add-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "diagnostic_marker",
+          "screening_notes"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619162930-add-t2",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 157,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619162930\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791619162930-add-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "diagnostic_marker",
+          "screening_notes"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619162930-produce-t1",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 502,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 205,
+        "bodyPreview": "{\"error\":\"outputs must be a nonempty string\",\"screened\":true,\"payload\":{\"payload\":{\"error\":\"outputs must be a nonempty string\",\"notes\":[]},\"screening_notes\":[],\"error\":\"outputs must be a nonempty string\"}}",
+        "parsedKeys": [
+          "error",
+          "screened",
+          "payload"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      }
+    ],
+    "served_pid_before": 27627,
+    "launcher_pid_before": 27605,
+    "build_id": "NAGwQKIQTJRhmcR9fI-un",
+    "db_path_served": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+    "db_sha256_before": "79186b357ffc39ad7e16a84214d015df73a36aacdb148efc6aa1d01e66a7931f",
+    "db_isolated": true,
+    "db_sha256_matches_fresh_init": false,
+    "overall": "failed",
+    "error": "Error: mutation failed at workflow-rec-ui-a-1791619162930-produce-t1: outputs must be a nonempty string",
+    "network_log_sha256": "6aefd5d183d4d62d4f37dae531de7ae296c01df8f634028eec76d12d5fe94272",
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK",
+    "exit": 1
+  },
+  "prior_attempts_preserved": [
+    "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+    "reports/independent-recovery-browser-review.json"
+  ],
+  "independent_ack": {
+    "browser_review": "reports/independent-recovery-browser-review.json (07:35:34)",
+    "screening_review": "reports/independent-recovery-screening-review.json (pending path in supervisor queue)",
+    "controlled_producer_scope": "local action only; prior acceptance preserved"
+  },
+  "diagnostic_screening": {
+    "applied": true,
+    "marker": "LOCAL-SCREENING-OK",
+    "notes": []
+  }
+}

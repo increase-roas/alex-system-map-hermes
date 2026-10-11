@@ -1,0 +1,283 @@
+{
+  "id": "table_07d4c1a54b97585d8605",
+  "sheet": "S05-06 LAB LOOP",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "LAB / EVIDENCE LOOP"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fresh post-timestamp Composio discovery/schema cluster • Internal evidence→isolated candidate→same eval→holdout/regression→KEEP/KILL."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Step"
+        },
+        {
+          "column": "B",
+          "value": "Stage"
+        },
+        {
+          "column": "C",
+          "value": "Action"
+        },
+        {
+          "column": "D",
+          "value": "Acceptance / Evidence"
+        },
+        {
+          "column": "E",
+          "value": "Status"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": 1
+        },
+        {
+          "column": "B",
+          "value": "Baseline"
+        },
+        {
+          "column": "C",
+          "value": "Freeze JAVAR-BASELINE-001: model/provider, harness/Hermes, rules, skills/config versions."
+        },
+        {
+          "column": "D",
+          "value": "Freeze split/scorecard/budget; reuse golden evals; save replay reference. Harness experiment: freeze model/provider; vary harness. Model bake-off: freeze harness/evaluator; vary model/provider. Never vary both and claim causal attribution."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": 2
+        },
+        {
+          "column": "B",
+          "value": "Observatory"
+        },
+        {
+          "column": "C",
+          "value": "Extend existing Observatory with shared structured intake from every active role, including Director. See FAILURES & BLOCKERS."
+        },
+        {
+          "column": "D",
+          "value": "Version-linked model/provider/tokens/cost/latency/tools/retries/outcome; event/mission/agent IDs and trace pointers. Deduplicate delivery; detect missing reports and buffer collector outages."
+        },
+        {
+          "column": "E",
+          "value": "Existing—verify"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": 3
+        },
+        {
+          "column": "B",
+          "value": "failure"
+        },
+        {
+          "column": "C",
+          "value": "Distinguish failures, legitimate blockers, corrections and UNKNOWNs; cluster a real failure using expected versus observed evidence."
+        },
+        {
+          "column": "D",
+          "value": "Composio discovery/schema root cause remains unproven. Confirmed recurring or high-impact failures become reviewed eval candidates; permission stops are preserved."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": 4
+        },
+        {
+          "column": "B",
+          "value": "Evidence research"
+        },
+        {
+          "column": "C",
+          "value": "Query internal knowledge first; then Exa, primary docs/source and implementation evidence."
+        },
+        {
+          "column": "D",
+          "value": "Save supporting + contradicting sources, scope and testable hypothesis. Unsupported idea cannot be called proven."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": 5
+        },
+        {
+          "column": "B",
+          "value": "candidate"
+        },
+        {
+          "column": "C",
+          "value": "STEERING = prompts, instructions, rules, routing guidance. CAPABILITY = tools, skills, memory, runtime/harness capabilities. Prefer one bounded category/change; preserve production and frozen holdout."
+        },
+        {
+          "column": "D",
+          "value": "Exact versions and stop/rollback. One variable at a time; no automatic or endless tuning."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": 6
+        },
+        {
+          "column": "B",
+          "value": "eval"
+        },
+        {
+          "column": "C",
+          "value": "Run baseline and candidate against the same frozen evaluator/scorecard. For important stochastic evaluations, use at least 3 repeated runs under the same frozen conditions for each compared condition; report mean + standard deviation."
+        },
+        {
+          "column": "D",
+          "value": "Measure quality and cost/latency. Accept a quality win, or cost win at unchanged quality floor; no invented target. A lucky single run cannot produce KEEP. UNKNOWN ≠ PASS. Deterministic checks with no possible variance need no repetition."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": 7
+        },
+        {
+          "column": "B",
+          "value": "holdout/regression"
+        },
+        {
+          "column": "C",
+          "value": "Run untouched holdout + existing regression checks."
+        },
+        {
+          "column": "D",
+          "value": "Final holdout answers stay outside optimizer context. AHO iteration validation is not our untouched final test. Any critical regression blocks KEEP; production unchanged."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": 8
+        },
+        {
+          "column": "B",
+          "value": "keep/kill"
+        },
+        {
+          "column": "C",
+          "value": "Director/reviewer decides keep or kill from receipts."
+        },
+        {
+          "column": "D",
+          "value": "Independent negative check + proven kill/rollback. Candidate success is not production release authority."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": 9
+        },
+        {
+          "column": "B",
+          "value": "record"
+        },
+        {
+          "column": "C",
+          "value": "Link failure → eval → experiment → fix in existing history. Prime receives distilled proven lessons; raw events/traces remain in the operational store."
+        },
+        {
+          "column": "D",
+          "value": "Save versions, sources, result, cost, recovery, decision and next action. Fresh controller retrieves current findings; recurring regression retained with explicit version/retirement history."
+        },
+        {
+          "column": "E",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "BOUNDARIES • Freeze→measure→KEEP/KILL→record. AHO is optional after Gate1 and competes against Astra/manual process. Events/Manus/Aperture/training/extra screens are not mission dependencies. No automatic production promotion or unbounded spend."
+        }
+      ]
+    }
+  ]
+}

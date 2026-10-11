@@ -1,0 +1,20 @@
+{
+  "at": "2026-10-10T13:07:44.427157+00:00",
+  "event": "successor_build_deadline_and_exactread_probe",
+  "session_id": 46274,
+  "pid": 56233,
+  "shell_deadline_evidence": {
+    "uses_timeout_command": false,
+    "uses_bounded_helper": false,
+    "runs_npm_build": true,
+    "remaining_deadline": "Not proven for successor shell from its parent chain or declared helper limits."
+  },
+  "probe": {
+    "target": "app/node_modules/.pnpm/@opentelemetry+api@1.9.0/node_modules/@opentelemetry/api/build/src/trace/NoopTracer.js",
+    "result": {
+      "bytes": 2823
+    }
+  },
+  "interpretation": "Changing dependency targets indicate advancement, not successful compilation. No actual successful exit yet.",
+  "full_completion": false
+}

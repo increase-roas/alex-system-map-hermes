@@ -1,0 +1,353 @@
+{
+  "id": "table_8de856dfca0b29aff587",
+  "sheet": "SDK CAPABILITIES",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What the SDK can do"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact capability table from the October 9 report. These are recorded implementation and proof claims, not newly executed tests."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability"
+        },
+        {
+          "column": "B",
+          "value": "Implementation / evidence"
+        },
+        {
+          "column": "C",
+          "value": "Practical boundary"
+        },
+        {
+          "column": "D",
+          "value": "Evidence"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Local files"
+        },
+        {
+          "column": "B",
+          "value": "List/read/create/write/replace/JSON edit/copy/move/delete; durable preimages, mode preservation, history, readback, restore"
+        },
+        {
+          "column": "C",
+          "value": "Configured mounts and operator-owned ancestors matter; unrelated external writers are not coordinated automatically"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Build processes"
+        },
+        {
+          "column": "B",
+          "value": "Typed, operator-defined argv recipes; bounded output, timeout cleanup, recorded exit status"
+        },
+        {
+          "column": "C",
+          "value": "The process runs with host permissions; this is not arbitrary untrusted-code isolation"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Extensible tools and profiles"
+        },
+        {
+          "column": "B",
+          "value": "Dynamic capability registry; profiles narrow capabilities, roots, accounts, effects, recipes"
+        },
+        {
+          "column": "C",
+          "value": "Broad catalog availability is not evidence every provider operation is configured or authorized"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shared-skill gates"
+        },
+        {
+          "column": "B",
+          "value": "Discovery, exact skill selection, content digest verification, tool/schema validation, named-account execution"
+        },
+        {
+          "column": "C",
+          "value": "Each actual target must supply its own working configuration and identity"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Direct Connect"
+        },
+        {
+          "column": "B",
+          "value": "Installed 1.5.1 completed real skill search/load, tool search, and schema lookup; exact destination restriction active"
+        },
+        {
+          "column": "C",
+          "value": "Execution stopped before Mem0; this particular live check proves preflight compatibility only"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Remote file editing"
+        },
+        {
+          "column": "B",
+          "value": "One full live cycle on Javar's isolated canary, including rejection checks, separate readback, and restoration"
+        },
+        {
+          "column": "C",
+          "value": "This was an owned scratch file; receipt explicitly says running-agent activation was not demonstrated; Javante was not proven"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agent account bindings"
+        },
+        {
+          "column": "B",
+          "value": "Sourced bindings and narrow-only profile selection; local allowed/denied tests"
+        },
+        {
+          "column": "C",
+          "value": "Runtime use of those accounts by both agents remains unproven; the Orgo account label in the canary receipt was caller asserted"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workflow state and recovery"
+        },
+        {
+          "column": "B",
+          "value": "SQLite intent before effects, stable operation IDs, persisted manifests/receipts, resume/replay, process locking"
+        },
+        {
+          "column": "C",
+          "value": "Same-ledger locking does not establish distributed fleet ownership or coordination across separate ledgers"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Task-start memory"
+        },
+        {
+          "column": "B",
+          "value": "Scoped bounded recall; one live retrieval on installed 1.5.0 returned one memory"
+        },
+        {
+          "column": "C",
+          "value": "No live worker-delivery, relevance-quality, automatic-capture, or two-agent recall proof follows from that single retrieval"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Delegated memory controls"
+        },
+        {
+          "column": "B",
+          "value": "Exact recall-block hash and size/item bounds; default behavior keeps recall with the caller unless delivery is approved"
+        },
+        {
+          "column": "C",
+          "value": "A caller-side receipt is not proof a worker received the memory; 1.5.1 did not alter these approval paths"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloud artifact delivery"
+        },
+        {
+          "column": "B",
+          "value": "Configured publisher, original-content backup, revision checks, separate readback, conflict-aware restore; local tests"
+        },
+        {
+          "column": "C",
+          "value": "Live isolated destination and registered Drive write/readback route were unresolved in the inspected evidence"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "TypeSafe/Jev"
+        },
+        {
+          "column": "B",
+          "value": "Typed choice/score interfaces, abstention, schema validation, provenance/error handling; local tests"
+        },
+        {
+          "column": "C",
+          "value": "Named account/skill/model and live inference/quality evidence remain unresolved; no sales policy is supplied by these types"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Existing SDK workflows"
+        },
+        {
+          "column": "B",
+          "value": "Codex dispatch, repair, knowledge maintenance, memory primitives, and Bridge/Observatory interfaces retained"
+        },
+        {
+          "column": "C",
+          "value": "Reuse and inspect these before treating historical fleet concerns as missing code"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CE hooks"
+        },
+        {
+          "column": "B",
+          "value": "Separate local Codex SessionStart/failure/Stop activation passed its native acceptance"
+        },
+        {
+          "column": "C",
+          "value": "Separate subsystem; it does not prove Hermes hook installation or fleet event subscriptions"
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,323 @@
+{
+  "id": "table_96c4b272ff74ff5d4e05",
+  "sheet": "S05-07 FAILURES & BLOCKERS",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OBSERVATORY / SHARED HISTORY"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foundation requirement • Every active agent, including Director • Planned intake; automatic collection and Cloudflare destination not yet proved."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Area"
+        },
+        {
+          "column": "B",
+          "value": "Requirement"
+        },
+        {
+          "column": "C",
+          "value": "Record / Rule"
+        },
+        {
+          "column": "D",
+          "value": "Acceptance / Evidence"
+        },
+        {
+          "column": "E",
+          "value": "Owner"
+        },
+        {
+          "column": "F",
+          "value": "Status"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All-agent coverage"
+        },
+        {
+          "column": "B",
+          "value": "Every Director/controller/worker mission emits structured outcomes and all applicable failure, blocker, correction and UNKNOWN records with trace/evidence pointers. Includes all active roles; future Sales before rollout."
+        },
+        {
+          "column": "C",
+          "value": "Mission/run/task/parent IDs, agent ID + role, company/account scope, event ID, observed time and trace pointers. Successful outcomes supply mission totals; do not invent events that did not occur."
+        },
+        {
+          "column": "D",
+          "value": "Map every active producer. Compare mission starts/completions with receipts; a silent or crashed agent creates a missing-report UNKNOWN, not an assumed success."
+        },
+        {
+          "column": "E",
+          "value": "Observatory + role owners"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Failure record"
+        },
+        {
+          "column": "B",
+          "value": "Capture expected versus actual behavior, category/stage, model/provider/tool, exact harness/runtime/rules/config versions, severity and trace/source pointers."
+        },
+        {
+          "column": "C",
+          "value": "Record recovery attempts and outcome, human correction with source pointer, linked eval/experiment IDs, owner and next action. Preserve original observation and later resolutions."
+        },
+        {
+          "column": "D",
+          "value": "A real Director or tool failure has a complete, redacted record and trace read-back. Missing facts stay UNKNOWN; no secrets or copied unrestricted customer content."
+        },
+        {
+          "column": "E",
+          "value": "Observatory owner"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Blocker record"
+        },
+        {
+          "column": "B",
+          "value": "Separate blockers from failures: permission, credential, required approval, uncertain identity, unavailable tool, API limit or dependency."
+        },
+        {
+          "column": "C",
+          "value": "Record affected step, reason, owner, dependency, exact resume condition and clearance evidence. A normal approval boundary is not automatically an agent error."
+        },
+        {
+          "column": "D",
+          "value": "An approval/permission block remains parked without bypass; independent work can proceed. A needless escalation can be investigated as a separate failure."
+        },
+        {
+          "column": "E",
+          "value": "Director / controller"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Lifecycle + noise"
+        },
+        {
+          "column": "B",
+          "value": "Separate event kind, outcome/evidence certainty and resolution state. Failure: OPEN / FIXED / WONT_FIX; blocker: OPEN / CLEARED. UNKNOWN never means PASS."
+        },
+        {
+          "column": "C",
+          "value": "Stable event IDs deduplicate delivery; group repeated errors by signature and versions, retaining count, first/last time and evidence pointers. Record short recovered incidents without a full investigation."
+        },
+        {
+          "column": "D",
+          "value": "Replay the same receipt without another event; do not collapse distinct missions. FIXED or CLEARED needs read-back evidence; original failure remains in history."
+        },
+        {
+          "column": "E",
+          "value": "Observatory owner"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Durable intake"
+        },
+        {
+          "column": "B",
+          "value": "One Observatory intake; failure/blocker ledgers are views of one authoritative operational store, linked to existing eval and experiment history."
+        },
+        {
+          "column": "C",
+          "value": "Inventory and name the existing store, raw-file destination, writer route and access scope. Cloudflare service/bucket/database selection remains unverified; no new database by default."
+        },
+        {
+          "column": "D",
+          "value": "Collector outage: retain a bounded local pending receipt, show delivery UNKNOWN, then drain once without duplicates. Independent reconciliation detects absent terminal reports."
+        },
+        {
+          "column": "E",
+          "value": "Observatory / infrastructure"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Failure → eval"
+        },
+        {
+          "column": "B",
+          "value": "Confirmed recurring OR high-impact failures become deduplicated eval candidates with expected behavior, source, version and relevance."
+        },
+        {
+          "column": "C",
+          "value": "Review/freeze the expected result before active promotion. Link failure → eval → experiment → verified fix; keep regressions versioned, with an explicit reason for retirement."
+        },
+        {
+          "column": "D",
+          "value": "Original failure + relevant regressions pass; unchanged protected holdout stays hidden. Permission-denial tests reward the correct stop. No self-weakened grader or automatic production release."
+        },
+        {
+          "column": "E",
+          "value": "Lab + reviewer"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime / Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Raw operational events and traces stay in the authoritative store. Prime/AI Search receives distilled, source-backed findings with evidence pointers."
+        },
+        {
+          "column": "C",
+          "value": "A promoted lesson names the cause, applicable versions, tested fix, experiment, limits and measured result. Unproven hypotheses remain labeled. Existing tenant/access scope follows retrieval."
+        },
+        {
+          "column": "D",
+          "value": "A fresh agent retrieves the original failure and proven lesson through their proper routes. Raw error floods are not copied into vector knowledge."
+        },
+        {
+          "column": "E",
+          "value": "Research / Intelligence"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Current findings"
+        },
+        {
+          "column": "B",
+          "value": "Return open failures/blockers, corrections, UNKNOWNs, proven/rejected fixes, current baseline and queue; show clusters over a specified mission window."
+        },
+        {
+          "column": "C",
+          "value": "Include source freshness, producer coverage, missing reports, per-category counts and mission totals. Distinguish a closed blocker from a fixed bug and a suggested fix from a proven one."
+        },
+        {
+          "column": "D",
+          "value": "Fresh controller answers where a task failed without Alex retelling. Counts reconcile to stored events; uncovered agents are visible rather than silently omitted."
+        },
+        {
+          "column": "E",
+          "value": "Director + Observatory"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foundation acceptance"
+        },
+        {
+          "column": "B",
+          "value": "Prove real failure capture now, while Director already runs work. Collector is a prerequisite for Sales shadow/rollout; future roles pass the same contract test."
+        },
+        {
+          "column": "C",
+          "value": "One real failure, one legitimate blocker, one Alex correction and one UNKNOWN; repeat delivery and collector interruption; read back from a fresh agent. All active producers accounted for."
+        },
+        {
+          "column": "D",
+          "value": "Prove linked eval/experiment/fix and distilled lesson for one confirmed case. Until these receipts exist, automatic capture remains To do. No historical example counts are claimed."
+        },
+        {
+          "column": "E",
+          "value": "Director / reviewer"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SOURCE • Alex’s shared failure-history proposal, Oct 5, 2026. This tab specifies the intake contract; it is not a live failure ledger or a new operational store."
+        }
+      ]
+    }
+  ]
+}

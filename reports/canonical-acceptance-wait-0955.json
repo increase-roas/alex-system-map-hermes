@@ -1,0 +1,49 @@
+{
+  "at": "2026-10-10T09:55:32.023059+00:00",
+  "session_id": 65404,
+  "owner_pid": 5162,
+  "acceptance_pid": 21504,
+  "browser_pid": 21785,
+  "transcript_records": 985,
+  "stage": "browser canonical edit acceptance, inside startup health wait inferred from no server descendant and loopback refusal",
+  "port_3223": "ECONNREFUSED",
+  "bounded_wait": {
+    "parent_browser_timeout_seconds": 600,
+    "request_header_deadline_ms": 120000,
+    "health_loop_deadline_ms": 600000
+  },
+  "diagnosis": {
+    "parent_sample": "poll while communicating with browser child",
+    "browser_sample": "kevent, event loop wait",
+    "build_markers": {
+      "411072.txt": {
+        "compile_success": true,
+        "lint_phase": true,
+        "build_failure": false,
+        "type_error": false,
+        "eslint_error": false,
+        "build_success_pages": false,
+        "no_production_build": false,
+        "canonical_receipt": false
+      },
+      "411073.txt": {
+        "compile_success": false,
+        "lint_phase": false,
+        "build_failure": false,
+        "type_error": false,
+        "eslint_error": false,
+        "build_success_pages": false,
+        "no_production_build": false,
+        "canonical_receipt": false
+      }
+    }
+  },
+  "review_gaps": [
+    "TimeoutExpired has no process attribute; _run_cli exception cleanup references exc.process",
+    "Browser timeout kills direct child only; no owned process-group cleanup proof",
+    "Browser startServer does not check early server exit; health loop can wait 600 seconds with refused port",
+    "Request timeout is cleared before response body consumption",
+    "Positive timeout self-test sleeps a separate child, does not exercise production browser cleanup path"
+  ],
+  "decision": "Current browser child within explicit 600-second parent deadline; do not kill or duplicate. At final exit require saved failure/result and next safe correction. No new acceptance promoted."
+}

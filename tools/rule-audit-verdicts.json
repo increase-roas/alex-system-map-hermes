@@ -1,0 +1,36 @@
+{
+  "reviewed_at": "2026-10-11",
+  "reviewed_by": "Claude, reading every rule-audit pair by hand",
+  "spurious_tool_pairs_note": "rule-audit 0.5.0 pairs rules that share a word (alex, play, guard, fence). All 70 pairs found on 2026-10-11 across shared.md, agent-routing.mdc, grok-bot-standing.mdc, Director AGENTS.md and gates.md were read: none are opposing instructions. The map shows any NEW pair (not in reviewed_pairs) as 'unreviewed'.",
+  "reviewed_pairs": {
+    "shared.md": 5,
+    "agent-routing.mdc": 5,
+    "grok-bot-standing.mdc": 1,
+    "AGENTS.md": 16,
+    "gates.md": 43
+  },
+  "conflicts": [
+    {
+      "id": "conflict:composio-only",
+      "a": "rule:cursor-grok-bot",
+      "b": "rule:app-reach",
+      "title": "Cursor's Grok Bot rule says Composio is the ONLY connector",
+      "plain": "Your shared rules and tool cards send some jobs outside Composio on purpose: web search, browser and computer use, Modal (terminal only) and the Director Observatory (local). Cursor's Grok Bot rule says \"Composio is the only connector,\" so on Grok Bot work Cursor may refuse those routes.",
+      "care": "maybe",
+      "why": "It only applies when Cursor works on Grok Bot / Ralph Jr, but there it can block the right tool.",
+      "todo": "Change that line to: \"Composio for app connectors; tool cards name the few local routes.\"",
+      "sources": ["~/.cursor/rules/grok-bot-standing.mdc", "~/.agents/instructions/shared.md", "~/.agents/tools/cards/web-search.md", "~/.agents/tools/cards/modal.md"]
+    },
+    {
+      "id": "conflict:chatgpt-no-rules",
+      "a": "rule:rule-chain",
+      "b": "app:chatgpt",
+      "title": "ChatGPT gets none of your generated rules",
+      "plain": "build_instructions.py writes your rules into Claude, Codex and Cursor only. ChatGPT is one of your AI apps, and shared.md even has ChatGPT-specific lines, but nothing delivers the rule file to it.",
+      "care": "yes",
+      "why": "ChatGPT can act through Composio without your ask-first gates unless you pasted them into its settings by hand. NEEDS VERIFICATION: the map can't read ChatGPT's custom instructions.",
+      "todo": "Paste the 'Ask Alex first' gate line into ChatGPT's custom instructions, or tell me to make a ChatGPT version of the rules.",
+      "sources": ["~/.agents/tools/unify/build_instructions.py", "~/.agents/instructions/shared.md"]
+    }
+  ]
+}

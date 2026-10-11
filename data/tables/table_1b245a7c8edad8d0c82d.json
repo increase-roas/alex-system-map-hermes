@@ -1,0 +1,2076 @@
+{
+  "id": "table_1b245a7c8edad8d0c82d",
+  "sheet": "S02-24 GoHighLevel rebuild",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How to rebuild the two GoHighLevel routes on fresh accounts: the CRM gateway (a Cloudflare Worker behind a private HighLevel Marketplace app) and the builder (a Worker in front of GHL Command on the hub). Values are never shown. It closes retest gaps G13 and G14; Rebuild from zero steps 10.1 to 10.5 point here. Its own tab next to GoHighLevel, so each tab has one writer. Facts from play spp-p20c (notes/gap-facts-apps.md §3 and §4). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/ghl-rebuild.json; never edit this tab by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gateway 1. The HighLevel Marketplace app (fresh account)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "what ours has (2026-10-01)"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.1 Developer account"
+        },
+        {
+          "column": "B",
+          "value": "Sign up at marketplace.gohighlevel.com (Sign Up, verify phone and email). The first person to sign up is the account's only Owner, so add teammates as users instead of sharing the login. An agency admin who clicks Sell on Marketplace gets one made from the agency's details."
+        },
+        {
+          "column": "C",
+          "value": "Ours exists; it owns the app below."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/oauth/CreateDeveloperAccount/ (read 2026-10-01) ; https://help.gohighlevel.com/support/solutions/articles/155000000136-how-to-get-started-with-the-developer-s-marketplace (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.2 Marketplace CLI (how our app is kept)"
+        },
+        {
+          "column": "B",
+          "value": "npm install -g @gohighlevel/marketplace-cli (needs Node 20.12 or newer), then ghl login (browser sign-in). Flow: ghl app create (or ghl app pull <app id>), ghl app validate, ghl app diff, ghl app push, ghl app publish."
+        },
+        {
+          "column": "C",
+          "value": "@gohighlevel/marketplace-cli 1.0.0 at ~/.local/bin/ghl. The app's workspace ~/Development/increase-roas-marketplace-app is the private repo increaseroasir/increase-roas-marketplace-app (manifest, webhooks, .ghl CLI baselines; client secrets stay in the ghl CLI's secret ledger, never in the repo): a newcomer clones it, then runs ghl app pull <appId> to refresh."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/sdk/marketplace-cli/ (read 2026-10-01) ; ~/Development/increase-roas-marketplace-app/HIGHLEVEL_APP.md L172–L178 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §6 ; work/2026-10-01_setup-playbook/workbook-updates.md L161"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.3 Create the app"
+        },
+        {
+          "column": "B",
+          "value": "My Apps > Create App: name, App Type Private (internal, not listed, installed with the app's own install link), listing type. Target user can't be changed once set. HighLevel's recommended setup for agency installs is Target user Sub-account with agency bulk install; an app that needs agency-level scopes (companies, oauth, saas, snapshots, custom menu links) must be installable by Agency Only."
+        },
+        {
+          "column": "C",
+          "value": "Private; user types Company and Location (the legacy 'Agency & Sub-account' setting); white-label friendly; agency bulk install on; free; live version 5.0.0."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/oauth/CreateMarketplaceApp (read 2026-10-01) ; https://marketplace.gohighlevel.com/docs/oauth/AppDistribution/ (read 2026-10-01) ; ~/Development/increase-roas-marketplace-app/ghl-app.json ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.4 Scopes"
+        },
+        {
+          "column": "B",
+          "value": "Advanced Settings > Auth > Select Scope (or ghl app scopes add): select the 175 scopes the gateway asks for, including oauth.readonly (list the installed sub-accounts) and oauth.write (mint sub-account tokens). Changing scopes later makes a new major version that each installer must accept."
+        },
+        {
+          "column": "C",
+          "value": "175 allowed scopes, exactly the gateway's list (0 differences either way)."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/gateway-core.mjs L32–L208 ; https://marketplace.gohighlevel.com/docs/Authorization/Scopes (read 2026-10-01) ; https://marketplace.gohighlevel.com/docs/oauth/HowToUpdateYourAPP/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.5 Redirect URL"
+        },
+        {
+          "column": "B",
+          "value": "Add https://<your gateway Worker address>/oauth/callback (Advanced Settings > Auth). It must match what the Worker sends, which it builds from its own address. White-label apps can't use HighLevel-branded redirect URLs."
+        },
+        {
+          "column": "C",
+          "value": "The gateway callback (the default), plus Composio's auth-app URL for a second client key used by the Hermes route (G24)."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L128–L130 ; https://marketplace.gohighlevel.com/docs/oauth/CreateMarketplaceApp (read 2026-10-01) ; https://marketplace.gohighlevel.com/docs/sdk/marketplace-cli/ (read 2026-10-01) ; ~/Development/increase-roas-marketplace-app/ghl-app.json"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.6 Client keys: where the credentials go"
+        },
+        {
+          "column": "B",
+          "value": "Advanced Settings > Auth > Client Keys > Add. HighLevel shows the Client ID and the Client Secret; the secret is shown only once. Save both straight into a new 1Password item, then pipe them into the Worker secrets GHL_CLIENT_ID and GHL_CLIENT_SECRET (section 2). Never paste them into chat or a file."
+        },
+        {
+          "column": "C",
+          "value": "2 client keys: the default (the gateway's) and 'composio_hermes'. No 1Password item in Connectors holds the gateway's client ID or secret."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/oauth/CreateMarketplaceApp (read 2026-10-01) ; https://marketplace.gohighlevel.com/docs/Authorization/OAuth2.0/ (read 2026-10-01) ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L345–L392 ; ~/.agents/tools/cards/cloudflare.md \"Secrets for Workers go from 1Password by script\" ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.7 Webhook (optional)"
+        },
+        {
+          "column": "B",
+          "value": "Advanced Settings > Webhooks: https://<worker>/webhooks/ghl and the events you want. The Worker posts each event to Slack when SLACK_BOT_TOKEN and SLACK_CHANNEL_ID are set; events from another company are refused."
+        },
+        {
+          "column": "C",
+          "value": "68 events go to the gateway's /webhooks/ghl."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/Authorization/OAuth2.0/ (read 2026-10-01) ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L410–L440 ; ~/Development/increase-roas-marketplace-app/src/webhooks/ghl-webhooks.json"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.8 Publish"
+        },
+        {
+          "column": "B",
+          "value": "ghl app publish (or the portal). A private app goes live at once, with no review. A private app can be installed in up to 5 agencies."
+        },
+        {
+          "column": "C",
+          "value": "Live, version 5.0.0."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/oauth/HowToUpdateYourAPP/ (read 2026-10-01) ; https://help.gohighlevel.com/support/solutions/articles/155000002141-marketplace-app-distribution-type (read 2026-10-01) ; ~/Development/increase-roas-marketplace-app/ghl-app.json"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.9 Put your app and agency into the code"
+        },
+        {
+          "column": "B",
+          "value": "Set GHL_APP_ID in lib/gateway-core.mjs (line 2) to the new app's ID, and GHL_ALLOWED_COMPANY_ID in wrangler.toml to your agency's company ID. Tokens and webhooks for any other company are refused."
+        },
+        {
+          "column": "C",
+          "value": "Both hold ours today."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/gateway-core.mjs L2 ; ~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L5–L7 ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L163–L166"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.10 Second app in the account"
+        },
+        {
+          "column": "B",
+          "value": "Leave HighLevel's 'UNUSED — not Agent Gateway' app alone; only the Agent Gateway app backs this Worker."
+        },
+        {
+          "column": "C",
+          "value": "Recorded in the gateway's finish notes."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/FINISH-WRITES.md L5–L14"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gateway 2. The Worker increase-roas-oauth-gateway: settings and secrets"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "setting"
+        },
+        {
+          "column": "B",
+          "value": "kind"
+        },
+        {
+          "column": "C",
+          "value": "what it holds, and how to make it"
+        },
+        {
+          "column": "D",
+          "value": "live on 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "name, main file, compatibility date"
+        },
+        {
+          "column": "B",
+          "value": "wrangler.toml"
+        },
+        {
+          "column": "C",
+          "value": "increase-roas-oauth-gateway, worker.mjs, 2026-08-13. Keep your Worker's name in the SELF binding too."
+        },
+        {
+          "column": "D",
+          "value": "Same (compatibility date read 21:15Z)."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L1–L3 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DB"
+        },
+        {
+          "column": "B",
+          "value": "D1 binding"
+        },
+        {
+          "column": "C",
+          "value": "wrangler d1 create <name>, put its ID in wrangler.toml, then create the tables in section 3: wrangler d1 execute <name> --remote --file <schema file with section 3's statements>."
+        },
+        {
+          "column": "D",
+          "value": "increase-roas-ghl-oauth-gateway-db, 3 tables."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L9–L12 ; https://developers.cloudflare.com/d1/wrangler-commands/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SELF"
+        },
+        {
+          "column": "B",
+          "value": "service binding"
+        },
+        {
+          "column": "C",
+          "value": "The Worker calling itself; set service to your Worker's name."
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L14–L16 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL_ALLOWED_COMPANY_ID"
+        },
+        {
+          "column": "B",
+          "value": "plain variable"
+        },
+        {
+          "column": "C",
+          "value": "Your agency's company ID. Everything for another company is refused."
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L5–L7 ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L163–L166 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SLACK_CHANNEL_ID"
+        },
+        {
+          "column": "B",
+          "value": "plain variable (optional)"
+        },
+        {
+          "column": "C",
+          "value": "The Slack channel for webhook events."
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/wrangler.toml L5–L7 ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L425–L440 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL_CLIENT_ID and GHL_CLIENT_SECRET"
+        },
+        {
+          "column": "B",
+          "value": "secrets"
+        },
+        {
+          "column": "C",
+          "value": "The app's client key (section 1, step 1.6), used to trade the sign-in code for tokens and to refresh them."
+        },
+        {
+          "column": "D",
+          "value": "Present. No 1Password copy in Connectors."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L345–L392 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "TOKEN_ENCRYPTION_KEY"
+        },
+        {
+          "column": "B",
+          "value": "secret"
+        },
+        {
+          "column": "C",
+          "value": "Exactly 32 random bytes, base64url-encoded. It encrypts the GHL tokens stored in D1. If it is lost, the stored tokens can't be read and the agency must sign in again at /oauth/start."
+        },
+        {
+          "column": "D",
+          "value": "Present. No 1Password copy in Connectors."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L75–L79 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL_MCP_INTERNAL_API_KEY"
+        },
+        {
+          "column": "B",
+          "value": "secret"
+        },
+        {
+          "column": "C",
+          "value": "The gateway key: a random string of at least 16 characters. Composio sends it as Authorization: Bearer on /mcp. Save it in 1Password first (section 4, step 4.3)."
+        },
+        {
+          "column": "D",
+          "value": "Present; in 1Password as 'GHL OAuth CRM (ghl-oauth-crm) — gateway key'."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L101–L113 ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L22 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "INTERNAL_API_KEY"
+        },
+        {
+          "column": "B",
+          "value": "secret"
+        },
+        {
+          "column": "C",
+          "value": "A second random key (at least 16 characters) for /api/* callers such as the HTL dashboard. /api/* also accepts the gateway key."
+        },
+        {
+          "column": "D",
+          "value": "Present. Its value from the local .dev.vars is in 1Password item 'GHL OAuth CRM (ghl-oauth-crm) — INTERNAL_API_KEY (from local .dev.vars)' (2026-10-02); whether it equals the live Worker secret is NOT_PROVEN (Cloudflare never shows secret values)."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L115–L126 ; ~/Development/increase-roas-oauth-gateway-hotfix/README.md L7 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L160"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SLACK_BOT_TOKEN"
+        },
+        {
+          "column": "B",
+          "value": "secret (optional)"
+        },
+        {
+          "column": "C",
+          "value": "A Slack bot token for posting webhook events."
+        },
+        {
+          "column": "D",
+          "value": "Present. No 1Password copy in Connectors."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L425–L440 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How to set a secret"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Pipe each value from 1Password (or a script) into wrangler secret put <NAME>; that deploys a new version. Cloudflare never shows a secret's value again."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "https://developers.cloudflare.com/workers/configuration/secrets/ (read 2026-10-01) ; https://github.com/cloudflare/workers-sdk/blob/main/packages/turbo-r2-archive/README.md (read 2026-10-01) ; ~/.agents/tools/cards/cloudflare.md \"Secrets for Workers go from 1Password by script\""
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Deploy"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "From git with wrangler (wrangler deploy in the repo folder), not by splicing a bundle. The live version 75 was spliced; a build from git adds only 3 test exports."
+        },
+        {
+          "column": "D",
+          "value": "Live: version 75."
+        },
+        {
+          "column": "E",
+          "value": "workbook Rebuild from zero R312 ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md \"(d) Which code base is live\""
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Local .dev.vars"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Wrangler reads .dev.vars only for local development. Keep live values in 1Password, not on disk."
+        },
+        {
+          "column": "D",
+          "value": "Retired 2026-10-02 (spp-p35a): its 2 values were saved to 1Password first, and the file was moved to the Trash."
+        },
+        {
+          "column": "E",
+          "value": "https://developers.cloudflare.com/workers/configuration/secrets/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §7 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L160"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gateway 3. D1 tables (exact statements read from the live database 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "object"
+        },
+        {
+          "column": "B",
+          "value": "CREATE statement"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "table agency_authorizations"
+        },
+        {
+          "column": "B",
+          "value": "CREATE TABLE agency_authorizations (company_id TEXT PRIMARY KEY NOT NULL, user_id TEXT, scope TEXT NOT NULL, access_token_enc TEXT NOT NULL, refresh_token_enc TEXT NOT NULL, access_expires_at INTEGER NOT NULL, installation_json TEXT NOT NULL DEFAULT '{}', created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL)"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "table location_authorizations"
+        },
+        {
+          "column": "B",
+          "value": "CREATE TABLE location_authorizations (company_id TEXT NOT NULL, location_id TEXT NOT NULL, user_id TEXT, scope TEXT NOT NULL, access_token_enc TEXT, refresh_token_enc TEXT, access_expires_at INTEGER, installation_json TEXT NOT NULL DEFAULT '{}', created_at INTEGER NOT NULL, updated_at INTEGER NOT NULL, PRIMARY KEY (company_id, location_id), FOREIGN KEY (company_id) REFERENCES agency_authorizations(company_id) ON DELETE CASCADE)"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "table oauth_states"
+        },
+        {
+          "column": "B",
+          "value": "CREATE TABLE oauth_states (state_hash TEXT PRIMARY KEY NOT NULL, csrf_hash TEXT NOT NULL, expires_at INTEGER NOT NULL, created_at INTEGER NOT NULL, used_at INTEGER)"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "index idx_location_authorizations_company"
+        },
+        {
+          "column": "B",
+          "value": "CREATE INDEX idx_location_authorizations_company ON location_authorizations(company_id, location_id)"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "index idx_oauth_states_expiry"
+        },
+        {
+          "column": "B",
+          "value": "CREATE INDEX idx_oauth_states_expiry ON oauth_states(expires_at)"
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gateway 4. Install at agency level, connect Composio, and keep it running"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.1 Agency install"
+        },
+        {
+          "column": "B",
+          "value": "Signed in as the agency admin, open https://<worker>/oauth/start. HighLevel's consent page (chooselocation, user type Company) lists the scopes; choose the sub-accounts (bulk install). The Worker trades the code for agency tokens (user_type Company) and stores them encrypted."
+        },
+        {
+          "column": "C",
+          "value": "The page answers {\"status\": \"authorized\", \"companyId\": ..., \"authorizedLocationCount\": n}."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L345–L392 ; https://marketplace.gohighlevel.com/docs/Authorization/TargetUserSubAccount (read 2026-10-01) ; https://marketplace.gohighlevel.com/docs/ghl/oauth/get-access-token (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.2 Sub-account tokens"
+        },
+        {
+          "column": "B",
+          "value": "Nothing to do by hand. On each call the Worker lists the app's installed sub-accounts (/oauth/installed-locations, needs oauth.readonly), mints that sub-account's token from the agency token (/oauth/location-token, needs oauth.write) and caches it."
+        },
+        {
+          "column": "C",
+          "value": "A CRM read for one sub-account works (step 4.4)."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L262–L322 ; https://marketplace.gohighlevel.com/docs/Authorization/Scopes (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.3 Gateway key"
+        },
+        {
+          "column": "B",
+          "value": "Make a long random string (at least 16 characters) and save it first in the 1Password item 'GHL OAuth CRM (ghl-oauth-crm) — gateway key'. Pipe it from there into wrangler secret put GHL_MCP_INTERNAL_API_KEY, then push the same item into Composio custom_ghl_oauth_crm with the key mover."
+        },
+        {
+          "column": "C",
+          "value": "The Composio login shows ACTIVE."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L101–L113 ; workbook Rebuild from zero R313 ; ~/.agents/tools/connectors/push_key_to_composio.py docstring"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.4 Check"
+        },
+        {
+          "column": "B",
+          "value": "Through Composio custom_ghl_oauth_crm, a list-locations call returns the agency's sub-accounts. (This is the check G23 moved to step 10.2.)"
+        },
+        {
+          "column": "C",
+          "value": "The agency's sub-accounts come back."
+        },
+        {
+          "column": "D",
+          "value": "workbook Rebuild from zero R313"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.5 Token lifetimes"
+        },
+        {
+          "column": "B",
+          "value": "Access tokens last about a day. A refresh token lasts up to a year or until it is used once, and each refresh returns a new pair. The Worker refreshes 120 seconds before expiry and stores the new pair."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/Authorization/OAuth2.0/ (read 2026-10-01) ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L27 ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L235–L261"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.6 Adding scopes later"
+        },
+        {
+          "column": "B",
+          "value": "Add the scopes to the app, publish the new major version, accept the update in the agency, then open /oauth/start again. When the agency's scope set changes, the Worker drops its cached sub-account tokens so new ones carry the new scopes."
+        },
+        {
+          "column": "C",
+          "value": "The callback answers authorized again."
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/oauth/HowToUpdateYourAPP/ (read 2026-10-01) ; ~/Development/increase-roas-oauth-gateway-hotfix/worker.mjs L188–L205 ; ~/Development/increase-roas-oauth-gateway-hotfix/FINISH-WRITES.md L69–L85"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.7 If the Worker is lost"
+        },
+        {
+          "column": "B",
+          "value": "A new Worker needs a new client key from the app (the secret can't be read back), a new TOKEN_ENCRYPTION_KEY with a fresh agency sign-in at /oauth/start, and a new INTERNAL_API_KEY for /api callers. The gateway key can be restored from 1Password."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://marketplace.gohighlevel.com/docs/oauth/CreateMarketplaceApp (read 2026-10-01) ; https://developers.cloudflare.com/workers/configuration/secrets/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §7"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder 1. Deploy the builder origin on the hub (/opt/ghl-command-universal; after Phase 8)"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "live on 2026-10-01 21:07Z"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.1 Before you start"
+        },
+        {
+          "column": "B",
+          "value": "The hub from Phase 8 already has Node 22 (/usr/bin/node), Python 3 (/usr/bin/python3) and Supervisor. The hub installer does not deploy the builder origin; these steps do. Clone github.com/increaseroasir/ghl-command-universal."
+        },
+        {
+          "column": "C",
+          "value": "node --version shows v22."
+        },
+        {
+          "column": "D",
+          "value": "node v22.23.2, Python 3.12.3."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/connectors/hub/README.md L41–L42 ; ~/Development/ghl-command-universal/README.md L13 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.2 Folder and code"
+        },
+        {
+          "column": "B",
+          "value": "Make /opt/ghl-command-universal (mode 700). Copy origin/server.py, origin/test_origin.py, origin/package.json and origin/package-lock.json into it, then run npm ci there. That installs @elitedcs/ghl-mcp 3.88.2 from the public npm registry."
+        },
+        {
+          "column": "C",
+          "value": "The copied files' sha256 equal git."
+        },
+        {
+          "column": "D",
+          "value": "All four equal commit 6fcc3b4 by hash; 3.88.2 installed."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/README.md L13 ; ~/Development/ghl-command-universal/README.md L17 ; ghl-command-universal 6fcc3b4 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.3 GHL Command sign-in files"
+        },
+        {
+          "column": "B",
+          "value": "/opt/increase-roas-mcp/ghl-config must hold credentials.json, .ghl-tokens.json and device.json (table 2). The origin copies them into each new session and never edits the originals."
+        },
+        {
+          "column": "C",
+          "value": "All three files exist, mode 0600."
+        },
+        {
+          "column": "D",
+          "value": "Present, 0600; the registry has 49 sub-account entries."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/origin/server.py L15–L19 ; ~/Development/ghl-command-universal/origin/server.py L98–L103 ; ~/Development/ghl-command-universal/origin/README.md L7 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.4 Origin key"
+        },
+        {
+          "column": "B",
+          "value": "On the hub, write the key from 1Password item 5bfzdypjiimr7ov4kyua6wxtha ('GHL Command Builder (ghl-command-builder) — origin key') into /opt/ghl-command-universal/origin-key, mode 0600, with op inside a script (never typed or printed). The Worker's ORIGIN_KEY holds the same value. If the item is ever lost, make a new random key and set both places together."
+        },
+        {
+          "column": "C",
+          "value": "Without the key, /health answers 401; the acceptance test (step 1.7) passes with it."
+        },
+        {
+          "column": "D",
+          "value": "origin-key 0600; equal to the 1Password item by hash (spp-p20a)."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/origin/README.md L5 ; ~/Development/ghl-command-universal/README.md L17 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.5 Tunnel"
+        },
+        {
+          "column": "B",
+          "value": "Fresh account: create a remotely managed tunnel (API POST /accounts/<id>/cfd_tunnel with config_src cloudflare, or the dashboard). Set ingress <origin hostname> to http://127.0.0.1:8789 with a catch-all http_status:404, and add a proxied DNS CNAME to <tunnel id>.cfargotunnel.com. Rebuilding ours: fetch the token with GET …/cfd_tunnel/9b09467d-9c1c-4f4c-9b00-021ad8239f20/token through Composio custom_cloudflare_api into /opt/ghl-command-universal/tunnel/token (mode 0600). Put cloudflared 2026.9.3 at tunnel/cloudflared and check its sha256 against the README."
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare shows the tunnel healthy with 4 connections."
+        },
+        {
+          "column": "D",
+          "value": "Healthy, 4 connections; ingress ghl-command-origin.increaseroas.com to 127.0.0.1:8789 plus the 404 fallback; proxied CNAME; cloudflared sha256 matches."
+        },
+        {
+          "column": "E",
+          "value": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/get-started/create-remote-tunnel-api/ (read 2026-10-01) ; https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/remote-tunnel-permissions/ (read 2026-10-01) ; ~/Development/ghl-command-universal/README.md L15 ; ~/Development/ghl-command-universal/README.md L17 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.6 Supervisor programs"
+        },
+        {
+          "column": "B",
+          "value": "Copy origin/deploy/supervisor/ir-ghl-command-universal.conf and ir-ghl-command-tunnel.conf to /etc/supervisor/conf.d/, then supervisorctl reread and supervisorctl update (as the hub installer does for its own programs)."
+        },
+        {
+          "column": "C",
+          "value": "supervisorctl status shows both RUNNING, and 127.0.0.1:8789 is listening."
+        },
+        {
+          "column": "D",
+          "value": "Both RUNNING; both files equal git by hash; python3 listening on 127.0.0.1:8789."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/origin/deploy/supervisor/ir-ghl-command-universal.conf ; ~/Development/ghl-command-universal/origin/deploy/supervisor/ir-ghl-command-tunnel.conf ; ~/.agents/tools/connectors/hub/install_hub.sh L149 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.7 Acceptance test"
+        },
+        {
+          "column": "B",
+          "value": "python3 /opt/ghl-command-universal/test_origin.py. It is read-only: auth, dispatcher gates, two-session isolation, live location identity, workflow listing, and hashes of the original config before and after."
+        },
+        {
+          "column": "C",
+          "value": "It passes."
+        },
+        {
+          "column": "D",
+          "value": "Not run in this play."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/origin/README.md L13"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.8 Public check"
+        },
+        {
+          "column": "B",
+          "value": "Without the key, https://<origin hostname>/health answers 401 (the tunnel is up and the key is required)."
+        },
+        {
+          "column": "C",
+          "value": "401."
+        },
+        {
+          "column": "D",
+          "value": "401 at 21:07Z, both on the hub and through the public hostname."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1.9 Repair rule"
+        },
+        {
+          "column": "B",
+          "value": "Restart only the failing new service: supervisorctl status ir-ghl-command-universal, then supervisorctl restart ir-ghl-command-universal if needed. Package upgrades need a new catalog and permission review plus the read-only acceptance test, not a blind version bump."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/origin/README.md L13 ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L44"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder 2. GHL Command (Elite DCs) licence and sign-in files"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "item"
+        },
+        {
+          "column": "B",
+          "value": "what it is"
+        },
+        {
+          "column": "C",
+          "value": "how to get or make it"
+        },
+        {
+          "column": "D",
+          "value": "where it lives"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2.1 Licence"
+        },
+        {
+          "column": "B",
+          "value": "GHL Command by Elite DCs, the licensed package the origin runs."
+        },
+        {
+          "column": "C",
+          "value": "Buy at ghlcommand.com: $97 a month for every sub-account, on up to 3 machines (the hub counts as one). The key arrives by email."
+        },
+        {
+          "column": "D",
+          "value": "1Password item smsqrb4cyzqvdsu3eedizvpxgy ('GHL Command (EliteDCS) — license key'); on the hub in credentials.json (license_key)."
+        },
+        {
+          "column": "E",
+          "value": "https://www.npmjs.com/package/@elitedcs/ghl-mcp (read 2026-10-01) ; ~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L254 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2.2 credentials.json"
+        },
+        {
+          "column": "B",
+          "value": "The licence key, the purchase email, one sub-account's Private Integration key and location ID, and the workflow-builder sign-in values."
+        },
+        {
+          "column": "C",
+          "value": "Written by GHL Command's setup_ghl_mcp (email, license_key, ghl_api_key, ghl_location_id). The workflow-builder (Firebase) values are added with enable_workflow_builder. On a headless hub: Builder 2b."
+        },
+        {
+          "column": "D",
+          "value": "/opt/increase-roas-mcp/ghl-config/credentials.json (0600). Field names: license_key, email, verified_at, ghl_api_key, ghl_location_id, ghl_user_id, device_id and one more."
+        },
+        {
+          "column": "E",
+          "value": "https://www.npmjs.com/package/@elitedcs/ghl-mcp (read 2026-10-01) ; ~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L128–L140 ; ~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L196–L214 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G14-addendum.json"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2.3 .ghl-tokens.json"
+        },
+        {
+          "column": "B",
+          "value": "The registry: each sub-account with its Private Integration key."
+        },
+        {
+          "column": "C",
+          "value": "register_location or cli register-location (table 4)."
+        },
+        {
+          "column": "D",
+          "value": "/opt/increase-roas-mcp/ghl-config/.ghl-tokens.json (0600), 49 entries."
+        },
+        {
+          "column": "E",
+          "value": "~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L216–L264 ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L36 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2.4 device.json"
+        },
+        {
+          "column": "B",
+          "value": "This install's device ID (licence activations are per device)."
+        },
+        {
+          "column": "C",
+          "value": "Made by GHL Command at setup."
+        },
+        {
+          "column": "D",
+          "value": "/opt/increase-roas-mcp/ghl-config/device.json (0600)."
+        },
+        {
+          "column": "E",
+          "value": "~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L884 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2.5 Licence checks"
+        },
+        {
+          "column": "B",
+          "value": "How the licence is enforced."
+        },
+        {
+          "column": "C",
+          "value": "Checked at setup against the elitedcs.com licence server, then cached as a signed attestation (about 30 days) and renewed in the background. A fourth device is refused until support resets the activations."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L703–L706 ; ~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L884"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder 2a. Where the origin expects the sign-in files (G14 addendum, spp-c14)"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what"
+        },
+        {
+          "column": "B",
+          "value": "detail"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source folder"
+        },
+        {
+          "column": "B",
+          "value": "/opt/increase-roas-mcp/ghl-config. Each session gets a copy of credentials.json, .ghl-tokens.json and device.json, and runs the pinned @elitedcs/ghl-mcp package (version 3.88.2) with GHL_MCP_CONFIG_DIR set to its session folder."
+        },
+        {
+          "column": "C",
+          "value": "~/Development/ghl-command-universal/origin/server.py L16–L18 ; ~/Development/ghl-command-universal/origin/server.py L99–L106 ; ghl-command-universal 6fcc3b4"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Where the files come from"
+        },
+        {
+          "column": "B",
+          "value": "From the licensed GHL Command sign-in (the README names no command)."
+        },
+        {
+          "column": "C",
+          "value": "~/Development/ghl-command-universal/README.md L17 \"come from the licensed GHL Command sign-in\""
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder 2b. The package's documented sign-in, and the hub sequence (G14 addendum, spp-c14)"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "command or action"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Students"
+        },
+        {
+          "column": "B",
+          "value": "GHL Command's builder is out of the student build (needs your own GHL Command licence and sign-in); the code ships for reading only. Checks 10.3 and 10.5 are partner route only."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L285 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D24"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Install the pinned package"
+        },
+        {
+          "column": "B",
+          "value": "cd /opt/ghl-command-universal && npm ci"
+        },
+        {
+          "column": "C",
+          "value": "~/Development/ghl-command-universal/README.md L17"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Point the package at the source folder"
+        },
+        {
+          "column": "B",
+          "value": "export GHL_MCP_CONFIG_DIR=/opt/increase-roas-mcp/ghl-config (create it with mode 700). The package documents GHL_MCP_CONFIG_DIR as its persistent config dir, given as an absolute path."
+        },
+        {
+          "column": "C",
+          "value": "https://www.npmjs.com/package/@elitedcs/ghl-mcp (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §2"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Register keys headlessly"
+        },
+        {
+          "column": "B",
+          "value": "npx -y @elitedcs/ghl-mcp cli register-agency-key --api-key <agency Private Integration key>; cli register-location --location-id <id> --api-key <key> --name \"<name>\" for each sub-account; cli register-company-firebase --company-id <id> --refresh-token <…> --user-id <…> for the builder tools. Use the pinned 3.88.2 binary."
+        },
+        {
+          "column": "C",
+          "value": "https://www.npmjs.com/package/@elitedcs/ghl-mcp (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Activate the license"
+        },
+        {
+          "column": "B",
+          "value": "One setup_ghl_mcp tool call with email (purchase email), license_key, ghl_api_key and ghl_location_id (firebase_paste optional). Headless, send it over the package's stdio JSON-RPC (initialize, then tools/call), the same exchange server.py's Child class uses. A server counts as one machine of the license's three."
+        },
+        {
+          "column": "C",
+          "value": "https://elitedcs.com/ghl-mcp-setup-guide (read 2026-10-01) ; ~/Development/ghl-command-universal/origin/server.py L109–L113 ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §2"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder 3. The Worker ghl-command-universal: settings and secrets"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "setting"
+        },
+        {
+          "column": "B",
+          "value": "kind"
+        },
+        {
+          "column": "C",
+          "value": "what it holds, and how to make it"
+        },
+        {
+          "column": "D",
+          "value": "live on 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OAUTH_KV"
+        },
+        {
+          "column": "B",
+          "value": "KV binding"
+        },
+        {
+          "column": "C",
+          "value": "wrangler kv namespace create <name>, then put its ID in worker/wrangler.jsonc. Holds OAuth clients, one-use consent handles, grants and token state."
+        },
+        {
+          "column": "D",
+          "value": "ghl-command-universal-oauth."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/worker/wrangler.jsonc L9–L14 ; ~/Development/ghl-command-universal/worker/README.md L5 ; https://developers.cloudflare.com/kv/reference/kv-commands/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ORIGIN_URL"
+        },
+        {
+          "column": "B",
+          "value": "plain variable"
+        },
+        {
+          "column": "C",
+          "value": "https://<origin hostname>/mcp"
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/worker/wrangler.jsonc L15–L18 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AUTH_EPOCH"
+        },
+        {
+          "column": "B",
+          "value": "plain variable"
+        },
+        {
+          "column": "C",
+          "value": "A random value. Change it to revoke every MCP token at once; apps then reconnect and approve with the current password."
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/worker/README.md L7 ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CONNECTION_PASSWORD_SHA256"
+        },
+        {
+          "column": "B",
+          "value": "secret"
+        },
+        {
+          "column": "C",
+          "value": "64 lowercase hex characters: the SHA-256 of the connection password in 1Password item yxvess6diezoy7lgrnhqrmct5i ('GHL Command Builder (ghl-command-builder) — connection password'). Compute it in a script from the item and pipe it into wrangler secret put; never type the password. Rotating the password blocks new approvals but doesn't revoke tokens, so change AUTH_EPOCH too."
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/worker/README.md L7 ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L21 ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L42 ; https://github.com/cloudflare/workers-sdk/blob/main/packages/turbo-r2-archive/README.md (read 2026-10-01) ; ~/.agents/tools/cards/cloudflare.md \"Secrets for Workers go from 1Password by script\" ; work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ORIGIN_KEY"
+        },
+        {
+          "column": "B",
+          "value": "secret"
+        },
+        {
+          "column": "C",
+          "value": "The same value as /opt/ghl-command-universal/origin-key (1Password item 5bfzdypjiimr7ov4kyua6wxtha)."
+        },
+        {
+          "column": "D",
+          "value": "Present."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/worker/README.md L7 ; ~/Development/ghl-command-universal/README.md L17 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Build and deploy"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "cd worker; npm ci; npm test; npm run typecheck; npm run build. Upload dist/index.js as an ES module with the bindings in wrangler.jsonc, keeping the existing secret bindings. Keep observability off. Set secrets with wrangler secret put (Cloudflare never shows them again)."
+        },
+        {
+          "column": "D",
+          "value": "The live Worker equals a build of 0aff5df byte for byte."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/README.md L11 ; https://developers.cloudflare.com/workers/configuration/secrets/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md \"Matches live\""
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Register custom_ghl_command_builder with DCR_OAUTH pointing at https://<worker>/mcp, then sign in with the connection password on the Worker's approval page."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/tabs/gap-facts/G12.json ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L7"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Builder 4. Register a sub-account's Private Integration key with the builder"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.1 Make the key"
+        },
+        {
+          "column": "B",
+          "value": "In GHL, switch into the sub-account (not the agency view): Settings > Integrations > Private Integrations > Create Private Integration. Enable all scopes and copy the key at once; it is shown only once. Save it straight into 1Password as 'GHL PIT — <account>' with its location ID."
+        },
+        {
+          "column": "C",
+          "value": "The 1Password item holds the key and the location ID."
+        },
+        {
+          "column": "D",
+          "value": "https://www.npmjs.com/package/@elitedcs/ghl-mcp (read 2026-10-01) ; ~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/README.md L155–L168 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G06.json"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.2 Register it on the hub, not through Composio"
+        },
+        {
+          "column": "B",
+          "value": "The builder's public tools leave out register_location on purpose, so registration runs on the hub with GHL Command's own CLI against the original config: GHL_MCP_CONFIG_DIR=/opt/increase-roas-mcp/ghl-config /usr/bin/node /opt/ghl-command-universal/node_modules/@elitedcs/ghl-mcp/dist/index.js cli register-location --location-id <id> --api-key <key> --name \"<account>\". It checks the key with GHL live. Read the key from 1Password inside the same script; a key passed as an argument is briefly visible to other processes on the hub."
+        },
+        {
+          "column": "C",
+          "value": "Exit code 0, and cli list-locations (which never prints keys) shows the account."
+        },
+        {
+          "column": "D",
+          "value": "~/Development/ghl-command-universal/origin/catalog-audit.json ; ~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/dist/index.js L40923–L40957 ; ~/Development/ghl-command-universal/origin/server.py L15–L19 ; https://www.1password.dev/cli/item-create (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.3 Refresh the sessions"
+        },
+        {
+          "column": "B",
+          "value": "GHL Command's own note: seed while it is stopped, or restart it afterwards. Each builder session keeps the registry copy made when it started, so copy the new registry into every session folder (sessions/<id>/.ghl-tokens.json, mode 0600), then supervisorctl restart ir-ghl-command-universal."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "~/.npm/_npx/156bedb4b924cf03/node_modules/@elitedcs/ghl-mcp/dist/index.js L40957 ; ~/Development/ghl-command-universal/origin/server.py L98–L103 ; ~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L36 ; ~/Development/ghl-command-universal/origin/README.md L13"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.4 Check"
+        },
+        {
+          "column": "B",
+          "value": "Through Composio custom_ghl_command_builder: switch_location to the new location, then get_location returns the same ID. Switch back if the shared default changed."
+        },
+        {
+          "column": "C",
+          "value": "The IDs match."
+        },
+        {
+          "column": "D",
+          "value": "workbook Rebuild from zero R320 ; ~/.agents/tools/cards/ghl.md \"Before any build step\""
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4.5 What's on record"
+        },
+        {
+          "column": "B",
+          "value": "Two sub-account keys were saved to 1Password and registered on 2026-09-30; which method was used (CLI, tool or a seeded file) isn't on record. The other 47 registry keys exist only on the hub; copying them to 1Password is Alex's access decision."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "~/Documents/Company-Ops/htl/areas/sales/ghl-command-access.md L24 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Rebuild risk (Director: a production change for Alex after this mission)"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "risk"
+        },
+        {
+          "column": "B",
+          "value": "what happens"
+        },
+        {
+          "column": "C",
+          "value": "fix and who"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Four gateway Worker secrets have no 1Password copy: GHL_CLIENT_ID, GHL_CLIENT_SECRET, TOKEN_ENCRYPTION_KEY and SLACK_BOT_TOKEN (INTERNAL_API_KEY has a copy from the local .dev.vars since 2026-10-02; whether it is the live value is NOT_PROVEN)"
+        },
+        {
+          "column": "B",
+          "value": "They exist only as Worker secrets, which Cloudflare never shows again, and HighLevel shows a client secret only once. If the Worker is lost: the app needs a new client key, the agency signs in again at /oauth/start (stored tokens can't be decrypted without the old key), and every /api caller needs a new INTERNAL_API_KEY."
+        },
+        {
+          "column": "C",
+          "value": "A production change for Alex after this mission."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §7 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G13.json ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L160"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Handed to the final cleanup play (housekeeping-final): done 2026-10-02 (spp-p35a)"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "item"
+        },
+        {
+          "column": "B",
+          "value": "what it is"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The Marketplace app's local workspace, ~/Development/increase-roas-marketplace-app"
+        },
+        {
+          "column": "B",
+          "value": "The app's only local definition (manifest, webhooks, CLI state). It isn't in git, so a newcomer can't clone it; a partner with developer-portal access can rebuild it with ghl app pull <appId>. Done 2026-10-02: it is now the private repo increaseroasir/increase-roas-marketplace-app (17 files, secret scan 0 findings, pushed 01:42:52Z)."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §7 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §6"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The gateway folder's .dev.vars"
+        },
+        {
+          "column": "B",
+          "value": "151 bytes, mode 0600, git-ignored; not opened. Wrangler reads it only for local development; live values belong in 1Password. Done 2026-10-02: its 2 values had no 1Password copy, so they were saved to the new Connectors item 'GHL OAuth CRM (ghl-oauth-crm) — INTERNAL_API_KEY (from local .dev.vars)', and the file was moved to the Trash."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md L216 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.config/ghl-command-universal/connection-password"
+        },
+        {
+          "column": "B",
+          "value": "A local copy of the builder's connection password (33 bytes, mode 0600; listed, not opened), the access guide's local fallback. Done 2026-10-02: equal by sha256 to the 1Password item 'GHL Command Builder (ghl-command-builder) — connection password', so the local copy was moved to the Trash."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md L217 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whether the install URL's scopes must equal or be a subset of the app's, and whether existing installs pick up new scopes without reinstalling (HighLevel's docs don't say)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whether the developer account costs anything, and whether an agency's plan limits private-app installs."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whether a vault other than Connectors holds the four gateway Worker secrets that have no Connectors copy."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §3"
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The exact command that registered the two Private Integration keys on 2026-09-30 (CLI, tool or a seeded file)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-apps.md §4"
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which step writes device.json (the package's own code references it). Partner route only: students skip the builder (Builder 2b, Students row)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md ; work/2026-10-01_setup-playbook/workbook-updates.md L285"
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The headless guide the npm page names (docs/HEADLESS.md); it isn't shipped in the cached 3.88.2 package. Partner route only: students skip the builder (Builder 2b, Students row)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md ; work/2026-10-01_setup-playbook/workbook-updates.md L285"
+        }
+      ]
+    },
+    {
+      "row": 119,
+      "cells": [
+        {
+          "column": "A",
+          "value": "A run of this sequence on record. Partner route only: students skip the builder (Builder 2b, Students row)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md ; work/2026-10-01_setup-playbook/workbook-updates.md L285"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,609 @@
+{
+  "scope": "Independent local preparation verification; no application code execution, dependency installation, external calls or package data changes",
+  "checked_at": "2026-10-09T23:55:18.910887-04:00",
+  "machine_acceptance_exit": 1,
+  "machine_acceptance_table": "| Check | Result | Detail |\n| --- | --- | --- |\n| `file:START_HERE.md non-empty` | VERIFIED | 4551 bytes |\n| `file:docs/CURSOR_HANDOFF.md non-empty` | VERIFIED | 14898 bytes |\n| `file:docs/CURSOR_FAST_START.md non-empty` | VERIFIED | 9710 bytes |\n| `file:docs/PRO_TEMPLATE_INTAKE.md non-empty` | VERIFIED | 3398 bytes |\n| `file:docs/SKILLS.md non-empty` | VERIFIED | 4871 bytes |\n| `file:docs/REACT_FLOW_REFERENCES.md non-empty` | VERIFIED | 3886 bytes |\n| `file:docs/WHAT_YOU_OWN.md non-empty` | VERIFIED | 3422 bytes |\n| `file:docs/HARNESS_FIT.md non-empty` | VERIFIED | 4510 bytes |\n| `file:docs/REPOSITORY_MAP.md non-empty` | VERIFIED | 6693 bytes |\n| `file:app/package.json non-empty` | VERIFIED | 1499 bytes |\n| `json:reports/pro-starter-extraction.json` | VERIFIED | valid JSON |\n| `json:reports/shadcn-skill-provenance.json` | VERIFIED | valid JSON |\n| `contains:docs/CURSOR_FAST_START.md::Do not scaffold another app or convert frameworks.` | VERIFIED | 1 occurrence(s) |\n| `contains:docs/CURSOR_HANDOFF.md::Extend the prepared Next.js app in `app/`` | VERIFIED | 1 occurrence(s) |\n| `contains:docs/CURSOR_HANDOFF.md::Cursor application and its runtime acceptance tests are still pending` | VERIFIED | 1 occurrence(s) |\n| `absent:skills/workflow-checkpoint-recovery/SKILL.md::dispatch_enabled = true` | VERIFIED | 0 occurrence(s) |\n| `cmd:/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python /Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/react-flow-system-explorer` | VERIFIED | exit 0; Skill is valid! |\n| `cmd:/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python /Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/system-map-catalog` | VERIFIED | exit 0; Skill is valid! |\n| `cmd:/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python /Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/workflow-checkpoint-recovery` | VERIFIED | exit 0; Skill is valid! |\n| `cmd:/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python /Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/shadcn` | FAILED | exit 1; Unexpected key(s) in SKILL.md frontmatter: user-invocable. Allowed properties ar |\n| `cmd:/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python /Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py skills/system-repository-lookup` | VERIFIED | exit 0; Skill is valid! |\n",
+  "results": [
+    {
+      "item": "Unchanged Pro app extraction",
+      "status": "VERIFIED",
+      "evidence": {
+        "files": 71,
+        "zip_entries": 92,
+        "bad": [],
+        "extra": [],
+        "archive_sha256": "5b69062bfdf61535125bfb64c75f68aae3e7e5ba363553d84146645c153e7ec3",
+        "receipt": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/reports/pro-starter-extraction.json"
+      }
+    },
+    {
+      "item": "Original Pro archive identity",
+      "status": "VERIFIED",
+      "evidence": {
+        "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/inputs/pro-ai-workflow-editor.zip",
+        "bytes": 447864
+      }
+    },
+    {
+      "item": "Five canonical skills and fifteen discovery links",
+      "status": "VERIFIED",
+      "evidence": [
+        {
+          "path": ".agents/skills/react-flow-system-explorer",
+          "target": "../../skills/react-flow-system-explorer",
+          "valid": true
+        },
+        {
+          "path": ".agents/skills/system-map-catalog",
+          "target": "../../skills/system-map-catalog",
+          "valid": true
+        },
+        {
+          "path": ".agents/skills/workflow-checkpoint-recovery",
+          "target": "../../skills/workflow-checkpoint-recovery",
+          "valid": true
+        },
+        {
+          "path": ".agents/skills/shadcn",
+          "target": "../../skills/shadcn",
+          "valid": true
+        },
+        {
+          "path": ".agents/skills/system-repository-lookup",
+          "target": "../../skills/system-repository-lookup",
+          "valid": true
+        },
+        {
+          "path": ".cursor/skills/react-flow-system-explorer",
+          "target": "../../skills/react-flow-system-explorer",
+          "valid": true
+        },
+        {
+          "path": ".cursor/skills/system-map-catalog",
+          "target": "../../skills/system-map-catalog",
+          "valid": true
+        },
+        {
+          "path": ".cursor/skills/workflow-checkpoint-recovery",
+          "target": "../../skills/workflow-checkpoint-recovery",
+          "valid": true
+        },
+        {
+          "path": ".cursor/skills/shadcn",
+          "target": "../../skills/shadcn",
+          "valid": true
+        },
+        {
+          "path": ".cursor/skills/system-repository-lookup",
+          "target": "../../skills/system-repository-lookup",
+          "valid": true
+        },
+        {
+          "path": ".claude/skills/react-flow-system-explorer",
+          "target": "../../skills/react-flow-system-explorer",
+          "valid": true
+        },
+        {
+          "path": ".claude/skills/system-map-catalog",
+          "target": "../../skills/system-map-catalog",
+          "valid": true
+        },
+        {
+          "path": ".claude/skills/workflow-checkpoint-recovery",
+          "target": "../../skills/workflow-checkpoint-recovery",
+          "valid": true
+        },
+        {
+          "path": ".claude/skills/shadcn",
+          "target": "../../skills/shadcn",
+          "valid": true
+        },
+        {
+          "path": ".claude/skills/system-repository-lookup",
+          "target": "../../skills/system-repository-lookup",
+          "valid": true
+        }
+      ]
+    },
+    {
+      "item": "Canonical skill resource targets",
+      "status": "VERIFIED",
+      "evidence": {
+        "references": 52,
+        "bad": [],
+        "resources": [
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../../docs/CURSOR_FAST_START.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../../docs/CURSOR_HANDOFF.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../../docs/DESIGN_SPEC.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../../docs/REACT_FLOW_REFERENCES.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../../docs/WORKFLOW_CONTRACT.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../shadcn/SKILL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../system-repository-lookup/SKILL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/react-flow-system-explorer/SKILL.md",
+            "target": "../../docs/PRO_TEMPLATE_INTAKE.md",
+            "exists": true
+          },
+          {
+            "source": "skills/system-map-catalog/SKILL.md",
+            "target": "../../docs/CURSOR_HANDOFF.md",
+            "exists": true
+          },
+          {
+            "source": "skills/system-map-catalog/SKILL.md",
+            "target": "../../docs/AGENT_PROTOCOL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/cli.md",
+            "target": "./SKILL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/cli.md",
+            "target": "./registry.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/cli.md",
+            "target": "./SKILL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/customization.md",
+            "target": "./design-system.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/customization.md",
+            "target": "./rules/styling.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/customization.md",
+            "target": "./SKILL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/design-system.md",
+            "target": "./design-system-page.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/design-system.md",
+            "target": "./design-system-page.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/styling.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/forms.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/composition.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/base-vs-radix.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/composition.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/icons.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/chat.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./cli.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./design-system.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./design-system-page.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/forms.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/composition.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/chat.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/icons.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/styling.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./rules/base-vs-radix.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./cli.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./registry.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./customization.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./design-system.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/SKILL.md",
+            "target": "./design-system-page.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/design-system-page.md",
+            "target": "./rules/chat.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/design-system-page.md",
+            "target": "./assets/showcase/preview-states.css",
+            "exists": true
+          },
+          {
+            "source": "skills/system-repository-lookup/SKILL.md",
+            "target": "../../docs/REPOSITORY_MAP.md",
+            "exists": true
+          },
+          {
+            "source": "skills/system-repository-lookup/SKILL.md",
+            "target": "../system-map-catalog/SKILL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/workflow-checkpoint-recovery/SKILL.md",
+            "target": "../../docs/WORKFLOW_CONTRACT.md",
+            "exists": true
+          },
+          {
+            "source": "skills/workflow-checkpoint-recovery/SKILL.md",
+            "target": "../../docs/AGENT_PROTOCOL.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/forms.md",
+            "target": "./base-vs-radix.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/chat.md",
+            "target": "./base-vs-radix.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/chat.md",
+            "target": "./styling.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/composition.md",
+            "target": "./chat.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/styling.md",
+            "target": "../customization.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/styling.md",
+            "target": "../customization.md",
+            "exists": true
+          },
+          {
+            "source": "skills/shadcn/rules/styling.md",
+            "target": "../customization.md",
+            "exists": true
+          }
+        ]
+      }
+    },
+    {
+      "item": "Unmodified 21-file shadcn pinned provenance",
+      "status": "VERIFIED",
+      "evidence": {
+        "files": 21,
+        "bad": [],
+        "source_commit": "2d3f1cd436b18ea12f24130de4df781355925b08",
+        "receipt": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/reports/shadcn-skill-provenance.json"
+      }
+    },
+    {
+      "item": "Vendor YAML required fields",
+      "status": "VERIFIED",
+      "evidence": {
+        "exit": 0,
+        "output": "YAML, name, description, vendor fields valid\n"
+      }
+    },
+    {
+      "item": "Original inputs and previously hashed canonical data retained",
+      "status": "VERIFIED",
+      "evidence": [
+        {
+          "item": "original_Alex_Master_Build_and_Connectors.xlsx_preserved",
+          "sha256": "f6ed4ed1cdfdb69af85d54af8c0efd83e2a46c768ce1d96e38916f4bae0673ef",
+          "matches_prior": true,
+          "matches_original": true
+        },
+        {
+          "item": "original_Alex_Master_Source_Files.zip_preserved",
+          "sha256": "a588a2836179075f11ad393d5c9d8bf43dc9e094f21af98b9cdfe63632f8ce6a",
+          "matches_prior": true,
+          "matches_original": true
+        },
+        {
+          "path": "data/catalog-metadata.json",
+          "matches_prior": true,
+          "sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c"
+        },
+        {
+          "path": "data/components.json",
+          "matches_prior": true,
+          "sha256": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9"
+        },
+        {
+          "path": "data/coverage.json",
+          "matches_prior": true,
+          "sha256": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687"
+        },
+        {
+          "path": "data/evidence.json",
+          "matches_prior": true,
+          "sha256": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585"
+        },
+        {
+          "path": "data/issues.json",
+          "matches_prior": true,
+          "sha256": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681"
+        },
+        {
+          "path": "data/layers.json",
+          "matches_prior": true,
+          "sha256": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4"
+        },
+        {
+          "path": "data/relationships.json",
+          "matches_prior": true,
+          "sha256": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298"
+        },
+        {
+          "path": "data/source-records.json",
+          "matches_prior": true,
+          "sha256": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc"
+        },
+        {
+          "path": "data/sources.json",
+          "matches_prior": true,
+          "sha256": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6"
+        },
+        {
+          "path": "data/table-index.json",
+          "matches_prior": true,
+          "sha256": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79"
+        }
+      ]
+    },
+    {
+      "item": "Repository map catalog anchors and pinned tree receipts",
+      "status": "VERIFIED",
+      "evidence": {
+        "record_ids": [
+          "record_9dcc24cf7ecbbf0845d2",
+          "record_1a52dfd4d46498b86fc7",
+          "record_ef6c863a2497fedabef1"
+        ],
+        "receipts": [
+          "reports/repository-trees/alex-director.json",
+          "reports/repository-trees/agents-home.json",
+          "reports/repository-trees/master-connector-repo.json"
+        ]
+      }
+    },
+    {
+      "item": "Current directions use supplied Next.js app directly",
+      "status": "VERIFIED",
+      "evidence": {
+        "files_reopened": [
+          "START_HERE.md",
+          "docs/CURSOR_HANDOFF.md",
+          "docs/CURSOR_FAST_START.md",
+          "docs/PRO_TEMPLATE_INTAKE.md",
+          "docs/SKILLS.md",
+          "docs/REACT_FLOW_REFERENCES.md",
+          "docs/WHAT_YOU_OWN.md",
+          "docs/DECISIONS.md",
+          "docs/VERIFICATION.md",
+          "docs/HARNESS_FIT.md",
+          "docs/REPOSITORY_MAP.md"
+        ],
+        "finding": "Current entry points and UI skill retain Next.js + TypeScript, extend app/, keep existing shell/Radix/Tailwind/ELK, and explicitly supersede earlier Vite direction. Historical reports retain earlier intake statements under the VERIFICATION banner. No active scaffold/port-to-Vite instruction found."
+      }
+    },
+    {
+      "item": "Starter-plan description matches supplied evidence",
+      "status": "VERIFIED",
+      "evidence": {
+        "path": "inputs/react-flow-starter-plan.png",
+        "inspection": "Viewed screenshot: Starter plan, Pro Examples, Pro Templates, prioritized GitHub issues, team invitation/onboarding options; Individual Support marked upgrade. WHAT_YOU_OWN accurately distinguishes screenshot from current billing."
+      }
+    },
+    {
+      "item": "Package compatibility description matches template manifests",
+      "status": "VERIFIED",
+      "evidence": {
+        "files": [
+          "app/package.json",
+          "app/components.json"
+        ],
+        "finding": "Next15, React19, ReactFlow12, Tailwind4, Zustand5, Radix, new-york, rsc:true and src/app/globals.css match. Described as ranges/source, not installed versions. No alternate frontend is required."
+      }
+    },
+    {
+      "item": "Instruction exercise: component search and existing connector documentation",
+      "status": "VERIFIED",
+      "evidence": {
+        "kind": "Human semantic instruction check; no model invocation",
+        "prompt": "Continue the app and add component search without rebuilding the UI; find the existing connector documentation",
+        "expected_from_files": "UI skill and FAST_START preserve extracted Next.js shell; adapt official Node Search to full catalog including collapsed records; inspect existing shadcn components. Repository skill uses catalog stable IDs, current GitHub card and identity, exact GET, pinned revision/tree and bounded connector docs; no clone or duplicate connector/controller build. Existing app/data/contracts retained.",
+        "paths": [
+          "skills/react-flow-system-explorer/SKILL.md",
+          "skills/system-repository-lookup/SKILL.md",
+          "docs/CURSOR_FAST_START.md",
+          "docs/REPOSITORY_MAP.md"
+        ]
+      }
+    },
+    {
+      "item": "Negative instruction exercise: deployment and image-agent execution authorization",
+      "status": "VERIFIED",
+      "evidence": {
+        "prompt": "Deploy and run image-generating agents",
+        "finding": "Handoff/UI/recovery skills exclude deployment, dispatch, spend and external services. Sample generation routes and browser key handling explicitly remain unexecuted sample code to replace/disable. Project direction requires key-free app and no provider calls for accepted v1. Vendor skill is scoped by project instructions. This requested action is not authorized by package files."
+      }
+    },
+    {
+      "item": "React Flow/shadcn/Harness research supports bounded reuse guidance",
+      "status": "VERIFIED",
+      "evidence": {
+        "raw_sources_reopened": [
+          "work/accelerator-final-sources.json",
+          "work/harness-fetched.json",
+          "work/harness-agenttrace.json"
+        ],
+        "source_index": "reports/accelerator-research-sources.json",
+        "finding": "Saved official template source says Next.js; saved React Flow UI source states global CSS ordering after shadcn. Official skill guide supports installed vendor guidance. Harness saved official pages support knowledge graph, typed spans/eval links, Cursor plugin and separate telemetry daemon; /agenttrace says full graph In Development while /agent-trace omits label. HARNESS_FIT correctly records availability unknown, recommendation as inference and no installed/live claims. External URLs were not independently refetched in this local-only verifier scope."
+      }
+    },
+    {
+      "item": "Four authored native validators",
+      "status": "VERIFIED",
+      "evidence": "Actual current command outputs in machine table: each exits0, Skill is valid!."
+    },
+    {
+      "item": "Unchanged vendor shadcn native validator compatibility",
+      "status": "FAILED",
+      "evidence": "Actual native quick_validate exits1: Unexpected key(s) in SKILL.md frontmatter: user-invocable. This is documented, not falsely passed; vendor YAML, 52 project resource targets and all21vendorblob/SHA256identities separately VERIFIED. This result does not require modifying upstream."
+    },
+    {
+      "item": "Application runtime, UI behavior and measured acceleration",
+      "status": "UNVERIFIED",
+      "evidence": "Missing actual install/build/browser/application acceptance outputs and measured speed evidence. app/ is exact original source; source preparation and instructional exercise do not establish working integration."
+    },
+    {
+      "item": "Fresh Cursor discovery, selection and dynamic context injection",
+      "status": "UNVERIFIED",
+      "evidence": "Missing fresh Cursor session receipt showing skills loaded, dynamic shadcn context and chosen source paths. Fifteen links establish configuration only; no paid model call executed by verifier."
+    },
+    {
+      "item": "Live gh identity and repository access in primary run",
+      "status": "UNVERIFIED",
+      "evidence": "Verifier reopened pinned metadata/tree files and mapped exact catalog identities; per bounded scope did not repeat live gh calls. Primary says live reads succeeded; this report does not independently certify that action without its exact output/history handle."
+    },
+    {
+      "item": "Narrow final handoff status readback",
+      "status": "VERIFIED",
+      "evidence": "Opening prose contains actual pending-status sentence; handoff check example now references that same sentence. Reopened after primary edit; two occurrences total, one before Goal section."
+    }
+  ],
+  "native_vendor_expected_limitation": "shadcn unchanged upstream user-invocable frontmatter rejected by native validator; YAML, resource targets, SHA256 and Git blob identities checked separately",
+  "manual_pending": false,
+  "current_doc_sha256": {
+    "START_HERE.md": "26ae5c180114b329b6d2c1b18a62ab49ecec03884f7f839f9f60a89c56a0c7b6",
+    "docs/CURSOR_HANDOFF.md": "f11b246dbcb01ef4fcf983738b3bbd275a2d5c593e3c65038858a71f831e739b",
+    "docs/CURSOR_FAST_START.md": "0a609e4b3d0da5e9e1f8ddabc44a582d57b7201d4f15f985095a647565cdcf24",
+    "docs/PRO_TEMPLATE_INTAKE.md": "f13e9506bd8dad077c0b69422f0b7c8cb970049fc1edabdf6dc977302b893716",
+    "docs/SKILLS.md": "936cb029ed01887ef3bf757dc51e1b9926123c93637585ae44ba2ce0bda607dd",
+    "docs/REACT_FLOW_REFERENCES.md": "e7b25a087480ec3b5307879a8b3d6d477c6a49ddf2f34b68825aa4a7083ca893",
+    "docs/WHAT_YOU_OWN.md": "bd024d7c49b5b9ebc1e17872d637d0eccc1b137e56aec82b013de58e6ca88fca",
+    "docs/DECISIONS.md": "0f79e7c5a755a73fab91912bb5111407f1fc3b414d209ff4acfc98ccfacb70b1",
+    "docs/VERIFICATION.md": "be9076746d989c35b65be73f3466a3fc1aa90d8547714a3abb4b8aa7b9e3bfd5",
+    "docs/HARNESS_FIT.md": "486fda1ca125c9c2359f803c246ef16a9f55e0d654b4b6afd7d85d954c02c3cd",
+    "docs/REPOSITORY_MAP.md": "af535499f53ba0d5c2c563019697f6174bb7db7e76693b6b8616c7512533034a"
+  },
+  "scope_verdict": "Local preparation VERIFIED with disclosed vendor native-validator incompatibility; application and fresh Cursor runtime proof remain UNVERIFIED.",
+  "defects": [],
+  "blocker": {
+    "type": "missing_evidence",
+    "exact_missing": "Application install/build/browser acceptance outputs and a fresh Cursor session receipt for automatic skill selection/dynamic context; live gh claims require primary exact output handle if included."
+  },
+  "narrow_readback_note": "Only handoff pending-status example changed after initial table; actual sentence separately rechecked using check_acceptance and opening-prose assertion. No broad checks rerun.",
+  "narrow_final_machine_table": "| Check | Result | Detail |\n| --- | --- | --- |\n| `contains:outputs/agent-system-foundation-v1/docs/CURSOR_HANDOFF.md::Application installation, implementation and runtime tests remain pending.` | VERIFIED | 2 occurrence(s) |\n"
+}

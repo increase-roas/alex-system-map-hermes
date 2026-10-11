@@ -1,0 +1,627 @@
+{
+  "id": "table_b7e8acde532cc776aa87",
+  "sheet": "S03-06 Hermes and Javar rebuild",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Pointers only: where each piece of the Hermes/Javar agents really lives, and the order for a rebuild. Their own docs stay the source; nothing is copied here. Rebuilding them is its own mission (Mission A). It answers retest gap G24 and the first check's G16. Facts from play spp-p20d (notes/gap-facts-repos.md §8). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/hermes-javar.json; never edit this tab by hand.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "0. Under review (2026-10-02): read this before the order in section 2"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "note"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CURRENT 2026-10-05: use maintained hermes-team-setup and javar-add-tool skills; the former Oct2 stale-skill diagnosis is historical. Canonical route catalog is existing INDEX.md and TOOLS.md, not retired Company OS/Build-Out Map. Read the role/platform evidence first. 2026-10-05 America/Detroit documentation reconciliation; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit\nCURRENT 2026-10-05: these are retired historical surfaces. Maintain existing INDEX.md and TOOLS.md; see ~/.agents/skills/javar-add-tool/SKILL.md."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-02_hermes-agents/notes/hermes-research.md §5.3 ; work/2026-10-02_hermes-agents/notes/hermes-research.md §6 ; work/2026-10-02_hermes-agents/notes/javante-home-audit.md §9 ; work/2026-10-01_setup-playbook/workbook-updates.md L272"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Where each piece lives (their own docs stay the source; nothing is copied here)"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "piece"
+        },
+        {
+          "column": "B",
+          "value": "real home"
+        },
+        {
+          "column": "C",
+          "value": "what a rebuild needs from it"
+        },
+        {
+          "column": "D",
+          "value": "in git?"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The Build project"
+        },
+        {
+          "column": "B",
+          "value": "GitHub increaseroasir/agency-agent-os (private; Alex's personal account; the owner is the only collaborator), cloned at ~/Documents/ChatGPT/Build, the path both Hermes skills name."
+        },
+        {
+          "column": "C",
+          "value": "Start with its AGENTS.md (authorization and credential rules) and docs/CURRENT-REPOSITORY-STATE.md. The repo owns the protected setup and route source; Javar's computer owns his files."
+        },
+        {
+          "column": "D",
+          "value": "GitHub main is 3f3fd4b (2026-09-25). This Mac works on branch fix/javar-maintenance-reporting (4cc5839): 23 commits not on main, 10 main commits not on the branch, and 166 uncommitted paths."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2 ; ~/Documents/ChatGPT/Build/AGENTS.md L3–L5 ; ~/Documents/ChatGPT/Build/BUILD_STATUS.md L1 ; ~/.agents/skills/hermes-team-setup/SKILL.md L8"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javar's own map"
+        },
+        {
+          "column": "B",
+          "value": "On his Orgo computer: /home/orgo/lil-smoove/home/agent-knowledge/INDEX.md. The repo's copy is agents/ea/startup/INDEX.md."
+        },
+        {
+          "column": "C",
+          "value": "Read it before any Javar work: it owns the single map of his sources and storage. Change the source and the installed copy together."
+        },
+        {
+          "column": "D",
+          "value": "startup INDEX.md, TOOLS.md and AGENTS.md are tracked and equal to GitHub main. WORKFLOWS.md, SOUL.md, USER.md, IDENTITY.md and KNOWLEDGE.md are untracked; WORKFLOWS.md is on no GitHub branch."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/AGENTS.md L3–L5 ; ~/Documents/ChatGPT/Build/agents/ea/startup/INDEX.md L1–L3 ; ~/.agents/skills/javar-add-tool/SKILL.md L30–L32 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Route catalog"
+        },
+        {
+          "column": "B",
+          "value": "agents/ea/startup/TOOLS.md, which Javar loads as the javar_capabilities 'routing' topic. The per-topic guides sit in 01-Agency/agent-os/ on his computer and in agents/ea/capability-discovery/ in the repo."
+        },
+        {
+          "column": "C",
+          "value": "The single route catalog: which guide covers native tools, GHL, Composio, 1Password, Meta, analytics, GTM, GA4 Admin, Cloudflare and Google Ads."
+        },
+        {
+          "column": "D",
+          "value": "Tracked: TOOLS.md, and the guides Native-Routes, Composio, GHL-Route, Meta-CLI, 01.Hermes, Capabilities and README. Untracked: Analytics, Cloudflare-Route, GTM-Route, GA4-Admin-Route, GoogleAds-Route, Manny-Access, 03.Memory-Policy and 04.Tool-Stack. 1Password-Config is git-ignored."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/startup/TOOLS.md L1–L3 ; ~/Documents/ChatGPT/Build/agents/ea/startup/TOOLS.md L9–L20 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javar's computer"
+        },
+        {
+          "column": "B",
+          "value": "Orgo computer 'EA' (d9b475e2-47b2-46d4-b8eb-102564f93283) in workspace 'EA (Javar)': 4 CPU, 16 GB RAM, 50 GB disk, running on 2026-10-01. Hermes home /home/orgo/lil-smoove/home/.hermes, work folder /home/orgo/lil-smoove/workspace, runtime and update package under /home/orgo/lil-smoove/runtime/. Tailnet name javar-orgo (tag:server)."
+        },
+        {
+          "column": "C",
+          "value": "A computer of that size, then the runtime (the 'Runtime' row). Never print Orgo create or get responses: they can include desktop credentials."
+        },
+        {
+          "column": "D",
+          "value": "No (it is a computer)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2 ; ~/Documents/ChatGPT/Build/agents/ea/startup/TOOLS.md L33–L40 ; ~/.agents/skills/hermes-team-setup/SKILL.md L33 ; workbook Tailscale R5 ; work/2026-10-02_rename-javar/notes/rename.md §6 ; system/run-log.md \"Orgo workspace now 'EA (Javar)'\""
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The other Orgo machines"
+        },
+        {
+          "column": "B",
+          "value": "Machine inventory and actual IDs/specs/role assignments live only in Gameplan COMPUTER INVENTORY: https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit . Old Finance/Ops/Media/CSM machines were replaced; do not reuse old IDs, tailscale addresses or credentials. EA remains PROD; My OpenClaw AI-INFRA; Javante Mac mini distinct. No duplicate machine table here."
+        },
+        {
+          "column": "C",
+          "value": "Each role's platform, identity and scope come from its folder in the Build repo (agents/<role>/) and the hermes-team-setup skill; not every role runs on Orgo. The hub is rebuilt from agents-home (rebuild_hub.py), not from the Build repo."
+        },
+        {
+          "column": "D",
+          "value": "Role folders: agents/csm, ea, finance, hunter, javante, media, setter and team-template. team-template isn't on GitHub main."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2 ; work/2026-10-01_fleet-and-offmac/plan.md L6–L8 ; workbook Tailscale R5–R13 ; ~/.agents/skills/hermes-team-setup/SKILL.md L12 ; ~/.agents/skills/hermes-team-setup/SKILL.md L28"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The fenced tools"
+        },
+        {
+          "column": "B",
+          "value": "Registered by Javar's plugin in agents/ea/hermes-inbox/__init__.py: javar_composio_execute (line 1234), javar_meta (1252), javar_composio_discovery (1254), javar_ghl (1259) and javar_propose_message (1286). The plugin manifest plugin.yaml lists 8 tools and leaves out javar_ghl, javar_meta and both Composio tools."
+        },
+        {
+          "column": "C",
+          "value": "javar_ghl: GHL locations under the agency company through the company gateway, whose key is a gateway credential, not a location key. javar_meta: the official Meta CLI through the gateway. javar_propose_message: the only route for messages to people; it sends Alex the exact draft to approve. All three stay (AI apps tab)."
+        },
+        {
+          "column": "D",
+          "value": "__init__.py is tracked and equal to GitHub main. The reviewed runtime copy under runtime-update/assets/javar-inbox is untracked."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/hermes-inbox/__init__.py L1234–L1290 ; ~/Documents/ChatGPT/Build/agents/ea/hermes-inbox/plugin.yaml L1–L15 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/Native-Routes.md L12–L14 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/1Password-Config.md L50 ; workbook AI apps R7 ; workbook SOP R28"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The Orgo 1Password loader"
+        },
+        {
+          "column": "B",
+          "value": "On his computer: /home/orgo/lil-smoove/home/.hermes/start-with-secrets.py. It resolves 1Password references in memory at launch, from a root-owned bootstrap that must never be opened. Source copy: agents/ea/runtime-update/assets/start-with-secrets.py."
+        },
+        {
+          "column": "C",
+          "value": "Javar's own 1Password service account and his vault 'Agent — EA-Javar — PROD', which is separate from the Connectors vault on the 1Password item catalog tab. The guide 1Password-Config.md names each reference. Never print values, and don't add secret files or vault grants."
+        },
+        {
+          "column": "D",
+          "value": "No. 1Password-Config.md is git-ignored on purpose (a private input), and the whole runtime-update/ package, loader included, is on no GitHub branch."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/capability-discovery/1Password-Config.md L5–L10 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/1Password-Config.md L48–L49 ; ~/Documents/ChatGPT/Build/.gitignore L57 ; ~/Documents/ChatGPT/Build/AGENTS.md L36–L45 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Runtime and its update path"
+        },
+        {
+          "column": "B",
+          "value": "agents/ea/runtime-update/ (README.md, manifest.json, update_runtime.py, assets/). It pins upstream Hermes tag v2026.9.21 and switches the existing supervisor service, keeping a rollback backup. On his computer the pinned package is /home/orgo/lil-smoove/runtime/javar-hermes-update."
+        },
+        {
+          "column": "C",
+          "value": "update_runtime.py prepare, review it, then switch. The gateway service is lil-smoove-messaging-gateway."
+        },
+        {
+          "column": "D",
+          "value": "No: the folder exists only on this Mac and his computer (on no GitHub branch)."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/runtime-update/README.md L3 ; ~/Documents/ChatGPT/Build/agents/ea/runtime-update/README.md L7 ; ~/Documents/ChatGPT/Build/agents/ea/startup/TOOLS.md L36 ; ~/.agents/skills/javar-add-tool/SKILL.md L26 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javar's own Composio"
+        },
+        {
+          "column": "B",
+          "value": "Google identities jay@ (Javar) and agent@ (Javante) stay distinct. Javar own-key MCP init/schema read observed Oct5, but member swap stopped before writes and full scoped consumer path unproved. Javante latest consumer isolation not established by current receipts; do not infer from Google labels. Sources: tools/hermes.md; work/2026-10-02_hermes-agents/notes/mha-cz4-swap-run.md and mha-cz5-member-route-stop.md (Oct5)."
+        },
+        {
+          "column": "C",
+          "value": "The key's reference is in 1Password-Config.md; reuse it, don't add a new login."
+        },
+        {
+          "column": "D",
+          "value": "The guide is git-ignored (see the loader row)."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/capability-discovery/Native-Routes.md L14 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/1Password-Config.md L15 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/1Password-Config.md L33 ; workbook SOP R28"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailnet and home internet"
+        },
+        {
+          "column": "B",
+          "value": "Each Orgo agent computer is on the tailnet (tag:server, Tailscale SSH) and browses through the home exit node; AI and API traffic stays direct."
+        },
+        {
+          "column": "C",
+          "value": "Tailscale tab steps for each new computer."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "workbook Tailscale R3 ; workbook Tailscale R5 ; workbook Tailscale R9–R13"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javante"
+        },
+        {
+          "column": "B",
+          "value": "Runs on Alex's Mac mini at home, not on Orgo. Javar reaches it only through a2a_call (peer javante), and only when Alex asks."
+        },
+        {
+          "column": "C",
+          "value": "Its setup notes in the Build repo's agents/javante/setup/."
+        },
+        {
+          "column": "D",
+          "value": "No: agents/javante/setup/ is untracked and isn't on GitHub main."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/startup/TOOLS.md L49 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/Native-Routes.md L32–L34"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The skills for these jobs"
+        },
+        {
+          "column": "B",
+          "value": "hermes-team-setup (set up, resume or repair a role from the Build project) and javar-add-tool (add or repair one Javar tool route), both in ~/.agents/skills, on in Codex and linked for Claude Code. A third, orgo-hermes-docs, lives only in Cursor (gap G18)."
+        },
+        {
+          "column": "C",
+          "value": "Load the matching skill before the work; neither adds approvals."
+        },
+        {
+          "column": "D",
+          "value": "Yes (agents-home)."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/skills/hermes-team-setup/SKILL.md L1–L8 ; ~/.agents/skills/javar-add-tool/SKILL.md L1–L12 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Where this stands"
+        },
+        {
+          "column": "B",
+          "value": "Current Javar mission, progress/gates and pause belong to Gameplan/Director checkpoint, not this workbook. Independent legacy fleet mission notes are historical; no restart, reset, key transfer or implementation follows from these rebuild pointers. 2026-10-05 America/Detroit documentation reconciliation; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_fleet-and-offmac/plan.md L6–L8 ; workbook Rebuild from zero R411 ; workbook Rebuild from zero R48"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Order for a rebuild (each linked doc decides the details)"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "where the instructions are"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Access and private inputs"
+        },
+        {
+          "column": "B",
+          "value": "Get an invite to increaseroasir/agency-agent-os and clone it to ~/Documents/ChatGPT/Build. A clean checkout holds only the private-material index, so ask the owner for the private inputs kept out of git on purpose (bindings, 1Password-Config.md, accepted baselines) and for the uncommitted runtime package."
+        },
+        {
+          "column": "C",
+          "value": "docs/PRIVATE-MATERIAL.md (what is private and where the originals are kept)."
+        },
+        {
+          "column": "D",
+          "value": "~/Documents/ChatGPT/Build/docs/PRIVATE-MATERIAL.md L3–L7 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Recover the role's facts first"
+        },
+        {
+          "column": "B",
+          "value": "The requested outcome, last verified checkpoint, settled decisions, identity and host, the remaining gap and the next action. Don't restart the project audit."
+        },
+        {
+          "column": "C",
+          "value": "hermes-team-setup, 'Start at the missing outcome'."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/hermes-team-setup/SKILL.md L10–L16"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Computer and runtime"
+        },
+        {
+          "column": "B",
+          "value": "Create or reuse the role's computer, then install the runtime from the reviewed package with update_runtime.py prepare and switch."
+        },
+        {
+          "column": "C",
+          "value": "runtime-update/README.md; hermes-team-setup, 'Known rollout traps'."
+        },
+        {
+          "column": "D",
+          "value": "~/Documents/ChatGPT/Build/agents/ea/runtime-update/README.md L3–L7 ; ~/.agents/skills/hermes-team-setup/SKILL.md L30–L40"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Credentials"
+        },
+        {
+          "column": "B",
+          "value": "Reuse the role's own 1Password service account and vault through start-with-secrets.py. No plaintext credential files."
+        },
+        {
+          "column": "C",
+          "value": "The Build repo's AGENTS.md, '1Password and existing credential pointers'."
+        },
+        {
+          "column": "D",
+          "value": "~/Documents/ChatGPT/Build/AGENTS.md L36–L45 ; ~/Documents/ChatGPT/Build/agents/ea/capability-discovery/1Password-Config.md L5–L10"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Tools and pointers"
+        },
+        {
+          "column": "B",
+          "value": "Add or repair each tool with javar-add-tool, update TOOLS.md and INDEX.md in the source and the installed copy together, and prove one real use."
+        },
+        {
+          "column": "C",
+          "value": "javar-add-tool."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/javar-add-tool/SKILL.md L28–L42"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. A new role"
+        },
+        {
+          "column": "B",
+          "value": "Run materialize.py with a non-secret binding (the fields hermes-team-setup lists) into a new output folder. It doesn't create the runtime, credentials, model login or RAG grants."
+        },
+        {
+          "column": "C",
+          "value": "hermes-team-setup, 'Materialize without cloning private state'."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/hermes-team-setup/SKILL.md L22–L26"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javar's installed files and services today. This play made one read-only Orgo metadata read (the computer list) and ran nothing on his computer."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which version his computer runs: GitHub main, the Mac branch or the uncommitted files (installed copies weren't compared)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The other roles' platforms (hermes-team-setup: check each role's documented platform)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §8"
+        }
+      ]
+    }
+  ]
+}

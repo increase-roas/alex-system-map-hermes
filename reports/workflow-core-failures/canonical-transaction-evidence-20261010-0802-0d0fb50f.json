@@ -1,0 +1,110 @@
+{
+  "source_inventory_audit": {
+    "record_count": 2351,
+    "violation_count": 0,
+    "sample_violations": [],
+    "note": "Existing source violations reported only; catalog not auto-modified to pass."
+  },
+  "schema_pure": {
+    "legitimate_passes": true,
+    "duplicate_alias_rejects": true,
+    "null_purpose_rejects": true,
+    "fit_absent_allowed": true,
+    "null_fit_rejects": true,
+    "error": null
+  },
+  "rollback_preserves": {
+    "rev_a_before_b_edit": 2,
+    "rev_a_after_reconcile": 2,
+    "a_revision_preserved": true,
+    "b_crash_exit": 1,
+    "b_revision_restored": true,
+    "recovery_state_idempotent": true,
+    "state_after_first_recovery": {
+      "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+      "revisions_sha256": "7216443a80a8c504664c077a95f648f933542f97730a6d7e67cd5028e07589cc",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "445bc1160636fd87d9731cea11fdb1754d9b894ed08dee43ac1d78c97dd99432",
+      "revision_record_a": 2,
+      "revision_record_b": 0,
+      "journal_bytes_sha256": "a883324f717cd1dfbbecb9a2d34674e152a92334d8620e3c0796cdf23ee5fe30",
+      "journal_entry_count": 3,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "0b0a0177b4bc988e8da041b324bc49feaf6e445bd4a2febe07a012675889fdb3",
+          "bytes": 400397
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "43611507f04222bdf8c8103747081240c90c6b497c69e8bfb3966e192547c221",
+          "bytes": 810
+        }
+      },
+      "manifest_sha256": "ca8ca836c3390bcc091be1205fef5def686abd3b8c7ec29eaabd5bb553e8fd17"
+    },
+    "state_after_second_recovery": {
+      "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+      "revisions_sha256": "7216443a80a8c504664c077a95f648f933542f97730a6d7e67cd5028e07589cc",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "445bc1160636fd87d9731cea11fdb1754d9b894ed08dee43ac1d78c97dd99432",
+      "revision_record_a": 2,
+      "revision_record_b": 0,
+      "journal_bytes_sha256": "a883324f717cd1dfbbecb9a2d34674e152a92334d8620e3c0796cdf23ee5fe30",
+      "journal_entry_count": 3,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "0b0a0177b4bc988e8da041b324bc49feaf6e445bd4a2febe07a012675889fdb3",
+          "bytes": 400397
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "43611507f04222bdf8c8103747081240c90c6b497c69e8bfb3966e192547c221",
+          "bytes": 810
+        }
+      },
+      "manifest_sha256": "ca8ca836c3390bcc091be1205fef5def686abd3b8c7ec29eaabd5bb553e8fd17"
+    }
+  },
+  "dual_lock": {
+    "barrier_group": "dual-e7fbd620",
+    "component_exit": 0,
+    "metadata_exit": 0,
+    "component_revision": 1,
+    "metadata_revision": 1,
+    "both_committed": true,
+    "component_purpose": "Dual lock component 0730",
+    "metadata_policy_contains": true
+  },
+  "distinct_records": {
+    "barrier_group": "dist-12a75c03",
+    "exit_a": 0,
+    "exit_b_first_attempt": 0,
+    "stale_sha_retry_used": true,
+    "overlapping_launched": true,
+    "purpose_a": "Distinct A 0730",
+    "purpose_b": "Distinct B 0730",
+    "both_preserved": true,
+    "exit_a_first_attempt": 1
+  },
+  "same_op_concurrent": {
+    "operation_id": "same-op-a6e05778",
+    "exit_a": 0,
+    "exit_b": 0,
+    "after_hash_a": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+    "after_hash_b": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+    "after_hash_match": true,
+    "canonical_components_sha256": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+    "response_hashes_match_canonical": true,
+    "committed_ledger_rows": 1,
+    "invalidated_ledger_rows": 0,
+    "one_commit": true,
+    "final_revision": 1,
+    "final_after_sha256": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2"
+  }
+}

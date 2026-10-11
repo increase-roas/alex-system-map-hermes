@@ -1,0 +1,88 @@
+{
+  "at": "2026-10-10T06:43:26+00:00",
+  "cases": {
+    "bounded_artifact_contract": {
+      "handler_positive_once": {
+        "error": "",
+        "exit": 0,
+        "matching_event_count": 1,
+        "observed_proofs_in_record": [
+          {
+            "byte_length": 18,
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+            "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8"
+          }
+        ],
+        "operation_count": 1
+      },
+      "pending_task_no_artifact": {
+        "checks": {
+          "artifact_present": false
+        },
+        "reason": "artifact_missing"
+      },
+      "plain_string_output_rejected": {
+        "checks": {
+          "artifact_descriptor_valid": false
+        },
+        "reason": "artifact_descriptor_invalid"
+      },
+      "real_artifact_measured": {
+        "descriptor_sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8",
+        "proofs": [
+          {
+            "byte_length": 18,
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+            "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8"
+          }
+        ],
+        "reason": null
+      },
+      "wrong_hash_rejected": {
+        "checks": {
+          "artifact_hash_matches": false
+        },
+        "reason": "artifact_sha256_mismatch"
+      }
+    },
+    "handler_scope_negatives": {
+      "wrong_operation": {
+        "error": "verification_record_operation_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "wrong_task": {
+        "error": "verification_record_task_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "wrong_verifier": {
+        "error": "verification_record_verifier_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      }
+    }
+  },
+  "delivery_id": "artifact-outcome-final-bytes-20261010-0639",
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": false,
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "run_id": "7af70594-b836-413d-8243-c78f73ccd7fc",
+  "source_identity": {
+    "tools/artifact_outcome_final_bytes_acceptance.py": "8602b30d0c1ac7f51ce989fe9d89a546ac6afeab338d9252f7f60bc996e7ee92",
+    "tools/bounded_acceptance.py": "f809ca1d647fbac14f4e6c878f28bd6b201b37c5b345878320b1bd8279e7ecf6",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "2ecf4695b28b8d6612bec1f4f217e4fa195d1d1aadf9af3214f448ec52bb259c",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a"
+  }
+}

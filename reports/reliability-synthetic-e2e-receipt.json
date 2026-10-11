@@ -1,0 +1,12 @@
+{
+  "label": "SYNTHETIC/TEST",
+  "delivery_id": "reliability-r2-20261010-0101",
+  "purpose": "Isolated local tracing + sync end-to-end (does not replace real-source acceptance)",
+  "dataset": [
+    "examples/reliability-trace-sync-synthetic.json",
+    "work/reliability/synthetic-sync-marker.json"
+  ],
+  "verifier": "tools/reliability_verification.py::synthetic_sync_trace_e2e",
+  "authoritative_detail": "reports/reliability-verification.json#synthetic_sync_trace_e2e",
+  "recorded_at": "2026-10-10T05:02:05+00:00"
+}

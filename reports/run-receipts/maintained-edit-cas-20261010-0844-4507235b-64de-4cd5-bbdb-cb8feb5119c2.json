@@ -1,0 +1,150 @@
+{
+  "at": "2026-10-10T08:47:51+00:00",
+  "cases": {
+    "api_derived": {
+      "after_sha256": "587ef85042d88807ab001a9f55c913e0ef0bc9bfe307f31b8210a03a1a01ee0a",
+      "apply_exit": 0,
+      "derived_revision": 1,
+      "lineage_ok": true,
+      "preview_exit": 0,
+      "preview_has_diff": true
+    },
+    "backup_restore_lkg": {
+      "after_sha256": "14a01ac84897f7274be3bb8af62310b5f739bd47e7b51429a7605f637b4be7ff",
+      "backup_path_ok": true,
+      "before_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+      "lkg_matches_committed": false,
+      "restored_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399"
+    },
+    "browser": {
+      "build_id": "hS45BSvRXG5eWVgdDrbq9",
+      "delivery": "maintained-edit-cas-20261010-0844",
+      "derived_lineage_ok": false,
+      "derived_meta_ok": true,
+      "derived_revision": 1,
+      "exit": 1,
+      "overall": "failed",
+      "persisted_after_restart": false,
+      "restart_pid_changed": true,
+      "served_pid_after_restart": 91795,
+      "served_pid_before": 91369,
+      "ui_diff_ok": true,
+      "ui_outcome": "Applied revision 1 \u00b7 after 85d54c5b3892\u2026",
+      "ui_outcome_ok": true,
+      "ui_revision_after": "0",
+      "ui_revision_after_restart": "1",
+      "ui_revision_before": "0",
+      "ui_revision_incremented": false,
+      "ui_sha_after_apply": "6dc53a3928a8743d4c13c8b4dc29132df0b9cd2e3efb089dcfc0e90aac52405e"
+    },
+    "concurrent": {
+      "committed_count": 1,
+      "conflict_count": 1,
+      "final_revision": 1,
+      "one_commit_one_conflict": true,
+      "results": [
+        {
+          "label": "A",
+          "ok": true
+        },
+        {
+          "error": "revision must be exactly 2",
+          "label": "B",
+          "ok": false
+        }
+      ]
+    },
+    "drive_publication": "local-only; not claimed",
+    "idempotent": {
+      "first_after_sha": "983c15db88aaabea22e6b6b5aae6b1c299ced432e0b04eefdeaaf20008d18a10",
+      "idempotent_match": true,
+      "second_after_sha": "983c15db88aaabea22e6b6b5aae6b1c299ced432e0b04eefdeaaf20008d18a10"
+    },
+    "negative": {
+      "bad_revision_rejected": true,
+      "canary_rejected": true
+    },
+    "real_sdk_trace_input": "BLOCKED",
+    "strict_types_regression": {
+      "control_row_wrong_flip_type_rejected": true,
+      "each_declared_flip_fails": true,
+      "generated_controls_valid": true,
+      "per_flip_fail": [
+        {
+          "path": "python_apply_export.no_token_leak",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.screened",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.nonempty",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.exit",
+          "still_passed": false
+        },
+        {
+          "path": "browser.overall",
+          "still_passed": false
+        },
+        {
+          "path": "browser.served_process_restarted",
+          "still_passed": false
+        },
+        {
+          "path": "browser.build_id_stable",
+          "still_passed": false
+        },
+        {
+          "path": "browser.restart_stop.portRefusedObserved",
+          "still_passed": false
+        },
+        {
+          "path": "recovery_regression.exit",
+          "still_passed": false
+        },
+        {
+          "path": "diagnostic_plain_token.screened_absent",
+          "still_passed": false
+        }
+      ],
+      "recovery_regression_exit_false_rejected": true,
+      "saved_baseline_core_pass": true
+    },
+    "symlink_escape": {
+      "error": null,
+      "symlink_escape_rejected": false
+    }
+  },
+  "delivery_id": "maintained-edit-cas-20261010-0844",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/maintained-edit-cas-20261010-0844-4507235b.json",
+      "sha256": "2a53eb22bd0649a497ebe55d5d8eb51ca038775509489c204eb90aca0664a4f1"
+    }
+  ],
+  "failures": [
+    "symlink_escape",
+    "backup_restore_lkg",
+    "browser_ui"
+  ],
+  "independent_verification": "not_claimed",
+  "isolated_db": "app/.data/maintained-edit-cas-20261010-0844/local.sqlite",
+  "isolated_db_sha256": "e25e318e4623d962c9f97f80cc806eab32f384fc277054bd7b6497cf208da8a1",
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "run_id": "4507235b-64de-4cd5-bbdb-cb8feb5119c2",
+  "source_identity": {
+    "app/.next/BUILD_ID": "601f76fcdefec605c70d08bafe12d178b8c8fc43d7c87dc3cf1bc595af3a075f",
+    "app/src/app/api/catalog/edit/route.ts": "2cd267dbf1ddc36e4f3e8177d89cbe24caefeb012fbaca30f810f701f63f65d4",
+    "app/src/app/api/catalog/edit/state/route.ts": "287f4671cd3c119d818ca7ac3707680086692ea17de744abc50e1e30ec98a781",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "ff26030c249b8e65c0c17a6160eac2947f15a24191e8f5923a9a8dd8d8ccf6bd",
+    "tools/browser_maintained_edit_cas.mjs": "bf1afd802809bc3d73de01a7aaf72112f8594622c9542a96be0ee2f0b8bbd1f1",
+    "tools/catalog_controlled_edit.py": "32ba3cb20703b3dc26f97c14c3853876ba90dfc6f04423c9e601805f8ec2c80e",
+    "tools/maintained_derived_views.py": "1a94eef5a28ae5774feb43cab3f6c7349654f355693ad0868ee967ba754fb49e",
+    "tools/maintained_edit_cas_acceptance.py": "5c939779627707666e88fac2a5f37af8112f4a27d2f6fd7dd97042a579f257c6"
+  }
+}

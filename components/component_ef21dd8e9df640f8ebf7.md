@@ -1,0 +1,27 @@
+# F0101 / System baseline / baseline/files/.agents/skills/alex-director/scripts/test_ledger_check.py
+
+ID: `component_ef21dd8e9df640f8ebf7`
+
+Purpose is recorded in the cited source details.
+
+Category: **historical** · Evidence: **reported** · Observed condition: **unknown**
+
+## Evidence boundary
+
+Saved evidence; no current installation, credential validity, or runtime use inferred.
+
+## Source records
+
+- `record_621de0b2f18d3b4e7e40`
+
+## Evidence pointers
+
+- `ev_bde55e56b4d02d4c91e5` — FILE CATALOG row 105 (Saved source row; no new live test)
+
+## Recorded relationships
+
+
+## Open questions and issues
+
+
+Read bounded source detail with `python3 tools/catalog.py component <ID>` or `evidence <ID>`.

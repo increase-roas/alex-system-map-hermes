@@ -1,0 +1,134 @@
+{
+  "results": [
+    {
+      "item": "system-map-catalog_native_structure",
+      "status": "VERIFIED",
+      "command": [
+        "/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python",
+        "/Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/system-map-catalog"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n",
+      "sha256": "61376f3bbffd133d06646d32d82104f769a9302d62472c8a55a5eebd2a8aa263"
+    },
+    {
+      "item": "system-map-catalog_canonical_doc_links",
+      "status": "VERIFIED",
+      "checked_links": [
+        "../../docs/CURSOR_HANDOFF.md#foundation-contract",
+        "../../docs/AGENT_PROTOCOL.md#corrections-and-evidence"
+      ],
+      "missing": []
+    },
+    {
+      "item": ".agents/system-map-catalog_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.agents/skills/system-map-catalog",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/system-map-catalog"
+    },
+    {
+      "item": ".claude/system-map-catalog_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.claude/skills/system-map-catalog",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/system-map-catalog"
+    },
+    {
+      "item": ".cursor/system-map-catalog_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.cursor/skills/system-map-catalog",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/system-map-catalog"
+    },
+    {
+      "item": "workflow-checkpoint-recovery_native_structure",
+      "status": "VERIFIED",
+      "command": [
+        "/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python",
+        "/Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/workflow-checkpoint-recovery"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n",
+      "sha256": "3512e0ad2877dcd29176c02df07c3fb459cda8577418d447a45d02953e8f7a81"
+    },
+    {
+      "item": "workflow-checkpoint-recovery_canonical_doc_links",
+      "status": "VERIFIED",
+      "checked_links": [
+        "../../docs/WORKFLOW_CONTRACT.md",
+        "../../docs/AGENT_PROTOCOL.md#fresh-agent-entry"
+      ],
+      "missing": []
+    },
+    {
+      "item": ".agents/workflow-checkpoint-recovery_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.agents/skills/workflow-checkpoint-recovery",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/workflow-checkpoint-recovery"
+    },
+    {
+      "item": ".claude/workflow-checkpoint-recovery_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.claude/skills/workflow-checkpoint-recovery",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/workflow-checkpoint-recovery"
+    },
+    {
+      "item": ".cursor/workflow-checkpoint-recovery_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.cursor/skills/workflow-checkpoint-recovery",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/workflow-checkpoint-recovery"
+    },
+    {
+      "item": "react-flow-system-explorer_native_structure",
+      "status": "VERIFIED",
+      "command": [
+        "/Users/alexlobaito/.local/pipx/.cache/f1f7d7da70349d4/bin/python",
+        "/Users/alexlobaito/.codex/skills/.system/skill-creator/scripts/quick_validate.py",
+        "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/react-flow-system-explorer"
+      ],
+      "exit_code": 0,
+      "output": "Skill is valid!\n",
+      "sha256": "7d026f3a5b765022e67c79ff04d19682c4d6b907725e3cbfe24616f3b25ff55b"
+    },
+    {
+      "item": "react-flow-system-explorer_canonical_doc_links",
+      "status": "VERIFIED",
+      "checked_links": [
+        "../../docs/CURSOR_HANDOFF.md",
+        "../../docs/DESIGN_SPEC.md",
+        "../../docs/REACT_FLOW_REFERENCES.md",
+        "../../docs/WORKFLOW_CONTRACT.md",
+        "../../docs/PRO_TEMPLATE_INTAKE.md"
+      ],
+      "missing": []
+    },
+    {
+      "item": ".agents/react-flow-system-explorer_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.agents/skills/react-flow-system-explorer",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/react-flow-system-explorer"
+    },
+    {
+      "item": ".claude/react-flow-system-explorer_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.claude/skills/react-flow-system-explorer",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/react-flow-system-explorer"
+    },
+    {
+      "item": ".cursor/react-flow-system-explorer_discovery_link",
+      "status": "VERIFIED",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/.cursor/skills/react-flow-system-explorer",
+      "resolved": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/skills/react-flow-system-explorer"
+    },
+    {
+      "item": "fresh_target_runtime_automatic_selection",
+      "status": "UNVERIFIED",
+      "evidence": "No fresh Cursor/Codex/Claude target-runtime selection receipt supplied. Local structural/link checks and verifier interpretation do not prove selection."
+    },
+    {
+      "item": "cursor_ui_runtime",
+      "status": "UNVERIFIED",
+      "evidence": "Application/UI deferred to Cursor; no runtime screenshots, service identity or browser acceptance runs supplied."
+    }
+  ]
+}

@@ -1,0 +1,153 @@
+{
+  "id": "table_6b26c8848d2573b26295",
+  "sheet": "CORE PACKAGE ADOPTION",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Core package adoption and remaining work"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Package-level assessment from the October 9 report. Acquisition does not establish installation or complete feature adoption."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Core source"
+        },
+        {
+          "column": "B",
+          "value": "Intended use"
+        },
+        {
+          "column": "C",
+          "value": "Supported statement"
+        },
+        {
+          "column": "D",
+          "value": "Work still needed"
+        },
+        {
+          "column": "E",
+          "value": "Source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Persona OS v2.0.0 and newer source snapshot"
+        },
+        {
+          "column": "B",
+          "value": "Agent profile, context, workspace and recovery structures"
+        },
+        {
+          "column": "C",
+          "value": "Downloaded; relevant templates and concepts referenced; no demonstrated integrated Persona OS runtime on the target agents"
+        },
+        {
+          "column": "D",
+          "value": "Select actual features/files, compare existing Hermes profiles, record adaptations, and test fresh-session loading and recovery"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Smart Orchestrator v2.1.3 and source snapshot"
+        },
+        {
+          "column": "B",
+          "value": "Worker briefs, ownership, return packets, routing/model evidence"
+        },
+        {
+          "column": "C",
+          "value": "Downloaded/reference material; no demonstrated deployment of that package through this SDK"
+        },
+        {
+          "column": "D",
+          "value": "Map its useful contracts and validators to existing dispatch/verifier mechanisms; adapt runtime-specific portions and prove outcomes"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex Model Router v3.0.1 and source snapshot"
+        },
+        {
+          "column": "B",
+          "value": "Routing, task packets, observations and evaluation examples"
+        },
+        {
+          "column": "C",
+          "value": "Downloaded/source-inspected reference; no complete mapping to current SDK routing or measured savings"
+        },
+        {
+          "column": "D",
+          "value": "Compare exact package features with the existing routing and execution path; implement only uncovered useful behavior and evaluate quality/cost"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Supporting profile and handoff templates"
+        },
+        {
+          "column": "B",
+          "value": "Identity, instructions, INDEX/workspace pointers, portable context"
+        },
+        {
+          "column": "C",
+          "value": "Referenced as adaptation inputs"
+        },
+        {
+          "column": "D",
+          "value": "Identify the canonical target files, selected revisions, loading triggers, and target-specific behavior tests"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    }
+  ]
+}

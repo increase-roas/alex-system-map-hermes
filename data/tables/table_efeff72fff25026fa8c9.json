@@ -1,0 +1,2073 @@
+{
+  "id": "table_efeff72fff25026fa8c9",
+  "sheet": "S01-09 1Password item catalog",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Every item in the Connectors vault by name and ID (never a value), the secrets that live on the hub and whether 1Password has them, the 2 keys saved into 1Password on 2026-10-01, and the files where item IDs are hard-coded (change those after copying the items to a new vault). Item IDs are identifiers, not secrets. It closes retest gap G06. Facts from play spp-p20a (notes/gap-facts.md §3). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/onepassword-catalog.json; never edit this tab by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Every item in the Connectors vault (names and IDs only, never values; read 2026-10-01 after this play's 2 saves; later rows: the vault sweep's 2 (21:29Z; it also found 9 more new items, all archived), the Firecrawl key, and the .dev.vars item and the Modal and Hugging Face tokens of 2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "item title"
+        },
+        {
+          "column": "B",
+          "value": "item ID"
+        },
+        {
+          "column": "C",
+          "value": "kind and fields"
+        },
+        {
+          "column": "D",
+          "value": "purpose"
+        },
+        {
+          "column": "E",
+          "value": "used by"
+        },
+        {
+          "column": "F",
+          "value": "rotation note"
+        },
+        {
+          "column": "G",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password service account — connectors-sync (read-only Connectors)"
+        },
+        {
+          "column": "B",
+          "value": "5l5qorgqmbn5bdlqqlupxu4w5a"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "Token of the read-only robot connectors-sync (Connectors vault only)."
+        },
+        {
+          "column": "E",
+          "value": "Nothing reads it from here today. The Mac Keychain item op-service-account-connectors-sync holds the read-write robot's token instead (decision D08, a read-only token on the Mac, is deferred)."
+        },
+        {
+          "column": "F",
+          "value": "A robot's token can't be changed: create a new service account, save its token, revoke the old one."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D08 ; ~/.agents/tools/connectors/orgo_op.py L4–L5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud API key"
+        },
+        {
+          "column": "B",
+          "value": "o5wmg5l5ef7tpebew74xrr5dru"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "Atlas Cloud API key behind the hub route atlas-cloud."
+        },
+        {
+          "column": "E",
+          "value": "Hub: install_hub.sh writes it to /opt/mcp-hub/creds/atlas-cloud-key. Also the skill ad-recreator-atlascloud-codex-v3 reads it by reference."
+        },
+        {
+          "column": "F",
+          "value": "Rotate in the Atlas Cloud dashboard, save here, rewrite the hub file, restart the atlas-cloud program."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/skills/ad-recreator-atlascloud-codex-v3/scripts/atlas_generate_image.mjs L17–L18 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud extra key (revoke in AtlasCloud dashboard)"
+        },
+        {
+          "column": "B",
+          "value": "hdt55xydsqt6rnbk6bfslomb6y"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, valid from, expires"
+        },
+        {
+          "column": "D",
+          "value": "A spare Atlas Cloud key kept only until it is revoked."
+        },
+        {
+          "column": "E",
+          "value": "Nothing."
+        },
+        {
+          "column": "F",
+          "value": "Owner step: revoke it in the Atlas Cloud dashboard, then archive this item (owner boundary 'extra Orgo/Atlas key revocations')."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-batch-4.md L17 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare API — Composio (account token)"
+        },
+        {
+          "column": "B",
+          "value": "tgdnkyzk22vvgx4pw3uimsm5b4"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, account_id, r2_access_key_id, r2_secret_access_key, r2_s3_endpoint, permissions, used by"
+        },
+        {
+          "column": "D",
+          "value": "Cloudflare account token (Read & Write on every group, no expiry) plus R2 keys and the account ID."
+        },
+        {
+          "column": "E",
+          "value": "Composio custom_cloudflare_api login. rebuild_hub.py reads account_id to fetch the hub tunnel's credentials."
+        },
+        {
+          "column": "F",
+          "value": "Make a new account token in the Cloudflare dashboard, save here, run push_key_to_composio.py --toolkit custom_cloudflare_api, revoke the old token."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py L25 ; ~/.agents/tools/connectors/hub/rebuild_hub.py L65–L71 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio — user API key (org wearenumber1)"
+        },
+        {
+          "column": "B",
+          "value": "ej5xlb52icpaabh4vto4a67na4"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, org, used by"
+        },
+        {
+          "column": "D",
+          "value": "Composio user API key for org wearenumber1 (REST calls)."
+        },
+        {
+          "column": "E",
+          "value": "Hub connector-health reads it at run time (config.json composio_item). The composio CLI login keeps its own copy in ~/.composio/user_data.json."
+        },
+        {
+          "column": "F",
+          "value": "Sign in again with composio login (or composio login --user-api-key <key> --org <org>), save the key from ~/.composio/user_data.json here with the read-write robot's standard-input flow (never printed), then retire the old key. The health check picks up the new value on its next run. Which route created today's item is NOT_PROVEN."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/health/health_check.py L132 ; ~/.agents/tools/connectors/health/config.json \"composio_item\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://github.com/ComposioHQ/composio/pull/3132 (merged 2026-04-08, read 2026-10-02) ; https://docs.composio.dev/reference/authenticating-to-composio (read 2026-10-02) ; https://docs.composio.dev/reference/v3/authentication (read 2026-10-02) ; ~/.agents/tools/cards/composio.md \"from ~/.composio/user_data.json\" ; work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §2 ; https://www.1password.dev/cli/item-create (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §31"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foreplay API key"
+        },
+        {
+          "column": "B",
+          "value": "ieop2kwq2eoixdkybc4qb7kdp4"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, url, used by"
+        },
+        {
+          "column": "D",
+          "value": "Foreplay API key."
+        },
+        {
+          "column": "E",
+          "value": "Composio custom_foreplay login."
+        },
+        {
+          "column": "F",
+          "value": "Rotate at Foreplay, save here, run push_key_to_composio.py --toolkit custom_foreplay, test one read (done this way on 2026-10-01)."
+        },
+        {
+          "column": "G",
+          "value": "system/run-log.md \"Foreplay key rotated\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command (EliteDCS) — license key"
+        },
+        {
+          "column": "B",
+          "value": "smsqrb4cyzqvdsu3eedizvpxgy"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, used by"
+        },
+        {
+          "column": "D",
+          "value": "License key of GHL Command (EliteDCS), the licensed GHL tool the builder origin runs."
+        },
+        {
+          "column": "E",
+          "value": "Hub file /opt/increase-roas-mcp/ghl-config/credentials.json (field license_key), which the builder origin copies into each session."
+        },
+        {
+          "column": "F",
+          "value": "Saved here 2026-10-01 by this play (it was only on the hub). On a rebuild, sign in to GHL Command with it. If EliteDCS issues a new key, update the hub sign-in and this item together."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; ~/Development/ghl-command-universal/origin/server.py L16 ; ~/Development/ghl-command-universal/origin/server.py L101–L106"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command Builder (ghl-command-builder) — connection password"
+        },
+        {
+          "column": "B",
+          "value": "yxvess6diezoy7lgrnhqrmct5i"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, valid from, expires, hostname, MCP endpoint, Cloudflare Worker, Source folder, Claude connector"
+        },
+        {
+          "column": "D",
+          "value": "The password typed on the GHL builder's sign-in page."
+        },
+        {
+          "column": "E",
+          "value": "The builder Worker ghl-command-universal checks it against its secret CONNECTION_PASSWORD_SHA256 (a hash). The Composio custom_ghl_command_builder login was made through that sign-in. The local fallback file ~/.config/ghl-command-universal/connection-password was retired 2026-10-02 after a sha256 match; this item is the only copy."
+        },
+        {
+          "column": "F",
+          "value": "Pick a new password, set the Worker secret CONNECTION_PASSWORD_SHA256 to its SHA-256, save here, then reconnect the Composio login."
+        },
+        {
+          "column": "G",
+          "value": "~/Development/ghl-command-universal/worker/src/index.ts L20 ; ~/Development/ghl-command-universal/worker/src/index.ts L119 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L159"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command Builder (ghl-command-builder) — origin key"
+        },
+        {
+          "column": "B",
+          "value": "5bfzdypjiimr7ov4kyua6wxtha"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, used by"
+        },
+        {
+          "column": "D",
+          "value": "Shared key between the GHL builder Worker and its origin on the hub."
+        },
+        {
+          "column": "E",
+          "value": "Hub file /opt/ghl-command-universal/origin-key (read by origin server.py) and the Worker secret ORIGIN_KEY (sent as Bearer to the origin)."
+        },
+        {
+          "column": "F",
+          "value": "Saved here 2026-10-01 by this play (it was only on the hub and in the write-only Worker secret). Rotate: new random key into the hub file and the Worker secret together, then here."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; ~/Development/ghl-command-universal/origin/server.py L19 ; ~/Development/ghl-command-universal/worker/src/index.ts L190 ; ~/Development/ghl-command-universal/README.md \"the origin key exists only on the hub\""
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL OAuth CRM (ghl-oauth-crm) — gateway key"
+        },
+        {
+          "column": "B",
+          "value": "3yxpnoxi2xd7o76whc6onu522a"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, url, header, reaches, used by"
+        },
+        {
+          "column": "D",
+          "value": "Key for the GHL CRM gateway's /mcp endpoint (Authorization: Bearer)."
+        },
+        {
+          "column": "E",
+          "value": "Composio custom_ghl_oauth_crm login. The gateway Worker compares it with its secret GHL_MCP_INTERNAL_API_KEY. The item's own 'used by' field is stale: it still names direct Claude and Cursor connectors and a relay."
+        },
+        {
+          "column": "F",
+          "value": "Set a new value as the Worker secret GHL_MCP_INTERNAL_API_KEY, save here, run push_key_to_composio.py --toolkit custom_ghl_oauth_crm, test one read. Also correct the item's 'used by' field."
+        },
+        {
+          "column": "G",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L110–L113 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL PIT — <client location A> (the real title names the location)"
+        },
+        {
+          "column": "B",
+          "value": "55bt4orq2273nskrzefdy4lnrq"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, locationId, companyId, used by"
+        },
+        {
+          "column": "D",
+          "value": "GHL Private Integration key for one client location."
+        },
+        {
+          "column": "E",
+          "value": "Registered in the GHL Command token registry on the hub (/opt/increase-roas-mcp/ghl-config/.ghl-tokens.json), which the builder origin uses."
+        },
+        {
+          "column": "F",
+          "value": "Rotate in that GHL location (Settings > Private Integrations), save here, register the new key with the builder."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL PIT — <client location B> (the real title names the location)"
+        },
+        {
+          "column": "B",
+          "value": "qku4dmh62p6qp3matj2pxaym7u"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, locationId, companyId, used by"
+        },
+        {
+          "column": "D",
+          "value": "GHL Private Integration key for one client location."
+        },
+        {
+          "column": "E",
+          "value": "Same registry as the row above."
+        },
+        {
+          "column": "F",
+          "value": "Same as the row above."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Cloud API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "xpf3cwbyg3t33swa4srlb4izcy"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential (empty), project_id (empty), roles (empty)"
+        },
+        {
+          "column": "D",
+          "value": "Placeholder: no Google Cloud key is needed (the robot gets project roles instead)."
+        },
+        {
+          "column": "E",
+          "value": "Nothing. All fields are empty by design."
+        },
+        {
+          "column": "F",
+          "value": "None."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_director-finish/notes/key-placeholders.md \"Google Cloud: no new key\""
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google service account — tagging-admin (GTM + GA4 Admin)"
+        },
+        {
+          "column": "B",
+          "value": "3rtcprjr3b626vxlmlkz53vbte"
+        },
+        {
+          "column": "C",
+          "value": "Document (a file)"
+        },
+        {
+          "column": "D",
+          "value": "Key file of the Google robot tagging-admin (domain-wide delegation)."
+        },
+        {
+          "column": "E",
+          "value": "Hub: install_hub.sh writes it to /opt/mcp-hub/creds/tagging.json for the gtm, ga4-admin and google-robot routes. Mac: gcloud_robot.py reads it per run."
+        },
+        {
+          "column": "F",
+          "value": "Owner step: make a new key in Google Cloud (IAM > Service accounts > tagging-admin > Keys), replace this document, rewrite the hub file, delete the old key."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/gcloud_robot.py docstring ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google service account — workspace-admin (Workspace Admin, can reset passwords)"
+        },
+        {
+          "column": "B",
+          "value": "35amwpz7c3wlxhmst4ueawpppu"
+        },
+        {
+          "column": "C",
+          "value": "Document (a file)"
+        },
+        {
+          "column": "D",
+          "value": "Key file of the retired workspace-admin robot (password resets moved to the Google robot)."
+        },
+        {
+          "column": "E",
+          "value": "No user left: the Claude Desktop server was removed 2026-10-02 (L01 done)."
+        },
+        {
+          "column": "F",
+          "value": "Archive now (L01 done 2026-10-02); deleting the key in Google Cloud is the owner's step."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/README.md \"retired route\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c12-desktop-plugins.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §1 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §8"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google tagging setup record + OAuth desktop client (from Downloads, Aug 2026)"
+        },
+        {
+          "column": "B",
+          "value": "zg3w36r2h7tx7jtdkt4fc2ubna"
+        },
+        {
+          "column": "C",
+          "value": "Document (a file)"
+        },
+        {
+          "column": "D",
+          "value": "Setup record and an OAuth desktop client file from the August 2026 tagging setup."
+        },
+        {
+          "column": "E",
+          "value": "Nothing in code. Reference only."
+        },
+        {
+          "column": "F",
+          "value": "None."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Higgsfield API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "mykharn2zwdxc7zptrzkz24dqa"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, key_id"
+        },
+        {
+          "column": "D",
+          "value": "Higgsfield key ID and secret (both filled, although the title still says 'paste here')."
+        },
+        {
+          "column": "E",
+          "value": "Composio higgsfield login."
+        },
+        {
+          "column": "F",
+          "value": "Rotate in the Higgsfield console, save here, run the key mover for higgsfield (key_id maps to generic_api_key, credential to generic_token), test one read. Rename the item."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_director-finish/notes/key-placeholders.md \"Higgsfield API key (paste here)\" ; system/run-log.md \"Higgsfield -> Composio\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "6b4gdiv6wuh5sv2ko72xkplyba"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, full"
+        },
+        {
+          "column": "D",
+          "value": "Make API token and its zone address (filled, although the title still says 'paste here')."
+        },
+        {
+          "column": "E",
+          "value": "Composio make login."
+        },
+        {
+          "column": "F",
+          "value": "Rotate in Make (Profile > API), save here, run the key mover for make, test one read. Rename the item."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_director-finish/notes/key-placeholders.md \"Make API key (paste here)\" ; system/run-log.md \"Make -> Composio\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP atlas-cloud route token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "ldtridi67bgehcpbojgmnxdwoy"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, used by"
+        },
+        {
+          "column": "D",
+          "value": "Bearer token for the hub route /atlas-cloud/mcp (this route has its own token)."
+        },
+        {
+          "column": "E",
+          "value": "Hub file /opt/mcp-hub/creds/route-tokens/atlas-cloud. Composio custom_atlas_cloud login."
+        },
+        {
+          "column": "F",
+          "value": "Make a new random token, save it here, rewrite the hub file (or rerun the installer's secrets step), then run push_key_to_composio.py --item <this item> --toolkit <slug> and one read-only call."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP Google robot token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "ol4f26ki7hgrsv6g5l6ik2dxwq"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, used by"
+        },
+        {
+          "column": "D",
+          "value": "Bearer token for the hub route /google-robot/mcp (this route has its own token)."
+        },
+        {
+          "column": "E",
+          "value": "Hub file /opt/mcp-hub/creds/route-tokens/google-robot. Composio custom_google_robot login."
+        },
+        {
+          "column": "F",
+          "value": "Make a new random token, save it here, rewrite the hub file (or rerun the installer's secrets step), then run push_key_to_composio.py --item <this item> --toolkit <slug> and one read-only call."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP hub token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "qhzv4z3vflmqdi64rx3wfh7sji"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "The shared hub token: every hub route without its own token file accepts only this one (gtm, ga4-admin, xai-research, prime-intellect, spyfu, ir-notes)."
+        },
+        {
+          "column": "E",
+          "value": "Hub file /opt/mcp-hub/creds/hub-token and the hub health check. Composio logins custom_google_tag_manager, custom_ga4_admin, custom_xai_research, custom_prime_intellect, custom_spyfu and custom_ir_notes. This answers the open 'IR notes token' question: it is this item."
+        },
+        {
+          "column": "F",
+          "value": "Make a new random token, save it here, rewrite the hub file (or rerun the installer's secrets step), then run push_key_to_composio.py --item <this item> --toolkit <slug> for each of the 6 toolkits and one read-only call."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L7–L10 ; ~/.agents/tools/connectors/health/health_check.py L46–L47 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP Workspace Admin token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "uhe4zyfbwy3k5e4wjcva2wopsq"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "Token of the retired hub route google-workspace-admin."
+        },
+        {
+          "column": "E",
+          "value": "No route. A leftover copy sits on the hub at /opt/mcp-hub/creds/wsadmin-token."
+        },
+        {
+          "column": "F",
+          "value": "Archive. Removing the hub copy is cleanup under the standing yes (back up first)."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/README.md \"retired route\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads — system user token (IR Business Manus App)"
+        },
+        {
+          "column": "B",
+          "value": "afu6eusv3rf2x3l663glsb3asy"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, type, default ad account (empty), reaches, used by"
+        },
+        {
+          "column": "D",
+          "value": "Meta system-user token (never expires)."
+        },
+        {
+          "column": "E",
+          "value": "Composio metaads login: this item is its paste source. The Mac meta CLI and its token file were removed 2026-10-01 (K04)."
+        },
+        {
+          "column": "F",
+          "value": "Generate a new system-user token in Meta Business settings, save here, reconnect Composio metaads, revoke the old token."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-batch-2.md L180 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo API key"
+        },
+        {
+          "column": "B",
+          "value": "pbkt6ghkrhcq6oab5b3cppncca"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, account, used by"
+        },
+        {
+          "column": "D",
+          "value": "Orgo API key."
+        },
+        {
+          "column": "E",
+          "value": "orgo_op.py finds it by title for every orgo call, sync_notes.py, capture_hub.py and rebuild_hub.py included (spp-p33a). The item's own 'used by' field still says ~/.orgo/credentials.json: change it to orgo_op.py."
+        },
+        {
+          "column": "F",
+          "value": "Make a new key in Orgo, save here, delete the old key in Orgo."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/orgo_op.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L139"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo extra API key 7e6e291b (was ~/.orgo/mcp.env; delete in Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "dthxwbpi3hib5sfytcvtxw4zka"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, valid from, expires"
+        },
+        {
+          "column": "D",
+          "value": "A spare Orgo key kept only until it is revoked."
+        },
+        {
+          "column": "E",
+          "value": "Nothing."
+        },
+        {
+          "column": "F",
+          "value": "Owner step: delete it in Orgo, then archive this item."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-keys-2.md L81–L84 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime Intellect API key"
+        },
+        {
+          "column": "B",
+          "value": "54hrrfs2n6u5lmm4gt7apl2ooe"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "Prime Intellect API key behind the hub route prime-intellect."
+        },
+        {
+          "column": "E",
+          "value": "Hub: install_hub.sh writes it to /opt/mcp-hub/creds/prime.env as PRIME_API_KEY=."
+        },
+        {
+          "column": "F",
+          "value": "Rotate at Prime Intellect, save here, rewrite the hub file, restart the prime-intellect program."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shopify API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "lvzszzgwfbi2eknrpnlxzjvnf4"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential (empty), api_key (empty), api_secret (empty), store_domain (empty)"
+        },
+        {
+          "column": "D",
+          "value": "Placeholder for the Shopify store app (all fields empty)."
+        },
+        {
+          "column": "E",
+          "value": "Nothing yet: waiting for Alex to create the store app (STATUS 'Waiting on the owner' 1)."
+        },
+        {
+          "column": "F",
+          "value": "None yet."
+        },
+        {
+          "column": "G",
+          "value": "STATUS.md \"Shopify: create the store app\""
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SpyFu API keys"
+        },
+        {
+          "column": "B",
+          "value": "bgz7imwftp3534pb35bbopxy7u"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, SPYFU_API_ID, used by"
+        },
+        {
+          "column": "D",
+          "value": "SpyFu API ID and key (credential = base64 of id:secret)."
+        },
+        {
+          "column": "E",
+          "value": "Hub: install_hub.sh writes /opt/mcp-hub/creds/spyfu.env for the spyfu route."
+        },
+        {
+          "column": "F",
+          "value": "Rotate at SpyFu, save the new base64 value and the ID here, rewrite the hub file, restart the spyfu program."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale auth key"
+        },
+        {
+          "column": "B",
+          "value": "bhbunmxv5gp262xna7eqt2366e"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "Tailscale auth key (reusable, tagged tag:server). Retitled from 'Tailscale auth key (paste here)' on 2026-10-01 (same ID)."
+        },
+        {
+          "column": "E",
+          "value": "install_hub.sh step 11 (tailscale up on a new hub), found by this exact title. Read once per build."
+        },
+        {
+          "column": "F",
+          "value": "Make a new reusable key tagged tag:server in the Tailscale admin console (Settings > Keys), save it here."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L39 ; ~/.agents/tools/connectors/hub/install_hub.sh L153–L156 ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §4"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xAI API key (xai-research)"
+        },
+        {
+          "column": "B",
+          "value": "hzbgkns2qocgczsq5kcv2ckl64"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, used by"
+        },
+        {
+          "column": "D",
+          "value": "xAI API key behind the hub route xai-research."
+        },
+        {
+          "column": "E",
+          "value": "Hub: install_hub.sh writes /opt/mcp-hub/creds/xai-key. It is already in 1Password: the hub file equals this item (checked 2026-10-01), so the workbook's 'not in 1Password' is stale. A duplicate copy sits on the Mac at ~/.cursor/mcp-servers/xai-research/key.txt."
+        },
+        {
+          "column": "F",
+          "value": "Rotate at xAI, save here, rewrite the hub file, restart xai-research. Remove the Mac copy (back up first) under the standing yes."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; workbook All connections R260 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password service account — composio"
+        },
+        {
+          "column": "B",
+          "value": "yp6ons6ebd6zcot6tv6dzyssb4"
+        },
+        {
+          "column": "C",
+          "value": "not read (the sweep listed names and IDs only)"
+        },
+        {
+          "column": "D",
+          "value": "Token of the 1Password robot 'composio' that Composio's _1password login runs as (read and write on 26 vaults). Saved 2026-10-01 20:39:36Z."
+        },
+        {
+          "column": "E",
+          "value": "Nothing: Composio's 1Password login is paused and its auth config disabled (22:13Z, spp-p31a)."
+        },
+        {
+          "column": "F",
+          "value": "Archived 2026-10-01 22:17:09Z by the read-write robot. Archived isn't unreadable: any robot with the ID can still read it, so it is harmless only once Alex revokes the token (To do R59)."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §3 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §7 ; work/2026-10-01_setup-playbook/workbook-updates.md L71 ; work/2026-10-01_setup-playbook/notes/composio-1password-removal.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L102"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale API token"
+        },
+        {
+          "column": "B",
+          "value": "75uhbn7dxm5lmzugcrmr4cfida"
+        },
+        {
+          "column": "C",
+          "value": "API Credential (title, ID and dates read 2026-10-03; fields not read)"
+        },
+        {
+          "column": "D",
+          "value": "The Tailscale API key kqEDA2QHaj11CNTRL (description '1pass', made by alex@ 2026-10-01 21:16:37Z, expires 2026-12-30), saved here 2026-10-01 21:17:06Z."
+        },
+        {
+          "column": "E",
+          "value": "The Composio Tailscale login tailscale_eaved-netter (ca_Qr4XRwIDafoq), created 15 seconds after this item was saved (title and time check 2026-10-03; values not compared). No script or config reads it (vault sweep 2026-10-01)."
+        },
+        {
+          "column": "F",
+          "value": "Expires 2026-12-30: make a new API key in the Tailscale admin console, save it here, then move it into the Composio login with the key mover."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L71 ; work/2026-10-03_claims-audit/notes/verify-workbook-other.md §2 ; work/2026-10-02_network-rules/notes/network-rules.md §2 ; work/2026-10-02_network-rules/notes/network-rules.md §11 ; work/2026-10-02_network-rules/notes/api/keys-metadata.json ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §41 ; ~/.agents/tools/cards/composio.md \"Key mover\""
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL OAuth CRM (ghl-oauth-crm) — INTERNAL_API_KEY (from local .dev.vars)"
+        },
+        {
+          "column": "B",
+          "value": "xcneoitmjinq6qvmrgln4xbfym"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential, ghl_mcp_internal_api_key_old"
+        },
+        {
+          "column": "D",
+          "value": "credential = the gateway Worker's INTERNAL_API_KEY as it was in the local .dev.vars (Wrangler's local-dev file); ghl_mcp_internal_api_key_old = an old GHL_MCP_INTERNAL_API_KEY, not the live gateway key. Saved 2026-10-02 before the file was retired."
+        },
+        {
+          "column": "E",
+          "value": "Nothing. The live gateway key Composio uses is a different item (3yxpnoxi…); whether INTERNAL_API_KEY here equals the live Worker secret is NOT_PROVEN."
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L159"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl API key"
+        },
+        {
+          "column": "B",
+          "value": "uuopqngw4ikpdmpvgnclx3eive"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential"
+        },
+        {
+          "column": "D",
+          "value": "Firecrawl API key (Personal Team, free plan, 1,000 credits a month)."
+        },
+        {
+          "column": "E",
+          "value": "Composio firecrawl (copy pushed 2026-10-01 by the key mover) and firecrawl_op.py (found by this exact title per run; this ID is only its fallback)."
+        },
+        {
+          "column": "F",
+          "value": "Make a new key in Firecrawl, save it here, then rerun the key mover (Rebuild from zero step 7.10)."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/firecrawl-connector.md §2 ; work/2026-10-01_setup-playbook/notes/firecrawl-connector.md §5 ; work/2026-10-01_setup-playbook/workbook-updates.md L96 ; work/2026-10-01_setup-playbook/notes/firecrawl-op-title.md §1 ; work/2026-10-01_setup-playbook/notes/firecrawl-op-title.md §2 ; ~/.agents/tools/connectors/firecrawl_op.py ; agents-home 10b9aa9 ; work/2026-10-01_setup-playbook/workbook-updates.md L264"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Modal API token"
+        },
+        {
+          "column": "B",
+          "value": "ozvkxvoxqgiy3ednp3tkx6rkqe"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: username (token ID, ak-), credential (secret, as-)"
+        },
+        {
+          "column": "D",
+          "value": "Modal API token for workspace alex-13722 (token 'modal', user alex-13722; expires 2027-10-01 22:09 EDT)."
+        },
+        {
+          "column": "E",
+          "value": "modal_op.py finds it by title for every modal call (read per run by the Keychain robot); never copied to ~/.modal.toml or Composio. Partners read it and never write it; only Alex rotates it."
+        },
+        {
+          "column": "F",
+          "value": "Before 2027-10-01: a new token in the Modal dashboard, both fields saved to this item (same title), the old token revoked in Modal; nothing else changes."
+        },
+        {
+          "column": "G",
+          "value": "~/.agents/tools/connectors/modal_op.py docstring ; work/2026-10-01_setup-playbook/notes/modal-connector.md §3 ; work/2026-10-01_setup-playbook/notes/modal-connector.md §4 ; work/2026-10-01_setup-playbook/workbook-updates.md L212 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L283 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D23"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face API token"
+        },
+        {
+          "column": "B",
+          "value": "u4gavrfzax27phth755upip3lq"
+        },
+        {
+          "column": "C",
+          "value": "API Credential: credential (hf_, 37 characters)"
+        },
+        {
+          "column": "D",
+          "value": "Fine-grained Hugging Face token 'accss' for user bloomsterhehe (created 2026-10-02): repo read/write, discussions, collections, webhooks, notifications, inference, Inference Endpoints, Jobs; no billing read."
+        },
+        {
+          "column": "E",
+          "value": "A copy pushed to Composio hugging_face (ca_LT97uOiNLDhk) and to the disabled CUSTOM_HF_MCP login (ca_YEECCwwIMmni, removed with CG-QWAA) by push_key_to_composio.py, found by title; no file or CLI holds it."
+        },
+        {
+          "column": "F",
+          "value": "Make a new fine-grained token on Hugging Face, save it here under the same title, rerun the key mover as in Rebuild from zero step 7.11, then revoke the old token."
+        },
+        {
+          "column": "G",
+          "value": "work/2026-10-01_setup-playbook/notes/huggingface-connector.md §1 ; work/2026-10-01_setup-playbook/notes/huggingface-connector.md §2 ; work/2026-10-01_setup-playbook/notes/huggingface-connector.md §6 ; work/2026-10-01_setup-playbook/workbook-updates.md L235"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Secrets on the hub, and whether 1Password has them (compared by hash on 2026-10-01; nothing printed)"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hub file or value"
+        },
+        {
+          "column": "B",
+          "value": "what it is"
+        },
+        {
+          "column": "C",
+          "value": "in 1Password?"
+        },
+        {
+          "column": "D",
+          "value": "action in this play, or why not moved"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/mcp-hub/creds/hub-token"
+        },
+        {
+          "column": "B",
+          "value": "The shared hub token"
+        },
+        {
+          "column": "C",
+          "value": "Yes: MCP hub token (equal by hash)"
+        },
+        {
+          "column": "D",
+          "value": "None"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/mcp-hub/creds/route-tokens/google-robot and /atlas-cloud"
+        },
+        {
+          "column": "B",
+          "value": "The two per-route tokens (the only route-token files on the hub)"
+        },
+        {
+          "column": "C",
+          "value": "Yes: the two MCP route-token items"
+        },
+        {
+          "column": "D",
+          "value": "None"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/mcp-hub/creds/atlas-cloud-key, xai-key, tagging.json"
+        },
+        {
+          "column": "B",
+          "value": "Atlas Cloud key, xAI key, Google robot key file"
+        },
+        {
+          "column": "C",
+          "value": "Yes: the Atlas, xAI and tagging-admin items"
+        },
+        {
+          "column": "D",
+          "value": "None. The xAI key was already in 1Password; the workbook row saying otherwise is stale."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; workbook All connections R260"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "IR notes route token"
+        },
+        {
+          "column": "B",
+          "value": "The tester asked which item it is"
+        },
+        {
+          "column": "C",
+          "value": "Yes: there is no route-tokens/ir-notes file, so the route accepts only the shared hub token"
+        },
+        {
+          "column": "D",
+          "value": "None"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; workbook All connections R296"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/mcp-hub/creds/prime.env and spyfu.env"
+        },
+        {
+          "column": "B",
+          "value": "Prime Intellect and SpyFu keys"
+        },
+        {
+          "column": "C",
+          "value": "Written from their items by install_hub.sh; proven equal 2026-10-01 by play spp-p2b"
+        },
+        {
+          "column": "D",
+          "value": "Not opened in this play (rule: never open .env files)"
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md \"Every creds file equals its 1Password value\""
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/mcp-hub/creds/wsadmin-token"
+        },
+        {
+          "column": "B",
+          "value": "Token of the retired workspace-admin route"
+        },
+        {
+          "column": "C",
+          "value": "Yes (retired item)"
+        },
+        {
+          "column": "D",
+          "value": "Left as is: a dead copy to remove later (back up first)"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/mcp-hub/creds/op-connectors-sync"
+        },
+        {
+          "column": "B",
+          "value": "Token of the read-write robot connectors-sync-rw"
+        },
+        {
+          "column": "C",
+          "value": "No. Also in the Mac Keychain (equal by hash), so it is not hub-only"
+        },
+        {
+          "column": "D",
+          "value": "Not moved: saving it in Connectors would let the read-only robot read a write token. Robots can't reach a Personal or Private vault, so keeping a backup there is an owner step (1Password's wizard offers Save in 1Password when a token is shown)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://developer.1password.com/docs/service-accounts/get-started/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/ghl-command-universal/origin-key"
+        },
+        {
+          "column": "B",
+          "value": "Builder origin key"
+        },
+        {
+          "column": "C",
+          "value": "No, before this play"
+        },
+        {
+          "column": "D",
+          "value": "Saved: item 5bfzdypjiimr7ov4kyua6wxtha, hash-verified on the hub and from the Mac"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/increase-roas-mcp/ghl-config/credentials.json: license_key"
+        },
+        {
+          "column": "B",
+          "value": "GHL Command (EliteDCS) license key"
+        },
+        {
+          "column": "C",
+          "value": "No, before this play"
+        },
+        {
+          "column": "D",
+          "value": "Saved: item smsqrb4cyzqvdsu3eedizvpxgy, hash-verified on the hub and from the Mac"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/increase-roas-mcp/ghl-config/credentials.json: three sign-in values"
+        },
+        {
+          "column": "B",
+          "value": "A GHL web sign-in refresh token, GHL's web API key and a signed license attestation"
+        },
+        {
+          "column": "C",
+          "value": "No"
+        },
+        {
+          "column": "D",
+          "value": "Not moved: sign-in state that the GHL Command sign-in writes and refreshes, so a copy would go stale. A rebuild signs in again with the license key."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/increase-roas-mcp/ghl-config/.ghl-tokens.json"
+        },
+        {
+          "column": "B",
+          "value": "GHL Command registry: 49 client-location keys"
+        },
+        {
+          "column": "C",
+          "value": "2 of 49 (the two GHL PIT items)"
+        },
+        {
+          "column": "D",
+          "value": "Not moved: 47 client keys in one bulk copy into the shared vault would widen who can read client keys (partners and both robots). That is Alex's call. Rebuild path: register each location's key again."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/ghl-command-universal/tunnel/token"
+        },
+        {
+          "column": "B",
+          "value": "Builder tunnel token"
+        },
+        {
+          "column": "C",
+          "value": "No, but Cloudflare returns the same token through custom_cloudflare_api (equal by hash)"
+        },
+        {
+          "column": "D",
+          "value": "Not moved: Cloudflare is its source; a rebuild fetches it"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/remote-tunnel-permissions/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/root/.cloudflared/<hub tunnel>.json"
+        },
+        {
+          "column": "B",
+          "value": "Hub tunnel credentials"
+        },
+        {
+          "column": "C",
+          "value": "No; rebuild_hub.py derives them from Cloudflare (account ID equal to the Cloudflare item)"
+        },
+        {
+          "column": "D",
+          "value": "Not moved: derived on every rebuild"
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py L74–L90 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/root/.cloudflared/cert.pem"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare account certificate"
+        },
+        {
+          "column": "C",
+          "value": "No"
+        },
+        {
+          "column": "D",
+          "value": "Not moved: it can create, delete and manage every tunnel in the account and isn't needed to run one. A copy in a vault two robots read would widen that power. Removing it from the hub is a separate cleanup."
+        },
+        {
+          "column": "E",
+          "value": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/tunnel-permissions/ (read 2026-10-01) ; ~/.agents/tools/connectors/hub/README.md \"cert.pem is not needed to run\""
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/ghl-command-universal/sessions/ (25 files)"
+        },
+        {
+          "column": "B",
+          "value": "Per-session copies of the GHL Command sign-in"
+        },
+        {
+          "column": "C",
+          "value": "No"
+        },
+        {
+          "column": "D",
+          "value": "Not opened, not moved: client session state the origin creates"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/opt/increase-roas-mcp/meta-ads.env and tunnel-runtime.env"
+        },
+        {
+          "column": "B",
+          "value": "Settings of the Meta MCP program on the hub"
+        },
+        {
+          "column": "C",
+          "value": "Not checked"
+        },
+        {
+          "column": "D",
+          "value": "Not opened (rule: never open .env files). NOT_PROVEN whether they hold a value 1Password lacks."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "/root/.openclaw (Orgo's OpenClaw agent)"
+        },
+        {
+          "column": "B",
+          "value": "openclaw.json, start-with-secrets.py, a fingerprint key, a relay secret and two .env files"
+        },
+        {
+          "column": "C",
+          "value": "Not checked"
+        },
+        {
+          "column": "D",
+          "value": "Out of the hub rebuild: Orgo manages OpenClaw. Names listed only; .env files not opened. NOT_PROVEN."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Keys saved into 1Password by this play"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "new item title"
+        },
+        {
+          "column": "B",
+          "value": "item ID"
+        },
+        {
+          "column": "C",
+          "value": "came from (hub)"
+        },
+        {
+          "column": "D",
+          "value": "how it was saved and checked"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command Builder (ghl-command-builder) — origin key"
+        },
+        {
+          "column": "B",
+          "value": "5bfzdypjiimr7ov4kyua6wxtha"
+        },
+        {
+          "column": "C",
+          "value": "/opt/ghl-command-universal/origin-key"
+        },
+        {
+          "column": "D",
+          "value": "Created on the hub with the read-write robot from a JSON template on stdin, then read back: hash match on the hub, and the Mac-side vault read finds the same value"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://www.1password.dev/cli/item-create (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command (EliteDCS) — license key"
+        },
+        {
+          "column": "B",
+          "value": "smsqrb4cyzqvdsu3eedizvpxgy"
+        },
+        {
+          "column": "C",
+          "value": "/opt/increase-roas-mcp/ghl-config/credentials.json (license_key)"
+        },
+        {
+          "column": "D",
+          "value": "Same method and checks. Vault went from 28 to 30 items, no duplicate titles"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://www.1password.dev/cli/item-create (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Where item IDs still appear (fallbacks since 2026-10-01; Rebuild from zero step 4.5a)"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "file"
+        },
+        {
+          "column": "B",
+          "value": "what it holds"
+        },
+        {
+          "column": "C",
+          "value": "what to change"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh"
+        },
+        {
+          "column": "B",
+          "value": "SECRETS table: each item's exact title, with Alex's ID as the fallback; the Tailscale key by TAILSCALE_KEY_TITLE."
+        },
+        {
+          "column": "C",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py"
+        },
+        {
+          "column": "B",
+          "value": "The Cloudflare item and the --check list, by title with the ID as the fallback."
+        },
+        {
+          "column": "C",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/tools/connectors/orgo_op.py"
+        },
+        {
+          "column": "B",
+          "value": "TITLE 'Orgo API key', with Alex's ID as the fallback."
+        },
+        {
+          "column": "C",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/orgo_op.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/tools/connectors/gcloud_robot.py"
+        },
+        {
+          "column": "B",
+          "value": "The robot key document, by exact title, with Alex's ID as the fallback."
+        },
+        {
+          "column": "C",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/gcloud_robot.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py"
+        },
+        {
+          "column": "B",
+          "value": "--item: an exact title first (op_items.py), else an ID or name as given; the vault by name."
+        },
+        {
+          "column": "C",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/tools/connectors/health/config.json"
+        },
+        {
+          "column": "B",
+          "value": "vault and composio_item (and the robot token file on the hub). Its other settings, composio_org, composio_project and composio_user, aren't item IDs: where each comes from is in Rebuild from zero section 10a"
+        },
+        {
+          "column": "C",
+          "value": "Change both"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/health/config.json \"composio_item\" ; work/2026-10-01_setup-playbook/tabs/gap-facts/G21-addendum.json"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.agents/skills/ad-recreator-atlascloud-codex-v3/scripts/atlas_generate_image.mjs"
+        },
+        {
+          "column": "B",
+          "value": "A full op:// reference to the Atlas key (L18)"
+        },
+        {
+          "column": "C",
+          "value": "Change it"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/ad-recreator-atlascloud-codex-v3/scripts/atlas_generate_image.mjs L17–L18"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Why titles first, IDs as fallback"
+        },
+        {
+          "column": "B",
+          "value": "op:// references can't carry the em dashes in our titles (1Password: unsupported characters need the ID), so scripts look the title up with op item list (IDs and titles only) and read by ID. A title that two items share stops the script unless the fallback is one of them. So never save a personal copy under a shared title: the scripts would keep reading the fallback ID."
+        },
+        {
+          "column": "C",
+          "value": "Keep exact titles"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L138 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D15 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L283"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whether /opt/increase-roas-mcp/meta-ads.env and tunnel-runtime.env hold a value 1Password lacks (.env files are never opened)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenClaw's own secrets under /root/.openclaw (Orgo-managed, outside the hub rebuild)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which exact token each Composio login holds: Composio masks stored values, so the mapping rests on the proxy rule plus working calls."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Who saved the 'Tailscale API token' item (21:17:06Z). What it is for is answered in section 1: the Composio Tailscale login (title and time check 2026-10-03)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §3 ; work/2026-10-03_claims-audit/notes/verify-workbook-other.md §2 ; work/2026-10-02_network-rules/notes/network-rules.md §2 ; work/2026-10-02_network-rules/notes/network-rules.md §11 ; work/2026-10-02_network-rules/notes/api/keys-metadata.json ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §41"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which route created today's 'Composio — user API key' item, and where a newcomer gets a user key to pass to composio login --user-api-key."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/playbook-tabs.md §31"
+        }
+      ]
+    }
+  ]
+}

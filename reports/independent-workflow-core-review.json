@@ -1,0 +1,170 @@
+{
+  "review_id": "independent-workflow-core-review-20261010-0611",
+  "reviewed_at": "2026-10-10T06:11:11.248799+00:00",
+  "scope": "Focused APP-REVIEW-01/03 core. Owner stopped; read-only source/receipt, SQLite URI mode=ro SELECT and pure mocked counterexamples only. No mutating acceptance rerun, source/shared DB writes, browser, external services, secrets, installs or helpers.",
+  "owner_receipt": {
+    "path": "reports/authoritative-workflow-core-receipt.json",
+    "at": "2026-10-10T06:08:35+00:00",
+    "sha256": "bacde2a92c8353a4c9e0124b92e41d26324bf934cd89d159d960c043f850702d",
+    "owner_pass_is_self_report": true
+  },
+  "snapshot": {
+    "stable": true,
+    "first_at": "2026-10-10T06:10:34.770851+00:00",
+    "last_at": "2026-10-10T06:11:11.248799+00:00",
+    "all_five_receipt_source_hashes_and_positive_proof_hash_match": true,
+    "source_sha256": {
+      "reports/authoritative-workflow-core-receipt.json": "bacde2a92c8353a4c9e0124b92e41d26324bf934cd89d159d960c043f850702d",
+      "reports/workflow-core-failures/APP-REVIEW-01.json": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+      "tools/authoritative_workflow_core_acceptance.py": "3ded93e55157ed31247094e5f23fb4f230ce4592e03db84b814890dd7df6bd2d",
+      "tools/workflow_apply_guard.py": "fdea2a709f3fca904737d268ccb8d476e86e4a115c4a115c0a9aed9f977c1565",
+      "tools/reliability_gate.py": "1f80df167dac4690ad1c4d7f4c2e477eb5db624a531bb12d6221acd31a813692",
+      "tools/workflow_engine.py": "59b02d29331595d7a1d50c8f85b617697cb641df27f6e489b245921086433731",
+      "tools/reliability_store.py": "c0b0cda009921a9fe5f36826fb0ec78f0bca3a92256ff5ad6eece0af5ad5886e",
+      "tools/local_service.py": "63c9f454c42a754b7b3e18808f540e222fd711e22a4dbeaa9ee4fec0ba4b59a6",
+      "work/reliability/legitimate-rel02-gate-positive-proof.json": "a8ab0db671e24283267164408bbf4ad544041b523118aef236dbbd37829e7618"
+    },
+    "limitation": "Stable sampled sources/current receipts and stored results, not rerun execution proof. Test helper hash independently recorded; owner receipt does not bind helper hash."
+  },
+  "overall": "FAILED; narrow fixes accepted, core acceptance still not met",
+  "items": [
+    {
+      "id": "APP-REVIEW-01",
+      "status": "FAILED",
+      "accepted": [
+        "Failed corrected-detail item statuses, nonJSON proof, missing requirement_set and missing proof hash now rejected. Workflow verify/checkpoint invokes requirement validation; arbitrary/manual evidence no longer sufficient without requirement_claims. Saved isolated workflow has core-verify-good exactly1 operation/event and verified task at revision3.",
+        "Known requirement binding mismatch rejects when proof supplies requirement_id. Optional relationships hash is compared when supplied."
+      ],
+      "gaps": [
+        "Freshness is year>=2026, not age/source freshness: pure checks accepted2026-01-01 and2099-01-01, both naive timestamps.",
+        "Proof success/requirement binding is optional: unrelated examples/agent-trace-fixture.json accepted as REL02 proof with its matching hash. _proof_content_ok falls through true if no bound requirement/success. Hash proves bytes, not successful actual use.",
+        "Positive artifact legitimate-rel02-gate-positive-proof.json contains only7 owner assertion fields; no test outputs, checks, job/revision/source identity. Naming it truthful owner proof is not evidence of REL02 actual use. Workflow validation checks claim job/revision only when supplied, never proof job/revision; same artifact with omitted claim binding validates different-job revision99.",
+        "Claim requires list of all REL names but validator permits justone requirement_claim; does not prove all named requirements. Source/relationships fingerprint and actual installed/used skill evidence remain optional/self asserted.",
+        "REL05 helper false_completion actually changes requirement toREL05 and retains REL02 proof; rejection is proof_requirement_mismatch, not absence of proof. Missing/skipped/stale cases use helpers, not all actual handler negatives."
+      ],
+      "sources": [
+        "tools/reliability_gate.py:49-102,127-184,242-250,314-349",
+        "tools/workflow_apply_guard.py:79-80",
+        "tools/authoritative_workflow_core_acceptance.py:87-108,237-275",
+        "work/reliability/legitimate-rel02-gate-positive-proof.json"
+      ],
+      "required_next": "Require successful requirement-specific measured results bound to actual job/revision/source hashes; compare dated proof to current UTC and source version with future-date rejection. Use a legitimate positive proof recording actual checks; test missing proof and each required item through actual handler."
+    },
+    {
+      "id": "APP-REVIEW-03",
+      "status": "FAILED",
+      "accepted": [
+        "Mandatory actor_owner enforced; checkpoint missing/foreign job_id rejected; canonical checkpoint lookup favored. Replay reconciles operation digest before stale revision guard; same actor/request replay and payload collision logic now present.",
+        "Independent read-only DB confirms core-h-op1 operation count1 and matching event count1. Total events2 comprises create plus op1. Task owner-b and handoff owner-b/revision2/acceptance=['check'] retained. Earlier replay failure is closed for this saved sequential case.",
+        "Handoff revision advancement now uses expected revision+owner UPDATE condition. Transfer checks supplied target job revision against Engine."
+      ],
+      "gaps": [
+        "Transfer only requires a nonempty actor; never compares actor_owner with expected/current owner. It never verifies selected handoff checkpoint job matches supplied target job before overwriting it. Pure mocked handler accepted actor intruder with foreign checkpoint operation; acceptance may be replaced with empty client list.",
+        "Two DB transactions remain: Engine commits before handoff CAS. Pure fault simulation commits Engine once, CAS fails, then retry returns stored success without repairing handoff; handoff remains revision2 vs engine result3. Transfer may concurrently change owner before a prior owner Engine mutation commits. CAS after commit detects too late.",
+        "No concurrent transfer/write or interrupted-CAS recovery tests. No transfer operation-id replay ledger; envelope operation identity not used by transfer handler. Actor remains caller asserted, not derived authoritative runtime identity.",
+        "Owner tests require operation_count but do not require per-operation event count, acceptance retained, or exact reason for each rejection; error fields null because wrapped service errors aren't unpacked. Independent current readback establishes one matching event, not concurrency/crash guarantees."
+      ],
+      "sources": [
+        "tools/workflow_apply_guard.py:68-80,99-122,126-154",
+        "tools/reliability_store.py:170-196,232-246",
+        "tools/workflow_engine.py:93-120,195",
+        "tools/authoritative_workflow_core_acceptance.py:305-364,367-410,431-443"
+      ],
+      "required_next": "Bind transfer actor and checkpoint to authoritative owner/job; preserve acceptance. Serialize owner transition with Engine mutation or persist/reconcile a recoverable operation across both DBs; replay must repair incomplete handoff. Test concurrent transfer/write and injected interruption; assert exactly1 matching event for each operation and explicit rejection reasons."
+    }
+  ],
+  "readback": {
+    "workflow_verification": "app/.data/workflow-core-tests/app01-gate-workflow.sqlite core-create/core-add-task/core-verify-good each exactly1 event; t1 verified with proof path, revision3",
+    "handoff": "app/.data/workflow-core-tests/app03-handoff-workflow.sqlite core-h-create/core-h-op1 each exactly1 event; core-h-op1 exactly1 operation; t1 owner-b",
+    "checkpoint": "app/.data/workflow-core-tests/app03-handoff-reliability.sqlite core-handoff-job-handoff owner-b revision2 acceptance ['check']"
+  },
+  "counterexamples": [
+    {
+      "case": "2026-01-01 naive proof timestamp",
+      "accepted": true
+    },
+    {
+      "case": "2099-01-01 future proof timestamp",
+      "accepted": true
+    },
+    {
+      "case": "positive artifact reused for different-job/revision99 with missing claim binding",
+      "validation_error": null
+    },
+    {
+      "case": "unrelated trace fixture asREL02 proof",
+      "accepted": true
+    },
+    {
+      "case": "Engine commit→handoff CAS failure→replay",
+      "engine_apply_calls": 1,
+      "first_error": "handoff revision advance lost race",
+      "replay_success": true,
+      "handoff_revision": 2,
+      "engine_result_revision": 3
+    },
+    {
+      "case": "intruder actor plus foreign checkpoint transfer",
+      "handler_accepted_with_mocked_persistence": true
+    }
+  ],
+  "counterexample_evidence": "Nonmutating exec output aef36b. Mocked persistence tests establish actual handler omissions/fault behavior; not a concurrent runtime execution claim.",
+  "history": {
+    "status": "UNVERIFIED full append-only history; VERIFIED retained first failing case",
+    "retained_failure_path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+    "sha256": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+    "prior_verify_accepts_gate_bound_claim": false,
+    "current_receipt_failure_list": [],
+    "root_history_report": "reports/workflow-core-history-check.json",
+    "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json",
+    "copy_hash_matches": true,
+    "distinction": "Prior failure bytes not erased; current receipt omits link. save_failure overwrites fixed case path; append-only attempt history unproved. Earlier06:08:21 timestamp from coordination, not embedded in retained case file."
+  },
+  "prior_relevant_findings": [
+    {
+      "id": "01_failed_report_truth",
+      "status": "FAILED",
+      "detail": "Named failed report blocked; unrelated neutralJSON still accepted; positive truth unproved"
+    },
+    {
+      "id": "02_date_and_missing_claims",
+      "status": "FAILED",
+      "detail": "Requirement set/hash now mandatory; actual current source/date freshness absent"
+    },
+    {
+      "id": "03_workflow_gate_bypass",
+      "status": "VERIFIED",
+      "detail": "Narrow old bypass closed: handler invokes claims validator and manual-only evidence rejects; proof truth still separate failure"
+    },
+    {
+      "id": "04_REL05_actual_regressions",
+      "status": "UNVERIFIED",
+      "detail": "Helpers run; false completion tests wrong requirement rather than no proof"
+    },
+    {
+      "id": "07_optional_actor_bypass",
+      "status": "VERIFIED",
+      "detail": "Missing actor rejected; caller identity authority and transfer enforcement remain separate gaps"
+    },
+    {
+      "id": "08_job_binding",
+      "status": "FAILED",
+      "detail": "Mutation checkpoint job required; transfer checkpoint/job and proof/job binding missing"
+    },
+    {
+      "id": "09_atomicity_revision_replay",
+      "status": "FAILED",
+      "detail": "Sequential replay closed; interrupted-CAS replay leaves stale handoff"
+    },
+    {
+      "id": "10_concurrency_recovery_tests",
+      "status": "UNVERIFIED",
+      "detail": "Independent exact event readback1 accepted; concurrent write/transfer/crash recovery absent"
+    }
+  ],
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Truthful job/revision/source-bound fresh completion proof and mandatory transfer owner/job enforcement with atomic/recoverable concurrency and replay reconciliation.",
+    "outside_dependency": "None needed for reviewed core corrections."
+  }
+}

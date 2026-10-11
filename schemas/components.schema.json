@@ -1,0 +1,125 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "schema_version": {
+      "const": "1.0.0"
+    },
+    "records": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "layer_id": {
+            "type": "string",
+            "pattern": "^layer_0[1-8]$"
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "purpose": {
+            "type": "string"
+          },
+          "boundary": {
+            "type": "string"
+          },
+          "category": {
+            "enum": [
+              "documented_current",
+              "historical",
+              "planned",
+              "unresolved"
+            ]
+          },
+          "evidence_level": {
+            "enum": [
+              "reported",
+              "configured",
+              "tested",
+              "unverified"
+            ]
+          },
+          "observed_condition": {
+            "enum": [
+              "working",
+              "failing",
+              "blocked",
+              "unknown"
+            ]
+          },
+          "observed_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "evidence_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "source_record_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "source_categories_preserved": {
+            "type": "boolean"
+          },
+          "fit": {
+            "type": "string"
+          },
+          "account_reference": {},
+          "resource_type": {},
+          "source_observed_at": {},
+          "provider_status": {}
+        },
+        "required": [
+          "id",
+          "name",
+          "layer_id",
+          "kind",
+          "aliases",
+          "purpose",
+          "boundary",
+          "category",
+          "evidence_level",
+          "observed_condition",
+          "observed_at",
+          "evidence_ids",
+          "source_record_ids",
+          "source_categories_preserved"
+        ],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "records"
+  ],
+  "additionalProperties": false
+}

@@ -1,0 +1,1132 @@
+{
+  "id": "table_35a5315164f363f91d9d",
+  "sheet": "S05-05 COMPUTER INVENTORY",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "COMPUTER INVENTORY / LIVE STATE"
+        },
+        {
+          "column": "K",
+          "value": "COMPUTER INVENTORY / IDENTITIES & RECOVERY"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Machine role must be VERIFIED from live Orgo state before use. Workbook labels do not prove deployment state."
+        },
+        {
+          "column": "K",
+          "value": "Machine role must be VERIFIED from live Orgo state before use. Workbook labels do not prove deployment state."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9 machines: 7 Orgo + 2 Macs • EA + OpenClaw: highest priority • Lab exists; activation blocked • No Windows host verified",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Four Orgo replacements and fresh uncredentialed JAVAR-LAB runtime are receipt-backed. This establishes existence, not working credentials or isolation acceptance. Private loader remains execution-disabled. Returned native guard design is not implemented or operationally accepted; trusted entry, per-request revocation and exact executable remain UNKNOWN. G1.1 is Blocked and mission work is paused. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        },
+        {
+          "column": "K",
+          "value": "Same nine machines • Live Mac Mini SSH connection verified • Key lanes and recovery still need proof"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer"
+        },
+        {
+          "column": "B",
+          "value": "Observed Role"
+        },
+        {
+          "column": "C",
+          "value": "OS"
+        },
+        {
+          "column": "D",
+          "value": "CPU / vCPU¹"
+        },
+        {
+          "column": "E",
+          "value": "RAM GB¹"
+        },
+        {
+          "column": "F",
+          "value": "Root Disk²\ntotal / free"
+        },
+        {
+          "column": "G",
+          "value": "Hermes Home / Profile(s)"
+        },
+        {
+          "column": "H",
+          "value": "Critical Stuff³"
+        },
+        {
+          "column": "I",
+          "value": "Production?"
+        },
+        {
+          "column": "J",
+          "value": "Status / Alex Priority"
+        },
+        {
+          "column": "K",
+          "value": "Computer / Orgo ID"
+        },
+        {
+          "column": "L",
+          "value": "IP / Hostname"
+        },
+        {
+          "column": "M",
+          "value": "Template / Snapshot"
+        },
+        {
+          "column": "N",
+          "value": "Tailscale Identity"
+        },
+        {
+          "column": "O",
+          "value": "Backup / Recovery"
+        },
+        {
+          "column": "P",
+          "value": "OpenRouter Lane"
+        },
+        {
+          "column": "Q",
+          "value": "Fireworks Lane"
+        },
+        {
+          "column": "R",
+          "value": "Composio Identity"
+        },
+        {
+          "column": "S",
+          "value": "Last Verified (UTC)"
+        },
+        {
+          "column": "T",
+          "value": "Evidence / Limits"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"EA\""
+        },
+        {
+          "column": "B",
+          "value": "Javar / EA\n(binding / host map verified)",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/AGENTS.md; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Javar / EA\""
+        },
+        {
+          "column": "C",
+          "value": "Ubuntu 24.04.4 LTS",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 4,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 4"
+        },
+        {
+          "column": "E",
+          "value": 16,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 16"
+        },
+        {
+          "column": "F",
+          "value": "49.10 GiB total\n15.95 GiB free",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 49.102"
+        },
+        {
+          "column": "G",
+          "value": "Javar main + root homes\nmanny-business\n2 canary profiles⁴",
+          "comment": "All observed homes/profiles; configuration is not serving proof.\n[\n  {\n    \"path\": \"/home/orgo/lil-smoove/canary/home/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary\",\n    \"profile_name\": \"ea-javar-canary\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.web_extract.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.compression.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.skills_hub.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.approval.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.mcp.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.title_generation.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.triage_specifier.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.kanban_decomposer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.profile_describer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.curator.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary\",\n    \"profile_name\": \"ea-javar-cloudflare-rag-canary\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.web_extract.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.compression.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.skills_hub.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.approval.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.mcp.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.title_generation.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.triage_specifier.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.kanban_decomposer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.profile_describer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.curator.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/home/orgo/lil-smoove/home/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"z-ai/glm-5.2\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous-api-key\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".providers.connection_names\",\n        \"value\": [\n          \"nous-api-key\"\n        ],\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".providers.nous-api-key.name\",\n        \"value\": \"Nous API\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".providers.nous-api-key.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.provider\",\n        \"value\": \"nous-api-key\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.model\",\n        \"value\": \"google/gemini-3.6-flash\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.web_extract.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.compression.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.skills_hub.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.approval.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.mcp.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.title_generation.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.triage_specifier.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.kanban_decomposer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.profile_describer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.curator.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.curator.model\",\n        \"value\": \"moonshotai/kimi-k3\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.curator.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.background_review.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.background_review.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".gateway.profile_routes.0.name\",\n        \"value\": \"manny-business-dm\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/home/orgo/lil-smoove/home/.hermes/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/home/orgo/lil-smoove/home/.hermes/hermes-agent/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business\",\n    \"profile_name\": \"manny-business\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/root/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"anthropic/claude-opus-4.6\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://openrouter.ai/api/v1\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".providers.connection_names\",\n        \"value\": [],\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.web_extract.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.compression.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.skills_hub.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.approval.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.mcp.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.title_generation.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.triage_specifier.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.kanban_decomposer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.profile_describer.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.curator.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Javar gateway; desktop backend; GHL route; Javante proxy; tunnel",
+          "comment": "Configured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"ea-clock-sync\",\n    \"ghl-command-cloud\",\n    \"javante-a2a-proxy\",\n    \"javar-desktop-backend\",\n    \"javar-reply-alert-health\",\n    \"lil-smoove-cloudflared\",\n    \"lil-smoove-hermes-firewall\",\n    \"lil-smoove-messaging-gateway\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"cloudflared\",\n    \"hermes\",\n    \"node\",\n    \"python\",\n    \"python3\",\n    \"python3.11\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.default\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.web_extract.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.compression.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.skills_hub.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.approval.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.mcp.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.title_generation.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.triage_specifier.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.kanban_decomposer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.profile_describer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.curator.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary/config.yaml\"\n    },\n    {\n      \"field\": \".model.default\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.web_extract.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.compression.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.skills_hub.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.approval.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.mcp.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.title_generation.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.triage_specifier.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.kanban_decomposer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.profile_describer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.curator.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary/config.yaml\"\n    },\n    {\n      \"field\": \".model.default\",\n      \"value\": \"z-ai/glm-5.2\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous-api-key\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".providers.connection_names\",\n      \"value\": [\n        \"nous-api-key\"\n      ],\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".providers.nous-api-key.name\",\n      \"value\": \"Nous API\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".providers.nous-api-key.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.provider\",\n      \"value\": \"nous-api-key\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.model\",\n      \"value\": \"google/gemini-3.6-flash\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.web_extract.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.compression.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.skills_hub.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.approval.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.mcp.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.title_generation.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.triage_specifier.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.kanban_decomposer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.profile_describer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.curator.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.curator.model\",\n      \"value\": \"moonshotai/kimi-k3\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.curator.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.background_review.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.background_review.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".gateway.profile_routes.0.name\",\n      \"value\": \"manny-business-dm\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.default\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/home/orgo/lil-smoove/home/.hermes/profiles/manny-business/config.yaml\"\n    },\n    {\n      \"field\": \".model.default\",\n      \"value\": \"anthropic/claude-opus-4.6\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://openrouter.ai/api/v1\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".providers.connection_names\",\n      \"value\": [],\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.web_extract.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.compression.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.skills_hub.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.approval.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.mcp.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.title_generation.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.triage_specifier.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.kanban_decomposer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.profile_describer.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.curator.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "I",
+          "value": "UNKNOWN\nLive service health untested",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/AGENTS.md; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; assigned role/runtime presence does not establish production state\""
+        },
+        {
+          "column": "J",
+          "value": "Running VM\nPROTECT · highest priority",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"HIGHEST — Alex direct 2026-10-05\""
+        },
+        {
+          "column": "K",
+          "value": "EA\nd9b475e2-47b2-46d4-b8eb-102564f93283",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"d9b475e2-47b2-46d4-b8eb-102564f93283\""
+        },
+        {
+          "column": "L",
+          "value": "orgo-desktop\n172.16.0.2\n(local VM IP)",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "UNKNOWN\nNot exposed by read",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "javar-orgo\n100.84.107.10",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"javar-orgo\",\n  \"DNSName\": \"javar-orgo.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.84.107.10\",\n    \"fd7a:115c:a1e0::4a30:6b0b\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "25 local backup / rollback folders observed\nRestore: UNKNOWN",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/home/orgo/lil-smoove/recovery\",\n    \"/home/orgo/lil-smoove/recovery/1password-recovery-20260815T230803Z\",\n    \"/home/orgo/lil-smoove/home/agent-knowledge/01-Agency/_core/.system-truth-backups\",\n    \"/home/orgo/lil-smoove/home/agent-knowledge/09-Archive/instruction-backups\",\n    \"/home/orgo/lil-smoove/home/.hermes/audit-factory-backups\",\n    \"/home/orgo/lil-smoove/home/.hermes/.curator_backups\",\n    \"/home/orgo/lil-smoove/home/.hermes/system-truth-backups\",\n    \"/home/orgo/lil-smoove/workspace/finish-javar-20260921/doc-backups\",\n    \"/home/orgo/lil-smoove/workspace/finish-javar-20260921/checker-backups\",\n    \"/home/orgo/lil-smoove/workspace/finish-javar-20260921/maintenance-backups\",\n    \"/home/orgo/lil-smoove/workspace/acceptance-20260918T230611Z/recovery-offline\",\n    \"/root/mha-ug5-backup-20261003T203429Z\",\n    \"/root/javar-hardening-backup-20260915T184237Z\",\n    \"/root/javar-hardening-backup-20260915T184224Z\",\n    \"/root/javar-recovery-zero-fence-20260918\",\n    \"/root/javar-v3-backup-20260915T182955\",\n    \"/root/javar-edit-backup-20260922T184318Z\",\n    \"/root/mha-j1-backup-20261002T180841Z\"\n  ],\n  \"archived_home_paths\": [\n    \"/root/javar-drive-repoint-20260917/home/orgo/lil-smoove/home/.hermes\",\n    \"/root/javar-edit-backup-20260922T184318Z/home/orgo/lil-smoove/home/.hermes\",\n    \"/root/javar-owner-send-20260917/home/orgo/lil-smoove/home/.hermes\",\n    \"/root/javar-repair-v3-zot7963m/restore-rehearsal/home/orgo/lil-smoove/home/.hermes\",\n    \"/root/mha-ug4-teardown-20261003T200008Z/mha-ug4/.hermes\",\n    \"/root/mha-ug5-backup-20261003T203429Z/files/home/orgo/lil-smoove/home/.hermes\",\n    \"/root/mha-ug5-backup-20261003T203429Z/rolled-back/home/orgo/lil-smoove/home/.hermes\"\n  ],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "Root home configured; active Javar home uses Nous. Key: UNKNOWN",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"CONFIGURED; request not tested\",\n  \"evidence\": [\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://openrouter.ai/api/v1\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN\nNo lane proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN\nNo agent identity proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05\n19:54:46 UTC",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/d9b475e2-47b2-46d4-b8eb-102564f93283.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:46.023184+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Live list/get + safe probe.\nConfigs/processes ≠ health.\nSources: cell notes.",
+          "comment": "Evidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: d9b475e2-47b2-46d4-b8eb-102564f93283\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nVERIFIED maintained assignment and live role binding\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "My OpenClaw",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"My OpenClaw\""
+        },
+        {
+          "column": "B",
+          "value": "AI infrastructure / IR 1 connector host\n(binding / host map verified)",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/docs/sops/chatgpt-ghl-plugin-talks-to-orgo.md; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"AI infrastructure / IR 1 connector host\""
+        },
+        {
+          "column": "C",
+          "value": "Ubuntu 24.04.4 LTS",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 1,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 1"
+        },
+        {
+          "column": "E",
+          "value": 8,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 8"
+        },
+        {
+          "column": "F",
+          "value": "39.26 GiB total\n31.40 GiB free",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 39.263"
+        },
+        {
+          "column": "G",
+          "value": "No Hermes home found\n(bounded probe)",
+          "comment": "All observed homes/profiles; configuration is not serving proof.\n[]"
+        },
+        {
+          "column": "H",
+          "value": "IR 1 MCP hub: GHL, Meta, Google robot, GA4/GTM, Prime + shared routes",
+          "comment": "Configured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"connector-health\",\n    \"ir-ghl-command-tunnel\",\n    \"ir-ghl-command-universal\",\n    \"ir-mcp-increase-roas-meta\",\n    \"mcp-hub-atlas-cloud\",\n    \"mcp-hub-ga4-admin\",\n    \"mcp-hub-google-robot\",\n    \"mcp-hub-google-robot-javante\",\n    \"mcp-hub-gtm\",\n    \"mcp-hub-ir-notes\",\n    \"mcp-hub-prime-intellect\",\n    \"mcp-hub-proxy\",\n    \"mcp-hub-spyfu\",\n    \"mcp-hub-tunnel\",\n    \"mcp-hub-xai-research\",\n    \"openclaw-gateway\",\n    \"openclaw-godmod\",\n    \"sshd\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"cloudflared\",\n    \"node\",\n    \"openclaw\",\n    \"openclaw-gatewa\",\n    \"python\",\n    \"python3\",\n    \"sshd\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": []\n}"
+        },
+        {
+          "column": "I",
+          "value": "Protected connector host\nLive health untested",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/docs/sops/chatgpt-ghl-plugin-talks-to-orgo.md; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"SOURCE-DOCUMENTED PROTECTED CONNECTOR HOST; live matching paths/program names observed, external behavior not tested\""
+        },
+        {
+          "column": "J",
+          "value": "Running VM\nPROTECT · highest priority",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"HIGHEST — Alex direct 2026-10-05\""
+        },
+        {
+          "column": "K",
+          "value": "My OpenClaw\n6fbffd8c-65b1-4f2e-993e-f283532109bf",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"6fbffd8c-65b1-4f2e-993e-f283532109bf\""
+        },
+        {
+          "column": "L",
+          "value": "orgo-desktop\n172.16.0.2\n(local VM IP)",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "UNKNOWN\nNot exposed by read",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "openclaw-hub\n100.122.97.7",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"openclaw-hub\",\n  \"DNSName\": \"openclaw-hub.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.122.97.7\",\n    \"fd7a:115c:a1e0::f730:6108\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "3 local backup / rollback folders observed\nRestore: UNKNOWN",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/root/.openclaw/skill-workshop/collection-backups\",\n    \"/root/Backups\",\n    \"/opt/increase-roas-mcp/backups\"\n  ],\n  \"archived_home_paths\": [],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN\nNo named key proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves an OpenRouter lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN\nNo lane proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN\nNo agent identity proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05\n19:54:45 UTC",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/6fbffd8c-65b1-4f2e-993e-f283532109bf.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:45.767125+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Live list/get + safe probe.\nConfigs/processes ≠ health.\nSources: cell notes.",
+          "comment": "Evidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: 6fbffd8c-65b1-4f2e-993e-f283532109bf\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nVERIFIED maintained host map with live matching connector paths and program names\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SPARE-CSM",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"computer-7121\""
+        },
+        {
+          "column": "B",
+          "value": "Spare replacement; no production role activated",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /home/csm/.hermes/plugins/agency-foundation/binding.json; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"CSM\""
+        },
+        {
+          "column": "C",
+          "value": "linux",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 0.5,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 0.5"
+        },
+        {
+          "column": "E",
+          "value": 8,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 8"
+        },
+        {
+          "column": "F",
+          "value": "40 GB allocated; filesystem total/free UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 39.263"
+        },
+        {
+          "column": "G",
+          "value": "UNKNOWN; no Hermes runtime verified",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nAll observed homes/profiles; configuration is not serving proof.\n[\n  {\n    \"path\": \"/home/csm/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/csm/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/csm/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Fresh base metadata; guest contents/health not independently proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nConfigured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"hermes-csm\",\n    \"sshd\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"hermes\",\n    \"python\",\n    \"python3\",\n    \"sshd\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.default\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/csm/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/csm/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "I",
+          "value": "No production activation proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /home/csm/.hermes/plugins/agency-foundation/binding.json; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; assigned role/runtime presence does not establish production state\""
+        },
+        {
+          "column": "J",
+          "value": "Spare; running VM observed Oct5; current health UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"LOW — Alex direct 2026-10-05\""
+        },
+        {
+          "column": "K",
+          "value": "SPARE-CSM\n7cedbb4b-0610-4241-907e-edc19b45cf57",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"41e29019-a1a2-456d-83f5-91ec206848fe\""
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN; replacement hostname/IP not proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "Fresh base; no template/snapshot request",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "UNKNOWN; old Tailscale identity is historical",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"csm-agent\",\n  \"DNSName\": \"csm-agent.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.81.140.39\",\n    \"fd7a:115c:a1e0::a530:8c28\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "UNKNOWN; old host backups do not establish replacement recovery",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/opt/hermes-secret-broker/candidate-20260913-csm/code-backup\"\n  ],\n  \"archived_home_paths\": [],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves an OpenRouter lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN; consumer scope unproved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05T23:43:53.104543+00:00",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/41e29019-a1a2-456d-83f5-91ec206848fe.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:47.187764+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Creation 2026-10-05T23:40:41.859681+00:00; deletion 23:36:29–23:37:40Z; readback 23:43:53Z. Current IDs replace old deleted VMs. Source: lab-fresh-reset.json; guest/runtime limits remain.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nOct 5, 23:43 UTC platform readback: old machine 41e29019-a1a2-456d-83f5-91ec206848fe was removed. Replacement SPARE-CSM: Orgo ID 7cedbb4b-0610-4241-907e-edc19b45cf57; workspace 6cda999c-708e-4121-8531-383640f97290; Linux, advertised 0.5 vCPU / 8 GB RAM / 40 GB disk; status running. Other cells in this row preserve the earlier dated inventory snapshot and are NOT evidence of the replacement's current runtime, credentials, IP, backup or role health. Guest/application readiness not established by this control-plane readback. Current evidence: work/gameplan-updater/2026-10-05T235523Z/evidence.json\n\nHistorical note:\nEvidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: 41e29019-a1a2-456d-83f5-91ec206848fe\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nVERIFIED live role binding\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "JAVAR-LAB",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Max - Increase Roas\""
+        },
+        {
+          "column": "B",
+          "value": "Dedicated Lab; uncredentialed; activation held",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /etc/supervisor/conf.d/hermes-finance.conf; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Finance / Max\""
+        },
+        {
+          "column": "C",
+          "value": "linux",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 0.5,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 0.5"
+        },
+        {
+          "column": "E",
+          "value": 8,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 8"
+        },
+        {
+          "column": "F",
+          "value": "40 GB allocated; filesystem total/free UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 39.263"
+        },
+        {
+          "column": "G",
+          "value": "/home/orgo/.hermes; JAVAR-LAB; Hermes v0.21.5+7498.gebadb54",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nAll observed homes/profiles; configuration is not serving proof.\n[\n  {\n    \"path\": \"/home/finance/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/finance/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.default\",\n        \"value\": \"anthropic/claude-opus-4.6\",\n        \"source\": \"/home/finance/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  },\n  {\n    \"path\": \"/root/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Fresh uncredentialed runtime; no gateway/provider connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nConfigured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"hermes-finance\",\n    \"sshd\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"hermes\",\n    \"python\",\n    \"python3\",\n    \"sshd\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/finance/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.default\",\n      \"value\": \"anthropic/claude-opus-4.6\",\n      \"source\": \"/home/finance/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "I",
+          "value": "No production activation proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /etc/supervisor/conf.d/hermes-finance.conf; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; assigned role/runtime presence does not establish production state\""
+        },
+        {
+          "column": "J",
+          "value": "PAUSED; running VM observed Oct5; activation blocked",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"LOW — Alex direct 2026-10-05\""
+        },
+        {
+          "column": "K",
+          "value": "JAVAR-LAB\n0c1ce74e-176b-48f1-bf80-c38139036164",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"8274a62e-a552-409d-82c4-7c233f2c04d7\""
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN; replacement hostname/IP not proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "Fresh base; no template/snapshot request",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "UNKNOWN; old Tailscale identity is historical",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"max-finance\",\n  \"DNSName\": \"max-finance.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.82.217.115\",\n    \"fd7a:115c:a1e0::d530:d974\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "UNKNOWN; old host backups do not establish replacement recovery",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/opt/hermes-secret-broker/candidate-20260913-finance/source-backups\"\n  ],\n  \"archived_home_paths\": [],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves an OpenRouter lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN; consumer scope unproved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05T23:43:53.104543+00:00",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/8274a62e-a552-409d-82c4-7c233f2c04d7.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:49.559319+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Creation 2026-10-05T23:39:20.690753+00:00; deletion 23:36:29–23:37:40Z; readback 23:43:53Z. Current IDs replace old deleted VMs. Source: lab-fresh-reset.json; guest/runtime limits remain.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nOct 5, 23:43 UTC platform readback: old machine 8274a62e-a552-409d-82c4-7c233f2c04d7 was removed. Replacement JAVAR-LAB: Orgo ID 0c1ce74e-176b-48f1-bf80-c38139036164; workspace 87ba4c76-bc3a-4d2c-84d6-c26f2f1b3117; Linux, advertised 0.5 vCPU / 8 GB RAM / 40 GB disk; status running. Other cells in this row preserve the earlier dated inventory snapshot and are NOT evidence of the replacement's current runtime, credentials, IP, backup or role health. 23:54 UTC install/readback: Hermes 0.21.5+7498.gebadb54 installed as orgo, default profile display JAVAR-LAB, curator paused. Model access NOT CONNECTED; G1.1 still Blocked. Current evidence: work/gameplan-updater/2026-10-05T235523Z/evidence.json\n\nHistorical note:\nEvidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: 8274a62e-a552-409d-82c4-7c233f2c04d7\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nINFERRED from named host, finance Hermes home and Supervisor program; role binding UNKNOWN\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "B2B Sales Agent",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"B2B Sales Agent\""
+        },
+        {
+          "column": "B",
+          "value": "Sales B2B / Hunter function\n(binding / host map verified)",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/agents/hunter/binding.json; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Sales B2B / Hunter function\""
+        },
+        {
+          "column": "C",
+          "value": "Ubuntu 24.04.4 LTS",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 2,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 2"
+        },
+        {
+          "column": "E",
+          "value": 4,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 4"
+        },
+        {
+          "column": "F",
+          "value": "7.78 GiB total\n0.69 GiB free",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 7.777"
+        },
+        {
+          "column": "G",
+          "value": "/root/.hermes\ndefault",
+          "comment": "All observed homes/profiles; configuration is not serving proof.\n[\n  {\n    \"path\": \"/root/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"anthropic/claude-opus-4.6\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"auto\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://openrouter.ai/api/v1\",\n        \"source\": \"/root/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "hermes-gateway; B2B node, proxy + tunnel",
+          "comment": "Configured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"hermes-gateway\",\n    \"htl-b2b-cloudflared\",\n    \"htl-b2b-hermes-proxy\",\n    \"htl-b2b-node\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"cloudflared\",\n    \"hermes\",\n    \"node\",\n    \"python\",\n    \"python3\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.default\",\n      \"value\": \"anthropic/claude-opus-4.6\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"auto\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://openrouter.ai/api/v1\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "I",
+          "value": "UNKNOWN\nLive service health untested",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/agents/hunter/binding.json; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; assigned role/runtime presence does not establish production state\""
+        },
+        {
+          "column": "J",
+          "value": "Running VM\nREVIEW · likely low priority\nLOW DISK",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"PROBABLY LOW — Alex direct 2026-10-05\""
+        },
+        {
+          "column": "K",
+          "value": "B2B Sales Agent\n2472bdb6-ae8f-4417-a4d0-103df5618d60",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2472bdb6-ae8f-4417-a4d0-103df5618d60\""
+        },
+        {
+          "column": "L",
+          "value": "orgo-desktop\n172.16.0.2\n(local VM IP)",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "UNKNOWN\nNot exposed by read",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "b2b-sales-agent\n100.99.199.66",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"b2b-sales-agent\",\n  \"DNSName\": \"b2b-sales-agent.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.99.199.66\",\n    \"fd7a:115c:a1e0::4a30:c743\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "4 local backup / rollback folders observed\nRestore: UNKNOWN",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/root/.backups\",\n    \"/root/sales-b2b-agent-backups\",\n    \"/root/sales-b2b-agent/.backup\",\n    \"/opt/hermes-secret-broker/candidate-20260913-b2b/source-backups\"\n  ],\n  \"archived_home_paths\": [],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "Configured in root home. Key name + request: UNKNOWN",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"CONFIGURED; request not tested\",\n  \"evidence\": [\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://openrouter.ai/api/v1\",\n      \"source\": \"/root/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN\nNo lane proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN\nNo agent identity proved",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05\n19:54:45 UTC",
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/2472bdb6-ae8f-4417-a4d0-103df5618d60.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:45.637470+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Live list/get + safe probe.\nConfigs/processes ≠ health.\nSources: cell notes.",
+          "comment": "Evidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: 2472bdb6-ae8f-4417-a4d0-103df5618d60\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nVERIFIED assignment, live root Hermes configuration observed\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SPARE-Media",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Media — Increase ROAS\""
+        },
+        {
+          "column": "B",
+          "value": "Spare replacement; no production role activated",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/agents/media/runtime-config.json; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Media buyer\""
+        },
+        {
+          "column": "C",
+          "value": "linux",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 0.5,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 0.5"
+        },
+        {
+          "column": "E",
+          "value": 8,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 8"
+        },
+        {
+          "column": "F",
+          "value": "40 GB allocated; filesystem total/free UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 39.263"
+        },
+        {
+          "column": "G",
+          "value": "UNKNOWN; no Hermes runtime verified",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nAll observed homes/profiles; configuration is not serving proof.\n[\n  {\n    \"path\": \"/home/media/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/media/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/media/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Fresh base metadata; guest contents/health not independently proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nConfigured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"hermes-media\",\n    \"sshd\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"hermes\",\n    \"python\",\n    \"python3\",\n    \"sshd\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.default\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/media/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/media/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "I",
+          "value": "No production activation proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/agents/media/runtime-config.json; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; assigned role/runtime presence does not establish production state\""
+        },
+        {
+          "column": "J",
+          "value": "Spare; running VM observed Oct5; current health UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNSPECIFIED\""
+        },
+        {
+          "column": "K",
+          "value": "SPARE-Media\nc8aed3e5-6228-449e-b744-9d02466669c1",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"5dac6fd0-833b-43e0-8492-63462bb965e4\""
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN; replacement hostname/IP not proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "Fresh base; no template/snapshot request",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "UNKNOWN; old Tailscale identity is historical",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"media-agent\",\n  \"DNSName\": \"media-agent.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.118.227.107\",\n    \"fd7a:115c:a1e0::3b30:e36c\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "UNKNOWN; old host backups do not establish replacement recovery",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/opt/hermes-secret-broker/candidate-20260913-media/source-backups\"\n  ],\n  \"archived_home_paths\": [],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves an OpenRouter lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN; consumer scope unproved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05T23:43:53.104543+00:00",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/5dac6fd0-833b-43e0-8492-63462bb965e4.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:49.329444+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Creation 2026-10-05T23:40:27.871549+00:00; deletion 23:36:29–23:37:40Z; readback 23:43:53Z. Current IDs replace old deleted VMs. Source: lab-fresh-reset.json; guest/runtime limits remain.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nOct 5, 23:43 UTC platform readback: old machine 5dac6fd0-833b-43e0-8492-63462bb965e4 was removed. Replacement SPARE-Media: Orgo ID c8aed3e5-6228-449e-b744-9d02466669c1; workspace d4e5f8db-c4c1-4727-8fc0-c876a4602e52; Linux, advertised 0.5 vCPU / 8 GB RAM / 40 GB disk; status running. Other cells in this row preserve the earlier dated inventory snapshot and are NOT evidence of the replacement's current runtime, credentials, IP, backup or role health. Guest/application readiness not established by this control-plane readback. Current evidence: work/gameplan-updater/2026-10-05T235523Z/evidence.json\n\nHistorical note:\nEvidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: 5dac6fd0-833b-43e0-8492-63462bb965e4\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nVERIFIED maintained assignment and live role binding\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SPARE-Ops",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ops Coordinator\""
+        },
+        {
+          "column": "B",
+          "value": "Spare replacement; no production role activated",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/AGENTS.md; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ops orchestration\""
+        },
+        {
+          "column": "C",
+          "value": "linux",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"Ubuntu 24.04.4 LTS\""
+        },
+        {
+          "column": "D",
+          "value": 0.5,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 0.5"
+        },
+        {
+          "column": "E",
+          "value": 8,
+          "comment": "Read-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 8"
+        },
+        {
+          "column": "F",
+          "value": "40 GB allocated; filesystem total/free UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: 39.263"
+        },
+        {
+          "column": "G",
+          "value": "UNKNOWN; no Hermes runtime verified",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nAll observed homes/profiles; configuration is not serving proof.\n[\n  {\n    \"path\": \"/home/orgo/ops/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/home/orgo/ops/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/home/orgo/ops/.hermes/config.yaml\"\n      }\n    ],\n    \"serving_status\": \"UNKNOWN; file presence/configuration is not serving proof\"\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Fresh base metadata; guest contents/health not independently proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nConfigured program names and observed process names; no service health test.\n{\n  \"programs\": [\n    \"hermes-ops\",\n    \"sshd\",\n    \"tailscaled\",\n    \"websockify\"\n  ],\n  \"processes\": [\n    \"hermes\",\n    \"python\",\n    \"python3\",\n    \"sshd\",\n    \"supervisord\",\n    \"tailscaled\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.default\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/home/orgo/ops/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/home/orgo/ops/.hermes/config.yaml\"\n    }\n  ]\n}"
+        },
+        {
+          "column": "I",
+          "value": "No production activation proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/AGENTS.md; /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; assigned role/runtime presence does not establish production state\""
+        },
+        {
+          "column": "J",
+          "value": "Spare; running VM observed Oct5; current health UNKNOWN",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: Alex direct chat clarification relayed by primary 2026-10-05; priority is not health or wipe/reassignment approval\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNSPECIFIED\""
+        },
+        {
+          "column": "K",
+          "value": "SPARE-Ops\n47a4ba7c-9908-44f7-aa32-b7da8e18ac85",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"9899abd2-57b0-4b76-a59a-1f0ba7ee538f\""
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN; replacement hostname/IP not proved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"orgo-desktop\""
+        },
+        {
+          "column": "M",
+          "value": "Fresh base; no template/snapshot request",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/metadata.json; filtered Orgo computers list/get\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "UNKNOWN; old Tailscale identity is historical",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"HostName\": \"ops-coordinator\",\n  \"DNSName\": \"ops-coordinator.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.78.72.70\",\n    \"fd7a:115c:a1e0::7e30:4847\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "UNKNOWN; old host backups do not establish replacement recovery",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"observed_folder_paths\": [],\n  \"archived_home_paths\": [\n    \"/opt/hermes-secret-broker/rollback-20260913\"\n  ],\n  \"method\": \"Observed local folders only; restore success UNKNOWN\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves an OpenRouter lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN; no provider lane connected",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"No selected nonsecret configuration proves a Fireworks lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN; consumer scope unproved",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"UNKNOWN; no verified existing nonsecret scope record found in bounded probe\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05T23:43:53.104543+00:00",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nRead-only inventory, October 5, 2026.\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/9899abd2-57b0-4b76-a59a-1f0ba7ee538f.json; fixed read-only probe.py, allowlisted fields\nEvidence: work/computer-inventory-20261005/live/inventory.json\nObserved value / limits: \"2026-10-05T19:54:46.887536+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Creation 2026-10-05T23:40:07.613278+00:00; deletion 23:36:29–23:37:40Z; readback 23:43:53Z. Current IDs replace old deleted VMs. Source: lab-fresh-reset.json; guest/runtime limits remain.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nOct 5, 23:43 UTC platform readback: old machine 9899abd2-57b0-4b76-a59a-1f0ba7ee538f was removed. Replacement SPARE-Ops: Orgo ID 47a4ba7c-9908-44f7-aa32-b7da8e18ac85; workspace c523a888-eec5-4501-b25d-b6d591a3a90a; Linux, advertised 0.5 vCPU / 8 GB RAM / 40 GB disk; status running. Other cells in this row preserve the earlier dated inventory snapshot and are NOT evidence of the replacement's current runtime, credentials, IP, backup or role health. Guest/application readiness not established by this control-plane readback. Current evidence: work/gameplan-updater/2026-10-05T235523Z/evidence.json\n\nHistorical note:\nEvidence: work/computer-inventory-20261005/live/inventory.json\nMachine ID: 9899abd2-57b0-4b76-a59a-1f0ba7ee538f\nRemote clocks differ from client time by up to about 9 minutes; use client readback UTC for audit chronology\nVERIFIED maintained assignment and live role binding\nvCPU/RAM are Orgo advertised allocation; live host CPU/RAM not measured. Disk is live root filesystem capacity/free, not advertised plan storage."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SASHA IR MAC MINI - JAVANTE",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"SASHA IR MAC MINI - JAVANTE\""
+        },
+        {
+          "column": "B",
+          "value": "Javante\n(home / services verified)",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/ChatGPT/Build/agents/javante/setup/README.md plus /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json\nObserved value / limits: \"Javante — verified maintained role, live sashairis home and service configuration match\""
+        },
+        {
+          "column": "C",
+          "value": "macOS 26.3.2\nApple M4",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Mac mini Mac16,10 / Apple M4\""
+        },
+        {
+          "column": "D",
+          "value": 10,
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: 10"
+        },
+        {
+          "column": "E",
+          "value": 16,
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: 16.0"
+        },
+        {
+          "column": "F",
+          "value": "228.27 GiB total\n88.05 GiB free",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: 228.274"
+        },
+        {
+          "column": "G",
+          "value": "/Users/sashairis/.hermes",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: [\n  {\n    \"path\": \"/Users/sashairis/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.default\",\n        \"value\": \"z-ai/glm-5.2\",\n        \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.model\",\n        \"value\": \"google/gemini-3.6-flash\",\n        \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n      }\n    ]\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Hermes serve + gateway; GHL broker; Tailscale. Hermes 0.21.5 installed.",
+          "comment": "Configured / loaded service names, not health proof.\n{\n  \"services\": [\n    \"ai.hermes.gateway\",\n    \"com.increaseroas.javante.hermes-serve\",\n    \"com.increaseroas.javante.ghl-token-broker\",\n    \"application.io.tailscale.ipn.macsys.14823755.14823761\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.default\",\n      \"value\": \"z-ai/glm-5.2\",\n      \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.model\",\n      \"value\": \"google/gemini-3.6-flash\",\n      \"source\": \"/Users/sashairis/.hermes/config.yaml\"\n    }\n  ],\n  \"installed\": [\n    {\n      \"source\": \"/Users/sashairis/.hermes/hermes-agent/venv/lib/python3.11/site-packages/hermes_agent-0.21.5.dist-info/METADATA\",\n      \"values\": {\n        \"Name\": \"hermes-agent\",\n        \"Version\": \"0.21.5\"\n      }\n    }\n  ],\n  \"limits\": \"Maintained Javante README records accepted 0.21.4; live installed package metadata reports 0.21.5. No update or source reconciliation performed.\"\n}"
+        },
+        {
+          "column": "I",
+          "value": "UNKNOWN\nService health untested",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"UNKNOWN; live home/configured and loaded service names do not establish production behavior\""
+        },
+        {
+          "column": "J",
+          "value": "SSH read verified\nPRESERVE · Javante host",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"PRESERVE existing Javante computer and serving home\""
+        },
+        {
+          "column": "K",
+          "value": "SASHA IR MAC MINI - JAVANTE\nNo Orgo ID (physical Mac)",
+          "comment": "Remote host aliases represent one Mac Mini; counted once\nExisting aliases: [\"agency-mini\", \"remote-ssh-codex-managed:IR%20Mini\", \"remote-control:env_e_6a98a73eb04c8331b2808e3471ea4c95\"]\nPhysical host record: physical-macmini-javante"
+        },
+        {
+          "column": "L",
+          "value": "Sashas-Mac-mini.local\n10.20.189.18",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Sashas-Mac-mini.local\""
+        },
+        {
+          "column": "M",
+          "value": "Orgo: N/A\nSnapshot: UNKNOWN",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "javante\n100.127.38.125",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"HostName\": \"javante\",\n  \"DNSName\": \"javante.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.127.38.125\",\n    \"fd7a:115c:a1e0::201:26cb\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "Local backup folder observed\nRestore: UNKNOWN",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/Users/sashairis/.hermes/backups\"\n  ],\n  \"method\": \"Local backups folder observed only; recovery execution not inspected\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN\nMain Hermes config: Nous",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"Selected nonsecret Hermes configuration does not prove a lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN\nNo lane proved",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"Selected nonsecret Hermes configuration does not prove a lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN\nNo agent identity proved",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"UNKNOWN; no scoped identity test or verified nonsecret scope record\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05\n20:02:05 UTC",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"2026-10-05T20:02:05.624711+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Installed 0.21.5; old record 0.21.4. Serving version untested.",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macmini-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Maintained Javante README records accepted 0.21.4; live installed package metadata reports 0.21.5. No update or source reconciliation performed.\""
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex’s MacBook Pro",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Alex’s MacBook Pro\""
+        },
+        {
+          "column": "B",
+          "value": "Alex owner workstation\n(current local Mac)",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Alex owner workstation — verified current local hostname/user\""
+        },
+        {
+          "column": "C",
+          "value": "macOS 26.6.2\nApple M4 Pro",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"MacBook Pro Mac16,7 / Apple M4 Pro\""
+        },
+        {
+          "column": "D",
+          "value": 14,
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: 14"
+        },
+        {
+          "column": "E",
+          "value": 24,
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: 24.0"
+        },
+        {
+          "column": "F",
+          "value": "460.43 GiB total\n29.51 GiB free",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: 460.432"
+        },
+        {
+          "column": "G",
+          "value": "/Users/alexlobaito/.hermes",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: [\n  {\n    \"path\": \"/Users/alexlobaito/.hermes\",\n    \"profile_name\": \"default\",\n    \"configuration\": [\n      {\n        \"field\": \".model.default\",\n        \"value\": \"moonshotai/kimi-k2.6\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".model.base_url\",\n        \"value\": \"https://inference-api.nousresearch.com/v1\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.compression.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.compression.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.title_generation.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.title_generation.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.approval.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.approval.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.triage_specifier.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.triage_specifier.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.memory_query_rewrite.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.memory_query_rewrite.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.profile_describer.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.profile_describer.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.monitor.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.monitor.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.vision.model\",\n        \"value\": \"z-ai/glm-5.3-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.mcp.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.mcp.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.skills_hub.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.skills_hub.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.tts_audio_tags.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.tts_audio_tags.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.goal_judge.provider\",\n        \"value\": \"nous\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      },\n      {\n        \"field\": \".auxiliary.goal_judge.model\",\n        \"value\": \"deepseek/deepseek-v4-flash\",\n        \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n      }\n    ]\n  }\n]"
+        },
+        {
+          "column": "H",
+          "value": "Hermes desktop; Tailscale. Hermes 0.21.3 installed.",
+          "comment": "Configured / loaded service names, not health proof.\n{\n  \"services\": [\n    \"io.tailscale.ipn.macsys.login-item-helper\",\n    \"application.io.tailscale.ipn.macsys.163687053.163687059\",\n    \"application.com.nousresearch.hermes.202414704.202414709\"\n  ],\n  \"provider_config\": [\n    {\n      \"field\": \".model.default\",\n      \"value\": \"moonshotai/kimi-k2.6\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".model.base_url\",\n      \"value\": \"https://inference-api.nousresearch.com/v1\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.compression.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.compression.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.title_generation.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.title_generation.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.approval.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.approval.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.triage_specifier.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.triage_specifier.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.memory_query_rewrite.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.memory_query_rewrite.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.profile_describer.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.profile_describer.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.monitor.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.monitor.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.vision.model\",\n      \"value\": \"z-ai/glm-5.3-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.mcp.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.mcp.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.skills_hub.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.skills_hub.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.tts_audio_tags.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.tts_audio_tags.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.goal_judge.provider\",\n      \"value\": \"nous\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    },\n    {\n      \"field\": \".auxiliary.goal_judge.model\",\n      \"value\": \"deepseek/deepseek-v4-flash\",\n      \"source\": \"/Users/alexlobaito/.hermes/config.yaml\"\n    }\n  ],\n  \"installed\": [\n    {\n      \"source\": \"/Users/alexlobaito/.hermes/hermes-agent/venv/lib/python3.11/site-packages/hermes_agent-0.21.3.dist-info/METADATA\",\n      \"values\": {\n        \"Name\": \"hermes-agent\",\n        \"Version\": \"0.21.3\"\n      }\n    }\n  ],\n  \"limits\": \"Repository pyproject metadata is 0.0.0; installed package metadata reports 0.21.3. Serving process version remains UNKNOWN.\"\n}"
+        },
+        {
+          "column": "I",
+          "value": "UNKNOWN\nService health untested",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"UNKNOWN; live home/configured and loaded service names do not establish production behavior\""
+        },
+        {
+          "column": "J",
+          "value": "Local read verified\nPRESERVE · Alex workstation",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"PRESERVE Alex’s current owner workstation\""
+        },
+        {
+          "column": "K",
+          "value": "Alex’s MacBook Pro\nNo Orgo ID (physical Mac)",
+          "comment": "Current local MacBook; counted once\nExisting aliases: []\nPhysical host record: physical-macbook-alex"
+        },
+        {
+          "column": "L",
+          "value": "Alexs-MacBook-Pro.local\n10.20.189.15",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Alexs-MacBook-Pro.local\""
+        },
+        {
+          "column": "M",
+          "value": "Orgo: N/A\nSnapshot: UNKNOWN",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"UNKNOWN\""
+        },
+        {
+          "column": "N",
+          "value": "Alex’s MacBook Pro\n100.90.100.19",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"HostName\": \"Alex’s MacBook Pro\",\n  \"DNSName\": \"alexs-macbook-pro.tailde26a1.ts.net.\",\n  \"TailscaleIPs\": [\n    \"100.90.100.19\",\n    \"fd7a:115c:a1e0::ee39:6414\"\n  ],\n  \"Online\": true,\n  \"backend_state\": \"Running\"\n}"
+        },
+        {
+          "column": "O",
+          "value": "Local backup folder observed\nRestore: UNKNOWN",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"observed_folder_paths\": [\n    \"/Users/alexlobaito/.hermes/backups\"\n  ],\n  \"method\": \"Local backups folder observed only; recovery execution not inspected\",\n  \"tested_restore\": \"UNKNOWN\"\n}"
+        },
+        {
+          "column": "P",
+          "value": "UNKNOWN\nMain Hermes config: Nous",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"Selected nonsecret Hermes configuration does not prove a lane\"\n}"
+        },
+        {
+          "column": "Q",
+          "value": "UNKNOWN\nNo lane proved",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: {\n  \"status\": \"UNKNOWN\",\n  \"reason\": \"Selected nonsecret Hermes configuration does not prove a lane\"\n}"
+        },
+        {
+          "column": "R",
+          "value": "UNKNOWN\nNo agent identity proved",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"UNKNOWN; no scoped identity test or verified nonsecret scope record\""
+        },
+        {
+          "column": "S",
+          "value": "2026-10-05\n20:02:05 UTC",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"2026-10-05T20:02:05.624478+00:00\""
+        },
+        {
+          "column": "T",
+          "value": "Physical local Mac. Installed version does not prove active runtime.",
+          "comment": "Live physical Mac read. Evidence: work/computer-inventory-20261005/live/mac_inventory.json\nSource: /Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/computer-inventory-20261005/live/macbook-proof.json; fixed read-only mac-probe.py\nObserved value / limits: \"Repository pyproject metadata is 0.0.0; installed package metadata reports 0.21.3. Serving process version remains UNKNOWN.\""
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "JAVAR-LAB identified and three spare replacements observed Oct5. WINDOWS-WORKER remains unidentified. VM running metadata does not prove credentials, isolation or live service health.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "K",
+          "value": "IDENTITY LIMIT • Orgo VMs share the same local hostname/IP; Macs have their own. Use the unique Orgo ID or Tailscale identity. A named OpenRouter key, Fireworks lane and Composio identity remain unproved."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "READING THIS TAB • Green computer cell = running Orgo VM / reachable Mac. Yellow = unproved / needs review. Red = low disk. Blue priority = Alex said protect; it is not a service-health PASS."
+        },
+        {
+          "column": "K",
+          "value": "RECOVERY LIMIT • Local backup folders are observations, not a tested restore. Template and snapshot IDs were not exposed in the inspected metadata. Client timestamps used; some host clocks lag."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "¹ Orgo CPU/RAM = allocation; Mac CPU = physical cores, RAM = unified memory. ² Live filesystem total/free. ³ Config/service names ≠ health. ⁴ Full homes, profiles and models: cell notes. Verify Macs on the live host."
+        },
+        {
+          "column": "K",
+          "value": "OWNER EVIDENCE: four obsolete computers deleted and replaced under Alex’s prior exact approval; EA/JAVAR-PROD and My OpenClaw/AI-INFRA retained. No additional reassignment or activation authorized; frozen gates unchanged.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\n"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ORGO CAPACITY: dated post-reset readback 2026-10-05T23:43:53Z; 7/7 computers, 60/72 GB RAM. Allocation differs from filesystem usage. See BUDGET for original envelope; no new spend authority.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json\nPrior cell note (historical unless independently current):\nSource: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        },
+        {
+          "column": "K",
+          "value": "ACCOUNT BILLING • See BUDGET → Orgo account snapshot for the monthly summary, credit/refill, renewal and conflicting adjustment controls.\nPlan storage allocation (GB) differs from each machine’s live filesystem capacity/free (GiB).",
+          "comment": "Source: /Users/alexlobaito/Downloads/FireShot/FireShot Capture 039 - Account · Orgo - [www.orgo.ai].pdf\nCaptured October 5, 2026, 4:14:20 PM America/Detroit. Supplied screenshot; invoice and current account not revalidated. Evidence: work/orgo-account-capture/snapshot.json"
+        }
+      ]
+    }
+  ]
+}

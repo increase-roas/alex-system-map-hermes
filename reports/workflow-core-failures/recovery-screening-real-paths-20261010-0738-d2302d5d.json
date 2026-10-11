@@ -1,0 +1,225 @@
+{
+  "recovery_dependency": {
+    "corrected_task_blocked": true,
+    "blockers_include_t1": true,
+    "next_not_corrected_downstream": true,
+    "diagnostic_marker": true
+  },
+  "emission_boundaries": {
+    "raw_event_contains_canary": true,
+    "raw_trace_label_contains_canary": true,
+    "events_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "trace_list_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "trace_get_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "list_jobs_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "recover_export": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "read_source_error_boundary": {
+      "exit": 1,
+      "canary_removed": false,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "diagnose_text": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "json_shape": true
+    },
+    "stderr_read_source_screened": true
+  },
+  "node_bridge": {
+    "exit": 1,
+    "parsed": {
+      "read_source_canary_removed": true,
+      "read_source_benign": false,
+      "read_source_intended_error": true,
+      "invalid_command_json_stdout": false,
+      "invalid_command_canary_removed": true,
+      "invalid_command_nonempty": true,
+      "invalid_command_benign": false,
+      "init_ok": true,
+      "benign": false,
+      "screened": true,
+      "nonempty": false
+    },
+    "benign_required": false,
+    "screened_required": true,
+    "nonempty_required": false,
+    "canary_removed": true
+  },
+  "browser": {
+    "delivery": "recovery-screening-real-paths-20261010-0738",
+    "runner_sha256": "278cd973ba945c93fde3c452b0cbb1beadd11238b46e9288ac21b6669d9365a1",
+    "networkLog": [
+      {
+        "label": "health-before",
+        "url": "http://127.0.0.1:3202/api/health",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 4285,
+        "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"6PA4cNz_L1VC8-17zlh1B\",\"process\":{\"pid\":6472},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/Us",
+        "parsedKeys": [
+          "ok",
+          "loopback_only",
+          "local_token_hint",
+          "token",
+          "build_id",
+          "process",
+          "runtime",
+          "completeness",
+          "sync"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-a-1791617973511-create",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 151,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791617973511-create\",\"handoff_operation_id\":\"rec-ui-a-1791617973511-handoff\"}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "handoff_operation_id"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-a-1791617973511-add-t1",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 95,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791617973511-add-t1\"}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-a-1791617973511-add-t2",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 95,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791617973511-add-t2\"}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-a-1791617973511-produce-t1",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 99,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":4,\"operation_id\":\"rec-ui-a-1791617973511-produce-t1\"}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-a-1791617973511-correct-t1",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 99,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":5,\"operation_id\":\"rec-ui-a-1791617973511-correct-t1\"}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-b-1791617973511-create",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 151,
+        "bodyPreview": "{\"job_id\":\"rec-ui-b-1791617973511\",\"revision\":1,\"operation_id\":\"rec-ui-b-1791617973511-create\",\"handoff_operation_id\":\"rec-ui-b-1791617973511-handoff\"}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "handoff_operation_id"
+        ]
+      },
+      {
+        "label": "workflow-rec-ui-b-1791617973511-add",
+        "url": "http://127.0.0.1:3202/api/workflow",
+        "status": 502,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 157,
+        "bodyPreview": "{\"error\":\"ID already exists\",\"screened\":true,\"payload\":{\"payload\":{\"error\":\"ID already exists\",\"notes\":[]},\"screening_notes\":[],\"error\":\"ID already exists\"}}",
+        "parsedKeys": [
+          "error",
+          "screened",
+          "payload"
+        ]
+      }
+    ],
+    "pid_before": 6472,
+    "build_id": "6PA4cNz_L1VC8-17zlh1B",
+    "db_path_served": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+    "db_sha256_before": "64f98c3b816bbeac716411219fd016cb3622e67c5acc4210defb9586b9efd1ac",
+    "db_isolated": false,
+    "overall": "failed",
+    "error": "Error: mutation failed at workflow-rec-ui-b-1791617973511-add: ID already exists",
+    "exit": 1
+  },
+  "prior_attempts_preserved": [
+    "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+    "reports/independent-recovery-browser-review.json"
+  ],
+  "independent_ack": {
+    "browser_review": "reports/independent-recovery-browser-review.json (07:35:34)",
+    "screening_review": "reports/independent-recovery-screening-review.json (pending path in supervisor queue)",
+    "controlled_producer_scope": "local action only; prior acceptance preserved"
+  }
+}

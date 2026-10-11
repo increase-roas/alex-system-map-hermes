@@ -1,0 +1,217 @@
+{
+  "status": "PASS",
+  "checks": [
+    {
+      "name": "components IDs unique",
+      "passed": true,
+      "detail": 2351
+    },
+    {
+      "name": "relationships IDs unique",
+      "passed": true,
+      "detail": 59
+    },
+    {
+      "name": "sources IDs unique",
+      "passed": true,
+      "detail": 1012
+    },
+    {
+      "name": "evidence IDs unique",
+      "passed": true,
+      "detail": 3393
+    },
+    {
+      "name": "issues IDs unique",
+      "passed": true,
+      "detail": 1515
+    },
+    {
+      "name": "source-records IDs unique",
+      "passed": true,
+      "detail": 2377
+    },
+    {
+      "name": "table-index IDs unique",
+      "passed": true,
+      "detail": 192
+    },
+    {
+      "name": "layers IDs unique",
+      "passed": true,
+      "detail": 8
+    },
+    {
+      "name": "components evidence references resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "relationships evidence references resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "issues evidence references resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "source-records evidence references resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all evidence sources resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all component source records resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "relationship endpoints resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "issue subjects resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "category enum valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "evidence_level enum valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "observed_condition enum valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "no unobserved live-health promotion",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all layers resolve",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "one presentation per component and all parents visible",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "presentation membership separate and valid",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all 198 original map entries retain exact names and boundaries",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "coverage exact counts",
+      "passed": true,
+      "detail": {
+        "App": 84,
+        "Asset record": 883,
+        "1Password item": 51,
+        "AI surface": 13,
+        "sdk capability": 14,
+        "package adoption": 4,
+        "Saved skill": 143,
+        "Tool card": 21,
+        "Source tab": 154,
+        "Source file": 1009,
+        "Screenshot": 1
+      }
+    },
+    {
+      "name": "coverage every record exactly once",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "coverage exact workbook identity",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "source row references in bounds",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "relationship table exact accounting",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all 1009 archived source bytes match",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original workbook unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "original source ZIP unchanged",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "all 192 source tables exported",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "component pages complete",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "generated text credential-pattern scan",
+      "passed": true,
+      "detail": []
+    },
+    {
+      "name": "generated XLSX has full catalog and coverage",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "generated XLSX no formula/error cells",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "negative omitted-record test",
+      "passed": true,
+      "detail": null
+    },
+    {
+      "name": "negative dangling-edge test",
+      "passed": true,
+      "detail": null
+    }
+  ],
+  "limitations": [
+    "Source reconciliation, not live system audit.",
+    "Pattern scan cannot prove absence of every possible opaque secret. No credential fields were fetched.",
+    "Cursor UI and authenticated application acceptance remain pending."
+  ]
+}

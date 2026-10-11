@@ -1,0 +1,300 @@
+{
+  "reviewed_at": "2026-10-10T06:49:05.810069+00:00",
+  "review_scope": "Bounded changed artifact outcome / scope controls / final receipt bytes only; prior rollback, historical replay and transfer remain accepted, not rerun.",
+  "owner_run_ended_self_report": true,
+  "receipt_at": "2026-10-10T06:44:06+00:00",
+  "run_id": "cf3dd177-0306-4b74-9f40-92dc8101ceb9",
+  "receipt_path": "reports/run-receipts/artifact-outcome-final-bytes-20261010-0639-cf3dd177-0306-4b74-9f40-92dc8101ceb9.json",
+  "receipt_sha256": "7085d2d7223407d9707995a14b00a6e32a8122ca2a1c2f9583417a66d8a496d7",
+  "source_identity": {
+    "tools/artifact_outcome_final_bytes_acceptance.py": {
+      "receipt_sha256": "6380d574be8681f27d4f377e2dc1feb82de98dbd9d6e09e6c44c2339dc7383d9",
+      "current_sha256": "6380d574be8681f27d4f377e2dc1feb82de98dbd9d6e09e6c44c2339dc7383d9",
+      "matches": true
+    },
+    "tools/bounded_acceptance.py": {
+      "receipt_sha256": "f809ca1d647fbac14f4e6c878f28bd6b201b37c5b345878320b1bd8279e7ecf6",
+      "current_sha256": "f809ca1d647fbac14f4e6c878f28bd6b201b37c5b345878320b1bd8279e7ecf6",
+      "matches": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "current_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "matches": true
+    },
+    "tools/receipt_immutable.py": {
+      "receipt_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "current_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "matches": true
+    },
+    "tools/reliability_gate.py": {
+      "receipt_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "current_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "matches": true
+    },
+    "tools/reliability_store.py": {
+      "receipt_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "current_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "matches": true
+    },
+    "tools/verification_evidence.py": {
+      "receipt_sha256": "2ecf4695b28b8d6612bec1f4f217e4fa195d1d1aadf9af3214f448ec52bb259c",
+      "current_sha256": "2ecf4695b28b8d6612bec1f4f217e4fa195d1d1aadf9af3214f448ec52bb259c",
+      "matches": true
+    },
+    "tools/workflow_apply_guard.py": {
+      "receipt_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "current_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "matches": true
+    },
+    "tools/workflow_engine.py": {
+      "receipt_sha256": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a",
+      "current_sha256": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a",
+      "matches": true
+    }
+  },
+  "snapshot_stable": true,
+  "methods": "Read-only sources/receipts; SQLite mode=ro SELECTs; pure in-memory/mocked nonmutating counterexamples. No shared state writes or acceptance reruns.",
+  "saved_db_readbacks": [
+    {
+      "path": "app/.data/workflow-core-tests/artifact-contract-artifact-outcome-final-bytes-20261010-0639.sqlite",
+      "sha256": "e3371c63b99404c03333aacb754420b6516d700540147f23ee6be07b41db978b",
+      "job_revision": 4,
+      "task_status": "verified",
+      "attempted_operation_id": "aof-record-good",
+      "operation_count": 1,
+      "event_count": 1,
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/91ae7eb0-ee53-46c0-bd19-325b88656fd5.json",
+          "registry_sha256": "ef9205ac76da35cddea3885c45b0e0dd40dcdc3f4dd184c111fb8dba03311ab0",
+          "actual_sha256": "ef9205ac76da35cddea3885c45b0e0dd40dcdc3f4dd184c111fb8dba03311ab0",
+          "scope": {
+            "job_id": "artifact-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "aof-record-good",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+              "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8",
+              "byte_length": 18
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "app/.data/workflow-core-tests/scope-wrong-task-artifact-outcome-final-bytes-20261010-0639.sqlite",
+      "sha256": "8f40abc330ee6bcb256c7057ad4ce0564732182e06088c46284af9431249ff22",
+      "job_revision": 3,
+      "task_status": "in_progress",
+      "attempted_operation_id": "aof-neg-wrong-task",
+      "operation_count": 0,
+      "event_count": 0,
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/3427b496-312b-45a2-9e71-fd9b97f7ebdb.json",
+          "registry_sha256": "8e1f14a93c619570faec3a0fac05a5d38cc5a8030f17d3f47380b7f29705d3a8",
+          "actual_sha256": "8e1f14a93c619570faec3a0fac05a5d38cc5a8030f17d3f47380b7f29705d3a8",
+          "scope": {
+            "job_id": "scope-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "aof-record-wt",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/scope-job/t1-1088b4b9e739.txt",
+              "sha256": "1088b4b9e739e97ff00ca30c4a250273c7dabdb0333fd689db07dd3223ee6b80",
+              "byte_length": 15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "app/.data/workflow-core-tests/scope-wrong-op-artifact-outcome-final-bytes-20261010-0639.sqlite",
+      "sha256": "c9bfe548f64920492de3536616971ae0ae4dc64c185c991f83d2598ffd0be9be",
+      "job_revision": 3,
+      "task_status": "in_progress",
+      "attempted_operation_id": "aof-neg-wrong-op",
+      "operation_count": 0,
+      "event_count": 0,
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/470183b6-c36b-4310-b3f3-b42c15c32927.json",
+          "registry_sha256": "0676d30f533c19e18b51b5838dd7b2f14c9c5d64b71f11edcc27094cf879c697",
+          "actual_sha256": "0676d30f533c19e18b51b5838dd7b2f14c9c5d64b71f11edcc27094cf879c697",
+          "scope": {
+            "job_id": "scope-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "aof-record-wo",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/scope-job/t1-7e9c2f4d5ae6.txt",
+              "sha256": "7e9c2f4d5ae64bfaeb92a5ba2506181d6d8f15039fde580e8915da6bcf6727e9",
+              "byte_length": 15
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "app/.data/workflow-core-tests/scope-wrong-verifier-artifact-outcome-final-bytes-20261010-0639.sqlite",
+      "sha256": "2e9b6285faedc14d9a7811ca40723ba0968628fbdafb74048af98777e37ab572",
+      "job_revision": 3,
+      "task_status": "in_progress",
+      "attempted_operation_id": "aof-record-wv",
+      "operation_count": 0,
+      "event_count": 0,
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/825ad380-9e6c-434d-9d78-46c592fedc12.json",
+          "registry_sha256": "07731cdd395709bee921cb90fb972668c11fe619edac7cd2b6c0212020484f84",
+          "actual_sha256": "07731cdd395709bee921cb90fb972668c11fe619edac7cd2b6c0212020484f84",
+          "scope": {
+            "job_id": "scope-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "aof-record-wv",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/scope-job/t1-8eb85e7b9a6f.txt",
+              "sha256": "8eb85e7b9a6f3f9fd88ca40c91488cb7d24632f180f1e46bf60b973dccc7a33f",
+              "byte_length": 15
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "items": [
+    {
+      "id": "A01",
+      "status": "VERIFIED",
+      "claim": "Real artifact existence and measured bytes, missing file and wrong hash refusal; unsupported criterion fails closed",
+      "evidence": [
+        "tools/bounded_acceptance.py:79-132",
+        "tools/artifact_outcome_final_bytes_acceptance.py:225-289",
+        "reports/run-receipts/artifact-outcome-final-bytes-20261010-0639-cf3dd177-0306-4b74-9f40-92dc8101ceb9.json"
+      ],
+      "readback": "Saved positive artifact has bytes expected-bytes-v1\\n, SHA bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8; one positive operation/event. Pure controls: artifact_missing, artifact_sha256_mismatch, acceptance_criterion_unsupported. Unsupported is not marked passed; no general semantic verifier is claimed."
+    },
+    {
+      "id": "A02",
+      "status": "FAILED",
+      "claim": "Successful bounded requested content/result is verified",
+      "evidence": [
+        "tools/bounded_acceptance.py:100-132",
+        "tools/artifact_outcome_final_bytes_acceptance.py:116-172",
+        "tools/artifact_outcome_final_bytes_acceptance.py:246-260"
+      ],
+      "counterexample": {
+        "criterion": "proof-bound",
+        "task_goal": "Return exactly expected-bytes-v1 and success result",
+        "expected_content": "expected-bytes-v1\n",
+        "expected_result": "success",
+        "result": "failed",
+        "output_descriptor": {
+          "schema": "bounded_artifact_v1",
+          "relative_path": "docs/RELIABILITY_ADDENDUM.md",
+          "sha256": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+        },
+        "actual_checks": {
+          "outcome_proof_bound": true,
+          "artifact_hash_matches": true
+        },
+        "actual_reason": null
+      },
+      "reason": "Expected content/result fields here are diagnostic inputs, not supported schema fields: validator ignores them and the task goal. Saved task goal g/criterion proof-bound has no independently declared expectation. Existing arbitrary project file with self-chosen current hash passes; positive expected-bytes fixture only proves existence/hash. No wrong-content or wrong-result control exists."
+    },
+    {
+      "id": "A03",
+      "status": "FAILED",
+      "claim": "Changing observed artifact invalidates proof at workflow consumption",
+      "evidence": [
+        "tools/verification_evidence.py:59-67",
+        "tools/verification_evidence.py:180-181",
+        "tools/verification_evidence.py:282-374",
+        "tools/reliability_gate.py:43-57"
+      ],
+      "counterexample": {
+        "method": "Pure unittest.mock SHA read replacement only; no file or DB mutation. Saved registered record 91ae7eb0-ee53-46c0-bd19-325b88656fd5; matching job/task/op/verifier and revision3. Alter measured SHA for its observed artifact to f*64.",
+        "actual_gate_result": [
+          true,
+          "ok"
+        ],
+        "separate_artifact_remeasure": [
+          false,
+          "artifact_sha256_mismatch"
+        ],
+        "gate_read_paths": [
+          "work/reliability/verification-records/91ae7eb0-ee53-46c0-bd19-325b88656fd5.json",
+          "data/relationships.json",
+          "docs/RELIABILITY_ADDENDUM.md"
+        ]
+      },
+      "reason": "Observed artifacts are stored in proof but never remeasured at consumption. Existing catalog/addendum fingerprint change rejection is VERIFIED by pure mocked changed catalog: verification_record_source_fingerprint_stale."
+    },
+    {
+      "id": "A04",
+      "status": "VERIFIED",
+      "claim": "Current-revision task/operation/verifier rejection branches and zero operation/event effects",
+      "evidence": [
+        "tools/artifact_outcome_final_bytes_acceptance.py:294-396",
+        "tools/verification_evidence.py:313-320",
+        "reports/run-receipts/artifact-outcome-final-bytes-20261010-0639-cf3dd177-0306-4b74-9f40-92dc8101ceb9.json"
+      ],
+      "readback": "Three separate SQLite DBs each remain job revision3/task in_progress; requested operation/event counts0. Receipt reasons exactly verification_record_task_id_mismatch, verification_record_operation_id_mismatch, verification_record_verifier_mismatch. Registry proof files/hashes/scope match saved rows. Wrong-operation and wrong-verifier each isolate requested mismatch."
+    },
+    {
+      "id": "A05",
+      "status": "UNVERIFIED",
+      "claim": "Full handler wrong-task control with matching operation identity",
+      "evidence": [
+        "tools/artifact_outcome_final_bytes_acceptance.py:333-346"
+      ],
+      "reason": "Wrong-task case changes task_id and operation_id together (record aof-record-wt vs request aof-neg-wrong-task). Exact task rejection branch is proven, but a single-variable wrong-task handler case is not recorded; change only task while keeping record operation for next isolated control."
+    },
+    {
+      "id": "A06",
+      "status": "VERIFIED",
+      "claim": "Final immutable receipt bytes match pointer, manifest and history",
+      "evidence": [
+        "reports/run-receipts/artifact-outcome-final-bytes-20261010-0639-cf3dd177-0306-4b74-9f40-92dc8101ceb9.json",
+        "reports/artifact-outcome-final-bytes-receipt.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl",
+        "tools/receipt_immutable.py:24-54",
+        "tools/artifact_outcome_final_bytes_acceptance.py:415-430"
+      ],
+      "readback": "All final-byte SHA256 values equal 7085d2d7223407d9707995a14b00a6e32a8122ca2a1c2f9583417a66d8a496d7; exclusive-create writer hashes serialized final bytes once, external links after writing. No self-rewriting receipt."
+    },
+    {
+      "id": "A07",
+      "status": "VERIFIED",
+      "claim": "Original failure and known malformed prior receipts retained with truthful reconciliation",
+      "evidence": [
+        "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json",
+        "reports/run-receipts/artifact-outcome-final-bytes-20261010-0639-cf3dd177-0306-4b74-9f40-92dc8101ceb9.json"
+      ],
+      "readback": "Original failure SHA307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960 retained and prior verify_accepts_gate_bound_claim accepted=false. Three prior run receipt actual hashes match current reconciliation (bf0728..., e3b483...,2671f8...), which explicitly leaves old declared hashes mismatched; old bytes were not rewritten to manufacture agreement."
+    }
+  ],
+  "verdict": "partial; bounded byte existence/hash and final receipt history accepted; requested outcome truth and live artifact invalidation failed",
+  "next_action": "Sole owner: add a small typed declared expected content/result contract bound to task acceptance before production; compare observed artifact against that expectation, reject unrelated/wrongcontent/wrongresult; remeasure observed artifacts on actual consumption; add isolated single-mismatch handler tests with matching remaining scope. Keep unknown criteria incomplete. Then proceed remaining APP02/04/edit/sync/browser/REL01 queue after acceptance.",
+  "blocker_type": "goal_not_met_yet"
+}

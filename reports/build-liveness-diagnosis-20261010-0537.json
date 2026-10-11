@@ -1,0 +1,24 @@
+{
+  "at": "2026-10-10T05:38:26.832941+00:00",
+  "owner_session": 74810,
+  "owner_pid": 89773,
+  "build_pid": 91982,
+  "worker_pid": 92787,
+  "stage": "type-checking",
+  "trace_sha256_unchanged": "081374f5f5e33e8e34e6b8797986f6e4359214474116bc9779d39bb33fd1529e",
+  "sample": "work/supervision/typecheck-worker-sample-0537.txt",
+  "stack": "83 of 84 sampled main-thread paths are ReadFileUtf8 -> uv_fs_read -> read",
+  "open_regular_dependency": "app/node_modules/.pnpm/eslint-plugin-jsx-a11y@6.10.2_eslint@9.39.5_jiti@2.7.0_/node_modules/eslint-plugin-jsx-a11y/lib/util/implicitRoles/progress.js",
+  "independent_bounded_read": {
+    "status": "read_completed",
+    "exit_code": 0,
+    "byte_count": "285"
+  },
+  "build_process_network_sockets": 0,
+  "diagnosis": "Observed local file read stall; storage/provider root cause not proven. No evidence of external fetch.",
+  "recovery": "Signal only exact Next build worker SIGTERM after identity check; keep owner and source files intact.",
+  "all_16_corrections": "reports/supervisor-correction-queue.json",
+  "independent_acceptance": "withheld",
+  "recovery_signal_sent": true,
+  "qualification": "Separate 285-byte read completed during diagnosis; permanent unreadability not established. Worker was observed waiting in read across sampled stack; root cause remains unproven."
+}

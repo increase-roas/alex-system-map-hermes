@@ -1,0 +1,85 @@
+{
+  "contract_version": 1,
+  "kind": "investigate",
+  "guided": true,
+  "dispatch_enabled": false,
+  "instructions": [
+    "Fill every required input before creating a real local record.",
+    "Use concrete check_acceptance.py expressions for acceptance.",
+    "Choose a verifier identity different from task owner.",
+    "Attach evidence references; independent verification checks evidence truth outside this engine.",
+    "Corrections trigger downstream rechecking."
+  ],
+  "required_inputs": [
+    "goal",
+    "scope",
+    "constraints",
+    "owner",
+    "allowed_files",
+    "account_or_local_only",
+    "acceptance"
+  ],
+  "job": {
+    "id": "investigate-JOB_ID",
+    "goal": "REQUIRED",
+    "scope": [
+      "REQUIRED approved files and records"
+    ],
+    "constraints": [
+      "REQUIRED permissions and stop gates"
+    ],
+    "owner": "REQUIRED",
+    "acceptance": [
+      "file:REQUIRED non-empty"
+    ],
+    "account_or_local_only": "REQUIRED"
+  },
+  "tasks": [
+    {
+      "id": "investigate-frame-TASK_ID",
+      "goal": "Confirm question, boundaries and authoritative sources",
+      "owner": "REQUIRED",
+      "deps": [],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Confirm question, boundaries and authoritative sources"
+    },
+    {
+      "id": "investigate-collect-TASK_ID",
+      "goal": "Collect bounded evidence",
+      "owner": "REQUIRED",
+      "deps": [
+        "investigate-frame-TASK_ID"
+      ],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Collect bounded evidence"
+    },
+    {
+      "id": "investigate-assess-TASK_ID",
+      "goal": "Explain findings and gaps",
+      "owner": "REQUIRED",
+      "deps": [
+        "investigate-collect-TASK_ID"
+      ],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Explain findings and gaps"
+    },
+    {
+      "id": "investigate-review-TASK_ID",
+      "goal": "Independent review of evidence and conclusions",
+      "owner": "REQUIRED",
+      "deps": [
+        "investigate-assess-TASK_ID"
+      ],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Independent review of evidence and conclusions"
+    }
+  ]
+}

@@ -1,0 +1,262 @@
+{
+  "at": "2026-10-10T07:39:34+00:00",
+  "cases": {
+    "browser": {
+      "build_id": "6PA4cNz_L1VC8-17zlh1B",
+      "db_isolated": false,
+      "db_path_served": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+      "db_sha256_before": "64f98c3b816bbeac716411219fd016cb3622e67c5acc4210defb9586b9efd1ac",
+      "delivery": "recovery-screening-real-paths-20261010-0738",
+      "error": "Error: mutation failed at workflow-rec-ui-b-1791617973511-add: ID already exists",
+      "exit": 1,
+      "networkLog": [
+        {
+          "bodyLength": 4285,
+          "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"6PA4cNz_L1VC8-17zlh1B\",\"process\":{\"pid\":6472},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/Us",
+          "contentType": "application/json",
+          "label": "health-before",
+          "parseError": null,
+          "parsedKeys": [
+            "ok",
+            "loopback_only",
+            "local_token_hint",
+            "token",
+            "build_id",
+            "process",
+            "runtime",
+            "completeness",
+            "sync"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/health"
+        },
+        {
+          "bodyLength": 151,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791617973511-create\",\"handoff_operation_id\":\"rec-ui-a-1791617973511-handoff\"}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-a-1791617973511-create",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "handoff_operation_id"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 95,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791617973511-add-t1\"}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-a-1791617973511-add-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 95,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791617973511-add-t2\"}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-a-1791617973511-add-t2",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 99,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":4,\"operation_id\":\"rec-ui-a-1791617973511-produce-t1\"}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-a-1791617973511-produce-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 99,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791617973511\",\"revision\":5,\"operation_id\":\"rec-ui-a-1791617973511-correct-t1\"}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-a-1791617973511-correct-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 151,
+          "bodyPreview": "{\"job_id\":\"rec-ui-b-1791617973511\",\"revision\":1,\"operation_id\":\"rec-ui-b-1791617973511-create\",\"handoff_operation_id\":\"rec-ui-b-1791617973511-handoff\"}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-b-1791617973511-create",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "handoff_operation_id"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 157,
+          "bodyPreview": "{\"error\":\"ID already exists\",\"screened\":true,\"payload\":{\"payload\":{\"error\":\"ID already exists\",\"notes\":[]},\"screening_notes\":[],\"error\":\"ID already exists\"}}",
+          "contentType": "application/json",
+          "label": "workflow-rec-ui-b-1791617973511-add",
+          "parseError": null,
+          "parsedKeys": [
+            "error",
+            "screened",
+            "payload"
+          ],
+          "status": 502,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        }
+      ],
+      "overall": "failed",
+      "pid_before": 6472,
+      "runner_sha256": "278cd973ba945c93fde3c452b0cbb1beadd11238b46e9288ac21b6669d9365a1"
+    },
+    "emission_boundaries": {
+      "diagnose_text": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "events_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "list_jobs_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "raw_event_contains_canary": true,
+      "raw_trace_label_contains_canary": true,
+      "read_source_error_boundary": {
+        "benign_marker": true,
+        "canary_removed": false,
+        "exit": 1,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "recover_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "stderr_read_source_screened": true,
+      "trace_get_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "trace_list_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      }
+    },
+    "independent_ack": {
+      "browser_review": "reports/independent-recovery-browser-review.json (07:35:34)",
+      "controlled_producer_scope": "local action only; prior acceptance preserved",
+      "screening_review": "reports/independent-recovery-screening-review.json (pending path in supervisor queue)"
+    },
+    "node_bridge": {
+      "benign_required": false,
+      "canary_removed": true,
+      "exit": 1,
+      "nonempty_required": false,
+      "parsed": {
+        "benign": false,
+        "init_ok": true,
+        "invalid_command_benign": false,
+        "invalid_command_canary_removed": true,
+        "invalid_command_json_stdout": false,
+        "invalid_command_nonempty": true,
+        "nonempty": false,
+        "read_source_benign": false,
+        "read_source_canary_removed": true,
+        "read_source_intended_error": true,
+        "screened": true
+      },
+      "screened_required": true
+    },
+    "prior_attempts_preserved": [
+      "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+      "reports/independent-recovery-browser-review.json"
+    ],
+    "recovery_dependency": {
+      "blockers_include_t1": true,
+      "corrected_task_blocked": true,
+      "diagnostic_marker": true,
+      "next_not_corrected_downstream": true
+    }
+  },
+  "delivery_id": "recovery-screening-real-paths-20261010-0738",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-d2302d5d.json",
+      "sha256": "3265fcf2a764fb9e33a660bbf664c048234d7193df600c9f0b307854eb9d9227"
+    }
+  ],
+  "failures": [
+    "emit_read_source_error_boundary",
+    "node_bridge",
+    "browser_required"
+  ],
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": true,
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-d2302d5d-3cad-4e5c-bd25-f8e82df38bcd.json"
+  },
+  "run_id": "d2302d5d-3cad-4e5c-bd25-f8e82df38bcd",
+  "source_identity": {
+    "app/src/app/api/health/route.ts": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+    "app/src/app/api/workflow/route.ts": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b",
+    "app/src/app/explorer/workflow-panel.tsx": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78",
+    "app/src/lib/server/paths.ts": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed",
+    "app/src/lib/server/python.ts": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32",
+    "tools/browser_recovery_screening.mjs": "278cd973ba945c93fde3c452b0cbb1beadd11238b46e9288ac21b6669d9365a1",
+    "tools/job_recovery.py": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a",
+    "tools/local_service.py": "c23e0d06e59a99171410be0d14a30c7d8b0ccded59a82dad6185af339774635e",
+    "tools/node_bridge_screen_probe.ts": "06dd905b35437ec8fb64156951b45d0c005cc2ffe0cdc6121d9f9326d81f9021",
+    "tools/output_screening.py": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+    "tools/recovery_screening_real_paths_acceptance.py": "4941cfde94c9ee160c984b60074969bc7f070dd8364985d8767f0932ccdaeac3",
+    "tools/trace_store.py": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+  }
+}

@@ -1,0 +1,27 @@
+# F0784 / Reusable team / revision-03/native-host-rollover/verification/evidence/rollover-stale-claim-red.txt
+
+ID: `component_98d32abc7293814ea432`
+
+Purpose is recorded in the cited source details.
+
+Category: **historical** · Evidence: **reported** · Observed condition: **unknown**
+
+## Evidence boundary
+
+Saved evidence; no current installation, credential validity, or runtime use inferred.
+
+## Source records
+
+- `record_d3a7fbd825f96e0b1238`
+
+## Evidence pointers
+
+- `ev_bbf5f6d760d5993bd106` — FILE CATALOG row 788 (Saved source row; no new live test)
+
+## Recorded relationships
+
+
+## Open questions and issues
+
+
+Read bounded source detail with `python3 tools/catalog.py component <ID>` or `evidence <ID>`.

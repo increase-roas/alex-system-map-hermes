@@ -1,0 +1,44 @@
+{
+  "stripped_descriptor": {
+    "stripped_old_path_sha_rejected": {
+      "exit": 1,
+      "error": "controlled_producer_evidence_missing",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "client_producer_receipt_id_rejected": {
+      "exit": 1,
+      "error": "client_production_metadata_forbidden",
+      "operation_count": 0,
+      "event_count": 0
+    }
+  },
+  "cross_contract": {
+    "stale_v1_receipt_under_v2_declaration": {
+      "exit": 1,
+      "error": "controlled_producer_evidence_missing",
+      "operation_count": 0,
+      "event_count": 0
+    }
+  },
+  "legitimate_path": {
+    "producer_ordering": {
+      "declaration_op": "cpr-legit-decl-v2",
+      "materialize_op": "cpr-legit-produce-v2",
+      "receipts_before_count": 1,
+      "receipts_after_count": 2,
+      "v2_receipt_consumed_by": "cpr-legit-produce-v2",
+      "v2_receipt_producer_op": "cpr-legit-produce-v2"
+    },
+    "attach_and_verify": {
+      "exit": 1,
+      "error": "verification_record_operation_id_mismatch",
+      "operation_count": 0,
+      "event_count": 0,
+      "job_revision": 5,
+      "production_history_len": 2,
+      "task_status": "in_progress"
+    },
+    "db_readback_sha256": "506e915afdfc8d366480a2b17cb91971646db9a01c086f29a0126e2b4e2b1c29"
+  }
+}

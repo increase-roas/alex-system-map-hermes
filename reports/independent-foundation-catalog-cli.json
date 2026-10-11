@@ -1,0 +1,72 @@
+{
+  "results": [
+    {
+      "item": "bounded_search",
+      "status": "VERIFIED",
+      "evidence": {
+        "query": "Composio",
+        "total": 82,
+        "returned": 3
+      }
+    },
+    {
+      "item": "exact_component_readback",
+      "status": "VERIFIED",
+      "evidence": {
+        "component_id": "component_c9048df8dc9d73cda593",
+        "relationship_count": 0,
+        "issue_count": 1
+      }
+    },
+    {
+      "item": "cited_evidence_readback",
+      "status": "VERIFIED",
+      "evidence": {
+        "evidence_id": "ev_1d7bd4d1bc5fa7b8bcbb",
+        "source_id": "source_master_workbook",
+        "sheet": "S03-21 AI apps",
+        "row": 9
+      }
+    },
+    {
+      "item": "original_record_readback",
+      "status": "VERIFIED",
+      "evidence": {
+        "record_id": "record_aabf1f962886bd857a47"
+      }
+    },
+    {
+      "item": "worker_binding_table_bounded_read",
+      "status": "VERIFIED",
+      "evidence": {
+        "table_id": "table_62f992fdc09f67c391c8",
+        "returned": 20,
+        "remaining": 181,
+        "relationship_inference": "No target-value evidence; keep sourcefield names separate from factualedges"
+      }
+    },
+    {
+      "item": "bounded_original_source_read",
+      "status": "VERIFIED",
+      "evidence": {
+        "source_id": "F0001",
+        "returned_lines": 2,
+        "total_lines": 33,
+        "raw_content": "Not copied into report"
+      }
+    },
+    {
+      "item": "negative_limit_and_missing_identity",
+      "status": "VERIFIED",
+      "evidence": "Over-limit read and unknown component reject with nonzero exit."
+    },
+    {
+      "item": "reads_preserve_canonical_bytes",
+      "status": "VERIFIED",
+      "evidence": {
+        "checked_json_files": 202,
+        "sha256_unchanged": true
+      }
+    }
+  ]
+}

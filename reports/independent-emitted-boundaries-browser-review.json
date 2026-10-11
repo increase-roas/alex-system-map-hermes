@@ -1,0 +1,165 @@
+{
+  "review_id": "independent-emitted-boundaries-browser-review",
+  "reviewed_at": "2026-10-10T08:10:24.486479+00:00",
+  "scope": "Read-only changed-source browser/restart evidence against prior diagnostic review exact defects; no browser/app reruns, no mutations, no network, no helpers.",
+  "owner_run": "177839b4-e802-48dc-83ce-1cbaa1c8a1db",
+  "owner_at": "2026-10-10T08:05:06+00:00",
+  "owner_overall_self_report": "passed",
+  "receipt_sha256": "b0c232868fa6c3ff0efa977f76ab44a64ae592d4c1a8ee959d661d741d14dad7",
+  "pointer_sha256": "7ef63a6bd0241103d96d2351e86a6b6f98a7e0c292a29830b426d6c355cfe874",
+  "source_sha256": {
+    "app/.next/BUILD_ID": "f1905fecc3c53c09bd92887bba45db656b980291b31014cf9dc5d4d4c7ffec37",
+    "app/src/lib/server/python.ts": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+    "tools/browser_recovery_screening.mjs": "d1324a38a2b13a24d1847a6c3800e64258f1e42c6cdd90601abbca7ea1b0f6ef",
+    "tools/diagnostic_emission_screening.mjs": "ab00e147f078103a1496d64b9aba7f897d867e6c496a9009364b1134d5b7b761",
+    "tools/diagnostic_emission_screening.py": "f70a319fbaaba0e240d11c3720c2e4513f455b95ad5a7ccbbf12cbb34eaca732",
+    "tools/diagnostic_screening_acceptance.py": "c0d364b8bcf90ad3e117fd2ab4e09fc6e8db5bd4e91c0c424a8b40b078820260",
+    "tools/emitted_boundaries_served_restart_acceptance.py": "1dae850ef4bf97eb3c642aef564581f6dcd170ca77a8b29d1086b31deb386930",
+    "tools/local_service.py": "0d52c9260b64068d3d1b58be642deeb50dd2210355ba65ef3878272d878023f1",
+    "tools/node_bridge_screen_probe.ts": "d75fdd205b28124e819f28dd1f2354847e61e9969e2c92431ab3d95b139d0fb1",
+    "tools/recovery_screening_real_paths_acceptance.py": "d8817cfbe713db17e642d35261f925aaa72ba296b5b9307bedb13d058ba9592a"
+  },
+  "additional_health_route_sha256": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+  "prior_review_sha256": "239781e11b3914cef09f443b42f51e2a0f53f6de006bc2540a7cf915466eb448",
+  "recovery_regression_binding": {
+    "run_id": "4d5fb421-86e8-4dce-8539-e4fdd8f9133c",
+    "receipt_path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-4d5fb421-86e8-4dce-8539-e4fdd8f9133c.json",
+    "sha256": "cf966125937a24c2b8248f76569dca96c15d98b1d8ab2648ad4e3fb9530aa656",
+    "matches_pointer": true,
+    "matches_owner": true
+  },
+  "capture_binding": {
+    "network": {
+      "path": "reports/browser-proof/emitted-boundaries-served-restart-20261010-0754/capture-177839b4e802/network-log-177839b4e802.json",
+      "sha256": "92ffb625e601a2f5ddac2692e3cfe44bd1fff8d379c9028b8ac38a53dac69a50",
+      "suffix": "177839b4e802"
+    },
+    "screenshot": {
+      "bytes": 82838,
+      "path": "reports/browser-proof/emitted-boundaries-served-restart-20261010-0754/capture-177839b4e802/recovery-177839b4e802.png",
+      "sha256": "6b85fb1e0ff7730f9415d7d6f1574caa5b2d1ba0768fd50dba4a71611b34c33a"
+    },
+    "raster_opened": false
+  },
+  "items": [
+    {
+      "id": "Receipt and current source identity",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/run-receipts/emitted-boundaries-served-restart-20261010-0754-177839b4-e802-48dc-83ce-1cbaa1c8a1db.json",
+        "reports/emitted-boundaries-served-restart-receipt.json"
+      ],
+      "finding": "Pointer matches final receipt bytes. All ten source identities match current files; runner hash matches browser source; served build before/after matches current BUILD_ID. This proves byte binding, not correctness of owner PASS."
+    },
+    {
+      "id": "Actual served process restart",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:106",
+        "app/src/app/api/health/route.ts:36",
+        "reports/run-receipts/emitted-boundaries-served-restart-20261010-0754-177839b4-e802-48dc-83ce-1cbaa1c8a1db.json"
+      ],
+      "finding": "Health exposes actual process.pid; saved served PIDs differ (42278 to 42700), launcher PIDs recorded separately, old served PID exit recorded after kill and polling. DB path and build remain stable across restart."
+    },
+    {
+      "id": "Strict listener release proof",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:118"
+      ],
+      "finding": "listenerReleased is true in saved run, but predicate also succeeds on any different health PID while old PID is dead. Saved metadata does not distinguish connection failure from another responding listener; closed-port interval is not independently established."
+    },
+    {
+      "id": "Two actual UI jobs and correction exclusion",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:363",
+        "tools/browser_recovery_screening.mjs:380",
+        "reports/run-receipts/emitted-boundaries-served-restart-20261010-0754-177839b4-e802-48dc-83ce-1cbaa1c8a1db.json"
+      ],
+      "finding": "Source selects both job A and B. Saved A/B UI strings contain respective full API next action; B action excludes actual A correction string. API B has no governing correction. Captured A stale instruction remains historical. Earlier narrow A history pass preserved."
+    },
+    {
+      "id": "Dependency-ineligible corrected downstream through browser",
+      "status": "FAILED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:39",
+        "tools/browser_recovery_screening.mjs:266",
+        "tools/browser_recovery_screening.mjs:339"
+      ],
+      "finding": "Browser defines downstream correction constant but only corrects upstream t1. Its blocked t2 checks prove dependency readiness for an uncorrected downstream task. Separate recovery regression genuinely corrects t2 and reports blocked/dependency booleans; that is CLI evidence, not served/browser corrected-downstream evidence."
+    },
+    {
+      "id": "Retained output, nonempty recheck, and logical DB continuity",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:260",
+        "tools/browser_recovery_screening.mjs:299",
+        "tools/browser_recovery_screening.mjs:336",
+        "app/src/lib/server/python.ts:127",
+        "reports/run-receipts/emitted-boundaries-served-restart-20261010-0754-177839b4-e802-48dc-83ce-1cbaa1c8a1db.json"
+      ],
+      "finding": "Fixture stores one nonempty output record before correction and restart. After restart API affected count is 1 with matching t1 output marker; UI affected count positive, A governing/stale state and B next action persist. Raw-init hash false is not failure: service initialization performs sync-observe and trace seeding after bare init. Same path plus logical readback proves scoped durable state; no byte-equality claim."
+    },
+    {
+      "id": "Full output/history UI assertions",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:371",
+        "tools/browser_recovery_screening.mjs:374",
+        "reports/run-receipts/emitted-boundaries-served-restart-20261010-0754-177839b4-e802-48dc-83ce-1cbaa1c8a1db.json"
+      ],
+      "finding": "Saved history contains stale baseline, affected UI displays count; full retained output marker is absent from captured affected UI string. History assertion checks only length; no exact historical note/record identity assertion. Actual correction reason absent from captured A action/history is not automatically a UI bug: required meaning/content is not asserted by this runner."
+    },
+    {
+      "id": "Run-specific capture binding",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/browser-proof/emitted-boundaries-served-restart-20261010-0754/capture-177839b4e802/network-log-177839b4e802.json",
+        "reports/browser-proof/emitted-boundaries-served-restart-20261010-0754/capture-177839b4e802/recovery-177839b4e802.png",
+        "tools/emitted_boundaries_served_restart_acceptance.py:158"
+      ],
+      "finding": "Capture paths contain final run suffix 177839b4e802; saved network bytes match recorded hash and receipt entries; screenshot hash and 82838-byte size match. Twelve network entries have no parse errors. Unique paths remove prior fixed-path overwrite gap for this run. Future immutability is not proven by current bytes."
+    },
+    {
+      "id": "Safe capture review boundary",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/browser-proof/emitted-boundaries-served-restart-20261010-0754/capture-177839b4e802/network-log-177839b4e802.json",
+        "reports/run-receipts/emitted-boundaries-served-restart-20261010-0754-177839b4-e802-48dc-83ce-1cbaa1c8a1db.json"
+      ],
+      "finding": "Used Boolean projections only; no raw tokens/credentials or capture bodies emitted. Pattern screening found no obvious credential exposure in textual capture. Raster was not opened, so visual token absence and screenshot usability remain unverified; screening internals belong to separate reviewer."
+    },
+    {
+      "id": "Required browser aggregate",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/emitted_boundaries_served_restart_acceptance.py:197",
+        "tools/recovery_screening_real_paths_acceptance.py:310"
+      ],
+      "finding": "Both owner aggregators require browser passed plus exit zero; main aggregate also requires served_process_restarted. Recorded browser exit zero is consistent with this source. Earlier omission of browser result remains fixed."
+    },
+    {
+      "id": "Mandatory history/build/listener gate coverage",
+      "status": "FAILED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:411"
+      ],
+      "finding": "Browser pass expression omits ui_a_history_ok, ui_b_no_history, build_id_stable and restart_stop.listenerReleased. Recorded positive booleans do not prove failure would propagate for these assertions; corrected downstream browser case is also absent."
+    },
+    {
+      "id": "Original broader browser matrix and real SDK input",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "reports/independent-consolidated-browser-review.json",
+        "reports/independent-diagnostic-browser-review.json"
+      ],
+      "finding": "This scoped retest preserves earlier narrow passes; does not close remaining original browser matrix, full observer/UI restart cursor proof, raster readability, or real SDK input."
+    }
+  ],
+  "verdict": "PARTIAL: specific prior defects closed; corrected downstream served/browser case and mandatory history gate remain missing.",
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Served/browser fixture correcting dependency-blocked t2, exact history/retained-output assertions with fail propagation, and strict listener-release evidence; original broader matrix remains outside this retest."
+  }
+}

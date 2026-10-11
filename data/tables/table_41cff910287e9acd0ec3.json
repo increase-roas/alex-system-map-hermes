@@ -1,0 +1,375 @@
+{
+  "id": "table_41cff910287e9acd0ec3",
+  "sheet": "SDK CURRENT",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK 1.5.1 — current recorded checkpoint"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "As of the October 9 report. Exact release source included; historical proof stays dated and separate from live fleet acceptance."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Topic"
+        },
+        {
+          "column": "B",
+          "value": "Recorded state"
+        },
+        {
+          "column": "C",
+          "value": "What it means / boundary"
+        },
+        {
+          "column": "D",
+          "value": "Evidence"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Recorded release"
+        },
+        {
+          "column": "B",
+          "value": "SDK 1.5.1"
+        },
+        {
+          "column": "C",
+          "value": "Latest independently verified release located by the October 9 report. This consolidation checks packaged bytes; it does not rerun SDK or live-provider tests."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact packaged source"
+        },
+        {
+          "column": "B",
+          "value": "157e2ae7d0d48922a6fadaf972583bdcc8f6132b"
+        },
+        {
+          "column": "C",
+          "value": "Release branch wt/connect-integration-20261009. The original SDK checkout is a separate lineage; use the release receipt to identify this package."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A38"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Actual source included"
+        },
+        {
+          "column": "B",
+          "value": "136 packaged files + embedded manifest"
+        },
+        {
+          "column": "C",
+          "value": "Every release ZIP member is extracted, cataloged and readable here when textual. Original ZIP, wheel and release evidence remain in the companion source archive."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A1833"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Package integrity"
+        },
+        {
+          "column": "B",
+          "value": "Release archive, wheel and manifest hashes matched"
+        },
+        {
+          "column": "C",
+          "value": "Compared the local files to the release SHA256SUMS during this workbook update. This is artifact verification, not proof of remote installation."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A1029"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source tests — recorded"
+        },
+        {
+          "column": "B",
+          "value": "617 run; OK; 2 skipped"
+        },
+        {
+          "column": "C",
+          "value": "Counts include skipped cases. Evidence is from the release/verifier records, not tests executed to create this workbook."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A38"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Installed tests — recorded"
+        },
+        {
+          "column": "B",
+          "value": "576 run; OK; 19 skipped"
+        },
+        {
+          "column": "C",
+          "value": "The installed package intentionally excludes host-specific bindings and four test modules. Read the release receipt for reasons."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A38"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Independent review — recorded"
+        },
+        {
+          "column": "B",
+          "value": "PASS WITH NOTES; 57 adversarial checks passed"
+        },
+        {
+          "column": "C",
+          "value": "The supplied verifier report lists trusted-host assumptions, transport and test limits. This is its dated verdict."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A49"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mac live check — recorded"
+        },
+        {
+          "column": "B",
+          "value": "1.5.1 strict Connect preflight"
+        },
+        {
+          "column": "C",
+          "value": "Skill search/load, tool search and schema lookup succeeded in the recorded check. It stopped before Mem0 execution."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A199"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory recall — recorded"
+        },
+        {
+          "column": "B",
+          "value": "One actual task-start recall on 1.5.0"
+        },
+        {
+          "column": "C",
+          "value": "Do not relabel the older retrieval as a new 1.5.1 test. Worker delivery, relevance and two-agent recall remain separate."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A171"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Remote agent proof"
+        },
+        {
+          "column": "B",
+          "value": "Javar scratch-file canary; full team behavior unproven"
+        },
+        {
+          "column": "C",
+          "value": "Scratch-file edit/readback/restore is narrower than Hermes activation, task handoff, memory delivery or Javante acceptance."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Original finish line"
+        },
+        {
+          "column": "B",
+          "value": "Working, recoverable, independently checked agent jobs"
+        },
+        {
+          "column": "C",
+          "value": "Keep task ownership, shared knowledge, interruption recovery and result acknowledgement in view. Local toolkit release proof does not close the full fleet goal."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A58"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Core-package adoption"
+        },
+        {
+          "column": "B",
+          "value": "Persona OS / Smart Orchestrator / Model Router"
+        },
+        {
+          "column": "C",
+          "value": "Acquired inputs; complete feature-to-implementation-to-agent mapping is not established by the checkpoint. Preserve its proposed reuse/adapt/equivalent/defer decisions."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Implementation owner in checkpoint"
+        },
+        {
+          "column": "B",
+          "value": "Cursor"
+        },
+        {
+          "column": "C",
+          "value": "Historical ownership statement from the October 9 report; this workbook update does not reassign implementation or execute the report’s recommendations."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI Money source reference"
+        },
+        {
+          "column": "B",
+          "value": "10-tab workbook included"
+        },
+        {
+          "column": "C",
+          "value": "Research findings, gaps, links, downloads, source notes and conversation history. It is a historical research reference, not a live deployment inventory."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'S06-01 Start Here'!A1"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Earlier SDK summaries"
+        },
+        {
+          "column": "B",
+          "value": "Retained as dated history"
+        },
+        {
+          "column": "C",
+          "value": "The older SDK v1 entries remain in their original files. Start with this section and the October 9 report for the newer release reconciliation."
+        },
+        {
+          "column": "D",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    }
+  ]
+}

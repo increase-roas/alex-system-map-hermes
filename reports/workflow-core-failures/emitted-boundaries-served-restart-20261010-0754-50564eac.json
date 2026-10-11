@@ -1,0 +1,60 @@
+{
+  "diagnostic_plain_token": {
+    "raw_detected": true,
+    "screened_absent": true,
+    "nested_absent": true,
+    "benign_marker_in_entry": true
+  },
+  "python_apply_export": {
+    "exit": 0,
+    "has_diagnostic_marker": true,
+    "has_job_id": true,
+    "nonempty_screening_notes": true,
+    "no_token_leak": true
+  },
+  "node_bridge": {
+    "read_source_canary_removed": true,
+    "read_source_benign": true,
+    "read_source_intended_error": true,
+    "invalid_command_json_stdout": true,
+    "invalid_command_canary_removed": true,
+    "invalid_command_nonempty": true,
+    "invalid_command_benign": true,
+    "init_ok": true,
+    "nonzero_json_rejected": true,
+    "nonzero_exit": 1,
+    "benign": true,
+    "screened": true,
+    "nonempty": true,
+    "exit": 0
+  },
+  "browser": {
+    "exit": -9
+  },
+  "recovery_regression": {
+    "overall": "failed",
+    "delivery_id": "recovery-screening-real-paths-20261010-0738",
+    "run_id": "88082493-f05b-47ac-aab5-b94ae3e7d533",
+    "failures": [
+      "browser_required"
+    ],
+    "immutable_content_sha256": "0193245f82932c5908df1e263f3bd3a54936c1526fe81f89b3269cba76f6a3bf",
+    "exit": 1
+  },
+  "independent_reviews_ack": [
+    "reports/independent-diagnostic-backend-review.json",
+    "reports/independent-diagnostic-browser-review.json"
+  ],
+  "remaining_requirements": [
+    "independent review on this receipt",
+    "maintained editing/CAS/derived views/full sync/browser matrix",
+    "REL-01 fresh session",
+    "real SDK trace input BLOCKED"
+  ],
+  "real_sdk_trace_input": "BLOCKED",
+  "diagnostic_screening": {
+    "applied": true,
+    "marker": "LOCAL-SCREENING-OK",
+    "notes": []
+  }
+}

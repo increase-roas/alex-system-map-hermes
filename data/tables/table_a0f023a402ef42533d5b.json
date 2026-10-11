@@ -1,0 +1,338 @@
+{
+  "id": "table_a0f023a402ef42533d5b",
+  "sheet": "S03-30 Tailscale policy",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The tailnet policy file as saved in Alex's admin console: policy v4, least privilege, saved by Alex on 2026-10-03 00:15:55Z (it replaced the 2026-10-01 allow-all file), what each part does, how it was checked, and a copy-ready file for a new tailnet. It closes retest gap G09 with Rebuild from zero steps 6.0 to 6.6. Saving a policy is the owner's: an agent gives the text and the steps. Facts from the network-rules job (work/2026-10-02_network-rules/notes/network-rules.md); the 2026-10-01 file is in play spp-p20b's notes (notes/gap-facts-infra.md §3). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/tailscale-policy.json; never edit this tab by hand.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The policy file as saved (v4, 110 lines, sha256 e49d6625…; saved by Alex 2026-10-03 00:15:55Z, ETag 79591c0d… → f271330f…; 9/9 after-save checks)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "lines"
+        },
+        {
+          "column": "B",
+          "value": "policy text"
+        },
+        {
+          "column": "C",
+          "value": "what it does"
+        },
+        {
+          "column": "D",
+          "value": "checked against the live machines"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9–23"
+        },
+        {
+          "column": "B",
+          "value": "\"hosts\": 12 aliases (javante, javar-orgo, Alex's MacBook and iPhone with IPv6 twins, the hub and the 5 agents)"
+        },
+        {
+          "column": "C",
+          "value": "Names for fixed tailnet addresses, so a rule or test can name one machine without retagging. Grants use only javante and javar-orgo; the 6 ephemeral Orgo machines appear only in deny tests, so a stale address blocks nothing."
+        },
+        {
+          "column": "D",
+          "value": "Addresses read live 2026-10-02 (network-rules §2)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §6 ; work/2026-10-02_network-rules/notes/network-rules.md §7 ; work/2026-10-02_network-rules/notes/network-rules.md §14"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "25–40"
+        },
+        {
+          "column": "B",
+          "value": "\"grants\": alex@ → * (all ports); tag:server → autogroup:internet; javar-orgo → javante tcp:9900; javante → javar-orgo tcp:18881 and tcp:9999"
+        },
+        {
+          "column": "C",
+          "value": "Least privilege: Alex's devices reach everything; every Orgo machine reaches only the internet through the home exit node; Javar → Javante A2A; Javante → Javar's GHL bridge and the fallback file push (9999 is Alex's call). Everything else is blocked."
+        },
+        {
+          "column": "D",
+          "value": "After the save: Javar and Javante answer on 443 from the MacBook; the exit node shows Comcast from all 7 Orgo machines; Javar's A2A card 200; the Mac mini reaches 18881; b2b → javante:9900 now fails (checks 2, 4-7)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §6 ; work/2026-10-02_network-rules/notes/network-rules.md §7 ; work/2026-10-02_network-rules/notes/network-rules.md §14"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "42–57"
+        },
+        {
+          "column": "B",
+          "value": "\"ssh\": accept alex@ → tag:server (root or any user); check autogroup:member → autogroup:self"
+        },
+        {
+          "column": "C",
+          "value": "Only Alex may SSH into the Orgo machines (agents can't SSH into each other, and agent@ can't); the default check rule stays for each person's own devices."
+        },
+        {
+          "column": "D",
+          "value": "tailscale ssh root@b2b-sales-agent rc 0, and all 6 SSH-reachable Orgo machines answered (check 3)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §6 ; work/2026-10-02_network-rules/notes/network-rules.md §7 ; work/2026-10-02_network-rules/notes/network-rules.md §14"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "61"
+        },
+        {
+          "column": "B",
+          "value": "\"tagOwners\": {\"tag:server\": [\"autogroup:admin\", \"alex@increaseroas.com\"]}"
+        },
+        {
+          "column": "C",
+          "value": "Defines tag:server. Admins as before, plus Alex by name, so he keeps the label after agent@ becomes a Member (one deliberate, additive change; today's exact line also validates)."
+        },
+        {
+          "column": "D",
+          "value": "Kept in the live policy (check 1: the parsed live JSON equals v4)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §6 ; work/2026-10-02_network-rules/notes/network-rules.md §7 ; work/2026-10-02_network-rules/notes/network-rules.md §14"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "(absent)"
+        },
+        {
+          "column": "B",
+          "value": "No nodeAttrs: Funnel is no longer granted."
+        },
+        {
+          "column": "C",
+          "value": "No machine may publish a service to the internet through Funnel."
+        },
+        {
+          "column": "D",
+          "value": "No machine used Funnel (checked 2026-10-02 on the MacBook, javante, javar-orgo and the other six Orgo machines)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §6 ; work/2026-10-02_network-rules/notes/network-rules.md §7 ; work/2026-10-02_network-rules/notes/network-rules.md §14"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "66–108"
+        },
+        {
+          "column": "B",
+          "value": "\"tests\" (10) and \"sshTests\" (3)"
+        },
+        {
+          "column": "C",
+          "value": "Checks Tailscale runs on every save: the allowed flows pass and named leaks are refused, by identity and by address (IPv6 too). If one fails, the console refuses to save."
+        },
+        {
+          "column": "D",
+          "value": "Validation 2026-10-03 00:06:48Z returned {} (all pass); 4 planted leaks on v4 were each rejected (network-rules §7)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §6 ; work/2026-10-02_network-rules/notes/network-rules.md §7 ; work/2026-10-02_network-rules/notes/network-rules.md §14"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Copy-ready policy for a new tailnet (policy v4; swap alex@ for your own login, <agent login> for your agent's, and the host addresses for your machines')"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what"
+        },
+        {
+          "column": "B",
+          "value": "policy text"
+        },
+        {
+          "column": "C",
+          "value": "how to use it"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The whole file (v4)"
+        },
+        {
+          "column": "B",
+          "value": "// Increase ROAS tailnet policy: least privilege. Built 2026-10-02 from the traffic each machine really uses\n// (job work/2026-10-02_network-rules, flows table in notes/network-rules.md). Anything not allowed here is blocked.\n{\n\t// Fixed tailnet addresses, so a rule or test can name one machine without changing any tags.\n\t// The rules (grants) use only javante and javar-orgo. Their addresses, and those of Alex's MacBook and iPhone, stay\n\t// unless the machine is removed and added again.\n\t// The six marked \"ephemeral\" are Orgo machines that come back with a new address when rebuilt. Only \"deny\" tests name\n\t// them, so a stale line blocks nothing; update it when that happens.\n\t\"hosts\": {\n\t\t\"javante\":           \"100.127.38.125\",  // Mac mini (agent@): Javante's Hermes and the home exit node\n\t\t\"javar-orgo\":        \"100.84.107.10\",   // Orgo \"EA\": Javar's Hermes\n\t\t\"alexs-macbook-pro\": \"100.90.100.19\",   // Alex\n\t\t\"iphone172\":         \"100.82.76.7\",     // Alex\n\t\t\"alexs-macbook-pro-v6\": \"fd7a:115c:a1e0::ee39:6414\", // Alex (IPv6, used only in the tag:server test)\n\t\t\"iphone172-v6\":         \"fd7a:115c:a1e0::9b39:4c08\", // Alex (IPv6, used only in the tag:server test)\n\t\t\"openclaw-hub\":      \"100.122.97.7\",    // Orgo \"My OpenClaw\": the MCP hub (shields up); ephemeral\n\t\t\"b2b-sales-agent\":   \"100.99.199.66\",   // ephemeral\n\t\t\"csm-agent\":         \"100.81.140.39\",   // ephemeral\n\t\t\"max-finance\":       \"100.82.217.115\",  // ephemeral\n\t\t\"media-agent\":       \"100.118.227.107\", // ephemeral\n\t\t\"ops-coordinator\":   \"100.78.72.70\",    // ephemeral\n\t},\n\n\t\"grants\": [\n\t\t// 1. Alex's devices (MacBook, iPhone) reach every machine on every port, and the internet through an exit node.\n\t\t{\"src\": [\"alex@increaseroas.com\"], \"dst\": [\"*\"], \"ip\": [\"*\"]},\n\n\t\t// 2. Every Orgo machine browses through the home exit node (javante). That needs internet access only,\n\t\t//    not access to the Mac mini itself (DNS through the exit node is checked against this same rule).\n\t\t{\"src\": [\"tag:server\"], \"dst\": [\"autogroup:internet\"], \"ip\": [\"*\"]},\n\n\t\t// 3. Javar -> Javante, A2A: Javar's a2a-javante-proxy calls 100.127.38.125:9900 (Serve TCP forward on javante).\n\t\t{\"src\": [\"javar-orgo\"], \"dst\": [\"javante\"], \"ip\": [\"tcp:9900\"]},\n\n\t\t// 4. Javante -> Javar: the GHL Command MCP bridge (18881), and Javar's documented fallback file push (9999).\n\t\t//    9999 is your call: delete \"tcp:9999\" (and the test that names it) if files should only go through Drive.\n\t\t{\"src\": [\"javante\"], \"dst\": [\"javar-orgo\"], \"ip\": [\"tcp:18881\", \"tcp:9999\"]},\n\t],\n\n\t\"ssh\": [\n\t\t// Alex (no agent) may SSH into the Orgo machines, as root or any other user.\n\t\t{\n\t\t\t\"action\": \"accept\",\n\t\t\t\"src\":    [\"alex@increaseroas.com\"],\n\t\t\t\"dst\":    [\"tag:server\"],\n\t\t\t\"users\":  [\"root\", \"autogroup:nonroot\"],\n\t\t},\n\t\t// Tailscale's default: each person may SSH into their own devices after a fresh sign-in.\n\t\t{\n\t\t\t\"action\": \"check\",\n\t\t\t\"src\":    [\"autogroup:member\"],\n\t\t\t\"dst\":    [\"autogroup:self\"],\n\t\t\t\"users\":  [\"autogroup:nonroot\", \"root\"],\n\t\t},\n\t],\n\n\t// Who may put the tag:server label on a machine: admins as before, plus Alex by name, so he keeps it after agent@\n\t// becomes a Member (Tailscale's docs don't promise that the Owner counts as an admin).\n\t\"tagOwners\": {\"tag:server\": [\"autogroup:admin\", \"alex@increaseroas.com\"]},\n\n\t// Funnel (public internet exposure) is no longer granted: no machine uses it (checked 2026-10-02 on the MacBook,\n\t// javante, javar-orgo and the other six Orgo machines; the iPhone was offline).\n\n\t// Checks Tailscale runs on every save. If one fails, the console refuses to save.\n\t// 1.1.1.1:443 and 8.8.8.8:53 stand for \"the internet through the exit node\" (exit-node DNS is checked on port 53).\n\t// Tests name both identities (people, tags) and the machines' real addresses, so a leak to a tested port is caught\n\t// whether a future rule names a person, a tag or an address. Ports not listed here aren't tested.\n\t\"tests\": [\n\t\t// Alex reaches what he uses: the Hermes app on Javar and Javante, the Mac mini's SSH, SSH into every Orgo\n\t\t// machine, and the internet.\n\t\t{\n\t\t\t\"src\":    \"alex@increaseroas.com\",\n\t\t\t\"accept\": [\"javar-orgo:443\", \"javar-orgo:9119\", \"javante:443\", \"javante:22\", \"javante:9900\", \"tag:server:22\", \"1.1.1.1:443\"],\n\t\t},\n\t\t// Javar: A2A to Javante, and the internet through the exit node. Nothing else.\n\t\t{\n\t\t\t\"src\":    \"javar-orgo\",\n\t\t\t\"accept\": [\"javante:9900\", \"1.1.1.1:443\", \"8.8.8.8:53\"],\n\t\t\t\"deny\":   [\"javante:22\", \"javante:443\", \"javante:5900\", \"alexs-macbook-pro:22\", \"iphone172:443\", \"alex@increaseroas.com:22\", \"alex@increaseroas.com:443\", \"openclaw-hub:8100\", \"b2b-sales-agent:22\"],\n\t\t},\n\t\t// Javante: the GHL bridge and the file push on Javar. Nothing else.\n\t\t{\n\t\t\t\"src\":    \"javante\",\n\t\t\t\"proto\":  \"tcp\",\n\t\t\t\"accept\": [\"javar-orgo:18881\", \"javar-orgo:9999\"],\n\t\t\t\"deny\":   [\"javar-orgo:22\", \"javar-orgo:9119\", \"javar-orgo:8644\", \"alexs-macbook-pro:22\", \"iphone172:443\", \"alex@increaseroas.com:22\", \"alex@increaseroas.com:443\", \"b2b-sales-agent:22\", \"tag:server:22\", \"tag:server:8080\"],\n\t\t},\n\t\t// Any Orgo machine by its tag: the internet through the exit node, nothing on the tailnet.\n\t\t{\n\t\t\t\"src\":    \"tag:server\",\n\t\t\t\"accept\": [\"1.1.1.1:443\", \"8.8.8.8:53\"],\n\t\t\t\"deny\":   [\"alexs-macbook-pro:22\", \"alexs-macbook-pro:443\", \"iphone172:443\", \"alexs-macbook-pro-v6:22\", \"iphone172-v6:443\", \"alex@increaseroas.com:22\", \"alex@increaseroas.com:443\", \"javante:22\", \"javante:5900\", \"javante:9900\", \"javar-orgo:18881\", \"javar-orgo:9119\", \"javar-orgo:22\", \"tag:server:8080\", \"tag:server:6080\", \"tag:server:9223\"],\n\t\t},\n\t\t// The hub and the five agents by address (deny only, so a stale ephemeral address can't block a save).\n\t\t{\"src\": \"openclaw-hub\",    \"deny\": [\"alexs-macbook-pro:22\", \"iphone172:443\", \"javante:22\", \"javante:9900\", \"javar-orgo:18881\", \"javar-orgo:22\"]},\n\t\t{\"src\": \"b2b-sales-agent\", \"deny\": [\"alexs-macbook-pro:22\", \"iphone172:443\", \"javante:22\", \"javante:9900\", \"javar-orgo:18881\", \"csm-agent:8080\"]},\n\t\t{\"src\": \"csm-agent\",       \"deny\": [\"alexs-macbook-pro:22\", \"iphone172:443\", \"javante:22\", \"javante:9900\", \"javar-orgo:18881\", \"max-finance:6080\"]},\n\t\t{\"src\": \"max-finance\",     \"deny\": [\"alexs-macbook-pro:22\", \"iphone172:443\", \"javante:22\", \"javante:9900\", \"javar-orgo:18881\", \"media-agent:8080\"]},\n\t\t{\"src\": \"media-agent\",     \"deny\": [\"alexs-macbook-pro:22\", \"iphone172:443\", \"javante:22\", \"javante:9900\", \"javar-orgo:18881\", \"ops-coordinator:8080\"]},\n\t\t{\"src\": \"ops-coordinator\", \"deny\": [\"alexs-macbook-pro:22\", \"iphone172:443\", \"javante:22\", \"javante:9900\", \"javar-orgo:18881\", \"openclaw-hub:8100\"]},\n\t],\n\n\t\"sshTests\": [\n\t\t// Alex can SSH into the Orgo machines as root.\n\t\t{\"src\": \"alex@increaseroas.com\", \"dst\": [\"tag:server\"], \"accept\": [\"root\"]},\n\t\t// Agents can't SSH into each other, and agent@ (javante) can't SSH into them, as root or as another user.\n\t\t{\"src\": \"tag:server\", \"dst\": [\"tag:server\"], \"deny\": [\"root\", \"javar\"]},\n\t\t{\"src\": \"<agent login>\", \"dst\": [\"tag:server\"], \"deny\": [\"root\", \"javar\"]},\n\t],\n}\n"
+        },
+        {
+          "column": "C",
+          "value": "Admin console > Access controls > JSON editor: paste it, change the names and addresses, Save (Tailscale runs the tests first and refuses a failing file). Rollback: paste the previous file (work/2026-10-02_network-rules/2026-10-02_rollback-policy.hujson). Saving is the owner's: a security setting."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-02_network-rules/2026-10-02_policy-least-privilege.hujson ; work/2026-10-02_network-rules/notes/network-rules.md §8 ; work/2026-10-02_network-rules/notes/network-rules.md §9 ; work/2026-10-02_network-rules/2026-10-02_rollback-policy.hujson"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whether Device approval is on in Alex's tailnet (it decides the Pre-approved tick)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §3"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The chosen expiry of the saved auth key (at most 90 days)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §3"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "That SSH into the hub is refused: taken from Tailscale's shields-up documentation, not tested."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §3"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Why the exit-node Mac mini carries a 'suggest-exit-node' capability: no policy line sets it."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §3"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javante (the Mac mini) is still shared with Kanwal Singh's outside account; the policy blocks it, and revoking the share is Alex's click (Machines > Filters > Shared > Shared by me > javante)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-02_network-rules/notes/network-rules.md §1 ; work/2026-10-02_network-rules/notes/network-rules.md §11"
+        }
+      ]
+    }
+  ]
+}

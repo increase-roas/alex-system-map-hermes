@@ -1,0 +1,104 @@
+{
+  "at": "2026-10-10T07:48:54+00:00",
+  "cases": {
+    "artifact_hygiene": {
+      "amendment_log_exists": true,
+      "clean": true,
+      "paths_checked": 6,
+      "paths_still_exposing_token": []
+    },
+    "diagnostic_screening": {
+      "applied": true,
+      "marker": "LOCAL-SCREENING-OK",
+      "notes": []
+    },
+    "fixture_token_rotation": {
+      "not_default_app_token": true,
+      "rotated_paths": [
+        "app/.data/recovery-screening-real-paths-20261010-0738/local-token.json"
+      ],
+      "rotation_kind": "delete_fixture_token_file_for_next_loopback_create"
+    },
+    "independent_verification": "not_claimed",
+    "prior_owner_receipt_preserved": {
+      "note": "0738 owner pass not independently accepted; history preserved",
+      "path": "reports/recovery-screening-real-paths-receipt.json"
+    },
+    "recovery_regression": {
+      "delivery_id": "recovery-screening-real-paths-20261010-0738",
+      "exit": 0,
+      "failures": [],
+      "immutable_content_sha256": "6320931b6602bdce8f382e835828c5b3a9f60ec886bb16a103aeac0d80638c8f",
+      "overall": "passed",
+      "run_id": "881140a1-79f4-44d5-a4e0-739f189d02d5"
+    },
+    "remaining_requirements": [
+      "independent backend+browser review on diagnostic-screening receipt",
+      "maintained editing/CAS/derived views/full sync/browser matrix",
+      "REL-01 fresh session",
+      "real SDK trace input BLOCKED"
+    ],
+    "sanitize_run": {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "amendment_log": "reports/diagnostic-sanitization-amendments.jsonl",
+      "exit": 0,
+      "files_amended_count": 0,
+      "paths": []
+    },
+    "screening_unit": {
+      "entry_marker": true,
+      "entry_token_key_redacted": true,
+      "nested_no_secrets": true,
+      "notes_nonempty": true,
+      "text_benign_shape": true,
+      "text_canary_removed": true,
+      "text_token_redacted": true
+    },
+    "supervisor_finding": "reports/supervisor-diagnostic-token-finding.json",
+    "token_isolation": {
+      "default_app_token_is_separate_file": true,
+      "default_app_token_path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/local-token.json",
+      "isolated_from_default_app_data": true,
+      "isolated_token_file_exists": true,
+      "loopback_only_mutation_auth": true,
+      "not_composio_or_1password": true,
+      "not_env_sourced": true,
+      "rotation_authorized_scope": "isolated_fixture_dirs_only",
+      "rotation_scope": "isolated_fixture_local-token.json only",
+      "token_file_path_pattern": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local-token.json",
+      "token_storage_relative": "local-token.json under LOCAL_DATA_DIR only"
+    }
+  },
+  "delivery_id": "diagnostic-screening-20261010-0747",
+  "failures": [],
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json"
+  },
+  "run_id": "33729ebf-1890-4590-93ca-741943ce3586",
+  "sanitized_artifact_amendment_manifest": "reports/diagnostic-sanitization-amendments.jsonl",
+  "source_identity": {
+    "app/.next/BUILD_ID": "140f64e07ea220a4c2e7f899d2fe017a2cba9f16319a588bbf2d93e6822eb4e0",
+    "app/src/lib/server/local-auth.ts": "877292a3771fa6a031ba9337bf33c34a3b485612e9563a62ef83d35cabcc61b2",
+    "tools/browser_recovery_screening.mjs": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec",
+    "tools/diagnostic_emission_screening.mjs": "26fdbabf7c4297b70f19558bb0485606d17816a4440677d58015dad7893b163e",
+    "tools/diagnostic_emission_screening.py": "7aff897ad1847d72c6b5b51d9ba7d13795c2242af3480e7b5b767cfaaa74b527",
+    "tools/diagnostic_screening_acceptance.py": "e9e4b0bc3bd7d4610915075819aa06195f87a60bf5deaba2406ed3f3f177f0b5",
+    "tools/recovery_screening_real_paths_acceptance.py": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411",
+    "tools/sanitize_exposed_diagnostic_artifacts.py": "5ead93bae2fbeb67e2bfeb98990e9cbb975e8254d3894fc8a5c9256e168d2599"
+  },
+  "token_scope_proof_metadata_only": {
+    "default_app_token_is_separate_file": true,
+    "default_app_token_path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/local-token.json",
+    "isolated_from_default_app_data": true,
+    "isolated_token_file_exists": true,
+    "loopback_only_mutation_auth": true,
+    "not_composio_or_1password": true,
+    "not_env_sourced": true,
+    "rotation_authorized_scope": "isolated_fixture_dirs_only",
+    "rotation_scope": "isolated_fixture_local-token.json only",
+    "token_file_path_pattern": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local-token.json",
+    "token_storage_relative": "local-token.json under LOCAL_DATA_DIR only"
+  }
+}

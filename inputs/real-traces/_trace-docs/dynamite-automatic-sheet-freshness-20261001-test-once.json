@@ -1,0 +1,54 @@
+{
+ "receipt_id": "director-dynamite-automatic-sheet-freshness-20261001-test-once-n2",
+ "trace_id": "trace-director-dynamite-automatic-sheet-freshness-20261001-test-once",
+ "label": "Director: dynamite-automatic-sheet-freshness-20261001-test-once (2 writes, 1 failed)",
+ "synthetic_only": false,
+ "started_at": "2026-10-01T10:35:33.307103+00:00",
+ "ended_at": "2026-10-01T11:47:00.147910+00:00",
+ "status": "partial",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "dynamite-automatic-sheet-freshness-20261001-test-once"
+ },
+ "spans": [
+  {
+   "span_id": "director-6a9f3a8e24e9-63",
+   "parent_span_id": null,
+   "name": "test-and-restore-dynamite-daily-refresh-once",
+   "agent_identity": "Director controller",
+   "tool_action": "test-and-restore-dynamite-daily-refresh-once",
+   "started_at": "2026-10-01T10:35:33.307103+00:00",
+   "ended_at": "2026-10-01T11:02:07.414762+00:00",
+   "duration_ms": 1594107,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 64
+   }
+  },
+  {
+   "span_id": "director-ac6eeb24d27b-68",
+   "parent_span_id": null,
+   "name": "restore-daily-refresh-conversation-links-once",
+   "agent_identity": "Director controller",
+   "tool_action": "restore-daily-refresh-conversation-links-once",
+   "started_at": "2026-10-01T11:13:08.802654+00:00",
+   "ended_at": "2026-10-01T11:47:00.147910+00:00",
+   "duration_ms": 2031345,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 69
+   }
+  }
+ ]
+}

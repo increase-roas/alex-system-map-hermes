@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-10T09:45:27.317107+00:00",
+  "session_id": 65404,
+  "build_pid": 16770,
+  "worker_pid": 16834,
+  "phase": "compile succeeded, linting remains",
+  "elapsed": "10m43",
+  "new_read_target": "app/node_modules/.pnpm/eslint-plugin-import@2.32.0_@typescript-eslint+parser@8.70.0_eslint@9.39.5_jiti@2.7.0__typesc_ygtyua5bfmnlfk3fuygtl7f2pa/node_modules/eslint-plugin-import/lib/rules/no-named-as-default.js",
+  "read_samples": [
+    "read  (in libsystem_kernel.dylib)        774"
+  ],
+  "bounded_read": {
+    "exit": 0,
+    "bytes": 11902
+  },
+  "build_command_bound_markers": {
+    "explicit_timeout_command": false,
+    "python_subprocess_wrapper": false
+  },
+  "decision": "read target advanced from fs.stat async.js; not same descriptor stall. No signals. Build overall bound not proven."
+}

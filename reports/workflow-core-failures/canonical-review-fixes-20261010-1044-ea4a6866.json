@@ -1,0 +1,299 @@
+{
+  "clone_manifest": {
+    "cloned_at": "2026-10-10T10:53:26+00:00",
+    "dest_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/canonical-review-fixes-20261010-1044/catalog-clone",
+    "production_binding": "CATALOG_FIXTURE_ROOT",
+    "original_immutable_hashes": {
+      "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+      "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+      "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+      "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+      "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+      "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+      "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+      "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+      "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+      "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+      "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+    },
+    "copy_hashes_at_clone": {
+      "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+      "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+      "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+      "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+      "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+      "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+      "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+      "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+      "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+      "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+      "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+    },
+    "copied_file_count": 13,
+    "components_derived": "cloned 2351 component markdown pages from production",
+    "components_cloned_count": 2351
+  },
+  "production_inspection": {
+    "exit": 0,
+    "component_count": 2351,
+    "real_maintained_assets": true
+  },
+  "schema_negative": {
+    "bad_layer_rejected": true,
+    "zero_writes_on_bad": true,
+    "stderr_has_layer": true
+  },
+  "concurrent": {
+    "committed_count": 1,
+    "conflict_count": 1,
+    "one_commit_one_conflict": true,
+    "results": [
+      {
+        "label": "A",
+        "exit": 0,
+        "op": "conc-a-293280"
+      },
+      {
+        "label": "B",
+        "exit": 1,
+        "op": "conc-b-890a6c"
+      }
+    ]
+  },
+  "cross_record_concurrent": {
+    "exit_a": 0,
+    "exit_b": 1,
+    "single_file_winner": true,
+    "purposes": {
+      "component_6f112167c8a413f0f3ab": "Cross A 1044",
+      "component_03a7517e6d7e423c9fd6": "Routes assigned work and returns acceptance evidence."
+    }
+  },
+  "idempotent": {
+    "first_exit": 0,
+    "second_exit": 0,
+    "first_after": "25eb495ca9d6979a0bf8c11b7815cf3c2240104f89476c9e1068b7da26e0725b",
+    "second_after": "25eb495ca9d6979a0bf8c11b7815cf3c2240104f89476c9e1068b7da26e0725b",
+    "idempotent_match": true,
+    "payload_collision_rejected": true
+  },
+  "replay_after_newer": {
+    "returns_original_without_clobber": true,
+    "disk_keeps_newer": true
+  },
+  "crash_reconcile": {
+    "crash_exit_nonzero": true,
+    "sha_restored": true,
+    "reconcile_idempotent": true,
+    "reconcile_ran": true
+  },
+  "canonical_derived": {
+    "apply_revision": 1,
+    "derived": {
+      "catalog_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/canonical-review-fixes-20261010-1044/catalog-clone",
+      "table": "data/components.json",
+      "record_id": "component_6f112167c8a413f0f3ab",
+      "drive_publication": "local-only; not registered Drive update",
+      "xlsx_sha256": "549a439c6395bc3e221dcbe045040f878c2bf8457ba8df9181242f874845c053",
+      "xlsx_path": "views/Alex_System_Foundation.xlsx",
+      "component_index_sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+      "component_markdown_path": "components/component_6f112167c8a413f0f3ab.md",
+      "component_markdown_sha256": "7a596018d890450b822b9e33c1b193e2f628cbc9bc534aa3d148f295c71b24ce",
+      "component_markdown_bytes": 827,
+      "overview_sha256": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b"
+    },
+    "xlsx_changed": true,
+    "md_changed": true,
+    "xlsx_purpose_updated": true,
+    "md_purpose_updated": true,
+    "proof_copied": {
+      "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+      "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+      "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+      "components/component_6f112167c8a413f0f3ab.md": "70d853d598ba12aac4e7987bc464e11b9b9b5948c892bf92c7e8fb86351cfc8e"
+    },
+    "run_proof_snapshotted": true,
+    "run_snapshot_dir": "reports/derived-proof/canonical-review-fixes-20261010-1044/run-ea4a6866fbfd",
+    "run_snapshot_hashes": {
+      "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+      "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+      "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+      "components/component_6f112167c8a413f0f3ab.md": "70d853d598ba12aac4e7987bc464e11b9b9b5948c892bf92c7e8fb86351cfc8e"
+    }
+  },
+  "metadata_doc": {
+    "apply_exit_ok": true,
+    "revision": 1
+  },
+  "timeout_production_path": {
+    "timeout_triggered": true,
+    "child_reaped": true
+  },
+  "build_quality": {
+    "build_exit": 0,
+    "lint_exit": 0,
+    "typecheck_exit": 0,
+    "build_id_sha256": "58fc34781fda08b9878092d537b9fdf92c2beeb50f7e20b404e01f1941495097",
+    "build_log_tail": "    161 B         102 kB\n\u251c \u0192 /api/workflow/recover/[jobId]          161 B         102 kB\n\u251c \u0192 /api/workflow/templates                161 B         102 kB\n\u2514 \u25cb /explorer                             514 kB         616 kB\n+ First Load JS shared by all             102 kB\n  \u251c chunks/02c278c0-35cc6750373fdd2e.js  54.3 kB\n  \u251c chunks/148-9d2be853fb88e954.js       45.9 kB\n  \u2514 other shared chunks (total)          2.02 kB\n\n\n\u25cb  (Static)   prerendered as static content\n\u0192  (Dynamic)  server-rendered on demand\n\n"
+  },
+  "browser": {
+    "delivery": "canonical-review-fixes-20261010-1044",
+    "overall": "failed",
+    "catalog_fixture_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/canonical-review-fixes-20261010-1044/catalog-clone",
+    "frozen_preview_matches_apply": true,
+    "metadata_ui_passed": false,
+    "served_pid_before": 69832,
+    "build_id": "quL80ktML0rbdNNb6mtX8",
+    "runtime_catalog_fixture_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/canonical-review-fixes-20261010-1044/catalog-clone",
+    "runtime_fixture_matches": true,
+    "disk_purpose": "Browser canonical review fixes 1044 purpose",
+    "disk_matches_ui": true,
+    "port_refused_after_stop": true,
+    "restart_pid_changed": true,
+    "persisted_after_restart": true,
+    "metadata_ui_revision": "0",
+    "loop_elapsed_ms": 11602,
+    "exit": 1
+  },
+  "metadata_doc_ui": {
+    "ui_apply_passed": false,
+    "metadata_revision": "0"
+  },
+  "strict_types_regression": {
+    "saved_baseline_core_pass": true,
+    "recovery_regression_exit_false_rejected": true,
+    "generated_controls_valid": true,
+    "control_row_wrong_flip_type_rejected": true,
+    "each_declared_flip_fails": true,
+    "per_flip_fail": [
+      {
+        "path": "python_apply_export.no_token_leak",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.screened",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.nonempty",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.exit",
+        "still_passed": false
+      },
+      {
+        "path": "browser.overall",
+        "still_passed": false
+      },
+      {
+        "path": "browser.served_process_restarted",
+        "still_passed": false
+      },
+      {
+        "path": "browser.build_id_stable",
+        "still_passed": false
+      },
+      {
+        "path": "browser.restart_stop.portRefusedObserved",
+        "still_passed": false
+      },
+      {
+        "path": "recovery_regression.exit",
+        "still_passed": false
+      },
+      {
+        "path": "diagnostic_plain_token.screened_absent",
+        "still_passed": false
+      }
+    ]
+  },
+  "canonical_field_flips": {
+    "each_flip_fails": true,
+    "per_flip": [
+      {
+        "path": "browser.disk_matches_ui",
+        "still_passed": false,
+        "failures": [
+          "ui_apply_passed",
+          "disk_matches_ui",
+          "exit_value",
+          "browser_overall",
+          "unchanged",
+          "each_flip_fails"
+        ]
+      },
+      {
+        "path": "browser.frozen_preview_matches_apply",
+        "still_passed": false,
+        "failures": [
+          "ui_apply_passed",
+          "frozen_preview_matches_apply",
+          "exit_value",
+          "browser_overall",
+          "unchanged",
+          "each_flip_fails"
+        ]
+      },
+      {
+        "path": "idempotent.idempotent_match",
+        "still_passed": false,
+        "failures": [
+          "idempotent_match",
+          "ui_apply_passed",
+          "exit_value",
+          "browser_overall",
+          "unchanged",
+          "each_flip_fails"
+        ]
+      },
+      {
+        "path": "cross_record_concurrent.single_file_winner",
+        "still_passed": false,
+        "failures": [
+          "single_file_winner",
+          "ui_apply_passed",
+          "exit_value",
+          "browser_overall",
+          "unchanged",
+          "each_flip_fails"
+        ]
+      },
+      {
+        "path": "schema_negative.zero_writes_on_bad",
+        "still_passed": false,
+        "failures": [
+          "zero_writes_on_bad",
+          "ui_apply_passed",
+          "exit_value",
+          "browser_overall",
+          "unchanged",
+          "each_flip_fails"
+        ]
+      },
+      {
+        "path": "build_quality.build_exit",
+        "still_passed": false,
+        "failures": [
+          "ui_apply_passed",
+          "exit_value",
+          "browser_overall",
+          "build_exit_value",
+          "unchanged",
+          "each_flip_fails"
+        ]
+      }
+    ]
+  },
+  "original_hashes_unchanged": {
+    "unchanged": true,
+    "before_count": 13,
+    "after_count": 13
+  }
+}

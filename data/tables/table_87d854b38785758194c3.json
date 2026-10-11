@@ -1,0 +1,382 @@
+{
+  "id": "table_87d854b38785758194c3",
+  "sheet": "S05-03 MCP & CONNECTIONS",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP / CONNECTIONS"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What each connection does • Keys are references only • Verified information is separate from a working connection."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connection"
+        },
+        {
+          "column": "B",
+          "value": "Purpose"
+        },
+        {
+          "column": "C",
+          "value": "Route / Address"
+        },
+        {
+          "column": "D",
+          "value": "Secret Reference"
+        },
+        {
+          "column": "E",
+          "value": "Used By"
+        },
+        {
+          "column": "F",
+          "value": "Connection Status"
+        },
+        {
+          "column": "G",
+          "value": "Evidence / Next Check"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks Docs MCP"
+        },
+        {
+          "column": "B",
+          "value": "Read current dataset requirements before bulk conversation extraction; avoid missing fields and repeat collection."
+        },
+        {
+          "column": "C",
+          "value": "Official HTTP MCP endpoint:\nhttps://docs.fireworks.ai/mcp",
+          "link": "https://docs.fireworks.ai/mcp"
+        },
+        {
+          "column": "D",
+          "value": "Published setup shows no key parameter. No extra credential item."
+        },
+        {
+          "column": "E",
+          "value": "Director / Sales Data / Lab"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        },
+        {
+          "column": "G",
+          "value": "Before bulk GHL: Fireworks Docs → SALES_CONVERSATION_SCHEMA_V1 → representative sample + target-export validation. Connection remains untested; canonical data stays provider-independent.",
+          "comment": "Oct 5: Fireworks official SFT docs read succeeded through existing Exa route (log_TqPc88GU0zKV). This is documentation proof, not a connected Fireworks Docs MCP. work/gameplan-updater/2026-10-05T193104Z/evidence.json"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks account tools"
+        },
+        {
+          "column": "B",
+          "value": "Inspect available models and deployments through our tool gateway."
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit: fireworks_ai\nCatalog lists model, deployment and response tools."
+        },
+        {
+          "column": "D",
+          "value": "Connectors → Fireworks API key - javar-lab\nExpected identity: javar-lab-orgo"
+        },
+        {
+          "column": "E",
+          "value": "Lab controller"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        },
+        {
+          "column": "G",
+          "value": "Catalog/schema verified Oct 5 [3]. Confirm provider account ID and service-account mapping, connect, then prove a read-only model/deployment listing."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks model access"
+        },
+        {
+          "column": "B",
+          "value": "Run the selected Lab model for a bounded evaluation."
+        },
+        {
+          "column": "C",
+          "value": "Hermes model-provider connection. Exact installed-runtime settings to verify; this is separate from Docs MCP."
+        },
+        {
+          "column": "D",
+          "value": "Same Fireworks Lab key; use the approved runtime secret route. No duplicate secret."
+        },
+        {
+          "column": "E",
+          "value": "Hermes javar-lab / optimizer"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        },
+        {
+          "column": "G",
+          "value": "Key storage verified Oct 5 [4]. Verify provider acceptance, account mapping, limits and runtime compatibility; funded model test requires approved spend."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenRouter model access"
+        },
+        {
+          "column": "B",
+          "value": "Provide models for production, Sales, research and Lab profiles."
+        },
+        {
+          "column": "C",
+          "value": "Hermes provider configuration; exact runtime endpoint and role mapping to verify."
+        },
+        {
+          "column": "D",
+          "value": "Four tagged items in ACCOUNTS & KEYS: javar-prod / sales-prod / javar-research / javar-lab"
+        },
+        {
+          "column": "E",
+          "value": "Matching Hermes profile"
+        },
+        {
+          "column": "F",
+          "value": "To do"
+        },
+        {
+          "column": "G",
+          "value": "Four distinct keys stored Oct 5 [4]. Prove each role resolves its own key; check provider acceptance, combined usage and native limits."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Nous / Hermes connection"
+        },
+        {
+          "column": "B",
+          "value": "Preserve the existing Nous connection and separate agent profiles."
+        },
+        {
+          "column": "C",
+          "value": "Reuse existing route; inventory actual host and profile settings first."
+        },
+        {
+          "column": "D",
+          "value": "Existing approved Nous item: exact reference still to verify. No new human account."
+        },
+        {
+          "column": "E",
+          "value": "Existing Hermes roles"
+        },
+        {
+          "column": "F",
+          "value": "Existing—verify"
+        },
+        {
+          "column": "G",
+          "value": "Historical connection only [4]. Record a current health check and reference; shared institutional knowledge stays external."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo computers"
+        },
+        {
+          "column": "B",
+          "value": "Reach the current live computers; reconcile COMPUTER INVENTORY and confirm the dedicated Lab."
+        },
+        {
+          "column": "C",
+          "value": "Existing approved Orgo route; actual computer IDs and role placements to verify."
+        },
+        {
+          "column": "D",
+          "value": "Connectors → Orgo API key\nTag: AI Infrastructure/Orgo"
+        },
+        {
+          "column": "E",
+          "value": "Director / Lab controller"
+        },
+        {
+          "column": "F",
+          "value": "Existing—verify"
+        },
+        {
+          "column": "G",
+          "value": "Seven computers inventoried live Oct 5; COMPUTER INVENTORY has IDs, specs and evidence. Lab isolation and provider/identity lanes remain unproved.\nOrgo long-job helper installed with dated live proof; use current inventory IDs. No job run by this update.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/work/2026-10-05_codex-bridge/notes/cb6-orgo-runner.md\nPrior cell note (historical unless independently current):\nAlex-authorized live infrastructure clarification, October 5, 2026. Evidence: work/computer-inventory-20261005/live/inventory.json. Existing five-slot plan and all frozen gates unchanged."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exa web research"
+        },
+        {
+          "column": "B",
+          "value": "Search the web and read official pages through the existing route."
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit: exa\nEXA_SEARCH + EXA_GET_CONTENTS_ACTION"
+        },
+        {
+          "column": "D",
+          "value": "Reuse named Composio login: exa_beode-vain. No new search credential."
+        },
+        {
+          "column": "E",
+          "value": "Research / Director / Lab"
+        },
+        {
+          "column": "F",
+          "value": "Seen working"
+        },
+        {
+          "column": "G",
+          "value": "Search and fresh official-page fetch succeeded Oct 5 [3]. Existing route verified; individual Hermes access remains to check."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "RETIRED"
+        },
+        {
+          "column": "B",
+          "value": "The old fireworks-websearch MCP is no longer available [2]. Do not install its cached setup. Exa remains our approved web-search route."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "[1] Fireworks Docs MCP • official setup  |  https://docs.fireworks.ai/ecosystem/integrations/development-setup",
+          "link": "https://docs.fireworks.ai/ecosystem/integrations/development-setup"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "[2] Web search • freshly fetched official retirement notice  |  https://docs.fireworks.ai/ecosystem/fireconnect/websearch-mcp",
+          "link": "https://docs.fireworks.ai/ecosystem/fireconnect/websearch-mcp"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "[3] Live Composio catalog/schema and Exa reads, Oct 5. [4] ACCOUNTS & KEYS + existing setup records; provider/host checks remain pending."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DONE FOR EACH ROUTE • Named owner + correct identity + one successful allowed read/test + dated receipt. No secrets, new accounts, installs or spending created by this tab."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Existing event store — release evidence",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "B",
+          "value": "Status/evidence pointer only; frozen scope unchanged",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "C",
+          "value": "dev-rag-worker / STATE StateEntity; existing approved route",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "D",
+          "value": "No identity issuance or credential transfer",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "E",
+          "value": "Current Director / existing Observatory owner",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "F",
+          "value": "PAUSED; runtime mission connection NOT IMPLEMENTED",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "G",
+          "value": "Release record /Users/alexlobaito/Documents/ChatGPT/Build/docs/evidence/2026-09-18-note-history-repair.md. Candidate original/worker.mjs SHA256 636b21eab8e2f1b7eefd449df7223cda860789c3bf9a607c535cdef18791f4d5 matches saved accepted live projection. No new live read; reproducible maintained-source build NOT_PROVEN. Receipt: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/worker-release-record-reconciliation.json\nPrior cell note (historical unless independently current):\n"
+        }
+      ]
+    }
+  ]
+}

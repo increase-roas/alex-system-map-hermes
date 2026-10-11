@@ -1,0 +1,31 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "c20d98f4-0ae5-4036-a783-41b6568dae0a",
+  "fixture_only": true,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "isolated-gate-only",
+    "job_revision": 1,
+    "task_id": null,
+    "operation_id": "iso-op",
+    "verifier": "iso-verifier"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "relationships_catalog_present": true,
+    "relationships_hash_matches_live": true,
+    "reliability_addendum_present": true,
+    "gate_module_present": true,
+    "required_skills_installed": true
+  },
+  "actually_used": "reliability_gate_per_requirement",
+  "skills_verified_at_issue": true,
+  "verifier": "iso-verifier",
+  "observed_at": "2026-10-10T06:23:57+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "f1e72ddbb708baa47fd96b2d8f7d6442a9bb3f90e6ee5118e64b87acc74405df"
+}

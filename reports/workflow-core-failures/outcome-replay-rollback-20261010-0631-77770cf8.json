@@ -1,0 +1,136 @@
+{
+  "post_write_cas": {
+    "before_snapshot_sha256": "ddc7af1de8dbca03fd45c0f00b70f458a91a96809168dd451dc80e330d332b65",
+    "after_failed_snapshot_sha256": "ddc7af1de8dbca03fd45c0f00b70f458a91a96809168dd451dc80e330d332b65",
+    "before_state": {
+      "jobs": [
+        {
+          "id": "post-write-job",
+          "revision": 2
+        }
+      ],
+      "handoffs": [
+        {
+          "operation_id": "post-write-job-handoff",
+          "owner": "owner-b",
+          "revision": 2,
+          "acceptance": [
+            "proof-bound"
+          ]
+        }
+      ],
+      "operation_ids": [
+        "orr-add",
+        "orr-create"
+      ],
+      "event_count": 2,
+      "tasks": {
+        "t1": {
+          "status": "pending",
+          "outputs": []
+        }
+      }
+    },
+    "after_failed_state": {
+      "jobs": [
+        {
+          "id": "post-write-job",
+          "revision": 2
+        }
+      ],
+      "handoffs": [
+        {
+          "operation_id": "post-write-job-handoff",
+          "owner": "owner-b",
+          "revision": 2,
+          "acceptance": [
+            "proof-bound"
+          ]
+        }
+      ],
+      "operation_ids": [
+        "orr-add",
+        "orr-create"
+      ],
+      "event_count": 2,
+      "tasks": {
+        "t1": {
+          "status": "pending",
+          "outputs": []
+        }
+      }
+    },
+    "failed_exit": 1,
+    "failed_error": "handoff revision advance lost race",
+    "failed_operation_count": 0,
+    "failed_matching_event_count": 0,
+    "state_unchanged_after_fail": true,
+    "authorized_first_success_exit": 0,
+    "replay_exit": 0,
+    "final_operation_count": 1,
+    "final_matching_event_count": 1,
+    "proof_paths": {
+      "before": "reports/outcome-replay-rollback-proofs/124ef21b-e552-45bf-b3d8-7b3722117b96/before-failed-attempt.sqlite",
+      "after_failed": "reports/outcome-replay-rollback-proofs/124ef21b-e552-45bf-b3d8-7b3722117b96/after-failed-attempt.sqlite"
+    }
+  },
+  "historical_replay": {
+    "replay_exit": 0,
+    "replay_error": "",
+    "stored_revision": 3,
+    "handoff_before": [
+      {
+        "operation_id": "replay-job-handoff",
+        "owner": "owner-c",
+        "revision": 5,
+        "acceptance": [
+          "proof-bound"
+        ]
+      }
+    ],
+    "handoff_after": [
+      {
+        "operation_id": "replay-job-handoff",
+        "owner": "owner-c",
+        "revision": 5,
+        "acceptance": [
+          "proof-bound"
+        ]
+      }
+    ],
+    "handoff_unchanged": true,
+    "job_revision_unchanged": true
+  },
+  "transfer_idempotency": {
+    "first_exit": 0,
+    "retry_exit": 0,
+    "retry_same_result": true,
+    "collision_exit": 1,
+    "collision_error": "transfer operation payload conflict",
+    "transfer_ledger_rows": 1,
+    "final_handoff_owner": "owner-b",
+    "final_handoff_revision": 2
+  },
+  "truthful_outcomes": {
+    "pending_without_output_issue_failed": true,
+    "pending_checks": {
+      "task_exists": true,
+      "acceptance_criteria_declared": true,
+      "outcome_proof_bound": false,
+      "all_acceptance_outcomes_verified": false
+    },
+    "positive_verify_exit": 1,
+    "wrong_task_rejected": true,
+    "wrong_task_reason": "verification_record_task_id_mismatch",
+    "wrong_operation_rejected": true,
+    "wrong_operation_reason": "verification_record_operation_id_mismatch",
+    "wrong_verifier_rejected": true,
+    "wrong_verifier_reason": "verification_record_operation_id_mismatch",
+    "measured_record_checks": {
+      "task_exists": true,
+      "acceptance_criteria_declared": true,
+      "outcome_proof_bound": true,
+      "all_acceptance_outcomes_verified": true
+    }
+  }
+}

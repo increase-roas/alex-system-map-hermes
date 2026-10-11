@@ -1,0 +1,2076 @@
+{
+  "correction_id": "rel-review-corrections-20261010-0104",
+  "acknowledged_at": "2026-10-10T05:07:58+00:00",
+  "latest": {
+    "delivery_id": "reliability-r2-20261010-0101",
+    "correction_id": "rel-review-corrections-20261010-0104",
+    "correction_acknowledgment": "Correction rel-review-corrections-20261010-0104 acknowledged; owner evidence re-run with application-path proof.",
+    "acknowledged_at": "2026-10-10T05:07:58+00:00",
+    "revision": 2,
+    "owner_chat_id": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+    "integration_owner": "cursor-integration-sole-owner",
+    "independent_review_disposition": "owner_reported_pass_independent_acceptance_withheld",
+    "independent_review_id": "independent-reliability-review-20261010-0104",
+    "owner_evidence_not_independent_acceptance": true,
+    "items": [
+      {
+        "id": "REL-01",
+        "status": "partial",
+        "owner": "cursor-integration-sole-owner",
+        "last_verified_at": "2026-10-10T05:07:58+00:00",
+        "evidence": {
+          "actually_used": "project_context_loader",
+          "agent_runtime": "UNVERIFIED",
+          "in_process": {
+            "entrypoint": "tools/project_context_loader.py",
+            "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+            "loaded_docs": [
+              {
+                "path": "START_HERE.md",
+                "present": true,
+                "bytes": 4551
+              },
+              {
+                "path": "docs/CURSOR_HANDOFF.md",
+                "present": true,
+                "bytes": 14903
+              },
+              {
+                "path": "docs/AGENT_PROTOCOL.md",
+                "present": true,
+                "bytes": 7025
+              },
+              {
+                "path": "docs/WORKFLOW_CONTRACT.md",
+                "present": true,
+                "bytes": 6390
+              },
+              {
+                "path": "docs/BUILD_SUPERVISION.md",
+                "present": true,
+                "bytes": 8977
+              },
+              {
+                "path": "docs/RELIABILITY_ADDENDUM.md",
+                "present": true,
+                "bytes": 4238
+              }
+            ],
+            "all_entry_docs_present": true,
+            "supervision_revision": 2,
+            "reliability_addendum_revision": 2,
+            "build_supervision_acknowledges_revision_2": true,
+            "required_skills_from_skills_md": [
+              {
+                "path": "skills/react-flow-system-explorer/SKILL.md",
+                "exists": true,
+                "bytes": 3742
+              },
+              {
+                "path": "skills/shadcn/SKILL.md",
+                "exists": true,
+                "bytes": 21306
+              },
+              {
+                "path": "skills/system-map-catalog/SKILL.md",
+                "exists": true,
+                "bytes": 2734
+              },
+              {
+                "path": "skills/system-repository-lookup/SKILL.md",
+                "exists": true,
+                "bytes": 3223
+              },
+              {
+                "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                "exists": true,
+                "bytes": 2538
+              }
+            ],
+            "all_listed_skills_present": true,
+            "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+            "cursor_agent_runtime_auto_skill_selection": {
+              "status": "UNVERIFIED",
+              "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+            }
+          },
+          "fresh_subprocess": {
+            "entrypoint": "tools/project_context_loader.py",
+            "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+            "loaded_docs": [
+              {
+                "path": "START_HERE.md",
+                "present": true,
+                "bytes": 4551
+              },
+              {
+                "path": "docs/CURSOR_HANDOFF.md",
+                "present": true,
+                "bytes": 14903
+              },
+              {
+                "path": "docs/AGENT_PROTOCOL.md",
+                "present": true,
+                "bytes": 7025
+              },
+              {
+                "path": "docs/WORKFLOW_CONTRACT.md",
+                "present": true,
+                "bytes": 6390
+              },
+              {
+                "path": "docs/BUILD_SUPERVISION.md",
+                "present": true,
+                "bytes": 8977
+              },
+              {
+                "path": "docs/RELIABILITY_ADDENDUM.md",
+                "present": true,
+                "bytes": 4238
+              }
+            ],
+            "all_entry_docs_present": true,
+            "supervision_revision": 2,
+            "reliability_addendum_revision": 2,
+            "build_supervision_acknowledges_revision_2": true,
+            "required_skills_from_skills_md": [
+              {
+                "path": "skills/react-flow-system-explorer/SKILL.md",
+                "exists": true,
+                "bytes": 3742
+              },
+              {
+                "path": "skills/shadcn/SKILL.md",
+                "exists": true,
+                "bytes": 21306
+              },
+              {
+                "path": "skills/system-map-catalog/SKILL.md",
+                "exists": true,
+                "bytes": 2734
+              },
+              {
+                "path": "skills/system-repository-lookup/SKILL.md",
+                "exists": true,
+                "bytes": 3223
+              },
+              {
+                "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                "exists": true,
+                "bytes": 2538
+              }
+            ],
+            "all_listed_skills_present": true,
+            "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+            "cursor_agent_runtime_auto_skill_selection": {
+              "status": "UNVERIFIED",
+              "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+            },
+            "subprocess_exit_code": 0,
+            "ok": true
+          },
+          "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation."
+        },
+        "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+      },
+      {
+        "id": "REL-02",
+        "status": "passed",
+        "owner": "cursor-integration-sole-owner",
+        "last_verified_at": "2026-10-10T05:07:58+00:00",
+        "evidence": {
+          "actually_used": "reliability_gate_per_requirement",
+          "documented_path": "docs/RELIABILITY_ADDENDUM.md",
+          "per_requirement_gate": {
+            "REL-01": {
+              "accepted": true,
+              "reason": "ok",
+              "next_unresolved_step": ""
+            },
+            "REL-02": {
+              "accepted": true,
+              "reason": "ok",
+              "next_unresolved_step": ""
+            },
+            "REL-03": {
+              "accepted": true,
+              "reason": "ok",
+              "next_unresolved_step": ""
+            },
+            "REL-04": {
+              "accepted": true,
+              "reason": "ok",
+              "next_unresolved_step": ""
+            },
+            "REL-05": {
+              "accepted": true,
+              "reason": "negative_cases_only",
+              "next_unresolved_step": ""
+            },
+            "REL-06": {
+              "accepted": true,
+              "reason": "ok",
+              "next_unresolved_step": ""
+            }
+          },
+          "ui_route": "/api/reliability/status",
+          "ui_renders_evidence": true
+        },
+        "next_unresolved_step": ""
+      },
+      {
+        "id": "REL-03",
+        "status": "passed",
+        "owner": "cursor-integration-sole-owner",
+        "last_verified_at": "2026-10-10T05:07:58+00:00",
+        "evidence": {
+          "actually_used": "recover_decision_with_correction",
+          "recovery": {
+            "governing_applied": true,
+            "next_action": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+            "presented_note": "Supervision baseline revision 1 only",
+            "active_correction_id": "corr-review-rel-review-corrections-20261010-0104",
+            "affected_outputs_needing_recheck": [
+              {
+                "output_id": "reports/build-supervision-state.json",
+                "reason": "superseded by corr-review-rel-review-corrections-20261010-0104",
+                "marked_at": "2026-10-10T05:07:58+00:00"
+              }
+            ],
+            "history_retained": true,
+            "deactivated_prior_corrections": [
+              "corr-rev2-governs"
+            ]
+          },
+          "correction_rows": 2,
+          "history_sample": [
+            {
+              "id": "corr-rev2-governs",
+              "created_at": "2026-10-10T05:02:05+00:00",
+              "supersedes_note": "Supervision baseline revision 1 only",
+              "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+              "active": 0,
+              "history": [
+                {
+                  "deactivated_at": "2026-10-10T05:07:41+00:00",
+                  "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                }
+              ]
+            },
+            {
+              "id": "corr-review-rel-review-corrections-20261010-0104",
+              "created_at": "2026-10-10T05:07:41+00:00",
+              "supersedes_note": "Supervision baseline revision 1 only",
+              "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+              "active": 1,
+              "history": [
+                {
+                  "deactivated_at": "2026-10-10T05:07:48+00:00",
+                  "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                }
+              ]
+            }
+          ]
+        },
+        "next_unresolved_step": ""
+      },
+      {
+        "id": "REL-04",
+        "status": "passed",
+        "owner": "cursor-integration-sole-owner",
+        "last_verified_at": "2026-10-10T05:07:58+00:00",
+        "evidence": {
+          "actually_used": "handoff_owner_and_operation_dedup",
+          "stale_owner_rejected": true,
+          "stale_revision_rejected": true,
+          "event_count_for_operation": 1,
+          "replay_revision": 3
+        },
+        "next_unresolved_step": ""
+      },
+      {
+        "id": "REL-05",
+        "status": "passed",
+        "owner": "cursor-integration-sole-owner",
+        "last_verified_at": "2026-10-10T05:07:58+00:00",
+        "evidence": {
+          "actually_used": "reliability_gate_negative_cases",
+          "regressions": [
+            {
+              "case": "missing_requirement",
+              "rejected_by_gate": true,
+              "reason": "actually_used_mismatch",
+              "next_unresolved_step": "Requirement REL-02 must record actually_used='reliability_gate_per_requirement'"
+            },
+            {
+              "case": "skipped_skill",
+              "rejected_by_gate": true,
+              "reason": "missing_documented_path",
+              "next_unresolved_step": "REL-02 requires documented_path in evidence"
+            },
+            {
+              "case": "stale_data_simulation",
+              "rejected_by_gate": true,
+              "reason": "stale_relationships_hash",
+              "next_unresolved_step": "Refresh catalog from live relationships.json"
+            },
+            {
+              "case": "false_completion_without_proof",
+              "rejected_by_gate": true,
+              "reason": "correction_not_applied",
+              "next_unresolved_step": "REL-03 requires governing_applied true with recheck queue"
+            }
+          ]
+        },
+        "next_unresolved_step": ""
+      },
+      {
+        "id": "REL-06",
+        "status": "passed",
+        "owner": "cursor-integration-sole-owner",
+        "last_verified_at": "2026-10-10T05:07:58+00:00",
+        "evidence": {
+          "actually_used": "multi_surface_canary_screening",
+          "fixture": "work/reliability/fake-canary-fixture.txt",
+          "surfaces": {
+            "diagnostic_screen_text": {
+              "passed": true,
+              "notes": [
+                "credential-shaped values withheld"
+              ]
+            },
+            "error_service_message": {
+              "passed": true,
+              "notes": [
+                "credential-shaped values withheld"
+              ]
+            },
+            "trace_export": {
+              "passed": true,
+              "path": "export_trace_json"
+            },
+            "json_export": {
+              "passed": true
+            }
+          }
+        },
+        "next_unresolved_step": ""
+      }
+    ],
+    "synthetic_sync_trace_e2e": {
+      "label": "SYNTHETIC/TEST",
+      "status": "passed",
+      "dataset": "examples/reliability-trace-sync-synthetic.json + work/reliability/synthetic-sync-marker.json",
+      "before_hash": "10d7eaaf1e4400aaff9a391818887d374f61a10a6f0f948036bf02e49f862caf",
+      "expected_hash_after_change": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+      "observed_hash_after_observe": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+      "hash_after_restart": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+      "sync_status_api_sha256": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+      "trace_import_first": {
+        "imported": true,
+        "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+        "trace_id": "trace-synthetic-sync-e2e",
+        "spans": 1,
+        "synthetic_only": true
+      },
+      "trace_import_second": {
+        "imported": false,
+        "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+        "reason": "duplicate receipt_id"
+      },
+      "cursor_persisted": true,
+      "passed": true
+    },
+    "browser_proof": {
+      "status": "not-run",
+      "blocked_not_run": true,
+      "reason": "No valid browser-proof report; project Chromium install incomplete",
+      "project_chromium_incomplete": true,
+      "already_installed_route_assessed": {
+        "route": "project_playwright_chrome_for_testing",
+        "executable": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.playwright-browsers/chromium-1208/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+      },
+      "note": "Report existence alone does not pass; screenshots and status PASS required"
+    },
+    "overall_rel_status": "partial",
+    "note": "13/13 app_acceptance does not prove REL-01..REL-06; independent review withheld acceptance",
+    "history": [
+      {
+        "at": "2026-10-10T05:01:42+00:00",
+        "snapshot": {
+          "delivery_id": "reliability-r2-20261010-0101",
+          "revision": 2,
+          "acknowledgment": "Revision 2 of BUILD_SUPERVISION and RELIABILITY_ADDENDUM acknowledged and executed by sole integration owner.",
+          "acknowledged_at": "2026-10-10T05:01:42+00:00",
+          "owner_chat_id": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+          "integration_owner": "cursor-integration-sole-owner",
+          "items": [
+            {
+              "id": "REL-01",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:01:42+00:00",
+              "evidence": {
+                "loaded_revision_2_ack": true,
+                "reliability_addendum_revision": 2,
+                "entrypoints": {
+                  "start_here": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/START_HERE.md",
+                  "build_supervision": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/docs/BUILD_SUPERVISION.md",
+                  "reliability_addendum": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/docs/RELIABILITY_ADDENDUM.md"
+                },
+                "skills_checked": [
+                  {
+                    "path": "skills/react-flow-system-explorer/SKILL.md",
+                    "exists": true,
+                    "bytes": 3742
+                  },
+                  {
+                    "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                    "exists": true,
+                    "bytes": 2538
+                  }
+                ],
+                "next_action": "Finish Playwright browser proof; controlled catalog edit API; real SDK receipt import; knowledge-graph impact navigation; crash-resume UI test.",
+                "delivery_id": "reliability-r2-20261010-0101"
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-02",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:01:42+00:00",
+              "evidence": {
+                "documented": {
+                  "path": "docs/RELIABILITY_ADDENDUM.md",
+                  "present": true
+                },
+                "installed": {
+                  "skills": [
+                    "skills/react-flow-system-explorer/SKILL.md",
+                    "skills/workflow-checkpoint-recovery/SKILL.md",
+                    "skills/system-map-catalog/SKILL.md"
+                  ],
+                  "all_present": true
+                },
+                "actually_used": {
+                  "claim": "catalog-export complete=True",
+                  "verified_at": "2026-10-10T05:01:42+00:00"
+                },
+                "ui_fields": [
+                  "owner",
+                  "last_verified_at",
+                  "evidence",
+                  "next_unresolved_step"
+                ],
+                "ui_route": "/api/reliability/status"
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-03",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:01:42+00:00",
+              "evidence": {
+                "active_correction": {
+                  "id": "corr-rev2-governs",
+                  "created_at": "2026-10-10T05:01:42+00:00",
+                  "supersedes_note": "Supervision baseline revision 1 only",
+                  "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                  "active": 1,
+                  "history_json": "[]"
+                },
+                "older_conflicting_note": "Supervision baseline revision 1 only",
+                "governing_applied": true,
+                "history_retained": true
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-04",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:01:42+00:00",
+              "evidence": {
+                "first": {
+                  "job_id": "rel04-handoff",
+                  "revision": 2,
+                  "operation_id": "rel04-op-1"
+                },
+                "replay": {
+                  "job_id": "rel04-handoff",
+                  "operation_id": "rel04-op-1",
+                  "revision": 2
+                },
+                "stale_rejected": true,
+                "single_owner_operation_id": "rel04-op-1"
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-05",
+              "status": "failed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:01:42+00:00",
+              "evidence": {
+                "regressions": [
+                  {
+                    "case": "missing_requirement",
+                    "gate_failed": true
+                  },
+                  {
+                    "case": "skipped_skill",
+                    "gate_failed": true
+                  },
+                  {
+                    "case": "stale_data_simulation",
+                    "gate_failed": true
+                  },
+                  {
+                    "case": "false_completion_without_proof",
+                    "gate_failed": false
+                  }
+                ]
+              },
+              "next_unresolved_step": "A negative case did not fail its gate"
+            },
+            {
+              "id": "REL-06",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:01:42+00:00",
+              "evidence": {
+                "fixture": "work/reliability/fake-canary-fixture.txt",
+                "canary_used": "FAKE ONLY sk-fake-canary-rel06\u2026",
+                "withheld_notes": [
+                  "credential-shaped values withheld"
+                ],
+                "leaked_in_output": false
+              },
+              "next_unresolved_step": ""
+            }
+          ],
+          "synthetic_sync_trace_e2e": {
+            "label": "SYNTHETIC/TEST",
+            "dataset": "examples/reliability-trace-sync-synthetic.json + work/reliability/synthetic-sync-marker.json",
+            "sync_marker_sha256": "b9bb5e8c970d9afb6c5ab515de19fb2f89fa767cd5d1eb872eb0a207f39fc0da",
+            "trace_import_first": {
+              "imported": true,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "trace_id": "trace-synthetic-sync-e2e",
+              "spans": 1,
+              "synthetic_only": true
+            },
+            "trace_import_second": {
+              "imported": false,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "reason": "duplicate receipt_id"
+            },
+            "trace_count_before": 0,
+            "trace_count_after_restart": 1,
+            "no_duplicate_import": true,
+            "trace_persisted": true,
+            "passed": true
+          },
+          "browser_proof": {
+            "status": "blocked",
+            "reason": "Playwright Chromium install incomplete on host (__dirlock / missing framework); not waiting on download per revision 2 boundary",
+            "fallback": "API acceptance 13/13; see reports/browser-proof/README.md",
+            "blocked_not_run": true
+          },
+          "overall_rel_status": "failed",
+          "note": "13/13 app_acceptance does not prove REL-01..REL-06"
+        }
+      },
+      {
+        "at": "2026-10-10T05:02:05+00:00",
+        "snapshot": {
+          "delivery_id": "reliability-r2-20261010-0101",
+          "revision": 2,
+          "acknowledgment": "Revision 2 of BUILD_SUPERVISION and RELIABILITY_ADDENDUM acknowledged and executed by sole integration owner.",
+          "acknowledged_at": "2026-10-10T05:02:05+00:00",
+          "owner_chat_id": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+          "integration_owner": "cursor-integration-sole-owner",
+          "items": [
+            {
+              "id": "REL-01",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:02:05+00:00",
+              "evidence": {
+                "loaded_revision_2_ack": true,
+                "reliability_addendum_revision": 2,
+                "entrypoints": {
+                  "start_here": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/START_HERE.md",
+                  "build_supervision": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/docs/BUILD_SUPERVISION.md",
+                  "reliability_addendum": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/docs/RELIABILITY_ADDENDUM.md"
+                },
+                "skills_checked": [
+                  {
+                    "path": "skills/react-flow-system-explorer/SKILL.md",
+                    "exists": true,
+                    "bytes": 3742
+                  },
+                  {
+                    "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                    "exists": true,
+                    "bytes": 2538
+                  }
+                ],
+                "next_action": "Finish Playwright browser proof; controlled catalog edit API; real SDK receipt import; knowledge-graph impact navigation; crash-resume UI test.",
+                "delivery_id": "reliability-r2-20261010-0101"
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-02",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:02:05+00:00",
+              "evidence": {
+                "documented": {
+                  "path": "docs/RELIABILITY_ADDENDUM.md",
+                  "present": true
+                },
+                "installed": {
+                  "skills": [
+                    "skills/react-flow-system-explorer/SKILL.md",
+                    "skills/workflow-checkpoint-recovery/SKILL.md",
+                    "skills/system-map-catalog/SKILL.md"
+                  ],
+                  "all_present": true
+                },
+                "actually_used": {
+                  "claim": "catalog-export complete=True",
+                  "verified_at": "2026-10-10T05:02:05+00:00"
+                },
+                "ui_fields": [
+                  "owner",
+                  "last_verified_at",
+                  "evidence",
+                  "next_unresolved_step"
+                ],
+                "ui_route": "/api/reliability/status"
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-03",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:02:05+00:00",
+              "evidence": {
+                "active_correction": {
+                  "id": "corr-rev2-governs",
+                  "created_at": "2026-10-10T05:02:05+00:00",
+                  "supersedes_note": "Supervision baseline revision 1 only",
+                  "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                  "active": 1,
+                  "history_json": "[]"
+                },
+                "older_conflicting_note": "Supervision baseline revision 1 only",
+                "governing_applied": true,
+                "history_retained": true
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-04",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:02:05+00:00",
+              "evidence": {
+                "first": {
+                  "job_id": "rel04-handoff",
+                  "revision": 2,
+                  "operation_id": "rel04-op-1"
+                },
+                "replay": {
+                  "job_id": "rel04-handoff",
+                  "operation_id": "rel04-op-1",
+                  "revision": 2
+                },
+                "stale_rejected": true,
+                "single_owner_operation_id": "rel04-op-1"
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-05",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:02:05+00:00",
+              "evidence": {
+                "regressions": [
+                  {
+                    "case": "missing_requirement",
+                    "gate_failed": true
+                  },
+                  {
+                    "case": "skipped_skill",
+                    "gate_failed": true
+                  },
+                  {
+                    "case": "stale_data_simulation",
+                    "gate_failed": true
+                  },
+                  {
+                    "case": "false_completion_without_proof",
+                    "gate_failed": true
+                  }
+                ]
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-06",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:02:05+00:00",
+              "evidence": {
+                "fixture": "work/reliability/fake-canary-fixture.txt",
+                "canary_used": "FAKE ONLY sk-fake-canary-rel06\u2026",
+                "withheld_notes": [
+                  "credential-shaped values withheld"
+                ],
+                "leaked_in_output": false
+              },
+              "next_unresolved_step": ""
+            }
+          ],
+          "synthetic_sync_trace_e2e": {
+            "label": "SYNTHETIC/TEST",
+            "dataset": "examples/reliability-trace-sync-synthetic.json + work/reliability/synthetic-sync-marker.json",
+            "sync_marker_sha256": "e3e489a36422830263a3acf81776ad683be01999c5bae77aa9e351edadce59fb",
+            "trace_import_first": {
+              "imported": true,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "trace_id": "trace-synthetic-sync-e2e",
+              "spans": 1,
+              "synthetic_only": true
+            },
+            "trace_import_second": {
+              "imported": false,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "reason": "duplicate receipt_id"
+            },
+            "trace_count_before": 0,
+            "trace_count_after_restart": 1,
+            "no_duplicate_import": true,
+            "trace_persisted": true,
+            "passed": true
+          },
+          "browser_proof": {
+            "status": "blocked",
+            "reason": "Playwright Chromium install incomplete on host (__dirlock / missing framework); not waiting on download per revision 2 boundary",
+            "fallback": "API acceptance 13/13; see reports/browser-proof/README.md",
+            "blocked_not_run": true
+          },
+          "overall_rel_status": "passed",
+          "note": "13/13 app_acceptance does not prove REL-01..REL-06"
+        }
+      },
+      {
+        "at": "2026-10-10T05:07:41+00:00",
+        "event": "correction_rerun",
+        "correction_id": "rel-review-corrections-20261010-0104",
+        "snapshot": {
+          "delivery_id": "reliability-r2-20261010-0101",
+          "correction_id": "rel-review-corrections-20261010-0104",
+          "correction_acknowledgment": "Correction rel-review-corrections-20261010-0104 acknowledged; owner evidence re-run with application-path proof.",
+          "acknowledged_at": "2026-10-10T05:07:41+00:00",
+          "revision": 2,
+          "owner_chat_id": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+          "integration_owner": "cursor-integration-sole-owner",
+          "independent_review_disposition": "owner_reported_pass_independent_acceptance_withheld",
+          "independent_review_id": "independent-reliability-review-20261010-0104",
+          "owner_evidence_not_independent_acceptance": true,
+          "items": [
+            {
+              "id": "REL-01",
+              "status": "partial",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:41+00:00",
+              "evidence": {
+                "actually_used": "project_context_loader",
+                "agent_runtime": "UNVERIFIED",
+                "in_process": {
+                  "entrypoint": "tools/project_context_loader.py",
+                  "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+                  "loaded_docs": [
+                    {
+                      "path": "START_HERE.md",
+                      "present": true,
+                      "bytes": 4551
+                    },
+                    {
+                      "path": "docs/CURSOR_HANDOFF.md",
+                      "present": true,
+                      "bytes": 14903
+                    },
+                    {
+                      "path": "docs/AGENT_PROTOCOL.md",
+                      "present": true,
+                      "bytes": 7025
+                    },
+                    {
+                      "path": "docs/WORKFLOW_CONTRACT.md",
+                      "present": true,
+                      "bytes": 6390
+                    },
+                    {
+                      "path": "docs/BUILD_SUPERVISION.md",
+                      "present": true,
+                      "bytes": 8977
+                    },
+                    {
+                      "path": "docs/RELIABILITY_ADDENDUM.md",
+                      "present": true,
+                      "bytes": 4238
+                    }
+                  ],
+                  "all_entry_docs_present": true,
+                  "supervision_revision": 2,
+                  "reliability_addendum_revision": 2,
+                  "build_supervision_acknowledges_revision_2": true,
+                  "required_skills_from_skills_md": [
+                    {
+                      "path": "skills/react-flow-system-explorer/SKILL.md",
+                      "exists": true,
+                      "bytes": 3742
+                    },
+                    {
+                      "path": "skills/shadcn/SKILL.md",
+                      "exists": true,
+                      "bytes": 21306
+                    },
+                    {
+                      "path": "skills/system-map-catalog/SKILL.md",
+                      "exists": true,
+                      "bytes": 2734
+                    },
+                    {
+                      "path": "skills/system-repository-lookup/SKILL.md",
+                      "exists": true,
+                      "bytes": 3223
+                    },
+                    {
+                      "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                      "exists": true,
+                      "bytes": 2538
+                    }
+                  ],
+                  "all_listed_skills_present": true,
+                  "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+                  "cursor_agent_runtime_auto_skill_selection": {
+                    "status": "UNVERIFIED",
+                    "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+                  }
+                },
+                "fresh_subprocess": {
+                  "entrypoint": "tools/project_context_loader.py",
+                  "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+                  "loaded_docs": [
+                    {
+                      "path": "START_HERE.md",
+                      "present": true,
+                      "bytes": 4551
+                    },
+                    {
+                      "path": "docs/CURSOR_HANDOFF.md",
+                      "present": true,
+                      "bytes": 14903
+                    },
+                    {
+                      "path": "docs/AGENT_PROTOCOL.md",
+                      "present": true,
+                      "bytes": 7025
+                    },
+                    {
+                      "path": "docs/WORKFLOW_CONTRACT.md",
+                      "present": true,
+                      "bytes": 6390
+                    },
+                    {
+                      "path": "docs/BUILD_SUPERVISION.md",
+                      "present": true,
+                      "bytes": 8977
+                    },
+                    {
+                      "path": "docs/RELIABILITY_ADDENDUM.md",
+                      "present": true,
+                      "bytes": 4238
+                    }
+                  ],
+                  "all_entry_docs_present": true,
+                  "supervision_revision": 2,
+                  "reliability_addendum_revision": 2,
+                  "build_supervision_acknowledges_revision_2": true,
+                  "required_skills_from_skills_md": [
+                    {
+                      "path": "skills/react-flow-system-explorer/SKILL.md",
+                      "exists": true,
+                      "bytes": 3742
+                    },
+                    {
+                      "path": "skills/shadcn/SKILL.md",
+                      "exists": true,
+                      "bytes": 21306
+                    },
+                    {
+                      "path": "skills/system-map-catalog/SKILL.md",
+                      "exists": true,
+                      "bytes": 2734
+                    },
+                    {
+                      "path": "skills/system-repository-lookup/SKILL.md",
+                      "exists": true,
+                      "bytes": 3223
+                    },
+                    {
+                      "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                      "exists": true,
+                      "bytes": 2538
+                    }
+                  ],
+                  "all_listed_skills_present": true,
+                  "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+                  "cursor_agent_runtime_auto_skill_selection": {
+                    "status": "UNVERIFIED",
+                    "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+                  },
+                  "subprocess_exit_code": 0,
+                  "ok": true
+                },
+                "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation."
+              },
+              "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+            },
+            {
+              "id": "REL-02",
+              "status": "failed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:41+00:00",
+              "evidence": {
+                "actually_used": "reliability_gate_per_requirement",
+                "documented_path": "docs/RELIABILITY_ADDENDUM.md",
+                "per_requirement_gate": {
+                  "REL-01": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-02": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-03": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-04": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-05": {
+                    "accepted": false,
+                    "reason": "negative_cases_only",
+                    "next_unresolved_step": "REL-05 must not pass a positive completion claim"
+                  },
+                  "REL-06": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  }
+                },
+                "ui_route": "/api/reliability/status",
+                "ui_renders_evidence": true
+              },
+              "next_unresolved_step": "One or more requirements failed the application completion gate"
+            },
+            {
+              "id": "REL-03",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:41+00:00",
+              "evidence": {
+                "actually_used": "recover_decision_with_correction",
+                "recovery": {
+                  "governing_applied": true,
+                  "next_action": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                  "presented_note": "Supervision baseline revision 1 only",
+                  "active_correction_id": "corr-review-rel-review-corrections-20261010-0104",
+                  "affected_outputs_needing_recheck": [
+                    {
+                      "output_id": "reports/build-supervision-state.json",
+                      "reason": "superseded by corr-review-rel-review-corrections-20261010-0104",
+                      "marked_at": "2026-10-10T05:07:41+00:00"
+                    }
+                  ],
+                  "history_retained": true,
+                  "deactivated_prior_corrections": [
+                    "corr-rev2-governs"
+                  ]
+                },
+                "correction_rows": 2,
+                "history_sample": [
+                  {
+                    "id": "corr-rev2-governs",
+                    "created_at": "2026-10-10T05:02:05+00:00",
+                    "supersedes_note": "Supervision baseline revision 1 only",
+                    "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                    "active": 0,
+                    "history": [
+                      {
+                        "deactivated_at": "2026-10-10T05:07:41+00:00",
+                        "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "corr-review-rel-review-corrections-20261010-0104",
+                    "created_at": "2026-10-10T05:07:41+00:00",
+                    "supersedes_note": "Supervision baseline revision 1 only",
+                    "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                    "active": 1,
+                    "history": []
+                  }
+                ]
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-04",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:41+00:00",
+              "evidence": {
+                "actually_used": "handoff_owner_and_operation_dedup",
+                "stale_owner_rejected": true,
+                "stale_revision_rejected": true,
+                "event_count_for_operation": 1,
+                "replay_revision": 3
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-05",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:41+00:00",
+              "evidence": {
+                "actually_used": "reliability_gate_negative_cases",
+                "regressions": [
+                  {
+                    "case": "missing_requirement",
+                    "rejected_by_gate": true,
+                    "reason": "actually_used_mismatch",
+                    "next_unresolved_step": "Requirement REL-02 must record actually_used='reliability_gate_per_requirement'"
+                  },
+                  {
+                    "case": "skipped_skill",
+                    "rejected_by_gate": true,
+                    "reason": "missing_documented_path",
+                    "next_unresolved_step": "REL-02 requires documented_path in evidence"
+                  },
+                  {
+                    "case": "stale_data_simulation",
+                    "rejected_by_gate": true,
+                    "reason": "stale_relationships_hash",
+                    "next_unresolved_step": "Refresh catalog from live relationships.json"
+                  },
+                  {
+                    "case": "false_completion_without_proof",
+                    "rejected_by_gate": true,
+                    "reason": "correction_not_applied",
+                    "next_unresolved_step": "REL-03 requires governing_applied true with recheck queue"
+                  }
+                ]
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-06",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:41+00:00",
+              "evidence": {
+                "actually_used": "multi_surface_canary_screening",
+                "fixture": "work/reliability/fake-canary-fixture.txt",
+                "surfaces": {
+                  "diagnostic_screen_text": {
+                    "passed": true,
+                    "notes": [
+                      "credential-shaped values withheld"
+                    ]
+                  },
+                  "error_service_message": {
+                    "passed": true,
+                    "notes": [
+                      "credential-shaped values withheld"
+                    ]
+                  },
+                  "trace_export": {
+                    "passed": true,
+                    "path": "export_trace_json"
+                  },
+                  "json_export": {
+                    "passed": true
+                  }
+                }
+              },
+              "next_unresolved_step": ""
+            }
+          ],
+          "synthetic_sync_trace_e2e": {
+            "label": "SYNTHETIC/TEST",
+            "status": "passed",
+            "dataset": "examples/reliability-trace-sync-synthetic.json + work/reliability/synthetic-sync-marker.json",
+            "before_hash": "e3e489a36422830263a3acf81776ad683be01999c5bae77aa9e351edadce59fb",
+            "expected_hash_after_change": "7decf98e38d466ee9f0e4d68227574f48e6b7613050b35d2491c1e791d0a18d5",
+            "observed_hash_after_observe": "7decf98e38d466ee9f0e4d68227574f48e6b7613050b35d2491c1e791d0a18d5",
+            "hash_after_restart": "7decf98e38d466ee9f0e4d68227574f48e6b7613050b35d2491c1e791d0a18d5",
+            "sync_status_api_sha256": "7decf98e38d466ee9f0e4d68227574f48e6b7613050b35d2491c1e791d0a18d5",
+            "trace_import_first": {
+              "imported": true,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "trace_id": "trace-synthetic-sync-e2e",
+              "spans": 1,
+              "synthetic_only": true
+            },
+            "trace_import_second": {
+              "imported": false,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "reason": "duplicate receipt_id"
+            },
+            "cursor_persisted": true,
+            "passed": true
+          },
+          "browser_proof": {
+            "status": "not-run",
+            "blocked_not_run": true,
+            "reason": "No valid browser-proof report; project Chromium install incomplete",
+            "project_chromium_incomplete": true,
+            "already_installed_route_assessed": {
+              "route": "project_playwright_chrome_for_testing",
+              "executable": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.playwright-browsers/chromium-1208/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+            },
+            "note": "Report existence alone does not pass; screenshots and status PASS required"
+          },
+          "overall_rel_status": "partial",
+          "note": "13/13 app_acceptance does not prove REL-01..REL-06; independent review withheld acceptance"
+        }
+      },
+      {
+        "at": "2026-10-10T05:07:48+00:00",
+        "event": "correction_rerun",
+        "correction_id": "rel-review-corrections-20261010-0104",
+        "snapshot": {
+          "delivery_id": "reliability-r2-20261010-0101",
+          "correction_id": "rel-review-corrections-20261010-0104",
+          "correction_acknowledgment": "Correction rel-review-corrections-20261010-0104 acknowledged; owner evidence re-run with application-path proof.",
+          "acknowledged_at": "2026-10-10T05:07:48+00:00",
+          "revision": 2,
+          "owner_chat_id": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+          "integration_owner": "cursor-integration-sole-owner",
+          "independent_review_disposition": "owner_reported_pass_independent_acceptance_withheld",
+          "independent_review_id": "independent-reliability-review-20261010-0104",
+          "owner_evidence_not_independent_acceptance": true,
+          "items": [
+            {
+              "id": "REL-01",
+              "status": "partial",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:48+00:00",
+              "evidence": {
+                "actually_used": "project_context_loader",
+                "agent_runtime": "UNVERIFIED",
+                "in_process": {
+                  "entrypoint": "tools/project_context_loader.py",
+                  "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+                  "loaded_docs": [
+                    {
+                      "path": "START_HERE.md",
+                      "present": true,
+                      "bytes": 4551
+                    },
+                    {
+                      "path": "docs/CURSOR_HANDOFF.md",
+                      "present": true,
+                      "bytes": 14903
+                    },
+                    {
+                      "path": "docs/AGENT_PROTOCOL.md",
+                      "present": true,
+                      "bytes": 7025
+                    },
+                    {
+                      "path": "docs/WORKFLOW_CONTRACT.md",
+                      "present": true,
+                      "bytes": 6390
+                    },
+                    {
+                      "path": "docs/BUILD_SUPERVISION.md",
+                      "present": true,
+                      "bytes": 8977
+                    },
+                    {
+                      "path": "docs/RELIABILITY_ADDENDUM.md",
+                      "present": true,
+                      "bytes": 4238
+                    }
+                  ],
+                  "all_entry_docs_present": true,
+                  "supervision_revision": 2,
+                  "reliability_addendum_revision": 2,
+                  "build_supervision_acknowledges_revision_2": true,
+                  "required_skills_from_skills_md": [
+                    {
+                      "path": "skills/react-flow-system-explorer/SKILL.md",
+                      "exists": true,
+                      "bytes": 3742
+                    },
+                    {
+                      "path": "skills/shadcn/SKILL.md",
+                      "exists": true,
+                      "bytes": 21306
+                    },
+                    {
+                      "path": "skills/system-map-catalog/SKILL.md",
+                      "exists": true,
+                      "bytes": 2734
+                    },
+                    {
+                      "path": "skills/system-repository-lookup/SKILL.md",
+                      "exists": true,
+                      "bytes": 3223
+                    },
+                    {
+                      "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                      "exists": true,
+                      "bytes": 2538
+                    }
+                  ],
+                  "all_listed_skills_present": true,
+                  "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+                  "cursor_agent_runtime_auto_skill_selection": {
+                    "status": "UNVERIFIED",
+                    "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+                  }
+                },
+                "fresh_subprocess": {
+                  "entrypoint": "tools/project_context_loader.py",
+                  "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+                  "loaded_docs": [
+                    {
+                      "path": "START_HERE.md",
+                      "present": true,
+                      "bytes": 4551
+                    },
+                    {
+                      "path": "docs/CURSOR_HANDOFF.md",
+                      "present": true,
+                      "bytes": 14903
+                    },
+                    {
+                      "path": "docs/AGENT_PROTOCOL.md",
+                      "present": true,
+                      "bytes": 7025
+                    },
+                    {
+                      "path": "docs/WORKFLOW_CONTRACT.md",
+                      "present": true,
+                      "bytes": 6390
+                    },
+                    {
+                      "path": "docs/BUILD_SUPERVISION.md",
+                      "present": true,
+                      "bytes": 8977
+                    },
+                    {
+                      "path": "docs/RELIABILITY_ADDENDUM.md",
+                      "present": true,
+                      "bytes": 4238
+                    }
+                  ],
+                  "all_entry_docs_present": true,
+                  "supervision_revision": 2,
+                  "reliability_addendum_revision": 2,
+                  "build_supervision_acknowledges_revision_2": true,
+                  "required_skills_from_skills_md": [
+                    {
+                      "path": "skills/react-flow-system-explorer/SKILL.md",
+                      "exists": true,
+                      "bytes": 3742
+                    },
+                    {
+                      "path": "skills/shadcn/SKILL.md",
+                      "exists": true,
+                      "bytes": 21306
+                    },
+                    {
+                      "path": "skills/system-map-catalog/SKILL.md",
+                      "exists": true,
+                      "bytes": 2734
+                    },
+                    {
+                      "path": "skills/system-repository-lookup/SKILL.md",
+                      "exists": true,
+                      "bytes": 3223
+                    },
+                    {
+                      "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                      "exists": true,
+                      "bytes": 2538
+                    }
+                  ],
+                  "all_listed_skills_present": true,
+                  "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+                  "cursor_agent_runtime_auto_skill_selection": {
+                    "status": "UNVERIFIED",
+                    "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+                  },
+                  "subprocess_exit_code": 0,
+                  "ok": true
+                },
+                "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation."
+              },
+              "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+            },
+            {
+              "id": "REL-02",
+              "status": "failed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:48+00:00",
+              "evidence": {
+                "actually_used": "reliability_gate_per_requirement",
+                "documented_path": "docs/RELIABILITY_ADDENDUM.md",
+                "per_requirement_gate": {
+                  "REL-01": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-02": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-03": {
+                    "accepted": false,
+                    "reason": "correction_not_applied",
+                    "next_unresolved_step": "REL-03 requires governing_applied true with recheck queue"
+                  },
+                  "REL-04": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-05": {
+                    "accepted": true,
+                    "reason": "negative_cases_only",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-06": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  }
+                },
+                "ui_route": "/api/reliability/status",
+                "ui_renders_evidence": true
+              },
+              "next_unresolved_step": "One or more requirements failed the application completion gate"
+            },
+            {
+              "id": "REL-03",
+              "status": "failed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:48+00:00",
+              "evidence": {
+                "actually_used": "recover_decision_with_correction",
+                "recovery": {
+                  "governing_applied": false,
+                  "next_action": null,
+                  "affected_outputs_needing_recheck": [
+                    {
+                      "output_id": "reports/build-supervision-state.json",
+                      "reason": "superseded by corr-review-rel-review-corrections-20261010-0104",
+                      "marked_at": "2026-10-10T05:07:48+00:00"
+                    }
+                  ],
+                  "history_retained": true
+                },
+                "correction_rows": 2,
+                "history_sample": [
+                  {
+                    "id": "corr-rev2-governs",
+                    "created_at": "2026-10-10T05:02:05+00:00",
+                    "supersedes_note": "Supervision baseline revision 1 only",
+                    "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                    "active": 0,
+                    "history": [
+                      {
+                        "deactivated_at": "2026-10-10T05:07:41+00:00",
+                        "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "corr-review-rel-review-corrections-20261010-0104",
+                    "created_at": "2026-10-10T05:07:41+00:00",
+                    "supersedes_note": "Supervision baseline revision 1 only",
+                    "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                    "active": 0,
+                    "history": [
+                      {
+                        "deactivated_at": "2026-10-10T05:07:48+00:00",
+                        "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "next_unresolved_step": "Recovery path did not apply correction over older note or mark recheck outputs"
+            },
+            {
+              "id": "REL-04",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:48+00:00",
+              "evidence": {
+                "actually_used": "handoff_owner_and_operation_dedup",
+                "stale_owner_rejected": true,
+                "stale_revision_rejected": true,
+                "event_count_for_operation": 1,
+                "replay_revision": 3
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-05",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:48+00:00",
+              "evidence": {
+                "actually_used": "reliability_gate_negative_cases",
+                "regressions": [
+                  {
+                    "case": "missing_requirement",
+                    "rejected_by_gate": true,
+                    "reason": "actually_used_mismatch",
+                    "next_unresolved_step": "Requirement REL-02 must record actually_used='reliability_gate_per_requirement'"
+                  },
+                  {
+                    "case": "skipped_skill",
+                    "rejected_by_gate": true,
+                    "reason": "missing_documented_path",
+                    "next_unresolved_step": "REL-02 requires documented_path in evidence"
+                  },
+                  {
+                    "case": "stale_data_simulation",
+                    "rejected_by_gate": true,
+                    "reason": "stale_relationships_hash",
+                    "next_unresolved_step": "Refresh catalog from live relationships.json"
+                  },
+                  {
+                    "case": "false_completion_without_proof",
+                    "rejected_by_gate": true,
+                    "reason": "correction_not_applied",
+                    "next_unresolved_step": "REL-03 requires governing_applied true with recheck queue"
+                  }
+                ]
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-06",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:48+00:00",
+              "evidence": {
+                "actually_used": "multi_surface_canary_screening",
+                "fixture": "work/reliability/fake-canary-fixture.txt",
+                "surfaces": {
+                  "diagnostic_screen_text": {
+                    "passed": true,
+                    "notes": [
+                      "credential-shaped values withheld"
+                    ]
+                  },
+                  "error_service_message": {
+                    "passed": true,
+                    "notes": [
+                      "credential-shaped values withheld"
+                    ]
+                  },
+                  "trace_export": {
+                    "passed": true,
+                    "path": "export_trace_json"
+                  },
+                  "json_export": {
+                    "passed": true
+                  }
+                }
+              },
+              "next_unresolved_step": ""
+            }
+          ],
+          "synthetic_sync_trace_e2e": {
+            "label": "SYNTHETIC/TEST",
+            "status": "passed",
+            "dataset": "examples/reliability-trace-sync-synthetic.json + work/reliability/synthetic-sync-marker.json",
+            "before_hash": "7decf98e38d466ee9f0e4d68227574f48e6b7613050b35d2491c1e791d0a18d5",
+            "expected_hash_after_change": "10d7eaaf1e4400aaff9a391818887d374f61a10a6f0f948036bf02e49f862caf",
+            "observed_hash_after_observe": "10d7eaaf1e4400aaff9a391818887d374f61a10a6f0f948036bf02e49f862caf",
+            "hash_after_restart": "10d7eaaf1e4400aaff9a391818887d374f61a10a6f0f948036bf02e49f862caf",
+            "sync_status_api_sha256": "10d7eaaf1e4400aaff9a391818887d374f61a10a6f0f948036bf02e49f862caf",
+            "trace_import_first": {
+              "imported": true,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "trace_id": "trace-synthetic-sync-e2e",
+              "spans": 1,
+              "synthetic_only": true
+            },
+            "trace_import_second": {
+              "imported": false,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "reason": "duplicate receipt_id"
+            },
+            "cursor_persisted": true,
+            "passed": true
+          },
+          "browser_proof": {
+            "status": "not-run",
+            "blocked_not_run": true,
+            "reason": "No valid browser-proof report; project Chromium install incomplete",
+            "project_chromium_incomplete": true,
+            "already_installed_route_assessed": {
+              "route": "project_playwright_chrome_for_testing",
+              "executable": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.playwright-browsers/chromium-1208/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+            },
+            "note": "Report existence alone does not pass; screenshots and status PASS required"
+          },
+          "overall_rel_status": "partial",
+          "note": "13/13 app_acceptance does not prove REL-01..REL-06; independent review withheld acceptance"
+        }
+      },
+      {
+        "at": "2026-10-10T05:07:58+00:00",
+        "event": "correction_rerun",
+        "correction_id": "rel-review-corrections-20261010-0104",
+        "snapshot": {
+          "delivery_id": "reliability-r2-20261010-0101",
+          "correction_id": "rel-review-corrections-20261010-0104",
+          "correction_acknowledgment": "Correction rel-review-corrections-20261010-0104 acknowledged; owner evidence re-run with application-path proof.",
+          "acknowledged_at": "2026-10-10T05:07:58+00:00",
+          "revision": 2,
+          "owner_chat_id": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+          "integration_owner": "cursor-integration-sole-owner",
+          "independent_review_disposition": "owner_reported_pass_independent_acceptance_withheld",
+          "independent_review_id": "independent-reliability-review-20261010-0104",
+          "owner_evidence_not_independent_acceptance": true,
+          "items": [
+            {
+              "id": "REL-01",
+              "status": "partial",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:58+00:00",
+              "evidence": {
+                "actually_used": "project_context_loader",
+                "agent_runtime": "UNVERIFIED",
+                "in_process": {
+                  "entrypoint": "tools/project_context_loader.py",
+                  "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+                  "loaded_docs": [
+                    {
+                      "path": "START_HERE.md",
+                      "present": true,
+                      "bytes": 4551
+                    },
+                    {
+                      "path": "docs/CURSOR_HANDOFF.md",
+                      "present": true,
+                      "bytes": 14903
+                    },
+                    {
+                      "path": "docs/AGENT_PROTOCOL.md",
+                      "present": true,
+                      "bytes": 7025
+                    },
+                    {
+                      "path": "docs/WORKFLOW_CONTRACT.md",
+                      "present": true,
+                      "bytes": 6390
+                    },
+                    {
+                      "path": "docs/BUILD_SUPERVISION.md",
+                      "present": true,
+                      "bytes": 8977
+                    },
+                    {
+                      "path": "docs/RELIABILITY_ADDENDUM.md",
+                      "present": true,
+                      "bytes": 4238
+                    }
+                  ],
+                  "all_entry_docs_present": true,
+                  "supervision_revision": 2,
+                  "reliability_addendum_revision": 2,
+                  "build_supervision_acknowledges_revision_2": true,
+                  "required_skills_from_skills_md": [
+                    {
+                      "path": "skills/react-flow-system-explorer/SKILL.md",
+                      "exists": true,
+                      "bytes": 3742
+                    },
+                    {
+                      "path": "skills/shadcn/SKILL.md",
+                      "exists": true,
+                      "bytes": 21306
+                    },
+                    {
+                      "path": "skills/system-map-catalog/SKILL.md",
+                      "exists": true,
+                      "bytes": 2734
+                    },
+                    {
+                      "path": "skills/system-repository-lookup/SKILL.md",
+                      "exists": true,
+                      "bytes": 3223
+                    },
+                    {
+                      "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                      "exists": true,
+                      "bytes": 2538
+                    }
+                  ],
+                  "all_listed_skills_present": true,
+                  "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+                  "cursor_agent_runtime_auto_skill_selection": {
+                    "status": "UNVERIFIED",
+                    "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+                  }
+                },
+                "fresh_subprocess": {
+                  "entrypoint": "tools/project_context_loader.py",
+                  "protocol": "docs/AGENT_PROTOCOL.md#fresh-agent-entry",
+                  "loaded_docs": [
+                    {
+                      "path": "START_HERE.md",
+                      "present": true,
+                      "bytes": 4551
+                    },
+                    {
+                      "path": "docs/CURSOR_HANDOFF.md",
+                      "present": true,
+                      "bytes": 14903
+                    },
+                    {
+                      "path": "docs/AGENT_PROTOCOL.md",
+                      "present": true,
+                      "bytes": 7025
+                    },
+                    {
+                      "path": "docs/WORKFLOW_CONTRACT.md",
+                      "present": true,
+                      "bytes": 6390
+                    },
+                    {
+                      "path": "docs/BUILD_SUPERVISION.md",
+                      "present": true,
+                      "bytes": 8977
+                    },
+                    {
+                      "path": "docs/RELIABILITY_ADDENDUM.md",
+                      "present": true,
+                      "bytes": 4238
+                    }
+                  ],
+                  "all_entry_docs_present": true,
+                  "supervision_revision": 2,
+                  "reliability_addendum_revision": 2,
+                  "build_supervision_acknowledges_revision_2": true,
+                  "required_skills_from_skills_md": [
+                    {
+                      "path": "skills/react-flow-system-explorer/SKILL.md",
+                      "exists": true,
+                      "bytes": 3742
+                    },
+                    {
+                      "path": "skills/shadcn/SKILL.md",
+                      "exists": true,
+                      "bytes": 21306
+                    },
+                    {
+                      "path": "skills/system-map-catalog/SKILL.md",
+                      "exists": true,
+                      "bytes": 2734
+                    },
+                    {
+                      "path": "skills/system-repository-lookup/SKILL.md",
+                      "exists": true,
+                      "bytes": 3223
+                    },
+                    {
+                      "path": "skills/workflow-checkpoint-recovery/SKILL.md",
+                      "exists": true,
+                      "bytes": 2538
+                    }
+                  ],
+                  "all_listed_skills_present": true,
+                  "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation.",
+                  "cursor_agent_runtime_auto_skill_selection": {
+                    "status": "UNVERIFIED",
+                    "reason": "docs/SKILLS.md: automatic selection needs fresh Cursor runtime receipt; out of scope for local verifier"
+                  },
+                  "subprocess_exit_code": 0,
+                  "ok": true
+                },
+                "recovered_next_action": "Original milestones: browser proof when Chromium complete without new install; controlled catalog edit round-trip; real SDK receipt import; knowledge-graph impact navigation."
+              },
+              "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+            },
+            {
+              "id": "REL-02",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:58+00:00",
+              "evidence": {
+                "actually_used": "reliability_gate_per_requirement",
+                "documented_path": "docs/RELIABILITY_ADDENDUM.md",
+                "per_requirement_gate": {
+                  "REL-01": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-02": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-03": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-04": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-05": {
+                    "accepted": true,
+                    "reason": "negative_cases_only",
+                    "next_unresolved_step": ""
+                  },
+                  "REL-06": {
+                    "accepted": true,
+                    "reason": "ok",
+                    "next_unresolved_step": ""
+                  }
+                },
+                "ui_route": "/api/reliability/status",
+                "ui_renders_evidence": true
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-03",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:58+00:00",
+              "evidence": {
+                "actually_used": "recover_decision_with_correction",
+                "recovery": {
+                  "governing_applied": true,
+                  "next_action": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                  "presented_note": "Supervision baseline revision 1 only",
+                  "active_correction_id": "corr-review-rel-review-corrections-20261010-0104",
+                  "affected_outputs_needing_recheck": [
+                    {
+                      "output_id": "reports/build-supervision-state.json",
+                      "reason": "superseded by corr-review-rel-review-corrections-20261010-0104",
+                      "marked_at": "2026-10-10T05:07:58+00:00"
+                    }
+                  ],
+                  "history_retained": true,
+                  "deactivated_prior_corrections": [
+                    "corr-rev2-governs"
+                  ]
+                },
+                "correction_rows": 2,
+                "history_sample": [
+                  {
+                    "id": "corr-rev2-governs",
+                    "created_at": "2026-10-10T05:02:05+00:00",
+                    "supersedes_note": "Supervision baseline revision 1 only",
+                    "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                    "active": 0,
+                    "history": [
+                      {
+                        "deactivated_at": "2026-10-10T05:07:41+00:00",
+                        "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                      }
+                    ]
+                  },
+                  {
+                    "id": "corr-review-rel-review-corrections-20261010-0104",
+                    "created_at": "2026-10-10T05:07:41+00:00",
+                    "supersedes_note": "Supervision baseline revision 1 only",
+                    "governing_text": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+                    "active": 1,
+                    "history": [
+                      {
+                        "deactivated_at": "2026-10-10T05:07:48+00:00",
+                        "reason": "superseded by corr-review-rel-review-corrections-20261010-0104"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-04",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:58+00:00",
+              "evidence": {
+                "actually_used": "handoff_owner_and_operation_dedup",
+                "stale_owner_rejected": true,
+                "stale_revision_rejected": true,
+                "event_count_for_operation": 1,
+                "replay_revision": 3
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-05",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:58+00:00",
+              "evidence": {
+                "actually_used": "reliability_gate_negative_cases",
+                "regressions": [
+                  {
+                    "case": "missing_requirement",
+                    "rejected_by_gate": true,
+                    "reason": "actually_used_mismatch",
+                    "next_unresolved_step": "Requirement REL-02 must record actually_used='reliability_gate_per_requirement'"
+                  },
+                  {
+                    "case": "skipped_skill",
+                    "rejected_by_gate": true,
+                    "reason": "missing_documented_path",
+                    "next_unresolved_step": "REL-02 requires documented_path in evidence"
+                  },
+                  {
+                    "case": "stale_data_simulation",
+                    "rejected_by_gate": true,
+                    "reason": "stale_relationships_hash",
+                    "next_unresolved_step": "Refresh catalog from live relationships.json"
+                  },
+                  {
+                    "case": "false_completion_without_proof",
+                    "rejected_by_gate": true,
+                    "reason": "correction_not_applied",
+                    "next_unresolved_step": "REL-03 requires governing_applied true with recheck queue"
+                  }
+                ]
+              },
+              "next_unresolved_step": ""
+            },
+            {
+              "id": "REL-06",
+              "status": "passed",
+              "owner": "cursor-integration-sole-owner",
+              "last_verified_at": "2026-10-10T05:07:58+00:00",
+              "evidence": {
+                "actually_used": "multi_surface_canary_screening",
+                "fixture": "work/reliability/fake-canary-fixture.txt",
+                "surfaces": {
+                  "diagnostic_screen_text": {
+                    "passed": true,
+                    "notes": [
+                      "credential-shaped values withheld"
+                    ]
+                  },
+                  "error_service_message": {
+                    "passed": true,
+                    "notes": [
+                      "credential-shaped values withheld"
+                    ]
+                  },
+                  "trace_export": {
+                    "passed": true,
+                    "path": "export_trace_json"
+                  },
+                  "json_export": {
+                    "passed": true
+                  }
+                }
+              },
+              "next_unresolved_step": ""
+            }
+          ],
+          "synthetic_sync_trace_e2e": {
+            "label": "SYNTHETIC/TEST",
+            "status": "passed",
+            "dataset": "examples/reliability-trace-sync-synthetic.json + work/reliability/synthetic-sync-marker.json",
+            "before_hash": "10d7eaaf1e4400aaff9a391818887d374f61a10a6f0f948036bf02e49f862caf",
+            "expected_hash_after_change": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+            "observed_hash_after_observe": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+            "hash_after_restart": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+            "sync_status_api_sha256": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee",
+            "trace_import_first": {
+              "imported": true,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "trace_id": "trace-synthetic-sync-e2e",
+              "spans": 1,
+              "synthetic_only": true
+            },
+            "trace_import_second": {
+              "imported": false,
+              "receipt_id": "synthetic-rel-r2-sync-trace-20261010",
+              "reason": "duplicate receipt_id"
+            },
+            "cursor_persisted": true,
+            "passed": true
+          },
+          "browser_proof": {
+            "status": "not-run",
+            "blocked_not_run": true,
+            "reason": "No valid browser-proof report; project Chromium install incomplete",
+            "project_chromium_incomplete": true,
+            "already_installed_route_assessed": {
+              "route": "project_playwright_chrome_for_testing",
+              "executable": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.playwright-browsers/chromium-1208/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
+            },
+            "note": "Report existence alone does not pass; screenshots and status PASS required"
+          },
+          "overall_rel_status": "partial",
+          "note": "13/13 app_acceptance does not prove REL-01..REL-06; independent review withheld acceptance"
+        }
+      }
+    ]
+  },
+  "history": [
+    {
+      "at": "2026-10-10T05:07:41+00:00",
+      "correction_id": "rel-review-corrections-20261010-0104",
+      "overall_rel_status": "partial",
+      "items": [
+        {
+          "id": "REL-01",
+          "status": "partial",
+          "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+        },
+        {
+          "id": "REL-02",
+          "status": "failed",
+          "next_unresolved_step": "One or more requirements failed the application completion gate"
+        },
+        {
+          "id": "REL-03",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-04",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-05",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-06",
+          "status": "passed",
+          "next_unresolved_step": ""
+        }
+      ]
+    },
+    {
+      "at": "2026-10-10T05:07:48+00:00",
+      "correction_id": "rel-review-corrections-20261010-0104",
+      "overall_rel_status": "partial",
+      "items": [
+        {
+          "id": "REL-01",
+          "status": "partial",
+          "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+        },
+        {
+          "id": "REL-02",
+          "status": "failed",
+          "next_unresolved_step": "One or more requirements failed the application completion gate"
+        },
+        {
+          "id": "REL-03",
+          "status": "failed",
+          "next_unresolved_step": "Recovery path did not apply correction over older note or mark recheck outputs"
+        },
+        {
+          "id": "REL-04",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-05",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-06",
+          "status": "passed",
+          "next_unresolved_step": ""
+        }
+      ]
+    },
+    {
+      "at": "2026-10-10T05:07:58+00:00",
+      "correction_id": "rel-review-corrections-20261010-0104",
+      "overall_rel_status": "partial",
+      "items": [
+        {
+          "id": "REL-01",
+          "status": "partial",
+          "next_unresolved_step": "Cursor agent-runtime automatic skill selection remains UNVERIFIED (see docs/SKILLS.md)"
+        },
+        {
+          "id": "REL-02",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-03",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-04",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-05",
+          "status": "passed",
+          "next_unresolved_step": ""
+        },
+        {
+          "id": "REL-06",
+          "status": "passed",
+          "next_unresolved_step": ""
+        }
+      ]
+    }
+  ]
+}

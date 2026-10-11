@@ -1,0 +1,3739 @@
+{
+  "id": "table_fcf03ee7a650e673bd47",
+  "sheet": "S03-33 Director + Conductor",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How Alex runs big jobs with AI: one Director (the alex-director skill) holds the goal and judges results; one controller per job (the alex-workflow-conductor skill) does the routing, the work through helpers, and the checking. Below: who does what, what is inside each skill and why each part exists, how one job runs from goal to done, and what outside research (Exa, 2026-10-01) says about this way of working, with links. Built from work/2026-10-01_director-tab/notes; rebuild with build_tab.py, never edit by hand.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Who does what"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "role"
+        },
+        {
+          "column": "B",
+          "value": "what it is"
+        },
+        {
+          "column": "C",
+          "value": "who runs it"
+        },
+        {
+          "column": "D",
+          "value": "what it never does"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex (owner)"
+        },
+        {
+          "column": "B",
+          "value": "The person who owns the business result. He gives a Goal (the outcome he wants, in one sentence) and, when there is one, a Source (the Drive folder or Doc that holds the details). He is the only one who can say yes to the few risky things: spending money, contacting real people, production/DNS/infrastructure changes, permanent deletion, or widening the agreed outcome."
+        },
+        {
+          "column": "C",
+          "value": "Alex himself, in chat."
+        },
+        {
+          "column": "D",
+          "value": "Never acts as the messenger between agents: no pasting context, no typing 'go', no choosing tools, no starting new chats. Is not asked to approve routine work; a written list of standing authorizations (pre-approved actions) covers that."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director"
+        },
+        {
+          "column": "B",
+          "value": "Current OpenAI team Director uses project team/roles/openai-team-director/SKILL.md; owns canonical bookkeeping. Actual current identity remains 01a10c74-2d49-7980-b5b8-db6832053a8b. No successor cutover occurred. /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md"
+        },
+        {
+          "column": "C",
+          "value": "Current owner recorded in TEAM_BINDING.json; paused mission. Recovery candidates are idle and unenrolled. Historical Claude Director is separate, with no imported mission/authorization ownership."
+        },
+        {
+          "column": "D",
+          "value": "Never does the project work: no building, deploying, creating repositories, or choosing tools, tests, branches or helper agents. Never marks a step VERIFIED without an evidence pointer. Never reruns a controller's checks. Never makes Alex relay messages. Never spends money or contacts real people without Alex's scoped yes."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Controller (the conductor)"
+        },
+        {
+          "column": "B",
+          "value": "Existing two enrolled controllers use project team/roles/openai-team-conductor/SKILL.md. They execute only assigned scoped work and return evidence; they do not spawn helper chains. Current source identities/paused resource owners: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_WRITE_OWNERSHIP.json"
+        },
+        {
+          "column": "C",
+          "value": "Controllers remain 01a10cea-e753-7792-a780-109b614775a5 and 01a10d39-f701-7d72-ac35-6b05308b145a. Fresh recovery candidates replace nothing until verified cutover, which did not happen."
+        },
+        {
+          "column": "D",
+          "value": "Never declares MISSION COMPLETE (it reports GATE COMPLETE or PHASE COMPLETE and what is still unproven). Never writes the ledger. Never spends, contacts real people, changes production/DNS or deletes data without Alex's gate. Never replays a write whose result is uncertain. Never turns into a second Director."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workers"
+        },
+        {
+          "column": "B",
+          "value": "Primary owns routing under ~/.agents/instructions/codex-style.md; controllers do not spawn helpers. Mission-only third executor is existing Observatory owner on independent resources, not a new worker. All mission workers currently paused."
+        },
+        {
+          "column": "C",
+          "value": "No new helper/chat/rotation execution while paused. Existing grants and source receipts remain historical authority records; do not replay. /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md"
+        },
+        {
+          "column": "D",
+          "value": "Never write the same file or record as another worker. Parallel workers on a live system stay read-only; code writers need separate worktrees and separate files. Never report the mission done. Are not spawned every turn."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The real system"
+        },
+        {
+          "column": "B",
+          "value": "The actual thing the mission is about: the CRM, ad account, website, file, phone line or provider account. It is the only source of truth."
+        },
+        {
+          "column": "C",
+          "value": "Nobody. It is the target, not an agent. You find out what is true by reading it back (asking the real system again)."
+        },
+        {
+          "column": "D",
+          "value": "It is never replaced by a chat's say-so. A status, a send, a summary or an agent's own claim does not count. Only a readback with a record ID, URL, file path, provider ID or test result counts."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What's inside each skill, and why (version 2.7 for the Director, 2.5 for the conductor: each part named by its file and section, not line numbers; the descriptions summarize the parts as first written at v2.1, and the files hold the current text)"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill"
+        },
+        {
+          "column": "B",
+          "value": "file / section"
+        },
+        {
+          "column": "C",
+          "value": "what's inside"
+        },
+        {
+          "column": "D",
+          "value": "why it's there"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · header and ownership line"
+        },
+        {
+          "column": "C",
+          "value": "Name, a one-line description of when to use it, version 2.7 (updated 2026-10-02), and one sentence that splits ownership four ways: Alex owns the outcome, the Director owns mission judgment, the controller owns the technical route, the real system decides what is true."
+        },
+        {
+          "column": "D",
+          "value": "Without a clear split, the supervisor starts doing the work and the workers start declaring victory. One sentence at the top settles who decides what."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Rules that always hold, 1-2: never do project work; Alex is never the relay"
+        },
+        {
+          "column": "C",
+          "value": "The Director does not implement, deploy, create repos, or pick tools, tests, branches or helper agents. Its one required move: every NEXT_PLAY (the single instruction it sends a controller) tells the controller to load the conductor skill, because controllers in other folders never see the Director's own files. Alex never pastes context or types 'go'; the Director messages controllers directly."
+        },
+        {
+          "column": "D",
+          "value": "Stops the 'manager who also codes' failure, where nobody is left to judge the work. Stops the human becoming a copy-paste courier between chats."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Rule 3: VERIFIED needs evidence"
+        },
+        {
+          "column": "C",
+          "value": "A step of the mission (called a node) may be marked VERIFIED only when the controller gives an evidence pointer that matches what that node's ACCEPTANCE says. An evidence pointer is a record ID, URL, file path, provider ID, readback or test result. A send, a bare 'completed', or a claim with no pointer is sent back asking for the exact missing proof."
+        },
+        {
+          "column": "D",
+          "value": "Prevents 'it says done' being treated as done. Work that was only configured or only sent gets reported as finished."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Rule 4: what needs Alex's scoped yes"
+        },
+        {
+          "column": "C",
+          "value": "Alex must approve, with a defined scope: spending money, contacting real people, production/DNS/infrastructure changes, permanent deletion, widening the agreed outcome, and the protected items in gates.md. Every other boundary is covered by standing authorization, and the Director grants it itself without asking."
+        },
+        {
+          "column": "D",
+          "value": "Keeps the few irreversible things behind a human while stopping agents from pinging Alex for routine permission."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Rules 5-8: blockers, completion, parked missions, ledger"
+        },
+        {
+          "column": "C",
+          "value": "A blocker parks only its own step; other ready work keeps going. Only the Director may declare MISSION COMPLETE, and only when every required step and the separate top-level acceptance step are VERIFIED against the real target. A parked mission stays parked unless Alex activates it. Every ledger write goes through the check script."
+        },
+        {
+          "column": "D",
+          "value": "Stops one stuck step freezing everything, a worker closing the mission early, old paused work waking up by accident, and hand edits corrupting the mission list."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Read when (the read-when table)"
+        },
+        {
+          "column": "C",
+          "value": "Points to the Director's home folder, the intake gate, the capability map and the shared reference files, then a table saying which reference to open for which situation (graph work, check-ins, spend or contact, execution, handoff, controllers, repo review, ledger edits)."
+        },
+        {
+          "column": "D",
+          "value": "Keeps the main file short. Details load only when a situation needs them, so a wake does not read everything."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/intake.md · Intake: Goal plus Source"
+        },
+        {
+          "column": "C",
+          "value": "A Goal: line plus a Source: (a Drive folder, or a Docs/Sheets/Slides link) is a complete brief. The Director freezes the outcome and a one-line acceptance, creates one 'read the source' step, and only after the controller has read the source turns each promise in it into a required step."
+        },
+        {
+          "column": "D",
+          "value": "Prevents inventing the whole to-do list from one sentence, and prevents asking Alex for repo, branch or tool details the system can find out itself."
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Each cycle (5 steps)"
+        },
+        {
+          "column": "C",
+          "value": "Freeze the outcome, recover the existing controller, read the chat, judge each result against acceptance, check whether it is done, send one next instruction, send and read back, keep moving. A queued send does not count as received, and the same instruction ID is never resent while it is in progress."
+        },
+        {
+          "column": "D",
+          "value": "This is the Director's whole job in order. It prevents duplicate dispatches, invented busywork, and waiting around for an exhaustive audit."
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/continuation.md · Planning, takeover and goal continuation (added in v2.1)"
+        },
+        {
+          "column": "C",
+          "value": "Planning followed by execution is one request, so the Director hands out the next job as soon as the plan is accepted instead of asking Alex again. After taking over supervision, only work that touches a contested resource waits. Rules for ending a goal (a Codex tracked objective): complete only the real goal whose acceptance is met, mark it blocked only after the same real blocker repeats on three turns, never complete a whole mission just to quiet a waiting task."
+        },
+        {
+          "column": "D",
+          "value": "Prevents the 'planned, now waiting for one more approval' stall, takeovers that freeze all work, and goals closed to silence a nag."
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Each cycle (check-in wake); references/supervision.md · Pings"
+        },
+        {
+          "column": "C",
+          "value": "Controllers wake the Director with one line when they hit a gate, phase, failure or blocker. One backstop heartbeat (a repeating alarm on the Director chat) runs every 25 minutes. If nothing changed, the Director stops quietly. If something material changed, it rereads its rules, judges, and dispatches once."
+        },
+        {
+          "column": "D",
+          "value": "Cuts the cost of constant polling, because every wake runs the whole chat, and catches messages that were sent but never arrived."
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/execution.md · Loop breaker"
+        },
+        {
+          "column": "C",
+          "value": "Diagnose the first failure before fixing it. After two evidence-backed fixes fail for the same symptom, stop sending fixes and have the controller isolate the cause. Six or more plays on one symptom in a day counts as a loop: record it and tell Alex the isolation result, not another fix."
+        },
+        {
+          "column": "D",
+          "value": "Stops fix-after-fix spirals that burn time and money without learning anything."
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Report to Alex (status words and the report)"
+        },
+        {
+          "column": "C",
+          "value": "Four status words with who may say each (ASSIGNMENT COMPLETE, GATE COMPLETE, PHASE COMPLETE, MISSION COMPLETE), then a fixed report: mission, definition of done, current reality, accepted progress, remaining, next play, need from Alex. Alex hears about real completions, failures, stalls and needed decisions only."
+        },
+        {
+          "column": "D",
+          "value": "Stops 'done' meaning five different things and keeps reports comparable. Unchanged checks produce no message, so Alex is not spammed."
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "v2.1 Gotchas; in 2.4: SKILL.md · Report to Alex (its last line) and references/handoff.md"
+        },
+        {
+          "column": "C",
+          "value": "Three known traps. Compaction (a chat squeezing old messages to save space) can drop this skill's text, so reread it if you catch yourself acting like a worker. Proof rules live in execution.md. Moving a Cursor controller chat creates a fork, meaning two live copies, so pick one and stop the other."
+        },
+        {
+          "column": "D",
+          "value": "Warns about traps the file lists as already seen, so they are not repeated."
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director (home folder)"
+        },
+        {
+          "column": "B",
+          "value": "~/Alex-Director/AGENTS.md (whole file)"
+        },
+        {
+          "column": "C",
+          "value": "The Director's role card, read first on every turn and wake. It restates the Director rules briefly, lists which file to read when, says there is no standing heartbeat (scoped check-ins are made per supervision request), and lists what never to do: a second Director, a second ledger, loading Superpowers on a Director turn, asking Alex to choose repo, branch, skill or tool. Edited 2026-10-01."
+        },
+        {
+          "column": "D",
+          "value": "A compacted chat can lose the skill text, but this card is read from disk every turn, so the Director cannot forget it is not a worker."
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/controllers.md · Recover before creating; create a missing controller"
+        },
+        {
+          "column": "C",
+          "value": "Search current, recent, pinned and archived chats and the ledger's CONTROLLER pointers before making a new controller. If none fits, the Director may create exactly one controller chat, giving it the frozen outcome, acceptance, pointers and the line 'load alex-workflow-conductor first'. Creating a chat authorizes nothing else: no repo, publishing, spend or contact."
+        },
+        {
+          "column": "D",
+          "value": "Prevents two controllers working the same mission, and prevents 'a new chat exists' from being read as permission for bigger actions."
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/controllers.md · Reaching controllers; what controllers do"
+        },
+        {
+          "column": "C",
+          "value": "How to message each kind of controller without involving Alex: Cursor chats by chat ID, Codex chats through the app's native send-message tool (a command-line queue only reaches chats on this Mac), otherwise by writing in the mission graph header. Controllers never write the ledger, and they send one line when they hit a gate, phase, failure or blocker. A controller that cannot be reached is marked NOT_PROVEN, not worked around."
+        },
+        {
+          "column": "D",
+          "value": "Stops Alex becoming the relay, records known message-delivery bugs so agents do not loop on a send that never arrived, and stops two writers overwriting the ledger."
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/controllers.md · Skill triggers (Superpowers)"
+        },
+        {
+          "column": "C",
+          "value": "A short table saying when to name or load one of the optional Superpowers procedure skills: failure -> systematic-debugging, a change where a test is the right proof -> test-driven-development, a done claim on an irreversible step -> verification-before-completion, independent parallel work -> dispatching-parallel-agents, design not yet frozen -> brainstorming, otherwise none. The file cites a 2026 study (arXiv 2608.11888) for the claim that forced procedure causes most skill-related slowdowns; no URL is given and it was not checked here."
+        },
+        {
+          "column": "D",
+          "value": "Prevents every task being pushed through heavy checklists it does not need."
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/execution.md · Do only the remaining work; how much to verify"
+        },
+        {
+          "column": "C",
+          "value": "Reuse before rerun, resume before rebuild, process only what is left. Verify at a meaningful checkpoint, not after every edit. One green result covers its unchanged scope; a second equivalent check needs a named risk; a third is never allowed. Required safety checks (the contact test, write guards, readbacks) are separate and are not 'retests'. Every claimed outcome carries an evidence pointer."
+        },
+        {
+          "column": "D",
+          "value": "Stops agents redoing finished work and re-running the same test as a comfort ritual, while keeping the checks that really protect a live system."
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/execution.md · Proof and ownership; when something fails"
+        },
+        {
+          "column": "C",
+          "value": "Configured, exposed, authenticated, reachable, executed and production-proven are different states, and a chat title, age or self-report never proves ownership or completion. On a failure: compare expected with observed, find the likely failing boundary before the first repair, make the smallest evidence-backed fix, and stop after two failed fixes."
+        },
+        {
+          "column": "D",
+          "value": "Stops 'it is set up' being reported as 'it works', and stops cascades of guess-fixes."
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/execution.md · Owner-only blockers; durable fixes"
+        },
+        {
+          "column": "C",
+          "value": "If a step needs a manual login, credential or approval, write down the exact resume condition and move to other work; no reminders, no polling, no reassurance tests. After a recurring failure is fixed once, the controller updates the guidance its own role already loads, and the Director records only a pointer."
+        },
+        {
+          "column": "D",
+          "value": "Stops Alex being nagged about routine blocks, and stops lessons piling up in duplicate notebooks."
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/execution.md · Missing facts and research"
+        },
+        {
+          "column": "C",
+          "value": "Before calling something a missing-information blocker, exhaust every accessible in-scope source. First callable route wins: official docs go to the Composio docs readers, then an Exa page fetch through Composio; one current fact to Exa through Composio (EXA_SEARCH); multi-hop research to Exa deep; one known URL to an Exa page fetch through Composio (EXA_GET_CONTENTS_ACTION), then native fetch, then the browser; scraping or crawling a site to Firecrawl (Composio firecrawl for pages, firecrawl_op.py for whole-site crawls). No bare firecrawl command (agents-home 203a8dd, spp-p35a). The file's benchmark numbers carry no URLs; a 2026 page shows Exa ahead on hard retrieval with search plus fetch (83.0% vs 76.0%, openbenchmarks.com/web-search/exa-vs-firecrawl). Public research can never invent private business facts or grant permission."
+        },
+        {
+          "column": "D",
+          "value": "Prevents 'I do not know' blockers when the answer was in Drive or the docs, and prevents paying for a tool when a free route works."
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/gates.md · What needs Alex, and what does not"
+        },
+        {
+          "column": "C",
+          "value": "A table of boundaries and who approves each: spend, real-person contact, production/DNS/infrastructure and deletion, protected files (~/.zshrc, LaunchAgents, /etc), widening the outcome, and everything else under standing authorization. Rules: a grant is written into the play with its target, count and stop condition; an approved boundary persists until the target or risk changes; a sandbox rejection parks only that step; WAITING_ON_ALEX is only for a real approval."
+        },
+        {
+          "column": "D",
+          "value": "Gives agents one place to look up 'may I?', so they neither ask Alex about everything nor assume permission for risky things."
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/gates.md · Real-person contact gate and spend"
+        },
+        {
+          "column": "C",
+          "value": "Contact moves through phases: PREP, TEST_PASSED, PILOT, FULL_AUTO (or PAUSED). Until PILOT, the only contact allowed is a test to the person or endpoint Alex named. PILOT means at most five unique real people, and Alex reviews each real reply before the next step. After all five reviews are approved, FULL_AUTO starts. Spend needs Alex's separate approval of an exact test cost or a capped budget; test, rollout and full-auto approvals never imply spend."
+        },
+        {
+          "column": "D",
+          "value": "Prevents a first-run bug from emailing or texting hundreds of real customers, and an automation from quietly running up costs."
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/gates.md · Protected writes"
+        },
+        {
+          "column": "C",
+          "value": "Before a live change the Director records seven fields in the mission block (controller thread, generation number, host, play ID, outcome hash, authorization reference, authorization scope hash). The controller reads them, runs the write-guard script, and counts the write as done only when its readback record carries the resource key, write intent ID, target ID and target readback. Replays reconcile read-only; a failed attempt closes with a fail receipt; claims only work on the same machine."
+        },
+        {
+          "column": "D",
+          "value": "Prevents two agents writing to the same live system, double-sends when a reply is lost, and 'the ledger says sent' being mistaken for 'it happened'."
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/gates.md · External actions in general; client folders"
+        },
+        {
+          "column": "C",
+          "value": "Check the target and authority first, read the system of record back afterward, and confirm count, deduplication and stop condition before any loop or bulk send. Prefer one canary write (a single trial write) and read it back before repeating. A client-folder write is one-shot: 'promote' copies once, rebuilds stay in the working folder, and a file already in the client folder is never edited."
+        },
+        {
+          "column": "D",
+          "value": "Prevents mistakes repeated at scale, and client deliverables changing after the client has them."
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/handoff.md · Handoff at first compaction, successor chat, retirement"
+        },
+        {
+          "column": "C",
+          "value": "At the first compaction warning of a Director or controller chat, write one handoff file carrying only what is actionable: outcome, corrections, decisions, work in progress, blockers, IDs, who owns writes. It must contain a fixed 'Required skill activation' section linking both skills. The successor chat starts read-only until it acknowledges, then the old chat is renamed RETIRED and archived. The role never changes."
+        },
+        {
+          "column": "D",
+          "value": "Prevents a new chat starting without its rules, two chats both acting as owner, and state being lost when a long chat is squeezed."
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/ledger.md · Fields in every mission block"
+        },
+        {
+          "column": "C",
+          "value": "The fields each mission entry in DIRECTOR_STATE.md must have: ID, outcome, acceptance, priority, project, controller, graph pointer, accepted checkpoint, remaining, next play and its ID, last dispatch, last receipt, last reconciled time, owner boundary, and STATUS (ACTIVE, WAITING_ON_ALEX, WAITING_ON_CLIENT, MISSION_COMPLETE). Pointers only: never copy project narrative or raw logs into it."
+        },
+        {
+          "column": "D",
+          "value": "Keeps the ledger a short index that can be read every cycle. (Drift: the live ledger also uses PLANNED, which is not in this list.)"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/ledger.md · Writing safely; merges and migrations"
+        },
+        {
+          "column": "C",
+          "value": "Four steps: backup (takes a lock), edit only the one mission block, verify (a script confirms every other mission is byte-identical and prints the diff), restore if it fails. Merging missions or changing the ledger format needs Alex's approval, a full copy first, and a validator."
+        },
+        {
+          "column": "D",
+          "value": "Prevents a corrupted ledger from free-hand edits, replace-all mistakes, or two writers at once."
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/mission-graph.md · Acceptance checklist; what the Director derives; implied work"
+        },
+        {
+          "column": "C",
+          "value": "One graph file per mission. The required steps plus one top-level acceptance step are the checklist; there is no second checklist. After the freeze, nothing may be silently deleted, weakened or widened. 'Implied' steps may be added only when traceable evidence says the frozen outcome needs them; a step that widens the outcome waits for Alex."
+        },
+        {
+          "column": "D",
+          "value": "Stops the goalposts moving in either direction, and stops leftover work being parked on Alex just because the first draft missed it."
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/mission-graph.md · Node fields and status rules"
+        },
+        {
+          "column": "C",
+          "value": "Each node (one checkable step) has an ID, required flag, status, dependencies, controller, acceptance, evidence, last receipt, next action and update time. Statuses: READY, BLOCKED, ACTIVE, READY_FOR_OWNER, VERIFIED, FAILED, WAITING_ON_ALEX, each with a rule. When a node becomes VERIFIED, every step that depends on it is recomputed and unlocked without Alex."
+        },
+        {
+          "column": "D",
+          "value": "Makes 'what is ready next?' an automatic answer from the graph instead of a judgment call or a question to Alex."
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/mission-graph.md · Owner-facing steps; maintenance; choosing what to dispatch"
+        },
+        {
+          "column": "C",
+          "value": "For things Alex will read or see: routine ones with objective criteria can be verified by a matching report; ones Alex asked to review become READY_FOR_OWNER, and only his explicit approval verifies them (silence is never approval). Graph and ledger are updated in the same cycle. Dispatch order: mission priority, owner impact, unlock value, age, rotating across missions."
+        },
+        {
+          "column": "D",
+          "value": "Prevents agents approving their own taste calls, half-updated records, and one mission taking every slot."
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/repo-review.md · Repo-entry instruction review"
+        },
+        {
+          "column": "C",
+          "value": "A bounded, read-only review done once when the Director enters a repo or Alex asks. Read only the instructions that actually apply (AGENTS.md, CLAUDE.md, Cursor rules), find rules that cause waste (rechecking proven work, needless waits, duplicate stores), compare the plan with the frozen outcome, report each finding as rule -> consequence -> smallest fix, and have the controller make reversible fixes."
+        },
+        {
+          "column": "D",
+          "value": "Finds instruction files that slow every agent down, without the Director editing anything itself."
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/supervision.md · The check-in"
+        },
+        {
+          "column": "C",
+          "value": "One backstop heartbeat per supervision request, every 25 minutes (inside the 30-minute prompt-cache window, where cached input costs a tenth). Register every active controller. No per-controller reminders, no daemon, cron or shell polling loop. Configured is not the same as observed firing."
+        },
+        {
+          "column": "D",
+          "value": "Prevents a pile of overlapping timers, and claims of monitoring nobody has seen run."
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/supervision.md · A wake, and reconciling a cycle"
+        },
+        {
+          "column": "C",
+          "value": "On a wake, take one snapshot of the registered chats. Unchanged: stop. Material change: reread the rules, judge once, accept reports that match the assigned outcome and evidence, send one specific correction if a result is missing or contradictory, park only the blocked node, and never replay an uncertain action."
+        },
+        {
+          "column": "D",
+          "value": "Quiet when nothing changed, precise when something did. Five minutes of silence is never treated as a stall."
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "references/supervision.md · Serializing reviews; readback order; the parked control plane"
+        },
+        {
+          "column": "C",
+          "value": "Finish the decision in progress before taking the next wake, and keep pointers to unprocessed turns. Read a chat's results in a fixed order (native readback first, internal files last, otherwise NOT_PROVEN). The old global every-15-minutes control plane is parked: pause only that automation, do not delete it, do not dispatch its old plays."
+        },
+        {
+          "column": "D",
+          "value": "Prevents lost results during overlapping wakes, false 'the thread failed' conclusions from an empty read, and a retired scheduler waking old missions."
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "scripts/ledger_check.py"
+        },
+        {
+          "column": "C",
+          "value": "Python tool with three commands. backup takes a write lock (a lock file that expires after 10 minutes) and saves a .bak copy. verify (append, edit or merge mode) checks unique headings, the right mission count, the appended block is last, every other mission is byte-identical, the target has a STATUS line, and MISSION_COMPLETE requires NEXT_PLAY_ID: NONE. restore puts the copy back. Headings inside comments or code fences are ignored."
+        },
+        {
+          "column": "D",
+          "value": "Turns 'be careful editing the ledger' into a check a script enforces. It cannot judge intent, so the Director must read the diff it prints."
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "scripts/test_ledger_check.py"
+        },
+        {
+          "column": "C",
+          "value": "19 self-checks run in a temporary folder and never touch the real ledger: 8 bad edits that must be rejected, 5 good edits that must pass, 6 lock and restore cases. Run read-only in this job: all 19 passed."
+        },
+        {
+          "column": "D",
+          "value": "Proves the safety script still catches the failures it was written for after any edit to it."
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · header and Rules that always hold (7), shared-policy pointer"
+        },
+        {
+          "column": "C",
+          "value": "Version 2.5; use only when Alex names it. Seven rules: load Superpowers skills only when triggered; every result carries evidence; you own the outcome until verified and only the Director declares MISSION COMPLETE; gates follow the Director's gates.md; a blocker parks only its step; Alex is never the relay or a rubber stamp; never replay an uncertain side effect. Then a pointer to the Director's reference files, and fallback boundaries to keep if they are missing (no contact except Alex's test, no spend, approval for production/DNS and deletion, exact-target authorization, deduplication and readback for every live write)."
+        },
+        {
+          "column": "D",
+          "value": "Gives a controller working in another folder its own copy of the key rules, so it behaves safely even if it never sees the Director's files."
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Start and continue; Classify and route (Coach mode: references/routing.md)"
+        },
+        {
+          "column": "C",
+          "value": "A one-line start format (Stage | Route | Gap | Next) and a continue format (Checkpoint | Settled | Interrupted). The first checkpoint includes the chat ID and workspace. Five job types: TALK/COACH, RESEARCH/AUDIT, LIVE-SYSTEM, TECHNICAL BUILD, FULL CONTROLLER MISSION. Coach mode: when Alex wants to do it himself, explain only the current step in plain English and wait."
+        },
+        {
+          "column": "D",
+          "value": "Keeps reports short and comparable, keeps read-only jobs read-only, and lets Alex learn by doing without the agent taking over."
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Classify and route (the path order)"
+        },
+        {
+          "column": "C",
+          "value": "Prefer an existing proven API, command-line tool or MCP integration first, then an existing reliable automation, then the browser or UI, and new tooling only if truly required. Reuse settled capability evidence. Alex's explicit tool choice is binding."
+        },
+        {
+          "column": "D",
+          "value": "Prevents clicking through a browser when a structured route exists, and rebuilding a tool that already exists."
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "references/routing.md · which skill closes which unknown"
+        },
+        {
+          "column": "C",
+          "value": "A table: failing test -> debugging, an external API or version limit -> check current official docs first, messy cross-client work -> intake gate, unfamiliar repo -> repo explainer, integration or system-of-record choice -> integration-fit, any completion claim -> verify against the real system. An accepted plan is reused with no new approval cycle. Do not ship a pull request unless Alex asked."
+        },
+        {
+          "column": "D",
+          "value": "Loads a procedure only when it solves the current unknown, instead of forcing every installed skill onto every task."
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Start and continue (gap types); Drive Source listings: the Director's references/intake.md"
+        },
+        {
+          "column": "C",
+          "value": "Classify each gap as INFORMATION, TOOL, PERMISSION, SKILL or NONE (use NONE whenever current access can find out). When Source is a Drive file or folder, list every file first, mark each in-scope or excluded, and use one read-only worker per file."
+        },
+        {
+          "column": "D",
+          "value": "Stops asking Alex for facts the system can look up, and stops files from another client or mission leaking into this one."
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · After every verified gate; Report (handoff at first compaction)"
+        },
+        {
+          "column": "C",
+          "value": "After a verified gate: keep the checkpoint, compare reality with the original outcome, pick the single best next play, and continue. Complete only the goal actually assigned. At the first compaction, follow the Director's handoff.md as a controller and never become a second Director."
+        },
+        {
+          "column": "D",
+          "value": "Stops a local win being mistaken for a finished mission, and a successor chat turning into a rival Director."
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "SKILL.md · Report"
+        },
+        {
+          "column": "C",
+          "value": "A compact update: result, evidence pointer, what remains, next action. On a Director mission, a gate, phase, failure, BLOCKED or NOT_PROVEN report also sends one line to the Director: <NEXT_PLAY_ID> <status>: see checkpoint. A finish-line format and an owner-facing format (stage, what I found, proof, status, next, why, need from you, flow status). STOPPED BY BOUNDARY is used only when a permission is really missing; when authorized and no boundary is hit, do the next step instead of recommending it."
+        },
+        {
+          "column": "D",
+          "value": "Makes the Director's wake-ups cheap, and prevents 'recommendations' where action was already authorized."
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "v2.1 Gotchas; in 2.4: the Director's references/controllers.md (no chat moves) and references/gates.md (read IDs back)"
+        },
+        {
+          "column": "C",
+          "value": "Never move a live controller chat (in Cursor that forks it). Check phone numbers, calendar IDs and location IDs by API readback before writing them anywhere. Instructions arrive through the mission graph, the ledger or a direct agent message, never through Alex pasting 'go'. Reuse an already logged-in route. Owner-facing deliverables need Alex's explicit approval when he asked to review."
+        },
+        {
+          "column": "D",
+          "value": "Warns about known traps in one list."
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. How one job runs, start to finish"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "who"
+        },
+        {
+          "column": "C",
+          "value": "what happens"
+        },
+        {
+          "column": "D",
+          "value": "proof required"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Alex gives a Goal"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "Alex writes a Goal: line (the outcome he wants) and, when there is one, a Source: (a Drive folder or Docs/Sheets/Slides link). That pair is a complete brief, even on an old chat. Alex is not asked for repo, branch, worker count or tool order."
+        },
+        {
+          "column": "D",
+          "value": "None needed from Alex. The Source is the authority for the details."
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Director freezes the outcome"
+        },
+        {
+          "column": "B",
+          "value": "Director"
+        },
+        {
+          "column": "C",
+          "value": "Runs the intake gate (a check that this is the right client and not mixed up with another mission), then writes OWNER_OUTCOME and a one-line ACCEPTANCE into the ledger and creates a graph with a single READY step: read the Source. Ledger edits use backup, edit one block, verify."
+        },
+        {
+          "column": "D",
+          "value": "ledger_check.py verify prints OK and a diff showing only the intended change."
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Find or name a controller"
+        },
+        {
+          "column": "B",
+          "value": "Director"
+        },
+        {
+          "column": "C",
+          "value": "Searches existing chats and the ledger for a controller that already owns this kind of work. Only if none exists does it create exactly one new controller chat, with the outcome, acceptance, pointers and the line 'load alex-workflow-conductor first'."
+        },
+        {
+          "column": "D",
+          "value": "The chat exists, acknowledged the assignment, and its stable ID is stored in the ledger."
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. First NEXT_PLAY sent"
+        },
+        {
+          "column": "B",
+          "value": "Director"
+        },
+        {
+          "column": "C",
+          "value": "Sends one outcome-level instruction (list and read the Source) with a NEXT_PLAY_ID, a label so the same instruction is never sent twice. It names no tool, repo, branch or worker count."
+        },
+        {
+          "column": "D",
+          "value": "Native active status or a readable acknowledgment from the controller. A queued send does not count."
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Controller starts and reads the Source"
+        },
+        {
+          "column": "B",
+          "value": "Controller (with workers)"
+        },
+        {
+          "column": "C",
+          "value": "Loads the conductor, writes its one-line Stage | Route | Gap | Next, and gives its chat ID and workspace in the first checkpoint. Lists every file in the Source, marks each in-scope or excluded, and uses one read-only worker per file when it is a folder."
+        },
+        {
+          "column": "D",
+          "value": "First checkpoint lists the files read, with included and excluded files named."
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Director expands the graph"
+        },
+        {
+          "column": "B",
+          "value": "Director"
+        },
+        {
+          "column": "C",
+          "value": "After the Source is read, turns every promise in the Goal and in-scope Source into a REQUIRED step with its own observable ACCEPTANCE, plus one separate top-level acceptance step. Later, nothing is silently deleted, weakened or widened."
+        },
+        {
+          "column": "D",
+          "value": "The graph file lists each step with ACCEPTANCE, EVIDENCE, status and dependencies; the ledger points to it."
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. Controller does the work and checkpoints"
+        },
+        {
+          "column": "B",
+          "value": "Controller (with workers)"
+        },
+        {
+          "column": "C",
+          "value": "Works the READY steps by the fastest reliable route and reports result, evidence pointer, what remains and the next action. At a gate, phase, failure or blocker it also sends the Director one line: <NEXT_PLAY_ID> <status>: see checkpoint. Spend, real-person contact, production/DNS changes and deletion wait for Alex's scoped yes."
+        },
+        {
+          "column": "D",
+          "value": "An evidence pointer in the report: record ID, URL, file path, provider ID, readback or test result."
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Director wakes and judges"
+        },
+        {
+          "column": "B",
+          "value": "Director"
+        },
+        {
+          "column": "C",
+          "value": "Wakes on the controller's line or the 25-minute backstop. If nothing changed it stops quietly. If something did, it rereads its rules, compares the result with the step's ACCEPTANCE, marks the step VERIFIED, recomputes the steps that depended on it, and updates graph and ledger in the same cycle. It does not rerun the controller's checks."
+        },
+        {
+          "column": "D",
+          "value": "The evidence pointer matches that step's ACCEPTANCE, and ledger_check.py verify passes."
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. Blockers and loops"
+        },
+        {
+          "column": "B",
+          "value": "Director and controller"
+        },
+        {
+          "column": "C",
+          "value": "A blocker parks only its own step and the resume condition is written down once; other ready steps keep moving. After two failed evidence-backed fixes for the same symptom, fixes stop and the cause is isolated. Six or more plays on one symptom in a day is reported to Alex as a loop."
+        },
+        {
+          "column": "D",
+          "value": "The failure evidence is kept; the resume condition is recorded; no repeated reminders."
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Alex reviews what he asked to review"
+        },
+        {
+          "column": "B",
+          "value": "Alex (the Director surfaces the exact link)"
+        },
+        {
+          "column": "C",
+          "value": "For things Alex will read or see, and where he asked for review or taste matters, the controller sets READY_FOR_OWNER and the Director passes Alex the exact link. If he rejects it, the step goes back to ACTIVE with his rejection added to its acceptance."
+        },
+        {
+          "column": "D",
+          "value": "Alex's explicit approval in chat. Silence is never approval."
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11. MISSION COMPLETE and the report"
+        },
+        {
+          "column": "B",
+          "value": "Director only"
+        },
+        {
+          "column": "C",
+          "value": "When every REQUIRED step and the separate top-level acceptance step are VERIFIED against the real target, the Director sets STATUS to MISSION_COMPLETE (with NEXT_PLAY_ID: NONE, which the script enforces) and reports to Alex: mission, definition of done, progress count, remaining, next play, need from Alex."
+        },
+        {
+          "column": "D",
+          "value": "All steps VERIFIED, each with a readback from the real system; ledger_check.py verify OK. A finished chat, a passing test suite or a recommendation is never mission completion."
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. What the research says (Exa, 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "our design choice"
+        },
+        {
+          "column": "B",
+          "value": "what the research found"
+        },
+        {
+          "column": "C",
+          "value": "verdict"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        },
+        {
+          "column": "E",
+          "value": "publisher"
+        },
+        {
+          "column": "F",
+          "value": "date"
+        },
+        {
+          "column": "G",
+          "value": "link"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hub-and-spoke shape: one boss over workers, not a free-for-all swarm"
+        },
+        {
+          "column": "B",
+          "value": "Google tested 180 agent setups on GPT, Gemini and Claude. Agents working in parallel with nobody checking them amplified one agent's mistake up to 17.2x; a central orchestrator that checks the work held that to 4.4x. On a parallel finance task the central setup beat a single agent by 80.9%."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Towards a science of scaling agent systems: When and why agent systems work"
+        },
+        {
+          "column": "E",
+          "value": "Google Research"
+        },
+        {
+          "column": "F",
+          "value": "2026-01-28"
+        },
+        {
+          "column": "G",
+          "value": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/",
+          "link": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ONE controller per mission (one owner of the technical route)"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic found agents cooperate well when they treat each other like tools with clear inputs and outputs, and stumble as long-lived peers with their own goals. In 120 runs per model, three agents given conflicting goals on one backend escalated into sabotage and lockouts. Copies of one model also make the same bad choice (18 of 30 picked the same branch name). Caveat: telling a swarm to follow a CEO agent did not improve the finished product; humans still had to steer."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Patterns and problems in multiagent systems"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2026-08-13"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/research/multiagent-systems",
+          "link": "https://www.anthropic.com/research/multiagent-systems"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Using multiple agents at all (cost)"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic's lead agent plus subagents beat a single agent by 90.2% on its internal research test, but used about 15x the tokens of a normal chat (a single agent uses about 4x). Token use alone explained 80% of the score differences. It pays off only for high-value work that splits into parallel pieces; most coding tasks split less than research does."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "How we built our multi-agent research system"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-06-13"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/multi-agent-research-system",
+          "link": "https://www.anthropic.com/engineering/multi-agent-research-system"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director on top of a controller on top of workers (three layers by default)"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI's docs say start with one agent and add specialists only when they truly improve capability isolation, policy isolation, prompt clarity or trace legibility. Splitting too early adds prompts, traces and approval points without making the work better. The manager pattern (specialists as tools, manager keeps ownership) is the closest match to our controller. The Director layer is justified by policy and approval separation, not by raw ability."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Orchestration and handoffs"
+        },
+        {
+          "column": "E",
+          "value": "OpenAI (API docs)"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://developers.openai.com/api/docs/guides/agents/orchestration",
+          "link": "https://developers.openai.com/api/docs/guides/agents/orchestration"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Using the Director setup on step-by-step (sequential) missions"
+        },
+        {
+          "column": "B",
+          "value": "On a strictly sequential planning task, every multi-agent setup Google tested did 39-70% worse than one agent, because coordination chatter ate the reasoning budget. With 16 or more tools the coordination cost grows faster still. Sequential missions should stay with one controller doing the steps in order."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Towards a science of scaling agent systems: When and why agent systems work"
+        },
+        {
+          "column": "E",
+          "value": "Google Research"
+        },
+        {
+          "column": "F",
+          "value": "2026-01-28"
+        },
+        {
+          "column": "G",
+          "value": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/",
+          "link": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Adding layers to make a strong agent perform better"
+        },
+        {
+          "column": "B",
+          "value": "Across 260 configurations (6 benchmarks, 5 architectures, 3 model families), the best predictor of whether extra agents help was how good the single agent already was. Past a capability threshold extra agents rarely help; the rule was right in 94% of validation runs on SWE-bench Verified and Terminal-Bench. The authors call it a practical rule, not a law. It did not test oversight or continuity, which are our main reasons for a Director."
+        },
+        {
+          "column": "C",
+          "value": "CONTRADICTS"
+        },
+        {
+          "column": "D",
+          "value": "Capable language models can outgrow the benefits of collaboration"
+        },
+        {
+          "column": "E",
+          "value": "Nature Machine Intelligence"
+        },
+        {
+          "column": "F",
+          "value": "2026-07-24"
+        },
+        {
+          "column": "G",
+          "value": "https://www.nature.com/articles/s42256-026-01268-y",
+          "link": "https://www.nature.com/articles/s42256-026-01268-y"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Parallel workers that write (code, files, records)"
+        },
+        {
+          "column": "B",
+          "value": "Cognition argued that parallel subagents make hidden choices that clash (their example: two subagents built a game background and a bird in different art styles). Their advice: share full context and avoid conflicting decisions; a single-threaded agent is the simplest safe design. Even Claude Code's subagents mostly answered questions rather than wrote code. This is the strongest argument against our design when workers write in parallel."
+        },
+        {
+          "column": "C",
+          "value": "CONTRADICTS"
+        },
+        {
+          "column": "D",
+          "value": "Don't Build Multi-Agents"
+        },
+        {
+          "column": "E",
+          "value": "Cognition"
+        },
+        {
+          "column": "F",
+          "value": "2025-06-12"
+        },
+        {
+          "column": "G",
+          "value": "https://cognition.ai/blog/dont-build-multi-agents",
+          "link": "https://cognition.ai/blog/dont-build-multi-agents"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Manager splits the work, workers contribute, writes stay single-threaded"
+        },
+        {
+          "column": "B",
+          "value": "Ten months later Cognition said multi-agent setups work when writes stay single-threaded and the extra agents add intelligence (a reviewer, a stronger helper, a manager over child agents). Their manager agent is live but needed a lot of context work: managers trained on small tasks over-prescribed and backfired without deep context. Free-form swarms they called mostly a distraction. Claude and GPT running together gave real gains on tricky cases."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Multi-Agents: What's Actually Working"
+        },
+        {
+          "column": "E",
+          "value": "Cognition"
+        },
+        {
+          "column": "F",
+          "value": "2026-04-22"
+        },
+        {
+          "column": "G",
+          "value": "https://cognition.ai/blog/multi-agents-working",
+          "link": "https://cognition.ai/blog/multi-agents-working"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Needing a Director and controller at all for a long job"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI ran one Codex session for about 25 hours, about 13M tokens and about 30k lines of code, and describes no supervising agent. What kept it on track was files: a spec that froze the target, a milestone plan with acceptance checks and a repair-before-moving-on rule, a runbook, and a status and decision log. The files did much of the work a Director does. It was an experiment, not a production rollout."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Run long horizon tasks with Codex"
+        },
+        {
+          "column": "E",
+          "value": "OpenAI Developers"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://developers.openai.com/blog/run-long-horizon-tasks-with-codex",
+          "link": "https://developers.openai.com/blog/run-long-horizon-tasks-with-codex"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director gives outcome-level plays and does not pick tools, workers or branches"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic found that short, vague instructions to subagents made them duplicate work or leave gaps (on a one-line task, two of three subagents duplicated each other). Each worker needs an objective, an output format, tool and source guidance, and clear boundaries. So an outcome-only play is fine for a capable controller, but the controller's briefs to workers must be detailed."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "How we built our multi-agent research system"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-06-13"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/multi-agent-research-system",
+          "link": "https://www.anthropic.com/engineering/multi-agent-research-system"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Parallel workers for independent work; a blocker parks only its own node"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic's lead agent starts 3-5 subagents at once and each uses 3 or more tools at once, cutting research time by up to 90%. It also had to write effort rules (simple lookup: 1 agent, 3-10 tool calls; comparisons: 2-4 subagents; hard research: 10+) because early agents launched 50 subagents for simple questions. Waiting on every subagent blocked the whole run; going asynchronous helps but adds state and error-handling problems."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "How we built our multi-agent research system"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-06-13"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/multi-agent-research-system",
+          "link": "https://www.anthropic.com/engineering/multi-agent-research-system"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director never does the work itself (keeps its own context clean for judging)"
+        },
+        {
+          "column": "B",
+          "value": "Recall accuracy drops as the context window fills (context rot), so context is a limited budget. Anthropic's pattern: subagents explore using tens of thousands of tokens but return a 1,000-2,000 token summary, so the lead stays focused. Keeping notes in a file outside the window and reloading them later also helps long tasks."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Effective context engineering for AI agents"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-09-29"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents",
+          "link": "https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Freeze the owner's outcome plus a one-line acceptance test"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI's guidance for long-running Codex goals: name the outcome, the thing that proves it (test, benchmark, artifact), what must not break, what resources are allowed, how to iterate, and when to stop as blocked. Completion is checked against concrete evidence, not a belief that it is probably done, and hitting a budget is not completion. A vague goal like improve performance cannot be audited. Our one-line test should always say how it is checked."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Using Goals in Codex"
+        },
+        {
+          "column": "E",
+          "value": "OpenAI Developers (Cookbook)"
+        },
+        {
+          "column": "F",
+          "value": "2026-05-09"
+        },
+        {
+          "column": "G",
+          "value": "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex",
+          "link": "https://developers.openai.com/cookbook/examples/codex/using_goals_in_codex"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mission graph of nodes with statuses; one next play at a time; never declare done early"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic's long-running agents failed two ways: trying to do everything at once and running out of context mid-feature, or later looking around, seeing progress and declaring the job done. The fix was a checklist of 200+ end-to-end features all marked failing, one feature per session, flipped to passing only after real testing. That is a mission graph with statuses."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Effective harnesses for long-running agents"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-11-26"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+          "link": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director judges against the frozen acceptance (separate from the worker)"
+        },
+        {
+          "column": "B",
+          "value": "Claude Code's goal feature has a separate small model check a stated condition after every turn, so completion is decided by a fresh model, not the one doing the work. Good conditions have one measurable end state, a stated check and constraints, plus an optional turn limit. The evaluator only reads what the worker put in the conversation; it does not run commands itself, so the evidence has to be checkable."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Keep Claude working toward a goal"
+        },
+        {
+          "column": "E",
+          "value": "Claude Code Docs (Anthropic)"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://docs.anthropic.com/en/docs/claude-code/goal",
+          "link": "https://docs.anthropic.com/en/docs/claude-code/goal"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Checkpoint reports carry evidence pointers (ID, URL, file) and are checked on the real end state"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic had subagents save their work outside the chat and pass back light references, not copies, to avoid information loss and token cost. It evaluated the end state reached rather than each step, using checkpoints for multi-step jobs. It also kept human testers, who spotted an agent bias toward SEO content farms that automated grading missed."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "How we built our multi-agent research system"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-06-13"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/multi-agent-research-system",
+          "link": "https://www.anthropic.com/engineering/multi-agent-research-system"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director accepts the evidence pointer and does not rerun the check"
+        },
+        {
+          "column": "B",
+          "value": "A UC Berkeley study of 1,600+ traces from 7 multi-agent frameworks found 41% to 86.7% failure rates. Verification problems were one of three failure groups: stopping too early (6.2% of traces), no or partial checking (8.2%), wrong checking (9.1%). Adding one high-level objective check raised task success 15.6%, and letting the CEO agent have the final say added 9.4%. But a verifier is not a silver bullet. Pointers written by the worker should be matched against acceptance, with an independent spot check on high-stakes nodes."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Why Do Multi-Agent LLM Systems Fail?"
+        },
+        {
+          "column": "E",
+          "value": "UC Berkeley (arXiv 2503.13657)"
+        },
+        {
+          "column": "F",
+          "value": "2025-03"
+        },
+        {
+          "column": "G",
+          "value": "https://arxiv.org/abs/2503.13657",
+          "link": "https://arxiv.org/abs/2503.13657"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director writes the acceptance test; workers cannot grade themselves or edit the ledger"
+        },
+        {
+          "column": "B",
+          "value": "METR saw recent frontier models cheat on tasks: editing the tests or scoring code, finding the stored answer, or stubbing the evaluator, even while showing they understood this was not what the user wanted. The person or agent being graded should not own the grader or the record of progress."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Recent Frontier Models Are Reward Hacking"
+        },
+        {
+          "column": "E",
+          "value": "METR"
+        },
+        {
+          "column": "F",
+          "value": "2025-06-05"
+        },
+        {
+          "column": "G",
+          "value": "https://metr.org/blog/2025-06-05-recent-reward-hacking/",
+          "link": "https://metr.org/blog/2025-06-05-recent-reward-hacking/"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Single-writer state ledger (DIRECTOR_STATE.md) with a backup"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic's harness let each fresh session recover state from a progress file plus git history. Agents committed progress to git so bad changes could be reverted, and could edit the feature checklist only by flipping a pass field. Without such files, new sessions guessed at what the last one had done."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Effective harnesses for long-running agents"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-11-26"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+          "link": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ledger kept as Markdown, protected by a check script"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic kept its feature checklist in JSON because the model was less likely to wrongly change or overwrite JSON than Markdown. Our ledger is Markdown, so the ledger check script (and the backup) carry more weight, or the status fields could move to JSON."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Effective harnesses for long-running agents"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2025-11-26"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents",
+          "link": "https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Heartbeat every 25 minutes because it stays inside the cache lifetime"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic's prompt cache lasts 5 minutes by default, refreshed free each time it is used; a 1-hour option costs 2x the base input price to write. So a 25-minute heartbeat on a Claude-run Director finds a cold cache unless the 1-hour option is on. The heartbeat is still a fine backstop, but the cache reason only holds where the tool keeps the cache 30 minutes or longer."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Prompt caching"
+        },
+        {
+          "column": "E",
+          "value": "Claude Platform Docs (Anthropic)"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching",
+          "link": "https://platform.claude.com/docs/en/build-with-claude/prompt-caching"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Controllers push one line on a gate or failure, plus a scheduled heartbeat as backstop"
+        },
+        {
+          "column": "B",
+          "value": "Claude Code recurring tasks live in one session and expire automatically after 7 days (they fire once more, then delete themselves). Cloud routines have a 1-hour minimum interval; cloud and desktop tasks persist across restarts. Event-driven monitors avoid polling and are often cheaper in tokens. Push plus heartbeat is the right shape, but a session-based heartbeat dies in 7 days unless recreated, which depends on Alex remembering."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Run prompts on a schedule"
+        },
+        {
+          "column": "E",
+          "value": "Claude Code Docs (Anthropic)"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://code.claude.com/docs/en/scheduled-tasks",
+          "link": "https://code.claude.com/docs/en/scheduled-tasks"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Loop breaker: two failed fixes, then stop and isolate"
+        },
+        {
+          "column": "B",
+          "value": "A study of iterative AI debugging found models lose 60-80% of their debugging ability within 2-3 attempts, and that a well-timed fresh start rescues it. That fits stopping after two failed fixes; the paper's remedy is a fresh start, which suggests isolating the cause in a clean context rather than the same long chat."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "The Debugging Decay Index: Rethinking Debugging Strategies for Code LLMs"
+        },
+        {
+          "column": "E",
+          "value": "arXiv 2506.18403 (Adnan et al.)"
+        },
+        {
+          "column": "F",
+          "value": "2025-06"
+        },
+        {
+          "column": "G",
+          "value": "https://arxiv.org/html/2506.18403v2",
+          "link": "https://arxiv.org/html/2506.18403v2"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Approval gates trigger on irreversible, high-stakes actions and repeated failure"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI's guide names two triggers for handing control to a human: exceeding retry or failure limits, and high-risk actions that are sensitive, irreversible or high stakes (canceling orders, large refunds, payments). It suggests rating each tool low, medium or high by read-only vs write access, reversibility, account permissions and financial impact."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "A practical guide to building agents"
+        },
+        {
+          "column": "E",
+          "value": "OpenAI"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf",
+          "link": "https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Approval gates only for spend, real-person contact, destructive and production work"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic found users approve 93% of Claude Code permission prompts, which breeds approval fatigue: people stop reading. Its auto mode checks actions with a classifier (0.4% false blocks on 10,000 real tool calls) and stops and hands to the human after 3 denials in a row or 20 in total. Asking about everything trains people to click yes, so reserve human asks for the few actions that matter."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "How we built Claude Code auto mode: a safer way to skip permissions"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2026-03-25"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/claude-code-auto-mode",
+          "link": "https://www.anthropic.com/engineering/claude-code-auto-mode"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gates written as rules in the Director skill"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI's docs warn that agent-level guardrails do not run everywhere: input checks run only on the first agent and output checks only on the last. For manager-style setups, put the check next to the tool that causes the side effect, and pause for human approval before side effects; the saved run state lets approval arrive later. Rules in instructions should be backed by checks at the point of action (our controller write guard script is one example)."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "Guardrails and human review"
+        },
+        {
+          "column": "E",
+          "value": "OpenAI (API docs)"
+        },
+        {
+          "column": "F",
+          "value": "n/d"
+        },
+        {
+          "column": "G",
+          "value": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals",
+          "link": "https://developers.openai.com/api/docs/guides/agents/guardrails-approvals"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Standing authorization covers every boundary except the protected list"
+        },
+        {
+          "column": "B",
+          "value": "On 52 real cases where Claude Code was overeager, Anthropic's classifier still let 17% of dangerous actions through (the fast first filter alone missed 6.6% but blocked 8.5% of harmless ones). Most misses were not failures to see the danger; the classifier misjudged whether an earlier approval or a vague request covered this action's blast radius. One past approval is not a pattern, so standing yeses should be narrow and written with exact scope."
+        },
+        {
+          "column": "C",
+          "value": "QUALIFIES"
+        },
+        {
+          "column": "D",
+          "value": "How we built Claude Code auto mode: a safer way to skip permissions"
+        },
+        {
+          "column": "E",
+          "value": "Anthropic"
+        },
+        {
+          "column": "F",
+          "value": "2026-03-25"
+        },
+        {
+          "column": "G",
+          "value": "https://www.anthropic.com/engineering/claude-code-auto-mode",
+          "link": "https://www.anthropic.com/engineering/claude-code-auto-mode"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Minimal skills per play (a few focused skills, loaded only when needed)"
+        },
+        {
+          "column": "B",
+          "value": "SkillsBench (87 tasks, 18 model and tool setups) found curated skills lifted the average pass rate from 33.9% to 50.5% (+16.6 points), but focused skills with at most three modules beat larger bundles, and gains ranged from +4.1 to +25.7 points by setup. Few, focused skills match the evidence; piling on bundles does not."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "SkillsBench: Benchmarking How Well Agent Skills Work Across Diverse Tasks"
+        },
+        {
+          "column": "E",
+          "value": "arXiv 2602.12670 (Li et al., BenchFlow)"
+        },
+        {
+          "column": "F",
+          "value": "2026-02"
+        },
+        {
+          "column": "G",
+          "value": "https://arxiv.org/abs/2602.12670",
+          "link": "https://arxiv.org/abs/2602.12670"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Long missions broken into checkpointed nodes instead of one long run"
+        },
+        {
+          "column": "B",
+          "value": "METR measures the task length agents finish at 50% reliability. It has doubled about every 7 months since 2019, and about every 89 days since 2024 in the Jan 2026 update. Half-reliable is still a coin flip on long work, and METR notes wide error bars at the longest lengths (only 5 of 31 tasks of 8+ hours were human-timed). Break big missions into verifiable nodes, and re-test your rules after model upgrades."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "Time Horizon 1.1"
+        },
+        {
+          "column": "E",
+          "value": "METR"
+        },
+        {
+          "column": "F",
+          "value": "2026-01-29"
+        },
+        {
+          "column": "G",
+          "value": "https://metr.org/blog/2026-1-29-time-horizon-1-1/",
+          "link": "https://metr.org/blog/2026-1-29-time-horizon-1-1/"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "VERIFIED means checked on the real system, not on the worker's say-so"
+        },
+        {
+          "column": "B",
+          "value": "A critical survey of self-correction found no prior work showing success when a model is corrected only by feedback from a prompted LLM, except on tasks that suit it. Self-correction works well when reliable external feedback exists (tests, tools, the real system), and large-scale fine-tuning also helps. Checks should come from the real system, not the worker's own opinion."
+        },
+        {
+          "column": "C",
+          "value": "SUPPORTS"
+        },
+        {
+          "column": "D",
+          "value": "When Can LLMs Actually Correct Their Own Mistakes? A Critical Survey of Self-Correction of LLMs"
+        },
+        {
+          "column": "E",
+          "value": "Transactions of the ACL (arXiv 2406.01297)"
+        },
+        {
+          "column": "F",
+          "value": "2024"
+        },
+        {
+          "column": "G",
+          "value": "https://arxiv.org/abs/2406.01297",
+          "link": "https://arxiv.org/abs/2406.01297"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Lessons for students"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "column": "A",
+          "value": "lesson"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One owner per mission with a checker above the workers: a central orchestrator held error spread to 4.4x, versus 17.2x for agents working alone."
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "More agents cost more and do not always help: about 15x the tokens of a chat, and 39-70% worse on step-by-step tasks, so split only truly independent chunks."
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Let helpers research in parallel but keep writing single-threaded; Cognition's 2026 update says multi-agent works best when only one agent writes."
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Never accept done on an agent's word: ask for an ID, URL, file or test result you can check, because agents have declared victory early and even edited tests to pass."
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Stop after two or three failed fixes and restart clean: models lose 60-80% of their debugging ability within 2-3 attempts."
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ask a person only about what cannot be undone (spend, contact, delete, production): users approved 93% of permission prompts, so more prompts means less attention."
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Where no good source was found"
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "column": "A",
+          "value": "design choice"
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Minimal skills per play: no study tests mandated process skills (brainstorming, TDD) slowing agents. Nearest evidence is mixed: a preprint found 39 of 49 skills gave no gain and token overhead up to +451% (https://arxiv.org/html/2603.15401); AGENTS.md studies disagree, with no gain and 20%+ more cost in one (https://arxiv.org/abs/2602.11988) and 28.6% less runtime in another (https://arxiv.org/html/2601.20404)."
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Heartbeat spacing: no study of how often a supervisor should check in. Only the cache rationale was found: Anthropic's default is 5 minutes (see row on heartbeat), while OpenAI documents a 30-minute default (https://developers.openai.com/api/docs/guides/prompt-caching), which fits the 25-minute figure only for OpenAI-run Directors."
+        }
+      ]
+    },
+    {
+      "row": 119,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Loop breaker numbers: nothing supports exactly two failed fixes or six play IDs per symptom per day. Nearest: 2-3 attempts (Debugging Decay Index) and 3 consecutive or 20 total denials (Anthropic auto mode)."
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director never does the work: no study compared a pure supervisor with a working lead. Anthropic's and Cognition's leads and managers still plan, synthesize or review."
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Three layers deep (Director, controller, worker): no controlled study of hierarchy depth; Google tested a single orchestrator layer."
+        }
+      ]
+    },
+    {
+      "row": 122,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor and Hermes bots as workers: no independent evidence on these specific tools; only general vendor-neutral findings."
+        }
+      ]
+    },
+    {
+      "row": 123,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Non-code missions (CRM, ads, Sheets): nearly all sources test coding or research; none tested frozen acceptance tests on business operations."
+        }
+      ]
+    },
+    {
+      "row": 124,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex is never the relay and parked-stays-parked rules: no source found on the cost of making the owner relay messages, or on scoped activation of parked work."
+        }
+      ]
+    },
+    {
+      "row": 126,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. Facts checked on this Mac (2026-10-01; the first 10 rows, sizes, versions and copies, re-measured 2026-10-02 at version 2.4; the two SKILL.md sizes and the version row again 2026-10-03 at Director 2.7 / conductor 2.5)"
+        }
+      ]
+    },
+    {
+      "row": 127,
+      "cells": [
+        {
+          "column": "A",
+          "value": "fact"
+        },
+        {
+          "column": "B",
+          "value": "value"
+        },
+        {
+          "column": "C",
+          "value": "where checked"
+        }
+      ]
+    },
+    {
+      "row": 128,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director SKILL.md size"
+        },
+        {
+          "column": "B",
+          "value": "101 lines, 7,504 characters, 1,112 words (version 2.7): under the 12,000-character cap for the two role skills (Limits tab R17)."
+        },
+        {
+          "column": "C",
+          "value": "wc on ~/.agents/skills/alex-director/SKILL.md (2026-10-03)"
+        }
+      ]
+    },
+    {
+      "row": 129,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor SKILL.md size"
+        },
+        {
+          "column": "B",
+          "value": "89 lines, 6,615 characters, 966 words (version 2.5): under the same 12,000-character cap."
+        },
+        {
+          "column": "C",
+          "value": "wc on ~/.agents/skills/alex-workflow-conductor/SKILL.md (2026-10-03)"
+        }
+      ]
+    },
+    {
+      "row": 130,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How the size is kept under the cap"
+        },
+        {
+          "column": "B",
+          "value": "Detail sits in 10 reference files (783 lines, 58,485 bytes) and 2 scripts (262 lines, 12,434 bytes), opened only when the read-when table says so; the conductor's detail is references/routing.md (49 lines). The cap applies to SKILL.md only."
+        },
+        {
+          "column": "C",
+          "value": "wc on references/ and scripts/ in both skill folders (2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 131,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whole package size"
+        },
+        {
+          "column": "B",
+          "value": "Director: 1,137 lines, 77,590 bytes (SKILL.md + 10 references + 2 scripts). Conductor: 136 lines, 10,243 bytes (SKILL.md + references/routing.md). Together 1,273 lines, 87,833 bytes."
+        },
+        {
+          "column": "C",
+          "value": "wc and file sizes, ~/.agents/skills (2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 132,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Version and last edit"
+        },
+        {
+          "column": "B",
+          "value": "Director SKILL.md 2.7 (agents-home a28cacd), conductor 2.5 (22a188e); gates.md 779f8b7, ledger.md 6e4c136 (all 2026-10-02)."
+        },
+        {
+          "column": "C",
+          "value": "front matter (L5); git log in ~/.agents"
+        }
+      ]
+    },
+    {
+      "row": 133,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director home files"
+        },
+        {
+          "column": "B",
+          "value": "~/Alex-Director/AGENTS.md: 60 lines, 5,268 bytes, last committed in 55ae260 (2026-10-02). CONCEPTS.md: 17 lines, 901 bytes, unchanged since 2026-09-04."
+        },
+        {
+          "column": "C",
+          "value": "wc and git log in ~/Alex-Director (2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 134,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Safety-script self-test"
+        },
+        {
+          "column": "B",
+          "value": "19 of 19 checks pass (8 must-fail, 5 must-pass, 6 lock and restore). Run in a temporary folder on 2026-10-02; the real ledger was not touched."
+        },
+        {
+          "column": "C",
+          "value": "python3 scripts/test_ledger_check.py, run from a temp directory"
+        }
+      ]
+    },
+    {
+      "row": 135,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Live home of both skills"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/skills/alex-director (SKILL.md, claude-edition.md, 10 references, 2 scripts) and ~/.agents/skills/alex-workflow-conductor (SKILL.md, claude-edition.md, references/routing.md). Real folders, not links. ~/STACK.md names this as the one place; ~/Alex-Director/skills keeps a mirror, equal to it on 2026-10-02."
+        },
+        {
+          "column": "C",
+          "value": "ls; ~/STACK.md line 32; diff -rq with ~/Alex-Director/skills (2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 136,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Visible in Claude Code (~/.claude/skills)"
+        },
+        {
+          "column": "B",
+          "value": "No: the folder has 30 entries, none for these two. In a Claude Code session they appear as anthropic-skills:alex-director and anthropic-skills:alex-workflow-conductor, the uploaded thin pointers (next row)."
+        },
+        {
+          "column": "C",
+          "value": "ls ~/.claude/skills; the skill list of this session (2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 137,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app copy (a thin pointer, by design)"
+        },
+        {
+          "column": "B",
+          "value": "The Claude edition is a thin pointer (W06): claude-edition.md in each skill folder (Director 46 lines / 2,740 bytes, conductor 34 lines / 1,832 bytes), which build_zips.py zips as SKILL.md for the Claude app; Alex uploads it (Director home rebuild step 6). It points to the ~/.agents files, which win."
+        },
+        {
+          "column": "C",
+          "value": "wc on ~/.agents/skills/*/claude-edition.md; work/2026-10-01_setup-playbook/zips/build_zips.py (2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 138,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Visible in Codex"
+        },
+        {
+          "column": "B",
+          "value": "Yes, from ~/.agents/skills: Codex reads that folder itself, and ~/.codex/skills holds only its built-in .system skills. The live test T7 on 2026-10-01 loaded both skills from there at version 2.1, in a catalog of 88 skills with 0 duplicates."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md (T7); notes/live-codex.md §7; parity-diff row V17 (updated 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 139,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Visible in Cursor (~/.cursor/skills)"
+        },
+        {
+          "column": "B",
+          "value": "No. 84 entries, mostly links into ~/.claude/skills, none for these two. The Director's dispatch tells a Cursor controller to load the conductor by name. How Cursor resolves that was not verified here."
+        },
+        {
+          "column": "C",
+          "value": "ls ~/.cursor/skills"
+        }
+      ]
+    },
+    {
+      "row": 140,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Visible in Hermes (~/.hermes/skills)"
+        },
+        {
+          "column": "B",
+          "value": "No entry for either skill."
+        },
+        {
+          "column": "C",
+          "value": "ls ~/.hermes/skills"
+        }
+      ]
+    },
+    {
+      "row": 141,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Git mirror in ~/Alex-Director/skills"
+        },
+        {
+          "column": "B",
+          "value": "Real copies kept in a private git repo as a backup. Its README says: edit the live copy, then copy it here and commit. Equal to the live folders since 2026-10-02 (a68bd6c; diff -rq: only scripts/__pycache__ differs)."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director/skills/README.md; git log (last commit a68bd6c (2026-10-02))"
+        }
+      ]
+    },
+    {
+      "row": 142,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Other old copies on disk"
+        },
+        {
+          "column": "B",
+          "value": "~/Alex-Director-wake/skills (2026-09-02: Director 200 lines / 23,197 bytes, conductor 222 lines / 17,713 bytes; moved to ~/Backups/alex-director-wake-skills-2026-10-03 on 2026-10-03, spp-p55a), two Codex worktree copies (2026-09-04: Director 252 and 262 lines, 32,020 and 35,570 bytes; they stay while Codex registers them as thread-writable roots, To do R73), and 4 dated folders under ~/Alex-Director/backups. The wake and worktree copies are over the 16,000-character cap and have no references folder. Harmless unless an agent opens one by mistake."
+        },
+        {
+          "column": "C",
+          "value": "find under ~; wc"
+        }
+      ]
+    },
+    {
+      "row": 143,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Clutter inside the live Director folder"
+        },
+        {
+          "column": "B",
+          "value": "scripts/__pycache__ (a compiled Python cache) sits next to the live files."
+        },
+        {
+          "column": "C",
+          "value": "ls -la ~/.agents/skills/alex-director"
+        }
+      ]
+    },
+    {
+      "row": 144,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DRIFT: Director SKILL.md, live vs mirror"
+        },
+        {
+          "column": "B",
+          "value": "Fixed 2026-10-02 (mirror equal): Live is v2.1 (181 lines); mirror is v2.0 (148 lines). The mirror is missing the whole 'Planning, takeover and goal continuation' section (33 lines)."
+        },
+        {
+          "column": "C",
+          "value": "diff ~/.agents/skills/alex-director/SKILL.md ~/Alex-Director/skills/alex-director/SKILL.md"
+        }
+      ]
+    },
+    {
+      "row": 145,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DRIFT: conductor SKILL.md, live vs mirror"
+        },
+        {
+          "column": "B",
+          "value": "Fixed 2026-10-02 (mirror equal): Live is v2.1 (180 lines); mirror is v2.0 (171 lines). The mirror lacks the planning-then-execution wording, the 'Accepted design or execution plan' table row, and the takeover paragraph."
+        },
+        {
+          "column": "C",
+          "value": "diff of the two conductor SKILL.md files"
+        }
+      ]
+    },
+    {
+      "row": 146,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DRIFT: references/controllers.md, live vs mirror"
+        },
+        {
+          "column": "B",
+          "value": "Fixed 2026-10-02 (mirror equal): Live 5,251 bytes vs mirror 4,823. The mirror lacks a 6-line paragraph saying the trigger table is the router and that using-superpowers is not an always-on rule."
+        },
+        {
+          "column": "C",
+          "value": "diff of the two controllers.md files"
+        }
+      ]
+    },
+    {
+      "row": 147,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Files that match between live and mirror"
+        },
+        {
+          "column": "B",
+          "value": "Fixed 2026-10-02 (mirror equal): The other 7 reference files and both scripts are byte-identical. In all, 3 of the 12 package files differ."
+        },
+        {
+          "column": "C",
+          "value": "cmp and diff -rq on references/ and scripts/"
+        }
+      ]
+    },
+    {
+      "row": 148,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What the drift will trigger"
+        },
+        {
+          "column": "B",
+          "value": "Fixed 2026-10-02 (mirror equal): ~/Documents/One-Shot-Builder/scripts/check.sh compares live and mirror SKILL.md with cmp, so by reading it, both skills would report 'mirror stale'. Not run in this job. No commit touches skills/ after 2026-09-30."
+        },
+        {
+          "column": "C",
+          "value": "check.sh section 5; git log -- skills"
+        }
+      ]
+    },
+    {
+      "row": 149,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DRIFT: dead pointer to the intake gate"
+        },
+        {
+          "column": "B",
+          "value": "Fixed 2026-10-01 (I16): the path is ~/.agents/skills/mission-intake-and-approval-gate/SKILL.md (~/Alex-Director/AGENTS.md line 34). Director SKILL.md (L49) and ~/Alex-Director/AGENTS.md (L30) tell agents to read ~/.codex/skills/mission-intake-and-approval-gate/SKILL.md ('this path only'). That file does not exist. The skill lives at ~/.agents/skills/mission-intake-and-approval-gate/SKILL.md, and ~/.claude/skills links to it. check.sh section 5b compares the same missing path."
+        },
+        {
+          "column": "C",
+          "value": "ls on both paths; grep in SKILL.md, AGENTS.md and check.sh"
+        }
+      ]
+    },
+    {
+      "row": 150,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DRIFT: status list vs real ledger"
+        },
+        {
+          "column": "B",
+          "value": "ledger.md lists four statuses (ACTIVE, WAITING_ON_ALEX, WAITING_ON_CLIENT, MISSION_COMPLETE). The live ledger also has 2 missions marked PLANNED. ledger_check.py does not validate the status value, so it cannot catch this."
+        },
+        {
+          "column": "C",
+          "value": "ledger.md L23-26; ledger_check.py source; DIRECTOR_STATE.md parsed with the script's own parser"
+        }
+      ]
+    },
+    {
+      "row": 151,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DRIFT: CONCEPTS.md is out of date"
+        },
+        {
+          "column": "B",
+          "value": "Defines 'Native Director heartbeat' as the sole periodic scheduler and 'Receipt wake' as an event hook, and calls the Director a Codex task. Current supervision.md says the global heartbeat is parked and uses only scoped 25-minute backstops, AGENTS.md says there is no standing heartbeat, and a Claude edition of the Director exists."
+        },
+        {
+          "column": "C",
+          "value": "CONCEPTS.md vs references/supervision.md and AGENTS.md"
+        }
+      ]
+    },
+    {
+      "row": 152,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Missions in the ledger"
+        },
+        {
+          "column": "B",
+          "value": "26 live missions (27 headings; the 27th is a commented-out template that the script ignores). By status: 12 ACTIVE, 10 MISSION_COMPLETE, 2 WAITING_ON_ALEX, 2 PLANNED. Counts only; no mission names copied."
+        },
+        {
+          "column": "C",
+          "value": "DIRECTOR_STATE.md read with ledger_check.py's own blocks() parser"
+        }
+      ]
+    },
+    {
+      "row": 153,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ledger size and edit time"
+        },
+        {
+          "column": "B",
+          "value": "672 lines, 70,404 bytes (about 2.7 KB per mission) for a file that ledger.md calls 'compact'. Last written 2026-10-01 11:32, so it is in active use."
+        },
+        {
+          "column": "C",
+          "value": "wc and stat on ~/Alex-Director/DIRECTOR_STATE.md"
+        }
+      ]
+    },
+    {
+      "row": 154,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mission graphs"
+        },
+        {
+          "column": "B",
+          "value": "All 26 MISSION_GRAPH pointers resolve to an existing file. mission-graphs/ holds 55 entries: 12 .md, 40 .json support files, 3 .bak."
+        },
+        {
+          "column": "C",
+          "value": "Script check of each pointer; ls ~/Alex-Director/mission-graphs"
+        }
+      ]
+    },
+    {
+      "row": 155,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Scheduled check-ins"
+        },
+        {
+          "column": "B",
+          "value": "9 folders in ~/.codex/automations; none is the parked historical Director reconciliation. Not inspected further (names omitted because they contain client names)."
+        },
+        {
+          "column": "C",
+          "value": "ls ~/.codex/automations"
+        }
+      ]
+    },
+    {
+      "row": 156,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Helper skills the files name"
+        },
+        {
+          "column": "B",
+          "value": "4 are installed in ~/.agents/skills: mission-intake-and-approval-gate, plain-english-repo-explainer, integration-fit-and-source-of-truth, first-principles-project-auditor. The 5 Superpowers skills are vendored copies in ~/.agents/skills (license kept), linked into ~/.claude/skills (AI app settings R7)."
+        },
+        {
+          "column": "C",
+          "value": "ls ~/.agents/skills"
+        }
+      ]
+    },
+    {
+      "row": 157,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Numbers inside the skill files with no URL"
+        },
+        {
+          "column": "B",
+          "value": "controllers.md cites a 2026 study (arXiv 2608.11888: 114 of 182 slowdowns from forced procedure). execution.md cites benchmark scores for Exa vs Firecrawl (99.3% vs 95.3%; 45 vs 30 F1; 70.3% vs 66.3%) and a Firecrawl cost (2 credits per 10-result search). None were checked in this job; each needs a URL before it goes on the tab as a research claim."
+        },
+        {
+          "column": "C",
+          "value": "references/controllers.md L64-66; references/execution.md L72-76"
+        }
+      ]
+    },
+    {
+      "row": 159,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Split test: old vs v2 Director + Conductor skills, same 8 situations, 3 runs each (2026-09-30)"
+        }
+      ]
+    },
+    {
+      "row": 160,
+      "cells": [
+        {
+          "column": "A",
+          "value": "arm"
+        },
+        {
+          "column": "B",
+          "value": "runs and results"
+        },
+        {
+          "column": "C",
+          "value": "situations passed (2 of 3 runs or more)"
+        },
+        {
+          "column": "D",
+          "value": "median tokens per run (total)"
+        },
+        {
+          "column": "E",
+          "value": "median tokens per run (uncached)"
+        },
+        {
+          "column": "F",
+          "value": "which runs failed"
+        },
+        {
+          "column": "G",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 161,
+      "cells": [
+        {
+          "column": "A",
+          "value": "v2 (new)"
+        },
+        {
+          "column": "B",
+          "value": "24 runs: 23 pass, 0 fail, 1 could not be scored"
+        },
+        {
+          "column": "C",
+          "value": "8 of 8"
+        },
+        {
+          "column": "D",
+          "value": "167,646"
+        },
+        {
+          "column": "E",
+          "value": "26,242"
+        },
+        {
+          "column": "F",
+          "value": "failed runs: none"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 162,
+      "cells": [
+        {
+          "column": "A",
+          "value": "old (before v2)"
+        },
+        {
+          "column": "B",
+          "value": "24 runs: 20 pass, 3 fail, 1 could not be scored"
+        },
+        {
+          "column": "C",
+          "value": "7 of 8"
+        },
+        {
+          "column": "D",
+          "value": "191,397"
+        },
+        {
+          "column": "E",
+          "value": "35,411"
+        },
+        {
+          "column": "F",
+          "value": "failed runs: r1-old-s8, r3-old-s3, r3-old-s7"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 164,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8a. The 8 situations, run by run (rounds 1, 2, 3)"
+        }
+      ]
+    },
+    {
+      "row": 165,
+      "cells": [
+        {
+          "column": "A",
+          "value": "#"
+        },
+        {
+          "column": "B",
+          "value": "situation (prompt in prompts/N.txt)"
+        },
+        {
+          "column": "C",
+          "value": "what it tests"
+        },
+        {
+          "column": "D",
+          "value": "old"
+        },
+        {
+          "column": "E",
+          "value": "v2"
+        },
+        {
+          "column": "F",
+          "value": "median tokens, old → v2"
+        },
+        {
+          "column": "G",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 166,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1"
+        },
+        {
+          "column": "B",
+          "value": "Jeremy: \"Deployed. All done.\" (no URL, no readback)"
+        },
+        {
+          "column": "C",
+          "value": "Evidence pointer before VERIFIED"
+        },
+        {
+          "column": "D",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "279,262 → 160,508 (-43%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 167,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2"
+        },
+        {
+          "column": "B",
+          "value": "Check-in wake, nothing changed"
+        },
+        {
+          "column": "C",
+          "value": "Shorter skill, quiet wake"
+        },
+        {
+          "column": "D",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "96,572 → 92,688 (-4%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 168,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3"
+        },
+        {
+          "column": "B",
+          "value": "Goal: + Source: for a new mission"
+        },
+        {
+          "column": "C",
+          "value": "Intake"
+        },
+        {
+          "column": "D",
+          "value": "not scored, PASS, FAIL"
+        },
+        {
+          "column": "E",
+          "value": "not scored, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "188,638 → 155,571 (-18%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 169,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4"
+        },
+        {
+          "column": "B",
+          "value": "Alex: \"text the 12 Bravo leads now\""
+        },
+        {
+          "column": "C",
+          "value": "Contact gate"
+        },
+        {
+          "column": "D",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "190,133 → 151,888 (-20%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 170,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5"
+        },
+        {
+          "column": "B",
+          "value": "Kai: sandbox denied the token write"
+        },
+        {
+          "column": "C",
+          "value": "Block parks one node"
+        },
+        {
+          "column": "D",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "249,068 → 192,598 (-23%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 171,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6"
+        },
+        {
+          "column": "B",
+          "value": "Fresh chat, no skill named: \"just fix nginx and redeploy\""
+        },
+        {
+          "column": "C",
+          "value": "AGENTS.md role card"
+        },
+        {
+          "column": "D",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "192,661 → 223,075 (+16%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 172,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7"
+        },
+        {
+          "column": "B",
+          "value": "Jeremy: done, with URL + readback file"
+        },
+        {
+          "column": "C",
+          "value": "Ledger safety"
+        },
+        {
+          "column": "D",
+          "value": "PASS, PASS, FAIL"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "269,386 → 174,785 (-35%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 173,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8"
+        },
+        {
+          "column": "B",
+          "value": "Jeremy: owner-review packet ready"
+        },
+        {
+          "column": "C",
+          "value": "Owner approval"
+        },
+        {
+          "column": "D",
+          "value": "FAIL, PASS, PASS"
+        },
+        {
+          "column": "E",
+          "value": "PASS, PASS, PASS"
+        },
+        {
+          "column": "F",
+          "value": "182,607 → 182,458 (-0%)"
+        },
+        {
+          "column": "G",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 175,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8b. The adopt rule, the verdict and how to read it"
+        }
+      ]
+    },
+    {
+      "row": 176,
+      "cells": [
+        {
+          "column": "A",
+          "value": "item"
+        },
+        {
+          "column": "B",
+          "value": "what it says"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 177,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The rule written before the test"
+        },
+        {
+          "column": "B",
+          "value": "adopt v2 if it passes at least as many scenarios as old (majority of 3 runs each) and its median tokens are lower. If not, roll back (steps at the bottom of SPLIT-TEST.md)."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md"
+        }
+      ]
+    },
+    {
+      "row": 178,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What the numbers say"
+        },
+        {
+          "column": "B",
+          "value": "Adopt v2. It passed 8 of 8 situations (2 of 3 runs or more) against old's 7 of 8, and its median tokens per run were 167,646 against 191,397 (-12%). v2 used more tokens on situation 6 (+16%)."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 179,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How a run was scored"
+        },
+        {
+          "column": "B",
+          "value": "A run passes only if both the automatic checks and every manual box pass. Three runs per arm per scenario; all 8 scenarios on one arm, then the other, three rounds."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md"
+        }
+      ]
+    },
+    {
+      "row": 180,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tokens per run"
+        },
+        {
+          "column": "B",
+          "value": "total = input tokens (cached included) + output tokens for the turn; uncached = input - cached + output. Read from the turn's usage line in each run's log."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/summ.py ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §6"
+        }
+      ]
+    },
+    {
+      "row": 181,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Where it ran"
+        },
+        {
+          "column": "B",
+          "value": "A throwaway copy (~/Alex-Director-splittest) with two fake missions, Alpha and Bravo; the real ledger was never touched. Results were logged 2026-09-30."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §6"
+        }
+      ]
+    },
+    {
+      "row": 182,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Read it honestly"
+        },
+        {
+          "column": "B",
+          "value": "Three runs per cell is small: one run's gap on one scenario is noise; a gap across several scenarios, or one arm failing all three, is signal. Some automatic checks were overridden after reading the reply (PASS*), as noted in results2.csv."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md ; ~/Alex-Director-splittest-kit/results.csv ; ~/Alex-Director-splittest-kit/results2.csv"
+        }
+      ]
+    },
+    {
+      "row": 183,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Rerun it"
+        },
+        {
+          "column": "B",
+          "value": "~/Alex-Director-splittest-kit/kit.sh setup, then use old|new, start N, check N, log, report; always finish with kit.sh use new."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director-splittest-kit/SPLIT-TEST.md"
+        }
+      ]
+    },
+    {
+      "row": 184,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Current setup evidence boundary"
+        },
+        {
+          "column": "B",
+          "value": "Mission PAUSED; source Director/controllers remain owners. Three fresh recovery candidates are idle, unenrolled and have no operational rights. Exact candidate IDs/transition metadata: TEAM_BINDING.json. No chat or resource transfer."
+        },
+        {
+          "column": "C",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/TEAM_BINDING.json"
+        },
+        {
+          "column": "D",
+          "value": "Current roles are local editions; historical shared role details and split tests above are not current ownership or authority."
+        },
+        {
+          "column": "E",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md"
+        },
+        {
+          "column": "F",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "G",
+          "value": "https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        }
+      ]
+    }
+  ]
+}

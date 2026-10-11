@@ -1,0 +1,661 @@
+{
+  "id": "table_942bd99e1842133b1127",
+  "sheet": "1PASS MAP",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Your 1Password map — Connectors vault"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fresh metadata listing with historical usage notes. No passwords, key values or document contents are included."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Topic"
+        },
+        {
+          "column": "B",
+          "value": "What is known"
+        },
+        {
+          "column": "C",
+          "value": "Meaning / how to use it"
+        },
+        {
+          "column": "D",
+          "value": "Evidence"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What this map covers"
+        },
+        {
+          "column": "B",
+          "value": "Connectors vault"
+        },
+        {
+          "column": "C",
+          "value": "Fresh read-only listing through the approved Composio 1Password connection. Other vaults in your 1Password account are outside this route."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Items returned"
+        },
+        {
+          "column": "B",
+          "value": 51
+        },
+        {
+          "column": "C",
+          "value": "Names, item IDs and categories only. No item fields, passwords, key values or document contents were retrieved."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A6"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Access route"
+        },
+        {
+          "column": "B",
+          "value": "1Password → read-only Composio connection → metadata map"
+        },
+        {
+          "column": "C",
+          "value": "Account: _1password_forby-paon. This is a dedicated Connectors-only service account; its scope was not changed."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A146"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How to find an item"
+        },
+        {
+          "column": "B",
+          "value": "Open 1Password → Connectors → search its title"
+        },
+        {
+          "column": "C",
+          "value": "Use the exact item ID to distinguish similarly named items. The Item Map retains both the ID and the fresh title."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A15"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Known purpose and usage"
+        },
+        {
+          "column": "B",
+          "value": "35 current item IDs; 35 catalog entries + 2 save receipts"
+        },
+        {
+          "column": "C",
+          "value": "Matches use exact item IDs. The two save receipts have different columns and are shown separately from consumer/usage facts. These notes are historical documentation, not fresh runtime tests."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Items without saved detail"
+        },
+        {
+          "column": "B",
+          "value": 16
+        },
+        {
+          "column": "C",
+          "value": "Listed live, but no matching item ID in the saved catalog. Purpose, consumers and rotation status remain undocumented here."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A15"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Older item not returned"
+        },
+        {
+          "column": "B",
+          "value": 1
+        },
+        {
+          "column": "C",
+          "value": "The saved catalog contains one ID absent from the fresh response. This does not establish deletion, revocation or a permission change."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A15"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What “listed” proves"
+        },
+        {
+          "column": "B",
+          "value": "Only that metadata was returned"
+        },
+        {
+          "column": "C",
+          "value": "It does not prove a credential is populated, valid, authorized for a task, in active use, rotated or safe to delete. Titles such as “paste here” or “revoke” are retained as names, not executed instructions."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A6"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Groups in the map"
+        },
+        {
+          "column": "B",
+          "value": "Navigation labels inferred from item titles"
+        },
+        {
+          "column": "C",
+          "value": "These make the map easier to browse. They do not establish ownership, effective permissions or real runtime links."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A15"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Read date"
+        },
+        {
+          "column": "B",
+          "value": "2026-10-10T00:37:20.434569+00:00"
+        },
+        {
+          "column": "C",
+          "value": "UTC timestamp for the fresh listing. Existing usage notes keep their original source references and dates."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A6"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Completeness boundary"
+        },
+        {
+          "column": "B",
+          "value": "All 51 returned items mapped; this is not the entire 1Password account"
+        },
+        {
+          "column": "C",
+          "value": "The tool offers no pagination input and returned no pagination indicator. No broader-vault claim is made."
+        },
+        {
+          "column": "D",
+          "value": "Read metadata",
+          "link": "'DOCS - 1Password'!A15"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Browse current items"
+        },
+        {
+          "column": "B",
+          "value": "1PASS ITEMS"
+        },
+        {
+          "column": "C",
+          "value": "Filter by title-derived group, item title or category."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Read saved relationships"
+        },
+        {
+          "column": "B",
+          "value": "1PASS USAGE"
+        },
+        {
+          "column": "C",
+          "value": "Every catalog entry and save receipt is retained, including the one catalog ID not returned."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'1PASS USAGE'!A1"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: 1Password access"
+        },
+        {
+          "column": "B",
+          "value": 2
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Agent dashboards"
+        },
+        {
+          "column": "B",
+          "value": 2
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Agent memory"
+        },
+        {
+          "column": "B",
+          "value": 1
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Business integrations"
+        },
+        {
+          "column": "B",
+          "value": 2
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: CRM and calling"
+        },
+        {
+          "column": "B",
+          "value": 8
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Compute"
+        },
+        {
+          "column": "B",
+          "value": 1
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Computers and network"
+        },
+        {
+          "column": "B",
+          "value": 5
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Connector platform"
+        },
+        {
+          "column": "B",
+          "value": 3
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Creative and research tools"
+        },
+        {
+          "column": "B",
+          "value": 8
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Google Workspace and Cloud"
+        },
+        {
+          "column": "B",
+          "value": 6
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Hosting and shared tools"
+        },
+        {
+          "column": "B",
+          "value": 1
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Models and inference"
+        },
+        {
+          "column": "B",
+          "value": 8
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Other"
+        },
+        {
+          "column": "B",
+          "value": 2
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Group: Research and web data"
+        },
+        {
+          "column": "B",
+          "value": 2
+        },
+        {
+          "column": "C",
+          "value": "Title-based grouping only; use the item table for exact names and IDs."
+        },
+        {
+          "column": "D",
+          "value": "Open items",
+          "link": "'1PASS ITEMS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Find documented file references"
+        },
+        {
+          "column": "B",
+          "value": "1PASS FILE LINKS"
+        },
+        {
+          "column": "C",
+          "value": "Historical hub locations and scripts that reference item titles/IDs. File contents and current access were not checked."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'1PASS FILE LINKS'!A1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "delivery_id": "core-evidence-transactions-20261010-0613",
+  "run_id": "206c63f9-01ee-4618-bf1b-2eff611c8544",
+  "at": "2026-10-10T06:18:10+00:00",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "source_identity": {
+    "tools/verification_evidence.py": "9ce3cacdb31fac79c0447e64c545b4925001e1d9d1b91ebe012297ea57a71f82",
+    "tools/workflow_apply_guard.py": "bb0bfe34873dd6a28dd4f6a1963b4e7d52606203574bdc891e60f385a500d8c2",
+    "tools/reliability_gate.py": "56def1a71c3d7ab186e902bc478bd04e7fd587531cefb3e84d82b89753bc557f"
+  },
+  "APP-REVIEW-01": {
+    "passed": true,
+    "cases": {
+      "reject_unrelated_trace_fixture": {
+        "exit": 1,
+        "rejected": true,
+        "reason": "verification_record_schema_mismatch"
+      },
+      "reject_future_via_record_validation": {
+        "rejected": true,
+        "reason": "verification_record_future_observed_at"
+      },
+      "reject_stale_observed_via_max_age": {
+        "rejected": true,
+        "reason": "verification_record_stale"
+      },
+      "reject_wrong_job_revision_scope": {
+        "rejected": true,
+        "reason": "verification_record_job_mismatch"
+      },
+      "fixture_positive_control": {
+        "accepted": true,
+        "reason": "ok"
+      },
+      "verify_handler_with_issued_record": {
+        "exit": 0,
+        "accepted": true,
+        "operation_count": 1,
+        "matching_event_count": 1,
+        "error": null
+      }
+    }
+  },
+  "APP-REVIEW-03": {
+    "passed": true,
+    "cases": {
+      "reject_intruder_transfer_actor": {
+        "exit": 1,
+        "rejected": true,
+        "error": "transfer actor must match expected_owner"
+      },
+      "reject_foreign_handoff_operation": {
+        "exit": 1,
+        "rejected": true,
+        "error": "handoff job_id mismatch"
+      },
+      "cas_fault_rolls_back_engine": {
+        "first_apply_failed": true,
+        "operation_count_after_fault": 0,
+        "handoff_revision_after_fault": 1,
+        "error": "handoff revision advance lost race"
+      },
+      "replay_after_fault_succeeds_once": {
+        "replay_exit": 0,
+        "operation_count": 1,
+        "matching_event_count": 1,
+        "handoff_owner": "owner-b",
+        "acceptance_retained": [
+          "check"
+        ],
+        "error": null
+      },
+      "concurrent_transfer_vs_mutate": {
+        "transfer": {
+          "exit": 0,
+          "error": ""
+        },
+        "mutate": {
+          "exit": 1,
+          "error": "handoff revision advance lost race"
+        },
+        "one_succeeded": true
+      }
+    }
+  },
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+      "sha256": "4168161f95308a19f1db62e950e0f376a43ed7cb76414a8a0a25de6d02fcf900",
+      "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json"
+    }
+  ],
+  "prior_attempt_hashes_linked": [
+    {
+      "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+      "sha256": "4168161f95308a19f1db62e950e0f376a43ed7cb76414a8a0a25de6d02fcf900",
+      "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json"
+    }
+  ],
+  "independent_verification": "not_claimed",
+  "overall": "passed",
+  "queue_remaining_required": [
+    "APP-REVIEW-02",
+    "APP-REVIEW-04",
+    "full queue browser/controlled-edit/REL-01/synthetic",
+    "real SDK BLOCKED"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "573c6f47-5037-40f4-833b-c5ee390f0737",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "pip-json-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "pip-json-good-verify",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "artifact_hash_matches": true,
+    "declared_outcome_verified": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T07:16:34+00:00",
+  "max_age_seconds": 604800,
+  "observed_proofs": [
+    {
+      "criterion": "proof-bound",
+      "relative_path": "work/task-artifacts/pip-json-job/t1-55f66c2c5aeb.txt",
+      "sha256": "55f66c2c5aeb275ff5b1ae26b321d5c0b8ceda8c034b19c2643e046d024919f3",
+      "byte_length": 13,
+      "production_id": "94ea2fd12bbff05c0b48d20f123cf2698157c3c286177aff673bc1c4e71e8deb",
+      "contract_revision": 1,
+      "contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+      "result_matches_declaration": true
+    }
+  ],
+  "record_sha256": "6ddf0c7295b3f91e2908edb05747e44b3ea7936526562ffebcaf013a06654dd3"
+}

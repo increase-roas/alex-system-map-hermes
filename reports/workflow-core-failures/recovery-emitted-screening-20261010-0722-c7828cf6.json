@@ -1,0 +1,96 @@
+{
+  "app02_job_recovery": {
+    "job_a_governing_applied": true,
+    "job_a_actionable_source": "workflow_correction",
+    "job_a_stale_not_actionable": true,
+    "job_a_affected_outputs": 1,
+    "job_b_no_governing": true,
+    "job_b_next_independent": true,
+    "job_b_no_leak_from_a": true,
+    "db_a_sha256": "8cdfbd0acb4a61a3c5599ed54dc9ae64def83c2964ad9b1563b437ba03c686b9",
+    "db_b_sha256": "464d75eca326973c3e9c826319f2ccf4510b024bcb319ff5d870387f30a73e5c"
+  },
+  "app04_emitted": {
+    "diagnose_text": {
+      "exit": 0,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "has_shape": true,
+      "stderr_empty": true
+    },
+    "service_error_probe": {
+      "exit": 1,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "has_shape": true,
+      "stderr_screened": true,
+      "stdout_only_emission": true
+    },
+    "trace_missing_canary_probe": {
+      "exit": 1,
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "has_shape": true
+    },
+    "trace_export": {
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "has_shape": true
+    },
+    "workflow_events": {
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "has_shape": true
+    },
+    "trace_list": {
+      "canary_removed": true,
+      "nonempty": true,
+      "benign_marker": true,
+      "has_shape": true
+    },
+    "read_source_allowlist": {
+      "exit": 1,
+      "error_present": true,
+      "canary_removed": true
+    }
+  },
+  "app04_node_bridge": {
+    "exit": 0,
+    "parsed": {
+      "screened": true,
+      "benign": false,
+      "nonempty": true,
+      "init_ok": true
+    },
+    "canary_removed_from_combined_output": true,
+    "benign_or_shape": true,
+    "nonempty_stdout": true
+  },
+  "app02_browser": {
+    "exit": 1,
+    "delivery": "recovery-emitted-screening-20261010-0722",
+    "checks": {
+      "health_ok": true,
+      "build_identity": "present",
+      "overall": "partial",
+      "error": "SyntaxError: Unexpected end of JSON input"
+    }
+  },
+  "matrix_findings_addressed": {
+    "APP-REVIEW-02.1": "job-scoped governing next via workflow corrections; UI actionable vs superseded",
+    "APP-REVIEW-02.2": "two isolated job DBs; no cross-job correction leak",
+    "APP-REVIEW-04.1": "FAKE-canary injected probes; exit/status/shape/nonempty asserted",
+    "APP-REVIEW-04.2": "events/trace-list/trace-get/diagnose/service-error screened",
+    "APP-REVIEW-04.3": "trace consumer shape preserved (trace+spans top-level on export)",
+    "REL-01": "queued_not_passed"
+  },
+  "controlled_producer_independent": {
+    "acknowledged": "D02 stripping VERIFIED local controlled production only (independent-controlled-producer-review 07:21:07)",
+    "scope_preserved": "Does not claim external agent labor"
+  }
+}

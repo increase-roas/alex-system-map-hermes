@@ -1,0 +1,1859 @@
+{
+  "id": "table_72227d3d5e4b1ecd0856",
+  "sheet": "S04-20 Relationships",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source asset key"
+        },
+        {
+          "column": "B",
+          "value": "Relationship"
+        },
+        {
+          "column": "C",
+          "value": "Target asset key / reference"
+        },
+        {
+          "column": "D",
+          "value": "Binding / label"
+        },
+        {
+          "column": "E",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "F",
+          "value": "Resolution"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|0900d6d0-02d4-4d82-ab5f-fcfb632bc043",
+          "link": "'S04-05 Cloudflare'!A60"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http://localhost:8644"
+        },
+        {
+          "column": "D",
+          "value": "hooks.increaseroas.ai"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        },
+        {
+          "column": "F",
+          "value": "Configured tunnel origin reference; connectivity untested"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|0900d6d0-02d4-4d82-ab5f-fcfb632bc043",
+          "link": "'S04-05 Cloudflare'!A60"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http://127.0.0.1:9119"
+        },
+        {
+          "column": "D",
+          "value": "dashboard.increaseroas.ai"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        },
+        {
+          "column": "F",
+          "value": "Configured tunnel origin reference; connectivity untested"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|9b09467d-9c1c-4f4c-9b00-021ad8239f20",
+          "link": "'S04-05 Cloudflare'!A61"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http://127.0.0.1:8789"
+        },
+        {
+          "column": "D",
+          "value": "ghl-command-origin.increaseroas.com"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        },
+        {
+          "column": "F",
+          "value": "Configured tunnel origin reference; connectivity untested"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|ebfa4bab-cd3a-4b51-9508-3b65613164f0",
+          "link": "'S04-05 Cloudflare'!A62"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http://127.0.0.1:8650"
+        },
+        {
+          "column": "D",
+          "value": "hermes-canary.hottublaunch.com"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        },
+        {
+          "column": "F",
+          "value": "Configured tunnel origin reference; connectivity untested"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|cd93a127-ac04-407c-8686-c3be371f3559",
+          "link": "'S04-05 Cloudflare'!A63"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http://127.0.0.1:8100"
+        },
+        {
+          "column": "D",
+          "value": "mcp.increaseroas.com"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        },
+        {
+          "column": "F",
+          "value": "Configured tunnel origin reference; connectivity untested"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: durable_object_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Durable Object namespace|d8302b544d8047bd8c63bed5e37c4783",
+          "link": "'S04-05 Cloudflare'!A24"
+        },
+        {
+          "column": "D",
+          "value": "STATE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|52acc48a-234e-4378-ae83-b8a27c5792d3",
+          "link": "'S04-05 Cloudflare'!A21"
+        },
+        {
+          "column": "D",
+          "value": "FUNNEL_DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|23ea2fb3-13fd-49fd-8ed2-bb4d231ed38d",
+          "link": "'S04-05 Cloudflare'!A16"
+        },
+        {
+          "column": "D",
+          "value": "FUNNEL_DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ghl-command-universal",
+          "link": "'S04-05 Cloudflare'!A81"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|f0f6c0862c3c4facab45082d4f5da886",
+          "link": "'S04-05 Cloudflare'!A33"
+        },
+        {
+          "column": "D",
+          "value": "OAUTH_KV"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|6891bc02-67f7-49fc-9fec-e4c98cb247e5",
+          "link": "'S04-05 Cloudflare'!A19"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-dashboard-connection-monitor",
+          "link": "'S04-05 Cloudflare'!A84"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|eba34ebbcb754840abc05fc3b7e8550f",
+          "link": "'S04-05 Cloudflare'!A32"
+        },
+        {
+          "column": "D",
+          "value": "MONITOR_STATE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-hermes-intake",
+          "link": "'S04-05 Cloudflare'!A86"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|4b19bf15-7aa4-4105-94c8-313beba1e907",
+          "link": "'S04-05 Cloudflare'!A17"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|f9cef164-167b-4dc0-a0b8-72f52e62e5f6",
+          "link": "'S04-05 Cloudflare'!A20"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|b9dcfe14-581f-4e95-85ed-b8d8d033c776",
+          "link": "'S04-05 Cloudflare'!A22"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: service"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "D",
+          "value": "SELF"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|7f2461b0-e7dc-4147-ad25-bbf7da7519d7",
+          "link": "'S04-05 Cloudflare'!A10"
+        },
+        {
+          "column": "D",
+          "value": "TRACKING_DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15",
+          "link": "'S04-05 Cloudflare'!A100"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|6dcc9bf0-d206-4f03-916e-bc3e659a68d2",
+          "link": "'S04-05 Cloudflare'!A8"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15",
+          "link": "'S04-05 Cloudflare'!A100"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-harbor-heat-15-images",
+          "link": "'S04-05 Cloudflare'!A56"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15",
+          "link": "'S04-05 Cloudflare'!A100"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|9a73f3c56d9d42b7b05c10a530264882",
+          "link": "'S04-05 Cloudflare'!A30"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|4ac51d4b-2d9e-4f6c-96d0-59ed4f74238e",
+          "link": "'S04-05 Cloudflare'!A11"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-harbor-heat-15-images",
+          "link": "'S04-05 Cloudflare'!A56"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|2fb321aeb0ac47d9b9279be9c6559f36",
+          "link": "'S04-05 Cloudflare'!A25"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|755c0c04-02d2-4f97-bac6-4533f81c203a",
+          "link": "'S04-05 Cloudflare'!A12"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-hot-tub-store-8-images",
+          "link": "'S04-05 Cloudflare'!A57"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|39cd9ffcb3d04f5bb4289f0e0ca006fc",
+          "link": "'S04-05 Cloudflare'!A26"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|346d1111-34ba-49ab-80d7-674447290026",
+          "link": "'S04-05 Cloudflare'!A13"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-hot-tub-store-8-images",
+          "link": "'S04-05 Cloudflare'!A57"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|ca5b7e356be241378868de5126a82d46",
+          "link": "'S04-05 Cloudflare'!A31"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|c1db2f6a-a617-4aa4-afc3-25b08482767d",
+          "link": "'S04-05 Cloudflare'!A9"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-sun-pool-17-images",
+          "link": "'S04-05 Cloudflare'!A58"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|97b0f5cddbd44c84948b28009f4eaa07",
+          "link": "'S04-05 Cloudflare'!A29"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|d42bddfc-7198-4c01-bb5c-c4562bf2153a",
+          "link": "'S04-05 Cloudflare'!A14"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-theme-matrix-qa-7-images",
+          "link": "'S04-05 Cloudflare'!A59"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|68da75bc08c543a88a2e29b8f548db6b",
+          "link": "'S04-05 Cloudflare'!A27"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: d1"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|D1 database|6a026a78-a395-402b-9e73-0f6f4765362a",
+          "link": "'S04-05 Cloudflare'!A15"
+        },
+        {
+          "column": "D",
+          "value": "DB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: r2_bucket"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|R2 bucket|website-theme-matrix-qa-7-images",
+          "link": "'S04-05 Cloudflare'!A59"
+        },
+        {
+          "column": "D",
+          "value": "PRODUCT_IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: kv_namespace"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|KV namespace|77aeffc13ad8469e87725b7860447b9a",
+          "link": "'S04-05 Cloudflare'!A28"
+        },
+        {
+          "column": "D",
+          "value": "SESSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|78cd0a617d03c42e4ce92f81b6e80bd6b9c16e72",
+          "link": "'S04-05 Cloudflare'!A107"
+        },
+        {
+          "column": "B",
+          "value": "Worker service"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "D",
+          "value": "dev-rag-worker"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|78cd0a617d03c42e4ce92f81b6e80bd6b9c16e72",
+          "link": "'S04-05 Cloudflare'!A107"
+        },
+        {
+          "column": "B",
+          "value": "DNS zone"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|DNS zone|d28649ade0cea715a0cee34a920776bf",
+          "link": "'S04-05 Cloudflare'!A68"
+        },
+        {
+          "column": "D",
+          "value": "d28649ade0cea715a0cee34a920776bf"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|60d893484cfdba739ed53af25f778714ed793cde",
+          "link": "'S04-05 Cloudflare'!A108"
+        },
+        {
+          "column": "B",
+          "value": "Worker service"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "D",
+          "value": "dev-rag-worker"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|60d893484cfdba739ed53af25f778714ed793cde",
+          "link": "'S04-05 Cloudflare'!A108"
+        },
+        {
+          "column": "B",
+          "value": "DNS zone"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|DNS zone|287c3dc657c2d4fc7a3eb0514851d3b0",
+          "link": "'S04-05 Cloudflare'!A66"
+        },
+        {
+          "column": "D",
+          "value": "287c3dc657c2d4fc7a3eb0514851d3b0"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|050ea74517bcf4df0df9f68d53d0734e5fc838fd",
+          "link": "'S04-05 Cloudflare'!A109"
+        },
+        {
+          "column": "B",
+          "value": "Worker service"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "D",
+          "value": "website-hot-tub-store-8"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|050ea74517bcf4df0df9f68d53d0734e5fc838fd",
+          "link": "'S04-05 Cloudflare'!A109"
+        },
+        {
+          "column": "B",
+          "value": "DNS zone"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|DNS zone|45d19405a710eae2468b6ddb807022dd",
+          "link": "'S04-05 Cloudflare'!A67"
+        },
+        {
+          "column": "D",
+          "value": "45d19405a710eae2468b6ddb807022dd"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|329eba4648f699f3fa97b018bd573cb1e4092ed0",
+          "link": "'S04-05 Cloudflare'!A110"
+        },
+        {
+          "column": "B",
+          "value": "Worker service"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|pts-quote-funnel",
+          "link": "'S04-05 Cloudflare'!A95"
+        },
+        {
+          "column": "D",
+          "value": "pts-quote-funnel"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|329eba4648f699f3fa97b018bd573cb1e4092ed0",
+          "link": "'S04-05 Cloudflare'!A110"
+        },
+        {
+          "column": "B",
+          "value": "DNS zone"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|DNS zone|4492695baa74ed42f0762860dacb99ea",
+          "link": "'S04-05 Cloudflare'!A72"
+        },
+        {
+          "column": "D",
+          "value": "4492695baa74ed42f0762860dacb99ea"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|ce1b1fa598e9c4fd543d28789454ce8cf7844b84",
+          "link": "'S04-05 Cloudflare'!A111"
+        },
+        {
+          "column": "B",
+          "value": "Worker service"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|pts-quote-funnel",
+          "link": "'S04-05 Cloudflare'!A95"
+        },
+        {
+          "column": "D",
+          "value": "pts-quote-funnel"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker custom domain|ce1b1fa598e9c4fd543d28789454ce8cf7844b84",
+          "link": "'S04-05 Cloudflare'!A111"
+        },
+        {
+          "column": "B",
+          "value": "DNS zone"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|DNS zone|4492695baa74ed42f0762860dacb99ea",
+          "link": "'S04-05 Cloudflare'!A72"
+        },
+        {
+          "column": "D",
+          "value": "4492695baa74ed42f0762860dacb99ea"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker zone route|bb2934a63c034aa085eea7421d158c64",
+          "link": "'S04-05 Cloudflare'!A112"
+        },
+        {
+          "column": "B",
+          "value": "Routes to Worker"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "D",
+          "value": "hottublaunch-main"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker zone route|6609b6a5a4144dd6b9c97b784774bb95",
+          "link": "'S04-05 Cloudflare'!A113"
+        },
+        {
+          "column": "B",
+          "value": "Routes to Worker"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "D",
+          "value": "hottublaunch-main"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker zone route|15c11e9b317a413abe33b1a05f0ed47c",
+          "link": "'S04-05 Cloudflare'!A114"
+        },
+        {
+          "column": "B",
+          "value": "Routes to Worker"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "D",
+          "value": "htl-practice-funnel"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker zone route|d87cd982d3c8405986a64dc91626e761",
+          "link": "'S04-05 Cloudflare'!A115"
+        },
+        {
+          "column": "B",
+          "value": "Routes to Worker"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|pts-quote-funnel",
+          "link": "'S04-05 Cloudflare'!A95"
+        },
+        {
+          "column": "D",
+          "value": "pts-quote-funnel"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker zone route|0ca74d73466e487eb2107955b7afc749",
+          "link": "'S04-05 Cloudflare'!A116"
+        },
+        {
+          "column": "B",
+          "value": "Routes to Worker"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare|Worker|pts-quote-funnel",
+          "link": "'S04-05 Cloudflare'!A95"
+        },
+        {
+          "column": "D",
+          "value": "pts-quote-funnel"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|6fbffd8c-65b1-4f2e-993e-f283532109bf",
+          "link": "'S04-14 Computers'!A2"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|3cc5025d-98d3-4b0e-bde3-cd45cd062b85",
+          "link": "'S04-13 Orgo Workspaces'!A2"
+        },
+        {
+          "column": "D",
+          "value": "IR 1"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|d9b475e2-47b2-46d4-b8eb-102564f93283",
+          "link": "'S04-14 Computers'!A3"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|b4d13606-19d3-4802-9f5c-82819995129a",
+          "link": "'S04-13 Orgo Workspaces'!A3"
+        },
+        {
+          "column": "D",
+          "value": "EA (Javar)"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|2472bdb6-ae8f-4417-a4d0-103df5618d60",
+          "link": "'S04-14 Computers'!A4"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|87d53061-ba01-4ff0-94c7-67057700af27",
+          "link": "'S04-13 Orgo Workspaces'!A4"
+        },
+        {
+          "column": "D",
+          "value": "B2B Agent (Sales)"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|7cedbb4b-0610-4241-907e-edc19b45cf57",
+          "link": "'S04-14 Computers'!A5"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|6cda999c-708e-4121-8531-383640f97290",
+          "link": "'S04-13 Orgo Workspaces'!A5"
+        },
+        {
+          "column": "D",
+          "value": "CSM"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|c8aed3e5-6228-449e-b744-9d02466669c1",
+          "link": "'S04-14 Computers'!A6"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|d4e5f8db-c4c1-4727-8fc0-c876a4602e52",
+          "link": "'S04-13 Orgo Workspaces'!A6"
+        },
+        {
+          "column": "D",
+          "value": "Media"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|47a4ba7c-9908-44f7-aa32-b7da8e18ac85",
+          "link": "'S04-14 Computers'!A7"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|c523a888-eec5-4501-b25d-b6d591a3a90a",
+          "link": "'S04-13 Orgo Workspaces'!A7"
+        },
+        {
+          "column": "D",
+          "value": "Ops — Increase ROAS"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo|Computer|0c1ce74e-176b-48f1-bf80-c38139036164",
+          "link": "'S04-14 Computers'!A8"
+        },
+        {
+          "column": "B",
+          "value": "Workspace membership"
+        },
+        {
+          "column": "C",
+          "value": "Orgo|Workspace|87ba4c76-bc3a-4d2c-84d6-c26f2f1b3117",
+          "link": "'S04-13 Orgo Workspaces'!A8"
+        },
+        {
+          "column": "D",
+          "value": "Increase Roas - Max"
+        },
+        {
+          "column": "E",
+          "value": "work/orgo-metadata.json"
+        },
+        {
+          "column": "F",
+          "value": "Asset ID matched"
+        }
+      ]
+    }
+  ]
+}

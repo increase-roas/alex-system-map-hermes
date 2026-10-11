@@ -1,0 +1,5720 @@
+{
+  "id": "table_44d62fca99a4337cf6ab",
+  "sheet": "S03-25 Composio",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        },
+        {
+          "column": "B",
+          "value": "connection"
+        },
+        {
+          "column": "C",
+          "value": "surface"
+        },
+        {
+          "column": "D",
+          "value": "on_off"
+        },
+        {
+          "column": "E",
+          "value": "account_it_reaches"
+        },
+        {
+          "column": "F",
+          "value": "can_do"
+        },
+        {
+          "column": "G",
+          "value": "where_the_key_lives"
+        },
+        {
+          "column": "H",
+          "value": "status"
+        },
+        {
+          "column": "I",
+          "value": "how_verified"
+        },
+        {
+          "column": "J",
+          "value": "notes"
+        },
+        {
+          "column": "K",
+          "value": "target_home"
+        },
+        {
+          "column": "L",
+          "value": "setup_step"
+        },
+        {
+          "column": "M",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup _1password (ac_FFWFZ84tq6l7)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "None now. Login ca_PSjKn84-Yd_T (made 20:40:00Z) was paused (INACTIVE) and ca_tUN0EokIrKzF is EXPIRED; auth config ac_FFWFZ84tq6l7 DISABLED at 22:13:43Z. It had run as the 1Password robot 'composio' with read and write on 26 vaults. Both logins were deleted 2026-10-02 23:04:44Z. The auth config was deleted 2026-10-03 11:53Z (readback 404)."
+        },
+        {
+          "column": "F",
+          "value": "6 tools: list vaults; list, get, create, update and delete items in those 26 vaults"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted: both logins 2026-10-02 23:04:44Z (Alex's yes naming CG-SZRA; HTTP 200, readback 404) and the disabled auth config 2026-10-03 11:53Z (Alex's yes, CG-MA2Q; HTTP 200, readback 404)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 22:13Z (spp-p31a): the pause and the disable read back, a 1Password call through Composio fails with 'No active connection', and the hosted connector's search offers no 1Password tool"
+        },
+        {
+          "column": "J",
+          "value": "Removed on Alex's decision (prompt injection could make a chat read or wipe any vault the robot reaches). Both logins were deleted 2026-10-02 after his yes naming CG-SZRA, and the robot's token was already dead (2026-10-01 22:40Z; To do R59). A disabled auth config hides its logins: list them with auth_config_ids."
+        },
+        {
+          "column": "K",
+          "value": "Removed (Alex, 2026-10-01)"
+        },
+        {
+          "column": "L",
+          "value": "Done: logins 2026-10-02 23:04:44Z (scripts/p31a_delete_composio_1p_logins.py); auth config 2026-10-03 11:53Z (ccf-dc1, work/2026-10-01_director-finish/notes/dead-configs.md)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "Composio apify (apify_ruby-asor)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "user increaseroas (id FpTERFxmbf9oH7NoW, alex@increaseroas.com, \"Alexander Bloomfield\", STARTER/BRONZE)"
+        },
+        {
+          "column": "F",
+          "value": "full Apify API"
+        },
+        {
+          "column": "G",
+          "value": "Composio-held API token"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "verified: APIFY_USERS_ME_GET (free). Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "composio execute"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "Composio apify_mcp (apify_mcp_musgu-jaina)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (the account it reached was never verified: no users/me tool in this toolkit)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE per list. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: weaker duplicate (12-tool subset); the kept Apify route is proven"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup apify_mcp (ac_dLAjctysX1Vt)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Its only login (apify_mcp_musgu-jaina) was deleted 2026-10-01. Kept route: apify (apify_ruby-asor)"
+        },
+        {
+          "column": "K",
+          "value": "Replaced"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Asana"
+        },
+        {
+          "column": "B",
+          "value": "Composio asana_logie-fratch"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "Asana read/write"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE; dashboard Active. 2026-10-01: a Cursor test chat read Asana through Composio. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Account still not read back"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Astro Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio CUSTOM_ASTRO_DOCS (keyless, Astro's own docs server)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "none (public docs, no login)"
+        },
+        {
+          "column": "F",
+          "value": "1 tool: SEARCH_ASTRO_DOCS"
+        },
+        {
+          "column": "G",
+          "value": "none (no key needed)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: SEARCH_ASTRO_DOCS \"content collections\" returned 10 doc chunks through Composio Connect. Not in the live login list: keyless toolkits have no login by design (not re-checked in the end-of-day pull)"
+        },
+        {
+          "column": "J",
+          "value": "Composio refuses a login for a no-auth toolkit. The tune-up refresh skips the 5 keyless docs readers. A search result may say \"No Active connection\": ignore it"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_atlas_cloud (custom_atlas_cloud_gash-tights, ca_lc_OOuJPDa_0) → hub /atlas-cloud/mcp"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Alex's Atlas Cloud account"
+        },
+        {
+          "column": "F",
+          "value": "15 tools: image, video and audio generation, models, balance"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Atlas Cloud API key\"; the Composio login holds only the hub route token"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: ATLAS_GET_BALANCE and ATLAS_LIST_MODELS answered (no paid generation). Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Generation spends money: it follows the Spend approval line. Claude Code's local Atlas copy was removed 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ClickUp"
+        },
+        {
+          "column": "B",
+          "value": "Composio clickup_pisco-spolia"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED attempt. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex 2026-10-01. The dead login was deleted"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ClickUp"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup clickup (ac_SFDNAI2Iwnw5)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex 2026-10-01. Its dead login (clickup_pisco-spolia) was deleted"
+        },
+        {
+          "column": "K",
+          "value": "Dropped"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Composio cloudflare_mcp (cloudflare_mcp_janice-seid)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached account a3f549867f040e13df33e5bd18f785f4)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "verified: read-only GET /accounts via CLOUDFLARE_MCP_EXECUTE (before it was deleted). Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Cloudflare's own Code Mode server. Replaced and deleted 2026-10-01 after custom_cloudflare_api (token that never expires) was proven"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_cloudflare_api (custom_cloudflare_api_sari-sud, ca_IUuu0MrmsQya)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Account a3f549867f040e13df33e5bd18f785f4: 13 zones, 30 Workers"
+        },
+        {
+          "column": "F",
+          "value": "Whole Cloudflare API (2,500+ endpoints) via SEARCH / EXECUTE / DOCS; full Read & Write token"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Cloudflare API — Composio (account token)\" (token + R2 S3 keys), pushed by push_key_to_composio.py"
+        },
+        {
+          "column": "H",
+          "value": "working: THE Cloudflare route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: listed 13 zones + 30 Workers; created and deleted a KV namespace; token verify active. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Cloudflare's own mcp.cloudflare.com; no expiry, no IP filter (the connector does not support IP-filtered tokens). In the health check. Card ~/.agents/tools/cards/cloudflare.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup cloudflare (ac_W8YuxS1FNTbe)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Composio's own 24-tool Cloudflare toolkit; never connected. The Cloudflare card ranks it weaker than custom_cloudflare_api"
+        },
+        {
+          "column": "K",
+          "value": "Not used"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup cloudflare_mcp (ac_f-M8Ks1a9EhX)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Its login (cloudflare_mcp_janice-seid, OAuth) was deleted 2026-10-01 after custom_cloudflare_api was proven"
+        },
+        {
+          "column": "K",
+          "value": "Replaced"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Context7"
+        },
+        {
+          "column": "B",
+          "value": "Composio CUSTOM_CONTEXT7 (keyless, Context7's own docs server)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "none (public docs, no login)"
+        },
+        {
+          "column": "F",
+          "value": "2 tools: RESOLVE_LIBRARY_ID, QUERY_DOCS"
+        },
+        {
+          "column": "G",
+          "value": "none (no key needed)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: RESOLVE_LIBRARY_ID \"next.js\" returned /vercel/next.js and 4 more libraries through Composio Connect. Not in the live login list: keyless toolkits have no login by design (not re-checked in the end-of-day pull)"
+        },
+        {
+          "column": "J",
+          "value": "Runs on Context7's free anonymous rate limit. Adding a key later means deleting and re-registering the toolkit"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discord"
+        },
+        {
+          "column": "B",
+          "value": "Composio discord_brainy-haired"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "Discord read/send"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE (per-toolkit list); dashboard Active. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ElevenLabs"
+        },
+        {
+          "column": "B",
+          "value": "Composio elevenlabs (elevenlabs_rangle-malo)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Pro subscription, active, first name Alex"
+        },
+        {
+          "column": "F",
+          "value": "TTS, voices"
+        },
+        {
+          "column": "G",
+          "value": "Composio-held API key"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "verified: ELEVENLABS_GET_USER_INFO / GET_USER_SUBSCRIPTION_INFO. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "composio execute"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exa"
+        },
+        {
+          "column": "B",
+          "value": "Composio exa (exa_beode-vain)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified (no free identity tool; EXA_SEARCH costs money)"
+        },
+        {
+          "column": "F",
+          "value": "search, contents, answer, research, Exa Agent, Websets (20 tools)"
+        },
+        {
+          "column": "G",
+          "value": "Composio-held API key"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE per connections list. 2026-10-01: EXA_SEARCH answered through Composio Connect in Claude Code. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "composio. Agent runs, research and Websets cost money: they follow the Spend approval line. Claude app and local Exa copies are not routes"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup firecrawl (ac_G8QUkEZDw-4x)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Login firecrawl_che-aday (ca_s4u_SyGN6QGq): the Firecrawl Personal Team of alex@increaseroas.com, 1,000 credits a month (free plan)"
+        },
+        {
+          "column": "F",
+          "value": "30 tools: scrape, batch scrape, crawl, map, search, extract, agent, credit and token usage, llms.txt; composio proxy reaches any api.firecrawl.dev path"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route for Firecrawl)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: FIRECRAWL_SCRAPE on example.com (log_FiOIg1JFbxaJ) and FIRECRAWL_CREDIT_USAGE_GET (log_OXN-IPWOQBhx) passed"
+        },
+        {
+          "column": "J",
+          "value": "The one Firecrawl route for pages and jobs. Whole-site crawls to files go through the Firecrawl CLI via firecrawl_op.py, with the key from 1Password per run. Firecrawl's hosted MCP (CUSTOM_FIRECRAWL_MCP) was deleted after Alex's yes (CG-KH45)."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done (2026-10-01)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireflies"
+        },
+        {
+          "column": "B",
+          "value": "Composio fireflies_kiyi-agaze"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "meeting transcripts"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foreplay"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_foreplay (custom_foreplay_sain-cogue, ca_Ewk5F5TGN7Yg)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Alex's Foreplay account (100k credits/mo)"
+        },
+        {
+          "column": "F",
+          "value": "31 tools: ad library, boards, swipe files, brand analytics"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Foreplay API key\" (rotated 2026-10-01)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: boards + usage returned. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "The old key leaked into a session log; it was rotated 2026-10-01 (the old key returns 401). Codex's plaintext copy was removed"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: rotated, pushed into this login and proven with a read (CUSTOM_FOREPLAY_GET_USER_USAGE)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "Composio \"GITHUB\" (github_lipase-modern)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "increaseroasir (id 258097502, free plan). Same account as gh active"
+        },
+        {
+          "column": "F",
+          "value": "full GitHub toolkit"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "verified: GITHUB_GET_THE_AUTHENTICATED_USER. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "composio execute. Always pass the account (the CLI without --account uses the login changed most recently). Card: ~/.agents/tools/cards/github.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "Composio \"JAVANTE GITHUB\" (github_tina-inwit)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "IRAGENTJAVANTE (id 335151839, free plan). Different account"
+        },
+        {
+          "column": "F",
+          "value": "full GitHub toolkit"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "verified: same tool. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "composio execute. Only for the Javante agent's own work"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitLab"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup gitlab (ac_D7fsUTLkeDai)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex 2026-10-01. No login left"
+        },
+        {
+          "column": "K",
+          "value": "Dropped"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "Composio gmail_savour-quinin"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "SEEN WORKING 2026-10-05: current registered workbook metadata read as alex@; final same-ID bytes verified in sync receipt after publication"
+        },
+        {
+          "column": "I",
+          "value": "Google Workspace card; current task metadata log_cjimISEDbY03 and hosted log_r-BbacMipFvo. Final byte verification: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/work/connectors-reconciliation-20261005/sync-receipt.json. Limited read/publication scope; no email or other account action tested."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; the Google robot (custom_google_robot) covers Alex's mailbox"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "Composio gmail_supawn-inmost"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; the Google robot (custom_google_robot) covers Alex's mailbox"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "Composio GMAIL gmail_redry-illeck \"Javante's Work email\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "agent@increaseroas.com (the alias says Javante)"
+        },
+        {
+          "column": "F",
+          "value": "Gmail"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GMAIL_GET_PROFILE. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "Composio GMAIL gmail_yana-anime \"Alex work email\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached alex@increaseroas.com)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GMAIL_GET_PROFILE. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: replaced by the Google robot (custom_google_robot), proven read + write as any user"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "Composio GMAIL gmail_ziffs-thoric \"Javar Work Email\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "jay@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Gmail"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GMAIL_GET_PROFILE. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "Composio googleads_fagara-tested"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; working login for the same account proven"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "Composio googleads_mile-gogo"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; working login for the same account proven"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEADS googleads_maned-sprack (always_allow)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Manager account 1640283674 \"Increase Roas Inc.\". All 8 client accounts under it are cancelled, suspended or closed (2026-10-01). Admins: alex@, franky@, Angel@"
+        },
+        {
+          "column": "F",
+          "value": "Read all; campaigns, ad groups, audiences built in (31 tools, 21 write); everything else through composio proxy (full Google Ads API v23). Can spend: T5"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "working: THE Google Ads route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: GAQL customer_client + customer_user_access read; createCustomerClient validateOnly passed; proxy v23 OK. Campaign writes not proven (no live client account). Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "The one Google Ads route. Composio adds its shared developer token. Waiting on franky@ or Angel@ to approve the admin invites for contact@ and anthony@. Card: ~/.agents/tools/cards/google-ads.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "Composio google_analytics_first-alif"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01 (expired)"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLE_ANALYTICS google_analytics_uncase-worded (always_allow)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached all 10 GA4 properties, reports only)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 before deletion: RUN_REPORT on 543642271 Paradise Spas = 962 sessions/7 days; create key event via proxy = 403 ACCESS_TOKEN_SCOPE_INSUFFICIENT. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: read-only Google login, a weaker second way in. custom_ga4_admin covers every property with reports and changes"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_ga4_admin_arundo-sower"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "All 10 GA4 properties in 6 accounts (acts as alex@increaseroas.com via domain-wide delegation)"
+        },
+        {
+          "column": "F",
+          "value": "Reports and changes: properties, web data streams + snippet, key events, custom dimensions/metrics, Google Ads links. Same robot has GTM scopes"
+        },
+        {
+          "column": "G",
+          "value": "Hub token; SA key on OpenClaw"
+        },
+        {
+          "column": "H",
+          "value": "working: THE GA4 route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: create+delete key event on all 4 client accounts and 550831897; web data stream create+delete; client report on 256987299. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "via https://mcp.increaseroas.com/ga4-admin/mcp. Occasional 503: retry once. Change only properties of current clients (knowledge/clients.md). Card: ~/.agents/tools/cards/ga4.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Later: load its key from 1Password instead of a file on OpenClaw"
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_htl_google_tracking_ungirt-appear"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (what it reached was never inspected)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "Added before this session; not inspected. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: Alex said cut; custom_ga4_admin covers it"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup google_analytics (ac_a3KncOcLnd0Q)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Both of its logins (the expired one and the read-only Google login) were deleted 2026-10-01. custom_ga4_admin is the one GA4 route"
+        },
+        {
+          "column": "K",
+          "value": "Replaced"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup custom_htl_google_tracking (ac_CeVs2EDDRo9N)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "unused"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "unused (0 logins)"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: sign-in setup ENABLED, 0 logins"
+        },
+        {
+          "column": "J",
+          "value": "Its login (custom_htl_google_tracking_ungirt-appear) was deleted 2026-10-01: Alex said cut"
+        },
+        {
+          "column": "K",
+          "value": "Kept (test toolkit)"
+        },
+        {
+          "column": "L",
+          "value": "Kept: the G01 member test uses this setup (work/2026-10-01_setup-playbook/scripts/g01_member_test.py; Composio custom routes R17; ccf-dc2 2026-10-03)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Calendar"
+        },
+        {
+          "column": "B",
+          "value": "Composio googlecalendar_fracas-conor"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; the Google robot covers Calendar"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Calendar"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLECALENDAR googlecalendar_rome-chinny (no alias)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached alex@increaseroas.com primary calendar)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GOOGLECALENDAR_GET_CALENDAR primary. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: replaced by the Google robot (custom_google_robot)"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Calendar"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup googlecalendar (ac_6FQoKet80FDp)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Both Calendar logins were deleted 2026-10-01. The Google robot covers Calendar"
+        },
+        {
+          "column": "K",
+          "value": "Replaced"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio googledocs_flood-codist"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio googledocs_khoka-entone"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEDOCS googledocs_defer-knar \"Javar's Google Docs\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "jay@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Docs"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. userinfo. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEDOCS googledocs_rehoe-cocky (no alias, always_allow)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached alex@increaseroas.com)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. proxy userinfo. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: replaced by the Google robot (custom_google_robot)"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEDOCS googledocs_tabby-phosis \"Javante's Google Docs\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "agent@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Docs"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. userinfo. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "Composio googledrive_orlo-ergot"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "Composio googledrive_rake-percur"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEDRIVE googledrive_gaily-perit \"Javante Google drive\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "agent@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Drive"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GOOGLEDRIVE_GET_ABOUT. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEDRIVE googledrive_kari-else (no alias)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached alex@increaseroas.com)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GOOGLEDRIVE_GET_ABOUT. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: replaced by the Google robot (custom_google_robot)"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLEDRIVE googledrive_prover-wore \"Javar's Google Drive\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "jay@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Drive"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. GOOGLEDRIVE_GET_ABOUT. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "Composio googlesheets_uppush-istoke"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "Composio googlesheets_wane-gregal"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "CLI refused it: EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLESHEETS googlesheets_gashes-unbag (no alias)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached alex@increaseroas.com)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. userinfo. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: replaced by the Google robot (custom_google_robot)"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLESHEETS googlesheets_incur-aghan \"Javar's Google Sheets\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "jay@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Sheets"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. userinfo. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "Composio GOOGLESHEETS googlesheets_paga-swure \"Javante's Google sheet\""
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "agent@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "Sheets"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE. userinfo. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Javar and Javante agents use this login. Not for Alex, Manny or Anthony (the Google robot is their route). Moving it to the robot is Alex's call later."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Tag Manager"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_google_tag_manager_quip-salar"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED in CLI. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired duplicate GTM login"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Tag Manager"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_google_tag_manager_bardel-serau"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Acts as alex@increaseroas.com (domain-wide delegation, switch /opt/mcp-hub/gtm-act-as-alex.sh). Reaches GTM accounts 6316753028 Increase Roas and 6359407641 Increase Roas (Official) only; no client GTM accounts sit under Alex"
+        },
+        {
+          "column": "F",
+          "value": "GTM read, edit and publish. Publishing puts tags live: ask Alex first"
+        },
+        {
+          "column": "G",
+          "value": "Hub token 1Password 'MCP hub token'; SA key on OpenClaw /opt/mcp-hub/creds/tagging.json"
+        },
+        {
+          "column": "H",
+          "value": "working: THE GTM route (2026-10-01)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: account list returned 2 (1 before the switch); created a test workspace on IncreaseROAS Web, then removed it with the robot's own access. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Server runs on Orgo OpenClaw via https://mcp.increaseroas.com/gtm/mcp. Delete power is unclear: the GA4 card says deletes are not delegated, the handoff says delete scopes were added later. Not re-tested. Alex is only \"user\" (read) in the \"Increase Roas\" GTM account; its admin is another Google account (Alex's to-do)"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Later: load its keys from 1Password instead of files on OpenClaw"
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace (Gmail, Drive, Docs, Sheets, Calendar, Admin)"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_google_robot (custom_google_robot_fenter-snork, ca_vm6rcasgNEIk) → hub /google-robot/mcp"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "All 16 increaseroas.com users (pass user=, default alex@)"
+        },
+        {
+          "column": "F",
+          "value": "Gmail, Drive, Docs, Sheets, Slides, Forms, Calendar, Contacts, Tasks, Admin: whole Workspace API via google_api + 12 shortcut tools (13 tools)"
+        },
+        {
+          "column": "G",
+          "value": "1Password: Google service account \"tagging-admin\" (key) + \"MCP Google robot token\""
+        },
+        {
+          "column": "H",
+          "value": "working: THE Workspace route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: read as alex@, contact@, anthony@; created and deleted a Doc, a Sheet and a Gmail draft; created and deleted an Admin group; all through Composio and the hub. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Replaces Alex's per-person Google logins and the old Workspace Admin connector (both deleted 2026-10-01). Javar's and Javante's Composio Google logins stay for their agents. Password resets use google_api. Emails to clients and deleting client data ask Alex first. Card: ~/.agents/tools/cards/google-workspace.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Alex added the 39 delegated scopes in Google Admin. Open for Alex: yes/no to giving the robot Owner at the Google Cloud org"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_google_workspace_admin_parody-boma"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (it held the wrong token)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE in Composio, but the gate refused its token (it held the shared token, not the Workspace Admin one). Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: returned 401 on list_users; it held the wrong token"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_google_workspace_admin_flange-imaret"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it acted as alex@increaseroas.com, 16 users)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted). It could list/get users and reset passwords"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "LIST_USERS ok via Composio. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: replaced by the Google robot (custom_google_robot), proven read + write as any user. The hub route was retired too"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup custom_google_workspace_admin (ac_2LHHIwnfmf4q)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Both logins were deleted 2026-10-01 (one held the wrong token). The Google robot replaced it. The custom toolkit itself (CUSTOM_GOOGLE_WORKSPACE_ADMIN) stayed until 2026-10-03, when it was deleted on Alex's yes (ccf-dc1, CG-K76T): 404, 0 tools"
+        },
+        {
+          "column": "K",
+          "value": "Replaced"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "HeyGen"
+        },
+        {
+          "column": "B",
+          "value": "Composio heygen_plower-ceiler"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "AI video generation (uses credits)"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Higgsfield"
+        },
+        {
+          "column": "B",
+          "value": "Composio higgsfield (higgsfield_belout-embus, ca_yDkZXqXVoUUy)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Alex's Higgsfield account"
+        },
+        {
+          "column": "F",
+          "value": "12 tools: Soul image, Seedance video, image-to-video, character references, cost estimate"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Higgsfield API key\" (key_id + secret)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: LIST_SOUL_V2_STYLES returned 33 styles (free). Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Generation spends credits: it follows the Spend approval line"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "IR Notes (tool notes)"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_ir_notes (custom_ir_notes_privy-bulse, ca_zTNUL9d6xZDl) → hub /ir-notes"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Increase ROAS's own notes service (no outside account)"
+        },
+        {
+          "column": "F",
+          "value": "Gives any AI the app rules cards: CUSTOM_IR_NOTES_GET_APP_RULES"
+        },
+        {
+          "column": "G",
+          "value": "Hub route token (held by this Composio login); its 1Password item name: not checked"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: CUSTOM_IR_NOTES_GET_APP_RULES answered through Composio Connect (Claude Code) and through Codex. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "The cards live in ~/.agents/tools/cards; a commit hook syncs them to this server. That hook runs on the Mac, so the sync still depends on the Mac"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Later: run the notes sync off the Mac"
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jobber"
+        },
+        {
+          "column": "B",
+          "value": "Composio jobber_clunk-fient"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "field-service CRM read/write"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Linear"
+        },
+        {
+          "column": "B",
+          "value": "Composio linear (linear_flap-urtica, ca_-3kNQV1b0-xq)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "F",
+          "value": "full Linear toolkit (47 tools)"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: LINEAR_WHO_AM_I returned alex@. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make"
+        },
+        {
+          "column": "B",
+          "value": "Composio make (make_gerbe-ashake, ca_nkMxaCSYt2gD)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "us1.make.com, org Increase ROAS (1111422), team My Team"
+        },
+        {
+          "column": "F",
+          "value": "full Make toolkit, token with all scopes"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Make API key\" (credential + full = https://us1.make.com), pushed into Composio"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: GET_CURRENT_AUTHORIZATION showed all scopes; LIST_TEAMS returned My Team. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Only token left on Make's API page; 4 OAuth grants (ChatGPT + 3 Cursor) were revoked 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "Composio metaads_bugi-thrimp"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; the system-user login (ca_7i7CdMbStKc9) replaced it"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "Composio metaads_uncord-taken"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: expired; the system-user login (ca_7i7CdMbStKc9) replaced it"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "Composio metaads (metaads_daub-putage, ca_7i7CdMbStKc9) (API key: system user token)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "System user Manus (IR Business Manus App): 57 ad accounts"
+        },
+        {
+          "column": "F",
+          "value": "Ads read + write incl. budgets (T5), pixels, CAPI (SEND_CONVERSION_EVENTS), insights; Graph API via proxy"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Meta Ads — system user token (IR Business Manus App)\" pushed by push_key_to_composio.py"
+        },
+        {
+          "column": "H",
+          "value": "working: THE Meta route (2026-10-01)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: METAADS_GET_AD_ACCOUNTS returned 57; debug_token SYSTEM_USER, never expires, 22 permissions; same token as the meta CLI. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Javar keeps javar_meta. Card ~/.agents/tools/cards/meta-ads.md. In the connector health check"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Notion"
+        },
+        {
+          "column": "B",
+          "value": "Composio notion (notion_alroot-sair)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (it reached workspace \"Increaseroas\", owner Alexander Bloomfield)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "verified: NOTION_GET_ABOUT_USER + NOTION_LIST_USERS. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Deleted 2026-10-01: it saw only 57 pages under one parent; replaced by notion_lepas-limbie (whole workspace)"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Notion"
+        },
+        {
+          "column": "B",
+          "value": "Composio notion_lepas-limbie \"Notion full workspace\" (ca_hq3X8KNk3nWe)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Increaseroas workspace: teamspace + private pages + People (Alex ticked all pages)"
+        },
+        {
+          "column": "F",
+          "value": "57 tools (29 write)"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: NOTION_FETCH_DATA returned 61 items incl. the workspace-level Notes and People databases. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "J",
+          "value": "Reconnected with every page ticked. The workspace also lists a native \"Notion MCP\" bot"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenAI Docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio CUSTOM_OPENAI_DOCS (keyless, developers.openai.com MCP)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "none (public docs, no login)"
+        },
+        {
+          "column": "F",
+          "value": "5 tools: SEARCH_OPENAI_DOCS, LIST_OPENAI_DOCS, FETCH_OPENAI_DOC, LIST_API_ENDPOINTS, GET_OPENAPI_SPEC"
+        },
+        {
+          "column": "G",
+          "value": "none (no key needed)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: SEARCH_OPENAI_DOCS \"Responses API streaming\" returned 55 hits through Composio Connect. Not in the live login list: keyless toolkits have no login by design (not re-checked in the end-of-day pull)"
+        },
+        {
+          "column": "J",
+          "value": "Cursor and Codex local copies were removed 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "People Data Labs"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup peopledatalabs (ac_rOHvobDbJlJH)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "unused"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "unused (0 logins)"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: sign-in setup ENABLED, 0 logins"
+        },
+        {
+          "column": "J",
+          "value": "No login. No record says why it was set up, and nothing uses it (checked 2026-10-03, ccf-dc2)"
+        },
+        {
+          "column": "K",
+          "value": "Not used"
+        },
+        {
+          "column": "L",
+          "value": "Waiting on Alex: keep or drop (ccf-dc2, 2026-10-03). If he drops it, an agent deletes it after his yes."
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime Intellect"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_prime_intellect_lave-outact"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Prime account 'Increaseroas' (wallet -$2.10)"
+        },
+        {
+          "column": "F",
+          "value": "list pods/GPU availability (read-only server)"
+        },
+        {
+          "column": "G",
+          "value": "Hub token; 1Password 'Prime Intellect API key'"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "LIST_PODS ok via Composio. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Later: load its keys from 1Password instead of files on OpenClaw"
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qt docs"
+        },
+        {
+          "column": "B",
+          "value": "Composio CUSTOM_QT_DOCS (keyless, qt-docs-mcp.qt.io)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "none (public docs, no login)"
+        },
+        {
+          "column": "F",
+          "value": "2 tools: QT_DOCUMENTATION_SEARCH, QT_DOCUMENTATION_READ"
+        },
+        {
+          "column": "G",
+          "value": "none (no key needed)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: QT_DOCUMENTATION_SEARCH \"QTimer singleShot\" returned qtimer.html and qtimerevent.html through Composio Connect. Not in the live login list: keyless toolkits have no login by design (not re-checked in the end-of-day pull)"
+        },
+        {
+          "column": "J",
+          "value": "The Claude app's Qt docs plugin was removed in the app batch on 2026-10-01 (decision W05), so this is the only Qt docs route."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done. The Claude app's Qt docs plugin was removed 2026-10-01 (W05)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "QuickBooks"
+        },
+        {
+          "column": "B",
+          "value": "Composio \"SSA - Start Scale Automate (personal brand, S-Corp)\" (quickbooks_arris-bigamy, ca_hX6MOzV-O7CS)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Alex's personal brand S-Corp. Company info returns \"No company name\" (not set in QuickBooks), so go by the word id"
+        },
+        {
+          "column": "F",
+          "value": "accounting read/write"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: company info read (per the QuickBooks card). Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Always name the company. Money moves and anything sent to customers ask Alex. Card: ~/.agents/tools/cards/quickbooks.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "QuickBooks"
+        },
+        {
+          "column": "B",
+          "value": "Composio \"Increase Roas (partnership, Phoenix)\" (quickbooks_genre-lapsed, ca_p-2iG6dDdXF_)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Increase ROAS, the partnership in Phoenix. Company info returns \"Increase Roas\""
+        },
+        {
+          "column": "F",
+          "value": "accounting read/write"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: company info returned \"Increase Roas\" (per the QuickBooks card). Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "The default company. Always name the company. Money moves and anything sent to customers ask Alex. Card: ~/.agents/tools/cards/quickbooks.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Retell AI"
+        },
+        {
+          "column": "B",
+          "value": "Composio retellai_testes-devil"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "voice agents/calls (can cost money)"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sentry"
+        },
+        {
+          "column": "B",
+          "value": "Composio sentry (sentry_venada-dama, ca_S-viSC950kAZ)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "org increaseroas"
+        },
+        {
+          "column": "F",
+          "value": "full Sentry toolkit (209 tools)"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: SENTRY_LIST_ORGANIZATIONS returned increaseroas. Live pull 2026-10-01: ACTIVE"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shopify"
+        },
+        {
+          "column": "B",
+          "value": "Composio shopify (not connected yet)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "not connected"
+        },
+        {
+          "column": "E",
+          "value": "none yet"
+        },
+        {
+          "column": "F",
+          "value": "none until connected"
+        },
+        {
+          "column": "G",
+          "value": "1Password \"Shopify API key (paste here)\" (empty until Alex fills it)"
+        },
+        {
+          "column": "H",
+          "value": "waiting on Alex"
+        },
+        {
+          "column": "I",
+          "value": "Not checked: the Composio auth type and fields get checked once the 1Password item is filled (handoff says S2S_OAUTH2 or OAUTH2)"
+        },
+        {
+          "column": "J",
+          "value": "The Claude app Shopify connector went with the Small Business plugin on 2026-10-01 (Claude app connectors R57, R84); Composio will be the only route"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Alex creates the store app (Settings > Apps > Develop apps > \"Composio\", all Admin API scopes) and fills the 1Password item. Then the agent connects Composio shopify and proves a read"
+        },
+        {
+          "column": "M",
+          "value": "1 now"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SkillsMP"
+        },
+        {
+          "column": "B",
+          "value": "Composio CUSTOM_SKILLSMP (keyless, skillsmp.com)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "none (public catalog, no login)"
+        },
+        {
+          "column": "F",
+          "value": "3 tools: SEARCH_SKILLS, GET_SKILL, LIST_CATEGORIES"
+        },
+        {
+          "column": "G",
+          "value": "none (no key needed)"
+        },
+        {
+          "column": "H",
+          "value": "working (THE route)"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: SEARCH_SKILLS \"google ads audit\" returned 2 skills through Composio Connect. Not in the live login list: keyless toolkits have no login by design (not re-checked in the end-of-day pull)"
+        },
+        {
+          "column": "J",
+          "value": "The local copies in Claude Code and Codex were removed 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "Composio \"Alex Slack Account\" (slack_rehood-hinney)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Increase ROAS (T0BGV107N3T), user alex (U0BGPQ2APT7). Same identity as slack-session"
+        },
+        {
+          "column": "F",
+          "value": "full Slack toolkit; house rule: do not send"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth (Composio vault)"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "verified: SLACK_TEST_AUTH ok=true. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "composio connections list --toolkit slack. Always pass the account: Composio has no \"set default\" setting. Card: ~/.agents/tools/cards/slack.md"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "Composio \"Lonestar Slack Account\" (slack_east-reps)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Lone Star client workspace (lonestar-vow3057.slack.com) per the Slack card; not re-tested today"
+        },
+        {
+          "column": "F",
+          "value": "full Slack toolkit"
+        },
+        {
+          "column": "G",
+          "value": "Composio OAuth"
+        },
+        {
+          "column": "H",
+          "value": "UNKNOWN — unverified; no new successful operation proved"
+        },
+        {
+          "column": "I",
+          "value": "unverified: SLACK_TEST_AUTH returned \"Tool execution denied by user\" earlier and was not retried. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Use only when the task names Lone Star. Anything posted in that workspace needs Alex's yes first"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SpyFu"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_spyfu_crural-myaria"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "SpyFu API account (paid key)"
+        },
+        {
+          "column": "F",
+          "value": "22 tools: competitors, keywords, ads, history, usage (paid per call)"
+        },
+        {
+          "column": "G",
+          "value": "Hub token; keys on OpenClaw /opt/mcp-hub/creds/spyfu.env; the Mac folder ~/.codex/mcp-servers/spyfu (its 1Password Environments mount) moved to ~/Backups/spyfu-2026-10-03 on 2026-10-03 (spp-p55a)"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "SPYFU_STATUS ok via Composio. 2026-10-01: 20 new tools each answered (about $0.02 of test spend, inside plan credit). Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Hub server fixed 2026-10-01 (reads env before the Mac mount path). Codex's local SpyFu copy was removed"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Later: load its keys from 1Password instead of files on OpenClaw"
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Supabase"
+        },
+        {
+          "column": "B",
+          "value": "Composio supabase_deeply-tocome"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED attempt. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex 2026-10-01. The dead login was deleted"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Supabase"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup supabase (ac_Ho6PPzYgvYQ9)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex 2026-10-01. Its dead login (supabase_deeply-tocome) was deleted. The Supabase plugin may still be listed inside Cursor (Alex uninstalls it there)"
+        },
+        {
+          "column": "K",
+          "value": "Dropped"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Vercel"
+        },
+        {
+          "column": "B",
+          "value": "Composio vercel_except-cliona"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none now (the Vercel account it reached was never verified)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted). It could list deploys and projects"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "Dashboard: Active before deletion. The live pull still listed it as ACTIVE; the delete came afterwards (STATUS.md, run-log). Not re-pulled."
+        },
+        {
+          "column": "J",
+          "value": "Alex said remove Vercel. Deleted 2026-10-01 by another session after the live pull (STATUS.md, run-log); the pull still listed it"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Vercel"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup vercel (ac_lhnSW04zxAGP)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-03 11:53Z (HTTP 200, readback 404)"
+        },
+        {
+          "column": "I",
+          "value": "Composio auth-config pull 2026-10-01 17:29Z: 0 logins (fix-k01-w20 after-list)"
+        },
+        {
+          "column": "J",
+          "value": "Its login (vercel_except-cliona) was deleted 2026-10-01 at Alex's word; the 17:29Z auth-config pull confirms 0 logins."
+        },
+        {
+          "column": "K",
+          "value": "Dropped"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-03: empty setup deleted on Alex's yes (ccf-dc2, CG-JRCF), readback 404"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "WhatsApp"
+        },
+        {
+          "column": "B",
+          "value": "Composio whatsapp_apron-scant"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED attempt. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex (needs the WhatsApp Business Platform, not set up). The dead login was deleted 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "WhatsApp"
+        },
+        {
+          "column": "B",
+          "value": "Composio whatsapp_corium-frond"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (dead login, deleted)"
+        },
+        {
+          "column": "F",
+          "value": "none now (deleted)"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted"
+        },
+        {
+          "column": "I",
+          "value": "EXPIRED attempt. Not in the live Composio list 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex (needs the WhatsApp Business Platform, not set up). The dead login was deleted 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted in Composio 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "WhatsApp"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup whatsapp (ac_R_udKvG46quH)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "deleted"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "deleted 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01 17:28–17:29Z: DELETE /api/v3/auth_configs/<id> returned 200; a GET read back 404 (fix-k01-w20)"
+        },
+        {
+          "column": "J",
+          "value": "Dropped by Alex (needs the WhatsApp Business Platform, not set up). Both dead logins were deleted 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "Dropped"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01: empty setup deleted (W20)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xAI Research"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom_xai_research_mir-borgh"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "xAI API account (key holder unverified)"
+        },
+        {
+          "column": "F",
+          "value": "search X/web, research (paid per call)"
+        },
+        {
+          "column": "G",
+          "value": "Hub token; xAI key on OpenClaw /opt/mcp-hub/creds/xai-key, equal to 1Password 'xAI API key (xai-research)' (1Password item catalog R34); the Mac copy went to the Trash 2026-10-03"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "USAGE_SUMMARY ok via Composio. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Cursor's local xai-research entry was removed 2026-10-01. The Mac key file matched 1Password 'xAI API key (xai-research)' and went to the Trash 2026-10-03 (spp-p55a)"
+        },
+        {
+          "column": "K",
+          "value": "Composio custom MCP ← Orgo OpenClaw"
+        },
+        {
+          "column": "L",
+          "value": "Done. Later: load its keys from 1Password instead of files on OpenClaw"
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "YouTube"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setup youtube (ac_hgs5jlb3dSFE)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "unused"
+        },
+        {
+          "column": "E",
+          "value": "none (0 logins)"
+        },
+        {
+          "column": "F",
+          "value": "none until someone connects a login"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "unused (0 logins)"
+        },
+        {
+          "column": "I",
+          "value": "Live pull 2026-10-01: sign-in setup ENABLED, 0 logins"
+        },
+        {
+          "column": "J",
+          "value": "No login. No record says why it was set up, and nothing uses it (checked 2026-10-03, ccf-dc2)"
+        },
+        {
+          "column": "K",
+          "value": "Not used"
+        },
+        {
+          "column": "L",
+          "value": "Waiting on Alex: keep or drop (ccf-dc2, 2026-10-03). If he drops it, an agent deletes it after his yes."
+        },
+        {
+          "column": "M",
+          "value": "3 later"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Zoom"
+        },
+        {
+          "column": "B",
+          "value": "Composio zoom_dour-dusk"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "Zoom meetings"
+        },
+        {
+          "column": "G",
+          "value": "Composio"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "ACTIVE; dashboard Active. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Decided 2026-10-02 (Alex: 'zoom is for me'): no admin app; this login is Alex's own and reads his meetings (To do R13)"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom MCP ghl-command-builder (custom_ghl_command_builder_dimble-genian, account ca_o1-FA70PbU3x)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "GHL Command builder registry: 49 registered accounts (IncreaseRoas + RevStead), incl. HTL B2B, Natural Sanitation, LONESTAR SALES"
+        },
+        {
+          "column": "F",
+          "value": "5 tools: switch_location, get_location, ghl_find_tools, ghl_read, ghl_write (workflows, funnels, forms, pipelines)"
+        },
+        {
+          "column": "G",
+          "value": "OAuth grant held by Composio; connection password in 1Password Connectors: \"GHL Command Builder (ghl-command-builder) — connection password\""
+        },
+        {
+          "column": "H",
+          "value": "working: THE GHL builder route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: composio execute switch_location + get_location returned Hot Tub Launch B2B (AG47jEV5rVUrGLt5FlKO). Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Builder worker fixed 2026-10-01 so Composio sign-in completes (double-submit replay, send-once page, hand-off page)"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom MCP ghl-oauth-crm (custom_ghl_oauth_crm_ransom-adiate, account ca_OIfo_F6scXwN)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency: 303 sub-accounts (verified count), incl. HTL B2B and Natural Sanitation"
+        },
+        {
+          "column": "F",
+          "value": "10 gateway tools: list/scan locations, search/describe/execute operations, ghl.request for any API path"
+        },
+        {
+          "column": "G",
+          "value": "Composio (pushed from 1Password Connectors \"GHL OAuth CRM (ghl-oauth-crm) — gateway key\" by connectors-sync; never typed)"
+        },
+        {
+          "column": "H",
+          "value": "working: THE GHL CRM route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: GHL_LIST_LOCATIONS via Composio returned count 303. Live pull 2026-10-01: ACTIVE."
+        },
+        {
+          "column": "J",
+          "value": "Created by ~/.agents/tools/connectors/push_key_to_composio.py pattern"
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio (setting)"
+        },
+        {
+          "column": "B",
+          "value": "Enhanced Control (Connect > Settings)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "off"
+        },
+        {
+          "column": "E",
+          "value": "all 15 logins that had saved approval policies"
+        },
+        {
+          "column": "F",
+          "value": "every tool runs with no Composio-side approval"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "HISTORICAL EVIDENCE — last recorded 2026-09-30–2026-10-03; current health UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "Turned off 2026-10-01 at Alex's request; Slack TEST_AUTH and Notion WHO_AM_I then succeeded through Composio Connect in Claude Code"
+        },
+        {
+          "column": "J",
+          "value": "Why: it needs approval popups (MCP elicitation) that Claude Code didn't show, so Slack and Notion failed. Our own ask-first rule still covers client messages, spend and client data deletes."
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale"
+        },
+        {
+          "column": "B",
+          "value": "Composio tailscale (tailscale_eaved-netter, login ca_Qr4XRwIDafoq)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "the tailnet increaseroas.com (Tailscale API v2)"
+        },
+        {
+          "column": "F",
+          "value": "Tailscale API calls through composio proxy. Used read-only so far: the policy, devices, users, key metadata, settings and the audit log, plus validate-only policy checks (POST /acl/validate). The token's scopes aren't recorded."
+        },
+        {
+          "column": "G",
+          "value": "Composio holds the API key (auth config ac_PuHkSI8S2VOZ, API_KEY). It is the key in the 1Password Connectors item 'Tailscale API token', confirmed by title and time on 2026-10-03 (values not compared): Tailscale API key kqEDA2QHaj11CNTRL (description '1pass') was made at 21:16:37Z, the item saved at 21:17:06Z and this login created at 21:17:21Z."
+        },
+        {
+          "column": "H",
+          "value": "working: ACTIVE (Composio REST read 2026-10-03)"
+        },
+        {
+          "column": "I",
+          "value": "Created 2026-10-01 21:17:21Z (Composio REST read 2026-10-03). The network-rules job read the policy and ran the validate calls through it (2026-10-02/03); the claims audit read the policy through it (2026-10-03)."
+        },
+        {
+          "column": "J",
+          "value": "Saving a policy stays Alex's (a security setting): agents only read and validate. composio proxy reads stdin, so run it with < /dev/null. The API key expires 2026-12-30 (Tailscale key metadata), and this login stops working then."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Manus API"
+        },
+        {
+          "column": "B",
+          "value": "Composio manus_gum-dub (ca_rqLSFAGY4UHY)"
+        },
+        {
+          "column": "C",
+          "value": "Composio native manus + v2 proxy"
+        },
+        {
+          "column": "D",
+          "value": "configured"
+        },
+        {
+          "column": "E",
+          "value": "Manus user 310519663447996219"
+        },
+        {
+          "column": "F",
+          "value": "Read tasks/projects/files; paid execution requires separate approval"
+        },
+        {
+          "column": "G",
+          "value": "1Password Connectors → Manus API key; Composio injection only"
+        },
+        {
+          "column": "H",
+          "value": "SEEN WORKING Oct3: task/identity reads; end-to-end agent integration UNKNOWN"
+        },
+        {
+          "column": "I",
+          "value": "~/.agents/tools/cards/manus.md: log_ylTAwg9Q6t3F; log_DZeC4lefD6Wo; v2 request IDs"
+        },
+        {
+          "column": "J",
+          "value": "Native metadata v1 differs from v2; do not guess pagination/state mapping. No new task, webhook, public sharing or paid test performed. Meta system user named Manus is a different object."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Search toolkit manus; name manus_gum-dub; harmless read only"
+        },
+        {
+          "column": "M",
+          "value": "No mission ownership imported"
+        }
+      ]
+    }
+  ]
+}

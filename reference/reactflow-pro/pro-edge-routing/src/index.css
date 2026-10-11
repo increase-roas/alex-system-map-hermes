@@ -1,0 +1,68 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  margin: 0;
+}
+
+.react-flow__node-example {
+  .handles {
+    position: absolute;
+    display: flex;
+    justify-content: space-around;
+
+    &[data-side='top'],
+    &[data-side='bottom'] {
+      left: 0;
+      right: 0;
+    }
+
+    &[data-side='left'],
+    &[data-side='right'] {
+      top: 0;
+      bottom: 0;
+      flex-direction: column;
+    }
+
+    &[data-side='top'] {
+      top: 0;
+      transform: translateY(-50%);
+    }
+
+    &[data-side='bottom'] {
+      bottom: 0;
+      transform: translateY(50%);
+    }
+
+    &[data-side='right'] {
+      right: 0;
+      transform: translateX(50%);
+    }
+
+    &[data-side='left'] {
+      left: 0;
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Beacuse we're using flexbox to position the handles rather than manual absolute
+  positioning, we need to make sure we undo some of the default styles React Flow
+  applies. */
+  .react-flow__handle {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    left: auto;
+    transform: none;
+
+    /* Source handles are highlighted to make it clearer to see which handles to
+    use to create a new edge. */
+    &.source {
+      border-color: var(--color-primary);
+    }
+  }
+}

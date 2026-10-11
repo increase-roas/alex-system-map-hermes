@@ -1,0 +1,184 @@
+@import '@xyflow/react/dist/style.css' layer(base);
+
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+@config "../../tailwind.config.ts";
+
+@layer utilities {
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 0 0% 96.1%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 74% 58%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+:root {
+  --sidebar: hsl(0 0% 98%);
+  --sidebar-foreground: hsl(240 5.3% 26.1%);
+  --sidebar-primary: hsl(240 5.9% 10%);
+  --sidebar-primary-foreground: hsl(0 0% 98%);
+  --sidebar-accent: hsl(240 4.8% 95.9%);
+  --sidebar-accent-foreground: hsl(240 5.9% 10%);
+  --sidebar-border: hsl(220 13% 91%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+.dark {
+  --sidebar: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(224.3 76.3% 48%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
+}
+
+@theme inline {
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* ===== React Flow brand theme (added by Claude 2026-10-10; original in ~/Backups/visualizer-claude-edits-20261010) ===== */
+:root {
+  --rf-pink: #ff0071;
+  --rf-pink-soft: rgba(255, 0, 113, 0.14);
+}
+.dark {
+  --background: 0 0% 7.8%;
+  --card: 0 0% 10.2%;
+  --popover: 0 0% 10.2%;
+  --muted: 0 0% 13.7%;
+  --border: 0 0% 18%;
+  --input: 0 0% 18%;
+  --primary: 333 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --ring: 333 100% 50%;
+}
+.react-flow {
+  --xy-background-color: transparent;
+  --xy-background-pattern-color: #3a3a3a;
+  --xy-edge-stroke: #8a8a8a;
+  --xy-edge-stroke-selected: var(--rf-pink);
+  --xy-handle-background-color: #9a9a9a;
+  --xy-handle-border-color: #141414;
+  --xy-node-border-radius: 12px;
+  --xy-controls-button-background-color: #1a1a1a;
+  --xy-controls-button-background-color-hover: #262626;
+  --xy-controls-button-color: #e5e5e5;
+  --xy-controls-button-border-color: #2e2e2e;
+}
+.react-flow.light {
+  --xy-background-pattern-color: #d4d4d4;
+  --xy-edge-stroke: #a3a3a3;
+  --xy-controls-button-background-color: #ffffff;
+  --xy-controls-button-color: #171717;
+  --xy-controls-button-border-color: #e5e5e5;
+}
+.react-flow__edge-path { stroke-dasharray: 5 4; stroke-width: 1.5; }
+.react-flow__edge.selected .react-flow__edge-path,
+.react-flow__edge:hover .react-flow__edge-path { stroke: var(--rf-pink); }
+.react-flow__edge-textbg { fill: #1a1a1a; }
+.react-flow.light .react-flow__edge-textbg { fill: #ffffff; }
+.react-flow__edge-text { fill: #a3a3a3; font-size: 10px; }
+.react-flow__handle { width: 9px; height: 9px; }
+.react-flow__node:hover > div,
+.react-flow__node.selected > div { border-color: var(--rf-pink) !important; box-shadow: 0 0 0 1px var(--rf-pink), 0 0 24px var(--rf-pink-soft); }
+.react-flow__node-layerNode > div { border-left: 3px solid var(--rf-pink) !important; }
+.react-flow__controls { border-radius: 10px; overflow: hidden; box-shadow: none; border: 1px solid #2e2e2e; }

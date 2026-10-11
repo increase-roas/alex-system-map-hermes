@@ -1,0 +1,221 @@
+{
+  "id": "table_77a9b6565d7717500ae1",
+  "sheet": "MAP AUDIT",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What was missing — and what was added"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Audit limited to the files already collected. No app calls, secret reads, connection changes or deployments. Original source evidence retains its dates and limits."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Audit area"
+        },
+        {
+          "column": "B",
+          "value": "Result"
+        },
+        {
+          "column": "C",
+          "value": "Evidence / scope"
+        },
+        {
+          "column": "D",
+          "value": "Open"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Control and execution"
+        },
+        {
+          "column": "B",
+          "value": "Added Director, Conductor, scope/acceptance/gates, budget boundaries, supervision and role bindings."
+        },
+        {
+          "column": "C",
+          "value": "Current-team notes take precedence over historic shared-role examples; paused-state evidence remains dated."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'S03-33 Director + Conductor'!A1"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK and memory"
+        },
+        {
+          "column": "B",
+          "value": "Every 14 capability rows and 4 adoption rows now has a direct map placement, plus source-backed memory/transport/ledger/dispatch detail."
+        },
+        {
+          "column": "C",
+          "value": "161 SDK files inventoried; key documents and 11 implementation modules inspected. Remaining tests/fixtures inventoried, not individually reviewed."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A1"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All apps"
+        },
+        {
+          "column": "B",
+          "value": "All 84 app labels and all 13 saved AI-surface rows are individually placed in the hierarchy."
+        },
+        {
+          "column": "C",
+          "value": "No longer an examples-only list. Also accounts for 143 saved skill rows and 21 tool card rows; their historical limits remain visible."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A1"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Infrastructure"
+        },
+        {
+          "column": "B",
+          "value": "All 883 resource records map to 16 resource groups; all 9 computers and 8 workspaces are individually shown."
+        },
+        {
+          "column": "C",
+          "value": "Workspaces, Hermes configurations and host observations are not extra machines. Relationship, binding-field and fallback tables are surfaced."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A1"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Credentials"
+        },
+        {
+          "column": "B",
+          "value": "All 51 metadata items accounted for; saved usage and file-reference views linked."
+        },
+        {
+          "column": "C",
+          "value": "No key values or new 1Password reads; other vaults are outside this evidence."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'1PASS MAP'!A1"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Build documents"
+        },
+        {
+          "column": "B",
+          "value": "Added mission records, knowledge reconciliation, maintenance, rebuild guidance and lab evaluation."
+        },
+        {
+          "column": "C",
+          "value": "838 build-group files inventoried;829 directly decoded text files; 7 nested snapshots held 48 readable members. 2 source workbooks are covered by the workbook audit. Historical instructions are source content, not authority."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A1"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Coverage"
+        },
+        {
+          "column": "B",
+          "value": "1,009 source files, 154 source tabs, 84 apps, 883 assets, 51 credential metadata items and the supplemental screenshot have map destinations."
+        },
+        {
+          "column": "C",
+          "value": "Accounting and preservation are exhaustive for these collected records. Semantic source review was targeted; this is not a claim that all external systems or every code path were tested."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'MAP COVERAGE'!A1"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Preservation"
+        },
+        {
+          "column": "B",
+          "value": "Earlier map retained as MAP BEFORE COVERAGE AUDIT; other data remains in its existing sheets and original ZIP."
+        },
+        {
+          "column": "C",
+          "value": "Incoming links to moved map components were retargeted by component identity."
+        },
+        {
+          "column": "D",
+          "value": "Open",
+          "link": "'MAP BEFORE COVERAGE AUDIT'!A1"
+        }
+      ]
+    }
+  ]
+}

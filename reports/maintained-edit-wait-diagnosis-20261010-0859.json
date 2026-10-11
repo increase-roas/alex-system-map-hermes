@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-10T08:59:42.541437+00:00",
+  "kind": "bounded_test_wait_recovery",
+  "owner_session": 14975,
+  "test_pid": 95672,
+  "parent_pid": 95630,
+  "isolated_listener_pid": 95700,
+  "observations": [
+    "transcript unchanged914 across live checks",
+    "browser runner over5minutes and isolated health timedout3seconds",
+    "fetch has no AbortSignal; parent subprocess timeout300000seconds"
+  ],
+  "action": "SIGTERM exact isolated browser-test child only; owner remains active",
+  "requirements": "Preserve failure, bound fetch and subprocess timeouts; use accepted restart/screening helpers; no broad process kill",
+  "next_action": "Observe owner response and correct bounded test wait at safe continuation if needed",
+  "followup_at": "2026-10-10T09:02:54.288151+00:00",
+  "timeout_units_correction": "Current parent timeout600000seconds is about6.94days. Need600seconds for10minutes, explicit TimeoutExpired handling and owned-child cleanup. Browser per-request bound must be separately verified."
+}

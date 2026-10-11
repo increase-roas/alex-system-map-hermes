@@ -1,0 +1,6065 @@
+{
+  "id": "table_62f992fdc09f67c391c8",
+  "sheet": "S04-21 Worker Binding Fields",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source asset key"
+        },
+        {
+          "column": "B",
+          "value": "Field type"
+        },
+        {
+          "column": "C",
+          "value": "Target visibility"
+        },
+        {
+          "column": "D",
+          "value": "Field name"
+        },
+        {
+          "column": "E",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "F",
+          "value": "Proof limit"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ALLOWED_ORIGIN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CALENDAR_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|acree-tree-service",
+          "link": "'S04-05 Cloudflare'!A77"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_TEST_EVENT_CODE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ACCESS_AUDIENCE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ACCESS_IDENTITY_MAP"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ACCESS_ISSUER"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "DEV_ACCESS_IDENTITY_MAP"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "DEV_JWT_HMAC_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ENVIRONMENT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "JWT_AUDIENCE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "JWT_HMAC_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "JWT_ISSUER"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "RAG_NOTE_IDENTITIES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ROLE_KNOWLEDGE_IDENTITIES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SOURCE_SYNC_IDENTITIES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TEAM_TASK_IDENTITIES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TEAM_WORKERS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|dev-rag-worker",
+          "link": "'S04-05 Cloudflare'!A78"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: vectorize"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "VECTOR_INDEX"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "FUNNEL_SHEET_TAB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_EMAIL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SHEETS_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_ACCESS_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_GRAPH_API_VERSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_VALUE_QUALIFIED"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_VALUE_SCHEDULE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_VALUE_SHOWED"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-1",
+          "link": "'S04-05 Cloudflare'!A79"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STAGE_WEBHOOK_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "FUNNEL_SHEET_TAB"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SHEETS_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_GRAPH_API_VERSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|funnel-theme-matrix-qa-8",
+          "link": "'S04-05 Cloudflare'!A80"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ghl-command-universal",
+          "link": "'S04-05 Cloudflare'!A81"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "AUTH_EPOCH"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ghl-command-universal",
+          "link": "'S04-05 Cloudflare'!A81"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CONNECTION_PASSWORD_SHA256"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ghl-command-universal",
+          "link": "'S04-05 Cloudflare'!A81"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ORIGIN_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ghl-command-universal",
+          "link": "'S04-05 Cloudflare'!A81"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ORIGIN_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ALERT_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ALERT_WEBHOOK_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CLOUDFLARE_ACCOUNT_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CLOUDFLARE_API_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CF_CONSENT_TEXT_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CF_LEAD_UUID_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CF_STORE_OWNER_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CF_UNITS_PER_MONTH_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_EMAIL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SHEETS_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "LEAD_VALUE_USD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SITE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|hottublaunch-main",
+          "link": "'S04-05 Cloudflare'!A82"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STAGE_WEBHOOK_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-alert-webhook",
+          "link": "'S04-05 Cloudflare'!A83"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ALERT_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-alert-webhook",
+          "link": "'S04-05 Cloudflare'!A83"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TELEGRAM_BOT_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-alert-webhook",
+          "link": "'S04-05 Cloudflare'!A83"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TELEGRAM_CHAT_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-dashboard-connection-monitor",
+          "link": "'S04-05 Cloudflare'!A84"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "DASHBOARD_SYNC_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-dashboard-connection-monitor",
+          "link": "'S04-05 Cloudflare'!A84"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "DASHBOARD_SYNC_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-dashboard-connection-monitor",
+          "link": "'S04-05 Cloudflare'!A84"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SLACK_WEBHOOK_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-dashboard-connection-monitor",
+          "link": "'S04-05 Cloudflare'!A84"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TENANT_ADMIN_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-google-tracking-readonly-mcp",
+          "link": "'S04-05 Cloudflare'!A85"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "BRIDGE_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-google-tracking-readonly-mcp",
+          "link": "'S04-05 Cloudflare'!A85"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_JSON"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-hermes-intake",
+          "link": "'S04-05 Cloudflare'!A86"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-hermes-intake",
+          "link": "'S04-05 Cloudflare'!A86"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_SMS_FROM"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-hermes-intake",
+          "link": "'S04-05 Cloudflare'!A86"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "HERMES_WEBHOOK_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-hermes-intake",
+          "link": "'S04-05 Cloudflare'!A86"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "PROSPECT_IDENTITY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_EMAIL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_PRIVATE_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SHEETS_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|htl-practice-funnel",
+          "link": "'S04-05 Cloudflare'!A87"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CALENDAR_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_PIT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SENTRY_DSN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-b2b-worker",
+          "link": "'S04-05 Cloudflare'!A88"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STRIPE_SECRET_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_ALLOWED_COMPANY_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CLIENT_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CLIENT_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_MCP_INTERNAL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "INTERNAL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SLACK_BOT_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SLACK_CHANNEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|increase-roas-oauth-gateway",
+          "link": "'S04-05 Cloudflare'!A89"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TOKEN_ENCRYPTION_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CALENDAR_CONSENT_TEXT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CALENDAR_CONSENT_VERSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CALENDAR_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CALENDAR_TIMEZONE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CALENDAR_VERIFIED"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CONSENT_TEXT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "CONSENT_VERSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GA4_API_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GA4_MEASUREMENT_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CONFIG"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SERVICE_ACCOUNT_JSON"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 119,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "POLICY_APPROVED"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "PRIVACY_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 122,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SHEET_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 123,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TERMS_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 124,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TRACKING_CONSENT_TEXT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 125,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TRACKING_CONSENT_VERSION"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 126,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|lone-star-tracking-outbox",
+          "link": "'S04-05 Cloudflare'!A91"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "TRACKING_ENABLED"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 127,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|new-season-tree-masters",
+          "link": "'S04-05 Cloudflare'!A92"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ALLOWED_ORIGIN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 128,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|new-season-tree-masters",
+          "link": "'S04-05 Cloudflare'!A92"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 129,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|new-season-tree-masters",
+          "link": "'S04-05 Cloudflare'!A92"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_CALENDAR_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 130,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|new-season-tree-masters",
+          "link": "'S04-05 Cloudflare'!A92"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 131,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|new-season-tree-masters",
+          "link": "'S04-05 Cloudflare'!A92"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 132,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|new-season-tree-masters",
+          "link": "'S04-05 Cloudflare'!A92"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 133,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 134,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 135,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SHEET_AUDIT_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 136,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "HYROS_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 137,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_ADS_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 138,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_ACCESS_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 139,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STRIPE_SECRET_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 140,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|ns-payment",
+          "link": "'S04-05 Cloudflare'!A93"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STRIPE_WEBHOOK_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 141,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ALERT_EMAIL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 142,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 143,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_PIT_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 144,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SA_EMAIL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 145,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SA_PRIVATE_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 146,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GOOGLE_SHEET_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 147,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TEST_EVENT_CODE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 148,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 149,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 150,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|psl-lead-api",
+          "link": "'S04-05 Cloudflare'!A94"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_TEST_EVENT_CODE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 151,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|pts-quote-funnel",
+          "link": "'S04-05 Cloudflare'!A95"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_PIXEL_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 152,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|retell-ghl-secretaries",
+          "link": "'S04-05 Cloudflare'!A96"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "DEFAULT_TIMEZONE"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 153,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|retell-ghl-secretaries",
+          "link": "'S04-05 Cloudflare'!A96"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ENABLE_SMS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 154,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|retell-ghl-secretaries",
+          "link": "'S04-05 Cloudflare'!A96"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 155,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|retell-ghl-secretaries",
+          "link": "'S04-05 Cloudflare'!A96"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY_PARADISE_SPAS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 156,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|retell-ghl-secretaries",
+          "link": "'S04-05 Cloudflare'!A96"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "RETELL_WEBHOOK_DRY_RUN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 157,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|retell-ghl-secretaries",
+          "link": "'S04-05 Cloudflare'!A96"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "RETELL_WEBHOOK_VERIFY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 158,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|spa-dashboard-api",
+          "link": "'S04-05 Cloudflare'!A97"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_ACCESS_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 159,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|spa-dashboard-api",
+          "link": "'S04-05 Cloudflare'!A97"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SUPABASE_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 160,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|spa-dashboard-api",
+          "link": "'S04-05 Cloudflare'!A97"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: plain_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "SUPABASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 161,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15",
+          "link": "'S04-05 Cloudflare'!A100"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 162,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15",
+          "link": "'S04-05 Cloudflare'!A100"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 163,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_PASSWORD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 164,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_SESSION_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 165,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 166,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ENVIRONMENT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 167,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 168,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-harbor-heat-15-preview",
+          "link": "'S04-05 Cloudflare'!A101"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "R2_PUBLIC_BASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 169,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_PASSWORD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 170,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_SESSION_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 171,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 172,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 173,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8",
+          "link": "'S04-05 Cloudflare'!A102"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "R2_PUBLIC_BASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 174,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_PASSWORD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 175,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_SESSION_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 176,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 177,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ENVIRONMENT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 178,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 179,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "R2_PUBLIC_BASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 180,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-hot-tub-store-8-preview",
+          "link": "'S04-05 Cloudflare'!A103"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STAGE_WEBHOOK_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 181,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_PASSWORD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 182,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_SESSION_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 183,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 184,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ENVIRONMENT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 185,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 186,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_LOCATION_ID"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 187,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 188,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-sun-pool-17-preview",
+          "link": "'S04-05 Cloudflare'!A104"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "R2_PUBLIC_BASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 189,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_PASSWORD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 190,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_SESSION_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 191,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 192,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 193,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7",
+          "link": "'S04-05 Cloudflare'!A105"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "R2_PUBLIC_BASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 194,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_PASSWORD"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 195,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ADMIN_SESSION_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 196,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: assets"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ASSETS"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 197,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "ENVIRONMENT"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 198,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "GHL_API_KEY"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 199,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: images"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "IMAGES"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 200,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "META_CAPI_ACCESS_TOKEN"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 201,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "R2_PUBLIC_BASE_URL"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    },
+    {
+      "row": 202,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Worker|website-theme-matrix-qa-7-preview",
+          "link": "'S04-05 Cloudflare'!A106"
+        },
+        {
+          "column": "B",
+          "value": "Worker binding: secret_text"
+        },
+        {
+          "column": "C",
+          "value": "No target exposed"
+        },
+        {
+          "column": "D",
+          "value": "STAGE_WEBHOOK_SECRET"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-worker-bindings.json"
+        },
+        {
+          "column": "F",
+          "value": "Field name/type only; values excluded"
+        }
+      ]
+    }
+  ]
+}

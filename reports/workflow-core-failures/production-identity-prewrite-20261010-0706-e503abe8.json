@@ -1,0 +1,55 @@
+{
+  "production_identity_relabel": {
+    "relabel_sealed_descriptor_rejected": {
+      "exit": 1,
+      "error": "client_production_metadata_forbidden",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "forged_production_id_rejected": {
+      "exit": 1,
+      "error": "client_production_metadata_forbidden",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "revisioned_production_and_verify": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1,
+      "production_history_len": 2,
+      "output_history_len": 2
+    }
+  },
+  "prewrite_containment": {
+    "unsafe_job_id": {
+      "reason": "artifact_path_traversal",
+      "probe_created": false
+    },
+    "parent_symlink_escape": {
+      "reason": null,
+      "unexpected_files": []
+    },
+    "safe_production_exit": 0
+  },
+  "json_handler_negatives": {
+    "issuance_wrong_json_type": {
+      "exit": 1,
+      "error_contains": true,
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "verify_with_missing_record": {
+      "exit": 1,
+      "error": "proof_path_missing",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "matching_json_positive": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1
+    }
+  }
+}

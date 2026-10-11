@@ -1,0 +1,31 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "f697cc55-68ad-42e4-9fbd-e8b8302a11cd",
+  "fixture_only": true,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "real-verify-job",
+    "job_revision": 2,
+    "task_id": "t1",
+    "operation_id": "wrong-op",
+    "verifier": "wrong-verifier"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "relationships_catalog_present": true,
+    "relationships_hash_matches_live": true,
+    "reliability_addendum_present": true,
+    "gate_module_present": true,
+    "required_skills_installed": true
+  },
+  "actually_used": "reliability_gate_per_requirement",
+  "skills_verified_at_issue": true,
+  "verifier": "wrong-verifier",
+  "observed_at": "2026-10-10T06:24:28+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "b2f547d21b53c3b713b6fadbc4c55961c178ed412fc757db36fab856aa9634d3"
+}

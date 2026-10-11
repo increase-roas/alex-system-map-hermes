@@ -1,0 +1,474 @@
+{
+  "reviewed_at": "2026-10-10T07:04:34.848638+00:00",
+  "receipt_at": "2026-10-10T07:01:17+00:00",
+  "run_id": "d8015788-1e24-4e12-9277-4cb4c28ae26d",
+  "receipt_path": "reports/run-receipts/contract-provenance-types-containment-20261010-0658-d8015788-1e24-4e12-9277-4cb4c28ae26d.json",
+  "receipt_sha256": "be1dd894a8c54b69eaf93fee10125b21b3165d99a3b52d0b0cb86c94d1a28acd",
+  "scope": "D02/D04/D06 only; declared outcome provenance, strict JSON types and production/consumption containment.",
+  "source_identity": {
+    "tools/bounded_acceptance.py": {
+      "receipt_sha256": "e9591fbead406b2f76a9319701ca5717302d7b25f3d9b95749b8aee812cf0c5e",
+      "current_sha256": "e9591fbead406b2f76a9319701ca5717302d7b25f3d9b95749b8aee812cf0c5e",
+      "matches": true
+    },
+    "tools/contract_provenance_types_containment_acceptance.py": {
+      "receipt_sha256": "c93cabc4c774a5801d95bea2fa734f8ede52e80f0a2b01f2206e979de467b224",
+      "current_sha256": "c93cabc4c774a5801d95bea2fa734f8ede52e80f0a2b01f2206e979de467b224",
+      "matches": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "current_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "matches": true
+    },
+    "tools/receipt_immutable.py": {
+      "receipt_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "current_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "matches": true
+    },
+    "tools/reliability_gate.py": {
+      "receipt_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "current_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "matches": true
+    },
+    "tools/reliability_store.py": {
+      "receipt_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "current_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "matches": true
+    },
+    "tools/verification_evidence.py": {
+      "receipt_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "current_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "matches": true
+    },
+    "tools/workflow_apply_guard.py": {
+      "receipt_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "current_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "matches": true
+    },
+    "tools/workflow_engine.py": {
+      "receipt_sha256": "1d6625d73e4617b1333f3b1828296d01c0370e2f75621f512855ff8335ab6a24",
+      "current_sha256": "1d6625d73e4617b1333f3b1828296d01c0370e2f75621f512855ff8335ab6a24",
+      "matches": true
+    }
+  },
+  "snapshot_stable": true,
+  "items": [
+    {
+      "id": "D02-guard",
+      "status": "VERIFIED",
+      "claim": "Monotonic contract change, separate declaration/production operation and supersession history",
+      "evidence": [
+        "tools/workflow_engine.py:194-233",
+        "tools/bounded_acceptance.py:187-223",
+        "tools/contract_provenance_types_containment_acceptance.py:243-369"
+      ],
+      "level": "saved actual application handler",
+      "detail": "Same-revision rewrite refused0op/0event; revised contract committed in separate operation, task needs_rechecking and outputs/evidence cleared; prior declaration retained with job revision4. Stale unchanged descriptor refused0op/0event; old proof refused0op/0event at revision mismatch; fresh production+proof succeeds once."
+    },
+    {
+      "id": "D02-relabel",
+      "status": "FAILED",
+      "claim": "Production provenance survives descriptor relabeling",
+      "evidence": [
+        "tools/bounded_acceptance.py:226-230",
+        "tools/bounded_acceptance.py:240-264",
+        "tools/bounded_acceptance.py:380-383",
+        "tools/workflow_engine.py:234-245"
+      ],
+      "level": "pure no-write counterexample plus actual handler consumer source",
+      "detail": "Editable descriptor fields are sole production binding. attach_contract_binding updates old descriptor revision/hash without producing bytes. After valid revision3 declaration for existing old wrong bytes, production validator returns true and issuance measurement outcome_proof_bound=true. Same old path/SHA retained. No immutable production receipt/ledger/task+declaration-specific production identity exists. Owner tests only stale unchanged labels, missing the requested relabel case. This is ordinary local descriptor input, not a hostile proof-registry alteration."
+    },
+    {
+      "id": "D04-types",
+      "status": "VERIFIED",
+      "claim": "Strict recursive JSON type/value equality and matching JSON handler proof",
+      "evidence": [
+        "tools/bounded_acceptance.py:76-88",
+        "tools/bounded_acceptance.py:333-340",
+        "tools/contract_provenance_types_containment_acceptance.py:372-414"
+      ],
+      "level": "pure and measurement helper negatives; saved actual handler positive",
+      "detail": "Bool/int mismatch rejected recursively through dictionaries/lists. Pure nested false/0 comparison false and identical nested true. Saved wrongnumeric task remains in_progress revision3 with no proof; helper returns declared_result_mismatch. Saved JSON positive registry/file hashes match and task verified revision4 with1verifyop/1event. Receipt label handler_path_wrong_numeric is helper-only, not a negative verify/issuance handler run."
+    },
+    {
+      "id": "D04-negative-handler",
+      "status": "UNVERIFIED",
+      "claim": "Saved actual issuance/verify wrong-result negative with0effects",
+      "evidence": [
+        "tools/contract_provenance_types_containment_acceptance.py:391-400"
+      ],
+      "level": "missing handler attempt",
+      "detail": "Bad JSON task is produced and measured directly by measure_criterion_outcome. No issue_record or verify request is attempted in negative case. Shared issuance function does call the same measurement, so source-level guard is verified; runtime negative handler claim exceeds receipt evidence."
+    },
+    {
+      "id": "D06-read-guards",
+      "status": "VERIFIED",
+      "claim": "Resolved artifactroot containment for descriptor acceptance, issuance measurement and live consumption",
+      "evidence": [
+        "tools/bounded_acceptance.py:46-73",
+        "tools/bounded_acceptance.py:261-264",
+        "tools/bounded_acceptance.py:344-347",
+        "tools/bounded_acceptance.py:436-438",
+        "tools/verification_evidence.py:442-481"
+      ],
+      "level": "shared guarded source paths + pure and saved helper negatives, saved handler positive",
+      "detail": "Traversal returns artifact_path_traversal; saved in-project symlink resolves to docs and returns artifact_outside_artifact_root. The same resolver guards descriptor update before acceptance, measurement at issue and remeasurement at consumption. Positive in-root task verified4 with one operation/event. Owner traversal/symlink negative tests are helpers only, not application negative handler runs."
+    },
+    {
+      "id": "D06-producer",
+      "status": "FAILED",
+      "claim": "Actual artifact materialization constrained before write",
+      "evidence": [
+        "tools/bounded_acceptance.py:267-291",
+        "tools/workflow_engine.py:26-28"
+      ],
+      "level": "pure mocked production capture + source",
+      "detail": "materialize_bounded_artifact writes before resolver/containment validation. Pure no-write mocked call job_id=.. captures resolved target work/t1-1e12cf1e3bdb.txt outside work/task-artifacts. Valid IDs only require nonempty text. Existing parent symlinks or unsafe suffix similarly lack prewrite containment guard. Later descriptor refusal cannot undo prior helper write. No external path was read/written; all write methods were mocked."
+    },
+    {
+      "id": "identity",
+      "status": "VERIFIED",
+      "claim": "Stable source-bound immutable receipt and history links",
+      "evidence": [
+        "reports/run-receipts/contract-provenance-types-containment-20261010-0658-d8015788-1e24-4e12-9277-4cb4c28ae26d.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl"
+      ],
+      "level": "readback",
+      "detail": "All9 source hashes match receipt. Immutable bytes/pointer/manifest/history matchbe1dd894a8c54b69eaf93fee10125b21b3165d99a3b52d0b0cb86c94d1a28acd. Prior byte/liveproof/transactions/history accepted and not broadly repeated."
+    }
+  ],
+  "saved_db_readbacks": [
+    {
+      "path": "app/.data/workflow-core-tests/provenance-contract-provenance-types-containment-20261010-0658.sqlite",
+      "sha256": "5d14581201de1c9c892bd558d34e7649cfcfbe77976640bbf356ed18f5c4f1c9",
+      "job_revision": 4,
+      "task_status": "needs_rechecking",
+      "task_outputs": [],
+      "declarations": [
+        "{\"contract_sha256\":\"d2d09bffe3764e7931571732ec02e786fef67bedbe1dd34e2ada2501833e10e8\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"contract-provenance-v1\\n\",\"revision\":2,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [
+        {
+          "contract_sha256": "5ef86d1824be1e4c560b3b4a9a6cc80402363cf5b01db35a599a2c8b135e7ccc",
+          "criterion": "proof-bound",
+          "revision": 1,
+          "snapshot": {
+            "criterion": "proof-bound",
+            "expected_result": null,
+            "expected_utf8": "contract-provenance-v1\n",
+            "revision": 1,
+            "schema": "declared_outcome_v1"
+          },
+          "superseded_at_job_revision": 4
+        }
+      ],
+      "proofs": [],
+      "operation_readbacks": {
+        "cptc-rewrite-same-rev": {
+          "operations": 0,
+          "events": 0
+        },
+        "cptc-decl-v2": {
+          "operations": 1,
+          "events": 1
+        },
+        "cptc-reuse-old-binding": {
+          "operations": 0,
+          "events": 0
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/provenance-positive-contract-provenance-types-containment-20261010-0658.sqlite",
+      "sha256": "1d3a8119e61b9275e566a0aa4eebcfb0fd0f608db25a1cf00efdd25d30d7a144",
+      "job_revision": 6,
+      "task_status": "verified",
+      "task_outputs": [
+        "{\"byte_length\":23,\"declared_contract_revision\":2,\"declared_contract_sha256\":\"d2d09bffe3764e7931571732ec02e786fef67bedbe1dd34e2ada2501833e10e8\",\"relative_path\":\"work/task-artifacts/prov-job/t1-f8a7ca61b92b.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"f8a7ca61b92b3a1df79403141969ff4838fd55a7e78f4ff8aa0c486acbac6ff7\"}"
+      ],
+      "declarations": [
+        "{\"contract_sha256\":\"d2d09bffe3764e7931571732ec02e786fef67bedbe1dd34e2ada2501833e10e8\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"contract-provenance-v1\\n\",\"revision\":2,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [
+        {
+          "contract_sha256": "5ef86d1824be1e4c560b3b4a9a6cc80402363cf5b01db35a599a2c8b135e7ccc",
+          "criterion": "proof-bound",
+          "revision": 1,
+          "snapshot": {
+            "criterion": "proof-bound",
+            "expected_result": null,
+            "expected_utf8": "contract-provenance-v1\n",
+            "revision": 1,
+            "schema": "declared_outcome_v1"
+          },
+          "superseded_at_job_revision": 4
+        }
+      ],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/751f84ab-8690-48d6-b4a4-e6c23920ca9a.json",
+          "registry_sha256": "942185e2a066bffe1684d3c913c9f5d1bb8441fd4101809d028fb7c190214c6b",
+          "actual_sha256": "942185e2a066bffe1684d3c913c9f5d1bb8441fd4101809d028fb7c190214c6b",
+          "scope": {
+            "job_id": "prov-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "cptc-v1-record-op",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/prov-job/t1-f8a7ca61b92b.txt",
+              "sha256": "f8a7ca61b92b3a1df79403141969ff4838fd55a7e78f4ff8aa0c486acbac6ff7",
+              "byte_length": 23,
+              "contract_revision": 1,
+              "contract_sha256": "5ef86d1824be1e4c560b3b4a9a6cc80402363cf5b01db35a599a2c8b135e7ccc",
+              "content_matches_declaration": true
+            }
+          ]
+        },
+        {
+          "path": "work/reliability/verification-records/bc291009-c68d-4194-a54a-a120b0fbd68e.json",
+          "registry_sha256": "0bbfa522a0aff747ca73a8564f44a2deb071610b9d5f43f29281b9fcb1b87520",
+          "actual_sha256": "0bbfa522a0aff747ca73a8564f44a2deb071610b9d5f43f29281b9fcb1b87520",
+          "scope": {
+            "job_id": "prov-job",
+            "job_revision": 5,
+            "task_id": "t1",
+            "operation_id": "cptc-verify-new",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/prov-job/t1-f8a7ca61b92b.txt",
+              "sha256": "f8a7ca61b92b3a1df79403141969ff4838fd55a7e78f4ff8aa0c486acbac6ff7",
+              "byte_length": 23,
+              "contract_revision": 2,
+              "contract_sha256": "d2d09bffe3764e7931571732ec02e786fef67bedbe1dd34e2ada2501833e10e8",
+              "content_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "cptc-verify-old-proof": {
+          "operations": 0,
+          "events": 0
+        },
+        "cptc-verify-new": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/json-types-contract-provenance-types-containment-20261010-0658.sqlite",
+      "sha256": "83da5c695a79260bd12f3e2d0b72a2c5172032aa9ea9cf841f9c22362bd85232",
+      "job_revision": 3,
+      "task_status": "in_progress",
+      "task_outputs": [
+        "{\"byte_length\":33,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"49a12878ac6116184d43aaa31e79138a96dea9f1e6efbaf7502c617cec9129ab\",\"relative_path\":\"work/task-artifacts/json-job/t1-438acb37067c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"438acb37067c1a6d65c22c0a4f067647ef46ad1711e5ceafeb53b0cdd6ea35e6\"}"
+      ],
+      "declarations": [
+        "{\"contract_sha256\":\"49a12878ac6116184d43aaa31e79138a96dea9f1e6efbaf7502c617cec9129ab\",\"criterion\":\"proof-bound\",\"expected_result\":{\"nested\":{\"flag\":false},\"ok\":true},\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [],
+      "proofs": [],
+      "operation_readbacks": {}
+    },
+    {
+      "path": "app/.data/workflow-core-tests/json-types-ok-contract-provenance-types-containment-20261010-0658.sqlite",
+      "sha256": "d4e5a1dcd4a7900680c8e77bd91a2719c99fab251658990933cd10dddb58cae2",
+      "job_revision": 4,
+      "task_status": "verified",
+      "task_outputs": [
+        "{\"byte_length\":40,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"49a12878ac6116184d43aaa31e79138a96dea9f1e6efbaf7502c617cec9129ab\",\"relative_path\":\"work/task-artifacts/json-job/t1-e14abf51cabb.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"e14abf51cabb2e276a251856361f7cace77f690a27f50e7e62305a4a9e43a4e7\"}"
+      ],
+      "declarations": [
+        "{\"contract_sha256\":\"49a12878ac6116184d43aaa31e79138a96dea9f1e6efbaf7502c617cec9129ab\",\"criterion\":\"proof-bound\",\"expected_result\":{\"nested\":{\"flag\":false},\"ok\":true},\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/41df8d41-7317-4a8d-9532-fe2d67b0c9ae.json",
+          "registry_sha256": "66b8fb9f8e68ba8c8d72b310ac46bd068b8e571412b4b995db1d2ecb25ead0b0",
+          "actual_sha256": "66b8fb9f8e68ba8c8d72b310ac46bd068b8e571412b4b995db1d2ecb25ead0b0",
+          "scope": {
+            "job_id": "json-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "cptc-json-verify",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/json-job/t1-e14abf51cabb.txt",
+              "sha256": "e14abf51cabb2e276a251856361f7cace77f690a27f50e7e62305a4a9e43a4e7",
+              "byte_length": 40,
+              "contract_revision": 1,
+              "contract_sha256": "49a12878ac6116184d43aaa31e79138a96dea9f1e6efbaf7502c617cec9129ab",
+              "result_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "cptc-json-verify": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/artifact-root-contract-provenance-types-containment-20261010-0658.sqlite",
+      "sha256": "e0022ed6c59df82a01a956c01f4cc7d2f9310703997aca736fc2e3a60e5087c9",
+      "job_revision": 4,
+      "task_status": "verified",
+      "task_outputs": [
+        "{\"byte_length\":14,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"aa8ea8e0bc95ba888693b0f4b26688c34eee7a555af14816858c678192994154\",\"relative_path\":\"work/task-artifacts/root-job/t1-2c9ffa388325.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"2c9ffa3883259887e255de5f2a96165c15e01b617d236848fc0cce27fb9ccc06\"}"
+      ],
+      "declarations": [
+        "{\"contract_sha256\":\"aa8ea8e0bc95ba888693b0f4b26688c34eee7a555af14816858c678192994154\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"in-root-bytes\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/51c63112-45a2-4fe7-8d3c-c5d2be4f940e.json",
+          "registry_sha256": "9283424f98a894e12a4d04d065912ace2c83caf682c8e65a471f91f675ee9168",
+          "actual_sha256": "9283424f98a894e12a4d04d065912ace2c83caf682c8e65a471f91f675ee9168",
+          "scope": {
+            "job_id": "root-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "cptc-root-verify",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/root-job/t1-2c9ffa388325.txt",
+              "sha256": "2c9ffa3883259887e255de5f2a96165c15e01b617d236848fc0cce27fb9ccc06",
+              "byte_length": 14,
+              "contract_revision": 1,
+              "contract_sha256": "aa8ea8e0bc95ba888693b0f4b26688c34eee7a555af14816858c678192994154",
+              "content_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "cptc-root-verify": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    }
+  ],
+  "pure_controls": {
+    "relabel_same_old_bytes": {
+      "old_descriptor": {
+        "byte_length": 26,
+        "declared_contract_revision": 1,
+        "declared_contract_sha256": "5ef86d1824be1e4c560b3b4a9a6cc80402363cf5b01db35a599a2c8b135e7ccc",
+        "relative_path": "work/task-artifacts/prov-job/t1-9780a3fca90b.txt",
+        "schema": "bounded_artifact_v1",
+        "sha256": "9780a3fca90b146924c2ff875e48592730ea1ff131aa4607cb513599e7192f6b"
+      },
+      "relabelled_descriptor": {
+        "byte_length": 26,
+        "declared_contract_revision": 3,
+        "declared_contract_sha256": "36e68af4fe6ccbd736d3e852d5b60c0c8ec1d99d6a7ee2d7e8edf3e8bd38ef86",
+        "relative_path": "work/task-artifacts/prov-job/t1-9780a3fca90b.txt",
+        "schema": "bounded_artifact_v1",
+        "sha256": "9780a3fca90b146924c2ff875e48592730ea1ff131aa4607cb513599e7192f6b"
+      },
+      "new_contract": "{\"contract_sha256\":\"36e68af4fe6ccbd736d3e852d5b60c0c8ec1d99d6a7ee2d7e8edf3e8bd38ef86\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"wrong-but-already-written\\n\",\"revision\":3,\"schema\":\"declared_outcome_v1\"}",
+      "contract_change_allowed": [
+        true,
+        "ok"
+      ],
+      "production_validator": [
+        true,
+        "ok"
+      ],
+      "issuance_measure": [
+        {
+          "outcome_proof_bound": true,
+          "artifact_hash_matches": true,
+          "declared_outcome_verified": true
+        },
+        [
+          {
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/prov-job/t1-9780a3fca90b.txt",
+            "sha256": "9780a3fca90b146924c2ff875e48592730ea1ff131aa4607cb513599e7192f6b",
+            "byte_length": 26,
+            "contract_revision": 3,
+            "contract_sha256": "36e68af4fe6ccbd736d3e852d5b60c0c8ec1d99d6a7ee2d7e8edf3e8bd38ef86",
+            "content_matches_declaration": true
+          }
+        ],
+        null
+      ]
+    },
+    "recursive_json_types": {
+      "wrong_nested_bool_numeric": false,
+      "positive_nested": true
+    },
+    "resolved_paths": {
+      "work/task-artifacts/../../docs/RELIABILITY_ADDENDUM.md": [
+        false,
+        "artifact_path_traversal"
+      ],
+      "work/task-artifacts/escape-test/link-out.txt": [
+        false,
+        "artifact_outside_artifact_root"
+      ]
+    },
+    "materializer_no_write_capture": {
+      "captured_writes": [
+        {
+          "relative_path": "work/task-artifacts/../t1-1e12cf1e3bdb.txt",
+          "resolved_relative_path": "work/t1-1e12cf1e3bdb.txt",
+          "byte_length": 20
+        }
+      ],
+      "descriptor": {
+        "schema": "bounded_artifact_v1",
+        "relative_path": "work/task-artifacts/../t1-1e12cf1e3bdb.txt",
+        "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+        "byte_length": 20
+      },
+      "method": "Path.mkdir and write_bytes mocked; SHA mocked; no real file writes"
+    }
+  },
+  "history_links": {
+    "reports/receipt-hash-manifest.jsonl": [
+      {
+        "content_sha256": "be1dd894a8c54b69eaf93fee10125b21b3165d99a3b52d0b0cb86c94d1a28acd",
+        "delivery_id": "contract-provenance-types-containment-20261010-0658",
+        "immutable_receipt_path": "reports/run-receipts/contract-provenance-types-containment-20261010-0658-d8015788-1e24-4e12-9277-4cb4c28ae26d.json",
+        "run_id": "d8015788-1e24-4e12-9277-4cb4c28ae26d"
+      }
+    ],
+    "reports/workflow-core-run-history.jsonl": [
+      {
+        "delivery_id": "contract-provenance-types-containment-20261010-0658",
+        "run_id": "d8015788-1e24-4e12-9277-4cb4c28ae26d",
+        "at": "2026-10-10T07:01:17+00:00",
+        "overall": "passed",
+        "immutable_receipt": "reports/run-receipts/contract-provenance-types-containment-20261010-0658-d8015788-1e24-4e12-9277-4cb4c28ae26d.json",
+        "content_sha256": "be1dd894a8c54b69eaf93fee10125b21b3165d99a3b52d0b0cb86c94d1a28acd"
+      }
+    ]
+  },
+  "overall": "partial",
+  "next_action": "Sole owner: bind output to authoritative production identity committed after current declaration, reject old descriptor relabel/reuse without new production receipt; enforce resolved artifactroot containment and safe identifiers/suffix before every materialization write. Add actual boundary negatives for relabel, bad JSON issuance, traversal/symlink. Keep accepted type/live-consumption/monotonic/history fixes; then move APP02/04 recovery+screening and remaining queue.",
+  "blocker_type": "goal_not_met_yet",
+  "methods": "Source/receipt readbacks; SQLite mode=ro; pure functions and mocked Path write capture only; no shared state writes or mutating reruns."
+}

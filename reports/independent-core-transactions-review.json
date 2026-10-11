@@ -1,0 +1,187 @@
+{
+  "review_id": "independent-core-transactions-review-20261010-0619",
+  "reviewed_at": "2026-10-10T06:18:51.631578+00:00",
+  "scope": "APP-REVIEW-01/03 only. Read-only targeted sources/receipt/history and SQLite URI mode=ro SELECT readback. No acceptance rerun, implementation/shared DB writes, browser, outside reads/services, credentials, installs or helpers. Owner stopped; no further audit after decisive findings.",
+  "owner_receipt": {
+    "path": "reports/core-evidence-transactions-receipt.json",
+    "at": "2026-10-10T06:18:10+00:00",
+    "run_id": "206c63f9-01ee-4618-bf1b-2eff611c8544",
+    "sha256": "3063374c4ee51b13e775a2e264be52205a1e5f3646a1925a21cd70ebe6687198",
+    "owner_pass_not_acceptance": true
+  },
+  "snapshot": {
+    "sampled_at": "2026-10-10T06:18:51.631578+00:00",
+    "three_receipt_recorded_source_hashes_match": true,
+    "source_sha256": {
+      "reports/core-evidence-transactions-receipt.json": "3063374c4ee51b13e775a2e264be52205a1e5f3646a1925a21cd70ebe6687198",
+      "tools/verification_evidence.py": "9ce3cacdb31fac79c0447e64c545b4925001e1d9d1b91ebe012297ea57a71f82",
+      "tools/workflow_apply_guard.py": "bb0bfe34873dd6a28dd4f6a1963b4e7d52606203574bdc891e60f385a500d8c2",
+      "tools/reliability_gate.py": "56def1a71c3d7ab186e902bc478bd04e7fd587531cefb3e84d82b89753bc557f",
+      "tools/workflow_engine.py": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a",
+      "tools/local_service.py": "2bd54828ae3e48bd858b4305e89a9ce5bd1b68840b4d655b66d2e90eb1321745",
+      "tools/reliability_store.py": "2cb2e6fdc4b9eb53a7ccf3e3a0704ee7f9748cf42d67b05a51a38fa4b48668e2",
+      "tools/core_evidence_transactions_acceptance.py": "6df195265b24ae5cad510fe58218fbeaa0f927b8185ed69eb160447b0df43ad8",
+      "reports/workflow-core-run-history.jsonl": "b44bb70540817846b7429a378b57020bba793a5651b58037fd922c6e1bca8564",
+      "reports/workflow-core-failures/APP-REVIEW-01.json": "4168161f95308a19f1db62e950e0f376a43ed7cb76414a8a0a25de6d02fcf900",
+      "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960"
+    },
+    "stability": "No changes observed in repeated targeted source reads; no final broad hash resample requested. Snapshot binds sampled bytes only.",
+    "receipt_coverage_gap": "Engine/local_service/reliability_store/acceptance helper absent from3 recorded hashes. Critically rowcount fix and executescript behavior in reliability_store are unbound by owner receipt."
+  },
+  "overall": "FAILED; actual stored concurrency effect contradicts owner atomicity claim",
+  "items": [
+    {
+      "id": "APP-REVIEW-01",
+      "status": "FAILED",
+      "accepted": [
+        "Verification record schema, required job/revision/requirement, observed_at age threshold and future skew now checked. Unrelated trace fixture rejected by schema; mandatory live relationships hash and stored doc/relationship fingerprints checked. Issue path generates UUID, records hashes and registry entry.",
+        "Actual workflow validator overwrites claim job/revision from handler request; saved evidence-verify DB has ev-verify exactly1 event/operation and job/handoff revision3. Registered issued record/file hash match. This proves fixture protocol wiring, not requirement completion."
+      ],
+      "remaining": [
+        "Authentic positive checks missing: issue_fixture_record hardcodes gate_bad_rejected/skills_present/relationships_fingerprint_live=True before executing the negative case. issue_record derives passed from caller booleans; it does not run or retain check results. fixture_only=True record is accepted by real workflow verification without distinguishing test-only completion. Local protocol should document/limit fixture proof; no hostile-agent security demanded.",
+        "Record stores task_id/operation_id/verifier, but validator never compares them to actual task/operation/verifier or task acceptance. Workflow payload acceptance {'proof-bound':true} differs from record checks. Job/revision matches alone cannot authorize verification of a different task in same revision.",
+        "Registry resolver SELECTs only record_id existence, not stored file SHA/path/requirement/job/revision. It therefore does not bind the exact issued artifact identity at consumption. Body record hash and source fingerprint entries are optional in validator; freshness limit is supplied by record. Registry should validate issued values and require source set.",
+        "Source fingerprints cover only relationships.json and addendum, not executing checker/gate/code relevant to actual use. checks/skills/actually_used are assertions without measured handles. Scope/time/source validation is a real improvement but not truthful actual completion proof."
+      ],
+      "sources": [
+        "tools/core_evidence_transactions_acceptance.py:106-129,166-178,277-295",
+        "tools/verification_evidence.py:46-54,57-116,123-173,176-204",
+        "tools/reliability_gate.py:84-125,254-282"
+      ],
+      "next": "Run actual checks before issuing proof and retain outputs/results; require record task/operation/verifier/acceptance and exact issued registry identity; reject or explicitly constrain fixture-only proof for actual completion; require relevant complete source fingerprints."
+    },
+    {
+      "id": "APP-REVIEW-03",
+      "status": "FAILED",
+      "accepted": [
+        "Workflow and handoff database path equality now required; different --reliability-db cannot fall through actual apply/transfer guard. Defaults apply handoff to workflow DB. Intruder transfer actor rejected against expected owner; canonical handoff and checkpoint job binding added; acceptance preserved when omitted. CAS now tests cursor.rowcount rather than connection.total_changes.",
+        "Guard attempts BEGIN IMMEDIATE with Engine manage_tx=False and handoff commit=False; digest replay/collision logic preserved. Saved txn-op1 is exactly1 operation/event; evidence verify similarly1. Injected pre-CAS failure receipt reports rollback; narrow mocked fault test does not cover actual schema commit path."
+      ],
+      "remaining": [
+        "Atomicity actually fails: reliability_store.ensure_schema uses conn.executescript. get_handoff/find_handoff/advance_handoff_revision_cas/record_handoff invoke this inside outer BEGIN IMMEDIATE. executescript commits an active transaction before its script, releasing lock; after Engine writes, advance CAS ensure_schema commits Engine changes before CAS failure/rollback. Same connection is insufficient.",
+        "Saved latest DB proves failed concurrent mutation persists: txn-concurrent operation result revision3 and matching event revision3, job txn-job revision3; canonical handoff owner-c revision2. Receipt says mutate exit1/handoff revision advance lost race and transfer exit0/one_succeeded=true. Thus both ownership transfer and failed mutation have durable effects, and job/handoff disagree.",
+        "Fault test patches advance_handoff_revision_cas to throw before real helper's ensure_schema; rollback assertion misses actual post-commit failure. Concurrency summary checks process exits only, never absence of loser effect or equality of final job/handoff revisions.",
+        "Replay unconditionally advances handoff to an old operation's saved revision whenever different, including lower revisions. It can roll handoff backward after newer successful actions; target Engine current revision is not compared. Transfer job revision read occurs before BEGIN and transfer has no operation replay ledger.",
+        "Create accepts supplied noncanonical handoff ID while later mutation requires canonical ID; supported create option can strand subsequent mutation. Legacy different-DB guard rejection is accepted from source; live negative command not rerun."
+      ],
+      "sources": [
+        "tools/reliability_store.py:24-57,143-146,235-252,278-299",
+        "tools/workflow_apply_guard.py:60-67,94-111,120-132,136-166,187-224",
+        "tools/local_service.py:425-454",
+        "tools/workflow_engine.py:113-122,197-205",
+        "tools/core_evidence_transactions_acceptance.py:402-435,456-503,521-529"
+      ],
+      "readback": {
+        "db": "app/.data/workflow-core-tests/txn-handoff-unified.sqlite",
+        "job": {
+          "id": "txn-job",
+          "revision": 3
+        },
+        "handoff": {
+          "id": "txn-job-handoff",
+          "owner": "owner-c",
+          "revision": 2,
+          "acceptance": [
+            "check"
+          ]
+        },
+        "failed_operation": {
+          "id": "txn-concurrent",
+          "persisted": true,
+          "result_revision": 3,
+          "matching_event_count": 1,
+          "event_revision": 3
+        },
+        "repeated_operation": {
+          "id": "txn-op1",
+          "operation_count": 1,
+          "matching_event_count": 1
+        }
+      },
+      "next": "Remove implicit commits/schema setup from active transaction; initialize schema before BEGIN and ensure read/CAS helpers preserve caller transaction. Retest real CAS failure/concurrency with loser op/event count0 and job/handoff revision equality. Historical replay must not change newer ownership/revision; preserve transfer operation/replay protocol."
+    }
+  ],
+  "proof_readback": {
+    "db": "app/.data/workflow-core-tests/evidence-verify-unified.sqlite",
+    "record_id": "1dd78145-6e4f-4f43-9230-d880e1041b60",
+    "record_path": "work/reliability/verification-records/1dd78145-6e4f-4f43-9230-d880e1041b60.json",
+    "file_sha256": "37d4ca031fb490db6698be8401258445f0a170ff7987e695331907e80bf438fa",
+    "registry_file_sha_matches": true,
+    "scope": {
+      "job_id": "evidence-verify-job",
+      "job_revision": 2,
+      "task_id": "t1",
+      "operation_id": "ev-verify"
+    },
+    "fixture_only": true,
+    "checks": {
+      "gate_bad_rejected": true,
+      "skills_present": true,
+      "relationships_fingerprint_live": true
+    },
+    "verifier": "workflow-core-fixture",
+    "actual_payload_verifier": "reviewer-b",
+    "actual_task_acceptance": [
+      "proof-bound"
+    ],
+    "observed_at": "2026-10-10T06:18:09+00:00",
+    "verified_job_revision": 3,
+    "handoff_revision": 3
+  },
+  "history": {
+    "status": "UNVERIFIED complete immutable run receipt history; VERIFIED append entries and retained original copy",
+    "history_path": "reports/workflow-core-run-history.jsonl",
+    "entries": 6,
+    "latest_run_hash_matches_current_receipt": true,
+    "earlier_hashes_only": "Old receipt hashes retained in JSONL but script overwrites one current receipt path; immutable original receipts not linked by run path. Earlier failing per-run files exist; current receipt links only fixed APP01 failure and supervisor copy.",
+    "current_fixed_failure_hash": "4168161f95308a19f1db62e950e0f376a43ed7cb76414a8a0a25de6d02fcf900",
+    "original_preserved_supervisor_hash": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+    "distinction": "Current fixed APP01 bytes changed from307fe to416816; original307fe remains in supervisor copy. These are different artifacts, not matching copies. New run-specific failure filenames and append mode improve retention, but history hashes on failed runs are taken before receipt rewrite adds failure links.",
+    "sources": [
+      "tools/core_evidence_transactions_acceptance.py:33-36,539-581"
+    ]
+  },
+  "prior_relevant_disposition": [
+    {
+      "id": "freshness/job/requirement",
+      "status": "VERIFIED",
+      "meaning": "Narrow former year-threshold/optional job-revision defects closed by record validation; task/op/authentic proof gaps remain"
+    },
+    {
+      "id": "positive proof truth/source identity",
+      "status": "FAILED",
+      "meaning": "Hardcoded fixture checks, optional incomplete fingerprint set, record registry not exact artifact-bound"
+    },
+    {
+      "id": "transfer actor/job/acceptance",
+      "status": "VERIFIED",
+      "meaning": "Narrow actor expectedowner/canonicaljob/preserved acceptance fixes accepted from source and saved receipt"
+    },
+    {
+      "id": "atomic apply/transfer",
+      "status": "FAILED",
+      "meaning": "Actual failed concurrent mutation durable atrev3 with handoffrev2; executescript commits inside transaction"
+    },
+    {
+      "id": "replay/event dedup",
+      "status": "FAILED",
+      "meaning": "Saved op/event dedup1 accepted; historical replay can downgrade checkpoint and transfer replay missing"
+    },
+    {
+      "id": "legacy split DB bypass",
+      "status": "VERIFIED",
+      "meaning": "Actual apply/transfer refuses different DB paths; no mutating rerun"
+    },
+    {
+      "id": "history",
+      "status": "UNVERIFIED",
+      "meaning": "Append rows/per-run failures improve, original preserved; full immutable receipt linkage absent"
+    }
+  ],
+  "evidence_output": "Read-only chunks fdab69/fd5b1a/62f75c; decisive stored txn-concurrent readback in62f75c. No new mutating tests or hostile-agent security requirements.",
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Transaction-preserving schema/read/CAS helpers with real loser-effect rollback proof; truthful task/operation-bound measured verification and exact registry identity; safe historical/transfer replay and immutable attempt links.",
+    "outside_dependency": "None for reviewed local core fixes."
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "65a3095b-3363-4234-8305-4155962097ed",
+  "fixture_only": true,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "isolated-job-a",
+    "job_revision": 2,
+    "task_id": "t1",
+    "operation_id": "stale-op",
+    "verifier": "workflow-core-fixture"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "relationships_catalog_present": true,
+    "relationships_hash_matches_live": true,
+    "reliability_addendum_present": true,
+    "gate_module_present": true,
+    "required_skills_installed": true
+  },
+  "actually_used": "reliability_gate_precondition_checks",
+  "skills_verified_at_issue": true,
+  "verifier": "workflow-core-fixture",
+  "observed_at": "2026-09-10T06:43:27+00:00",
+  "max_age_seconds": 3600,
+  "record_sha256": "1de1700da954fb3bb6cda0c3bb15089b7bb47e11e8368d80f218123c4591362d"
+}

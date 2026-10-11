@@ -1,0 +1,141 @@
+{
+  "review_id": "independent-controlled-edit-review-20261010-0543",
+  "reviewed_at": "2026-10-10T05:43:51.542438+00:00",
+  "scope": "Controlled_catalog_edit only; browser owner actively progressing and left untouched. No reliability/general-build reaudit.",
+  "method": "Read-only current source/receipt/fixture/backup inspection, SQLite URI mode=ro catalog_watch readback, one nonmutating preview negative check. Only this review JSON/MD written.",
+  "owner_receipt": {
+    "path": "reports/browser-original-milestone-receipt.json",
+    "at": "2026-10-10T05:38:27+00:00",
+    "sha256": "31c704595883417a318cc19b7bd1494c665e4b15e0c782e70a79a9d27cf16e8d",
+    "delivery_id": "browser-original-milestone-20261010-0525"
+  },
+  "snapshot": {
+    "stable_during_bounded_review": true,
+    "observations_at": [
+      "2026-10-10T05:42:49.715518+00:00",
+      "2026-10-10T05:43:51.542438+00:00"
+    ],
+    "source_sha256": {
+      "reports/browser-original-milestone-receipt.json": "31c704595883417a318cc19b7bd1494c665e4b15e0c782e70a79a9d27cf16e8d",
+      "tools/catalog_controlled_edit.py": "507263ca8a2e447b951c4b047a44864cc3d8b7095c856c9b0574b70a5b557a67",
+      "tools/browser_original_milestone.py": "6b14ed618fac1a5ed70c24ae9218da892b16079f7fcb801bd4de2d8456a01b23",
+      "docs/BUILD_SUPERVISION.md": "4290a8e6762e075f9eb0a69899290cac32fb3f2bec453e28f99b700a05990a11",
+      "tools/local_service.py": "ae32de4dd2157a11acb5a4403552d46683503f9715a20fb8abe102db0cb6e85e",
+      "tools/catalog_sync.py": "6b2b8059d9cf79a04560764466ecc02976324b9bdd6f8433e29d224494908c69"
+    },
+    "receipt_binding": {
+      "controlled_edit_source_matches": true,
+      "helper_matches": false,
+      "helper_receipt_sha256": "3ac3677ba7d644505e10a1057e8ee4fcff765c8b300b49036a2dd6e0ccb237f3",
+      "helper_current_sha256": "6b14ed618fac1a5ed70c24ae9218da892b16079f7fcb801bd4de2d8456a01b23"
+    },
+    "limitation": "Tracked receipt/edit module/helper/baseline unchanged between sampled reads; helper is already newer/different than receipt run. Active browser work may produce a later receipt; this review binds only 05:38:27."
+  },
+  "overall": "PARTIAL fixture-only proof; full controlled-edit acceptance FAILED/UNVERIFIED",
+  "accepted_narrow_proof": [
+    {
+      "item": "Fixture scope",
+      "status": "VERIFIED",
+      "evidence": "EDITABLE contains only work/reliability/editable-fixture.json and synthetic-sync-marker.json; controlled service CLI routes dispatch these helpers (catalog_controlled_edit.py:12-15; local_service.py:288-297,361-373)."
+    },
+    {
+      "item": "Preview and sequential SHA conflict",
+      "status": "VERIFIED bounded code/receipt",
+      "evidence": "Preview reads current SHA, rejects mismatched expected SHA, returns before/after SHA/document. Owner receipt reports successful preview and stale reapply failure. This proves sequential conflict, not concurrent write serialization."
+    },
+    {
+      "item": "Persisted fixture readback",
+      "status": "VERIFIED",
+      "evidence": "Current editable-fixture.json revision=1, delivery_id browser-original-milestone-20261010-0525; SHA 0ba2db68d9277cd655935b0c9365f44ab87a3cd1d3075fc4614463f15a6857e5 matches receipt and catalog_watch row observed 05:38:27."
+    },
+    {
+      "item": "Backup",
+      "status": "VERIFIED",
+      "evidence": "app/.data/catalog-backups/editable-fixture.json.4716a586a405.bak exists with revision0, no delivery_id; full SHA 4716a586a405f9dd84b16b815efc5d3cca7530fb22c13d8f0858cb5b7311b1f6. Current source copies backup before temporary-file replace."
+    },
+    {
+      "item": "Atomic pathname replacement and fresh CLI read",
+      "status": "VERIFIED implementation; runtime bounded",
+      "evidence": "Temporary JSON is read back then tmp.replace(path) (catalog_controlled_edit.py:68-75). Helper starts a new service subprocess to read fixture after mutation (browser_original_milestone.py:80-83). This is not application/observer/UI restart proof."
+    }
+  ],
+  "requirements": [
+    {
+      "id": "Maintained catalog records and editable project documents through API/UI",
+      "status": "FAILED",
+      "finding": "Only two synthetic fixture files can be edited. No data/*.json records or project docs are editable. Current app API route list and targeted source search reveal no catalog edit route/client. CLI-only paths do not meet maintained record in UI -> server persists acceptance.",
+      "source": [
+        "tools/catalog_controlled_edit.py:12-15",
+        "tools/local_service.py:288-297,361-373",
+        "tools/browser_original_milestone.py:31-32",
+        "docs/BUILD_SUPERVISION.md:23-25"
+      ],
+      "next": "Implement narrow registered record/document edit API and UI; preserve source boundaries and show preview/diff/evidence."
+    },
+    {
+      "id": "Schema/ID validation and revision contract",
+      "status": "FAILED",
+      "finding": "preview_patch serializes arbitrary supplied JSON and unconditionally valid=True; no schema/version/stable ID/reference validation or numeric revision rule. Pure preview of empty {} against current SHA returned valid=True without writing. Full maintained record validation is absent.",
+      "source": [
+        "tools/catalog_controlled_edit.py:48-59"
+      ],
+      "next": "Validate intended schema, required fields/IDs and references before any write; use explicit expected source revision/hash and reject invalid proposal while preserving last good bytes."
+    },
+    {
+      "id": "Concurrent stale edits and crash/backup integrity",
+      "status": "UNVERIFIED",
+      "finding": "Expected SHA is checked once before backup/write, no lock or commit-time CAS. Both concurrent writers can pass initial check and share fixed .tmp path; backup could copy bytes changed after preview. Sequential stale rejection is supported; concurrent conflict/kill/recovery tests missing. Existing file-name replacement alone does not establish crash durability.",
+      "source": [
+        "tools/catalog_controlled_edit.py:62-75",
+        "tools/browser_original_milestone.py:67-79"
+      ],
+      "next": "Serialize one write transaction or implement lock/CAS at commit with unique temp and verified backup; prove two stale writers, partial write/crash and restore/readback invariants."
+    },
+    {
+      "id": "Restart, regeneration and derived-view agreement",
+      "status": "UNVERIFIED",
+      "finding": "Helper starts another read-state subprocess and manually observes SHA. No app/observer restart, render-only regeneration, companion XLSX/Markdown/map reconciliation or derived-view assertion occurs. Fixture does not belong to maintained catalog source records.",
+      "source": [
+        "tools/browser_original_milestone.py:80-104",
+        "tools/catalog_controlled_edit.py:62-83"
+      ],
+      "next": "Exercise actual maintained record edit -> commit/readback -> restart -> render-only derived views -> canonical/map/derived agreement."
+    },
+    {
+      "id": "Rename/delete/unreadable/invalid source and original identity",
+      "status": "UNVERIFIED",
+      "finding": "Controlled edit test covers only ordinary fixture and sequential stale SHA. No source rename/delete/unreadable/malformed JSON handling, last-known-good/history restoration or before/after immutable-original hash assertions.",
+      "source": [
+        "docs/BUILD_SUPERVISION.md:25",
+        "tools/browser_original_milestone.py:31-105"
+      ],
+      "next": "Add isolated safe failure cases and readbacks preserving last-known-good state/history; compare immutable original hashes."
+    },
+    {
+      "id": "Allowlist and secret/export boundary",
+      "status": "UNVERIFIED complete boundary",
+      "finding": "Narrow lexical allowlist avoids normal edits to originals, but resolve_editable does not resolve/reject symlink targets. No traversal/symlink negative tests. Service preview/state returns supplied documents directly without schema or output screening; no fake-canary secret/export test for edit surfaces.",
+      "source": [
+        "tools/catalog_controlled_edit.py:26-33",
+        "tools/local_service.py:361-373"
+      ],
+      "next": "Resolve/restrict actual editable paths, reject symlink escape, and test allowed/denied paths and fake-canary outputs without real credentials."
+    },
+    {
+      "id": "Integrity of owner PASS",
+      "status": "FAILED as full acceptance",
+      "finding": "Helper passed only checks preview/apply exit0, any stale nonzero and delivery_id after write. It does not require backup existence/content, matching readback revision, equality of observed SHA, derived views or restart/UI. backup_written is truthiness of returned path, not file check. Receipt admits full controlled edit beyond fixtures is open. Helper current SHA differs from receipt run, so current script cannot be treated as exact executed version.",
+      "source": [
+        "tools/browser_original_milestone.py:92-104",
+        "reports/browser-original-milestone-receipt.json controlled_catalog_edit/original_still_open"
+      ],
+      "next": "Persist exact command outputs/backup/updated records and bind all checks/source hashes; require every acceptance invariant in aggregate verdict."
+    }
+  ],
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Maintained catalog/document API/UI editing with schema/IDs, concurrency-safe commit, actual restart/derived-view and failure-case evidence; fixture proof is a milestone only.",
+    "owner_next": "Continue sole Cursor implementation and active browser work; no interruption or duplicate dispatch from this review.",
+    "outside_dependency": "No outside-project access, credential, installation or paid operation is needed for reviewed local gaps."
+  }
+}

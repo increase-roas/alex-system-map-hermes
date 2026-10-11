@@ -1,0 +1,270 @@
+{
+  "review_id": "independent-outcome-replay-review-20261010-0637",
+  "reviewed_at": "2026-10-10T06:37:14.165928+00:00",
+  "scope": "APP01/03 outcome/rollback/replay milestone only. Read-only targeted source/receipt/history and SQLite mode=ro SELECTs, pure in-memory no-output/wrong-output measurement counterexamples. No rerun, shared edits, outside read/service, browser, helpers, credentials or installs.",
+  "owner_receipt": {
+    "path": "reports/outcome-replay-rollback-receipt.json",
+    "at": "2026-10-10T06:35:18+00:00",
+    "run_id": "935f027b-6ab4-490c-8239-0d40b98c6475",
+    "sha256": "957d16b5a4eaad4508a12a2f188084e6f0e674f7dad1e25e1aa484142259f893",
+    "owner_pass_not_acceptance": true
+  },
+  "snapshot": {
+    "stable": true,
+    "first_at": "2026-10-10T06:36:40.010804+00:00",
+    "last_at": "2026-10-10T06:37:14.165928+00:00",
+    "changed_paths": [],
+    "seven_receipt_source_hashes_match": true,
+    "source_sha256": {
+      "tools/workflow_engine.py": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a",
+      "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "tools/verification_evidence.py": "1e63f5609022860e3f6b8ee4e736c2223649579e6a962f5467ebb1124fb70f5d",
+      "tools/outcome_replay_rollback_acceptance.py": "ad12bf1bbb343716dae201a7821b456b1197e28bb88c7fda8f6f69901e1dc37e",
+      "reports/outcome-replay-rollback-receipt.json": "957d16b5a4eaad4508a12a2f188084e6f0e674f7dad1e25e1aa484142259f893",
+      "reports/run-receipts/outcome-replay-rollback-20261010-0631-935f027b-6ab4-490c-8239-0d40b98c6475.json": "bf0728e2b8fd5f551ce2dde213c40d34f771fb8c35d4e816589ac8f7414c28cb",
+      "reports/workflow-core-run-history.jsonl": "9fa5917d7703de5261d5af5386cd6e3fef73d18c6cc9a2a1124c854c2e8ddecf",
+      "reports/outcome-replay-rollback-proofs/be9b2be6-1e15-45b7-acff-7374079fa777/before-failed-attempt.sqlite": "fc326871a9b5d5ed2883ae9ab1286f1442799683d1f81b31435b23049f2f102e",
+      "reports/outcome-replay-rollback-proofs/be9b2be6-1e15-45b7-acff-7374079fa777/after-failed-attempt.sqlite": "fc326871a9b5d5ed2883ae9ab1286f1442799683d1f81b31435b23049f2f102e"
+    }
+  },
+  "overall": "FAILED; rollback/historical replay/transfer repairs accepted; actual work outcomes and receipt hash integrity still fail",
+  "items": [
+    {
+      "id": "post_Engine_write_fault_rollback",
+      "status": "VERIFIED",
+      "accepted": [
+        "Unlike prior early stale-revision test, helper submits valid revision2 and injects targeted error inside actual advance_handoff_revision_cas after Engine.apply has written task/job/event/operation. Source hook is at reliability_store.py:273-276; guard Engine write161-163 then CAS164-172 and catch rollback175-177.",
+        "Before and after-failed snapshots have identical SHAfc326871... and independently matching complete selected tables. Both retain only orr-create/orr-add, jobrevision2/handoffowner-b revision2, no t2 and no orr-post-write-fail operation/event.",
+        "Final saved retry DB has t2, job/handoffrevision3 and exactly1 operation/event for orr-post-write-fail; source/helper receipt supports successful retry and dedup replay."
+      ],
+      "proof_paths": {
+        "before": "reports/outcome-replay-rollback-proofs/be9b2be6-1e15-45b7-acff-7374079fa777/before-failed-attempt.sqlite",
+        "after_failed": "reports/outcome-replay-rollback-proofs/be9b2be6-1e15-45b7-acff-7374079fa777/after-failed-attempt.sqlite"
+      },
+      "snapshot_sha256": "fc326871a9b5d5ed2883ae9ab1286f1442799683d1f81b31435b23049f2f102e",
+      "before_after_identical_bytes": true,
+      "readback": {
+        "failed_operation_id": "orr-post-write-fail",
+        "failed_snapshot_operation_count": 0,
+        "failed_snapshot_event_count": 0,
+        "failed_snapshot_task_t2": false,
+        "failed_snapshot_job_revision": 2,
+        "failed_snapshot_handoff_revision": 2,
+        "final_operation_count": 1,
+        "final_event_count": 1,
+        "final_job_revision": 3,
+        "final_handoff_revision": 3
+      },
+      "sources": [
+        "tools/outcome_replay_rollback_acceptance.py:181-246",
+        "tools/reliability_store.py:263-284",
+        "tools/workflow_apply_guard.py:161-177"
+      ],
+      "limit": "Accepted bounded injected helper failure after Engine writes; not a claim of process-kill/filesystem durability."
+    },
+    {
+      "id": "historical_replay_state_preservation",
+      "status": "VERIFIED",
+      "accepted": [
+        "Guard now advances checkpoint only if lower than stored result; it never rewinds newer state. Saved replay-job currentrevision5/checkpointowner-c revision5/acceptance proof-bound, while early operation storedrevision3. Receipt retains before/after unchanged owner/revision/acceptance.",
+        "Independent database confirms one early operation/event, later progressrevision5 and later owner-c checkpoint; scoped prior replay-lowers-handoff defect closed."
+      ],
+      "db": "app/.data/workflow-core-tests/historical-replay-outcome-replay-rollback-20261010-0631.sqlite",
+      "sources": [
+        "tools/workflow_apply_guard.py:98-119",
+        "tools/outcome_replay_rollback_acceptance.py:338-350"
+      ]
+    },
+    {
+      "id": "transfer_digest_retry_and_transactional_read",
+      "status": "VERIFIED",
+      "accepted": [
+        "Unique envelope transfer operation_id and digest include actor/payload; transaction BEGIN precedes ledger replay and current jobrevision SELECT. Same operation/digest returns recorded result before stale-owner checks, payload collision rejects. Ledger insert/handoff update commit together.",
+        "Saved transfer-idem DB has1 ledger row orr-transfer-attempt-1 with digestac2e6ab8..., owner-b/handoffrevision2 and no owner-c effect. Helper same request twice, changed new_owner collision, receipt records same result. Current-job read moved inside transaction."
+      ],
+      "db": "app/.data/workflow-core-tests/transfer-idem-outcome-replay-rollback-20261010-0631.sqlite",
+      "sources": [
+        "tools/workflow_apply_guard.py:180-271",
+        "tools/reliability_store.py:336-364",
+        "tools/outcome_replay_rollback_acceptance.py:354-394"
+      ],
+      "limit": "Sequential lost-response-style retry/current read protocol accepted; no additional concurrency rerun."
+    },
+    {
+      "id": "requested_work_outcome_evidence",
+      "status": "FAILED",
+      "accepted": [
+        "No-output pending task now prevents issuance; unsupported criteria fail. Performed-work label separated from REL02 gate precondition label; saved record skills_verified_at_issue=false distinguishes skill proof."
+      ],
+      "remaining": [
+        "Supported proof-bound/gate-bound proof criteria still require only at least1 nonempty output string, not file existence/content or requested work outcome. Pure pending task with unrelated text or missing-output.txt yields allTrue. No file is read or content compared by outcome checker.",
+        "Saved truthful-outcomes t1 is verified with outputs=['bounded-output.txt']; that path does not exist in project root, and helper never creates it. Positive checks therefore prove declaration of an output name, not actual outcome.",
+        "Source fingerprint/record scopes/registry identity cannot make that false outcome truthful; actual criterion checks must inspect produced artifacts/results and bind outcome proof."
+      ],
+      "db": "app/.data/workflow-core-tests/truthful-outcomes-outcome-replay-rollback-20261010-0631.sqlite",
+      "positive_record": {
+        "id": "db636dc8-02a5-4d6b-a098-a02f0f126b84",
+        "path": "work/reliability/verification-records/db636dc8-02a5-4d6b-a098-a02f0f126b84.json",
+        "sha256": "93905e652e427ef77de8d38ff0fcdc171f0f93549706866117ae5f3ebbb1f564",
+        "checks": {
+          "task_exists": true,
+          "acceptance_criteria_declared": true,
+          "outcome_proof_bound": true,
+          "all_acceptance_outcomes_verified": true
+        },
+        "actually_used": "workflow_verify_performed_work",
+        "fixture_only": false
+      },
+      "sources": [
+        "tools/verification_evidence.py:87-120",
+        "tools/outcome_replay_rollback_acceptance.py:430-458"
+      ],
+      "required_next": "Give bounded criterion proof-bound a concrete check contract: inspect existing in-project produced artifact and expected semantic content/result, record its observed hash/result and failure reason. Add nonexistent output, unrelated content and wrong result negatives; reject unsupported criteria rather than counting strings."
+    },
+    {
+      "id": "scope_handler_regression_proof",
+      "status": "UNVERIFIED",
+      "accepted": [
+        "Previous individual scope/registry validators remain present and actual handler passes task/op/verifier scope; prior pure tests accepted. New wrong-task failure is verification_record_task_id_mismatch."
+      ],
+      "remaining": [
+        "Wrong-operation record is issued for orr-wrong-op-record, and handler uses exactly that operation ID; it is not an operation mismatch. After positiveverify advances job/handoff to4, test still requestsrevision3, so handoff revision conflict masks intended scope test.",
+        "Wrong-verifier test reuses successful orr-verify-good operation with changed ID/verifier/payload. Replay digest conflict happens before proof validation; operation payload conflict does not prove verifier-scope rejection.",
+        "Summary tests any nonzero, not expected exact reasons or one-isolated-mismatch controls."
+      ],
+      "sources": [
+        "tools/outcome_replay_rollback_acceptance.py:539-603,623-626",
+        "tools/workflow_apply_guard.py:98-124",
+        "tools/reliability_gate.py:279-303"
+      ],
+      "required_next": "For each handler negative use fresh unconsumed request operation and current matching jobrevision; change only one proof task/op/verifier field, require exact verification_record_*_mismatch and zero operations/events. Retain legitimate matching positive."
+    },
+    {
+      "id": "immutable_receipt_hash_and_history",
+      "status": "FAILED",
+      "accepted": [
+        "Unique per-run receipt files now exist, including2 earlier partial attempts and current run. Original supervisor307fe failure and currentfixed49330d artifact both explicitly linked with matching hashes; old failures not claimed identical.",
+        "Current canonical hash957d16... matches independent bytes/history. Proof snapshot hashes match actual files."
+      ],
+      "remaining": [
+        "Current immutable_receipt_sha256/history declared1a9229d... does not match actual uniquely named receiptbf0728e.... Writer hashes initial receipt then rewrites it with immutable/canonical hash fields, invalidating recorded hash.",
+        "Both earlier unique partial-run receipts exist but history hashes also mismatch actual bytes. Failed runs can rewrite again when failure links are appended. Filename uniqueness alone does not establish immutable hash integrity."
+      ],
+      "current_immutable": {
+        "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-935f027b-6ab4-490c-8239-0d40b98c6475.json",
+        "declared_sha256": "1a9229d667fe95150ab1015cbcf838df8d3f4a47aaa5de31a4dbfdd8e4501b10",
+        "actual_sha256": "bf0728e2b8fd5f551ce2dde213c40d34f771fb8c35d4e816589ac8f7414c28cb"
+      },
+      "history_receipts": [
+        {
+          "kind": "immutable_history",
+          "run_id": "77770cf8-5b70-4c96-bd79-481c1e8725e8",
+          "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-77770cf8-5b70-4c96-bd79-481c1e8725e8.json",
+          "exists": true,
+          "declared": "93c89af9fc428924df7ed60cee3c66645f21a14f1bbe8c7dd3164a0efdfe21ce",
+          "actual": "e3b48368b0cae27046c7c82629f170f70c78bb5a31d6cd5f6fe00a4177e03b69",
+          "hash_matches": false,
+          "recorded_status": "partial",
+          "actual_status": "partial"
+        },
+        {
+          "kind": "immutable_history",
+          "run_id": "1b203773-a375-42fe-8817-90698dc0b48e",
+          "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-1b203773-a375-42fe-8817-90698dc0b48e.json",
+          "exists": true,
+          "declared": "c001934242a85058c763ca77cf4bb652e6e18eca39bfdf80b015541ec8e80ea1",
+          "actual": "2671f8843743a1256f7110cb2ef62eecba64ff90371858135b290d386162e31d",
+          "hash_matches": false,
+          "recorded_status": "partial",
+          "actual_status": "partial"
+        },
+        {
+          "kind": "immutable_history",
+          "run_id": "935f027b-6ab4-490c-8239-0d40b98c6475",
+          "path": "reports/run-receipts/outcome-replay-rollback-20261010-0631-935f027b-6ab4-490c-8239-0d40b98c6475.json",
+          "exists": true,
+          "declared": "1a9229d667fe95150ab1015cbcf838df8d3f4a47aaa5de31a4dbfdd8e4501b10",
+          "actual": "bf0728e2b8fd5f551ce2dde213c40d34f771fb8c35d4e816589ac8f7414c28cb",
+          "hash_matches": false,
+          "recorded_status": "passed",
+          "actual_status": "passed"
+        }
+      ],
+      "failure_links": [
+        {
+          "kind": "failure_link",
+          "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+          "declared": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+          "actual": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783"
+        },
+        {
+          "kind": "failure_link",
+          "path": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json",
+          "declared": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+          "actual": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960"
+        }
+      ],
+      "sources": [
+        "tools/outcome_replay_rollback_acceptance.py:678-703"
+      ],
+      "required_next": "Finalize receipt including all failures, write uniquely named bytes once, compute fileSHA after final write, and place that SHA in separate history/manifest/canonical pointer. Do not insert self-file hash and rewrite immutable file. Repair new ledger entries with actual old-file hash without erasing originals."
+    }
+  ],
+  "pure_counterexamples": [
+    {
+      "kind": "pure_outcome",
+      "output": "totally-unrelated-text",
+      "artifact_exists": false,
+      "checks": {
+        "task_exists": true,
+        "acceptance_criteria_declared": true,
+        "outcome_proof_bound": true,
+        "all_acceptance_outcomes_verified": true
+      }
+    },
+    {
+      "kind": "pure_outcome",
+      "output": "missing-output.txt",
+      "artifact_exists": false,
+      "checks": {
+        "task_exists": true,
+        "acceptance_criteria_declared": true,
+        "outcome_proof_bound": true,
+        "all_acceptance_outcomes_verified": true
+      }
+    },
+    {
+      "kind": "bounded_output_stat",
+      "path": "bounded-output.txt",
+      "exists": false
+    }
+  ],
+  "prior_accepted_fixes_retained": [
+    "Individual DDL avoids executescript implicit commit; prepare-before-BEGIN; singleDB path guard",
+    "Saved transfer-wins concurrent loser0effect proof from preceding review",
+    "Fixture exclusion for real workflow and explicit isolated fixture-only gate",
+    "Exact registry hash/path/requirement/jobrevision + task/operation/verifier validator binding",
+    "Age/future checks and live relationship fingerprint"
+  ],
+  "prior_relevant_disposition": {
+    "post_write_rollback": "VERIFIED bounded hook failure/readback now proved",
+    "historical_replay": "VERIFIED previous lowering defect repaired",
+    "transfer_idempotency": "VERIFIED ledger/retry/collision/current read repaired",
+    "actual_outcome": "FAILED arbitrary output names still pass",
+    "isolated_scope_negatives": "UNVERIFIED masked controls",
+    "immutable_run_hashes": "FAILED write-after-hash mutation"
+  },
+  "evidence_handles": [
+    "Source/readback exec3d961c: snapshots/DBs/pure arbitrary-output checks",
+    "History/hash/source exec48ee82: stable bytes and all3 unique-receipt hash mismatches",
+    "Source helper exec15d79e/0bc34a: actual fault and transfer retry request"
+  ],
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Real artifact/result acceptance checks, isolated exact-reason operation/verifier handler negatives, and final-byte immutable receipt hash publication.",
+    "outside_dependency": "None for remaining reviewed local work; other required queue remains separate."
+  }
+}

@@ -1,0 +1,472 @@
+{
+  "id": "table_170af05f4ef8ff21ec57",
+  "sheet": "S05-10 DEFINITION OF DONE",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "DEFINITION / FOUR MISSION GATES"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Completion criteria, not achieved claims • Configuration is not proof • Live customer sending is a separate launch gate."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gate"
+        },
+        {
+          "column": "B",
+          "value": "Phase / Finish"
+        },
+        {
+          "column": "C",
+          "value": "Done Means"
+        },
+        {
+          "column": "D",
+          "value": "Proof + Negative Check"
+        },
+        {
+          "column": "E",
+          "value": "Proposed Owner"
+        },
+        {
+          "column": "F",
+          "value": "Status"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G1.1"
+        },
+        {
+          "column": "B",
+          "value": "1 — Lab"
+        },
+        {
+          "column": "C",
+          "value": "Reconcile current live inventory against COMPUTER INVENTORY (7 Orgo computers + 2 local Macs as of Oct 5). One JAVAR-LAB + independent optimizer profile/config/session; correct Lab keys."
+        },
+        {
+          "column": "D",
+          "value": "Real connection + isolation; production write credentials absent, config unchanged. Reuse Nous/Composio/1Password; confirmed spend + tested stop."
+        },
+        {
+          "column": "E",
+          "value": "Lab controller"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Four Orgo replacements and fresh uncredentialed JAVAR-LAB runtime are receipt-backed. This establishes existence, not working credentials or isolation acceptance. Private loader remains execution-disabled. Returned native guard design is not implemented or operationally accepted; trusted entry, per-request revocation and exact executable remain UNKNOWN. G1.1 is Blocked and mission work is paused. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G1.2"
+        },
+        {
+          "column": "B",
+          "value": "1 — Lab"
+        },
+        {
+          "column": "C",
+          "value": "Freeze JAVAR-BASELINE-001, exact models/provider/harness/rules/skills/config, task split/scorecard/budget."
+        },
+        {
+          "column": "D",
+          "value": "Reuse/reconcile current golden suite + hidden tests. Fresh replay reference; holdout outside optimizer context. Current runtime never guessed."
+        },
+        {
+          "column": "E",
+          "value": "Lab + evaluator"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G1.2 Blocked on G1.1. Private baseline candidate passed 15 focused checks; no live JAVAR-BASELINE-001, task grading or cost linkage is established. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G1.3"
+        },
+        {
+          "column": "B",
+          "value": "1 — Lab"
+        },
+        {
+          "column": "C",
+          "value": "Every Director/controller/worker mission must emit structured failure, blocker, correction, UNKNOWN and outcome records into Observatory with trace/evidence pointers."
+        },
+        {
+          "column": "D",
+          "value": "All active roles follow FAILURES & BLOCKERS; future Sales before rollout. Fresh real-event read-back, replay/dedupe, collector outage and missing-report proof; supported event types do not imply every type occurred."
+        },
+        {
+          "column": "E",
+          "value": "Observatory owner"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G1.3 Blocked. Existing Cloudflare Worker/STATE destination is identified, but mission writer/reader issuance and append→durable→Observatory delivery are not proved. Permission-only private candidate passed 39 checks; no deployment. Exact proposed identities/policies are absent. StateEntity head/replay/missing-report gaps are reproduced. Corrected permission package is NOT_WRITTEN; stale return was rejected. Owner proposal is a draft with five unresolved details, not implementation. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G1.4"
+        },
+        {
+          "column": "B",
+          "value": "1 — Lab"
+        },
+        {
+          "column": "C",
+          "value": "Fresh Composio discovery/schema failure experiment AFTER timestamp experiment: evidence→candidate→same eval→holdout/regression→KEEP/KILL."
+        },
+        {
+          "column": "D",
+          "value": "Do not presume root cause; retain supporting/contrary evidence. Frozen scorecard; quality or cost win at quality floor. Important stochastic evals: ≥3 repeated runs per condition; mean + standard deviation; single run ≠ KEEP. Deterministic checks exempt. Apply LAB LOOP controls. UNKNOWN ≠ PASS; production untouched; kill/rollback proved."
+        },
+        {
+          "column": "E",
+          "value": "Lab + reviewer"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G1.4 Blocked on G1.1/G1.2/G1.3/G2.2. No fresh accepted improvement experiment or KEEP decision. Frozen variance and intervention controls remain unchanged. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G1.5"
+        },
+        {
+          "column": "B",
+          "value": "1 — Lab"
+        },
+        {
+          "column": "C",
+          "value": "Permanent operational/eval/experiment history; get_current_findings returns failures/blockers/corrections/unknowns/proven/rejected/baseline/queue."
+        },
+        {
+          "column": "D",
+          "value": "Fresh-agent retrieval; confirmed important case → reviewed eval → experiment → verified fix. Counts include mission totals/coverage; protected holdout hidden; no weakened grader."
+        },
+        {
+          "column": "E",
+          "value": "Lab + Research"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Oct 5, 11:05 PM Detroit: manual current-state check requested by Alex. G1.5 remains Blocked. The completed pause checkpoint and fresh-chat recovery receipts preserve current state, but do not establish the full operational failure→eval→fix chain. Local B1/B2–B6 source acceptance remains supported; Observatory tool-card acceptance labels are stale relative to canonical receipts. Owner notification delivery remains blocked; native finals were recovered. All-client schema refresh, B6 config cleanup, StateEntity connection and JAVAR-LAB visibility remain unproved or pending. Cursor’s separate resource scope is not established. Existing bounded Claude/MOBILE/private coverage gaps remain; no all-source or live-provider audit is claimed. Evidence: work/gameplan-updater/manual-check-20261006T0305Z/evidence.json. Current checkpoint SHA256 e4d98df644a08ab23dd4a7e41e18ec08e9f2aa835a5af6c66a42d21ee2ddb841."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G2.1"
+        },
+        {
+          "column": "B",
+          "value": "2 — Evidence"
+        },
+        {
+          "column": "C",
+          "value": "Thin Evidence MCP reuses Prime + Cloudflare/Vectorize/AI Search. Operational history remains authoritative; distilled verified lessons become shared knowledge."
+        },
+        {
+          "column": "D",
+          "value": "Name actual existing storage destinations and access scope, then prove write/read. Internal-first query with original evidence pointers; raw errors not dumped into vector knowledge."
+        },
+        {
+          "column": "E",
+          "value": "Research / Intelligence"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G2.1 Blocked on owner binding. Existing Prime/Cloudflare destination remains selected; permission package correction is NOT_WRITTEN. No working scoped end-to-end write/read proof. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G2.2"
+        },
+        {
+          "column": "B",
+          "value": "2 — Evidence"
+        },
+        {
+          "column": "C",
+          "value": "Real open Javar failure→candidate approaches→best testable hypothesis handed to Lab; useful research preserved."
+        },
+        {
+          "column": "D",
+          "value": "Supporting/contradicting sources + semantic receipts. Astra chooses smallest test; Observatory decides. Historical Prime capabilities are not proven business outcomes."
+        },
+        {
+          "column": "E",
+          "value": "Research + Lab"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G2.2 Blocked on G2.1. Research-to-Lab hypothesis gate is incomplete; no fresh passing receipt. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G3.1"
+        },
+        {
+          "column": "B",
+          "value": "3 — Sales data"
+        },
+        {
+          "column": "C",
+          "value": "SALES_CONVERSATION_SCHEMA_V1 is the provider-independent canonical master: account/contact/conversation IDs, messages, source/channel/time and known business outcomes; raw/source pointers retained."
+        },
+        {
+          "column": "D",
+          "value": "Before bulk: current Fireworks docs + representative sample/export validation. Fireworks, Prime and SalesBench use transformers from the canonical master; vendor formats never dictate source storage. Prove pagination/incremental dedupe; missing outcomes UNKNOWN."
+        },
+        {
+          "column": "E",
+          "value": "Sales Data controller"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G3.1 Blocked on historical ordering/revisions. The same 18 saved messages were rechecked; missing history/order/revision/as-of facts remain UNKNOWN. Historical training export is blocked. No new customer read or training upload occurred in reconciliation. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G3.2"
+        },
+        {
+          "column": "B",
+          "value": "3 — Sales data"
+        },
+        {
+          "column": "C",
+          "value": "Normalized outcomes→Prime→evidence-backed sales patterns→repeatable SalesBench cases."
+        },
+        {
+          "column": "D",
+          "value": "Intent/objection/strategy/qualification/next action/timing/escalation; extraction is not truth. Check source-backed correlation; no causal/ROI claim without evidence. Cheap/batch only within budget."
+        },
+        {
+          "column": "E",
+          "value": "Sales Data + Research"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G3.2 Blocked on G3.1/G2.1. Repeatable source-backed outcomes→Prime→SalesBench pipeline remains unproved. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G3.3"
+        },
+        {
+          "column": "B",
+          "value": "3 — Sales data"
+        },
+        {
+          "column": "C",
+          "value": "SalesBench real historical states + expected next decisions/outcomes; train/dev/hidden holdout."
+        },
+        {
+          "column": "D",
+          "value": "Coverage sized, not arbitrary rows. STOP/DND/no duplicate/tenant/hallucination/authority/booking/handoff cases; price/inventory/availability retrieved. Incremental cases tested."
+        },
+        {
+          "column": "E",
+          "value": "Sales evaluator"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G3.3 Blocked on G3.1/G3.2. Historical SalesBench and hidden holdout acceptance remain unproved. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G4.1"
+        },
+        {
+          "column": "B",
+          "value": "4 — Sales V1"
+        },
+        {
+          "column": "C",
+          "value": "Scoped inbound + reactivation→qualify→objections→appointment→follow-up→human handoff; existing commercial baseline first."
+        },
+        {
+          "column": "D",
+          "value": "Historical eval + hidden holdout; grade decisions. Same harness/SalesBench for OpenRouter/Fireworks candidates; agreed quality threshold + measured cost/latency; zero unacceptable failures."
+        },
+        {
+          "column": "E",
+          "value": "Sales Agent controller"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G4.1 Blocked on G3.3/G1.3. Historical quality/cost acceptance remains unproved; no production launch. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G4.2"
+        },
+        {
+          "column": "B",
+          "value": "4 — Sales V1"
+        },
+        {
+          "column": "C",
+          "value": "Winner completes live no-send shadow after all-agent failure intake is proved; future Sales emits the same outcomes/blockers/corrections/UNKNOWN contract."
+        },
+        {
+          "column": "D",
+          "value": "Human process continues. Verify Sales event delivery/read-back, cost/latency/handoff and zero customer sends. Prepare controlled-pilot audience/limits/stop/owner/window."
+        },
+        {
+          "column": "E",
+          "value": "Sales Agent + reviewer"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. G4.2 Blocked on G4.1/G1.3. Live no-send shadow has not been accepted. No customer sends authorized by this pause. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MISSION"
+        },
+        {
+          "column": "B",
+          "value": "Gates 1–4"
+        },
+        {
+          "column": "C",
+          "value": "Director proves all four gates and all eight START HERE criteria with fresh execution evidence against the current target/version; preserve production recoverability."
+        },
+        {
+          "column": "D",
+          "value": "Installed/configured ≠ working; UNKNOWN ≠ PASS. Dated read-back and independent acceptance per gate. Deferred IDEAS block only when a required gate proves necessity. Same-Drive final-byte receipt; ends shadow-proven, not launched."
+        },
+        {
+          "column": "E",
+          "value": "Director / reviewer"
+        },
+        {
+          "column": "F",
+          "value": "Blocked",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Top mission acceptance is Blocked: all four gates are incomplete. Alex paused implementation. Private source reviews, metadata and recovery receipts are bounded evidence, not working gate completion. No new scope, spend, security change, credential transfer, deployment or launch. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "LAUNCH"
+        },
+        {
+          "column": "B",
+          "value": "Separate later gate"
+        },
+        {
+          "column": "C",
+          "value": "Concrete pilot/release packet approved by Alex for exact audience/channel/spend/stop/handoff."
+        },
+        {
+          "column": "D",
+          "value": "Current approval before customer sending/production. Security owner restrictions stand; simulation/shadow is not live revenue proof."
+        },
+        {
+          "column": "E",
+          "value": "Alex + Director"
+        },
+        {
+          "column": "F",
+          "value": "Blocked"
+        }
+      ]
+    }
+  ]
+}

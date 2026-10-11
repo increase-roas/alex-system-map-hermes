@@ -1,0 +1,32 @@
+{
+  "at": "2026-10-10T13:04:21.947180+00:00",
+  "event": "build_acceptance_drift_and_dependency_probe",
+  "session_id": 46274,
+  "owner_pid": 47964,
+  "failed_receipt_run": "955300be-c21b-4676-92eb-30f1e7436f1d",
+  "drift": [
+    "SKIP_ACCEPTANCE_BUILD sets build_rc0 using BUILD_ID existence and nonnull current panel hash, without compiled-source equivalence or successful build receipt.",
+    "build timeout raised600to900 without recorded cause."
+  ],
+  "active_build_pids": [
+    56200,
+    56212,
+    56233
+  ],
+  "open_dependency_read_target": "app/node_modules/.pnpm/next@15.5.25_@opentelemetry+api@1.9.0_@types+node@22.20.5_react-dom@19.3.0_react@19.3.0/node_modules/next/dist/compiled/comment-json/package.json",
+  "dependency_probe": {
+    "read_exit": 1,
+    "byte_count": null
+  },
+  "proof_boundary": "No prior full bound build can satisfy changed panel/server/renderer compilation. Rootcause environmental vs code not yet proven.",
+  "required_next_correction": "Remove false-success build reuse. Reuse only actual successful exact source/build-bound receipt. Diagnose bounded dependency reads and buildphase, preserve timeout output safely, then same-owner bounded retry. No timeout waiver or lint/type bypass.",
+  "full_completion": false,
+  "followup_exact_probe": {
+    "at": "2026-10-10T13:04:44.738301+00:00",
+    "pid": 56233,
+    "observed_dependency_changed_from": "next/dist/compiled/comment-json/package.json",
+    "observed_dependency_changed_to": "next/dist/compiled/devalue/devalue.umd.js",
+    "exact_lsof_path_read_timed_out_seconds": 5,
+    "interpretation": "Dependency read target changed, proving some advancement; independent read of new exact file stalled. Environmental read latency suspected, not yet proven cause or permission denial. Earlier manually reconstructed path probe exit1 is not evidence about exact file."
+  }
+}

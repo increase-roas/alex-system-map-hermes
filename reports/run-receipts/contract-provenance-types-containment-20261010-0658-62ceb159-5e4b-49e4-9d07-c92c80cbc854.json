@@ -1,0 +1,97 @@
+{
+  "at": "2026-10-10T07:00:35+00:00",
+  "cases": {
+    "artifact_root_containment": {
+      "in_root_positive": {
+        "error": "verification_record_operation_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "symlink_escape_rejected": {
+        "measure_ok": false,
+        "measure_reason": "artifact_outside_artifact_root"
+      },
+      "traversal_descriptor_rejected": {
+        "criterion_reason": "artifact_path_traversal",
+        "measure_ok": false,
+        "measure_reason": "artifact_path_traversal"
+      }
+    },
+    "json_type_equality": {
+      "handler_path_matching_json": {
+        "error": "verification_record_operation_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "handler_path_wrong_numeric": {
+        "reason": "declared_result_mismatch"
+      },
+      "pure_ok_false_vs_zero": {
+        "equal": false
+      },
+      "pure_ok_one_vs_true": {
+        "equal": false
+      }
+    },
+    "provenance_revision": {
+      "fresh_proof_positive": {
+        "error": "verification_record_operation_id_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "old_proof_after_contract_change": {
+        "error": "verification_record_revision_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "revisioned_declaration_committed": {
+        "declaration_history_entries": 1,
+        "error": "",
+        "exit": 0,
+        "operation_count": 1,
+        "outputs_cleared": true,
+        "task_status": "needs_rechecking"
+      },
+      "same_revision_rewrite_rejected": {
+        "error": "declared_outcome_revision_unchanged",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "stale_descriptor_reuse_rejected": {
+        "error": "output_declaration_binding_stale",
+        "exit": 1
+      }
+    }
+  },
+  "delivery_id": "contract-provenance-types-containment-20261010-0658",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/contract-provenance-types-containment-20261010-0658-62ceb159.json",
+      "sha256": "db8c8523d3701a0a8bf17df30686671d128a86fefb16ff9677eba9d19a7d5b24"
+    }
+  ],
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": true,
+  "overall": "partial",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/contract-provenance-types-containment-20261010-0658-62ceb159-5e4b-49e4-9d07-c92c80cbc854.json"
+  },
+  "run_id": "62ceb159-5e4b-49e4-9d07-c92c80cbc854",
+  "source_identity": {
+    "tools/bounded_acceptance.py": "dd1a9fe8e851b9512a46bd5478b4397fed32cdc0f907c418b64ddda32a66ad7f",
+    "tools/contract_provenance_types_containment_acceptance.py": "efcbc8a4de49193448336b7ee30ae4d522b5aec1fe6e6dea71ad7c3a62bad453",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "99492e4c90c501d81824b7f9dae0a2e70eb3c1494f599f86f03b63c4f5d1ec7b"
+  }
+}

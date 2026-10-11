@@ -1,0 +1,169 @@
+{
+  "at": "2026-10-10T10:30:17.771910+00:00",
+  "scope": "Read-only diagnosis of repeated canonical replay and actual UI/API failures; not acceptance or implementation. Owner remains active.",
+  "overall": "FAILED",
+  "blocker_type": "goal_not_met_yet",
+  "latest_receipt": {
+    "path": "reports/run-receipts/canonical-edit-sync-20261010-0913-fb3e9271-f673-4089-a431-614668685eb0.json",
+    "at": "2026-10-10T10:27:34+00:00",
+    "sha256": "cfa1629fa67709e5e3208bad2a036c6c95034027eacd9db5d28e631b20e25089"
+  },
+  "source_initial": {
+    "tools/canonical_maintained_edit.py": "35edadab50e0f74156ceff6630a43cbe1a73bfded0fc04d47381c50ba45665fd",
+    "tools/canonical_edit_sync_acceptance.py": "9b63b43d15b99e3db47971cb9c83c4683a2c164a14019fcbaccc9d2e451946a8",
+    "tools/catalog_fixture_clone.py": "8fff25a6e870e21a08c3aac0a92963f88fccea04359f4a7523acd48c93260a99",
+    "tools/local_service.py": "8a198bf7874d53cb56a5243b9bc02bd02be310d799bb3aaaf8837b73f86fc5bd",
+    "tools/browser_canonical_edit_sync.mjs": "5a88d92f7a4f66a8c92f4e47817107c316a5b55e74fa87525065e854a2162143"
+  },
+  "source_final": {
+    "tools/canonical_maintained_edit.py": "35edadab50e0f74156ceff6630a43cbe1a73bfded0fc04d47381c50ba45665fd",
+    "tools/canonical_edit_sync_acceptance.py": "a4fd1df6267ad42e0ccdbbe0f823a7164b6e65ad5d0e128691f078adcde89b60",
+    "tools/catalog_fixture_clone.py": "8fff25a6e870e21a08c3aac0a92963f88fccea04359f4a7523acd48c93260a99",
+    "tools/local_service.py": "8a198bf7874d53cb56a5243b9bc02bd02be310d799bb3aaaf8837b73f86fc5bd",
+    "tools/browser_canonical_edit_sync.mjs": "c5d6cce3577a7519e2b58e5d4dcfd10a98c269b3ce42595ada90e01655d799ab",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "8e391b79edf4ce74433602cda45ba4835532b2a5d672e041585c0a5ef783eff8"
+  },
+  "changed_while_reading": {
+    "tools/canonical_maintained_edit.py": false,
+    "tools/canonical_edit_sync_acceptance.py": true,
+    "tools/catalog_fixture_clone.py": false,
+    "tools/local_service.py": false,
+    "tools/browser_canonical_edit_sync.mjs": true
+  },
+  "source_differs_from_latest_receipt": {
+    "tools/canonical_maintained_edit.py": false,
+    "tools/canonical_edit_sync_acceptance.py": true,
+    "tools/catalog_fixture_clone.py": false,
+    "tools/local_service.py": false,
+    "tools/browser_canonical_edit_sync.mjs": true,
+    "app/src/app/explorer/maintained-edit-panel.tsx": true
+  },
+  "snapshot_qualification": "Source changed while reading: tools/canonical_edit_sync_acceptance.py, tools/browser_canonical_edit_sync.mjs. Findings cite the initial source snapshot; final hashes are recorded separately, and corrected current code is not adjudicated. Browser and acceptance sources also differ from the10:27:34 receipt. Owner remains active.",
+  "saved_failures": [
+    {
+      "path": "reports/run-receipts/canonical-edit-sync-20261010-0913-261dfbee-8e95-4996-a2de-260acfeee169.json",
+      "sha256": "7c024eb28f951ec0931edc285f3af071a63bd3b1bb2833f544ac6009bb9975ad",
+      "at": "2026-10-10T10:23:21+00:00",
+      "overall": "failed",
+      "failures": [
+        "idempotent",
+        "browser_ui"
+      ],
+      "idempotent": {
+        "first_exit": 0,
+        "second_exit": 1,
+        "first_after": "25eb495ca9d6979a0bf8c11b7815cf3c2240104f89476c9e1068b7da26e0725b",
+        "second_after": null,
+        "idempotent_match": false,
+        "payload_collision_rejected": true
+      },
+      "browser_safe_projection": {
+        "api_list_matches_ui": false,
+        "api_readback_matches_ui": false,
+        "catalog_list_matches_readback": true,
+        "pre_browser_revision": 0,
+        "ui_revision_before": "0",
+        "ui_revision_after": "1",
+        "ui_diff_has_purpose": true,
+        "ui_outcome_has_record": true,
+        "persisted_after_restart": true
+      },
+      "api_values_equal_pre_browser": true
+    },
+    {
+      "path": "reports/run-receipts/canonical-edit-sync-20261010-0913-fb3e9271-f673-4089-a431-614668685eb0.json",
+      "sha256": "cfa1629fa67709e5e3208bad2a036c6c95034027eacd9db5d28e631b20e25089",
+      "at": "2026-10-10T10:27:34+00:00",
+      "overall": "failed",
+      "failures": [
+        "idempotent",
+        "browser_ui"
+      ],
+      "idempotent": {
+        "first_exit": 0,
+        "second_exit": 1,
+        "first_after": "25eb495ca9d6979a0bf8c11b7815cf3c2240104f89476c9e1068b7da26e0725b",
+        "second_after": null,
+        "idempotent_match": false,
+        "payload_collision_rejected": true
+      },
+      "browser_safe_projection": {
+        "api_list_matches_ui": false,
+        "api_readback_matches_ui": false,
+        "catalog_list_matches_readback": true,
+        "pre_browser_revision": 0,
+        "ui_revision_before": "0",
+        "ui_revision_after": "1",
+        "ui_diff_has_purpose": true,
+        "ui_outcome_has_record": true,
+        "persisted_after_restart": true
+      },
+      "api_values_equal_pre_browser": true
+    },
+    {
+      "path": "reports/run-receipts/canonical-edit-sync-20261010-0913-2e60e975-e0ea-454c-ba81-9a67c962ab0c.json",
+      "sha256": "21ed10970a3a988a20536df7891f9849ee4808eeb61b9c7e3cf7f184bdc6b277",
+      "at": "2026-10-10T10:17:40+00:00",
+      "overall": "failed",
+      "failures": [
+        "idempotent",
+        "browser_ui"
+      ],
+      "idempotent": {
+        "first_exit": 0,
+        "second_exit": 1,
+        "first_after": "25eb495ca9d6979a0bf8c11b7815cf3c2240104f89476c9e1068b7da26e0725b",
+        "second_after": null,
+        "idempotent_match": false,
+        "payload_collision_rejected": true
+      },
+      "browser_safe_projection": {
+        "api_list_matches_ui": false,
+        "api_readback_matches_ui": false,
+        "catalog_list_matches_readback": true,
+        "pre_browser_revision": null,
+        "ui_revision_before": "0",
+        "ui_revision_after": "1",
+        "ui_diff_has_purpose": true,
+        "ui_outcome_has_record": true,
+        "persisted_after_restart": true
+      },
+      "api_values_equal_pre_browser": null
+    }
+  ],
+  "findings": [
+    {
+      "id": "CR01",
+      "status": "VERIFIED",
+      "finding": "Actual identical-request replay identity is incorrectly derived from mutable current revision.",
+      "proof": [
+        "tools/canonical_edit_sync_acceptance.py:255-287 sends identical first_sha/document/next_revision/operation_id twice",
+        "tools/canonical_maintained_edit.py:311-312 uses current read_state revision for normalized digest",
+        "tools/canonical_maintained_edit.py:173-188 includes that revision in digest;320-323 rejects mismatch before replay",
+        "pure no-write extracted digest check8713a1 returned true for digest inequality rev0 vsrev1 with unchanged request"
+      ],
+      "classification": "Real implementation bug; repeated request test is valid. Saved receipts show first_exit0,second_exit1 but do not preserve exact second error text. Exact rejection reason is source-derived, not a saved runtime error readback.",
+      "smallest_correction": "Derive operation request identity from explicit immutable submitted expected revision/next_revision, table/record/document/expected SHA; include requested revision in digest. Under target lock recheck ledger and replay identical committed request before current-state conflict checks; retain changed-request collision rejection. Do not replace retry arguments with refreshed state."
+    },
+    {
+      "id": "CR02",
+      "status": "UNVERIFIED",
+      "finding": "Source-supported UI draft overwrite explains saved revision-only successes, but exact failing browser request content is absent.",
+      "proof": [
+        "all three saved browser cases: api_readback_matches_ui=false, api_list_matches_ui=false, catalog_list_matches_readback=true, UIrevision0->1",
+        "latest saved API readback/list preserve the pre_browser purpose even though UI diff contained intended purpose",
+        "app/src/app/explorer/maintained-edit-panel.tsx:81-94 sync fingerprint change invokes refresh",
+        "same file:41-72 refresh resets purpose/updatePolicy and clears preview/outcome without dirty or in-flight guard",
+        "same file:97-121 preview captures purpose;124-140 apply reconstructs from current mutable purpose instead of immutable preview",
+        "browser_canonical_edit_sync.mjs:105-128 fills purpose, waits preview then clicks apply and independently compares API"
+      ],
+      "classification": "An actual source-level race is present: async refresh can replace a dirty draft between preview and apply; saved behavior is consistent with it. No recorded apply request body or server final disk snapshot at the failing instant proves it is the sole cause. Routing/clone discrepancy is not established: API list and state agree. Clone reset is present in current test_browser382-383; not proof of browser draft preservation.",
+      "smallest_correction": "Keep server observation separate from dirty draft; block/stage poll refresh during editing/preview/apply and retain a validated immutable preview request for apply. If new observation changes expected source show conflict instead of silently replacing fields. Capture safely projected submitted purpose/expected hash/revision/op, apply result, disk purpose and final UI field for the next isolated run. Keep intended DOM/API/disk equality assertions."
+    }
+  ],
+  "pure_checks": {
+    "identical_request_digest_changes_when_current_revision_increments": true,
+    "no_writes": true
+  },
+  "not_proven": "Exact failed second stderr/error and browser apply body were not persisted in the cited receipts. No new app tests or live requests were run."
+}

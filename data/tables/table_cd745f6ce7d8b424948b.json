@@ -1,0 +1,103 @@
+{
+  "id": "table_cd745f6ce7d8b424948b",
+  "sheet": "DOCS - Other",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Full text — Other"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact text in ordered chunks. Decode any JSON-string rows, then concatenate Text in Part order. This preserves terminal control characters that Excel cannot display."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "File ID"
+        },
+        {
+          "column": "B",
+          "value": "Document"
+        },
+        {
+          "column": "C",
+          "value": "Part"
+        },
+        {
+          "column": "D",
+          "value": "Section context"
+        },
+        {
+          "column": "E",
+          "value": "Text"
+        },
+        {
+          "column": "F",
+          "value": "Text encoding"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "F0842"
+        },
+        {
+          "column": "B",
+          "value": "workbook-drive.json"
+        },
+        {
+          "column": "C",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "{\n  \"schema_version\": 1,\n  \"updated\": \"2026-10-03_210437\",\n  \"policy\": \"Canonical local masters publish to these stable Drive file IDs; changed bytes never create a new file. Follow the Google Workspace card. Verify after the final local change.\",\n  \"workbooks\": [\n    {\n      \"key\": \"connectors\",\n      \"canonical_local_path\": \"/Users/alexlobaito/Projects/master-connector-repo/work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx\",\n      \"drive_file_id\": \"1V8Q_v4nA7LaIaJoisvB0Jr2-MQsuTxi7\",\n      \"shared_drive_id\": \"0AMHpEV4U3WCiUk9PVA\",\n      \"parent_folder_id\": \"1d-bybId07i_Hm6CXJ7DjbNnsmTtLcgZG\",\n      \"filename\": \"connectors-2026-09-30.xlsx\",\n      \"mime_type\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\"\n    },\n    {\n      \"key\": \"javar\",\n      \"canonical_local_path\": \"/Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/outputs/Javar_AI_Infrastructure_Gameplan.xlsx\",\n      \"drive_file_id\": \"1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW\",\n      \"shared_drive_id\": \"0AMHpEV4U3WCiUk9PVA\",\n"
+        },
+        {
+          "column": "F",
+          "value": "UTF-8 text"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "F0842"
+        },
+        {
+          "column": "B",
+          "value": "workbook-drive.json"
+        },
+        {
+          "column": "C",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "      \"parent_folder_id\": \"1d-bybId07i_Hm6CXJ7DjbNnsmTtLcgZG\",\n      \"filename\": \"Javar_AI_Infrastructure_Gameplan.xlsx\",\n      \"mime_type\": \"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet\",\n      \"builder_path\": \"/Users/alexlobaito/Documents/Codex/2026-10-03/referenced-chatgpt-conversation-this-is-an/work/javar-gameplan/build_workbook.py\"\n    }\n  ]\n}\n"
+        },
+        {
+          "column": "F",
+          "value": "UTF-8 text"
+        }
+      ]
+    }
+  ]
+}

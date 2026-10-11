@@ -1,0 +1,18 @@
+{
+  "at": "2026-10-10T10:05:33.567443+00:00",
+  "delivery_id": "canonical-edit-sync-20261010-0913",
+  "owner_pid": 5162,
+  "target_pid": 24566,
+  "target_parent_pid": 24551,
+  "target_script": "tools/browser_canonical_edit_sync.mjs",
+  "status": "failed_startup_prerequisite",
+  "proof": {
+    "production_build_id_exists": false,
+    "port_3223": "ECONNREFUSED",
+    "target_has_children": false,
+    "cwd_identity_verified": true
+  },
+  "reason": "Repeated production browser startup wait without a completed production build. No served process or productive browser work.",
+  "action": "SIGTERM exact verified browser child only; owner untouched",
+  "next_required_action": "Complete bounded genuine build with exit zero, BUILD_ID and manifests before browser launch. Fail fast on build absence/server exit. Fix actual timeout and process-tree cleanup; retain all failed attempts. No accepted rows changed."
+}

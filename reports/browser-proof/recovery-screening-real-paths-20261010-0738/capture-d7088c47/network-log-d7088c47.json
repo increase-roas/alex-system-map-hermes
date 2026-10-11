@@ -1,0 +1,283 @@
+[
+  {
+    "label": "health-before",
+    "url": "http://127.0.0.1:3202/api/health",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 1404,
+    "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":53221},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+    "parsedKeys": [
+      "ok",
+      "loopback_only",
+      "local_token_hint",
+      "build_id",
+      "process",
+      "runtime",
+      "completeness",
+      "sync",
+      "token_redacted"
+    ],
+    "screening_notes": [
+      "local-mutation-token withheld"
+    ],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791620005350-create",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 213,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791620005350-create\",\"handoff_operation_id\":\"rec-ui-a-1791620005350-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "handoff_operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791620005350-add-t1",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 157,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791620005350-add-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791620005350-add-t2",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 157,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791620005350-add-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791620005350-produce-t1",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 161,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":4,\"operation_id\":\"rec-ui-a-1791620005350-produce-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791620005350-correct-t2",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 161,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":5,\"operation_id\":\"rec-ui-a-1791620005350-correct-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791620005350-correct-t1",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 161,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":6,\"operation_id\":\"rec-ui-a-1791620005350-correct-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-b-1791620005350-create",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 213,
+    "bodyPreview": "{\"job_id\":\"rec-ui-b-1791620005350\",\"revision\":1,\"operation_id\":\"rec-ui-b-1791620005350-create\",\"handoff_operation_id\":\"rec-ui-b-1791620005350-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "handoff_operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-b-1791620005350-add",
+    "url": "http://127.0.0.1:3202/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 154,
+    "bodyPreview": "{\"job_id\":\"rec-ui-b-1791620005350\",\"revision\":2,\"operation_id\":\"rec-ui-b-1791620005350-add\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "recover-a-before-restart",
+    "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-a-1791620005350",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 3979,
+    "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-a-1791620005350\",\"current_revision\":6,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job A chain\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[{\"active\":true,\"affected_task_ids\":[\"t2\"],\"id\":\"corr-t2\",\"preserved_attempts\":[],\"preserved_outputs\":[],\"reason\":\"Revise downstream instruction 0754-t2\",\"revision\":5,\"superseded_next_action\":\"wait for t1\",\"task_id",
+    "parsedKeys": [
+      "contract",
+      "synthetic_only",
+      "job_id",
+      "current_revision",
+      "goal",
+      "last_valid_verified_checkpoint",
+      "active_corrections",
+      "pending_dependencies",
+      "next_permitted_action",
+      "tasks",
+      "affected_outputs_needing_recheck",
+      "governing_next_action",
+      "superseded_next_permitted_action",
+      "correction_governed_task",
+      "reliability_recovery",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "health-after",
+    "url": "http://127.0.0.1:3202/api/health",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 1404,
+    "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":53674},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+    "parsedKeys": [
+      "ok",
+      "loopback_only",
+      "local_token_hint",
+      "build_id",
+      "process",
+      "runtime",
+      "completeness",
+      "sync",
+      "token_redacted"
+    ],
+    "screening_notes": [
+      "local-mutation-token withheld"
+    ],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "recover-a",
+    "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-a-1791620005350",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 3979,
+    "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-a-1791620005350\",\"current_revision\":6,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job A chain\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[{\"active\":true,\"affected_task_ids\":[\"t2\"],\"id\":\"corr-t2\",\"preserved_attempts\":[],\"preserved_outputs\":[],\"reason\":\"Revise downstream instruction 0754-t2\",\"revision\":5,\"superseded_next_action\":\"wait for t1\",\"task_id",
+    "parsedKeys": [
+      "contract",
+      "synthetic_only",
+      "job_id",
+      "current_revision",
+      "goal",
+      "last_valid_verified_checkpoint",
+      "active_corrections",
+      "pending_dependencies",
+      "next_permitted_action",
+      "tasks",
+      "affected_outputs_needing_recheck",
+      "governing_next_action",
+      "superseded_next_permitted_action",
+      "correction_governed_task",
+      "reliability_recovery",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "recover-b",
+    "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-b-1791620005350",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 1081,
+    "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-b-1791620005350\",\"current_revision\":2,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job B control\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[],\"pending_dependencies\":{\"b1\":[]},\"next_permitted_action\":{\"task_id\":\"b1\",\"action\":\"Independent B step\",\"source\":\"workflow_engine\",\"actionable\":true},\"tasks\":{\"b1\":{\"acceptance\":[\"check\"],\"attempts\":[],\"blocker",
+    "parsedKeys": [
+      "contract",
+      "synthetic_only",
+      "job_id",
+      "current_revision",
+      "goal",
+      "last_valid_verified_checkpoint",
+      "active_corrections",
+      "pending_dependencies",
+      "next_permitted_action",
+      "tasks",
+      "affected_outputs_needing_recheck",
+      "reliability_recovery",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  }
+]

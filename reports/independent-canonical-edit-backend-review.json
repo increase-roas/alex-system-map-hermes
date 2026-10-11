@@ -1,0 +1,262 @@
+{
+  "at": "2026-10-10T10:42:36.009865+00:00",
+  "scope": "Bounded canonical backend review at safe checkpoint; no source/app/DB mutations, acceptance reruns, network, installs, browser control, credentials or helpers. Prior accepted unrelated/core mechanisms retained.",
+  "overall": "FAILED",
+  "blocker_type": "goal_not_met_yet",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/canonical-edit-sync-20261010-0913-9fe2b9db-db45-4ab5-8b69-4a988899cee0.json",
+    "sha256": "a5346a4ae14b2d7fb99abaa08aeca0144a5548f8a9fc73cf50ee93a4262832c4",
+    "expected_sha256": "a5346a4ae14b2d7fb99abaa08aeca0144a5548f8a9fc73cf50ee93a4262832c4",
+    "at": "2026-10-10T10:36:15+00:00",
+    "run_id": "9fe2b9db-db45-4ab5-8b69-4a988899cee0",
+    "owner_overall": "passed",
+    "owner_pass_is_self_report": true
+  },
+  "source_identity": {
+    "app/.next/BUILD_ID": "3c0ac5d75a4cb95e4151b599314ec19d8b04fa6dadb02dc88b2e64c0d34c0687",
+    "app/src/app/api/catalog/edit/route.ts": "8577c4558f1effc42a57ca7fb691c67ec44beb9062a243a832624e82444d4042",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "3506f29e580a1a46677c751220efa4634ce3dacaabe50afc0f0d81d024628b2f",
+    "tools/browser_canonical_edit_sync.mjs": "a6900295086601ebfd54776776e7fd925504744dde658bf77cec0fbee2cfdcac",
+    "tools/build_catalog.py": "4b65359742dd7f26e52fceb11d062c2718a9887df8f790bfe07689de15403703",
+    "tools/canonical_derived_render.py": "a2648e738621c7cd37ae61e04439153e2919eec5e34f78497772662f2b12ef63",
+    "tools/canonical_edit_sync_acceptance.py": "63977647e271283fd9f641cf2a5278552b016ee9512dfa752392644e071222bb",
+    "tools/canonical_maintained_edit.py": "3ce2e5e89aa9b739473a5e5a8d8a57f64feb8544131eeb065e0fd1914dc33545",
+    "tools/catalog_fixture_clone.py": "8fff25a6e870e21a08c3aac0a92963f88fccea04359f4a7523acd48c93260a99",
+    "tools/catalog_sync.py": "8fd8bdc7c90b7630ef2b66b2674e6f7acdbba395cc810813352b4d4be5cef73f",
+    "tools/local_service.py": "8a198bf7874d53cb56a5243b9bc02bd02be310d799bb3aaaf8837b73f86fc5bd"
+  },
+  "source_identity_start_matches": true,
+  "source_identity_end_matches": {
+    "app/.next/BUILD_ID": true,
+    "app/src/app/api/catalog/edit/route.ts": true,
+    "app/src/app/explorer/maintained-edit-panel.tsx": true,
+    "tools/browser_canonical_edit_sync.mjs": true,
+    "tools/build_catalog.py": true,
+    "tools/canonical_derived_render.py": true,
+    "tools/canonical_edit_sync_acceptance.py": true,
+    "tools/canonical_maintained_edit.py": true,
+    "tools/catalog_fixture_clone.py": true,
+    "tools/catalog_sync.py": true,
+    "tools/local_service.py": true
+  },
+  "extra_source_identity": {
+    "app/src/lib/server/python.ts": "477ac57adfaec274ef5fd89fba6838e0cc6f460ea6b68906ee007485d8b5075f",
+    "app/src/app/api/catalog/edit/state/route.ts": "03fb4fca81d4696988217841b023fc66373c3db3232509b7fc47fd3ddd2034ca",
+    "tools/catalog_io.py": "04e1c1b0cdf2ea7bd40ff63621ddf5bf1106408c8779331267ca4d0c51e25393"
+  },
+  "snapshot_stable": true,
+  "scope_authority": "work/supervision/canonical-edit-sync-20261010-0913.txt",
+  "prior_review": "reports/independent-maintained-edit-backend-review.json",
+  "checks": [
+    {
+      "id": "CE01",
+      "status": "VERIFIED",
+      "claim": "Actual canonical maintained catalog and metadata handlers replace the staging-only path.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:26-29,72-86,136-161",
+        "tools/local_service.py:523-540,548-605",
+        "app/src/app/api/catalog/edit/route.ts:21-43",
+        "app/src/app/api/catalog/edit/state/route.ts:5-17",
+        "receipt.cases.production_inspection",
+        "tools/catalog_io.py:13-17"
+      ],
+      "limits": "2351-record production data is available; destructive cases use the same handlers via CATALOG_FIXTURE_ROOT. No live production edit was performed or claimed. Metadata is a maintained JSON document, not general arbitrary document editing."
+    },
+    {
+      "id": "CE02",
+      "status": "FAILED",
+      "claim": "Actual canonical schema/reference integrity is not enforced.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:89-119,122-133",
+        "pure no-write source checks794d5c"
+      ],
+      "reason": "ID immutability, wrapper version, nonempty name and text types are repaired, but unknown layer_0999, unresolved evidence IDs, integer source_record_ids and a record missing kind are accepted. Reference arrays are not checked against canonical targets. Metadata validation also allows changing source identity/hash fields while retaining their names.",
+      "next_fix": "Use the actual maintained schema and resolve layer/evidence/source-record references, validate required fields and preserve immutable source/provenance fields; prove negative handlers produce zero writes."
+    },
+    {
+      "id": "CE03",
+      "status": "VERIFIED",
+      "claim": "Explicit immutable revision request identity now supports sequential identical retry and rejects payload collision under the target lock.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:302-316,328-360",
+        "tools/canonical_edit_sync_acceptance.py:270-329",
+        "receipt.cases.idempotent",
+        "pure extracted request digest794d5c"
+      ],
+      "limits": "Saved first/second exits0 with equal original afterhash; pure digest matches the original base revision. Same-op replay is before current-state reads, so source supports replay after newer state without rewriting. No saved after-newer-state or concurrent same-op effects test establishes those required runtime cases. next_revision remains optional for new requests; retry with missing revision then fails. Digest lacks catalog_root while OPS_LOG is shared."
+    },
+    {
+      "id": "CE04",
+      "status": "FAILED",
+      "claim": "Concurrency lock scope does not protect the complete canonical file.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:68-69,328-331,379-391",
+        "tools/canonical_edit_sync_acceptance.py:245-267",
+        "receipt.cases.concurrent"
+      ],
+      "reason": "Lock key includes record_id while mutation reads and replaces all data/components.json. Different-record edits acquire different locks and can both pass hash validation before replacing the same file, losing one update. Saved process race tests only the same record/distinct operation IDs; that subset reports one winner. Same-op concurrency, exact loser effects and cross-record integrity are not saved.",
+      "next_fix": "Serialize/CAS at canonical-file scope, including revision sidecar/derived outputs as needed; retain same-record distinct-op test and add exact concurrent same-op replay and different-record effects proof."
+    },
+    {
+      "id": "CE05",
+      "status": "FAILED",
+      "claim": "Journal recovery is incomplete and can repeatedly downgrade later state.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:212-244,378-406,420-431",
+        "tools/local_service.py:523-545",
+        "tools/canonical_edit_sync_acceptance.py:332-357"
+      ],
+      "reason": "The existing injected post_canonical_pre_derived exception and explicit reconcile reports pre-SHA restored; accepted only at that stage. Rename occurs before the journal records post-write stage, leaving a pending-entry crash gap; pending entries are discarded. Journal marks committed before operation result is appended, leaving a lost-response replay gap. Reconcile skips only committed status, so rolled_back entries retain post-write stage and are restored again on every reconcile. It takes no file lock and startup/state/apply paths do not invoke it automatically.",
+      "next_fix": "Make crash states recoverable across rename, derived/revision and operation-ledger completion; treat finalized rollback as terminal; reconcile under the canonical-file lock before serving mutations/reads and prove repeat/restart reconciliation preserves later commits."
+    },
+    {
+      "id": "CE06",
+      "status": "UNVERIFIED",
+      "claim": "Restore preserves revisions, replay truth and derivative consistency.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:435-456"
+      ],
+      "reason": "Restore is improved to lock, atomic replacement and regeneration, but it does not update the revision sidecar or operation ledger and has no saved actual restore case in this receipt. No fault/crash boundary during restore is proven.",
+      "next_fix": "Bind restored content to a coherent maintained revision/operation history and preserve actual restore/restart readback evidence."
+    },
+    {
+      "id": "CE07",
+      "status": "VERIFIED",
+      "claim": "Existing generators produce final-byte Markdown/XLSX hashes and the retained workbook contains the edited exact component value.",
+      "evidence": [
+        "tools/build_catalog.py:226-288",
+        "tools/canonical_derived_render.py:30-55",
+        "tools/canonical_edit_sync_acceptance.py:154-205",
+        "reports/derived-proof/canonical-edit-sync-20261010-0913/snapshots/views__Alex_System_Foundation.xlsx",
+        "read-only proof checks794d5c/bf1f5c"
+      ],
+      "limits": "All three retained snapshot hashes match receipt and XLSX has exactly one target ID row with intended purpose. The former Markdown missing-newline hash bug is fixed by hashing final bytes. The receipt claims Markdown content but omits its preserved snapshot; that exact historical byte/content assertion cannot be independently re-opened."
+    },
+    {
+      "id": "CE08",
+      "status": "FAILED",
+      "claim": "Derived proof is not immutable run-specific canonical/Markdown/map/XLSX agreement.",
+      "evidence": [
+        "tools/canonical_edit_sync_acceptance.py:27,183-196",
+        "tools/canonical_derived_render.py:58-72",
+        "tools/build_catalog.py:226-288",
+        "reports/derived-proof/canonical-edit-sync-20261010-0913/"
+      ],
+      "reason": "Proof directory is delivery-wide, so repeated runs overwrite evidence. copy_derived_proof saves XLSX/index/overview only, omitting canonical edited bytes, revision sidecar and component Markdown. Overview hash is unchanged and render does not regenerate that file; map value/revision agreement is not asserted. No preserved canonical revision permits value-level agreement across all required outputs.",
+      "next_fix": "Retain run-ID-specific canonical/sidecar/component-MD/map/XLSX final bytes and independently compare exact ID/value/revision lineage. Keep source hashes separate from factual verification."
+    },
+    {
+      "id": "CE09",
+      "status": "FAILED",
+      "claim": "Complete isolated catalog cloning and immutable-original proof are narrower than requested.",
+      "evidence": [
+        "tools/catalog_fixture_clone.py:12-16,50-96",
+        "receipt.cases.clone_manifest",
+        "read-only clone/original checks794d5c/d8c13f"
+      ],
+      "reason": "Canonical data is copied, but component pages are deliberately not cloned; retained clone has1 Markdown page versus2351 production pages. Only13 production catalog/view hashes are tracked; those13 currently match and original file write paths are excluded, but immutable source archive/workbook bytes are absent from this milestone identity map.",
+      "next_fix": "Preserve complete relevant catalog/derived tree for destructive cases and run-specific original/copy identity manifest including authoritative immutable inputs; do not reinterpret current unchanged13 hashes as full original-source proof."
+    },
+    {
+      "id": "CE10",
+      "status": "FAILED",
+      "claim": "Real timeout/cleanup path remains defective despite corrected seconds constants.",
+      "evidence": [
+        "tools/canonical_edit_sync_acceptance.py:28-29,75-100,245-255,380-423,491-501",
+        "tools/browser_canonical_edit_sync.mjs:42-55,58-78,150-179",
+        "pure TimeoutExpired metadata check794d5c"
+      ],
+      "reason": "600 seconds cap replaces600000 correctly. But timeout_bounded is a separate sleeping child helper. Actual CLI timeout handler accesses nonexistent TimeoutExpired.process and raises AttributeError; actual browser subprocess timeout returns a label without terminating/reaping owned Chrome/served descendants. Popen concurrency timeout has no cleanup. JS finally only sends SIGTERM to npx and does not await actual served exit/reap. Exception paths re-raise before writing immutable failure receipt; safely screened bounded failure evidence is absent.",
+      "next_fix": "Use the actual production launch helper with owned process-group lifecycle, terminate/reap on timeout and preserve screened failure receipt. Inject a hang through this actual browser/CLI path and verify all owned descendants closed, no unrelated process touched."
+    },
+    {
+      "id": "CE11",
+      "status": "FAILED",
+      "claim": "New canonical verdict does not fail closed for all required typed outcomes or independent controls.",
+      "evidence": [
+        "tools/canonical_edit_sync_acceptance.py:426-470",
+        "pure baseline/one-field mutations794d5c"
+      ],
+      "reason": "Current saved baseline passes, but xlsx_purpose_updated=string false and concurrent flag=string false still pass; idempotent.first_exit1, strict each_declared_flip_failsFalse, browser.ui_diff_has_purposeFalse and a wrong clone hash map also still pass. Truthiness-only summarize does not validate actual Boolean/int/schema fields or canonical per-field controls. The old typed-controls baseline regression is not new canonical acceptance.",
+      "next_fix": "Add explicit exact typed canonical requirements and unique one-field controls from this independently passing baseline; enforce every required outcome including identity/hash/value/revision/concurrency/sync/LKG/cleanup rather than trusting nested overall labels."
+    },
+    {
+      "id": "CE12",
+      "status": "VERIFIED",
+      "claim": "Changed Python bridge preserves scoped emitted-boundary screening and fixture-root routing in pure actual-module regression.",
+      "evidence": [
+        "app/src/lib/server/python.ts:7-37,58-66,77-119",
+        "mocked-process transpiled actual-module checkbf1f5c"
+      ],
+      "limits": "Nested canary/plain fixture values screened, benign marker retained, clone env forwarded, valid JSON/nonzero rejected and invalid stdout/stderr screened. No real child process, app/DB writes or raw diagnostic output. Existing accepted emission mechanisms otherwise preserved. This module is not in owner receipt source_identity; reviewer hash binds it independently."
+    },
+    {
+      "id": "CE13",
+      "status": "UNVERIFIED",
+      "claim": "Automatic bounded sync/LKG negative handling and canonical endpoint-specific screening are fully proven.",
+      "evidence": [
+        "tools/catalog_sync.py:18-30,56-85",
+        "receipt.cases"
+      ],
+      "reason": "Observer dynamically enumerates existing files, hashes bytes without JSON validation, and misses deleted paths in the observation loop; rename/delete/malformed/unreadable negative evidence is absent. New canonical handler canary test is absent; shared bridge regression is not endpoint-specific injected persistence/export proof. Browser reviewer owns actual DOM scope.",
+      "next_fix": "Retain the requested original negative sync/LKG and emitted-boundary evidence on the actual canonical path; preserve prior accepted screening rather than treating it as this new path proof."
+    },
+    {
+      "id": "CE14",
+      "status": "VERIFIED",
+      "claim": "Exact immutable final receipt, declared source identities, saved DB identity and historical failed files are retained.",
+      "evidence": [
+        "reports/run-receipts/canonical-edit-sync-20261010-0913-9fe2b9db-db45-4ab5-8b69-4a988899cee0.json",
+        "work/supervision/canonical-edit-sync-20261010-0913-checkpoint.txt",
+        "read-only identity checks3a4206/794d5c/d8c13f"
+      ],
+      "limits": "All11declared source hashes match at start/end; DB hash matches, mode=ro integrity_check ok. Historical7failure paths remain with measured hashes. full_completion false is correct. Owner failed_attempt_history is empty; checkpoint/historical handles provide links, not erased failures. Receipt authenticity/identity is separate from semantic acceptance."
+    }
+  ],
+  "pure_checks": {
+    "unknown_layer": "accepted",
+    "unresolved_evidence": "accepted",
+    "nonstring_source_refs": "accepted",
+    "missing_required_kind": "accepted",
+    "request_digest_replay_stable": true,
+    "saved_canonical_baseline_passes": true,
+    "wrong_type_or_ignored_control_still_passes": [
+      "canonical_derived.xlsx_purpose_updated=string false",
+      "concurrent.one_commit_one_conflict=string false",
+      "idempotent.first_exit=1",
+      "strict_types_regression.each_declared_flip_fails=False",
+      "browser.ui_diff_has_purpose=False",
+      "clone_manifest.copy_hashes_at_clone=wrong map"
+    ],
+    "TimeoutExpired_has_process_attribute": false
+  },
+  "bridge_pure_regression": {
+    "nested_success_screened": true,
+    "benign_retained": true,
+    "fixture_root_forwarded": true,
+    "valid_json_nonzero_rejected": true,
+    "invalid_streams_screened": true
+  },
+  "saved_artifact_readback": {
+    "three_proof_snapshot_hashes_match": true,
+    "xlsx_target_row_count": 1,
+    "xlsx_purpose_matches": true,
+    "original_tracked13_current_hashes_match": true,
+    "production_component_markdown_count": 2351,
+    "clone_component_markdown_count": 1,
+    "isolated_db_hash_match": true,
+    "sqlite_mode": "mode=ro",
+    "integrity_check": "ok"
+  },
+  "historical_failures": {
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-2e60e975.json": "bb09162c0fcd68250e003df38e5aa8d86b788054cdc7aaff93c187fc70cf09e3",
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-fb3e9271.json": "27fed79ffb9053ec4965ef51dc3cf0f47801d96fbed88fc9504cb3ab2fa7daab",
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-261dfbee.json": "a6c6c48b506ec4ce64cdbcf7127dcc1b275e9f1e9a35c3e9266083846223d742",
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-a886a750.json": "a1187428c65b79d365157cf5f41dd38ce159c2926d3b36df76d8e4f72bb8e1db",
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-bea9d002.json": "7871c3841fab23319bebbd1af387079fbae7f435ef5d3df5a50540900fcf13ff",
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-419b54e9.json": "887658f41d2817006139d6e31a56be87c8951289f009d897034ae4e372be7cdd",
+    "reports/workflow-core-failures/canonical-edit-sync-20261010-0913-2ba0a016.json": "7c3cbbbc03fb45e3ae0427947ba1c8e869839306705bca83e7c0e58c458aeb54"
+  },
+  "next_action": "Same owner correct exact schema/reference and file-lock scope; finalize journal/replay/restore recovery; immutable complete derived proof; actual bounded process cleanup and strict canonical verdict. Preserve narrow accepted canonical/replay/generator/bridge repairs. Browser and broader observer/REL01 remain separate, fullcompletion false."
+}

@@ -1,0 +1,45 @@
+{
+  "at": "2026-10-10T13:14:56.000831+00:00",
+  "session_id": 46274,
+  "owner_pid": 47964,
+  "build_pgid": 56200,
+  "pinned_leader_start": "Sat Oct 10 09:01:27 2026",
+  "supervisory_cutoff_elapsed_seconds": 900,
+  "scope": "Only exact existing project build process group; owner remains untouched.",
+  "status": "cutoff_cleanup_verified",
+  "signals": [
+    {
+      "signal": "TERM",
+      "at": "2026-10-10T13:16:27.928600+00:00"
+    }
+  ],
+  "full_completion": false,
+  "verified_members_at_cutoff": [
+    {
+      "pid": 56200,
+      "ppid": 47964,
+      "pgid": 56200,
+      "elapsed": "15:00"
+    },
+    {
+      "pid": 56212,
+      "ppid": 56200,
+      "pgid": 56200,
+      "elapsed": "15:00"
+    },
+    {
+      "pid": 56233,
+      "ppid": 56212,
+      "pgid": 56200,
+      "elapsed": "15:00"
+    },
+    {
+      "pid": 64761,
+      "ppid": 56233,
+      "pgid": 56200,
+      "elapsed": "00:01"
+    }
+  ],
+  "remaining_members": [],
+  "finished_at": "2026-10-10T13:16:29.007600+00:00"
+}

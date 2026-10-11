@@ -1,0 +1,957 @@
+{
+  "id": "table_c402197c69721934aaab",
+  "sheet": "S01-13 Projects",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "part"
+        },
+        {
+          "column": "B",
+          "value": "what it is / what goes there"
+        },
+        {
+          "column": "C",
+          "value": "rule"
+        },
+        {
+          "column": "D",
+          "value": "why (source)"
+        },
+        {
+          "column": "E",
+          "value": "size limit"
+        },
+        {
+          "column": "F",
+          "value": "test data behind it (source)"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. What a project is"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Project = folder = repo"
+        },
+        {
+          "column": "B",
+          "value": "One folder per client or business line (Dynamite Lighting, Hot Tub Launch, RevStead, this connector repo). A Codex project and a Claude Code session both open that folder. If the folder is tracked with git it is also a repo; git only adds history."
+        },
+        {
+          "column": "C",
+          "value": "Keep one folder per client. Never two copies of the same client folder."
+        },
+        {
+          "column": "D",
+          "value": "Every AI that opens the folder sees the same files, so it gets the same rules."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Codex shows two same-name skills side by side instead of merging them, and identical tools get picked by list order, not correctness (arXiv 2505.18135). Two copies of a client folder = two of everything."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shared vs. project"
+        },
+        {
+          "column": "B",
+          "value": "Shared things live once and projects point to them: connectors in Composio, keys in 1Password, SOP skills in ~/.agents/skills, app cards in ~/.agents/tools/cards, global instructions built from ~/.agents/instructions. The project holds only what is unique to that client."
+        },
+        {
+          "column": "C",
+          "value": "Never copy a shared skill, connector or key into a project."
+        },
+        {
+          "column": "D",
+          "value": "Copies drift. GHL had ~50 overlapping routes; 71 skills exist as 3 separate copies today (Skills tab)."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "Look-alike options cause most wrong picks: at 120 look-alike items accuracy fell to ~45–63%; with none, 100% at 20 items (arXiv 2601.04748). One shared copy removes the look-alikes."
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. The skeleton (what goes in every project)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AGENTS.md"
+        },
+        {
+          "column": "B",
+          "value": "THE map, the one copy of the rules: what this business is, where things are, a short \"which skill for which job\" table, which Composio tool to use for each app (one route per app), rules that don't bend, and one \"Spend approval:\" line that says whether the AI may spend money (ads, paid APIs) without asking; unset means it asks and reminds Alex to set it (2026-10-01). Written or reviewed by a person; kept minimal. Size limits: Limits tab."
+        },
+        {
+          "column": "C",
+          "value": "Codex, Cursor and newer Claude Code read AGENTS.md on their own. Put the real rules here."
+        },
+        {
+          "column": "D",
+          "value": "Loaded every session. Anthropic suggests under 200 lines, but the only Claude Code test found length itself didn't matter; what matters is each rule earning its place. AI-written map files lowered success slightly and cost 20–23% more (ETH Zurich). See Evidence tab."
+        },
+        {
+          "column": "E",
+          "value": "Target 100 lines / 8,000 chars. Cap 150 / 12,000. Codex reads at most 32 KiB of AGENTS.md, global + project together."
+        },
+        {
+          "column": "F",
+          "value": "• 1,650 Claude Code sessions: a 25-line and a 500-line file were followed about the same (~64%) (arXiv 2605.10039).\n• \"Obey every rule\": Claude Sonnet 5 94% at 10 rules, 75% at 20, 24% at 40 (arXiv 2607.19257). So count rules, not just lines: 20 max with the global file.\n• AI-written map files: −0.5% to −2% success and +20–23% cost; hand-written slightly better (ETH Zurich, arXiv 2602.11988).\n• A short always-loaded index scored 100% vs 53% for a skill the AI never opened (Vercel, Jan 2026)."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CLAUDE.md"
+        },
+        {
+          "column": "B",
+          "value": "One line: @AGENTS.md (plus any Claude-only notes under it)."
+        },
+        {
+          "column": "C",
+          "value": "Use the @AGENTS.md import, never a sentence like \"read AGENTS.md / read CLAUDE.md\"."
+        },
+        {
+          "column": "D",
+          "value": "When both files exist Claude reads CLAUDE.md only; the @ import pulls AGENTS.md in. A sentence pointer only works if the AI decides to open the file. Claude Code reads AGENTS.md itself only from 2.1.277 (this Mac runs 2.1.287, 2026-10-03); the @AGENTS.md import stays the rule because it works on every version. https://code.claude.com/docs/en/memory"
+        },
+        {
+          "column": "E",
+          "value": "10 lines / 1,000 chars: just @AGENTS.md"
+        },
+        {
+          "column": "F",
+          "value": "• The @AGENTS.md import cost nothing: 68.2% vs 67.7% compliance (arXiv 2605.10039).\n• Claude Code 2.1.251 reads CLAUDE.md, not AGENTS.md (AGENTS.md support starts at 2.1.277) (code.claude.com/docs/en/memory)."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "STATUS.md"
+        },
+        {
+          "column": "B",
+          "value": "What is true right now: focus, open items, blockers, who is logged in where, and the \"Last tune-up\" date the 8-hour tune-up sets. Limits tab: 60 lines / 5,000 chars."
+        },
+        {
+          "column": "C",
+          "value": "Anything that changes week to week goes here, not in the map."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic lists \"information that changes frequently\" under what to leave out of CLAUDE.md. Stale facts in the map get treated as rules. https://code.claude.com/docs/en/best-practices"
+        },
+        {
+          "column": "E",
+          "value": "60 lines / 5,000 chars"
+        },
+        {
+          "column": "F",
+          "value": "• No direct test. Indirect: models believe wrong information placed in front of them over 60% of the time (ClashEval, arXiv 2404.10198), so stale status in the map gets treated as true."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "knowledge/<topic>.md"
+        },
+        {
+          "column": "B",
+          "value": "Lasting facts: offer, prices, brand, accounts, process. One topic per file, dated when changed."
+        },
+        {
+          "column": "C",
+          "value": "The map links to these files; the AI reads one only when the task needs it."
+        },
+        {
+          "column": "D",
+          "value": "\"Progressive disclosure\": only load what the task needs, so the map stays small. https://www.humanlayer.com/blog/writing-a-good-claude-md"
+        },
+        {
+          "column": "E",
+          "value": "200 lines / 16,000 chars; key facts first"
+        },
+        {
+          "column": "F",
+          "value": "• Where a fact sits matters: 75.8% right when it was first vs 53.8% in the middle, at only ~2,000 tokens (Lost in the Middle, arXiv 2307.03172)."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "inbox/ then sources/"
+        },
+        {
+          "column": "B",
+          "value": "Files someone sent. After filing, originals are read-only. sources/_derived/ holds a text copy of every PDF, Office, audio or video file; sources/_manifest.md lists them."
+        },
+        {
+          "column": "C",
+          "value": "Facts in deliverables must come from sources/, knowledge/ or a cited URL."
+        },
+        {
+          "column": "D",
+          "value": "The AI can read text copies; read-only originals mean nothing gets silently changed."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "• Models adopt wrong context over their own correct knowledge >60% of the time (arXiv 2404.10198): facts must trace to a filed source."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "work/YYYY-MM-DD_job/"
+        },
+        {
+          "column": "B",
+          "value": "One folder per job: brief.md (goal, audience, what done means), notes/ (one file per helper agent), checks.md."
+        },
+        {
+          "column": "C",
+          "value": "Work in progress never goes in the map or knowledge/."
+        },
+        {
+          "column": "D",
+          "value": "Keeps scratch work out of every future session."
+        },
+        {
+          "column": "E",
+          "value": "brief.md: one page"
+        },
+        {
+          "column": "F",
+          "value": "• Splitting step-by-step work across agents made results 39–70% worse; split-up independent work gained up to +80.8% (Google/MIT, 260 setups, arXiv 2512.08296). Hence one notes file per helper, one writer for the final."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "deliverables/"
+        },
+        {
+          "column": "B",
+          "value": "Approved finals only, named YYYY-MM-DD_name_v01.ext."
+        },
+        {
+          "column": "C",
+          "value": "Only after checks pass and the owner approves."
+        },
+        {
+          "column": "D",
+          "value": "One place to find what was actually sent."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "• Models rate their own work higher and kept their own wrong answer 86% of the time (arXiv 2504.03846); without outside feedback they can't reliably fix their reasoning (arXiv 2310.01798). Hence a fresh checker before anything ships."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tools/<tool>.md"
+        },
+        {
+          "column": "B",
+          "value": "One short card per tool or app: the ONE route (the Composio toolkit, e.g. custom_ghl_oauth_crm), what it can do (tested, dated), quirks, costs, fixes. Never keys. Cards every project needs live once in ~/.agents/tools/cards (one per app, 9 on 2026-10-01); a project's own tools/*.md cover what only that project uses. Committing ~/.agents syncs the cards to Composio (CUSTOM_IR_NOTES), every AI's instructions and the Tool cards tab."
+        },
+        {
+          "column": "C",
+          "value": "One card per tool, not one giant TOOLS.md."
+        },
+        {
+          "column": "D",
+          "value": "A card loads only when that tool is used. Dynamite's single TOOLS.md was 32 KB and loaded all of it every time; it is 6 KB now (measured 2026-10-01), still over the 5,000-char limit."
+        },
+        {
+          "column": "E",
+          "value": "60 lines / 5,000 chars; names the Composio toolkit"
+        },
+        {
+          "column": "F",
+          "value": "• Fewer tools: GitHub cut 40→13 tools and success rose 2–5 points (GitHub blog, Nov 2025).\n• Search across thousands of tools missed the right one 36–66% of the time (Arcade, Stacklok tests), so cards name the exact toolkit.\n• Longer tool descriptions: +5.85 points success but +67% steps (arXiv 2602.14878). Short and clear."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": ".agents/skills/ + .claude/skills/"
+        },
+        {
+          "column": "B",
+          "value": "Skills that only this project uses. Real folder in .agents/skills/<skill>/SKILL.md; a link to it in .claude/skills/<skill>."
+        },
+        {
+          "column": "C",
+          "value": "Not a plain skills/ folder: no AI reads that."
+        },
+        {
+          "column": "D",
+          "value": "Codex and Cursor read .agents/skills; Claude Code reads .claude/skills and ignores .agents/. https://developers.openai.com/codex/skills https://cursor.com/docs/skills https://code.claude.com/docs/en/memory"
+        },
+        {
+          "column": "E",
+          "value": "SKILL.md target 60 lines / 5,000 chars, cap 200 / 16,000. Description 200 chars. Name 64 chars. 40 skills max."
+        },
+        {
+          "column": "F",
+          "value": "• Human-reviewed skills +16.6 points; skills an AI invented from scratch −8 to −11.5 (SkillsBench, arXiv 2602.12670).\n• 1–3 skills per task best (+18 to +19); 4+ only +10; \"comprehensive\" skills −2.9.\n• Picking the right skill: over 90% with 20 or fewer, ~20% at 200 (arXiv 2601.04748).\n• Claude Code fits ~8,000 chars of skill descriptions; past that the least-used skills lose their description (code.claude.com/docs/en/skills)."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "system/"
+        },
+        {
+          "column": "B",
+          "value": "run-log.md (one line per task), lessons.md (proposed rules), CHANGELOG.md, snapshots/ (copy before any map change), proposals/ and evals/ (the tune-up's proposals and test tasks), handoff/ (one file that lets a fresh chat pick up a long job)."
+        },
+        {
+          "column": "C",
+          "value": "History goes here, never in the map."
+        },
+        {
+          "column": "D",
+          "value": "The map stays short; every change to it can be undone."
+        },
+        {
+          "column": "E",
+          "value": "run-log: one line per task, under 300 chars"
+        },
+        {
+          "column": "F",
+          "value": "• Instruction files grow ~57 words per edit and rarely get pruned (2,303-file study, arXiv 2511.12884), so lessons wait here until the tune-up (every 8 hours since 2026-10-01) promotes or drops them."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "_archive/"
+        },
+        {
+          "column": "B",
+          "value": "Finished or unused files."
+        },
+        {
+          "column": "C",
+          "value": "Move, never delete. Deleting is the owner's call."
+        },
+        {
+          "column": "D",
+          "value": "Nothing is lost, and old files stop confusing the AI."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Why this works (the data)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Short map, skills for procedures"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic: CLAUDE.md loads every session, so only include what applies broadly; put workflows that matter sometimes into skills, which load on demand. \"Bloated CLAUDE.md files cause Claude to ignore your actual instructions.\""
+        },
+        {
+          "column": "C",
+          "value": "Every line must pass: \"Would removing this cause a mistake? If not, cut it.\""
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/best-practices"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fewer rules get followed better"
+        },
+        {
+          "column": "B",
+          "value": "The more rules that must all be followed, the more get dropped (best model 68% at 500 rules). But in 1,650 Claude Code sessions, file length (25 to 500 lines) made no difference; a plain written rule was followed ~64% of the time either way."
+        },
+        {
+          "column": "C",
+          "value": "Cut any rule that doesn't earn its place; don't chase a line count. Add a rule only after the same mistake happens twice."
+        },
+        {
+          "column": "D",
+          "value": "https://arxiv.org/abs/2507.11538 https://arxiv.org/abs/2605.10039"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "No contradictions"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic: CLAUDE.md files are stacked, not overridden; if two rules contradict, Claude may pick one arbitrarily. Example: Dynamite's model rule conflicted with the global one."
+        },
+        {
+          "column": "C",
+          "value": "A rule lives in exactly one file: global for everyone, project only for that client."
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/memory"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Long context hurts"
+        },
+        {
+          "column": "B",
+          "value": "Chroma tested 18 models: performance gets less reliable as input grows, and even one irrelevant line lowers accuracy. Anthropic calls this context rot."
+        },
+        {
+          "column": "C",
+          "value": "Start a fresh session for each new task."
+        },
+        {
+          "column": "D",
+          "value": "https://research.trychroma.com/context-rot https://claude.com/blog/using-claude-code-session-management-and-1m-context"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One agent for step-by-step work"
+        },
+        {
+          "column": "B",
+          "value": "Google Research tested 180 setups: helper agents boosted split-up work (up to +81% on financial analysis) but every multi-agent setup made step-by-step planning 39–70% worse."
+        },
+        {
+          "column": "C",
+          "value": "Use parallel helpers only for independent parts (research N companies); one agent for anything sequential."
+        },
+        {
+          "column": "D",
+          "value": "https://research.google/blog/towards-a-science-of-scaling-agent-systems-when-and-why-agent-systems-work/"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hard rules need enforcement, not prose"
+        },
+        {
+          "column": "B",
+          "value": "Anthropic: CLAUDE.md is context, not enforced configuration. Anything that must happen every time belongs in a hook or permission setting."
+        },
+        {
+          "column": "C",
+          "value": "Put \"never do X\" rules that must never break into hooks or permissions."
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/memory"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools installed once"
+        },
+        {
+          "column": "B",
+          "value": "Tools belong on the machine (e.g. ~/.local/bin/composio), connectors in Composio. A project should never hold a tool install."
+        },
+        {
+          "column": "C",
+          "value": "No tool installs inside a project folder. Exception: a Cloudflare Worker code repo holds its own wrangler, as Cloudflare recommends (\"Cloudflare recommends installing Wrangler locally in your project (rather than globally)\"; Director decision 2026-10-01)."
+        },
+        {
+          "column": "D",
+          "value": "Dynamite had a 328 MB Composio install inside the client folder."
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Health check for any project (run it when something feels off)"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Map size"
+        },
+        {
+          "column": "B",
+          "value": "AGENTS.md under 200 lines, no week-to-week state in it."
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Map wiring"
+        },
+        {
+          "column": "B",
+          "value": "CLAUDE.md is @AGENTS.md (an import, not a sentence)."
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "No conflicts"
+        },
+        {
+          "column": "B",
+          "value": "Nothing in the project map contradicts ~/.claude/CLAUDE.md or ~/.codex/AGENTS.md (e.g. model names, delegation rules). Both are generated from ~/.agents/instructions: fix a conflict there, not in the generated file."
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills visible"
+        },
+        {
+          "column": "B",
+          "value": "Project skills in .agents/skills with links in .claude/skills; no copies of shared skills."
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools"
+        },
+        {
+          "column": "B",
+          "value": "Tool cards name the Composio toolkit (one route per app); no keys; no tool installs inside the folder."
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "State"
+        },
+        {
+          "column": "B",
+          "value": "STATUS.md current; run-log has a line for the last task."
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Paths"
+        },
+        {
+          "column": "B",
+          "value": "The Codex project name and saved tasks point at the real folder, not an old copy or link."
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Fix it automatically"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill: repo-conform"
+        },
+        {
+          "column": "B",
+          "value": "Audits a project folder, fixes it, re-audits until clean. Lives at ~/.agents/skills/repo-conform (scripts/audit.py does the checks, scripts/verify.py is the gate). Ask any AI: \"use repo-conform on <folder>\"."
+        },
+        {
+          "column": "C",
+          "value": "Status 2026-10-01: version 2.1, updated to match this tab. It now enforces the new setup: AGENTS.md holds the rules, CLAUDE.md is the one line @AGENTS.md, project skills live in .agents/skills with a link in .claude/skills. Run on this repo 2026-10-01: High findings 8 to 0, verify PASS."
+        },
+        {
+          "column": "D",
+          "value": "The checks the earlier note said were missing now exist: the map's length, density and week-to-week state (M1, M7 to M9), conflicts with the global files (C1 to C3), tool installs inside the folder (B1), cards that aren't Composio-first (T1 to T4), copies of shared skills (K11), Codex project name and path (P1 to P3), and the size limits on the Limits tab (L1 to L4 and others). Not checked: how these behave on a client project other than this repo."
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Map has a skill index"
+        },
+        {
+          "column": "B",
+          "value": "The map lists which skill to use for which job."
+        },
+        {
+          "column": "C",
+          "value": "Every map keeps a short \"which skill for which job\" table."
+        },
+        {
+          "column": "D",
+          "value": "On-demand skills went unopened in 56% of runs in Vercel's test; an always-loaded index pointing to the docs scored 100%. https://vercel.com/blog/agents-md-outperforms-skills-in-our-agent-evals"
+        },
+        {
+          "column": "E",
+          "value": "One row per skill"
+        },
+        {
+          "column": "F",
+          "value": "• Vercel: skill unopened in 56% of runs (53% score); short index in AGENTS.md 100%."
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Who writes skills"
+        },
+        {
+          "column": "B",
+          "value": "Skills come from a run that passed its checks, then a person reviews them."
+        },
+        {
+          "column": "C",
+          "value": "Never let an AI invent a skill from scratch and install it."
+        },
+        {
+          "column": "D",
+          "value": "SkillsBench: AI-written-from-scratch skills scored 8–11.5 points below no skills; curated +16.6. https://arxiv.org/abs/2602.12670"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "• SkillsBench: AI-invented skills scored below no skills; workflows written from runs that passed a check beat human-written (35.5% vs 33.0%, arXiv 2409.07429)."
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Where each kind of instruction goes"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hard rules + tool routing"
+        },
+        {
+          "column": "B",
+          "value": "Things that must hold every task: ask before spend/send/delete, never route around a denial, keys never in chat, which tool for which job."
+        },
+        {
+          "column": "C",
+          "value": "Project: AGENTS.md (the always-loaded rule file). Global: edit ~/.agents/instructions/shared.md; build_instructions.py builds ~/.claude/CLAUDE.md and ~/.codex/AGENTS.md from it, so never edit those two by hand. Keep it to the rules."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: CLAUDE.md is for what Claude should know and rules that apply broadly (code.claude.com/docs/en/memory)."
+        },
+        {
+          "column": "E",
+          "value": "20 rules max, global + project map"
+        },
+        {
+          "column": "F",
+          "value": "\"Obey every rule\" falls fast as rules pile up: 94% at 10, 75% at 20, 24% at 40 (arXiv 2607.19257)."
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Voice, tone, answer format, working style"
+        },
+        {
+          "column": "B",
+          "value": "How the AI talks and moves: big-brother voice, explain-it-like-he's-5, answer first, one move not a survey."
+        },
+        {
+          "column": "C",
+          "value": "Claude: an output style (~/.claude/output-styles). Codex: developer_instructions in ~/.codex/config.toml. Both are built from ~/.agents/instructions (claude-style.md, codex-style.md, shared-style.md)."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: \"every response in a certain voice, length, or format, or Claude in a different role\" → output style; it is sent as part of the system instructions, while CLAUDE.md arrives as a user message (code.claude.com/docs/en/output-styles, /memory). Codex: developer_instructions are injected before AGENTS.md (developers.openai.com/codex/config-reference)."
+        },
+        {
+          "column": "E",
+          "value": "60 lines / 5,000 chars"
+        },
+        {
+          "column": "F",
+          "value": "No study isolates where style lives. The win is separation: the rule file stays short and checkable, and style changes can't break a rule."
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Procedures (how to do one kind of job)"
+        },
+        {
+          "column": "B",
+          "value": "Delegation playbook, research method, how to turn a repeated job into a skill."
+        },
+        {
+          "column": "C",
+          "value": "A skill, with one line in the rule file's skill table pointing to it."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: instructions for one kind of task → a skill, loaded only when the task matches (code.claude.com/docs/en/output-styles)."
+        },
+        {
+          "column": "E",
+          "value": "SKILL.md 60 / 5,000 target"
+        },
+        {
+          "column": "F",
+          "value": "Vercel: a skill nobody points to went unopened in 56% of runs; a short always-loaded index fixed it (100%)."
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which route for each app, and its rules"
+        },
+        {
+          "column": "B",
+          "value": "The ONE route to use for an app (the Composio toolkit), what it can reach and change, and the rules for it."
+        },
+        {
+          "column": "C",
+          "value": "A tool card in ~/.agents/tools/cards. The always-loaded instructions carry only a one-line index entry per card; the full card loads when that app is used, or from Composio CUSTOM_IR_NOTES_GET_APP_RULES on another machine."
+        },
+        {
+          "column": "D",
+          "value": "A short always-loaded index scored 100% in Vercel's test while an on-demand skill nobody pointed to scored 53% (Vercel, Jan 2026). claude.ai drops MCP server instructions, so the notes can't ride on the connector alone."
+        },
+        {
+          "column": "E",
+          "value": "One line per card in the index; card 60 lines / 5,000 chars"
+        },
+        {
+          "column": "F",
+          "value": "Our own small test (2026-10-01, not a study): the notes tool showed up in 2 of 4 task searches; after its description named the tasks, 5 of 6. Golden task G14 (name the Google Ads route and ask before a budget change) passed 3 of 3 runs."
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Must happen every time, no exceptions"
+        },
+        {
+          "column": "B",
+          "value": "Blocking a dangerous command, formatting after every edit."
+        },
+        {
+          "column": "C",
+          "value": "A hook or a permission setting, not prose."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: CLAUDE.md is context, not enforced configuration; use a hook to guarantee it (code.claude.com/docs/en/memory)."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "A written rule was followed ~60–68% of the time (arXiv 2605.10039); hard enforcement blocked over 90% of unsafe runs (arXiv 2503.18666)."
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Facts about the business"
+        },
+        {
+          "column": "B",
+          "value": "Offers, prices, accounts, brand."
+        },
+        {
+          "column": "C",
+          "value": "knowledge/<topic>.md, linked from the map."
+        },
+        {
+          "column": "D",
+          "value": "Loaded only when needed; one home per fact."
+        },
+        {
+          "column": "E",
+          "value": "200 / 16,000"
+        },
+        {
+          "column": "F",
+          "value": "Fact first 75.8% vs buried in the middle 53.8% (arXiv 2307.03172)."
+        }
+      ]
+    }
+  ]
+}

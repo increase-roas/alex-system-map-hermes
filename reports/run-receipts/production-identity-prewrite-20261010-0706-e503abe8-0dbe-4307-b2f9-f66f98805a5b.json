@@ -1,0 +1,84 @@
+{
+  "at": "2026-10-10T07:07:25+00:00",
+  "cases": {
+    "json_handler_negatives": {
+      "issuance_wrong_json_type": {
+        "error_contains": true,
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "matching_json_positive": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1
+      },
+      "verify_with_missing_record": {
+        "error": "proof_path_missing",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      }
+    },
+    "prewrite_containment": {
+      "parent_symlink_escape": {
+        "reason": null,
+        "unexpected_files": []
+      },
+      "safe_production_exit": 0,
+      "unsafe_job_id": {
+        "probe_created": false,
+        "reason": "artifact_path_traversal"
+      }
+    },
+    "production_identity_relabel": {
+      "forged_production_id_rejected": {
+        "error": "client_production_metadata_forbidden",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "relabel_sealed_descriptor_rejected": {
+        "error": "client_production_metadata_forbidden",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "revisioned_production_and_verify": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1,
+        "output_history_len": 2,
+        "production_history_len": 2
+      }
+    }
+  },
+  "delivery_id": "production-identity-prewrite-20261010-0706",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/production-identity-prewrite-20261010-0706-e503abe8.json",
+      "sha256": "b8d16c02b1e1bd1a106304f243f05840287ad8401dae499d305505e730304322"
+    }
+  ],
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": true,
+  "overall": "partial",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/production-identity-prewrite-20261010-0706-e503abe8-0dbe-4307-b2f9-f66f98805a5b.json"
+  },
+  "run_id": "e503abe8-0dbe-4307-b2f9-f66f98805a5b",
+  "source_identity": {
+    "tools/bounded_acceptance.py": "be6d7fa822cfce3648217b97be16413cf9e750ee7817dc0d41b6b5258fa92797",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/production_identity_prewrite_acceptance.py": "c4fb4085f408e2749901a1a8f109eeaa2aaa1ac5da7e0f48390945223ef360e5",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "e769edabb6cc40beab5b3d58a1a52fb00362527d3df8eb5295002cdf6789a3e2"
+  }
+}

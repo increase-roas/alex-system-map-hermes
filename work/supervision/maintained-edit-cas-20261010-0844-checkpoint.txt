@@ -1,0 +1,23 @@
+Owner checkpoint maintained-edit-cas-20261010-0844 (2026-10-10T09:06:40+00:00)
+Owner chat: 4f32e74a-58e3-4abb-ba6f-fb151ba80cd7
+Status: owner delivery PASS at safe review point — NOT full project completion; independent verification not claimed.
+
+Receipt pointer: reports/maintained-edit-cas-receipt.json
+Immutable: reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json
+content_sha256: a48be59aaad2792c85ddc0675894b58e4759f6fee988886a91397504669af098
+
+Proved (owner run):
+- Explorer maintained view + MaintainedEditPanel (preview diff, observation revision, apply outcome) via /api/catalog/edit*
+- CAS/lock/atomic write, backup restore snapshot, idempotent operation_id, concurrent stale writers → 1 commit + 1 conflict
+- Allowlist + symlink rejection + canary note screening + bad revision negatives
+- Derived MD/meta regeneration with source_sha256 lineage (local-only; no Drive claim)
+- Playwright UI on staging record; served Next.js restart persistence via API on isolated LOCAL_DATA_DIR
+- strict_types regression on saved typed-controls baseline preserved
+
+Blocked / out of scope this milestone:
+- Real SDK trace input BLOCKED
+- Full observer sync / REL-01 / independent maintained-edit review
+- Registered Drive publication (explicitly not claimed)
+- Full catalog map/XLSX render-only lineage (derived layer is MD/meta for editable records)
+
+Next: independent backend/browser review on maintained-edit-cas receipt; then REL-01 and observer sync per supervision queue.

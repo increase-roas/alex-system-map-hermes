@@ -1,0 +1,66 @@
+{
+  "pending_task_no_artifact": {
+    "reason": "artifact_missing",
+    "checks": {
+      "artifact_present": false
+    }
+  },
+  "plain_string_output_rejected": {
+    "reason": "artifact_descriptor_invalid",
+    "checks": {
+      "artifact_descriptor_valid": false
+    }
+  },
+  "real_artifact_measured": {
+    "reason": null,
+    "proofs": [
+      {
+        "criterion": "proof-bound",
+        "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+        "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8",
+        "byte_length": 18
+      }
+    ],
+    "descriptor_sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8"
+  },
+  "wrong_hash_rejected": {
+    "reason": "artifact_sha256_mismatch",
+    "checks": {
+      "artifact_hash_matches": false
+    }
+  },
+  "handler_positive_once": {
+    "exit": 1,
+    "error": "verification_record_operation_id_mismatch",
+    "operation_count": 0,
+    "matching_event_count": 0,
+    "observed_proofs_in_record": [
+      {
+        "criterion": "proof-bound",
+        "relative_path": "work/task-artifacts/artifact-job/t1-bef31e0b04dd.txt",
+        "sha256": "bef31e0b04ddda5623c3b81ce522fef1c822937889d3d3effba4e3003c5bdaf8",
+        "byte_length": 18
+      }
+    ]
+  },
+  "handler_scope_negatives": {
+    "wrong_task": {
+      "exit": 1,
+      "error": "verification_record_task_id_mismatch",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "wrong_operation": {
+      "exit": 1,
+      "error": "verification_record_operation_id_mismatch",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "wrong_verifier": {
+      "exit": 1,
+      "error": "verification_record_operation_id_mismatch",
+      "operation_count": 0,
+      "event_count": 0
+    }
+  }
+}

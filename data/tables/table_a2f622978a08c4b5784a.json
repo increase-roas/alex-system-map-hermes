@@ -1,0 +1,933 @@
+{
+  "id": "table_a2f622978a08c4b5784a",
+  "sheet": "GAPS & DIFFERENCES",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Known gaps and differences"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "These are dated source claims and synthesis rules. A later snapshot does not silently erase older evidence."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Reference"
+        },
+        {
+          "column": "B",
+          "value": "Issue or difference"
+        },
+        {
+          "column": "C",
+          "value": "Evidence / next check"
+        },
+        {
+          "column": "D",
+          "value": "Owner / meaning"
+        },
+        {
+          "column": "E",
+          "value": "Full source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G01"
+        },
+        {
+          "column": "B",
+          "value": "Current runtime health and serving identity were not tested"
+        },
+        {
+          "column": "C",
+          "value": "Role documents and Oct5–6 metadata; use a separately scoped read-only runtime check with exact identity and one meaningful acceptance probe"
+        },
+        {
+          "column": "D",
+          "value": "Runtime owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G02"
+        },
+        {
+          "column": "B",
+          "value": "Current Ops host is unresolved"
+        },
+        {
+          "column": "C",
+          "value": "BUILD_IMPLEMENTATION records the historical Ops host removed Oct5 and replacement SPARE metadata; compare current guest/profile/customer identity and acceptance rather than equating names"
+        },
+        {
+          "column": "D",
+          "value": "Ops owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G03"
+        },
+        {
+          "column": "B",
+          "value": "CSM and Media spares are not proven serving role hosts"
+        },
+        {
+          "column": "C",
+          "value": "BUILD_IMPLEMENTATION records historical CSM/Media hosts removed Oct5 and replacement SPARE metadata; obtain current guest/role/profile/customer binding and runtime acceptance"
+        },
+        {
+          "column": "D",
+          "value": "CSM / Media owners"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G04"
+        },
+        {
+          "column": "B",
+          "value": "Finance is unbound in the examples"
+        },
+        {
+          "column": "C",
+          "value": "Company/host/profile binding requires its maintained accepted configuration; no company assignment inferred here"
+        },
+        {
+          "column": "D",
+          "value": "Finance owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G05"
+        },
+        {
+          "column": "B",
+          "value": "Javante version observations differ by date"
+        },
+        {
+          "column": "C",
+          "value": "Maintained setup mentions 0.21.4; later Oct5 installed observation says 0.21.5. Read current installed and serving version before deployment/recovery"
+        },
+        {
+          "column": "D",
+          "value": "Javante owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G06"
+        },
+        {
+          "column": "B",
+          "value": "Earlier role-read timeouts resolved in build-context extension"
+        },
+        {
+          "column": "C",
+          "value": "Earlier snapshot had two timeouts. Extension now fully reads all34 maintained role sources, including both files; see BUILD_IMPLEMENTATION_SOURCES and BUILD_SOURCE_COVERAGE. This closes source-read availability only, not actual deployed customer/Finance bindings"
+        },
+        {
+          "column": "D",
+          "value": "Knowledge auditor"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G07"
+        },
+        {
+          "column": "B",
+          "value": "Linked build source coverage is expanded but remote/private/mutable state remains partial"
+        },
+        {
+          "column": "C",
+          "value": "The extension reads selected linked plans/code/receipts and the registered Javar Gameplan/Notes; see BUILD_IMPLEMENTATION and BUILD_SOURCE_COVERAGE for exact read/exclusion records. Remote evolving state and safety-excluded/private originals remain uninspected; never assume a full installation backup"
+        },
+        {
+          "column": "D",
+          "value": "Role owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G08"
+        },
+        {
+          "column": "B",
+          "value": "Skill supporting-resource contents/behavior were not generally audited"
+        },
+        {
+          "column": "C",
+          "value": "Original complete SKILL.md catalogue remains an entry-file audit. The extension adds selected full safe supporting-source snapshots and a dependency closure register in PROCEDURES_AND_DEPENDENCIES. Uninspected example/literal/support/remote references remain explicit; read and verify the dependencies required by the selected task"
+        },
+        {
+          "column": "D",
+          "value": "Skill owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G09"
+        },
+        {
+          "column": "B",
+          "value": "Cached/discovered skills do not prove runtime selection or remote delivery"
+        },
+        {
+          "column": "C",
+          "value": "Local canonical/system/pointer/plugin source and path observations; obtain fresh target-runtime discovery/selection and remote delivery receipts before claiming availability"
+        },
+        {
+          "column": "D",
+          "value": "Skill integration owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G10"
+        },
+        {
+          "column": "B",
+          "value": "Hooks were not executed; hook coverage is scoped"
+        },
+        {
+          "column": "C",
+          "value": "Earlier selected Claude source/config scope retained; extension adds safe Codex/Claude/Cursor declarations and selected startup/maintenance implementations. No hook/scheduler/runtime execution or universal effective-loader trace was performed; managed/state-only/remote surfaces remain unproven"
+        },
+        {
+          "column": "D",
+          "value": "Runtime / repo owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G11"
+        },
+        {
+          "column": "B",
+          "value": "Plan prices and personal account identities are declarations"
+        },
+        {
+          "column": "C",
+          "value": "Cursor/Claude/Codex-ChatGPT $200/month each declared; Grokbot plan unknown. Billing/login proof requires appropriate read-only account evidence; no new spending authorized"
+        },
+        {
+          "column": "D",
+          "value": "Alex / account owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G12"
+        },
+        {
+          "column": "B",
+          "value": "“Manus studio 2.09” is ambiguous"
+        },
+        {
+          "column": "C",
+          "value": "Retain exact declared text; product tier, version, currency and billing interval remain unknown"
+        },
+        {
+          "column": "D",
+          "value": "Alex / account owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G13"
+        },
+        {
+          "column": "B",
+          "value": "Hermes emails are not bound to saved configurations"
+        },
+        {
+          "column": "C",
+          "value": "Declared alex@ and agent@ identities are not proof of active profile ownership; compare accepted principal/profile mapping"
+        },
+        {
+          "column": "D",
+          "value": "Hermes owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G14"
+        },
+        {
+          "column": "B",
+          "value": "Current disk usage and hidden binding targets remain unknown"
+        },
+        {
+          "column": "C",
+          "value": "Historical disk dates and October6 targetless-binding register retained. One October7 dev-rag settings read exposes specific binding targets in SERVICE_BUILD_CONTEXT; it does not refresh all201 previously target-unexposed fields or current disks"
+        },
+        {
+          "column": "D",
+          "value": "Infrastructure owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G15"
+        },
+        {
+          "column": "B",
+          "value": "Saved connector ACTIVE status is not provider acceptance"
+        },
+        {
+          "column": "C",
+          "value": "54 saved connector records, including expired Fireworks, retain dates. Extension has exact successful Cloudflare settings and one-location GHL configuration reads only; these do not validate every connection or runtime action. App card overrides historical workbook routes"
+        },
+        {
+          "column": "D",
+          "value": "Connector owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G16"
+        },
+        {
+          "column": "B",
+          "value": "The Exa card and automatic approval review differed for a public fetch"
+        },
+        {
+          "column": "C",
+          "value": "Exa fetch was categorized as spending by automatic approval review and rejected for no spending approval; no bypass/retry. Resolve the actual approval policy before any paid reference check"
+        },
+        {
+          "column": "D",
+          "value": "Alex / policy owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G17"
+        },
+        {
+          "column": "B",
+          "value": "Markdown publication does not install these rules into every agent runtime"
+        },
+        {
+          "column": "C",
+          "value": "Drive-readable knowledge and update instructions are the deliverable. Remote agents need approved access and demonstrated use; no startup hook/automation is installed by this audit"
+        },
+        {
+          "column": "D",
+          "value": "Runtime owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G18"
+        },
+        {
+          "column": "B",
+          "value": "Jev folder contents were outside the role-build snapshot check"
+        },
+        {
+          "column": "C",
+          "value": "Existing Jev folder is visible in the hub; enumerate its source documents and authority for a Jev-specific task before claiming setup coverage"
+        },
+        {
+          "column": "D",
+          "value": "Jev owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G19"
+        },
+        {
+          "column": "B",
+          "value": "Original target-parent history was not compared before/after"
+        },
+        {
+          "column": "C",
+          "value": "Shortcuts preserve original target IDs; no original-file update/delete call in the inspected grouping script. No broader location-history proof claimed"
+        },
+        {
+          "column": "D",
+          "value": "Knowledge auditor"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G20"
+        },
+        {
+          "column": "B",
+          "value": "Exact-content copies and versions need ownership reconciliation before cleanup"
+        },
+        {
+          "column": "C",
+          "value": "353 resolved skill-entry paths contain331 distinct byte hashes;17 repeated-hash groups cover39 source paths. Exact bytes do not establish semantic ownership or redundancy. Compare source owners/lifecycle before proposing removal; no source copies were deleted"
+        },
+        {
+          "column": "D",
+          "value": "Skill integration owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G21"
+        },
+        {
+          "column": "B",
+          "value": "One robot Markdown read misdecoded UTF-8 text"
+        },
+        {
+          "column": "C",
+          "value": "Published ACCOUNTS bytes and checksum were correct; strict decoding recovery reproduced the exact bytes. Use the checksum-guarded protocol for reads; connector implementation/root-cause/service fix remains outside this audit"
+        },
+        {
+          "column": "D",
+          "value": "Connector owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G22"
+        },
+        {
+          "column": "B",
+          "value": "Effective instruction/settings loading remains unproven"
+        },
+        {
+          "column": "C",
+          "value": "Full safe local Codex/Claude/Cursor source snapshots and generator matches are captured in CONFIGURATION_SOURCES. Need credential-blind effective exports or controlled loader traces for each runtime, plus managed/cloud/state-only surface coverage; disk defaults do not override task restrictions"
+        },
+        {
+          "column": "D",
+          "value": "Runtime owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G23"
+        },
+        {
+          "column": "B",
+          "value": "Accepted materializer baseline disagrees with three current plugin files"
+        },
+        {
+          "column": "C",
+          "value": "Static comparison in PROCEDURES_AND_DEPENDENCIES: __init__.py, tasks.py and plugin.yaml differ; two other guarded files match. Guard source is designed to reject drift. Recover accepted sources or review/reaccept the changed component before changing the baseline; no materializer was executed here"
+        },
+        {
+          "column": "D",
+          "value": "Build component owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G24"
+        },
+        {
+          "column": "B",
+          "value": "Javar Gameplan mission is paused with blocked gates"
+        },
+        {
+          "column": "C",
+          "value": "Registered Gameplan/Notes are current-file byte matched and read in BUILD_IMPLEMENTATION. Do not treat source packaging as gate acceptance or resume authority. Exact loader/binding/acceptance prerequisites remain in that owning record"
+        },
+        {
+          "column": "D",
+          "value": "Javar / mission owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G25"
+        },
+        {
+          "column": "B",
+          "value": "GHL build structure/settings remain incomplete"
+        },
+        {
+          "column": "C",
+          "value": "Scoped October7 B2B workflow/calendar/pipeline metadata is in SERVICE_BUILD_CONTEXT. Full affected workflow actions/triggers/settings, calendar scheduling/ownership, sender/field/webhook configuration and exact stage mapping need their own scoped reads and acceptance; no agency-wide configuration audit claimed"
+        },
+        {
+          "column": "D",
+          "value": "GHL owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G26"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare source/deployment/dependency parity remains incomplete"
+        },
+        {
+          "column": "C",
+          "value": "Selected Worker/modules/schema source plus one live settings read are captured in SERVICE_SOURCES and SERVICE_BUILD_CONTEXT. Need deployed-code equality, imported JSON/identity mapping, relevant hidden binding targets, index discrepancy reconciliation and meaningful retrieval/source acceptance"
+        },
+        {
+          "column": "D",
+          "value": "Cloudflare owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G27"
+        },
+        {
+          "column": "B",
+          "value": "Startup/scheduler/recovery proof is incomplete"
+        },
+        {
+          "column": "C",
+          "value": "Full selected local setup-check/maintenance/runtime-update sources are captured, with package/serving-path differences preserved. Need current exact profile, job/last-result/delivery evidence, and reviewed restore/rollback acceptance; no procedure executed here"
+        },
+        {
+          "column": "D",
+          "value": "Runtime / recovery owner"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "G28"
+        },
+        {
+          "column": "B",
+          "value": "Three documented local procedure/acceptance source paths are missing"
+        },
+        {
+          "column": "C",
+          "value": "Implementation: agents/finance/run_live_acceptance.py and agents/javante/setup/tools/ghl/README.md. Procedure closure: agents/javante/setup/skills/productivity/javante-ghl/SKILL.md. Actual missing-file evidence is retained; confirm owner replacement/deprecation rather than substituting a similarly named source"
+        },
+        {
+          "column": "D",
+          "value": "Source / role owners"
+        },
+        {
+          "column": "E",
+          "value": "Read GAPS",
+          "link": "'DOCS - Knowledge'!A3699"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ownership"
+        },
+        {
+          "column": "B",
+          "value": "Connector master, Javar plan and infrastructure inventory overlap."
+        },
+        {
+          "column": "C",
+          "value": "Keep access/rebuild instructions tied to Connectors; mission/gates tied to Javar; dated asset observations tied to Infrastructure."
+        },
+        {
+          "column": "D",
+          "value": "Synthesis rule; no underlying source replaced."
+        },
+        {
+          "column": "E",
+          "value": "Read BUILD_IMPLEMENTATION",
+          "link": "'DOCS - Knowledge'!A183"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Dates"
+        },
+        {
+          "column": "B",
+          "value": "Older host/version/route statements differ from later build notes."
+        },
+        {
+          "column": "C",
+          "value": "Use BUILD_IMPLEMENTATION and CURRENT_STATE to read the later reconciliation; keep original dated versions for traceability."
+        },
+        {
+          "column": "D",
+          "value": "No silent overwrite of historical claims."
+        },
+        {
+          "column": "E",
+          "value": "Read BUILD_IMPLEMENTATION",
+          "link": "'DOCS - Knowledge'!A183"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Scope"
+        },
+        {
+          "column": "B",
+          "value": "The corpus points to files that were missing, private, remote or excluded."
+        },
+        {
+          "column": "C",
+          "value": "BUILD_SOURCE_COVERAGE and GAPS retain these dispositions. Referenced material is not claimed as captured unless it is actually present."
+        },
+        {
+          "column": "D",
+          "value": "Complete identified-package accounting, not universal system completeness."
+        },
+        {
+          "column": "E",
+          "value": "Read BUILD_IMPLEMENTATION",
+          "link": "'DOCS - Knowledge'!A183"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Status"
+        },
+        {
+          "column": "B",
+          "value": "Written, configured, installed and seen working are different."
+        },
+        {
+          "column": "C",
+          "value": "Read exact evidence scope and date. This consolidation performs no new provider or runtime tests."
+        },
+        {
+          "column": "D",
+          "value": "No live-health certification."
+        },
+        {
+          "column": "E",
+          "value": "Read BUILD_IMPLEMENTATION",
+          "link": "'DOCS - Knowledge'!A183"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Newer SDK evidence"
+        },
+        {
+          "column": "B",
+          "value": "Older SDK v1 statements are historical; newer release is 1.5.1 in the October 9 checkpoint."
+        },
+        {
+          "column": "C",
+          "value": "Use SDK CURRENT / SDK PLAN & GAPS. Memory recall belongs to 1.5.0; 1.5.1 proves the recorded strict preflight, not a fresh Mem0 execution."
+        },
+        {
+          "column": "D",
+          "value": "Dated reconciliation"
+        },
+        {
+          "column": "E",
+          "value": "SDK CURRENT",
+          "link": "'SDK CURRENT'!A1"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password scope"
+        },
+        {
+          "column": "B",
+          "value": "Only Connectors is visible through the approved connection."
+        },
+        {
+          "column": "C",
+          "value": "51 metadata items returned; other vaults and credential field contents are outside this map."
+        },
+        {
+          "column": "D",
+          "value": "Read-only route scope"
+        },
+        {
+          "column": "E",
+          "value": "Open map",
+          "link": "'1PASS MAP'!A1"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,643 @@
+{
+ "receipt_id": "director-dynamite-operating-reliability-20260929-n33",
+ "trace_id": "trace-director-dynamite-operating-reliability-20260929",
+ "label": "Director: dynamite-operating-reliability-20260929 (33 writes, 2 failed)",
+ "synthetic_only": false,
+ "started_at": "2026-09-29T10:05:28.609003+00:00",
+ "ended_at": "2026-10-01T09:28:12.328121+00:00",
+ "status": "partial",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "dynamite-operating-reliability-20260929"
+ },
+ "spans": [
+  {
+   "span_id": "director-d22ce47722e0-17",
+   "parent_span_id": null,
+   "name": "update-operating-instructions",
+   "agent_identity": "Director controller",
+   "tool_action": "update-operating-instructions",
+   "started_at": "2026-09-29T10:05:28.609003+00:00",
+   "ended_at": "2026-09-29T10:09:55.244027+00:00",
+   "duration_ms": 266635,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 18
+   }
+  },
+  {
+   "span_id": "director-2210aea847f7-18",
+   "parent_span_id": null,
+   "name": "prepare-crew-cash-decision-packet",
+   "agent_identity": "Director controller",
+   "tool_action": "prepare-crew-cash-decision-packet",
+   "started_at": "2026-09-29T10:27:25.631740+00:00",
+   "ended_at": "2026-09-29T10:35:54.242151+00:00",
+   "duration_ms": 508610,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 19
+   }
+  },
+  {
+   "span_id": "director-a17d77d7b6f5-19",
+   "parent_span_id": null,
+   "name": "prepare-payment-exception-resolution",
+   "agent_identity": "Director controller",
+   "tool_action": "prepare-payment-exception-resolution",
+   "started_at": "2026-09-29T10:48:02.640572+00:00",
+   "ended_at": "2026-09-29T10:57:58.919529+00:00",
+   "duration_ms": 596278,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 20
+   }
+  },
+  {
+   "span_id": "director-13e069e2e231-20",
+   "parent_span_id": null,
+   "name": "prepare-employee-owner-readiness",
+   "agent_identity": "Director controller",
+   "tool_action": "prepare-employee-owner-readiness",
+   "started_at": "2026-09-29T11:01:46.826966+00:00",
+   "ended_at": "2026-09-29T11:07:14.822784+00:00",
+   "duration_ms": 327995,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 21
+   }
+  },
+  {
+   "span_id": "director-bf277e779912-21",
+   "parent_span_id": null,
+   "name": "publish-dynamite-conversion-operations-workspace",
+   "agent_identity": "Director controller",
+   "tool_action": "publish-dynamite-conversion-operations-workspace",
+   "started_at": "2026-09-29T12:54:42.072064+00:00",
+   "ended_at": "2026-09-29T13:27:57.468679+00:00",
+   "duration_ms": 1995396,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 22
+   }
+  },
+  {
+   "span_id": "director-2e77d55682e2-22",
+   "parent_span_id": null,
+   "name": "refresh-dynamite-daily-quotes-awaiting-decision",
+   "agent_identity": "Director controller",
+   "tool_action": "refresh-dynamite-daily-quotes-awaiting-decision",
+   "started_at": "2026-09-29T13:41:04.596520+00:00",
+   "ended_at": "2026-09-29T13:45:16.751833+00:00",
+   "duration_ms": 252155,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 23
+   }
+  },
+  {
+   "span_id": "director-773b5a2e20f3-23",
+   "parent_span_id": null,
+   "name": "prepare-dynamite-customer-quote-preview-and-queue-delta",
+   "agent_identity": "Director controller",
+   "tool_action": "prepare-dynamite-customer-quote-preview-and-queue-delta",
+   "started_at": "2026-09-29T13:56:17.475663+00:00",
+   "ended_at": "2026-09-29T14:03:57.377084+00:00",
+   "duration_ms": 459901,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 24
+   }
+  },
+  {
+   "span_id": "director-a3cd25aab785-24",
+   "parent_span_id": null,
+   "name": "prepare-dynamite-derrick-review-and-accepted-asset-links",
+   "agent_identity": "Director controller",
+   "tool_action": "prepare-dynamite-derrick-review-and-accepted-asset-links",
+   "started_at": "2026-09-29T14:11:33.799329+00:00",
+   "ended_at": "2026-09-29T14:14:31.761017+00:00",
+   "duration_ms": 177961,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 25
+   }
+  },
+  {
+   "span_id": "director-008916545da4-25",
+   "parent_span_id": null,
+   "name": "record-dynamite-current-pipeline-accuracy-gap",
+   "agent_identity": "Director controller",
+   "tool_action": "record-dynamite-current-pipeline-accuracy-gap",
+   "started_at": "2026-09-29T14:20:11.853821+00:00",
+   "ended_at": "2026-09-29T14:21:18.712260+00:00",
+   "duration_ms": 66858,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 26
+   }
+  },
+  {
+   "span_id": "director-b26da214e7f2-26",
+   "parent_span_id": null,
+   "name": "record-dynamite-support-library-completion",
+   "agent_identity": "Director controller",
+   "tool_action": "record-dynamite-support-library-completion",
+   "started_at": "2026-09-29T15:05:46.374724+00:00",
+   "ended_at": "2026-09-29T15:06:26.305283+00:00",
+   "duration_ms": 39930,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 27
+   }
+  },
+  {
+   "span_id": "director-67af5c7881b8-27",
+   "parent_span_id": null,
+   "name": "refresh-dynamite-owner-review-checkpoint",
+   "agent_identity": "Director controller",
+   "tool_action": "refresh-dynamite-owner-review-checkpoint",
+   "started_at": "2026-09-29T15:10:19.761139+00:00",
+   "ended_at": "2026-09-29T15:13:14.597198+00:00",
+   "duration_ms": 174836,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 28
+   }
+  },
+  {
+   "span_id": "director-452d3879c5de-28",
+   "parent_span_id": null,
+   "name": "record-dynamite-ghl-authentication-success",
+   "agent_identity": "Director controller",
+   "tool_action": "record-dynamite-ghl-authentication-success",
+   "started_at": "2026-09-29T15:23:20.696638+00:00",
+   "ended_at": "2026-09-29T15:23:44.222687+00:00",
+   "duration_ms": 23526,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 29
+   }
+  },
+  {
+   "span_id": "director-fbbebdc3f1e5-30",
+   "parent_span_id": null,
+   "name": "record-dynamite-ghl-connector-config-enabled",
+   "agent_identity": "Director controller",
+   "tool_action": "record-dynamite-ghl-connector-config-enabled",
+   "started_at": "2026-09-29T15:51:53.208489+00:00",
+   "ended_at": "2026-09-29T15:52:20.961260+00:00",
+   "duration_ms": 27752,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 31
+   }
+  },
+  {
+   "span_id": "director-4558f5c5b392-32",
+   "parent_span_id": null,
+   "name": "record-owner-answer-actions-and-prepare-julian-review",
+   "agent_identity": "Director controller",
+   "tool_action": "record-owner-answer-actions-and-prepare-julian-review",
+   "started_at": "2026-09-29T16:09:06.398911+00:00",
+   "ended_at": "2026-09-29T16:11:49.377750+00:00",
+   "duration_ms": 162978,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 33
+   }
+  },
+  {
+   "span_id": "director-fe514b4f10e3-33",
+   "parent_span_id": null,
+   "name": "correct-julian-pricing-ownership-and-record-local-guard-repair",
+   "agent_identity": "Director controller",
+   "tool_action": "correct-julian-pricing-ownership-and-record-local-guard-repair",
+   "started_at": "2026-09-29T16:19:15.003847+00:00",
+   "ended_at": "2026-09-29T16:20:43.629239+00:00",
+   "duration_ms": 88625,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 34
+   }
+  },
+  {
+   "span_id": "director-1b6a78a13bca-34",
+   "parent_span_id": null,
+   "name": "rewrite-current-constraints-in-specific-plain-language",
+   "agent_identity": "Director controller",
+   "tool_action": "rewrite-current-constraints-in-specific-plain-language",
+   "started_at": "2026-09-29T16:26:12.286435+00:00",
+   "ended_at": "2026-09-29T16:28:41.261159+00:00",
+   "duration_ms": 148974,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 35
+   }
+  },
+  {
+   "span_id": "director-d4ad83f63925-35",
+   "parent_span_id": null,
+   "name": "record-two-accepted-property-proximity-results",
+   "agent_identity": "Director controller",
+   "tool_action": "record-two-accepted-property-proximity-results",
+   "started_at": "2026-09-29T16:31:39.216371+00:00",
+   "ended_at": "2026-09-29T16:32:25.407031+00:00",
+   "duration_ms": 46190,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 36
+   }
+  },
+  {
+   "span_id": "director-a5cd17994bce-36",
+   "parent_span_id": null,
+   "name": "upload-existing-dynamite-project-library",
+   "agent_identity": "Director controller",
+   "tool_action": "upload-existing-dynamite-project-library",
+   "started_at": "2026-09-29T18:24:28.507445+00:00",
+   "ended_at": "2026-09-29T18:31:10.189604+00:00",
+   "duration_ms": 401682,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 37
+   }
+  },
+  {
+   "span_id": "director-1011974d3b1e-37",
+   "parent_span_id": null,
+   "name": "bounded-wording-cleanup",
+   "agent_identity": "Director controller",
+   "tool_action": "bounded-wording-cleanup",
+   "started_at": "2026-09-30T09:59:45.071694+00:00",
+   "ended_at": "2026-09-30T10:01:02.684008+00:00",
+   "duration_ms": 77612,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 38
+   }
+  },
+  {
+   "span_id": "director-8615b759b565-38",
+   "parent_span_id": null,
+   "name": "repair-existing-refresh-path-and-prompt",
+   "agent_identity": "Director controller",
+   "tool_action": "repair-existing-refresh-path-and-prompt",
+   "started_at": "2026-09-30T11:01:05.873547+00:00",
+   "ended_at": "2026-09-30T11:07:42.653345+00:00",
+   "duration_ms": 396779,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 39
+   }
+  },
+  {
+   "span_id": "director-9246dad8df5a-39",
+   "parent_span_id": null,
+   "name": "deploy-lighting-read-auth-rule",
+   "agent_identity": "Director controller",
+   "tool_action": "deploy-lighting-read-auth-rule",
+   "started_at": "2026-09-30T11:34:10.080199+00:00",
+   "ended_at": "2026-09-30T19:43:20.108856+00:00",
+   "duration_ms": 29350028,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 40
+   }
+  },
+  {
+   "span_id": "director-ee0eef1881df-41",
+   "parent_span_id": null,
+   "name": "deploy-dedicated-ghl-lighting-read-adapter",
+   "agent_identity": "Director controller",
+   "tool_action": "deploy-dedicated-ghl-lighting-read-adapter",
+   "started_at": "2026-09-30T22:34:17.004361+00:00",
+   "ended_at": "2026-10-01T01:11:44.135858+00:00",
+   "duration_ms": 9447131,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 42
+   }
+  },
+  {
+   "span_id": "director-d277ea30f181-42",
+   "parent_span_id": null,
+   "name": "opportunities.update",
+   "agent_identity": "Director controller",
+   "tool_action": "opportunities.update",
+   "started_at": "2026-10-01T03:32:39.796025+00:00",
+   "ended_at": "2026-10-01T03:33:16.128288+00:00",
+   "duration_ms": 36332,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 43
+   }
+  },
+  {
+   "span_id": "director-f51dfed6410a-43",
+   "parent_span_id": null,
+   "name": "opportunities.update",
+   "agent_identity": "Director controller",
+   "tool_action": "opportunities.update",
+   "started_at": "2026-10-01T03:35:18.358893+00:00",
+   "ended_at": "2026-10-01T03:35:56.968231+00:00",
+   "duration_ms": 38609,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 44
+   }
+  },
+  {
+   "span_id": "director-da26e2aa9125-46",
+   "parent_span_id": null,
+   "name": "opportunities.update",
+   "agent_identity": "Director controller",
+   "tool_action": "opportunities.update",
+   "started_at": "2026-10-01T05:51:04.201446+00:00",
+   "ended_at": "2026-10-01T05:51:51.550678+00:00",
+   "duration_ms": 47349,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 47
+   }
+  },
+  {
+   "span_id": "director-86fc91d05579-48",
+   "parent_span_id": null,
+   "name": "managed_agents.unpublish",
+   "agent_identity": "Director controller",
+   "tool_action": "managed_agents.unpublish",
+   "started_at": "2026-10-01T08:16:22.119406+00:00",
+   "ended_at": "2026-10-01T08:18:53.477812+00:00",
+   "duration_ms": 151358,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 49
+   }
+  },
+  {
+   "span_id": "director-d2910b9896ef-49",
+   "parent_span_id": null,
+   "name": "managed_agents.instructions.update",
+   "agent_identity": "Director controller",
+   "tool_action": "managed_agents.instructions.update",
+   "started_at": "2026-10-01T08:25:31.770371+00:00",
+   "ended_at": "2026-10-01T08:27:08.774459+00:00",
+   "duration_ms": 97004,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 50
+   }
+  },
+  {
+   "span_id": "director-c56f4b39e905-50",
+   "parent_span_id": null,
+   "name": "managed_agents.instructions.update",
+   "agent_identity": "Director controller",
+   "tool_action": "managed_agents.instructions.update",
+   "started_at": "2026-10-01T08:37:07.176350+00:00",
+   "ended_at": "2026-10-01T08:39:17.110378+00:00",
+   "duration_ms": 129934,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 51
+   }
+  },
+  {
+   "span_id": "director-935c59272f52-51",
+   "parent_span_id": null,
+   "name": "knowledge_base.rich_text.update",
+   "agent_identity": "Director controller",
+   "tool_action": "knowledge_base.rich_text.update",
+   "started_at": "2026-10-01T08:43:36.883522+00:00",
+   "ended_at": "2026-10-01T08:45:30.838293+00:00",
+   "duration_ms": 113954,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 52
+   }
+  },
+  {
+   "span_id": "director-7db41ee1f0e4-53",
+   "parent_span_id": null,
+   "name": "knowledge_base.rich_text.update",
+   "agent_identity": "Director controller",
+   "tool_action": "knowledge_base.rich_text.update",
+   "started_at": "2026-10-01T08:49:39.332685+00:00",
+   "ended_at": "2026-10-01T08:51:23.579210+00:00",
+   "duration_ms": 104246,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 54
+   }
+  },
+  {
+   "span_id": "director-122c08c9fb6f-54",
+   "parent_span_id": null,
+   "name": "managed_agents.default_tool.disable",
+   "agent_identity": "Director controller",
+   "tool_action": "managed_agents.default_tool.disable",
+   "started_at": "2026-10-01T08:56:11.958197+00:00",
+   "ended_at": "2026-10-01T08:57:34.957669+00:00",
+   "duration_ms": 82999,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 55
+   }
+  },
+  {
+   "span_id": "director-146887c0aaca-55",
+   "parent_span_id": null,
+   "name": "managed_agents.instructions.update",
+   "agent_identity": "Director controller",
+   "tool_action": "managed_agents.instructions.update",
+   "started_at": "2026-10-01T09:10:32.841829+00:00",
+   "ended_at": "2026-10-01T09:12:45.521809+00:00",
+   "duration_ms": 132679,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 56
+   }
+  },
+  {
+   "span_id": "director-ca816b072cfa-57",
+   "parent_span_id": null,
+   "name": "managed_agents.default_tool.restore",
+   "agent_identity": "Director controller",
+   "tool_action": "managed_agents.default_tool.restore",
+   "started_at": "2026-10-01T09:25:05.002818+00:00",
+   "ended_at": "2026-10-01T09:28:12.328121+00:00",
+   "duration_ms": 187325,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 58
+   }
+  }
+ ]
+}

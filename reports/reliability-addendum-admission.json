@@ -1,0 +1,69 @@
+{
+  "revision": 2,
+  "admitted_at": "2026-10-10T04:38:15.695645+00:00",
+  "status": "acknowledged_executed",
+  "scope": "project-local existing visualizer",
+  "owner": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "requirements": [
+    {
+      "id": "REL-01",
+      "status": "partial"
+    },
+    {
+      "id": "REL-02",
+      "status": "passed"
+    },
+    {
+      "id": "REL-03",
+      "status": "passed"
+    },
+    {
+      "id": "REL-04",
+      "status": "passed"
+    },
+    {
+      "id": "REL-05",
+      "status": "passed"
+    },
+    {
+      "id": "REL-06",
+      "status": "passed"
+    }
+  ],
+  "spec": "docs/RELIABILITY_ADDENDUM.md",
+  "blockers": [],
+  "next_action": "Continue original milestones (real SDK trace, controlled catalog edit, browser proof when Chromium complete)",
+  "supersedes": null,
+  "original_acceptance_preserved": true,
+  "history": [
+    {
+      "at": "2026-10-10T05:01:42+00:00",
+      "event": "owner_acknowledgment_revision_2",
+      "delivery_id": "reliability-r2-20261010-0101"
+    },
+    {
+      "at": "2026-10-10T05:02:05+00:00",
+      "event": "owner_acknowledgment_revision_2",
+      "delivery_id": "reliability-r2-20261010-0101"
+    },
+    {
+      "at": "2026-10-10T05:07:41+00:00",
+      "event": "correction_follow_up",
+      "correction_id": "rel-review-corrections-20261010-0104"
+    },
+    {
+      "at": "2026-10-10T05:07:48+00:00",
+      "event": "correction_follow_up",
+      "correction_id": "rel-review-corrections-20261010-0104"
+    },
+    {
+      "at": "2026-10-10T05:07:58+00:00",
+      "event": "correction_follow_up",
+      "correction_id": "rel-review-corrections-20261010-0104"
+    }
+  ],
+  "acknowledged_at": "2026-10-10T05:02:05+00:00",
+  "delivery_id": "reliability-r2-20261010-0101",
+  "owner_evidence_overall": "partial",
+  "independent_acceptance": "withheld_see_independent_reliability_review.json"
+}

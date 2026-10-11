@@ -1,0 +1,145 @@
+{
+  "review_id": "independent-app-path-review-20261010-0526",
+  "reviewed_at": "2026-10-10T05:26:14.128969+00:00",
+  "delivery_id": "app-path-corrections-20261010-0514",
+  "owner_receipt_at": "2026-10-10T05:15:13+00:00",
+  "owner_receipt_sha256": "bc1d77b833f73b5ef352950437377a137aa1748974360b72d1164990ddf77b1e",
+  "scope": "Only corrections to previous REL02-REL06 and synthetic app paths; no broad original-build audit; browser remains primary/owner work.",
+  "method": "Read-only source/receipt inspection, SQLite mode=ro SELECT readback, pure nonmutating gate/guard checks with bytecode disabled. No verifier rerun, shared DB/source mutation, browser, secret retrieval, outside operation or helper.",
+  "snapshot": {
+    "stable": true,
+    "observations_at": [
+      "2026-10-10T05:25:15.822527+00:00",
+      "2026-10-10T05:26:14.128969+00:00"
+    ],
+    "five_receipt_recorded_source_hashes_match_current": true,
+    "source_sha256": {
+      "tools/local_service.py": "44c2b5a5efabeaad43b01ee741290c130ee42861010cae5432c90b0efc6633a6",
+      "tools/reliability_gate.py": "b46a20356eed96c409fdb04757ec8f88ff8193c11785785ade4a3d6b0b7bf42f",
+      "tools/workflow_apply_guard.py": "eca829dd35d125e8b3484c33ebd7c5d27a3f7ef30fcbd89f00bf895e3b7aa2b8",
+      "tools/reliability_store.py": "c4f5f801f4e0d9d6a72c3bda815e3bf374e3c47087a7257b65e9244ddce17440",
+      "tools/trace_store.py": "9fce34c168a4a6a0fdc9eb798f7019cc8359ad2b3ff150441bc42d79761462dc",
+      "tools/app_path_corrections_acceptance.py": "1d584b5c99f5e2587824facfb724cdb21745c020f1429ccf24d42c3d7a95c0ad",
+      "tools/output_screening.py": "0eb76a1131b1baf6c6e1b7b5b614cb0fe1833de25993191e969ff64dfb7c97f2",
+      "app/src/lib/server/python.ts": "3e688cf879ecc45c7c40734ae7bfc3bb05a5421bcdc23964d879b8e9ba65f5e1",
+      "app/src/app/api/workflow/recover/[jobId]/route.ts": "37211b5ddeacfec7fc9bac71e56a557c64ad99d233fabbcc85cdc63e1340a7d0",
+      "app/src/app/api/workflow/route.ts": "30f6017b50e4e680fc2d3b4d5c87373b12a345fd5fdebde7357255acbef6484f",
+      "reports/app-path-corrections-receipt.json": "bc1d77b833f73b5ef352950437377a137aa1748974360b72d1164990ddf77b1e",
+      "app/src/app/explorer/tracing-panel.tsx": "b99df3d806c76a9091ca712b55cc5638deaba9b13675e54a26ea9b025e0afd5e",
+      "app/src/app/explorer/workflow-panel.tsx": "35b04c94738a582bb64651c2959dc4b9395f83f06646f358385fe0ff20746f0f"
+    }
+  },
+  "overall": "PARTIAL; owner overall PASS not independently accepted",
+  "items": [
+    {
+      "id": "REL-02_gate_and_REL-05_negatives",
+      "status": "FAILED",
+      "accepted": [
+        "Actual local_service reliability-complete now invokes gate and upserts evidence; invalid timestamp and missing proof path rejected; proof SHA mismatch checked when supplied; canonical skill installation paths checked."
+      ],
+      "still_failing": [
+        "Positive test uses prior independent-reliability-corrected-detail.json (which explicitly FAILED/UNVERIFIED items) as proof, and gate accepts based on file existence/hash alone. It never binds proof content/result to requirement or dated source identity.",
+        "Pure read-only check accepted REL-02 with a 2001 timestamp, prior failure report as proof, omitted other requirements, skills_verified=false and no proof_sha256. Matching labels still substitute for actual-use proof.",
+        "Requirement-set and skills_verified omission checks exist only in evaluate_negative_case; real completion does not call them. Local_service workflow verify/checkpoint still routes to Engine through guard, never to requirement completion gate; UI fabricates checks=true and evidence local-explorer-evidence (workflow-panel.tsx:254-265).",
+        "New receipt does not cover REL-05 four regressions; existing helper/source change is not application regression proof."
+      ],
+      "source": [
+        "tools/reliability_gate.py:35-47,58-154,157-214",
+        "tools/local_service.py:325-342,390-401",
+        "tools/app_path_corrections_acceptance.py:50-94",
+        "tools/workflow_apply_guard.py:32",
+        "app/src/app/explorer/workflow-panel.tsx:254-265"
+      ],
+      "next": "Parse and bind requirement-specific successful proof/results/freshness; enforce all required claims/skills in real completion and workflow verification path; run four actual application negative cases."
+    },
+    {
+      "id": "REL-03_recovery",
+      "status": "UNVERIFIED",
+      "accepted": [
+        "API now calls recover-enhanced; fresh local_service subprocess merges persisted active correction, governing_next_action and affected-output queue. Owner receipt now records successful corrected text and one recheck row."
+      ],
+      "still_failing": [
+        "merge_recover_packet adds governing_next_action but retains original next_permitted_action. UI still displays/uses that original field and ignores governing_next_action/reliability_recovery; correction governs an extra field, not proven actual selected next action.",
+        "API hardcodes one old-note string, and correction/recheck helper remains global/hardcoded to supervision state; generalized affected outputs and acceptance restart case remain unproved."
+      ],
+      "source": [
+        "app/src/app/api/workflow/recover/[jobId]/route.ts:7-16",
+        "tools/reliability_store.py:199-207",
+        "tools/app_path_corrections_acceptance.py:97-123",
+        "app/src/app/explorer/workflow-panel.tsx:373-385"
+      ],
+      "next": "Make the actual displayed/permitted action correction-aware; retain old note/history; demonstrate conflicting note through intended restart path with affected outputs for recheck."
+    },
+    {
+      "id": "REL-04_handoff",
+      "status": "FAILED",
+      "accepted": [
+        "Application apply now has owner/revision guard when both client fields supplied, transfer uses SQL conditional update, transferred checkpoint retains acceptance. Read-only app-path-rel04.sqlite has task owner-b, exactly one operation and one event for app-path-op-0514; durable handoff owner-b/revision1/acceptance check retained."
+      ],
+      "still_failing": [
+        "Guard is conditional on handoff_operation_id AND actor_owner. Omitting either falls through directly to engine.apply; ordinary UI request omits both. Nonmutating DummyEngine check confirms omitted fields invoke unguarded engine.",
+        "Guard does not verify handoff checkpoint job_id matches request job_id. Actor identity remains client supplied.",
+        "Handoff transfer is in separate reliability DB from workflow task mutation; guard/check and apply are not atomic, handoff revision is not advanced after workflow write, and retry replay is checked only after handoff revision/owner guard.",
+        "Receipt tests conditional field path only; lacks omission/foreign-job/concurrent transfer/recoverability negatives. Summary omits replay_ok from acceptance."
+      ],
+      "source": [
+        "tools/workflow_apply_guard.py:11-32,35-50",
+        "tools/reliability_store.py:170-196",
+        "tools/app_path_corrections_acceptance.py:126-281,408-413",
+        "app/src/app/explorer/workflow-panel.tsx:229-243,275-289"
+      ],
+      "readback": [
+        "app/.data/reliability-tests/app-path-rel04.sqlite operations/events app-path-op-0514 count=1 each; task owner-b",
+        "app/.data/reliability.sqlite reliability_handoffs app-path-op-0514 owner-b revision1 acceptance=['check']"
+      ],
+      "next": "Derive active handoff/current owner from authoritative job state; require/enforce identity without optional bypass, bind job ID, synchronize revision atomically, and reconcile retries before rejecting stale revision."
+    },
+    {
+      "id": "REL-06_screening",
+      "status": "FAILED",
+      "accepted": [
+        "Actual trace-get now invokes export_trace_safe→export_json_safe; values recursively screened. Actual diagnose-text and caught service errors now call redaction path. Saved fake-canary trace import exists in isolated DB."
+      ],
+      "still_failing": [
+        "Error canary test requests missing-trace-id without injecting a canary into the error, so error_no_leak is vacuous. Test ignores command exit statuses and output shape/content; empty output could pass.",
+        "Node stderr/invalid-JSON error bridge remains raw (python.ts:38-58). trace-list, workflow events and other outputs still print raw values; full supported diagnostic/error/trace/export proof missing.",
+        "Output wrapper changes trace-get shape to {payload:{trace,spans},screening_notes}; API passes through, TracingPanel setsDetail(response) then reads detail.trace.label. Source proves consumer contract mismatch, likely runtime crash; no browser action taken."
+      ],
+      "source": [
+        "tools/trace_store.py:215-221",
+        "tools/output_screening.py:21-46",
+        "tools/local_service.py:344-347,382-389,423-425",
+        "tools/app_path_corrections_acceptance.py:284-320",
+        "app/src/lib/server/python.ts:38-58",
+        "app/src/app/api/traces/[traceId]/route.ts:7-15",
+        "app/src/app/explorer/tracing-panel.tsx:140-149,180-185"
+      ],
+      "next": "Preserve/unpack trace response contract; inject fake canary into actual emitted error/stdout/stderr/export paths, assert nonempty expected shape/screened content and no leaks, and cover remaining supported outputs."
+    },
+    {
+      "id": "combined_synthetic_sync_trace",
+      "status": "VERIFIED bounded CLI sequence; UNVERIFIED full application refresh",
+      "accepted": [
+        "Unlike prior prerecorded fixture, test observes baseline before mutation, performs actual local marker change, observes again, generates same-run linked SYNTHETIC/TEST receipt with before/after hashes, imports through local_service, starts fresh status subprocess and repeat import.",
+        "Current marker SHA matches owner receipt and isolated catalog_watch: 0db0b4016236b3800518fd0ff3e7b218d917fe304f561f33b171f185f89554a9. live receipt file SHA matches trace_imports payload SHA: 3c07c2871b2398707eda13a97f001c2987e893223cca7ec85ac694dd861b713c.",
+        "Read-only app-path-sync.sqlite retains one import/trace/span and matching source cursor, proving bounded local persistence/dedup mechanics."
+      ],
+      "still_failing": [
+        "No browser/automatic UI refresh/observer lifecycle proof; test exercises manual CLI observe and fresh status reader.",
+        "Generated span lacks actual start/end times and agent/source/evidence IDs; it hardcodes status ok instead of recording subprocess result. Broader tracing schema/real-source acceptance remains open.",
+        "Summary does not require restart_subprocess_ok; no receipt cursor-before/after assertion. This review supports current stored cursor, not equivalence across runtime restart."
+      ],
+      "source": [
+        "tools/app_path_corrections_acceptance.py:324-385,418-423",
+        "work/reliability/live-mutation-receipt.json",
+        "app/.data/reliability-tests/app-path-sync.sqlite"
+      ],
+      "next": "Keep accepted CLI test; add actual observed action metadata/status/timestamps and application observer/UI restart/cursor invariants. Do not substitute this synthetic proof for original real-source tracing."
+    }
+  ],
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Mandatory actual ownership/proof enforcement; correction-aware actionable recovery; supported error/trace screening and response-shape repair; full regression/application refresh evidence.",
+    "outside_dependency": "None needed for reviewed local corrections. Browser/controlled-edit/real-source milestones remain separate authorized owner work."
+  }
+}

@@ -1,0 +1,498 @@
+{
+  "id": "table_9d8d4ad8fe6e2437be3d",
+  "sheet": "S04-15 Network Access",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Resource name"
+        },
+        {
+          "column": "B",
+          "value": "Type"
+        },
+        {
+          "column": "C",
+          "value": "Account / container"
+        },
+        {
+          "column": "D",
+          "value": "Purpose / capability"
+        },
+        {
+          "column": "E",
+          "value": "Evidence state"
+        },
+        {
+          "column": "F",
+          "value": "Access route"
+        },
+        {
+          "column": "G",
+          "value": "Proven scope"
+        },
+        {
+          "column": "H",
+          "value": "Provider status"
+        },
+        {
+          "column": "I",
+          "value": "Notes"
+        },
+        {
+          "column": "J",
+          "value": "URL"
+        },
+        {
+          "column": "K",
+          "value": "Provider"
+        },
+        {
+          "column": "L",
+          "value": "Evidence date"
+        },
+        {
+          "column": "M",
+          "value": "Resource ID / reference"
+        },
+        {
+          "column": "N",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "O",
+          "value": "Asset key"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alexs-macbook-pro.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=Alex’s MacBook Pro; OS=macOS; addresses=100.90.100.19, fd7a:115c:a1e0::ee39:6414; lastSeen=2026-10-06T11:53:06Z; expires=2027-01-29T19:43:08Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "6140514428079263"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|6140514428079263"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "b2b-sales-agent.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=b2b-sales-agent; OS=linux; addresses=100.99.199.66, fd7a:115c:a1e0::4a30:c743; lastSeen=2026-10-06T11:53:06Z; expires=2027-03-30T11:50:55Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "4086213282631064"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|4086213282631064"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "iphone172-1.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=localhost; OS=iOS; addresses=100.66.78.13, fd7a:115c:a1e0::ad30:4e0e; lastSeen=2026-10-05T17:54:12Z; expires=2027-04-01T20:14:39Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "673704982873237"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|673704982873237"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "iphone172.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=localhost; OS=iOS; addresses=100.82.76.7, fd7a:115c:a1e0::9b39:4c08; lastSeen=2026-09-25T22:22:59Z; expires=2027-01-30T22:01:09Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "3868771353230947"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|3868771353230947"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javante.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "agent@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=javante; OS=macOS; addresses=100.127.38.125, fd7a:115c:a1e0::201:26cb; lastSeen=2026-10-06T11:53:06Z; expires=2027-01-29T19:37:40Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "7206754500808810"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|7206754500808810"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javar-orgo.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=javar-orgo; OS=linux; addresses=100.84.107.10, fd7a:115c:a1e0::4a30:6b0b; lastSeen=2026-10-06T11:53:06Z; expires=2027-03-30T11:51:43Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "8618077016034125"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|8618077016034125"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "openclaw-hub.tailde26a1.ts.net"
+        },
+        {
+          "column": "B",
+          "value": "Device"
+        },
+        {
+          "column": "C",
+          "value": "alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "Private-network device registration"
+        },
+        {
+          "column": "E",
+          "value": "READ VERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Composio tailscale"
+        },
+        {
+          "column": "G",
+          "value": "Successful device metadata list only; connectivity and ACL permissions untested"
+        },
+        {
+          "column": "H",
+          "value": "authorized=True"
+        },
+        {
+          "column": "I",
+          "value": "hostname=openclaw-hub; OS=linux; addresses=100.122.97.7, fd7a:115c:a1e0::f730:6108; lastSeen=2026-10-06T11:53:06Z; expires=0001-01-01T00:00:00Z"
+        },
+        {
+          "column": "K",
+          "value": "Tailscale"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "M",
+          "value": "8365858903559448"
+        },
+        {
+          "column": "N",
+          "value": "work/read-tailscale.json | log_8eIruXd0W0jU"
+        },
+        {
+          "column": "O",
+          "value": "Tailscale|Device|8365858903559448"
+        }
+      ]
+    }
+  ]
+}

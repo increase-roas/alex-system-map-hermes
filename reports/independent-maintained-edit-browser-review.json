@@ -1,0 +1,150 @@
+{
+  "review_id": "independent-maintained-edit-browser-review",
+  "reviewed_at": "2026-10-10T09:11:46.763351+00:00",
+  "acceptance": [
+    "docs/BUILD_SUPERVISION.md:21",
+    "docs/BUILD_SUPERVISION.md:23",
+    "docs/BUILD_SUPERVISION.md:25",
+    "reports/independent-consolidated-edit-review.json"
+  ],
+  "scope": "Bounded maintained-edit browser/application proof and bounds/cleanup. Read-only source/safe metadata plus pure AST-extracted summarize controls; no browser/app writes, launches, network, installs, helpers or raw captures. Backend transaction/schema internals excluded.",
+  "owner_run": "d4ffebe6-dd74-401b-b995-4e100169fdb9",
+  "owner_at": "2026-10-10T09:06:40+00:00",
+  "owner_pass_self_report": "passed",
+  "receipt_sha256": "a48be59aaad2792c85ddc0675894b58e4759f6fee988886a91397504669af098",
+  "pointer_sha256": "48a1ce71377e9da9520dcc89644bb3d78db8163a8d566454ce775f3e8d1d5a77",
+  "source_sha256": {
+    "app/.next/BUILD_ID": "601f76fcdefec605c70d08bafe12d178b8c8fc43d7c87dc3cf1bc595af3a075f",
+    "app/src/app/api/catalog/edit/route.ts": "2cd267dbf1ddc36e4f3e8177d89cbe24caefeb012fbaca30f810f701f63f65d4",
+    "app/src/app/api/catalog/edit/state/route.ts": "287f4671cd3c119d818ca7ac3707680086692ea17de744abc50e1e30ec98a781",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "ff26030c249b8e65c0c17a6160eac2947f15a24191e8f5923a9a8dd8d8ccf6bd",
+    "tools/browser_maintained_edit_cas.mjs": "c856e3c70a5237dcfb165b28fbfe6bf8dbe775c8bd48ce87403d0e4442502740",
+    "tools/catalog_controlled_edit.py": "0fa749e286092c3ac5ece5ca082238b7fb004e6a551a48026d4b6fe0afe72e2f",
+    "tools/maintained_derived_views.py": "1a94eef5a28ae5774feb43cab3f6c7349654f355693ad0868ee967ba754fb49e",
+    "tools/maintained_edit_cas_acceptance.py": "799434f32f2072f552c30e57c6fd8c0d07c1ff603198fbae2253489296b9cc8d"
+  },
+  "prior_edit_review_sha256": "e10dbd9024f2d5def0674836255d9aa27e319f7fd61ed4060f41ea09b0ffe41f",
+  "diagnosis_sha256": "9fd249d7eaa26788525a8ae835f1e734495e4e5044a9fb9da92c8862a49d59c3",
+  "pure_negative_controls": {
+    "positive_baseline_pass": true,
+    "restart_pid_changed_false_rejected": false,
+    "derived_revision_invalid_rejected": false,
+    "preview_has_diff_false_rejected": false,
+    "browser_ui_diff_false_independently_rejected": false,
+    "browser_derived_lineage_false_independently_rejected": false,
+    "browser_build_empty_independently_rejected": false,
+    "browser_served_pid_missing_independently_rejected": false
+  },
+  "safe_observations": {
+    "browser_build_matches_current": true,
+    "source_hashes_all_match": true,
+    "browser_revision_incremented": true,
+    "restart_actual_pid_before": 2054,
+    "restart_actual_pid_after": 2220,
+    "isolated_cli_db_hash_matches_current": true,
+    "recovery_runner_unchanged": true,
+    "recovery_workflow_component_unchanged": true,
+    "raster_opened": false
+  },
+  "items": [
+    {
+      "id": "Final receipt/source/current build identity",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json",
+        "reports/maintained-edit-cas-receipt.json"
+      ],
+      "finding": "Final run d4ffebe6-dd74-401b-b995-4e100169fdb9 at 09:06:40 UTC: pointer hash and all eight current source hashes match. Browser saved build ID equals current BUILD_ID. Isolated CLI DB current snapshot hash matches final receipt. This is byte binding, not owner PASS acceptance."
+    },
+    {
+      "id": "Actual UI/API staging edit",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/browser_maintained_edit_cas.mjs:88",
+        "app/src/app/explorer/maintained-edit-panel.tsx:52",
+        "reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json"
+      ],
+      "finding": "Runner selects maintained panel and staging JSON, fills label/note, clicks Preview/Apply, captures applied outcome and revision increment. API state/apply and derived revision metadata agree for this fixture. Preview assertion is only text contains label; exact saved before/after diff and edited-value readback are not retained. Narrow fixture UI implementation accepted."
+    },
+    {
+      "id": "Maintained canonical records and editable documents",
+      "status": "FAILED",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:21",
+        "tools/browser_maintained_edit_cas.mjs:19",
+        "docs/BUILD_SUPERVISION.md:23"
+      ],
+      "finding": "Allowlist remains editable-fixture, synthetic-sync-marker, and staging-catalog-record JSON paths. No real maintained canonical project record or explicitly editable local project document included/exercised. UI label/note editing of a restored staging fixture does not satisfy original maintained-record/document acceptance."
+    },
+    {
+      "id": "Derived Markdown/map/XLSX values agreement",
+      "status": "FAILED",
+      "evidence": [
+        "tools/maintained_derived_views.py:21",
+        "tools/maintained_edit_cas_acceptance.py:168",
+        "tools/browser_maintained_edit_cas.mjs:112"
+      ],
+      "finding": "Generator writes only fixture Markdown and metadata, not map/XLSX. Tests compare metadata revision/source hash, not generated Markdown field values or map/XLSX agreement. Fixture derived files are deleted in cleanup; no retained regenerated content evidence. Full canonical-to-derived agreement remains missing."
+    },
+    {
+      "id": "Automatic source/edit propagation",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "app/src/app/explorer/maintained-edit-panel.tsx:27",
+        "docs/BUILD_SUPERVISION.md:21"
+      ],
+      "finding": "Maintained edit panel refreshes on mount/path change, Reload state and post-apply; no watcher/poll/reconnect behavior in this panel. This receipt does not exercise disk fixture change automatically reaching UI/map, fingerprints/debounce/incremental reconciliation, or edit propagation to actual map/XLSX. Existing separate sync capability is not denied; current milestone does not prove integration."
+    },
+    {
+      "id": "Missing/rename/unreadable/invalid errors and visible LKG",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "docs/BUILD_SUPERVISION.md:25",
+        "app/src/app/explorer/maintained-edit-panel.tsx:27",
+        "reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json"
+      ],
+      "finding": "No saved browser cases for rename/delete/unreadable/malformed source, conflict/error presentation, visible last-known-good or retained observation history. Backup restore is a fixture byte-restoration subproof, not visible sync LKG. Backend transaction/schema review belongs to separate verifier."
+    },
+    {
+      "id": "New maintained restart evidence",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "tools/maintained_edit_cas_acceptance.py:249",
+        "reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json"
+      ],
+      "finding": "Health-reported actual PIDs differ 2054 to 2220 and staging revision/hash persist across restart: narrow evidence accepted. Runner stops npx launcher, without proving actual old served PID exit or connection refusal. No persisted before/after served DB path/hash and build identity. File state persistence alone does not prove isolated DB continuity or genuine process cleanup. Required restart_pid_changed is omitted from aggregate."
+    },
+    {
+      "id": "Bounds and child cleanup",
+      "status": "FAILED",
+      "evidence": [
+        "tools/maintained_edit_cas_acceptance.py:389",
+        "tools/browser_maintained_edit_cas.mjs:41",
+        "tools/browser_maintained_edit_cas.mjs:145",
+        "reports/maintained-edit-wait-diagnosis-20261010-0859.json"
+      ],
+      "finding": "Python subprocess timeout=600000 is seconds (~6.94 days), not 10 minutes. Browser health fetch has no AbortSignal timeout; elapsed loop cannot bound a stalled fetch. Browser cleanup kills only launcher, does not wait for actual served PID/port; browser closes only happy path. Python restart kills launcher with no actual served-child exit proof; stderr read on health timeout can block while child alive. Prior supervised hang diagnosis is preserved, not fixed by final PASS."
+    },
+    {
+      "id": "Required assertions and nonvacuous aggregation",
+      "status": "FAILED",
+      "evidence": [
+        "tools/maintained_edit_cas_acceptance.py:417"
+      ],
+      "finding": "Pure AST-extracted no-write summarize positive baseline passes. Independently setting restart_pid_changed false, derived_revision -999, or preview_has_diff false still passes aggregate. Saved browser overall/exit is required, but aggregate does not independently enforce browser build/PID/subfield assertions; browser source itself gates diff/revision/lineage only, not restart/build/DB. Actual edited label/note and full derived value agreement not asserted."
+    },
+    {
+      "id": "Previously accepted recovery browser boundaries",
+      "status": "VERIFIED",
+      "evidence": [
+        "reports/independent-actual-ui-baseline-browser-review.json"
+      ],
+      "finding": "Current recovery browser runner and workflow-panel source hashes remain equal to prior accepted review. Preserve prior scoped recovery evidence historically. Current build changed, so this is not a fresh recovery execution proof for latest build; no broader visual/browser matrix was audited."
+    }
+  ],
+  "verdict": "PARTIAL: staging fixture UI editing is exercised; original maintained editing/sync and full derived/restart acceptance not met.",
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Actual maintained canonical record/document UI edit with retained exact diff/value readback and Markdown/map/XLSX agreement; automatic sync/error/LKG UI evidence; bounded fetch/runner and actual served-child cleanup/restart/DB bindings with required gates."
+  }
+}

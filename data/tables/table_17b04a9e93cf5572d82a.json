@@ -1,0 +1,526 @@
+{
+  "id": "table_17b04a9e93cf5572d82a",
+  "sheet": "S02-05 Student starter kit",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What a partner needs to get the code: the four private repos the rebuild runs on, what each holds, and how to get access and clone them. Students don't get these repos: they get the student edition, a generated copy of the workbook and the code with every client shown as a label, no git history and no keys (Rebuild from zero, step 0.5; play spp-p32a, notes/student-edition.md). It closes gap G02 of the second replication check (spp-c4): the steps ran code that lives only in private repos. Facts from play spp-p20a (notes/gap-facts-g02.md, notes/gap-facts.md). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/student-kit.json; never edit this tab by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The four private repos"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "repo"
+        },
+        {
+          "column": "B",
+          "value": "GitHub address and visibility"
+        },
+        {
+          "column": "C",
+          "value": "what it holds"
+        },
+        {
+          "column": "D",
+          "value": "rebuild steps that need it"
+        },
+        {
+          "column": "E",
+          "value": "current commit"
+        },
+        {
+          "column": "F",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "agents-home"
+        },
+        {
+          "column": "B",
+          "value": "https://github.com/increase-roas/agents-home · private, owned by the increase-roas org (moved 2026-10-02), branch main · 1 collaborator: the owner (admin); 1 read invitation pending (a partner)"
+        },
+        {
+          "column": "C",
+          "value": "The shared home that lives at ~/.agents. skills/ (128 skill folders on Alex's Mac), instructions/ (the 6 sources of the global instruction files), tools/cards/ (13 app tool cards), tools/connectors/ (the key mover push_key_to_composio.py, gcloud_robot.py, orgo_op.py, cards_to_sheet.py, the ir-notes and google-robot servers, the health check, and hub/: the Orgo hub rebuild bundle with rebuild_hub.py, install_hub.sh and capture_hub.py), tools/unify/ (git_setup.sh, the post-commit hook, build_instructions.py, unify.py, check.py, skill_deps.py), tools/guards/, tools/skill-hygiene/, and .skill-lock.json (where third-party skills come from). No secrets: keys come from 1Password at run time."
+        },
+        {
+          "column": "D",
+          "value": "Phase 3 (3.1–3.5: clone, git_setup.sh, the hook) · 4.4–4.5 and 7.4 (key mover, gcloud_robot.py, orgo_op.py) · Phase 8 (hub: rebuild_hub.py, install_hub.sh, capture_hub.py) · 9.1 (the route servers behind the custom toolkits) · Phase 12 (build_instructions.py, check.py) · Phase 13 (cards, hook, sync_notes.py, cards_to_sheet.py) · Phase 14 (unify.py, .skill-lock.json, repo-conform audit.py) · 15.1–15.3 (Director and conductor skills, test_ledger_check.py) · 16.1–16.2 (audit.py --scaffold, verify.py) · 17.1–17.2 (health_check.py and its config)"
+        },
+        {
+          "column": "E",
+          "value": "GitHub main ae2136d (2026-10-01). Alex's Mac was at 4120ead, 31 commits ahead and not yet pushed (2026-10-01 16:15 EDT)."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md §2 ; agents-home ae2136db8b047ead4a83bd12a2d823579e05acda ; agents-home 4120ead88145e1ccb1c49214b4338162ddd22d74 ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md §1 ; ~/.agents/tools/connectors/hub/README.md ; ~/.agents/tools/unify/git_setup.sh L5 ; work/2026-10-02_repo-lock/notes/repo-lock.md §4 ; work/2026-10-02_repo-lock/notes/repo-lock.md §5 ; work/2026-10-02_repo-lock/notes/repo-lock.md §10"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "master-connector-repo"
+        },
+        {
+          "column": "B",
+          "value": "https://github.com/increase-roas/master-connector-repo · private, owned by the increase-roas org (moved 2026-10-02), branch main · 1 collaborator: the owner (admin); 1 read invitation pending (a partner)"
+        },
+        {
+          "column": "C",
+          "value": "Alex's connector project: the connectors workbook (work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx) and the work/ notes behind it; AGENTS.md (the map) and STATUS.md; tools/ (README.md with the risk tiers T0–T5, plus project tool cards for browser, Composio, Exa and web search, and the card template); system/ (run log, lessons, changelog, evals with the golden tasks, snapshots, proposals); setup/ (a 4-file starter guide); knowledge/, sources/, deliverables/, inbox/, _archive/. No package install."
+        },
+        {
+          "column": "D",
+          "value": "3.5 and 13.2 (the agents-home hook rewrites this repo's workbook) · 16.3 (risk tiers in tools/README.md) · 17.5 (golden tasks in system/evals/golden-tasks.md) · the hub's ir-notes server also serves this repo's tools/*.md cards · plus every step that cites a work/ notes file (gap G03)"
+        },
+        {
+          "column": "E",
+          "value": "GitHub main f1b1355 (2026-10-01). Alex's Mac was at 45fd8f5, 10 commits ahead and not yet pushed, with work in progress (2026-10-01 16:24 EDT)."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md §2 ; master-connector-repo f1b1355e95efab2c787f3f38d291df2ea3c3b289 ; master-connector-repo 45fd8f573f133718b5bb9b3e4f1063eb04b3d70e ; ~/.agents/tools/connectors/cards_to_sheet.py L16–L18 ; AGENTS.md \"Details: `tools/README.md`\" ; tools/README.md \"Tiers (T0 to T5): for approval\" ; system/evals/golden-tasks.md ; ~/.agents/tools/connectors/hub/README.md \"plus the connector repo's `tools/*.md`\" ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md L157 ; work/2026-10-02_repo-lock/notes/repo-lock.md §4 ; work/2026-10-02_repo-lock/notes/repo-lock.md §5 ; work/2026-10-02_repo-lock/notes/repo-lock.md §10"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ghl-command-universal"
+        },
+        {
+          "column": "B",
+          "value": "https://github.com/increaseroasir/ghl-command-universal · private, owned by increaseroasir, branch main · 1 collaborator: the owner (admin)"
+        },
+        {
+          "column": "C",
+          "value": "The GHL builder route. worker/ is the Cloudflare Worker ghl-command-universal: a password sign-in (OAuth) that then passes MCP calls through. It has TypeScript source, tests and wrangler.jsonc, with wrangler 4.143.0 pinned. origin/ is the bridge that runs on the Orgo hub: server.py on port 8789, test_origin.py, the npm manifest that installs the licensed GHL Command package 3.88.2, the two supervisor programs and catalog-audit.json. No secrets: the origin key, tunnel token and GHL Command sign-in stay out of git."
+        },
+        {
+          "column": "D",
+          "value": "10.3–10.6 (builder Worker plus its origin service on the hub, a new origin key, location keys, wrangler tail when sign-in fails). The hub installer in Phase 8 does not deploy this origin (gap G14). Students: GHL Command's builder is out of the student build (needs your own GHL Command licence and sign-in); the code ships for reading only. Checks 10.3 and 10.5 are partner route only."
+        },
+        {
+          "column": "E",
+          "value": "6fcc3b4 (2026-10-01). GitHub and Alex's Mac match."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md §2 ; ghl-command-universal 6fcc3b4f05a1dbad315e37a2c293ad249ea41208 ; ~/Development/ghl-command-universal/README.md ; ~/Development/ghl-command-universal/worker/README.md ; ~/Development/ghl-command-universal/origin/README.md ; ~/Development/ghl-command-universal/worker/package.json ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md §1 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L285 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D24"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "increase-roas-oauth-gateway"
+        },
+        {
+          "column": "B",
+          "value": "https://github.com/increaseroasir/increase-roas-oauth-gateway · private, owned by increaseroasir, branch main · 1 collaborator: the owner (admin). An older copy under the increase-roas organization is stale; don't use it."
+        },
+        {
+          "column": "C",
+          "value": "The GHL CRM gateway Worker increase-roas-oauth-gateway. worker.mjs and lib/ hold the gateway core, MCP runtime and auth. wrangler.toml has the Worker name, D1 database and company allowlist. test/ has 5 test files (npm test). deployed/ holds a byte copy of the live module (version 75) and how it differs from a build. Also docs/plans/ and two working notes. Secrets stay in Cloudflare as Worker secrets."
+        },
+        {
+          "column": "D",
+          "value": "10.1–10.2 (deploy the CRM gateway Worker from git with wrangler; it is an agency-level GHL Marketplace app; then push its key into custom_ghl_oauth_crm). New accounts also need the Marketplace app, secrets and D1 (gap G13)."
+        },
+        {
+          "column": "E",
+          "value": "b464b6d (2026-10-01). GitHub and Alex's Mac match. The live Worker equals deployed/live-v75-worker.js."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md §2 ; increase-roas-oauth-gateway b464b6d99076ba744966b3e25eb10db12fb56717 ; ~/Development/increase-roas-oauth-gateway-hotfix/README.md ; ~/Development/increase-roas-oauth-gateway-hotfix/deployed/README.md ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md L128 ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md L134"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. How a partner gets access and clones (students get the student edition instead)"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "who"
+        },
+        {
+          "column": "C",
+          "value": "what to do"
+        },
+        {
+          "column": "D",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "0. Bring GitHub up to date"
+        },
+        {
+          "column": "B",
+          "value": "Alex (or his agent, with a normal git push)"
+        },
+        {
+          "column": "C",
+          "value": "Push agents-home and master-connector-repo so GitHub holds the commit this tab names. On 2026-10-01 Alex's Mac was 31 and 10 commits ahead of GitHub; a newcomer clones only what GitHub has."
+        },
+        {
+          "column": "D",
+          "value": "On Alex's Mac, after git fetch, git rev-list --count origin/main..HEAD prints 0 in ~/.agents and in ~/Projects/master-connector-repo."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md §2 ; agents-home 4120ead88145e1ccb1c49214b4338162ddd22d74 ; master-connector-repo 45fd8f573f133718b5bb9b3e4f1063eb04b3d70e"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Get a GitHub account"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "Sign up at github.com if you don't have an account, then send your GitHub username to Alex (alex@increaseroas.com)."
+        },
+        {
+          "column": "D",
+          "value": "You can sign in at github.com and see your username on your profile."
+        },
+        {
+          "column": "E",
+          "value": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Decide what access means"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "agents-home and master-connector-repo are in the increase-roas organization since 2026-10-02, so each person gets a role per repo there: Read (pull only) or Write (pull and push). Alex chose Read for the partner invited on 2026-10-02. On the two repos still owned by Alex's personal account (ghl-command-universal and increase-roas-oauth-gateway) every collaborator can read AND push: a personal account's private repo has only owner and collaborator levels. Read-only there needs the same move, or a read-only deploy key per repo and machine (it never expires and isn't tied to a person)."
+        },
+        {
+          "column": "D",
+          "value": "Each person's role on each repo is written down before step 3 (Read unless they must push). The partner of 2026-10-02: Read on agents-home, master-connector-repo and the Director's home; nothing on the two Worker repos."
+        },
+        {
+          "column": "E",
+          "value": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository (read 2026-10-01) ; https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization (read 2026-10-01) ; https://docs.github.com/en/authentication/connecting-to-github-with-ssh/managing-deploy-keys (read 2026-10-01) ; work/2026-10-02_repo-lock/notes/repo-lock.md §1 ; work/2026-10-02_repo-lock/notes/repo-lock.md §5 ; https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Send the invites"
+        },
+        {
+          "column": "B",
+          "value": "Alex (owner account increaseroasir)"
+        },
+        {
+          "column": "C",
+          "value": "For each repo the person needs: open https://github.com/<owner>/<repo> (owner increase-roas for agents-home and master-connector-repo, increaseroasir for the two Worker repos), then Settings > Access > Collaborators (in the organization: Collaborators and teams) > Add people. Type the username, pick the match, choose the role in the organization (Read unless they must push), and add them. Invite by username: a pending invitation sent by email takes an organization seat. Script route: PUT /repos/<owner>/<repo>/collaborators/<username>, which also sends the invite; a pending invitation's role changes with PATCH /repos/<owner>/<repo>/invitations/<id> (permissions=read, as on 2026-10-02). GitHub allows 50 invitations per repo per 24 hours. Most newcomers need agents-home and master-connector-repo; the two Worker repos are only for rebuilding the GHL routes."
+        },
+        {
+          "column": "D",
+          "value": "The person shows as a pending invite on the repo's access page, and GET /repos/<owner>/<repo>/invitations lists the open invitation with its role (read for the 2026-10-02 partner)."
+        },
+        {
+          "column": "E",
+          "value": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository (read 2026-10-01) ; https://docs.github.com/en/rest/collaborators/collaborators (read 2026-10-01) ; https://docs.github.com/en/rest/collaborators/invitations (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md §1 ; work/2026-10-02_repo-lock/notes/repo-lock.md §1 ; work/2026-10-02_repo-lock/notes/repo-lock.md §5 ; https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Accept each invite"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "Accept each repo's invitation (there is one per repo) from the email GitHub sends or the notifications page on github.com. By API: GET /user/repository_invitations, then PATCH /user/repository_invitations/<invitation id>."
+        },
+        {
+          "column": "D",
+          "value": "https://github.com/<owner>/<repo> (increase-roas for agents-home and master-connector-repo, increaseroasir for the Worker repos) opens while you are signed in, instead of a not-found page, and the repo's access page lists you."
+        },
+        {
+          "column": "E",
+          "value": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/inviting-collaborators-to-a-personal-repository (read 2026-10-01) ; https://docs.github.com/en/rest/collaborators/collaborators (read 2026-10-01) ; https://docs.github.com/en/rest/collaborators/invitations (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md \"anonymous API 404\" ; work/2026-10-02_repo-lock/notes/repo-lock.md §4 ; work/2026-10-02_repo-lock/notes/repo-lock.md §6"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Sign the Mac in to GitHub"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "Sign in once with gh auth login (Rebuild step 2.2) as the account Alex invited. A private repo clones only for a signed-in account that has access."
+        },
+        {
+          "column": "D",
+          "value": "The clones in steps 6 to 9 finish without a permission error."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md §1 ; https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Clone the shared home"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "git clone https://github.com/increase-roas/agents-home.git ~/.agents && bash ~/.agents/tools/unify/git_setup.sh. The setup script links the tracked post-commit hook into .git/hooks, runs the secret scan and keeps the committed .gitignore. Until Phase 8 points the scripts at your own hub, the hook's notes sync still targets Alex's hub."
+        },
+        {
+          "column": "D",
+          "value": "git -C ~/.agents log -1 --format=%h prints the commit in section 1. skills/, instructions/, tools/cards/, tools/connectors/ and tools/unify/ exist. .git/hooks/post-commit links to tools/unify/hooks/post-commit, and the scan reports 0 hits."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/unify/git_setup.sh L5 ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md L98–L105 ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md §1 ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md L198 ; work/2026-10-02_repo-lock/notes/repo-lock.md §4 ; work/2026-10-02_repo-lock/notes/repo-lock.md §10"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. Clone the connector project"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "git clone https://github.com/increase-roas/master-connector-repo.git ~/Projects/master-connector-repo. Use exactly this path: the agents-home hook rewrites the workbook there and also writes a copy to ~/Documents. Nothing to install. Read AGENTS.md, then STATUS.md. Student route: the edition's master-connector-repo already holds the workbook at work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx (the same bytes as connectors-student-edition.xlsx, at the path the agents-home hook writes) and a blank STATUS.md (the repo-conform skeleton), so this step's check passes on the student copy too."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-09-30_composio-connect/connectors-2026-09-30.xlsx exists in the clone, and git log -1 --format=%h prints the commit in section 1."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/connectors/cards_to_sheet.py L16–L18 ; master-connector-repo f1b1355e95efab2c787f3f38d291df2ea3c3b289 ; AGENTS.md \"Read `STATUS.md`: current focus, open items, blockers.\" ; work/2026-10-01_setup-playbook/notes/student-edition.md §6 ; work/2026-10-01_setup-playbook/workbook-updates.md L252 ; work/2026-10-02_repo-lock/notes/repo-lock.md §4 ; work/2026-10-02_repo-lock/notes/repo-lock.md §10"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Clone the GHL builder (only to rebuild it)"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "git clone https://github.com/increaseroasir/ghl-command-universal.git ~/Development/ghl-command-universal. Then, in worker/: npm ci, npm test, npm run typecheck, npm run build, which builds dist/index.js with the pinned wrangler 4.143.0. The origin/ half goes onto the hub: copy server.py and test_origin.py to /opt/ghl-command-universal, run npm ci there, and install the two supervisor programs from origin/deploy/supervisor/. Its secrets (origin key, tunnel token, GHL Command sign-in) are not in git (gap G14)."
+        },
+        {
+          "column": "D",
+          "value": "Tests and typecheck pass and worker/dist/index.js exists. On the hub, python3 /opt/ghl-command-universal/test_origin.py passes."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/ghl-command-universal/README.md \"Worker: `cd worker`, `npm ci`, `npm test`, `npm run typecheck`, `npm run build`.\" ; ~/Development/ghl-command-universal/README.md \"Rebuild the origin on a fresh hub\" ; ~/Development/ghl-command-universal/origin/README.md \"Run the read-only acceptance check\" ; ~/Development/ghl-command-universal/worker/package.json"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. Clone the GHL CRM gateway (only to rebuild it)"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "git clone https://github.com/increaseroasir/increase-roas-oauth-gateway.git ~/Development/increase-roas-oauth-gateway, then npm test, which runs node --test on test/*.test.mjs with nothing to install. Build check: wrangler deploy --dry-run. The last check used wrangler 4.77.0, and the repo doesn't pin a version. Deploying to new accounts also needs the GHL Marketplace app, Worker secrets and a D1 database (gap G13). Clone only the increaseroasir copy."
+        },
+        {
+          "column": "D",
+          "value": "All tests pass: 65 of 65 on the source-as-live commit, per the repo's README."
+        },
+        {
+          "column": "E",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/package.json ; ~/Development/increase-roas-oauth-gateway-hotfix/deployed/README.md \"passed 65 of 65 on this source\" ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md L118–L128 ; work/2026-10-01_setup-playbook/notes/replication-retest-prelim.md L167"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. When someone leaves"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "Remove the person as a collaborator on each repo. They lose read and write access, and their forks of a private repo are deleted, but any local clones stay on their machine, so rotate anything they could have read."
+        },
+        {
+          "column": "D",
+          "value": "Their name is gone from each repo's collaborator list (GET /repos/<owner>/<repo>/collaborators, owner increase-roas or increaseroasir)."
+        },
+        {
+          "column": "E",
+          "value": "https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/repository-access-and-collaboration/permission-levels-for-a-personal-account-repository (read 2026-10-01) ; https://docs.github.com/en/rest/collaborators/collaborators (read 2026-10-01) ; work/2026-10-02_repo-lock/notes/repo-lock.md §4"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Pending invitations are listed since 2026-10-02 (two read invitations on the moved repos, from GET /repos/increase-roas/<repo>/invitations). How long an outside collaborator's invitation lasts isn't on the pages read; GitHub's organization-invitation page says 7 days, so about 2026-10-09 is likely, not proven."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md ; work/2026-10-02_repo-lock/notes/repo-lock.md §5"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub was behind Alex's Mac on 2026-10-01 (agents-home +31, master-connector-repo +10 commits): a clone gets older code until Alex pushes."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-g02.md"
+        }
+      ]
+    }
+  ]
+}

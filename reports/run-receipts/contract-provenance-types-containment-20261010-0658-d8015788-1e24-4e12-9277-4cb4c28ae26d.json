@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-10T07:01:17+00:00",
+  "cases": {
+    "artifact_root_containment": {
+      "in_root_positive": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1
+      },
+      "symlink_escape_rejected": {
+        "measure_ok": false,
+        "measure_reason": "artifact_outside_artifact_root"
+      },
+      "traversal_descriptor_rejected": {
+        "criterion_reason": "artifact_path_traversal",
+        "measure_ok": false,
+        "measure_reason": "artifact_path_traversal"
+      }
+    },
+    "json_type_equality": {
+      "handler_path_matching_json": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1
+      },
+      "handler_path_wrong_numeric": {
+        "reason": "declared_result_mismatch"
+      },
+      "pure_ok_false_vs_zero": {
+        "equal": false
+      },
+      "pure_ok_one_vs_true": {
+        "equal": false
+      }
+    },
+    "provenance_revision": {
+      "fresh_proof_positive": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1
+      },
+      "old_proof_after_contract_change": {
+        "error": "verification_record_revision_mismatch",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "revisioned_declaration_committed": {
+        "declaration_history_entries": 1,
+        "error": "",
+        "exit": 0,
+        "operation_count": 1,
+        "outputs_cleared": true,
+        "task_status": "needs_rechecking"
+      },
+      "same_revision_rewrite_rejected": {
+        "error": "declared_outcome_revision_unchanged",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "stale_descriptor_reuse_rejected": {
+        "error": "output_declaration_binding_stale",
+        "exit": 1
+      }
+    }
+  },
+  "delivery_id": "contract-provenance-types-containment-20261010-0658",
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": false,
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/contract-provenance-types-containment-20261010-0658-d8015788-1e24-4e12-9277-4cb4c28ae26d.json"
+  },
+  "run_id": "d8015788-1e24-4e12-9277-4cb4c28ae26d",
+  "source_identity": {
+    "tools/bounded_acceptance.py": "e9591fbead406b2f76a9319701ca5717302d7b25f3d9b95749b8aee812cf0c5e",
+    "tools/contract_provenance_types_containment_acceptance.py": "c93cabc4c774a5801d95bea2fa734f8ede52e80f0a2b01f2206e979de467b224",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "1d6625d73e4617b1333f3b1828296d01c0370e2f75621f512855ff8335ab6a24"
+  }
+}

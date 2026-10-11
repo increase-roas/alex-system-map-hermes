@@ -1,0 +1,44 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "ec54dd78-3578-4063-8465-6eeae394e060",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "root-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "cptc-root-verify",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "artifact_hash_matches": true,
+    "declared_outcome_verified": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T07:07:46+00:00",
+  "max_age_seconds": 604800,
+  "observed_proofs": [
+    {
+      "criterion": "proof-bound",
+      "relative_path": "work/task-artifacts/root-job/t1-2c9ffa388325.txt",
+      "sha256": "2c9ffa3883259887e255de5f2a96165c15e01b617d236848fc0cce27fb9ccc06",
+      "byte_length": 14,
+      "production_id": "0ee263fbca9f722b0ce3366488314b33a8a7beec474849e421ba7b81380e87a3",
+      "contract_revision": 1,
+      "contract_sha256": "aa8ea8e0bc95ba888693b0f4b26688c34eee7a555af14816858c678192994154",
+      "content_matches_declaration": true
+    }
+  ],
+  "record_sha256": "8bfa244c40f76cbdc84d3644a84adc1e8d7ae2900fc9e817231e6826c74c78b6"
+}

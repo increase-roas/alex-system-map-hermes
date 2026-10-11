@@ -1,0 +1,194 @@
+{
+  "delivery_id": "outcome-replay-rollback-20261010-0631",
+  "run_id": "1b203773-a375-42fe-8817-90698dc0b48e",
+  "at": "2026-10-10T06:35:03+00:00",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "source_identity": {
+    "tools/workflow_engine.py": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/verification_evidence.py": "bfcd690b08146eae520915ed8e1dd2d49ca2ace371598808b10c735ae5f75a28",
+    "tools/outcome_replay_rollback_acceptance.py": "ad12bf1bbb343716dae201a7821b456b1197e28bb88c7fda8f6f69901e1dc37e"
+  },
+  "cases": {
+    "post_write_cas": {
+      "before_snapshot_sha256": "368a3898aed9686ac9e023334e30573480890e0a7f99e57ad323fadf175d5bd8",
+      "after_failed_snapshot_sha256": "368a3898aed9686ac9e023334e30573480890e0a7f99e57ad323fadf175d5bd8",
+      "before_state": {
+        "jobs": [
+          {
+            "id": "post-write-job",
+            "revision": 2
+          }
+        ],
+        "handoffs": [
+          {
+            "operation_id": "post-write-job-handoff",
+            "owner": "owner-b",
+            "revision": 2,
+            "acceptance": [
+              "proof-bound"
+            ]
+          }
+        ],
+        "operation_ids": [
+          "orr-add",
+          "orr-create"
+        ],
+        "event_count": 2,
+        "tasks": {
+          "t1": {
+            "status": "pending",
+            "outputs": []
+          }
+        }
+      },
+      "after_failed_state": {
+        "jobs": [
+          {
+            "id": "post-write-job",
+            "revision": 2
+          }
+        ],
+        "handoffs": [
+          {
+            "operation_id": "post-write-job-handoff",
+            "owner": "owner-b",
+            "revision": 2,
+            "acceptance": [
+              "proof-bound"
+            ]
+          }
+        ],
+        "operation_ids": [
+          "orr-add",
+          "orr-create"
+        ],
+        "event_count": 2,
+        "tasks": {
+          "t1": {
+            "status": "pending",
+            "outputs": []
+          }
+        }
+      },
+      "failed_exit": 1,
+      "failed_error": "handoff revision advance lost race",
+      "failed_operation_count": 0,
+      "failed_matching_event_count": 0,
+      "state_unchanged_after_fail": true,
+      "authorized_first_success_exit": 0,
+      "replay_exit": 0,
+      "final_operation_count": 1,
+      "final_matching_event_count": 1,
+      "proof_paths": {
+        "before": "reports/outcome-replay-rollback-proofs/4bdbf4d0-3f7b-472d-9d55-157dadab2664/before-failed-attempt.sqlite",
+        "after_failed": "reports/outcome-replay-rollback-proofs/4bdbf4d0-3f7b-472d-9d55-157dadab2664/after-failed-attempt.sqlite"
+      }
+    },
+    "historical_replay": {
+      "replay_exit": 0,
+      "replay_error": "",
+      "stored_revision": 3,
+      "handoff_before": [
+        {
+          "operation_id": "replay-job-handoff",
+          "owner": "owner-c",
+          "revision": 5,
+          "acceptance": [
+            "proof-bound"
+          ]
+        }
+      ],
+      "handoff_after": [
+        {
+          "operation_id": "replay-job-handoff",
+          "owner": "owner-c",
+          "revision": 5,
+          "acceptance": [
+            "proof-bound"
+          ]
+        }
+      ],
+      "handoff_unchanged": true,
+      "job_revision_unchanged": true
+    },
+    "transfer_idempotency": {
+      "first_exit": 0,
+      "retry_exit": 0,
+      "retry_same_result": true,
+      "collision_exit": 1,
+      "collision_error": "transfer operation payload conflict",
+      "transfer_ledger_rows": 1,
+      "final_handoff_owner": "owner-b",
+      "final_handoff_revision": 2
+    },
+    "truthful_outcomes": {
+      "pending_without_output_issue_failed": true,
+      "pending_checks": {
+        "task_exists": true,
+        "acceptance_criteria_declared": true,
+        "outcome_proof_bound": false,
+        "all_acceptance_outcomes_verified": false
+      },
+      "positive_verify_exit": 1,
+      "wrong_task_rejected": true,
+      "wrong_task_reason": "verification_record_task_id_mismatch",
+      "wrong_operation_rejected": true,
+      "wrong_operation_reason": "verification_record_actually_used_mismatch",
+      "wrong_verifier_rejected": true,
+      "wrong_verifier_reason": "verification_record_verifier_mismatch",
+      "measured_record_checks": {
+        "task_exists": true,
+        "acceptance_criteria_declared": true,
+        "outcome_proof_bound": true,
+        "all_acceptance_outcomes_verified": true
+      }
+    }
+  },
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+      "sha256": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+      "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json"
+    },
+    {
+      "path": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json",
+      "sha256": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+      "note": "immutable supervisor snapshot preserved"
+    },
+    {
+      "path": "reports/workflow-core-failures/outcome-replay-rollback-20261010-0631-1b203773.json",
+      "sha256": "c343043af896ca873eb2e19fab2becdcfc327cfa77613c7f0c1064d889fb9e94"
+    }
+  ],
+  "prior_attempt_hashes_linked": [
+    {
+      "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+      "sha256": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+      "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json"
+    },
+    {
+      "path": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json",
+      "sha256": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+      "note": "immutable supervisor snapshot preserved"
+    },
+    {
+      "path": "reports/workflow-core-failures/outcome-replay-rollback-20261010-0631-1b203773.json",
+      "sha256": "c343043af896ca873eb2e19fab2becdcfc327cfa77613c7f0c1064d889fb9e94"
+    }
+  ],
+  "independent_verification": "not_claimed",
+  "overall": "partial",
+  "still_open_for_independent": [
+    "APP-REVIEW-02 recovery UI",
+    "APP-REVIEW-04 screening",
+    "controlled-edit/CAS/derived views",
+    "browser/REL-01/synthetic full queue",
+    "real SDK traces BLOCKED"
+  ],
+  "immutable_receipt_sha256": "c001934242a85058c763ca77cf4bb652e6e18eca39bfdf80b015541ec8e80ea1",
+  "canonical_receipt_sha256": "b98b8cbade4b54dca45e81141ad677da3e160341b246583390bc26e687267884"
+}

@@ -1,0 +1,2694 @@
+{
+  "id": "table_0fe9c25154abd2feb847",
+  "sheet": "S06-02 Findings",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Category",
+          "comment": "Source: saved AI Money research/current chat. Snapshot 2026-10-07T09:34:35-04:00. Complete source provenance is on Data Sources."
+        },
+        {
+          "column": "B",
+          "value": "Title"
+        },
+        {
+          "column": "C",
+          "value": "Finding"
+        },
+        {
+          "column": "D",
+          "value": "Evidence type"
+        },
+        {
+          "column": "E",
+          "value": "Status"
+        },
+        {
+          "column": "F",
+          "value": "Original source"
+        },
+        {
+          "column": "G",
+          "value": "Source date"
+        },
+        {
+          "column": "H",
+          "value": "Date basis"
+        },
+        {
+          "column": "I",
+          "value": "Version"
+        },
+        {
+          "column": "J",
+          "value": "Inspected date"
+        },
+        {
+          "column": "K",
+          "value": "Inspection scope"
+        },
+        {
+          "column": "L",
+          "value": "Local reference"
+        },
+        {
+          "column": "M",
+          "value": "Remaining gap"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Deployment"
+        },
+        {
+          "column": "B",
+          "value": "Docker alongside OpenClaw"
+        },
+        {
+          "column": "C",
+          "value": "Jeff reports using Claude Code to install Hermes in a Docker container alongside OpenClaw. Guide targets separation of ports, credentials and channel setup."
+        },
+        {
+          "column": "D",
+          "value": "Instructor statement and setup guide"
+        },
+        {
+          "column": "E",
+          "value": "Instructor-reported install; not reproduced"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/going-live-wednesday-hermes-vs-openclaw",
+          "link": "https://www.skool.com/aimoney/going-live-wednesday-hermes-vs-openclaw"
+        },
+        {
+          "column": "G",
+          "value": "May 28"
+        },
+        {
+          "column": "H",
+          "value": "Displayed UI date; year unknown"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/Hermes_Agent_Guide_by_Jeff.txt"
+        },
+        {
+          "column": "M",
+          "value": "No supplied reusable Dockerfile/Compose setup or Bo-container proof"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Deployment"
+        },
+        {
+          "column": "B",
+          "value": "Docker optional versus mandatory"
+        },
+        {
+          "column": "C",
+          "value": "Opening guide table sounds mandatory; later text allows direct computer/VPS installation and describes Docker for coexistence isolation."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full extracted guide inspected"
+        },
+        {
+          "column": "F",
+          "value": "https://docs.google.com/document/d/1b-DeLNhf50JxV2hymaaJlN6ESxS-ZW4x/edit",
+          "link": "https://docs.google.com/document/d/1b-DeLNhf50JxV2hymaaJlN6ESxS-ZW4x/edit"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/Hermes_Agent_Guide_by_Jeff.txt"
+        },
+        {
+          "column": "M",
+          "value": "Recheck current deployment commands before use"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Deployment"
+        },
+        {
+          "column": "B",
+          "value": "Docker finding was already saved"
+        },
+        {
+          "column": "C",
+          "value": "Docker was in the guide/inventory captured October 6. Earlier summaries failed to surface it; this is a reporting omission, not a newly discovered package."
+        },
+        {
+          "column": "D",
+          "value": "Workspace record"
+        },
+        {
+          "column": "E",
+          "value": "Coverage correction"
+        },
+        {
+          "column": "G",
+          "value": "2026-10-06"
+        },
+        {
+          "column": "H",
+          "value": "Research capture date"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No universal container requirement follows"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Deployment"
+        },
+        {
+          "column": "B",
+          "value": "Separate mini-PCs"
+        },
+        {
+          "column": "C",
+          "value": "Jeff says each OpenClaw gets its own mini-PC; Docker/Proxmox are mentioned as ways to host more."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Historical instructor statement"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/bonus-video-install-openclaw-2026512-walkthrough",
+          "link": "https://www.skool.com/aimoney/bonus-video-install-openclaw-2026512-walkthrough"
+        },
+        {
+          "column": "G",
+          "value": "May 16"
+        },
+        {
+          "column": "H",
+          "value": "UI reply date; year unverified"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Machines not inspected"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Bo"
+        },
+        {
+          "column": "B",
+          "value": "Bo host and migration"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code is narrated on Bo’s computer; Ubuntu server and later VPS-to-local migration are discussed. Completed migration is not established."
+        },
+        {
+          "column": "D",
+          "value": "Instructor narration"
+        },
+        {
+          "column": "E",
+          "value": "Selected transcript evidence"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "Current host/provider and completed migration unknown"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Bo"
+        },
+        {
+          "column": "B",
+          "value": "Bo tools and integrations"
+        },
+        {
+          "column": "C",
+          "value": "Custom website/presentation/video capabilities plus Google via gog, GitHub, Discord, Obsidian, 1Password, ClawHub, ElevenLabs and Whisper are narrated."
+        },
+        {
+          "column": "D",
+          "value": "Instructor narration"
+        },
+        {
+          "column": "E",
+          "value": "Named inventory; scopes not verified"
+        },
+        {
+          "column": "F",
+          "value": "https://www.youtube.com/watch?v=HaaaTw6mp1Y&t=6378s",
+          "link": "https://www.youtube.com/watch?v=HaaaTw6mp1Y&t=6378s"
+        },
+        {
+          "column": "G",
+          "value": "2026-04-13"
+        },
+        {
+          "column": "H",
+          "value": "Workshop date; replay published April 15"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "No private profile/tool/credential export"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Bo"
+        },
+        {
+          "column": "B",
+          "value": "Parent versus worker permissions"
+        },
+        {
+          "column": "C",
+          "value": "No complete Bo-versus-worker credential and permission matrix recovered. Group bot permissions belong to a separately described bot."
+        },
+        {
+          "column": "D",
+          "value": "Bounded research gap"
+        },
+        {
+          "column": "E",
+          "value": "Unknown"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "Worker identities and access scopes require configuration evidence"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Coordination"
+        },
+        {
+          "column": "B",
+          "value": "Local Claude Code helper handoff"
+        },
+        {
+          "column": "C",
+          "value": "Briefs, local project directory, background logs, OpenClaw completion system-event wake and revision redispatch are supplied as written instructions."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Reference inspected; not runtime verified"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/community-references/OpenClaw-Claude-Code-TOOLS-Handoff.reference.md"
+        },
+        {
+          "column": "M",
+          "value": "No proven durable acknowledgements/retries"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Coordination"
+        },
+        {
+          "column": "B",
+          "value": "Reporting failure and watchdog"
+        },
+        {
+          "column": "C",
+          "value": "Built website existed but parent reporting was confused. A ten-minute watchdog is proposed in the workshop."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Incident narrated; watchdog not configured"
+        },
+        {
+          "column": "F",
+          "value": "https://www.youtube.com/watch?v=HaaaTw6mp1Y&t=5870s",
+          "link": "https://www.youtube.com/watch?v=HaaaTw6mp1Y&t=5870s"
+        },
+        {
+          "column": "G",
+          "value": "2026-04-13"
+        },
+        {
+          "column": "H",
+          "value": "Workshop date"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "Watchdog operation and independent verification unproven"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Codex Model Router"
+        },
+        {
+          "column": "C",
+          "value": "Worker/reviewer JSON contracts, expected identity checks, local-session observation and before/after worktree hashing. Validators do not prove business truth or prevent writes."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "All 69 release members read; not run"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/codex-model-router-optimization/releases/download/v3.0.1/codex-model-router-optimization-3.0.1.zip",
+          "link": "https://github.com/jeffjhunter/codex-model-router-optimization/releases/download/v3.0.1/codex-model-router-optimization-3.0.1.zip"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "3.0.1"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Runtime/current compatibility; no durable controller"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Claude Code Smart Orchestrator"
+        },
+        {
+          "column": "C",
+          "value": "Five profiles, routing policy and trace/model/lifecycle verification scripts. Trace validation is not artifact correctness or authenticated evidence."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Core source inspected; remaining coverage varies; not run"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/claude-code-smart-orchestrator/releases/download/v2.1.3/Claude-Code-Smart-Orchestrator-Giveaway-v2.1.3.zip",
+          "link": "https://github.com/jeffjhunter/claude-code-smart-orchestrator/releases/download/v2.1.3/Claude-Code-Smart-Orchestrator-Giveaway-v2.1.3.zip"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "2.1.3"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No complete durable messaging/shared-memory implementation"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Power User Kit"
+        },
+        {
+          "column": "C",
+          "value": "Handoff packets, scoped helpers, separate worktrees, recovery notes, Complete/Partial/Blocked reports and independent checks."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full 53-page text read"
+        },
+        {
+          "column": "F",
+          "value": "https://get.aimoneygroup.com/resources/Claude-Power-User-Kit-Production.pdf",
+          "link": "https://get.aimoneygroup.com/resources/Claude-Power-User-Kit-Production.pdf"
+        },
+        {
+          "column": "G",
+          "value": "2026-07-31"
+        },
+        {
+          "column": "H",
+          "value": "Explicit cover update and PDF metadata"
+        },
+        {
+          "column": "I",
+          "value": "V2"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Written guide; no executable SQL/task service"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Provider-Proof Workflow Kit"
+        },
+        {
+          "column": "C",
+          "value": "Portable handoff folder, backup scorecard and outage drill for continuity across tools/providers."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Selected guide/templates inspected; not executed"
+        },
+        {
+          "column": "F",
+          "value": "https://get.aimoneygroup.com/resources/provider-proof-ai-workflow-kit-complete.zip",
+          "link": "https://get.aimoneygroup.com/resources/provider-proof-ai-workflow-kit-complete.zip"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No automatic failover runtime established"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Mission 8 Delivery Without You"
+        },
+        {
+          "column": "C",
+          "value": "Assembler retains original agreement; checker validates saved output against earlier expectations. Mechanical pass is not semantic truth."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "All ten entries read; not executed"
+        },
+        {
+          "column": "F",
+          "value": "https://jeff.ity.so/mission8-delivery-skill",
+          "link": "https://jeff.ity.so/mission8-delivery-skill"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "0.9.29"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Need actual artifact/source acceptance check"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Persona OS v2"
+        },
+        {
+          "column": "C",
+          "value": "Profiles, memory, daily logs, errors, learnings, recovery and review templates."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Complete v2 source reviewed; not installed"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/ai-persona-os",
+          "link": "https://github.com/jeffjhunter/ai-persona-os"
+        },
+        {
+          "column": "G",
+          "value": "2026-05-19"
+        },
+        {
+          "column": "H",
+          "value": "Recorded release metadata"
+        },
+        {
+          "column": "I",
+          "value": "2.0.0"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No end-to-end live deployment proof"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Persona OS v3 alpha"
+        },
+        {
+          "column": "C",
+          "value": "Checkpoint reports ten tools, two UI descriptors and 80 checks. Auto context-pressure checkpointing, v2 migration and operator-scope repair are deferred."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full checkpoint read; implementation review incomplete"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/ai-persona-os/blob/main/CHECKPOINT.md",
+          "link": "https://github.com/jeffjhunter/ai-persona-os/blob/main/CHECKPOINT.md"
+        },
+        {
+          "column": "G",
+          "value": "2026-05-19"
+        },
+        {
+          "column": "H",
+          "value": "Checkpoint top snapshot"
+        },
+        {
+          "column": "I",
+          "value": "3.0.0-alpha.5"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Reconcile full source/commit history; tests are author-reported"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "SecureClaw provisioning"
+        },
+        {
+          "column": "C",
+          "value": "Linux/VPS provisioning and monitoring helpers are supplied. Hermes onboarding is skipped in inspected provisioning source."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Source inspected; not installed"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Gateway/model/channel setup and host proof"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Decision and error records"
+        },
+        {
+          "column": "C",
+          "value": "Daily log saves decisions/reasons/time. ERRORS saves failure/root cause/resolution. LEARNINGS captures tried/worked/next action. TOOLS stores gotchas."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Exact templates inspected"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "2.0.0"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/ai-persona-os-2.0.0/assets/LEARNINGS-template.md"
+        },
+        {
+          "column": "M",
+          "value": "Automatic capture and consistent consultation unproven"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Learning promotion loop"
+        },
+        {
+          "column": "C",
+          "value": "Weekly review template scans recent logs and promotes repeated lessons. High-impact lessons are also promotion candidates in the template."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Optional cron template inspected; not installed"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/ai-persona-os-2.0.0/assets/cron-templates/weekly-review.sh"
+        },
+        {
+          "column": "M",
+          "value": "Fresh-session behavior and cross-agent distribution untested"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Obsidian shared context"
+        },
+        {
+          "column": "C",
+          "value": "Jeff says his different OpenClaw agents access Obsidian context files. Exact sync method is not specified in recovered passages."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Instructor statement confirmed"
+        },
+        {
+          "column": "F",
+          "value": "https://www.youtube.com/watch?v=HaaaTw6mp1Y&t=6510s",
+          "link": "https://www.youtube.com/watch?v=HaaaTw6mp1Y&t=6510s"
+        },
+        {
+          "column": "G",
+          "value": "2026-04-13"
+        },
+        {
+          "column": "H",
+          "value": "Workshop; replay published April 15"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Vault path/host/sync/writer policy unknown"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Local source and Drive mirrors"
+        },
+        {
+          "column": "C",
+          "value": "Keep It Synced lesson says local files are source of truth; Drive is backup/collaboration and mirrors profile/memory/workflow files."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Five source chunks inspected"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/classroom/33e9cbb9?md=ca6415a293e14078ab1dbed791db3315",
+          "link": "https://www.skool.com/aimoney/classroom/33e9cbb9?md=ca6415a293e14078ab1dbed791db3315"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No sync command/service/schedule; not an Obsidian connection recipe"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Mem0 instructor recommendation"
+        },
+        {
+          "column": "C",
+          "value": "Jeff names openclaw-mem0 and recommends daily writes, pre-compaction flush and end-of-session summaries."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Recommendation captured"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/openclaw-lost-its-memory",
+          "link": "https://www.skool.com/aimoney/openclaw-lost-its-memory"
+        },
+        {
+          "column": "G",
+          "value": "March 16"
+        },
+        {
+          "column": "H",
+          "value": "UI year unavailable"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Bo installed Mem0 configuration unlocated"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Hermes Mem0 plugin"
+        },
+        {
+          "column": "C",
+          "value": "Vendor integration recalls at turn start and extracts after responses. Capture may skip busy turns; no durable capture queue in inspected implementation."
+        },
+        {
+          "column": "D",
+          "value": "Vendor documentation/source"
+        },
+        {
+          "column": "E",
+          "value": "Vendor docs/source inspected; not run"
+        },
+        {
+          "column": "F",
+          "value": "https://docs.mem0.ai/integrations/hermes",
+          "link": "https://docs.mem0.ai/integrations/hermes"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Interrupt/retry/shared-agent tests; current provider setup"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Mem0 storage and worker limits"
+        },
+        {
+          "column": "C",
+          "value": "Hermes multi-process local Qdrant paths need server-based storage. OpenClaw docs say workers recall parent memories but worker sessions are not auto-captured."
+        },
+        {
+          "column": "D",
+          "value": "Vendor documentation/source"
+        },
+        {
+          "column": "E",
+          "value": "Source/documented limitations"
+        },
+        {
+          "column": "F",
+          "value": "https://docs.mem0.ai/integrations/openclaw",
+          "link": "https://docs.mem0.ai/integrations/openclaw"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "All-agent contributions and client isolation not proven"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory"
+        },
+        {
+          "column": "B",
+          "value": "Vector search and SQLite"
+        },
+        {
+          "column": "C",
+          "value": "Persona OS describes hybrid keyword/vector lookup returning source-linked chunks and an agent-local SQLite index."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Package instructions inspected"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "2.0.0"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-vector-search-instructions.md"
+        },
+        {
+          "column": "M",
+          "value": "No shared fleet vector server/config proof"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools"
+        },
+        {
+          "column": "B",
+          "value": "Skill versus plugin"
+        },
+        {
+          "column": "C",
+          "value": "Jeff recommends API/MCP documentation to make a skill; script-heavy integrations may become plugins."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Timestamped workshop passage inspected"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "M",
+          "value": "No universal SDK skeleton provided"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools"
+        },
+        {
+          "column": "B",
+          "value": "Hermes current native capabilities"
+        },
+        {
+          "column": "C",
+          "value": "Vendor docs describe MCP, hooks, batches, peer messaging, kanban/project tools, profiles, pause/resume, backups and UI."
+        },
+        {
+          "column": "D",
+          "value": "Vendor documentation"
+        },
+        {
+          "column": "E",
+          "value": "Overview and partial CLI read"
+        },
+        {
+          "column": "F",
+          "value": "https://hermes-agent.nousresearch.com/docs/user-guide/features/overview",
+          "link": "https://hermes-agent.nousresearch.com/docs/user-guide/features/overview"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Installed version/transport/retry/ownership semantics unverified"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools"
+        },
+        {
+          "column": "B",
+          "value": "Google connection via gog"
+        },
+        {
+          "column": "C",
+          "value": "Bo narrates Google integration via gog. Guide/checkpoint does not establish every operation or shared credential scope."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Historical narrated capability"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "Pinned gogcli archive download was browser-blocked; no bypass"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools"
+        },
+        {
+          "column": "B",
+          "value": "HeyGen Studio skill"
+        },
+        {
+          "column": "C",
+          "value": "Nine downloaded files map browser/MCP/CLI/REST use, authentication, polling and duplicate submission concerns."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Static reference inspection"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/heygen-studio-skill/SKILL.md"
+        },
+        {
+          "column": "M",
+          "value": "Concurrency guidance conflicts; runtime/subscription billing unverified"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tools"
+        },
+        {
+          "column": "B",
+          "value": "Dialpad incoming SMS repair"
+        },
+        {
+          "column": "C",
+          "value": "Workshop handles message types and bytes/strings, then another error occurs after restart. Successful repair and corrected listener package remain unproven."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Selected June 18 transcript inspected"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "Private listener bytes and passing inbound SMS test missing"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sales"
+        },
+        {
+          "column": "B",
+          "value": "Tool Beau"
+        },
+        {
+          "column": "C",
+          "value": "Post describes Zoom/Meet notes, actions, objections and next steps while human handles the relationship."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full text inspected; embedded media uninspected"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/tool-tuesday-tool-beau",
+          "link": "https://www.skool.com/aimoney/tool-tuesday-tool-beau"
+        },
+        {
+          "column": "G",
+          "value": "July 7"
+        },
+        {
+          "column": "H",
+          "value": "UI year unavailable"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "M",
+          "value": "No full profile/connector setup/runtime proof"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sales"
+        },
+        {
+          "column": "B",
+          "value": "Prospect Finder"
+        },
+        {
+          "column": "C",
+          "value": "Offer-specific fit rules, verified public contacts, evidence grading, scoring and independent finish review for 20 new prospects."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Source inspected; not executed"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "1.0"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/ai-money-prospect-finder-v1.0/ai-money-prospect-finder/SKILL.md"
+        },
+        {
+          "column": "M",
+          "value": "Adapt to existing CRM; do not delete incomplete contacts"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sales"
+        },
+        {
+          "column": "B",
+          "value": "Mission 5 conversation drafting"
+        },
+        {
+          "column": "C",
+          "value": "Draft conversation plans with source support, review sheets and evidence-based sent/replied statuses."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Downloaded reference; not activated"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/mission5-conversation-drafter/SKILL.md"
+        },
+        {
+          "column": "M",
+          "value": "Not an autonomous closer or message bus"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sales"
+        },
+        {
+          "column": "B",
+          "value": "Sales Follow-Up Employee Blueprint"
+        },
+        {
+          "column": "C",
+          "value": "Descriptor located; full asset and linked implementation still uninspected."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "31-word descriptor only"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/classroom/be6b9963?md=872d36b2ac5a437c830ae0466eed9a27",
+          "link": "https://www.skool.com/aimoney/classroom/be6b9963?md=872d36b2ac5a437c830ae0466eed9a27"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Full blueprint/download inspection outstanding"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CRM"
+        },
+        {
+          "column": "B",
+          "value": "Bulk contacts"
+        },
+        {
+          "column": "C",
+          "value": "Course describes Sheets to Make/Zapier to OpenAI/Claude, writeback and a ten-row prompt test before broader processing."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full recovered lesson read"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/classroom/8f75e66b?md=6903d3a7faa84488aa69038dadafec7a",
+          "link": "https://www.skool.com/aimoney/classroom/8f75e66b?md=6903d3a7faa84488aa69038dadafec7a"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-contact-list-setup.md"
+        },
+        {
+          "column": "M",
+          "value": "Fetching/validation/pagination/retries/resume unspecified"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CRM"
+        },
+        {
+          "column": "B",
+          "value": "Airtable"
+        },
+        {
+          "column": "C",
+          "value": "Course uses structured lead, content and product records with automation. Inspected passages do not supply Airtable RAG configuration."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Selected course sources read"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-airtable-proxies.md"
+        },
+        {
+          "column": "M",
+          "value": "No embeddings/chunking/index sync/retrieval code"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CRM"
+        },
+        {
+          "column": "B",
+          "value": "Proxy meaning"
+        },
+        {
+          "column": "C",
+          "value": "A Python intermediary for local Ollama metrics and residential-IP local machines are discussed; rotating residential proxy pool is not established."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Selected passages inspected"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-airtable-proxies.md"
+        },
+        {
+          "column": "M",
+          "value": "No purchased proxy fleet or setup demonstrated"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef"
+        },
+        {
+          "column": "B",
+          "value": "Classifier in front"
+        },
+        {
+          "column": "C",
+          "value": "Jeff proposes fixed buckets, one criterion and one label before main-model research/writing."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full group posts read"
+        },
+        {
+          "column": "F",
+          "value": "https://www.skool.com/aimoney/tool-thursday-put-a-sorter-in-front",
+          "link": "https://www.skool.com/aimoney/tool-thursday-put-a-sorter-in-front"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No tested accuracy or runtime Bo use"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef"
+        },
+        {
+          "column": "B",
+          "value": "Direct/OpenRouter/Cloudflare routes"
+        },
+        {
+          "column": "C",
+          "value": "Attached guide covers TypeSafe System One, OpenRouter System One and Clef Cloudflare Workers AI. These are alternative inference connections."
+        },
+        {
+          "column": "D",
+          "value": "User-provided research reference"
+        },
+        {
+          "column": "E",
+          "value": "Vendor reference inspected in supplied document"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/.codex/attachments/6a90e699-5b7f-42fb-a219-49cd8ba4139d/Pasted text.txt"
+        },
+        {
+          "column": "M",
+          "value": "No live contact inference or CRM write; see attached guide in Source Notes"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef"
+        },
+        {
+          "column": "B",
+          "value": "TypeSafe agent skill"
+        },
+        {
+          "column": "C",
+          "value": "Official documentation links downloadable typesafe-ai skill."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Located; full source review outstanding"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md",
+          "link": "https://github.com/typesafe-ai/skills/blob/main/skills/typesafe-ai/SKILL.md"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Not installed; not an MCP or memory service"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef"
+        },
+        {
+          "column": "B",
+          "value": "n8n node and Clef mismatch"
+        },
+        {
+          "column": "C",
+          "value": "Official node appends /v1/systemone, so changing base URL alone cannot call documented Cloudflare Clef endpoint."
+        },
+        {
+          "column": "D",
+          "value": "User-provided code research"
+        },
+        {
+          "column": "E",
+          "value": "Pinned code inspected in attached guide"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/typesafe-ai/n8n-nodes-typesafe-ai/tree/c12537bbd9ed7159b7bbe23678ca128c7b2fb52b",
+          "link": "https://github.com/typesafe-ai/n8n-nodes-typesafe-ai/tree/c12537bbd9ed7159b7bbe23678ca128c7b2fb52b"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "I",
+          "value": "0.9.0 source package"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Live package install/endpoint response untested"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef"
+        },
+        {
+          "column": "B",
+          "value": "CRM grading and evaluation"
+        },
+        {
+          "column": "C",
+          "value": "Read exact CRM facts; classify fit/intent/unknown; save version/source evidence; human review and false-negative/error tests before broader use."
+        },
+        {
+          "column": "D",
+          "value": "Proposed implementation"
+        },
+        {
+          "column": "E",
+          "value": "Proposed design; not deployed"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Human-labeled sample, chosen CRM/account, mapping and actual costs"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef"
+        },
+        {
+          "column": "B",
+          "value": "API key/dashboard status"
+        },
+        {
+          "column": "C",
+          "value": "TypeSafe console access was blocked; no key created. Existing OpenRouter catalog reads succeeded without inference."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Historical access observations"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Actual inference access not tested"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fine-tuning"
+        },
+        {
+          "column": "B",
+          "value": "RAG versus weight training"
+        },
+        {
+          "column": "C",
+          "value": "Vector retrieval finds reference passages; fine-tuning updates model weights. No Jev fine-tuning service established by inspected docs."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Research distinction and tutorial inspection"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-finetuning-tutorial-inspection.md"
+        },
+        {
+          "column": "M",
+          "value": "No trained sales model or fine-tuning run"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fine-tuning"
+        },
+        {
+          "column": "B",
+          "value": "External tutorials"
+        },
+        {
+          "column": "C",
+          "value": "Unsloth DiffusionGemma Sudoku, Google adapter and NVIDIA recipes inspected to differing depths. They are external technical references, not Jeff’s demonstrated sales build."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Tutorial/source inspection; no training"
+        },
+        {
+          "column": "F",
+          "value": "https://unsloth.ai/docs/models/diffusiongemma",
+          "link": "https://unsloth.ai/docs/models/diffusiongemma"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-finetuning-tutorial-inspection.md"
+        },
+        {
+          "column": "M",
+          "value": "Original valid notebooks, hardware/runtime and sales relevance not proven"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Costs"
+        },
+        {
+          "column": "B",
+          "value": "Cost Optimizer usage"
+        },
+        {
+          "column": "C",
+          "value": "Audit providers/models/workload/budget, add aliases, test switches; advisor suggests task-based model choices with user acceptance."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "README and usage sections inspected"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/openclaw-cost-optimizer",
+          "link": "https://github.com/jeffjhunter/openclaw-cost-optimizer"
+        },
+        {
+          "column": "G",
+          "value": "2026-09-21"
+        },
+        {
+          "column": "H",
+          "value": "Repository update metadata"
+        },
+        {
+          "column": "I",
+          "value": "1.1.0"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Not installed; current model refs/prices need checking"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Costs"
+        },
+        {
+          "column": "B",
+          "value": "Cost Optimizer measurements"
+        },
+        {
+          "column": "C",
+          "value": "Savings tracker uses estimated task tokens and registry prices, not billed usage. Model labels/IDs contain inconsistencies."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Source inspection"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/agent-packages/openclaw-cost-optimizer-main/SKILL.md"
+        },
+        {
+          "column": "M",
+          "value": "50–90% advertised savings not reproduced"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Packages"
+        },
+        {
+          "column": "B",
+          "value": "Other September skills"
+        },
+        {
+          "column": "C",
+          "value": "Meeting notes, SOUL maker and daily briefing packages are downloaded/integrity checked."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Full source review pending"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/ai-meeting-notes",
+          "link": "https://github.com/jeffjhunter/ai-meeting-notes"
+        },
+        {
+          "column": "G",
+          "value": "2026-09-21"
+        },
+        {
+          "column": "H",
+          "value": "Repository update metadata"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "No installation or runtime demonstration"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discovery"
+        },
+        {
+          "column": "B",
+          "value": "Organized public resource hub"
+        },
+        {
+          "column": "C",
+          "value": "Jeff public hub has delivery links, manifest and hashes; 24 repositories were catalog/root screened. Screening is not a full audit."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Catalog and manifest inspected"
+        },
+        {
+          "column": "F",
+          "value": "https://github.com/jeffjhunter/ai-money-group-resources",
+          "link": "https://github.com/jeffjhunter/ai-money-group-resources"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Nested guides and newer source still need inspection"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discovery"
+        },
+        {
+          "column": "B",
+          "value": "Notifications"
+        },
+        {
+          "column": "C",
+          "value": "Skool docs describe member-follow/post bells, daily emails and weekly digest. No notification settings changed or monitor created."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Official help inspected"
+        },
+        {
+          "column": "F",
+          "value": "https://help.skool.com/article/95-how-to-manage-my-notifications",
+          "link": "https://help.skool.com/article/95-how-to-manage-my-notifications"
+        },
+        {
+          "column": "G",
+          "value": "2026-05-04"
+        },
+        {
+          "column": "H",
+          "value": "Help-page update date"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "M",
+          "value": "Instant push/earliest trend platform unproven"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discovery"
+        },
+        {
+          "column": "B",
+          "value": "Jay notification email"
+        },
+        {
+          "column": "C",
+          "value": "Authorized ping sent and Gmail readback confirms SENT. Recipient reading/action remains unproven."
+        },
+        {
+          "column": "D",
+          "value": "Inspected research source"
+        },
+        {
+          "column": "E",
+          "value": "Saved send/readback receipt"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/../work/jay-ai-money-notification-ping-receipt-2026-10-07.json"
+        },
+        {
+          "column": "M",
+          "value": "No recurring monitor"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Observatory"
+        },
+        {
+          "column": "B",
+          "value": "Proposed durable coordination"
+        },
+        {
+          "column": "C",
+          "value": "Task ownership, attempts/events, result acknowledgements, retries, independent receipts and restart recovery are proposed extensions beyond inspected kits."
+        },
+        {
+          "column": "D",
+          "value": "Proposed implementation"
+        },
+        {
+          "column": "E",
+          "value": "Proposed architecture"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "M",
+          "value": "No implemented proof loop on current Alex system"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Observatory"
+        },
+        {
+          "column": "B",
+          "value": "First acceptance loop"
+        },
+        {
+          "column": "C",
+          "value": "One main-agent to worker to independent checker to main-agent report loop, followed by recovery and memory-isolation tests."
+        },
+        {
+          "column": "D",
+          "value": "Proposed acceptance test"
+        },
+        {
+          "column": "E",
+          "value": "Not executed"
+        },
+        {
+          "column": "H",
+          "value": "Publication/update date unavailable; see cited research record"
+        },
+        {
+          "column": "J",
+          "value": "2026-10-06 / 2026-10-07"
+        },
+        {
+          "column": "K",
+          "value": "See complete Source Notes for exact inspection scope and limitations"
+        },
+        {
+          "column": "L",
+          "value": "/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "M",
+          "value": "Live behavior and artifact proof required"
+        }
+      ]
+    }
+  ]
+}

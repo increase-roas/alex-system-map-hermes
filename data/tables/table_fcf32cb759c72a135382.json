@@ -1,0 +1,482 @@
+{
+  "id": "table_fcf32cb759c72a135382",
+  "sheet": "S03-21 AI apps",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which AI apps survive, and what each one is connected to at the end of 2026-10-01. Mission (Alex, 2026-10-01; wording per decision W03): every AI app keeps only Composio, its own 1Password route and a named list of built-ins (browser, computer use and the like, which are not connectors). Rule: every kept app reaches every tool through Composio; its own local copies go. Counts come from the end-of-day read of the local configs plus the run-log. 'live connections' = switched on today. 'duplicates of Composio' = connections Composio already has working (goal: 0). 'only here' = things Composio can't hold: they control this Mac, are the AI's own built-ins, or have no Composio login yet.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI app"
+        },
+        {
+          "column": "B",
+          "value": "live connections"
+        },
+        {
+          "column": "C",
+          "value": "duplicates of Composio"
+        },
+        {
+          "column": "D",
+          "value": "only here"
+        },
+        {
+          "column": "E",
+          "value": "runs where"
+        },
+        {
+          "column": "F",
+          "value": "verdict"
+        },
+        {
+          "column": "G",
+          "value": "why"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code (desktop + CLI)"
+        },
+        {
+          "column": "B",
+          "value": "HISTORICAL EVIDENCE: Oct1–3 cleanup counts. Configured later: director-observatory in Claude Desktop local MCP; native Claude proof in canonical Observatory card. Current complete per-surface inventory UNKNOWN."
+        },
+        {
+          "column": "C",
+          "value": "0"
+        },
+        {
+          "column": "D",
+          "value": "Built-ins it keeps: Playwright (the only server in ~/.claude.json) for public pages from a terminal, the desktop app's built-in browser, Claude in Chrome for pages behind Alex's login, and computer use for desktop apps. Skills: the Superpowers skills the Director and conductor call, as vendored copies in ~/.agents/skills linked into ~/.claude/skills (the Superpowers plugin itself is off). Plugins: composio@composio (pinned to v0.2.4), plus Desktop Commander and PDF Viewer, which sync in from claude.ai Modal through ~/.agents/tools/connectors/modal_op.py (a Mac CLI route, not a connector: live connections stay 2); proven 2026-10-02 (token info, workspace alex-13722).\nCodex bridge also configured in Claude app: 5 tools, native Oct5 scratch proof; refuses held/deny-listed sends. See All connections codex-bridge row.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/work/2026-10-05_codex-bridge/notes; /Users/alexlobaito/Alex-Director/mission-graphs/mission-codex-control-bridge.md\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "E",
+          "value": "Mac (cloud sessions possible)"
+        },
+        {
+          "column": "F",
+          "value": "KEEP: operator for connectors, infrastructure, browser and computer tasks"
+        },
+        {
+          "column": "G",
+          "value": "Down from 10 to 2 (2026-10-01): the Apify, Exa, Workspace Admin, GHL CRM, Atlas Cloud and SkillsMP copies were removed (backups in ~/Backups/claude-config-2026-10-01). ~/.claude.json now lists only playwright; Composio comes in two doors: the composio command first (the composio@composio plugin adds its hooks and a command, no MCP) and the claude.ai Composio connector as the fallback. Its 1Password route is the op CLI and the connectors-sync scripts, which the W03 rule allows (not a gap) Firecrawl (2026-10-01): Claude Code reaches it only through Composio, with the composio CLI (whole-site crawls through firecrawl_op.py on the Mac); no Firecrawl connector or plugin is added (one route per app). Hugging Face (2026-10-02): Claude Code reaches it only through Composio, with the composio CLI (--account hugging_face_pricer-drongo; composio search finds it only with --toolkits hugging_face). Hugging Face's own connectors and its MCP server are not added (one route per app)."
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex"
+        },
+        {
+          "column": "B",
+          "value": "CONFIGURED 2026-10-05: MCP names node_repl, director-observatory; enabled plugin keys browser@openai-bundled, unified-computer-use@openai-bundled, chrome@openai-bundled, computer-use@openai-bundled, messages@openai-bundled. Different inventories; no combined live-tool count claimed."
+        },
+        {
+          "column": "C",
+          "value": "0: the 4 old ChatGPT connectors are gone from Codex's config too (already by 2026-10-01 21:40; read 2026-10-03)"
+        },
+        {
+          "column": "D",
+          "value": "Codex built-ins retain their native contracts. Existing Director Observatory is an owner-approved read-only evidence/evaluation MCP, distinct from external app connectors. Local Composio CLI first; hosted official Composio plugin when CLI unavailable. 1Password op/scripts stay on operator host. Current config is configuration proof, not proof every plugin or model works. /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md"
+        },
+        {
+          "column": "E",
+          "value": "Mac + cloud tasks"
+        },
+        {
+          "column": "F",
+          "value": "KEEP: coding and cloud tasks (Alex sends work here)"
+        },
+        {
+          "column": "G",
+          "value": "Seen working 2026-10-05: same-MCP fixed Observatory client and Google robot metadata reads in this documentation task. Desktop inline hot reload remains UNKNOWN. Historical cleanup counts retained only in prior receipts. Source: ~/.codex/config.toml (names/enabled projection only); 2026-10-05 America/Detroit documentation reconciliation; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor"
+        },
+        {
+          "column": "B",
+          "value": "CONFIGURED: Orgo MCP + Composio routes and native Cursor tools; count categories separately. Cursor 3.23.23; cursor-agent 2026.10.01 (dated Oct5/Oct6 receipt).",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/work/2026-10-05_cursor-cleanup/notes/cc4-verify.md; system/run-log.md lines 480–484; current names-only configuration projection\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "C",
+          "value": "Cleanup DONE Oct5/Oct6: installed plugins 2 — Composio marketplace and imported Composio Claude plugin. Appwrite, Superpowers and Compound Engineering uninstalled; Higgsfield project plugin dropped.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/work/2026-10-05_cursor-cleanup/notes/cc4-verify.md; system/run-log.md lines 480–484; current names-only configuration projection\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "D",
+          "value": "Orgo and the 5 built-in Cursor tools (the 1Password MCP was removed 2026-10-01, All connections R4)"
+        },
+        {
+          "column": "E",
+          "value": "Mac"
+        },
+        {
+          "column": "F",
+          "value": "KEEP: IDE and coding (Alex sends work here)"
+        },
+        {
+          "column": "G",
+          "value": "Cursor guard wired to beforeShellExecution and beforeMCPExecution. 21 adapter tests; live CLI shell denies 2026-10-06T00:20:40Z / 00:30:53Z. Native in-app turn and MCP denial remain NOT_PROVEN (unit/configuration only). ~/.cursor/skills empty; shared skills ~/.agents/skills. Four Cursor-only helpers/skills dropped; Grok Bot rule and fast-model hook KEPT. Sealed backup ~/Backups/cursor-cleanup-2026-10-05; RESTORE.md.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/work/2026-10-05_cursor-cleanup/notes/cc4-verify.md; system/run-log.md lines 480–484; current names-only configuration projection\nPrior cell note (historical unless independently current):\n"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes / Javar (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "UNKNOWN current full tool count; do not reuse the Oct1 count of six as current."
+        },
+        {
+          "column": "C",
+          "value": "3 on purpose: javar_ghl, javar_meta, javar_propose_message (Javar's fenced tools, they stay)"
+        },
+        {
+          "column": "D",
+          "value": "Orgo 1Password loader, javar_inbox"
+        },
+        {
+          "column": "E",
+          "value": "Cloud (Orgo)"
+        },
+        {
+          "column": "F",
+          "value": "KEEP: always-on agent"
+        },
+        {
+          "column": "G",
+          "value": "Javar PROD stays on Orgo; Javante stays on the Mac mini. Google logins jay@ and agent@ are distinct account routes, not proof of isolated Composio consumer identities. Latest saved Javar member-swap run Oct5 stopped before writes; own-key MCP initialization/schema read was seen, full swap/account isolation unproved; legacy Alex-key CLI risk remains in saved diagnosis. Lab is a separate uncredentialed runtime. 2026-10-05 America/Detroit documentation reconciliation; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; ~/Projects/master-connector-repo/work/2026-10-02_hermes-agents/notes/mha-cz4-swap-run.md ; notes/mha-cz5-member-route-stop.md"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenClaw hub (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "HISTORICAL EVIDENCE: eight hub routes observed Oct1; current full health not re-probed."
+        },
+        {
+          "column": "C",
+          "value": "0 (AI apps reach them only through Composio)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "Cloud (Orgo)"
+        },
+        {
+          "column": "F",
+          "value": "KEEP: hosting"
+        },
+        {
+          "column": "G",
+          "value": "AI-INFRA/My OpenClaw owns hub hosting; protected by current gameplan inventory. Oct1 health schedule and route proof are historical. No route, key or schedule change authorized by this update. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app (claude.ai / desktop chat)"
+        },
+        {
+          "column": "B",
+          "value": "HISTORICAL Oct2 screenshot count; later owner-approved local Director Observatory MCP configured and selected native Claude reads verified Oct3. Current full desktop/web/plugin inventory UNKNOWN; no restart or connector edit in this task."
+        },
+        {
+          "column": "C",
+          "value": "0: GitHub Integration is a named built-in that stays: it attaches repo files to chats and Project knowledge, read-only, while Composio github does the API actions (Claude help center article 10167454). Qt docs now comes only through Composio (W05)"
+        },
+        {
+          "column": "D",
+          "value": "Desktop Commander and PDF Viewer: plugins that work on this Mac, so they can't live in Composio. GitHub Integration: attaches repo files to chats and Project knowledge, read-only. Browser Use and Shopify went with their plugins, and Ref was removed (app batch). Anthropic's own built-ins it keeps: Code execution and file creation (on, for skills), visualize and Claude Docs (decision V10) Claude in Chrome: the browser for logged-in sites (built-in, Included); 1Password for Claude needs it. 1Password for Claude: sign-in autofill for Claude in Chrome. 1Password fills the login into the page, and Claude gets only item metadata and pass/fail, never a password or code, with a fresh approval in the 1Password app for every task. It is not a key route: keys still reach the Claude app only through Composio."
+        },
+        {
+          "column": "E",
+          "value": "Cloud + Mac app"
+        },
+        {
+          "column": "F",
+          "value": "REPLACE as a work surface: phone/chat only, apps through the Composio connector; it also keeps GitHub Integration, Claude Docs and 2 Mac plugins (see 'only here')"
+        },
+        {
+          "column": "G",
+          "value": "Progress 2026-10-01: Alex removed the Exa, Cloudflare, GoHighLevel, Gmail and Google Drive connectors, ElevenLabs is gone, Composio Connect added. Still to do: Alex removes Ref; Shopify connector is broken (auth error) and goes once Composio Shopify is proven; Qt docs plugin is Alex's call. Overlaps Claude Code Update, later 2026-10-01 (app batch, Claude in Chrome, after Alex's yes): the Ref, Foreplay, GHL OAuth Gateway, Google Calendar and Notion connectors and 12 plugins removed; D4's 6 old uploads switched off and backed up; the Director, the conductor and 4 other uploads replaced from ~/.agents. Since then Alex saved the claude.ai instructions (V05, read back as a match at 20:50Z) and says he revoked the Ref key at ref.tools. Firecrawl (2026-10-01): the Claude app reaches it only through Composio, with the hosted Composio connector; no Firecrawl connector or plugin is added (one route per app). Not run from this surface yet. Hugging Face (2026-10-02): the Claude app reaches it only through Composio, with the hosted Composio connector: COMPOSIO_SEARCH_TOOLS leaves the toolkit out (2026-10-02), so it goes card, then COMPOSIO_GET_TOOL_SCHEMAS, then COMPOSIO_MULTI_EXECUTE_TOOL. Hugging Face's own connectors and its MCP server are not added (one route per app). Not run from this surface yet: the hosted door was proven from a Claude Code session's claude.ai connector."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Desktop legacy config"
+        },
+        {
+          "column": "B",
+          "value": "CONFIGURED: director-observatory local MCP after Oct3 installation; earlier zero-server cleanup is historical, not the current total."
+        },
+        {
+          "column": "C",
+          "value": "0"
+        },
+        {
+          "column": "D",
+          "value": "Nothing of its own: Desktop Commander and PDF Viewer come from the claude.ai plugins (row 9). The 1Password pairing is 1Password for Claude (sign-in autofill, row 9): the Claude desktop app pairs with the 1Password desktop app over local IPC. Not a key route."
+        },
+        {
+          "column": "E",
+          "value": "Mac"
+        },
+        {
+          "column": "F",
+          "value": "Historical duplicate cleanup retained; approved Observatory subsequently installed. Native Claude trial proved selected tools, not every tool or current session health."
+        },
+        {
+          "column": "G",
+          "value": "Earlier empty-config cleanup is dated Oct2. Existing Director Observatory subsequently installed and verified for selected native calls; current whole-session health UNKNOWN. Canonical card: /Users/alexlobaito/Documents/Codex/2026-10-03/i-want-you-to-improve-my/outputs/director-observatory/TOOL_CARD.md"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT connectors (Increase ROAS GoHighLevel, Notion, Slack, Google Drive)"
+        },
+        {
+          "column": "B",
+          "value": "0: all 4 are gone from ChatGPT (2026-10-01) and from Codex's config"
+        },
+        {
+          "column": "C",
+          "value": "0"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "Cloud"
+        },
+        {
+          "column": "F",
+          "value": "RETIRED in ChatGPT: all 4 are gone from its app list (2026-10-01); gone from Codex's config too"
+        },
+        {
+          "column": "G",
+          "value": "All duplicate Composio routes. The GHL one's Orgo backend was stopped and removed 2026-09-30, so it should no longer work (not tested). Gone from Codex's config (2026-10-03). Keep only the Composio app. On Alex's removal list"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Manny's and Anthony's AI apps (contact@, anthony@)"
+        },
+        {
+          "column": "B",
+          "value": "not checked"
+        },
+        {
+          "column": "C",
+          "value": "not checked"
+        },
+        {
+          "column": "D",
+          "value": "not checked"
+        },
+        {
+          "column": "E",
+          "value": "not checked"
+        },
+        {
+          "column": "F",
+          "value": "SAME RULE: 1Password (the partner Mac's own read-only robot) + Composio, with less power than the partner (Decisions D34)"
+        },
+        {
+          "column": "G",
+          "value": "The mission covers their apps too (handoff). Their local configs were not part of the 2026-10-01 pull, so no counts here"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mac CLIs (meta, op, gcloud, orgo, composio; Parallel dropped)"
+        },
+        {
+          "column": "B",
+          "value": "16"
+        },
+        {
+          "column": "C",
+          "value": "4 (wrangler, gh, ghl, meta: each app is also in Composio)"
+        },
+        {
+          "column": "D",
+          "value": "1Password (op), Google Cloud (gcloud), Orgo"
+        },
+        {
+          "column": "E",
+          "value": "Mac"
+        },
+        {
+          "column": "F",
+          "value": "MOVE jobs to Orgo"
+        },
+        {
+          "column": "G",
+          "value": "Scripts that must run unattended belong on Orgo, not the MacBook. The Parallel CLI is off: Alex dropped Parallel 2026-10-01"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT (desktop app, web, phone, Work, dots)"
+        },
+        {
+          "column": "B",
+          "value": "The official Composio plugin from the ChatGPT plugin directory (developer Sampark Inc, which is Composio), signed in once as your Composio user with the org picked. On the Mac's Local host, Work and Codex chats use the composio command first Plugins after a fresh load (about 21:07Z): Composio (connected as alex@increaseroas.com, v1.0.1), Finances and Superpowers; the 1Password plugin is removed."
+        },
+        {
+          "column": "C",
+          "value": "0: the Gmail, GitHub, Exa, Descript, Slack, Notion, Drive and ClickUp apps and both Increase ROAS apps (GoHighLevel, Meta Ads) are gone (2026-10-01)"
+        },
+        {
+          "column": "D",
+          "value": "Built-ins it keeps: OpenAI's own apps that come with the account (listed 2026-10-01: Sites, Pets, Codex Document Control, Codex Goals, ChatGPT Space and Plugin Management). 1Password: none; to move a key, a Codex or Work chat on the Local host runs the key mover Kept plugins: Finances, OpenAI's own personal-finance feature, which reads bank data through Plaid and can't take financial actions (no moving money, paying bills or trades), a personal job no Composio route covers; and Superpowers, kept on the account for the remote cloud Codex environment, which can't see the vendored copies (vendoring decision 1), with its skills switched off on this Mac."
+        },
+        {
+          "column": "E",
+          "value": "Cloud + Mac app + phone"
+        },
+        {
+          "column": "F",
+          "value": "KEEP: chat surface; the official Composio plugin is its one route"
+        },
+        {
+          "column": "G",
+          "value": "Removed 2026-10-01 at about 21:07Z (Alex: \"yes remove\", Director chat 21:04:31Z): the 1Password plugin, which only managed 1Password Environments; the uninstall was read back, and Composio is still connected. Verified gone 2026-10-03: no 1password folder in ~/.codex/plugins/cache/openai-curated-remote. Firecrawl (2026-10-01): ChatGPT reaches it only through Composio, with the official Composio plugin; no Firecrawl connector or plugin is added (one route per app). Not run from this surface yet. Hugging Face (2026-10-02): ChatGPT reaches it only through Composio, with the official Composio plugin: COMPOSIO_SEARCH_TOOLS leaves the toolkit out (2026-10-02), so it goes card, then COMPOSIO_GET_TOOL_SCHEMAS, then COMPOSIO_MULTI_EXECUTE_TOOL. Hugging Face's own connectors and its MCP server are not added (one route per app). Not run from this surface yet: the hosted door was proven from a Claude Code session's claude.ai connector."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex on the Mac mini (agency-mini)"
+        },
+        {
+          "column": "B",
+          "value": "9 in config.toml (2026-10-03): node_repl, retell, hyperframes (computer-use's server off) and 6 plugins (browser, chrome, computer-use, unified-computer-use, codex-app-tools and composio@composio 0.2.3 (the old ComposioHQ plugin; D02 removes it))"
+        },
+        {
+          "column": "C",
+          "value": "0 since 2026-10-03: ghl-oauth-gateway, ref, ref-2 and the retired GoHighLevel app's approvals removed (the ghl block went on 2026-10-02)"
+        },
+        {
+          "column": "D",
+          "value": "retell and hyperframes (the ad and voice work there; left alone by the Director's ruling, whether Composio covers them not checked), and this Mac's ad/video workflow at the end of its AGENTS.md"
+        },
+        {
+          "column": "E",
+          "value": "Mac mini (Javante's Mac), in its ChatGPT app and through the MacBook app's SSH remote"
+        },
+        {
+          "column": "F",
+          "value": "KEEP, under the general rules since 2026-10-03 (Director): the generated AGENTS.md plus the ad/video tail, and the Composio guard hook; the hook runs only after Alex trusts it there (Settings > Coding > Hooks); D07's plugin set too (Messages waits on that Mac's app)"
+        },
+        {
+          "column": "G",
+          "value": "The general rules have no machine limit, and the standing yes covers dead configs. D07 applies there too (Director, 2026-10-03): documents, pdf, spreadsheets, presentations, template-creator and visualize are off. Messages isn't installed yet: that Mac's app (26.917) doesn't offer it, and Codex refuses to install it from the app's bundle; its send_message deny list is already in place for when it does. Nothing checks that Mac's plugins on a schedule (check.py runs on the MacBook)."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javante / Hermes Mac mini"
+        },
+        {
+          "column": "B",
+          "value": "UNKNOWN current complete tool count"
+        },
+        {
+          "column": "C",
+          "value": "No current duplicate count established"
+        },
+        {
+          "column": "D",
+          "value": "Mac-only runtime Keychain/broker; distinct agent Google OAuth identity agent@"
+        },
+        {
+          "column": "E",
+          "value": "Mac mini sashairis; fixed Observatory SSH home /Users/sashairis/.hermes"
+        },
+        {
+          "column": "F",
+          "value": "Distinct from Javar Orgo and from Codex on same Mac"
+        },
+        {
+          "column": "G",
+          "value": "HISTORICAL Oct3 serving/route evidence in tools/hermes.md; consumer identity/account isolation not proved by current receipts. Do not inherit Javar route or Alex account rights. 2026-10-05 America/Detroit documentation reconciliation; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit"
+        }
+      ]
+    }
+  ]
+}

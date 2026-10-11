@@ -1,0 +1,13 @@
+{
+  "recorded_at": "2026-10-10T06:10:43.327064+00:00",
+  "current_owner_receipt_at": "2026-10-10T06:08:35+00:00",
+  "current_failure_artifacts_preserved": [],
+  "earlier_failure_file_exists": true,
+  "earlier_case_still_failed": true,
+  "original_failure_path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+  "failure_sha256": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+  "supervisor_preserved_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json",
+  "conclusion": "Prior failing case bytes remain, but new owner receipt empty failure list does not link them. Per-case fixed path would overwrite failure history on future failure; append-only run history remains unproved.",
+  "no_claim": "No original full06:08:21 receipt bytes recovered here; supplied time is coordination context, not embedded in retained case file.",
+  "required_next": "Link retained failure by ID/hash/run timestamp and append every attempt; do not replace failure artifacts or delete test history to report success."
+}

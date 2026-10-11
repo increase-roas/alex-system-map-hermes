@@ -1,0 +1,57 @@
+{
+  "reject_corrected_detail_failed_items": {
+    "rejected": true,
+    "reason": "proof_contains_failed_items"
+  },
+  "reject_non_json_proof": {
+    "rejected": true,
+    "reason": "proof_must_be_json"
+  },
+  "reject_stale_2001_timestamp": {
+    "rejected": true,
+    "reason": "stale_verified_at"
+  },
+  "reject_missing_requirement_set": {
+    "rejected": true,
+    "reason": "requirement_set_required"
+  },
+  "legitimate_positive_control": {
+    "accepted": true,
+    "reason": "ok"
+  },
+  "verify_rejects_fabricated_evidence": {
+    "rejected": true,
+    "error": null
+  },
+  "verify_accepts_gate_bound_claim": {
+    "accepted": false,
+    "revision": null
+  },
+  "rel05_negative_helpers": {
+    "missing_requirement": {
+      "case": "missing_requirement",
+      "rejected_by_gate": true,
+      "reason": "requirement_omitted_from_set",
+      "next_unresolved_step": "Include all REL requirements before claiming completion"
+    },
+    "skipped_skill": {
+      "case": "skipped_skill",
+      "rejected_by_gate": true,
+      "reason": "skills_not_verified_in_claim",
+      "next_unresolved_step": "Record skills_verified after checking canonical skill paths",
+      "missing_skills": []
+    },
+    "stale_data_simulation": {
+      "case": "stale_data_simulation",
+      "rejected_by_gate": true,
+      "reason": "stale_relationships_hash",
+      "next_unresolved_step": "Refresh catalog from live relationships.json"
+    },
+    "false_completion": {
+      "case": "false_completion",
+      "rejected_by_gate": true,
+      "reason": "actually_used_mismatch",
+      "next_unresolved_step": "Requirement REL-05 must record actually_used='reliability_gate_negative_cases'"
+    }
+  }
+}

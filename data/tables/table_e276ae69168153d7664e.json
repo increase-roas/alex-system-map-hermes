@@ -1,0 +1,570 @@
+{
+  "id": "table_e276ae69168153d7664e",
+  "sheet": "S05-02 ACCOUNTS & KEYS",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ACCOUNTS / KEYS"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Names and item references only • No secrets • Desired guardrails require verification."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Provider"
+        },
+        {
+          "column": "B",
+          "value": "Account/Workspace"
+        },
+        {
+          "column": "C",
+          "value": "Service Account/Profile"
+        },
+        {
+          "column": "D",
+          "value": "Key Name"
+        },
+        {
+          "column": "E",
+          "value": "Purpose"
+        },
+        {
+          "column": "F",
+          "value": "Environment"
+        },
+        {
+          "column": "G",
+          "value": "Suggested Spend Guardrail"
+        },
+        {
+          "column": "H",
+          "value": "Expiration/Rotation"
+        },
+        {
+          "column": "I",
+          "value": "Where Secret Lives"
+        },
+        {
+          "column": "J",
+          "value": "Status"
+        },
+        {
+          "column": "K",
+          "value": "Notes"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenRouter"
+        },
+        {
+          "column": "B",
+          "value": "Single shared account/workspace"
+        },
+        {
+          "column": "C",
+          "value": "javar-prod"
+        },
+        {
+          "column": "D",
+          "value": "javar-prod"
+        },
+        {
+          "column": "E",
+          "value": "Javar production"
+        },
+        {
+          "column": "F",
+          "value": "Production"
+        },
+        {
+          "column": "G",
+          "value": "$50/day allocation; verify native enforcement."
+        },
+        {
+          "column": "H",
+          "value": "Record provider expiry at creation; rotate on compromise or access change."
+        },
+        {
+          "column": "I",
+          "value": "1Password → Connectors\nOpenRouter API key - javar-prod\nTag: AI Infrastructure/OpenRouter"
+        },
+        {
+          "column": "J",
+          "value": "In progress"
+        },
+        {
+          "column": "K",
+          "value": "October 5, 2026: key saved in its concealed API key field; title and tags verified. All five values differ. Provider acceptance, account mapping, funding, caps and runtime connection remain unverified."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenRouter"
+        },
+        {
+          "column": "B",
+          "value": "Single shared account/workspace"
+        },
+        {
+          "column": "C",
+          "value": "sales-prod"
+        },
+        {
+          "column": "D",
+          "value": "sales-prod"
+        },
+        {
+          "column": "E",
+          "value": "Sales production"
+        },
+        {
+          "column": "F",
+          "value": "Production"
+        },
+        {
+          "column": "G",
+          "value": "$100/day allocation; verify native enforcement."
+        },
+        {
+          "column": "H",
+          "value": "Record provider expiry at creation; rotate on compromise or access change."
+        },
+        {
+          "column": "I",
+          "value": "1Password → Connectors\nOpenRouter API key - sales-prod\nTag: AI Infrastructure/OpenRouter"
+        },
+        {
+          "column": "J",
+          "value": "In progress"
+        },
+        {
+          "column": "K",
+          "value": "October 5, 2026: key saved in its concealed API key field; title and tags verified. All five values differ. Provider acceptance, account mapping, funding, caps and runtime connection remain unverified."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenRouter"
+        },
+        {
+          "column": "B",
+          "value": "Single shared account/workspace"
+        },
+        {
+          "column": "C",
+          "value": "javar-research"
+        },
+        {
+          "column": "D",
+          "value": "javar-research"
+        },
+        {
+          "column": "E",
+          "value": "Evidence research"
+        },
+        {
+          "column": "F",
+          "value": "Research"
+        },
+        {
+          "column": "G",
+          "value": "$40/day allocation; verify native enforcement."
+        },
+        {
+          "column": "H",
+          "value": "Record provider expiry at creation; rotate on compromise or access change."
+        },
+        {
+          "column": "I",
+          "value": "1Password → Connectors\nOpenRouter API key - javar-research\nTag: AI Infrastructure/OpenRouter"
+        },
+        {
+          "column": "J",
+          "value": "In progress"
+        },
+        {
+          "column": "K",
+          "value": "October 5, 2026: key saved in its concealed API key field; title and tags verified. All five values differ. Provider acceptance, account mapping, funding, caps and runtime connection remain unverified."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenRouter"
+        },
+        {
+          "column": "B",
+          "value": "Single shared account/workspace"
+        },
+        {
+          "column": "C",
+          "value": "javar-lab"
+        },
+        {
+          "column": "D",
+          "value": "javar-lab"
+        },
+        {
+          "column": "E",
+          "value": "Model experiments"
+        },
+        {
+          "column": "F",
+          "value": "Lab"
+        },
+        {
+          "column": "G",
+          "value": "$90/day combined Lab ceiling across both providers; verify native enforcement."
+        },
+        {
+          "column": "H",
+          "value": "Record provider expiry at creation; rotate on compromise or access change."
+        },
+        {
+          "column": "I",
+          "value": "1Password → Connectors\nOpenRouter API key - javar-lab\nTag: AI Infrastructure/OpenRouter\nOperator storage only; NOT available to the empty read-only Agent — JAVAR-LAB vault. No provider key needed by the accepted current setup phase; future use requires separate proof/decision.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/system/run-log.md lines 471,473,484 (2026-10-06T01:12Z saved check; no token read by this reconciliation)\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "J",
+          "value": "In progress"
+        },
+        {
+          "column": "K",
+          "value": "October 5, 2026: key saved in its concealed API key field; title and tags verified. All five values differ. Provider acceptance, account mapping, funding, caps and runtime connection remain unverified."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks"
+        },
+        {
+          "column": "B",
+          "value": "Single account"
+        },
+        {
+          "column": "C",
+          "value": "javar-lab-orgo"
+        },
+        {
+          "column": "D",
+          "value": "javar-lab"
+        },
+        {
+          "column": "E",
+          "value": "First Lab experiments"
+        },
+        {
+          "column": "F",
+          "value": "Lab"
+        },
+        {
+          "column": "G",
+          "value": "Share the same $90/day Lab ceiling with OpenRouter; small prepaid balance; auto-reload OFF."
+        },
+        {
+          "column": "H",
+          "value": "Record provider expiry at creation; rotate on compromise or access change."
+        },
+        {
+          "column": "I",
+          "value": "1Password → Connectors\nFireworks API key - javar-lab\nTag: AI Infrastructure/Fireworks\nOperator storage only; NOT available to the empty read-only Agent — JAVAR-LAB vault. No provider key needed by the accepted current setup phase; future use requires separate proof/decision.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/system/run-log.md lines 471,473,484 (2026-10-06T01:12Z saved check; no token read by this reconciliation)\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "J",
+          "value": "In progress"
+        },
+        {
+          "column": "K",
+          "value": "October 5, 2026: key saved in its concealed API key field; title and tags verified. All five values differ. Provider acceptance, account mapping, funding, caps and runtime connection remain unverified."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks"
+        },
+        {
+          "column": "B",
+          "value": "Same single account"
+        },
+        {
+          "column": "C",
+          "value": "javar-prod-orgo"
+        },
+        {
+          "column": "D",
+          "value": "No key yet"
+        },
+        {
+          "column": "E",
+          "value": "Future production only if proven need"
+        },
+        {
+          "column": "F",
+          "value": "Deferred"
+        },
+        {
+          "column": "G",
+          "value": "No separate allocation or purchase planned."
+        },
+        {
+          "column": "H",
+          "value": "Decide only when needed."
+        },
+        {
+          "column": "I",
+          "value": "No secret yet."
+        },
+        {
+          "column": "J",
+          "value": "Deferred"
+        },
+        {
+          "column": "K",
+          "value": "Optional future service identity; not required for initial setup."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks"
+        },
+        {
+          "column": "B",
+          "value": "Same single account"
+        },
+        {
+          "column": "C",
+          "value": "sales-prod-orgo"
+        },
+        {
+          "column": "D",
+          "value": "No key yet"
+        },
+        {
+          "column": "E",
+          "value": "Future production only if proven need"
+        },
+        {
+          "column": "F",
+          "value": "Deferred"
+        },
+        {
+          "column": "G",
+          "value": "No separate allocation or purchase planned."
+        },
+        {
+          "column": "H",
+          "value": "Decide only when needed."
+        },
+        {
+          "column": "I",
+          "value": "No secret yet."
+        },
+        {
+          "column": "J",
+          "value": "Deferred"
+        },
+        {
+          "column": "K",
+          "value": "Optional future service identity; not required for initial setup."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Nous"
+        },
+        {
+          "column": "B",
+          "value": "Existing connection"
+        },
+        {
+          "column": "C",
+          "value": "Hermes profiles"
+        },
+        {
+          "column": "D",
+          "value": "Existing credential; name unverified"
+        },
+        {
+          "column": "E",
+          "value": "Reuse current connection"
+        },
+        {
+          "column": "F",
+          "value": "Existing"
+        },
+        {
+          "column": "G",
+          "value": "Track usage within agreed allocation; verify native controls."
+        },
+        {
+          "column": "H",
+          "value": "Verify existing expiry; rotate on compromise/access change."
+        },
+        {
+          "column": "I",
+          "value": "Reuse the existing Nous credential in its approved current vault. Exact item was not inspected; no new account or duplicate secret."
+        },
+        {
+          "column": "J",
+          "value": "Existing—verify"
+        },
+        {
+          "column": "K",
+          "value": "0 new Nous accounts. No existing credential value copied here."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo"
+        },
+        {
+          "column": "B",
+          "value": "Existing environment"
+        },
+        {
+          "column": "C",
+          "value": "5 planned role slots; 7 observed computers",
+          "comment": "Alex-authorized live infrastructure clarification, October 5, 2026. Evidence: work/computer-inventory-20261005/live/inventory.json. Existing five-slot plan and all frozen gates unchanged."
+        },
+        {
+          "column": "D",
+          "value": "Existing credential; name unverified"
+        },
+        {
+          "column": "E",
+          "value": "Map roles to existing computers"
+        },
+        {
+          "column": "F",
+          "value": "Existing"
+        },
+        {
+          "column": "G",
+          "value": "0 additional computers; verify current cost and controls."
+        },
+        {
+          "column": "H",
+          "value": "Verify existing expiry; rotate on compromise/access change."
+        },
+        {
+          "column": "I",
+          "value": "1Password → Connectors\nOrgo API key\nTag: AI Infrastructure/Orgo"
+        },
+        {
+          "column": "J",
+          "value": "SEEN WORKING in saved Oct5 Orgo route proof; current health not retested",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/work/2026-10-05_codex-bridge/notes/cb6-orgo-runner.md\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "K",
+          "value": "Names, IDs and dated specs: COMPUTER INVENTORY. Replacement JAVAR-LAB exists; credential/consumer/activation proof remains blocked.",
+          "comment": "Final pause reconciliation, Oct 5, 22:48 Detroit / Oct 6, 02:48 UTC. Four Orgo replacements and fresh uncredentialed JAVAR-LAB runtime are receipt-backed. This establishes existence, not working credentials or isolation acceptance. Private loader remains execution-disabled. Returned native guard design is not implemented or operationally accepted; trusted entry, per-request revocation and exact executable remain UNKNOWN. G1.1 is Blocked and mission work is paused. Evidence: work/gameplan-updater/final-pause-20261006/evidence.json. Canonical checkpoint: /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md; SHA256 815fe8b92d761b58f7da5b821f128e0543a9400a90f323a94c9093482ff83c2a."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes"
+        },
+        {
+          "column": "B",
+          "value": "Existing setup"
+        },
+        {
+          "column": "C",
+          "value": "javar-prod / sales-prod / javar-research / javar-lab"
+        },
+        {
+          "column": "D",
+          "value": "References to provider keys"
+        },
+        {
+          "column": "E",
+          "value": "Separate agent identities and environments"
+        },
+        {
+          "column": "F",
+          "value": "Mixed"
+        },
+        {
+          "column": "G",
+          "value": "Respect role allocations; enforce combined provider spend."
+        },
+        {
+          "column": "H",
+          "value": "Follow underlying provider credential rules."
+        },
+        {
+          "column": "I",
+          "value": "Provider items stored in Connectors are operator references, not granted Lab access. Agent — JAVAR-LAB is empty/read-only. Service account JAVAR-LAB — Runtime: saved 01:12Z proof sees exactly 1 vault, 0 items. Token item Service Account — JAVAR-LAB Runtime — 2026-10-06 is in Local Vault (operator secrets); no transfer/activation.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/system/run-log.md lines 471,473,484 (2026-10-06T01:12Z saved check; no token read by this reconciliation)\nPrior cell note (historical unless independently current):\n"
+        },
+        {
+          "column": "J",
+          "value": "To do"
+        },
+        {
+          "column": "K",
+          "value": "Four runtime roles are proposed, not four computers. Required optimizer profile has independent state under existing Lab credentials; no extra human account. Composio = gateway; 1Password = secret source.\nCurrent status: fresh Lab Hermes installed uncredentialed; all workers paused. Empty Lab vault and runtime account reach verified in saved Claude receipt; provider/consumer runtime isolation not proved.",
+          "comment": "CURRENT DOCUMENTATION RECONCILIATION: /Users/alexlobaito/Projects/master-connector-repo/system/run-log.md lines 471,473,484 (2026-10-06T01:12Z saved check; no token read by this reconciliation)\nPrior cell note (historical unless independently current):\n"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,145 @@
+{
+  "at": "2026-10-10T09:06:40+00:00",
+  "cases": {
+    "api_derived": {
+      "after_sha256": "587ef85042d88807ab001a9f55c913e0ef0bc9bfe307f31b8210a03a1a01ee0a",
+      "apply_exit": 0,
+      "derived_revision": 1,
+      "lineage_ok": true,
+      "preview_exit": 0,
+      "preview_has_diff": true
+    },
+    "backup_restore_lkg": {
+      "backup_path_ok": true,
+      "backup_restores_pre_apply_snapshot": true,
+      "before_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+      "committed_after_sha256": "14a01ac84897f7274be3bb8af62310b5f739bd47e7b51429a7605f637b4be7ff",
+      "restored_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399"
+    },
+    "browser": {
+      "build_id": "hS45BSvRXG5eWVgdDrbq9",
+      "delivery": "maintained-edit-cas-20261010-0844",
+      "derived_lineage_ok": true,
+      "derived_meta_ok": true,
+      "derived_revision": 1,
+      "exit": 0,
+      "overall": "passed",
+      "served_pid_before": 1718,
+      "ui_diff_ok": true,
+      "ui_outcome": "Applied revision 1 \u00b7 after a5640bfc769e\u2026",
+      "ui_outcome_ok": true,
+      "ui_revision_after": "1",
+      "ui_revision_before": "0",
+      "ui_revision_incremented": true
+    },
+    "concurrent": {
+      "committed_count": 1,
+      "conflict_count": 1,
+      "final_revision": 1,
+      "one_commit_one_conflict": true,
+      "results": [
+        {
+          "label": "A",
+          "ok": true
+        },
+        {
+          "error": "revision must be exactly 2",
+          "label": "B",
+          "ok": false
+        }
+      ]
+    },
+    "drive_publication": "local-only; not claimed",
+    "idempotent": {
+      "first_after_sha": "d1751588ceec8ce27342b428b5cb37f1f6c1038adf0b46f7224491e878bfe064",
+      "idempotent_match": true,
+      "second_after_sha": "d1751588ceec8ce27342b428b5cb37f1f6c1038adf0b46f7224491e878bfe064"
+    },
+    "negative": {
+      "bad_revision_rejected": true,
+      "canary_rejected": true
+    },
+    "real_sdk_trace_input": "BLOCKED",
+    "served_restart": {
+      "derived_revision": 1,
+      "matches_apply": true,
+      "persisted_after_restart": true,
+      "pid_after_restart": 2220,
+      "pid_before": 2054,
+      "restart_pid_changed": true,
+      "revision_after_restart": 1,
+      "sha_after_restart": "0a193e5acc3ceb4e52deb84f893aa46b08e5db7a2617fe68f547533b8022f3c8"
+    },
+    "strict_types_regression": {
+      "control_row_wrong_flip_type_rejected": true,
+      "each_declared_flip_fails": true,
+      "generated_controls_valid": true,
+      "per_flip_fail": [
+        {
+          "path": "python_apply_export.no_token_leak",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.screened",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.nonempty",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.exit",
+          "still_passed": false
+        },
+        {
+          "path": "browser.overall",
+          "still_passed": false
+        },
+        {
+          "path": "browser.served_process_restarted",
+          "still_passed": false
+        },
+        {
+          "path": "browser.build_id_stable",
+          "still_passed": false
+        },
+        {
+          "path": "browser.restart_stop.portRefusedObserved",
+          "still_passed": false
+        },
+        {
+          "path": "recovery_regression.exit",
+          "still_passed": false
+        },
+        {
+          "path": "diagnostic_plain_token.screened_absent",
+          "still_passed": false
+        }
+      ],
+      "recovery_regression_exit_false_rejected": true,
+      "saved_baseline_core_pass": true
+    },
+    "symlink_escape": {
+      "error": "symlink not allowed for editable path",
+      "symlink_escape_rejected": true
+    }
+  },
+  "delivery_id": "maintained-edit-cas-20261010-0844",
+  "failures": [],
+  "independent_verification": "not_claimed",
+  "isolated_db": "app/.data/maintained-edit-cas-20261010-0844/local.sqlite",
+  "isolated_db_sha256": "e25e318e4623d962c9f97f80cc806eab32f384fc277054bd7b6497cf208da8a1",
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "run_id": "d4ffebe6-dd74-401b-b995-4e100169fdb9",
+  "source_identity": {
+    "app/.next/BUILD_ID": "601f76fcdefec605c70d08bafe12d178b8c8fc43d7c87dc3cf1bc595af3a075f",
+    "app/src/app/api/catalog/edit/route.ts": "2cd267dbf1ddc36e4f3e8177d89cbe24caefeb012fbaca30f810f701f63f65d4",
+    "app/src/app/api/catalog/edit/state/route.ts": "287f4671cd3c119d818ca7ac3707680086692ea17de744abc50e1e30ec98a781",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "ff26030c249b8e65c0c17a6160eac2947f15a24191e8f5923a9a8dd8d8ccf6bd",
+    "tools/browser_maintained_edit_cas.mjs": "c856e3c70a5237dcfb165b28fbfe6bf8dbe775c8bd48ce87403d0e4442502740",
+    "tools/catalog_controlled_edit.py": "0fa749e286092c3ac5ece5ca082238b7fb004e6a551a48026d4b6fe0afe72e2f",
+    "tools/maintained_derived_views.py": "1a94eef5a28ae5774feb43cab3f6c7349654f355693ad0868ee967ba754fb49e",
+    "tools/maintained_edit_cas_acceptance.py": "799434f32f2072f552c30e57c6fd8c0d07c1ff603198fbae2253489296b9cc8d"
+  }
+}

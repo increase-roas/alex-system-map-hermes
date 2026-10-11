@@ -1,0 +1,795 @@
+{
+  "id": "table_ea9198a0c9250119d77a",
+  "sheet": "S03-17 Tune-up",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The 8-hour tune-up (connector-repo-tuneup): where it is defined, its prompt line by line, and the steps to recreate it on a new Mac. It closes retest gap G20; Rebuild from zero step 17.3 points here. Facts from play spp-p20d (notes/gap-facts-repos.md §7). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/tune-up.json; never edit this tab by hand.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Where it is defined (read on 2026-10-01 at about 21:05Z, read-only)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "part"
+        },
+        {
+          "column": "B",
+          "value": "value now"
+        },
+        {
+          "column": "C",
+          "value": "where it lives"
+        },
+        {
+          "column": "D",
+          "value": "in git?"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Task"
+        },
+        {
+          "column": "B",
+          "value": "connector-repo-tuneup, shown as 'Connector repo tune-up (every 8 hours)'. Created 2026-10-01 at 05:59:03Z."
+        },
+        {
+          "column": "C",
+          "value": "Claude desktop app > Routines. It is a Local scheduled task of Claude Code Desktop, not a Cowork task."
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7 ; ~/Library/Application Support/Claude/claude-code-sessions/9128974b-7478-4108-a088-7310e0ed93c7/b9a4d135-f5b9-4e7a-9206-aa19c0f16762/scheduled-tasks.json ; https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Schedule"
+        },
+        {
+          "column": "B",
+          "value": "cron 0 */8 * * *, enabled: 00:00, 08:00 and 16:00 in the Mac's local time (the 20:00Z slot is 16:00 EDT), plus a fixed delay of about 12 minutes (716 seconds) that the app adds to each run of this task. Next run 2026-10-02 at 04:11:56Z."
+        },
+        {
+          "column": "C",
+          "value": "The app's own store, ~/Library/Application Support/Claude/claude-code-sessions/<account>/<org>/scheduled-tasks.json. Not in SKILL.md."
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "~/Library/Application Support/Claude/claude-code-sessions/9128974b-7478-4108-a088-7310e0ed93c7/b9a4d135-f5b9-4e7a-9206-aa19c0f16762/scheduled-tasks.json \"0 */8 * * *\" ; https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Working folder"
+        },
+        {
+          "column": "B",
+          "value": "~/Projects/master-connector-repo. No model, permission mode or worktree setting is stored for the task, so the defaults apply."
+        },
+        {
+          "column": "C",
+          "value": "The same store."
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "~/Library/Application Support/Claude/claude-code-sessions/9128974b-7478-4108-a088-7310e0ed93c7/b9a4d135-f5b9-4e7a-9206-aa19c0f16762/scheduled-tasks.json \"master-connector-repo\" ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prompt"
+        },
+        {
+          "column": "B",
+          "value": "19 lines, 2,593 bytes (sha256 first 16: dae1d4e505ca3b43), last edited 2026-10-01 at 06:41 EDT. Lines 1–4 are frontmatter (name and description) and lines 6–19 the instructions (section 2)."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md"
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L1–L19 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What it runs"
+        },
+        {
+          "column": "B",
+          "value": "The weekly-tuneup skill and its single script tuneup.py (snapshot, scan, refresh, fingerprint, finish). finish sets 'Last tune-up' in STATUS.md and appends the run-log line."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/weekly-tuneup/ (agents-home)."
+        },
+        {
+          "column": "D",
+          "value": "Yes (agents-home)"
+        },
+        {
+          "column": "E",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L9–L15 ; ~/.agents/skills/weekly-tuneup/scripts/tuneup.py L17"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Allow rule"
+        },
+        {
+          "column": "B",
+          "value": "Bash(python3 /Users/alexlobaito/.agents/skills/weekly-tuneup/scripts/tuneup.py:*), so the unattended run never stops to ask."
+        },
+        {
+          "column": "C",
+          "value": "The project's .claude/settings.local.json, line 9."
+        },
+        {
+          "column": "D",
+          "value": "No: settings.local.json is untracked, so a clone of master-connector-repo doesn't bring it."
+        },
+        {
+          "column": "E",
+          "value": ".claude/settings.local.json L9 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Saved approval"
+        },
+        {
+          "column": "B",
+          "value": "WebFetch for backend.composio.dev (the task's 'Always allowed' list)."
+        },
+        {
+          "column": "C",
+          "value": "The app's store."
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "~/Library/Application Support/Claude/claude-code-sessions/9128974b-7478-4108-a088-7310e0ed93c7/b9a4d135-f5b9-4e7a-9206-aa19c0f16762/scheduled-tasks.json \"backend.composio.dev\" ; https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Runs"
+        },
+        {
+          "column": "B",
+          "value": "3 on 2026-10-01, all succeeded: 06:00:49Z (right after it was created), 12:12:31Z and 20:12:15Z."
+        },
+        {
+          "column": "C",
+          "value": "The task's history page, or Claude's list_task_runs."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. The prompt file, line by line (the Instructions field takes lines 6–19; on another Mac replace /Users/alexlobaito with your home folder)"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "line"
+        },
+        {
+          "column": "B",
+          "value": "text"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1"
+        },
+        {
+          "column": "B",
+          "value": "---"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L1"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2"
+        },
+        {
+          "column": "B",
+          "value": "name: connector-repo-tuneup"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L2"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3"
+        },
+        {
+          "column": "B",
+          "value": "description: Self-improving loop for ~/Projects/master-connector-repo: lessons, drift, memory, capped rule-change proposals"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L3"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4"
+        },
+        {
+          "column": "B",
+          "value": "---"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L4"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L5"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6"
+        },
+        {
+          "column": "B",
+          "value": "Run the tune-up for the project folder /Users/alexlobaito/Projects/master-connector-repo (owner: Alex). This run is unattended: never use any shell command except the one pre-approved script below, so the run never stops for approval."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L6"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L7"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8"
+        },
+        {
+          "column": "B",
+          "value": "1. Work in that folder. Read its AGENTS.md (the rules) and STATUS.md first."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L8"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9"
+        },
+        {
+          "column": "B",
+          "value": "2. Load and follow the `weekly-tuneup` skill (~/.agents/skills/weekly-tuneup/SKILL.md), including \"How often\" and \"Commands\"."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L9"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10"
+        },
+        {
+          "column": "B",
+          "value": "3. Shell steps, only this script (exact path):"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L10"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11"
+        },
+        {
+          "column": "B",
+          "value": "   - `python3 /Users/alexlobaito/.agents/skills/weekly-tuneup/scripts/tuneup.py snapshot /Users/alexlobaito/Projects/master-connector-repo`"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L11"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12"
+        },
+        {
+          "column": "B",
+          "value": "   - `python3 /Users/alexlobaito/.agents/skills/weekly-tuneup/scripts/tuneup.py scan /Users/alexlobaito/Projects/master-connector-repo` (run-log since last tune-up, changed memory files, version changes, lesson candidates, open proposals)"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L12"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "13"
+        },
+        {
+          "column": "B",
+          "value": "   - `python3 /Users/alexlobaito/.agents/skills/weekly-tuneup/scripts/tuneup.py refresh /Users/alexlobaito/Projects/master-connector-repo` (re-syncs every custom Composio connector's tool list so new vendor tools reach every AI; report any added or removed tools in your summary)"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L13"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "14"
+        },
+        {
+          "column": "B",
+          "value": "   - After writing tools/_fingerprints.new.json with the Write tool ({\"connector name\": [sorted tool names you can see]}): `python3 /Users/alexlobaito/.agents/skills/weekly-tuneup/scripts/tuneup.py fingerprint /Users/alexlobaito/Projects/master-connector-repo`"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L14"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "15"
+        },
+        {
+          "column": "B",
+          "value": "   - At the end: `python3 /Users/alexlobaito/.agents/skills/weekly-tuneup/scripts/tuneup.py finish /Users/alexlobaito/Projects/master-connector-repo \"<result>\" <N>`"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L15"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "16"
+        },
+        {
+          "column": "B",
+          "value": "   Everything else: Read, Write, Edit, Glob, Grep only."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L16"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "17"
+        },
+        {
+          "column": "B",
+          "value": "4. Only when a lesson is ready_to_propose (proof + 2 sightings or the owner's words), or versions/fingerprints changed: draft at most 3 one-bullet changes, run the golden tasks (each 3 times; safety tasks must pass all 3) using subagents that only read and report, have a separate grader subagent run system/evals/held-out.md (don't open it yourself), and write or add to ONE open proposal in system/proposals/YYYY-MM-DD.md with a Prune section. Max 3 changes approved per day."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L17"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "18"
+        },
+        {
+          "column": "B",
+          "value": "5. Never apply a proposal, never edit AGENTS.md, skills or tools/README.md, and never send, publish, spend or delete. Files and the proposal only."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L18"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "19"
+        },
+        {
+          "column": "B",
+          "value": "6. End with a 3-line summary for Alex in plain words: what you found (including any connector tool changes from refresh), whether a proposal is waiting, and anything that needs him."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L19"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Recreate it on a new Mac (Claude desktop app)"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Prerequisites"
+        },
+        {
+          "column": "B",
+          "value": "agents-home cloned to ~/.agents (step 3.1), so ~/.agents/skills/weekly-tuneup/scripts/tuneup.py exists; master-connector-repo cloned to ~/Projects/master-connector-repo (step 3.1b, gap G03); the Claude desktop app signed in."
+        },
+        {
+          "column": "C",
+          "value": "Both paths exist."
+        },
+        {
+          "column": "D",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L6–L15 ; workbook Rebuild from zero R390"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Allow the script"
+        },
+        {
+          "column": "B",
+          "value": "Add Bash(python3 <home>/.agents/skills/weekly-tuneup/scripts/tuneup.py:*) to the allow list in ~/Projects/master-connector-repo/.claude/settings.local.json, which isn't in git. Allow rules in ~/.claude/settings.json also apply to scheduled runs."
+        },
+        {
+          "column": "C",
+          "value": "The file holds the line and parses as JSON."
+        },
+        {
+          "column": "D",
+          "value": ".claude/settings.local.json L9 ; https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Create the task"
+        },
+        {
+          "column": "B",
+          "value": "Desktop app: Routines (sidebar) > New routine > Local. Name connector-repo-tuneup (it becomes the folder name). Description: section 2, line 3. Instructions: section 2, lines 6–19. Folder: ~/Projects/master-connector-repo, worktree off. Don't make it a Cowork scheduled task: those run remotely and can't use a folder on the Mac."
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md exists and its body equals section 2."
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01) ; https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork (read 2026-10-01) ; ~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L1–L19"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Every 8 hours"
+        },
+        {
+          "column": "B",
+          "value": "The schedule picker offers only Manual, Hourly, Daily, Weekdays and Weekly, so ask Claude in any desktop session: 'Set connector-repo-tuneup to run every 8 hours at minute 0 (cron 0 */8 * * *).'"
+        },
+        {
+          "column": "C",
+          "value": "Claude's task list shows 'At 0 minutes past the hour, every 8 hours, every day', enabled, with a next run time."
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. First run"
+        },
+        {
+          "column": "B",
+          "value": "Click Run now, watch for permission prompts and choose 'always allow' for each, so later runs don't stall. Keep the app open and the Mac awake (Settings > Desktop app > General > Keep computer awake): a run is skipped while the Mac sleeps, and on wake one catch-up run covers the last 7 days."
+        },
+        {
+          "column": "C",
+          "value": "The run's session ends with the 3-line summary, its history shows succeeded, and STATUS.md's 'Last tune-up' line has today's date."
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01) ; ~/.claude/scheduled-tasks/connector-repo-tuneup/SKILL.md L19 ; ~/.agents/skills/weekly-tuneup/scripts/tuneup.py L17 ; workbook Rebuild from zero R390"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Keep in mind"
+        },
+        {
+          "column": "B",
+          "value": "Edits to SKILL.md take effect on the next run. The schedule, folder and enabled state aren't in that file: change them in the app or by asking Claude. Nothing in git recreates the task, so each new Mac depends on someone doing these steps by hand."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://code.claude.com/docs/en/desktop-scheduled-tasks (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "A fresh Mac with only the project allow rule. Today's runs also had the saved WebFetch approval and this Mac's broader allow rules."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The time zone used for the cron: inferred from the store (the 20:00Z slot is 16:00 EDT), not documented."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §7"
+        }
+      ]
+    }
+  ]
+}

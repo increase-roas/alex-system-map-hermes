@@ -1,0 +1,1011 @@
+{
+  "id": "table_e277c61f35e42440c718",
+  "sheet": "1PASS FILE LINKS",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Where files reference 1Password items"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory and item-reference locations from the saved catalog. No referenced secret file was opened and no cleanup instruction was executed."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Source section"
+        },
+        {
+          "column": "B",
+          "value": "File / location"
+        },
+        {
+          "column": "C",
+          "value": "What it describes"
+        },
+        {
+          "column": "D",
+          "value": "Saved vault relationship"
+        },
+        {
+          "column": "E",
+          "value": "Saved action / note"
+        },
+        {
+          "column": "F",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "G",
+          "value": "Source row"
+        },
+        {
+          "column": "H",
+          "value": "Full source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/mcp-hub/creds/hub-token"
+        },
+        {
+          "column": "C",
+          "value": "The shared hub token"
+        },
+        {
+          "column": "D",
+          "value": "Yes: MCP hub token (equal by hash)"
+        },
+        {
+          "column": "E",
+          "value": "None"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 44
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/mcp-hub/creds/route-tokens/google-robot and /atlas-cloud"
+        },
+        {
+          "column": "C",
+          "value": "The two per-route tokens (the only route-token files on the hub)"
+        },
+        {
+          "column": "D",
+          "value": "Yes: the two MCP route-token items"
+        },
+        {
+          "column": "E",
+          "value": "None"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 45
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/mcp-hub/creds/atlas-cloud-key, xai-key, tagging.json"
+        },
+        {
+          "column": "C",
+          "value": "Atlas Cloud key, xAI key, Google robot key file"
+        },
+        {
+          "column": "D",
+          "value": "Yes: the Atlas, xAI and tagging-admin items"
+        },
+        {
+          "column": "E",
+          "value": "None. The xAI key was already in 1Password; the workbook row saying otherwise is stale."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; workbook All connections R260"
+        },
+        {
+          "column": "G",
+          "value": 46
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "IR notes route token"
+        },
+        {
+          "column": "C",
+          "value": "The tester asked which item it is"
+        },
+        {
+          "column": "D",
+          "value": "Yes: there is no route-tokens/ir-notes file, so the route accepts only the shared hub token"
+        },
+        {
+          "column": "E",
+          "value": "None"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; workbook All connections R296"
+        },
+        {
+          "column": "G",
+          "value": 47
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/mcp-hub/creds/prime.env and spyfu.env"
+        },
+        {
+          "column": "C",
+          "value": "Prime Intellect and SpyFu keys"
+        },
+        {
+          "column": "D",
+          "value": "Written from their items by install_hub.sh; proven equal 2026-10-01 by play spp-p2b"
+        },
+        {
+          "column": "E",
+          "value": "Not opened in this play (rule: never open .env files)"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md \"Every creds file equals its 1Password value\""
+        },
+        {
+          "column": "G",
+          "value": 48
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/mcp-hub/creds/wsadmin-token"
+        },
+        {
+          "column": "C",
+          "value": "Token of the retired workspace-admin route"
+        },
+        {
+          "column": "D",
+          "value": "Yes (retired item)"
+        },
+        {
+          "column": "E",
+          "value": "Left as is: a dead copy to remove later (back up first)"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 49
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/mcp-hub/creds/op-connectors-sync"
+        },
+        {
+          "column": "C",
+          "value": "Token of the read-write robot connectors-sync-rw"
+        },
+        {
+          "column": "D",
+          "value": "No. Also in the Mac Keychain (equal by hash), so it is not hub-only"
+        },
+        {
+          "column": "E",
+          "value": "Not moved: saving it in Connectors would let the read-only robot read a write token. Robots can't reach a Personal or Private vault, so keeping a backup there is an owner step (1Password's wizard offers Save in 1Password when a token is shown)."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://developer.1password.com/docs/service-accounts/get-started/ (read 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": 50
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/ghl-command-universal/origin-key"
+        },
+        {
+          "column": "C",
+          "value": "Builder origin key"
+        },
+        {
+          "column": "D",
+          "value": "No, before this play"
+        },
+        {
+          "column": "E",
+          "value": "Saved: item 5bfzdypjiimr7ov4kyua6wxtha, hash-verified on the hub and from the Mac"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 51
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/increase-roas-mcp/ghl-config/credentials.json: license_key"
+        },
+        {
+          "column": "C",
+          "value": "GHL Command (EliteDCS) license key"
+        },
+        {
+          "column": "D",
+          "value": "No, before this play"
+        },
+        {
+          "column": "E",
+          "value": "Saved: item smsqrb4cyzqvdsu3eedizvpxgy, hash-verified on the hub and from the Mac"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 52
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/increase-roas-mcp/ghl-config/credentials.json: three sign-in values"
+        },
+        {
+          "column": "C",
+          "value": "A GHL web sign-in refresh token, GHL's web API key and a signed license attestation"
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "Not moved: sign-in state that the GHL Command sign-in writes and refreshes, so a copy would go stale. A rebuild signs in again with the license key."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 53
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/increase-roas-mcp/ghl-config/.ghl-tokens.json"
+        },
+        {
+          "column": "C",
+          "value": "GHL Command registry: 49 client-location keys"
+        },
+        {
+          "column": "D",
+          "value": "2 of 49 (the two GHL PIT items)"
+        },
+        {
+          "column": "E",
+          "value": "Not moved: 47 client keys in one bulk copy into the shared vault would widen who can read client keys (partners and both robots). That is Alex's call. Rebuild path: register each location's key again."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 54
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/ghl-command-universal/tunnel/token"
+        },
+        {
+          "column": "C",
+          "value": "Builder tunnel token"
+        },
+        {
+          "column": "D",
+          "value": "No, but Cloudflare returns the same token through custom_cloudflare_api (equal by hash)"
+        },
+        {
+          "column": "E",
+          "value": "Not moved: Cloudflare is its source; a rebuild fetches it"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/remote-tunnel-permissions/ (read 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": 55
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/root/.cloudflared/<hub tunnel>.json"
+        },
+        {
+          "column": "C",
+          "value": "Hub tunnel credentials"
+        },
+        {
+          "column": "D",
+          "value": "No; rebuild_hub.py derives them from Cloudflare (account ID equal to the Cloudflare item)"
+        },
+        {
+          "column": "E",
+          "value": "Not moved: derived on every rebuild"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py L74–L90 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 56
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/root/.cloudflared/cert.pem"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare account certificate"
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "Not moved: it can create, delete and manage every tunnel in the account and isn't needed to run one. A copy in a vault two robots read would widen that power. Removing it from the hub is a separate cleanup."
+        },
+        {
+          "column": "F",
+          "value": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/do-more-with-tunnels/local-management/tunnel-permissions/ (read 2026-10-01) ; ~/.agents/tools/connectors/hub/README.md \"cert.pem is not needed to run\""
+        },
+        {
+          "column": "G",
+          "value": 57
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/ghl-command-universal/sessions/ (25 files)"
+        },
+        {
+          "column": "C",
+          "value": "Per-session copies of the GHL Command sign-in"
+        },
+        {
+          "column": "D",
+          "value": "No"
+        },
+        {
+          "column": "E",
+          "value": "Not opened, not moved: client session state the origin creates"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 58
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/opt/increase-roas-mcp/meta-ads.env and tunnel-runtime.env"
+        },
+        {
+          "column": "C",
+          "value": "Settings of the Meta MCP program on the hub"
+        },
+        {
+          "column": "D",
+          "value": "Not checked"
+        },
+        {
+          "column": "E",
+          "value": "Not opened (rule: never open .env files). NOT_PROVEN whether they hold a value 1Password lacks."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 59
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Historical hub inventory"
+        },
+        {
+          "column": "B",
+          "value": "/root/.openclaw (Orgo's OpenClaw agent)"
+        },
+        {
+          "column": "C",
+          "value": "openclaw.json, start-with-secrets.py, a fingerprint key, a relay secret and two .env files"
+        },
+        {
+          "column": "D",
+          "value": "Not checked"
+        },
+        {
+          "column": "E",
+          "value": "Out of the hub rebuild: Orgo manages OpenClaw. Names listed only; .env files not opened. NOT_PROVEN."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "G",
+          "value": 60
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh"
+        },
+        {
+          "column": "C",
+          "value": "SECRETS table: each item's exact title, with Alex's ID as the fallback; the Tailscale key by TAILSCALE_KEY_TITLE."
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        },
+        {
+          "column": "G",
+          "value": 69
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py"
+        },
+        {
+          "column": "C",
+          "value": "The Cloudflare item and the --check list, by title with the ID as the fallback."
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        },
+        {
+          "column": "G",
+          "value": 70
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/connectors/orgo_op.py"
+        },
+        {
+          "column": "C",
+          "value": "TITLE 'Orgo API key', with Alex's ID as the fallback."
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/orgo_op.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        },
+        {
+          "column": "G",
+          "value": 71
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/connectors/gcloud_robot.py"
+        },
+        {
+          "column": "C",
+          "value": "The robot key document, by exact title, with Alex's ID as the fallback."
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/gcloud_robot.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        },
+        {
+          "column": "G",
+          "value": 72
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py"
+        },
+        {
+          "column": "C",
+          "value": "--item: an exact title first (op_items.py), else an ID or name as given; the vault by name."
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Nothing: found by exact title; the ID is the fallback (op_items.py)"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py docstring ; ~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L138"
+        },
+        {
+          "column": "G",
+          "value": 73
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/connectors/health/config.json"
+        },
+        {
+          "column": "C",
+          "value": "vault and composio_item (and the robot token file on the hub). Its other settings, composio_org, composio_project and composio_user, aren't item IDs: where each comes from is in Rebuild from zero section 10a"
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Change both"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/health/config.json \"composio_item\" ; work/2026-10-01_setup-playbook/tabs/gap-facts/G21-addendum.json"
+        },
+        {
+          "column": "G",
+          "value": 74
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/skills/ad-recreator-atlascloud-codex-v3/scripts/atlas_generate_image.mjs"
+        },
+        {
+          "column": "C",
+          "value": "A full op:// reference to the Atlas key (L18)"
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Change it"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/skills/ad-recreator-atlascloud-codex-v3/scripts/atlas_generate_image.mjs L17–L18"
+        },
+        {
+          "column": "G",
+          "value": 75
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Documented item-reference locations"
+        },
+        {
+          "column": "B",
+          "value": "Why titles first, IDs as fallback"
+        },
+        {
+          "column": "C",
+          "value": "op:// references can't carry the em dashes in our titles (1Password: unsupported characters need the ID), so scripts look the title up with op item list (IDs and titles only) and read by ID. A title that two items share stops the script unless the fallback is one of them. So never save a personal copy under a shared title: the scripts would keep reading the fallback ID."
+        },
+        {
+          "column": "D",
+          "value": "Saved title/ID reference; current file not re-read"
+        },
+        {
+          "column": "E",
+          "value": "Keep exact titles"
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/connectors/op_items.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L138 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D15 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L283"
+        },
+        {
+          "column": "G",
+          "value": 76
+        },
+        {
+          "column": "H",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    }
+  ]
+}

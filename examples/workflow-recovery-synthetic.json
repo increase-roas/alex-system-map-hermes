@@ -1,0 +1,87 @@
+{
+  "contract": "local-reference-v1",
+  "synthetic_only": true,
+  "job_id": "synthetic-lamp-audit",
+  "current_revision": 6,
+  "goal": {
+    "acceptance": [
+      "synthetic proof only"
+    ],
+    "constraints": [
+      "no services",
+      "no real job certification"
+    ],
+    "goal": "Demonstrate correction recovery on synthetic lamps",
+    "owner": "demo-builder",
+    "scope": [
+      "synthetic sample only"
+    ]
+  },
+  "last_valid_verified_checkpoint": null,
+  "active_corrections": [
+    {
+      "active": true,
+      "affected_task_ids": [
+        "synthetic-inspect",
+        "synthetic-report"
+      ],
+      "id": "synthetic-correction-1",
+      "reason": "Mock fixture version changed",
+      "revision": 6,
+      "task_id": "synthetic-inspect"
+    }
+  ],
+  "pending_dependencies": {
+    "synthetic-inspect": [],
+    "synthetic-report": [
+      "synthetic-inspect"
+    ]
+  },
+  "next_permitted_action": {
+    "task_id": "synthetic-inspect",
+    "action": "recheck against correction or changed prerequisites"
+  },
+  "tasks": {
+    "synthetic-inspect": {
+      "acceptance": [
+        "contains:synthetic-report::fixture"
+      ],
+      "attempts": [
+        {
+          "details": "First synthetic inspection",
+          "revision": 4
+        }
+      ],
+      "blockers": [],
+      "deps": [],
+      "evidence": [
+        "synthetic fixture observation"
+      ],
+      "goal": "Inspect mock fixture",
+      "id": "synthetic-inspect",
+      "next_action": "recheck against correction or changed prerequisites",
+      "outputs": [
+        "mock fixture notes"
+      ],
+      "owner": "demo-builder",
+      "status": "needs_rechecking"
+    },
+    "synthetic-report": {
+      "acceptance": [
+        "file:synthetic-report non-empty"
+      ],
+      "attempts": [],
+      "blockers": [],
+      "deps": [
+        "synthetic-inspect"
+      ],
+      "evidence": [],
+      "goal": "Summarize mock fixture",
+      "id": "synthetic-report",
+      "next_action": "recheck against correction or changed prerequisites",
+      "outputs": [],
+      "owner": "demo-builder",
+      "status": "needs_rechecking"
+    }
+  }
+}

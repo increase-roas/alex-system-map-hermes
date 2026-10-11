@@ -1,0 +1,232 @@
+{
+  "at": "2026-10-10T12:04:26+00:00",
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "cases": {
+    "distinct_records": {
+      "barrier_group": "dist-12a75c03",
+      "both_preserved": true,
+      "exit_a": 0,
+      "exit_a_first_attempt": 1,
+      "exit_b_first_attempt": 0,
+      "overlapping_launched": true,
+      "purpose_a": "Distinct A 0730",
+      "purpose_b": "Distinct B 0730",
+      "stale_sha_retry_used": true
+    },
+    "dual_lock": {
+      "barrier_group": "dual-e7fbd620",
+      "both_committed": true,
+      "component_exit": 0,
+      "component_purpose": "Dual lock component 0730",
+      "component_revision": 1,
+      "metadata_exit": 0,
+      "metadata_policy_contains": true,
+      "metadata_revision": 1
+    },
+    "rollback_preserves": {
+      "a_revision_preserved": true,
+      "b_crash_exit": 1,
+      "b_revision_restored": true,
+      "recovery_state_idempotent": true,
+      "rev_a_after_reconcile": 2,
+      "rev_a_before_b_edit": 2,
+      "state_after_first_recovery": {
+        "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+        "derived": {
+          "components/component_6f112167c8a413f0f3ab.md": {
+            "bytes": 810,
+            "sha256": "43611507f04222bdf8c8103747081240c90c6b497c69e8bfb3966e192547c221"
+          },
+          "docs/COMPONENT_INDEX.md": {
+            "bytes": 278244,
+            "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+          },
+          "views/Alex_System_Foundation.xlsx": {
+            "bytes": 400397,
+            "sha256": "0b0a0177b4bc988e8da041b324bc49feaf6e445bd4a2febe07a012675889fdb3"
+          }
+        },
+        "journal_bytes_sha256": "a883324f717cd1dfbbecb9a2d34674e152a92334d8620e3c0796cdf23ee5fe30",
+        "journal_entry_count": 3,
+        "ledger_sha256": "445bc1160636fd87d9731cea11fdb1754d9b894ed08dee43ac1d78c97dd99432",
+        "manifest_sha256": "ca8ca836c3390bcc091be1205fef5def686abd3b8c7ec29eaabd5bb553e8fd17",
+        "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+        "revision_record_a": 2,
+        "revision_record_b": 0,
+        "revisions_sha256": "7216443a80a8c504664c077a95f648f933542f97730a6d7e67cd5028e07589cc"
+      },
+      "state_after_second_recovery": {
+        "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+        "derived": {
+          "components/component_6f112167c8a413f0f3ab.md": {
+            "bytes": 810,
+            "sha256": "43611507f04222bdf8c8103747081240c90c6b497c69e8bfb3966e192547c221"
+          },
+          "docs/COMPONENT_INDEX.md": {
+            "bytes": 278244,
+            "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+          },
+          "views/Alex_System_Foundation.xlsx": {
+            "bytes": 400397,
+            "sha256": "0b0a0177b4bc988e8da041b324bc49feaf6e445bd4a2febe07a012675889fdb3"
+          }
+        },
+        "journal_bytes_sha256": "a883324f717cd1dfbbecb9a2d34674e152a92334d8620e3c0796cdf23ee5fe30",
+        "journal_entry_count": 3,
+        "ledger_sha256": "445bc1160636fd87d9731cea11fdb1754d9b894ed08dee43ac1d78c97dd99432",
+        "manifest_sha256": "ca8ca836c3390bcc091be1205fef5def686abd3b8c7ec29eaabd5bb553e8fd17",
+        "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+        "revision_record_a": 2,
+        "revision_record_b": 0,
+        "revisions_sha256": "7216443a80a8c504664c077a95f648f933542f97730a6d7e67cd5028e07589cc"
+      }
+    },
+    "same_op_concurrent": {
+      "after_hash_a": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+      "after_hash_b": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+      "after_hash_match": true,
+      "canonical_components_sha256": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+      "committed_ledger_rows": 1,
+      "exit_a": 0,
+      "exit_b": 0,
+      "final_after_sha256": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+      "final_revision": 1,
+      "invalidated_ledger_rows": 0,
+      "one_commit": true,
+      "operation_id": "same-op-a6e05778",
+      "response_hashes_match_canonical": true
+    },
+    "schema_pure": {
+      "duplicate_alias_rejects": true,
+      "error": null,
+      "fit_absent_allowed": true,
+      "legitimate_passes": true,
+      "null_fit_rejects": true,
+      "null_purpose_rejects": true
+    },
+    "source_inventory_audit": {
+      "note": "Existing source violations reported only; catalog not auto-modified to pass.",
+      "record_count": 2351,
+      "sample_violations": [],
+      "violation_count": 0
+    }
+  },
+  "delivery_id": "canonical-transaction-evidence-20261010-0802",
+  "evidence_root": "app/.data/canonical-transaction-evidence-20261010-0802/evidence/0d0fb50f-eeaf-410e-b95b-310d3ec75157",
+  "failed_attempt_history": [
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-8fed1394.json",
+      "sha256": "fe94115255b18bba0d983ab2b27e5a7845730c7f85bfe10346eeeadbaad1b5b3"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-b0f104b3.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-c3bbd1c0.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-015378f4.json",
+      "sha256": "7b1484d85c654ae6dcd7ff1f13de2dd1ffff80f7c5c9dc501d377f05cfa17dc7"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-57bc53b6.json",
+      "sha256": "fc33acc86ad9417dc70cb57d93a19698606a8b5d457a2a22fc25deb4a418c9ff"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-63725caa.json",
+      "sha256": "648739ae9f3930b6d0b3a7345ac48094ba01a1ba02825414b9a0d66b4aec3e8a"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-8aff89eb.json",
+      "sha256": "a6cd86a364998991da9f7c5fa29686f432c92c463df0457f6e88062db1938603"
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+      "sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3"
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-schema-receipt.json",
+      "sha256": "d6af32263292a5a4d589229226034a1c66f7edef4e90f80416fbce6365a17024"
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-correction-receipt.json",
+      "sha256": "a8e94cee8da6c79cce0a4c1e5c22095b685e450db16e185ae4d0c37c8a7ffed7"
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-proof-receipt.json",
+      "sha256": "1bd243b6768beeb6b5b69860ac94cabe74e288ffecf6b873099c9e9a5a04036a"
+    },
+    {
+      "delivery": "canonical-transaction-proof-20261010-0743",
+      "note": "historical_owner_pass_with_independent_defects",
+      "run_id": "7126aeb3-c121-4c48-b3d3-1bf888fcf8fb"
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "b2194176"
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "8aff89eb"
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "57bc53b6"
+    },
+    {
+      "note": "intermediate_proof_run",
+      "run_id_prefix": "63725caa"
+    },
+    {
+      "at": "2026-10-10T12:04:26+00:00",
+      "error": "cannot import name '_journal_bundle' from 'canonical_transaction_evidence' (/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/tools/canonical_transaction_evidence.py)"
+    }
+  ],
+  "failure_artifact": "reports/workflow-core-failures/canonical-transaction-evidence-20261010-0802-0d0fb50f.json",
+  "failures": [
+    "exception",
+    "cannot import name '_journal_bundle' from 'canonical_transaction_evidence' (/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/tools/canonical_transaction_evidence.py)"
+  ],
+  "full_completion": false,
+  "independent_verification": "not_claimed",
+  "isolated_clone": "app/.data/canonical-transaction-evidence-20261010-0802/catalog-clone",
+  "milestone_scope": "TS05/09/11 evidence and control contract only",
+  "next_permitted_action": "Independent verification of this focused receipt; broader browser/sync/trace gates remain pending.",
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "owner_verification": "failed",
+  "prior_delivery_id": "canonical-transaction-proof-20261010-0743",
+  "prior_reviews_acknowledged": [
+    "reports/independent-transaction-proof-review.json",
+    "reports/independent-transaction-proof-review.md"
+  ],
+  "run_id": "0d0fb50f-eeaf-410e-b95b-310d3ec75157",
+  "source_identity": {
+    "modules": {
+      "tools/canonical_maintained_edit.py": "9359b2b6e68adc42259868a55496b6cd5d1982963de912c7c81ae7128f309136",
+      "tools/canonical_transaction_evidence.py": "5f9fff04caeffc45498cfc0d53728a8bb4535eddf04a88c53a2cc20576735b6f",
+      "tools/canonical_transaction_invariants.py": "e9cedae3af77aacc6983913f11263104c1243bc4125521dfb9bb0fa27231bae6",
+      "tools/canonical_transaction_regression.py": "ef2cdc4a37614b2843c247e9e51aa3229e754a3f1bbaade2046f708ba433369c",
+      "tools/canonical_transaction_spec.py": "a02105e781039f5b98e2ffa6bb17a5387aca6d2d991040189cadb740081a95d9",
+      "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "tools/catalog_reference_validation.py": "9785469eb101c019a78a83f546890311d2df1456ee67129ca675e5237ae442fd",
+      "tools/local_service.py": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+    },
+    "schema": {
+      "schemas/components.schema.json": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e"
+    }
+  },
+  "ts03_ts07_ts08": "preserved_verified_implementation_not_reworked"
+}

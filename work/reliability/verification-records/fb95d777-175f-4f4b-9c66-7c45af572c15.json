@@ -1,0 +1,31 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "fb95d777-175f-4f4b-9c66-7c45af572c15",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "real-verify-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "ab-verify-tamper",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "relationships_catalog_present": false,
+    "relationships_hash_matches_live": true,
+    "reliability_addendum_present": true,
+    "gate_module_present": true,
+    "required_skills_installed": true
+  },
+  "actually_used": "reliability_gate_precondition_checks",
+  "skills_verified_at_issue": true,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T06:52:55+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "308548a9fdc61a748686a08b94b9eb310a08708b517cfa9ddb9b3369ba524c71"
+}

@@ -1,0 +1,5405 @@
+{
+  "id": "table_dd248d4939e110067edd",
+  "sheet": "MY SYSTEM MAP",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Your complete documented system — top down"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Audited against the collected files and inventories. Every app has a placement; resource groups link to all underlying records. Grouping is explanatory, not a verified runtime chain. Expand/collapse a layer with Excel outline controls; full evidence stays linked."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Layer / component"
+        },
+        {
+          "column": "B",
+          "value": "Its job"
+        },
+        {
+          "column": "C",
+          "value": "How it fits / source context"
+        },
+        {
+          "column": "D",
+          "value": "Evidence and limits"
+        },
+        {
+          "column": "E",
+          "value": "Open detail"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "01 · YOU — direction and decisions"
+        },
+        {
+          "column": "B",
+          "value": "Alex sets the goal, scope and approvals."
+        },
+        {
+          "column": "C",
+          "value": "This is the top of the map. The layers below support the work you authorize."
+        },
+        {
+          "column": "D",
+          "value": "Reading structure for this workbook; no new approval or delegation is implied."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'BUILD OVERVIEW'!A1"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director — mission judgment"
+        },
+        {
+          "column": "B",
+          "value": "Owns recorded mission judgment and bookkeeping."
+        },
+        {
+          "column": "C",
+          "value": "Distinct from Director Observatory, which reads evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved Oct5 team note records a paused mission and no successor cutover; historical shared roles remain separate."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-33 Director + Conductor'!A6"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Conductor — scoped execution"
+        },
+        {
+          "column": "B",
+          "value": "Routes assigned work and returns acceptance evidence."
+        },
+        {
+          "column": "C",
+          "value": "Sits between mission direction and bounded execution; responsibilities are documented separately."
+        },
+        {
+          "column": "D",
+          "value": "Saved team note names existing controllers and paused ownership; no new enrollment or dispatch occurs here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-33 Director + Conductor'!A7"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mission scope, acceptance and gates"
+        },
+        {
+          "column": "B",
+          "value": "Defines what done means and what actions are authorized."
+        },
+        {
+          "column": "C",
+          "value": "Binds outcomes to acceptance evidence and recorded scope."
+        },
+        {
+          "column": "D",
+          "value": "These are archived procedures, not new approvals or permission to resume a paused mission."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-33 Director + Conductor'!A5"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Budget and stop boundaries"
+        },
+        {
+          "column": "B",
+          "value": "Records the plan’s spending envelope, allocations and enforcement gaps."
+        },
+        {
+          "column": "C",
+          "value": "Budget planning belongs with direction and approvals."
+        },
+        {
+          "column": "D",
+          "value": "Historical plan: $300/day ceiling is not a purchase, spend or recurring-job approval; native caps remain unverified."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S05-08 BUDGET'!A1"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Your working interfaces"
+        },
+        {
+          "column": "B",
+          "value": "Where you work with AI and give it tasks."
+        },
+        {
+          "column": "C",
+          "value": "Codex and Cursor have saved connection records; they are interfaces, not proof that every listed agent is installed."
+        },
+        {
+          "column": "D",
+          "value": "See the recorded surfaces and routes."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A16"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director Observatory"
+        },
+        {
+          "column": "B",
+          "value": "Inspect saved agent/build evidence."
+        },
+        {
+          "column": "C",
+          "value": "Supports oversight of the agent layer. Observation does not establish command authority."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here.\n\nCursor screenshot: enabled; Local shown Connected (Oct 9). Execution unverified."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'CURSOR EVIDENCE'!A1"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI app settings and built-ins"
+        },
+        {
+          "column": "B",
+          "value": "Saved per-surface settings, native tools and sanitized configuration references."
+        },
+        {
+          "column": "C",
+          "value": "Complements the interface inventory; built-ins are separate from external connector accounts."
+        },
+        {
+          "column": "D",
+          "value": "Dated setup evidence, not current full tool-health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-22 AI app settings'!A1"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Claude Code (desktop + CLI)"
+        },
+        {
+          "column": "B",
+          "value": "KEEP: operator for connectors, infrastructure, browser and computer tasks"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac (cloud sessions possible); native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL EVIDENCE: Oct1–3 cleanup counts. Configured later: director-observatory in Claude Desktop local MCP; native Claude proof in canonical Observatory card. Current complete per-surface inventory UNKNOWN. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A4"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Codex"
+        },
+        {
+          "column": "B",
+          "value": "KEEP: coding and cloud tasks (Alex sends work here)"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac + cloud tasks; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "CONFIGURED 2026-10-05: MCP names node_repl, director-observatory; enabled plugin keys browser@openai-bundled, unified-computer-use@openai-bundled, chrome@openai-bundled, computer-use@openai-bundled, messages@openai-bundled. Different inventories; no combined live-tool count claimed. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A5"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Cursor"
+        },
+        {
+          "column": "B",
+          "value": "KEEP: IDE and coding (Alex sends work here)"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "CONFIGURED: Orgo MCP + Composio routes and native Cursor tools; count categories separately. Cursor 3.23.23; cursor-agent 2026.10.01 (dated Oct5/Oct6 receipt). | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A6"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Claude app (claude.ai / desktop chat)"
+        },
+        {
+          "column": "B",
+          "value": "REPLACE as a work surface: phone/chat only, apps through the Composio connector; it also keeps GitHub Integration, Claude Docs and 2 Mac plugins (see 'only here')"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Cloud + Mac app; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL Oct2 screenshot count; later owner-approved local Director Observatory MCP configured and selected native Claude reads verified Oct3. Current full desktop/web/plugin inventory UNKNOWN; no restart or connector edit in this task. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A9"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Claude Desktop legacy config"
+        },
+        {
+          "column": "B",
+          "value": "Historical duplicate cleanup retained; approved Observatory subsequently installed. Native Claude trial proved selected tools, not every tool or current session health."
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "CONFIGURED: director-observatory local MCP after Oct3 installation; earlier zero-server cleanup is historical, not the current total. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A10"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Manny's and Anthony's AI apps (contact@, anthony@)"
+        },
+        {
+          "column": "B",
+          "value": "SAME RULE: 1Password (the partner Mac's own read-only robot) + Composio, with less power than the partner (Decisions D34)"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: not checked; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "not checked | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A12"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · ChatGPT (desktop app, web, phone, Work, dots)"
+        },
+        {
+          "column": "B",
+          "value": "KEEP: chat surface; the official Composio plugin is its one route"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Cloud + Mac app + phone; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "The official Composio plugin from the ChatGPT plugin directory (developer Sampark Inc, which is Composio), signed in once as your Composio user with the org picked. On the Mac's Local host, Work and Codex chats use the composio command first Plugins after a fresh load (about 21:07Z): Composio (connected as alex@increaseroas.com, v1.0.1), Finances and Superpowers; the 1Password plugin is removed. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A14"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Codex on the Mac mini (agency-mini)"
+        },
+        {
+          "column": "B",
+          "value": "KEEP, under the general rules since 2026-10-03 (Director): the generated AGENTS.md plus the ad/video tail, and the Composio guard hook; the hook runs only after Alex trusts it there (Settings > Coding > Hooks); D07's plugin set too (Messages waits on that Mac's app)"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac mini (Javante's Mac), in its ChatGPT app and through the MacBook app's SSH remote; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "9 in config.toml (2026-10-03): node_repl, retell, hyperframes (computer-use's server off) and 6 plugins (browser, chrome, computer-use, unified-computer-use, codex-app-tools and composio@composio 0.2.3 (the old ComposioHQ plugin; D02 removes it)) | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A15"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex"
+        },
+        {
+          "column": "B",
+          "value": "local helpers"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A16"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex plugin"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A18"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor"
+        },
+        {
+          "column": "B",
+          "value": "Cursor internals"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A22"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "02 · AGENTS — who does the work"
+        },
+        {
+          "column": "B",
+          "value": "Documented responsibilities and role lanes."
+        },
+        {
+          "column": "C",
+          "value": "Roles sit below your direction and use the supporting layers where installed and authorized."
+        },
+        {
+          "column": "D",
+          "value": "Role definitions are separate from current running-agent proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javar"
+        },
+        {
+          "column": "B",
+          "value": "Executive assistant; operating file catalog"
+        },
+        {
+          "column": "C",
+          "value": "Maintained startup contracts; dated EA host/configuration and implementation evidence."
+        },
+        {
+          "column": "D",
+          "value": "Current serving profile/health and paused mission gates require separate proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A5"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Javante"
+        },
+        {
+          "column": "B",
+          "value": "Mac mini creative and technical execution"
+        },
+        {
+          "column": "C",
+          "value": "Reviewed setup/recovery contracts and historical scheduler/access acceptance."
+        },
+        {
+          "column": "D",
+          "value": "Current serving release, scheduler delivery and live identity remain untested here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A6"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ops"
+        },
+        {
+          "column": "B",
+          "value": "Operational coordination"
+        },
+        {
+          "column": "C",
+          "value": "Historical foundation and handoff procedures. Later documents record replacement SPARE-Ops metadata."
+        },
+        {
+          "column": "D",
+          "value": "A spare computer does not establish the current installed Ops role."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A7"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Customer Success"
+        },
+        {
+          "column": "B",
+          "value": "Onboarding, customer health and delivery follow-through"
+        },
+        {
+          "column": "C",
+          "value": "Role contracts and customer-scope templates; historical/replacement host evidence."
+        },
+        {
+          "column": "D",
+          "value": "Current guest, role profile and customer binding are not established by inventory alone."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A8"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Media"
+        },
+        {
+          "column": "B",
+          "value": "Advertising analysis and creative briefs"
+        },
+        {
+          "column": "C",
+          "value": "Read-plugin source, customer bindings and historical bounded reference reads."
+        },
+        {
+          "column": "D",
+          "value": "Current serving role and actual customer/provider acceptance remain separate."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A9"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sales / Hunter / Setter"
+        },
+        {
+          "column": "B",
+          "value": "Prospect research, qualification and handoffs"
+        },
+        {
+          "column": "C",
+          "value": "Hunter is a function in the B2B/Setter lane; build source and historical handoff evidence retained."
+        },
+        {
+          "column": "D",
+          "value": "No new proof of outreach eligibility, customer grants, live sends or booking."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A10"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Finance"
+        },
+        {
+          "column": "B",
+          "value": "Company-scoped accounting review preparation"
+        },
+        {
+          "column": "C",
+          "value": "Offline acceptance and read-only accounting code; dated host history."
+        },
+        {
+          "column": "D",
+          "value": "Actual current Finance placement/company binding is not proved."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'AGENTS & BUILDS'!A11"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes"
+        },
+        {
+          "column": "B",
+          "value": "Agent runtime / provider records."
+        },
+        {
+          "column": "C",
+          "value": "Related to agent execution; use the saved records to distinguish host setup from active behavior."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A47"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Role identity, host and customer binding"
+        },
+        {
+          "column": "B",
+          "value": "Keeps role names separate from the machine, identity, account and customer scope."
+        },
+        {
+          "column": "C",
+          "value": "Use the configuration-to-computer view to inspect saved placements."
+        },
+        {
+          "column": "D",
+          "value": "Configuration rows do not prove running roles; spare labels are not additional active agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S04-19 Hermes by Computer'!A1"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Supervision and checkpoint reconciliation"
+        },
+        {
+          "column": "B",
+          "value": "Collects progress and checks it against mission acceptance."
+        },
+        {
+          "column": "C",
+          "value": "Documented supervision design; the reusable-team revision says native supervision is not activated by the revision."
+        },
+        {
+          "column": "D",
+          "value": "Historical design; no heartbeat, controller loop or schedule is enabled by this workbook."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A572"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Hermes / Javar (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "KEEP: always-on agent"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Cloud (Orgo); native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "UNKNOWN current full tool count; do not reuse the Oct1 count of six as current. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A7"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Javante / Hermes Mac mini"
+        },
+        {
+          "column": "B",
+          "value": "Distinct from Javar Orgo and from Codex on same Mac"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac mini sashairis; fixed Observatory SSH home /Users/sashairis/.hermes; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "UNKNOWN current complete tool count | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A16"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex bridge"
+        },
+        {
+          "column": "B",
+          "value": "5 tools: list/read threads, turn status, safe config read, bounded send"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A17"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes Configurations — 8 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A880"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agent profiles and identity bindings narrow the master profile"
+        },
+        {
+          "column": "B",
+          "value": "A derived agent profile constrains capabilities, filesystem roots, accounts, effects and command recipes; sourced bindings describe agent host, accounts and owned remote paths. The code rejects widening and mismatched tool bindings."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0926 src/master_ops/build/profiles.py"
+        },
+        {
+          "column": "D",
+          "value": "A configured or caller-asserted account label is not proof of provider identity or current agent use."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A930"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Typed workflow orchestration and dispatch receipts are implemented, but do not close the live Hermes task path"
+        },
+        {
+          "column": "B",
+          "value": "Workflow manifests bind profile/capability digests and stable operation IDs; dispatch composes authorized task context, captures thread/turn identifiers and checks explicit acceptance evidence. This provides reusable lifecycle pieces."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0935 src/master_ops/build/workflow.py; F0941 src/master_ops/dispatch_workflow.py"
+        },
+        {
+          "column": "D",
+          "value": "SDK-level workflow contracts and tests do not show current Hermes task submission, worker completion, coordinator acknowledgement, or a fresh Javar and Javante acceptance run."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A939"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Remote-file transport performs identity/path checks, backups, revision fencing, readback, and restore"
+        },
+        {
+          "column": "B",
+          "value": "Remote file operations resolve a bound provider/account/host/path, reject path escapes and route mismatch, save preimages before writes, check expected digests, separately inspect readback, and restore from retained backup."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0932 src/master_ops/build/remote_files.py"
+        },
+        {
+          "column": "D",
+          "value": "A changed file on an isolated scratch path is not evidence that Hermes loaded it or that the intended agent behavior changed."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A936"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "03 · SDK — the shared operating layer"
+        },
+        {
+          "column": "B",
+          "value": "SDK 1.5.1, its contracts, capabilities and package."
+        },
+        {
+          "column": "C",
+          "value": "The intended operating layer for agent jobs. Inclusion in this workbook does not mean every agent runs it."
+        },
+        {
+          "column": "D",
+          "value": "October 9 release checkpoint; full fleet behavior remains unproven."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CURRENT'!A1"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capabilities and adoption"
+        },
+        {
+          "column": "B",
+          "value": "See what is implemented and what still needs adoption."
+        },
+        {
+          "column": "C",
+          "value": "Read this before assuming that a planned capability is available to an agent."
+        },
+        {
+          "column": "D",
+          "value": "Recorded implementation evidence and explicit limits."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A1"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Memory and recovery"
+        },
+        {
+          "column": "B",
+          "value": "Saved recall, continuity and recovery evidence."
+        },
+        {
+          "column": "C",
+          "value": "Supports the agent/SDK layer; shared delivery and recovery must be judged from their actual evidence."
+        },
+        {
+          "column": "D",
+          "value": "The recorded 1.5.0 recall is not a new 1.5.1 fleet test."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CURRENT'!A13"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shared skills and local skill homes"
+        },
+        {
+          "column": "B",
+          "value": "Documents reusable procedures, installation locations and distribution."
+        },
+        {
+          "column": "C",
+          "value": "Skills are procedures; local files and remote delivery are separate evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved setup and distribution records; not proof that every target agent loaded each skill."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-10 Skills, where they live'!A1"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mem0 — scoped memory service"
+        },
+        {
+          "column": "B",
+          "value": "Scoped memory search, reads, writes and reconciliation in the SDK source."
+        },
+        {
+          "column": "C",
+          "value": "Task-start recall and delegated delivery use bounded scope and receipts."
+        },
+        {
+          "column": "D",
+          "value": "One recorded live recall is on 1.5.0; automatic capture, relevant recall and two-agent delivery remain unproven."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A13"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Complete saved skill catalog"
+        },
+        {
+          "column": "B",
+          "value": "Every skill row, saved location, surface visibility and historical issue."
+        },
+        {
+          "column": "C",
+          "value": "Shows the full reusable procedure inventory beyond the few named examples."
+        },
+        {
+          "column": "D",
+          "value": "Historical catalog; proposed fixes are not executed and are not claims of current installation."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-36 Skills'!A1"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Local files"
+        },
+        {
+          "column": "B",
+          "value": "List/read/create/write/replace/JSON edit/copy/move/delete; durable preimages, mode preservation, history, readback, restore"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Configured mounts and operator-owned ancestors matter; unrelated external writers are not coordinated automatically"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A5"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Build processes"
+        },
+        {
+          "column": "B",
+          "value": "Typed, operator-defined argv recipes; bounded output, timeout cleanup, recorded exit status"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "The process runs with host permissions; this is not arbitrary untrusted-code isolation"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A6"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Extensible tools and profiles"
+        },
+        {
+          "column": "B",
+          "value": "Dynamic capability registry; profiles narrow capabilities, roots, accounts, effects, recipes"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Broad catalog availability is not evidence every provider operation is configured or authorized"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A7"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Shared-skill gates"
+        },
+        {
+          "column": "B",
+          "value": "Discovery, exact skill selection, content digest verification, tool/schema validation, named-account execution"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Each actual target must supply its own working configuration and identity"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A8"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Direct Connect"
+        },
+        {
+          "column": "B",
+          "value": "Installed 1.5.1 completed real skill search/load, tool search, and schema lookup; exact destination restriction active"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Execution stopped before Mem0; this particular live check proves preflight compatibility only"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A9"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Remote file editing"
+        },
+        {
+          "column": "B",
+          "value": "One full live cycle on Javar's isolated canary, including rejection checks, separate readback, and restoration"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "This was an owned scratch file; receipt explicitly says running-agent activation was not demonstrated; Javante was not proven"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A10"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Agent account bindings"
+        },
+        {
+          "column": "B",
+          "value": "Sourced bindings and narrow-only profile selection; local allowed/denied tests"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Runtime use of those accounts by both agents remains unproven; the Orgo account label in the canary receipt was caller asserted"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A11"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Workflow state and recovery"
+        },
+        {
+          "column": "B",
+          "value": "SQLite intent before effects, stable operation IDs, persisted manifests/receipts, resume/replay, process locking"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Same-ledger locking does not establish distributed fleet ownership or coordination across separate ledgers"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A12"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Task-start memory"
+        },
+        {
+          "column": "B",
+          "value": "Scoped bounded recall; one live retrieval on installed 1.5.0 returned one memory"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "No live worker-delivery, relevance-quality, automatic-capture, or two-agent recall proof follows from that single retrieval"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A13"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Delegated memory controls"
+        },
+        {
+          "column": "B",
+          "value": "Exact recall-block hash and size/item bounds; default behavior keeps recall with the caller unless delivery is approved"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "A caller-side receipt is not proof a worker received the memory; 1.5.1 did not alter these approval paths"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A14"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Cloud artifact delivery"
+        },
+        {
+          "column": "B",
+          "value": "Configured publisher, original-content backup, revision checks, separate readback, conflict-aware restore; local tests"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Live isolated destination and registered Drive write/readback route were unresolved in the inspected evidence"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A15"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · TypeSafe/Jev"
+        },
+        {
+          "column": "B",
+          "value": "Typed choice/score interfaces, abstention, schema validation, provenance/error handling; local tests"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Named account/skill/model and live inference/quality evidence remain unresolved; no sales policy is supplied by these types"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A16"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · Existing SDK workflows"
+        },
+        {
+          "column": "B",
+          "value": "Codex dispatch, repair, knowledge maintenance, memory primitives, and Bridge/Observatory interfaces retained"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Reuse and inspect these before treating historical fleet concerns as missing code"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A17"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK · CE hooks"
+        },
+        {
+          "column": "B",
+          "value": "Separate local Codex SessionStart/failure/Stop activation passed its native acceptance"
+        },
+        {
+          "column": "C",
+          "value": "Recorded capability from the October 9 report; follow the source for implementation/proof."
+        },
+        {
+          "column": "D",
+          "value": "Separate subsystem; it does not prove Hermes hook installation or fleet event subscriptions"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A18"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Adoption · Persona OS v2.0.0 and newer source snapshot"
+        },
+        {
+          "column": "B",
+          "value": "Agent profile, context, workspace and recovery structures"
+        },
+        {
+          "column": "C",
+          "value": "Downloaded; relevant templates and concepts referenced; no demonstrated integrated Persona OS runtime on the target agents"
+        },
+        {
+          "column": "D",
+          "value": "Select actual features/files, compare existing Hermes profiles, record adaptations, and test fresh-session loading and recovery"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'CORE PACKAGE ADOPTION'!A5"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Adoption · Claude Smart Orchestrator v2.1.3 and source snapshot"
+        },
+        {
+          "column": "B",
+          "value": "Worker briefs, ownership, return packets, routing/model evidence"
+        },
+        {
+          "column": "C",
+          "value": "Downloaded/reference material; no demonstrated deployment of that package through this SDK"
+        },
+        {
+          "column": "D",
+          "value": "Map its useful contracts and validators to existing dispatch/verifier mechanisms; adapt runtime-specific portions and prove outcomes"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'CORE PACKAGE ADOPTION'!A6"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Adoption · Codex Model Router v3.0.1 and source snapshot"
+        },
+        {
+          "column": "B",
+          "value": "Routing, task packets, observations and evaluation examples"
+        },
+        {
+          "column": "C",
+          "value": "Downloaded/source-inspected reference; no complete mapping to current SDK routing or measured savings"
+        },
+        {
+          "column": "D",
+          "value": "Compare exact package features with the existing routing and execution path; implement only uncovered useful behavior and evaluate quality/cost"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'CORE PACKAGE ADOPTION'!A7"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Adoption · Supporting profile and handoff templates"
+        },
+        {
+          "column": "B",
+          "value": "Identity, instructions, INDEX/workspace pointers, portable context"
+        },
+        {
+          "column": "C",
+          "value": "Referenced as adaptation inputs"
+        },
+        {
+          "column": "D",
+          "value": "Identify the canonical target files, selected revisions, loading triggers, and target-specific behavior tests"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'CORE PACKAGE ADOPTION'!A8"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mem0 has scoped CRUD, exact-write reconciliation, and task-start recall code"
+        },
+        {
+          "column": "B",
+          "value": "MemoryProfile fixes account/user scope; Mem0Client and MemoryService support search/get/history/save/update/reconcile, with stable operation IDs, authorization, content hashes and exact scoped-content readback. Task recall is bounded and records provenance hashes; worker delivery is approval-gated by exact composed-message hash."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0948 src/master_ops/memory.py; F0879 docs/MEMORY.md"
+        },
+        {
+          "column": "D",
+          "value": "The source supports implementation claims. The workbook explicitly says no new 1.5.1 Mem0 execution occurred and the one live recall belongs to 1.5.0."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A952"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Local intent ledgers, stable operation IDs, resume, and same-ledger locking exist"
+        },
+        {
+          "column": "B",
+          "value": "The workflow stores a manifest keyed by operation ID and detects a changed manifest; operation services retain durable receipts and reconcile uncertain memory writes; local locks serialize access to the same ledger/root."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0935 src/master_ops/build/workflow.py; F0923 src/master_ops/build/locking.py; F0946 src/master_ops/ledger.py"
+        },
+        {
+          "column": "D",
+          "value": "These controls do not demonstrate distributed ownership, cross-agent stale-attempt prevention, or successful recovery after interruption on both target runtimes."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A939"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "04 · ACCESS — tools, accounts and secrets"
+        },
+        {
+          "column": "B",
+          "value": "Composio is the app-access layer; 1Password is credential storage."
+        },
+        {
+          "column": "C",
+          "value": "These are supporting services, not additional agents in a command chain."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata, credential metadata and runtime behavior are different evidence."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A19"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio"
+        },
+        {
+          "column": "B",
+          "value": "Named app connections and tool discovery/execution."
+        },
+        {
+          "column": "C",
+          "value": "Agents use their documented Composio route and intended account. Open records for the saved configurations."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A19"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password"
+        },
+        {
+          "column": "B",
+          "value": "Stores credentials; the approved route lists Connectors-vault metadata."
+        },
+        {
+          "column": "C",
+          "value": "Item names link back to saved usage notes. A title match alone does not prove which connection uses a credential."
+        },
+        {
+          "column": "D",
+          "value": "51 item names returned October 9; no key values or other vaults included."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'1PASS MAP'!A1"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Account bindings"
+        },
+        {
+          "column": "B",
+          "value": "Which named login belongs to a recorded route."
+        },
+        {
+          "column": "C",
+          "value": "Different logins can be intentional. Do not collapse routes just because app names repeat."
+        },
+        {
+          "column": "D",
+          "value": "54 account records dated October 6; ACTIVE is not a runtime test."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S04-06 Composio Accounts'!A1"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tool cards and route rules"
+        },
+        {
+          "column": "B",
+          "value": "Names the maintained per-app instructions and account-selection rules."
+        },
+        {
+          "column": "C",
+          "value": "Complements Composio discovery with the owning app’s documented route."
+        },
+        {
+          "column": "D",
+          "value": "Saved procedures; follow current cards when executing, not historical approvals."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-35 Tool cards'!A1"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Custom MCP routes and hub"
+        },
+        {
+          "column": "B",
+          "value": "Documents custom connection routes and their intended capabilities."
+        },
+        {
+          "column": "C",
+          "value": "Separate tool catalog, authentication, account identity and runtime evidence."
+        },
+        {
+          "column": "D",
+          "value": "Historical route inventory; configured or connected does not prove the requested operation works."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-26 Composio custom routes'!A1"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password — saved usage and save receipts"
+        },
+        {
+          "column": "B",
+          "value": "Keeps historical consumer notes separate from records of how items were saved."
+        },
+        {
+          "column": "C",
+          "value": "Exact-ID matches support the saved catalog; title matches elsewhere are navigation only."
+        },
+        {
+          "column": "D",
+          "value": "38 historical records; no secret values, present consumer verification or other-vault coverage."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'1PASS USAGE'!A1"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password — file references"
+        },
+        {
+          "column": "B",
+          "value": "Documents files and scripts that reference credential items."
+        },
+        {
+          "column": "C",
+          "value": "Connects the credential catalog to saved file-location evidence."
+        },
+        {
+          "column": "D",
+          "value": "Historical references; referenced secret files were not opened or verified current."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'1PASS FILE LINKS'!A1"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · ChatGPT connectors (Increase ROAS GoHighLevel, Notion, Slack, Google Drive)"
+        },
+        {
+          "column": "B",
+          "value": "RETIRED in ChatGPT: all 4 are gone from its app list (2026-10-01); gone from Codex's config too"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Cloud; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "0: all 4 are gone from ChatGPT (2026-10-01) and from Codex's config | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A11"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · Mac CLIs (meta, op, gcloud, orgo, composio; Parallel dropped)"
+        },
+        {
+          "column": "B",
+          "value": "MOVE jobs to Orgo"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Mac; native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "16 | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A13"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google robot"
+        },
+        {
+          "column": "B",
+          "value": "Configured custom_google_robot account route"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A43"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 8 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A46"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "IR Notes"
+        },
+        {
+          "column": "B",
+          "value": "CUSTOM_IR_NOTES_GET_APP_RULES: any AI on any machine asks for an app's rules before its first call\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A51"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenAI authorization helper"
+        },
+        {
+          "column": "B",
+          "value": "Creates exact authorization record; prints binding/ledger instructions"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A62"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio Accounts — 54 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A222"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Access Routes — 15 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A276"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Credential References — 9 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A871"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Strict shared-skill gates and Composio transport exist in the release source"
+        },
+        {
+          "column": "B",
+          "value": "The SDK binds an exact registered task/skill/tool/account/payload, verifies pinned Markdown content by digest, validates tool/schema, and supports direct Connect or a hosted-session spool relay. The Mem0 path can require this same preflight."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0881 master-agent-operations-sdk/docs/SHARED_SKILLS.md"
+        },
+        {
+          "column": "D",
+          "value": "The October 9 Mac preflight proves discovery/load/schema lookup, not Mem0 execution, fleet credential deployment, or actual skill selection by both agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A885"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloud artifact publisher records backups, revision checks, independent readback, and restore"
+        },
+        {
+          "column": "B",
+          "value": "The publisher uses explicit account/principal/destination bindings, persists receipts, saves original bytes, checks revision before writes, performs separate metadata/media readback, and can restore. Drive's nonconditional update race is recorded."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0928 src/master_ops/build/publishers.py; F0873 docs/CLOUD_DELIVERY.md"
+        },
+        {
+          "column": "D",
+          "value": "Local implementation/tests are not proof of the intended live Drive identity, destination write, readback, or restore."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A932"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "05 · INFRASTRUCTURE — where work runs"
+        },
+        {
+          "column": "B",
+          "value": "Computers, hosting and network access."
+        },
+        {
+          "column": "C",
+          "value": "These hosts support agents and services; documented placement must be checked separately from role definitions."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory, not a current fleet-health claim."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A1"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo"
+        },
+        {
+          "column": "B",
+          "value": "Remote computer records."
+        },
+        {
+          "column": "C",
+          "value": "Host and workspace evidence for the remote environment."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A65"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mac tools"
+        },
+        {
+          "column": "B",
+          "value": "Local machine tools and access."
+        },
+        {
+          "column": "C",
+          "value": "Supports work on the Macs; see actual surfaces in the saved records."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A54"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale"
+        },
+        {
+          "column": "B",
+          "value": "Network connectivity and access records."
+        },
+        {
+          "column": "C",
+          "value": "Connectivity is separate from app permissions and agent installation."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A82"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Hosting, routing and API records."
+        },
+        {
+          "column": "C",
+          "value": "Provides infrastructure and connection routes where documented."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A15"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Infrastructure relationship edges"
+        },
+        {
+          "column": "B",
+          "value": "Shows tunnel targets and worker bindings to actual resource references."
+        },
+        {
+          "column": "C",
+          "value": "These are the recorded connections between resources, not just a list of names."
+        },
+        {
+          "column": "D",
+          "value": "Rows distinguish matched IDs from configured target references; connectivity is not implied."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S04-20 Relationships'!A1"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Worker binding fields"
+        },
+        {
+          "column": "B",
+          "value": "Lists configuration field names and types where targets or values are not exposed."
+        },
+        {
+          "column": "C",
+          "value": "Preserves the difference between a known target relationship and a field-only record."
+        },
+        {
+          "column": "D",
+          "value": "Field/type metadata only; secret values are excluded."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S04-21 Worker Binding Fields'!A1"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tunnel fallback rules"
+        },
+        {
+          "column": "B",
+          "value": "Records the configured fallback responses for tunnels."
+        },
+        {
+          "column": "C",
+          "value": "A separate configuration detail alongside tunnel ingress targets."
+        },
+        {
+          "column": "D",
+          "value": "Configured response behavior; runtime connectivity not tested here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S04-22 Tunnel Fallback Rules'!A1"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI surface · OpenClaw hub (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "KEEP: hosting"
+        },
+        {
+          "column": "C",
+          "value": "Recorded location: Cloud (Orgo); native tools, routes and reasons are retained in the source row."
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL EVIDENCE: eight hub routes observed Oct1; current full health not re-probed. | Dated source; full current health not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-21 AI apps'!A8"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Appwrite"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A7"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AWS"
+        },
+        {
+          "column": "B",
+          "value": "per plugin"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A11"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Browser Use"
+        },
+        {
+          "column": "B",
+          "value": "drive a browser"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A12"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Clerk"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A13"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Convex"
+        },
+        {
+          "column": "B",
+          "value": "database"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A21"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Desktop Commander"
+        },
+        {
+          "column": "B",
+          "value": "files/processes on this Mac"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A23"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Cloud"
+        },
+        {
+          "column": "B",
+          "value": "—\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A40"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo long jobs"
+        },
+        {
+          "column": "B",
+          "value": "run/status detached jobs; not a scheduler"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A66"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Playwright"
+        },
+        {
+          "column": "B",
+          "value": "drive a browser on this Mac"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A69"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sentry"
+        },
+        {
+          "column": "B",
+          "value": "—\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A76"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Supabase"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A81"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Vercel"
+        },
+        {
+          "column": "B",
+          "value": "deploys/projects\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A84"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace — 35 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A5"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare — 115 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A107"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo Workspaces — 8 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A839"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · IR 1"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A839"
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · EA (Javar)"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A840"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · B2B Agent (Sales)"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A841"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · CSM"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A842"
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · Media"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A843"
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · Ops — Increase ROAS"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A844"
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · Increase Roas - Max"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A845"
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Workspace · bold-spark"
+        },
+        {
+          "column": "B",
+          "value": "Capability: Workspace; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": " | Orgo CLI GET wrapper"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A846"
+        }
+      ]
+    },
+    {
+      "row": 119,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computers — 9 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A847"
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · My OpenClaw"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "3cc5025d-98d3-4b0e-bde3-cd45cd062b85 | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A847"
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · EA"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "b4d13606-19d3-4802-9f5c-82819995129a | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A848"
+        }
+      ]
+    },
+    {
+      "row": 122,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · B2B Sales Agent"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "87d53061-ba01-4ff0-94c7-67057700af27 | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A849"
+        }
+      ]
+    },
+    {
+      "row": 123,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · SPARE-CSM"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "6cda999c-708e-4121-8531-383640f97290 | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A850"
+        }
+      ]
+    },
+    {
+      "row": 124,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · SPARE-Media"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "d4e5f8db-c4c1-4727-8fc0-c876a4602e52 | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A851"
+        }
+      ]
+    },
+    {
+      "row": 125,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · SPARE-Ops"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "c523a888-eec5-4501-b25d-b6d591a3a90a | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A852"
+        }
+      ]
+    },
+    {
+      "row": 126,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · JAVAR-LAB"
+        },
+        {
+          "column": "B",
+          "value": "Virtual computer; intended business purpose unknown"
+        },
+        {
+          "column": "C",
+          "value": "87ba4c76-bc3a-4d2c-84d6-c26f2f1b3117 | Orgo CLI"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A853"
+        }
+      ]
+    },
+    {
+      "row": 127,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · Alex’s MacBook Pro"
+        },
+        {
+          "column": "B",
+          "value": "Owner workstation"
+        },
+        {
+          "column": "C",
+          "value": "Local workstation | Local system_profiler"
+        },
+        {
+          "column": "D",
+          "value": "READ VERIFIED\n2026-10-06; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A854"
+        }
+      ]
+    },
+    {
+      "row": 128,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Computer · SASHA IR MAC MINI - JAVANTE"
+        },
+        {
+          "column": "B",
+          "value": "Observed Hermes host"
+        },
+        {
+          "column": "C",
+          "value": "Javante host | SSH (historical)"
+        },
+        {
+          "column": "D",
+          "value": "STALE\n2026-10-05; inventory record, not current health proof."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A855"
+        }
+      ]
+    },
+    {
+      "row": 129,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Network Access — 7 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A856"
+        }
+      ]
+    },
+    {
+      "row": 130,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Host Observations — 8 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A863"
+        }
+      ]
+    },
+    {
+      "row": 131,
+      "cells": [
+        {
+          "column": "A",
+          "value": "06 · MODELS — intelligence and compute"
+        },
+        {
+          "column": "B",
+          "value": "Model/provider and compute connections."
+        },
+        {
+          "column": "C",
+          "value": "Supports agent or application tasks where configured. A provider account does not identify every consumer."
+        },
+        {
+          "column": "D",
+          "value": "Provider mappings are saved records; current use is not inferred."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A31"
+        }
+      ]
+    },
+    {
+      "row": 132,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenAI"
+        },
+        {
+          "column": "B",
+          "value": "OpenAI access records."
+        },
+        {
+          "column": "C",
+          "value": "Open the recorded account, purpose and usage evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A61"
+        }
+      ]
+    },
+    {
+      "row": 133,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireworks provider"
+        },
+        {
+          "column": "B",
+          "value": "Fireworks provider route."
+        },
+        {
+          "column": "C",
+          "value": "Open the recorded account, purpose and usage evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A31"
+        }
+      ]
+    },
+    {
+      "row": 134,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenRouter provider"
+        },
+        {
+          "column": "B",
+          "value": "OpenRouter provider records."
+        },
+        {
+          "column": "C",
+          "value": "Open the recorded account, purpose and usage evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A64"
+        }
+      ]
+    },
+    {
+      "row": 135,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime Intellect"
+        },
+        {
+          "column": "B",
+          "value": "Compute/provider records."
+        },
+        {
+          "column": "C",
+          "value": "Open the recorded account, purpose and usage evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A71"
+        }
+      ]
+    },
+    {
+      "row": 136,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Modal"
+        },
+        {
+          "column": "B",
+          "value": "Compute/service route."
+        },
+        {
+          "column": "C",
+          "value": "Open the recorded account, purpose and usage evidence."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A58"
+        }
+      ]
+    },
+    {
+      "row": 137,
+      "cells": [
+        {
+          "column": "A",
+          "value": "TypeSafe / Jev decision interface"
+        },
+        {
+          "column": "B",
+          "value": "Typed choice/score results, abstention and provenance."
+        },
+        {
+          "column": "C",
+          "value": "Provides SDK decision interfaces rather than a complete sales policy."
+        },
+        {
+          "column": "D",
+          "value": "Local tests and source exist; live account/model route and decision quality remain unresolved."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK CAPABILITIES'!A16"
+        }
+      ]
+    },
+    {
+      "row": 138,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud"
+        },
+        {
+          "column": "B",
+          "value": "image/video generation (paid)\n+ 3 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A10"
+        }
+      ]
+    },
+    {
+      "row": 139,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face"
+        },
+        {
+          "column": "B",
+          "value": "135 tools (20260729_00): Hub search and reads, dataset viewer, papers, docs search, repos, commits, branches, tags, discussions, collections, webhooks, Space settings/secrets/variables, notifications, 2 inference tools;…\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A50"
+        }
+      ]
+    },
+    {
+      "row": 140,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Manus API"
+        },
+        {
+          "column": "B",
+          "value": "Read tasks/projects/files; paid execution requires separate approval\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A56"
+        }
+      ]
+    },
+    {
+      "row": 141,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Nous / Hermes provider"
+        },
+        {
+          "column": "B",
+          "value": "See Gameplan MCP & CONNECTIONS for exact setup proof"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A60"
+        }
+      ]
+    },
+    {
+      "row": 142,
+      "cells": [
+        {
+          "column": "A",
+          "value": "TypeSafe decision interfaces carry schema and attribution evidence, while decision quality and live route remain open"
+        },
+        {
+          "column": "B",
+          "value": "The typed decision layer validates requested answer models, abstention and response shape, and records account/tool/log/skill/schema/model attribution in receipts."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: F0920 src/master_ops/build/decisions.py; F0883 docs/TYPESAFE.md"
+        },
+        {
+          "column": "D",
+          "value": "The presence of types and local tests does not demonstrate current provider invocation, quality, or suitability for a real agent decision."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A924"
+        }
+      ]
+    },
+    {
+      "row": 143,
+      "cells": [
+        {
+          "column": "A",
+          "value": "07 · CONNECTED APPS — the work being done"
+        },
+        {
+          "column": "B",
+          "value": "Business systems, research, creative tools and collaboration."
+        },
+        {
+          "column": "C",
+          "value": "Agents reach these through documented access routes. This grouping explains purpose, not ownership or permissions."
+        },
+        {
+          "column": "D",
+          "value": "All 84 app labels are individually represented somewhere in these 8 layers. Resource groups preserve every underlying inventory record."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A1"
+        }
+      ]
+    },
+    {
+      "row": 144,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "CRM and customer operations records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A36"
+        }
+      ]
+    },
+    {
+      "row": 145,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jobber"
+        },
+        {
+          "column": "B",
+          "value": "Job and customer operations records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A52"
+        }
+      ]
+    },
+    {
+      "row": 146,
+      "cells": [
+        {
+          "column": "A",
+          "value": "QuickBooks"
+        },
+        {
+          "column": "B",
+          "value": "Accounting access records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A73"
+        }
+      ]
+    },
+    {
+      "row": 147,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "Files and workspace records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A42"
+        }
+      ]
+    },
+    {
+      "row": 148,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "Advertising access records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A57"
+        }
+      ]
+    },
+    {
+      "row": 149,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "Team communication access records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A79"
+        }
+      ]
+    },
+    {
+      "row": 150,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All apps and integrations"
+        },
+        {
+          "column": "B",
+          "value": "Open the full 84-row lookup."
+        },
+        {
+          "column": "C",
+          "value": "Includes the other Google apps, research/creative tools, developer tools and every retained app label."
+        },
+        {
+          "column": "D",
+          "value": "Full record coverage; examples above are not an exhaustive list."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A1"
+        }
+      ]
+    },
+    {
+      "row": 151,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "full Apify API\n+ 7 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A6"
+        }
+      ]
+    },
+    {
+      "row": 152,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Asana"
+        },
+        {
+          "column": "B",
+          "value": "Asana read/write\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A8"
+        }
+      ]
+    },
+    {
+      "row": 153,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ClickUp"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A14"
+        }
+      ]
+    },
+    {
+      "row": 154,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discord"
+        },
+        {
+          "column": "B",
+          "value": "Discord read/send\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A25"
+        }
+      ]
+    },
+    {
+      "row": 155,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ElevenLabs"
+        },
+        {
+          "column": "B",
+          "value": "TTS, voices\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A27"
+        }
+      ]
+    },
+    {
+      "row": 156,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireflies"
+        },
+        {
+          "column": "B",
+          "value": "meeting transcripts\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A30"
+        }
+      ]
+    },
+    {
+      "row": 157,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foreplay"
+        },
+        {
+          "column": "B",
+          "value": "ad library research\n+ 3 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A32"
+        }
+      ]
+    },
+    {
+      "row": 158,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "repos, issues, PRs\n+ 4 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 2 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A33"
+        }
+      ]
+    },
+    {
+      "row": 159,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitLab"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A34"
+        }
+      ]
+    },
+    {
+      "row": 160,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 6 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 3 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A35"
+        }
+      ]
+    },
+    {
+      "row": 161,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A37"
+        }
+      ]
+    },
+    {
+      "row": 162,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Analytics (GA4)"
+        },
+        {
+          "column": "B",
+          "value": "GA4 read\n+ 8 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A38"
+        }
+      ]
+    },
+    {
+      "row": 163,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Calendar"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 5 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A39"
+        }
+      ]
+    },
+    {
+      "row": 164,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 5 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 3 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A41"
+        }
+      ]
+    },
+    {
+      "row": 165,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 4 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 3 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A44"
+        }
+      ]
+    },
+    {
+      "row": 166,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Tag Manager"
+        },
+        {
+          "column": "B",
+          "value": "none\n+ 4 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A45"
+        }
+      ]
+    },
+    {
+      "row": 167,
+      "cells": [
+        {
+          "column": "A",
+          "value": "HeyGen"
+        },
+        {
+          "column": "B",
+          "value": "AI video generation (uses credits)\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A48"
+        }
+      ]
+    },
+    {
+      "row": 168,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Higgsfield"
+        },
+        {
+          "column": "B",
+          "value": "video generation\n+ 3 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A49"
+        }
+      ]
+    },
+    {
+      "row": 169,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Linear"
+        },
+        {
+          "column": "B",
+          "value": "—\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A53"
+        }
+      ]
+    },
+    {
+      "row": 170,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make"
+        },
+        {
+          "column": "B",
+          "value": "scenarios\n+ 3 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A55"
+        }
+      ]
+    },
+    {
+      "row": 171,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Notion"
+        },
+        {
+          "column": "B",
+          "value": "full Notion toolkit\n+ 5 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A59"
+        }
+      ]
+    },
+    {
+      "row": 172,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Parallel"
+        },
+        {
+          "column": "B",
+          "value": "web research (paid)"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A67"
+        }
+      ]
+    },
+    {
+      "row": 173,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Postman"
+        },
+        {
+          "column": "B",
+          "value": "per plugin"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A70"
+        }
+      ]
+    },
+    {
+      "row": 174,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Retell AI"
+        },
+        {
+          "column": "B",
+          "value": "voice agents/calls (can cost money)\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A75"
+        }
+      ]
+    },
+    {
+      "row": 175,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shopify"
+        },
+        {
+          "column": "B",
+          "value": "store admin incl. products/orders\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A77"
+        }
+      ]
+    },
+    {
+      "row": 176,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SpyFu"
+        },
+        {
+          "column": "B",
+          "value": "domain stats (paid per call)\n+ 3 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A80"
+        }
+      ]
+    },
+    {
+      "row": 177,
+      "cells": [
+        {
+          "column": "A",
+          "value": "WAVV Dialer"
+        },
+        {
+          "column": "B",
+          "value": "Configured custom_wavv account route"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A85"
+        }
+      ]
+    },
+    {
+      "row": 178,
+      "cells": [
+        {
+          "column": "A",
+          "value": "WhatsApp"
+        },
+        {
+          "column": "B",
+          "value": "none"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A86"
+        }
+      ]
+    },
+    {
+      "row": 179,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xAI Research"
+        },
+        {
+          "column": "B",
+          "value": "search X/web, research (paid per call)\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A87"
+        }
+      ]
+    },
+    {
+      "row": 180,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Zoom"
+        },
+        {
+          "column": "B",
+          "value": "Zoom meetings\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A88"
+        }
+      ]
+    },
+    {
+      "row": 181,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub — 67 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A40"
+        }
+      ]
+    },
+    {
+      "row": 182,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Locations — 303 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A291"
+        }
+      ]
+    },
+    {
+      "row": 183,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Advertising — 67 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A594"
+        }
+      ]
+    },
+    {
+      "row": 184,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Analytics — 25 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A661"
+        }
+      ]
+    },
+    {
+      "row": 185,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack — 22 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A686"
+        }
+      ]
+    },
+    {
+      "row": 186,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Business Systems — 131 saved records"
+        },
+        {
+          "column": "B",
+          "value": "Browse every resource and configuration record in this section."
+        },
+        {
+          "column": "C",
+          "value": "Separate entity types, account containers, access routes and source evidence."
+        },
+        {
+          "column": "D",
+          "value": "Dated inventory; record counts are not counts of active machines or agents."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'ASSET DIRECTORY'!A708"
+        }
+      ]
+    },
+    {
+      "row": 187,
+      "cells": [
+        {
+          "column": "A",
+          "value": "08 · FILES & PROOF — what the system knows"
+        },
+        {
+          "column": "B",
+          "value": "Source documents, evidence, history and unresolved gaps."
+        },
+        {
+          "column": "C",
+          "value": "Information supports every layer above. Follow these links to distinguish the plan from what was actually verified."
+        },
+        {
+          "column": "D",
+          "value": "All 1,009 original source files remain preserved."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A1"
+        }
+      ]
+    },
+    {
+      "row": 188,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exa"
+        },
+        {
+          "column": "B",
+          "value": "Research access records."
+        },
+        {
+          "column": "C",
+          "value": "Example entry point into the complete inventory; other apps are retained in the lookup."
+        },
+        {
+          "column": "D",
+          "value": "Saved connection evidence; runtime not verified here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A28"
+        }
+      ]
+    },
+    {
+      "row": 189,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Find and retrieve data"
+        },
+        {
+          "column": "B",
+          "value": "Source paths and documented retrieval process."
+        },
+        {
+          "column": "C",
+          "value": "Use the file catalog first, then the documented account-specific route when live data is needed."
+        },
+        {
+          "column": "D",
+          "value": "The workbook does not execute calls or grant access."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'HOW TO GET THE DATA'!A1"
+        }
+      ]
+    },
+    {
+      "row": 190,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gaps and next checks"
+        },
+        {
+          "column": "B",
+          "value": "Account issues, SDK gaps and incomplete evidence."
+        },
+        {
+          "column": "C",
+          "value": "Return here before treating a planned or configured component as working."
+        },
+        {
+          "column": "D",
+          "value": "Dated findings; no live changes made."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'NEEDS ATTENTION'!A1"
+        }
+      ]
+    },
+    {
+      "row": 191,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Complete source history"
+        },
+        {
+          "column": "B",
+          "value": "Every detailed section and original source tab."
+        },
+        {
+          "column": "C",
+          "value": "This is the evidence behind the map, kept separate from everyday navigation."
+        },
+        {
+          "column": "D",
+          "value": "Original content retained; gray tabs are the archive."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'DETAIL & SOURCE INDEX'!A1"
+        }
+      ]
+    },
+    {
+      "row": 192,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Mission ledger and graph"
+        },
+        {
+          "column": "B",
+          "value": "Stores compact mission state, acceptance and evidence pointers."
+        },
+        {
+          "column": "C",
+          "value": "Separate ledger state from progress logs and execution records."
+        },
+        {
+          "column": "D",
+          "value": "Historical/current-team source distinctions must remain intact; no ledger is resumed or rewritten here."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-33 Director + Conductor'!A39"
+        }
+      ]
+    },
+    {
+      "row": 193,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Knowledge hub — audit and reconciliation"
+        },
+        {
+          "column": "B",
+          "value": "Tracks sources, contradictions, coverage, gaps and delivery checks."
+        },
+        {
+          "column": "C",
+          "value": "Gives the map an evidence-maintenance process rather than treating summaries as truth."
+        },
+        {
+          "column": "D",
+          "value": "Documented procedure; no new runtime or external-state claim."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A8"
+        }
+      ]
+    },
+    {
+      "row": 194,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Lessons and maintenance loop"
+        },
+        {
+          "column": "B",
+          "value": "Records corrections and verified lessons with source pointers."
+        },
+        {
+          "column": "C",
+          "value": "Connects review findings, source reconciliation and future maintenance."
+        },
+        {
+          "column": "D",
+          "value": "Saved lesson evidence; this map does not promote rules or change skills."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'FILE CATALOG'!A22"
+        }
+      ]
+    },
+    {
+      "row": 195,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Lab evaluation and KEEP/KILL loop"
+        },
+        {
+          "column": "B",
+          "value": "Frozen baseline → candidate → same evaluation → holdout → decision → record."
+        },
+        {
+          "column": "C",
+          "value": "Separates steering changes, capability changes and measured outcomes."
+        },
+        {
+          "column": "D",
+          "value": "Planned workflow with To do / Existing—verify states; no automatic production promotion."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S05-06 LAB LOOP'!A1"
+        }
+      ]
+    },
+    {
+      "row": 196,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI Money source and research archive"
+        },
+        {
+          "column": "B",
+          "value": "Collected findings, topic coverage, downloads and source references."
+        },
+        {
+          "column": "C",
+          "value": "Reference inputs for build decisions and package adoption."
+        },
+        {
+          "column": "D",
+          "value": "Research/blueprint material does not prove live installation."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S06-01 Start Here'!A1"
+        }
+      ]
+    },
+    {
+      "row": 197,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Setup projects, templates and rebuild instructions"
+        },
+        {
+          "column": "B",
+          "value": "Project catalog, templates and recovery/rebuild notes."
+        },
+        {
+          "column": "C",
+          "value": "Shows where implementation and reproduction guidance lives."
+        },
+        {
+          "column": "D",
+          "value": "Saved snapshots; rebuild instructions are not executed by this audit."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-02 Rebuild from zero'!A1"
+        }
+      ]
+    },
+    {
+      "row": 198,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Saved tests, decisions and tune-up records"
+        },
+        {
+          "column": "B",
+          "value": "Tracks what was decided, tested and maintained."
+        },
+        {
+          "column": "C",
+          "value": "Read the evidence dates and limits before carrying a conclusion forward."
+        },
+        {
+          "column": "D",
+          "value": "Historical tests are not a fresh check of current behavior."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-12 Tests'!A1"
+        }
+      ]
+    },
+    {
+      "row": 199,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Project and repository structure"
+        },
+        {
+          "column": "B",
+          "value": "Documents client/project folders, shared rules, source ownership and working files."
+        },
+        {
+          "column": "C",
+          "value": "Explains where agents get project context and how that differs from global setup."
+        },
+        {
+          "column": "D",
+          "value": "Saved guidance; client/project names in examples do not prove current deployments."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'S03-13 Projects'!A1"
+        }
+      ]
+    },
+    {
+      "row": 200,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Astro Docs"
+        },
+        {
+          "column": "B",
+          "value": "read docs\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A9"
+        }
+      ]
+    },
+    {
+      "row": 201,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Context7"
+        },
+        {
+          "column": "B",
+          "value": "per plugin\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A20"
+        }
+      ]
+    },
+    {
+      "row": 202,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs helper"
+        },
+        {
+          "column": "B",
+          "value": "read docs"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A26"
+        }
+      ]
+    },
+    {
+      "row": 203,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "30 tools: scrape, batch scrape, crawl, map, search, extract, agent, credit and token usage, llms.txt; composio proxy reaches any api.firecrawl.dev path (interact, monitor, parse, research)\n+ 2 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Account metadata: ACTIVE: 1 (Oct 6). Runtime not checked."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A29"
+        }
+      ]
+    },
+    {
+      "row": 204,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenAI Docs"
+        },
+        {
+          "column": "B",
+          "value": "read docs\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A63"
+        }
+      ]
+    },
+    {
+      "row": 205,
+      "cells": [
+        {
+          "column": "A",
+          "value": "PDF viewer"
+        },
+        {
+          "column": "B",
+          "value": "view/annotate PDFs"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A68"
+        }
+      ]
+    },
+    {
+      "row": 206,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qt docs"
+        },
+        {
+          "column": "B",
+          "value": "docs\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A72"
+        }
+      ]
+    },
+    {
+      "row": 207,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ref"
+        },
+        {
+          "column": "B",
+          "value": "docs search\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A74"
+        }
+      ]
+    },
+    {
+      "row": 208,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SkillsMP"
+        },
+        {
+          "column": "B",
+          "value": "search skills\n+ 1 more — open records"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A78"
+        }
+      ]
+    },
+    {
+      "row": 209,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Unknown app"
+        },
+        {
+          "column": "B",
+          "value": "unknown"
+        },
+        {
+          "column": "C",
+          "value": "Navigation grouping inferred from the saved function; open records for all routes, accounts and surfaces."
+        },
+        {
+          "column": "D",
+          "value": "Older saved connection evidence; current runtime not checked"
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'APP INVENTORY'!A83"
+        }
+      ]
+    },
+    {
+      "row": 210,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Measured full-workflow speed gain is not established"
+        },
+        {
+          "column": "B",
+          "value": "The SDK report describes reuse of deterministic operations and context as the speed mechanism, but no matched end-to-end workload measurement is recorded."
+        },
+        {
+          "column": "C",
+          "value": "Source audit: SDK FULL REPORT!74-79; SDK PLAN & GAPS!32"
+        },
+        {
+          "column": "D",
+          "value": "Runner latency, output length, or package capability alone cannot establish complete workflow time or quality improvement."
+        },
+        {
+          "column": "E",
+          "value": "Open",
+          "link": "'SDK FULL REPORT'!A74"
+        }
+      ]
+    }
+  ]
+}

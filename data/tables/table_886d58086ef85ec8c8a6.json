@@ -1,0 +1,527 @@
+{
+  "id": "table_886d58086ef85ec8c8a6",
+  "sheet": "S04-18 Hermes Configurations",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Resource name"
+        },
+        {
+          "column": "B",
+          "value": "Type"
+        },
+        {
+          "column": "C",
+          "value": "Account / container"
+        },
+        {
+          "column": "D",
+          "value": "Purpose / capability"
+        },
+        {
+          "column": "E",
+          "value": "Evidence state"
+        },
+        {
+          "column": "F",
+          "value": "Access route"
+        },
+        {
+          "column": "G",
+          "value": "Proven scope"
+        },
+        {
+          "column": "H",
+          "value": "Provider status"
+        },
+        {
+          "column": "I",
+          "value": "Notes"
+        },
+        {
+          "column": "J",
+          "value": "URL"
+        },
+        {
+          "column": "K",
+          "value": "Provider"
+        },
+        {
+          "column": "L",
+          "value": "Evidence date"
+        },
+        {
+          "column": "M",
+          "value": "Resource ID / reference"
+        },
+        {
+          "column": "N",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "O",
+          "value": "Asset key"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / ea-javar-canary"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary; profile=ea-javar-canary; model settings: .model.default=deepseek/deepseek-v4-flash; .model.provider=nous; .model.base_url=https://inference-api.nousresearch.com/v1; .auxiliary.vision.provider=auto; .auxiliary.web_extract.provider=auto; .auxiliary.compression.provider=auto; .auxiliary.skills_hub.provider=auto; .auxiliary.approval.provider=auto; .auxiliary.mcp.provider=auto; .auxiliary.title_generation.provider=auto; .auxiliary.triage_specifier.provider=auto; .auxiliary.kanban_decomposer.provider=auto; .auxiliary.profile_describer.provider=auto; .auxiliary.curator.provider=auto"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|EA|/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-canary"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / ea-javar-cloudflare-rag-canary"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary; profile=ea-javar-cloudflare-rag-canary; model settings: .model.default=deepseek/deepseek-v4-flash; .model.provider=nous; .model.base_url=https://inference-api.nousresearch.com/v1; .auxiliary.vision.provider=auto; .auxiliary.web_extract.provider=auto; .auxiliary.compression.provider=auto; .auxiliary.skills_hub.provider=auto; .auxiliary.approval.provider=auto; .auxiliary.mcp.provider=auto; .auxiliary.title_generation.provider=auto; .auxiliary.triage_specifier.provider=auto; .auxiliary.kanban_decomposer.provider=auto; .auxiliary.profile_describer.provider=auto; .auxiliary.curator.provider=auto"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|EA|/home/orgo/lil-smoove/canary/home/.hermes/profiles/ea-javar-cloudflare-rag-canary"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / Javar main default"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/home/.hermes; profile=default; model settings: .model.default=z-ai/glm-5.2; .model.provider=nous-api-key; .model.base_url=https://inference-api.nousresearch.com/v1; .auxiliary.vision.provider=nous-api-key; .auxiliary.vision.model=google/gemini-3.6-flash; .auxiliary.web_extract.provider=auto; .auxiliary.compression.provider=auto; .auxiliary.skills_hub.provider=auto; .auxiliary.approval.provider=auto; .auxiliary.mcp.provider=auto; .auxiliary.title_generation.provider=auto; .auxiliary.triage_specifier.provider=auto; .auxiliary.kanban_decomposer.provider=auto; .auxiliary.profile_describer.provider=auto; .auxiliary.curator.provider=nous; .auxiliary.curator.model=moonshotai/kimi-k3; .auxiliary.background_review.provider=nous; .auxiliary.background_review.model=deepseek/deepseek-v4-flash"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/home/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|EA|/home/orgo/lil-smoove/home/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / manny-business"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/home/.hermes/profiles/manny-business; profile=manny-business; model settings: .model.default=deepseek/deepseek-v4-flash; .model.provider=nous; .model.base_url=https://inference-api.nousresearch.com/v1"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/home/.hermes/profiles/manny-business"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|EA|/home/orgo/lil-smoove/home/.hermes/profiles/manny-business"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / root default"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /root/.hermes; profile=default; model settings: .model.default=anthropic/claude-opus-4.6; .model.provider=auto; .model.base_url=https://openrouter.ai/api/v1; .auxiliary.vision.provider=auto; .auxiliary.web_extract.provider=auto; .auxiliary.compression.provider=auto; .auxiliary.skills_hub.provider=auto; .auxiliary.approval.provider=auto; .auxiliary.mcp.provider=auto; .auxiliary.title_generation.provider=auto; .auxiliary.triage_specifier.provider=auto; .auxiliary.kanban_decomposer.provider=auto; .auxiliary.profile_describer.provider=auto; .auxiliary.curator.provider=auto"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/root/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|EA|/root/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "B2B Sales Agent / default"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "B2B Sales Agent"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /root/.hermes; profile=default; model settings: .model.default=anthropic/claude-opus-4.6; .model.provider=auto; .model.base_url=https://openrouter.ai/api/v1"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "B2B Sales Agent|/root/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G9"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|B2B Sales Agent|/root/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SASHA IR MAC MINI - JAVANTE / default"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "SASHA IR MAC MINI - JAVANTE"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /Users/sashairis/.hermes; profile=default; model settings: .model.provider=nous; .model.base_url=https://inference-api.nousresearch.com/v1; .model.default=z-ai/glm-5.2; .auxiliary.vision.provider=nous; .auxiliary.vision.model=google/gemini-3.6-flash"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "SASHA IR MAC MINI - JAVANTE|/Users/sashairis/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G12"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|SASHA IR MAC MINI - JAVANTE|/Users/sashairis/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex’s MacBook Pro / default"
+        },
+        {
+          "column": "B",
+          "value": "Profile configuration"
+        },
+        {
+          "column": "C",
+          "value": "Alex’s MacBook Pro"
+        },
+        {
+          "column": "D",
+          "value": "Saved Hermes configuration; active agent untested"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /Users/alexlobaito/.hermes; profile=default; model settings: .model.default=moonshotai/kimi-k2.6; .model.provider=nous; .model.base_url=https://inference-api.nousresearch.com/v1; .auxiliary.compression.provider=nous; .auxiliary.compression.model=deepseek/deepseek-v4-flash; .auxiliary.title_generation.provider=nous; .auxiliary.title_generation.model=deepseek/deepseek-v4-flash; .auxiliary.approval.provider=nous; .auxiliary.approval.model=deepseek/deepseek-v4-flash; .auxiliary.triage_specifier.provider=nous; .auxiliary.triage_specifier.model=deepseek/deepseek-v4-flash; .auxiliary.memory_query_rewrite.provider=nous; .auxiliary.memory_query_rewrite.model=deepseek/deepseek-v4-flash; .auxiliary.profile_describer.provider=nous; .auxiliary.profile_describer.model=deepseek/deepseek-v4-flash; .auxiliary.monitor.provider=nous; .auxiliary.monitor.model=deepseek/deepseek-v4-flash; .auxiliary.vision.provider=nous; .auxiliary.vision.model=z-ai/glm-5.3-flash; .auxiliary.mcp.provider=nous; .auxiliary.mcp.model=deepseek/deepseek-v4-flash; .auxiliary.skills_hub.provider=nous; .auxiliary.skills_hub.model=deepseek/deepseek-v4-flash; .auxiliary.tts_audio_tags.provider=nous; .auxiliary.tts_audio_tags.model=deepseek/deepseek-v4-flash; .auxiliary.goal_judge.provider=nous; .auxiliary.goal_judge.model=deepseek/deepseek-v4-flash"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "Alex’s MacBook Pro|/Users/alexlobaito/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G13"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Profile configuration|Alex’s MacBook Pro|/Users/alexlobaito/.hermes"
+        }
+      ]
+    }
+  ]
+}

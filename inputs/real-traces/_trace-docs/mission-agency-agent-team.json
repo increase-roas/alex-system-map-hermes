@@ -1,0 +1,149 @@
+{
+ "receipt_id": "director-mission-agency-agent-team-n7",
+ "trace_id": "trace-director-mission-agency-agent-team",
+ "label": "Director: mission-agency-agent-team (7 writes, 6 failed)",
+ "synthetic_only": false,
+ "started_at": "2026-09-04T08:35:36.631294+00:00",
+ "ended_at": "2026-09-05T02:15:50.671668+00:00",
+ "status": "partial",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "mission-agency-agent-team"
+ },
+ "spans": [
+  {
+   "span_id": "director-a36b3f7f3289-0",
+   "parent_span_id": null,
+   "name": "controller write (action not recorded)",
+   "agent_identity": "Director controller",
+   "tool_action": null,
+   "started_at": "2026-09-04T08:35:36.631294+00:00",
+   "ended_at": "2026-09-04T08:40:46.519918+00:00",
+   "duration_ms": 309888,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 1
+   }
+  },
+  {
+   "span_id": "director-f731423b0218-1",
+   "parent_span_id": null,
+   "name": "controller write (action not recorded)",
+   "agent_identity": "Director controller",
+   "tool_action": null,
+   "started_at": "2026-09-04T09:02:04.465343+00:00",
+   "ended_at": "2026-09-04T09:13:05.392703+00:00",
+   "duration_ms": 660927,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 2
+   }
+  },
+  {
+   "span_id": "director-3b46e0bd30e8-2",
+   "parent_span_id": null,
+   "name": "action-generalized (long or detailed)",
+   "agent_identity": "Director controller",
+   "tool_action": "action-generalized (long or detailed)",
+   "started_at": "2026-09-04T09:57:25.403588+00:00",
+   "ended_at": "2026-09-04T10:01:19.898192+00:00",
+   "duration_ms": 234494,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 3
+   }
+  },
+  {
+   "span_id": "director-2a863ce9e092-3",
+   "parent_span_id": null,
+   "name": "action-generalized (long or detailed)",
+   "agent_identity": "Director controller",
+   "tool_action": "action-generalized (long or detailed)",
+   "started_at": "2026-09-04T10:23:18.339504+00:00",
+   "ended_at": "2026-09-04T10:28:51.627046+00:00",
+   "duration_ms": 333287,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 4
+   }
+  },
+  {
+   "span_id": "director-08f0f3dbb839-4",
+   "parent_span_id": null,
+   "name": "update",
+   "agent_identity": "Director controller",
+   "tool_action": "update",
+   "started_at": "2026-09-04T10:56:58.358831+00:00",
+   "ended_at": "2026-09-04T10:59:18.629358+00:00",
+   "duration_ms": 140270,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 5
+   }
+  },
+  {
+   "span_id": "director-14120a59d3ba-5",
+   "parent_span_id": null,
+   "name": "update",
+   "agent_identity": "Director controller",
+   "tool_action": "update",
+   "started_at": "2026-09-04T11:04:26.794234+00:00",
+   "ended_at": "2026-09-04T11:05:33.702725+00:00",
+   "duration_ms": 66908,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 6
+   }
+  },
+  {
+   "span_id": "director-6076b6a55814-9",
+   "parent_span_id": null,
+   "name": "correct_javar_memory_only_config_once",
+   "agent_identity": "Director controller",
+   "tool_action": "correct_javar_memory_only_config_once",
+   "started_at": "2026-09-05T02:15:01.731419+00:00",
+   "ended_at": "2026-09-05T02:15:50.671668+00:00",
+   "duration_ms": 48940,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 10
+   }
+  }
+ ]
+}

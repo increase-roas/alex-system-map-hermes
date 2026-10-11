@@ -1,0 +1,85 @@
+{
+  "contract_version": 1,
+  "kind": "repair",
+  "guided": true,
+  "dispatch_enabled": false,
+  "instructions": [
+    "Fill every required input before creating a real local record.",
+    "Use concrete check_acceptance.py expressions for acceptance.",
+    "Choose a verifier identity different from task owner.",
+    "Attach evidence references; independent verification checks evidence truth outside this engine.",
+    "Corrections trigger downstream rechecking."
+  ],
+  "required_inputs": [
+    "goal",
+    "scope",
+    "constraints",
+    "owner",
+    "allowed_files",
+    "account_or_local_only",
+    "acceptance"
+  ],
+  "job": {
+    "id": "repair-JOB_ID",
+    "goal": "REQUIRED",
+    "scope": [
+      "REQUIRED approved files and records"
+    ],
+    "constraints": [
+      "REQUIRED permissions and stop gates"
+    ],
+    "owner": "REQUIRED",
+    "acceptance": [
+      "file:REQUIRED non-empty"
+    ],
+    "account_or_local_only": "REQUIRED"
+  },
+  "tasks": [
+    {
+      "id": "repair-reproduce-TASK_ID",
+      "goal": "Capture failure and existing state",
+      "owner": "REQUIRED",
+      "deps": [],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Capture failure and existing state"
+    },
+    {
+      "id": "repair-diagnose-TASK_ID",
+      "goal": "Identify cause from evidence",
+      "owner": "REQUIRED",
+      "deps": [
+        "repair-reproduce-TASK_ID"
+      ],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Identify cause from evidence"
+    },
+    {
+      "id": "repair-fix-TASK_ID",
+      "goal": "Apply bounded reversible repair",
+      "owner": "REQUIRED",
+      "deps": [
+        "repair-diagnose-TASK_ID"
+      ],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Apply bounded reversible repair"
+    },
+    {
+      "id": "repair-review-TASK_ID",
+      "goal": "Independent regression review",
+      "owner": "REQUIRED",
+      "deps": [
+        "repair-fix-TASK_ID"
+      ],
+      "acceptance": [
+        "file:REQUIRED non-empty"
+      ],
+      "next_action": "Independent regression review"
+    }
+  ]
+}

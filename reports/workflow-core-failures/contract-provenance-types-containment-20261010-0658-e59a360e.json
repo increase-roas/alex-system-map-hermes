@@ -1,0 +1,68 @@
+{
+  "provenance_revision": {
+    "same_revision_rewrite_rejected": {
+      "exit": 1,
+      "error": "declared_outcome_revision_unchanged",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "revisioned_declaration_committed": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "declaration_history_entries": 1,
+      "outputs_cleared": true,
+      "task_status": "needs_rechecking"
+    },
+    "old_proof_after_contract_change": {
+      "exit": 1,
+      "error": "verification_record_revision_mismatch",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "fresh_proof_positive": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1
+    },
+    "stale_descriptor_reuse_rejected": {
+      "exit": 1,
+      "error": "client_production_metadata_forbidden"
+    }
+  },
+  "json_type_equality": {
+    "pure_ok_one_vs_true": {
+      "equal": false
+    },
+    "pure_ok_false_vs_zero": {
+      "equal": false
+    },
+    "handler_path_wrong_numeric": {
+      "reason": "declared_result_mismatch"
+    },
+    "handler_path_matching_json": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1
+    }
+  },
+  "artifact_root_containment": {
+    "traversal_descriptor_rejected": {
+      "measure_ok": false,
+      "measure_reason": "artifact_path_traversal",
+      "criterion_reason": "output_missing_production_identity"
+    },
+    "symlink_escape_rejected": {
+      "measure_ok": false,
+      "measure_reason": "artifact_outside_artifact_root"
+    },
+    "in_root_positive": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1
+    }
+  }
+}

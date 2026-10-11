@@ -1,0 +1,331 @@
+{
+  "at": "2026-10-10T07:54:21.245122+00:00",
+  "scope": "APP02 backend recovery, APP04 actual emission, diagnostic persistence/hygiene/fixture-only boundary; browser acceptance excluded",
+  "verdict": "PARTIAL \u2014 bounded repairs verified, complete backend screening acceptance not met",
+  "receipts": [
+    {
+      "pointer": "reports/diagnostic-screening-receipt.json",
+      "path": "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json",
+      "run_id": "33729ebf-1890-4590-93ca-741943ce3586",
+      "at": "2026-10-10T07:48:54+00:00",
+      "sha256": "0bbee737493d38dc12e1b931d994c273ea86eb163377e7cb6677a7963e868ec6",
+      "hash_matches": true,
+      "sources_match": true,
+      "owner_overall": "passed",
+      "manifest_match": true,
+      "history_match": true
+    },
+    {
+      "pointer": "reports/recovery-screening-real-paths-receipt.json",
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json",
+      "run_id": "881140a1-79f4-44d5-a4e0-739f189d02d5",
+      "at": "2026-10-10T07:48:54+00:00",
+      "sha256": "6320931b6602bdce8f382e835828c5b3a9f60ec886bb16a103aeac0d80638c8f",
+      "hash_matches": true,
+      "sources_match": true,
+      "owner_overall": "passed",
+      "manifest_match": true,
+      "history_match": true
+    }
+  ],
+  "source_identity": {
+    "app/.next/BUILD_ID": {
+      "receipt_sha256": "140f64e07ea220a4c2e7f899d2fe017a2cba9f16319a588bbf2d93e6822eb4e0",
+      "observed_sha256": "140f64e07ea220a4c2e7f899d2fe017a2cba9f16319a588bbf2d93e6822eb4e0"
+    },
+    "app/src/lib/server/local-auth.ts": {
+      "receipt_sha256": "877292a3771fa6a031ba9337bf33c34a3b485612e9563a62ef83d35cabcc61b2",
+      "observed_sha256": "877292a3771fa6a031ba9337bf33c34a3b485612e9563a62ef83d35cabcc61b2"
+    },
+    "tools/browser_recovery_screening.mjs": {
+      "receipt_sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec",
+      "observed_sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec"
+    },
+    "tools/diagnostic_emission_screening.mjs": {
+      "receipt_sha256": "26fdbabf7c4297b70f19558bb0485606d17816a4440677d58015dad7893b163e",
+      "observed_sha256": "26fdbabf7c4297b70f19558bb0485606d17816a4440677d58015dad7893b163e"
+    },
+    "tools/diagnostic_emission_screening.py": {
+      "receipt_sha256": "7aff897ad1847d72c6b5b51d9ba7d13795c2242af3480e7b5b767cfaaa74b527",
+      "observed_sha256": "7aff897ad1847d72c6b5b51d9ba7d13795c2242af3480e7b5b767cfaaa74b527"
+    },
+    "tools/diagnostic_screening_acceptance.py": {
+      "receipt_sha256": "e9e4b0bc3bd7d4610915075819aa06195f87a60bf5deaba2406ed3f3f177f0b5",
+      "observed_sha256": "e9e4b0bc3bd7d4610915075819aa06195f87a60bf5deaba2406ed3f3f177f0b5"
+    },
+    "tools/recovery_screening_real_paths_acceptance.py": {
+      "receipt_sha256": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411",
+      "observed_sha256": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411"
+    },
+    "tools/sanitize_exposed_diagnostic_artifacts.py": {
+      "receipt_sha256": "5ead93bae2fbeb67e2bfeb98990e9cbb975e8254d3894fc8a5c9256e168d2599",
+      "observed_sha256": "5ead93bae2fbeb67e2bfeb98990e9cbb975e8254d3894fc8a5c9256e168d2599"
+    },
+    "app/src/app/api/health/route.ts": {
+      "receipt_sha256": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+      "observed_sha256": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2"
+    },
+    "app/src/app/api/workflow/route.ts": {
+      "receipt_sha256": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b",
+      "observed_sha256": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b"
+    },
+    "app/src/app/explorer/workflow-panel.tsx": {
+      "receipt_sha256": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78",
+      "observed_sha256": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78"
+    },
+    "app/src/lib/server/paths.ts": {
+      "receipt_sha256": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed",
+      "observed_sha256": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed"
+    },
+    "app/src/lib/server/python.ts": {
+      "receipt_sha256": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32",
+      "observed_sha256": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32"
+    },
+    "tools/job_recovery.py": {
+      "receipt_sha256": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a",
+      "observed_sha256": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a"
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "980d971e9cfdb316368bdabaf2b162aea5e3dfd0731048bc8e485e16e03fc337",
+      "observed_sha256": "980d971e9cfdb316368bdabaf2b162aea5e3dfd0731048bc8e485e16e03fc337"
+    },
+    "tools/node_bridge_screen_probe.ts": {
+      "receipt_sha256": "426b3a7787d23ba00aa0b3c6192b84d25cf78f7cc26a14c9bcf8d0e1894ba2a2",
+      "observed_sha256": "426b3a7787d23ba00aa0b3c6192b84d25cf78f7cc26a14c9bcf8d0e1894ba2a2"
+    },
+    "tools/output_screening.py": {
+      "receipt_sha256": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+      "observed_sha256": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a"
+    },
+    "tools/trace_store.py": {
+      "receipt_sha256": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6",
+      "observed_sha256": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+    }
+  },
+  "snapshot_stable": true,
+  "saved_db_sha256": {
+    "dep_chain": "8450e500acf17a82a2852e58d1789a4da6b93bda06d3186370ba4170954c2fd4",
+    "emit": "4570736d35c6308d24eec16fe9bf8b9e1fcdfb3c851551055aecc04dfec52806",
+    "same_db_jobs": "98ec189155bf72c0c970d0721d3520cad20dfb9cd62e6b0ddd817cd24cdc6104"
+  },
+  "diagnostic_network_metadata": {
+    "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/network-log.json",
+    "sha256": "b7d831b13f577dad34ff2902b7d5b0631632debd7c662215e3a3872d5862507c",
+    "entry_count": 12,
+    "structured_token_exposure": false,
+    "all_entries_marker": true,
+    "health_token_redaction_notes": 2,
+    "raw_body_values_printed": false
+  },
+  "fixture_scope_metadata": {
+    "isolated_dir_resolves_inside_project": true,
+    "isolated_dir_is_symlink": false,
+    "fixture_token_exists": true,
+    "same_resolved_path_as_default": false,
+    "same_file_as_default": false,
+    "token_values_read": false,
+    "action_proof_limitation": "Deletion/recreation runtime claim has only receipt path metadata, not before/after action receipt. Source unlink targets fixed fixture token paths only."
+  },
+  "amendments": [
+    {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "at": "2026-10-10T07:48:18+00:00",
+      "content_sha256_after": "e88a8770b2f3ebd2416f62501a19bffc3a57d29879654c00ab55088baa779bd1",
+      "content_sha256_before": "791f21941fa49427fb72af5224b7e4c6e84ef54917d7f3c724e3273dc4481b05",
+      "immutable_bytes_amended": true,
+      "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/network-log.json",
+      "reason": "post-hoc redaction of isolated local-mutation-token from synthetic test capture",
+      "unsanitized_backup_in_reports": false,
+      "current_sha256": "b7d831b13f577dad34ff2902b7d5b0631632debd7c662215e3a3872d5862507c",
+      "current_matches_amended_bytes": false
+    },
+    {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "at": "2026-10-10T07:48:18+00:00",
+      "content_sha256_after": "cd407da75a82ded9d9470f5ec0de13fc9bc362dc5ed3c45c66309d6716066d85",
+      "content_sha256_before": "a411924c219dfa12d65b1100b473d5541169f4f55cac0093e048b88fe702c390",
+      "immutable_bytes_amended": true,
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-2ea4bdda.json",
+      "reason": "post-hoc redaction of isolated local-mutation-token from synthetic test capture",
+      "unsanitized_backup_in_reports": false,
+      "current_sha256": "cd407da75a82ded9d9470f5ec0de13fc9bc362dc5ed3c45c66309d6716066d85",
+      "current_matches_amended_bytes": true
+    },
+    {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "at": "2026-10-10T07:48:18+00:00",
+      "content_sha256_after": "d4ae4c44f26e40de7f597872bbc409966f0cab346c77c0aaf06b83d195c03d43",
+      "content_sha256_before": "3265fcf2a764fb9e33a660bbf664c048234d7193df600c9f0b307854eb9d9227",
+      "immutable_bytes_amended": true,
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-d2302d5d.json",
+      "reason": "post-hoc redaction of isolated local-mutation-token from synthetic test capture",
+      "unsanitized_backup_in_reports": false,
+      "current_sha256": "d4ae4c44f26e40de7f597872bbc409966f0cab346c77c0aaf06b83d195c03d43",
+      "current_matches_amended_bytes": true
+    },
+    {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "at": "2026-10-10T07:48:18+00:00",
+      "content_sha256_after": "44d12b6c2128d1f90dfeb40ada3b9533e08a6d21dc3dd88ab0ac0af845aaca70",
+      "content_sha256_before": "b90886ef3c56cb46aa0b996f7d3750b4d95409cd262745062bbc07d4ea7429ab",
+      "immutable_bytes_amended": true,
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-2ea4bdda-c9d6-42c5-8d2f-5785053f8bc5.json",
+      "reason": "post-hoc redaction of isolated local-mutation-token from synthetic test capture",
+      "unsanitized_backup_in_reports": false,
+      "current_sha256": "44d12b6c2128d1f90dfeb40ada3b9533e08a6d21dc3dd88ab0ac0af845aaca70",
+      "current_matches_amended_bytes": true
+    },
+    {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "at": "2026-10-10T07:48:18+00:00",
+      "content_sha256_after": "b1498a8a9fdec24331f91eb77ca9d7e2b91cd90a3650af5d40153627274eceab",
+      "content_sha256_before": "b59b47e5d10179ccece4bd75283aa80206c7c87572322153391e241f4829860d",
+      "immutable_bytes_amended": true,
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-d2302d5d-3cad-4e5c-bd25-f8e82df38bcd.json",
+      "reason": "post-hoc redaction of isolated local-mutation-token from synthetic test capture",
+      "unsanitized_backup_in_reports": false,
+      "current_sha256": "b1498a8a9fdec24331f91eb77ca9d7e2b91cd90a3650af5d40153627274eceab",
+      "current_matches_amended_bytes": true
+    },
+    {
+      "amendment_id": "diagnostic-screening-20261010-0747",
+      "at": "2026-10-10T07:48:18+00:00",
+      "content_sha256_after": "2b24ccf90dec145806d91cb5fb8aedf2f034d2716f44129152a40e6395d7df3e",
+      "content_sha256_before": "85214592fb4d1c6d3639d466961bc0de30ce44e8b0590a256a7498f6620b12b4",
+      "immutable_bytes_amended": true,
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-fdb7e504-604b-49d2-931a-c812dcc08897.json",
+      "reason": "post-hoc redaction of isolated local-mutation-token from synthetic test capture",
+      "unsanitized_backup_in_reports": false,
+      "current_sha256": "2b24ccf90dec145806d91cb5fb8aedf2f034d2716f44129152a40e6395d7df3e",
+      "current_matches_amended_bytes": true
+    }
+  ],
+  "items": [
+    {
+      "id": "B01 dependency eligible recovery",
+      "status": "VERIFIED",
+      "finding": "Actual merge now checks unmet dependencies plus blocked/verified status before selecting corrected task, otherwise uses eligible Engine next. Saved dep-chain DB returns t1 with t2 blocked by t1; pure blocked/verified/unmet-dependency cases retain upstream next. Previously accepted transactions are unchanged.",
+      "evidence": [
+        "tools/job_recovery.py:40-49,96-140",
+        "app/.data/recovery-screening-real-paths-0738/dep-chain.sqlite",
+        "readonly/pure command 847f27"
+      ]
+    },
+    {
+      "id": "B02 same-DB two-job independence",
+      "status": "VERIFIED",
+      "finding": "Read-only saved browser DB contains both jobs. A has one correction and next t1/workflow_correction; B has zero corrections and next b1/workflow_engine. A downstream task still waits on t1. This closes earlier separate-DB-only isolation gap without claiming browser acceptance.",
+      "evidence": [
+        "app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+        "readonly command 847f27"
+      ]
+    },
+    {
+      "id": "B03 current output/checkpoint recovery depth",
+      "status": "UNVERIFIED",
+      "finding": "Saved A tasks are needs_rechecking but both current output arrays are empty. Owner affected=true proves task status, not retained current outputs or real artifact remeasurement; initial verified checkpoint case remains absent. Existing output/production history mechanism is preserved, not rejected.",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:193-237",
+        "saved local.sqlite tasks t1/t2 safe metadata; command d2e896"
+      ]
+    },
+    {
+      "id": "B04 selected actual Python emitted exporters",
+      "status": "VERIFIED",
+      "finding": "Recover/recover-enhanced/list-jobs/read-source now route through screening. Saved emit DB genuinely injects event payload and trace label/span canaries; actual read-only exporters remove them and preserve nonempty typed lists plus benign marker. Parser errors now use screened JSON stdout and outer main handles uncaught runtime errors. Narrow selected-path repairs accepted.",
+      "evidence": [
+        "tools/local_service.py:241-292,303-317,499-530,607-619,637-645",
+        "app/.data/recovery-screening-real-paths-0738/emit.sqlite",
+        "readonly exporter command 847f27"
+      ]
+    },
+    {
+      "id": "B05 complete emission/bridge boundary",
+      "status": "FAILED",
+      "finding": "Complete boundary is still not implemented: apply/presentation/catalog normal outputs still print unscreened JSON; Node bridge source is identical to earlier failed review, resolves successful parsed payload unchanged and valid JSON with no error despite nonzero exit, and spreads original nested error payload. New Node test only consumes already screened read-source errors and invalid-command Python JSON, not raw Node stderr/invalid JSON canaries.",
+      "evidence": [
+        "tools/local_service.py:485-497,606,620-625",
+        "app/src/lib/server/python.ts:46-80",
+        "tools/node_bridge_screen_probe.ts:24-72",
+        "reports/independent-recovery-screening-review.json"
+      ]
+    },
+    {
+      "id": "B06 acceptance checks remain weaker than claims",
+      "status": "FAILED",
+      "finding": "Export json_shape checks only startswith brace. Summary ignores expected exit/status and typed shapes, list-jobs/recover/diagnose checks, raw trace-label injection, and Node screened/nonempty requirements. Read-source now uses actual error handler but synthetic/canary-error-boundary is a dedicated test-only injection branch. Do not promote actual stderr/error provenance from this alone.",
+      "evidence": [
+        "tools/recovery_screening_real_paths_acceptance.py:222-241,290-308",
+        "tools/node_bridge_screen_probe.ts:66-72",
+        "tools/local_service.py:157-160"
+      ]
+    },
+    {
+      "id": "B07 diagnostic sanitization before persistence",
+      "status": "VERIFIED",
+      "finding": "Browser fetch logs screen entries before pushing/writing networkLog. Both Python receipt writers screen cases before failure/final writes. Actual saved network log safe metadata shows structured token exposure absent and redaction notes retained. Pure Python/JS supported structured token cases remove value, preserve benign JSON and marker. Scope is supported structured 48-hex token fields/canaries, not arbitrary text secrecy.",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:43-58,330-333",
+        "tools/diagnostic_emission_screening.py:24-105",
+        "tools/diagnostic_emission_screening.mjs:27-87",
+        "tools/diagnostic_screening_acceptance.py:224-245",
+        "tools/recovery_screening_real_paths_acceptance.py:335-355",
+        "safe network metadata; pure JS command 0395f6"
+      ]
+    },
+    {
+      "id": "B08 diagnostic nested-no-secrets claim",
+      "status": "FAILED",
+      "finding": "Unit test itself embeds fake 48-character token in unstructured error text. Pure Python/JS controls show that value survives while contains_exposed_local_mutation_token reports clean; nested_no_secrets=true checks only recognized JSON-field patterns, not absence of injected fake value. Fix the scoped claim/test or support the actual labeled diagnostic form; no universal secret detector is required.",
+      "evidence": [
+        "tools/diagnostic_screening_acceptance.py:64-93",
+        "tools/diagnostic_emission_screening.py:61-72,108-113",
+        "tools/diagnostic_emission_screening.mjs:13-24,90-92",
+        "safe Boolean commands 847f27 and 0395f6"
+      ]
+    },
+    {
+      "id": "B09 truthful amendments and final hashes",
+      "status": "VERIFIED",
+      "finding": "Both latest receipt hashes match pointer/manifest/history and all current recorded sources match. Old receipt/failure sanitization explicitly records before/after SHA and immutable_bytes_amended=true; five retained receipt/failure files match amendment after hashes. Fixed network-log path has newer run bytes, so its prior amendment hash is historical, not a current-byte claim. No unchanged historical-byte claim accepted.",
+      "evidence": [
+        "reports/diagnostic-sanitization-amendments.jsonl",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl",
+        "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json",
+        "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json"
+      ]
+    },
+    {
+      "id": "B10 fixture-only replacement boundary",
+      "status": "VERIFIED",
+      "finding": "Rotation implementation only unlinks local-token.json at two fixed project fixture dirs. Runtime browser sets LOCAL_DATA_DIR to its isolated project dir. Safe stat/path metadata confirms distinct resolved file from default, no fixture dir symlink. No default credential values read or credential changes made by this reviewer.",
+      "evidence": [
+        "tools/diagnostic_screening_acceptance.py:23-26,128-144",
+        "tools/browser_recovery_screening.mjs:79-91",
+        "app/src/lib/server/local-auth.ts:8-21",
+        "safe path/stat metadata"
+      ]
+    },
+    {
+      "id": "B11 fixture rotation action readback",
+      "status": "UNVERIFIED",
+      "finding": "Receipt says fixture token deleted for recreation; source discards before hash and returns no replacement identity/action receipt. Current isolated file exists and is separate; this supports scope/current existence, not independent proof of the earlier deletion/replacement sequence.",
+      "evidence": [
+        "tools/diagnostic_screening_acceptance.py:128-144",
+        "diagnostic receipt fixture_token_rotation metadata"
+      ]
+    }
+  ],
+  "prior_core_acceptance_preserved": true,
+  "next_fixes": [
+    "Complete existing Python/Node actual output boundary or document/test exact supported narrower emissions; cover normal unscreened operations, nonzero valid JSON status, nested error payload, and raw stderr/invalid JSON injections.",
+    "Require expected exit/status, parsed typed schemas, benign/nonempty preservation and all required case results in acceptance; retain before/after injected-value proof.",
+    "Correct nested_no_secrets assertion using actual fake-value absence or honestly limit the claim to supported structured token fields.",
+    "Retain missing output/checkpoint recovery evidence and fixture replacement action proof as UNVERIFIED; do not reset prior core passes or expand into universal verifier."
+  ],
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Complete truthful real-path emission/status/shape evidence, corrected diagnostic nested-token claim, and required recovery output/checkpoint proof; browser separately reviewed."
+  }
+}

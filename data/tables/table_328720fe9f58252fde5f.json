@@ -1,0 +1,334 @@
+{
+  "id": "table_328720fe9f58252fde5f",
+  "sheet": "S01-16 Self-improving loop",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what happens"
+        },
+        {
+          "column": "C",
+          "value": "our rule"
+        },
+        {
+          "column": "D",
+          "value": "test data behind it (source)"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Big picture"
+        },
+        {
+          "column": "B",
+          "value": "The AI gets better from its own mistakes and wins, but nothing changes until a person says yes."
+        },
+        {
+          "column": "C",
+          "value": "Catch lessons during work. Check in on a schedule (every 8 hours). Test before changing. Owner approves. Keep old copies."
+        },
+        {
+          "column": "D",
+          "value": "Every serious method works this way (\"propose, test, keep only if better\"): GEPA beat retraining by 6% on average and up to 20%, using up to 35x fewer runs (arXiv 2507.19457). ACE +10.6% on agent tasks (arXiv 2510.04618)."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Catch the lesson"
+        },
+        {
+          "column": "B",
+          "value": "After a correction, a failure, or a run that passed its checks, write \"When X, do Y, because Z.\""
+        },
+        {
+          "column": "C",
+          "value": "Every lesson has a source (owner / task failure / tool error / checked success / outside content), proof, and for failures the run where the fix worked."
+        },
+        {
+          "column": "D",
+          "value": "Saving every run did WORSE than saving none on all 4 test agents (e.g. 67.5%→55.5%); saving checked runs did best (memory-management study). Lessons from wins and failures together: ExpeL 28%→39% and 40%→59% (arXiv 2308.10144)."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Only real, checked lessons"
+        },
+        {
+          "column": "B",
+          "value": "Lessons from web pages, emails or client files are never promoted."
+        },
+        {
+          "column": "C",
+          "value": "Outside content can be flagged, never turned into a rule."
+        },
+        {
+          "column": "D",
+          "value": "Memory-poisoning attacks using normal-looking questions planted records 98.2% of the time and worked 76.8% (MINJA). Poisoning under 0.1% of memory gave 80%+ success with under 1% drop on normal tasks (AgentPoison, arXiv 2407.12784), so tests alone won't catch it."
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Check often, change carefully"
+        },
+        {
+          "column": "B",
+          "value": "A check-in runs on a schedule (Alex: every 8 hours; it started weekly and was changed on 2026-10-01). Each run snapshots the control files, reads the run log, re-syncs tool lists, checks tool fingerprints and lists new memory notes. Rule changes happen only when a lesson has proof and showed up twice."
+        },
+        {
+          "column": "C",
+          "value": "Check-in as often as you work. Max 3 rule changes a day, one open proposal at a time; tests run only when there is a change to test."
+        },
+        {
+          "column": "D",
+          "value": "People edit these files about daily and mostly add: 57 words per edit, almost no deletions (2,303 files, arXiv 2511.12884). Promoting per task is how files bloat. No study compares per-task vs weekly directly."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Small edits only"
+        },
+        {
+          "column": "B",
+          "value": "Each proposed change is one bullet: add, edit, archive."
+        },
+        {
+          "column": "C",
+          "value": "Never rewrite a whole rules, lessons or skill file."
+        },
+        {
+          "column": "D",
+          "value": "One full rewrite shrank a playbook from 18,282 to 122 tokens and dropped accuracy from 66.7% to 57.1%, below having no memory (63.7%) (ACE \"context collapse\", arXiv 2510.04618)."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Max 3 changes a day"
+        },
+        {
+          "column": "B",
+          "value": "The owner reads one short proposal, not a stream of yes/no clicks."
+        },
+        {
+          "column": "C",
+          "value": "At most 3 changes approved per day; each shows what changes, why, and test results before vs after."
+        },
+        {
+          "column": "D",
+          "value": "People clicking through approvals caught a planted dangerous command only 13.6% of the time, falling to ~5% after 50 prompts (Anthropic, 1,053 testers)."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Test before changing"
+        },
+        {
+          "column": "B",
+          "value": "Run the test tasks with and without the change."
+        },
+        {
+          "column": "C",
+          "value": "14 tasks built from real mistakes (G1 to G14; G14 added 2026-10-01: the AI must name the Google Ads route from its card and ask before a budget change); target 20–50; run each 3 times; safety tasks must pass all 3; grade what the agent did, not what it said."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic recommends 20–50 tasks from real failures. tau-bench: GPT-4o passed 61% once but ~25% when it had to pass 8 times in a row. 8 of 8 passing still allows ~31% true failure (binomial math)."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. Hidden tests"
+        },
+        {
+          "column": "B",
+          "value": "A separate grader runs 3 tests the proposer never sees."
+        },
+        {
+          "column": "C",
+          "value": "Never change a test and a rule in the same proposal; max 3 tries per change."
+        },
+        {
+          "column": "D",
+          "value": "Prompts tuned on the examples they saw scored 5–20% higher there than on new ones (OPRO); gains stalled after ~3 rounds (ProTeGi)."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Prune"
+        },
+        {
+          "column": "B",
+          "value": "Each proposal lists rules, lessons and memories that never fired, duplicate, or point at something gone."
+        },
+        {
+          "column": "C",
+          "value": "Owner approves each; pruned items go to _archive/. Never prune by score alone."
+        },
+        {
+          "column": "D",
+          "value": "Careful adding plus deleting: +10%. But 197 of 207 \"never used\" rules were still valid, so a person decides (memory-management study). Retiring and capping skills: 0.258→0.584 (one 2026 paper)."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. Run early when things change"
+        },
+        {
+          "column": "B",
+          "value": "Model, Claude Code or Codex updated, or a connector's tool list changed."
+        },
+        {
+          "column": "C",
+          "value": "Each run starts with tuneup.py refresh, which re-syncs every custom Composio toolkit's tool list (hub routes and docs readers; added 2026-10-01). Then compare system/evals/versions.txt and the tool fingerprints in tools/_fingerprints.json; rerun the tests on any change. Known gaps (2026-10-01): refresh failed 3 times in one run (network), and custom toolkits that need no key are skipped."
+        },
+        {
+          "column": "D",
+          "value": "The same GPT-4 name dropped from 84% to 51% on one task within 3 months (Chen, Zaharia, Zou 2023). A tool can change after approval (a Cursor flaw of this kind was rated 8.8/10 severity)."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Revert and notice"
+        },
+        {
+          "column": "B",
+          "value": "If a change causes a new correction or a failed test the next week, revert it. A skipped run shows."
+        },
+        {
+          "column": "C",
+          "value": "Snapshots before every change; \"Last tune-up\" date in STATUS.md, flagged when over 24 hours old (the tune-up runs every 8 hours)."
+        },
+        {
+          "column": "D",
+          "value": "Only 21.9% of real-world prompt changes were documented (prompt-evolution study): log a reason and a restore path with every change."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How it runs unattended (added 2026-10-01)"
+        },
+        {
+          "column": "B",
+          "value": "It is a scheduled task (connector-repo-tuneup) in the Claude app. Every mechanical step goes through one script, tuneup.py (snapshot, scan, refresh, fingerprint, finish), so the run never stops to ask for approval. Recreating the task on a new Mac: the Tune-up tab."
+        },
+        {
+          "column": "C",
+          "value": "A run nobody watches only writes files and a proposal; it never sends, publishes, spends or deletes. Any other shell command pauses it, so the task prompt allows none."
+        },
+        {
+          "column": "D",
+          "value": "The first runs paused for approval 3 times and Alex would not approve each pause, so we added the one script and one project allow rule. It needs the Claude app open and the Mac awake, so it still depends on the Mac."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Watch out: auto-memory"
+        },
+        {
+          "column": "B",
+          "value": "Claude saves its own memory notes with no approval step."
+        },
+        {
+          "column": "C",
+          "value": "Every tune-up run lists new or changed memory notes for keep / fix / remove."
+        },
+        {
+          "column": "D",
+          "value": "Same poisoning risk as step 2: any unreviewed write path can carry a bad instruction forward."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What it has done so far (2026-10-01)"
+        },
+        {
+          "column": "B",
+          "value": "Run 1: snapshot, no proposal (nothing met the bar), first fingerprint baseline for 10 connectors, 4 memory notes reviewed (keep all). Run 2: a proposal with 2 items (P1: a \"change only current clients\" rule; P2: point the GA4 row at one route). Neither was applied yet on 2026-10-01."
+        },
+        {
+          "column": "C",
+          "value": "Nothing is applied until Alex says yes to each item. A run with nothing worth proposing only adds one run-log line."
+        },
+        {
+          "column": "D",
+          "value": "Our own first run: both changes were tested with and without, 3 runs each, and all 7 regression tasks passed. The hidden set passed 1 of 3 and failed the same 2 with and without the changes, so the proposal reads them as gaps that already existed (the standing yes lets an agent remove dead logins without listing them first; an owner-stated rule can skip the candidate queue). The refresh step could not finish (network cut off 3 times), so vendor tool changes were not checked in that run."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sources"
+        },
+        {
+          "column": "B",
+          "value": "Full tables with links: master-connector-repo/work/2026-10-01_self-improvement/notes/. Several sources are vendor tests or preprints; numbers marked \"binomial math\" are our own arithmetic."
+        }
+      ]
+    }
+  ]
+}

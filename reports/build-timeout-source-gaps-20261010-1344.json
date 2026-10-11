@@ -1,0 +1,14 @@
+{
+  "at": "2026-10-10T13:44:20.029570+00:00",
+  "event": "build_timeout_helper_source_failure",
+  "source_paths": [
+    "tools/bounded_npm_build.py",
+    "tools/subprocess_bounded.py"
+  ],
+  "findings": [
+    "Build TimeoutExpired calls blocking stdout.read before terminate_group.",
+    "terminate_group exits when parent already exited, leaving possible pipe-holding children; group enumeration failures return empty."
+  ],
+  "values_or_logs_retained": false,
+  "full_completion": false
+}

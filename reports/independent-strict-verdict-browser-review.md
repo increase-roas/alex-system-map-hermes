@@ -1,0 +1,31 @@
+# Independent strict-verdict browser review
+
+Reviewed 2026-10-10T08:19:26.021381+00:00; final owner run `61e0ea53-316f-45a1-a6ac-4f76d877537a` at 2026-10-10T08:15:29+00:00.
+
+Read-only source and safe metadata review; owner passed is a self-report. Prior narrow passes preserved.
+
+- **VERIFIED — Final receipt/source/build/runner identity.** Final run 61e0ea53-316f-45a1-a6ac-4f76d877537a at 08:15:29 UTC is the reviewed receipt. Pointer hash matches; all eight recorded source hashes match current bytes; browser runner hash matches source; before/after served build ID equals current BUILD_ID. Intermediate a104 receipt not used. Evidence: `reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json`, `reports/strict-verdict-catalog-dependent-ui-receipt.json`
+
+- **VERIFIED — Actual corrected downstream API with unmet dependency.** Fixture now applies corr-t2 while dependency t1 is incomplete, then corr-t1. After restart API confirms active t2 correction, pending t1 dependency, and next task t1. Previous missing downstream correction is closed at the served API level. Evidence: `tools/browser_recovery_screening.mjs:275`, `tools/browser_recovery_screening.mjs:363`, `reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json`
+
+- **FAILED — Actual corrected downstream blocked UI.** Saved ui_t2_downstream_blocked is empty. Runner falls back to API correction/not-next plus t2 absent from A action; this reports ui_t2_downstream_blocked_ok true without observing blocked corrected t2 or its unmet upstream in the UI. Requirement for actual corrected-dependent UI remains unmet. Evidence: `tools/browser_recovery_screening.mjs:404`, `reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json`
+
+- **VERIFIED — History content and required history gates.** Saved A history contains exact stale baseline, B no-history gate true. Browser pass now requires A history and B no-history. Independently changing either boolean to false makes pure strict aggregate fail. Prior history-gate omission closed; no broader screenshot layout claim. Evidence: `tools/browser_recovery_screening.mjs:398`, `tools/browser_recovery_screening.mjs:468`, `tools/acceptance_summarize_strict.py:75`, `reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json`
+
+- **VERIFIED — True served PID restart, both jobs, retained state.** Actual served PID changes 63705 to 64217; old PID exit recorded. Same isolated DB path and build, A governing/stale state and retained output marker plus positive recheck count, and B independent next action survive restart. Saved A/B UI strings contain respective full API action. Earlier narrow restart/both-job/retained-record passes preserved. False raw-init hash remains explained by initialization writes; byte-continuity is not claimed. Evidence: `tools/browser_recovery_screening.mjs:332`, `reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json`
+
+- **UNVERIFIED — Actual closed-port interval.** Saved oldPidExited, listenerReleased and loopback_unreachable_observed are true. Improved stop waits for health failure and old PID exit, rather than accepting a different PID. However helper returns res.ok, and catches timeout/abort: an open listener returning non-OK HTTP or timing out is labeled unreachable. No saved connection-refused/TCP-closed evidence distinguishes actual closed port. Evidence: `tools/browser_recovery_screening.mjs:89`, `tools/browser_recovery_screening.mjs:129`, `reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json`
+
+- **FAILED — Every required identity gate fails closed.** Build stability true is observed but omitted from browser and strict aggregate pass requirements. Independent pure control setting build_id_stable false still passes aggregate. Setting loopback_unreachable_observed false also passes, though listenerReleased false correctly fails. Retained output identity is API prefix-marker evidence; affected UI captures count only and lacks exact output marker. Thus every required build/listener/output identity gate is not established. Evidence: `tools/browser_recovery_screening.mjs:448`, `tools/acceptance_summarize_strict.py:70`
+
+- **VERIFIED — Run-specific capture byte binding.** Network and screenshot paths carry final run suffix 61e0ea53316f. Network bytes/hash match receipt entries and capture binding; 13 entries have zero parse errors. Screenshot hash and 82805-byte size match. No raster opened; no raw capture/credential text emitted. Screening internals and screenshot visual safety are outside this review. Evidence: `reports/browser-proof/strict-verdict-catalog-dependent-ui-20261010-0809/capture-61e0ea53316f/network-log-61e0ea53316f.json`, `reports/browser-proof/strict-verdict-catalog-dependent-ui-20261010-0809/capture-61e0ea53316f/recovery-61e0ea53316f.png`
+
+- **VERIFIED — Mandatory browser aggregate integrity.** Recorded browser passed/exit0 is required by strict aggregate. Independent pure negative controls for A/B history, blocked-UI boolean and listenerReleased each fail aggregate. This proves propagation of those booleans, not truth of the weak blocked-UI/listener predicates. Evidence: `tools/acceptance_summarize_strict.py:70`, `tools/strict_verdict_catalog_dependent_ui_acceptance.py:75`
+
+- **UNVERIFIED — Original broader browser matrix.** No broader visual audit, browser launch, runtime rerun or real SDK execution performed. Original matrix and real SDK evidence remain separate open work; prior narrow passes preserved. Evidence: `reports/independent-consolidated-browser-review.json`, `reports/independent-emitted-boundaries-browser-review.json`
+
+Pure negative controls: A/B history, downstream UI Boolean and listenerReleased failures propagate; build stability and loopback-unreachable failures do not.
+
+Final receipt SHA-256: `a53396052a876d4a53c6a5931652f9e140369f7f24b9534d695c9e8169a22967`.
+
+Blocker: **goal_not_met_yet** — Nonempty actual corrected-dependent UI showing t2 blocked by t1, required build stability/output identity assertions, and connection-level closed-port interval evidence.

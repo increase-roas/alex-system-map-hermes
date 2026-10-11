@@ -1,0 +1,934 @@
+{
+  "id": "table_7fb7496f0f14d50f69d6",
+  "sheet": "S03-22 AI app settings",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Target settings for Claude Code and Codex as sanitized copies of the live files: secret-named values replaced, secret-shaped strings masked and home paths shown as /Users/<you>. Each row says why the setting is there and how it looked on 2026-10-01; the last section holds the snippets to compare or paste. It closes retest gap G16. What each AI keeps is on the AI apps tab. Facts from play spp-p20a (notes/gap-facts.md §5). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/ai-app-settings.json; never edit this tab by hand.\n\nCURRENT SETUP NOTE (2026-10-05): Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Claude Code (and Claude Desktop's local config)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "setting"
+        },
+        {
+          "column": "B",
+          "value": "file"
+        },
+        {
+          "column": "C",
+          "value": "target (sanitized copy)"
+        },
+        {
+          "column": "D",
+          "value": "why and how"
+        },
+        {
+          "column": "E",
+          "value": "live on 2026-10-01"
+        },
+        {
+          "column": "F",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio plugin, pinned"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json and ~/.claude/plugins/known_marketplaces.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"extraKnownMarketplaces\": {\"composio\": {\"source\": {\"source\": \"git\", \"url\": \"https://github.com/ComposioHQ/composio-plugin-cc.git\", \"ref\": \"v0.2.4\"}}}, \"enabledPlugins\": {\"composio@composio\": true}}"
+        },
+        {
+          "column": "D",
+          "value": "Install pinned: claude plugin marketplace add https://github.com/ComposioHQ/composio-plugin-cc.git#v0.2.4, then install composio@composio. The plugin's own daily self-update then resolves to the same tag (last result: current). Version 0.2.4 installed."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"v0.2.4\" ; ~/.claude/plugins/known_marketplaces.json \"v0.2.4\" ; ~/.claude/plugins/installed_plugins.json \"0.2.4\" ; ~/.composio/plugin-cc-self-update.json \"current\" ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md L13–L15"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Spend, client-message and delete guard"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json"
+        },
+        {
+          "column": "C",
+          "value": "[{\"matcher\": \"Bash\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/composio_guard.py\", \"if\": \"Bash(*composio*)\", \"timeout\": 30}]}, {\"matcher\": \"mcp__.*\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/composio_guard.py\", \"timeout\": 30}]}]"
+        },
+        {
+          "column": "D",
+          "value": "Every MCP call and every Bash command that mentions composio goes through ~/.agents/tools/guards/composio_guard.py (agents-home; the stricter version 527f1e7 since 2026-10-03). It stops spend, sends to clients or anyone outside increaseroas.com, deletes, DNS changes, deploys and security changes (Tailscale policy, keys, users and devices) until Alex says yes in chat. There is no stored guard code: each stop prints a one-time code (CG-XXXX), one per delete, and Alex approves by typing yes to a message that names the code. A yes can't release a rule denial, because the call itself is wrong: no login named on a toolkit with more than one login, a payload file the guard can't read at a literal path, or a path into ~/Library/Containers or Group Containers. The call has to be corrected (composio card, Guard). A deny holds even in bypass mode."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"composio_guard.py\" ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md L13–L14 ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md L57–L60 ; ~/.agents/tools/guards/composio_guard.py docstring ; agents-home 527f1e7 ; ~/.agents/tools/cards/composio.md \"Guard (Claude Code and Codex)\" ; work/2026-10-01_setup-playbook/notes/spp-p52a-guard-hook.md \"Phase 2\""
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Superpowers"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json and ~/.claude/skills"
+        },
+        {
+          "column": "C",
+          "value": "{\"enabledPlugins\": {\"superpowers@claude-plugins-official\": false}}"
+        },
+        {
+          "column": "D",
+          "value": "The plugin is off. Its skills come from vendored copies (license kept) in ~/.agents/skills, linked into ~/.claude/skills (11 links): brainstorming, dispatching-parallel-agents, executing-plans, finishing-a-development-branch, requesting-code-review, subagent-driven-development, systematic-debugging, test-driven-development, using-git-worktrees, verification-before-completion, writing-plans. This is the skills-vendoring end state (play spp-p16a Phase 2, done 2026-10-01)."
+        },
+        {
+          "column": "E",
+          "value": "Matches (changed after the 15:33 note that turned the plugin on)"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"superpowers@claude-plugins-official\" ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L237 ; system/run-log.md \"spp-p16a skills-vendoring Phase 2\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Playwright browser"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"playwright\": {\"type\": \"stdio\", \"command\": \"npx\", \"args\": [\"-y\", \"@playwright/mcp@latest\"], \"env\": {}}}"
+        },
+        {
+          "column": "D",
+          "value": "The only MCP server in ~/.claude.json (public pages from a terminal). Claude Code's own browser, Claude in Chrome and computer use come with the app."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude.json ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; workbook Rebuild from zero R342"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Permission mode"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"permissions\": {\"allow\": [\"Edit(//Users/<you>/.codex/**)\", \"Write(//Users/<you>/.codex/**)\", \"Edit(//Users/<you>/.agents/**)\", \"Write(//Users/<you>/.agents/**)\", \"Bash(claude mcp list)\", \"Bash(mkdir *)\", \"Bash(git add *)\"], \"defaultMode\": \"acceptEdits\"}}"
+        },
+        {
+          "column": "D",
+          "value": "The file's default is acceptEdits plus 7 allow rules. Desktop Code sessions run in bypass permissions, chosen per session in the app; the guard's deny still holds there."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"acceptEdits\" ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md L3"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sandbox"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"sandbox\": {\"enabled\": true, \"allowUnsandboxedCommands\": true}}"
+        },
+        {
+          "column": "D",
+          "value": "The Bash sandbox is on; a command it blocks can be rerun outside it with approval. op and the composio search/schema commands need that."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"allowUnsandboxedCommands\" ; ~/.agents/tools/connectors/orgo_op.py L15 ; ~/.agents/tools/cards/composio.md \"so run those two outside the sandbox\""
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Auto mode context"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"autoMode\": {\"allow\": [\"$defaults\", \"Create, update, publish or delete GHL workflows, conversation/SMS AI agents and their prompts, voice agents and their prompts, voice/conversation actions, custom values, custom fields, tags, pipelines, calendars, forms and knowledge-base entries via the Composio toolkits custom_ghl_oauth_crm (CRM, tools CUSTOM_GHL_OAUTH_CRM_*) or custom_ghl_command_builder (builds, tools CUSTOM_GHL_COMMAND_BUILDER_*), called through the Composio connector or `composio execute`, when the user's request or an approved handoff/plan in this session covers the change, including live customer-facing bots.\", \"Delete a single GHL object (action, agent, workflow, field, value, tag) by ID when the user named the cleanup or approved a plan that lists it.\"], \"soft_deny\": [\"$defaults\", \"Sending SMS, email or calls to real GHL contacts, bulk-deleting contacts, or deleting a whole GHL sub-account, unless the user asked for that specific send or delete in this session.\"], \"environment\": [\"$defaults\", \"The user runs a GoHighLevel (GHL) agency. GHL sub-accounts reached through the Composio toolkits custom_ghl_oauth_crm and custom_ghl_command_builder (tools CUSTOM_GHL_OAUTH_CRM_* and CUSTOM_GHL_COMMAND_BUILDER_*) are the user's own or client accounts they are paid to manage; they are trusted work targets, not third-party systems.\", \"Editing GHL workflows, conversation/SMS agents, voice agents, voice actions, custom values, custom fields, tags, pipelines, calendars, forms and knowledge bases is the user's routine daily work.\"]}}"
+        },
+        {
+          "column": "D",
+          "value": "Tells auto mode that GHL builds through the two GHL toolkits are routine work, and that sends to real contacts and bulk deletes need the user's request."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"soft_deny\""
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code updates"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"autoUpdates\": false}"
+        },
+        {
+          "column": "D",
+          "value": "Native install with auto-update off: update by hand with claude update (2.1.273 or later for skill sync)."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude.json ; workbook Rebuild from zero R57"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Session hook (optional)"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json"
+        },
+        {
+          "column": "C",
+          "value": "[{\"matcher\": \"^(startup|resume|clear|compact|fork)$\", \"hooks\": [{\"type\": \"command\", \"command\": \"bash '/Users/<you>/.claude/hooks/herdr-agent-state.sh' session\", \"timeout\": 10}]}]"
+        },
+        {
+          "column": "D",
+          "value": "herdr's agent-state hook. Optional; what herdr is for is gap G04."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.claude/settings.json \"herdr-agent-state.sh\""
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Chat guard (memory and chat size)"
+        },
+        {
+          "column": "B",
+          "value": "~/.claude/settings.json and ~/.agents/tools/guards/chat_guard.py"
+        },
+        {
+          "column": "C",
+          "value": "[{\"event\": \"SessionStart\", \"matcher\": \"^(resume|compact)$\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py start\", \"timeout\": 20}]}, {\"event\": \"PostToolUse\", \"matcher\": \"*\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py post\", \"timeout\": 20}]}, {\"event\": \"UserPromptSubmit\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py prompt\", \"timeout\": 20}]}, {\"event\": \"PreToolUse\", \"matcher\": \"Agent|Task|Workflow\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py pre\", \"timeout\": 20}]}]"
+        },
+        {
+          "column": "D",
+          "value": "Four hooks run ~/.agents/tools/guards/chat_guard.py (agents-home), each with a 20-second limit. Chat size never blocks: at 20 MB it saves a handoff snapshot and asks Alex once, fresh chat or keep going, then again every +15 MB. Memory acts only near the limit (under 10% available, or macOS says critical): no new agents until it recovers, and the biggest command this chat started (over 2 GiB) is stopped; no memory notes above that. Every agent prompt gets one memory-safe line (no whole-home scans; stream files over 50 MB). Why: the 2026-10-02 20:46 out-of-memory crash, caused by an agent's whole-home scan (8.69 GiB). Turn off: remove the chat_guard.py entries."
+        },
+        {
+          "column": "E",
+          "value": "Matches (live since 2026-10-02 21:22; the script is the round-2 file of 22:27)"
+        },
+        {
+          "column": "F",
+          "value": "system/CHANGELOG.md \"## 2026-10-02 21:22 chat guard\" ; work/2026-10-02_chat-guard/checks.md ; work/2026-10-02_chat-guard/notes/research.md \"## Decision and why\" ; work/2026-10-02_chat-guard/notes/fix-1.md \"## Round 2\" ; ~/.agents/tools/guards/chat_guard.py docstring ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §4"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Desktop local servers"
+        },
+        {
+          "column": "B",
+          "value": "~/Library/Application Support/Claude/claude_desktop_config.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"mcpServers\": {}}"
+        },
+        {
+          "column": "D",
+          "value": "Target: no local servers. Alex deletes each with the trash icon in Claude Desktop Settings → Developer; the app edits its own file, so nothing needs to quit."
+        },
+        {
+          "column": "E",
+          "value": "Matches: mcpServers is empty (Alex's 2 trash clicks 2026-10-02, spp-c21; names-only read 2026-10-03)"
+        },
+        {
+          "column": "F",
+          "value": "~/Library/Application Support/Claude/claude_desktop_config.json ; work/2026-10-01_setup-playbook/notes/fix-l01-detach.md ; workbook Rebuild from zero R345 ; work/2026-10-01_setup-playbook/notes/spp-c12-desktop-plugins.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §1 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §8"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Desktop 1Password pairing"
+        },
+        {
+          "column": "B",
+          "value": "~/Library/Application Support/Claude/config.json"
+        },
+        {
+          "column": "C",
+          "value": "{\"grandPrix\": {\"onePassword\": {\"paired\": true}}}"
+        },
+        {
+          "column": "D",
+          "value": "A pairing flag, not a key route: no key reaches Claude through it. It is the pairing for 1Password for Claude (sign-in autofill over local IPC; spp-c21)."
+        },
+        {
+          "column": "E",
+          "value": "The pairing is 1Password for Claude (sign-in autofill over local IPC; spp-c21; 1Password security page 2026-08-17)"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/cursor-audits-review.md L97 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §2 ; https://support.claude.com/en/articles/15936181-get-started-with-1password-for-claude (2026-07-16, read 2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Codex (CLI and the ChatGPT desktop app), and ChatGPT's Composio permission"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "setting"
+        },
+        {
+          "column": "B",
+          "value": "file"
+        },
+        {
+          "column": "C",
+          "value": "target (sanitized copy)"
+        },
+        {
+          "column": "D",
+          "value": "why and how"
+        },
+        {
+          "column": "E",
+          "value": "live on 2026-10-01"
+        },
+        {
+          "column": "F",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Model"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "model = \"gpt-6.1-sol\", model_reasoning_effort = \"xhigh\", model_verbosity = \"medium\", model_reasoning_summary = \"concise\""
+        },
+        {
+          "column": "D",
+          "value": "Owner deciding (To do R77): the target stays gpt-6.1-sol until Alex answers. The ChatGPT app (26.930.21537, updated 2026-10-02) bundles codex-cli 0.159.0-alpha.12.1 and runs this model. model_verbosity and model_reasoning_summary are set by build_instructions.py (CODEX_SETTINGS). The terminal CLI at ~/.local/bin/codex failed with HTTP 400 on 0.150.1 (model not supported with a ChatGPT account); after its update to 0.160.0 (npm, prefix ~/.local), codex exec with gpt-6.1-sol answered OK (spp-c13). Keep the terminal CLI at the app's version or newer."
+        },
+        {
+          "column": "E",
+          "value": "Owner deciding (To do R77). Live 2026-10-03: model gpt-6-astra (config written 05:26:14 EDT, most likely by the app's model picker) and effort xhigh, as targeted. The terminal CLI 0.160.0 ran gpt-6.1-sol (spp-c13)"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md L29 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md L50 ; system/run-log.md L132 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §8 ; ~/.agents/tools/unify/build_instructions.py docstring ; agents-home b39becc ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03d.md §2 ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §45"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Approvals and sandbox"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "approval_policy = \"never\", sandbox_mode = \"danger-full-access\", approvals_reviewer = \"user\", web_search = \"live\""
+        },
+        {
+          "column": "D",
+          "value": "Full access with no prompts; the hard rules are enforced by the guard hook and the Composio app's approve mode instead."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Features"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "{\"hooks\": true, \"network_proxy\": true, \"computer_use\": true, \"memories\": false, \"multi_agent\": true, \"chronicle\": false}"
+        },
+        {
+          "column": "D",
+          "value": "hooks, computer use and multi-agent on; memories and chronicle off. No features.skills: it isn't a Codex setting (the config reference has none, and Codex logged 'features.skills is ignored'); spp-p37a removed it on 2026-10-02."
+        },
+        {
+          "column": "E",
+          "value": "Matches (spp-p37a's readback, 2026-10-02)"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-b.md §1 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-b.md L59–L61 ; work/2026-10-01_setup-playbook/workbook-updates.md L172"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Bundled plugins"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "{\"browser@openai-bundled\": true, \"chrome@openai-bundled\": true, \"computer-use@openai-bundled\": true, \"unified-computer-use@openai-bundled\": true, \"messages@openai-bundled\": true, \"compound-engineering@compound-engineering-plugin\": false, \"code-review@openai-bundled\": false, \"visualize@openai-bundled\": false, \"documents@openai-primary-runtime\": false, \"pdf@openai-primary-runtime\": false, \"spreadsheets@openai-primary-runtime\": false, \"presentations@openai-primary-runtime\": false, \"template-creator@openai-primary-runtime\": false}"
+        },
+        {
+          "column": "D",
+          "value": "browser, chrome, computer-use and unified-computer-use for the web and the Mac; Messages with its send_message tool turned off (read only). compound-engineering's plugin is off since 20:45Z: the skills it was kept for now come from vendored copies in ~/.agents/skills (its marketplace stays configured). Install with codex plugin add <name>@<marketplace>. Messages and Computer Use run only in the desktop app. The other 7 bundled plugins (code-review, visualize, documents, pdf, spreadsheets, presentations, template-creator) stay explicitly enabled = false (decision D07): the ChatGPT app update 26.930.21537 (2026-10-02 12:45 EDT) switched them on and dropped Messages without anyone deciding it. ~/.agents/tools/unify/codex-plugins.json is the agreed set; check.py check 7 reports drift every tune-up; python3 ~/.agents/tools/unify/codex_plugins.py apply restores it with a backup."
+        },
+        {
+          "column": "E",
+          "value": "Matches (restored 2026-10-03 after the 2026-10-02 app update flipped it; check.py check 7 watches it)"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/codex-restore.md L15–L18 ; work/2026-10-01_setup-playbook/notes/codex-restore.md L46 ; system/run-log.md \"spp-p16a skills-vendoring Phase 2\" ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §2 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## L16\" ; ~/.agents/tools/unify/codex_plugins.py docstring ; ~/.agents/tools/unify/codex-plugins.json ; agents-home a3c8d53"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Superpowers"
+        },
+        {
+          "column": "B",
+          "value": "account level (no config.toml line)"
+        },
+        {
+          "column": "C",
+          "value": "codex plugin add superpowers@openai-curated-remote"
+        },
+        {
+          "column": "D",
+          "value": "A remote-catalog plugin (6.4.2) installed for the account, like the Composio app, so it gets no [plugins] line. It stays installed, but since 20:45Z all 15 of its skills are switched off by [[skills.config]]: Codex uses the same vendored copies in ~/.agents/skills as Claude Code, so each skill shows once. (Headless codex exec runs often started without remote plugins, a startup race the vendored copies avoid.)"
+        },
+        {
+          "column": "E",
+          "value": "Matches (re-read 20:52Z)"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/codex-restore.md L46 ; work/2026-10-01_setup-playbook/notes/codex-restore.md L75–L80 ; work/2026-10-01_setup-playbook/notes/codex-restore.md L89 ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L233"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill off-switches"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "[[skills.config]] path = \"/Users/<you>/.agents/skills/<skill>/SKILL.md\", enabled = false"
+        },
+        {
+          "column": "D",
+          "value": "One entry per skill to hide; Codex's config reference defines skills.config.<n>.path and .enabled (it describes path as the skill folder; the live entries point at SKILL.md and work, Codex T7 passed). 166 entries at 20:52Z, all enabled = false: 109 for skills in ~/.agents/skills, 15 for the Superpowers plugin copies, 30 for the compound-engineering plugin copies, 12 other. After spp-p37a (2026-10-02): 139 entries. The 32 that pointed at missing files (30 compound-engineering 3.30.2 cache copies, the retired firecrawl skill and the uninstalled 1Password plugin's cache) are gone, and Codex still lists the same 63 enabled skills, 0 repeated."
+        },
+        {
+          "column": "E",
+          "value": "Matches: 139 entries. The 4 pages entries were repointed from 0.1.18 to 0.1.19 on 2026-10-03 after the plugin update (check.py: 0 point at missing files)"
+        },
+        {
+          "column": "F",
+          "value": "https://developers.openai.com/codex/config-reference (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L232–L235 ; work/2026-10-01_setup-playbook/notes/skills-cap.md ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-b.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L173 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §2 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## L09\""
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio app"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "[apps.asdk_app_6a58503580c08191b78cc5bdaf4eba6e] default_tools_approval_mode = \"approve\""
+        },
+        {
+          "column": "D",
+          "value": "The official Composio app asks before each tool call; other apps default to auto. The two OpenAI connectors (safety settings, hotline) are off."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; workbook Rebuild from zero R346 ; work/2026-10-01_setup-playbook/notes/codex-guard.md L32"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT: Composio plugin permission"
+        },
+        {
+          "column": "B",
+          "value": "ChatGPT > Settings > Plugins > Composio > Permission (an account setting, no file)"
+        },
+        {
+          "column": "C",
+          "value": "Always ask (the account's Default permission stays Allow read-only tools)"
+        },
+        {
+          "column": "D",
+          "value": "Set 2026-10-01 on Alex's yes (spp-c17). One approval card covers every Composio call in that answer, writes included (tested 2026-10-01: 1 card, 2 writes ran), so ChatGPT is for reads and drafts; sends go through Claude Code or Codex behind the guard."
+        },
+        {
+          "column": "E",
+          "value": "Matches (read back after a reload, 2026-10-01 22:45–22:50 EDT)"
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/spp-c17-chatgpt-write-approval.md \"## Result after Alex's yes\" ; work/2026-10-01_setup-playbook/workbook-updates.md L226"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Guard hook"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/hooks.json"
+        },
+        {
+          "column": "C",
+          "value": "[{\"matcher\": \"^(Bash|shell|shell_command|exec_command|local_shell)$|^mcp__\", \"hooks\": [{\"type\": \"command\", \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/codex_composio_guard.py\", \"timeout\": 30}]}]"
+        },
+        {
+          "column": "D",
+          "value": "Codex's version of the spend, client-message and delete guard (~/.agents/tools/guards/codex_composio_guard.py). Codex hooks must be reviewed and trusted once with /hooks before they run; config.toml's [hooks.state] now records a trusted hash for both hooks in hooks.json."
+        },
+        {
+          "column": "E",
+          "value": "Matches (hooks.json written 16:29 EDT; both hooks trusted)"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/hooks.json \"codex_composio_guard.py\" ; work/2026-10-01_setup-playbook/notes/codex-guard.md L30–L31"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP servers"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "keep [mcp_servers.node_repl] (written by the ChatGPT app); remove [mcp_servers.1password]"
+        },
+        {
+          "column": "D",
+          "value": "node_repl is the app's browser runtime. The 1password entry is 1Password's Environments server: it was removed on 2026-10-01 (one key route: op plus the scripts)."
+        },
+        {
+          "column": "E",
+          "value": "Matches: [mcp_servers.1password] was removed at 17:03 local (spp-c11)"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; workbook Composio + 1Password right way R66 ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md L89–L94 ; work/2026-10-01_setup-playbook/notes/spp-c11-1password-gmail.md"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Environment filter"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "[shell_environment_policy] inherit = \"core\"; filters exclude *TOKEN*, *SECRET*, *PASSWORD*, *CREDENTIAL*, *API_KEY*"
+        },
+        {
+          "column": "D",
+          "value": "Commands Codex runs don't inherit secret-looking variables."
+        },
+        {
+          "column": "E",
+          "value": "Matches"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Personal text"
+        },
+        {
+          "column": "B",
+          "value": "~/.codex/config.toml"
+        },
+        {
+          "column": "C",
+          "value": "developer_instructions (generated by build_instructions.py)"
+        },
+        {
+          "column": "D",
+          "value": "Alex's own voice and delegation text. Not copied: it's personal and generated from ~/.agents/instructions."
+        },
+        {
+          "column": "E",
+          "value": "Not copied"
+        },
+        {
+          "column": "F",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. The snippets, ready to compare or paste"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "file"
+        },
+        {
+          "column": "B",
+          "value": "snippet"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.claude/settings.json (target, sanitized; personal display settings left out)"
+        },
+        {
+          "column": "B",
+          "value": "{\n \"permissions\": {\n  \"allow\": [\n   \"Edit(//Users/<you>/.codex/**)\",\n   \"Write(//Users/<you>/.codex/**)\",\n   \"Edit(//Users/<you>/.agents/**)\",\n   \"Write(//Users/<you>/.agents/**)\",\n   \"Bash(claude mcp list)\",\n   \"Bash(mkdir *)\",\n   \"Bash(git add *)\"\n  ],\n  \"defaultMode\": \"acceptEdits\"\n },\n \"hooks\": {\n  \"SessionStart\": [\n   {\n    \"matcher\": \"^(startup|resume|clear|compact|fork)$\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"bash '/Users/<you>/.claude/hooks/herdr-agent-state.sh' session\",\n      \"timeout\": 10\n     }\n    ]\n   },\n   {\n    \"matcher\": \"^(resume|compact)$\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py start\",\n      \"timeout\": 20\n     }\n    ]\n   }\n  ],\n  \"UserPromptSubmit\": [\n   {\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py prompt\",\n      \"timeout\": 20\n     }\n    ]\n   }\n  ],\n  \"PreToolUse\": [\n   {\n    \"matcher\": \"Bash\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/composio_guard.py\",\n      \"if\": \"Bash(*composio*)\",\n      \"timeout\": 30\n     }\n    ]\n   },\n   {\n    \"matcher\": \"mcp__.*\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/composio_guard.py\",\n      \"timeout\": 30\n     }\n    ]\n   },\n   {\n    \"matcher\": \"Agent|Task|Workflow\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py pre\",\n      \"timeout\": 20\n     }\n    ]\n   }\n  ],\n  \"PostToolUse\": [\n   {\n    \"matcher\": \"*\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/chat_guard.py post\",\n      \"timeout\": 20\n     }\n    ]\n   }\n  ]\n },\n \"enabledPlugins\": {\n  \"composio@composio\": true,\n  \"superpowers@claude-plugins-official\": false\n },\n \"extraKnownMarketplaces\": {\n  \"composio\": {\n   \"source\": {\n    \"source\": \"git\",\n    \"url\": \"https://github.com/ComposioHQ/composio-plugin-cc.git\",\n    \"ref\": \"v0.2.4\"\n   }\n  }\n },\n \"sandbox\": {\n  \"enabled\": true,\n  \"allowUnsandboxedCommands\": true\n },\n \"autoMode\": {\n  \"allow\": [\n   \"$defaults\",\n   \"Create, update, publish or delete GHL workflows, conversation/SMS AI agents and their prompts, voice agents and their prompts, voice/conversation actions, custom values, custom fields, tags, pipelines, calendars, forms and knowledge-base entries via the Composio toolkits custom_ghl_oauth_crm (CRM, tools CUSTOM_GHL_OAUTH_CRM_*) or custom_ghl_command_builder (builds, tools CUSTOM_GHL_COMMAND_BUILDER_*), called through the Composio connector or `composio execute`, when the user's request or an approved handoff/plan in this session covers the change, including live customer-facing bots.\",\n   \"Delete a single GHL object (action, agent, workflow, field, value, tag) by ID when the user named the cleanup or approved a plan that lists it.\"\n  ],\n  \"soft_deny\": [\n   \"$defaults\",\n   \"Sending SMS, email or calls to real GHL contacts, bulk-deleting contacts, or deleting a whole GHL sub-account, unless the user asked for that specific send or delete in this session.\"\n  ],\n  \"environment\": [\n   \"$defaults\",\n   \"The user runs a GoHighLevel (GHL) agency. GHL sub-accounts reached through the Composio toolkits custom_ghl_oauth_crm and custom_ghl_command_builder (tools CUSTOM_GHL_OAUTH_CRM_* and CUSTOM_GHL_COMMAND_BUILDER_*) are the user's own or client accounts they are paid to manage; they are trusted work targets, not third-party systems.\",\n   \"Editing GHL workflows, conversation/SMS agents, voice agents, voice actions, custom values, custom fields, tags, pipelines, calendars, forms and knowledge bases is the user's routine daily work.\"\n  ]\n }\n}"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude/settings.json ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; system/CHANGELOG.md \"## 2026-10-02 21:22 chat guard\" ; work/2026-10-02_chat-guard/checks.md ; work/2026-10-02_chat-guard/notes/research.md \"## Decision and why\" ; work/2026-10-02_chat-guard/notes/fix-1.md \"## Round 2\" ; ~/.agents/tools/guards/chat_guard.py docstring ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §4"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.claude.json (only these keys matter for the rebuild)"
+        },
+        {
+          "column": "B",
+          "value": "{\n \"mcpServers\": {\n  \"playwright\": {\n   \"type\": \"stdio\",\n   \"command\": \"npx\",\n   \"args\": [\n    \"-y\",\n    \"@playwright/mcp@latest\"\n   ],\n   \"env\": {}\n  }\n },\n \"autoUpdates\": false\n}"
+        },
+        {
+          "column": "C",
+          "value": "~/.claude.json ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.codex/config.toml (the tables that matter; app-managed, project and desktop tables left out)"
+        },
+        {
+          "column": "B",
+          "value": "model = \"gpt-6.1-sol\"   # owner deciding (To do R77): the live default is gpt-6-astra since 2026-10-03\nmodel_reasoning_effort = \"xhigh\"\nmodel_verbosity = \"medium\"\nmodel_reasoning_summary = \"concise\"\napproval_policy = \"never\"\nsandbox_mode = \"danger-full-access\"\nweb_search = \"live\"\napprovals_reviewer = \"user\"\n\n[features]\nhooks = true\nnetwork_proxy = true\ncomputer_use = true\nmemories = false\nmulti_agent = true\nchronicle = false\n\n[marketplaces.compound-engineering-plugin]\nsource_type = \"git\"\nsource = \"https://github.com/EveryInc/compound-engineering-plugin.git\"\n\n[plugins.\"compound-engineering@compound-engineering-plugin\"]\nenabled = false\n[plugins.\"messages@openai-bundled\"]\nenabled = true\n[plugins.\"messages@openai-bundled\".mcp_servers.messages]\ndisabled_tools = [\"send_message\"]\n[plugins.\"unified-computer-use@openai-bundled\"]\nenabled = true\n[plugins.\"browser@openai-bundled\"]\nenabled = true\n[plugins.\"chrome@openai-bundled\"]\nenabled = true\n[plugins.\"computer-use@openai-bundled\"]\nenabled = true\n# the other bundled plugins stay off (decision D07; ~/.agents/tools/unify/codex-plugins.json, check.py check 7)\n[plugins.\"code-review@openai-bundled\"]\nenabled = false\n[plugins.\"visualize@openai-bundled\"]\nenabled = false\n[plugins.\"documents@openai-primary-runtime\"]\nenabled = false\n[plugins.\"pdf@openai-primary-runtime\"]\nenabled = false\n[plugins.\"spreadsheets@openai-primary-runtime\"]\nenabled = false\n[plugins.\"presentations@openai-primary-runtime\"]\nenabled = false\n[plugins.\"template-creator@openai-primary-runtime\"]\nenabled = false\n\n[apps._default]\ndefault_tools_approval_mode = \"auto\"\n[apps.connector_openai_safety_settings]\nenabled = false\n[apps.connector_openai_hotline]\nenabled = false\n[apps.asdk_app_6a58503580c08191b78cc5bdaf4eba6e]   # the official Composio app (Sampark Inc); find your id on the All connections tab\ndefault_tools_approval_mode = \"approve\"\n\n[shell_environment_policy]\ninherit = \"core\"\nignore_default_excludes = false\n[shell_environment_policy.filters]\n\"*TOKEN*\" = \"exclude\"\n\"*SECRET*\" = \"exclude\"\n\"*PASSWORD*\" = \"exclude\"\n\"*CREDENTIAL*\" = \"exclude\"\n\"*API_KEY*\" = \"exclude\"\n\n# one off-switch per skill to hide (139 on Alex's Mac on 2026-10-02):\n[[skills.config]]\npath = \"/Users/<you>/.agents/skills/<skill>/SKILL.md\"\nenabled = false"
+        },
+        {
+          "column": "C",
+          "value": "~/.codex/config.toml ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-b.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L172 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §2 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## L16\" ; ~/.agents/tools/unify/codex_plugins.py docstring ; ~/.agents/tools/unify/codex-plugins.json ; agents-home a3c8d53 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §8 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03d.md §2"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/.codex/hooks.json"
+        },
+        {
+          "column": "B",
+          "value": "{\n \"hooks\": {\n  \"SessionStart\": [\n   {\n    \"hooks\": [\n     {\n      \"command\": \"bash '/Users/<you>/.codex/herdr-agent-state.sh' session\",\n      \"timeout\": 10,\n      \"type\": \"command\"\n     }\n    ]\n   }\n  ],\n  \"PreToolUse\": [\n   {\n    \"matcher\": \"^(Bash|shell|shell_command|exec_command|local_shell)$|^mcp__\",\n    \"hooks\": [\n     {\n      \"type\": \"command\",\n      \"command\": \"/usr/bin/python3 /Users/<you>/.agents/tools/guards/codex_composio_guard.py\",\n      \"timeout\": 30\n     }\n    ]\n   }\n  ]\n }\n}"
+        },
+        {
+          "column": "C",
+          "value": "~/.codex/hooks.json ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "~/Library/Application Support/Claude/claude_desktop_config.json (target)"
+        },
+        {
+          "column": "B",
+          "value": "{\n \"mcpServers\": {}\n}"
+        },
+        {
+          "column": "C",
+          "value": "workbook Rebuild from zero R345 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Nothing open (2026-10-03). Closed: the grandPrix pairing is 1Password for Claude (spp-c21); the Codex [[skills.config]] cleanup after spp-p16a Phase 2 is live (139 entries; 0 point at missing files after the pages 0.1.19 repoint)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §2 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §2 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## L09\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,119 @@
+{
+  "concurrent": {
+    "committed_count": 1,
+    "conflict_count": 1,
+    "one_commit_one_conflict": true,
+    "final_revision": 1,
+    "results": [
+      {
+        "label": "A",
+        "ok": true
+      },
+      {
+        "label": "B",
+        "ok": false,
+        "error": "revision must be exactly 2"
+      }
+    ]
+  },
+  "idempotent": {
+    "first_after_sha": "983c15db88aaabea22e6b6b5aae6b1c299ced432e0b04eefdeaaf20008d18a10",
+    "second_after_sha": "983c15db88aaabea22e6b6b5aae6b1c299ced432e0b04eefdeaaf20008d18a10",
+    "idempotent_match": true
+  },
+  "api_derived": {
+    "preview_exit": 0,
+    "preview_has_diff": true,
+    "apply_exit": 0,
+    "after_sha256": "587ef85042d88807ab001a9f55c913e0ef0bc9bfe307f31b8210a03a1a01ee0a",
+    "derived_revision": 1,
+    "lineage_ok": true
+  },
+  "symlink_escape": {
+    "symlink_escape_rejected": false,
+    "error": null
+  },
+  "backup_restore_lkg": {
+    "backup_path_ok": true,
+    "restored_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+    "lkg_matches_committed": false,
+    "before_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+    "after_sha256": "14a01ac84897f7274be3bb8af62310b5f739bd47e7b51429a7605f637b4be7ff"
+  },
+  "negative": {
+    "bad_revision_rejected": true,
+    "canary_rejected": true
+  },
+  "browser": {
+    "delivery": "maintained-edit-cas-20261010-0844",
+    "overall": "failed",
+    "served_pid_before": 91369,
+    "build_id": "hS45BSvRXG5eWVgdDrbq9",
+    "ui_revision_before": "0",
+    "ui_diff_ok": true,
+    "ui_outcome": "Applied revision 1 \u00b7 after 85d54c5b3892\u2026",
+    "ui_outcome_ok": true,
+    "ui_revision_after": "0",
+    "ui_revision_incremented": false,
+    "ui_sha_after_apply": "6dc53a3928a8743d4c13c8b4dc29132df0b9cd2e3efb089dcfc0e90aac52405e",
+    "served_pid_after_restart": 91795,
+    "restart_pid_changed": true,
+    "ui_revision_after_restart": "1",
+    "persisted_after_restart": false,
+    "derived_meta_ok": true,
+    "derived_revision": 1,
+    "derived_lineage_ok": false,
+    "exit": 1
+  },
+  "strict_types_regression": {
+    "saved_baseline_core_pass": true,
+    "recovery_regression_exit_false_rejected": true,
+    "generated_controls_valid": true,
+    "control_row_wrong_flip_type_rejected": true,
+    "each_declared_flip_fails": true,
+    "per_flip_fail": [
+      {
+        "path": "python_apply_export.no_token_leak",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.screened",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.nonempty",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.exit",
+        "still_passed": false
+      },
+      {
+        "path": "browser.overall",
+        "still_passed": false
+      },
+      {
+        "path": "browser.served_process_restarted",
+        "still_passed": false
+      },
+      {
+        "path": "browser.build_id_stable",
+        "still_passed": false
+      },
+      {
+        "path": "browser.restart_stop.portRefusedObserved",
+        "still_passed": false
+      },
+      {
+        "path": "recovery_regression.exit",
+        "still_passed": false
+      },
+      {
+        "path": "diagnostic_plain_token.screened_absent",
+        "still_passed": false
+      }
+    ]
+  },
+  "real_sdk_trace_input": "BLOCKED",
+  "drive_publication": "local-only; not claimed"
+}

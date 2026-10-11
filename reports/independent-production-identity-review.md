@@ -1,0 +1,20 @@
+# Independent production identity review
+
+Final receipt 2026-10-10T07:08:48+00:00; run 7f8a7aa9-6f44-4897-aebb-d427ba66189f; SHA 19eceecb24d2426f5f033204ce41a66215e9d33ec9d2e25110356f28c4319115.
+
+All9 source hashes match. Bounded pass only; prior fixes preserved.
+
+- **VERIFIED D02-seal — Server seal binds committed submission to scope/history and rejects client metadata**. Saved relabel/forged-ID handler attempts reject client_production_metadata_forbidden with0operations/0events. Server seal includes job/task/op/jobrevision and declared contract+artifact path/SHA; two production/output histories retained, current positive task verified6 withone verifyoperation/event. Legitimate descriptor mutation cannot impersonate existing production_history entry.
+  Evidence: tools/bounded_acceptance.py:324-415; tools/workflow_engine.py:237-267; tools/production_identity_prewrite_acceptance.py:240-337.
+- **FAILED D02-stripping — Ordinary stripping/reattachment cannot certify old bytes as freshly produced**. Dropping forbidden descriptor keys produces ordinary valid draft with same path/SHA. Under newer declaration, server seal assigns new production operation/revision/id to existing bytes without materialization call or production evidence, and issuance measurement passes. This is ordinary local input, no secret or registry modification. Seal proves fresh attachment and live hash attestation only, not output reproduction after declaration. Owner tests retain forbidden keys and miss stripped path; production helper is outside this boundary.
+  Evidence: tools/bounded_acceptance.py:358-415; tools/bounded_acceptance.py:425-439; tools/workflow_engine.py:237-267; tools/production_identity_prewrite_acceptance.py:269-307.
+- **VERIFIED D06-producer — Materializer validates IDs/suffix/resolved containment before writes**. Unsafe job/task/suffix pure calls reject before any mocked mkdir/write; saved parent symlink resolves to project docs and refuses outside artifactroot. Resolver precedes parent creation and content write. Saved project-local symlink negatives report no leaked docs files; safe production DB contains sealed output atrevision3. Static local containment accepted; race/hostile filesystem guarantees not requested or claimed.
+  Evidence: tools/bounded_acceptance.py:268-298; tools/bounded_acceptance.py:442-460; tools/production_identity_prewrite_acceptance.py:342-385.
+- **VERIFIED D04-issuer — Actual measured issuance rejects wrong JSON type before record/state effects**. Actual issue_record helper invokes measured issuer and catches declared_result_mismatch. Independent no-write issuer call with saved wrong task/read-only DB fails with full reasons before issue_record; registry remains0. Saved bad DB remainsrevision3/in_progress with0issuance and verifyattempt operations/events. Saved matching JSON produces registered proof and verified4 task with1operation/event. Separately missingrecord verify fails proof_path_missing; this is not wrong-result verification evidence and is not used as such.
+  Evidence: tools/production_identity_prewrite_acceptance.py:389-439; tools/verification_evidence.py:231-262.
+- **VERIFIED identity — Stable source-bound final receipt and history**. All9 source hashes match final07:08:48 receipt; actual immutable bytes/pointer/manifest/history SHA19eceecb24d2426f5f033204ce41a66215e9d33ec9d2e25110356f28c4319115. Earlier snapshot not used. Prior accepted transaction/liveproof/type/history mechanisms retained without broad repeat.
+  Evidence: reports/run-receipts/production-identity-prewrite-20261010-0706-7f8a7aa9-6f44-4897-aebb-d427ba66189f.json; reports/receipt-hash-manifest.jsonl; reports/workflow-core-run-history.jsonl.
+
+Next: require production evidence from actual controlled producer, or honestly recorded reuse, rather than creating fresh production identity from ordinary old descriptor attachment. D06 and D04 are closed.
+
+Blocker: `goal_not_met_yet` — stripped old descriptor still obtains new production seal without any actual production call.

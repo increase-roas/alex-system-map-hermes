@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-10T12:58:45.829491+00:00",
+  "event": "heartbeat_scan_document_read_stalled",
+  "supervisor_scan_pid": 53792,
+  "scan_session": 19738,
+  "stalled_read": "docs/BUILD_SUPERVISION.md",
+  "evidence": "lsof confirms supervisor scan held document open; no buffered output after >30sec. Terminated only own scan PID.",
+  "owner_pid": 47964,
+  "acceptance_pid": 50967,
+  "build_pid": 50978,
+  "build_elapsed_seconds": 446,
+  "declared_build_timeout_seconds": 600,
+  "owner_action": "Left owner and build untouched; within build bound but no productive progress proven.",
+  "next_action": "Check actual600second timeout and owned descendants; use bounded reads. No duplicate build.",
+  "full_completion": false
+}

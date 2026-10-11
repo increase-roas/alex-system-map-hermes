@@ -1,0 +1,169 @@
+{
+  "at": "2026-10-10T08:39:07.676988+00:00",
+  "scope": "Focused AB02/03/05/07 backend retest only; no browser/general audit",
+  "verdict": "PARTIAL \u2014 named handler/type/control repairs verified; two precise metadata/status assertions remain",
+  "owner_receipt": {
+    "pointer": "reports/typed-controls-real-edit-receipt.json",
+    "path": "reports/run-receipts/typed-controls-real-edit-20261010-0831-9555e22e-b62f-4902-a95b-905bef94bfee.json",
+    "run_id": "9555e22e-b62f-4902-a95b-905bef94bfee",
+    "at": "2026-10-10T08:34:24+00:00",
+    "sha256": "31281a736f82ded1b7967170bc556f6691e4e4b92f141f1b5b1583a8183ef94c",
+    "actual_sha256": "31281a736f82ded1b7967170bc556f6691e4e4b92f141f1b5b1583a8183ef94c",
+    "manifest_match": true,
+    "history_match": true,
+    "owner_overall": "passed",
+    "full_acceptance": false
+  },
+  "source_identity": {
+    "app/.next/BUILD_ID": {
+      "receipt_sha256": "487bbc690d08fba5577533541f6827a99f9067a78d55f5ac24c8c9a3b81df0c4",
+      "observed_sha256": "487bbc690d08fba5577533541f6827a99f9067a78d55f5ac24c8c9a3b81df0c4",
+      "match": true
+    },
+    "tools/acceptance_summarize_strict.py": {
+      "receipt_sha256": "b1e53c8d3529bb15ed6e220aac8d469282c9d9fe4fda7c6dfaf9f10b5bf6af27",
+      "observed_sha256": "b1e53c8d3529bb15ed6e220aac8d469282c9d9fe4fda7c6dfaf9f10b5bf6af27",
+      "match": true
+    },
+    "tools/catalog_controlled_edit.py": {
+      "receipt_sha256": "8019012f529a1b3beacf8579e94136a12cf8c6a7f9a34b59f823e1a6bce5222d",
+      "observed_sha256": "8019012f529a1b3beacf8579e94136a12cf8c6a7f9a34b59f823e1a6bce5222d",
+      "match": true
+    },
+    "tools/catalog_io.py": {
+      "receipt_sha256": "04e1c1b0cdf2ea7bd40ff63621ddf5bf1106408c8779331267ca4d0c51e25393",
+      "observed_sha256": "04e1c1b0cdf2ea7bd40ff63621ddf5bf1106408c8779331267ca4d0c51e25393",
+      "match": true
+    },
+    "tools/catalog_screening_probe.py": {
+      "receipt_sha256": "3e2561ee5cd016ab364f560de37e84b6423b16bf41950e732b7974e33cb6d98a",
+      "observed_sha256": "3e2561ee5cd016ab364f560de37e84b6423b16bf41950e732b7974e33cb6d98a",
+      "match": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "d2d62173dd8c0ff415f3d78cf63e269527e40ddefe93dece4de1e84d4eef957c",
+      "observed_sha256": "d2d62173dd8c0ff415f3d78cf63e269527e40ddefe93dece4de1e84d4eef957c",
+      "match": true
+    },
+    "tools/typed_controls_real_edit_acceptance.py": {
+      "receipt_sha256": "894724c0f6472efb74ce487d232ac907b6125632e8679fe90b9046b8489379e7",
+      "observed_sha256": "894724c0f6472efb74ce487d232ac907b6125632e8679fe90b9046b8489379e7",
+      "match": true
+    }
+  },
+  "snapshot_stable": true,
+  "prior_failure_preserved": {
+    "path": "reports/independent-actual-ui-baseline-backend-review.json",
+    "sha256": "58dadfae6a5ec7c77fcf42c24f6749dd70c452e8336ac99494d52dc8fd87f375",
+    "at": "2026-10-10T08:30:49.227816+00:00",
+    "exists_nonempty": true
+  },
+  "fixture_restoration_readback": {
+    "path": "work/reliability/synthetic-sync-marker.json",
+    "current_sha256": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485",
+    "receipt_before": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485",
+    "receipt_restored": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485",
+    "matches": true,
+    "injected_preimage_backup": "app/.data/catalog-backups/synthetic-sync-marker.json.7253f42fda1b.bak",
+    "backup_sha256": "7253f42fda1bc0c67b5ae3c93076afd78a6e4a1f9702fe7214bbf6418fb2e916"
+  },
+  "items": [
+    {
+      "id": "TC01 passing baseline and exact path set",
+      "status": "VERIFIED",
+      "finding": "Independent actual saved core/final baseline passes; recomputed ten known single-field flips all fail. Empty/duplicate path reports reject. Validator now requires exact unique path set/specs/count and failed rows with causes. Circular baseline and duplicate-path failures repaired within the known local generated-control protocol.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:241-280,292-333",
+        "pure output fd8544"
+      ]
+    },
+    {
+      "id": "TC02 remaining row flip identity",
+      "status": "FAILED",
+      "finding": "Changing first generated row value_type from bool to str still passes final summary. expected_flip_specs is compared as a separate declared list, but individual row type is never matched to corresponding expected spec. Exact path+flip identity requirement remains partial; require each row type to match spec (and keep fixed flip values bound by generator).",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:237-280",
+        "pure control_row_wrong_flip_type result fd8544"
+      ]
+    },
+    {
+      "id": "TC03 strict Node/catalog types and schemas",
+      "status": "VERIFIED",
+      "finding": "Actual saved-positive counterexamples for screened=\"false\", node exit=False, nonzero_exit=\"0\", catalog state document=[] and catalog parser exit2 now reject. Catalog export/edit validators require handler labels, integer exits/revisions and actual dict preview/document plus restoration. This closes the named Node and catalog schema/status failures narrowly.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:10-106,144-161",
+        "pure output fd8544"
+      ]
+    },
+    {
+      "id": "TC04 remaining recovery suite status type",
+      "status": "FAILED",
+      "finding": "recovery_regression.exit=False still passes complete emitted summary because its check compares !=0 without exact int type. Use the same strict integer-zero guard already applied to Node/apply/catalog. No browser proof is invalidated by this isolated malformed summary input.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:179-181",
+        "pure recovery_exit_false result fd8544"
+      ]
+    },
+    {
+      "id": "TC05 correct real edit handler and error paths",
+      "status": "VERIFIED",
+      "finding": "Catalog probe now supplies --db for state/preview/apply/stale/canary error commands and checks expected exit0/1 plus handler-specific shapes; parser substitutions reject. Saved state has injected stored canary redaction note. Genuine preview validation rejects canary note, and dedicated actual edit error emitter yields exit1, benign marker and redacted error string/notes. Stale error is separately labelled static; no static-error redaction claim. Preview/apply success docs are clean, so their canary_removed flags prove only absence, not injected-value redaction. This is narrow local fixture handler proof, not maintained-catalog/CAS acceptance.",
+      "evidence": [
+        "tools/catalog_screening_probe.py:132-209",
+        "tools/catalog_controlled_edit.py:42-53",
+        "tools/local_service.py:516-537",
+        "final receipt catalog handler blocks"
+      ],
+      "safe_error_readback": {
+        "exit": 1,
+        "parser_error": false,
+        "marker": true,
+        "error_is_string": true,
+        "error_has_redaction": true,
+        "canary_absent_in_error": true,
+        "redaction_notes": [
+          "test-canary tokens withheld"
+        ]
+      }
+    },
+    {
+      "id": "TC06 apply and fixture restoration readback",
+      "status": "VERIFIED",
+      "finding": "Saved apply result is success with revision23 and before/after/restored hashes. Current marker SHA exactly matches receipt before/restored SHA. Actual project backup matches the independently computed injected on-disk preimage used by the probe. This supports scoped fixture apply/restoration; no mutation rerun performed.",
+      "evidence": [
+        "tools/catalog_screening_probe.py:123-180,210-234",
+        "work/reliability/synthetic-sync-marker.json",
+        "app/.data/catalog-backups/synthetic-sync-marker.json.7253f42fda1b.bak",
+        "safe hash readback fd8544"
+      ]
+    },
+    {
+      "id": "TC07 final identity/history and preserved acceptance",
+      "status": "VERIFIED",
+      "finding": "Final9555e22e receipt dated08:34:24 matches pointer/manifest/history and all seven recorded source hashes. Prior failed review retained and hash-bound. Build/Node/browser behavior not re-audited; owner changes are validation helper/probe plus early edit-error output handling, so prior accepted browser/core mechanisms remain preserved.",
+      "evidence": [
+        "reports/run-receipts/typed-controls-real-edit-20261010-0831-9555e22e-b62f-4902-a95b-905bef94bfee.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl",
+        "reports/independent-actual-ui-baseline-backend-review.json"
+      ]
+    }
+  ],
+  "prior_browser_and_core_acceptance_preserved": true,
+  "next_fixes": [
+    "Compare each control row value_type to expected flip spec for that exact unique path; malformed row identity must fail.",
+    "Apply strict type(value) is int and exit==0 guard to recovery_regression.exit; Boolean False must reject. Preserve all accepted handler/error/fixture repairs and then advance maintained-edit/CAS."
+  ],
+  "security": {
+    "app_writes": false,
+    "mutation_reruns": false,
+    "raw_diagnostics_or_token_values_printed": false,
+    "credential_operations": false,
+    "outside_network_install_helpers_browser": false,
+    "checks": "Read-only sources/receipt/hash projections plus pure summarize functions; no actual process app rerun."
+  },
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Per-row flip type identity and strict recovery-suite exit type validation; two bounded assertion fixes."
+  }
+}

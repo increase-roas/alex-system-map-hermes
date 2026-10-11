@@ -1,0 +1,183 @@
+{
+  "reviewed_at": "2026-10-10T09:12:55.135531+00:00",
+  "scope": "Bounded maintained editing/CAS backend review; no implementation, browser control or mutating reruns. Prior thirteen accepted mechanisms preserved.",
+  "overall": "FAILED",
+  "blocker_type": "goal_not_met_yet",
+  "receipt": {
+    "pointer": "reports/maintained-edit-cas-receipt.json",
+    "immutable_path": "reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json",
+    "run_id": "d4ffebe6-dd74-401b-b995-4e100169fdb9",
+    "at": "2026-10-10T09:06:40+00:00",
+    "sha256": "a48be59aaad2792c85ddc0675894b58e4759f6fee988886a91397504669af098",
+    "hash_matches_pointer": true,
+    "owner_overall": "passed",
+    "owner_pass_is_not_acceptance": true
+  },
+  "source_identity": {
+    "app/.next/BUILD_ID": "601f76fcdefec605c70d08bafe12d178b8c8fc43d7c87dc3cf1bc595af3a075f",
+    "app/src/app/api/catalog/edit/route.ts": "2cd267dbf1ddc36e4f3e8177d89cbe24caefeb012fbaca30f810f701f63f65d4",
+    "app/src/app/api/catalog/edit/state/route.ts": "287f4671cd3c119d818ca7ac3707680086692ea17de744abc50e1e30ec98a781",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "ff26030c249b8e65c0c17a6160eac2947f15a24191e8f5923a9a8dd8d8ccf6bd",
+    "tools/browser_maintained_edit_cas.mjs": "c856e3c70a5237dcfb165b28fbfe6bf8dbe775c8bd48ce87403d0e4442502740",
+    "tools/catalog_controlled_edit.py": "0fa749e286092c3ac5ece5ca082238b7fb004e6a551a48026d4b6fe0afe72e2f",
+    "tools/maintained_derived_views.py": "1a94eef5a28ae5774feb43cab3f6c7349654f355693ad0868ee967ba754fb49e",
+    "tools/maintained_edit_cas_acceptance.py": "799434f32f2072f552c30e57c6fd8c0d07c1ff603198fbae2253489296b9cc8d"
+  },
+  "source_matches_at_end": {
+    "app/.next/BUILD_ID": true,
+    "app/src/app/api/catalog/edit/route.ts": true,
+    "app/src/app/api/catalog/edit/state/route.ts": true,
+    "app/src/app/explorer/maintained-edit-panel.tsx": true,
+    "tools/browser_maintained_edit_cas.mjs": true,
+    "tools/catalog_controlled_edit.py": true,
+    "tools/maintained_derived_views.py": true,
+    "tools/maintained_edit_cas_acceptance.py": true
+  },
+  "snapshot_stable": true,
+  "isolated_db": {
+    "path": "app/.data/maintained-edit-cas-20261010-0844/local.sqlite",
+    "sha256": "e25e318e4623d962c9f97f80cc806eab32f384fc277054bd7b6497cf208da8a1",
+    "matches_receipt": true,
+    "read_mode": "mode=ro",
+    "integrity_check": "ok"
+  },
+  "checks": [
+    {
+      "id": "ME01",
+      "status": "VERIFIED",
+      "claim": "Authenticated API and UI call the actual local-service preview/apply/state handlers; supported file commits use a per-path flock and recheck expected hash/revision inside that lock.",
+      "evidence": [
+        "app/src/app/api/catalog/edit/route.ts:6-29",
+        "app/src/app/api/catalog/edit/state/route.ts:5-11",
+        "app/src/app/explorer/maintained-edit-panel.tsx:52-107",
+        "tools/local_service.py:517-544",
+        "tools/catalog_controlled_edit.py:157-175"
+      ],
+      "limits": "Saved distinct-operation thread race reports one commit, one conflict, revision1. Test uses actual handler on synthetic staging file; not a maintained catalog record. Browser reviewer owns UI runtime acceptance."
+    },
+    {
+      "id": "ME02",
+      "status": "FAILED",
+      "claim": "Actual maintained catalog/doc editing remains absent.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:21-25",
+        "tools/maintained_edit_cas_acceptance.py:74-80",
+        "tools/catalog_io.py:62",
+        "tools/local_service.py:428-429",
+        "tools/build_catalog.py:207-268"
+      ],
+      "reason": "The entire allowlist contains two reliability fixtures plus a synthetic staging record. The catalog consumer reads data/*.json; edits cannot touch its canonical records or explicitly editable documents. Moving a fixture under work/maintained does not connect it to the actual map/catalog.",
+      "next_fix": "Allowlist specific maintained canonical records/documents with their actual schema and regeneration/consumer path; retain original archive exclusions."
+    },
+    {
+      "id": "ME03",
+      "status": "FAILED",
+      "claim": "Stable IDs, schema and reference validation are incomplete.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:54-79",
+        "pure no-write AST extraction command627442"
+      ],
+      "reason": "Pure source function accepted a revision-only document, replacement record_id, invalid source_refs elements and schema_version=False. IDs are optional and not bound to the existing record; references are checked only as a list; false schema bypasses the truthiness guard. Monotonic integer revision itself is accepted narrowly.",
+      "next_fix": "Validate the maintained record schema, preserve stable IDs, resolve references and reject missing/invalid schema values before backup or writes."
+    },
+    {
+      "id": "ME04",
+      "status": "FAILED",
+      "claim": "Idempotency is not payload-bound or correctly serialized.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:104-122",
+        "tools/catalog_controlled_edit.py:152-161",
+        "tools/maintained_edit_cas_acceptance.py:127-142",
+        "pure no-write AST extraction command627442"
+      ],
+      "reason": "Lookup occurs before the file lock and checks only operation_id/path/status. A no-write replay reproduction returns prior success for a changed expected hash and revision999/replacement-ID payload. Two same-operation calls can both miss the prelock log; the loser then conflicts rather than replaying. Same payload sequential retry is the only tested accepted subset.",
+      "next_fix": "Bind operation identity to a canonical request digest and path, recheck its ledger under lock, reject payload collisions and replay matching concurrent retries without rewriting."
+    },
+    {
+      "id": "ME05",
+      "status": "FAILED",
+      "claim": "Canonical/derived commit and crash recovery are not proven atomic.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:163-198",
+        "tools/catalog_controlled_edit.py:202-210",
+        "tools/maintained_edit_cas_acceptance.py:209-230"
+      ],
+      "reason": "Canonical rename precedes derived writes and operation receipt, so a derived failure or crash leaves an unrecorded partial commit. No journal/reconciliation is present. restore_from_backup uses unlocked non-atomic copy2 and does not reconcile derived views or replay ledger. The saved case proves a manual pre-apply backup copy restoration, not a fault/crash recovery or visible LKG behavior.",
+      "next_fix": "Add a recoverable commit boundary/journal for canonical+derived+operation state; restore under the same lock with atomic replacement and regeneration; prove failures at actual write boundaries and restart reconciliation."
+    },
+    {
+      "id": "ME06",
+      "status": "FAILED",
+      "claim": "Derived agreement is metadata-only and the Markdown digest is incorrect.",
+      "evidence": [
+        "tools/maintained_derived_views.py:21-53",
+        "tools/maintained_edit_cas_acceptance.py:168-178",
+        "tools/build_catalog.py:223-268"
+      ],
+      "reason": "The edit regeneration emits only a staging Markdown file and metadata, without the map catalog or XLSX. lineage_ok compares a source hash/revision from metadata, not regenerated content. markdown_sha256 hashes md_body but the writer persists md_body plus a newline, so it cannot identify final bytes. Current derived directory has no saved metadata to independently re-open; served-restart cleanup removes it.",
+      "next_fix": "Regenerate actual maintained Markdown/map/workbook consumers and compare their semantic records plus final byte hashes; retain run-specific generated snapshots."
+    },
+    {
+      "id": "ME07",
+      "status": "VERIFIED",
+      "claim": "Current resolved allowlist rejects a leaf symlink and a resolved path outside the project; staging bad-revision/canary controls remain narrowly supported.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:38-51",
+        "tools/catalog_controlled_edit.py:63-70",
+        "receipt.cases.symlink_escape",
+        "receipt.cases.negative"
+      ],
+      "limits": "Saved symlink test calls read_state only. Canary negative targets one fixture sentinel in note. This does not prove arbitrary schema fields, persisted derived content, or all production paths. Existing shared output screening acceptance is preserved."
+    },
+    {
+      "id": "ME08",
+      "status": "UNVERIFIED",
+      "claim": "Rename/delete/unreadable/malformed state retains visible LKG, and immutable original sources remain unchanged in this delivery.",
+      "evidence": [
+        "tools/catalog_controlled_edit.py:82-92",
+        "tools/maintained_edit_cas_acceptance.py:233-244",
+        "receipt.source_identity"
+      ],
+      "reason": "No delivery-specific original input/archive hash comparison is recorded. The negative helper tests a wrong revision and note sentinel, not malformed JSON, rename/delete/unreadable handling or visible LKG. read_state itself directly raises on missing/invalid data. No assertion that originals changed is made."
+    },
+    {
+      "id": "ME09",
+      "status": "FAILED",
+      "claim": "Parent process wait remains unbounded in practical operation and has no timeout cleanup.",
+      "evidence": [
+        "tools/maintained_edit_cas_acceptance.py:383-402",
+        "reports/maintained-edit-wait-diagnosis-20261010-0859.json"
+      ],
+      "reason": "subprocess.run timeout=600000 means Python seconds, approximately6.9days; no TimeoutExpired handler or process-tree cleanup follows. Parent reported termination of exact hung child95672; report exists and its hash is retained without reading raw diagnostics.",
+      "next_fix": "Use an intentional seconds limit, catch TimeoutExpired, terminate/reap the launched child and its owned descendants, preserve a safely screened failure receipt, and verify the bounded timeout case."
+    },
+    {
+      "id": "ME10",
+      "status": "VERIFIED",
+      "claim": "Final receipt bytes, all eight declared source hashes and isolated DB identity match the reviewed snapshot. Prior failures remain historical.",
+      "evidence": [
+        "reports/maintained-edit-cas-receipt.json",
+        "reports/run-receipts/maintained-edit-cas-20261010-0844-d4ffebe6-dd74-401b-b995-4e100169fdb9.json",
+        "reports/independent-consolidated-edit-review.json",
+        "reports/independent-two-types-review.json",
+        "read-only identity/readback commands627442/e80518"
+      ],
+      "limits": "mode=ro SQLite integrity_check returned ok; DB has workflow/catalog-watch tables but no catalog edit transaction ledger. This proves identity/integrity only, not edit semantics."
+    }
+  ],
+  "historical_evidence": {
+    "reports/independent-consolidated-edit-review.json": "e10dbd9024f2d5def0674836255d9aa27e319f7fd61ed4060f41ea09b0ffe41f",
+    "reports/independent-two-types-review.json": "ff1ab503cb65d6318396ddf69eef2750efcc29af99c11a26fc4745950037782b",
+    "reports/maintained-edit-wait-diagnosis-20261010-0859.json": "9fd249d7eaa26788525a8ae835f1e734495e4e5044a9fb9da92c8862a49d59c3"
+  },
+  "pure_no_write_results": {
+    "missing_id_schema": "accepted",
+    "changed_id": "accepted",
+    "invalid_refs": "accepted",
+    "false_schema": "accepted",
+    "replayed_different_payload": {
+      "accepted_prior": true
+    }
+  },
+  "next_action": "Same owner: correct actual maintained consumer support/schema and bound replay transaction; make derived final bytes truthful, recover crash/fault states and fix parent seconds timeout/cleanup. Browser acceptance is separate. No new external or universal verifier scope."
+}

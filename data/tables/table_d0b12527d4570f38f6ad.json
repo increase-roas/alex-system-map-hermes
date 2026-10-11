@@ -1,0 +1,1546 @@
+{
+  "id": "table_d0b12527d4570f38f6ad",
+  "sheet": "S03-23 GoHighLevel",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        },
+        {
+          "column": "B",
+          "value": "connection"
+        },
+        {
+          "column": "C",
+          "value": "surface"
+        },
+        {
+          "column": "D",
+          "value": "on_off"
+        },
+        {
+          "column": "E",
+          "value": "account_it_reaches"
+        },
+        {
+          "column": "F",
+          "value": "can_do"
+        },
+        {
+          "column": "G",
+          "value": "where_the_key_lives"
+        },
+        {
+          "column": "H",
+          "value": "status"
+        },
+        {
+          "column": "I",
+          "value": "how_verified"
+        },
+        {
+          "column": "J",
+          "value": "notes"
+        },
+        {
+          "column": "K",
+          "value": "target_home"
+        },
+        {
+          "column": "L",
+          "value": "setup_step"
+        },
+        {
+          "column": "M",
+          "value": "priority"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex ghl-oauth-crm (renamed from increase-roas-ghl) — relay on javar-orgo to the OAuth gateway"
+        },
+        {
+          "column": "C",
+          "value": "Codex"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "Increase ROAS OAuth Gateway (IncreaseRoas agency, 303 locations), via a relay on javar-orgo"
+        },
+        {
+          "column": "F",
+          "value": "Config only approves read tools. Remote side may expose writes (not checked)."
+        },
+        {
+          "column": "G",
+          "value": "SSH ControlMaster socket + root on the Tailscale host javar-orgo. The gateway key stays on the remote side (README: \"remote 1Password loader\")."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Config read 2026-10-01: Codex has no ghl entry (mcp_servers: 1password, composio-docs, computer-use, hermes-docs, meta-ads-docs, node_repl, orgo). The old SSH relay to javar-orgo is no longer used. A later re-read the same day found only node_repl under [mcp_servers] (the others went in Alex's 12:47 EDT cleanup and spp-c11)."
+        },
+        {
+          "column": "J",
+          "value": "Removed from ~/.codex/config.toml 2026-10-01. Composio route proven 2026-10-01 (Codex ran Composio calls for ir-notes and GA4 after its Composio app was set to approve). Backup ~/Backups/codex-config-2026-10-01/"
+        },
+        {
+          "column": "K",
+          "value": "Removed (Composio ghl-oauth-crm is the one CRM way in)"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "ChatGPT app 'Increase ROAS — GoHighLevel'"
+        },
+        {
+          "column": "C",
+          "value": "ChatGPT → Orgo OpenClaw"
+        },
+        {
+          "column": "D",
+          "value": "off"
+        },
+        {
+          "column": "E",
+          "value": "GHL_MCP_CONFIG_DIR=/opt/increase-roas-mcp/ghl-config: 48-location registry, companies IncreaseRoas + RevStead, default HTL B2B (credentials.json ghl_location_id). The tool description advertises the RevStead Sales/CS/Demo IDs."
+        },
+        {
+          "column": "F",
+          "value": "ghl_read limited to a 21-tool allowlist; ghl_write = any other tool (can send messages, delete)."
+        },
+        {
+          "column": "G",
+          "value": "OpenAI control-plane key CONTROL_PLANE_API_KEY in /opt/increase-roas-mcp/tunnel-runtime.env; 1Password \"RevStead GHL Tunnel\" (archived 2026-09-30). GHL PITs in /opt/increase-roas-mcp/ghl-config/."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Backend service ir-mcp-revstead-ghl was removed from OpenClaw 2026-09-30 and is not in the 2026-10-01 hub service list, so the app should not answer (not tested). Codex config read 2026-10-01 still lists the app and its 3 tools."
+        },
+        {
+          "column": "J",
+          "value": "Orgo My OpenClaw: supervisor ir-mcp-revstead-ghl (removed) → tunnel-client profile revstead-ghl → ghl-server.py → @elitedcs/ghl-mcp. The app entry in ChatGPT was deleted 2026-10-01 too."
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Done: gone from ChatGPT 2026-10-01; Codex entries gone (MacBook 2026-10-01, Mac mini approvals 2026-10-03)"
+        },
+        {
+          "column": "M",
+          "value": "Done"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Claude Code: GHL Command (local) @elitedcs/ghl-mcp v3.88.2"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "48 locations in its PIT registry: 45 in IncreaseRoas (HTL B2B, HTL Success, Paradise Spas, Sun Pool, The Hot Tub Store, New Season, ~30 \"IR\" tree clients, Javar Premium, IR Customer Success, etc.) + 3 in RevStead (Customer Service nyj3vuxjM20BbGk2rh7C, Demo NkIE2EA8fq9SxOXO2g7O, Sales xD6QoPV5zWKfUPSonXZD). Firebase workflow-builder sessions for both agencies. Current default: Hot Tub Launch B2B."
+        },
+        {
+          "column": "F",
+          "value": "Full read and write, including send_message, bulk deletes, workflow publish, invoices. switch_location changes account."
+        },
+        {
+          "column": "G",
+          "value": "Config dir ~/Library/Application Support/elitedcs-ghl-mcp/ (credentials.json: license + default location PIT + Firebase; .ghl-tokens.json: 48 per-location PITs + firebaseByCompany). Env var names it also honors: GHL_API_KEY, GHL_LOCATION_ID, GHL_COMPANY_ID, GHL_USER_ID, GHL_FIREBASE_API_KEY, GHL_FIREBASE_REFRESH_TOKEN, GHL_LICENSE_KEY, GHL_LICENSE_EMAIL, GHL_MCP_CONFIG_DIR. None are set in the configs. License email alex@increaseroas.com."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Working. Live get_current_location returned Hot Tub Launch B2B, registry 48 in this local copy, v3.88.2; the live builder registry on the hub holds 49 (read 2026-10-03, spp-p55a)."
+        },
+        {
+          "column": "J",
+          "value": "EliteDCS licensed package, 329 tools, runs locally on the Mac"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Removed from config 2026-09-30 (backup ~/Backups/ghl-cleanup-2026-09-30)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Claude Code: ghl-oauth-crm (renamed from ghl-oauth-gateway) — Increase ROAS OAuth Gateway (increase-roas-ghl server 1.3.0)"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency only: 303 installed locations (all listed authorizationState: installed). RevStead agency → agency_authorization_not_found."
+        },
+        {
+          "column": "F",
+          "value": "Read (ghl_list_locations, ghl_account_summary, ghl_search, ghl_fetch, ghl_execute_read_operation) and write (ghl_execute_operation, any API op incl. conversations/messages within scopes)"
+        },
+        {
+          "column": "G",
+          "value": "Bearer key GHL_MCP_INTERNAL_API_KEY. Mac: ~/.cursor/mcp-servers/ghl-oauth-gateway.env (both Claude wrappers read this file); duplicate-looking file ~/.cursor/mcp-servers/ghl-mcp-internal.key. 1Password: \"GHL Agent Gateway — Javante — PROD (shared company integration)\" (vault Agent — Javante — PROD, field GHL_MCP_INTERNAL_API_KEY); pointer note \"GHL Marketplace OAuth Gateway — Reference\" (Local Vault). Upstream OAuth tokens live in the Worker (not inspected). Both Mac files were moved to the Trash 2026-10-03 after the 1Password check (K03)."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Claude Code ~/.claude.json lists only playwright (config read 2026-10-01). Gateway itself still works: Composio GHL_LIST_LOCATIONS returned 303 on 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Removed 2026-10-01: Composio custom_ghl_oauth_crm is the one GHL CRM route. Backup ~/Backups/claude-config-2026-10-01/. The gateway behind it is the Cloudflare Worker described in the last rows."
+        },
+        {
+          "column": "K",
+          "value": "Removed (Composio ghl-oauth-crm is the one CRM way in)"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01 (was renamed to ghl-oauth-crm 2026-09-30, then removed)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex app asdk_app_6aa142ee… 'Increase ROAS — GoHighLevel'"
+        },
+        {
+          "column": "C",
+          "value": "Codex → Orgo OpenClaw"
+        },
+        {
+          "column": "D",
+          "value": "off"
+        },
+        {
+          "column": "E",
+          "value": "GHL_MCP_CONFIG_DIR=/opt/increase-roas-mcp/ghl-config: 48-location registry, companies IncreaseRoas + RevStead, default HTL B2B (credentials.json ghl_location_id). The tool description advertises the RevStead Sales/CS/Demo IDs."
+        },
+        {
+          "column": "F",
+          "value": "ghl_read limited to a 21-tool allowlist; ghl_write = any other tool (can send messages, delete)."
+        },
+        {
+          "column": "G",
+          "value": "OpenAI control-plane key CONTROL_PLANE_API_KEY in /opt/increase-roas-mcp/tunnel-runtime.env; 1Password \"RevStead GHL Tunnel\" (archived 2026-09-30). GHL PITs in /opt/increase-roas-mcp/ghl-config/."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Codex config read 2026-10-01: the app and its ghl_find_tools, ghl_read and ghl_write entries are still listed. Its backend is gone (2026-09-30)."
+        },
+        {
+          "column": "J",
+          "value": "Same app as row 3. Its plugin ghl-builder@personal was removed 2026-10-01. Composio custom_ghl_command_builder is the route."
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Done: gone from ChatGPT 2026-10-01; Codex entries gone (MacBook 2026-10-01, Mac mini approvals 2026-10-03)"
+        },
+        {
+          "column": "M",
+          "value": "Done"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "ghl-command-builder — GHL Command Universal (claude.ai connector 'GoHighLevel')"
+        },
+        {
+          "column": "C",
+          "value": "Claude app (claude.ai connector) → Orgo OpenClaw"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "Each OAuth connection gets its own session copied from /opt/increase-roas-mcp/ghl-config, so it has the same 48-location PIT registry (IncreaseRoas + RevStead). All 9 session credentials.json files default to HTL B2B. Live: get_location on HTL B2B succeeded; Lone Star CS and RevStead Sales returned 403 on the active selection, so you must switch_location first."
+        },
+        {
+          "column": "F",
+          "value": "5 entry tools: switch_location, get_location, ghl_find_tools, ghl_read (106 reads), ghl_write (123 writes; can send messages, publish, delete). Writes require expected_location_id."
+        },
+        {
+          "column": "G",
+          "value": "Connection password: 1Password \"GHL Command Builder (ghl-command-builder) — connection password\" (Connectors vault); that item is the only copy: the local fallback ~/.config/ghl-command-universal/connection-password was retired 2026-10-02 after a sha256 match (spp-p35a). Origin key /opt/ghl-command-universal/origin-key, tunnel token /opt/ghl-command-universal/tunnel/token. Worker secrets CONNECTION_PASSWORD_SHA256, ORIGIN_KEY."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: this Claude session lists no GoHighLevel connector (it shows visualize, Ref, Composio and Claude Docs). Before removal it worked: list_workflows_full on HTL B2B returned 40 workflows, canWrite true (2026-09-30)."
+        },
+        {
+          "column": "J",
+          "value": "Removed by Alex in Claude > Settings > Connectors 2026-10-01; the Composio builder route is equal or stronger. Its engine (Orgo services ir-ghl-command-universal and ir-ghl-command-tunnel) is still RUNNING because the Composio builder route uses it: see the \"Orgo hub services\" row. The 12 dead GHL allow rules were removed from ~/.claude/settings.json 2026-10-01 (backup in ~/Backups/claude-config-2026-10-01); only wording in its auto-mode text still names the old connector (cosmetic)."
+        },
+        {
+          "column": "K",
+          "value": "Removed (Composio ghl-command-builder is the one builder way in)"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01. Nothing left to do for this row"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "ghl CLI @gohighlevel/marketplace-cli 1.0.0"
+        },
+        {
+          "column": "C",
+          "value": "Mac CLI"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Marketplace developer account alowbaito@gmail.com, developer/team ID 686eb92b97142ffc2103e444; selected app \"Increase ROAS Agent Gateway\" appId 6a7d5266dcca6b11ed7a52f9, version 6abb693688de6fce3ba982a6 (likely the app behind gateway A). No location."
+        },
+        {
+          "column": "F",
+          "value": "Can change and publish the marketplace app config (no CRM data)"
+        },
+        {
+          "column": "G",
+          "value": "OAuth access + refresh token in ~/.config/ghl/credentials.json; app selection in ~/.config/ghl/config.json"
+        },
+        {
+          "column": "H",
+          "value": "working"
+        },
+        {
+          "column": "I",
+          "value": "Logged in (refreshed 2026-09-30 19:36; access token expiry 2026-09-30 20:36 EDT; refresh token present). No live command was run. Not rechecked 2026-10-01."
+        },
+        {
+          "column": "J",
+          "value": "Official HighLevel developer portal CLI (apps, sandbox, secrets). Not a CRM/location client. The 2026-09-29 CSV row giving it 329 CRM tools is wrong."
+        },
+        {
+          "column": "K",
+          "value": "Mac (keep)"
+        },
+        {
+          "column": "L",
+          "value": "Developer tool for your GHL app; not a connector"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Claude Desktop: GHL Command (local) @elitedcs/ghl-mcp v3.88.2"
+        },
+        {
+          "column": "C",
+          "value": "Claude Desktop"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "48 locations in its PIT registry: 45 in IncreaseRoas (HTL B2B, HTL Success, Paradise Spas, Sun Pool, The Hot Tub Store, New Season, ~30 \"IR\" tree clients, Javar Premium, IR Customer Success, etc.) + 3 in RevStead (Customer Service nyj3vuxjM20BbGk2rh7C, Demo NkIE2EA8fq9SxOXO2g7O, Sales xD6QoPV5zWKfUPSonXZD). Firebase workflow-builder sessions for both agencies. Current default: Hot Tub Launch B2B."
+        },
+        {
+          "column": "F",
+          "value": "Full read and write, including send_message, bulk deletes, workflow publish, invoices. switch_location changes account."
+        },
+        {
+          "column": "G",
+          "value": "Config dir ~/Library/Application Support/elitedcs-ghl-mcp/ (credentials.json: license + default location PIT + Firebase; .ghl-tokens.json: 48 per-location PITs + firebaseByCompany). Env var names it also honors: GHL_API_KEY, GHL_LOCATION_ID, GHL_COMPANY_ID, GHL_USER_ID, GHL_FIREBASE_API_KEY, GHL_FIREBASE_REFRESH_TOKEN, GHL_LICENSE_KEY, GHL_LICENSE_EMAIL, GHL_MCP_CONFIG_DIR. None are set in the configs. License email alex@increaseroas.com."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Same key/config as the Claude Code copy, which was tested live; this copy not separately tested"
+        },
+        {
+          "column": "J",
+          "value": "EliteDCS licensed package, 329 tools, runs locally on the Mac"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Removed 2026-09-30 when the Claude app quit (config now has only ghl-oauth-crm)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Claude Desktop: ghl-oauth-crm (renamed from ghl-oauth-gateway) — Increase ROAS OAuth Gateway (increase-roas-ghl server 1.3.0)"
+        },
+        {
+          "column": "C",
+          "value": "Claude Desktop"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency only: 303 installed locations (all listed authorizationState: installed). RevStead agency → agency_authorization_not_found."
+        },
+        {
+          "column": "F",
+          "value": "Read (ghl_list_locations, ghl_account_summary, ghl_search, ghl_fetch, ghl_execute_read_operation) and write (ghl_execute_operation, any API op incl. conversations/messages within scopes)"
+        },
+        {
+          "column": "G",
+          "value": "Bearer key GHL_MCP_INTERNAL_API_KEY. Mac: ~/.cursor/mcp-servers/ghl-oauth-gateway.env (both Claude wrappers read this file); duplicate-looking file ~/.cursor/mcp-servers/ghl-mcp-internal.key. 1Password: \"GHL Agent Gateway — Javante — PROD (shared company integration)\" (vault Agent — Javante — PROD, field GHL_MCP_INTERNAL_API_KEY); pointer note \"GHL Marketplace OAuth Gateway — Reference\" (Local Vault). Upstream OAuth tokens live in the Worker (not inspected). Both Mac files were moved to the Trash 2026-10-03 after the 1Password check (K03)."
+        },
+        {
+          "column": "H",
+          "value": "removed 2026-10-02 (Alex's trash click in Claude Desktop Settings → Developer; mcpServers empty, spp-c21)"
+        },
+        {
+          "column": "I",
+          "value": "Claude Desktop config re-read when this tab was refreshed (2026-10-01): still lists ghl-oauth-crm (and google-workspace-admin). Whether it still connects was not tested."
+        },
+        {
+          "column": "J",
+          "value": "Duplicate of Composio ghl-oauth-crm. The run log says it was removed earlier on 2026-10-01 (backup ~/Backups/claude-config-2026-10-01/); the app probably wrote it back when it closed (not checked). Its wrapper reads ~/.cursor/mcp-servers/ghl-oauth-gateway.env, and both key files were on the Mac until 2026-10-03 (~/.cursor/mcp-servers/ghl-oauth-gateway.env and ghl-mcp-internal.key), when they were moved to the Trash after the 1Password check (K03)."
+        },
+        {
+          "column": "K",
+          "value": "Remove (duplicate of Composio)"
+        },
+        {
+          "column": "L",
+          "value": "Done: removed 2026-10-02 (spp-c21); both key files moved to the Trash 2026-10-03 (K03)"
+        },
+        {
+          "column": "M",
+          "value": "Done"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex \"ghl\" (GHL Command + Lone Star routing adapter)"
+        },
+        {
+          "column": "C",
+          "value": "Codex"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "GHL Command registry: 48 locations (45 IncreaseRoas agency uVK13CFqZs9TOBENvXSH + 3 RevStead 8lhv95QH1ieNGTrnac9F), default Hot Tub Launch B2B; plus Lone Star CS + Natural Sanitation routing The 48 is this local copy's count on 2026-09-30; the live builder registry on the hub holds 49 (read 2026-10-03, spp-p55a)."
+        },
+        {
+          "column": "F",
+          "value": "Read/write like B (17 read tools set to approval \"approve\" in config)."
+        },
+        {
+          "column": "G",
+          "value": "Same files as B. Identity check for the two OAuth locations shells out to the increase-roas-ghl SSH transport (row D)."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Unknown for current Codex session. Adapter fails closed if npx package changes. The Lone Star identity check depends on row D, which is currently not connectable."
+        },
+        {
+          "column": "J",
+          "value": "Same EliteDCS package as B (loads the exact npx-cache file), patched at runtime"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted from Codex config 2026-09-30; files in ~/Backups/ghl-cleanup-2026-09-30/files"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex plugin ghl-builder@personal"
+        },
+        {
+          "column": "C",
+          "value": "Codex"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "No GHL account. Its skill routes builds to ghl-command-builder and CRM to ghl-oauth-crm."
+        },
+        {
+          "column": "F",
+          "value": "n/a (instructions)"
+        },
+        {
+          "column": "G",
+          "value": "none"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Codex plugin list read 2026-10-01: ghl-builder@personal is not there."
+        },
+        {
+          "column": "J",
+          "value": "Removed with `codex plugin remove` 2026-10-01. The build-ghl-systems skill (updated 2026-09-30) names ghl-command-builder and ghl-oauth-crm."
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex plugin: GHL Conversation Scanner (local REST tool + Codex plugin ghl-conversation-scanner)"
+        },
+        {
+          "column": "C",
+          "value": "Codex plugin"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "4 locations: New Season Tree Masters, Paradise Spas, The Hot Tub Store, Sun Pool and Supply (IDs are in .env, not read)"
+        },
+        {
+          "column": "F",
+          "value": "Read-only conversation scans (by design)"
+        },
+        {
+          "column": "G",
+          "value": "~/ghl-conversation-scanner/.env: GHL_API_KEY_{NEW_SEASON,HOT_TUB_STORE,PARADISE_SPAS,SUN_POOL_AND_SUPPLY}, GHL_LOCATION_ID_*, GHL_API_BASE_URL"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Unknown (not run)"
+        },
+        {
+          "column": "J",
+          "value": "Local Node scanner, direct GHL REST with per-customer PITs"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Moved to ~/Backups/ghl-cleanup-2026-09-30 on 2026-09-30 (plugin, skill, tool and its 4 PITs)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Cursor: GHL Command (local) @elitedcs/ghl-mcp v3.88.2"
+        },
+        {
+          "column": "C",
+          "value": "Cursor"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "48 locations in its PIT registry: 45 in IncreaseRoas (HTL B2B, HTL Success, Paradise Spas, Sun Pool, The Hot Tub Store, New Season, ~30 \"IR\" tree clients, Javar Premium, IR Customer Success, etc.) + 3 in RevStead (Customer Service nyj3vuxjM20BbGk2rh7C, Demo NkIE2EA8fq9SxOXO2g7O, Sales xD6QoPV5zWKfUPSonXZD). Firebase workflow-builder sessions for both agencies. Current default: Hot Tub Launch B2B."
+        },
+        {
+          "column": "F",
+          "value": "Full read and write, including send_message, bulk deletes, workflow publish, invoices. switch_location changes account."
+        },
+        {
+          "column": "G",
+          "value": "Config dir ~/Library/Application Support/elitedcs-ghl-mcp/ (credentials.json: license + default location PIT + Firebase; .ghl-tokens.json: 48 per-location PITs + firebaseByCompany). Env var names it also honors: GHL_API_KEY, GHL_LOCATION_ID, GHL_COMPANY_ID, GHL_USER_ID, GHL_FIREBASE_API_KEY, GHL_FIREBASE_REFRESH_TOKEN, GHL_LICENSE_KEY, GHL_LICENSE_EMAIL, GHL_MCP_CONFIG_DIR. None are set in the configs. License email alex@increaseroas.com."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Same key/config as the Claude Code copy, which was tested live; this copy not separately tested"
+        },
+        {
+          "column": "J",
+          "value": "EliteDCS licensed package, 329 tools, runs locally on the Mac"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Removed from config 2026-09-30 (backup ~/Backups/ghl-cleanup-2026-09-30)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Cursor: ghl-oauth-crm (renamed from ghl-oauth-gateway) — Increase ROAS OAuth Gateway (increase-roas-ghl server 1.3.0)"
+        },
+        {
+          "column": "C",
+          "value": "Cursor"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency only: 303 installed locations (all listed authorizationState: installed). RevStead agency → agency_authorization_not_found."
+        },
+        {
+          "column": "F",
+          "value": "Read (ghl_list_locations, ghl_account_summary, ghl_search, ghl_fetch, ghl_execute_read_operation) and write (ghl_execute_operation, any API op incl. conversations/messages within scopes)"
+        },
+        {
+          "column": "G",
+          "value": "Bearer key GHL_MCP_INTERNAL_API_KEY. Mac: ~/.cursor/mcp-servers/ghl-oauth-gateway.env (both Claude wrappers read this file); duplicate-looking file ~/.cursor/mcp-servers/ghl-mcp-internal.key. 1Password: \"GHL Agent Gateway — Javante — PROD (shared company integration)\" (vault Agent — Javante — PROD, field GHL_MCP_INTERNAL_API_KEY); pointer note \"GHL Marketplace OAuth Gateway — Reference\" (Local Vault). Upstream OAuth tokens live in the Worker (not inspected). Both Mac files were moved to the Trash 2026-10-03 after the 1Password check (K03)."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Cursor ~/.cursor/mcp.json lists only 1password and orgo (config read 2026-10-01)."
+        },
+        {
+          "column": "J",
+          "value": "Removed from ~/.cursor/mcp.json 2026-10-01. Composio route proven 2026-10-01 (Cursor read Calendar and Asana through its Composio plugin). Backup ~/Backups/cursor-config-2026-10-01/"
+        },
+        {
+          "column": "K",
+          "value": "Removed (Composio ghl-oauth-crm is the one CRM way in)"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Hermes/Javar javar_ghl"
+        },
+        {
+          "column": "C",
+          "value": "Hermes/Javar (Orgo)"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "Increase ROAS OAuth Gateway → IncreaseRoas agency (303 locations); pinned to HTL B2B AG47jEV5rVUrGLt5FlKO per 1Password item"
+        },
+        {
+          "column": "F",
+          "value": "CRM read/write via gateway"
+        },
+        {
+          "column": "G",
+          "value": "1Password via Orgo loader: \"GHL Worker — EA-Javar — PROD\" (vault Agent — EA-Javar — PROD), and/or \"GHL Agent Gateway — Javante — PROD\""
+        },
+        {
+          "column": "H",
+          "value": "unverified"
+        },
+        {
+          "column": "I",
+          "value": "Unverified (Javar's box was not accessed). The gateway itself works (303 locations through Composio 2026-10-01)."
+        },
+        {
+          "column": "J",
+          "value": "Client of the OAuth Gateway (A)"
+        },
+        {
+          "column": "K",
+          "value": "Javar (keep)"
+        },
+        {
+          "column": "L",
+          "value": "Leave as is: Javar's own route"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Mac (local tool): GHL Conversation Scanner (local REST tool + Codex plugin ghl-conversation-scanner)"
+        },
+        {
+          "column": "C",
+          "value": "Mac (local tool)"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "4 locations: New Season Tree Masters, Paradise Spas, The Hot Tub Store, Sun Pool and Supply (IDs are in .env, not read)"
+        },
+        {
+          "column": "F",
+          "value": "Read-only conversation scans (by design)"
+        },
+        {
+          "column": "G",
+          "value": "~/ghl-conversation-scanner/.env: GHL_API_KEY_{NEW_SEASON,HOT_TUB_STORE,PARADISE_SPAS,SUN_POOL_AND_SUPPLY}, GHL_LOCATION_ID_*, GHL_API_BASE_URL"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Unknown (not run)"
+        },
+        {
+          "column": "J",
+          "value": "Local Node scanner, direct GHL REST with per-customer PITs"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Moved to ~/Backups/ghl-cleanup-2026-09-30 on 2026-09-30 (plugin, skill, tool and its 4 PITs)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Official LeadConnector MCP \"ghl-htl-snapshot-builder\""
+        },
+        {
+          "column": "C",
+          "value": "Claude Code"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "Unverified. No locationId header or env is configured. The location would come from the OAuth grant, and no grant was found."
+        },
+        {
+          "column": "F",
+          "value": "Unverified"
+        },
+        {
+          "column": "G",
+          "value": "OAuth through Claude Code's MCP auth (stored in Claude Code's keychain entry if completed). No header or env names in the config."
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Last seen \"Needs authentication\" (transcripts 2026-08-21). The project folder is empty. Likely never authenticated."
+        },
+        {
+          "column": "J",
+          "value": "HighLevel hosted MCP https://services.leadconnectorhq.com/mcp/anthropic/v2"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Removed 2026-09-30 (never signed in)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex \"ghl-docs\""
+        },
+        {
+          "column": "C",
+          "value": "Codex"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "No GHL account. It only fetches marketplace.gohighlevel.com / help docs."
+        },
+        {
+          "column": "F",
+          "value": "Read public docs"
+        },
+        {
+          "column": "G",
+          "value": "none"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Disabled"
+        },
+        {
+          "column": "J",
+          "value": "Local docs fetcher ~/.codex/mcp-servers/ghl-docs/index.mjs"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Deleted from Codex config 2026-09-30; files in ~/Backups/ghl-cleanup-2026-09-30/files"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Cursor ghl-command-builder — GHL Command Universal"
+        },
+        {
+          "column": "C",
+          "value": "Cursor"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "Same 48-location registry as Universal (IncreaseRoas 45 + RevStead 3)"
+        },
+        {
+          "column": "F",
+          "value": "workflow/funnel/form/pipeline builder + CRM tools (5-tool facade)"
+        },
+        {
+          "column": "G",
+          "value": "OAuth sign-in (connection password: 1Password 'GHL Command Builder (ghl-command-builder) — connection password')"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Cursor ~/.cursor/mcp.json lists only 1password and orgo (config read 2026-10-01)."
+        },
+        {
+          "column": "J",
+          "value": "Removed from ~/.cursor/mcp.json 2026-10-01. Composio route proven 2026-10-01 (Cursor read Calendar and Asana through its Composio plugin). Backup ~/Backups/cursor-config-2026-10-01/"
+        },
+        {
+          "column": "K",
+          "value": "Removed (Composio ghl-command-builder is the one builder way in)"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Codex ghl-command-builder — GHL Command Universal"
+        },
+        {
+          "column": "C",
+          "value": "Codex"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "Same 48-location registry"
+        },
+        {
+          "column": "F",
+          "value": "builder + CRM tools (5-tool facade), auto-approved"
+        },
+        {
+          "column": "G",
+          "value": "OAuth sign-in (connection password: 1Password 'GHL Command Builder (ghl-command-builder) — connection password')"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Config read 2026-10-01: Codex has no ghl entry."
+        },
+        {
+          "column": "J",
+          "value": "Removed from ~/.codex/config.toml 2026-10-01. Composio route proven 2026-10-01 (Codex ran Composio calls for ir-notes and GA4 after its Composio app was set to approve). Backup ~/Backups/codex-config-2026-10-01/"
+        },
+        {
+          "column": "K",
+          "value": "Removed (Composio ghl-command-builder is the one builder way in)"
+        },
+        {
+          "column": "L",
+          "value": "Done 2026-10-01"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Claude ~/.claude/mcp_settings.json 'ghl-ssa' (third-party GHL MCP on onrender.com)"
+        },
+        {
+          "column": "C",
+          "value": "Claude (legacy settings file)"
+        },
+        {
+          "column": "D",
+          "value": "removed"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "unverified"
+        },
+        {
+          "column": "G",
+          "value": "unverified"
+        },
+        {
+          "column": "H",
+          "value": "removed"
+        },
+        {
+          "column": "I",
+          "value": "Found in config scan 2026-09-30; never called"
+        },
+        {
+          "column": "J",
+          "value": "Third-party hosted GHL MCP"
+        },
+        {
+          "column": "K",
+          "value": "Removed"
+        },
+        {
+          "column": "L",
+          "value": "Removed from ~/.claude/mcp_settings.json 2026-09-30 (backup in ~/Backups/ghl-cleanup-2026-09-30/files)"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom MCP ghl-command-builder (custom_ghl_command_builder, account ca_o1-FA70PbU3x)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "GHL Command builder registry: 49 registered accounts (IncreaseRoas + RevStead), incl. HTL B2B, Natural Sanitation, LONESTAR SALES"
+        },
+        {
+          "column": "F",
+          "value": "5 tools: switch_location, get_location, ghl_find_tools, ghl_read, ghl_write (workflows, funnels, forms, pipelines)"
+        },
+        {
+          "column": "G",
+          "value": "OAuth grant held by Composio; connection password in 1Password Connectors: \"GHL Command Builder (ghl-command-builder) — connection password\""
+        },
+        {
+          "column": "H",
+          "value": "working: THE GHL builder route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: composio execute switch_location + get_location returned Hot Tub Launch B2B (AG47jEV5rVUrGLt5FlKO). Login ca_o1-FA70PbU3x is ACTIVE in the end-of-day Composio list (2026-10-01)."
+        },
+        {
+          "column": "J",
+          "value": "Builder worker fixed 2026-10-01 so Composio sign-in completes (double-submit replay, send-once page, hand-off page). Runs on the Orgo services ir-ghl-command-universal and ir-ghl-command-tunnel (both RUNNING 2026-10-01): keep them. LONESTAR CUSTOMER SERVICE: dropped 2026-10-02 (Alex)."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Composio custom MCP ghl-oauth-crm (custom_ghl_oauth_crm, account ca_OIfo_F6scXwN)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency: 303 sub-accounts (verified count), incl. HTL B2B and Natural Sanitation"
+        },
+        {
+          "column": "F",
+          "value": "10 gateway tools: list/scan locations, search/describe/execute operations, ghl.request for any API path"
+        },
+        {
+          "column": "G",
+          "value": "Composio (pushed from 1Password Connectors \"GHL OAuth CRM (ghl-oauth-crm) — gateway key\" by connectors-sync; never typed)"
+        },
+        {
+          "column": "H",
+          "value": "working: THE GHL CRM route"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: GHL_LIST_LOCATIONS via Composio returned count 303. Login ca_OIfo_F6scXwN is ACTIVE in the end-of-day Composio list (2026-10-01)."
+        },
+        {
+          "column": "J",
+          "value": "Created by ~/.agents/tools/connectors/push_key_to_composio.py pattern. Javar keeps javar_ghl on the same gateway (row 16)."
+        },
+        {
+          "column": "K",
+          "value": "Composio"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Orgo hub services ir-ghl-command-universal + ir-ghl-command-tunnel (the engine behind the builder route)"
+        },
+        {
+          "column": "C",
+          "value": "Orgo My OpenClaw (hub)"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "GHL Command builder registry: 49 registered accounts (same as row 23)"
+        },
+        {
+          "column": "F",
+          "value": "Runs @elitedcs/ghl-mcp 3.88.2 (loopback :8789); the tunnel carries ghl-command-origin.increaseroas.com (tunnel link inferred from the service names and the old Universal row)"
+        },
+        {
+          "column": "G",
+          "value": "Connection password: 1Password \"GHL Command Builder (ghl-command-builder) — connection password\" (Connectors vault). Origin key and tunnel token under /opt/ghl-command-universal/ on the hub. Worker secrets CONNECTION_PASSWORD_SHA256, ORIGIN_KEY."
+        },
+        {
+          "column": "H",
+          "value": "working: still running"
+        },
+        {
+          "column": "I",
+          "value": "Hub service list 2026-10-01 (end of day): ir-ghl-command-universal RUNNING (up 2 days 3:43), ir-ghl-command-tunnel RUNNING (up 2 days 3:54)"
+        },
+        {
+          "column": "J",
+          "value": "These are NOT duplicates. Composio ghl-command-builder → Cloudflare Worker (OAuth + password consent) → this tunnel → this service. Stopping them breaks the builder route. The old ChatGPT/Revstead service ir-mcp-revstead-ghl is gone from the list. Source in git (2026-10-01): github.com/increaseroasir/ghl-command-universal, commit 6fcc3b4 (worker/ and origin/, including the supervisor programs)."
+        },
+        {
+          "column": "K",
+          "value": "Keep (hosting for Composio ghl-command-builder)"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare Worker increase-roas-oauth-gateway (the engine behind the CRM route)"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare Workers"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency only: 303 installed locations. RevStead agency → agency_authorization_not_found."
+        },
+        {
+          "column": "F",
+          "value": "Read (list, scan, search, fetch) and write (ghl_execute_operation: any API op within the app's scopes)"
+        },
+        {
+          "column": "G",
+          "value": "Bearer key GHL_MCP_INTERNAL_API_KEY: 1Password \"GHL OAuth CRM (ghl-oauth-crm) — gateway key\" (Connectors vault), pushed into Composio by the key mover; never typed. Upstream OAuth tokens live in the Worker (not inspected)."
+        },
+        {
+          "column": "H",
+          "value": "working"
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Composio GHL_LIST_LOCATIONS returned 303 (the Worker answered)"
+        },
+        {
+          "column": "J",
+          "value": "One Worker only (no second copy). GHL Marketplace app OAuth, agency-level install. Doors left: Composio ghl-oauth-crm and Javar's javar_ghl (the Claude Desktop leftover in row 10 was removed 2026-10-02). The two Mac copies of a gateway key (~/.cursor/mcp-servers/ghl-oauth-gateway.env and ghl-mcp-internal.key) fed only that leftover; they were moved to the Trash 2026-10-03 after the 1Password check (K03: the .key held the old gateway key value already saved in 'GHL OAuth CRM (ghl-oauth-crm) — INTERNAL_API_KEY (from local .dev.vars)'; the .env was never opened). Source in git (2026-10-01): github.com/increaseroasir/increase-roas-oauth-gateway; commit b464b6d holds the live version 75 bytes, and the next deploy should be built from git."
+        },
+        {
+          "column": "K",
+          "value": "Cloudflare (keep)"
+        },
+        {
+          "column": "L",
+          "value": "Done"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "Composio toolkits \"highlevel\" and \"highlevel_mcp\" (Composio's own GHL apps)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "off"
+        },
+        {
+          "column": "E",
+          "value": "Not connected: no login in the end-of-day Composio list (2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "One location per key (narrower than the 303-location gateway)"
+        },
+        {
+          "column": "G",
+          "value": "none"
+        },
+        {
+          "column": "H",
+          "value": "not connected"
+        },
+        {
+          "column": "I",
+          "value": "Live Composio list 2026-10-01: no highlevel login"
+        },
+        {
+          "column": "J",
+          "value": "Card ghl.md says never use them. Official HighLevel MCP is also one location per Private Integration Token, so it is not a route (power audit 2026-10-01)."
+        },
+        {
+          "column": "K",
+          "value": "Do not add"
+        },
+        {
+          "column": "L",
+          "value": "Do not connect these"
+        },
+        {
+          "column": "M",
+          "value": "—"
+        }
+      ]
+    }
+  ]
+}

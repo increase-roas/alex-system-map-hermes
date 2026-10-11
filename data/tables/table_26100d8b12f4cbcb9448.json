@@ -1,0 +1,1841 @@
+{
+  "id": "table_26100d8b12f4cbcb9448",
+  "sheet": "SDK FULL REPORT",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Full SDK status, original intent and plan drift"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The complete October 9 report in readable chunks. Original bytes are also preserved in DOCS - SDK and the source ZIP."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Report section"
+        },
+        {
+          "column": "B",
+          "value": "Report text"
+        },
+        {
+          "column": "C",
+          "value": "Exact source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK status, original build intent, and plan drift"
+        },
+        {
+          "column": "B",
+          "value": "# SDK status, original build intent, and plan drift"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK status, original build intent, and plan drift"
+        },
+        {
+          "column": "B",
+          "value": "As of: October 9, 2026, America/Detroit. Author: Codex side conversation."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK status, original build intent, and plan drift"
+        },
+        {
+          "column": "B",
+          "value": "Scope: a documentary checkpoint of the existing SDK, relevant AI Money core packages, current proof, and outstanding build work. This document does not change the SDK, release artifacts, canonical gap CSV, build plan, agent profiles, hooks, or Google Sheet. Cursor remains the implementation owner. No installation, provider call, paid inference, deployment, or new test execution was performed to write this report."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The current position"
+        },
+        {
+          "column": "B",
+          "value": "## 1. The current position"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The current position"
+        },
+        {
+          "column": "B",
+          "value": "**The SDK is a working, versioned toolkit for building and maintaining the agent system. The full intended agent system is not yet demonstrated end to end.** SDK 1.5.1 is the latest independently verified release located in the inspected records. Its exact source is `157e2ae7d0d48922a6fadaf972583bdcc8f6132b`, on `wt/connect-integration-20261009`, in the [connect-integration worktree](/Users/alexlobaito/Documents/Codex/master-agent-operations-sdk-worktrees/connect-integration). [S1], [S2]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The current position"
+        },
+        {
+          "column": "B",
+          "value": "The SDK now has useful building blocks: editable files and configuration, bounded process recipes, scoped agent profiles, Composio shared-skill validation, direct Connect access, durable receipts and recovery, remote-file operations, memory recall, and typed decision interfaces. Their proof levels differ. A successful local SDK test does not establish that Hermes loaded the package, selected a skill, received a recalled memory, or completed a delegated job."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The current position"
+        },
+        {
+          "column": "B",
+          "value": "The relevant AI Money goal is **adopting the useful mechanisms in the core packages already collected**, especially Persona OS, Smart Orchestrator, Codex Model Router, and their supporting profile/handoff material. It is not acquiring every community resource or reproducing Bo's inaccessible private configuration. The original plan already says the private configuration is not a prerequisite. [S3]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The current position"
+        },
+        {
+          "column": "B",
+          "value": "There are two unfinished connections:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The current position"
+        },
+        {
+          "column": "B",
+          "value": "1. **Source to implementation:** for each relevant course-package feature, identify our exact implementation, adaptation, or remaining work.\n2. **Implementation to live agents:** prove the behavior on Javar and Javante, with correct accounts, memory, task/result delivery, independent checks, and recovery."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What the SDK is"
+        },
+        {
+          "column": "B",
+          "value": "## 2. What the SDK is"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What the SDK is"
+        },
+        {
+          "column": "B",
+          "value": "This is Alex's custom **Master Agent Operations SDK**, implemented in Python. An SDK is a reusable software toolkit: it gives Codex and other authorized callers consistent operations instead of making them reconstruct shell commands, connector calls, account selection, backup logic, and verification for every job."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What the SDK is"
+        },
+        {
+          "column": "B",
+          "value": "The common implementation is available through a Python facade, JSON command-line interfaces, and a stdio MCP interface. The broad master capability registry can be extended; Javar, Javante, and later agents receive narrower profiles from the same implementation. The common toolkit is not itself a complete Hermes profile, a deployed agent team, a replacement model, or a CRM sales-agent policy. [S4]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What the SDK is"
+        },
+        {
+          "column": "B",
+          "value": "Responsibility boundaries from the plan:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What the SDK is"
+        },
+        {
+          "column": "B",
+          "value": "| Component | Intended responsibility |\n|---|---|\n| Codex / existing primary | Build, maintain, assign work, make judgments, integrate verified results |\n| SDK | Resolve targets and capabilities; apply account/path/effect restrictions; execute reusable operations; retain intent, state, and evidence |\n| Hermes on Javar/Javante | Run each agent's actual profile, tools, skills, and tasks on its existing host |\n| Composio | Connected-service access and reusable hosted skill discovery; execution still requires the intended named account |\n| Mem0 | Scoped semantic memory retrieval and capture; remembered text does not determine task completion or g"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. What the SDK is"
+        },
+        {
+          "column": "B",
+          "value": "rant permissions |\n| Canonical Markdown / workspace | Human-readable decisions, instructions, sources, and durable context |\n| Observatory | Display actual task, evidence, failure, and version state from authoritative records |\n| Independent verifier | Check substantive work against the original acceptance criteria |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "## 3. What the original plan required"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "The [October 8 fleet plan][S3] begins with this objective:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "> Alex can give his existing agent team a job, see who owns it, receive independently checked results, and resume the work with current shared knowledge after an interruption."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "The intended order was: existing baseline → broad master SDK → target/profile/account and edit bindings → controlled write/readback → real Hermes adapter → one task with independent acceptance → broader skill delivery and automatic memory/source maintenance."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "The initial requirements remain the yardstick:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "| Requirement group | Original intent |\n|---|---|\n| R1–R4: team and sources | Preserve Orgo, Javar, and Javante; reuse inspected downloads; trace each capability to a source or explicit adaptation; do not require Bo's private profile/vault |\n| R5–R8: dependable work | Stable task/attempt identities, exact targets, exclusive ownership for conflicting edits, independent acceptance, acknowledged reporting, and interruption recovery |\n| R9–R10: skills and tools | Select useful skills with triggers, versions, and behavioral tests; use registered shared-skill discovery, revision checks, schemas, and named accounts |\n| R11–R12: memory | Recall at ta"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "sk start; automatic eligible capture; provenance, corrections, replay of missed capture, fresh-session and second-agent retrieval |\n| R13–R16: operation | Observatory state, verified repair lessons, source freshness and accepted baselines, and a dated per-target inventory with restore proof |\n| R17: speed | Reuse a typed fleet-task recipe; measure equivalent work before/after with acceptance unchanged |\n| R18–R19: editing | Supply the operations needed to edit actual build targets; preserve identity, authority, backup, readback, and agent-specific delivery proof |\n| R20: TypeSafe | A reusable typed decision capability for supplied answer/acti"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "on candidates, including abstention and quality checks; domain-specific CRM policy is a later application |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. What the original plan required"
+        },
+        {
+          "column": "B",
+          "value": "Alex explicitly requested a broadly capable master SDK first, followed by fenced agent versions. The plan was corrected to keep the master SDK stage separate from sales-agent scoping. Manus was a library of organized skill sources; Codex was the build execution surface. [S3], [S5]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. What has actually been delivered"
+        },
+        {
+          "column": "B",
+          "value": "## 4. What has actually been delivered"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Release progression"
+        },
+        {
+          "column": "B",
+          "value": "### Release progression"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Release progression"
+        },
+        {
+          "column": "B",
+          "value": "| Release | Exact source / historical milestone | What it established |\n|---|---|---|\n| 1.3.0 baseline | Primary checkout lineage `0cd9217`; baseline later captured for integration | General build/edit SDK existed, but source/package reproducibility needed repair; the version label alone did not identify all installed bytes |\n| 1.4.0 | `374c1ba63167d45a4fad543b9bf6c31b665560c0` | Reproducible source/wheel, remote-file operations, account profiles, hosted-skill bridge work, task recall, cloud delivery and TypeSafe interfaces; independent PASS WITH NOTES |\n| 1.5.0 | `db79aa2523073c50cbcad52e16992c7adee766d8` | Direct Composio Connect without a "
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Release progression"
+        },
+        {
+          "column": "B",
+          "value": "chat/spool host; installed preflight and one actual task-start recall on the Mac; independent PASS WITH NOTES |\n| **1.5.1** | **`157e2ae7d0d48922a6fadaf972583bdcc8f6132b`** | Restricts the Connect credential destination to the exact approved endpoint and rejects redirects; independent PASS WITH NOTES and a live installed compatibility preflight |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Release progression"
+        },
+        {
+          "column": "B",
+          "value": "Use release records and their exact commits, not the primary checkout or a version string alone. The worktrees and release directories are separate from the original `feat/sdk-mem0` checkout. [S1], [S6], [S7]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "### Capability and proof inventory"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "| Capability | Current implementation / evidence | Practical boundary |\n|---|---|---|\n| Local files | List/read/create/write/replace/JSON edit/copy/move/delete; durable preimages, mode preservation, history, readback, restore | Configured mounts and operator-owned ancestors matter; unrelated external writers are not coordinated automatically |\n| Build processes | Typed, operator-defined argv recipes; bounded output, timeout cleanup, recorded exit status | The process runs with host permissions; this is not arbitrary untrusted-code isolation |\n| Extensible tools and profiles | Dynamic capability registry; profiles narrow capabilities, roots, a"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "ccounts, effects, recipes | Broad catalog availability is not evidence every provider operation is configured or authorized |\n| Shared-skill gates | Discovery, exact skill selection, content digest verification, tool/schema validation, named-account execution | Each actual target must supply its own working configuration and identity |\n| Direct Connect | Installed 1.5.1 completed real skill search/load, tool search, and schema lookup; exact destination restriction active | Execution stopped before Mem0; this particular live check proves preflight compatibility only |\n| Remote file editing | One full live cycle on Javar's isolated canary, incl"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "uding rejection checks, separate readback, and restoration | This was an owned scratch file; receipt explicitly says running-agent activation was not demonstrated; Javante was not proven |\n| Agent account bindings | Sourced bindings and narrow-only profile selection; local allowed/denied tests | Runtime use of those accounts by both agents remains unproven; the Orgo account label in the canary receipt was caller asserted |\n| Workflow state and recovery | SQLite intent before effects, stable operation IDs, persisted manifests/receipts, resume/replay, process locking | Same-ledger locking does not establish distributed fleet ownership or coordi"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "nation across separate ledgers |\n| Task-start memory | Scoped bounded recall; one live retrieval on installed 1.5.0 returned one memory | No live worker-delivery, relevance-quality, automatic-capture, or two-agent recall proof follows from that single retrieval |\n| Delegated memory controls | Exact recall-block hash and size/item bounds; default behavior keeps recall with the caller unless delivery is approved | A caller-side receipt is not proof a worker received the memory; 1.5.1 did not alter these approval paths |\n| Cloud artifact delivery | Configured publisher, original-content backup, revision checks, separate readback, conflict-aware "
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "restore; local tests | Live isolated destination and registered Drive write/readback route were unresolved in the inspected evidence |\n| TypeSafe/Jev | Typed choice/score interfaces, abstention, schema validation, provenance/error handling; local tests | Named account/skill/model and live inference/quality evidence remain unresolved; no sales policy is supplied by these types |\n| Existing SDK workflows | Codex dispatch, repair, knowledge maintenance, memory primitives, and Bridge/Observatory interfaces retained | Reuse and inspect these before treating historical fleet concerns as missing code |\n| CE hooks | Separate local Codex SessionStart/"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "failure/Stop activation passed its native acceptance | Separate subsystem; it does not prove Hermes hook installation or fleet event subscriptions |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability and proof inventory"
+        },
+        {
+          "column": "B",
+          "value": "Evidence: [master handbook][S4], [1.4.0 integration evidence][S8], [1.5.0 release][S7], [1.5.1 release][S1], and [hook closeout][S12]."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact 1.5.1 verification"
+        },
+        {
+          "column": "B",
+          "value": "### Exact 1.5.1 verification"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact 1.5.1 verification"
+        },
+        {
+          "column": "B",
+          "value": "- Source suite: **617 tests run, OK, 2 skipped**. Installed suite: **576 tests run, OK, 19 skipped**. These totals include the skipped cases; they are not 617 and 576 individually passed tests.\n- Installed destination suite: 16 OK; contract suite: 29 run, OK with 3 skipped; transport suite: 17 OK; local integration: 12/12.\n- Fresh verifier: PASS WITH NOTES; its 57 adversarial checks passed. It reviewed request paths and used a dummy key without live provider calls.\n- Live compatibility: October 9, about **1:30 p.m. EDT**. Installed 1.5.1 completed the strict preflight against the approved server with no redirect. Mem0 execution was intentiona"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact 1.5.1 verification"
+        },
+        {
+          "column": "B",
+          "value": "lly refused at the boundary.\n- This document's fresh read-only check: ZIP, wheel, and manifest hashes match `SHA256SUMS`; all **136 packaged files match the exact Git revision and manifest**. No test suite or live call was rerun here. [S1], [S2], [S9], [S16]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact 1.5.1 verification"
+        },
+        {
+          "column": "B",
+          "value": "The single live memory recall belongs to 1.5.0's `4d5e1f1` build. Final 1.5.0 `db79aa2` changed only documentation/evidence, and its installed preflight was repeated. Do not relabel that memory retrieval as a new 1.5.1 test. [S7]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exact 1.5.1 verification"
+        },
+        {
+          "column": "B",
+          "value": "Remaining 1.5.1 notes: trusted host proxy/certificate environment (`trust_env=True`), a fully trusted test-only transport seam, event-stream reconnect/resumption paths traced but not exercised at runtime, test-detail gaps, an intermittent workflow subprocess failure that passed subsequent checks, and test resource warnings. These notes are documented limits, not a failed verifier verdict. Host-specific bindings and profiles are not shipped in the generic package. [S1], [S2]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "## 5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "**They are acquired implementation inputs. The inspected records do not establish package-level installation or complete feature adoption.** The original plan explicitly recommends adapting useful procedures rather than adding entire foreign runtimes. That can be the correct approach, but it still needs an auditable feature mapping. [S3]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "| Core source | Existing plan's intended use | Current supported statement | Work needed to close adoption |\n|---|---|---|---|\n| Persona OS v2.0.0 and newer source snapshot | Agent profile, context, workspace and recovery structures | Downloaded; relevant templates and concepts referenced; no demonstrated integrated Persona OS runtime on the target agents | Select actual features/files, compare existing Hermes profiles, record adaptations, and test fresh-session loading and recovery |\n| Claude Smart Orchestrator v2.1.3 and source snapshot | Worker briefs, ownership, return packets, routing/model evidence | Downloaded/reference material; no de"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "monstrated deployment of that package through this SDK | Map its useful contracts and validators to existing dispatch/verifier mechanisms; adapt runtime-specific portions and prove outcomes |\n| Codex Model Router v3.0.1 and source snapshot | Routing, task packets, observations and evaluation examples | Downloaded/source-inspected reference; no complete mapping to current SDK routing or measured savings | Compare exact package features with the existing routing and execution path; implement only uncovered useful behavior and evaluate quality/cost |\n| Supporting profile and handoff templates | Identity, instructions, INDEX/workspace pointers, p"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "ortable context | Referenced as adaptation inputs | Identify the canonical target files, selected revisions, loading triggers, and target-specific behavior tests |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "A name search in scoped 1.5.1 implementation/configuration files found no explicit references to these package names. **That search is supporting evidence only:** differently named code may implement equivalent ideas. It cannot establish that every concept is absent. Likewise, a package name in a plan does not prove adoption."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Are we using Persona OS, Smart Orchestrator, and Model Router?"
+        },
+        {
+          "column": "B",
+          "value": "The source-to-build comparison should answer feature by feature: **reuse unchanged, adapt, already covered by a verified equivalent, defer, or exclude with a reason**. The question is useful capability coverage for this Codex/Hermes build. Bo's private config and exhaustive community coverage are outside this finish line."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "## 6. What the gap CSV means now"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "The [canonical 28-row CSV][S10] contains **8 rows with integration updates and 20 historical-only rows**. The updated rows are 1, 2, 4, 7, 8, 18, 24, and 25. Its earlier headline counts must not be presented as a fresh missing-implementation count. Its Connect row still references 1.5.0, while the later 1.5.1 release receipt now governs destination hardening."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "This is reconciliation of recorded evidence, not a fresh implementation audit of every historical row:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "| # | Item | Status to carry forward |\n|---|---|---|\n| 1 | Reproducible source release | Closed locally; current verified artifact is 1.5.1. Publication/merge is separate |\n| 2 | Complete package and deployment guide | Closed locally; host-specific setup and portability still require per-target work |\n| 3 | Fleet baseline and restore | Historical proof question; establish current per-agent runtime and a real restore |\n| 4 | Remote file editing | Live Javar canary only; broader profile edits and Javante remain unproven |\n| 5 | Agent activation and rollback | Historical integration concern; file-byte proof does not close it |\n| 6 | Independent "
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "provider-write readback | Historical broad concern; some scoped implementations now have readback. Recheck each required provider operation |\n| 7 | Per-agent accounts/profiles | Implemented and locally tested; live allowed/denied behavior on both agents outstanding |\n| 8 | Hosted shared-skill bridge | Direct Connect proven on the Mac, including 1.5.1 preflight; fleet credential/configuration deployment outstanding |\n| 9 | Shared catalog authoring | Historical concern; a registered authoring skill exists in research records. Verify current SDK wiring and saved-content readback |\n| 10 | Skill installation and triggers | Historical target-proof "
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "concern; inspect selected skills and actual runtime selection |\n| 11 | Hermes task submission/results | Historical target-adapter concern; prove actual endpoint, acknowledgement, exact result correlation |\n| 12 | Typed fleet-task lifecycle | Historical composition concern; reuse existing workflows/contracts and check complete fleet coverage |\n| 13 | Independent substantive verification | Historical end-to-end concern; local validators and reviewer claims are not the entire acceptance path |\n| 14 | Parallel ownership/stale attempts | Historical fleet concern; same-ledger SDK locks exist, but cross-agent conflicts need their own proof |\n| 15 | "
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "Recovery without original chat | Historical fleet proof concern; local durable replay already exists |\n| 16 | Uncertain-operation reconciliation | Historical target/provider concern; inspect existing reconciliation before adding another implementation |\n| 17 | Result consumption/acknowledgement | Historical fleet proof concern; verify coordinator receipt separately from worker completion |\n| 18 | Memory at task start | One 1.5.0 Mac recall proven; worker delivery, relevance, and target-runtime behavior unproven |\n| 19 | Automatic capture/missed-event replay | Historical concern; memory CRUD/recall alone does not demonstrate event-driven captu"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "re |\n| 20 | Corrections/stale-work revalidation | Historical concern; test corrected retrieval and dependent-output handling |\n| 21 | Shared memory across both agents | Historical proof question; scope boundaries and second-agent fresh-session retrieval outstanding |\n| 22 | Observatory fleet evidence | Historical integration concern; existing inspection/import paths are not complete live fleet projection |\n| 23 | Recoverable source monitoring | Historical concern; existing knowledge-maintenance primitives should be reused and checked |\n| 24 | Cloud artifact writes | Implemented/local tests; last inspected live blockers were an isolated destin"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "ation and a registered write/readback skill |\n| 25 | TypeSafe provider binding | Implemented/local tests; last inspected account/skill/model/spend requirements unresolved |\n| 26 | Decision provenance/outcomes | Historical concern; newer TypeSafe receipts cover some provenance, while observed-outcome coverage needs recheck |\n| 27 | TypeSafe quality/fleet use | Historical proof question; schema-valid output is not decision-quality evidence |\n| 28 | Measured speed/usage | No matched full-workflow improvement measurement located in these release records |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. What the gap CSV means now"
+        },
+        {
+          "column": "B",
+          "value": "Two additional tracking gaps sit across these rows: core-package feature adoption is not mapped to current implementation and acceptance; the reference sheet/research prose is not synchronized to the newest SDK proof."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "## 7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "**The broad SDK was explicitly requested. Building it was not an unauthorized detour.** Source reproducibility, direct Connect, credential routing, backups, and exact readback were legitimate enablers of the original goal."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "The drift is the distance between the original outcome and what completion reporting started emphasizing:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "| Original intent | Observed emphasis | Consequence |\n|---|---|---|\n| Use relevant course systems in the real team | Downloads and source references were retained, but release work concentrated on SDK operations and eight gap rows | No complete evidence chain from core package feature to our target behavior |\n| Give Javar/Javante a job and get checked results | Local package suites and Mac-side provider preflight accumulated | Strong library proof; remote Hermes workflow proof still outstanding |\n| SDK makes subsequent implementation faster | Packaging/transport/security milestones became prominent | The next implementation recipe and measure"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "d setup savings still need demonstration |\n| Broad master capability first; role-specific application later | Some older research and intermediate guidance focused on CRM candidate replies | Current master plan correctly restores a domain-neutral SDK; future reports must preserve that boundary |\n| Keep a current build map | The plan, original CSV rows, reference workbook, and release notes describe different dates/scopes | Old statements can look like current missing features or current completions |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "**Assessment / inference:** this is primarily a traceability and acceptance-closure gap, not evidence that the SDK work should be discarded. The plan did not promise to install every downloaded package unchanged. It did require useful source capabilities to become explicit implementation choices and target tests; that connection is not yet complete in the inspected records."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "Specific stale or conflicting records to retain as dated history:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "- The October 7 Sheet is a research reference snapshot, not a current 1.5.1 deployment inventory.\n- The October 9 1.4-era integration report says no live recall and a persistent relay is needed; later direct Connect and recall evidence supersedes those statements.\n- The 1.5.0 release note contains a trailing no-independent-verifier sentence despite its completed verifier report.\n- The committed 1.5.1 handbook says live compatibility was not rerun; the later release receipt and 1.5.1 installed-preflight receipt document that it was. The test still stopped before Mem0 execution.\n- The earlier hook acceptance review had documentation pending; th"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "e later final review and closeout close it."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. The drift: what changed, and what did not"
+        },
+        {
+          "column": "B",
+          "value": "No source record was silently rewritten while preparing this checkpoint."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "B",
+          "value": "## 8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "B",
+          "value": "The speed mechanism is **reuse of deterministic operations and context**, not simply adding more agents or more tools. [S3]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "B",
+          "value": "| Repeated work today | Intended reusable SDK path |\n|---|---|\n| Rediscover the computer, profile, account and file paths | Named target bindings and capability profiles |\n| Handcraft each edit and backup | One inspect → preimage/backup → revision check → apply → independent readback → restore sequence |\n| Re-explain permission and skill rules | Registered shared workflow, pinned content, current schema, named account |\n| Rebuild task prompts after every interruption | Typed task brief, source/context references, stable task identity and persisted checkpoint |\n| Paste large histories into every worker | Bounded context/recall blocks with prov"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "B",
+          "value": "enance and exact delivery approval |\n| Ask the worker what happened and trust its summary | Structured receipts plus independent acceptance of the real output |\n| Invent a new integration for every host | Common operation contracts with narrow Codex/Hermes/Orgo adapters |\n| Reapply the same skill/configuration manually | Versioned delivery recipe, target readback, fresh-session test and rollback |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "B",
+          "value": "Example of the intended build use: choose a relevant Persona OS workspace behavior → locate the exact source template → map it to the existing Hermes-owned file → apply through the SDK with backup/revision checks → activate on the canary → test the behavior → retain the result and rollback path. The reusable machinery should make the second feature cheaper to implement than the first."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. How the SDK was supposed to make this faster"
+        },
+        {
+          "column": "B",
+          "value": "**Not measured yet:** percentage token savings, a 2× build-speed improvement, or equivalent claims. Measure the same bounded task before/after, including research/setup, implementation, review, retries, and final acceptance. A faster runner or smaller response is not the whole-workflow result."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "## 9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "Yes: [AI Money Agent Reference — existing Google Sheet](https://docs.google.com/spreadsheets/d/1oGB2LMFz1-YtsK5MbAjaDvvXt3fy2smZ7R2j71oEe9M/edit)."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "Local canonical workbook: [AI_Money_Agent_Reference.xlsx](/Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/AI_Money_Agent_Reference.xlsx). The recorded publication is October 7, with historical full-cell readback verification. The local workbook was inspected read-only for this checkpoint; the live Google Sheet was not reopened or updated."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "Its ten tabs are **Start Here, Findings, Topic Coverage, Gaps, Links, Downloads, Requests, Conversation, Source Notes, and Data Sources**. The local file has 53 findings, 85 gap rows, 1,326 links, and 499 physical download rows. Physical files include archives, extracted members, and text copies; those counts do not count installed capabilities. [S11]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "Useful existing references:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "| Artifact | Use in the plan |\n|---|---|\n| Existing Google Sheet / local workbook | Course findings, source links, download index, historical questions |\n| Canonical Markdown inventory | Source inspection scope, versions, original evidence and unknowns |\n| 28-row SDK gap CSV | Historical SDK gaps plus dated integration updates; read each update before using its status |\n| 76-row Manus skill-fit CSV | Which exported skill content to reuse, adapt, use conditionally or exclude; not the complete AI Money package-feature map |\n| Release and verifier reports | Exact source revision, packaged bytes, tests, current implementation proof |\n| This check"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "point | Reconciliation of purpose, current evidence, drift, remaining acceptance and the next package-coverage task |"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "**Recommended next sheet tab: `Core Package Adoption`.** Keep it in the existing workbook/Sheet instead of creating a competing source tracker. Recommended columns:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "`Feature ID | Package | Version | Exact source file/section | Useful behavior | Plan requirement/work unit | Reuse/adapt/equivalent/defer | Our implementation path | Release commit | Target agent/profile | Local proof | Live proof | Remaining gap | Owner | Verified date | Evidence link`"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "Use one row per meaningful feature, not one row per package. A Persona OS folder name or a whole Smart Orchestrator archive is too broad to show what was adopted. This document supplies the initial package-level assessment in section 5; the detailed feature rows still require bounded inspection and mapping."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. The sheet that can be referenced from the plan"
+        },
+        {
+          "column": "B",
+          "value": "The current plan already links the local skill-fit map and source inventory. It does not contain the existing Google Sheet URL. A plan update could reference this checkpoint and the new adoption tab once that tab is populated; **neither the plan nor the Sheet was edited in this side task**."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Next actions and ownership"
+        },
+        {
+          "column": "B",
+          "value": "## 10. Next actions and ownership"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Next actions and ownership"
+        },
+        {
+          "column": "B",
+          "value": "**Current implementation owner: Cursor.** The Connect destination patch is now completed in verified local release 1.5.1; the earlier checkpoint describing it as unfinished is superseded. This report does not establish Cursor's next active assignment or transfer ownership."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Next actions and ownership"
+        },
+        {
+          "column": "B",
+          "value": "Recommended sequence:"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Next actions and ownership"
+        },
+        {
+          "column": "B",
+          "value": "1. Map relevant features from Persona OS, Smart Orchestrator, Model Router, and supporting templates to current SDK/Hermes implementations. Reuse demonstrated equivalents; identify exact missing work and test criteria.\n2. Turn that mapping into a small number of reusable SDK build recipes and populate the existing Sheet's proposed adoption tab when authorized.\n3. Prepare the verified package, target bindings, credential delivery and host-environment decision for Javar's isolated canary.\n4. Prove one real Hermes task: start, strict shared-skill route, scoped recall, explicitly approved worker context, exact result correlation, independent subs"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Next actions and ownership"
+        },
+        {
+          "column": "B",
+          "value": "tantive verification, and coordinator acknowledgement.\n5. Interrupt and resume that same path; check conflicting/stale attempts and rollback. A successful scratch-file edit is not this test.\n6. Repeat target-specific acceptance on Javante; do not infer it from Javar's success.\n7. Finish selected profile/skill delivery, automatic memory capture/corrections, and Observatory projection using the current primitives.\n8. Close cloud/TypeSafe integrations only for required concrete uses and applicable authority; measure the complete workload before claiming speed or cost improvement."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Next actions and ownership"
+        },
+        {
+          "column": "B",
+          "value": "Finish line: a current package-feature map plus working, recoverable, independently checked behavior on the named agents. Bo's private configuration and the entire community catalog are not required."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11. Separate hook-activation checkpoint"
+        },
+        {
+          "column": "B",
+          "value": "## 11. Separate hook-activation checkpoint"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11. Separate hook-activation checkpoint"
+        },
+        {
+          "column": "B",
+          "value": "The local Codex hook work is **closed**. Its final native-return receipt shows the resumed turn completed without a second hook continuation after acknowledgement; its later independent review passes all five stated acceptance items. The final closeout records 110 installed tests, one controlled event/triage/diagnosis/ack, and no remaining required work. Scope is this local Codex project, not Hermes/Orgo deployment. No hook was restarted or altered for this document. [S12]"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Source and verification record"
+        },
+        {
+          "column": "B",
+          "value": "## 12. Source and verification record"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Source and verification record"
+        },
+        {
+          "column": "B",
+          "value": "This is a synthesis of current local source/release records and the user's stated intent. It is not a fresh remote-fleet inventory, live provider audit, or rerun of release tests. Recommendations are explicitly labeled and do not authorize implementation."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Source and verification record"
+        },
+        {
+          "column": "B",
+          "value": "The document-only evidence run is `sdk-status-drift-side-20261009`, trace `b02857ae-345c-4c5f-80d6-3c3fcb81af89`. It links the current side-session envelope without inheriting the parent thread's implementation authority. Source hashes and package-to-Git comparisons are retained in [source-readback.json][S16]. No new lesson, independent review, or full CE implementation lifecycle is claimed for this writing task."
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Source and verification record"
+        },
+        {
+          "column": "B",
+          "value": "[S1]: /Users/alexlobaito/Documents/Codex/master-agent-operations-sdk/work/gap-integration-20261009/release-1.5.1/RELEASE.md\n[S2]: /Users/alexlobaito/Documents/Codex/master-agent-operations-sdk/work/gap-integration-20261009/independent-verification-1.5.1-destination.md\n[S3]: /Users/alexlobaito/Documents/Codex/2026-10-06/can/docs/plans/2026-10-08-0709-feat-agent-fleet-sdk-build-plan.md\n[S4]: /Users/alexlobaito/Documents/Codex/master-agent-operations-sdk-worktrees/connect-integration/docs/MASTER_BUILD.md\n[S5]: /Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/codex-build-skill-guide.md\n[S6]: /Users/alexlobaito/Documents/Codex/master-agen"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Source and verification record"
+        },
+        {
+          "column": "B",
+          "value": "t-operations-sdk/work/gap-integration-20261008/release-1.4.0/RELEASE.md\n[S7]: /Users/alexlobaito/Documents/Codex/master-agent-operations-sdk/work/gap-integration-20261009/release-1.5.0/RELEASE.md\n[S8]: /Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/sdk-gap-integration-evidence-2026-10-09.md\n[S9]: /Users/alexlobaito/Documents/Codex/master-agent-operations-sdk/work/gap-integration-20261009/installed-preflight/receipt-release-1.5.1.json\n[S10]: /Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/sdk-gap-audit-2026-10-08.csv\n[S11]: /Users/alexlobaito/Documents/Codex/2026-10-06/can/outputs/ai-money-agent-file-inventory.md\n[S12]: /U"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Source and verification record"
+        },
+        {
+          "column": "B",
+          "value": "sers/alexlobaito/Documents/Codex/2026-10-06/can/work/ce-operational-learning-20261008/native-resume-20261008/final-closeout.json\n[S16]: /Users/alexlobaito/Documents/Codex/2026-10-06/can/work/sdk-status-drift-side-20261009/source-readback.json\n"
+        },
+        {
+          "column": "C",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    }
+  ]
+}

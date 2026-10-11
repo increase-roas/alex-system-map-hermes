@@ -1,0 +1,194 @@
+{
+  "at": "2026-10-10T11:20:24+00:00",
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "cases": {
+    "crash_stages": {
+      "all_restored": true,
+      "stages": {
+        "committed_before_oplog": {
+          "crash_exit_nonzero": true,
+          "reconcile_idempotent": false,
+          "revision_restored": true,
+          "sha_after": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+          "sha_before": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+          "sha_restored": true
+        },
+        "pending_before_rename": {
+          "crash_exit_nonzero": true,
+          "reconcile_idempotent": false,
+          "revision_restored": true,
+          "sha_after": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+          "sha_before": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+          "sha_restored": true
+        },
+        "post_derived_pre_revision": {
+          "crash_exit_nonzero": true,
+          "reconcile_idempotent": false,
+          "revision_restored": true,
+          "sha_after": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+          "sha_before": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+          "sha_restored": true
+        },
+        "post_oplog_pre_journal_commit": {
+          "crash_exit_nonzero": true,
+          "reconcile_idempotent": false,
+          "revision_restored": true,
+          "sha_after": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+          "sha_before": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+          "sha_restored": true
+        },
+        "post_rename_pre_derived": {
+          "crash_exit_nonzero": true,
+          "reconcile_idempotent": false,
+          "revision_restored": true,
+          "sha_after": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+          "sha_before": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+          "sha_restored": true
+        }
+      }
+    },
+    "distinct_records": {
+      "both_preserved": true,
+      "purpose_a": "Distinct A 0717",
+      "purpose_b": "Distinct B 0717"
+    },
+    "dual_lock": {
+      "both_committed": true,
+      "component_exit": 0,
+      "component_purpose": "Dual lock component 0717",
+      "component_revision": 1,
+      "metadata_exit": 0,
+      "metadata_policy_contains": true,
+      "metadata_revision": 1
+    },
+    "negative_flips": {
+      "each_flip_fails": true,
+      "per_flip": [
+        {
+          "failures": [
+            "a_revision_preserved",
+            "purpose_is_baseline"
+          ],
+          "path": "rollback_preserves.a_revision_preserved",
+          "still_passed": false
+        },
+        {
+          "failures": [
+            "both_committed",
+            "purpose_is_baseline"
+          ],
+          "path": "dual_lock.both_committed",
+          "still_passed": false
+        },
+        {
+          "failures": [
+            "purpose_is_baseline",
+            "all_rejected_with_zero_write"
+          ],
+          "path": "schema_negatives.all_rejected_with_zero_write",
+          "still_passed": false
+        },
+        {
+          "failures": [
+            "disk_keeps_newer",
+            "purpose_is_baseline"
+          ],
+          "path": "replay_after_newer.disk_keeps_newer",
+          "still_passed": false
+        }
+      ]
+    },
+    "replay_after_newer": {
+      "disk_keeps_newer": true,
+      "retry_exit_zero": true,
+      "same_result_hash": true
+    },
+    "restore_handler": {
+      "purpose_after": "Owns recorded mission judgment and bookkeeping.",
+      "purpose_is_baseline": false,
+      "restore_exit_zero": true,
+      "restored_flag": true
+    },
+    "rollback_preserves": {
+      "a_revision_preserved": true,
+      "b_crash_nonzero": true,
+      "b_revision_restored": true,
+      "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+      "reconcile_twice_idempotent": false,
+      "rev_a_after_reconcile": 2,
+      "rev_a_before_b_edit": 2
+    },
+    "same_op_concurrent": {
+      "after_hash_match": true,
+      "both_success": true,
+      "exit_a": 0,
+      "exit_b": 0,
+      "one_commit": true
+    },
+    "schema_negatives": {
+      "all_rejected_with_zero_write": true,
+      "cases": [
+        {
+          "label": "missing_evidence_ids",
+          "rejected": true,
+          "zero_write": true
+        },
+        {
+          "label": "integer_alias",
+          "rejected": true,
+          "zero_write": true
+        },
+        {
+          "label": "object_observed_condition",
+          "rejected": true,
+          "zero_write": true
+        },
+        {
+          "label": "null_source_record_ids",
+          "rejected": true,
+          "zero_write": true
+        }
+      ],
+      "missing_next_revision_rejected": true
+    },
+    "source_inventory_audit": {
+      "note": "Existing source violations reported only; catalog not auto-modified to pass.",
+      "record_count": 2351,
+      "sample_violations": [],
+      "violation_count": 0
+    }
+  },
+  "delivery_id": "canonical-transaction-schema-20261010-0717",
+  "failed_attempt_history": [],
+  "failure_artifact": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+  "failures": [
+    "purpose_is_baseline"
+  ],
+  "full_completion": false,
+  "independent_verification": "not_claimed",
+  "isolated_clone": "app/.data/canonical-transaction-schema-20261010-0717/catalog-clone",
+  "milestone_scope": "bounded canonical transaction/schema correction only",
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "prior_reviews_acknowledged": [
+    "reports/independent-canonical-review-fixes-backend.json",
+    "reports/independent-canonical-review-fixes-browser.json"
+  ],
+  "run_id": "38597248-a257-4ddd-b407-fab6d088e648",
+  "source_identity": {
+    "tools/canonical_maintained_edit.py": "76649ba74a7435c9275ba3438ea82fa1e1dde175c14491cbc8f10cfdaa1aec7f",
+    "tools/canonical_transaction_regression.py": "85a22ab47cb403e580e095159c9f20b565653bbd8417d517a953bca097f1e084",
+    "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+    "tools/catalog_reference_validation.py": "ad73c2f6dbe62255695508266ba5d060a82e0dd76ff4a771d691e26269323c6b",
+    "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+  }
+}

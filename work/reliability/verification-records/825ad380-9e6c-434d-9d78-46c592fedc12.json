@@ -1,0 +1,39 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "825ad380-9e6c-434d-9d78-46c592fedc12",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "scope-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "aof-record-wv",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "artifact_hash_matches": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T06:44:06+00:00",
+  "max_age_seconds": 604800,
+  "observed_proofs": [
+    {
+      "criterion": "proof-bound",
+      "relative_path": "work/task-artifacts/scope-job/t1-8eb85e7b9a6f.txt",
+      "sha256": "8eb85e7b9a6f3f9fd88ca40c91488cb7d24632f180f1e46bf60b973dccc7a33f",
+      "byte_length": 15
+    }
+  ],
+  "record_sha256": "5d6d99d7e492cb8a162b1c6a29f082d4720bcb2b5e6ef3ae96fd23f592e33661"
+}

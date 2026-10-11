@@ -1,0 +1,91 @@
+{
+  "at": "2026-10-10T13:11:41.040243+00:00",
+  "scope": "Bounded read-only build wait diagnosis; no acceptance expansion or implementation",
+  "overall": "diagnosis_complete_rootcause_unknown",
+  "full_completion": false,
+  "observation_window": {
+    "start": "2026-10-10T13:09:01.458067+00:00",
+    "end": "2026-10-10T13:10:21.694430+00:00"
+  },
+  "owner_pid": 47964,
+  "build_process_chain": [
+    56200,
+    56212,
+    56233
+  ],
+  "build_present_at_last_observation": true,
+  "checks": [
+    {
+      "id": "LIVE-BUILD",
+      "status": "VERIFIED",
+      "observed": "Owner47964 and shell56200\u2192npm56212\u2192node56233 present at13:09:01 and13:10:21UTC; build elapsed07:34 then08:54, CPU0.0%, sleeping state.",
+      "evidence": "Bounded ps metadata outputs d8bc9d / d6498b; these observations do not prove deadlock or progress percentage."
+    },
+    {
+      "id": "OPEN-PROJECT-TARGET",
+      "status": "VERIFIED",
+      "observed": "Project fd12 changed from builtin-request-context.js1148bytes to route-matcher.js1509bytes over80seconds.",
+      "first_at": "2026-10-10T13:09:01.458067+00:00",
+      "first_path": "app/node_modules/.pnpm/next@15.5.25_@opentelemetry+api@1.9.0_@types+node@22.20.5_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/server/after/builtin-request-context.js",
+      "second_at": "2026-10-10T13:10:21.694430+00:00",
+      "second_path": "app/node_modules/.pnpm/next@15.5.25_@opentelemetry+api@1.9.0_@types+node@22.20.5_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/shared/lib/router/utils/route-matcher.js",
+      "evidence": "Bounded lsof -nP -a -p56233 field projection; only project paths emitted."
+    },
+    {
+      "id": "TWO-SAME-FILE-READS",
+      "status": "VERIFIED",
+      "observed": "Exactly2 bounded reads of first fd12 target succeed, identical1148bytes and SHA;0.022s/0.021s elapsed, each5s deadline.",
+      "path": "app/node_modules/.pnpm/next@15.5.25_@opentelemetry+api@1.9.0_@types+node@22.20.5_react-dom@19.3.0_react@19.3.0__react@19.3.0/node_modules/next/dist/server/after/builtin-request-context.js",
+      "sha256": "3e86a0515c7ce492f8ab348a0d723b7fc55877bdbb9573ee702288a03db5b4f3",
+      "evidence": "Read-only Python child read_bytes projection, output23df8f. No third read and no module execution."
+    },
+    {
+      "id": "PROCESS-SAMPLE",
+      "status": "VERIFIED",
+      "observed": "Bounded1second native sample of56233 exits0; sanitized function-label projection has read2,uv_fs_read1,kevent2.",
+      "qualification": "Sampling labels indicate filesystem-read/event-wait activity; no project stack location or exact blocking duration was established. Raw sample was not persisted or printed.",
+      "evidence": "sample56233 1 1 -file/dev/stdout captured with6s caller timeout, output23df8f."
+    },
+    {
+      "id": "EFFECTIVE-DEADLINE",
+      "status": "UNVERIFIED",
+      "observed": "Visible shell/npm/Node command projection contains npm run build/next build and no timeout/gtimeout/run_bounded marker.",
+      "qualification": "An external executor deadline cannot be inferred from process arguments; effective outer deadline NOT_PROVEN. Prior acceptance timeout600s does not transfer proof to this successor."
+    },
+    {
+      "id": "FAILED-PREDECESSOR",
+      "status": "VERIFIED",
+      "observed": "955300be receipt at13:01:14UTC is overallfailed with npm run build timed out after600seconds.",
+      "path": "reports/run-receipts/browser-sync-recovery-20261010-1249-955300be-c21b-4676-92eb-30f1e7436f1d.json",
+      "sha256": "93e535e886165db3cc9a1ce7e4ebc2d80910365b514b8cec24483b82af1af97e",
+      "failure": [
+        "Command '['npm', 'run', 'build']' timed out after 600 seconds"
+      ]
+    },
+    {
+      "id": "ROOTCAUSE",
+      "status": "UNVERIFIED",
+      "observed": "No source compile error was observed in assigned safe evidence. Changing dependency targets show continued module-file activity, but no successful compilation/phase/ETA. Fast same-file reads do not establish general filesystem health or disprove an earlier intermittent delay.",
+      "classification": {
+        "code_defect": "NOT_PROVEN",
+        "local_filesystem_latency": "NOT_PROVEN",
+        "exact_build_phase": "unknown beyond next build + dependency file reads",
+        "hang_or_deadlock": "NOT_PROVEN"
+      },
+      "qualification": "Parent-reported earlier devalue timeout and NoopTracer read were not repeated or promoted as independent measurements."
+    },
+    {
+      "id": "SKIP-BUILD-PATH",
+      "status": "UNVERIFIED",
+      "observed": "Previously queued unsafe SKIP_ACCEPTANCE_BUILD finding remains a separate open item; no bypass or false-success accepted in this diagnosis.",
+      "path": "reports/browser-sync-build-drift-20261010-1304.json",
+      "sha256": "afe97f60f17601ccde1c5586a522506754bb10e9978372120f5d8cbf27e36b0a",
+      "qualification": "Only finding handle/hash read; this bounded diagnosis did not re-audit or repair that code path."
+    }
+  ],
+  "raw_capture_policy": "No credential/environment/health output; raw sample discarded, only safe counts and project metadata recorded.",
+  "preserved_accepted_scope": "Independent accepted transaction guards remain unchanged; no app/source/DB edits or build launches/signals were performed.",
+  "blocker_type": "external_wait",
+  "exact_missing": "Actual successor build exit/result plus demonstrated effective outer deadline and cleanup path.",
+  "next_permitted_action": "Primary should keep a single build owner and establish the existing successor deadline/cleanup before any retry. Capture actual exit/build result when it completes. If a retry is needed, sole implementation owner must use the required bounded production build path and verify the previous process group is gone. This diagnosis grants no signal or implementation authority. Never use SKIP_ACCEPTANCE_BUILD as successful build evidence."
+}

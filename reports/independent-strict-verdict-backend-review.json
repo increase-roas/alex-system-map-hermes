@@ -1,0 +1,171 @@
+{
+  "at": "2026-10-10T08:20:36.310322+00:00",
+  "scope": "Bounded changed-source catalog screening/strict verdict retest only; no browser/full audit",
+  "verdict": "PARTIAL \u2014 former handler bypass and listed checks repaired; genuine process proof and complete strict verdict still incomplete",
+  "owner_receipt": {
+    "pointer": "reports/strict-verdict-catalog-dependent-ui-receipt.json",
+    "path": "reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json",
+    "run_id": "61e0ea53-316f-45a1-a6ac-4f76d877537a",
+    "at": "2026-10-10T08:15:29+00:00",
+    "sha256": "a53396052a876d4a53c6a5931652f9e140369f7f24b9534d695c9e8169a22967",
+    "actual_sha256": "a53396052a876d4a53c6a5931652f9e140369f7f24b9534d695c9e8169a22967",
+    "manifest_match": true,
+    "history_match": true,
+    "owner_overall": "passed",
+    "full_acceptance": false
+  },
+  "source_identity": {
+    "app/.next/BUILD_ID": {
+      "receipt_sha256": "f1905fecc3c53c09bd92887bba45db656b980291b31014cf9dc5d4d4c7ffec37",
+      "observed_sha256": "f1905fecc3c53c09bd92887bba45db656b980291b31014cf9dc5d4d4c7ffec37",
+      "match": true
+    },
+    "app/src/lib/server/python.ts": {
+      "receipt_sha256": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+      "observed_sha256": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+      "match": true
+    },
+    "tools/acceptance_summarize_strict.py": {
+      "receipt_sha256": "cb576ad29bd575bdb452f474d5915c3b64cf359c7fa69c8bb1e418289e6c5c65",
+      "observed_sha256": "cb576ad29bd575bdb452f474d5915c3b64cf359c7fa69c8bb1e418289e6c5c65",
+      "match": true
+    },
+    "tools/browser_recovery_screening.mjs": {
+      "receipt_sha256": "dcf76e810ccc7b808264859f0c0ea180da3492c92d9ab76a2ecce42674ffea75",
+      "observed_sha256": "dcf76e810ccc7b808264859f0c0ea180da3492c92d9ab76a2ecce42674ffea75",
+      "match": true
+    },
+    "tools/emitted_boundaries_served_restart_acceptance.py": {
+      "receipt_sha256": "edf8ffd86b653fff18daaf658787cc1ecfbe2ed17da3538a61b3a8720f029ac8",
+      "observed_sha256": "edf8ffd86b653fff18daaf658787cc1ecfbe2ed17da3538a61b3a8720f029ac8",
+      "match": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "c381f113218dff924d68e51be42cfcfdafbb82b365a9292772cb927515ddbfd9",
+      "observed_sha256": "c381f113218dff924d68e51be42cfcfdafbb82b365a9292772cb927515ddbfd9",
+      "match": true
+    },
+    "tools/recovery_screening_real_paths_acceptance.py": {
+      "receipt_sha256": "611ad5f33c743ffa1b5618637ae80a6b469759219983ff2d4515054d6cfc0a70",
+      "observed_sha256": "611ad5f33c743ffa1b5618637ae80a6b469759219983ff2d4515054d6cfc0a70",
+      "match": true
+    },
+    "tools/strict_verdict_catalog_dependent_ui_acceptance.py": {
+      "receipt_sha256": "5c3296be83d3802ab9a083fcb33bd5b4632412a86337b74089eb3a03b92cdc8a",
+      "observed_sha256": "5c3296be83d3802ab9a083fcb33bd5b4632412a86337b74089eb3a03b92cdc8a",
+      "match": true
+    }
+  },
+  "additional_reviewed_source_sha256": {
+    "tools/catalog_screening_probe.py": "8e58eaba47952b9338d75bda126ba9e954d75784a261a375b54ac89fbdb81400"
+  },
+  "snapshot_stable": true,
+  "prior_failure_preserved": {
+    "path": "reports/independent-emitted-boundaries-backend-review.json",
+    "sha256": "da4d7a2387db516b017690f6337f1455512f0c764176be3b8063a1600d177bb2",
+    "at": "2026-10-10T08:10:26.830393+00:00",
+    "exists_nonempty": true
+  },
+  "items": [
+    {
+      "id": "SV01 catalog handler plumbing",
+      "status": "VERIFIED",
+      "finding": "Exact former catalog-export/edit-state/preview/apply normal bypasses now call print_screened_json_flat. Early catalog exceptions reach outer screened JSON error handler. Prior helper removal/shape proof and accepted Node/dependency/controlled production are preserved. This verifies source plumbing, not injected process execution.",
+      "evidence": [
+        "tools/local_service.py:412-420,501-513,658-661",
+        "reports/independent-emitted-boundaries-backend-review.json"
+      ]
+    },
+    {
+      "id": "SV02 catalog injected process evidence",
+      "status": "UNVERIFIED",
+      "finding": "catalog_screening_probe runs ordinary catalog-export without injection, then injects a canary only into print_screened_json_flat in current Python process. injected_canary_removed is helper proof, not catalog subprocess proof. No saved injected catalog-edit normal/error process result. Probe module itself omitted from owner source_identity; independent report binds its current SHA.",
+      "evidence": [
+        "tools/catalog_screening_probe.py:16-54",
+        "tools/strict_verdict_catalog_dependent_ui_acceptance.py:53-78"
+      ],
+      "actual_vs_helper": {
+        "ordinary_catalog_subprocess_called_in_source": true,
+        "subprocess_canary_injected": false,
+        "helper_canary_injected": true,
+        "edit_process_canary_case_present": false
+      }
+    },
+    {
+      "id": "SV03 prior ignored fields now enforced",
+      "status": "VERIFIED",
+      "finding": "Source now requires prior Python leak flag, Node screened/nonempty and all seven recovery export exit/shape/nonempty/benign/removal flags. Independently invoke actual summarize on saved passing emitted/recovery cases: all 10 emitted and 11 recovery listed individual flips fail. Old counterexamples repaired narrowly.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:29-135",
+        "pure outputs 21f3bd and 1f5f5d"
+      ],
+      "independent_checks": {
+        "positive_emitted_pass": true,
+        "emitted_listed_flips_fail": 10,
+        "positive_recovery_pass": true,
+        "recovery_listed_flips_fail": 11,
+        "recovery_source_receipt_run": "e620c972-c736-4114-b46d-613bc9a7cf15"
+      }
+    },
+    {
+      "id": "SV04 negative-control provenance",
+      "status": "FAILED",
+      "finding": "Owner generator runs before summarize_negative_controls is attached. Actual summarize already rejects that positive base solely for missing controls. Thus any mutation, including an ignored field, is reported must-fail. Pure reproduction: runtime_path_ok=false remains accepted with saved passing baseline, but same ignored flip reports all_must_fail=true when baseline lacks controls. Generator does not assert baseline passes or identify failure caused by flipped field. Current listed flips independently verified by this reviewer; owner generation remains unreliable for omissions.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:84-86,131-133,147-158",
+        "tools/strict_verdict_catalog_dependent_ui_acceptance.py:72-75,110-123",
+        "pure output 21f3bd"
+      ]
+    },
+    {
+      "id": "SV05 remaining omitted fields/status",
+      "status": "FAILED",
+      "finding": "Saved positive emitted summary still passes catalog runtime_path_ok=false/helper_has_marker=false, Node read_source_intended_error=false/nonzero_exit=0/init_ok=false, and empty negative-control cases with all_must_fail=true. These genuine runtime/status/control prerequisites are not validated. Existing aggregate no longer ignores the old leak/nonempty flags, but every required result is not fail-closed.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:43-63,84-86",
+        "tools/catalog_screening_probe.py:29-34,48-54",
+        "pure output 21f3bd"
+      ]
+    },
+    {
+      "id": "SV06 Boolean/consumer shape integrity",
+      "status": "FAILED",
+      "finding": "Most required Boolean flags use truthiness, so canary_removed=\"false\" passes actual recovery summary. json_shape producer now parses a nonempty dict (improvement) but does not check per-consumer fields/types such as events list or trace/spans. Apply nonempty_screening_notes is merely list isinstance, and catalog lacks typed schema/nonempty result assertions. Labeling these generic flags as typed consumer shape proof is unsupported.",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:11-26,32-63,94-125",
+        "tools/recovery_screening_real_paths_acceptance.py:222-235",
+        "tools/emitted_boundaries_served_restart_acceptance.py:119-128",
+        "tools/catalog_screening_probe.py:25-34",
+        "pure output 1f5f5d"
+      ]
+    },
+    {
+      "id": "SV07 final identity/history",
+      "status": "VERIFIED",
+      "finding": "Final run61e0ea53 receipt dated08:15:29 hashes to exact pointer value and matches manifest/history. All eight recorded source hashes match current bytes. Previous failure artifact is present and hash-bound; intermediate run not treated as final. Browser restart/UI is separately reviewed.",
+      "evidence": [
+        "reports/run-receipts/strict-verdict-catalog-dependent-ui-20261010-0809-61e0ea53-316f-45a1-a6ac-4f76d877537a.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl",
+        "reports/independent-emitted-boundaries-backend-review.json"
+      ]
+    }
+  ],
+  "prior_node_dependency_controlled_production_acceptance_preserved": true,
+  "next_fixes": [
+    "Keep current handler fixes; inject canary into actual isolated catalog-export/edit normal and error subprocess inputs and retain safe source-bound before/after evidence.",
+    "Run controls against demonstrably passing baseline, separate control-generation from final gate, and require each mutation to fail for its intended field.",
+    "Validate all runtime/status/control prerequisites; require Boolean is True and per-consumer parsed schema/nonempty benign outputs. Include negative controls for omitted fields, missing/malformed controls and wrong types."
+  ],
+  "security": {
+    "app_writes": false,
+    "credential_or_token_values_read": false,
+    "raw_diagnostics_printed": false,
+    "network_install_helpers_browser": false,
+    "tests": "Pure summarize calls on saved cases only; no mutating acceptance reruns."
+  },
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Actual injected catalog/edit process proof and complete independently valid strict Boolean/status/typed-shape/control assertions."
+  }
+}

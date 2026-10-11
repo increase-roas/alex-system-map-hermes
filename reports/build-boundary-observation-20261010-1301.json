@@ -1,0 +1,16 @@
+{
+  "at": "2026-10-10T13:01:32.608416+00:00",
+  "event": "build600second_boundary_children_exited",
+  "session_id": 46274,
+  "owner_pid": 47964,
+  "acceptance_pid": 50967,
+  "original_build_pids_absent": [
+    50978,
+    51015,
+    51049
+  ],
+  "acceptance_descendants": [],
+  "proof_limit": "Absence of observed build PIDs only. Build success vs timeout and full descendant cleanup require saved result.",
+  "next_action": "Leave acceptance/owner running; collect safe failure receipt and diagnosis before retry.",
+  "full_completion": false
+}

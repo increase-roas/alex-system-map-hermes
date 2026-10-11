@@ -1,0 +1,1805 @@
+{
+  "id": "table_43bebd45714de6dfecfa",
+  "sheet": "1PASS USAGE",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Saved 1Password relationships"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "36 catalog entries and2 save receipts kept separately. Purpose, usage, rotation and save/check notes are historical; source pointers are not consumers."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Saved item title"
+        },
+        {
+          "column": "B",
+          "value": "Record type"
+        },
+        {
+          "column": "C",
+          "value": "Saved purpose"
+        },
+        {
+          "column": "D",
+          "value": "Saved used by"
+        },
+        {
+          "column": "E",
+          "value": "Saved rotation note"
+        },
+        {
+          "column": "F",
+          "value": "Saved origin / check note"
+        },
+        {
+          "column": "G",
+          "value": "Fresh list comparison"
+        },
+        {
+          "column": "H",
+          "value": "Original evidence pointer"
+        },
+        {
+          "column": "I",
+          "value": "Item ID"
+        },
+        {
+          "column": "J",
+          "value": "Source row"
+        },
+        {
+          "column": "K",
+          "value": "Full source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password service account — connectors-sync (read-only Connectors)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Token of the read-only robot connectors-sync (Connectors vault only)."
+        },
+        {
+          "column": "D",
+          "value": "Nothing reads it from here today. The Mac Keychain item op-service-account-connectors-sync holds the read-write robot's token instead (decision D08, a read-only token on the Mac, is deferred)."
+        },
+        {
+          "column": "E",
+          "value": "A robot's token can't be changed: create a new service account, save its token, revoke the old one."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D08 ; ~/.agents/tools/connectors/orgo_op.py L4–L5"
+        },
+        {
+          "column": "I",
+          "value": "5l5qorgqmbn5bdlqqlupxu4w5a"
+        },
+        {
+          "column": "J",
+          "value": 5
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud API key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Atlas Cloud API key behind the hub route atlas-cloud."
+        },
+        {
+          "column": "D",
+          "value": "Hub: install_hub.sh writes it to /opt/mcp-hub/creds/atlas-cloud-key. Also the skill ad-recreator-atlascloud-codex-v3 reads it by reference."
+        },
+        {
+          "column": "E",
+          "value": "Rotate in the Atlas Cloud dashboard, save here, rewrite the hub file, restart the atlas-cloud program."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/skills/ad-recreator-atlascloud-codex-v3/scripts/atlas_generate_image.mjs L17–L18 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "o5wmg5l5ef7tpebew74xrr5dru"
+        },
+        {
+          "column": "J",
+          "value": 6
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud extra key (revoke in AtlasCloud dashboard)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "A spare Atlas Cloud key kept only until it is revoked."
+        },
+        {
+          "column": "D",
+          "value": "Nothing."
+        },
+        {
+          "column": "E",
+          "value": "Owner step: revoke it in the Atlas Cloud dashboard, then archive this item (owner boundary 'extra Orgo/Atlas key revocations')."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-batch-4.md L17 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "hdt55xydsqt6rnbk6bfslomb6y"
+        },
+        {
+          "column": "J",
+          "value": 7
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare API — Composio (account token)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare account token (Read & Write on every group, no expiry) plus R2 keys and the account ID."
+        },
+        {
+          "column": "D",
+          "value": "Composio custom_cloudflare_api login. rebuild_hub.py reads account_id to fetch the hub tunnel's credentials."
+        },
+        {
+          "column": "E",
+          "value": "Make a new account token in the Cloudflare dashboard, save here, run push_key_to_composio.py --toolkit custom_cloudflare_api, revoke the old token."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py L25 ; ~/.agents/tools/connectors/hub/rebuild_hub.py L65–L71 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        },
+        {
+          "column": "I",
+          "value": "tgdnkyzk22vvgx4pw3uimsm5b4"
+        },
+        {
+          "column": "J",
+          "value": 8
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio — user API key (org wearenumber1)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Composio user API key for org wearenumber1 (REST calls)."
+        },
+        {
+          "column": "D",
+          "value": "Hub connector-health reads it at run time (config.json composio_item). The composio CLI login keeps its own copy in ~/.composio/user_data.json."
+        },
+        {
+          "column": "E",
+          "value": "Sign in again with composio login (or composio login --user-api-key <key> --org <org>), save the key from ~/.composio/user_data.json here with the read-write robot's standard-input flow (never printed), then retire the old key. The health check picks up the new value on its next run. Which route created today's item is NOT_PROVEN."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/health/health_check.py L132 ; ~/.agents/tools/connectors/health/config.json \"composio_item\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://github.com/ComposioHQ/composio/pull/3132 (merged 2026-04-08, read 2026-10-02) ; https://docs.composio.dev/reference/authenticating-to-composio (read 2026-10-02) ; https://docs.composio.dev/reference/v3/authentication (read 2026-10-02) ; ~/.agents/tools/cards/composio.md \"from ~/.composio/user_data.json\" ; work/2026-10-01_setup-playbook/notes/gap-facts-c13.md §2 ; https://www.1password.dev/cli/item-create (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §31"
+        },
+        {
+          "column": "I",
+          "value": "ej5xlb52icpaabh4vto4a67na4"
+        },
+        {
+          "column": "J",
+          "value": 9
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foreplay API key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Foreplay API key."
+        },
+        {
+          "column": "D",
+          "value": "Composio custom_foreplay login."
+        },
+        {
+          "column": "E",
+          "value": "Rotate at Foreplay, save here, run push_key_to_composio.py --toolkit custom_foreplay, test one read (done this way on 2026-10-01)."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "system/run-log.md \"Foreplay key rotated\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        },
+        {
+          "column": "I",
+          "value": "ieop2kwq2eoixdkybc4qb7kdp4"
+        },
+        {
+          "column": "J",
+          "value": 10
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command (EliteDCS) — license key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "License key of GHL Command (EliteDCS), the licensed GHL tool the builder origin runs."
+        },
+        {
+          "column": "D",
+          "value": "Hub file /opt/increase-roas-mcp/ghl-config/credentials.json (field license_key), which the builder origin copies into each session."
+        },
+        {
+          "column": "E",
+          "value": "Saved here 2026-10-01 by this play (it was only on the hub). On a rebuild, sign in to GHL Command with it. If EliteDCS issues a new key, update the hub sign-in and this item together."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; ~/Development/ghl-command-universal/origin/server.py L16 ; ~/Development/ghl-command-universal/origin/server.py L101–L106"
+        },
+        {
+          "column": "I",
+          "value": "smsqrb4cyzqvdsu3eedizvpxgy"
+        },
+        {
+          "column": "J",
+          "value": 11
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command Builder (ghl-command-builder) — connection password"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "The password typed on the GHL builder's sign-in page."
+        },
+        {
+          "column": "D",
+          "value": "The builder Worker ghl-command-universal checks it against its secret CONNECTION_PASSWORD_SHA256 (a hash). The Composio custom_ghl_command_builder login was made through that sign-in. The local fallback file ~/.config/ghl-command-universal/connection-password was retired 2026-10-02 after a sha256 match; this item is the only copy."
+        },
+        {
+          "column": "E",
+          "value": "Pick a new password, set the Worker secret CONNECTION_PASSWORD_SHA256 to its SHA-256, save here, then reconnect the Composio login."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/Development/ghl-command-universal/worker/src/index.ts L20 ; ~/Development/ghl-command-universal/worker/src/index.ts L119 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L159"
+        },
+        {
+          "column": "I",
+          "value": "yxvess6diezoy7lgrnhqrmct5i"
+        },
+        {
+          "column": "J",
+          "value": 12
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command Builder (ghl-command-builder) — origin key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Shared key between the GHL builder Worker and its origin on the hub."
+        },
+        {
+          "column": "D",
+          "value": "Hub file /opt/ghl-command-universal/origin-key (read by origin server.py) and the Worker secret ORIGIN_KEY (sent as Bearer to the origin)."
+        },
+        {
+          "column": "E",
+          "value": "Saved here 2026-10-01 by this play (it was only on the hub and in the write-only Worker secret). Rotate: new random key into the hub file and the Worker secret together, then here."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; ~/Development/ghl-command-universal/origin/server.py L19 ; ~/Development/ghl-command-universal/worker/src/index.ts L190 ; ~/Development/ghl-command-universal/README.md \"the origin key exists only on the hub\""
+        },
+        {
+          "column": "I",
+          "value": "5bfzdypjiimr7ov4kyua6wxtha"
+        },
+        {
+          "column": "J",
+          "value": 13
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL OAuth CRM (ghl-oauth-crm) — gateway key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Key for the GHL CRM gateway's /mcp endpoint (Authorization: Bearer)."
+        },
+        {
+          "column": "D",
+          "value": "Composio custom_ghl_oauth_crm login. The gateway Worker compares it with its secret GHL_MCP_INTERNAL_API_KEY. The item's own 'used by' field is stale: it still names direct Claude and Cursor connectors and a relay."
+        },
+        {
+          "column": "E",
+          "value": "Set a new value as the Worker secret GHL_MCP_INTERNAL_API_KEY, save here, run push_key_to_composio.py --toolkit custom_ghl_oauth_crm, test one read. Also correct the item's 'used by' field."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/Development/increase-roas-oauth-gateway-hotfix/lib/mcp-auth.mjs L110–L113 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §4"
+        },
+        {
+          "column": "I",
+          "value": "3yxpnoxi2xd7o76whc6onu522a"
+        },
+        {
+          "column": "J",
+          "value": 14
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL PIT — <client location A> (the real title names the location)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "GHL Private Integration key for one client location."
+        },
+        {
+          "column": "D",
+          "value": "Registered in the GHL Command token registry on the hub (/opt/increase-roas-mcp/ghl-config/.ghl-tokens.json), which the builder origin uses."
+        },
+        {
+          "column": "E",
+          "value": "Rotate in that GHL location (Settings > Private Integrations), save here, register the new key with the builder."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "55bt4orq2273nskrzefdy4lnrq"
+        },
+        {
+          "column": "J",
+          "value": 15
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL PIT — <client location B> (the real title names the location)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "GHL Private Integration key for one client location."
+        },
+        {
+          "column": "D",
+          "value": "Same registry as the row above."
+        },
+        {
+          "column": "E",
+          "value": "Same as the row above."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "qku4dmh62p6qp3matj2pxaym7u"
+        },
+        {
+          "column": "J",
+          "value": 16
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Cloud API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Placeholder: no Google Cloud key is needed (the robot gets project roles instead)."
+        },
+        {
+          "column": "D",
+          "value": "Nothing. All fields are empty by design."
+        },
+        {
+          "column": "E",
+          "value": "None."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_director-finish/notes/key-placeholders.md \"Google Cloud: no new key\""
+        },
+        {
+          "column": "I",
+          "value": "xpf3cwbyg3t33swa4srlb4izcy"
+        },
+        {
+          "column": "J",
+          "value": 17
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google service account — tagging-admin (GTM + GA4 Admin)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Key file of the Google robot tagging-admin (domain-wide delegation)."
+        },
+        {
+          "column": "D",
+          "value": "Hub: install_hub.sh writes it to /opt/mcp-hub/creds/tagging.json for the gtm, ga4-admin and google-robot routes. Mac: gcloud_robot.py reads it per run."
+        },
+        {
+          "column": "E",
+          "value": "Owner step: make a new key in Google Cloud (IAM > Service accounts > tagging-admin > Keys), replace this document, rewrite the hub file, delete the old key."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/gcloud_robot.py docstring ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "3rtcprjr3b626vxlmlkz53vbte"
+        },
+        {
+          "column": "J",
+          "value": 18
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google service account — workspace-admin (Workspace Admin, can reset passwords)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Key file of the retired workspace-admin robot (password resets moved to the Google robot)."
+        },
+        {
+          "column": "D",
+          "value": "No user left: the Claude Desktop server was removed 2026-10-02 (L01 done)."
+        },
+        {
+          "column": "E",
+          "value": "Archive now (L01 done 2026-10-02); deleting the key in Google Cloud is the owner's step."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/README.md \"retired route\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c12-desktop-plugins.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §1 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §8"
+        },
+        {
+          "column": "I",
+          "value": "35amwpz7c3wlxhmst4ueawpppu"
+        },
+        {
+          "column": "J",
+          "value": 19
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google tagging setup record + OAuth desktop client (from Downloads, Aug 2026)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Setup record and an OAuth desktop client file from the August 2026 tagging setup."
+        },
+        {
+          "column": "D",
+          "value": "Nothing in code. Reference only."
+        },
+        {
+          "column": "E",
+          "value": "None."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "zg3w36r2h7tx7jtdkt4fc2ubna"
+        },
+        {
+          "column": "J",
+          "value": 20
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Higgsfield API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Higgsfield key ID and secret (both filled, although the title still says 'paste here')."
+        },
+        {
+          "column": "D",
+          "value": "Composio higgsfield login."
+        },
+        {
+          "column": "E",
+          "value": "Rotate in the Higgsfield console, save here, run the key mover for higgsfield (key_id maps to generic_api_key, credential to generic_token), test one read. Rename the item."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_director-finish/notes/key-placeholders.md \"Higgsfield API key (paste here)\" ; system/run-log.md \"Higgsfield -> Composio\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "mykharn2zwdxc7zptrzkz24dqa"
+        },
+        {
+          "column": "J",
+          "value": 21
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Make API token and its zone address (filled, although the title still says 'paste here')."
+        },
+        {
+          "column": "D",
+          "value": "Composio make login."
+        },
+        {
+          "column": "E",
+          "value": "Rotate in Make (Profile > API), save here, run the key mover for make, test one read. Rename the item."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_director-finish/notes/key-placeholders.md \"Make API key (paste here)\" ; system/run-log.md \"Make -> Composio\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "6b4gdiv6wuh5sv2ko72xkplyba"
+        },
+        {
+          "column": "J",
+          "value": 22
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP atlas-cloud route token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Bearer token for the hub route /atlas-cloud/mcp (this route has its own token)."
+        },
+        {
+          "column": "D",
+          "value": "Hub file /opt/mcp-hub/creds/route-tokens/atlas-cloud. Composio custom_atlas_cloud login."
+        },
+        {
+          "column": "E",
+          "value": "Make a new random token, save it here, rewrite the hub file (or rerun the installer's secrets step), then run push_key_to_composio.py --item <this item> --toolkit <slug> and one read-only call."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "ldtridi67bgehcpbojgmnxdwoy"
+        },
+        {
+          "column": "J",
+          "value": 23
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP Google robot token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Bearer token for the hub route /google-robot/mcp (this route has its own token)."
+        },
+        {
+          "column": "D",
+          "value": "Hub file /opt/mcp-hub/creds/route-tokens/google-robot. Composio custom_google_robot login."
+        },
+        {
+          "column": "E",
+          "value": "Make a new random token, save it here, rewrite the hub file (or rerun the installer's secrets step), then run push_key_to_composio.py --item <this item> --toolkit <slug> and one read-only call."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L9–L10 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "ol4f26ki7hgrsv6g5l6ik2dxwq"
+        },
+        {
+          "column": "J",
+          "value": 24
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP hub token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "The shared hub token: every hub route without its own token file accepts only this one (gtm, ga4-admin, xai-research, prime-intellect, spyfu, ir-notes)."
+        },
+        {
+          "column": "D",
+          "value": "Hub file /opt/mcp-hub/creds/hub-token and the hub health check. Composio logins custom_google_tag_manager, custom_ga4_admin, custom_xai_research, custom_prime_intellect, custom_spyfu and custom_ir_notes. This answers the open 'IR notes token' question: it is this item."
+        },
+        {
+          "column": "E",
+          "value": "Make a new random token, save it here, rewrite the hub file (or rerun the installer's secrets step), then run push_key_to_composio.py --item <this item> --toolkit <slug> for each of the 6 toolkits and one read-only call."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; ~/.agents/tools/connectors/hub/root/opt/mcp-hub/proxy.mjs L7–L10 ; ~/.agents/tools/connectors/health/health_check.py L46–L47 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "qhzv4z3vflmqdi64rx3wfh7sji"
+        },
+        {
+          "column": "J",
+          "value": 25
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP Workspace Admin token (mcp.increaseroas.com)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Token of the retired hub route google-workspace-admin."
+        },
+        {
+          "column": "D",
+          "value": "No route. A leftover copy sits on the hub at /opt/mcp-hub/creds/wsadmin-token."
+        },
+        {
+          "column": "E",
+          "value": "Archive. Removing the hub copy is cleanup under the standing yes (back up first)."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/README.md \"retired route\" ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "uhe4zyfbwy3k5e4wjcva2wopsq"
+        },
+        {
+          "column": "J",
+          "value": 26
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads — system user token (IR Business Manus App)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Meta system-user token (never expires)."
+        },
+        {
+          "column": "D",
+          "value": "Composio metaads login: this item is its paste source. The Mac meta CLI and its token file were removed 2026-10-01 (K04)."
+        },
+        {
+          "column": "E",
+          "value": "Generate a new system-user token in Meta Business settings, save here, reconnect Composio metaads, revoke the old token."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-batch-2.md L180 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "afu6eusv3rf2x3l663glsb3asy"
+        },
+        {
+          "column": "J",
+          "value": 27
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo API key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Orgo API key."
+        },
+        {
+          "column": "D",
+          "value": "orgo_op.py finds it by title for every orgo call, sync_notes.py, capture_hub.py and rebuild_hub.py included (spp-p33a). The item's own 'used by' field still says ~/.orgo/credentials.json: change it to orgo_op.py."
+        },
+        {
+          "column": "E",
+          "value": "Make a new key in Orgo, save here, delete the old key in Orgo."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/orgo_op.py docstring ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L139"
+        },
+        {
+          "column": "I",
+          "value": "pbkt6ghkrhcq6oab5b3cppncca"
+        },
+        {
+          "column": "J",
+          "value": 28
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo extra API key 7e6e291b (was ~/.orgo/mcp.env; delete in Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "A spare Orgo key kept only until it is revoked."
+        },
+        {
+          "column": "D",
+          "value": "Nothing."
+        },
+        {
+          "column": "E",
+          "value": "Owner step: delete it in Orgo, then archive this item."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-keys-2.md L81–L84 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "dthxwbpi3hib5sfytcvtxw4zka"
+        },
+        {
+          "column": "J",
+          "value": 29
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime Intellect API key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Prime Intellect API key behind the hub route prime-intellect."
+        },
+        {
+          "column": "D",
+          "value": "Hub: install_hub.sh writes it to /opt/mcp-hub/creds/prime.env as PRIME_API_KEY=."
+        },
+        {
+          "column": "E",
+          "value": "Rotate at Prime Intellect, save here, rewrite the hub file, restart the prime-intellect program."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "54hrrfs2n6u5lmm4gt7apl2ooe"
+        },
+        {
+          "column": "J",
+          "value": 30
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shopify API key (paste here)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Placeholder for the Shopify store app (all fields empty)."
+        },
+        {
+          "column": "D",
+          "value": "Nothing yet: waiting for Alex to create the store app (STATUS 'Waiting on the owner' 1)."
+        },
+        {
+          "column": "E",
+          "value": "None yet."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "STATUS.md \"Shopify: create the store app\""
+        },
+        {
+          "column": "I",
+          "value": "lvzszzgwfbi2eknrpnlxzjvnf4"
+        },
+        {
+          "column": "J",
+          "value": 31
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SpyFu API keys"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "SpyFu API ID and key (credential = base64 of id:secret)."
+        },
+        {
+          "column": "D",
+          "value": "Hub: install_hub.sh writes /opt/mcp-hub/creds/spyfu.env for the spyfu route."
+        },
+        {
+          "column": "E",
+          "value": "Rotate at SpyFu, save the new base64 value and the ID here, rewrite the hub file, restart the spyfu program."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3"
+        },
+        {
+          "column": "I",
+          "value": "bgz7imwftp3534pb35bbopxy7u"
+        },
+        {
+          "column": "J",
+          "value": 32
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale auth key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Tailscale auth key (reusable, tagged tag:server). Retitled from 'Tailscale auth key (paste here)' on 2026-10-01 (same ID)."
+        },
+        {
+          "column": "D",
+          "value": "install_hub.sh step 11 (tailscale up on a new hub), found by this exact title. Read once per build."
+        },
+        {
+          "column": "E",
+          "value": "Make a new reusable key tagged tag:server in the Tailscale admin console (Settings > Keys), save it here."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L39 ; ~/.agents/tools/connectors/hub/install_hub.sh L153–L156 ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §4"
+        },
+        {
+          "column": "I",
+          "value": "bhbunmxv5gp262xna7eqt2366e"
+        },
+        {
+          "column": "J",
+          "value": 33
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xAI API key (xai-research)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "xAI API key behind the hub route xai-research."
+        },
+        {
+          "column": "D",
+          "value": "Hub: install_hub.sh writes /opt/mcp-hub/creds/xai-key. It is already in 1Password: the hub file equals this item (checked 2026-10-01), so the workbook's 'not in 1Password' is stale. The Mac copy (~/.cursor/mcp-servers/xai-research/key.txt) matched this item and went to the Trash 2026-10-03 (spp-p55a)."
+        },
+        {
+          "column": "E",
+          "value": "Rotate at xAI, save here, rewrite the hub file, restart xai-research. The Mac copy is removed (Trash, 2026-10-03)."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L28–L39 ; workbook All connections R260 ; work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; work/2026-10-03_claims-audit/notes/spp-p55a-live-items.md \"## L3\""
+        },
+        {
+          "column": "I",
+          "value": "hzbgkns2qocgczsq5kcv2ckl64"
+        },
+        {
+          "column": "J",
+          "value": 34
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password service account — composio"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Token of the 1Password robot 'composio' that Composio's _1password login runs as (read and write on 26 vaults). Saved 2026-10-01 20:39:36Z."
+        },
+        {
+          "column": "D",
+          "value": "Nothing now: both Composio 1Password logins were deleted 2026-10-02 and the 1Password auth config ac_FFWFZ84tq6l7 on 2026-10-03 (readback 404 each)."
+        },
+        {
+          "column": "E",
+          "value": "Archived 2026-10-01 22:17:09Z by the read-write robot. Archived isn't unreadable: any robot with the ID can still read it, but the token in it is dead: Alex revoked it, and the server refused it at 2026-10-01 22:40:34Z (403 Service Account Deleted; To do R59)."
+        },
+        {
+          "column": "G",
+          "value": "ID not returned; cause unknown"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §3 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §7 ; work/2026-10-01_setup-playbook/workbook-updates.md L71 ; work/2026-10-01_setup-playbook/notes/composio-1password-removal.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L102 ; system/run-log.md \"dead-configs removal, scripts 1 and 2\" ; system/run-log.md \"server refuses the token\""
+        },
+        {
+          "column": "I",
+          "value": "yp6ons6ebd6zcot6tv6dzyssb4"
+        },
+        {
+          "column": "J",
+          "value": 35
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailscale API token"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "The Tailscale API key kqEDA2QHaj11CNTRL (description '1pass', made by alex@ 2026-10-01 21:16:37Z, expires 2026-12-30), saved here 2026-10-01 21:17:06Z."
+        },
+        {
+          "column": "D",
+          "value": "The Composio Tailscale login tailscale_eaved-netter (ca_Qr4XRwIDafoq), created 15 seconds after this item was saved (title and time check 2026-10-03; values not compared). No script or config reads it (vault sweep 2026-10-01)."
+        },
+        {
+          "column": "E",
+          "value": "Expires 2026-12-30: make a new API key in the Tailscale admin console, save it here, then move it into the Composio login with the key mover."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L71 ; work/2026-10-03_claims-audit/notes/verify-workbook-other.md §2 ; work/2026-10-02_network-rules/notes/network-rules.md §2 ; work/2026-10-02_network-rules/notes/network-rules.md §11 ; work/2026-10-02_network-rules/notes/api/keys-metadata.json ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §41 ; ~/.agents/tools/cards/composio.md \"Key mover\""
+        },
+        {
+          "column": "I",
+          "value": "75uhbn7dxm5lmzugcrmr4cfida"
+        },
+        {
+          "column": "J",
+          "value": 36
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL OAuth CRM (ghl-oauth-crm) — INTERNAL_API_KEY (from local .dev.vars)"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "credential = the gateway Worker's INTERNAL_API_KEY as it was in the local .dev.vars (Wrangler's local-dev file); ghl_mcp_internal_api_key_old = an old GHL_MCP_INTERNAL_API_KEY, not the live gateway key. Saved 2026-10-02 before the file was retired."
+        },
+        {
+          "column": "D",
+          "value": "Nothing. The live gateway key Composio uses is a different item (3yxpnoxi…); whether INTERNAL_API_KEY here equals the live Worker secret is NOT_PROVEN."
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L159"
+        },
+        {
+          "column": "I",
+          "value": "xcneoitmjinq6qvmrgln4xbfym"
+        },
+        {
+          "column": "J",
+          "value": 37
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl API key"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Firecrawl API key (Personal Team, free plan, 1,000 credits a month)."
+        },
+        {
+          "column": "D",
+          "value": "Composio firecrawl (copy pushed 2026-10-01 by the key mover) and firecrawl_op.py (found by this exact title per run; this ID is only its fallback)."
+        },
+        {
+          "column": "E",
+          "value": "Make a new key in Firecrawl, save it here, then rerun the key mover (Rebuild from zero step 7.10)."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/firecrawl-connector.md §2 ; work/2026-10-01_setup-playbook/notes/firecrawl-connector.md §5 ; work/2026-10-01_setup-playbook/workbook-updates.md L96 ; work/2026-10-01_setup-playbook/notes/firecrawl-op-title.md §1 ; work/2026-10-01_setup-playbook/notes/firecrawl-op-title.md §2 ; ~/.agents/tools/connectors/firecrawl_op.py ; agents-home 10b9aa9 ; work/2026-10-01_setup-playbook/workbook-updates.md L264"
+        },
+        {
+          "column": "I",
+          "value": "uuopqngw4ikpdmpvgnclx3eive"
+        },
+        {
+          "column": "J",
+          "value": 38
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Modal API token"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Modal API token for workspace alex-13722 (token 'modal', user alex-13722; expires 2027-10-01 22:09 EDT)."
+        },
+        {
+          "column": "D",
+          "value": "modal_op.py finds it by title for every modal call (read per run by the Keychain robot); never copied to ~/.modal.toml or Composio. Partners read it and never write it; only Alex rotates it."
+        },
+        {
+          "column": "E",
+          "value": "Before 2027-10-01: a new token in the Modal dashboard, both fields saved to this item (same title), the old token revoked in Modal; nothing else changes."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/connectors/modal_op.py docstring ; work/2026-10-01_setup-playbook/notes/modal-connector.md §3 ; work/2026-10-01_setup-playbook/notes/modal-connector.md §4 ; work/2026-10-01_setup-playbook/workbook-updates.md L212 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L283 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D23"
+        },
+        {
+          "column": "I",
+          "value": "ozvkxvoxqgiy3ednp3tkx6rkqe"
+        },
+        {
+          "column": "J",
+          "value": 39
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face API token"
+        },
+        {
+          "column": "B",
+          "value": "Catalog entry"
+        },
+        {
+          "column": "C",
+          "value": "Fine-grained Hugging Face token 'accss' for user bloomsterhehe (created 2026-10-02): repo read/write, discussions, collections, webhooks, notifications, inference, Inference Endpoints, Jobs; no billing read."
+        },
+        {
+          "column": "D",
+          "value": "A copy pushed to Composio hugging_face (ca_LT97uOiNLDhk) and to the disabled CUSTOM_HF_MCP login (ca_YEECCwwIMmni, removed with CG-QWAA) by push_key_to_composio.py, found by title; no file or CLI holds it."
+        },
+        {
+          "column": "E",
+          "value": "Make a new fine-grained token on Hugging Face, save it here under the same title, rerun the key mover as in Rebuild from zero step 7.11, then revoke the old token."
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/huggingface-connector.md §1 ; work/2026-10-01_setup-playbook/notes/huggingface-connector.md §2 ; work/2026-10-01_setup-playbook/notes/huggingface-connector.md §6 ; work/2026-10-01_setup-playbook/workbook-updates.md L235"
+        },
+        {
+          "column": "I",
+          "value": "u4gavrfzax27phth755upip3lq"
+        },
+        {
+          "column": "J",
+          "value": 40
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command Builder (ghl-command-builder) — origin key"
+        },
+        {
+          "column": "B",
+          "value": "Historical save receipt"
+        },
+        {
+          "column": "F",
+          "value": "Saved origin: /opt/ghl-command-universal/origin-key\nSaved/check method: Created on the hub with the read-write robot from a JSON template on stdin, then read back: hash match on the hub, and the Mac-side vault read finds the same value"
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://www.1password.dev/cli/item-create (read 2026-10-01)"
+        },
+        {
+          "column": "I",
+          "value": "5bfzdypjiimr7ov4kyua6wxtha"
+        },
+        {
+          "column": "J",
+          "value": 64
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL Command (EliteDCS) — license key"
+        },
+        {
+          "column": "B",
+          "value": "Historical save receipt"
+        },
+        {
+          "column": "F",
+          "value": "Saved origin: /opt/increase-roas-mcp/ghl-config/credentials.json (license_key)\nSaved/check method: Same method and checks. Vault went from 28 to 30 items, no duplicate titles"
+        },
+        {
+          "column": "G",
+          "value": "ID returned live; saved notes untested"
+        },
+        {
+          "column": "H",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts.md §3 ; https://www.1password.dev/cli/item-create (read 2026-10-01)"
+        },
+        {
+          "column": "I",
+          "value": "smsqrb4cyzqvdsu3eedizvpxgy"
+        },
+        {
+          "column": "J",
+          "value": 65
+        },
+        {
+          "column": "K",
+          "value": "Read saved source",
+          "link": "'DOCS - 1Password'!A98"
+        }
+      ]
+    }
+  ]
+}

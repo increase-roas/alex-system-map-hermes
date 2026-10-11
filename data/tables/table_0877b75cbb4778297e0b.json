@@ -1,0 +1,471 @@
+{
+  "id": "table_0877b75cbb4778297e0b",
+  "sheet": "S03-29 Tailscale",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "device",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        },
+        {
+          "column": "B",
+          "value": "tailscale name"
+        },
+        {
+          "column": "C",
+          "value": "OS"
+        },
+        {
+          "column": "D",
+          "value": "Tailscale IP"
+        },
+        {
+          "column": "E",
+          "value": "status (2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "what it's for / notes"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex's MacBook Pro"
+        },
+        {
+          "column": "B",
+          "value": "alexs-macbook-pro.tailde26a1.ts.net"
+        },
+        {
+          "column": "C",
+          "value": "macOS"
+        },
+        {
+          "column": "D",
+          "value": "100.90.100.19"
+        },
+        {
+          "column": "E",
+          "value": "online (2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "This Mac. SSH from here into all 7 Orgo computers worked (2026-10-01)\nHISTORICAL machine claim (Oct1–3), not current inventory. Current IDs/placements and reset evidence: https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit → COMPUTER INVENTORY. No retained address implies current access."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sasha's Mac mini"
+        },
+        {
+          "column": "B",
+          "value": "javante.tailde26a1.ts.net"
+        },
+        {
+          "column": "C",
+          "value": "macOS"
+        },
+        {
+          "column": "D",
+          "value": "100.127.38.125"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE — online (2026-10-01); current health not rechecked"
+        },
+        {
+          "column": "F",
+          "value": "Home exit node (Comcast residential). Orgo agents' web traffic leaves through here; AI and API traffic stays direct. The health check alerts if it drops"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "iPhone"
+        },
+        {
+          "column": "B",
+          "value": "iphone172.tailde26a1.ts.net"
+        },
+        {
+          "column": "C",
+          "value": "iOS"
+        },
+        {
+          "column": "D",
+          "value": "100.82.76.7"
+        },
+        {
+          "column": "E",
+          "value": "offline (last seen 2026-09-25; not re-checked 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "No note in the run-log. What it is used for: not recorded"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javar-orgo"
+        },
+        {
+          "column": "B",
+          "value": "javar-orgo.tailde26a1.ts.net"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "100.84.107.10"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE — online, tag:server (2026-10-01); current health not rechecked"
+        },
+        {
+          "column": "F",
+          "value": "Javar's EA Orgo computer. Tagged tag:server. Tailscale SSH on (policy v4: only alex@ may SSH in). Chrome policy -> home proxy, proven Comcast. One of the 6 agent machines in the 2026-10-01 exposure issue, fixed by policy v4 on 2026-10-03 (row 15)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "harmanjeet's MacBook Air"
+        },
+        {
+          "column": "B",
+          "value": "harmanjeets-macbook-air.tailde26a1.ts.net"
+        },
+        {
+          "column": "C",
+          "value": "macOS"
+        },
+        {
+          "column": "D",
+          "value": "100.71.196.38"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE — removed from tailnet (gone 2026-10-01); current health not rechecked"
+        },
+        {
+          "column": "F",
+          "value": "Teammate device. Gone from the tailnet as of 2026-10-01; who removed it: not checked"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "My OpenClaw (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "openclaw-hub"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "100.122.97.7"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE — online, tag:server (2026-10-01); current health not rechecked"
+        },
+        {
+          "column": "F",
+          "value": "Joined 2026-10-01 (userspace mode, supervisor program tailscaled). Exit node = Sasha's Mac mini, used ONLY through the agent proxy socks5://localhost:1055 / http://localhost:1056 -> 50.238.53.114 Comcast. Hub's own traffic stays direct (69.67.151.85 Latitude.sh). Shields-up is ON: after joining, its backend ports answered tailnet requests without a token (userspace mode forwards inbound traffic to localhost); fixed 2026-10-01. SSH was enabled before shields-up; whether SSH to the hub still works now: not checked. Key in 1Password 'Tailscale auth key'"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tailnet"
+        },
+        {
+          "column": "B",
+          "value": "increaseroas.com"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "MagicDNS suffix tailde26a1.ts.net. Use: private links between your Macs and Orgo computers without public ports. Open: javante is still shared with Kanwal Singh's outside account; Alex revokes the share (the user was removed 2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "B2B Sales Agent (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "b2b-sales-agent"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "100.99.199.66"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE — online, tag:server (2026-10-01); current health not rechecked"
+        },
+        {
+          "column": "F",
+          "value": "Hermes agent. Joined 2026-10-01 (userspace, supervisor tailscaled). Tailscale SSH on. Chrome policy /etc/opt/chrome/policies/managed/home-proxy.json -> socks5 127.0.0.1:1055 -> exit node Sasha's Mac mini; fresh Chrome proven Comcast Chicago. AI/API traffic stays direct. One of the 6 agent machines in the 2026-10-01 exposure issue, fixed by policy v4 on 2026-10-03 (row 15)"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "CSM computer-7121 (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "csm-agent"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL ADDRESS — retired-machine snapshot; current mapping see Gameplan COMPUTER INVENTORY"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE Oct1–3; old machine replaced Oct5. Current network/exit-node configuration UNKNOWN here."
+        },
+        {
+          "column": "F",
+          "value": "Retain prior network/policy evidence only. Do not use this row to connect to a current machine or assign a role; inventory: https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; reset receipt /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Max - Increase Roas (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "max-finance"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL ADDRESS — retired-machine snapshot; current mapping see Gameplan COMPUTER INVENTORY"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE Oct1–3; old machine replaced Oct5. Current network/exit-node configuration UNKNOWN here."
+        },
+        {
+          "column": "F",
+          "value": "Retain prior network/policy evidence only. Do not use this row to connect to a current machine or assign a role; inventory: https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; reset receipt /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Media — Increase ROAS (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "media-agent"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL ADDRESS — retired-machine snapshot; current mapping see Gameplan COMPUTER INVENTORY"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE Oct1–3; old machine replaced Oct5. Current network/exit-node configuration UNKNOWN here."
+        },
+        {
+          "column": "F",
+          "value": "Retain prior network/policy evidence only. Do not use this row to connect to a current machine or assign a role; inventory: https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; reset receipt /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Ops Coordinator (Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "ops-coordinator"
+        },
+        {
+          "column": "C",
+          "value": "linux"
+        },
+        {
+          "column": "D",
+          "value": "HISTORICAL ADDRESS — retired-machine snapshot; current mapping see Gameplan COMPUTER INVENTORY"
+        },
+        {
+          "column": "E",
+          "value": "HISTORICAL EVIDENCE Oct1–3; old machine replaced Oct5. Current network/exit-node configuration UNKNOWN here."
+        },
+        {
+          "column": "F",
+          "value": "Retain prior network/policy evidence only. Do not use this row to connect to a current machine or assign a role; inventory: https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; reset receipt /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/outputs/javar-gameplan-v1/lab-fresh-reset.json"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Rule (all Orgo computers)"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "2026-10-03 (policy v4)"
+        },
+        {
+          "column": "F",
+          "value": "Every Orgo agent browses through Sasha's Mac mini (Comcast home IP); the health check alerts if it stops (18/18 green 2026-10-01). All 7 are tagged tag:server (no key expiry). Key: 1Password 'Tailscale auth key' (reusable, tagged). Policy v4 saved by Alex 2026-10-03 00:15:55Z: only alex@ may SSH into the Orgo machines; the agent machines reach only their real flows (A2A 9900, GHL bridge 18881, the exit node); 9/9 after-save checks (network-rules §14)"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Open issue (2026-10-01)"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "fixed 2026-10-03 ('fix properly', policy v4)"
+        },
+        {
+          "column": "F",
+          "value": "6 agent machines (javar-orgo, b2b-sales-agent, csm-agent, max-finance, media-agent, ops-coordinator) answer tailnet peers on desktop-api 8080, VNC 6080 and 5999, Chrome debug 9223 (CSM), Hermes 8644-8646 and 9119, plus helper ports. Cause: userspace Tailscale forwards inbound traffic to localhost. The hub had the same problem and was fixed with shields-up. Options: 'lock now' = shields-up on each (closes it, also stops Tailscale SSH) or 'fix properly' = an access rule allowing only Alex's admin access, SSH, the exit node and the agents' real traffic. Which port is on which machine: not broken down. Agent checks with the Cursor chat auditing Javar/Javante limits before touching their rules Fixed by policy v4 (b2b → javante:9900 now refused; Javar A2A and the GHL bridge still work)."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "To do (Alex)"
+        },
+        {
+          "column": "B",
+          "value": "—"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "open"
+        },
+        {
+          "column": "F",
+          "value": "Done 2026-10-02: Alex removed the user Kanwal Singh. Still open: javante (the Mac mini) is still shared with Kanwal Singh's outside account (network-rules 2026-10-02): Alex revokes the share in the admin console (Machines > Filters > Shared > Shared by me > javante > Share > Revoke invite)"
+        }
+      ]
+    }
+  ]
+}

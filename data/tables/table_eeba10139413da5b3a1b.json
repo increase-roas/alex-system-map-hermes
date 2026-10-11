@@ -1,0 +1,2084 @@
+{
+  "id": "table_eeba10139413da5b3a1b",
+  "sheet": "S02-08 Composio + 1Password rig",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "This tab shows the one right way to wire Composio and 1Password into each AI Alex uses: the one Composio route and the one 1Password route per surface, how a key travels, and what never to do. Every row ends with a source (a file, a workbook row, a commit or a vendor page) that the build script checks. The tab is built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/composio-1password.json, so change the JSON and rebuild; never edit the sheet by hand. Proven means a live test passed on the date shown; NOT_PROVEN means nobody has tested it yet, and the row says what would prove it."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The design in one line"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "part"
+        },
+        {
+          "column": "B",
+          "value": "the rule"
+        },
+        {
+          "column": "C",
+          "value": "why"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio holds every app login"
+        },
+        {
+          "column": "B",
+          "value": "One Composio account (org wearenumber1, signed in as alex@increaseroas.com) holds every app login. It has two doors into the same logins: the `composio` command (a CLI, meaning a command typed in a terminal) wherever a terminal exists, and the Composio app's tools in chats that have no terminal."
+        },
+        {
+          "column": "C",
+          "value": "One place to fix a login, and every AI gets the same thing. Both doors see the same logins, so there is never a second copy to keep in step."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/instructions/shared.md L14 ; ~/.agents/tools/cards/composio.md \"Same logins either way\" ; workbook SOP R3 ; agents-home 0d7adb3"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password holds every key"
+        },
+        {
+          "column": "B",
+          "value": "Every API key lives in the 1Password vault Connectors, shared with Alex, Manny and Anthony. Scripts read it with robot logins (1Password service accounts: logins for scripts that need no Touch ID)."
+        },
+        {
+          "column": "C",
+          "value": "One home per key. A key that lives in two places drifts, and a copy in a file gets leaked."
+        },
+        {
+          "column": "D",
+          "value": "workbook SOP R3 ; workbook SOP R8 ; workbook SOP R40 ; ~/.agents/instructions/shared.md L10"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Every secret an AI needs is in Connectors"
+        },
+        {
+          "column": "B",
+          "value": "Every secret an AI or script needs lives in the Connectors vault, which the connectors-sync robots read. Nothing an AI needs lives in Employee or Private, the default Shared vault, 'Local Vault (operator secrets)' or a 1Password Environment. Agents read 1Password only through the Keychain robot; making robots, Connect servers or vault grants is Alex's (a security setting). Javar's and the agent team's own vaults stay as they are (their fence)."
+        },
+        {
+          "column": "C",
+          "value": "Robots, 1Password Connect and Composio's 1Password can never reach the built-in Personal, Private or Employee vault or the default Shared vault, and 'Local Vault (operator secrets)' is granted to no robot. Anything outside the robots' reach is read as Alex through the 1Password app, which asks for Touch ID. One exception: the robots' recovery tokens stay in 'Local Vault (operator secrets)', so no robot can read another robot's token (least privilege)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §1 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §3 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §4 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md L7 ; work/2026-10-01_setup-playbook/workbook-updates.md L71"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Keys reach apps only through Composio, and no AI ever sees a key"
+        },
+        {
+          "column": "B",
+          "value": "A key goes from 1Password into Composio only through the key mover script (push_key_to_composio.py). Keys never go in chat, files or logs, and scripts never print them."
+        },
+        {
+          "column": "C",
+          "value": "Composio then serves the app to every AI without anyone handling the key again. 1Password stays the source and Composio keeps a working copy. All current Composio logins were created after Composio's breach disclosure of 2026-05-21."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/instructions/shared.md L5 ; ~/.agents/tools/cards/composio.md \"all our logins are newer\" ; ~/.agents/tools/cards/composio.md \"reach Composio only through the key mover\" ; ~/.agents/tools/connectors/push_key_to_composio.py docstring ; STATUS.md L41"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Each AI keeps only three kinds of things"
+        },
+        {
+          "column": "B",
+          "value": "Each AI keeps only Composio, its own 1Password route (the `op` command and the connectors-sync scripts on Claude Code and Codex; none on the Claude app or ChatGPT) and the built-ins its row in the AI apps tab names, one per job. Anything else is a finding to remove."
+        },
+        {
+          "column": "C",
+          "value": "The AIs used to carry their own copies of the same apps, so they picked the wrong one. A short fixed list per AI makes a leftover easy to spot."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/instructions/shared.md L10 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W03 ; workbook SOP R4 ; agents-home 2713b89"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Each surface: the one Composio route and the one 1Password route"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "surface"
+        },
+        {
+          "column": "B",
+          "value": "Composio: the one route"
+        },
+        {
+          "column": "C",
+          "value": "1Password: the one route"
+        },
+        {
+          "column": "D",
+          "value": "status and proof"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code (terminal and the desktop Code tab)"
+        },
+        {
+          "column": "B",
+          "value": "The `composio` command first: `composio search \"<task>\"`, then `composio execute` (and `composio proxy` for raw API calls with the stored login). The claude.ai Composio connector arrives on its own and reaches the same account; use it only when the command can't run. Inside the Claude Code sandbox (the safety box Claude Code runs commands in), `composio execute` works, at most warning that it can't write its cache; `composio search` and `--get-schema` fail there because they write ~/.composio, so run those outside it."
+        },
+        {
+          "column": "C",
+          "value": "The `op` command (1Password's CLI). Interactive work signs in with Touch ID through the 1Password app; scripts use the robot login; values are piped to their target and never printed (the key mover, `op run`, `op inject`). `op` fails inside the Claude Code sandbox, so it runs outside it."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01: `composio whoami` shows alex@increaseroas.com and org wearenumber1, and the connector and the command see the same logins. The composio@composio plugin's self-updating hook (a script the app runs by itself) is pinned to marketplace tag v0.2.4 since 2026-10-01 (I15). Headless live tests on 2026-10-01 were BLOCKED: the terminal CLI (2.1.251) was signed out (\"OAuth session expired\"). By about 20:46Z it was on 2.1.287 and signed in with claude.ai, and it syncs the claude.ai connectors. The conductor then ran the same tests as Claude Code subagents in the signed-in desktop app: T1–T6 PASS, including T2 (a Gmail draft created and trashed, never sent) and T3 (a 1Password read through the Keychain token and op, hashed, with no value shown); T7 PASS on the terminal and, after the restart, on the desktop. On 2026-10-02 the terminal ran T1–T6 headless: all 6 PASS (T2 under the headless guard rule), and the fresh-session guard check passed (Tests tab)."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/instructions/shared.md L14 ; ~/.agents/tools/cards/composio.md L12–L15 ; ~/.agents/tools/cards/composio.md L32–L34 ; work/2026-10-01_setup-playbook/notes/card-fixes.md §4 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L19–L20 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L29–L30 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L60 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W02 ; system/run-log.md L91 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L91 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md \"Findings for the workbook and the Director\" ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-conductor.md \"## Results\" ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md \"## 4. I15\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"T7 re-run\" ; work/2026-10-01_setup-playbook/notes/spp-c9-d5-remainder.md §3 ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §21 ; work/2026-10-01_setup-playbook/notes/live-tests-terminal-final.md §1 ; work/2026-10-01_setup-playbook/notes/live-tests-terminal-final.md §2 ; work/2026-10-01_setup-playbook/notes/live-tests-terminal-final.md §3 ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Desktop T7 after the restart\" ; work/2026-10-01_setup-playbook/workbook-updates.md L192"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app (claude.ai web, desktop chat, Cowork, phone)"
+        },
+        {
+          "column": "B",
+          "value": "One custom connector (an add-on that gives Claude tools) at https://connect.composio.dev/mcp, added once under Customize > Connectors > Add custom connector, signed in as alex@increaseroas.com with org wearenumber1. Claude's directory has no Composio listing yet, so the custom connector is the route."
+        },
+        {
+          "column": "C",
+          "value": "None for keys: keys reach the Claude app only through Composio. Optional and separate: 1Password for Claude, in Claude Desktop on a Mac, fills website logins through Claude in Chrome. It never handles API keys, and Claude never sees the password."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01: the connector is connected (11 tools) and reaches the same org and logins as the command. On Alex's iPhone (2026-10-01): T1 (GHL rules read through Composio), T2 (a Gmail draft created, read back and deleted through custom_google_robot, never sent) and T4 (the Google Ads route named, nothing changed) PASS; T7 PASS with gaps: about 150 plugin-pack skills loaded then, and the chat still saw the old GHL OAuth Gateway connector's tools (L13). After the app batch (fresh readback 20:26Z, 2026-10-01) the Claude app keeps 2 connectors, Composio and GitHub Integration (a named built-in that attaches repo files to chats, read-only; Composio github does the API actions), and 2 plugins, PDF Viewer and Desktop Commander; 12 plugins were removed, Qt Development Skills among them (W05), and Qt docs stays available through Composio. NOT_PROVEN: which Composio user it signed in as (inferred alex@). 1Password for Claude is connected in Claude Desktop (2026-10-02, spp-c21): sign-in autofill only."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L11–L12 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L27–L29 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L83 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L146–L148 ; ~/.agents/instructions/shared.md L10 ; https://docs.composio.dev/docs/composio-connect (read 2026-10-01) ; https://support.claude.com/en/articles/15936181-get-started-with-1password-for-claude (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## Claude mobile\" ; work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_claude-mobile-parity-test.md ; work/2026-10-01_setup-playbook/notes/app-batch.md \"Proof readbacks\" ; work/2026-10-01_setup-playbook/notes/app-batch.md §3 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W05 ; work/2026-10-01_setup-playbook/workbook-updates.md L18–L22 ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §2"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Desktop local config (what must NOT be there)"
+        },
+        {
+          "column": "B",
+          "value": "Nothing. Desktop chat gets Composio from the Claude app connector. The two old local MCP servers (small programs that give an AI tools), google-workspace-admin and ghl-oauth-crm, must not be there: proven Composio routes (custom_google_robot and custom_ghl_oauth_crm) replace both."
+        },
+        {
+          "column": "C",
+          "value": "Nothing. Both old servers read keys from plaintext files on the Mac (parity items K02 and K03); both are gone (K02 2026-10-01; K03's two files moved to the Trash 2026-10-03)."
+        },
+        {
+          "column": "D",
+          "value": "Done 2026-10-02: Alex deleted both; claude_desktop_config.json lists 0 local servers (spp-c21)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/parity-diff.csv row L01 ; workbook AI apps R10 ; workbook SOP R29 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L15–L16 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L97–L103 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S09. K03, K02 and L01\" ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row K02 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row K03 ; work/2026-10-01_setup-playbook/notes/spp-c12-desktop-plugins.md §5 ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §1 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## K03\""
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex (terminal CLI and the desktop app)"
+        },
+        {
+          "column": "B",
+          "value": "The `composio` command first, because Codex has a terminal. The second door is the official Composio app (the same directory plugin ChatGPT uses). Its entry in ~/.codex/config.toml must say default_tools_approval_mode = \"approve\": Codex runs with approvals off, so without that line every Composio call is refused."
+        },
+        {
+          "column": "C",
+          "value": "The `op` command and the connectors-sync scripts (the key mover, gcloud_robot.py, orgo_op.py). The `1password-mcp` entry, which managed only 1Password Environments (a separate developer feature) and couldn't see the Connectors vault, was removed from ~/.codex/config.toml on 2026-10-01 at 17:03 local (spp-c11), so agents keep only the service-account route."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01 in headless live tests (the ChatGPT app's bundled Codex 0.159.2, in a test repo): a reversible write through the Composio app (a Gmail draft created, read back and trashed, never sent), a GHL CRM read through the `composio` command and a Google Ads read. That run passed 5 of 7 (7 of 7 after the T3 retest and T7, Tests tab): T1 read the card from the local file, which is by design on the Mac, and T3's Keychain read was refused without a prompt and exposed nothing. The terminal codex-cli failed with HTTP 400 on 0.150.1; after its update to 0.160.0, codex exec with the configured model answered OK (spp-c13). Also proven: the approve line is in the config, and the old composio@composio 0.2.3 plugin, its 2 hooks and its marketplace are gone. NOT_PROVEN: the negative check that /hooks lists no Composio hooks."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/instructions/shared.md L10 ; ~/.agents/instructions/shared.md L14 ; workbook SOP R25 ; workbook SOP R58 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L30–L31 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L12 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L18 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L36–L37 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L126–L129 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L69–L71 ; system/run-log.md L93 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md \"Results\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 4. Removal\" ; work/2026-10-01_setup-playbook/notes/spp-c11-1password-gmail.md ; system/run-log.md L132 ; workbook Tests R1"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT web"
+        },
+        {
+          "column": "B",
+          "value": "Only the official Composio plugin from ChatGPT's Plugins Directory (v1.0.1, developer Sampark Inc, which is Composio's legal name). Install it once, sign in as alex@increaseroas.com and pick org wearenumber1. Add nothing else for Composio."
+        },
+        {
+          "column": "C",
+          "value": "None for keys: keys reach ChatGPT only through Composio. There is no official 1Password app for ChatGPT on the web. Website logins in ChatGPT's cloud browser use ChatGPT's own secure sign-in form, which keeps the password away from the model."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01 (22:16–22:25 local, spp-c16) in the Conductor's own browser tab: T1, T2 (a Gmail draft created through the Composio robot as alex@, read back and trashed, never sent; the mailbox checked live) and T4 PASS; T7 PASS with gaps (50 skills). Composio's permission is Always ask since 2026-10-01 (spp-c17), but one approval covers every Composio call in that answer, writes included, so ChatGPT is for reads and drafts."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L9 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L93–L98 ; ~/.agents/instructions/shared.md L10 ; ~/.agents/instructions/shared.md L14 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L20–L22 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L86–L87 ; system/run-log.md L93 ; STATUS.md L39 ; master-connector-repo f1b1355 ; https://help.openai.com/en/articles/20001280-using-cloud-browser-in-chatgpt (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S11. Which ChatGPT surface\" ; work/2026-10-01_setup-playbook/notes/live-chatgpt.md L12 ; work/2026-10-01_setup-playbook/notes/transcripts/chatgpt-web/2026-10-01_chatgpt-web-parity-test.md \"## Conductor verdicts\" ; work/2026-10-01_setup-playbook/notes/spp-c17-chatgpt-write-approval.md \"## Result after Alex's yes\" ; work/2026-10-01_setup-playbook/workbook-updates.md L185"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT desktop app (Mac)"
+        },
+        {
+          "column": "B",
+          "value": "Chat uses the same official Composio plugin. Codex and Work chats on the Local host (meaning they run on the Mac) have a terminal, so they use the `composio` command first."
+        },
+        {
+          "column": "C",
+          "value": "Chat: none for keys. The official 1Password plugin was removed on 2026-10-01 (Alex's yes, read back): it only managed Environments, never returned a secret and couldn't see the Connectors vault. To move a key, a Codex or Work chat on the Local host runs the key mover, which is Codex's route."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01 between 17:52 and 17:57Z in this app: the Composio plugin, connected as alex@, passed a Foreplay read and a write (the Google robot created a Google Doc, then trashed it), and Duke passed the read too. NOT_PROVEN: whether 1Password's local MCP server is switched on; one \"List my 1Password Environments\" call from a desktop chat would show it."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/instructions/shared.md L14 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L13–L16 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L56 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L79–L82 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L139 ; STATUS.md L39 ; system/run-log.md L93 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S11. Which ChatGPT surface\" ; work/2026-10-01_setup-playbook/notes/live-chatgpt.md L12 ; work/2026-10-01_setup-playbook/notes/app-batch.md \"Item 9 (add-on)\""
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT phone app"
+        },
+        {
+          "column": "B",
+          "value": "The same official Composio plugin, once it is installed on the account. The plugin is set up per ChatGPT workspace, and the phone uses whichever workspace is selected."
+        },
+        {
+          "column": "C",
+          "value": "None in chat. 1Password fills ChatGPT's secure sign-in form through iPhone AutoFill. To push a key from the phone, paste it into its pre-made item in the 1Password phone app, then use Codex Remote (driving Codex on the Mac from the phone) to run the key mover; see section 3."
+        },
+        {
+          "column": "D",
+          "value": "Proven on Alex's iPhone (2026-10-01): T1 (GHL rules read through Composio), T2 (a Gmail draft created, read back and deleted through custom_google_robot, never sent) and T4 (the Google Ads route named, nothing changed) PASS; T7 PASS with gaps (37 skills, including the Composio plugin's skill). Not recorded: Chat or Work mode, and which workspace was selected."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L34 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L120 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L133 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L144 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L59 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L83–L85 ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## ChatGPT mobile\" ; work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_chatgpt-mobile-parity-test.md"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT Work cloud and dots"
+        },
+        {
+          "column": "B",
+          "value": "The same official Composio plugin; OpenAI's docs say plugins work in Work and dots. Plugin hooks don't run in cloud Work, which is one more reason to use the official plugin, which has none."
+        },
+        {
+          "column": "C",
+          "value": "None for keys. Website logins use ChatGPT's secure sign-in form, which a password manager can fill, and the model never sees the password. That covers logins only, not API keys."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01: a read through a dot passed. NOT_PROVEN: a write through a dot, and any Work cloud run; proof is the same read and reversible write. A hosted Codex task once failed with \"Unknown tool\" for a Composio tool, so test cloud runs on their own."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L35 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L136 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L30–L32 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L60 ; STATUS.md L39 ; system/run-log.md L93 ; https://learn.chatgpt.com/docs/plugins (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Orgo hub (server side: mcp.increaseroas.com on Orgo)"
+        },
+        {
+          "column": "B",
+          "value": "The hub hosts the custom routes Composio can't host itself, and Composio's custom toolkits (for example custom_google_robot) call them. The hub holds each route's bearer token (the password the route checks), and AI apps reach the hub only through Composio. Javar's agents call Composio through javar_composio_execute."
+        },
+        {
+          "column": "C",
+          "value": "The robot login tokens also sit on the hub, so key work could move off the Mac later. The Google robot route's hub token is kept in 1Password too. Javar's agents keep their fenced Orgo 1Password loader."
+        },
+        {
+          "column": "D",
+          "value": "Proven 2026-10-01: 8 routes running in a live pull, and checks every 30 minutes text and email Alex and Manny on a break. On the Mac, Orgo commands now get the Orgo key from 1Password at each launch (orgo_op.py)."
+        },
+        {
+          "column": "E",
+          "value": "workbook SOP R3 ; workbook SOP R8 ; workbook SOP R28 ; workbook AI apps R8 ; ~/.agents/tools/cards/google-workspace.md L2 ; ~/.agents/tools/cards/google-workspace.md \"hub token in 1Password\" ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row K05 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L96–L97 ; STATUS.md L15 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L60–L69"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. How a key flows, step by step"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "who"
+        },
+        {
+          "column": "C",
+          "value": "what happens"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Copy the key"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "Alex creates or rotates the key on the vendor's site and copies it by highlighting it and pressing Cmd+C. The copy button in an in-app browser does not reach the Mac clipboard."
+        },
+        {
+          "column": "D",
+          "value": "workbook SOP R17 ; workbook SOP R47"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Check the shape only"
+        },
+        {
+          "column": "B",
+          "value": "Agent on the Mac (Claude Code, or Codex in a terminal or in the ChatGPT desktop app)"
+        },
+        {
+          "column": "C",
+          "value": "The agent reads the clipboard into memory in one Python process and checks only the key's prefix and length (fc- 35, hf_ 37; Modal: the copied `modal token set` line, both values). It never prints, echoes or logs the key."
+        },
+        {
+          "column": "D",
+          "value": "workbook SOP R17 ; system/run-log.md L92 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L79–L82 ; ~/.agents/skills/tool-card/references/key-capture.md ; work/2026-10-01_setup-playbook/workbook-updates.md L245"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Save it to its 1Password item"
+        },
+        {
+          "column": "B",
+          "value": "Agent (the read-write robot; no Touch ID)"
+        },
+        {
+          "column": "C",
+          "value": "In the same process: duplicate-title check in the Connectors vault, then `op item create --vault <Connectors> --format json -` with a JSON template on stdin (1Password: command arguments can be visible to other processes, so sensitive values go in a template), using the Keychain robot token (connectors-sync-rw) and OP_BIOMETRIC_UNLOCK_ENABLED=false; an existing item is filled by piping its JSON to `op item edit`. The agent reads the item back and compares hashes, without printing it."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/tool-card/references/key-capture.md ; system/run-log.md L92 ; workbook SOP R17 ; https://developer.1password.com/docs/cli/item-create (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/tool-card-v14.md §3 ; work/2026-10-01_setup-playbook/notes/tool-card-v14.md §8 ; work/2026-10-01_setup-playbook/workbook-updates.md L246"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Clear the clipboard"
+        },
+        {
+          "column": "B",
+          "value": "Agent"
+        },
+        {
+          "column": "C",
+          "value": "The agent clears the clipboard with `pbcopy </dev/null`."
+        },
+        {
+          "column": "D",
+          "value": "workbook SOP R17 ; system/run-log.md L84 ; system/run-log.md L92 ; ~/.agents/skills/tool-card/references/key-capture.md ; work/2026-10-01_setup-playbook/workbook-updates.md L247"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Run the key mover"
+        },
+        {
+          "column": "B",
+          "value": "Agent runs the script"
+        },
+        {
+          "column": "C",
+          "value": "The agent runs ~/.agents/tools/connectors/push_key_to_composio.py --item \"<1Password item>\" --toolkit <slug>, where the slug is Composio's short name for the app (for example custom_foreplay). The robot login reads the key from 1Password with no Touch ID, the `composio` command's login sends it, and the script prints only the connection ID. Custom toolkits store the key as generic_api_key."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py docstring ; ~/.agents/tools/cards/composio.md \"Key mover:\" ; ~/.agents/tools/cards/composio.md \"stored as `generic_api_key`\" ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L42"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Prove it with one read-only call"
+        },
+        {
+          "column": "B",
+          "value": "Agent"
+        },
+        {
+          "column": "C",
+          "value": "Composio does not test a key when it is saved, so the agent runs one read-only tool of that app. Example: after the Foreplay rotation, CUSTOM_FOREPLAY_GET_USER_USAGE passed."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/push_key_to_composio.py docstring ; ~/.agents/tools/cards/composio.md \"Composio doesn't test the key\" ; workbook SOP R47 ; system/run-log.md L92"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Phone variant"
+        },
+        {
+          "column": "B",
+          "value": "Alex on the phone, then the Mac"
+        },
+        {
+          "column": "C",
+          "value": "Alex pastes the key into its pre-made \"paste here\" item in the 1Password phone app (for example \"Shopify API key (paste here)\"). Then, in the ChatGPT app, he uses Codex Remote to ask the Mac to run the key mover. The push uses the robot login, so it needs no Touch ID, but the Mac must be awake, online and running the ChatGPT app. Not built (needs Alex's go): a hub route that runs the same push, so web, phone and dots wouldn't need the Mac."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L83–L85 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L105–L107 ; STATUS.md L19"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Robot logins"
+        },
+        {
+          "column": "B",
+          "value": "1Password service accounts"
+        },
+        {
+          "column": "C",
+          "value": "connectors-sync can only read the Connectors vault; connectors-sync-rw (added 2026-10-01) can also save a key there. Neither reaches any other vault, and Alex chose to keep both. The read-write token sits in the Mac Keychain (in the entry named op-service-account-connectors-sync) and on the Orgo hub; the read-only token is only in its 1Password backup item. On the hub it is one file, /opt/mcp-hub/creds/op-connectors-sync, readable by root only (mode 600, in a folder with mode 700); the hub uses it at install to pull its other secrets from 1Password."
+        },
+        {
+          "column": "D",
+          "value": "workbook SOP R8 ; system/run-log.md L65 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L60 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L42 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S12. How the robot token\" ; ~/.agents/tools/connectors/hub/rebuild_hub.py L160–L162 ; ~/.agents/tools/connectors/hub/install_hub.sh L103–L106"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which token sits in the Keychain: settled"
+        },
+        {
+          "column": "B",
+          "value": "Alex decides; an agent checks"
+        },
+        {
+          "column": "C",
+          "value": "Settled 2026-10-01 by fingerprints, values never printed: the Keychain entry op-service-account-connectors-sync and the hub's /opt/mcp-hub/creds/op-connectors-sync hold the same token, and it belongs to the read-write robot, connectors-sync-rw. The read-only robot's token is only in its 1Password backup item. Their notes now say read-write too (agents-home ea6c339). Least privilege, with the read-only robot by default and read-write only inside the key-save step, is decided but waits until testing is done (Decisions and why, D08)."
+        },
+        {
+          "column": "D",
+          "value": "system/run-log.md L92 ; master-connector-repo 68917d2 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L9–L10 ; ~/.agents/tools/connectors/orgo_op.py docstring ; ~/.agents/tools/connectors/push_key_to_composio.py docstring ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L124–L126 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S05. G05\" ; agents-home ea6c339"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Per-run wrapper: gcloud_robot.py"
+        },
+        {
+          "column": "B",
+          "value": "Script"
+        },
+        {
+          "column": "C",
+          "value": "Runs gcloud (Google Cloud's command) as the Google robot with no key on disk. Each run reads the robot's key from 1Password into memory, signs a token request through a pipe, gets a 1-hour access token, and runs gcloud with a throwaway config that is deleted afterwards. `gcloud auth ...` is refused because it could print tokens. Run it outside the Claude Code sandbox. Proven 2026-10-01: a storage read worked after the old local key was revoked, and the same read with a fake token failed."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/gcloud_robot.py docstring ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L43–L80 ; agents-home 2917d22"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Per-run wrapper: orgo_op.py"
+        },
+        {
+          "column": "B",
+          "value": "Script"
+        },
+        {
+          "column": "C",
+          "value": "Runs an Orgo command with the Orgo key read from 1Password at launch and handed over in memory. Nothing is written to disk or printed, and `orgo login` is refused because it would write a key file. Cursor's Orgo server now starts through it. Proven 2026-10-01: listing computers worked, a fake key failed, and the old ~/.orgo/mcp.env key file was deleted after its key was saved to 1Password. sync_notes.py, capture_hub.py and rebuild_hub.py go through it too, and it refuses `orgo login` anywhere in a command."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/orgo_op.py docstring ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L60–L99 ; agents-home f77e02c ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L140"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Rotation: the Foreplay example"
+        },
+        {
+          "column": "B",
+          "value": "Alex, then an agent"
+        },
+        {
+          "column": "C",
+          "value": "Why it happened: on 2026-10-01 a redaction step written with sed printed the old Foreplay key into a session log. The fix used the normal flow. Alex copied the new key; it went from the clipboard to 1Password (read back) to Composio custom_foreplay; a usage call passed; the old key now returns 401 (rejected); the old Composio login was deleted; the 1Password item was renamed and its notes updated; no local copies remain."
+        },
+        {
+          "column": "D",
+          "value": "workbook SOP R62 ; STATUS.md L40 ; system/run-log.md L92 ; master-connector-repo 68917d2"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Never do this"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "don't"
+        },
+        {
+          "column": "B",
+          "value": "why (what happened or would happen)"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connect Composio's 1Password toolkit (`_1password`)"
+        },
+        {
+          "column": "B",
+          "value": "Its Get Item tool returns all fields and secrets, so the raw key would land in the chat. That breaks the rule that keys never go in chat. Removed 2026-10-01 on Alex's decision: login ca_PSjKn84-Yd_T paused (INACTIVE) and auth config ac_FFWFZ84tq6l7 disabled at 22:13Z, so a 1Password call through Composio now fails with 'No active connection'. Both logins were deleted 2026-10-02 23:04:44Z after Alex's yes naming CG-SZRA (HTTP 200, readback 404); the robot's token was already dead (2026-10-01 22:40:34Z, 403 Service Account Deleted; To do R59). Composio's login ran as the 1Password robot 'composio' with read and write on 26 vaults, Javar's and every agent vault included, and the toolkit can get, create, update and delete items, so one prompt-injected chat could read or wipe any of them. Prompt injection is measured, not theoretical: in 160 tests across 8 models, agents leaked data in up to 40% of authorized-looking requests and exfiltrated sensitive files in up to 90% (SBSeg 2026); a poisoned public GitHub issue made Claude 4 Opus copy private-repo data into a public pull request through the official GitHub MCP server (Invariant Labs, 2025-05-26)."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L46 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L91 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L61 ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L193 ; https://docs.composio.dev/toolkits/_1password (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §1 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §7 ; work/2026-10-01_setup-playbook/notes/composio-1password-removal.md §1 ; work/2026-10-01_setup-playbook/notes/composio-1password-removal.md §2 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D13 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03c.md §8 ; system/run-log.md \"p31a deleted Composio\" ; system/run-log.md \"server refuses the token\""
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Run `op read` or `op item get --reveal` in a chat's shell"
+        },
+        {
+          "column": "B",
+          "value": "Both print the key, so it lands in the transcript. Use the key mover, or `op run`, which hides values in its output by default. Codex runs with full access and never asks, so an agent tricked by text it reads (prompt injection) could print a key without anyone seeing a prompt."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L41 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L82 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L110–L114 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L131 ; https://www.1password.dev/cli/reference/commands/run (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Type or paste a key or a password into a chat"
+        },
+        {
+          "column": "B",
+          "value": "Keys never go in chat, files or logs. ChatGPT's sign-in protection doesn't cover passwords pasted into chat, and connecting an app never needs a pasted key, because Composio holds it."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/instructions/shared.md L5 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L120 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L48 ; workbook SOP R40"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Redact keys with sed"
+        },
+        {
+          "column": "B",
+          "value": "The Mac's sed has no \\s, so on 2026-10-01 a redaction step printed an old Foreplay key into a session log, and the key had to be rotated. Redact in Python."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/instructions/shared.md L5 ; workbook SOP R62 ; STATUS.md L40"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Leave a key in a plaintext file"
+        },
+        {
+          "column": "B",
+          "value": "Files get copied and leaked. The Google robot's key, which can act as any of the 16 company users, sat in gcloud's config folder and in 3 more files. All of those copies are gone, and gcloud now reads the key from 1Password per run. ~/.orgo/mcp.env is gone too. The Meta token file went the same way on 2026-10-01 (K04): deleted after a sha256 match with 1Password, with the Mac meta CLI retired. K02 done 2026-10-01; K03 done 2026-10-03 (row 15). Still open: the others listed in section 5."
+        },
+        {
+          "column": "C",
+          "value": "workbook SOP R40 ; work/2026-10-01_setup-playbook/notes/parity-diff.md L75–L98 ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L12–L97 ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L128–L132 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L13–L32 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L81–L87 ; work/2026-10-01_setup-playbook/notes/fix-batch-2.md \"1. K04 Meta token file\" ; work/2026-10-03_claims-audit/notes/verify-workbook-other.md §1 ; workbook Composio + 1Password right way R15 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## K03\""
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Give a key a second home"
+        },
+        {
+          "column": "B",
+          "value": "The Connectors vault is the only home for keys. A copy in 1Password Environments, Codex Cloud secrets or an OpenAI vault would mean every key lives in two places."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L40 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L48 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L77–L78 ; ~/.agents/instructions/shared.md L10"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Add a second Composio route on the same surface (for example `claude mcp add` of the Composio URL, or a hand-added developer-mode connector in ChatGPT)"
+        },
+        {
+          "column": "B",
+          "value": "Two Composio tool sets then show up in every chat; an earlier live check found two Composio entries. In Claude Code a local entry for the same URL hides the claude.ai connector, and the header form stores a Composio key in plaintext in ~/.claude.json. In ChatGPT a hand-added connector only adds limits, because developer mode works on the web only."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L15 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L33–L34 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L138 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L50 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L109 ; https://help.openai.com/en/articles/12584461 (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Install the old self-updating Codex plugin (composio@composio 0.2.3) or trust its 2 hooks"
+        },
+        {
+          "column": "B",
+          "value": "Its startup hook reinstalled whatever was on GitHub once a day, unpinned and not reviewed by OpenAI, and hooks run outside Codex's sandbox with Alex's full user rights. Apart from the self-update, the hooks only added hints. It was removed on 2026-10-01, and the official plugin has no hooks."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L52–L89 ; system/run-log.md L93 ; STATUS.md L39 ; https://github.com/ComposioHQ/composio-plugin-openai (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connect apps in Composio's developer project"
+        },
+        {
+          "column": "B",
+          "value": "Composio keeps developer-project logins apart from the Connect project the AIs use, so a login made there doesn't show up in ChatGPT. Connect apps through the dashboard (Connect Apps > Connect for myself) or the `composio` command, then confirm them in ChatGPT."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L134 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L48 ; workbook SOP R46 ; https://docs.composio.dev/kb/guide/consumer-project-boundaries-and-auth-selection (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Trust the `composio connections list` count"
+        },
+        {
+          "column": "B",
+          "value": "The command returns at most 50 logins, so apps past the cutoff look missing. Count logins on the dashboard's Connected tab."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/tools/cards/composio.md \"returns at most 50\" ; workbook SOP R7"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Turn on \"Always allow\" for write tools without thinking"
+        },
+        {
+          "column": "B",
+          "value": "Composio can send, delete and run remote code. \"Always allow\" removes the last click before a write, Composio's own extra approval layer (Enhanced Controls) is off, and Codex already runs with approvals off. It is Alex's call per surface. Since 2026-10-01 Claude Code has a hard stop as well: a guard hook holds Composio spend, client-send and delete calls until Alex types the guard code or names the target (agents-home a8959c7); Codex has the same guard (agents-home 26ee11c), trusted on 2026-10-01 and proven by Run H, with no release path."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L137 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L82 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L132 ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md \"## 6. Proof\" ; agents-home a8959c7 ; work/2026-10-01_setup-playbook/workbook-updates.md L9–L10 ; agents-home 26ee11c ; work/2026-10-01_setup-playbook/notes/codex-guard.md §8"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Leave 1Password unlocked with automatic sign-in in a browser an AI drives"
+        },
+        {
+          "column": "B",
+          "value": "1Password's own advisory says text on a page can trigger autofill or open the web vault through an unlocked extension. Turn off automatic sign-in, require confirmation before filling, and use a short lock time."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L88–L90 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L117–L119 ; https://1password.com/blog/security-advisory-for-ai-assisted-browsing-with-the-1password-browser (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Open a 1Password Environments .env file (a named pipe), or point a script at one"
+        },
+        {
+          "column": "B",
+          "value": "1Password Environments can mount a \"local .env file\": a named pipe (a FIFO) that pops 1Password's authorization dialog on Alex's screen whenever anything opens it, and 1Password remounts it every time it starts. Four such destinations (Apify, SpyFu, Revstead and an Atlas skill's) are enabled and dead, because those apps run through Composio now. On 2026-10-01 a worker opened two of them once and popped dialogs, and a script that reads one after its mount is off would hang. List files with find -type f or lstat; never cat, grep, copy or hash a .env path."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 1. Research\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 2. Inventory\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 3. Replacements\" ; work/2026-10-01_setup-playbook/notes/fix-repo-docs.md L164"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Delete the pipe file, or the whole Environment, to stop the pop-ups"
+        },
+        {
+          "column": "B",
+          "value": "Deleting the pipe works only until 1Password restarts, because it remounts it, and it leaves an enabled-but-missing record that 1Password's own agent hook treats as an error. \"Delete environment\" deletes the stored variables and can't be undone. Only the 1Password app's Enabled toggle on the destination, or removing the destination row, takes it away; no CLI or MCP tool can."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 1. Research\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 4. Removal\""
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Open items"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "open item"
+        },
+        {
+          "column": "B",
+          "value": "status"
+        },
+        {
+          "column": "C",
+          "value": "what would close it"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Desktop's two old local servers and their key files (parity L01, K02, K03)"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-02 (spp-c21): Alex deleted google-workspace-admin and ghl-oauth-crm with the trash icon in Claude Desktop Settings → Developer; claude_desktop_config.json lists 0 local servers. K02 is done: the dead delegation is gone and the old key was moved to ~/Backups (k02-verify). K03 done 2026-10-03: the .key file held the old gateway key value already saved in the 1Password item 'GHL OAuth CRM (ghl-oauth-crm) — INTERNAL_API_KEY (from local .dev.vars)', so both files went to the Trash."
+        },
+        {
+          "column": "C",
+          "value": "Nothing for the agent. Alex's calls: rotating the gateway key, and emptying the Trash."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/parity-diff.csv row L01 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row K02 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row K03 ; workbook AI apps R10 ; STATUS.md L21 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S09. K03, K02 and L01\" ; work/2026-10-01_setup-playbook/notes/spp-c12-desktop-plugins.md §5 ; work/2026-10-01_setup-playbook/notes/k02-verify.md ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §1 ; work/2026-10-01_setup-playbook/notes/parity-fix-2026-10-03.md \"## K03\""
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Other keys still in plaintext on the Mac"
+        },
+        {
+          "column": "B",
+          "value": "Partly done. The Meta token file (K04) is done: it was deleted on 2026-10-01 after a sha256 match with 1Password, and the Mac meta CLI was retired with it. The Orgo file is done too (2026-10-01, spp-p33a): the three scripts switched to orgo_op.py and were proven with the file renamed away (sync_notes 14 cards and refresh 200, rebuild_hub --check all OK, capture_hub --diff 32/32), then the file was deleted after a sha256 match with 1Password; no plaintext copy kept. Still open: the key sweep's 6 keys in ~/.zsh_history plus keys in .env files. Done 2026-10-02 (spp-p35a): the gateway's .dev.vars (its 2 values saved to 1Password first) and the builder's connection-password copy (matched 1Password) retired. They sit in the Trash until Alex empties it."
+        },
+        {
+          "column": "C",
+          "value": "Alex decides each one."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/parity-diff.csv row K04 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S06 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L48–L50 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L111–L114 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L123 ; STATUS.md L33 ; work/2026-10-01_setup-playbook/notes/fix-batch-2.md \"1. K04 Meta token file\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 6. CLI login stores\" ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §1 ; work/2026-10-01_setup-playbook/notes/fresh-vault-fixes.md §4 ; work/2026-10-01_setup-playbook/workbook-updates.md L140 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L163"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Rotations and deletes only Alex can do"
+        },
+        {
+          "column": "B",
+          "value": "Open. The main Google robot key sat in plaintext in 4 files, so it should be rotated. An extra live Orgo key found in the old ~/.orgo/mcp.env still works; it is saved in 1Password until it is deleted."
+        },
+        {
+          "column": "C",
+          "value": "Alex rotates the robot key in Google Cloud. Alex deletes the extra Orgo key in Orgo (Settings > API Keys) or tells an agent to; then the agent archives its 1Password item."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L137–L138 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L81–L87 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L115–L119 ; work/2026-10-01_setup-playbook/notes/fix-keys-2.md L122"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which robot token the Mac Keychain holds"
+        },
+        {
+          "column": "B",
+          "value": "Settled 2026-10-01 by fingerprints: the Keychain entry named for the read-only login holds the read-write token, and the hub holds the same one. So the key mover and both wrappers run with write power on the Connectors vault; their notes were corrected to say so (agents-home ea6c339)."
+        },
+        {
+          "column": "C",
+          "value": "Alex decides which robot the Mac's scripts and the hub should use by default. Then an agent swaps or renames the Keychain entry and saves a backup item for the read-write token. The Director has since decided least privilege (the read-only robot by default, read-write only inside the key-save script), deferred until testing is done (Decisions and why, D08)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/fix-keys-2.md L9–L10 ; system/run-log.md L65 ; system/run-log.md L92 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L124–L126 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L142 ; workbook SOP R8 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S05. G05\" ; work/2026-10-01_setup-playbook/notes/rebuild-sources.md L76 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D08 ; agents-home ea6c339"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT surfaces not yet tested"
+        },
+        {
+          "column": "B",
+          "value": "NOT_PROVEN: Work cloud and a write through a dot. ChatGPT web passed T1, T2 and T4 on 2026-10-01 (spp-c16), the phone passed them the same day, and Codex passed its headless tests. Also unknown: whether the \"Increase Roas\" ChatGPT workspace is a Business workspace (its admin would control apps) and which workspace the phone uses."
+        },
+        {
+          "column": "C",
+          "value": "Run the test plan on Work cloud and a dot (Composio is on Always ask since 2026-10-01, spp-c17, which asks once per answer, not per write): one read (CUSTOM_IR_NOTES_GET_APP_RULES for cloudflare) and one reversible write (a Gmail draft to alex@increaseroas.com, deleted afterwards and never sent). Alex checks the workspace in ChatGPT's profile menu."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L100–L129 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L133 ; work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L143–L144 ; system/run-log.md L93 ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## ChatGPT mobile\" ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md \"Results\" ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S11. Which ChatGPT surface\" ; work/2026-10-01_setup-playbook/notes/live-chatgpt.md L12 ; work/2026-10-01_setup-playbook/notes/transcripts/chatgpt-web/2026-10-01_chatgpt-web-parity-test.md \"## Conductor verdicts\" ; work/2026-10-01_setup-playbook/notes/spp-c17-chatgpt-write-approval.md \"## Result after Alex's yes\" ; work/2026-10-01_setup-playbook/workbook-updates.md L185"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app checks"
+        },
+        {
+          "column": "B",
+          "value": "NOT_PROVEN: which Composio user the connector signed in as (inferred alex@). Composio on the phone passed T1, T2 and T4 on 2026-10-01. 1Password for Claude is connected in Claude Desktop (2026-10-02, spp-c21): sign-in autofill only, no secret reaches the model."
+        },
+        {
+          "column": "C",
+          "value": "Alex opens Customize > Connectors > Composio to see the user."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L85–L89 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L95 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L146–L148 ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## Claude mobile\" ; work/2026-10-01_setup-playbook/notes/spp-c21-claude-app-connectors.md §2 ; https://support.claude.com/en/articles/15936181-get-started-with-1password-for-claude (2026-07-16, read 2026-10-02)"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code's Composio plugin has a self-updating hook"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-01 (I15): the plugin is pinned to marketplace tag v0.2.4, so its daily self-update now resolves to the same version; updates happen on purpose after the tune-up diff. It still adds two hooks and the /composio-connect command, and no MCP server or skill."
+        },
+        {
+          "column": "C",
+          "value": "After the hook's next run (after 2026-10-01 23:51Z), ~/.composio/plugin-cc-self-update.json should say current at 0.2.4; anyone can check it. After any composio login, an agent checks that ~/.claude/skills/composio-cli is still the link into ~/.agents."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md L91 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W02 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L19 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L30 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L107–L110 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S13. Would removing\" ; ~/.claude/plugins/cache/composio/composio/0.2.4/hooks/hooks.json ; ~/.claude/plugins/cache/composio/composio/0.2.4/hooks/session-start.sh L26–L51 ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md \"## 4. I15\" ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md \"## 7. Gaps\""
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Local logins an agent could read"
+        },
+        {
+          "column": "B",
+          "value": "Open. The `composio` command's login is a user API key in plaintext in ~/.composio/user_data.json, and this repo's Claude settings allow reading ~/.composio. The Keychain robot token has no human gate, so any agent with a shell on the Mac can use it. The rule against value-printing commands rests on the model's judgment only."
+        },
+        {
+          "column": "C",
+          "value": "Alex decides whether to add a guard, which is a control-file change. The research notes suggest a deny rule for value-printing `op` commands in Claude Code and Codex, and in Codex also for Keychain reads that print a value."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L49 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L131 ; work/2026-10-01_chatgpt-claude-research/notes/r2-1password-chatgpt.md L110–L114 ; ~/.agents/tools/cards/composio.md \"from ~/.composio/user_data.json\""
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1Password Environments: 4 enabled .env destinations"
+        },
+        {
+          "column": "B",
+          "value": "Open. Apify, SpyFu, Revstead and AtlasCloud are enabled destinations whose apps now run through Composio (apify, custom_spyfu, metaads and custom_atlas_cloud; apify, custom_spyfu and custom_atlas_cloud each passed one read on 2026-10-01). No skill opens them any more: the javar audit's SpyFu step moved to Composio custom_spyfu, and the ad-recreator script reads the Atlas key from 1Password per run (agents-home 86752d7)."
+        },
+        {
+          "column": "C",
+          "value": "Alex, about a minute in the 1Password app: Developer > View Environments > each Environment > Destinations > Local .env file > Enabled off, or remove the row; never Delete environment. Then an agent re-reads 1Password's database read-only, lists pipes with find -type p, and moves the dead helper folders to ~/Backups."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 2. Inventory\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 3. Replacements\" ; work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 4. Removal\" ; agents-home 86752d7"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The 1password-mcp entries in Codex and Cursor"
+        },
+        {
+          "column": "B",
+          "value": "Done 2026-10-01: Codex's entry was removed at 17:03 local (spp-c11) and Cursor's at 21:19:53Z (spp-p24d). Both managed 1Password Environments only; Codex's was last used for real on 2026-09-11, to create an Environment (spp-p28a F4)."
+        },
+        {
+          "column": "C",
+          "value": "Nothing left here. Cursor's cached 1Password plugin is an optional uninstall (Cursor > Customize > Plugins > 1Password)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/onepassword-one-route.md \"## 4. Removal\" ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §5 ; work/2026-10-01_setup-playbook/notes/onepassword-vault-scope.md §7 ; work/2026-10-01_setup-playbook/notes/spp-c11-1password-gmail.md"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. Cloudflare account token (1Password item 'Cloudflare API — Composio (account token)') (G08)"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What it is"
+        },
+        {
+          "column": "B",
+          "value": "An account-owned API token (not a user token): Read & Write on every permission group, the entire account and all zones, no expiry, no IP filter. The item's own permissions note says the same. Checked 2026-10-01 through Composio: the account-token verify call answered active with no expiry date, and the user-token verify call rejected it as invalid."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §4 ; ~/.agents/tools/cards/cloudflare.md \"Read & Write on every permission group\" ; workbook Route power R36"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Who can make it"
+        },
+        {
+          "column": "B",
+          "value": "A Super Administrator of the Cloudflare account, or a member with API Token Provisioning. A member can only grant a subset of their own permissions."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Create it"
+        },
+        {
+          "column": "B",
+          "value": "dash.cloudflare.com > select the account > Manage account > Account API tokens > Create Token > Create Custom Token. Name it (for example Composio). Under Permissions add every Account group and every Zone group with Edit (Edit is full create, read, update, delete and list). Resources: the account and all zones. Client IP Address Filtering: leave empty, because Composio's Cloudflare connector can't use an IP-filtered token. TTL: leave empty for no expiry. Continue to summary > Create Token."
+        },
+        {
+          "column": "C",
+          "value": "The token secret shows once, starting cfat_. The owner copies it; nothing else sees it."
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/fundamentals/api/get-started/create-token/ (read 2026-10-01) ; https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/ (read 2026-10-01) ; workbook All connections R275"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What an account token can't cover"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare's compatibility list marks Page Rules, Registrar, Super Bot Fight Mode, Turnstile, Zero Trust Client Platform and Intel Data Platform as not supported for account tokens. None of them is a route in this setup; the routes use Workers, D1, KV, R2, DNS, Tunnels and AI Search."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/ (read 2026-10-01) ; ~/.agents/tools/cards/cloudflare.md \"Workers, D1, KV, R2, Pages, DNS records\""
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Save it and the R2 keys"
+        },
+        {
+          "column": "B",
+          "value": "Save the token as credential in the 1Password item, with account_id. The S3-style R2 keys come from the same token: the Access Key ID is the token's id, and the Secret Access Key is the SHA-256 of the token value (fields r2_access_key_id, r2_secret_access_key, r2_s3_endpoint). The agent works these out in memory, never printed."
+        },
+        {
+          "column": "C",
+          "value": "The item has all five fields filled."
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/r2/api/tokens/ (read 2026-10-01) ; system/run-log.md L66 ; workbook Rebuild from zero R118"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hand it to Composio"
+        },
+        {
+          "column": "B",
+          "value": "push_key_to_composio.py --item \"Cloudflare API — Composio (account token)\" --toolkit custom_cloudflare_api (Composio registration of the toolkit: G12). Cloudflare's API MCP server takes the token as a Bearer header, and both user and account tokens are supported."
+        },
+        {
+          "column": "C",
+          "value": "A read through custom_cloudflare_api answers: for example GET /accounts/<account_id>/tokens/verify returns status active."
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/agents/model-context-protocol/cloudflare/servers-for-cloudflare/ (read 2026-10-01) ; workbook Rebuild from zero R239 ; work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §4"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. What uses the Cloudflare token, and the permission each use needs (why every group is on) (G08)"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "user of the token"
+        },
+        {
+          "column": "B",
+          "value": "what it calls"
+        },
+        {
+          "column": "C",
+          "value": "permission Cloudflare documents for it"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio custom_cloudflare_api (every AI)"
+        },
+        {
+          "column": "B",
+          "value": "Any of the 2,500+ Cloudflare API endpoints through SEARCH, EXECUTE and DOCS: Workers, D1, KV, R2, Pages, DNS, Zero Trust, tunnels."
+        },
+        {
+          "column": "C",
+          "value": "Whatever each call needs. The owner's rule is full power, so every group has Edit."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/cards/cloudflare.md \"whole Cloudflare API\" ; workbook Route power R36"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "rebuild_hub.py (--check and the build)"
+        },
+        {
+          "column": "B",
+          "value": "GET /accounts/<account_id>/cfd_tunnel/<tunnel id>/token, to make the hub tunnel's credentials file."
+        },
+        {
+          "column": "C",
+          "value": "Reading a tunnel token needs Cloudflare Tunnel Write (or Cloudflare One Connectors Write, or Cloudflare One Connector: cloudflared Write). Read access is not enough."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py L74–L90 ; https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/configure-tunnels/remote-tunnel-permissions/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Making tunnels and their hostnames (G11)"
+        },
+        {
+          "column": "B",
+          "value": "POST /accounts/<account_id>/cfd_tunnel, PUT its configurations, POST a CNAME to the zone."
+        },
+        {
+          "column": "C",
+          "value": "Account: Cloudflare Tunnel Edit, and Zone: DNS Edit."
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/cloudflare-one/networks/connectors/cloudflare-tunnel/get-started/create-remote-tunnel-api/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tracking checklist deploys"
+        },
+        {
+          "column": "B",
+          "value": "Workers, KV, D1, routes and DNS for client sites."
+        },
+        {
+          "column": "C",
+          "value": "Workers Scripts, Workers KV, D1 and Workers Routes edit, plus Zone DNS edit."
+        },
+        {
+          "column": "D",
+          "value": "workbook Tracking access R4"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "R2 through the S3 API"
+        },
+        {
+          "column": "B",
+          "value": "The derived R2 keys in the same item."
+        },
+        {
+          "column": "C",
+          "value": "R2 permissions on the parent token (the S3 keys inherit them)."
+        },
+        {
+          "column": "D",
+          "value": "https://developers.cloudflare.com/r2/api/tokens/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "aimoney-search skill"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare AI Search: POST /accounts/{account_id}/ai-search/namespaces/{name}/instances/{id}/search through custom_cloudflare_api."
+        },
+        {
+          "column": "C",
+          "value": "Covered by every group having Edit; the exact AI Search group name wasn't checked."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/aimoney-search/SKILL.md L8 ; ~/.agents/skills/aimoney-search/SKILL.md L14"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Google robot key for tagging-admin (1Password document 'Google service account — tagging-admin (GTM + GA4 Admin)') (G08)"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What it is"
+        },
+        {
+          "column": "B",
+          "value": "The JSON key of the service account tagging-admin (Alex's: in Cloud project increaseroas-tagging, delegation client 112417209265494842557). The hub routes gtm, ga4-admin and google-robot use it through domain-wide delegation (39 scopes, gap G07), and gcloud_robot.py reads it per run. It is a 1Password Document (file credentials.json) that install_hub.sh reads by item ID 3rtcprjr3b626vxlmlkz53vbte."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/hub/install_hub.sh L37 ; ~/.agents/tools/cards/google-workspace.md \"39 delegated scopes\" ; ~/.agents/tools/connectors/gcloud_robot.py docstring"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Who can make it"
+        },
+        {
+          "column": "B",
+          "value": "Someone with Service Account Key Admin (roles/iam.serviceAccountKeyAdmin) on the project or on the service account; the project Owner has it. The IAM API must be on in the project first. On 2026-10-01 it was off in increaseroas-tagging (a 403 SERVICE_DISABLED from the robot). Turning on Google APIs in our own Cloud projects is a standing yes."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://cloud.google.com/iam/docs/keys-create-delete (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L69 ; ~/.claude/CLAUDE.md \"enable Google APIs in our own Cloud projects\""
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "New Google Cloud organizations"
+        },
+        {
+          "column": "B",
+          "value": "Organizations created on or after 2024-05-03 enforce constraints/iam.managed.disableServiceAccountKeyCreation, which blocks key creation. An Organization Policy Administrator must first exempt the robot's project (the doc's tag-based exception). Whether Alex's organization enforces it is not known; his key exists."
+        },
+        {
+          "column": "C",
+          "value": "Creating a key no longer fails with a policy error."
+        },
+        {
+          "column": "D",
+          "value": "https://cloud.google.com/resource-manager/docs/secure-by-default-organizations (read 2026-10-01) ; https://cloud.google.com/iam/docs/keys-create-delete (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make the key with no copy on disk (owner, on the Mac)"
+        },
+        {
+          "column": "B",
+          "value": "Sign gcloud in as the owner (gcloud auth login), then run one pipe: curl -s -X POST -H \"Authorization: Bearer $(gcloud auth print-access-token)\" -H \"Content-Type: application/json\" -d '{\"keyAlgorithm\": \"KEY_ALG_RSA_2048\"}' \"https://iam.googleapis.com/v1/projects/<PROJECT_ID>/serviceAccounts/tagging-admin@<PROJECT_ID>.iam.gserviceaccount.com/keys\" | python3 -c 'import sys,json,base64; sys.stdout.buffer.write(base64.b64decode(json.load(sys.stdin)[\"privateKeyData\"]))' | op document create - --vault Connectors --title \"Google service account — tagging-admin (GTM + GA4 Admin)\" --file-name credentials.json. Google's REST method returns the key as base64 privateKeyData, and op document create - reads the file from standard input. To rotate, use op document edit 3rtcprjr3b626vxlmlkz53vbte - --vault Connectors --file-name credentials.json instead, so the item ID that install_hub.sh hard-codes stays the same. Finish with gcloud auth revoke, so no owner login stays on the Mac."
+        },
+        {
+          "column": "C",
+          "value": "op prints the new item's ID, and no key file exists on disk. Not run in this play, because it creates a real key; each part is documented."
+        },
+        {
+          "column": "D",
+          "value": "https://cloud.google.com/iam/docs/keys-create-delete (read 2026-10-01) ; https://developer.1password.com/docs/cli/reference/management-commands/document/ (read 2026-10-01) ; workbook Rebuild from zero R121"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Console fallback (leaves a file for a moment)"
+        },
+        {
+          "column": "B",
+          "value": "Cloud console > IAM & Admin > Service accounts > tagging-admin > Keys > Add key > Create new key > JSON > Create. That downloads the key file once. Drop it into the 1Password Document item, then delete the download and empty the Trash. On 2026-10-01 four forgotten key files from this route were found in ~/Downloads and ~/.cursor."
+        },
+        {
+          "column": "C",
+          "value": "1Password holds the document and the Downloads folder holds no key file."
+        },
+        {
+          "column": "D",
+          "value": "https://cloud.google.com/iam/docs/keys-create-delete (read 2026-10-01) ; work/2026-10-01_setup-playbook/tabs/gap-facts/G06.json \"tagging-admin > Keys\" ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md \"K01\""
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What the key can do"
+        },
+        {
+          "column": "B",
+          "value": "The routes act as the impersonated user through domain-wide delegation, so the 39 delegated scopes (G07) plus that user's own access decide what the key can do, along with the APIs turned on in the robot's project (step 5.3). The robot's own Cloud IAM roles aren't known: the IAM API is off and the role read returned 403."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/cards/google-workspace.md \"acting as any increaseroas.com user\" ; workbook Rebuild from zero R127 ; workbook Rebuild from zero R128 ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md L69"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Check it"
+        },
+        {
+          "column": "B",
+          "value": "python3 ~/.agents/tools/connectors/hub/rebuild_hub.py --check reads the document by its ID. After the hub build, a Composio custom_google_robot read as alex@ works."
+        },
+        {
+          "column": "C",
+          "value": "--check prints OK for tagging.json; the read returns alex@'s data."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/connectors/hub/rebuild_hub.py L133–L149 ; workbook Rebuild from zero R127"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. Meta system-user token (1Password item 'Meta Ads — system user token (IR Business Manus App)') (G08)"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What it is"
+        },
+        {
+          "column": "B",
+          "value": "The token of system user Manus in Alex's business portfolio, made for the business-owned app IR Business Manus App. Type SYSTEM_USER, never expires (the item's own note, from a debug_token check on 2026-09-30). It is the paste source for Composio metaads (login ca_7i7CdMbStKc9), which reaches 57 ad accounts."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/cards/meta-ads.md \"system user\" ; workbook Route power R26 ; work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §5"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Before you begin"
+        },
+        {
+          "column": "B",
+          "value": "Your business portfolio must own a Facebook app; a system user can only get a token for an app owned by the same business. Only apps with Ads Management API standard access or higher can be installed for a system user. Meta notes that not all businesses have system users."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://en-gb.facebook.com/business/help/503306463479099 (read 2026-10-01) ; https://developers.facebook.com/docs/business-management-apis/system-users/install-apps-and-generate-tokens/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Create the system user and its token"
+        },
+        {
+          "column": "B",
+          "value": "Meta Business Suite > Settings > Users > System users > Add new system user. Name it (Alex's is Manus) > Create system user. Assign assets: the ad accounts, Pages, datasets (pixels) and catalogues it must manage. Then Generate new token > pick the app > pick the expiry > tick the 22 permissions below > Generate token > copy it once."
+        },
+        {
+          "column": "C",
+          "value": "The token shows once. Each new system user needs its own new token."
+        },
+        {
+          "column": "D",
+          "value": "https://en-gb.facebook.com/business/help/503306463479099 (read 2026-10-01) ; https://developers.facebook.com/docs/business-management-apis/system-users/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Expiry: never, or 60 days"
+        },
+        {
+          "column": "B",
+          "value": "Alex's token never expires. Meta now recommends 60-day tokens and says some businesses must use them; for those, a never-expiring request fails. A 60-day token must be refreshed before day 60 with the app secret (oauth/access_token with fb_exchange_token and set_token_expires_in_60_days=true), and that refresh would be a new recurring job, which is Alex's call."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "https://developers.facebook.com/docs/business-management-apis/system-users/install-apps-and-generate-tokens/ (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §5"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The 22 permissions on Alex's token"
+        },
+        {
+          "column": "B",
+          "value": "ads_management, ads_read, attribution_read, business_management, instagram_basic, instagram_content_publish, leads_retrieval, page_events, pages_manage_ads, pages_manage_cta, pages_manage_engagement, pages_manage_instant_articles, pages_manage_metadata, pages_manage_posts, pages_messaging, pages_read_engagement, pages_read_user_content, pages_show_list, pages_utility_messaging, public_profile, publish_video, read_insights. Read 2026-10-01 with GET /me/permissions through Composio metaads; all 22 granted. 20 are on Meta's system-user scope list; public_profile and pages_utility_messaging aren't on that list as read."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §5 ; https://developers.facebook.com/docs/business-management-apis/system-users/install-apps-and-generate-tokens/ (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which of them the routes rely on"
+        },
+        {
+          "column": "B",
+          "value": "Conversions API events for the tracking checklist need ads_management and business_management, with each site's dataset assigned to the system user. The card's tested set adds ads_read, leads_retrieval, attribution_read, page_events, pages_manage_ads, pages_read_engagement and instagram_basic. The rest are on for full power, the owner's rule."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "workbook Tracking access R6 ; ~/.agents/tools/cards/meta-ads.md \"22, incl. ads_management\""
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Save it and connect it"
+        },
+        {
+          "column": "B",
+          "value": "Save it as credential in the 1Password item, the one-way key flow of step 4.4, then move it into Composio metaads with the key mover. Composio connects Meta Ads with the system-user token."
+        },
+        {
+          "column": "C",
+          "value": "METAADS_GET_AD_ACCOUNTS lists your ad accounts (57 for Alex on 2026-10-01). composio proxy https://graph.facebook.com/v23.0/me/permissions --toolkit metaads lists the permissions."
+        },
+        {
+          "column": "D",
+          "value": "workbook Rebuild from zero R118 ; workbook Route power R26 ; ~/.agents/tools/cards/composio.md \"Meta connects with a system-user token\" ; work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §5"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. Not proven yet (G08)"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The no-disk Google key pipe end to end: it would create a real key, so it wasn't run. Each part (Google's REST method, op document create from standard input) is documented."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §4–§5"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Whether Alex's Google organization enforces the key-creation block; the robot's own Cloud IAM roles."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §4–§5"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The exact Cloudflare permission-group name AI Search needs (covered by every group having Edit)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §4–§5"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How the Meta token's expiry was chosen in the dialog (the item says never; the dialog wording wasn't seen)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-infra.md §4–§5"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11. A partner's own read-only robot, and the read-write token's backup (G05 addendum, spp-c14)"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "who"
+        },
+        {
+          "column": "C",
+          "value": "how"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Create one read-only robot per partner Mac"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "Waits on the P0 node partner-1password-isolation: the partner's robot gets a vault that holds no admin-grade keys, never Connectors, which holds the Google robot's key and the hub tokens (which items that vault holds is Alex's call). Then: op service-account create \"connectors-sync <partner> Mac\" --vault <that vault>:read_items. read_items is also the default, and a robot's vault permissions can't be changed later."
+        },
+        {
+          "column": "D",
+          "value": "https://developer.1password.com/docs/cli/reference/management-commands/service-account (read 2026-10-01) ; https://developer.1password.com/docs/service-accounts/get-started (read 2026-10-01) ; work/2026-10-03_partner-robot/design.md §6 ; work/2026-10-03_partner-robot/design.md §10"
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Save the token at once"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "The CLI shows the token only once. Save it in 1Password immediately and give the partner access to that item; never keep it in plaintext."
+        },
+        {
+          "column": "D",
+          "value": "https://developer.1password.com/docs/service-accounts/get-started (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Store it on the partner's Mac"
+        },
+        {
+          "column": "B",
+          "value": "Partner"
+        },
+        {
+          "column": "C",
+          "value": "security add-generic-password -U -a connectors-sync -s op-service-account-connectors-sync -w (with -w last, so it prompts and nothing lands in shell history). Never add -A."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §4 ; workbook Rebuild from zero R116"
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Keep the read-write token's backup where only Alex can read it"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "His built-in Private vault. Service accounts can't be granted access to a built-in Personal, Private or Employee vault."
+        },
+        {
+          "column": "D",
+          "value": "https://developer.1password.com/docs/cli/reference/management-commands/service-account (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §4"
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Not proven yet (G05 addendum)"
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 122,
+      "cells": [
+        {
+          "column": "A",
+          "value": "A partner robot created and used end to end on a partner Mac."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c14.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+ "receipt_id": "director-mission-jason-lonestar-call-readiness-n7",
+ "trace_id": "trace-director-mission-jason-lonestar-call-readiness",
+ "label": "Director: mission-jason-lonestar-call-readiness (7 writes, 2 failed)",
+ "synthetic_only": false,
+ "started_at": "2026-09-04T21:57:14.185871+00:00",
+ "ended_at": "2026-09-07T21:34:43.977236+00:00",
+ "status": "partial",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "mission-jason-lonestar-call-readiness"
+ },
+ "spans": [
+  {
+   "span_id": "director-dd3119943e5d-6",
+   "parent_span_id": null,
+   "name": "website_source_edit",
+   "agent_identity": "Director controller",
+   "tool_action": "website_source_edit",
+   "started_at": "2026-09-04T21:57:14.185871+00:00",
+   "ended_at": "2026-09-04T22:05:06.831668+00:00",
+   "duration_ms": 472645,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 7
+   }
+  },
+  {
+   "span_id": "director-4fbd555cdbce-7",
+   "parent_span_id": null,
+   "name": "deploy_artifact_preparation",
+   "agent_identity": "Director controller",
+   "tool_action": "deploy_artifact_preparation",
+   "started_at": "2026-09-05T01:02:08.289835+00:00",
+   "ended_at": "2026-09-05T01:11:01.242158+00:00",
+   "duration_ms": 532952,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 8
+   }
+  },
+  {
+   "span_id": "director-26d1e53c889f-10",
+   "parent_span_id": null,
+   "name": "source_backed_site_implementation",
+   "agent_identity": "Director controller",
+   "tool_action": "source_backed_site_implementation",
+   "started_at": "2026-09-07T18:08:13.316231+00:00",
+   "ended_at": "2026-09-07T18:45:06.635923+00:00",
+   "duration_ms": 2213319,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 11
+   }
+  },
+  {
+   "span_id": "director-9b8b0e783ad9-12",
+   "parent_span_id": null,
+   "name": "source_backed_site_implementation",
+   "agent_identity": "Director controller",
+   "tool_action": "source_backed_site_implementation",
+   "started_at": "2026-09-07T19:43:55.187691+00:00",
+   "ended_at": "2026-09-07T19:58:31.649996+00:00",
+   "duration_ms": 876462,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 13
+   }
+  },
+  {
+   "span_id": "director-68c3e0d4ce74-13",
+   "parent_span_id": null,
+   "name": "pages_direct_upload_production",
+   "agent_identity": "Director controller",
+   "tool_action": "pages_direct_upload_production",
+   "started_at": "2026-09-07T20:36:02.607347+00:00",
+   "ended_at": "2026-09-07T20:39:54.951285+00:00",
+   "duration_ms": 232343,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 14
+   }
+  },
+  {
+   "span_id": "director-8b565030ce24-14",
+   "parent_span_id": null,
+   "name": "pages_direct_upload_production",
+   "agent_identity": "Director controller",
+   "tool_action": "pages_direct_upload_production",
+   "started_at": "2026-09-07T20:44:50.693523+00:00",
+   "ended_at": "2026-09-07T21:11:53.637584+00:00",
+   "duration_ms": 1622944,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 15
+   }
+  },
+  {
+   "span_id": "director-07afb9c61734-15",
+   "parent_span_id": null,
+   "name": "restore_original_website_presentation",
+   "agent_identity": "Director controller",
+   "tool_action": "restore_original_website_presentation",
+   "started_at": "2026-09-07T21:13:55.533079+00:00",
+   "ended_at": "2026-09-07T21:34:43.977236+00:00",
+   "duration_ms": 1248444,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 16
+   }
+  }
+ ]
+}

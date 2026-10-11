@@ -1,0 +1,949 @@
+{
+  "schema_version": "1.0.0",
+  "records": [
+    {
+      "id": "relationship_45b8760334abffc5d3df",
+      "source_id": "component_49e2ea623d873266c0a4",
+      "target_id": "reference_9d63c1c9a4e3274f0392",
+      "type": "Tunnel ingress",
+      "label": "hooks.increaseroas.ai",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_34a4ce26b05e86e3dbc3"
+      ],
+      "resolution": "Configured tunnel origin reference; connectivity untested",
+      "source_pointer": "work/cloudflare-base.json"
+    },
+    {
+      "id": "relationship_019e1036407a0e3c45dc",
+      "source_id": "component_49e2ea623d873266c0a4",
+      "target_id": "reference_c445fc86ff60891d5941",
+      "type": "Tunnel ingress",
+      "label": "dashboard.increaseroas.ai",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_71092c0c44f322c9736d"
+      ],
+      "resolution": "Configured tunnel origin reference; connectivity untested",
+      "source_pointer": "work/cloudflare-base.json"
+    },
+    {
+      "id": "relationship_b15f6988a036ae43fd76",
+      "source_id": "component_e297e83a08b394b59623",
+      "target_id": "reference_f54a87be29df3dcd5ffd",
+      "type": "Tunnel ingress",
+      "label": "ghl-command-origin.increaseroas.com",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_f870ce006e4404919ca2"
+      ],
+      "resolution": "Configured tunnel origin reference; connectivity untested",
+      "source_pointer": "work/cloudflare-base.json"
+    },
+    {
+      "id": "relationship_6bfde08d46377b25a0b4",
+      "source_id": "component_53113fd19a54436b7e84",
+      "target_id": "reference_b732fb55d1ad855735e7",
+      "type": "Tunnel ingress",
+      "label": "hermes-canary.hottublaunch.com",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_f66c54ad50f790bcbbbd"
+      ],
+      "resolution": "Configured tunnel origin reference; connectivity untested",
+      "source_pointer": "work/cloudflare-base.json"
+    },
+    {
+      "id": "relationship_fd81eff32c743a8d73fc",
+      "source_id": "component_3bd5d672fe1dbec783f9",
+      "target_id": "reference_fea87b1b64212bc5b81f",
+      "type": "Tunnel ingress",
+      "label": "mcp.increaseroas.com",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_f9ed7ac463e1a836d2b8"
+      ],
+      "resolution": "Configured tunnel origin reference; connectivity untested",
+      "source_pointer": "work/cloudflare-base.json"
+    },
+    {
+      "id": "relationship_f5c0dec284cbc7201d3d",
+      "source_id": "component_5c5891e1f2f4d5f58652",
+      "target_id": "component_94dbd10d38b8c2d6272c",
+      "type": "Worker binding: durable_object_namespace",
+      "label": "STATE",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_6b46d6aba4a464900dc2"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_7d20fffbe25996bc56e7",
+      "source_id": "component_311d9afaa52ce3beb977",
+      "target_id": "component_657ae12a5c77df45b69c",
+      "type": "Worker binding: d1",
+      "label": "FUNNEL_DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_bc5cb5f3d8731de8da3b"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_2638961f996770a215ce",
+      "source_id": "component_8411170fb43530c46860",
+      "target_id": "component_a04f2741bbe46d21ec98",
+      "type": "Worker binding: d1",
+      "label": "FUNNEL_DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_7a5e6d53f6ba5bfc7532"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_2aad547bf1b95c12adfc",
+      "source_id": "component_756d5f302412191df704",
+      "target_id": "component_b1a54de6adaa69316378",
+      "type": "Worker binding: kv_namespace",
+      "label": "OAUTH_KV",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_c77ed0cba39f2041fd5d"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_62f8be42432ae1b785dd",
+      "source_id": "component_b5c18e1913d02350e88f",
+      "target_id": "component_57084195b42eb46b2ff6",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_1f0a47df28541c5b34a7"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_d8c7a0e1221306c3fe27",
+      "source_id": "component_5db35cf2f5e8d8165916",
+      "target_id": "component_b2c090cee616dce47638",
+      "type": "Worker binding: kv_namespace",
+      "label": "MONITOR_STATE",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_5efb583f93294d70e8c5"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_a1a4f4244dabf06021b6",
+      "source_id": "component_3a24588462487abe3aa9",
+      "target_id": "component_29657c6b893038eb75d3",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_660e0357db422ae72abc"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_753a20160b5b6f3f4ab3",
+      "source_id": "component_88d29b98f492687da903",
+      "target_id": "component_bf836fd79954076601b3",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_15d1b0fefdbfc4553107"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_f164fefeeec080d3b1dc",
+      "source_id": "component_ebb1a4062dc973050ada",
+      "target_id": "component_6552be7e6d238ce3a61a",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_67964405807013756af6"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_643b27b1203a6eb47771",
+      "source_id": "component_ebb1a4062dc973050ada",
+      "target_id": "component_ebb1a4062dc973050ada",
+      "type": "Worker binding: service",
+      "label": "SELF",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_7a7827f68895d5d97b73"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_1606928612da097cfe63",
+      "source_id": "component_7fc82c7b3a37ec2c29f9",
+      "target_id": "component_921ee906e2b545fbfe05",
+      "type": "Worker binding: d1",
+      "label": "TRACKING_DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_0883a103eb1090de9818"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_f1c431dbbcf857db5a16",
+      "source_id": "component_5e2a7b3196db08481508",
+      "target_id": "component_500b327647589404c670",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_b89ef4d1b5f2933d1336"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_cea561b917b918f33679",
+      "source_id": "component_5e2a7b3196db08481508",
+      "target_id": "component_963c983722f6d75d21a3",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_8dbaa0b4fcce55ef0a5d"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_620bda7f1a2c11478c6d",
+      "source_id": "component_5e2a7b3196db08481508",
+      "target_id": "component_84b657237b570970741d",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_644453099c3720bed31e"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_37339763ecf7e90a52fc",
+      "source_id": "component_e1ae60fbd01e2b51be7f",
+      "target_id": "component_2deb2d6bc15f90bc2d66",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_12d6327128ceb3681ca6"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_7613a2a0ec38b7fcdf3f",
+      "source_id": "component_e1ae60fbd01e2b51be7f",
+      "target_id": "component_963c983722f6d75d21a3",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_19b5342a71893dae8f99"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_cbfdb6d345883925d363",
+      "source_id": "component_e1ae60fbd01e2b51be7f",
+      "target_id": "component_a4e78d5e9b17387a14ca",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_d6125245999e4da09c33"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_265aec37aed901874d7c",
+      "source_id": "component_cfafdc3a2c726b018386",
+      "target_id": "component_38de329e1a6e7d05391c",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_e02b733dd939712c5085"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_b8c2e41e000d54fb6504",
+      "source_id": "component_cfafdc3a2c726b018386",
+      "target_id": "component_f0c1a090816a31d97b9e",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_7df1ace857911d4241ea"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_75479864760ffcfc72e7",
+      "source_id": "component_cfafdc3a2c726b018386",
+      "target_id": "component_9cdcada6c8b3e78317aa",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_1ec1463c27db35b74463"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_4e002f38b8cc0e4a5318",
+      "source_id": "component_77de7a48c8f98ecc676a",
+      "target_id": "component_b488e09675fc182b48eb",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_321b3fb2184f369af13f"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_3a59943e90c6b0fca36b",
+      "source_id": "component_77de7a48c8f98ecc676a",
+      "target_id": "component_f0c1a090816a31d97b9e",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_4d632d1cfefb72e9e300"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_9dac2a5e4aabd71c1455",
+      "source_id": "component_77de7a48c8f98ecc676a",
+      "target_id": "component_ad121644855c05f22b19",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_c5f1be6d48ee5e02ee94"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_d336d75392a26461d1d8",
+      "source_id": "component_8ab352dc97364d481b2a",
+      "target_id": "component_233c4823a7782f8da323",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_0ba91d0a5e08320f0e9e"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_b4689178365b2a981571",
+      "source_id": "component_8ab352dc97364d481b2a",
+      "target_id": "component_355a1b78b01fd0aaf702",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_fb34aae0e6078ca66e28"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_ca6b0b8a0de21dc620fd",
+      "source_id": "component_8ab352dc97364d481b2a",
+      "target_id": "component_1a4847213021847fdef5",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_0f961ff5a355a692a83f"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_0b356aaa2105b25fda7f",
+      "source_id": "component_eeaa52058d0117448a43",
+      "target_id": "component_e2fb2e3dc0a20538d878",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_9244ea4900f885e09d63"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_fb935de8b9d57bd8a679",
+      "source_id": "component_eeaa52058d0117448a43",
+      "target_id": "component_2cefdf6ecfe02413651d",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_749c6346e1fffa4cedad"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_c644dd75d81ea5ef77cd",
+      "source_id": "component_eeaa52058d0117448a43",
+      "target_id": "component_2cf6d65bb41fd3d6d122",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_1e8b08d034ddcb123845"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_0564d0592e97244f9664",
+      "source_id": "component_e11fceb000878b57224f",
+      "target_id": "component_eb60ee9cd055e70e93f8",
+      "type": "Worker binding: d1",
+      "label": "DB",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_26cfc7ccb33e946f167a"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_167ba0831cb9330b0515",
+      "source_id": "component_e11fceb000878b57224f",
+      "target_id": "component_2cefdf6ecfe02413651d",
+      "type": "Worker binding: r2_bucket",
+      "label": "PRODUCT_IMAGES",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_2305b16897d25b04d3ad"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_5511dc56c08a54023e3b",
+      "source_id": "component_e11fceb000878b57224f",
+      "target_id": "component_6dcfe4f7c75e1824719c",
+      "type": "Worker binding: kv_namespace",
+      "label": "SESSION",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_49fd88a2fb4b36f120f6"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-worker-bindings.json"
+    },
+    {
+      "id": "relationship_e5db5bee04bd80bbf249",
+      "source_id": "component_0de0f4f0d6bfdb4ebd95",
+      "target_id": "component_5c5891e1f2f4d5f58652",
+      "type": "Worker service",
+      "label": "dev-rag-worker",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_88b90fd1699ea6dcad27"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_8f924f42e770f7e21310",
+      "source_id": "component_0de0f4f0d6bfdb4ebd95",
+      "target_id": "component_3dd0b312aa826f153328",
+      "type": "DNS zone",
+      "label": "d28649ade0cea715a0cee34a920776bf",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_a28e73904acdb79b4dbb"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_89254d445479dee93945",
+      "source_id": "component_fdd1b98981274debf1be",
+      "target_id": "component_5c5891e1f2f4d5f58652",
+      "type": "Worker service",
+      "label": "dev-rag-worker",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_b499a61fdcf0c812eea4"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_7696251aad0fa478f3ac",
+      "source_id": "component_fdd1b98981274debf1be",
+      "target_id": "component_a76ada145529b2bd281d",
+      "type": "DNS zone",
+      "label": "287c3dc657c2d4fc7a3eb0514851d3b0",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_be5b40d7bca4327c4608"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_406892eab25a469d4b69",
+      "source_id": "component_25d286deb8ee1cf04343",
+      "target_id": "component_cfafdc3a2c726b018386",
+      "type": "Worker service",
+      "label": "website-hot-tub-store-8",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_21bb46ef2dcf502df38f"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_91a174fee5d84bc54d32",
+      "source_id": "component_25d286deb8ee1cf04343",
+      "target_id": "component_fb0c0ffaec983d66f9c7",
+      "type": "DNS zone",
+      "label": "45d19405a710eae2468b6ddb807022dd",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_363b698456fd97bc33d7"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_48c583349054df38cba5",
+      "source_id": "component_76fcea20fed4c657333c",
+      "target_id": "component_318bd6fbbdeae5cb15aa",
+      "type": "Worker service",
+      "label": "pts-quote-funnel",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_925787508fe8a945afdc"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_cd1315dfa0ba8b3655ff",
+      "source_id": "component_76fcea20fed4c657333c",
+      "target_id": "component_49a01490277e2d542929",
+      "type": "DNS zone",
+      "label": "4492695baa74ed42f0762860dacb99ea",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_387bde5092033c423c53"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_77781b9b348337da1f83",
+      "source_id": "component_0f026319193f8a297946",
+      "target_id": "component_318bd6fbbdeae5cb15aa",
+      "type": "Worker service",
+      "label": "pts-quote-funnel",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_f6ac14896d49b5a65cbd"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_d8fcc270beeb856ea677",
+      "source_id": "component_0f026319193f8a297946",
+      "target_id": "component_49a01490277e2d542929",
+      "type": "DNS zone",
+      "label": "4492695baa74ed42f0762860dacb99ea",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_2a1e812bf8a24a77b650"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_5bdfa59cbd6f6787e982",
+      "source_id": "component_9d37adb8daaeea49b941",
+      "target_id": "component_b5c18e1913d02350e88f",
+      "type": "Routes to Worker",
+      "label": "hottublaunch-main",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_fea6bacb6b7a4b066fb1"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_6fa030c240b19e0517c8",
+      "source_id": "component_cf63877770d95a8f9766",
+      "target_id": "component_b5c18e1913d02350e88f",
+      "type": "Routes to Worker",
+      "label": "hottublaunch-main",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_b3ab501403c68a533a6e"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_5e89c7d8b1d6a266f36e",
+      "source_id": "component_be712097cdb7d42db99e",
+      "target_id": "component_88d29b98f492687da903",
+      "type": "Routes to Worker",
+      "label": "htl-practice-funnel",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_6826ff5a89dace232617"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_ffbea6a84a65a91da444",
+      "source_id": "component_f8eea7ba238e541cf9f9",
+      "target_id": "component_318bd6fbbdeae5cb15aa",
+      "type": "Routes to Worker",
+      "label": "pts-quote-funnel",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_08fba528246cb037d423"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_79b7fed1f66f1db5e76b",
+      "source_id": "component_788c25f23a224a748783",
+      "target_id": "component_318bd6fbbdeae5cb15aa",
+      "type": "Routes to Worker",
+      "label": "pts-quote-funnel",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_4a793de9c4a966102b94"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/cloudflare-routing.json | log_GdcuALA0dDtd"
+    },
+    {
+      "id": "relationship_27f693b6a0e90888a46b",
+      "source_id": "component_09380dcb4e947e772d15",
+      "target_id": "component_9da2de2e87ca63bed45a",
+      "type": "Workspace membership",
+      "label": "IR 1",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_705a66218cdf2796fca8"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    },
+    {
+      "id": "relationship_8a5cbc5e869d90c98b7f",
+      "source_id": "component_7a9c8472058df623abcf",
+      "target_id": "component_dd55d28566704567d948",
+      "type": "Workspace membership",
+      "label": "EA (Javar)",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_50eecc6a1c6b99afddde"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    },
+    {
+      "id": "relationship_1dbc4f9b32454f5ba332",
+      "source_id": "component_eff0c06ce150aa95834b",
+      "target_id": "component_4aec6c43a748169bb39b",
+      "type": "Workspace membership",
+      "label": "B2B Agent (Sales)",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_c5efdce9762e3b0b5c5f"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    },
+    {
+      "id": "relationship_6fbcb21aed91365e952a",
+      "source_id": "component_8cd11323e3477bfb1a75",
+      "target_id": "component_fbc5406b018abb4b4fb4",
+      "type": "Workspace membership",
+      "label": "CSM",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_73f5b90e55800a57b11b"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    },
+    {
+      "id": "relationship_24f6051445a373b9280b",
+      "source_id": "component_2296fd645d1b3e4b684b",
+      "target_id": "component_332b80bd54ab8599744f",
+      "type": "Workspace membership",
+      "label": "Media",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_f3e144015508621e61b2"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    },
+    {
+      "id": "relationship_20234326026842fb8274",
+      "source_id": "component_76b87757ced8e3e96855",
+      "target_id": "component_6b95025a13cad65e052f",
+      "type": "Workspace membership",
+      "label": "Ops — Increase ROAS",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_d4a8c91512a1ff06f8f9"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    },
+    {
+      "id": "relationship_b982b45933f57d769344",
+      "source_id": "component_016472518156ef23d5db",
+      "target_id": "component_64d96c0c7ba13826d393",
+      "type": "Workspace membership",
+      "label": "Increase Roas - Max",
+      "category": "documented_current",
+      "evidence_level": "configured",
+      "observed_condition": "unknown",
+      "observed_at": null,
+      "evidence_ids": [
+        "ev_fb7e5ddccea4d8e85e4a"
+      ],
+      "resolution": "Asset ID matched",
+      "source_pointer": "work/orgo-metadata.json"
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "at": "2026-10-10T11:31:40+00:00",
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "cases": {
+    "source_inventory_audit": {
+      "note": "Existing source violations reported only; catalog not auto-modified to pass.",
+      "record_count": 2351,
+      "sample_violations": [],
+      "violation_count": 0
+    }
+  },
+  "delivery_id": "canonical-transaction-correction-20261010-0730",
+  "failed_attempt_history": [
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+      "sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3"
+    },
+    {
+      "prior_milestone_pointer": "reports/canonical-transaction-schema-receipt.json",
+      "sha256": "d6af32263292a5a4d589229226034a1c66f7edef4e90f80416fbce6365a17024"
+    },
+    {
+      "at": "2026-10-10T11:31:40+00:00",
+      "error": "'document'"
+    }
+  ],
+  "failure_artifact": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-c3bbd1c0.json",
+  "failures": [
+    "exception",
+    "'document'"
+  ],
+  "full_completion": false,
+  "independent_verification": "not_claimed",
+  "isolated_clone": "app/.data/canonical-transaction-correction-20261010-0730/catalog-clone",
+  "milestone_scope": "bounded canonical transaction correction (independent review TS02/03/05/07/08/09/11)",
+  "next_permitted_action": "Independent verification of this focused receipt; broader browser/sync/trace gates remain pending.",
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "prior_delivery_id": "canonical-transaction-schema-20261010-0717",
+  "prior_reviews_acknowledged": [
+    "reports/independent-canonical-transaction-review.json",
+    "reports/independent-canonical-transaction-review.md"
+  ],
+  "run_id": "c3bbd1c0-6c91-4464-b540-75c9f980d0c9",
+  "source_identity": {
+    "modules": {
+      "tools/canonical_maintained_edit.py": "caea6584b63eb4e6166d569de46e350ea4c7a4b4b20330658e70222e45741c68",
+      "tools/canonical_transaction_regression.py": "16dce1f35d4633179955eee38187d4612f3bb2a61aca0a79476422f095f46f03",
+      "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "tools/catalog_reference_validation.py": "07ca9551c4b9bf6818fda333a90cf920200aa660fb6637af27a6399938883d25",
+      "tools/local_service.py": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+    },
+    "schema": {
+      "schemas/components.schema.json": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e"
+    }
+  }
+}

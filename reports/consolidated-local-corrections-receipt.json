@@ -1,0 +1,175 @@
+{
+  "delivery_id": "consolidated-local-corrections-20261010-0550",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "at": "2026-10-10T05:55:11+00:00",
+  "source_identity": {
+    "delivery_id": "consolidated-local-corrections-20261010-0550",
+    "git_commit": null,
+    "source_sha256": {
+      "tools/workflow_apply_guard.py": "ad2b89f3d6b556ad809be4e8e4db46cb25158e11de6ba0251179c26b4796af79",
+      "tools/reliability_gate.py": "ff3d29faf6f10738011bfb85cb4c743fd7346e4ba6cdda770e22b4b15e25fd49",
+      "tools/trace_store.py": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189",
+      "app/src/lib/graph/build-graph.ts": "25e1412fb401182f6bc9307503319b8eb82c3947aa8dca013286a90ccdcc0491",
+      "tools/browser_acceptance.mjs": "1e1dd9c2379daca9a15003243fea43cd36a3546080e060bbf35c306d035a439b"
+    },
+    "next_build_id": "a9b54bf2c9bee2c2"
+  },
+  "findings": {
+    "APP-REVIEW-01": {
+      "gate_rejects_failed_independent_proof": true,
+      "gate_reason": "independent_proof_not_success"
+    },
+    "APP-REVIEW-03": {
+      "omit_handoff_rejected": true,
+      "error": null
+    },
+    "APP-REVIEW-04": {
+      "trace_top_level_shape": true,
+      "span_count": 2
+    },
+    "CONTROLLED-EDIT": {
+      "preview_has_after_sha": true,
+      "invalid_revision_rejected": true
+    },
+    "app_path_suite": {
+      "REL-02_gate": "passed",
+      "REL-03_recover": "passed",
+      "REL-04_handoff": "passed",
+      "REL-06_canary": "passed",
+      "synthetic_live_mutation": "passed",
+      "overall": "passed"
+    }
+  },
+  "failure_history_preserved": [
+    {
+      "check": "reliability_shows_evidence_existence_only",
+      "status": "FAIL",
+      "preserved": true,
+      "note": "Prior browser milestone used count-only assertion; superseded by reliability_evidence_nonempty/readable"
+    }
+  ],
+  "browser_proof": {
+    "delivery_id": "browser-original-milestone-20261010-0525",
+    "consolidated_delivery_id": "consolidated-local-corrections-20261010-0550",
+    "status": "PASS",
+    "failed_checks": [],
+    "checks": {
+      "health_ok": true,
+      "catalog_complete": true,
+      "relationship_count": 59,
+      "component_count": 2351,
+      "relationships_at_least_59": true,
+      "components_nonempty": true,
+      "persistent_profile_dir": true,
+      "heading_visible": true,
+      "stats_show_relationships": true,
+      "stats_show_complete": true,
+      "overview_layer_nodes": 8,
+      "overview_layer_top_down": true,
+      "no_horizontal_overflow": true,
+      "dark_theme_toggled": true,
+      "all_view_screenshots": true,
+      "workflows_panel_has_content": true,
+      "workflows_recovery_ux": true,
+      "reliability_shows_evidence": true,
+      "reliability_evidence_nonempty": true,
+      "reliability_evidence_readable": true,
+      "reliability_recovery_note": true,
+      "tracing_span_visible": true,
+      "subsystem_view_loaded": true,
+      "search_navigation": true,
+      "no_page_errors": true
+    },
+    "browser_route": "system_google_chrome_playwright_channel",
+    "server_command": "npx next start -H 127.0.0.1 -p 3200",
+    "loopback": "http://127.0.0.1:3200",
+    "build_identity": {
+      "package_json_sha256": "a9b54bf2c9bee2c23c2c68be03955a64b04555032ad54efd65844ec2d8607faa"
+    },
+    "api_catalog_counts": {
+      "relationships": 59,
+      "components": 2351
+    },
+    "screenshots": [
+      {
+        "name": "01-explorer-overview-light",
+        "path": "reports/browser-proof/01-explorer-overview-light.png",
+        "bytes": 203052,
+        "sha256": "e363993fdd962822aef3b8092a248c93da2bce56d9dc253199fc554f0450ca0e"
+      },
+      {
+        "name": "02-explorer-overview-dark",
+        "path": "reports/browser-proof/02-explorer-overview-dark.png",
+        "bytes": 195969,
+        "sha256": "668abdd492d2e2deac69e677d6157cbe94e72a8232a45b053d8e3e33bee98d5e"
+      },
+      {
+        "name": "view-subsystem",
+        "path": "reports/browser-proof/view-subsystem.png",
+        "bytes": 146714,
+        "sha256": "55ce51d8b23d77ad3c3040cf84da5b36266f969561398374bbc84ce64aaa3479"
+      },
+      {
+        "name": "view-files",
+        "path": "reports/browser-proof/view-files.png",
+        "bytes": 79089,
+        "sha256": "81beb7e76404602ff03c56685f79529a884bd3504a8db7a45b754898f576c5f2"
+      },
+      {
+        "name": "view-problems",
+        "path": "reports/browser-proof/view-problems.png",
+        "bytes": 78884,
+        "sha256": "39dfa497f90aa3412cd4ae5ed8889b8c3e1120b504d70b6427397ed92a913fb4"
+      },
+      {
+        "name": "view-workflows",
+        "path": "reports/browser-proof/view-workflows.png",
+        "bytes": 89795,
+        "sha256": "705018a40fff55482f485469e27ca12a25ae2ef5074874bfa2e31564f508a5d2"
+      },
+      {
+        "name": "view-tracing",
+        "path": "reports/browser-proof/view-tracing.png",
+        "bytes": 73133,
+        "sha256": "f9f4c0be2b4db3a3eafff4d4693ac7fe0107aa883c288cbb142361876dff9ee5"
+      },
+      {
+        "name": "view-reliability",
+        "path": "reports/browser-proof/view-reliability.png",
+        "bytes": 111865,
+        "sha256": "acde6c9d9e59a5d481d6cc9c8342d25e7dc4b225cd1dd8848bc27587f7404773"
+      },
+      {
+        "name": "view-tracing-detail",
+        "path": "reports/browser-proof/view-tracing-detail.png",
+        "bytes": 73047,
+        "sha256": "b7c869139638f3fc2a952d2ad3e6deb6f4c601d46ce8dda6e06835baa26fa7c6"
+      },
+      {
+        "name": "view-subsystem-impact",
+        "path": "reports/browser-proof/view-subsystem-impact.png",
+        "bytes": 160998,
+        "sha256": "d1caa0d3fa1b836f794bf2a35f84d552db0805ca4af32f99b059f6e646a47083"
+      },
+      {
+        "name": "component-detail-from-search",
+        "path": "reports/browser-proof/component-detail-from-search.png",
+        "bytes": 193374,
+        "sha256": "ed6293afdf6f8d071418a1c90b3522b3f237abcdf0755d9e41c1a1fbba9812f6"
+      }
+    ],
+    "errors": [],
+    "source_sha256": {
+      "tools/browser_acceptance.mjs": "1e1dd9c2379daca9a15003243fea43cd36a3546080e060bbf35c306d035a439b"
+    },
+    "at": "2026-10-10T05:54:21.193Z",
+    "owner_evidence_not_independent_acceptance": true
+  },
+  "real_sdk_tracing": {
+    "status": "BLOCKED",
+    "doc": "docs/REAL_TRACE_INPUT.md"
+  },
+  "rel_01_fresh_context": "UNVERIFIED",
+  "owner_pass_not_independent_acceptance": true,
+  "overall": "partial"
+}

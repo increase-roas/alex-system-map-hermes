@@ -1,0 +1,19 @@
+Fresh final command evidence: bundled Python executable, working directory /tmp.
+Command: /Users/alexlobaito/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3 /Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/tools/workflow_tests.py
+Exit code: 0
+Output chunk: f32e65
+test_active_correction_captures_new_descendants_before_edge_removal ... ok
+test_cli_init_create_recover ... ok
+test_correction_retains_original_affected_tasks_after_dependency_edit ... ok
+test_corrections_preserve_history_and_recheck_descendants ... ok
+test_cycles_and_atomic_rollback ... ok
+test_globally_unique_ids ... ok
+test_malformed_requests_leave_database_unchanged ... ok
+test_reopened_task_invalidates_prior_proof ... ok
+test_restart_and_recovery ... ok
+test_revision_and_idempotency ... ok
+test_stale_checkpoint_after_unrelated_revision ... ok
+test_verification_guardrails ... ok
+Ran 12 tests in 0.159s
+OK
+This final proof supersedes the earlier nine-test report.

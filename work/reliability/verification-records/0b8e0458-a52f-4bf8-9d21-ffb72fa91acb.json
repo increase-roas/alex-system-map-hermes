@@ -1,0 +1,28 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "0b8e0458-a52f-4bf8-9d21-ffb72fa91acb",
+  "fixture_only": true,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "app-path-gate-job",
+    "job_revision": 1,
+    "task_id": "gate-task",
+    "operation_id": "app-path-gate-op"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "bad_timestamp_rejected": true,
+    "skills_present": true,
+    "relationships_fingerprint_live": true
+  },
+  "actually_used": "reliability_gate_per_requirement",
+  "skills_verified_at_issue": true,
+  "verifier": "app-path-acceptance",
+  "observed_at": "2026-10-10T06:17:21+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "74640e2de9988d954d6345f195db8dc84edbc57c456337d84408160229b67c21"
+}

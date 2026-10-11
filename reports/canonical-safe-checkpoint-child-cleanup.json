@@ -1,0 +1,28 @@
+{
+  "at": "2026-10-10T10:42:31.538725+00:00",
+  "session_id": 65404,
+  "owner_pid": 5162,
+  "turn_end_record": 1069,
+  "turn_end_status": "success",
+  "stuck_children": [
+    {
+      "pid": 25915,
+      "parent": 5162,
+      "executable": "/bin/zsh"
+    },
+    {
+      "pid": 25916,
+      "parent": 25915,
+      "executable": "cat"
+    }
+  ],
+  "diagnosis": "Both sampled blocked in read; project cwd; leftover startup shell/cat after owner successful turn ended. No active browser/build/acceptance child.",
+  "action": "Terminate exact leftover shell25915 then cat25916 only; preserve owner5162.",
+  "next": "Readback native session exit; await saved review reports before one same-chat correction.",
+  "readback": {
+    "at": "2026-10-10T10:42:49.330783+00:00",
+    "owner_alive": false,
+    "shell_child_exited": true,
+    "cat_child_exited": true
+  }
+}

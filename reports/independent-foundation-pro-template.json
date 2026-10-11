@@ -1,0 +1,61 @@
+{
+  "results": [
+    {
+      "item": "pro_template_original_bytes",
+      "status": "VERIFIED",
+      "evidence": {
+        "original": "/Users/alexlobaito/Downloads/pro-ai-workflow-editor.zip",
+        "copy": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/inputs/pro-ai-workflow-editor.zip",
+        "sha256": "5b69062bfdf61535125bfb64c75f68aae3e7e5ba363553d84146645c153e7ec3",
+        "bytes": 447864
+      }
+    },
+    {
+      "item": "archive_count_paths_and_license",
+      "status": "VERIFIED",
+      "evidence": {
+        "entries": 92,
+        "unsafe_paths": [],
+        "license_version": "1.0 from supplied LICENSE.md"
+      }
+    },
+    {
+      "item": "framework_and_named_source_locations",
+      "status": "VERIFIED",
+      "evidence": {
+        "next": "^15.5.15",
+        "react_flow": "^12.11.2",
+        "elk": "^0.11.1",
+        "zustand": "5.0.13"
+      }
+    },
+    {
+      "item": "example_runtime_scope_documented_and_source_only_verifier_read",
+      "status": "VERIFIED",
+      "evidence": {
+        "inspected_paths": [
+          "README.md",
+          "src/app/api/generate-text/route.ts",
+          "src/app/actions/cookies.ts",
+          "src/app/workflow/hooks/use-workflow-runner.tsx"
+        ],
+        "action": "Read ZIP bytes only; no code executed, installed, or provider request issued by verifier."
+      }
+    },
+    {
+      "item": "archive_crc_readback",
+      "status": "VERIFIED",
+      "evidence": {
+        "zip_testzip_first_bad_entry": null
+      }
+    },
+    {
+      "item": "recognized_credential_pattern_scan",
+      "status": "VERIFIED",
+      "evidence": {
+        "findings_paths_only": [],
+        "limit": "Conservative recognized patterns; not a proof against every opaque credential."
+      }
+    }
+  ]
+}

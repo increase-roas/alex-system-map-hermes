@@ -1,0 +1,28 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "deb096f2-6818-4f2a-b5d0-6c83c6c7984d",
+  "fixture_only": true,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "core-verify-job",
+    "job_revision": 2,
+    "task_id": "gate-task",
+    "operation_id": "core-verify-op"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "gate_bound": true,
+    "skills_present": true,
+    "relationships_fingerprint_live": true
+  },
+  "actually_used": "reliability_gate_per_requirement",
+  "skills_verified_at_issue": true,
+  "verifier": "workflow-core-acceptance",
+  "observed_at": "2026-10-10T06:18:07+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "c0364023e35bb8ec8cca398551aa87fda861ff1023f53068e290aec9b807dfc4"
+}

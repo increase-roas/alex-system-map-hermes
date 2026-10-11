@@ -1,0 +1,508 @@
+{
+  "id": "table_f0217d69fe3d70354267",
+  "sheet": "S01-35 Tool cards",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "A tool card is one page per app: the one route to use, which login, what it reaches and can change (tested, with the date), and its rules, with the hazards and the asks first. A skill is a step-by-step job that uses one or more tools. How the cards reach every AI: (1) the always-loaded App rules block names every card and says to read it before the first call, plus the two cross-app rules (name the login; samples can send or spend, budgets ask Alex and never go through proxy) (blind split test 2026-10-01: work/2026-10-01_setup-playbook/notes/app-rules-redesign.md); (2) the hosted notes tool Composio CUSTOM_IR_NOTES_GET_APP_RULES returns a full card on any machine, and its description lists every card with its index line; (3) the card files themselves (~/.agents/tools/cards). Hard stops are also enforced by the guard hooks. Edit the card and commit ~/.agents: the hook updates the hosted notes, the instructions and this tab. Never edit the sheet by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app"
+        },
+        {
+          "column": "B",
+          "value": "card file"
+        },
+        {
+          "column": "C",
+          "value": "the one route"
+        },
+        {
+          "column": "D",
+          "value": "last updated"
+        },
+        {
+          "column": "E",
+          "value": "rules in the card"
+        },
+        {
+          "column": "F",
+          "value": "skills that mention it"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Browser and computer use"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/browser-and-computer.md"
+        },
+        {
+          "column": "C",
+          "value": "not Composio: public page = the built-in browser (Playwright in a terminal); logged-in site = Claude in Chrome (Alex's signed-in Chrome); desktop app = computer use"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 5
+        },
+        {
+          "column": "F",
+          "value": "none yet"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/cloudflare.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit custom_cloudflare_api (login ca_IUuu0MrmsQya) -> Cloudflare's own API connector mcp.cloudflare.com, account token from 1Password \"Cloudflare API — Composio (account token)\""
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 5
+        },
+        {
+          "column": "F",
+          "value": "agents-sdk, aimoney-search, clone-site, cloudflare-email-service, cloudflare-one-migrations, cloudflare-one, cloudflare, durable-objects (+10)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Composio"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/composio.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio project wearenumber1 (alex@increaseroas.com); the CLI first on Claude Code and Codex, the hosted connector or app when the CLI can't run and on chat apps"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 9
+        },
+        {
+          "column": "F",
+          "value": "ad-recreator-atlascloud-codex-v3, aimoney-search, alex-workflow-conductor, atlas-drone-style-video, atlas-talking-baby-video, build-ghl-systems, cloudflare, composio-cli (+10)"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exa"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/exa.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit exa (login exa_beode-vain), the one way in for every AI; Claude's Exa connector and local exa servers are not routes"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 5
+        },
+        {
+          "column": "F",
+          "value": "alex-director, alex-workflow-conductor, hermes-boss-director, native-fix-research, research-with-sources"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/firecrawl.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit firecrawl (login firecrawl_che-aday, ca_s4u_SyGN6QGq), Firecrawl Personal Team of alex@increaseroas.com; whole-site crawls: ~/.agents/tools/connectors/firecrawl_op.py"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 4
+        },
+        {
+          "column": "F",
+          "value": "javar-website-only-audit-factory"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GA4"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/ga4.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit custom_ga4_admin (login ca_RjAXt_4X2K28), acting as alex@increaseroas.com"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-02"
+        },
+        {
+          "column": "E",
+          "value": 10
+        },
+        {
+          "column": "F",
+          "value": "blueprint, content-gap-analysis, javar-website-only-audit-factory, seo-competitor-analysis, website-traffic-checker"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/ghl.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkits custom_ghl_oauth_crm (CRM) and custom_ghl_command_builder (builds)"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-02"
+        },
+        {
+          "column": "E",
+          "value": 12
+        },
+        {
+          "column": "F",
+          "value": "blueprint, build-ghl-systems, fulfill-hot-tub-launch, hermes-boss-director, javar-website-only-audit-factory, native-fix-research"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/github.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit github, two logins; default \"GITHUB\" (ca_O_g-WhWXwO9d, github_lipase-modern, user increaseroasir); org increase-roas repos: gh CLI (the org's OAuth App access restrictions refuse Composio's GitHub app, 403)"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-02"
+        },
+        {
+          "column": "E",
+          "value": 6
+        },
+        {
+          "column": "F",
+          "value": "backlink-analysis, ce-babysit-pr, ce-resolve-pr-feedback, cloudflare-email-service, composio-cli, drive-link-harvest, embedded-captions, excalidraw-diagram (+18)"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/google-ads.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit googleads (login googleads_maned-sprack, signed in as alex@increaseroas.com), manager account 164-028-3674 \"Increase Roas Inc.\""
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 8
+        },
+        {
+          "column": "F",
+          "value": "javar-website-only-audit-factory"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/google-workspace.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit custom_google_robot (login ca_vm6rcasgNEIk) -> hub route /google-robot/mcp, the tagging-admin Google robot acting as any increaseroas.com user (domain-wide delegation)"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 4
+        },
+        {
+          "column": "F",
+          "value": "none yet"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/huggingface.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit hugging_face (login hugging_face_pricer-drongo, ca_LT97uOiNLDhk) = Hugging Face user bloomsterhehe (free plan, no orgs), from every AI"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-02"
+        },
+        {
+          "column": "E",
+          "value": 4
+        },
+        {
+          "column": "F",
+          "value": "none yet"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/meta-ads.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit metaads (login ca_7i7CdMbStKc9), system user \"Manus\" of IR Business Manus App, key from 1Password \"Meta Ads — system user token (IR Business Manus App)\""
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 4
+        },
+        {
+          "column": "F",
+          "value": "ad-audio-polish, building-long-running-meta-ad-inventories, create-local-meta-ads, fulfill-hot-tub-launch, javar-website-only-audit-factory, meta-ads, meta-hammer-them, meta-paused-campaign-builder"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Modal"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/modal.md"
+        },
+        {
+          "column": "C",
+          "value": "Terminal only: ~/.agents/tools/connectors/modal_op.py <modal command> (Claude Code, Codex), workspace alex-13722; Composio has no Modal toolkit"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-02"
+        },
+        {
+          "column": "E",
+          "value": 4
+        },
+        {
+          "column": "F",
+          "value": "ce-debug, copywriting"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "QuickBooks"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/quickbooks.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit quickbooks, two companies; default \"Increase Roas (partnership, Phoenix)\" (ca_p-2iG6dDdXF_, quickbooks_genre-lapsed)"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 3
+        },
+        {
+          "column": "F",
+          "value": "none yet"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/slack.md"
+        },
+        {
+          "column": "C",
+          "value": "Composio toolkit slack, two logins; default \"Alex Slack Account\" (ca_ioyaOJLKDEUK, slack_rehood-hinney, Increase ROAS workspace, acts as Alex)"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 4
+        },
+        {
+          "column": "F",
+          "value": "ask-jeremy, ce-brainstorm, copywriting, hermes-team-setup, image, javar-add-tool, site-architecture, web-design-engineer"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Built-in web search and web fetch"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/tools/cards/web-search.md"
+        },
+        {
+          "column": "C",
+          "value": "not Composio: the app's own web search and web fetch, the fallback after Composio exa"
+        },
+        {
+          "column": "D",
+          "value": "2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": 5
+        },
+        {
+          "column": "F",
+          "value": "financial-analysis, youtube-video-research"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,187 @@
+{
+ "receipt_id": "director-dynamite-internal-failure-alert-20261001-recurring-n9",
+ "trace_id": "trace-director-dynamite-internal-failure-alert-20261001-recurring",
+ "label": "Director: dynamite-internal-failure-alert-20261001-recurring (9 writes)",
+ "synthetic_only": false,
+ "started_at": "2026-10-01T10:47:56.811066+00:00",
+ "ended_at": "2026-10-01T21:42:12.825698+00:00",
+ "status": "completed",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "dynamite-internal-failure-alert-20261001-recurring"
+ },
+ "spans": [
+  {
+   "span_id": "director-e4cd8a054742-65",
+   "parent_span_id": null,
+   "name": "automation.update",
+   "agent_identity": "Director controller",
+   "tool_action": "automation.update",
+   "started_at": "2026-10-01T10:47:56.811066+00:00",
+   "ended_at": "2026-10-01T10:48:34.153901+00:00",
+   "duration_ms": 37342,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 66
+   }
+  },
+  {
+   "span_id": "director-5b76254d1a6b-75",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T15:27:16.536754+00:00",
+   "ended_at": "2026-10-01T15:29:22.002941+00:00",
+   "duration_ms": 125466,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 76
+   }
+  },
+  {
+   "span_id": "director-39a2d4a61fef-76",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T15:57:53.485260+00:00",
+   "ended_at": "2026-10-01T15:58:36.302823+00:00",
+   "duration_ms": 42817,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 77
+   }
+  },
+  {
+   "span_id": "director-10d46ebe3d6b-77",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T16:10:34.632362+00:00",
+   "ended_at": "2026-10-01T16:11:11.246183+00:00",
+   "duration_ms": 36613,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 78
+   }
+  },
+  {
+   "span_id": "director-609f0105a3f9-78",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T16:21:01.328595+00:00",
+   "ended_at": "2026-10-01T16:21:47.311381+00:00",
+   "duration_ms": 45982,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 79
+   }
+  },
+  {
+   "span_id": "director-1f264472e5c1-79",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T17:16:23.862755+00:00",
+   "ended_at": "2026-10-01T17:17:43.773778+00:00",
+   "duration_ms": 79911,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 80
+   }
+  },
+  {
+   "span_id": "director-db3d9c6ac1d0-83",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T18:32:51.165668+00:00",
+   "ended_at": "2026-10-01T18:32:53.372792+00:00",
+   "duration_ms": 2207,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 84
+   }
+  },
+  {
+   "span_id": "director-15452a6eee30-84",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T21:08:42.303670+00:00",
+   "ended_at": "2026-10-01T21:08:44.795296+00:00",
+   "duration_ms": 2491,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 85
+   }
+  },
+  {
+   "span_id": "director-a6e7f749bdf6-86",
+   "parent_span_id": null,
+   "name": "local.file.replace_exact",
+   "agent_identity": "Director controller",
+   "tool_action": "local.file.replace_exact",
+   "started_at": "2026-10-01T21:42:10.335673+00:00",
+   "ended_at": "2026-10-01T21:42:12.825698+00:00",
+   "duration_ms": 2490,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 87
+   }
+  }
+ ]
+}

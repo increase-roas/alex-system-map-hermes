@@ -1,0 +1,417 @@
+{
+  "review_id": "independent-consolidated-browser-review-20261010",
+  "reviewed_at": "2026-10-10T05:56:50.843353+00:00",
+  "scope": "Read-only independent review of BROWSER01-08 and APP-REVIEW05; no browser interaction, rerun, shared DB/source mutation, outside-project read, secret access, installs or paid calls",
+  "owner_milestone": "consolidated-local-corrections-20261010-0550",
+  "owner_receipt_at": "2026-10-10T05:55:11+00:00",
+  "browser_receipt_at": "2026-10-10T05:54:21.193Z",
+  "owner_receipt_sha256": "e0d010d788b44ac307c983d32d5418290e9534f5cb9511c98e1c4022ad0e1507",
+  "browser_receipt_sha256": "f669abd67d6bd99ff0f64f36709a686406773659d9de11ff49b14a8414a145df",
+  "snapshot_initial": {
+    "app/.next/BUILD_ID": "403b472fa6f8b40ad9fa7e44f4f5add08660b9cd6eebfbb807c257aed5f1a36f",
+    "app/package.json": "a9b54bf2c9bee2c23c2c68be03955a64b04555032ad54efd65844ec2d8607faa",
+    "app/src/app/explorer/page.tsx": "a3013ace92f86557198729e9322c965453d6b0b5ec75db52de3f09162e1a87cc",
+    "app/src/app/explorer/reliability-panel.tsx": "288f5f0d13191c2ab404448e930cf307780c91de6f9bbabebc07f83ae94cd380",
+    "app/src/app/explorer/tracing-panel.tsx": "d03476f3d19b478eaad6c5d54d9268938ec47e5bd85222dbcdc0163388ea5bbc",
+    "app/src/app/explorer/workflow-panel.tsx": "2a9b8eac16065a82f4fdfa20ab51eb492c6d570d07d22734ba69c17320ef639f",
+    "app/src/lib/graph/build-graph.ts": "25e1412fb401182f6bc9307503319b8eb82c3947aa8dca013286a90ccdcc0491",
+    "reports/app-path-corrections-receipt.json": "347552c0adb2aeb8c7f9e164a4f725bcb4d05b1d6b174acb8f3018bcd5f466dd",
+    "reports/browser-proof/report.json": "f669abd67d6bd99ff0f64f36709a686406773659d9de11ff49b14a8414a145df",
+    "reports/consolidated-local-corrections-receipt.json": "e0d010d788b44ac307c983d32d5418290e9534f5cb9511c98e1c4022ad0e1507",
+    "tools/app_path_corrections_acceptance.py": "1344f348141559e41e96b13749a6ce51c6147e86893f99c35c1c8c105e370130",
+    "tools/browser_acceptance.mjs": "1e1dd9c2379daca9a15003243fea43cd36a3546080e060bbf35c306d035a439b",
+    "tools/reliability_gate.py": "ff3d29faf6f10738011bfb85cb4c743fd7346e4ba6cdda770e22b4b15e25fd49",
+    "tools/trace_store.py": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189",
+    "tools/workflow_apply_guard.py": "ad2b89f3d6b556ad809be4e8e4db46cb25158e11de6ba0251179c26b4796af79",
+    "work/reliability/live-mutation-receipt.json": "d8e2d420e5fc08f186946e866e38dbad30f46c522de3abac90554fc0892ced49"
+  },
+  "machine_checks": [
+    {
+      "item": "tools/workflow_apply_guard.py",
+      "status": "VERIFIED",
+      "evidence": "ad2b89f3d6b556ad809be4e8e4db46cb25158e11de6ba0251179c26b4796af79",
+      "expected": "ad2b89f3d6b556ad809be4e8e4db46cb25158e11de6ba0251179c26b4796af79"
+    },
+    {
+      "item": "tools/reliability_gate.py",
+      "status": "VERIFIED",
+      "evidence": "ff3d29faf6f10738011bfb85cb4c743fd7346e4ba6cdda770e22b4b15e25fd49",
+      "expected": "ff3d29faf6f10738011bfb85cb4c743fd7346e4ba6cdda770e22b4b15e25fd49"
+    },
+    {
+      "item": "tools/trace_store.py",
+      "status": "VERIFIED",
+      "evidence": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189",
+      "expected": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189"
+    },
+    {
+      "item": "app/src/lib/graph/build-graph.ts",
+      "status": "VERIFIED",
+      "evidence": "25e1412fb401182f6bc9307503319b8eb82c3947aa8dca013286a90ccdcc0491",
+      "expected": "25e1412fb401182f6bc9307503319b8eb82c3947aa8dca013286a90ccdcc0491"
+    },
+    {
+      "item": "tools/browser_acceptance.mjs",
+      "status": "VERIFIED",
+      "evidence": "1e1dd9c2379daca9a15003243fea43cd36a3546080e060bbf35c306d035a439b",
+      "expected": "1e1dd9c2379daca9a15003243fea43cd36a3546080e060bbf35c306d035a439b"
+    },
+    {
+      "item": "reports/browser-proof/01-explorer-overview-light.png",
+      "status": "VERIFIED",
+      "evidence": "e363993fdd962822aef3b8092a248c93da2bce56d9dc253199fc554f0450ca0e",
+      "bytes": 203052,
+      "dimensions": [
+        1400,
+        949
+      ]
+    },
+    {
+      "item": "reports/browser-proof/02-explorer-overview-dark.png",
+      "status": "VERIFIED",
+      "evidence": "668abdd492d2e2deac69e677d6157cbe94e72a8232a45b053d8e3e33bee98d5e",
+      "bytes": 195969,
+      "dimensions": [
+        1400,
+        949
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-subsystem.png",
+      "status": "VERIFIED",
+      "evidence": "55ce51d8b23d77ad3c3040cf84da5b36266f969561398374bbc84ce64aaa3479",
+      "bytes": 146714,
+      "dimensions": [
+        1400,
+        1006
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-files.png",
+      "status": "VERIFIED",
+      "evidence": "81beb7e76404602ff03c56685f79529a884bd3504a8db7a45b754898f576c5f2",
+      "bytes": 79089,
+      "dimensions": [
+        1400,
+        900
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-problems.png",
+      "status": "VERIFIED",
+      "evidence": "39dfa497f90aa3412cd4ae5ed8889b8c3e1120b504d70b6427397ed92a913fb4",
+      "bytes": 78884,
+      "dimensions": [
+        1400,
+        900
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-workflows.png",
+      "status": "VERIFIED",
+      "evidence": "705018a40fff55482f485469e27ca12a25ae2ef5074874bfa2e31564f508a5d2",
+      "bytes": 89795,
+      "dimensions": [
+        1400,
+        900
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-tracing.png",
+      "status": "VERIFIED",
+      "evidence": "f9f4c0be2b4db3a3eafff4d4693ac7fe0107aa883c288cbb142361876dff9ee5",
+      "bytes": 73133,
+      "dimensions": [
+        1400,
+        900
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-reliability.png",
+      "status": "VERIFIED",
+      "evidence": "acde6c9d9e59a5d481d6cc9c8342d25e7dc4b225cd1dd8848bc27587f7404773",
+      "bytes": 111865,
+      "dimensions": [
+        1400,
+        900
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-tracing-detail.png",
+      "status": "VERIFIED",
+      "evidence": "b7c869139638f3fc2a952d2ad3e6deb6f4c601d46ce8dda6e06835baa26fa7c6",
+      "bytes": 73047,
+      "dimensions": [
+        1400,
+        900
+      ]
+    },
+    {
+      "item": "reports/browser-proof/view-subsystem-impact.png",
+      "status": "VERIFIED",
+      "evidence": "d1caa0d3fa1b836f794bf2a35f84d552db0805ca4af32f99b059f6e646a47083",
+      "bytes": 160998,
+      "dimensions": [
+        1400,
+        1006
+      ]
+    },
+    {
+      "item": "reports/browser-proof/component-detail-from-search.png",
+      "status": "VERIFIED",
+      "evidence": "ed6293afdf6f8d071418a1c90b3522b3f237abcdf0755d9e41c1a1fbba9812f6",
+      "bytes": 193374,
+      "dimensions": [
+        1400,
+        949
+      ]
+    },
+    {
+      "item": "Rendered build identity",
+      "status": "FAILED",
+      "expected": "a9b54bf2c9bee2c2",
+      "evidence": "i_SCUW1zzhsjO0FfO1A9q",
+      "package_hash": "a9b54bf2c9bee2c23c2c68be03955a64b04555032ad54efd65844ec2d8607faa"
+    }
+  ],
+  "sqlite_readback": {
+    "tables": [
+      "jobs",
+      "tasks",
+      "checkpoints",
+      "corrections",
+      "events",
+      "sqlite_sequence",
+      "operations",
+      "presentation",
+      "catalog_watch",
+      "trace_imports",
+      "traces",
+      "spans",
+      "trace_cursors"
+    ],
+    "counts": {
+      "traces": 1,
+      "spans": 1,
+      "trace_imports": 1,
+      "catalog_watch": 13
+    },
+    "schemas": {
+      "trace_imports": [
+        "receipt_id",
+        "source_path",
+        "imported_at",
+        "synthetic_only",
+        "payload_sha256"
+      ],
+      "catalog_watch": [
+        "path",
+        "sha256",
+        "bytes",
+        "mtime",
+        "observed_at",
+        "readable",
+        "error"
+      ]
+    }
+  },
+  "prior_finding_ids": [
+    "BROWSER-01",
+    "BROWSER-02",
+    "BROWSER-03",
+    "BROWSER-04",
+    "BROWSER-05",
+    "BROWSER-06",
+    "BROWSER-07",
+    "BROWSER-08"
+  ],
+  "snapshot_final": {
+    "app/.next/BUILD_ID": "403b472fa6f8b40ad9fa7e44f4f5add08660b9cd6eebfbb807c257aed5f1a36f",
+    "app/package.json": "a9b54bf2c9bee2c23c2c68be03955a64b04555032ad54efd65844ec2d8607faa",
+    "app/src/app/explorer/page.tsx": "a3013ace92f86557198729e9322c965453d6b0b5ec75db52de3f09162e1a87cc",
+    "app/src/app/explorer/reliability-panel.tsx": "288f5f0d13191c2ab404448e930cf307780c91de6f9bbabebc07f83ae94cd380",
+    "app/src/app/explorer/tracing-panel.tsx": "d03476f3d19b478eaad6c5d54d9268938ec47e5bd85222dbcdc0163388ea5bbc",
+    "app/src/app/explorer/workflow-panel.tsx": "2a9b8eac16065a82f4fdfa20ab51eb492c6d570d07d22734ba69c17320ef639f",
+    "app/src/lib/graph/build-graph.ts": "25e1412fb401182f6bc9307503319b8eb82c3947aa8dca013286a90ccdcc0491",
+    "reports/app-path-corrections-receipt.json": "347552c0adb2aeb8c7f9e164a4f725bcb4d05b1d6b174acb8f3018bcd5f466dd",
+    "reports/browser-proof/report.json": "f669abd67d6bd99ff0f64f36709a686406773659d9de11ff49b14a8414a145df",
+    "reports/consolidated-local-corrections-receipt.json": "e0d010d788b44ac307c983d32d5418290e9534f5cb9511c98e1c4022ad0e1507",
+    "tools/app_path_corrections_acceptance.py": "1344f348141559e41e96b13749a6ce51c6147e86893f99c35c1c8c105e370130",
+    "tools/browser_acceptance.mjs": "1e1dd9c2379daca9a15003243fea43cd36a3546080e060bbf35c306d035a439b",
+    "tools/reliability_gate.py": "ff3d29faf6f10738011bfb85cb4c743fd7346e4ba6cdda770e22b4b15e25fd49",
+    "tools/trace_store.py": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189",
+    "tools/workflow_apply_guard.py": "ad2b89f3d6b556ad809be4e8e4db46cb25158e11de6ba0251179c26b4796af79",
+    "work/reliability/live-mutation-receipt.json": "d8e2d420e5fc08f186946e866e38dbad30f46c522de3abac90554fc0892ced49"
+  },
+  "source_stable_during_review": true,
+  "changed_during_review": [],
+  "review_completed_at": "2026-10-10T05:58:39.619002+00:00",
+  "method": "Direct source and saved-receipt readback, exact byte/hash checks, readonly SQLite metadata SELECTs, and direct image inspection; no owner PASS assumed.",
+  "inspected_images": [
+    "reports/browser-proof/01-explorer-overview-light.png",
+    "reports/browser-proof/view-reliability.png",
+    "reports/browser-proof/view-tracing-detail.png",
+    "reports/browser-proof/view-workflows.png",
+    "reports/browser-proof/component-detail-from-search.png"
+  ],
+  "items": [
+    {
+      "id": "BROWSER-01",
+      "status": "FAILED",
+      "accepted": [
+        "Visible REL01 evidence is nonempty in directly inspected screenshot. Runner now reads REL02 text and computed font, stronger than count alone."
+      ],
+      "missing_or_failed": [
+        "No visible assertion or expected actual proof fields/result identity. >40 characters and opening brace can pass unrelated JSON. Screenshot shows REL01, not requested REL02 evidence. Failed/hidden evidence is not exercised."
+      ],
+      "evidence": [
+        "tools/browser_acceptance.mjs:194-205",
+        "reports/browser-proof/view-reliability.png"
+      ]
+    },
+    {
+      "id": "BROWSER-02",
+      "status": "VERIFIED",
+      "accepted": [
+        "Exact observed eight-layer order: You/direction -> Agents -> SDK -> Access/credentials -> Infrastructure -> Models -> Apps -> Files/evidence. Current source positions by explicit order and distinguishes layer_navigation/membership edges."
+      ],
+      "missing_or_failed": [
+        "Runner itself permits >=6 nodes and near-equal y; weak future regression guard. Current screenshot and source independently establish requested order."
+      ],
+      "evidence": [
+        "data/layers.json",
+        "app/src/lib/graph/build-graph.ts:62-83",
+        "tools/browser_acceptance.mjs:154-165",
+        "reports/browser-proof/01-explorer-overview-light.png"
+      ]
+    },
+    {
+      "id": "BROWSER-03",
+      "status": "VERIFIED",
+      "accepted": [
+        "Selected Local catalog read test trace visible with span graph, timestamp/status/agent/tool/source content. Consumer source accepts top-level and screened wrapper response shapes."
+      ],
+      "missing_or_failed": [
+        "This accepts bounded displayed trace selection/shape only. Graph labels have visual contrast/clipping defect (BROWSER07); real-source trace unavailable. This is not same-run synthetic sync trace selection."
+      ],
+      "evidence": [
+        "tools/browser_acceptance.mjs:207-216",
+        "app/src/app/explorer/tracing-panel.tsx:142-155",
+        "reports/browser-proof/view-tracing-detail.png"
+      ]
+    },
+    {
+      "id": "BROWSER-04",
+      "status": "FAILED",
+      "accepted": [
+        "Workflow guided-start screen visible; current UI source now displays governing_next_action."
+      ],
+      "missing_or_failed": [
+        "Runner only counts Recover packet text and waits for Start guided job. It never clicks start/mutation/correction/recover, restarts app or compares displayed permitted action to backend correction. Screenshot contains no selected job/recover packet. Actual intended UI recovery path missing."
+      ],
+      "evidence": [
+        "tools/browser_acceptance.mjs:187-190",
+        "app/src/app/explorer/workflow-panel.tsx:396-410",
+        "reports/browser-proof/view-workflows.png"
+      ]
+    },
+    {
+      "id": "BROWSER-05",
+      "status": "FAILED",
+      "accepted": [
+        "Saved Composio detail screenshot displays purpose, evidence ID and proof labels reached through search."
+      ],
+      "missing_or_failed": [
+        "Search remains conditional, is omitted from required[] and asserts no matching stable detail ID. Subsystem check only react-flow presence; no group expansion, collapse, accessible list, impact traversal or sync refresh interaction."
+      ],
+      "evidence": [
+        "tools/browser_acceptance.mjs:218-233,240-258",
+        "reports/browser-proof/component-detail-from-search.png",
+        "reports/browser-proof/view-subsystem-impact.png"
+      ]
+    },
+    {
+      "id": "BROWSER-06",
+      "status": "FAILED",
+      "accepted": [
+        "Receipt reports2351components/59relationships and complete; screenshot text agrees. pageerror listener now exists and is required."
+      ],
+      "missing_or_failed": [
+        "required[] still omits catalog_complete/stats_show_complete/dark_theme_toggled/search_navigation; count checks are nonempty and relationships>=59. Theme flag records click only. No requestfailed/failed-response/console-error collection. No exact count reconciliation gate."
+      ],
+      "evidence": [
+        "tools/browser_acceptance.mjs:51-66,123-126,147-175,238-258",
+        "reports/browser-proof/report.json"
+      ]
+    },
+    {
+      "id": "BROWSER-07",
+      "status": "FAILED",
+      "accepted": [
+        "All11PNG widths are1400; old2171px width corrected. Visible reliability JSON is materially larger; current source text-sm/wrapping/contained-scroll configured."
+      ],
+      "missing_or_failed": [
+        "Runner tests page width only before switching views and permits font>=13, below14-16requirement. Reliability screenshot still presents a tall uncontained REL01 JSON whereas current source max-h-48 is192px; render-source identity unresolved. Trace graph has black-on-black unreadable/clipped oversized node labels in directly inspected screenshot."
+      ],
+      "evidence": [
+        "reports/browser-proof/view-reliability.png",
+        "reports/browser-proof/view-tracing-detail.png",
+        "app/src/app/explorer/reliability-panel.tsx:94-99",
+        "app/src/app/explorer/tracing-panel.tsx:71-113",
+        "tools/browser_acceptance.mjs:166-168,194-200"
+      ]
+    },
+    {
+      "id": "BROWSER-08",
+      "status": "UNVERIFIED",
+      "accepted": [
+        "Runner explicitly starts Next with -H127.0.0.1 and passes project profile directory to launchPersistentContext; source configuration defects fixed."
+      ],
+      "missing_or_failed": [
+        "No listener readback saved. SKIP_SERVER_START may reuse another listener while report always prints configured command; package/runner identity does not bind served build or listener/profile process. Runtime isolation proof remains missing."
+      ],
+      "evidence": [
+        "tools/browser_acceptance.mjs:21-22,46-53,105-126",
+        "reports/browser-proof/report.json"
+      ]
+    },
+    {
+      "id": "APP-REVIEW-05",
+      "status": "FAILED",
+      "accepted": [
+        "Saved current marker SHA400b2bd493f1579ac22ce794c8d235a003c5c053787feef6a163af7a13c25e73 matches readonly catalog_watch. One receipt/trace/span persisted; payload SHA d8e2d420e5fc08f186946e866e38dbad30f46c522de3abac90554fc0892ced49 matches current receipt and trace_imports; source cursor stores same receipt ID. Bounded manual CLI observe/import/dedup/current persistence accepted."
+      ],
+      "missing_or_failed": [
+        "Source still manually invokes sync-observe twice, then starts fresh sync-status reader. No observer lifecycle, app restart, automatic UI refresh or browser cursor invariants. Captured status_before_restart unused; no cursor-before/after equivalence assertion. Restart_subprocess_ok omitted from synth_ok. Span hardcodes ok and lacks actual start/end, agent/source/evidence identity. Browser picks unrelated catalog-read test trace rather than same-run synthetic mutation receipt."
+      ],
+      "evidence": [
+        "tools/app_path_corrections_acceptance.py:325-385,419-424",
+        "reports/app-path-corrections-receipt.json:41-49",
+        "work/reliability/live-mutation-receipt.json",
+        "app/.data/reliability-tests/app-path-sync.sqlite mode=ro"
+      ]
+    },
+    {
+      "id": "SOURCE-IDENTITY",
+      "status": "FAILED",
+      "accepted": [
+        "Five recorded source hashes and all11screenshots match current bytes. Package.json SHA matches browser receipt. Source/receipt hashes stable across review."
+      ],
+      "missing_or_failed": [
+        "Consolidated next_build_id a9b54bf2c9bee2c2 equals package.json hash prefix, not actual app/.next/BUILD_ID i_SCUW1zzhsjO0FfO1A9q. Browser receipt binds only runner/package, not executed app sources or actual build. App build-source match cannot be accepted."
+      ],
+      "evidence": [
+        "reports/consolidated-local-corrections-receipt.json:source_identity",
+        "reports/browser-proof/report.json:build_identity",
+        "app/.next/BUILD_ID"
+      ]
+    }
+  ],
+  "independent_acceptance": "WITHHELD: partial browser display/configuration proof; requested behavioral gates and full observer/UI restart remain unmet",
+  "overall": "PARTIAL; owner PASS not accepted",
+  "real_sdk_input": "BLOCKED; no outside-project read attempted",
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Visible requirement-specific evidence check; actual workflow correction/recovery UI run; mandatory exact catalog/theme/search/error gates; readable trace graph and every-view sizing; listener/rendered-build binding; same-run synthetic observer/UI refresh restart and before/after cursor invariants."
+  }
+}

@@ -1,0 +1,77 @@
+{
+  "at": "2026-10-10T06:53:05+00:00",
+  "cases": {
+    "consumption_recheck": {
+      "after_restore_and_fresh_record": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1
+      },
+      "after_tamper_verify": {
+        "error": "observed_artifact_changed_at_consumption",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "artifact_proof_path": "reports/declared-outcome-live-proof-proofs/declared-outcome-live-proof-20261010-0650-consumption-artifact.txt",
+      "artifact_sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd"
+    },
+    "predeclared_outcome": {
+      "handler_positive_once": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "observed_proofs": [
+          {
+            "byte_length": 23,
+            "content_matches_declaration": true,
+            "contract_revision": 1,
+            "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/decl-job/t1-0e3b0d4bfd2c.txt",
+            "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd"
+          }
+        ],
+        "operation_count": 1
+      },
+      "missing_artifact": {
+        "reason": "artifact_missing"
+      },
+      "unrelated_allowlisted_path_rejected": {
+        "reason": "artifact_not_allowlisted"
+      },
+      "wrong_content_rejected": {
+        "reason": "declared_content_mismatch"
+      }
+    },
+    "wrong_task_single_variable": {
+      "error": "verification_record_task_id_mismatch",
+      "event_count": 0,
+      "exit": 1,
+      "operation_count": 0,
+      "record_operation_id": "dolp-record-wt",
+      "request_operation_id": "dolp-record-wt"
+    }
+  },
+  "delivery_id": "declared-outcome-live-proof-20261010-0650",
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": false,
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json"
+  },
+  "run_id": "6b83d885-e2da-4955-b1de-70eaf67ee859",
+  "source_identity": {
+    "tools/bounded_acceptance.py": "48e76eaf7f767dce6352f9ae28610b9f3aaae3406c92b244d77fc9172462555e",
+    "tools/declared_outcome_live_proof_acceptance.py": "b17e84affbdb447c254253491223f9625b0b2094d471c14b88c75664afabe0dd",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "de05c154a0be7ce0f851c0909fe17a54cb8fe9ba4d3cdb2cf4d84803c92602b1"
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "source_inventory_audit": {
+    "record_count": 2351,
+    "violation_count": 0,
+    "sample_violations": [],
+    "note": "Existing source violations reported only; catalog not auto-modified to pass."
+  },
+  "rollback_preserves": {
+    "rev_a_before_b_edit": 2,
+    "rev_a_after_reconcile": 2,
+    "a_revision_preserved": true,
+    "b_crash_nonzero": true,
+    "reconcile_twice_idempotent": false,
+    "b_revision_restored": true,
+    "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843"
+  },
+  "dual_lock": {
+    "component_exit": 0,
+    "metadata_exit": 0,
+    "component_revision": 1,
+    "metadata_revision": 1,
+    "both_committed": true,
+    "component_purpose": "Dual lock component 0717",
+    "metadata_policy_contains": true
+  },
+  "distinct_records": {
+    "purpose_a": "Distinct A 0717",
+    "purpose_b": "Distinct B 0717",
+    "both_preserved": true
+  },
+  "same_op_concurrent": {
+    "exit_a": 0,
+    "exit_b": 0,
+    "both_success": true,
+    "after_hash_match": true,
+    "one_commit": true
+  },
+  "replay_after_newer": {
+    "retry_exit_zero": true,
+    "same_result_hash": true,
+    "disk_keeps_newer": true
+  },
+  "crash_stages": {
+    "stages": {
+      "pending_before_rename": {
+        "crash_exit_nonzero": true,
+        "revision_restored": true,
+        "reconcile_idempotent": false,
+        "sha_before": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+        "sha_after": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+        "sha_restored": true
+      },
+      "post_rename_pre_derived": {
+        "crash_exit_nonzero": true,
+        "revision_restored": true,
+        "reconcile_idempotent": false,
+        "sha_before": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+        "sha_after": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+        "sha_restored": true
+      },
+      "post_derived_pre_revision": {
+        "crash_exit_nonzero": true,
+        "revision_restored": true,
+        "reconcile_idempotent": false,
+        "sha_before": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+        "sha_after": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+        "sha_restored": true
+      },
+      "committed_before_oplog": {
+        "crash_exit_nonzero": true,
+        "revision_restored": true,
+        "reconcile_idempotent": false,
+        "sha_before": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+        "sha_after": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+        "sha_restored": true
+      },
+      "post_oplog_pre_journal_commit": {
+        "crash_exit_nonzero": true,
+        "revision_restored": true,
+        "reconcile_idempotent": false,
+        "sha_before": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+        "sha_after": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+        "sha_restored": true
+      }
+    },
+    "all_restored": true
+  },
+  "restore_handler": {
+    "restore_exit_zero": true,
+    "restored_flag": true,
+    "purpose_after": "Owns recorded mission judgment and bookkeeping.",
+    "purpose_is_baseline": false
+  },
+  "schema_negatives": {
+    "cases": [
+      {
+        "label": "missing_evidence_ids",
+        "rejected": true,
+        "zero_write": true
+      },
+      {
+        "label": "integer_alias",
+        "rejected": true,
+        "zero_write": true
+      },
+      {
+        "label": "object_observed_condition",
+        "rejected": true,
+        "zero_write": true
+      },
+      {
+        "label": "null_source_record_ids",
+        "rejected": true,
+        "zero_write": true
+      }
+    ],
+    "all_rejected_with_zero_write": true,
+    "missing_next_revision_rejected": true
+  },
+  "negative_flips": {
+    "each_flip_fails": true,
+    "per_flip": [
+      {
+        "path": "rollback_preserves.a_revision_preserved",
+        "still_passed": false,
+        "failures": [
+          "a_revision_preserved",
+          "purpose_is_baseline"
+        ]
+      },
+      {
+        "path": "dual_lock.both_committed",
+        "still_passed": false,
+        "failures": [
+          "both_committed",
+          "purpose_is_baseline"
+        ]
+      },
+      {
+        "path": "schema_negatives.all_rejected_with_zero_write",
+        "still_passed": false,
+        "failures": [
+          "purpose_is_baseline",
+          "all_rejected_with_zero_write"
+        ]
+      },
+      {
+        "path": "replay_after_newer.disk_keeps_newer",
+        "still_passed": false,
+        "failures": [
+          "disk_keeps_newer",
+          "purpose_is_baseline"
+        ]
+      }
+    ]
+  }
+}

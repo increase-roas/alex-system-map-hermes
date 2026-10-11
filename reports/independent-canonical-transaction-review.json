@@ -1,0 +1,1636 @@
+{
+  "at": "2026-10-10T11:27:33.530738+00:00",
+  "scope": "Bounded canonical transaction/schema/restore review only. Read-only source/artifacts and pure source checks; no app/server/DB mutation, subprocess acceptance rerun, browser/network/install/outside reads/helpers.",
+  "overall": "FAILED",
+  "blocker_type": "goal_not_met_yet",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/canonical-transaction-schema-20261010-0717-87c0ae9f-d368-40eb-bc5c-587090424027.json",
+    "at": "2026-10-10T11:21:28+00:00",
+    "run_id": "87c0ae9f-d368-40eb-bc5c-587090424027",
+    "sha256": "a2cee23ec434a98d7697a205f60ecb5d36d19b708c356675289ff583e6d8692b",
+    "pointer_hash_matches": true,
+    "owner_overall": "passed",
+    "owner_pass_is_self_report": true
+  },
+  "source_identity": {
+    "tools/canonical_maintained_edit.py": "76649ba74a7435c9275ba3438ea82fa1e1dde175c14491cbc8f10cfdaa1aec7f",
+    "tools/canonical_transaction_regression.py": "ee391fc5b41400b925997b5498436fd75f65098ea505fd5a089037f5823bfccd",
+    "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+    "tools/catalog_reference_validation.py": "ad73c2f6dbe62255695508266ba5d060a82e0dd76ff4a771d691e26269323c6b",
+    "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+  },
+  "source_start_matches": true,
+  "source_end_matches": {
+    "tools/canonical_maintained_edit.py": true,
+    "tools/canonical_transaction_regression.py": true,
+    "tools/catalog_fixture_clone.py": true,
+    "tools/catalog_reference_validation.py": true,
+    "tools/subprocess_bounded.py": true
+  },
+  "snapshot_stable": true,
+  "unbound_actual_handler": {
+    "path": "tools/local_service.py",
+    "sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+    "stable_at_start_end": true
+  },
+  "schema_identity": {
+    "path": "schemas/components.schema.json",
+    "sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e"
+  },
+  "authority": "work/supervision/canonical-transaction-correction-20261010-1118.txt",
+  "prior_review": "reports/independent-canonical-review-fixes-backend.json",
+  "checks": [
+    {
+      "id": "TS01",
+      "status": "VERIFIED",
+      "claim": "Shared canonical transaction lock and prior revision snapshots repair the identified source causes.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:48,86-105,278-289,478-499",
+        "receipt.cases.rollback_preserves"
+      ],
+      "accepted": "All data edits now acquire one lock. Rollback restores target before_revision while retaining other revision keys, replacing prior pop-to-zero. Saved case reports recordA revision2 preserved and recordB restored.",
+      "limits": "No immutable per-stage state/ledger/derived snapshots are retained; runtime coherence beyond source/helper assertions remains unverified."
+    },
+    {
+      "id": "TS02",
+      "status": "FAILED",
+      "claim": "Simultaneous component+metadata and distinct-record preservation proof is absent.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:177-221,224-246"
+      ],
+      "reason": "Both helpers execute one run_cli/apply_record to completion before starting the next. They establish sequential preservation, not the requested simultaneous processes. Current shared lock supports the intended fix by source inspection; saved labels do not prove the race. New milestone has no fresh same-record distinct-op one-winner/effect proof.",
+      "next": "Use actual simultaneous subprocesses and exact canonical/sidecar/ledger/derived outcomes under the shared lock, preserving valid stale-conflict semantics."
+    },
+    {
+      "id": "TS03",
+      "status": "FAILED",
+      "claim": "Same-operation concurrent proof does not measure one commit.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:249-285",
+        "tools/canonical_maintained_edit.py:432-457"
+      ],
+      "reason": "Two identical actual subprocesses launch concurrently and receipt records both exit0/equal afterhash, accepted narrowly. one_commit expression is true for either one success or two successes, without observing commit count. Both empty parsed hashes also compare equal. Final revision, canonical hash, committed ledger row count, journal and derivative effects are not saved.",
+      "next": "Measure one actual commit and consistent replay, require nonempty exact hash/result schema and zero duplicate effects; preserve simultaneous execution."
+    },
+    {
+      "id": "TS04",
+      "status": "VERIFIED",
+      "claim": "Per-root immutable request replay-after-newer and collision mechanisms remain present.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:204-247,432-457",
+        "tools/canonical_transaction_regression.py:288-345",
+        "receipt.cases.replay_after_newer"
+      ],
+      "accepted": "Request next_revision is now required on preview/apply, source replay precedes new-state validation under the lock, and invalidated operations are excluded from replay. Saved helper reports same original result hash and newer disk value.",
+      "limits": "Exact immutable old/new/final snapshots and request IDs are absent; this does not independently establish every runtime effect."
+    },
+    {
+      "id": "TS05",
+      "status": "FAILED",
+      "claim": "Recovery idempotency metric is invalid; state idempotency and interrupted recovery remain unproven.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:149-174,347-374",
+        "tools/canonical_maintained_edit.py:274-350"
+      ],
+      "reason": "reconcile_twice_idempotent/reconcile_idempotent compares first recovery action list to second no-op list, which naturally differ. Their false values do not establish that persistent state changed. summarize ignores these fields. Five stages use a legitimate committed revision1 and compare restored canonical SHA/revision, accepted narrowly; no before/after sidecar/derived/ledger comparison or recovery-interruption stage is saved. No exact retry of a rolled-back post-oplog operation proves ledger invalidation at runtime.",
+      "next": "Compare persistent canonical/revision/derived/ledger state after each recovery, allow first actions followed by empty second actions, enforce the true state invariant and inject interruption during recovery. Do not force action-list equality."
+    },
+    {
+      "id": "TS06",
+      "status": "VERIFIED",
+      "claim": "Operation invalidation repairs source-level ledger-versus-journal rollback gap.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:223-264,319-348,549-569"
+      ],
+      "accepted": "Recovery appends invalidated ledger rows and _load_operation uses only the latest committed row. Post-oplog/prejournal fault injection is now present.",
+      "limits": "No retained exact ledger readback/digest IDs after each crash; caller retries and crash during invalidation/recovery remain unverified. No claim of universal storage durability."
+    },
+    {
+      "id": "TS07",
+      "status": "FAILED",
+      "claim": "Restore violates monotonic revision and its fault journal is unrecoverable.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:573-635",
+        "tools/canonical_maintained_edit.py:319-349",
+        "tools/canonical_transaction_regression.py:377-392"
+      ],
+      "reason": "Restore reads the selected backup revision and writes it back, so restoring the first committed content after revision2 reduces revision to1. restore_pending has no branch in recovery. Journal backup points to desired restore bytes, not a saved pre-restore canonical snapshot. The only restore injector is before writing and is not tested; no restore history/ledger invalidation or other-record revision coherence is proven.",
+      "next": "Treat user restore as a new monotonic committed revision/history action, journal correct pre-restore canonical/sidecar/ledger state, handle restore interruption stages and preserve all records coherently."
+    },
+    {
+      "id": "TS08",
+      "status": "FAILED",
+      "claim": "Full versioned schema still differs from its declared contract.",
+      "evidence": [
+        "tools/catalog_reference_validation.py:88-145",
+        "schemas/components.schema.json:29-42,73-88,100-116",
+        "tools/canonical_maintained_edit.py:136-148",
+        "pure source tests65aaad"
+      ],
+      "reason": "Prior four schema negatives now reject with saved canonical zero-write flags, accepted. Pure actual contract validator still accepts required purpose=None and boundary=None plus duplicate aliases/evidence_ids/source_record_ids, while declared JSON schema requires strings/uniqueItems. Four process negatives do not test full contract or intended error reason; zero_write checks only canonical file. Existing2351-record zero-violation label is a self-audit using that incomplete validator.",
+      "next": "Validate exact existing versioned schema and reference rules without deleting source records; add passing legitimate controls and exact reason/zero-effects evidence for full required-field/type/uniqueness negatives."
+    },
+    {
+      "id": "TS09",
+      "status": "FAILED",
+      "claim": "Focused verdict omits required typed/state/effect outcomes.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:450-506",
+        "pure baseline/control matrix65aaad/ed6ee2"
+      ],
+      "reason": "Saved complete baseline passes. Across66stored Boolean/numeric/SHA paths, only16 reject all false/missing/wrongtype mutations and50still pass all three, including every per-stage crash result/hash/idempotency, exact exits/revisions, one_commit, restored_flag and negative result rows. negative_flips itself is unchecked. Four saved false controls are no longer circular in the final PASS but do not cover the required milestone set; their failed-run counterparts had unrelated purpose_is_baseline failure.",
+      "next": "Declare exact required typed checks and nested stage/result/identity/effect schema; start with independently passing baseline and reject each false/missing/wrongtype for its intended reason. Enforce corrected state-idempotency metric rather than the invalid current label."
+    },
+    {
+      "id": "TS10",
+      "status": "VERIFIED",
+      "claim": "Failed-to-pass restore change is consistent with a legitimate fixture correction, not evidence of relaxed restore-purpose acceptance.",
+      "evidence": [
+        "reports/run-receipts/canonical-transaction-schema-20261010-0717-38597248-a257-4ddd-b407-fab6d088e648.json",
+        "reports/run-receipts/canonical-transaction-schema-20261010-0717-87c0ae9f-d368-40eb-bc5c-587090424027.json",
+        "tools/canonical_transaction_regression.py:377-391,475-477"
+      ],
+      "accepted": "Only regression source hash changed between failed38597248 and PASS87c0; implementation hashes identical. Failed receipt restored original production purpose, final restores requested Restore baseline. Current helper selects the second edit backup (pre-second state), and strict purpose_is_baseline remains required.",
+      "limits": "Old source bytes/text diff are not retained, so exact historical edit is unverified. Other false idempotence fields are unchanged and ignored in both; this correction does not close those proof gaps."
+    },
+    {
+      "id": "TS11",
+      "status": "UNVERIFIED",
+      "claim": "Receipt source binding includes actual changed restore handler.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:30-36",
+        "tools/local_service.py:417-420,552-568",
+        "receipt.source_identity"
+      ],
+      "reason": "local_service.py changed and invokes the real restore/reconcile commands but is omitted from five declared source hashes. Reviewer records its current SHA aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1. No final per-test clone/DB/canonical/ledger/journal/derivative immutable evidence hashes bind measured effects.",
+      "next": "Include actual routing/service and declared schema dependencies plus run-specific state/ledger/journal/derived readbacks in the corrected receipt."
+    },
+    {
+      "id": "TS12",
+      "status": "VERIFIED",
+      "claim": "Receipt/history/source snapshot identities and pending broader scope are honest.",
+      "evidence": [
+        "reports/canonical-transaction-schema-receipt.json",
+        "reports/run-receipts/canonical-transaction-schema-20261010-0717-87c0ae9f-d368-40eb-bc5c-587090424027.json",
+        "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json"
+      ],
+      "accepted": "Pointer hash matches exact final receipt; all5declared sources and extra local_service hash stable. Failed38597248 receipt/artifact retained. full_completionfalse and broader gates_still_pending preserved. Prior unchanged broader/core/bridge/browser audits are not reopened."
+    }
+  ],
+  "pure_baseline_passes": true,
+  "typed_control_matrix": [
+    {
+      "path": "crash_stages.all_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "all_restored"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "all_restored"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "all_restored"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.committed_before_oplog.crash_exit_nonzero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.committed_before_oplog.reconcile_idempotent",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.committed_before_oplog.revision_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.committed_before_oplog.sha_after",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.committed_before_oplog.sha_before",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.committed_before_oplog.sha_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.pending_before_rename.crash_exit_nonzero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.pending_before_rename.reconcile_idempotent",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.pending_before_rename.revision_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.pending_before_rename.sha_after",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.pending_before_rename.sha_before",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.pending_before_rename.sha_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_derived_pre_revision.crash_exit_nonzero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_derived_pre_revision.reconcile_idempotent",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_derived_pre_revision.revision_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_derived_pre_revision.sha_after",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_derived_pre_revision.sha_before",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_derived_pre_revision.sha_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_oplog_pre_journal_commit.crash_exit_nonzero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_oplog_pre_journal_commit.reconcile_idempotent",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_oplog_pre_journal_commit.revision_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_oplog_pre_journal_commit.sha_after",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_oplog_pre_journal_commit.sha_before",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_oplog_pre_journal_commit.sha_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_rename_pre_derived.crash_exit_nonzero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_rename_pre_derived.reconcile_idempotent",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_rename_pre_derived.revision_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_rename_pre_derived.sha_after",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_rename_pre_derived.sha_before",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "crash_stages.stages.post_rename_pre_derived.sha_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "distinct_records.both_preserved",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "both_preserved"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "both_preserved"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "both_preserved"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "dual_lock.both_committed",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "both_committed"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "both_committed"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "both_committed"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "dual_lock.component_exit",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "dual_lock.component_revision",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "dual_lock.metadata_exit",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "dual_lock.metadata_policy_contains",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "metadata_policy_contains"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "metadata_policy_contains"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "metadata_policy_contains"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "dual_lock.metadata_revision",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "replay_after_newer.disk_keeps_newer",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "disk_keeps_newer"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "disk_keeps_newer"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "disk_keeps_newer"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "replay_after_newer.retry_exit_zero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "retry_exit_zero"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "retry_exit_zero"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "retry_exit_zero"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "replay_after_newer.same_result_hash",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "same_result_hash"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "same_result_hash"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "same_result_hash"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "restore_handler.purpose_is_baseline",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "purpose_is_baseline"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "purpose_is_baseline"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "purpose_is_baseline"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "restore_handler.restore_exit_zero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "restore_exit_zero"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "restore_exit_zero"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "restore_exit_zero"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "restore_handler.restored_flag",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.a_revision_preserved",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "a_revision_preserved"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "a_revision_preserved"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "a_revision_preserved"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.b_crash_nonzero",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "b_crash_nonzero"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "b_crash_nonzero"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "b_crash_nonzero"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.b_revision_restored",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "b_revision_restored"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "b_revision_restored"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "b_revision_restored"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.components_sha256",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.reconcile_twice_idempotent",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.rev_a_after_reconcile",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "rollback_preserves.rev_a_before_b_edit",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "same_op_concurrent.after_hash_match",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "after_hash_match"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "after_hash_match"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "after_hash_match"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "same_op_concurrent.both_success",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "both_success"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "both_success"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "both_success"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "same_op_concurrent.exit_a",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "same_op_concurrent.exit_b",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "same_op_concurrent.one_commit",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.all_rejected_with_zero_write",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "all_rejected_with_zero_write"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "all_rejected_with_zero_write"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "all_rejected_with_zero_write"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.0.rejected",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.0.zero_write",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.1.rejected",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.1.zero_write",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.2.rejected",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.2.zero_write",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.3.rejected",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.cases.3.zero_write",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "missing",
+          "still_passed": true,
+          "failures": []
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": true,
+          "failures": []
+        }
+      ]
+    },
+    {
+      "path": "schema_negatives.missing_next_revision_rejected",
+      "mutations": [
+        {
+          "mutation": "false",
+          "still_passed": false,
+          "failures": [
+            "missing_next_revision_rejected"
+          ]
+        },
+        {
+          "mutation": "missing",
+          "still_passed": false,
+          "failures": [
+            "missing_next_revision_rejected"
+          ]
+        },
+        {
+          "mutation": "wrongtype",
+          "still_passed": false,
+          "failures": [
+            "missing_next_revision_rejected"
+          ]
+        }
+      ]
+    }
+  ],
+  "typed_control_summary": {
+    "stored_paths_tested": 66,
+    "all_three_mutations_reject": 16,
+    "all_three_mutations_still_pass": 50
+  },
+  "schema_pure_counterexamples": {
+    "legitimate": "accepted",
+    "null_purpose": "accepted",
+    "null_boundary": "accepted",
+    "duplicate_alias": "accepted",
+    "duplicate_evidence": "accepted",
+    "duplicate_source_ref": "accepted"
+  },
+  "history": {
+    "prior_receipt": "reports/run-receipts/canonical-transaction-schema-20261010-0717-38597248-a257-4ddd-b407-fab6d088e648.json",
+    "prior_receipt_sha256": "e22fd8b24c1c1896fb16cc8fdeaf9199dfc7edae6a80a83649f4b355d3af9e19",
+    "prior_failure_artifact": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+    "prior_failure_sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3",
+    "changed_source_hashes": {
+      "tools/canonical_transaction_regression.py": {
+        "failed": "85a22ab47cb403e580e095159c9f20b565653bbd8417d517a953bca097f1e084",
+        "passed": "ee391fc5b41400b925997b5498436fd75f65098ea505fd5a089037f5823bfccd"
+      }
+    }
+  },
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "next_action": "Same owner: correct state-idempotency proof metric, complete real simultaneous/effect tests and recovery-interruption/restore monotonic history, exact schema/uniqueItems/type validation, exhaustive strict nested milestone controls and actual handler/state source binding. Keep accepted shared-lock/revision-snapshot/invalidation fixes and broader queue unchanged."
+}

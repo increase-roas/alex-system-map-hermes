@@ -1,0 +1,73 @@
+{
+ "receipt_id": "director-dynamite-daily-quote-refresh-20260930-once-n3",
+ "trace_id": "trace-director-dynamite-daily-quote-refresh-20260930-once",
+ "label": "Director: dynamite-daily-quote-refresh-20260930-once (3 writes, 1 failed)",
+ "synthetic_only": false,
+ "started_at": "2026-09-30T19:48:57.937493+00:00",
+ "ended_at": "2026-10-01T13:46:35.233842+00:00",
+ "status": "partial",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "dynamite-daily-quote-refresh-20260930-once"
+ },
+ "spans": [
+  {
+   "span_id": "director-f937f2260f8f-40",
+   "parent_span_id": null,
+   "name": "refresh-dynamite-daily-quotes-awaiting-decision",
+   "agent_identity": "Director controller",
+   "tool_action": "refresh-dynamite-daily-quotes-awaiting-decision",
+   "started_at": "2026-09-30T19:48:57.937493+00:00",
+   "ended_at": "2026-09-30T20:04:37.410605+00:00",
+   "duration_ms": 939473,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 41
+   }
+  },
+  {
+   "span_id": "director-505339bb8451-71",
+   "parent_span_id": null,
+   "name": "refresh-dynamite-daily-quotes-awaiting-decision",
+   "agent_identity": "Director controller",
+   "tool_action": "refresh-dynamite-daily-quotes-awaiting-decision",
+   "started_at": "2026-10-01T13:17:09.446873+00:00",
+   "ended_at": "2026-10-01T13:19:21.015219+00:00",
+   "duration_ms": 131568,
+   "status": "failed",
+   "error": "failed (reason withheld by export)",
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 72
+   }
+  },
+  {
+   "span_id": "director-93f7bf41de12-73",
+   "parent_span_id": null,
+   "name": "repair-daily-quote-summary-value-and-link-once",
+   "agent_identity": "Director controller",
+   "tool_action": "repair-daily-quote-summary-value-and-link-once",
+   "started_at": "2026-10-01T13:45:17.353351+00:00",
+   "ended_at": "2026-10-01T13:46:35.233842+00:00",
+   "duration_ms": 77880,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 74
+   }
+  }
+ ]
+}

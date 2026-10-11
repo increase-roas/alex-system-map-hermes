@@ -1,0 +1,5883 @@
+{
+  "id": "table_38a0417ff3534bc71afb",
+  "sheet": "S03-36 Skills",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        },
+        {
+          "column": "B",
+          "value": "what it does"
+        },
+        {
+          "column": "C",
+          "value": "where it is now"
+        },
+        {
+          "column": "D",
+          "value": "copies"
+        },
+        {
+          "column": "E",
+          "value": "Claude Code sees it"
+        },
+        {
+          "column": "F",
+          "value": "Codex sees it"
+        },
+        {
+          "column": "G",
+          "value": "Cursor sees it"
+        },
+        {
+          "column": "H",
+          "value": "problem"
+        },
+        {
+          "column": "I",
+          "value": "fix (target: one copy in ~/.agents/skills)"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ad-audio-polish"
+        },
+        {
+          "column": "B",
+          "value": "Clean and master the audio of a talking-head ad or short (denoise, echo, EQ, loudness to -14 LUFS), lay a music bed under the voice, cut in b-roll with velocity"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/ad-audio-polish"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ad-recreator-atlascloud-codex-v3"
+        },
+        {
+          "column": "B",
+          "value": "Recreate approved B2B marketing ads or slides through AtlasCloud from Codex, preserving reference composition while replacing it with supplied avatar, apparel, "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/ad-recreator-atlascloud-codex-v3"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ad-recreator-universal-v2"
+        },
+        {
+          "column": "B",
+          "value": "Recreate approved B2B marketing ads or slides while preserving the reference composition and replacing it with supplied avatar, brand, apparel, logo, and offer "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/ad-recreator-universal-v2\n~/.claude/skills/ad-recreator-universal-v2 -> ~/.agents/skills/ad-recreator-universal-v2\n~/.cursor/skills/ad-recreator-universal-v2"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "agents-sdk"
+        },
+        {
+          "column": "B",
+          "value": "Build AI agents on Cloudflare Workers using the Agents SDK. Load when creating stateful agents, durable workflows, real-time WebSocket apps, scheduled tasks, MC"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/agents-sdk"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "aimoney-search"
+        },
+        {
+          "column": "B",
+          "value": "Search Alex's private AI Money archive in Cloudflare AI Search for course lessons, transcripts, workshops, assets, and community discussions. Use when Alex asks"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/aimoney-search"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it; names the Codex Cloudflare connector and mcp__cloudflare__search/execute (Cloudflare is now Composio custom_cloudflare_api; Codex no longer has a cloudflare MCP entry)"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy; reword to the Composio Cloudflare route (SEARCH/EXECUTE)"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director"
+        },
+        {
+          "column": "B",
+          "value": "Act as Alex's Director. Supervise controller chats, freeze outcomes, dispatch next plays, judge results, review repo agent rules. Use for act as Director, add a"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/alex-director"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "only the Claude app edition (anthropic-skills:alex-director)"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code sees the Claude app edition, which is now the thin pointer to this file (W06, uploaded as v5 on 2026-10-01): the 2.1.287 terminal lists it once (T7 PASS, 67 skills, 0 repeats). After the restart the desktop app lists it once too (T7 PASS, 83 skills). The Ref docs row is gone from references/execution.md (checked 2026-10-01)."
+        },
+        {
+          "column": "I",
+          "value": "Keep the ~/.agents copy (Codex and Cursor read it). For Claude, keep a thin Claude-app edition that only points to this file and re-upload it after each change (W06, S04: the agent builds the zip, Alex uploads); add no ~/.claude/skills link, because the name would show twice."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-workflow-conductor"
+        },
+        {
+          "column": "B",
+          "value": "Alex's controller skill. Route, execute, verify and report one mission's work by the fastest reliable path. Use only when Alex names alex-workflow-conductor or "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/alex-workflow-conductor"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "only the Claude app edition (anthropic-skills:alex-workflow-conductor)"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code sees the Claude app edition, which is now the thin pointer to this file (W06, uploaded as v5 on 2026-10-01): the 2.1.287 terminal lists it once (T7 PASS). After the restart the desktop app lists it once too (T7 PASS, 83 skills)."
+        },
+        {
+          "column": "I",
+          "value": "Keep the ~/.agents copy (Codex and Cursor read it). For Claude, keep a thin Claude-app edition that only points to this file and re-upload it after each change (W06, S04: the agent builds the zip, Alex uploads); add no ~/.claude/skills link, because the name would show twice."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alternative-blog-writer"
+        },
+        {
+          "column": "B",
+          "value": "Write informative, simple, and highly SEO-optimized \"alternative\" or \"competitor comparison\" blog articles designed to capture organic search traffic for high-v"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/alternative-blog-writer\n~/.claude/skills/alternative-blog-writer -> ~/.agents/skills/alternative-blog-writer\n~/.cursor/skills/alternative-blog-writer"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "analyzing-crm-conversations"
+        },
+        {
+          "column": "B",
+          "value": "Use when analyzing CRM exports, call transcripts, recorded calls, message threads, or activity across an account, pipeline, or rep conversations."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/analyzing-crm-conversations"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "apify-dataset-to-disk"
+        },
+        {
+          "column": "B",
+          "value": "Get large Apify dataset results onto disk without blowing the context window, and avoid the field-projection traps that silently return empty or wrong data. Use"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/apify-dataset-to-disk"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "applying-brand-guidelines"
+        },
+        {
+          "column": "B",
+          "value": "This skill applies consistent corporate branding and styling to all generated documents including colors, fonts, layouts, and messaging"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/applying-brand-guidelines\n~/.claude/skills/applying-brand-guidelines -> ~/.agents/skills/applying-brand-guidelines\n~/.cursor/skills/applying-brand-guidelines"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ask-jeremy"
+        },
+        {
+          "column": "B",
+          "value": "Use when a project needs a bounded operating decision or implementation clarification from Jeremy AI, especially for Hermes, Orgo, Slack, GHL, agent roles, appr"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/ask-jeremy"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "atlas-drone-style-video"
+        },
+        {
+          "column": "B",
+          "value": "Generate aerial drone-style footage (reveal, orbit, flyover, top-down) of a place or subject through the Atlas Cloud tools already connected in the session (no "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/atlas-drone-style-video\n~/.claude/skills/atlas-drone-style-video -> ~/.agents/skills/atlas-drone-style-video\n~/.cursor/skills/atlas-drone-style-video"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice; names mcp__atlascloud__ tools (Atlas Cloud is now in Composio as custom_atlas_cloud; Claude Code config lists only playwright)"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy; reword to the Composio Atlas Cloud tools"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "atlas-talking-baby-video"
+        },
+        {
+          "column": "B",
+          "value": "Make a viral-style vertical video of a baby in a costume who actually SAYS a scripted line out loud, generated through the Atlas Cloud tools already connected i"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/atlas-talking-baby-video\n~/.claude/skills/atlas-talking-baby-video -> ~/.agents/skills/atlas-talking-baby-video\n~/.cursor/skills/atlas-talking-baby-video"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice; names mcp__atlascloud__ tools (Atlas Cloud is now in Composio as custom_atlas_cloud; Claude Code config lists only playwright)"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy; reword to the Composio Atlas Cloud tools"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "audio-fx-hook"
+        },
+        {
+          "column": "B",
+          "value": "Analyze the audio of any video (loudness, pauses, spectrogram, voice pitch over time) and apply a pitch-shifted \"deep\" or \"squeaky\" voice to just the hook of an"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/audio-fx-hook"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "backlink-analysis"
+        },
+        {
+          "column": "B",
+          "value": "Produce a practitioner-grade backlink profile audit report for any target domain using Ahrefs, Semrush, DataForSEO, Similarweb, or user-uploaded tool exports. U"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/backlink-analysis\n~/.claude/skills/backlink-analysis -> ~/.agents/skills/backlink-analysis\n~/.cursor/skills/backlink-analysis"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "blueprint"
+        },
+        {
+          "column": "B",
+          "value": "Turn a GHL Command client intake into a complete, reviewable GoHighLevel account build plan — the GHL Command Blueprint. Detects Agency OS for a deeper brief (e"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/blueprint"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/. Kept off by Director decision D3. A GHL Command package update may put it back into ~/.claude/skills (its manifest .ghl-command-skills.json stays there); check.py flags a Claude folder that shadows a ~/.agents copy."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "building-long-running-meta-ad-inventories"
+        },
+        {
+          "column": "B",
+          "value": "Use when compiling, expanding, validating, or ranking advertiser inventories from Meta Ad Library, Apify, or Foreplay where ads must be currently live for a min"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/building-long-running-meta-ad-inventories"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "capture-lessons"
+        },
+        {
+          "column": "B",
+          "value": "Turns corrections, failures and retries into 1 to 5 evidenced lessons in system/lessons.md, updating matches, not duplicating. Use when the owner corrects Claude, a task fails, or a fix finally works."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/capture-lessons / ~/.claude/skills/capture-lessons -> ~/.agents/skills/capture-lessons"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK (added 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "claude-md-improver"
+        },
+        {
+          "column": "B",
+          "value": "Audit and improve CLAUDE.md files in repositories. Use when user asks to check, audit, update, improve, or fix CLAUDE.md files. Scans for all CLAUDE.md files, e"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/claude-md-improver / ~/.claude/skills/claude-md-improver -> ~/.agents/skills/claude-md-improver / ~/.cursor/skills/claude-md-improver"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "clip-stitcher"
+        },
+        {
+          "column": "B",
+          "value": "Turn a folder of raw talking-head or UGC video clips into a phrase-by-phrase clip library (CLIP-LIBRARY.md with timestamps, which video each line is in, and a M"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/clip-stitcher / ~/.claude/skills/clip-stitcher / ~/.cursor/skills/clip-stitcher"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "3 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "clone-site"
+        },
+        {
+          "column": "B",
+          "value": "Clone an existing live website or landing page from its URL and rebrand it for a new client — same layout, images, video and CSS, with new company name, contact"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/clone-site"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/. A GHL Command package update may put it back into ~/.claude/skills (its manifest .ghl-command-skills.json stays there); check.py flags a Claude folder that shadows a ~/.agents copy."
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Comprehensive Cloudflare platform skill covering Workers, Pages, storage (KV, D1, R2), AI (Workers AI, Vectorize, Agents SDK), feature flags (Flagship), network"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/cloudflare"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "cloudflare-email-service"
+        },
+        {
+          "column": "B",
+          "value": "Send and receive transactional emails with Cloudflare Email Service (Email Sending + Email Routing). Use when building email sending (Workers binding or REST AP"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/cloudflare-email-service"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "cloudflare-one"
+        },
+        {
+          "column": "B",
+          "value": "Guides Cloudflare One Zero Trust and SASE work across Access, Gateway, WARP, Tunnel, Cloudflare WAN, DLP, CASB, device posture, and identity. Use when designing"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/cloudflare-one"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "cloudflare-one-migrations"
+        },
+        {
+          "column": "B",
+          "value": "Plans migrations from Zscaler ZIA/ZPA, Palo Alto, legacy VPN, SWG, or SASE stacks to Cloudflare One. Use for migration assessments, policy mapping, rollout plan"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/cloudflare-one-migrations"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "comparison-article-writer"
+        },
+        {
+          "column": "B",
+          "value": "Write high-quality, research-backed \"X vs Y\" comparison blog articles (products, tools, services, brands, methods, or concepts). Use when the user asks to write"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/comparison-article-writer / ~/.claude/skills/comparison-article-writer -> ~/.agents/skills/comparison-article-writer / ~/.cursor/skills/comparison-article-writer"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "competitive-ads-extractor"
+        },
+        {
+          "column": "B",
+          "value": "Extracts and analyzes competitors' ads from ad libraries (Facebook, LinkedIn, etc.) to understand what messaging, problems, and creative approaches are working."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/competitive-ads-extractor / ~/.claude/skills/competitive-ads-extractor -> ~/.agents/skills/competitive-ads-extractor / ~/.cursor/skills/competitive-ads-extractor"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "composio-cli"
+        },
+        {
+          "column": "B",
+          "value": "Help users operate the published Composio CLI to find the right tool, connect accounts, inspect schemas, execute tools, subscribe to trigger events with `compos"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/composio-cli / ~/.claude/skills/composio-cli -> ~/.agents/skills/composio-cli"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "content-gap-analysis"
+        },
+        {
+          "column": "B",
+          "value": "Identify and prioritize content gaps for a website by comparing it against competitors and search demand. Use when asked to run a content gap analysis, keyword "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/content-gap-analysis / ~/.claude/skills/content-gap-analysis -> ~/.agents/skills/content-gap-analysis / ~/.cursor/skills/content-gap-analysis"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "copy-editing"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to edit, review, or improve existing marketing copy, or refresh outdated content. Also use when the user mentions 'edit this copy,' 'review "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/copy-editing / ~/.cursor/skills/copy-editing"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "copy-rewriter"
+        },
+        {
+          "column": "B",
+          "value": "Reads copy from any source (URL, text, or file), audits it against the copywriting and landing page frameworks, and rewrites it using actual customer language ("
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/copy-rewriter / ~/.claude/skills/copy-rewriter -> ~/.agents/skills/copy-rewriter / ~/.cursor/skills/copy-rewriter"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "copywriting"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to write, rewrite, or improve marketing copy for any page — including homepage, landing pages, pricing pages, feature pages, about pages, or"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/copywriting / ~/.cursor/skills/copywriting"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "credit-optimizer"
+        },
+        {
+          "column": "B",
+          "value": "Automatically optimize AI agent credit usage by routing tasks to the most cost-efficient execution path. Use when you want to reduce AI API costs by 30-75% with"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/credit-optimizer / ~/.claude/skills/credit-optimizer -> ~/.agents/skills/credit-optimizer / ~/.cursor/skills/credit-optimizer"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "cro"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to optimize, improve, or increase conversions on any marketing page or form — including homepage, landing pages, pricing pages, feature page"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/cro / ~/.cursor/skills/cro"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "cut-the-curve"
+        },
+        {
+          "column": "B",
+          "value": "The technique catalog: five velocity-matched SEAMS (zoom-through, INVERSE zoom-through, cut-the-curve, waterfall cut, rack-focus blur-cut) plus the two in-scene"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/cut-the-curve / ~/.claude/skills/cut-the-curve -> ~/.agents/skills/cut-the-curve / ~/.cursor/skills/cut-the-curve"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "drive-link-harvest"
+        },
+        {
+          "column": "B",
+          "value": "Resolve shortener links and download Google Drive files and folders that the Drive API cannot see, including link-shared folders and files behind the virus-scan"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/drive-link-harvest"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/."
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "durable-objects"
+        },
+        {
+          "column": "B",
+          "value": "Create and review Cloudflare Durable Objects. Use when building stateful coordination (chat rooms, multiplayer games, booking systems), implementing RPC methods"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/durable-objects"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "emails"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to create or optimize an email sequence, drip campaign, automated email flow, or lifecycle email program. Also use when the user mentions \"e"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/emails / ~/.cursor/skills/emails"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "embedded-captions"
+        },
+        {
+          "column": "B",
+          "value": "Add captions or subtitles to an existing single-subject talking-head video without editing the footage. Use for plain verbatim captions, cinematic captions embe"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/embedded-captions / ~/.claude/skills/embedded-captions -> ~/.agents/skills/embedded-captions / ~/.cursor/skills/embedded-captions -> ~/.agents/skills/embedded-captions"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "excalidraw-diagram"
+        },
+        {
+          "column": "B",
+          "value": "Generate Excalidraw diagrams from text content. Supports three output modes - Obsidian (.md), Standard (.excalidraw), and Animated (.excalidraw with animation o"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/excalidraw-diagram / ~/.claude/skills/excalidraw-diagram -> ~/.agents/skills/excalidraw-diagram / ~/.cursor/skills/excalidraw-diagram"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "excel-generator"
+        },
+        {
+          "column": "B",
+          "value": "Professional Excel spreadsheet creation with a focus on aesthetics and data analysis. Use when creating spreadsheets for organizing, analyzing, and presenting s"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/excel-generator / ~/.claude/skills/excel-generator -> ~/.agents/skills/excel-generator / ~/.cursor/skills/excel-generator"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "executing-plans"
+        },
+        {
+          "column": "B",
+          "value": "Use when you have a written implementation plan to execute in a separate session with review checkpoints"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/executing-plans / ~/.claude/skills/executing-plans -> ~/.agents/skills/executing-plans / ~/.cursor/skills/executing-plans"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "export-imessage-thread"
+        },
+        {
+          "column": "B",
+          "value": "Export a specified Apple Messages or iMessage conversation over a date range into a local Markdown transcript, preserving senders, timestamps, and attachment de"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/export-imessage-thread"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "faceless-explainer"
+        },
+        {
+          "column": "B",
+          "value": "Turn arbitrary text — an article, notes, a topic, a brief — into a faceless explainer video: there is no site or footage to capture, so the visuals are invented"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/faceless-explainer / ~/.claude/skills/faceless-explainer -> ~/.agents/skills/faceless-explainer / ~/.cursor/skills/faceless-explainer -> ~/.agents/skills/faceless-explainer"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "fan-out"
+        },
+        {
+          "column": "B",
+          "value": "Splits work with 3 or more independent read-only parts across 3 to 5 briefed subagents, each writing one notes file, then merges them. Use when researching many companies or summarizing many files."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/fan-out / ~/.claude/skills/fan-out -> ~/.agents/skills/fan-out"
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK (added 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "financial-analysis"
+        },
+        {
+          "column": "B",
+          "value": "Research company financials, market prices, SEC filings, earnings calls, investor presentations, options, forex, crypto, and macroeconomic data using structured"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/financial-analysis / ~/.claude/skills/financial-analysis -> ~/.agents/skills/financial-analysis / ~/.cursor/skills/financial-analysis"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "Any live-web task via the Firecrawl CLI — including ordinary web research: searching the web, reading or extracting pages, gathering sources, discovering site U"
+        },
+        {
+          "column": "C",
+          "value": "~/Backups/firecrawl-skill-2026-10-01/firecrawl (moved out of ~/.agents/skills on 2026-10-02)"
+        },
+        {
+          "column": "D",
+          "value": "0 (only the backup)"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "no (its old off-switch now points at the moved folder)"
+        },
+        {
+          "column": "G",
+          "value": "no"
+        },
+        {
+          "column": "H",
+          "value": "Retired: the firecrawl tool card replaces it"
+        },
+        {
+          "column": "I",
+          "value": "Done 2026-10-02: moved to ~/Backups (spp-p35a, agents-home 203a8dd)"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "first-principles-convo-analyzer"
+        },
+        {
+          "column": "B",
+          "value": "Audit the most recent 20 substantive user and assistant exchanges for intent drift, overscoping, contradictions, unproven claims, and the smallest useful correc"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/first-principles-convo-analyzer"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "first-principles-project-auditor"
+        },
+        {
+          "column": "B",
+          "value": "Audit an active project conversation, proposal, or build milestone for wrong outcomes, overscoping, unproven claims, missing proof, and unsafe side effects. Use"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/first-principles-project-auditor"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "first-principles-speed-analyzer"
+        },
+        {
+          "column": "B",
+          "value": "Analyze a source-backed project or build request from first principles to select the smallest evidence-backed proof, identify existing assets to extend, and cut"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/first-principles-speed-analyzer / ~/.claude/skills/first-principles-speed-analyzer"
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "frontend-app-builder"
+        },
+        {
+          "column": "B",
+          "value": "Use for new frontend applications, dashboards, games, creative websites, hero sections, and visually driven UI from scratch, or when the user explicitly asks fo"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/frontend-app-builder"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "frontend-design"
+        },
+        {
+          "column": "B",
+          "value": "Guidance for distinctive, intentional visual design when building new UI or reshaping an existing one. Helps with aesthetic direction, typography, and making ch"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/frontend-design / ~/.cursor/skills/frontend-design"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "game-dev"
+        },
+        {
+          "column": "B",
+          "value": "Build playable browser games (Babylon.js) end-to-end using the godogen production pipeline adapted to Manus. Use when the user wants to make, generate, rebuild,"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/game-dev / ~/.claude/skills/game-dev -> ~/.agents/skills/game-dev / ~/.cursor/skills/game-dev"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "general-video"
+        },
+        {
+          "column": "B",
+          "value": "Author or edit a custom HyperFrames composition when no specialized workflow fits, or when BRIEF.md sets flow: companion. Use for longer or multi-scene pieces, "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/general-video / ~/.claude/skills/general-video -> ~/.agents/skills/general-video / ~/.cursor/skills/general-video -> ~/.agents/skills/general-video"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "github-gem-seeker"
+        },
+        {
+          "column": "B",
+          "value": "Search GitHub for battle-tested solutions instead of reinventing the wheel. Use when the user's problem is universal enough that open source developers have pro"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/github-gem-seeker / ~/.claude/skills/github-gem-seeker -> ~/.agents/skills/github-gem-seeker / ~/.cursor/skills/github-gem-seeker"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hermes-team-setup"
+        },
+        {
+          "column": "B",
+          "value": "Set up or resume an Increase ROAS Hermes role on its verified platform using the existing team foundation, role adapters and accepted evidence. Preserve the exi"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hermes-team-setup"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "html-video-production"
+        },
+        {
+          "column": "B",
+          "value": "Build editable, scene-based HTML videos rendered to MP4, on HyperFrames (open-source HTML-to-video framework by HeyGen). Use when the user wants a reproducible,"
+        },
+        {
+          "column": "C",
+          "value": "~/Backups/skills-retired-2026-10-01/html-video-production (retired)"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no (retired)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "no (retired; its Cursor copy is in the backup)"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No (retired)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (fc064e5), then retired with the Director's yes at 19:40Z (written for Manus, 0 uses, 19 Codex load errors per session): moved to ~/Backups/skills-retired-2026-10-01/html-video-production, its Cursor copy to cursor-copies/, its off-switch removed."
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "humanizer"
+        },
+        {
+          "column": "B",
+          "value": "Remove signs of AI-generated writing from text. Use when editing or reviewing text to make it sound more natural and human-written. Based on Wikipedia's compreh"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/humanizer / ~/.claude/skills/humanizer -> ~/.agents/skills/humanizer / ~/.cursor/skills/humanizer"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes"
+        },
+        {
+          "column": "B",
+          "value": "Mandatory entry point: read this first for any request to make, create, edit, animate, or render a video, animation, or motion graphic, including a promo, expla"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes / ~/.claude/skills/hyperframes -> ~/.agents/skills/hyperframes / ~/.cursor/skills/hyperframes -> ~/.agents/skills/hyperframes"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-animation"
+        },
+        {
+          "column": "B",
+          "value": "All animation knowledge for HyperFrames — atomic motion rules, multi-phase scene blueprints, scene transitions, broader motion-design techniques, AND the seven "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-animation / ~/.claude/skills/hyperframes-animation -> ~/.agents/skills/hyperframes-animation / ~/.cursor/skills/hyperframes-animation -> ~/.agents/skills/hyperframes-animation"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-audio"
+        },
+        {
+          "column": "B",
+          "value": "Use when audio already placed in a HyperFrames composition needs to be mixed: fade-in/fade-out, crossfade, track gain or volume, volume automation, ducking, a m"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-audio / ~/.claude/skills/hyperframes-audio -> ~/.agents/skills/hyperframes-audio / ~/.cursor/skills/hyperframes-audio -> ~/.agents/skills/hyperframes-audio"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-cli"
+        },
+        {
+          "column": "B",
+          "value": "Use the HyperFrames CLI development loop: init, add, catalog, capture, lint, check, snapshot, compare, grade-compare, preview, play, present, beats, keyframes, "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-cli / ~/.claude/skills/hyperframes-cli -> ~/.agents/skills/hyperframes-cli / ~/.cursor/skills/hyperframes-cli -> ~/.agents/skills/hyperframes-cli"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-core"
+        },
+        {
+          "column": "B",
+          "value": "The HyperFrames composition contract — build one renderable project. Use for composition structure, the `data-*` timing attributes, `class=\"clip\"`, tracks, sub-"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-core / ~/.claude/skills/hyperframes-core -> ~/.agents/skills/hyperframes-core / ~/.cursor/skills/hyperframes-core -> ~/.agents/skills/hyperframes-core"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-creative"
+        },
+        {
+          "column": "B",
+          "value": "Non-animation creative direction for HyperFrames videos. Use for design spec (frame.md / design.md) handling, palettes, typography, narration, beat planning, au"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-creative / ~/.claude/skills/hyperframes-creative -> ~/.agents/skills/hyperframes-creative / ~/.cursor/skills/hyperframes-creative -> ~/.agents/skills/hyperframes-creative"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-keyframes"
+        },
+        {
+          "column": "B",
+          "value": "Use when a HyperFrames composition needs a punch-in, punch-out, zoom, reframe, Ken Burns treatment, camera move, visual match/whip handoff, or other seek-safe 2"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-keyframes / ~/.claude/skills/hyperframes-keyframes -> ~/.agents/skills/hyperframes-keyframes / ~/.cursor/skills/hyperframes-keyframes -> ~/.agents/skills/hyperframes-keyframes"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-registry"
+        },
+        {
+          "column": "B",
+          "value": "Search, install, and wire registry blocks and components into HyperFrames compositions. Use BEFORE hand-building any named visual — whenever a brief, a user, or"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-registry / ~/.claude/skills/hyperframes-registry -> ~/.agents/skills/hyperframes-registry / ~/.cursor/skills/hyperframes-registry -> ~/.agents/skills/hyperframes-registry"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hyperframes-studio"
+        },
+        {
+          "column": "B",
+          "value": "Use when working with a person on a HyperFrames project in Studio: first, whether their message asks for a change at all (questions, loose ideas and \"don't chan"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hyperframes-studio / ~/.claude/skills/hyperframes-studio -> ~/.agents/skills/hyperframes-studio / ~/.cursor/skills/hyperframes-studio -> ~/.agents/skills/hyperframes-studio"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "image"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to create, generate, edit, or optimize images for marketing — blog heroes, social graphics, product mockups, profile banners, listing visual"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/image / ~/.cursor/skills/image"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "intake-triage"
+        },
+        {
+          "column": "B",
+          "value": "Files new inbox files into sources/ with safe names, text twins and manifest rows, flagging duplicates and embedded instructions. Use when files land in inbox/ or the owner says file these."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/intake-triage / ~/.claude/skills/intake-triage -> ~/.agents/skills/intake-triage"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK (added 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "integration-fit-and-source-of-truth"
+        },
+        {
+          "column": "B",
+          "value": "Assess whether an existing product capability, a small extension, or no integration is the right solution for a named business workflow. Use before connecting s"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/integration-fit-and-source-of-truth / ~/.claude/skills/integration-fit-and-source-of-truth"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 73,
+      "cells": [
+        {
+          "column": "A",
+          "value": "internet-skill-finder"
+        },
+        {
+          "column": "B",
+          "value": "Search and recommend Agent Skills from verified GitHub repositories. Use when users ask to find, discover, search for, or recommend skills/plugins for specific "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/internet-skill-finder / ~/.claude/skills/internet-skill-finder / ~/.cursor/skills/internet-skill-finder"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "3 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javar-add-tool"
+        },
+        {
+          "column": "B",
+          "value": "Add or enable a tool for Javar on Hermes/Orgo, with on-demand discovery, existing credentials, synchronized file catalogs and installed instructions, and a smal"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/javar-add-tool"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "javar-website-only-audit-factory"
+        },
+        {
+          "column": "B",
+          "value": "Produce a branded Hot Tub Launch or Powersports Launch online-presence audit from one public lead website URL. Use when Javar is asked to audit a hot tub store "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/javar-website-only-audit-factory / ~/.claude/skills/javar-website-only-audit-factory -> ~/.agents/skills/javar-website-only-audit-factory / ~/.cursor/skills/javar-website-only-audit-factory"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "keyword-research"
+        },
+        {
+          "column": "B",
+          "value": "Conduct keyword research and generate a strictly formatted three-tab Excel workbook containing a Topic Cluster Summary, 300 priority keywords, and a competitor "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/keyword-research / ~/.claude/skills/keyword-research -> ~/.agents/skills/keyword-research / ~/.cursor/skills/keyword-research"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "knowledge-synthesis"
+        },
+        {
+          "column": "B",
+          "value": "Combines search results from multiple sources into coherent, deduplicated answers with source attribution. Handles confidence scoring based on freshness and aut"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/knowledge-synthesis / ~/.claude/skills/knowledge-synthesis -> ~/.agents/skills/knowledge-synthesis / ~/.cursor/skills/knowledge-synthesis"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "listicle-blog-writer"
+        },
+        {
+          "column": "B",
+          "value": "Write \"best X tools/products\" listicle blog articles optimized for SEO and GEO/AEO (AI engine citation by ChatGPT, Perplexity, Google AI Overviews). Use when th"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/listicle-blog-writer / ~/.claude/skills/listicle-blog-writer -> ~/.agents/skills/listicle-blog-writer / ~/.cursor/skills/listicle-blog-writer"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "manim-animator"
+        },
+        {
+          "column": "B",
+          "value": "Generate code-driven explanatory animation videos and precise vector graphics using the Manim engine. Use when the user requests mathematical visualizations, al"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/manim-animator / ~/.claude/skills/manim-animator -> ~/.agents/skills/manim-animator / ~/.cursor/skills/manim-animator"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "manus-api"
+        },
+        {
+          "column": "B",
+          "value": "Manage tasks, projects, and other data through the Manus API; build OAuth2 Open Apps and third-party integrations; or create Manus tasks programmatically for se"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/manus-api / ~/.claude/skills/manus-api -> ~/.agents/skills/manus-api / ~/.cursor/skills/manus-api"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "manus-skill-builder"
+        },
+        {
+          "column": "B",
+          "value": "Author, refactor, split, or package Manus Agent Skills that follow Manus progressive disclosure and composability. Use when the user mentions Manus skills, Manu"
+        },
+        {
+          "column": "C",
+          "value": "~/.cursor/skills/manus-skill-builder (unchanged)"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Cursor only."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Nothing. No decision names it; Cursor is outside this mission."
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "marketing-psychology"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Also use when the user mentions 'psychology,' 'mental "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/marketing-psychology / ~/.cursor/skills/marketing-psychology"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "media-use"
+        },
+        {
+          "column": "B",
+          "value": "Agent Media OS, the single skill for every media need in a HyperFrames project. Resolve BGM, SFX, image, icon, brand logo, voice, color grade, or LUT into a fro"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/media-use / ~/.claude/skills/media-use -> ~/.agents/skills/media-use / ~/.cursor/skills/media-use -> ~/.agents/skills/media-use"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "meeting-insights-analyzer"
+        },
+        {
+          "column": "B",
+          "value": "Analyzes meeting transcripts and recordings to uncover behavioral patterns, communication insights, and actionable feedback. Identifies when you avoid conflict,"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/meeting-insights-analyzer / ~/.claude/skills/meeting-insights-analyzer -> ~/.agents/skills/meeting-insights-analyzer / ~/.cursor/skills/meeting-insights-analyzer"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "meta-ads"
+        },
+        {
+          "column": "B",
+          "value": "Use when inspecting or managing Meta, Facebook, or Instagram ads, ad accounts, campaigns, creatives, catalogs, datasets, or insights with the official Meta Ads "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/meta-ads"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "meta-hammer-them"
+        },
+        {
+          "column": "B",
+          "value": "Build or template Alex's Hammer Them (Hammerhead) Meta strategy: one video per ad set with its own 3-second-viewer exclusion. Use for Hammer Them requests and c"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/meta-hammer-them"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 87,
+      "cells": [
+        {
+          "column": "A",
+          "value": "meta-paused-campaign-builder"
+        },
+        {
+          "column": "B",
+          "value": "Use when staging, rebuilding, cloning, or validating a Meta Ads campaign with multiple ad sets or reusable creatives through the official Meta CLI, especially w"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/meta-paused-campaign-builder"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "mission-intake-and-approval-gate"
+        },
+        {
+          "column": "B",
+          "value": "Verify whether a named client or project mission is safe and sufficiently defined to begin. Use before researching, building, editing files, configuring integra"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/mission-intake-and-approval-gate / ~/.claude/skills/mission-intake-and-approval-gate -> ~/.agents/skills/mission-intake-and-approval-gate"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "motion-graphics"
+        },
+        {
+          "column": "B",
+          "value": "A short, design-led motion graphic where motion is the message — kinetic typography, stat count-up, chart/data-viz hit, logo sting / brand lockup, lower-third /"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/motion-graphics / ~/.claude/skills/motion-graphics -> ~/.agents/skills/motion-graphics / ~/.cursor/skills/motion-graphics -> ~/.agents/skills/motion-graphics"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "muapi-3d-logo-animation"
+        },
+        {
+          "column": "B",
+          "value": "Transform a 2D logo into a premium 3D version and animate it with professional cinematic effects."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/muapi-3d-logo-animation / ~/.claude/skills/muapi-3d-logo-animation -> ~/.agents/skills/muapi-3d-logo-animation / ~/.cursor/skills/muapi-3d-logo-animation"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "muapi-drone-style-video"
+        },
+        {
+          "column": "B",
+          "value": "Generate aerial drone-perspective footage — sweeping bird's-eye views, orbit shots, and flyover sequences for landscapes, architecture, and events."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/muapi-drone-style-video / ~/.claude/skills/muapi-drone-style-video -> ~/.agents/skills/muapi-drone-style-video / ~/.cursor/skills/muapi-drone-style-video"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "muapi-talking-baby-video"
+        },
+        {
+          "column": "B",
+          "value": "Create a viral-style video of a talking baby with custom costumes and scripts."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/muapi-talking-baby-video / ~/.claude/skills/muapi-talking-baby-video -> ~/.agents/skills/muapi-talking-baby-video / ~/.cursor/skills/muapi-talking-baby-video"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "muapi-ui-design"
+        },
+        {
+          "column": "B",
+          "value": "Generate high-fidelity UI/UX mockups for mobile and web apps using Atomic Design principles — creates wireframes and design systems via muapi.ai"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/muapi-ui-design / ~/.claude/skills/muapi-ui-design -> ~/.agents/skills/muapi-ui-design / ~/.cursor/skills/muapi-ui-design"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "music-prompter"
+        },
+        {
+          "column": "B",
+          "value": "MUST read this skill BEFORE entering generate mode for music tasks. Covers prompt crafting framework, structure syntax, and multi-clip strategy."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/music-prompter / ~/.claude/skills/music-prompter -> ~/.agents/skills/music-prompter / ~/.cursor/skills/music-prompter"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 95,
+      "cells": [
+        {
+          "column": "A",
+          "value": "music-to-video"
+        },
+        {
+          "column": "B",
+          "value": "Turn a music track (an audio file, a video to pull audio from, or a track generated from a mood brief) into a beat-synced video — lyric video, slideshow, or kin"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/music-to-video / ~/.claude/skills/music-to-video -> ~/.agents/skills/music-to-video / ~/.cursor/skills/music-to-video -> ~/.agents/skills/music-to-video"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "open-claw-skill-hunter-and-developer"
+        },
+        {
+          "column": "B",
+          "value": "Hunts, analyzes, transforms, and bundles OpenClaw skills from the ClawHub registry (52k+ skills) into Manus-compatible skill batches. Use when the user wants to"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/open-claw-skill-hunter-and-developer / ~/.claude/skills/open-claw-skill-hunter-and-developer -> ~/.agents/skills/open-claw-skill-hunter-and-developer / ~/.cursor/skills/open-claw-skill-hunter-and-developer"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "openai-docs"
+        },
+        {
+          "column": "B",
+          "value": "Use for OpenAI APIs/products, ChatGPT, Codex, models, prompting, SDKs, Responses, Realtime, agents, evals, and Chat/Work/Codex comparisons. Trigger on OpenAI, C"
+        },
+        {
+          "column": "C",
+          "value": "~/.cursor/skills/openai-docs / ~/.codex/skills/.system/openai-docs (Codex built-in)"
+        },
+        {
+          "column": "D",
+          "value": 2
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift (the Codex one is built in and app-managed); Claude Code cannot see it; the Cursor copy still points at the old openaiDeveloperDocs MCP"
+        },
+        {
+          "column": "I",
+          "value": "OpenAI docs now come from the Composio OpenAI Docs reader and Codex has its own built-in openai-docs, so the Cursor copy is a candidate to remove (back up to ~/Backups first)"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "orgo-hermes-docs"
+        },
+        {
+          "column": "B",
+          "value": "Forces current Orgo and Hermes Agent documentation into context before designing, wiring, or changing SalesOps / Hermes runtime / Orgo computer control. Use whe"
+        },
+        {
+          "column": "C",
+          "value": "~/.cursor/skills/orgo-hermes-docs (unchanged)"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Cursor only."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Nothing. No decision names it; Cursor is outside this mission. It loads current Orgo and Hermes docs before Hermes or Orgo work, so the Hermes rebuild (G24) may want it in ~/.agents."
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "persuasion-recreator"
+        },
+        {
+          "column": "B",
+          "value": "Create a readable Excel comparison with a separate tab per requested product. Each tab lists every original marketing-page element beside faithful and stronger "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/persuasion-recreator"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "plain-english-repo-explainer"
+        },
+        {
+          "column": "B",
+          "value": "Explain an existing software repository to a non-technical owner using evidence from the codebase. Use when the user asks what a repo does, how its parts fit to"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/plain-english-repo-explainer / ~/.claude/skills/plain-english-repo-explainer"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 101,
+      "cells": [
+        {
+          "column": "A",
+          "value": "preserve-and-release-website"
+        },
+        {
+          "column": "B",
+          "value": "Use when revising or releasing an existing website, especially when original styling must survive, an exact tested build is approved, or a release resumes after"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/preserve-and-release-website"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "product-launch-video"
+        },
+        {
+          "column": "B",
+          "value": "Turn a product or marketing URL, pasted script, or brief into a product launch / promo video — SaaS promos, feature reveals, product demos, app and company laun"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/product-launch-video / ~/.claude/skills/product-launch-video -> ~/.agents/skills/product-launch-video / ~/.cursor/skills/product-launch-video -> ~/.agents/skills/product-launch-video"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ranking-industry-advertisers"
+        },
+        {
+          "column": "B",
+          "value": "Use when finding or ranking the strongest advertisers or likely winning Meta ad creatives in an industry or local market, especially when ad activity, longevity"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/ranking-industry-advertisers"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "repo-conform"
+        },
+        {
+          "column": "B",
+          "value": "Audits a project folder against the AGENTS.md blueprint, fixes every finding itself (scripts plus recipes), then proves it with verify.py. Use to audit, fix or "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/repo-conform / ~/.claude/skills/repo-conform -> ~/.agents/skills/repo-conform"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice; its template files (skeleton AGENTS.md row, tools/ref.md card, tools/README.md) still name Ref (removed 2026-10-01) and mcp__Exa__ tool names"
+        },
+        {
+          "column": "I",
+          "value": "OK for copies (the ~/.cursor copy is gone as of 2026-10-01, backup in ~/Backups/repo-conform-2026-10-01/cursor-copy); reword the template: docs via Composio docs readers, Exa via Composio exa"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "column": "A",
+          "value": "research-with-sources"
+        },
+        {
+          "column": "B",
+          "value": "Researches a question with dated, cited sources, marks facts versus inferences, and saves findings to the job folder. Use when a lookup, comparison, market, competitor or price question needs sources."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/research-with-sources / ~/.claude/skills/research-with-sources -> ~/.agents/skills/research-with-sources"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice; still names Ref (removed 2026-10-01) and mcp__Exa__ tool names (Exa now runs through Composio)"
+        },
+        {
+          "column": "I",
+          "value": "OK (added 2026-10-01); reword: docs come from the Composio docs readers, Exa from Composio exa"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "revstead-educational-profile-posts"
+        },
+        {
+          "column": "B",
+          "value": "Create educational Facebook and Instagram profile-post visuals for Revstead Systems that teach fencing contractors practical scaling and operations principles. "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/revstead-educational-profile-posts / ~/.claude/skills/revstead-educational-profile-posts -> ~/.agents/skills/revstead-educational-profile-posts / ~/.cursor/skills/revstead-educational-profile-posts"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 107,
+      "cells": [
+        {
+          "column": "A",
+          "value": "sandbox-sdk"
+        },
+        {
+          "column": "B",
+          "value": "Build sandboxed applications for secure code execution. Load when building AI code execution, code interpreters, CI/CD systems, interactive dev environments, or"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/sandbox-sdk"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "scrapling"
+        },
+        {
+          "column": "B",
+          "value": "使用 scrapling 进行网页抓取和数据提取。根据目标网站特征自动选择最佳 Fetcher， 生成并执行 Python 脚本完成任务。Use when: (1) 抓取/爬取网页内容或数据（scrape, crawl, fetch page, extract data） (2) 需要绕过 Cloudflare/WAF"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/scrapling / ~/.claude/skills/scrapling -> ~/.agents/skills/scrapling / ~/.cursor/skills/scrapling"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "self-improvement"
+        },
+        {
+          "column": "B",
+          "value": "Captures learnings, errors, and corrections to enable continuous improvement. Use when: (1) A command or operation fails unexpectedly, (2) User corrects Claude "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/self-improvement / ~/.claude/skills/self-improvement -> ~/.agents/skills/self-improvement / ~/.cursor/skills/self-improvement"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "column": "A",
+          "value": "seo-audit"
+        },
+        {
+          "column": "B",
+          "value": "Create plain-language, evidence-led SEO audit reports using the structure developed with the user. Use when asked to create, revise, or standardize an SEO audit"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/seo-audit / ~/.claude/skills/seo-audit -> ~/.agents/skills/seo-audit / ~/.cursor/skills/seo-audit"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "seo-competitor-analysis"
+        },
+        {
+          "column": "B",
+          "value": "Create simplified, target-first SEO organic competitor reports modeled on the approved example report style. Use for `/seo-competitor-analysis`, simplified SEO "
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/seo-competitor-analysis / ~/.claude/skills/seo-competitor-analysis -> ~/.agents/skills/seo-competitor-analysis / ~/.cursor/skills/seo-competitor-analysis"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 112,
+      "cells": [
+        {
+          "column": "A",
+          "value": "similarweb-analytics"
+        },
+        {
+          "column": "B",
+          "value": "Analyze websites and domains using SimilarWeb traffic data. Get traffic metrics, engagement stats, global rankings, traffic sources, and geographic distribution"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/similarweb-analytics / ~/.claude/skills/similarweb-analytics -> ~/.agents/skills/similarweb-analytics / ~/.cursor/skills/similarweb-analytics"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 113,
+      "cells": [
+        {
+          "column": "A",
+          "value": "site-architecture"
+        },
+        {
+          "column": "B",
+          "value": "When the user wants to plan, map, or restructure their website's page hierarchy, navigation, URL structure, or internal linking. Also use when the user mentions"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/site-architecture / ~/.cursor/skills/site-architecture"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Claude Code cannot see it; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 114,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill-creator"
+        },
+        {
+          "column": "B",
+          "value": "Guide for creating or updating skills that extend Manus via specialized knowledge, workflows, or tool integrations. For any modification or improvement request,"
+        },
+        {
+          "column": "C",
+          "value": "~/.cursor/skills/skill-creator (unchanged)"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Cursor only (the other two skill-creators are separate skills)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Nothing. Codex has its own system skill-creator and the Claude app has Anthropic's, so the name exists three times."
+        }
+      ]
+    },
+    {
+      "row": 115,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skool-apify-scraper"
+        },
+        {
+          "column": "B",
+          "value": "Scrape a Skool classroom or classroom-tab posts via Apify. Use when Alex asks to scrape Skool, aimoney, a Skool classroom, Skool posts/comments, or run dz_omar/"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/skool-apify-scraper"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills and rewired to Composio's Apify tools (agents-home 4f919c1, 14:22 EDT); off in Codex; no ~/.claude/skills link."
+        }
+      ]
+    },
+    {
+      "row": 116,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skool-archive"
+        },
+        {
+          "column": "B",
+          "value": "Archive an entire Skool community - every lesson, video transcript, comment thread and downloadable asset - using Apify. Use when asked to scrape, archive, back"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/skool-archive"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no (not linked)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? No: off in Codex, not linked for Claude Code, not uploaded."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (agents-home fc064e5, 15:23 EDT) and given a Codex off-switch; no ~/.claude/skills link. The original folder is backed up in ~/Backups/skills-cap-2026-10-01/claude-skills-real/."
+        }
+      ]
+    },
+    {
+      "row": 117,
+      "cells": [
+        {
+          "column": "A",
+          "value": "speak-normal"
+        },
+        {
+          "column": "B",
+          "value": "Talk and write like a person, not a chatbot. Use for every reply, explanation, draft, rewrite, or audit when the user wants natural voice, or says speak normal,"
+        },
+        {
+          "column": "C",
+          "value": "~/.cursor/skills/speak-normal (unchanged)"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Cursor only."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Nothing. No decision names it; Cursor is outside this mission."
+        }
+      ]
+    },
+    {
+      "row": 118,
+      "cells": [
+        {
+          "column": "A",
+          "value": "stitch::extract-design-md"
+        },
+        {
+          "column": "B",
+          "value": "Extract a comprehensive design system (DESIGN.md) directly from frontend source code — React, Vue, Svelte, Angular, plain HTML/CSS, or any web framework. Analyz"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/stitch-extract-design-md / ~/.claude/skills/stitch-extract-design-md -> ~/.agents/skills/stitch-extract-design-md / ~/.cursor/skills/stitch-extract-design-md"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 119,
+      "cells": [
+        {
+          "column": "A",
+          "value": "stock-analysis"
+        },
+        {
+          "column": "B",
+          "value": "Analyze stocks and companies using financial market data. Get company profiles, technical insights, price charts, insider holdings, and SEC filings for comprehe"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/stock-analysis / ~/.claude/skills/stock-analysis -> ~/.agents/skills/stock-analysis / ~/.cursor/skills/stock-analysis"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 120,
+      "cells": [
+        {
+          "column": "A",
+          "value": "subagent-driven-development"
+        },
+        {
+          "column": "B",
+          "value": "Use when executing implementation plans with independent tasks in the current session"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/subagent-driven-development / ~/.claude/skills/subagent-driven-development -> ~/.agents/skills/subagent-driven-development / ~/.cursor/skills/subagent-driven-development"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 121,
+      "cells": [
+        {
+          "column": "A",
+          "value": "talk-with-alex"
+        },
+        {
+          "column": "B",
+          "value": "Use when replying conversationally to Alex, especially when updates sound robotic, overformatted, stiff, or overloaded with Director jargon, or when Alex asks f"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/talk-with-alex"
+        },
+        {
+          "column": "D",
+          "value": 1
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 122,
+      "cells": [
+        {
+          "column": "A",
+          "value": "talking-head-recut"
+        },
+        {
+          "column": "B",
+          "value": "Package an existing talking-head / interview / podcast video with timed, designed GRAPHIC OVERLAY cards — kinetic titles, lower-thirds, data callouts, quotes, s"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/talking-head-recut / ~/.claude/skills/talking-head-recut -> ~/.agents/skills/talking-head-recut / ~/.cursor/skills/talking-head-recut -> ~/.agents/skills/talking-head-recut"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK"
+        }
+      ]
+    },
+    {
+      "row": 123,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tool-card"
+        },
+        {
+          "column": "B",
+          "value": "Use when a connector, tool or API key is added, changed or fails. Saves the key to 1Password, picks the strongest route, proves reach and power, tiers each tool and writes its card."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/tool-card (SKILL.md v1.4 + references/: key-capture, route-compare, cli-wrapper, tools-and-tiers, card-and-logs) / ~/.claude/skills/tool-card -> ~/.agents/skills/tool-card; repo-conform mirror equal (Codex off-switch on the mirror)"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK (v1.4 2026-10-02: 45-line checklist core + 5 references; trigger check PASS, codex exec 'Add the Notion connector' read SKILL.md then 2 references, notes/transcripts/spp-p42a/)"
+        }
+      ]
+    },
+    {
+      "row": 124,
+      "cells": [
+        {
+          "column": "A",
+          "value": "transcript-to-workflow-opportunity-mapper"
+        },
+        {
+          "column": "B",
+          "value": "Identify reusable workflows from transcripts or chats and recommend the smallest prompt, playbook, or skill. Use when deciding what work to systemize."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/transcript-to-workflow-opportunity-mapper, plus the claude.ai upload"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "yes (through the claude.ai sync)"
+        },
+        {
+          "column": "F",
+          "value": "no"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Yes, in the Claude app and Claude Code (through the claude.ai sync)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: Moved into ~/.agents/skills (fc064e5) and off in Codex. The claude.ai upload stays on (decision SK40-D4). The ~/.agents copy and the synced upload are byte-identical (sha256 first 16: 80cca29d690e251a)."
+        }
+      ]
+    },
+    {
+      "row": 125,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tts-prompter"
+        },
+        {
+          "column": "B",
+          "value": "MUST read this skill BEFORE entering generate mode for text-to-speech (TTS) tasks. Covers prompt crafting framework, separating spoken text from style instructi"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/tts-prompter / ~/.claude/skills/tts-prompter -> ~/.agents/skills/tts-prompter / ~/.cursor/skills/tts-prompter"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 126,
+      "cells": [
+        {
+          "column": "A",
+          "value": "turnstile-spin"
+        },
+        {
+          "column": "B",
+          "value": "Set up Cloudflare Turnstile end-to-end in a project. Scan the codebase, create the widget via the Cloudflare API, embed it where user requests need bot verifica"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/turnstile-spin"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 127,
+      "cells": [
+        {
+          "column": "A",
+          "value": "typst-pdf-maker"
+        },
+        {
+          "column": "B",
+          "value": "Generate professional, high-quality PDF documents with Typst. Use for reports, academic papers, resumes, structured documents, mathematical typesetting, code-ri"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/typst-pdf-maker / ~/.claude/skills/typst-pdf-maker -> ~/.agents/skills/typst-pdf-maker / ~/.cursor/skills/typst-pdf-maker"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 128,
+      "cells": [
+        {
+          "column": "A",
+          "value": "verify-before-done"
+        },
+        {
+          "column": "B",
+          "value": "Checks a finished deliverable against its brief, sources and numbers, including one negative check, and writes checks.md. Use when a task is about to be called done, sent to anyone, or published."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/verify-before-done / ~/.claude/skills/verify-before-done -> ~/.agents/skills/verify-before-done"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "OK (added 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 129,
+      "cells": [
+        {
+          "column": "A",
+          "value": "video-generator"
+        },
+        {
+          "column": "B",
+          "value": "Professional AI video production workflow. Use when creating videos, short films, commercials, or any video content using AI generation tools."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/video-generator / ~/.claude/skills/video-generator -> ~/.agents/skills/video-generator / ~/.cursor/skills/video-generator"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 130,
+      "cells": [
+        {
+          "column": "A",
+          "value": "web-design-engineer"
+        },
+        {
+          "column": "B",
+          "value": "Build or redesign polished browser-rendered visual artifacts with HTML/CSS/JavaScript/React: pages, dashboards, prototypes, slide decks, animations, UI mockups,"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/web-design-engineer / ~/.claude/skills/web-design-engineer -> ~/.agents/skills/web-design-engineer / ~/.cursor/skills/web-design-engineer"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 131,
+      "cells": [
+        {
+          "column": "A",
+          "value": "web-design-reviewer"
+        },
+        {
+          "column": "B",
+          "value": "This skill enables visual inspection of websites running locally or remotely to identify and fix design issues. Triggers on requests like \"review website design"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/web-design-reviewer / ~/.claude/skills/web-design-reviewer -> ~/.agents/skills/web-design-reviewer / ~/.cursor/skills/web-design-reviewer"
+        },
+        {
+          "column": "D",
+          "value": 3
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 132,
+      "cells": [
+        {
+          "column": "A",
+          "value": "web-perf"
+        },
+        {
+          "column": "B",
+          "value": "Audit, diagnose, or optimize website loading and interaction performance, Core Web Vitals, and Lighthouse performance scores."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/web-perf / ~/.claude/skills/web-perf -> ~/.agents/skills/web-perf / ~/.cursor/skills/web-perf"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 133,
+      "cells": [
+        {
+          "column": "A",
+          "value": "website-traffic-checker"
+        },
+        {
+          "column": "B",
+          "value": "Comprehensive website traffic analysis workflow. Use when the user asks to analyze a website's traffic, check competitor traffic, analyze best-performing conten"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/website-traffic-checker / ~/.claude/skills/website-traffic-checker -> ~/.agents/skills/website-traffic-checker / ~/.cursor/skills/website-traffic-checker"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 134,
+      "cells": [
+        {
+          "column": "A",
+          "value": "weekly-tuneup"
+        },
+        {
+          "column": "B",
+          "value": "Runs the scheduled tune-up: merges lessons, checks drift and memory, tests changes on golden tasks, writes a proposal for the owner. Use when the scheduled tune-up runs. Now runs every 8 hours (scheduled task connector-repo-tuneup, set 2026-10-01); each run starts with a refresh step that re-syncs the custom Composio connectors (keyless custom ones are skipped)."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/weekly-tuneup / ~/.claude/skills/weekly-tuneup -> ~/.agents/skills/weekly-tuneup"
+        },
+        {
+          "column": "D",
+          "value": "2"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Cursor may list it twice; name says weekly but it runs every 8 hours"
+        },
+        {
+          "column": "I",
+          "value": "OK (added 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 135,
+      "cells": [
+        {
+          "column": "A",
+          "value": "workers-best-practices"
+        },
+        {
+          "column": "B",
+          "value": "Reviews and authors Cloudflare Workers code against production best practices. Load when writing new Workers, reviewing Worker code, configuring wrangler.jsonc,"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/workers-best-practices"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 136,
+      "cells": [
+        {
+          "column": "A",
+          "value": "wrangler"
+        },
+        {
+          "column": "B",
+          "value": "Cloudflare Workers CLI for deploying, developing, and managing Workers, KV, R2, D1, Vectorize, Hyperdrive, Workers AI, Containers, Queues, Workflows, Pipelines,"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/wrangler"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "Claude Code cannot see it"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 137,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xlsx"
+        },
+        {
+          "column": "B",
+          "value": "Use this skill any time a spreadsheet file is the primary input or output. This means any task where the user wants to: open, read, edit, or fix an existing .xl"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/xlsx / ~/.claude/skills/xlsx -> ~/.agents/skills/xlsx / ~/.cursor/skills/xlsx"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 138,
+      "cells": [
+        {
+          "column": "A",
+          "value": "youtube-video-research"
+        },
+        {
+          "column": "B",
+          "value": "Enhance any deep research task with first-hand YouTube video evidence via manus-analyze-video. Highly recommended whenever the task involves deep research, inve"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/youtube-video-research / ~/.claude/skills/youtube-video-research -> ~/.agents/skills/youtube-video-research / ~/.cursor/skills/youtube-video-research"
+        },
+        {
+          "column": "D",
+          "value": "3"
+        },
+        {
+          "column": "E",
+          "value": "yes"
+        },
+        {
+          "column": "F",
+          "value": "yes"
+        },
+        {
+          "column": "G",
+          "value": "yes"
+        },
+        {
+          "column": "H",
+          "value": "2 separate copies can drift; Cursor may list it twice"
+        },
+        {
+          "column": "I",
+          "value": "Keep ~/.agents copy; replace other copies with a link in ~/.claude/skills; delete ~/.cursor copy"
+        }
+      ]
+    },
+    {
+      "row": 139,
+      "cells": [
+        {
+          "column": "A",
+          "value": "create-local-meta-ads"
+        },
+        {
+          "column": "B",
+          "value": "Use for Facebook or Instagram ads, Stories/Reels, UGC concepts, creative briefs, image or video prompts, ad copy, offer tests or creative audits for local service businesses and hot tub dealers."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/create-local-meta-ads, plus the ChatGPT cloud skill in Alex's account"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no (no ~/.claude/skills link; not in the claude.ai upload set)"
+        },
+        {
+          "column": "F",
+          "value": "no (off-switch, W07)"
+        },
+        {
+          "column": "G",
+          "value": "yes (not tested)"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Yes, in ChatGPT (cloud skill)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: copied into ~/.agents/skills (agents-home e7916f1) as the whole ChatGPT package (5 files), byte-identical except line 3 of SKILL.md (a trigger-first description). Off in Codex (W07); no ~/.claude/skills link. After an edit, re-upload to ChatGPT from this folder. Added at the end of this tab, not in name order."
+        }
+      ]
+    },
+    {
+      "row": 140,
+      "cells": [
+        {
+          "column": "A",
+          "value": "fulfill-hot-tub-launch"
+        },
+        {
+          "column": "B",
+          "value": "Use for Hot Tub Launch fulfillment, such as paid funnels, retailer websites, GHL snapshot workflows, Sheets lead projection, Meta Pixel/CAPI dedup, launch gates and diagnosis. Not for Meta ads."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/fulfill-hot-tub-launch, plus the ChatGPT cloud skill in Alex's account"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no (no ~/.claude/skills link; not in the claude.ai upload set)"
+        },
+        {
+          "column": "F",
+          "value": "no (off-switch, W07)"
+        },
+        {
+          "column": "G",
+          "value": "yes (not tested)"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Yes, in ChatGPT (cloud skill). But ChatGPT's record marks its safety check 'blocked' (whether that stops it running is NOT_PROVEN), and shows latest version 4, default 1 (which one runs is NOT_PROVEN)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: copied into ~/.agents/skills (agents-home e7916f1) as the whole ChatGPT package (20 files), byte-identical except line 3 of SKILL.md (a trigger-first description). Off in Codex (W07); no ~/.claude/skills link. After an edit, re-upload to ChatGPT from this folder. Added at the end of this tab, not in name order."
+        }
+      ]
+    },
+    {
+      "row": 141,
+      "cells": [
+        {
+          "column": "A",
+          "value": "higgsfield-hot-tub-scene-variation"
+        },
+        {
+          "column": "B",
+          "value": "Use for Higgsfield batches of the same hot tub in new scenes, like “same tub in California,” “10 of these,” new camera angles, showroom, patio or snowy backyard. Not for same-scene cleanup."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/higgsfield-hot-tub-scene-variation, plus the ChatGPT cloud skill in Alex's account"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "no (no ~/.claude/skills link; not in the claude.ai upload set)"
+        },
+        {
+          "column": "F",
+          "value": "no (off-switch, W07)"
+        },
+        {
+          "column": "G",
+          "value": "yes (not tested)"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Yes, in ChatGPT (cloud skill); latest version 2, default 1 (which one runs is NOT_PROVEN)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: copied into ~/.agents/skills (agents-home e7916f1) as the whole ChatGPT package (3 files), byte-identical except line 3 of SKILL.md (a trigger-first description). Off in Codex (W07); no ~/.claude/skills link. After an edit, re-upload to ChatGPT from this folder. Added at the end of this tab, not in name order."
+        }
+      ]
+    },
+    {
+      "row": 142,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hermes-boss-director"
+        },
+        {
+          "column": "B",
+          "value": "Hermes controller playbook for Javante/Javar under the Director and Conductor: native-fix research, right-route dispatch, live verification."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/hermes-boss-director, plus the claude.ai upload"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "yes (through the claude.ai sync)"
+        },
+        {
+          "column": "F",
+          "value": "no (off-switch)"
+        },
+        {
+          "column": "G",
+          "value": "yes (not tested)"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Yes, in the Claude app and Claude Code (through the claude.ai sync)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: copied into ~/.agents/skills (agents-home bfeacb2), byte-identical to the claude.ai copy (account updatedAt 2026-09-29), and off in Codex (W07); no ~/.claude/skills link. Added at the end of this tab, not in name order. 2026-10-02 (agents-home 340a34f): the Research and GHL checks lines name Composio exa (EXA_SEARCH, EXA_GET_CONTENTS_ACTION, EXA_ANSWER), the Composio docs readers, Composio custom_cloudflare_api and Composio custom_ghl_oauth_crm in place of the removed mcp__Exa__/mcp__Ref__ tools, the Claude app's Cloudflare connector and the GHL OAuth Gateway. Then (af3b811): Research rows load research-with-sources (the old deep-research never existed), and EA's Orgo calls go through python3 ~/.agents/tools/connectors/orgo_op.py orgo computers ... (N03, no ~/.orgo/credentials.json). The 2 zips rebuilt at 02:00Z carry both, so Alex re-uploads once; until then the claude.ai copy is the older text."
+        }
+      ]
+    },
+    {
+      "row": 143,
+      "cells": [
+        {
+          "column": "A",
+          "value": "native-fix-research"
+        },
+        {
+          "column": "B",
+          "value": "Find the documented native fix for a bot or tool failure, plan it as a mission, fix it with parallel agents on the right route (Hermes app UI, live view, SSH, API; browser last), and supervise until it is verified live."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/native-fix-research, plus the claude.ai upload"
+        },
+        {
+          "column": "D",
+          "value": "1"
+        },
+        {
+          "column": "E",
+          "value": "yes (through the claude.ai sync)"
+        },
+        {
+          "column": "F",
+          "value": "no (off-switch)"
+        },
+        {
+          "column": "G",
+          "value": "yes (not tested)"
+        },
+        {
+          "column": "H",
+          "value": "Active anywhere? Yes, in the Claude app and Claude Code (through the claude.ai sync)."
+        },
+        {
+          "column": "I",
+          "value": "2026-10-01: copied into ~/.agents/skills (agents-home bfeacb2), byte-identical to the claude.ai copy (account updatedAt 2026-09-29), and off in Codex (W07); no ~/.claude/skills link. Added at the end of this tab, not in name order. 2026-10-02 (agents-home 340a34f): the Research and GHL checks lines name Composio exa (EXA_SEARCH, EXA_GET_CONTENTS_ACTION, EXA_ANSWER), the Composio docs readers and Composio custom_ghl_oauth_crm in place of the removed mcp__Exa__/mcp__Ref__ tools and the GHL OAuth Gateway. Then (af3b811): Research rows load research-with-sources (the old deep-research never existed), and EA's Orgo calls go through python3 ~/.agents/tools/connectors/orgo_op.py orgo computers ... (N03, no ~/.orgo/credentials.json). The 2 zips rebuilt at 02:00Z carry both, so Alex re-uploads once; until then the claude.ai copy is the older text."
+        }
+      ]
+    },
+    {
+      "row": 144,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Note (2026-10-03)"
+        },
+        {
+          "column": "B",
+          "value": "Columns B, E and F of this tab are the 2026-10-01 inventory from before the skills cap. What each AI sees now is on the 'Skills, where they live' tab (Claude Code: the ~/.claude/skills links and synced pointers; Codex: ~/.agents/skills minus the off-switches), and each SKILL.md's own description is current (parity V07)."
+        }
+      ]
+    }
+  ]
+}

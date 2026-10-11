@@ -1,0 +1,302 @@
+{
+  "at": "2026-10-10T12:00:51.274255+00:00",
+  "scope": "Read-only TS03/05/07/08/09/11 final residual retest; no app mutations or test rerun",
+  "overall": "failed",
+  "blocker_type": "goal_not_met_yet",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/canonical-transaction-proof-20261010-0743-7126aeb3-c121-4c48-b3d3-1bf888fcf8fb.json",
+    "run_id": "7126aeb3-c121-4c48-b3d3-1bf888fcf8fb",
+    "at": "2026-10-10T11:56:38+00:00",
+    "sha256": "ef62801ad39a065c7d9a277438c76d438b1f1905bb520662687d109362a82b6b",
+    "pointer_hash_matches": true
+  },
+  "snapshot_stable": true,
+  "source_identity": {
+    "tools/canonical_maintained_edit.py": {
+      "sha256": "9359b2b6e68adc42259868a55496b6cd5d1982963de912c7c81ae7128f309136",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_evidence.py": {
+      "sha256": "d8fc78acd6cafb62b614ed72416d1fffe156ce8f6e4992c7b4e4638f933f167f",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_invariants.py": {
+      "sha256": "f35b37085d3b658209782072e88c86d6503d05daf0c11dbb99b416fdb1606597",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/canonical_transaction_regression.py": {
+      "sha256": "2c673f7780a44568b0315a8d7d9de522fc9c4b38778317e930e0401a15a4ccf8",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/catalog_fixture_clone.py": {
+      "sha256": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/catalog_reference_validation.py": {
+      "sha256": "9785469eb101c019a78a83f546890311d2df1456ee67129ca675e5237ae442fd",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/local_service.py": {
+      "sha256": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "tools/subprocess_bounded.py": {
+      "sha256": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c",
+      "start_matches": true,
+      "end_matches": true
+    },
+    "schemas/components.schema.json": {
+      "sha256": "abbf4ac4eb3d8b5941c6cd9370c428b5f7a24380cd6fe4ef81dd6e49e7c55c1e",
+      "start_matches": true,
+      "end_matches": true
+    }
+  },
+  "acceptance_prompt": "work/supervision/transaction-evidence-controls-20261010-1144.txt",
+  "prior_review": "reports/independent-transaction-correction-review.json",
+  "checks": [
+    {
+      "id": "TS03",
+      "status": "VERIFIED",
+      "scope": "Observed bounded simultaneous same-op and distinct-op same-record cases; no full project acceptance.",
+      "proof": "Saved same-op final ledger contains exactly1 committed row for its operation,1 matching journal and revision1; canonical bytes match ledger result after_sha256. Distinct-op final state contains1 winning committed row/journal, no losing ledger row/journal and revision1. Source derives actual losing operation from exits, not a retry. Existing shared lock/CAS remains.",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:435-510",
+        "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/same_op_concurrent/final",
+        "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/distinct_op_same_record/final"
+      ],
+      "limits": "The strict validator does not require all of these count/hash/result invariants; see TS09. Ledger scope comes from saved operation IDs; zero ledger/journal and canonical winner identity prove the bounded loser result, not universal concurrency behavior."
+    },
+    {
+      "id": "TS05",
+      "status": "UNVERIFIED",
+      "accepted": "Persistent snapshots now include journal bundle identity and complete revision/ledger hashes; first/second comparison remains equality of state, not action lists. Five edit crash cases report recovery idempotency.",
+      "missing": "Five crash cases save only after_second_recovery files. Their before/interrupted/first-recovered files cannot be independently reopened; receipt hash summaries alone do not close requested immutable stage evidence. Complete original journal bytes are also missing (TS11).",
+      "evidence": [
+        "tools/canonical_transaction_regression.py:208-261,679-713",
+        "tools/canonical_transaction_evidence.py:33-54,92-121",
+        "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/crash_stage_pending_before_rename/after_second_recovery"
+      ],
+      "correction": "Save before, interrupted, first recovered and second recovered canonical/revision/ledger/journal/derived state for each required crash case before reset; keep state equality rather than action-list equality."
+    },
+    {
+      "id": "TS07",
+      "status": "VERIFIED",
+      "scope": "Genuine post-write interrupted restore recovery in the supplied bounded case.",
+      "proof": "Recovery injector moved after canonical replacement and derived regeneration, then writes after_sha into pending journal before raising. Actual captured exits are1/1 and injector_fired=true. Saved interrupted-recovery derived bytes and journal differ from interrupted-restore; revision remains2. First recovered state advances to3, clears pending restore, and its complete saved manifest equals second recovered manifest. Five distinct stage directories are inspectable and all copied-file hashes match.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:356-382",
+        "tools/canonical_transaction_regression.py:772-802",
+        "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_recovery_interrupt"
+      ],
+      "limits": "This promotes the exact previously missing post-write interruption and retry/idempotency proof. Required monotonic/retry success and stage identity are still not enforced comprehensively by the strict verdict (TS09); complete raw journal-byte retention remains TS11. Broader crash/LKG/restore UI gates are unchanged."
+    },
+    {
+      "id": "TS08",
+      "status": "VERIFIED",
+      "proof": "Present fit=null now rejects ValueError with field-specific reason; absent fit is allowed. category/evidence_level/observed_condition type-check before set membership, avoiding unhashable errors. Pure actual validator calls confirm all three object/array enum negatives. Saved schema negative rows all require rejected, zero_effect and reason_matches, and legitimate positive control is retained.",
+      "evidence": [
+        "tools/catalog_reference_validation.py:96-110,158-161",
+        "tools/canonical_transaction_regression.py:805-932",
+        "receipt cases.schema_pure / cases.schema_negatives",
+        "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/schema_negatives/final"
+      ],
+      "limits": "This closes only prior fit-null/type-first-enum/reason defects; no universal validator expansion."
+    },
+    {
+      "id": "TS09",
+      "status": "FAILED",
+      "accepted": "Validator excludes flip/validation metadata; saved complete baseline independently passes. Eight stored negative controls now fail for specific intended paths without prior missing-self-field circularity. Exact integer helper rejects bool for fields it covers.",
+      "defect": "Only8 invalid-value flips exist, rather than missing/wrongtype/invalid controls for EACH required invariant. Validator iterates whatever crash stages are present, so an empty stage map passes. It omits required fields and relationships and only requires a nonempty evidence map, without file/manifest/hash validation. Original after_hash_a=null counterexample still passes; owner instead controls final_after_sha256 syntax.",
+      "accepted_counterexamples": [
+        "crash_stages.stages={}",
+        "same_op_concurrent.after_hash_a=null",
+        "same_op_concurrent.invalidated_ledger_rows=1",
+        "restore_recovery_interrupt.monotonic_revision=false",
+        "restore_recovery_interrupt.recovery_completed_after_retry=false",
+        "dual_lock.metadata_revision=0",
+        "post_oplog_rollback_retry.committed_after_retry=false",
+        "schema_negatives.missing_next_revision_rejected=false",
+        "changed_payload_collision.second_rejected=false",
+        "evidence_index.cases={fake:[missing]}"
+      ],
+      "evidence": [
+        "tools/canonical_transaction_invariants.py:57-119,140-160",
+        "tools/canonical_transaction_regression.py:971-975",
+        "receipt cases.validation.baseline=[true,[]] / cases.negative_flips.per_flip length8"
+      ],
+      "correction": "Enumerate exact required case/stage/schema-label sets, every required exit/revision/count/hash/result/recovery/identity relation and saved byte readback. From one genuinely passing baseline, test missing, wrongtype and invalid value for EACH invariant with its intended failure. Reject empty stages and forged/nonexistent evidence; bind both response hashes to final bytes."
+    },
+    {
+      "id": "TS11",
+      "status": "FAILED",
+      "accepted": "Unique run-specific EvidenceStore refuses overwrite and preserves19 case/stage snapshots before reset. Every copied canonical/metadata/revision/ledger/derived file hash and every manifest hash matches readback; explicit absent files match. All9 declared module/schema bindings match start/end, final receipt hash matches pointer, and failed history remains.",
+      "defect": "Only restore_recovery_interrupt has requested before/interrupted/first/second stage set; most cases save only final/second state, and changed-payload/post-oplog/replay cases have no immutable evidence directory. Journal bundle stores parsed entries in journal.json, not original named raw journal files. Stored bytes_sha256 hashes original raw texts, but those texts/order cannot be read back from sorted serialized parsed entries. All19 reconstructed sorted bundles differ from that raw hash; this is missing raw evidence, not proof source hashes were wrong. SaveStage does not validate copied files after saving and verdict only checks evidence map nonempty.",
+      "evidence": [
+        "tools/canonical_transaction_evidence.py:33-54,82-121",
+        "tools/canonical_transaction_regression.py save_evidence calls and case_index",
+        "receipt cases.evidence_index.cases",
+        "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb"
+      ],
+      "correction": "Retain original named journal bytes with manifest hashes and exact required per-case stage files; verify copied manifests/files after saving and at acceptance. Preserve explicit absences and refuse overwrite. Add evidence for collision, post-oplog invalidation/retry and historical replay."
+    }
+  ],
+  "pure_baseline_passes": true,
+  "stored_negative_control_count": 8,
+  "immutable_evidence_readback": [
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/crash_stage_committed_before_oplog/after_second_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/crash_stage_pending_before_rename/after_second_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/crash_stage_post_derived_pre_revision/after_second_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/crash_stage_post_oplog_pre_journal_commit/after_second_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/crash_stage_post_rename_pre_derived/after_second_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/distinct_op_same_record/final",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/distinct_records/final",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/dual_lock/final",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_crash_and_recovery/after_second_reconcile",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_handler/final",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_recovery_interrupt/before_restore",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_recovery_interrupt/first_recovered",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_recovery_interrupt/interrupted_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_recovery_interrupt/interrupted_restore",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/restore_recovery_interrupt/second_recovered",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/rollback_preserves/after_second_recovery",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/rollback_preserves/before_crash",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/same_op_concurrent/final",
+      "file_and_manifest_hashes_match": true
+    },
+    {
+      "path": "app/.data/canonical-transaction-proof-20261010-0743/evidence/7126aeb3-c121-4c48-b3d3-1bf888fcf8fb/schema_negatives/final",
+      "file_and_manifest_hashes_match": true
+    }
+  ],
+  "history": [
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-8fed1394.json",
+      "sha256": "fe94115255b18bba0d983ab2b27e5a7845730c7f85bfe10346eeeadbaad1b5b3",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-b0f104b3.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-correction-20261010-0730-c3bbd1c0.json",
+      "sha256": "04aa251128d79ca8c99b021cfdfa0c833b09dce7b773b47c88174647e8a3d5fc",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-015378f4.json",
+      "sha256": "7b1484d85c654ae6dcd7ff1f13de2dd1ffff80f7c5c9dc501d377f05cfa17dc7",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-57bc53b6.json",
+      "sha256": "fc33acc86ad9417dc70cb57d93a19698606a8b5d457a2a22fc25deb4a418c9ff",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-63725caa.json",
+      "sha256": "648739ae9f3930b6d0b3a7345ac48094ba01a1ba02825414b9a0d66b4aec3e8a",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-proof-20261010-0743-8aff89eb.json",
+      "sha256": "a6cd86a364998991da9f7c5fa29686f432c92c463df0457f6e88062db1938603",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/workflow-core-failures/canonical-transaction-schema-20261010-0717-38597248.json",
+      "sha256": "da8d275b4495e6c8601d61473cc8064dbd9955aeccdd3078fc4c74cbc2f919f3",
+      "hash_matches": true
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-schema-receipt.json",
+      "sha256": "d6af32263292a5a4d589229226034a1c66f7edef4e90f80416fbce6365a17024",
+      "hash_matches": true
+    },
+    {
+      "prior_pointer": "reports/canonical-transaction-correction-receipt.json",
+      "sha256": "a8e94cee8da6c79cce0a4c1e5c22095b685e450db16e185ae4d0c37c8a7ffed7",
+      "hash_matches": true
+    },
+    {
+      "path": "reports/run-receipts/canonical-transaction-proof-20261010-0743-b2194176-6e96-4dbe-b555-9166d657227c.json",
+      "sha256": "de36f62d88cb2d34bef41db7f7eb598b627495576c7aa792d42b3d43e02cd90a",
+      "overall": "passed",
+      "at": "2026-10-10T11:48:34+00:00",
+      "preserved": true,
+      "listed_by_latest_receipt": false
+    }
+  ],
+  "broader_gates_still_pending": [
+    "browser_full_ui_races_and_LKG",
+    "automatic_sync_observer_DOM_proof",
+    "full_2351_derived_final_byte_lineage",
+    "canonical_acceptance_summarize_aggregate",
+    "production_path_timeout_hang_cleanup",
+    "REL-01_fresh_session",
+    "real_sdk_trace_input",
+    "full_visual_matrix"
+  ],
+  "next_action": "Promote only observed same-op/loser effects, genuine post-write restore recovery and prior schema fixes. Same owner must finish complete typed invariant/control coverage and immutable full-stage/raw-journal evidence without repeating already verified implementation work. Broader queue remains required."
+}

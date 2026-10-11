@@ -1,0 +1,776 @@
+{
+  "source_inventory_audit": {
+    "record_count": 2351,
+    "violation_count": 0,
+    "sample_violations": [],
+    "note": "Existing source violations reported only; catalog not auto-modified to pass."
+  },
+  "schema_pure": {
+    "legitimate_passes": true,
+    "duplicate_alias_rejects": true,
+    "null_purpose_rejects": true,
+    "fit_absent_allowed": true,
+    "null_fit_rejects": true,
+    "error": null
+  },
+  "rollback_preserves": {
+    "rev_a_before_b_edit": 2,
+    "rev_a_after_reconcile": 2,
+    "a_revision_preserved": true,
+    "b_crash_exit": 1,
+    "b_revision_restored": true,
+    "recovery_state_idempotent": true,
+    "state_after_first_recovery": {
+      "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+      "revisions_sha256": "74d3d222a300d59615684bd12360953005d7d79e00849521d88ab67a75a2048d",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "2e9ff817622ea07ea7a43f25d30b506fbead1901bfca78cb291e4163df06a571",
+      "revision_record_a": 2,
+      "revision_record_b": 0,
+      "journal_bytes_sha256": "67c664c7f759519e258c04ad153fc39692d58bcde1502fce42a0cd05022b1c9d",
+      "journal_entry_count": 101,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "7dfbbc019edfd6b843e2fe1343d82101d2c30e6f6e9f7b53f5dbfed8274bfa61",
+          "bytes": 400396
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "43611507f04222bdf8c8103747081240c90c6b497c69e8bfb3966e192547c221",
+          "bytes": 810
+        }
+      },
+      "manifest_sha256": "7b19db2914a5faaac5302ada9a9c06e6aec891fd3b1db6fdfd291aaadbeb5ce3"
+    },
+    "state_after_second_recovery": {
+      "components_sha256": "68cb7cc17e9036425a8c0885474950d2b74b6fe934dc9a4797e422619d5ca843",
+      "revisions_sha256": "74d3d222a300d59615684bd12360953005d7d79e00849521d88ab67a75a2048d",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "2e9ff817622ea07ea7a43f25d30b506fbead1901bfca78cb291e4163df06a571",
+      "revision_record_a": 2,
+      "revision_record_b": 0,
+      "journal_bytes_sha256": "67c664c7f759519e258c04ad153fc39692d58bcde1502fce42a0cd05022b1c9d",
+      "journal_entry_count": 101,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "7dfbbc019edfd6b843e2fe1343d82101d2c30e6f6e9f7b53f5dbfed8274bfa61",
+          "bytes": 400396
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "43611507f04222bdf8c8103747081240c90c6b497c69e8bfb3966e192547c221",
+          "bytes": 810
+        }
+      },
+      "manifest_sha256": "7b19db2914a5faaac5302ada9a9c06e6aec891fd3b1db6fdfd291aaadbeb5ce3"
+    }
+  },
+  "dual_lock": {
+    "barrier_group": "dual-d128b794",
+    "component_exit": 0,
+    "metadata_exit": 0,
+    "component_revision": 1,
+    "metadata_revision": 1,
+    "both_committed": true,
+    "component_purpose": "Dual lock component 0730",
+    "metadata_policy_contains": true
+  },
+  "distinct_records": {
+    "barrier_group": "dist-5b1e26de",
+    "exit_a": 1,
+    "exit_b_first_attempt": 0,
+    "stale_sha_retry_used": false,
+    "overlapping_launched": true,
+    "purpose_a": "Owns recorded mission judgment and bookkeeping.",
+    "purpose_b": "Distinct B 0730",
+    "both_preserved": false
+  },
+  "same_op_concurrent": {
+    "operation_id": "same-op-fd245b96",
+    "exit_a": 0,
+    "exit_b": 0,
+    "after_hash_a": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+    "after_hash_b": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2",
+    "after_hash_match": true,
+    "committed_ledger_rows": 1,
+    "invalidated_ledger_rows": 0,
+    "one_commit": true,
+    "final_revision": 1,
+    "final_after_sha256": "55c8629fa9bcc8853be24a06198f950251b530e6d9c7bda411472940b583f2d2"
+  },
+  "distinct_op_same_record": {
+    "exit_winner": 0,
+    "exit_loser": 1,
+    "winner_revision_delta": 1,
+    "loser_committed_rows": 0,
+    "loser_journal_rows": 0,
+    "purpose_on_disk": "Distinct op winner 0730",
+    "loser_zero_effects": true
+  },
+  "changed_payload_collision": {
+    "first_exit_zero": true,
+    "second_rejected": true,
+    "revision_still_one": true,
+    "purpose_unchanged_by_collision": true
+  },
+  "post_oplog_rollback_retry": {
+    "crash_exit_nonzero": true,
+    "reconcile_actions": [
+      {
+        "journal_id": "b7722acfe2e74bb4bcbd2ac3bd13970d",
+        "action": "rolled_back"
+      }
+    ],
+    "ledger_after_rollback": {
+      "row_count": 2,
+      "committed_count": 1,
+      "invalidated_count": 1,
+      "commits_after_invalidation": 0,
+      "latest_status": "invalidated",
+      "latest_after_sha256": null,
+      "rows_sha256": "a472da6e1b70966fba46b654e2f4d4502e586c79a544c54cf7a70c660fe9612d"
+    },
+    "retry_exit_zero": true,
+    "invalidated_after_rollback": true,
+    "committed_after_retry": true,
+    "final_revision": 1,
+    "state_before_reconcile": {
+      "components_sha256": "512e2fad566b929d952f00d9ef947506f76f853577e3a235437d4567cb330b1c",
+      "revisions_sha256": "4f233277b29c0b75b9cbdb3b1ee8713f44cbb69bea6411906166b18b925be16c",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "9118e5f85c8697ef846ac9c75056b8620f71333d78f0785efba0abb6fba03113",
+      "revision_record_a": 1,
+      "revision_record_b": null,
+      "journal_bytes_sha256": "c1faae8f5bac7e4175cb3e08e446eafda328dd6694186faae4c1f3ec20943660",
+      "journal_entry_count": 108,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "164c1aea357283b0cccbf973b76cf57e5aa27be88f8bb13a43d1ceef067955f7",
+          "bytes": 400400
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "8c1f60f19618cfb3769b2feb87186ec58508c1bf52f7f711697a146871dd83db",
+          "bytes": 810
+        }
+      },
+      "manifest_sha256": "dec2c6372df795bf274f2babe652856d784f1925555dde5f1fcb634b83e01ae9"
+    },
+    "state_after_reconcile": {
+      "components_sha256": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "revisions_sha256": "c8c0240829924af5a10b8386e9c91f6d0146a8d766a0affff71d632ae4bf75ac",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "a472da6e1b70966fba46b654e2f4d4502e586c79a544c54cf7a70c660fe9612d",
+      "revision_record_a": 0,
+      "revision_record_b": null,
+      "journal_bytes_sha256": "9476758ea8e5ac7118b1e057ead260d02582baf9c0baeb9e0011d9a4d941448a",
+      "journal_entry_count": 108,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "ef9c9c8476479ee43f34d69cf77c27bc335d38a31bd81faeb3f964be78383be7",
+          "bytes": 400402
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "dd77ef5793d2640a5da07d3db2088b16ce56f89f9325626627d20a163b09a2d5",
+          "bytes": 836
+        }
+      },
+      "manifest_sha256": "e5a0d894e5266562c02b678ba53a1844a71f6b3e06f879dbaf51ed8a99570a2c"
+    },
+    "state_after_retry": {
+      "components_sha256": "512e2fad566b929d952f00d9ef947506f76f853577e3a235437d4567cb330b1c",
+      "revisions_sha256": "3223aa615db66ae3076de2fa94881bcb6bbf2fb591a6797dc4fe50a534b1ac63",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "7dd22901a69669178247e0a249ebcf12c507bf104dcc5552e0f2ff8e04d77264",
+      "revision_record_a": 1,
+      "revision_record_b": null,
+      "journal_bytes_sha256": "e61a48e41f7998da37a1357e9bae8ccbc0b3e59e9589b8bbe0ddd5418bd09e9c",
+      "journal_entry_count": 109,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "49956df64ecf441dd2be9b13f88688d8cbfe04f2804c12b9a1d716fdfe22d1cc",
+          "bytes": 400399
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "8c1f60f19618cfb3769b2feb87186ec58508c1bf52f7f711697a146871dd83db",
+          "bytes": 810
+        }
+      },
+      "manifest_sha256": "779facd6174c5f4fde25f2f6dfd193c569c707273b2bae191c009b9100f415bd"
+    },
+    "second_reconcile_idempotent": true,
+    "retry_after_sha256": "512e2fad566b929d952f00d9ef947506f76f853577e3a235437d4567cb330b1c"
+  },
+  "replay_after_newer": {
+    "retry_exit_zero": true,
+    "same_result_hash": true,
+    "disk_keeps_newer": true,
+    "final_revision": 2
+  },
+  "crash_stages": {
+    "stages": {
+      "pending_before_rename": {
+        "crash_exit": 1,
+        "revision_restored": true,
+        "sha_before": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+        "sha_after": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+        "sha_restored": true,
+        "recovery_state_idempotent": true,
+        "state_after_first_recovery": {
+          "components_sha256": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+          "revisions_sha256": "81c255fae6e357e9c969fd1ae9969f8d82d359f6157c3e361819cf21c0ccb281",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "4eaf1c972b62bc002b32b1d49c3b9b8c9a011ce1eb2259312a668a6c271ce98d",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "09d0305fc6dc2c7813bd665421fb1f56203fc454b9dab465aaf08bc700b10ccc",
+          "journal_entry_count": 113,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "488b9316f21b9722ad7a9ec673f6965b3d4ca559b09f7754b0e07c5db78567a8",
+              "bytes": 400403
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "5fea8d9c850111af2b7528e293deec2032508fa819cb23e7762ea99088212c0d",
+              "bytes": 819
+            }
+          },
+          "manifest_sha256": "c1a385bbf2b2e6843db5cb8df639639f98a19b3ab42658990efc65010ddb133c"
+        },
+        "state_after_second_recovery": {
+          "components_sha256": "cd15804f4de9017ccae72bd8c0b4870c07c5e7e24c3de3ac26c6a0607c84333d",
+          "revisions_sha256": "81c255fae6e357e9c969fd1ae9969f8d82d359f6157c3e361819cf21c0ccb281",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "4eaf1c972b62bc002b32b1d49c3b9b8c9a011ce1eb2259312a668a6c271ce98d",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "09d0305fc6dc2c7813bd665421fb1f56203fc454b9dab465aaf08bc700b10ccc",
+          "journal_entry_count": 113,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "488b9316f21b9722ad7a9ec673f6965b3d4ca559b09f7754b0e07c5db78567a8",
+              "bytes": 400403
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "5fea8d9c850111af2b7528e293deec2032508fa819cb23e7762ea99088212c0d",
+              "bytes": 819
+            }
+          },
+          "manifest_sha256": "c1a385bbf2b2e6843db5cb8df639639f98a19b3ab42658990efc65010ddb133c"
+        }
+      },
+      "post_rename_pre_derived": {
+        "crash_exit": 1,
+        "revision_restored": true,
+        "sha_before": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+        "sha_after": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+        "sha_restored": true,
+        "recovery_state_idempotent": true,
+        "state_after_first_recovery": {
+          "components_sha256": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+          "revisions_sha256": "a7ff540023376a472aefaa31f230287a88b5381aca96a50c118442d0f3252136",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "99b4cd85f0e15bded4973107824c270af677e1f1a42ff8733eba47209653bdea",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "f75fb6ac16eba51685ec51c635f60457a6c4b98d7dcac125926cf0614e5e1e3c",
+          "journal_entry_count": 115,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "be78bc483743e34bd710c6e5da9b2fb7f663d345ba58d9d970db314b9c70eb2d",
+              "bytes": 400408
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "f49680ce61a784ca790d260320f9ce89727f883cebbe1d7ac86c7a4cd000b025",
+              "bytes": 821
+            }
+          },
+          "manifest_sha256": "b840932edd4d36e492c908db10d53b57d1a5665503a8478b05d2e97e2b3903a8"
+        },
+        "state_after_second_recovery": {
+          "components_sha256": "fee87c8c6628ee052b65034d73bf7008abab5f90d4ad0ebc3b87d0f9b829af9a",
+          "revisions_sha256": "a7ff540023376a472aefaa31f230287a88b5381aca96a50c118442d0f3252136",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "99b4cd85f0e15bded4973107824c270af677e1f1a42ff8733eba47209653bdea",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "f75fb6ac16eba51685ec51c635f60457a6c4b98d7dcac125926cf0614e5e1e3c",
+          "journal_entry_count": 115,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "be78bc483743e34bd710c6e5da9b2fb7f663d345ba58d9d970db314b9c70eb2d",
+              "bytes": 400408
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "f49680ce61a784ca790d260320f9ce89727f883cebbe1d7ac86c7a4cd000b025",
+              "bytes": 821
+            }
+          },
+          "manifest_sha256": "b840932edd4d36e492c908db10d53b57d1a5665503a8478b05d2e97e2b3903a8"
+        }
+      },
+      "post_derived_pre_revision": {
+        "crash_exit": 1,
+        "revision_restored": true,
+        "sha_before": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+        "sha_after": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+        "sha_restored": true,
+        "recovery_state_idempotent": true,
+        "state_after_first_recovery": {
+          "components_sha256": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+          "revisions_sha256": "8523f31bbfc6f581c2f57580d8d28468743bcb2830e9b3545f645b2f3500203a",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "cf82bdb622d83e040f6c536e1b2c8ed5980435a5e8c7a5259f40919841405aa4",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "6df0e8e432ce32c68e14195d42f8c71df955069c7395c16be4d7010072854f6c",
+          "journal_entry_count": 117,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "e928d2f44d3852a358a37758564f002d0dfd102f79ff6da9fe9f3ddc816a941f",
+              "bytes": 400409
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "cfd7b3ae3d6c02da7e0b960d1c785e1f34e491ae13e46b35ae37e75033c563fd",
+              "bytes": 823
+            }
+          },
+          "manifest_sha256": "8bb32901da9ef2d8049bb5a4dd016fb9997305274e2c414e241614d6aca332fc"
+        },
+        "state_after_second_recovery": {
+          "components_sha256": "6c438a9b93f1523836547a8b3604440d388c309d6e30bc358fc7dc0bf96ee6df",
+          "revisions_sha256": "8523f31bbfc6f581c2f57580d8d28468743bcb2830e9b3545f645b2f3500203a",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "cf82bdb622d83e040f6c536e1b2c8ed5980435a5e8c7a5259f40919841405aa4",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "6df0e8e432ce32c68e14195d42f8c71df955069c7395c16be4d7010072854f6c",
+          "journal_entry_count": 117,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "e928d2f44d3852a358a37758564f002d0dfd102f79ff6da9fe9f3ddc816a941f",
+              "bytes": 400409
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "cfd7b3ae3d6c02da7e0b960d1c785e1f34e491ae13e46b35ae37e75033c563fd",
+              "bytes": 823
+            }
+          },
+          "manifest_sha256": "8bb32901da9ef2d8049bb5a4dd016fb9997305274e2c414e241614d6aca332fc"
+        }
+      },
+      "committed_before_oplog": {
+        "crash_exit": 1,
+        "revision_restored": true,
+        "sha_before": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+        "sha_after": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+        "sha_restored": true,
+        "recovery_state_idempotent": true,
+        "state_after_first_recovery": {
+          "components_sha256": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+          "revisions_sha256": "2fbb2db745f5194687366f18e3944bc6f66dd2d40fcec127fbca6facf16563f0",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "826399fc3c4e5f168032bc2c84ada9120ab0ad94e94edfb4d0ca6d4939839e10",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "fab9f33ef7a905f682877818b1ddc7bcb7acee4291933402fdbc2341b1a6fd46",
+          "journal_entry_count": 119,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "ac3ffa2763f23c139f8cb8137ecb06529c41582fddf8f3f6af0c286eaca108b4",
+              "bytes": 400406
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "f57844e60519a05d7f080097906210ea3d7a9afdd884bf63446def9e7a507e02",
+              "bytes": 820
+            }
+          },
+          "manifest_sha256": "421f4e5f60e5ca0e453c03d833ead9b066c9e502c8534b59c8280e03df317fdf"
+        },
+        "state_after_second_recovery": {
+          "components_sha256": "cbaabba9fab40deae26c3dfcf517a198be089c88d77f84c3128ce259a5911288",
+          "revisions_sha256": "2fbb2db745f5194687366f18e3944bc6f66dd2d40fcec127fbca6facf16563f0",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "826399fc3c4e5f168032bc2c84ada9120ab0ad94e94edfb4d0ca6d4939839e10",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "fab9f33ef7a905f682877818b1ddc7bcb7acee4291933402fdbc2341b1a6fd46",
+          "journal_entry_count": 119,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "ac3ffa2763f23c139f8cb8137ecb06529c41582fddf8f3f6af0c286eaca108b4",
+              "bytes": 400406
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "f57844e60519a05d7f080097906210ea3d7a9afdd884bf63446def9e7a507e02",
+              "bytes": 820
+            }
+          },
+          "manifest_sha256": "421f4e5f60e5ca0e453c03d833ead9b066c9e502c8534b59c8280e03df317fdf"
+        }
+      },
+      "post_oplog_pre_journal_commit": {
+        "crash_exit": 1,
+        "revision_restored": true,
+        "sha_before": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+        "sha_after": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+        "sha_restored": true,
+        "recovery_state_idempotent": true,
+        "state_after_first_recovery": {
+          "components_sha256": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+          "revisions_sha256": "664d6156f2203fc67b3ecf175748eb7acfb9bbdf757b214f6e6ff0daee67a46b",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "1d65a4895ec9d3c01d8a806e343ef0ab5b33cfa3026e6a9b1ac7b344c6540a0c",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "4d77c1f8d4f53d0980cb67a87c149a066471036bd59e8e53c107dc7a88f2999d",
+          "journal_entry_count": 121,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "a2dcffdec0842a55beb41077a8d975cb2eae64da52710ce1333f075b4e86f92a",
+              "bytes": 400414
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "89899ab7e963b81c074ebd5c8b4fa7e20d2ead88cf8ea41e54932bf953dab16f",
+              "bytes": 827
+            }
+          },
+          "manifest_sha256": "9b227f255dd013a9782782927574b2d0847f99cd545fbed73b4094ca1405a941"
+        },
+        "state_after_second_recovery": {
+          "components_sha256": "ee93e22e65a2e74fdb2269cdcb0e1fe22c76cd91ea24a6d11088a089a9c62853",
+          "revisions_sha256": "664d6156f2203fc67b3ecf175748eb7acfb9bbdf757b214f6e6ff0daee67a46b",
+          "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+          "ledger_sha256": "1d65a4895ec9d3c01d8a806e343ef0ab5b33cfa3026e6a9b1ac7b344c6540a0c",
+          "revision_record_a": 1,
+          "revision_record_b": null,
+          "journal_bytes_sha256": "4d77c1f8d4f53d0980cb67a87c149a066471036bd59e8e53c107dc7a88f2999d",
+          "journal_entry_count": 121,
+          "derived": {
+            "views/Alex_System_Foundation.xlsx": {
+              "sha256": "a2dcffdec0842a55beb41077a8d975cb2eae64da52710ce1333f075b4e86f92a",
+              "bytes": 400414
+            },
+            "docs/COMPONENT_INDEX.md": {
+              "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+              "bytes": 278244
+            },
+            "components/component_6f112167c8a413f0f3ab.md": {
+              "sha256": "89899ab7e963b81c074ebd5c8b4fa7e20d2ead88cf8ea41e54932bf953dab16f",
+              "bytes": 827
+            }
+          },
+          "manifest_sha256": "9b227f255dd013a9782782927574b2d0847f99cd545fbed73b4094ca1405a941"
+        }
+      }
+    },
+    "all_restored": true,
+    "all_recovery_idempotent": true
+  },
+  "restore_handler": {
+    "restore_exit": 0,
+    "restored_flag": true,
+    "purpose_after": "Restore baseline 0730",
+    "purpose_is_baseline": true,
+    "revision_before_restore": 2,
+    "revision_after_restore": 3,
+    "monotonic_revision": true,
+    "handler_monotonic_flag": true
+  },
+  "restore_crash_and_recovery": {
+    "crash_exit": 1,
+    "reconcile_restore_completed": true,
+    "purpose_is_baseline": true,
+    "monotonic_after_recovery": true,
+    "never_rolled_back_revision": true,
+    "state_mid_crash": {
+      "components_sha256": "43bdfb69046de07981cdbce0f1d5c146701763ac7014454e5d84ed141b705405",
+      "revisions_sha256": "fabb9a66e78e464764156a3df57b6bfc25bce2b59fdaefef4f9500ec6b3a5061",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "75e6b2e92a3f2278a22d10a9ebd3b9239b7f0dc4b91fcc7c31ada6c2527cb22b",
+      "revision_record_a": 2,
+      "revision_record_b": null,
+      "journal_bytes_sha256": "c82b2ccef46e273920cde3e72d56fc26969ff44588862a3f9cb5c2745c413b3b",
+      "journal_entry_count": 127,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "50c6689f541db70ad63c0aed12623b6322823d3de6da669f5a2d8ad65c112103",
+          "bytes": 400400
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "7ca9c29e52662d833847f60500021e4188d3b1b5e5d6c5977b00ad08b6e6850e",
+          "bytes": 814
+        }
+      },
+      "manifest_sha256": "ab7bf5db4d695c5fcb7b4ac5feefa5fd3846b5a8380b07512e2cc60ffbba691b"
+    },
+    "state_after_first_reconcile": {
+      "components_sha256": "eaaafdc3e2a678d7ab2a57fcc101a556e8127a90f2fa207b1ba7649701621c28",
+      "revisions_sha256": "9fcea09c0eac048f5095a0c803938fd0632fc4fdc2d4c3c56efaea54e1de2972",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "75e6b2e92a3f2278a22d10a9ebd3b9239b7f0dc4b91fcc7c31ada6c2527cb22b",
+      "revision_record_a": 3,
+      "revision_record_b": null,
+      "journal_bytes_sha256": "fa60b3d9c6b79a40af08026948bcce429d88b7688f7d6a742a66405c35f9b629",
+      "journal_entry_count": 127,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "c915dfaecfb3a0a5263685222f85a7f955a0a4b27d7e64e800dacd71a16b233e",
+          "bytes": 400398
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "801fb9c6675bf63ddf51058f5431605f23394a6de7f6eea9c5608f0a6bb86c3f",
+          "bytes": 816
+        }
+      },
+      "manifest_sha256": "4671248dbe5efb3bd04755dd1fa66e9e23b32855c14bc0c497897b03a289e66b"
+    },
+    "state_after_second_reconcile": {
+      "components_sha256": "eaaafdc3e2a678d7ab2a57fcc101a556e8127a90f2fa207b1ba7649701621c28",
+      "revisions_sha256": "9fcea09c0eac048f5095a0c803938fd0632fc4fdc2d4c3c56efaea54e1de2972",
+      "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "ledger_sha256": "75e6b2e92a3f2278a22d10a9ebd3b9239b7f0dc4b91fcc7c31ada6c2527cb22b",
+      "revision_record_a": 3,
+      "revision_record_b": null,
+      "journal_bytes_sha256": "fa60b3d9c6b79a40af08026948bcce429d88b7688f7d6a742a66405c35f9b629",
+      "journal_entry_count": 127,
+      "derived": {
+        "views/Alex_System_Foundation.xlsx": {
+          "sha256": "c915dfaecfb3a0a5263685222f85a7f955a0a4b27d7e64e800dacd71a16b233e",
+          "bytes": 400398
+        },
+        "docs/COMPONENT_INDEX.md": {
+          "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+          "bytes": 278244
+        },
+        "components/component_6f112167c8a413f0f3ab.md": {
+          "sha256": "801fb9c6675bf63ddf51058f5431605f23394a6de7f6eea9c5608f0a6bb86c3f",
+          "bytes": 816
+        }
+      },
+      "manifest_sha256": "4671248dbe5efb3bd04755dd1fa66e9e23b32855c14bc0c497897b03a289e66b"
+    },
+    "second_reconcile_idempotent": true
+  },
+  "restore_recovery_interrupt": {
+    "restore_crash_exit": 1,
+    "recovery_interrupt_exit": 1,
+    "injector_fired": true,
+    "purpose_is_baseline": true,
+    "monotonic_revision": true,
+    "second_reconcile_idempotent": true,
+    "recovery_completed_after_retry": true
+  },
+  "schema_negatives": {
+    "cases": [
+      {
+        "label": "missing_evidence_ids",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "integer_alias",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "object_observed_condition",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "null_source_record_ids",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "null_purpose",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "null_boundary",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "duplicate_aliases",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "duplicate_evidence",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      },
+      {
+        "label": "null_fit",
+        "rejected": true,
+        "zero_effect": true,
+        "reason_matches": true
+      }
+    ],
+    "all_rejected_with_zero_effect": true,
+    "missing_next_revision_rejected": true,
+    "inventory_unchanged": true
+  },
+  "evidence_index": {
+    "run_id": "57bc53b6-396d-4b83-a07f-5dab4bf1e04f",
+    "cases": {
+      "crash_stage_committed_before_oplog": [
+        "after_second_recovery"
+      ],
+      "crash_stage_pending_before_rename": [
+        "after_second_recovery"
+      ],
+      "crash_stage_post_derived_pre_revision": [
+        "after_second_recovery"
+      ],
+      "crash_stage_post_oplog_pre_journal_commit": [
+        "after_second_recovery"
+      ],
+      "crash_stage_post_rename_pre_derived": [
+        "after_second_recovery"
+      ],
+      "distinct_op_same_record": [
+        "final"
+      ],
+      "distinct_records": [
+        "final"
+      ],
+      "dual_lock": [
+        "final"
+      ],
+      "restore_crash_and_recovery": [
+        "after_second_reconcile"
+      ],
+      "restore_handler": [
+        "final"
+      ],
+      "restore_recovery_interrupt": [
+        "before_restore",
+        "first_recovered",
+        "interrupted_recovery",
+        "interrupted_restore",
+        "second_recovered"
+      ],
+      "rollback_preserves": [
+        "after_second_recovery",
+        "before_crash"
+      ],
+      "same_op_concurrent": [
+        "final"
+      ],
+      "schema_negatives": [
+        "final"
+      ]
+    }
+  },
+  "validation": {
+    "baseline": [
+      false,
+      [
+        "distinct_records.both_preserved: expected True"
+      ]
+    ]
+  },
+  "negative_flips": {
+    "each_flip_fails": false,
+    "skipped": "baseline_invalid",
+    "per_flip": []
+  },
+  "final_effect_snapshot": {
+    "components_sha256": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+    "revisions_sha256": null,
+    "metadata_sha256": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+    "ledger_sha256": null,
+    "revision_record_a": null,
+    "revision_record_b": null,
+    "journal_bytes_sha256": "c7de3532c319e3daa3bff557cd91178ab5736cae8bfb093c8e19b6d2c4173eda",
+    "journal_entry_count": 130,
+    "derived": {
+      "views/Alex_System_Foundation.xlsx": {
+        "sha256": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+        "bytes": 400606
+      },
+      "docs/COMPONENT_INDEX.md": {
+        "sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+        "bytes": 278244
+      },
+      "components/component_6f112167c8a413f0f3ab.md": {
+        "sha256": "70d853d598ba12aac4e7987bc464e11b9b9b5948c892bf92c7e8fb86351cfc8e",
+        "bytes": 835
+      }
+    },
+    "manifest_sha256": "08e0d896eaea554b4a64237d86777183dde63e7bb797c0feceded4305eef7d3b"
+  }
+}

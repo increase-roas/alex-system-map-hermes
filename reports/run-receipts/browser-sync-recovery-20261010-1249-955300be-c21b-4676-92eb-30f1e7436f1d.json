@@ -1,0 +1,121 @@
+{
+  "at": "2026-10-10T13:01:14+00:00",
+  "broader_gates_still_pending": [
+    "full_visual_matrix",
+    "REL-01_fresh_session",
+    "agent_tracing_import",
+    "whole_edit_promotion"
+  ],
+  "cases": {
+    "clone_manifest": {
+      "cloned_at": "2026-10-10T12:51:03+00:00",
+      "components_cloned_count": 2351,
+      "components_derived": "cloned 2351 component markdown pages from production",
+      "copied_file_count": 13,
+      "copy_hashes_at_clone": {
+        "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+        "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+        "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+        "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+        "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+        "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+        "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+        "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+        "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+        "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+        "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+        "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+        "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b"
+      },
+      "dest_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-sync-recovery-20261010-1249/catalog-clone",
+      "original_immutable_hashes": {
+        "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+        "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+        "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+        "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+        "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+        "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+        "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+        "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+        "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+        "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+        "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+        "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+        "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b"
+      },
+      "production_binding": "CATALOG_FIXTURE_ROOT"
+    },
+    "four_guard_regression": {
+      "all_passed": true,
+      "controls": {
+        "guard.extra_evidence_case_rejects": true,
+        "guard.integer_targets_path_rejects": true,
+        "guard.omitted_required_md_manifest_rejects": true,
+        "guard.unrelated_failure_rejects": true
+      }
+    },
+    "original_hashes_unchanged": {
+      "after_count": 13,
+      "before_count": 13,
+      "unchanged": true
+    }
+  },
+  "delivery_id": "browser-sync-recovery-20261010-1249",
+  "evidence_root": null,
+  "failed_attempt_history": [
+    {
+      "delivery": "transaction-final-four-guards-20261010-1240",
+      "note": "transaction_final_guards",
+      "run_id": "86b6ee03-b7cb-4b96-81f1-de847391eacc"
+    },
+    {
+      "delivery": "canonical-transaction-enforcement-20261010-0828",
+      "note": "enforcement_0828",
+      "run_id": "40ded520-af4a-4452-9da5-4cab8b320d7a"
+    },
+    {
+      "delivery": "canonical-review-fixes-20261010-1044",
+      "note": "review_fixes_1044",
+      "run_id": "ae094cc8-5a7f-425e-9f4b-5deb31afeec8"
+    },
+    {
+      "at": "2026-10-10T13:01:04+00:00",
+      "error": "Command '['npm', 'run', 'build']' timed out after 600 seconds"
+    }
+  ],
+  "failure_artifact": "reports/workflow-core-failures/browser-sync-recovery-20261010-1249-955300be.json",
+  "failures": [
+    "Command '['npm', 'run', 'build']' timed out after 600 seconds"
+  ],
+  "full_completion": false,
+  "independent_verification": "not_claimed",
+  "milestone_scope": "browser/sync/restart/recovery bounded proof only",
+  "next_permitted_action": "Scoped independent browser/backend review of this receipt; then visual/REL-01/tracing gates.",
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "owner_verification": "failed",
+  "prior_delivery_id": "transaction-final-four-guards-20261010-1240",
+  "prior_reviews_acknowledged": [
+    "reports/independent-canonical-review-fixes-browser.json",
+    "reports/independent-canonical-review-fixes-browser.md"
+  ],
+  "prior_transaction_acceptance": "reports/independent-transaction-final-guards-review.json run 86b6ee03",
+  "real_sdk_trace_input": "BLOCKED",
+  "run_id": "955300be-c21b-4676-92eb-30f1e7436f1d",
+  "source_identity": {
+    "build_id_sha256": "dd4bbb100d258a44dbfcff3a25377a3f6aa038746f1b4e9742d0420002d8fab3",
+    "modules": {
+      "app/src/app/explorer/maintained-edit-panel.tsx": "90750124ecac070a427da81c55d20522f610da530b2bcce4f2242db3a74bc18f",
+      "app/src/lib/server/python.ts": "e33618c2cb4bf0b48be03a82983da3bb8e0de58192c94d8573c45c9515e6069a",
+      "tools/browser_sync_recovery.mjs": "3591941cc708b02ed2d81f46aed3b0539dec1568b4366876f7a45bcf55cbc4ab",
+      "tools/browser_sync_recovery_acceptance.py": "544da71c79e8949cb0088dc4361b9e108dec1e8fb18e6fd475b10a311c68a44f",
+      "tools/browser_sync_recovery_summarize.py": "1b2574a7061e8e3744627473b7ded5e6be0164a20c7ce95e5bea4f66aec5f6c1",
+      "tools/canonical_derived_render.py": "35bc1f9e2330e96d69aa308e97d8df6245d1e3ada6f639ae51861b5d06543f9a",
+      "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+      "tools/catalog_sync.py": "8fd8bdc7c90b7630ef2b66b2674e6f7acdbba395cc810813352b4d4be5cef73f",
+      "tools/local_service.py": "aebac590d4b26224fc4d0bc3fa32238882051f665619d9c77e444ef1e7e01ac1",
+      "tools/node_process_bounded.mjs": "ca2e2a9849a9184170b2f653089a867361fb22c0c600813aeb9fd90a4005146f",
+      "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+    }
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "scope": "independent local synthetic workflow tests; no service/UI/app writes",
+  "engine_sha256": "55244927489bd365229697d5a636a1790d0e5e99f1dea9f55f1b4078b2536f3e",
+  "results": [
+    {
+      "item": "revision_idempotency_conflicting_retry",
+      "status": "VERIFIED",
+      "evidence": "Same operation returns original revision after later write; changed retry and stale revision reject atomically."
+    },
+    {
+      "item": "restart_new_process",
+      "status": "VERIFIED",
+      "evidence": "New Engine instance and separate CLI process recover identical state."
+    },
+    {
+      "item": "proof_guards",
+      "status": "VERIFIED",
+      "evidence": "Self verification, empty evidence, false/extra checks, unmet prerequisite and direct verified status rejected."
+    },
+    {
+      "item": "transitive_correction_oldproof_preserved",
+      "status": "VERIFIED",
+      "evidence": "3-hop invalidation; unrelated proof stays valid; historical proof payloads/attempts/output remain; correction clears only after all 3 reverify."
+    },
+    {
+      "item": "dag_atomic_rollback",
+      "status": "VERIFIED",
+      "evidence": "Cycle, self-cycle and missing dependency reject atomically."
+    },
+    {
+      "item": "reopening_invalidation",
+      "status": "VERIFIED",
+      "evidence": "Reopening verified ancestor invalidates descendant proof."
+    },
+    {
+      "item": "prerequisite_edit_invalidation",
+      "status": "VERIFIED",
+      "evidence": "Changed prerequisite invalidates target and descendants, preserves ancestor."
+    },
+    {
+      "item": "stale_checkpoint",
+      "status": "VERIFIED",
+      "evidence": "Older valid checkpoint cannot drive update after unrelated revision."
+    },
+    {
+      "item": "malformed_verifier_evidence_types",
+      "status": "VERIFIED",
+      "evidence": "Malformed named verifier/evidence rejected."
+    },
+    {
+      "item": "blank_evidence_verifier",
+      "status": "VERIFIED",
+      "evidence": "Blank verifier and blank evidence reference rejected."
+    },
+    {
+      "item": "malformed_acceptance_type",
+      "status": "VERIFIED",
+      "evidence": "String acceptance rejected."
+    },
+    {
+      "item": "boolean_revision",
+      "status": "VERIFIED",
+      "evidence": "Boolean revision rejected."
+    },
+    {
+      "item": "correction_affected_set_survives_dag_edit",
+      "status": "VERIFIED",
+      "evidence": "Original correction affected set retained across later DAG edits."
+    }
+  ]
+}

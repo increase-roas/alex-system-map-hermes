@@ -1,0 +1,2145 @@
+{
+  "id": "table_6f164d882ff427f5e6f6",
+  "sheet": "S01-10 Skills, where they live",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "This tab shows where each AI (Claude Code, the Claude app, Codex, ChatGPT and Cursor) finds its skills, the size and count limits, how many skills to keep on, how to prove a skill loaded, and the house rules. A skill is a folder with a SKILL.md file that teaches an AI one procedure. Every row names its source in the last column, and NOT_PROVEN marks what still needs a check. The tab is built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/skills-where.json; never edit the sheet by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Where each AI reads skills"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "surface"
+        },
+        {
+          "column": "B",
+          "value": "where its skills come from"
+        },
+        {
+          "column": "C",
+          "value": "how a skill gets there"
+        },
+        {
+          "column": "D",
+          "value": "how it picks one"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Global home: ~/.agents/skills (this Mac)"
+        },
+        {
+          "column": "B",
+          "value": "The one real copy of every shared skill. A skill is a folder holding a SKILL.md file (its instructions). On 2026-10-01 it held 122 skill folders."
+        },
+        {
+          "column": "C",
+          "value": "Create or edit the skill here, never inside an app's own folder. unify.py moves stray copies here and turns identical Claude copies into links (pointers to the real folder). Retired copies are moved to ~/skills-archive, never deleted."
+        },
+        {
+          "column": "D",
+          "value": "It is a folder, not an AI. Codex and Cursor read it directly. Claude Code reaches it through the links in ~/.claude/skills. The Claude app and ChatGPT never read it."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/unify/unify.py L2–L14 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L7–L12 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L9 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L55 ; workbook Projects R4"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One project (a repo folder)"
+        },
+        {
+          "column": "B",
+          "value": "Skills only that project needs. The real folder is .agents/skills/<name>/SKILL.md, and .claude/skills/<name> is a link to it. A plain skills/ folder is read by no AI."
+        },
+        {
+          "column": "C",
+          "value": "Create the folder in .agents/skills, then link it: ln -s ../../.agents/skills/<name> .claude/skills/<name>. repo-conform (audit.py --fix) moves stray skills into .agents/skills and makes missing links."
+        },
+        {
+          "column": "D",
+          "value": "Codex and Cursor read .agents/skills; Codex scans from the current folder up to the repo root. Claude Code reads .claude/skills and ignores .agents/."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L3 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L14–L16 ; ~/.agents/skills/repo-conform/assets/skeleton/.claude/skills/README.md L1–L4 ; ~/.agents/skills/repo-conform/SKILL.md L35–L36 ; ~/.agents/skills/repo-conform/SKILL.md L80–L81 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L45 ; workbook Projects R14"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code (terminal and the desktop app's Code tab)"
+        },
+        {
+          "column": "B",
+          "value": "Personal skills in ~/.claude/skills (links into ~/.agents/skills), the project's .claude/skills, plugin skills (skills inside an installed plugin, named plugin:skill), and skills uploaded to the Claude app. The desktop Code tab gets the uploads in-process as anthropic-skills:<name>. The terminal gets them only on version 2.1.273 or later, synced one way into ~/.claude/skills/synced/ at start and about every 10 minutes."
+        },
+        {
+          "column": "C",
+          "value": "Add a link in ~/.claude/skills (picked up live, no restart), or upload to the Claude app and let it sync. One delivery per skill: an uploaded skill gets no ~/.claude/skills link (section 5)."
+        },
+        {
+          "column": "D",
+          "value": "A skill listing (every name plus its 'when to use me' description) is in every session; Claude matches the request against it, or you type /name. If a local and a synced skill share a name, the local one is /name and the synced one is /anthropic-skills:name."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L21 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L36 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L69–L73 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L115 ; workbook Limits R12 ; https://code.claude.com/docs/en/skills.md (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app (claude.ai web, desktop chat, Cowork, phone)"
+        },
+        {
+          "column": "B",
+          "value": "Skills uploaded as ZIP files (custom skills belong to the user, not a project), Anthropic's own skills, and skills inside plugins added under Customize > Plugins. One undated Anthropic page says plugins aren't used in chat; r4 follows the newer help article, which says they are. The app never reads the Mac's skill folders."
+        },
+        {
+          "column": "C",
+          "value": "Turn on Settings > Capabilities > 'Code execution and file creation'. Build the ZIP from ~/.agents/skills (repo-conform audit.py --zips), then Customize > Skills > + > Create skill > Upload a skill. Re-upload after every change. Uploads follow the account to web chat, desktop chat, Cowork, the Office add-ins and Claude Code. On the phone (Claude mobile, 2026-10-01) the uploaded skills are listed (alex-director, alex-workflow-conductor and 13 more), with about 150 plugin-pack skills on top at the time (T7 PASS with gaps). After the app batch (2026-10-01) the only plugins left are PDF Viewer and Desktop Commander, D4's 6 old uploads are switched off, and the Director, the conductor and 4 other uploads were rebuilt from ~/.agents and replaced in place (v5 and v2)."
+        },
+        {
+          "column": "D",
+          "value": "From the skill list (name plus description). On the phone, an uploaded skill should show in the / menu. Test a new upload in a fresh conversation."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L13 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L69 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L72 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L95 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L138 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L12 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L38–L43 ; https://claude.com/docs/skills/how-to (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## Claude mobile\" ; work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_claude-mobile-parity-test.md ; work/2026-10-01_setup-playbook/notes/app-batch.md \"Summary\""
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex (CLI, desktop app, IDE extension, and Work run locally in the ChatGPT desktop app)"
+        },
+        {
+          "column": "B",
+          "value": "Local folders: .agents/skills from the current folder up to the repo root, ~/.agents/skills, /etc/codex/skills and the bundled ~/.codex/skills/.system. Plus plugin skills from ~/.codex/plugins/cache, named plugin:skill (the IDE extension takes no plugins). Codex follows links and also scans nested folders, so template copies inside a skill get listed too."
+        },
+        {
+          "column": "C",
+          "value": "Put a folder with SKILL.md in a scanned place, or install a plugin and start a new session. Don't use $skill-installer: it writes to ~/.codex/skills, a third home. To hide a skill from Codex only, add an off-switch ([[skills.config]] with its path and enabled = false) to ~/.codex/config.toml, then restart."
+        },
+        {
+          "column": "D",
+          "value": "A catalog (each skill's name, description and path) goes into the prompt. Pick with $name, /skills or the Skills picker, or Codex picks by description. A skill set to allow_implicit_invocation: false in agents/openai.yaml loads only when named."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L33–L35 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L40 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L43–L49 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L65 ; https://learn.chatgpt.com/docs/build-skills (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT web, phone and desktop Chat (cloud)"
+        },
+        {
+          "column": "B",
+          "value": "Skills from the Skills tab (Plugins > Skills) and skills bundled inside installed plugins. Alex's ~/.agents/skills never reaches it. Desktop Chat uses the same cloud sources; the docs don't say local folders apply there, so treat it as no. On 2026-10-01 the phone listed 37 skills: 3 custom cloud skills (create-local-meta-ads, fulfill-hot-tub-launch, higgsfield-hot-tub-scene-variation), the official Composio plugin's skill, the 1Password Environments skill and OpenAI's own; none of the ~/.agents skills, as expected."
+        },
+        {
+          "column": "C",
+          "value": "Skills tab (listed for Business, Enterprise, Healthcare and Edu; Plus and Pro are not listed): Create > Upload from your computer, one ZIP per skill with the folder at the ZIP root (ChatGPT doesn't publish ZIP rules). ChatGPT scans each upload and marks it Available, Needs Review or Blocked. Without the tab: one skills-only plugin made with @plugin-creator. Install on web or desktop; the phone uses what the account has. A third-party guide found desktop installs didn't show on the web."
+        },
+        {
+          "column": "D",
+          "value": "Progressive disclosure: it reads the name and description first and opens SKILL.md only when the request matches. Type @ to pick one by name. Plugins marked 'Desktop only' don't run on the phone."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L9–L10 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L20–L26 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L30–L32 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L38 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L41 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L113–L121 ; https://help.openai.com/en/articles/20001066-skills-in-chatgpt (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_chatgpt-mobile-parity-test.md"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor"
+        },
+        {
+          "column": "B",
+          "value": "Project .agents/skills and ~/.agents/skills, the same folders as Codex. On 2026-10-01 ~/.cursor/skills also held 84 entries, mostly links into ~/.claude/skills."
+        },
+        {
+          "column": "C",
+          "value": "No upload: a skill in one of those folders is visible. The Skills tab plans to delete the ~/.cursor copies, because Cursor may list a skill twice."
+        },
+        {
+          "column": "D",
+          "value": "Both. The agent sees each skill's name and description and decides from context when one is relevant (the description is \"used by the agent to determine relevance\"), and you can call one by name by typing / in Agent chat. disable-model-invocation: true makes a skill load only by /name, and paths limits it to matching files. Cursor also reads ~/.claude/skills and ~/.codex/skills, so a skill kept in ~/.agents/skills and linked into ~/.claude/skills can show twice."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L10 ; ~/.agents/skills/repo-conform/SKILL.md L80–L81 ; workbook Projects R14 ; workbook Director + Conductor R139 ; workbook Skills R4 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S14. How Cursor picks\" ; https://cursor.com/docs/context/skills (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Limits"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "limit"
+        },
+        {
+          "column": "B",
+          "value": "value"
+        },
+        {
+          "column": "C",
+          "value": "applies to"
+        },
+        {
+          "column": "D",
+          "value": "what happens past it"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SKILL.md body (and its references/ files)"
+        },
+        {
+          "column": "B",
+          "value": "Our target: 60 lines / 5,000 characters. Our cap: 200 lines / 16,000 characters. Each references/ file: 300 lines / 25,000 characters, one level deep. Outside guidance (Anthropic, Agent Skills standard): under 500 lines and about 5,000 tokens."
+        },
+        {
+          "column": "C",
+          "value": "Every skill on every AI. repo-conform checks the body limits when it audits a project; references/ sizes were not measured yet."
+        },
+        {
+          "column": "D",
+          "value": "Claude Code keeps only the first 5,000 tokens of a skill after compaction (when it shrinks a long session). In SkillsBench, skill text over about 43 KB per task gained only +0.7 points. Move detail into references/. The house README states the same limits since repo-conform 2.2 (2026-10-01); before that it said 150 lines."
+        },
+        {
+          "column": "E",
+          "value": "workbook Limits R9 ; workbook Limits R10 ; workbook Limits R21 ; ~/.agents/skills/repo-conform/references/checks.md L11 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L34–L35 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L131 ; agents-home 1c10184"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill name"
+        },
+        {
+          "column": "B",
+          "value": "64 characters at most: lowercase letters, numbers and hyphens, the same as the folder name."
+        },
+        {
+          "column": "C",
+          "value": "Every AI (Agent Skills standard), Claude app uploads included."
+        },
+        {
+          "column": "D",
+          "value": "Codex refuses to load the skill. On 2026-10-01 one skill broke the rule: stitch-extract-design-md has the name stitch::extract-design-md."
+        },
+        {
+          "column": "E",
+          "value": "workbook Limits R11 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L69 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L61"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill description (the 'when to use me' text)"
+        },
+        {
+          "column": "B",
+          "value": "Our limit: 200 characters (about 25 words) saying what the skill does and when to use it. The Claude app's upload limit is also 200; the standard allows 1,024."
+        },
+        {
+          "column": "C",
+          "value": "Every skill. Every AI reads all the descriptions in every session, in its skill list."
+        },
+        {
+          "column": "D",
+          "value": "Codex refuses a skill past 1,024 characters. Claude Code cuts description plus when_to_use at 1,536. The Claude app takes 200 at most. Sources disagree: five live uploads on Alex's account are longer than 200, so the cap may apply only to new uploads (NOT_PROVEN). This tab keeps 200."
+        },
+        {
+          "column": "E",
+          "value": "workbook Limits R12 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L69–L70 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L128 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L139 ; https://claude.com/docs/skills/how-to (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All descriptions together in Claude Code (the skill listing)"
+        },
+        {
+          "column": "B",
+          "value": "1% of the context window (the AI's working memory): about 8,000 characters on 200k-token models, 30,000–40,000 on 1M-token models."
+        },
+        {
+          "column": "C",
+          "value": "Claude Code: terminal and desktop Code tab."
+        },
+        {
+          "column": "D",
+          "value": "The least-used skills lose their descriptions first and keep only their names. /doctor estimates what the listing costs."
+        },
+        {
+          "column": "E",
+          "value": "workbook Limits R13 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L70 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L113"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All descriptions together in Codex (the catalog)"
+        },
+        {
+          "column": "B",
+          "value": "At most 2% of the context window, or 8,000 characters when the window size is unknown. The skills.max_context_tokens setting is capped at 10,000."
+        },
+        {
+          "column": "C",
+          "value": "Codex: CLI, desktop app and IDE extension."
+        },
+        {
+          "column": "D",
+          "value": "Codex shortens descriptions first, then drops skills with a warning. On 2026-10-01 the desktop catalog was over budget and every description was cut to 150 characters, so the 'Use when…' text at the end was lost."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L33 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L56 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L70 ; workbook Limits R13 ; https://learn.chatgpt.com/docs/config-file/config-reference (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Upload package size"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: Anthropic states no size or file-count limit; secondary sources say 30 MB and 200 files (NOT_PROVEN). The ZIP holds the skill folder, not loose files. ChatGPT: no published upload limit; OpenAI's API limits are 50 MB per ZIP, 500 files and 25 MB per file."
+        },
+        {
+          "column": "C",
+          "value": "Claude app uploads and ChatGPT Skills tab uploads."
+        },
+        {
+          "column": "D",
+          "value": "Not stated by either app."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L69 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L151 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L30 ; https://developers.openai.com/api/docs/guides/tools-skills (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. How many skills to keep on"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "where"
+        },
+        {
+          "column": "B",
+          "value": "how many"
+        },
+        {
+          "column": "C",
+          "value": "sheet rule or recommendation"
+        },
+        {
+          "column": "D",
+          "value": "why"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Every AI together"
+        },
+        {
+          "column": "B",
+          "value": "40 active skills at most (40 × 200 characters = 8,000 characters of list). Group or switch off the rest."
+        },
+        {
+          "column": "C",
+          "value": "The sheet's rule: the owner's limit on the Limits tab, checked by repo-conform. W07 is applied (the skills cap, then vendoring, 2026-10-01): Codex has 63 enabled, 58 of them from ~/.agents/skills, above the 40 cap by Director decision 3; a fresh Claude Code terminal session lists 67. Counts per surface: section 7."
+        },
+        {
+          "column": "D",
+          "value": "Picking the right skill is over 90% with 20 or fewer skills and about 20% at 200; about 3 points are lost each time the library doubles."
+        },
+        {
+          "column": "E",
+          "value": "workbook Limits R13 ; workbook Projects R14 ; ~/.agents/skills/repo-conform/references/checks.md L11 ; workbook Evidence R17 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W07 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L3 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G18.json ; workbook Limits R18"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex"
+        },
+        {
+          "column": "B",
+          "value": "30 enabled or fewer, plus explicit-only (allow_implicit_invocation: false) for big, rarely used skills. Start from the 19 skills Codex opened in Sep–Oct, the 4 cloud skills and the rare ones Alex names."
+        },
+        {
+          "column": "C",
+          "value": "Recommendation from r3, not the sheet's rule. It is stricter than the sheet's 40, so the two disagree; this tab keeps 40 as the rule and shows 30 as the Codex target."
+        },
+        {
+          "column": "D",
+          "value": "An estimate: the desktop catalog spent about 21,600 characters on 102 entries. The same budget over 30 entries leaves about 700 characters each, so the descriptions measured on 2026-10-01 (median 323 characters) would fit whole."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L99–L102 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L130"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT cloud (web, phone, desktop Chat)"
+        },
+        {
+          "column": "B",
+          "value": "4 skills, 5 at most: verify-before-done, research-with-sources, integration-fit-and-source-of-truth, transcript-to-workflow-opportunity-mapper, and optionally mission-intake-and-approval-gate."
+        },
+        {
+          "column": "C",
+          "value": "Recommendation from r3. The first two need a rewrite first, because they hard-code repo paths (work/<job>/, checks.md) and subagents. transcript-to-workflow-opportunity-mapper must move into ~/.agents/skills first. Three custom cloud skills already exist there (create-local-meta-ads, fulfill-hot-tub-launch, higgsfield-hot-tub-scene-variation), found by the 2026-10-01 phone test, so they count toward the 5."
+        },
+        {
+          "column": "D",
+          "value": "Only skills that work without the Mac belong in the cloud. Keep out the controller skills (alex-director, alex-workflow-conductor), CLI skills (composio-cli, meta-ads (Composio app route)), repo-file skills (repo-conform, capture-lessons, intake-triage, tool-card, weekly-tuneup, fan-out) and local media skills."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L77 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L82–L97 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L129 ; work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_chatgpt-mobile-parity-test.md ; agents-home 2c53ed3"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app uploads"
+        },
+        {
+          "column": "B",
+          "value": "No number is set. Upload the agreed set only, and leave out skills that need the Mac (composio-cli, repo-conform, weekly-tuneup and others)."
+        },
+        {
+          "column": "C",
+          "value": "Recommendation from r4. Sources disagree: the house README says the 7 universal skills need uploading once per account, while r3 and r4 keep repo-bound ones (weekly-tuneup, capture-lessons, intake-triage, tool-card, fan-out) out of chat. This tab follows r3 and r4; S12 leaves the choice to Alex."
+        },
+        {
+          "column": "D",
+          "value": "A Mac-only skill uploaded to the app shows up in web chat, the phone and Cowork, where it can't work and misleads."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L93 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L129 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L18–L20 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L42–L43 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L95 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S12"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Each task"
+        },
+        {
+          "column": "B",
+          "value": "2 or 3 skills."
+        },
+        {
+          "column": "C",
+          "value": "Research finding, also written into the house README ('past about 4 per task, results drop')."
+        },
+        {
+          "column": "D",
+          "value": "SkillsBench: 2–3 skills gave the biggest gain, 4 or more much less, and 'comprehensive' skills did worse than none. The exact numbers differ between the Evidence tab (+17.8, +18.6, +5.9) and r3 (+18.0, +19.0, +10.1); the direction is the same, so this tab uses only the direction."
+        },
+        {
+          "column": "E",
+          "value": "workbook Evidence R17 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L74 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L24–L25"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Plugin skill packs (Claude Code and the Claude app)"
+        },
+        {
+          "column": "B",
+          "value": "Uninstall unused plugins. The approved plan (L04) keeps up to 4 of the 15 Claude app plugins and uninstalls 11."
+        },
+        {
+          "column": "C",
+          "value": "The sheet's rule (Evidence tab: turning off unused plugin skill packs is the biggest skills lever) plus approved recommendation L04. The uninstall is Alex's clicks: Claude desktop app > Customize > Plugins."
+        },
+        {
+          "column": "D",
+          "value": "The 15 plugins bring about 170 skills and 76 MCP servers (connections to outside apps) into every Claude Code session. About 320 skills were visible to Claude in one session, eight times the 40 cap."
+        },
+        {
+          "column": "E",
+          "value": "workbook Evidence R17 ; workbook Limits R13 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row L04 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L3 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L84"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. How to prove a skill loaded"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "surface"
+        },
+        {
+          "column": "B",
+          "value": "test"
+        },
+        {
+          "column": "C",
+          "value": "pass when"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Any surface (setup)"
+        },
+        {
+          "column": "B",
+          "value": "Add one canary line (a marker) at the end of the skill's body, not its description: 'When you use this skill, end your reply with [skill:<name> <date>]'. Change the date each time the skill is updated. Record every result as date | surface | prompt | canary Y/N in the job's checks.md."
+        },
+        {
+          "column": "C",
+          "value": "The marker in a reply proves the whole SKILL.md loaded, not just its name and description. The marker means the same thing in the Claude app and Claude Code: both load only a skill's name and description until it is used, then the whole SKILL.md. No T2 to T4 run is recorded on either surface yet."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L125 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L135 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L153 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S15. The canary test\" ; https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview (read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT web and phone"
+        },
+        {
+          "column": "B",
+          "value": "T1: Plugins > Skills tab (or the plugin's details), then type @verify in the composer. T2: new chat, @verify-before-done plus a 3-line brief and draft. T3: new chat with no @: 'Before I send this to the client, check it against the brief' plus text. T5: repeat T3 on the phone, and T2 if @ works there."
+        },
+        {
+          "column": "C",
+          "value": "T1: the skill is listed. T2, T3 and T5: the marker appears (T2 proves an explicit load, T3 an implicit trigger). Phone result 2026-10-01 (one-shot parity test, not the canary): the skills list came back with 37 skills (T7 PASS with gaps)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L137–L143 ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## ChatGPT mobile\""
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Any surface (negative test)"
+        },
+        {
+          "column": "B",
+          "value": "T4: new chat, 'Write a haiku about Mondays'. For a stricter check, use about 20 prompts: half should trigger the skill and half shouldn't."
+        },
+        {
+          "column": "C",
+          "value": "No marker on the haiku, so the skill doesn't fire when it shouldn't."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L142 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L151"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex (desktop app or CLI)"
+        },
+        {
+          "column": "B",
+          "value": "T6: run codex debug prompt-input --disable network_proxy, then $verify-before-done in a session. Then look in the session log (~/.codex/sessions/…jsonl)."
+        },
+        {
+          "column": "C",
+          "value": "The skill is listed once, its catalog text still contains 'Use when', the marker appears, and the log records the SKILL.md read."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L144 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L147"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code (terminal and desktop Code tab)"
+        },
+        {
+          "column": "B",
+          "value": "Run /skills. After the terminal update to 2.1.273+, also run /plugin. /doctor estimates the skill listing's context cost."
+        },
+        {
+          "column": "C",
+          "value": "/skills lists each name once. After the update, Claude app skills appear under 'claude.ai sync' and /plugin shows the synced plugins. Result 2026-10-01: T7 FAIL in the first run (322 skills, 11 repeated names); pending after the skills cap (250 skills, 2 repeated names; what clears it is on the Tests tab)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L111–L117 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-conductor.md \"## Results\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"T7 re-run\""
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app (web, desktop, phone)"
+        },
+        {
+          "column": "B",
+          "value": "Check that Customize > Skills is not greyed out (that proves code execution is on). After an upload, test in a fresh conversation. On the phone, open a new chat and look for the skill in the / menu. After a re-upload, the agent compares the synced copies' hashes (file fingerprints) with the ~/.agents sources."
+        },
+        {
+          "column": "C",
+          "value": "The skill is listed and its synced copy matches the source."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L80 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L95 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L43 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S04 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W06"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The Mac (one-home check)"
+        },
+        {
+          "column": "B",
+          "value": "Run python3 ~/.agents/tools/unify/check.py. It only reads."
+        },
+        {
+          "column": "C",
+          "value": "Exit code 0. It exits 1 when something needs attention, such as a broken Claude link, a real Claude folder hiding a ~/.agents skill, a missing Codex off-switch or uncommitted changes in ~/.agents."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/unify/check.py ; ~/.agents/tools/unify/check.py L20–L24 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L52–L58"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. House rules"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "do or don't"
+        },
+        {
+          "column": "B",
+          "value": "rule"
+        },
+        {
+          "column": "C",
+          "value": "why"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Keep one real folder per skill: ~/.agents/skills/<name> for shared skills, the project's .agents/skills/<name> for project skills. Each AI that needs it gets a link, never a second copy. A plain skills/ folder is invisible to every AI."
+        },
+        {
+          "column": "C",
+          "value": "Copies drift: the Projects tab counted 71 skills kept as 3 separate copies. Codex shows same-name skills side by side instead of merging them, and look-alike options cause wrong picks."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L14–L16 ; ~/.agents/skills/repo-conform/SKILL.md L80–L83 ; workbook Projects R4 ; workbook Projects R29 ; workbook Evidence R18"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Don't"
+        },
+        {
+          "column": "B",
+          "value": "Don't copy a global skill into a project, even an identical one. The 7 universal skills (intake-triage, research-with-sources, fan-out, verify-before-done, capture-lessons, tool-card, weekly-tuneup) stay in ~/.agents/skills. Don't keep copies in ~/.codex/skills (only Codex's own .system folder stays there), and don't install with $skill-installer."
+        },
+        {
+          "column": "C",
+          "value": "A project copy of a global skill makes picks worse even when identical, so repo-conform archives such copies. $skill-installer would create a third home."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L18–L20 ; ~/.agents/skills/repo-conform/SKILL.md L35–L36 ; ~/.agents/skills/repo-conform/SKILL.md L82–L83 ; ~/.agents/tools/unify/unify.py L8 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L65"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "One delivery per skill in Claude Code. A skill uploaded to the Claude app gets no ~/.claude/skills link; a Claude-Code-only skill keeps its link. Follow r4's order: uninstall unused plugins, update the terminal to 2.1.273+, then remove the links."
+        },
+        {
+          "column": "C",
+          "value": "Same-name skills show twice (/name and /anthropic-skills:name), which costs list space and causes misfires. Sources disagree: the house README links the universal skills in ~/.claude/skills and also uploads them once per account, which would show each twice. This tab keeps r4's one-delivery rule, which W06 also applies to the Director and conductor."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L21 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L77 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L114–L117 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L127 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L11 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L42–L43 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W06"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Write the description trigger first, in 200 characters or fewer: 'Use when Y. Does X.' The trigger words belong in the first 150 characters."
+        },
+        {
+          "column": "C",
+          "value": "200 characters is the Claude app's upload limit, so one source copy fits every AI. Codex shortens descriptions from the end when the skill list is long: on 2026-10-01 it cut every description to 150 characters and the 'Use when' part was lost (only 16 of 84 skills started with the trigger). The house README switched from 'Does X. Use when Y.' to trigger first in repo-conform 2.2 (2026-10-01), as r3 recommended."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L4–L5 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L30–L31 ; workbook Limits R12 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L91 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L39 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L59 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L70 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L103 ; agents-home 1c10184"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "The folder name equals name. Frontmatter (the settings block at the top of SKILL.md) uses only name, description, license, compatibility, metadata and allowed-tools; anything else (version, slug, tools) goes under metadata. The body ends with a Gotchas section, keeps detail in references/, names tools by their Composio slug or full MCP name, and holds no keys, passwords or client secrets."
+        },
+        {
+          "column": "C",
+          "value": "On 2026-10-01, 9 skills had extra top-level keys and one name didn't match its folder; r3 lists both as spec problems."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L29 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L32–L36 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L61"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Build every upload ZIP from ~/.agents: repo-conform's audit.py --zips writes one ZIP per skill, with the folder at the ZIP root, to system/skill-zips/. Never edit an uploaded copy by hand: change the source, rebuild, re-upload."
+        },
+        {
+          "column": "C",
+          "value": "Uploads kept apart from the source drift: on 2026-10-01, 6 uploaded Claude app copies differed from their sources, and the Claude-edition uploads still named removed routes such as Ref and the old Exa tools. The app batch rebuilt 6 uploads from ~/.agents (the Director, the conductor and 4 policy skills) with zips/build_zips.py and replaced them in place; each zip's SKILL.md is byte-identical to its source."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L13 ; ~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L42–L43 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S04 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S10 ; work/2026-10-01_setup-playbook/notes/app-batch.md \"build_zips.py now also lists\" ; work/2026-10-01_setup-playbook/zips/build_zips.py"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Don't"
+        },
+        {
+          "column": "B",
+          "value": "Don't install a third-party skill you haven't read end to end, scripts included. Don't install a skill an AI invented from scratch: make skills only from a run that passed its checks, then have a person review it."
+        },
+        {
+          "column": "C",
+          "value": "Snyk found critical issues in 13.4% of about 4,000 public skills (Feb 2026). Skills an AI wrote for itself scored 8–11.5 points below no skills; curated skills gained +16.6."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L45–L47 ; workbook Evidence R16 ; workbook Projects R36"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "List the skills a project uses in its map's short 'which skill for which job' table (AGENTS.md)."
+        },
+        {
+          "column": "C",
+          "value": "In Vercel's test an on-demand skill went unopened in 56% of runs and scored 53%; a short always-loaded index pointing to the docs scored 100%."
+        },
+        {
+          "column": "D",
+          "value": "workbook Evidence R15 ; workbook Projects R35"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Don't"
+        },
+        {
+          "column": "B",
+          "value": "Don't change a shared skill or the skills READMEs without Alex's yes. Propose the change in system/lessons.md, and snapshot the file before an approved edit."
+        },
+        {
+          "column": "C",
+          "value": "They are control files under AGENTS.md rule 5."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/.agents/skills/README.md L4–L5 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L105 ; AGENTS.md"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. State on 2026-10-01 and open items"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "item"
+        },
+        {
+          "column": "B",
+          "value": "state on 2026-10-01"
+        },
+        {
+          "column": "C",
+          "value": "what is open, and who acts"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills in ~/.agents/skills"
+        },
+        {
+          "column": "B",
+          "value": "122 skill folders and 129 SKILL.md files; 7 of the files are template copies inside repo-conform/assets/universal-skills. After the spp-p4a commit, check.py counted 123 canonical skills."
+        },
+        {
+          "column": "C",
+          "value": "Nothing to do. Other counts use other methods: the Limits tab counted 130–132 local skills, and the Skills tab has 137 rows because it also lists skills that live only in ~/.claude/skills (for example ad-audio-polish)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L55 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L53 ; workbook Limits R9 ; workbook Skills R2"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex catalog and off-switches"
+        },
+        {
+          "column": "B",
+          "value": "Desktop catalog: 102 entries (91 from ~/.agents/skills with 7 of them twice, 4 system, 7 plugin), 21,613 characters, every description cut to 150. CLI: 96 entries. Codex opened only 19 of 84 unique skills in Sep–Oct. Off-switches after the L09 fix: 93 → 54 (39 dead ones dropped, 7 repointed so the template copies are off), 0 missing paths. Live test T7 (2026-10-01 18:36Z, the bundled Codex 0.159.2): 88 skills from 2 roots (~/.agents/skills and ~/.codex/skills/.system), 0 duplicates and no plugin skills, because the [plugins] table was empty. After the restore (codex exec, 19:10Z): 97 skills with 0 repeated names, including exactly the 6 compound-engineering skills; off-switches 54 → 91."
+        },
+        {
+          "column": "C",
+          "value": "Counts disagree: W07 counted 156 catalog entries in the earlier live-state read; parity-diff L09 counted 32 dead off-switches and r3 counted 46. This tab uses the fix notes, the newest and checked with check.py. The live T7 run proved it: no skill is listed twice. If the repo-conform templates are renamed, rerun check.py and drop those 7 off-switches."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L56–L58 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L60 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L144 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L209 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W07 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row L09 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L30 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L53 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L83–L84 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md \"Results\" ; work/2026-10-01_setup-playbook/notes/codex-restore.md \"## Proof\""
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Plugin sets changed by a cleanup (root cause found)"
+        },
+        {
+          "column": "B",
+          "value": "At 12:47:01 EDT on 2026-10-01 one script run from Alex's Cursor chat rewrote ~/.codex/config.toml (19 plugins removed, 20 → 1) and turned Superpowers off in Claude Code (`claude plugin list --json` at 19:09Z shows it disabled; the 6.3.0 bundle is still on disk). It came from his \"clean up the live connections\", read against SOP R4's two-connector rule while App decisions still carried the W01 removal lists. Uninstalls in the ChatGPT app at 12:54–12:56 then removed Codex's real Superpowers source and the compound-engineering marketplace. Earlier notes put the change at 12:22–12:47; 12:22:42 is only the old file's time, kept by the backup copy. The approved I14 line is still in ~/.agents/instructions/claude.md L5 and ~/.claude/CLAUDE.md L7. Later on 2026-10-01 Claude Code's Superpowers plugin was turned on again, then off for good once its skills were vendored into ~/.agents/skills (11 links), and Codex got 5 Superpowers skills (using-superpowers off) and the 6 compound-engineering skills back."
+        },
+        {
+          "column": "C",
+          "value": "Restored 2026-10-01 (partially verified): in Codex the browser and computer-use plugins, 5 Superpowers skills with using-superpowers off (policy.txt), exactly the 6 compound-engineering skills, and Messages with its send tool removed; Codex's own inventory confirms it. Running desktop threads pick this up only after a reload or in a new thread. In Claude Code the Superpowers plugin is off and its skills come from the vendored links (AI app settings, Superpowers row); the I14 line still puts the conductor's rule first on Director missions. Still off by decision: Codex's Orgo MCP (the orgo_op.py command route covers it)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 1. Actor and intent\" ; work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 2. Timeline\" ; work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 4. Does anything we rely on break?\" ; work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 5. Restore blocks\" ; ~/Alex-Director/mission-graphs/mission-setup-playbook-parity.md ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L27 ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S16. Is superpowers on\" ; work/2026-10-01_setup-playbook/notes/codex-restore.md \"## Result\" ; work/2026-10-01_setup-playbook/notes/codex-restore.md \"## Parked: NOT_PROVEN\" ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md \"## 5. Superpowers re-enabled\" ; ~/.agents/tools/skill-hygiene/policy.txt ; agents-home ae2136d ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L237 ; work/2026-10-01_setup-playbook/notes/replication-retest-final.md §3"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code"
+        },
+        {
+          "column": "B",
+          "value": "Now (T7 final run, 2026-10-01 20:46–20:54Z): the terminal CLI 2.1.287, signed in, lists 67 skills with no name twice: 48 unprefixed (29 links plus built-ins) and 19 claude.ai skills. Its MCP servers are claude.ai Claude Docs, claude.ai Composio and playwright; no claude.ai plugin server loads. After Claude restarted (2026-10-01, about 21:00 EDT), a fresh desktop session passed T7: 83 skills in 6 groups, both thin pointers once, and only schedule twice (the built-in and anthropic-skills:schedule, an exception waiting on Alex's optional switch-off). The 12 removed plugin groups are gone, and only the desktop-commander and pdf-viewer plugin servers load. cowork-plugin-management still shows 2 skills: it has no row on claude.ai (a desktop built-in), and where the desktop loads it from is NOT_PROVEN."
+        },
+        {
+          "column": "C",
+          "value": "Done: the desktop T7 passed after the restart (see the state column)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L35–L36 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L111 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L114–L115 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L126 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W07 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row L04 ; workbook Limits R13 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md \"Findings for the workbook and the Director\" ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-conductor.md \"## Results\" ; work/2026-10-01_setup-playbook/notes/sources-17.md \"S17. Is the Claude Code terminal\" ; work/2026-10-01_setup-playbook/notes/live-claude-code.md L13 ; work/2026-10-01_setup-playbook/notes/hard-rule-checks.md \"## 5. Superpowers re-enabled\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md L33 ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"T7 re-run\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"What changed\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Open items\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"T7 final run on all three surfaces\" ; work/2026-10-01_setup-playbook/notes/transcripts/claude-cli-t7-final-spp-p11a ; work/2026-10-01_setup-playbook/notes/transcripts/claude-conductor/T7-final-desktop-spp-p11a.md ; work/2026-10-01_setup-playbook/notes/transcripts/claude-conductor/T7-desktop-after-restart-spp-p11a.md ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Desktop T7 after the restart\""
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills that differ between ~/.claude and ~/.agents"
+        },
+        {
+          "column": "B",
+          "value": "At the spp-p4a check, 5 skills existed as different real folders in ~/.claude/skills and ~/.agents/skills: clip-stitcher, first-principles-speed-analyzer, integration-fit-and-source-of-truth, internet-skill-finder, plain-english-repo-explainer. Later on 2026-10-01 commit 294913c merged the Claude-side variants into ~/.agents and linked them, and check.py now flags any diverging or duplicate real Claude copy. transcript-to-workflow-opportunity-mapper lived only in ~/.claude/skills, so Codex couldn't see it."
+        },
+        {
+          "column": "C",
+          "value": "Done for S10 (294913c). To confirm on any machine, run ~/.agents/tools/unify/check.py: it exits 1 if a real Claude folder differs from or duplicates a ~/.agents skill. Still open: move transcript-to-workflow-opportunity-mapper into ~/.agents/skills before it is uploaded anywhere (r3)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/parity-diff.csv row S10 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L3 ; work/2026-10-01_setup-playbook/notes/fix-instructions.md L52 ; ~/.agents/tools/unify/unify.py L9–L11 ; ~/.agents/tools/unify/check.py L20 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L65 ; agents-home 294913c"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director and conductor skills"
+        },
+        {
+          "column": "B",
+          "value": "Live home: ~/.agents/skills/alex-director and ~/.agents/skills/alex-workflow-conductor (real folders), Director 2.7 and conductor 2.5. Codex loads them once each from there (T7 final run, 2026-10-01). Claude loads the claude.ai thin pointers (W06, uploaded as v5 on 2026-10-01), which point at the ~/.agents files: the 2.1.287 terminal lists each once (T7 PASS). ~/.claude/skills and ~/.cursor/skills have no entry for either; the 2 stray links were removed at 20:07:53Z. The desktop app's T7 passed after the restart: each pointer once."
+        },
+        {
+          "column": "C",
+          "value": "W06 is done: the thin pointers replaced the old Claude edition. Re-upload after each change (the agent builds the ZIPs, Alex uploads them, the agent checks the synced hashes). Still open: the desktop T7 after the next restart. Skills R7 and R8 and Director + Conductor R138 match W06 and V17."
+        },
+        {
+          "column": "D",
+          "value": "workbook Director + Conductor R135 ; workbook Director + Conductor R136 ; workbook Director + Conductor R137 ; workbook Director + Conductor R138 ; workbook Director + Conductor R139 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row W06 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row V17 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S04 ; workbook Skills R7 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L60 ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-codex.md \"Results\" ; work/2026-10-01_setup-playbook/notes/live-tests-claude-code-conductor.md \"## Results\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"T7 re-run\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Open items\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"T7 final run on all three surfaces\" ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Removed 20:07:53Z\" ; work/2026-10-01_setup-playbook/notes/app-batch.md \"Summary\" ; workbook Skills R8 ; work/2026-10-01_setup-playbook/notes/transcripts/claude-conductor/T7-desktop-after-restart-spp-p11a.md ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Desktop T7 after the restart\" ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03.md §8 ; agents-home cca6959 ; agents-home 22a188e ; agents-home a28cacd"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app"
+        },
+        {
+          "column": "B",
+          "value": "Uploads: 9 on (6 built from ~/.agents/skills, 3 others) and 6 switched off. From Anthropic and the 2 kept plugins: 14 on the web list (docs, google-workspace, skill-creator, PDF Viewer's 5 and Desktop Commander's 6), plus desktop built-ins. native-fix-research and hermes-boss-director: their home is ~/.agents/skills since 2026-10-01 (bfeacb2), and the uploads are older copies until Alex re-uploads the 2 zips (routes fixed in agents-home 340a34f and af3b811)."
+        },
+        {
+          "column": "C",
+          "value": "The thin pointers and 4 rebuilt uploads are live (app batch); D4's 6 old uploads are switched off. Upgrade path, after a one-skill pilot: one private plugin in a GitHub marketplace repo, so a git push updates web chat, desktop, Cowork and Claude Code with no re-uploads."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L34 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L94 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L123 ; work/2026-10-01_setup-playbook/notes/parity-diff.csv row S12 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G18.json ; work/2026-10-01_setup-playbook/notes/app-batch.md \"Summary\" ; agents-home bfeacb2 ; work/2026-10-01_setup-playbook/notes/g18-g19-content.md ; work/2026-10-01_setup-playbook/notes/hermes-skills-routes.md \"## For Alex\" ; agents-home 340a34f ; agents-home af3b811 ; work/2026-10-01_setup-playbook/workbook-updates.md L169"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT"
+        },
+        {
+          "column": "B",
+          "value": "The ChatGPT account has 3 custom cloud skills: create-local-meta-ads, fulfill-hot-tub-launch and higgsfield-hot-tub-scene-variation. The 2026-10-01 phone test found them; research 4 had found none, because Alex's 5 private plugins have skills: []. The phone lists 37 skills in all, including the Composio plugin's skill and the 1Password Environments skill, and none of the ~/.agents skills, as expected. NOT_PROVEN: which workspace the phone uses and how the 3 were added (the Skills tab or a plugin)."
+        },
+        {
+          "column": "C",
+          "value": "Then Route A (Skills tab upload) or Route B (a skills-only plugin from @plugin-creator), then the tests in section 4. After Route B, check that Codex doesn't list a skill twice (the plugin copy plus the ~/.agents copy). Their home has been ~/.agents/skills since 2026-10-01 (agents-home e7916f1). In ChatGPT's record, Fulfill Hot Tub Launch's safety check shows 'blocked', and latest and default versions differ (4 / 1; higgsfield 2 / 1). What either means at run time is NOT_PROVEN."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L10 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L62 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L109–L123 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L159–L161 ; work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_chatgpt-mobile-parity-test.md ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## ChatGPT mobile\" ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §1 ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L152"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Other NOT_PROVEN items"
+        },
+        {
+          "column": "B",
+          "value": "NOT_PROVEN: whether syncClaudeAiSkills: false also affects the desktop Code tab. Proof needed: one test after the terminal update. NOT_PROVEN: the Codex desktop Skills page count after the config rewrite (134 was seen before it). Proof needed: Desktop > Skills, host Local. (Uploaded Claude skills on the phone were proven on 2026-10-01: Claude mobile listed them.)"
+        },
+        {
+          "column": "C",
+          "value": "Alex or a fresh session runs each check, and the result goes in checks.md."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L95 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L147 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L149 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L163 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L153 ; work/2026-10-01_setup-playbook/notes/conductor-ui-lane.md \"## Claude mobile\""
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Steps that depend on someone remembering"
+        },
+        {
+          "column": "B",
+          "value": "Re-uploading a skill to the Claude app or ChatGPT after its ~/.agents source changes; bumping the canary date with each update; checking that ~/.claude/skills/composio-cli is still a link after any composio login, since login installs its own copy. Also: re-uploading create-local-meta-ads, fulfill-hot-tub-launch or higgsfield-hot-tub-scene-variation to ChatGPT after an edit in ~/.agents. Due now: build_zips.py builds hermes-boss-director and native-fix-research too (8 of 8 zips, 2026-10-02); Alex re-uploads work/2026-10-01_setup-playbook/zips/hermes-boss-director.zip and native-fix-research.zip in the Claude app."
+        },
+        {
+          "column": "C",
+          "value": "Open until the plugin route or a tune-up drift check exists."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L110 ; work/2026-10-01_chatgpt-claude-research/notes/r4-claude-setup.md L135 ; work/2026-10-01_chatgpt-claude-research/notes/r3-skills-chatgpt.md L125 ; work/2026-10-01_setup-playbook/workbook-updates.md L154 ; work/2026-10-01_setup-playbook/notes/hermes-skills-routes.md \"## For Alex\" ; work/2026-10-01_setup-playbook/notes/housekeeping-final-a.md §5 ; work/2026-10-01_setup-playbook/workbook-updates.md L164 ; work/2026-10-01_setup-playbook/workbook-updates.md L169"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7. Active skills per surface (measured 2026-10-01, G18)"
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "surface"
+        },
+        {
+          "column": "B",
+          "value": "active now"
+        },
+        {
+          "column": "C",
+          "value": "how it was counted"
+        },
+        {
+          "column": "D",
+          "value": "where they come from"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex (app and CLI)"
+        },
+        {
+          "column": "B",
+          "value": "63 enabled: 58 from ~/.agents/skills (24 own + 34 vendored) and 5 Codex system skills. A codex exec session listed 61 or 62 (it showed 3 or 4 of the system skills); the 58 from ~/.agents/skills were the same in every count. 0 names repeated."
+        },
+        {
+          "column": "C",
+          "value": "The Codex app-server inventory with forceReload, 20:41–20:45Z (spp-p16a). Re-derived at about 21:10Z from the 160 skill folders and the 166 off-switches in config.toml: 58 on, 102 off. After spp-p34a (22:55Z): 162 folders, 168 off-switches, 58 on and 104 off; a fresh app-server probe still lists 63 enabled, 0 repeated (notes/transcripts/spp-p34a/codex-probe/). After spp-c15 (21:41 local): 164 folders, 171 off-switches, 58 on and 106 off; a fresh app-server probe still lists 63 enabled, 0 repeated (notes/transcripts/spp-c15/codex-probe/). After spp-p37a (2026-10-02): 139 off-switches. The 32 that pointed at missing files (30 compound-engineering 3.30.2 cache, the retired firecrawl skill, the uninstalled 1Password plugin's cache) are gone; a fresh app-server probe lists the same 63 enabled, 0 repeated; check.py OK."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills (agents-home) and ~/.codex/skills/.system (comes with Codex)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-vendoring.md L352 ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L373 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L164 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L171–L173 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5 ; work/2026-10-01_setup-playbook/notes/g18-g19-content.md \"## G18: which copy, and what was checked\" ; work/2026-10-01_setup-playbook/notes/spp-c15-chatgpt-skills.md \"## Codex: duplicate check and off-switches\" ; work/2026-10-01_setup-playbook/workbook-updates.md L155 ; work/2026-10-01_setup-playbook/notes/housekeeping-final-b.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L173"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude Code (terminal 2.1.287)"
+        },
+        {
+          "column": "B",
+          "value": "67 in a fresh session: 29 links in ~/.claude/skills (18 own + 11 vendored Superpowers), 19 Claude Code built-ins and 19 skills synced from claude.ai. Plugins: composio and 3 built-in ones; none adds a skill here. 0 names repeated (T7 PASS). The 49 counted at 20:39Z came from the older 2.1.251 terminal, which couldn't sync claude.ai skills."
+        },
+        {
+          "column": "C",
+          "value": "The init event of a fresh claude -p session at 20:47Z (T7 final). The desktop app after its restart: 83 in a fresh session (T7 PASS; only schedule twice)."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills through links, the claude.ai account through its sync, and Claude Code itself."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-cap.md L165 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L166 ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L319 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5 ; work/2026-10-01_setup-playbook/notes/transcripts/claude-conductor/T7-desktop-after-restart-spp-p11a.md ; work/2026-10-01_setup-playbook/notes/skills-cap.md \"Desktop T7 after the restart\""
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Claude app (web, desktop chat, phone)"
+        },
+        {
+          "column": "B",
+          "value": "Uploads: 9 on (6 built from ~/.agents/skills, 3 others) and 6 switched off. From Anthropic and the 2 kept plugins: 14 on the web list (docs, google-workspace, skill-creator, PDF Viewer's 5 and Desktop Commander's 6), plus desktop built-ins."
+        },
+        {
+          "column": "C",
+          "value": "Fresh page loads 20:24–20:29Z (spp-p15a). This Mac's sync cache at 20:38:23Z holds 19 skills: the 9 uploads, 6 Anthropic examples and 4 Anthropic document skills."
+        },
+        {
+          "column": "D",
+          "value": "The claude.ai account (uploads), Anthropic, and the PDF Viewer and Desktop Commander plugins."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/app-batch.md L202–L212 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ChatGPT (web, desktop, phone)"
+        },
+        {
+          "column": "B",
+          "value": "37 visible on the phone: 3 custom cloud skills (create-local-meta-ads, fulfill-hot-tub-launch, higgsfield-hot-tub-scene-variation), the official Composio plugin's skill, the 1Password Environments skill and OpenAI's own. None of the ~/.agents skills, as designed. The remote Superpowers plugin stays installed for the remote Codex cloud environment; its 15 skills are switched off on this Mac."
+        },
+        {
+          "column": "C",
+          "value": "The phone parity test on 2026-10-01 (about 19:05Z), and Director decision 1 in spp-p16a."
+        },
+        {
+          "column": "D",
+          "value": "The ChatGPT account. Alex made the 3 custom skills in ChatGPT ('Created by me', dated Jul 10 to Aug 15, 2026), and their home is ~/.agents/skills since agents-home e7916f1: sections 10 and 11."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/transcripts/claude-mobile/2026-10-01_chatgpt-mobile-parity-test.md L16–L23 ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L332 ; workbook Skills, where they live R62 ; work/2026-10-01_setup-playbook/tabs/gap-facts/G18-addendum.json ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §3 ; agents-home e7916f1"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cursor"
+        },
+        {
+          "column": "B",
+          "value": "Outside this mission. ~/.cursor/skills holds 79 entries, 17 of them links into ~/.agents/skills. Four skills still live only there (section 3)."
+        },
+        {
+          "column": "C",
+          "value": "Phase A listing of spp-p11a."
+        },
+        {
+          "column": "D",
+          "value": "~/.cursor/skills."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-cap.md L66 ; workbook Rebuild from zero R48"
+        }
+      ]
+    },
+    {
+      "row": 74,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8. Where each active skill lives, one home each (G18)"
+        }
+      ]
+    },
+    {
+      "row": 75,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skills"
+        },
+        {
+          "column": "B",
+          "value": "count"
+        },
+        {
+          "column": "C",
+          "value": "the one home"
+        },
+        {
+          "column": "D",
+          "value": "how each surface gets them"
+        },
+        {
+          "column": "E",
+          "value": "how a rebuild brings them back"
+        },
+        {
+          "column": "F",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 76,
+      "cells": [
+        {
+          "column": "A",
+          "value": "aimoney-search, build-ghl-systems, capture-lessons, cloudflare, composio-cli, fan-out, first-principles-project-auditor, hermes-team-setup, intake-triage, javar-add-tool, meta-ads, preserve-and-release-website, repo-conform, research-with-sources, talk-with-alex, tool-card, verify-before-done, weekly-tuneup"
+        },
+        {
+          "column": "B",
+          "value": "18"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/<name> (agents-home)."
+        },
+        {
+          "column": "D",
+          "value": "Codex reads the folder. Claude Code reads a link ~/.claude/skills/<name>. Not uploaded to claude.ai."
+        },
+        {
+          "column": "E",
+          "value": "Clone agents-home (step 3.1). Make the 18 links with ln -s ~/.agents/skills/<name> ~/.claude/skills/<name>. Give these no off-switch."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-cap.md L99–L105 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 77,
+      "cells": [
+        {
+          "column": "A",
+          "value": "alex-director, alex-workflow-conductor, first-principles-speed-analyzer, integration-fit-and-source-of-truth, mission-intake-and-approval-gate, plain-english-repo-explainer"
+        },
+        {
+          "column": "B",
+          "value": "6"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/<name> (agents-home). For alex-director and alex-workflow-conductor the Claude copy is the thin pointer claude-edition.md in the same folder."
+        },
+        {
+          "column": "D",
+          "value": "Codex reads the folder. Claude gets the claude.ai upload, synced into Claude Code; there is no ~/.claude/skills link, so the name loads once (W06)."
+        },
+        {
+          "column": "E",
+          "value": "python3 work/2026-10-01_setup-playbook/zips/build_zips.py builds the 6 zips; upload each in claude.ai (Customize > Skills > Add, or the skill's ⋮ > Replace). Code execution must be on (Settings > Capabilities)."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/zips/build_zips.py L1–L12 ; work/2026-10-01_setup-playbook/notes/app-batch.md L124 ; work/2026-10-01_setup-playbook/notes/app-batch.md L130 ; work/2026-10-01_setup-playbook/notes/app-batch.md L142–L147 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row W06"
+        }
+      ]
+    },
+    {
+      "row": 78,
+      "cells": [
+        {
+          "column": "A",
+          "value": "brainstorming, dispatching-parallel-agents, systematic-debugging, test-driven-development, verification-before-completion (triggerable); executing-plans, finishing-a-development-branch, requesting-code-review, subagent-driven-development, using-git-worktrees, writing-plans (dependency)"
+        },
+        {
+          "column": "B",
+          "value": "11"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/<name>, a pinned copy of Superpowers v6.4.2 (github.com/obra/superpowers, tag v6.4.2, MIT). vendor-lock.json records each file's hash, so the source is now checked."
+        },
+        {
+          "column": "D",
+          "value": "Codex reads the folder; Claude Code through 11 links. The Superpowers plugin is disabled in Claude Code and switched off on this Mac in Codex."
+        },
+        {
+          "column": "E",
+          "value": "Comes with agents-home. Make the 11 links; give these no off-switch."
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/skill-hygiene/vendor-lock.json ; ~/.agents/tools/skill-hygiene/vendor-lock.json \"obra/superpowers\" ; agents-home 9de9e66 ; work/2026-10-01_setup-playbook/notes/skills-vendoring.md L311 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 79,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ce-compound, ce-debug, ce-handoff, ce-plan, ce-work, lfg (triggerable); ce-babysit-pr, ce-bakeoff, ce-brainstorm, ce-code-review, ce-commit, ce-commit-push-pr, ce-compound-refresh, ce-doc-review, ce-explain, ce-noslop, ce-pov, ce-proof, ce-prototype, ce-resolve-pr-feedback, ce-simplify-code, ce-test-browser, ce-worktree (dependency)"
+        },
+        {
+          "column": "B",
+          "value": "23"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/<name>, a pinned copy of compound-engineering v3.30.2 (github.com/EveryInc/compound-engineering-plugin, tag compound-engineering-v3.30.2, MIT)."
+        },
+        {
+          "column": "D",
+          "value": "Codex only. The compound-engineering plugin itself is disabled."
+        },
+        {
+          "column": "E",
+          "value": "Comes with agents-home; give these no off-switch."
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/tools/skill-hygiene/vendor-lock.json ; ~/.agents/tools/skill-hygiene/vendor-lock.json \"compound-engineering-v3.30.2\" ; agents-home 9de9e66 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 80,
+      "cells": [
+        {
+          "column": "A",
+          "value": "imagegen, openai-docs, review-agent, skill-creator, skill-installer"
+        },
+        {
+          "column": "B",
+          "value": "5"
+        },
+        {
+          "column": "C",
+          "value": "~/.codex/skills/.system (Codex writes these itself)."
+        },
+        {
+          "column": "D",
+          "value": "Codex only."
+        },
+        {
+          "column": "E",
+          "value": "Install Codex."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-vendoring.md L352 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 81,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hermes-boss-director, native-fix-research"
+        },
+        {
+          "column": "B",
+          "value": "2"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/<name> (since agents-home bfeacb2), the claude.ai upload is older until the re-upload (routes fixed in 340a34f and af3b811)."
+        },
+        {
+          "column": "D",
+          "value": "Claude app and Claude Code through the upload; off in Codex (W07)."
+        },
+        {
+          "column": "E",
+          "value": "Comes with agents-home; re-upload to claude.ai from that folder. Due now: Alex re-uploads work/2026-10-01_setup-playbook/zips/hermes-boss-director.zip and native-fix-research.zip (built 02:00Z, carrying both fixes)."
+        },
+        {
+          "column": "F",
+          "value": "agents-home bfeacb2 ; work/2026-10-01_setup-playbook/notes/g18-g19-content.md ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row W07 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row SK40-D4 ; work/2026-10-01_setup-playbook/notes/hermes-skills-routes.md \"## Result\" ; work/2026-10-01_setup-playbook/notes/hermes-skills-routes.md \"## spp-p36b: the two leftovers\" ; agents-home 340a34f ; agents-home af3b811 ; work/2026-10-01_setup-playbook/workbook-updates.md L169"
+        }
+      ]
+    },
+    {
+      "row": 82,
+      "cells": [
+        {
+          "column": "A",
+          "value": "transcript-to-workflow-opportunity-mapper"
+        },
+        {
+          "column": "B",
+          "value": "1"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills (since fc064e5), byte-identical to its claude.ai upload."
+        },
+        {
+          "column": "D",
+          "value": "Claude app and Claude Code through the upload; off in Codex."
+        },
+        {
+          "column": "E",
+          "value": "Comes with agents-home; re-upload it to claude.ai from that folder."
+        },
+        {
+          "column": "F",
+          "value": "agents-home fc064e5 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row SK40-D4 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 83,
+      "cells": [
+        {
+          "column": "A",
+          "value": "sales-team-management, sales-script-optimizer, sales-data-review, sales-call-review, event-fair-campaign, skill-hygiene"
+        },
+        {
+          "column": "B",
+          "value": "6 (off)"
+        },
+        {
+          "column": "C",
+          "value": "claude.ai uploads, switched off; backups in ~/Backups/claude-skills-2026-10-01/claude-ai-uploads-d4/."
+        },
+        {
+          "column": "D",
+          "value": "None: switched off. Removing them for good is Alex's click."
+        },
+        {
+          "column": "E",
+          "value": "Not part of the active set. Restore one only by uploading its .skill backup."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/app-batch.md L104–L121 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row SK40-D4"
+        }
+      ]
+    },
+    {
+      "row": 84,
+      "cells": [
+        {
+          "column": "A",
+          "value": "docs, google-workspace, skill-creator, docx, pdf, pptx, xlsx, chrome-browser, built-in-browser, computer-use; PDF Viewer's 5 and Desktop Commander's 6; the 4 desktop built-ins schedule, setup-claude, setup-cowork and explain-usage"
+        },
+        {
+          "column": "B",
+          "value": "25"
+        },
+        {
+          "column": "C",
+          "value": "Anthropic, and the two kept plugins."
+        },
+        {
+          "column": "D",
+          "value": "The Claude app; Claude Code sees the synced ones."
+        },
+        {
+          "column": "E",
+          "value": "Come with the Claude account and the 2 kept plugins (decision L04)."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/app-batch.md L210–L212 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row L04 ; work/2026-10-01_setup-playbook/notes/spp-c9-d5-remainder.md ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 85,
+      "cells": [
+        {
+          "column": "A",
+          "value": "batch, claude-api, code-review, dataviz, debug, deep-research, design, design-sync, doctor, fewer-permission-prompts, loop, plugin-authoring, run, run-skill-generator, schedule, simplify, update-config, verify, workflow-authoring"
+        },
+        {
+          "column": "B",
+          "value": "19"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code itself (2.1.287). The composio@composio plugin (pinned v0.2.4) adds no skill in the terminal."
+        },
+        {
+          "column": "D",
+          "value": "Claude Code only."
+        },
+        {
+          "column": "E",
+          "value": "Install Claude Code."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-cap.md L165 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L168–L170 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 86,
+      "cells": [
+        {
+          "column": "A",
+          "value": "create-local-meta-ads, fulfill-hot-tub-launch, higgsfield-hot-tub-scene-variation"
+        },
+        {
+          "column": "B",
+          "value": "3"
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/<name> since agents-home e7916f1: the whole ChatGPT package, byte-identical except the SKILL.md description. The ChatGPT cloud copies stay."
+        },
+        {
+          "column": "D",
+          "value": "ChatGPT (cloud skills). Off in Codex (W07); Claude doesn't load them."
+        },
+        {
+          "column": "E",
+          "value": "Comes with agents-home; after an edit, re-upload to ChatGPT from that folder."
+        },
+        {
+          "column": "F",
+          "value": "agents-home e7916f1 ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L151"
+        }
+      ]
+    },
+    {
+      "row": 88,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9. Rebuild the active set on a fresh Mac, after agents-home is cloned (G18)"
+        }
+      ]
+    },
+    {
+      "row": 89,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "what to do"
+        },
+        {
+          "column": "C",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 90,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Codex off-switches"
+        },
+        {
+          "column": "B",
+          "value": "Every ~/.agents/skills folder not named in section 8's first 4 rows gets an off-switch in ~/.codex/config.toml: [[skills.config]], then path = \"<home>/.agents/skills/<name>/SKILL.md\" and enabled = false. That is 102 folders today, plus the 7 template copies under repo-conform/assets/universal-skills. If the compound-engineering or remote Superpowers plugins are installed, switch off their skills too (30 and 15 today), and 12 other plugin skills."
+        },
+        {
+          "column": "C",
+          "value": "A fresh Codex session lists 58 skills from ~/.agents/skills plus the system skills, each name once."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/unify/unify.py L155 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L51–L52 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5 ; work/2026-10-01_setup-playbook/notes/replication-retest-final.md §3"
+        }
+      ]
+    },
+    {
+      "row": 91,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Claude Code links"
+        },
+        {
+          "column": "B",
+          "value": "Make the 29 links (section 8: the 18 own and the 11 Superpowers). Make none for the 6 claude.ai uploads or the compound-engineering skills."
+        },
+        {
+          "column": "C",
+          "value": "A fresh claude -p init lists each name once (67 on 2026-10-01)."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/skills-cap.md L99–L105 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L165"
+        }
+      ]
+    },
+    {
+      "row": 92,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Claude app uploads"
+        },
+        {
+          "column": "B",
+          "value": "Run build_zips.py and upload the 6 zips (section 2, second row). Re-upload a skill whenever its ~/.agents source changes; this step depends on someone remembering it."
+        },
+        {
+          "column": "C",
+          "value": "Each upload's synced copy matches its zip."
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/zips/build_zips.py L1–L12 ; workbook Skills, where they live R64"
+        }
+      ]
+    },
+    {
+      "row": 93,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Keep list and lock"
+        },
+        {
+          "column": "B",
+          "value": "policy.txt (the skills a hygiene run must never switch off) and vendor-lock.json come with agents-home. check.py check 6 fails if a skill the role skills need is missing or switched off."
+        },
+        {
+          "column": "C",
+          "value": "python3 ~/.agents/tools/unify/check.py shows no skills FIX line."
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/tools/skill-hygiene/policy.txt L1–L3 ; ~/.agents/tools/skill-hygiene/vendor-lock.json ; agents-home 4114517"
+        }
+      ]
+    },
+    {
+      "row": 94,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Note"
+        },
+        {
+          "column": "B",
+          "value": "The scripts that set today's links and off-switches (skills_cap_phase_b.py, scripts/phase2_agents.py, scripts/phase2_codex.py) and build_zips.py were never committed, and the links and off-switches themselves live only on this Mac. So steps 1 to 3 are done by hand, from this tab."
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    },
+    {
+      "row": 96,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10. The 3 ChatGPT skills Alex made: their home is ~/.agents/skills since agents-home e7916f1 (G18 addendum, spp-c14 and spp-c15)"
+        }
+      ]
+    },
+    {
+      "row": 97,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill (display / name)"
+        },
+        {
+          "column": "B",
+          "value": "what it is"
+        },
+        {
+          "column": "C",
+          "value": "author and date shown"
+        },
+        {
+          "column": "D",
+          "value": "home in ~/.agents/skills"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 98,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fulfill Hot Tub Launch / fulfill-hot-tub-launch"
+        },
+        {
+          "column": "B",
+          "value": "Fulfil, audit and prepare launches of HTL paid funnels, retailer websites and GHL snapshot integrations (SKILL.md, agents/openai.yaml, an icon, about 18 references)."
+        },
+        {
+          "column": "C",
+          "value": "Alexander Lobaito, Aug 15, 2026 (Created by me)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/fulfill-hot-tub-launch (whole package, 20 files; off in Codex)"
+        },
+        {
+          "column": "E",
+          "value": "https://chatgpt.com/skills (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §3 ; agents-home e7916f1 ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §2"
+        }
+      ]
+    },
+    {
+      "row": 99,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hot Tub Scene Variator / higgsfield-hot-tub-scene-variation"
+        },
+        {
+          "column": "B",
+          "value": "Controlled batches of photorealistic dealer-style hot-tub images in new scenes through Higgsfield, keeping the exact product (SKILL.md, agents/openai.yaml, an icon)."
+        },
+        {
+          "column": "C",
+          "value": "Alexander Lobaito, Aug 13, 2026 (Created by me)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/higgsfield-hot-tub-scene-variation (whole package, 3 files; off in Codex)"
+        },
+        {
+          "column": "E",
+          "value": "https://chatgpt.com/skills (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §3 ; agents-home e7916f1 ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §2"
+        }
+      ]
+    },
+    {
+      "row": 100,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Local Meta Ad Creative System / create-local-meta-ads"
+        },
+        {
+          "column": "B",
+          "value": "Direct-response Meta ad creative systems for local service businesses (SKILL.md, agents/openai.yaml, three references)."
+        },
+        {
+          "column": "C",
+          "value": "Alexander Lobaito, Jul 10, 2026 (Created by me)"
+        },
+        {
+          "column": "D",
+          "value": "~/.agents/skills/create-local-meta-ads (whole package, 5 files; off in Codex)"
+        },
+        {
+          "column": "E",
+          "value": "https://chatgpt.com/skills (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §3 ; agents-home e7916f1 ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §2"
+        }
+      ]
+    },
+    {
+      "row": 102,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11. ChatGPT's own record of each skill (read-only skills API, spp-c15)"
+        }
+      ]
+    },
+    {
+      "row": 103,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill"
+        },
+        {
+          "column": "B",
+          "value": "updated_at (the date the page shows)"
+        },
+        {
+          "column": "C",
+          "value": "latest / default version"
+        },
+        {
+          "column": "D",
+          "value": "safety_check_status"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 104,
+      "cells": [
+        {
+          "column": "A",
+          "value": "fulfill-hot-tub-launch"
+        },
+        {
+          "column": "B",
+          "value": "2026-08-15T14:47:02Z"
+        },
+        {
+          "column": "C",
+          "value": "4 / 1"
+        },
+        {
+          "column": "D",
+          "value": "blocked"
+        },
+        {
+          "column": "E",
+          "value": "https://chatgpt.com/backend-api/hazelnuts (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md L11"
+        }
+      ]
+    },
+    {
+      "row": 105,
+      "cells": [
+        {
+          "column": "A",
+          "value": "higgsfield-hot-tub-scene-variation"
+        },
+        {
+          "column": "B",
+          "value": "2026-08-13T19:13:26Z"
+        },
+        {
+          "column": "C",
+          "value": "2 / 1"
+        },
+        {
+          "column": "D",
+          "value": "unchecked"
+        },
+        {
+          "column": "E",
+          "value": "https://chatgpt.com/backend-api/hazelnuts (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md L12"
+        }
+      ]
+    },
+    {
+      "row": 106,
+      "cells": [
+        {
+          "column": "A",
+          "value": "create-local-meta-ads"
+        },
+        {
+          "column": "B",
+          "value": "2026-07-10T04:44:39Z"
+        },
+        {
+          "column": "C",
+          "value": "1 / 1"
+        },
+        {
+          "column": "D",
+          "value": "unchecked"
+        },
+        {
+          "column": "E",
+          "value": "https://chatgpt.com/backend-api/hazelnuts (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-c15.md L13"
+        }
+      ]
+    },
+    {
+      "row": 108,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12. Not proven yet (G18)"
+        }
+      ]
+    },
+    {
+      "row": 109,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 110,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Which workspace the 3 ChatGPT skills were made in; which version ChatGPT runs when latest and default differ (fulfill-hot-tub-launch 4 / 1, higgsfield-hot-tub-scene-variation 2 / 1); what safety_check_status 'blocked' does for fulfill-hot-tub-launch; and whether the date each page shows (the API's updated_at) is also the creation date."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-c15.md §1 ; work/2026-10-01_setup-playbook/notes/gap-facts-c14.md §3"
+        }
+      ]
+    },
+    {
+      "row": 111,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What becomes of the 4 Cursor-only skills: no decision exists, and Cursor is outside this mission."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §5"
+        }
+      ]
+    }
+  ]
+}

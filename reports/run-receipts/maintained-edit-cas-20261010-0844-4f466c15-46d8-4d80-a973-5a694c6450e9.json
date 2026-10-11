@@ -1,0 +1,130 @@
+{
+  "at": "2026-10-10T08:59:42+00:00",
+  "cases": {
+    "api_derived": {
+      "after_sha256": "587ef85042d88807ab001a9f55c913e0ef0bc9bfe307f31b8210a03a1a01ee0a",
+      "apply_exit": 0,
+      "derived_revision": 1,
+      "lineage_ok": true,
+      "preview_exit": 0,
+      "preview_has_diff": true
+    },
+    "backup_restore_lkg": {
+      "backup_path_ok": true,
+      "backup_restores_pre_apply_snapshot": true,
+      "before_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+      "committed_after_sha256": "14a01ac84897f7274be3bb8af62310b5f739bd47e7b51429a7605f637b4be7ff",
+      "restored_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399"
+    },
+    "browser": {
+      "exit": -15
+    },
+    "concurrent": {
+      "committed_count": 1,
+      "conflict_count": 1,
+      "final_revision": 1,
+      "one_commit_one_conflict": true,
+      "results": [
+        {
+          "label": "A",
+          "ok": true
+        },
+        {
+          "error": "revision must be exactly 2",
+          "label": "B",
+          "ok": false
+        }
+      ]
+    },
+    "drive_publication": "local-only; not claimed",
+    "idempotent": {
+      "first_after_sha": "bb3d85ac71bd31845d788f70ea87c92299208a043bace184d52fc8e5187c7a8a",
+      "idempotent_match": true,
+      "second_after_sha": "bb3d85ac71bd31845d788f70ea87c92299208a043bace184d52fc8e5187c7a8a"
+    },
+    "negative": {
+      "bad_revision_rejected": true,
+      "canary_rejected": true
+    },
+    "real_sdk_trace_input": "BLOCKED",
+    "strict_types_regression": {
+      "control_row_wrong_flip_type_rejected": true,
+      "each_declared_flip_fails": true,
+      "generated_controls_valid": true,
+      "per_flip_fail": [
+        {
+          "path": "python_apply_export.no_token_leak",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.screened",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.nonempty",
+          "still_passed": false
+        },
+        {
+          "path": "node_bridge.exit",
+          "still_passed": false
+        },
+        {
+          "path": "browser.overall",
+          "still_passed": false
+        },
+        {
+          "path": "browser.served_process_restarted",
+          "still_passed": false
+        },
+        {
+          "path": "browser.build_id_stable",
+          "still_passed": false
+        },
+        {
+          "path": "browser.restart_stop.portRefusedObserved",
+          "still_passed": false
+        },
+        {
+          "path": "recovery_regression.exit",
+          "still_passed": false
+        },
+        {
+          "path": "diagnostic_plain_token.screened_absent",
+          "still_passed": false
+        }
+      ],
+      "recovery_regression_exit_false_rejected": true,
+      "saved_baseline_core_pass": true
+    },
+    "symlink_escape": {
+      "error": "symlink not allowed for editable path",
+      "symlink_escape_rejected": true
+    }
+  },
+  "delivery_id": "maintained-edit-cas-20261010-0844",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/maintained-edit-cas-20261010-0844-4f466c15.json",
+      "sha256": "39abd1e490a2dc6a3533a0e3765e1d9dd1ab80ff67386a497a5c2967331239d3"
+    }
+  ],
+  "failures": [
+    "browser_ui"
+  ],
+  "independent_verification": "not_claimed",
+  "isolated_db": "app/.data/maintained-edit-cas-20261010-0844/local.sqlite",
+  "isolated_db_sha256": "e25e318e4623d962c9f97f80cc806eab32f384fc277054bd7b6497cf208da8a1",
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "run_id": "4f466c15-46d8-4d80-a973-5a694c6450e9",
+  "source_identity": {
+    "app/.next/BUILD_ID": "601f76fcdefec605c70d08bafe12d178b8c8fc43d7c87dc3cf1bc595af3a075f",
+    "app/src/app/api/catalog/edit/route.ts": "2cd267dbf1ddc36e4f3e8177d89cbe24caefeb012fbaca30f810f701f63f65d4",
+    "app/src/app/api/catalog/edit/state/route.ts": "287f4671cd3c119d818ca7ac3707680086692ea17de744abc50e1e30ec98a781",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "ff26030c249b8e65c0c17a6160eac2947f15a24191e8f5923a9a8dd8d8ccf6bd",
+    "tools/browser_maintained_edit_cas.mjs": "af062653fc6d418b44431d7ab552ec1dae192c8604ae765af1fb06b21462cd3a",
+    "tools/catalog_controlled_edit.py": "0fa749e286092c3ac5ece5ca082238b7fb004e6a551a48026d4b6fe0afe72e2f",
+    "tools/maintained_derived_views.py": "1a94eef5a28ae5774feb43cab3f6c7349654f355693ad0868ee967ba754fb49e",
+    "tools/maintained_edit_cas_acceptance.py": "5af848b49758c270040fd9cf2c9bab938071197aa583b9e541a6adb4eebf1075"
+  }
+}

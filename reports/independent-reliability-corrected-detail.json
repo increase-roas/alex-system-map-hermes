@@ -1,0 +1,183 @@
+{
+  "review_id": "independent-reliability-corrected-detail-20261010-0510",
+  "reviewed_at": "2026-10-10T05:10:42.236231+00:00",
+  "scope": "REL-02 through REL-06 and combined synthetic trace/sync only; REL-01 and browser handled by primary",
+  "method": "Read-only current source and receipt inspection, SQLite URI mode=ro SELECT readback, pure gate negative checks with bytecode disabled. No implementation changes, receipt-mutating verifier rerun, browser, external service, or real credential read.",
+  "owner_receipt": {
+    "path": "reports/reliability-verification.json",
+    "at": "2026-10-10T05:07:58+00:00",
+    "sha256": "a54d5289900d531e260a6c538f98322c457f89aa323c7f1e958fb33efe24e8ca",
+    "correction_id": "rel-review-corrections-20261010-0104"
+  },
+  "prior_independent_review": {
+    "path": "reports/independent-reliability-review.json",
+    "reviewed_at": "2026-10-10T05:05:40.582750+00:00"
+  },
+  "snapshot": {
+    "stable_during_inspection": true,
+    "changed_paths": [],
+    "source_sha256": {
+      "reports/reliability-verification.json": "a54d5289900d531e260a6c538f98322c457f89aa323c7f1e958fb33efe24e8ca",
+      "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640",
+      "tools/reliability_verification.py": "549c64e1b3a5b2e5cf6b88bfc72340cb2db86a6835692c9da4007182c86bc98f",
+      "tools/reliability_store.py": "230e13e8591960d7b0ff3a7a3691592503f8754cf75f63577019fb77b25d44b5",
+      "tools/reliability_gate.py": "3848b59145d53268c8c6d58e3fbed87049acc28e25e95d9500ca444e33229b81",
+      "tools/catalog_sync.py": "0ccef1e4300890654fe7e00fd9b36b6dad59f41717943ff8925717dea0cddc75",
+      "tools/trace_store.py": "0ff86785fe46f8b98e82849ef8548b21577bb5cadaa012fb407d32f8c3c8d876",
+      "tools/local_service.py": "f2104d62b9a417e51a7cd4a3060bff99f1bf570c0c2d14ec9674429d6b4a8106",
+      "tools/workflow_engine.py": "55244927489bd365229697d5a636a1790d0e5e99f1dea9f55f1b4078b2536f3e",
+      "app/src/app/explorer/reliability-panel.tsx": "90174ede3251afd0ea167a66b9dbffed7865112db4da844cec0f26aa618434f4",
+      "app/src/lib/server/python.ts": "3e688cf879ecc45c7c40734ae7bfc3bb05a5421bcdc23964d879b8e9ba65f5e1",
+      "examples/reliability-trace-sync-synthetic.json": "473dd2e5aa52f9b592c149e5bd58de68e59e24e5ed767a5828a18cfab4266e50",
+      "work/reliability/synthetic-sync-marker.json": "5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee"
+    },
+    "limitation": "Saved owner receipt does not bind its run to source hashes. reliability_store.py filesystem mtime is newer than receipt timestamp; current source stability does not prove exact execution-source identity."
+  },
+  "fully_proven_requirements": [],
+  "items": [
+    {
+      "id": "REL-02",
+      "status": "FAILED",
+      "accepted_portions": [
+        "Requirement DB separates documented_path, installed_path and actually_used_evidence (reliability_store.py:42-49). UI now renders owner/time/evidence/conditional next step (reliability-panel.tsx:77-98), correcting prior review's missing req.evidence rendering finding."
+      ],
+      "missing_evidence": [
+        "Dated evidence and actual-use proofs validated by application completion path. Gate is invoked only by verification helpers, not local_service workflow apply; API status reads owner report rather than enforcing completion.",
+        "Pure gate check accepts REL-02 with verified_at='arbitrary-not-a-date', documented_path='does-not-exist', matching use label and no proof handle, returning accepted=true/next step empty.",
+        "verify_rel02 fabricates per-requirement use labels and identical installed_path='docs/SKILLS.md canonical five', including accepted REL-01 despite unverified runtime. No installed/used proof is linked or validated."
+      ],
+      "source_refs": [
+        "tools/reliability_gate.py:19-87",
+        "tools/reliability_verification.py:129-199",
+        "tools/local_service.py:343-355",
+        "tools/reliability_store.py:239-289",
+        "app/src/app/explorer/reliability-panel.tsx:77-98"
+      ],
+      "required_next": "Bind dated requirement-specific evidence and evidence identity/freshness to the real completion path; reject missing/mismatched/nonexistent proofs and retain exact unresolved reason. Browser rendering remains for primary review."
+    },
+    {
+      "id": "REL-03",
+      "status": "UNVERIFIED",
+      "accepted_portions": [
+        "Saved correction rows exist: old corr-rev2-governs inactive, corr-review-rel-review-corrections-20261010-0104 active; older superseded note retained; one recheck row exists for reports/build-supervision-state.json.",
+        "Current recovery helper compares presented older note, returns governing correction text and reads actual retained history/recheck rows (reliability_store.py:118-140). Owner receipt records governing_applied=true."
+      ],
+      "missing_evidence": [
+        "verify_rel03 opens a second SQLite connection while original connection stays live; it does not restart a process/application or invoke intended workflow recovery API.",
+        "local_service recover still calls Engine.recover only; corrected decision helper is only called by reliability_verification.py. No proof correction governs actual fresh application's recovered next action.",
+        "Recheck marking is hardcoded to build-supervision-state.json; evidence does not establish all affected outputs invalidated."
+      ],
+      "source_refs": [
+        "tools/reliability_verification.py:203-231",
+        "tools/reliability_store.py:60-140",
+        "tools/local_service.py:354-355"
+      ],
+      "readback_handles": [
+        "app/.data/reliability.sqlite:reliability_corrections ids corr-rev2-governs and corr-review-rel-review-corrections-20261010-0104",
+        "app/.data/reliability.sqlite:reliability_recheck_queue output_id reports/build-supervision-state.json"
+      ],
+      "required_next": "Exercise process restart and actual recovery entrypoint with an older conflicting note; assert corrected next action and all affected outputs for recheck while retaining old notes/history."
+    },
+    {
+      "id": "REL-04",
+      "status": "FAILED",
+      "accepted_portions": [
+        "Saved isolated workflow DB has exactly one operations row and one events payload for operation rel04-op-handoff, job revision 3, one attempt. This independently supports bounded duplicate operation effect proof.",
+        "Owner receipt and helper reject owner-a in reliability_handoffs after transfer to owner-b, and reject stale engine revision."
+      ],
+      "missing_evidence": [
+        "assert_handoff_owner is test-only; local_service apply never invokes it. Separate handoff owner changes do not transfer workflow task ownership: retained task owner remains owner-a while attempt says owner-b step.",
+        "Transferred checkpoint drops acceptance; DB row checkpoint_json has job_id/owner only.",
+        "No restart/recoverability or atomic concurrent owner transition proof; transfer_handoff unconditionally updates without expected old owner/revision."
+      ],
+      "source_refs": [
+        "tools/reliability_verification.py:235-309",
+        "tools/reliability_store.py:149-174",
+        "tools/local_service.py:343-352",
+        "tools/workflow_engine.py:93-180"
+      ],
+      "readback_handles": [
+        "app/.data/reliability-tests/rel04-workflow.sqlite:operations id rel04-op-handoff count=1",
+        "app/.data/reliability-tests/rel04-workflow.sqlite:events operation_id rel04-op-handoff count=1",
+        "app/.data/reliability.sqlite:reliability_handoffs operation_id rel04-op-handoff owner-b revision=2 checkpoint lacks acceptance"
+      ],
+      "required_next": "Enforce one current owner with expected owner/revision atomically through application mutation path; preserve acceptance in transferred checkpoint and prove former owner/stale revision rejection plus restart/replay recovery."
+    },
+    {
+      "id": "REL-05",
+      "status": "FAILED",
+      "accepted_portions": [
+        "Owner receipt retains four negative results and nonempty reasons/next steps; wrong use label, missing doc-path, unequal source hash and false correction boolean are rejected by helpers."
+      ],
+      "missing_evidence": [
+        "Cases named missing_requirement/skipped_skill do not actually omit a requirement/required skill: they supply wrong actually_used label or absent documented_path.",
+        "Stale hash comparison is separate stale_relationships_gate, not integrated application completion gate.",
+        "No requirement set or required-skill set/use proof is inspected, and actual application completion is not exercised. Gate accepts unsupported REL-02/REL-06 completion without proof."
+      ],
+      "source_refs": [
+        "tools/reliability_verification.py:313-369",
+        "tools/reliability_gate.py:19-109",
+        "tools/local_service.py:343-352"
+      ],
+      "required_next": "Omit an actual required item/skill, supply real stale source evidence, and claim completion without a proof handle through the real completion path; assert correct rejection and exact next step for each."
+    },
+    {
+      "id": "REL-06",
+      "status": "FAILED",
+      "accepted_portions": [
+        "Fake-canary-only fixture and four helper surface labels are retained; trace import plus wrapper redaction actually exercises fake canary in trace metadata/error.",
+        "Read-only DB read confirms fake canary resides in test trace metadata and span error; no real credentials inspected."
+      ],
+      "missing_evidence": [
+        "error_service_message only raises/catches an artificial exception and directly calls screen_text; actual Node/Python error emission is not tested or screened.",
+        "export_trace_json exists only in verifier, not application trace/export handler. Actual local_service trace-get prints get_trace payload raw; trace_store.get_trace returns raw metadata/error. Known fake canary in saved test DB would be included by that path.",
+        "json_export serializes already-screened fixture, not supported application export."
+      ],
+      "source_refs": [
+        "tools/reliability_verification.py:373-428",
+        "tools/local_service.py:337-342",
+        "tools/local_service.py:368-369",
+        "tools/trace_store.py:206-212",
+        "app/src/lib/server/python.ts:38-58"
+      ],
+      "readback_handles": [
+        "app/.data/reliability-tests/rel06-trace.sqlite:traces.metadata fake_canary_present=true",
+        "app/.data/reliability-tests/rel06-trace.sqlite:spans.error fake_canary_present=true"
+      ],
+      "required_next": "Route fake canaries through actual diagnostic/error/trace/export emitters and inspect emitted bytes. Centralize supported output screening before JSON/browser delivery; prove each real path, not test-only wrappers."
+    }
+  ],
+  "synthetic_sync_trace": {
+    "status": "FAILED",
+    "accepted_portions": [
+      "SYNTHETIC/TEST labels explicit. Marker file SHA equals expected owner receipt SHA and persisted isolated watch row: 5d8e585ea5048b59b7f70d64764a154cc30ac76b9ed0c53abda6718d93e394ee.",
+      "Saved test DB has one trace, one span, one import and durable cursor. Static trace source SHA matches imported payload SHA 473dd2e5aa52f9b592c149e5bd58de68e59e24e5ed767a5828a18cfab4266e50.",
+      "Current test assertions compare changed bytes to observed/reopened watch fingerprint, reconcile repeat receipt import, and read sync-status in a separate local_service subprocess."
+    ],
+    "missing_evidence": [
+      "Test writes marker at 05:07:58 then imports prerecorded fixture whose action timestamps are 05:00:00. No receipt/span is generated from actual test mutation/observation, and fixture contains empty source/component/evidence IDs.",
+      "Observer is initialized only after marker change by deleting isolated DB; test proves initial fingerprint ingestion, not change refresh from a prior observed baseline.",
+      "Only SQLite reconnect plus status-reader subprocess, not watcher/application process restart/cursor replay. No browser/UI refresh assertion.",
+      "Static import/dedup proves synthetic importer mechanics, not original real-source tracing."
+    ],
+    "source_refs": [
+      "tools/reliability_verification.py:432-507",
+      "examples/reliability-trace-sync-synthetic.json:1-35",
+      "tools/catalog_sync.py:46-89",
+      "tools/trace_store.py:120-181"
+    ],
+    "readback_handles": [
+      "app/.data/reliability-tests/synthetic-sync-trace.sqlite:catalog_watch synthetic-sync-marker sha256",
+      "app/.data/reliability-tests/synthetic-sync-trace.sqlite:trace_imports receipt synthetic-rel-r2-sync-trace-20261010",
+      "app/.data/reliability-tests/synthetic-sync-trace.sqlite:trace_cursors source examples/reliability-trace-sync-synthetic.json"
+    ],
+    "required_next": "Observe fixture baseline, perform actual local mutation, instrument that same action/refresh into a dated linked synthetic receipt, restart the intended observer/application, confirm new fingerprint/cursor/no duplicates and UI refresh."
+  },
+  "scope_and_blockers": {
+    "outside_dependency_for_reviewed_local_work": "None established; reviewed missing behaviors can be implemented/tested in-project without new credentials, services, installs or access.",
+    "primary_owned": "REL-01 fresh agent runtime and browser route/install constraints are intentionally excluded; missing browser evidence remains independent from reviewed source defects.",
+    "original_acceptance": "Original real-source trace and full build acceptance remain open; synthetic test cannot replace them.",
+    "blocker_type": "goal_not_met_yet",
+    "exact_missing": "Actual application-path evidence, owner/correction enforcement, supported output canary tests, and instrumentation of the same synthetic change/refresh/restart."
+  }
+}

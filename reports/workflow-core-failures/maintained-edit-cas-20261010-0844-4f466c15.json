@@ -1,0 +1,101 @@
+{
+  "concurrent": {
+    "committed_count": 1,
+    "conflict_count": 1,
+    "one_commit_one_conflict": true,
+    "final_revision": 1,
+    "results": [
+      {
+        "label": "A",
+        "ok": true
+      },
+      {
+        "label": "B",
+        "ok": false,
+        "error": "revision must be exactly 2"
+      }
+    ]
+  },
+  "idempotent": {
+    "first_after_sha": "bb3d85ac71bd31845d788f70ea87c92299208a043bace184d52fc8e5187c7a8a",
+    "second_after_sha": "bb3d85ac71bd31845d788f70ea87c92299208a043bace184d52fc8e5187c7a8a",
+    "idempotent_match": true
+  },
+  "api_derived": {
+    "preview_exit": 0,
+    "preview_has_diff": true,
+    "apply_exit": 0,
+    "after_sha256": "587ef85042d88807ab001a9f55c913e0ef0bc9bfe307f31b8210a03a1a01ee0a",
+    "derived_revision": 1,
+    "lineage_ok": true
+  },
+  "symlink_escape": {
+    "symlink_escape_rejected": true,
+    "error": "symlink not allowed for editable path"
+  },
+  "backup_restore_lkg": {
+    "backup_path_ok": true,
+    "restored_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+    "backup_restores_pre_apply_snapshot": true,
+    "committed_after_sha256": "14a01ac84897f7274be3bb8af62310b5f739bd47e7b51429a7605f637b4be7ff",
+    "before_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399"
+  },
+  "negative": {
+    "bad_revision_rejected": true,
+    "canary_rejected": true
+  },
+  "browser": {
+    "exit": -15
+  },
+  "strict_types_regression": {
+    "saved_baseline_core_pass": true,
+    "recovery_regression_exit_false_rejected": true,
+    "generated_controls_valid": true,
+    "control_row_wrong_flip_type_rejected": true,
+    "each_declared_flip_fails": true,
+    "per_flip_fail": [
+      {
+        "path": "python_apply_export.no_token_leak",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.screened",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.nonempty",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.exit",
+        "still_passed": false
+      },
+      {
+        "path": "browser.overall",
+        "still_passed": false
+      },
+      {
+        "path": "browser.served_process_restarted",
+        "still_passed": false
+      },
+      {
+        "path": "browser.build_id_stable",
+        "still_passed": false
+      },
+      {
+        "path": "browser.restart_stop.portRefusedObserved",
+        "still_passed": false
+      },
+      {
+        "path": "recovery_regression.exit",
+        "still_passed": false
+      },
+      {
+        "path": "diagnostic_plain_token.screened_absent",
+        "still_passed": false
+      }
+    ]
+  },
+  "real_sdk_trace_input": "BLOCKED",
+  "drive_publication": "local-only; not claimed"
+}

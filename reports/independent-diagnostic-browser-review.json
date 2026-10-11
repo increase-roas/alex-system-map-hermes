@@ -1,0 +1,596 @@
+{
+  "review_id": "independent-diagnostic-browser-review-20261010",
+  "reviewed_at": "2026-10-10T07:55:22.817981+00:00",
+  "scope": "Read-only code/metadata and safe Boolean projections; no raw tokens/capture contents emitted, no screenshot opened, no browser/app rerun, install/network/outside read/helper",
+  "owner_diagnostic_run": "33729ebf-1890-4590-93ca-741943ce3586",
+  "owner_diagnostic_at": "2026-10-10T07:48:54+00:00",
+  "owner_recovery_run": "881140a1-79f4-44d5-a4e0-739f189d02d5",
+  "owner_recovery_at": "2026-10-10T07:48:54+00:00",
+  "receipt_hashes": {
+    "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json": "0bbee737493d38dc12e1b931d994c273ea86eb163377e7cb6677a7963e868ec6",
+    "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json": "6320931b6602bdce8f382e835828c5b3a9f60ec886bb16a103aeac0d80638c8f"
+  },
+  "source_sha256": {
+    "app/.next/BUILD_ID": "140f64e07ea220a4c2e7f899d2fe017a2cba9f16319a588bbf2d93e6822eb4e0",
+    "app/src/lib/server/local-auth.ts": "877292a3771fa6a031ba9337bf33c34a3b485612e9563a62ef83d35cabcc61b2",
+    "tools/browser_recovery_screening.mjs": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec",
+    "tools/diagnostic_emission_screening.mjs": "26fdbabf7c4297b70f19558bb0485606d17816a4440677d58015dad7893b163e",
+    "tools/diagnostic_emission_screening.py": "7aff897ad1847d72c6b5b51d9ba7d13795c2242af3480e7b5b767cfaaa74b527",
+    "tools/diagnostic_screening_acceptance.py": "e9e4b0bc3bd7d4610915075819aa06195f87a60bf5deaba2406ed3f3f177f0b5",
+    "tools/recovery_screening_real_paths_acceptance.py": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411",
+    "tools/sanitize_exposed_diagnostic_artifacts.py": "5ead93bae2fbeb67e2bfeb98990e9cbb975e8254d3894fc8a5c9256e168d2599",
+    "app/src/app/api/health/route.ts": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+    "app/src/app/api/workflow/route.ts": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b",
+    "app/src/app/explorer/workflow-panel.tsx": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78",
+    "app/src/lib/server/paths.ts": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed",
+    "app/src/lib/server/python.ts": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32",
+    "tools/job_recovery.py": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a",
+    "tools/local_service.py": "980d971e9cfdb316368bdabaf2b162aea5e3dfd0731048bc8e485e16e03fc337",
+    "tools/node_bridge_screen_probe.ts": "426b3a7787d23ba00aa0b3c6192b84d25cf78f7cc26a14c9bcf8d0e1894ba2a2",
+    "tools/output_screening.py": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+    "tools/trace_store.py": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+  },
+  "machine_checks": [
+    {
+      "item": "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json",
+      "status": "VERIFIED",
+      "sha256": "0bbee737493d38dc12e1b931d994c273ea86eb163377e7cb6677a7963e868ec6"
+    },
+    {
+      "item": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json",
+      "status": "VERIFIED",
+      "sha256": "6320931b6602bdce8f382e835828c5b3a9f60ec886bb16a103aeac0d80638c8f"
+    },
+    {
+      "item": "app/.next/BUILD_ID",
+      "status": "VERIFIED",
+      "sha256": "140f64e07ea220a4c2e7f899d2fe017a2cba9f16319a588bbf2d93e6822eb4e0"
+    },
+    {
+      "item": "app/src/lib/server/local-auth.ts",
+      "status": "VERIFIED",
+      "sha256": "877292a3771fa6a031ba9337bf33c34a3b485612e9563a62ef83d35cabcc61b2"
+    },
+    {
+      "item": "tools/browser_recovery_screening.mjs",
+      "status": "VERIFIED",
+      "sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec"
+    },
+    {
+      "item": "tools/diagnostic_emission_screening.mjs",
+      "status": "VERIFIED",
+      "sha256": "26fdbabf7c4297b70f19558bb0485606d17816a4440677d58015dad7893b163e"
+    },
+    {
+      "item": "tools/diagnostic_emission_screening.py",
+      "status": "VERIFIED",
+      "sha256": "7aff897ad1847d72c6b5b51d9ba7d13795c2242af3480e7b5b767cfaaa74b527"
+    },
+    {
+      "item": "tools/diagnostic_screening_acceptance.py",
+      "status": "VERIFIED",
+      "sha256": "e9e4b0bc3bd7d4610915075819aa06195f87a60bf5deaba2406ed3f3f177f0b5"
+    },
+    {
+      "item": "tools/recovery_screening_real_paths_acceptance.py",
+      "status": "VERIFIED",
+      "sha256": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411"
+    },
+    {
+      "item": "tools/sanitize_exposed_diagnostic_artifacts.py",
+      "status": "VERIFIED",
+      "sha256": "5ead93bae2fbeb67e2bfeb98990e9cbb975e8254d3894fc8a5c9256e168d2599"
+    },
+    {
+      "item": "app/src/app/api/health/route.ts",
+      "status": "VERIFIED",
+      "sha256": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2"
+    },
+    {
+      "item": "app/src/app/api/workflow/route.ts",
+      "status": "VERIFIED",
+      "sha256": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b"
+    },
+    {
+      "item": "app/src/app/explorer/workflow-panel.tsx",
+      "status": "VERIFIED",
+      "sha256": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78"
+    },
+    {
+      "item": "app/src/lib/server/paths.ts",
+      "status": "VERIFIED",
+      "sha256": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed"
+    },
+    {
+      "item": "app/src/lib/server/python.ts",
+      "status": "VERIFIED",
+      "sha256": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32"
+    },
+    {
+      "item": "tools/browser_recovery_screening.mjs",
+      "status": "VERIFIED",
+      "sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec"
+    },
+    {
+      "item": "tools/job_recovery.py",
+      "status": "VERIFIED",
+      "sha256": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a"
+    },
+    {
+      "item": "tools/local_service.py",
+      "status": "VERIFIED",
+      "sha256": "980d971e9cfdb316368bdabaf2b162aea5e3dfd0731048bc8e485e16e03fc337"
+    },
+    {
+      "item": "tools/node_bridge_screen_probe.ts",
+      "status": "VERIFIED",
+      "sha256": "426b3a7787d23ba00aa0b3c6192b84d25cf78f7cc26a14c9bcf8d0e1894ba2a2"
+    },
+    {
+      "item": "tools/output_screening.py",
+      "status": "VERIFIED",
+      "sha256": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a"
+    },
+    {
+      "item": "tools/recovery_screening_real_paths_acceptance.py",
+      "status": "VERIFIED",
+      "sha256": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411"
+    },
+    {
+      "item": "tools/trace_store.py",
+      "status": "VERIFIED",
+      "sha256": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+    },
+    {
+      "item": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/recovery-real-paths.png",
+      "status": "VERIFIED",
+      "sha256": "abf208cd21ba236f6578102dcc82ac622d8a89c854f26f3ba0121bd12b2eb6bc",
+      "bytes": 112304,
+      "viewed": false,
+      "reason": "No independent token-free raster proof; not opened."
+    }
+  ],
+  "safe_boolean_metadata": {
+    "build_id_matches_current": true,
+    "build_id_after_matches_before": true,
+    "runner_hash_matches": true,
+    "network_capture_matches_same_run_receipt": true,
+    "network_responses_count": 12,
+    "network_all_success_status": true,
+    "network_all_parse_success": true,
+    "served_db_is_project_isolated_path": true,
+    "ui_action_matches_api_and_t1_source": true,
+    "ui_historical_note_exact": true,
+    "db_fresh_init_hash_matches": false
+  },
+  "scoped_artifact_safety": [
+    {
+      "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/network-log.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-2ea4bdda-c9d6-42c5-8d2f-5785053f8bc5.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-d2302d5d-3cad-4e5c-bd25-f8e82df38bcd.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-fdb7e504-604b-49d2-931a-c812dcc08897.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-2ea4bdda.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    },
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-d2302d5d.json",
+      "valid_json": true,
+      "local_token_pattern_absent": true,
+      "fake_canary_pattern_absent": true
+    }
+  ],
+  "amendments": [
+    {
+      "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/network-log.json",
+      "at": "2026-10-10T07:48:18+00:00",
+      "before_sha256": "791f21941fa49427fb72af5224b7e4c6e84ef54917d7f3c724e3273dc4481b05",
+      "after_sha256": "e88a8770b2f3ebd2416f62501a19bffc3a57d29879654c00ab55088baa779bd1",
+      "current_sha256": "b7d831b13f577dad34ff2902b7d5b0631632debd7c662215e3a3872d5862507c",
+      "current_after_match": false,
+      "declares_immutable_bytes_amended": true,
+      "no_unsanitized_backup_declared": true
+    },
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-2ea4bdda.json",
+      "at": "2026-10-10T07:48:18+00:00",
+      "before_sha256": "a411924c219dfa12d65b1100b473d5541169f4f55cac0093e048b88fe702c390",
+      "after_sha256": "cd407da75a82ded9d9470f5ec0de13fc9bc362dc5ed3c45c66309d6716066d85",
+      "current_sha256": "cd407da75a82ded9d9470f5ec0de13fc9bc362dc5ed3c45c66309d6716066d85",
+      "current_after_match": true,
+      "declares_immutable_bytes_amended": true,
+      "no_unsanitized_backup_declared": true
+    },
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-d2302d5d.json",
+      "at": "2026-10-10T07:48:18+00:00",
+      "before_sha256": "3265fcf2a764fb9e33a660bbf664c048234d7193df600c9f0b307854eb9d9227",
+      "after_sha256": "d4ae4c44f26e40de7f597872bbc409966f0cab346c77c0aaf06b83d195c03d43",
+      "current_sha256": "d4ae4c44f26e40de7f597872bbc409966f0cab346c77c0aaf06b83d195c03d43",
+      "current_after_match": true,
+      "declares_immutable_bytes_amended": true,
+      "no_unsanitized_backup_declared": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-2ea4bdda-c9d6-42c5-8d2f-5785053f8bc5.json",
+      "at": "2026-10-10T07:48:18+00:00",
+      "before_sha256": "b90886ef3c56cb46aa0b996f7d3750b4d95409cd262745062bbc07d4ea7429ab",
+      "after_sha256": "44d12b6c2128d1f90dfeb40ada3b9533e08a6d21dc3dd88ab0ac0af845aaca70",
+      "current_sha256": "44d12b6c2128d1f90dfeb40ada3b9533e08a6d21dc3dd88ab0ac0af845aaca70",
+      "current_after_match": true,
+      "declares_immutable_bytes_amended": true,
+      "no_unsanitized_backup_declared": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-d2302d5d-3cad-4e5c-bd25-f8e82df38bcd.json",
+      "at": "2026-10-10T07:48:18+00:00",
+      "before_sha256": "b59b47e5d10179ccece4bd75283aa80206c7c87572322153391e241f4829860d",
+      "after_sha256": "b1498a8a9fdec24331f91eb77ca9d7e2b91cd90a3650af5d40153627274eceab",
+      "current_sha256": "b1498a8a9fdec24331f91eb77ca9d7e2b91cd90a3650af5d40153627274eceab",
+      "current_after_match": true,
+      "declares_immutable_bytes_amended": true,
+      "no_unsanitized_backup_declared": true
+    },
+    {
+      "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-fdb7e504-604b-49d2-931a-c812dcc08897.json",
+      "at": "2026-10-10T07:48:18+00:00",
+      "before_sha256": "85214592fb4d1c6d3639d466961bc0de30ce44e8b0590a256a7498f6620b12b4",
+      "after_sha256": "2b24ccf90dec145806d91cb5fb8aedf2f034d2716f44129152a40e6395d7df3e",
+      "current_sha256": "2b24ccf90dec145806d91cb5fb8aedf2f034d2716f44129152a40e6395d7df3e",
+      "current_after_match": true,
+      "declares_immutable_bytes_amended": true,
+      "no_unsanitized_backup_declared": true
+    }
+  ],
+  "items": [
+    {
+      "id": "Capture/sanitization metadata",
+      "status": "VERIFIED",
+      "accepted": "Eight scoped JSON captures/receipts parse and contain no tested raw local-mutation-token or fake-canary patterns. Current network array equals same-run browser receipt; 12 HTTP200 responses parse successfully.",
+      "gap": "Pattern and metadata proof only; backend reviewer evaluates screening internals. Raster token-free proof absent, so screenshot not opened.",
+      "evidence": [
+        {
+          "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/network-log.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-2ea4bdda-c9d6-42c5-8d2f-5785053f8bc5.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-d2302d5d-3cad-4e5c-bd25-f8e82df38bcd.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-fdb7e504-604b-49d2-931a-c812dcc08897.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-2ea4bdda.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        },
+        {
+          "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-d2302d5d.json",
+          "valid_json": true,
+          "local_token_pattern_absent": true,
+          "fake_canary_pattern_absent": true
+        }
+      ]
+    },
+    {
+      "id": "Sanitization amendment truth",
+      "status": "VERIFIED",
+      "accepted": "Six amendment entries explicitly declare immutable bytes amended; five historical files match recorded after hashes. Before/after hashes differ.",
+      "gap": "Fixed network-log path was overwritten by latest run, so its amendment after hash no longer matches current capture. Current capture matches latest receipt. Original unsanitized preimages are not retained; original-byte/semantic preservation cannot be independently reconstructed from declaration alone.",
+      "evidence": [
+        {
+          "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/network-log.json",
+          "at": "2026-10-10T07:48:18+00:00",
+          "before_sha256": "791f21941fa49427fb72af5224b7e4c6e84ef54917d7f3c724e3273dc4481b05",
+          "after_sha256": "e88a8770b2f3ebd2416f62501a19bffc3a57d29879654c00ab55088baa779bd1",
+          "current_sha256": "b7d831b13f577dad34ff2902b7d5b0631632debd7c662215e3a3872d5862507c",
+          "current_after_match": false,
+          "declares_immutable_bytes_amended": true,
+          "no_unsanitized_backup_declared": true
+        },
+        {
+          "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-2ea4bdda.json",
+          "at": "2026-10-10T07:48:18+00:00",
+          "before_sha256": "a411924c219dfa12d65b1100b473d5541169f4f55cac0093e048b88fe702c390",
+          "after_sha256": "cd407da75a82ded9d9470f5ec0de13fc9bc362dc5ed3c45c66309d6716066d85",
+          "current_sha256": "cd407da75a82ded9d9470f5ec0de13fc9bc362dc5ed3c45c66309d6716066d85",
+          "current_after_match": true,
+          "declares_immutable_bytes_amended": true,
+          "no_unsanitized_backup_declared": true
+        },
+        {
+          "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-d2302d5d.json",
+          "at": "2026-10-10T07:48:18+00:00",
+          "before_sha256": "3265fcf2a764fb9e33a660bbf664c048234d7193df600c9f0b307854eb9d9227",
+          "after_sha256": "d4ae4c44f26e40de7f597872bbc409966f0cab346c77c0aaf06b83d195c03d43",
+          "current_sha256": "d4ae4c44f26e40de7f597872bbc409966f0cab346c77c0aaf06b83d195c03d43",
+          "current_after_match": true,
+          "declares_immutable_bytes_amended": true,
+          "no_unsanitized_backup_declared": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-2ea4bdda-c9d6-42c5-8d2f-5785053f8bc5.json",
+          "at": "2026-10-10T07:48:18+00:00",
+          "before_sha256": "b90886ef3c56cb46aa0b996f7d3750b4d95409cd262745062bbc07d4ea7429ab",
+          "after_sha256": "44d12b6c2128d1f90dfeb40ada3b9533e08a6d21dc3dd88ab0ac0af845aaca70",
+          "current_sha256": "44d12b6c2128d1f90dfeb40ada3b9533e08a6d21dc3dd88ab0ac0af845aaca70",
+          "current_after_match": true,
+          "declares_immutable_bytes_amended": true,
+          "no_unsanitized_backup_declared": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-d2302d5d-3cad-4e5c-bd25-f8e82df38bcd.json",
+          "at": "2026-10-10T07:48:18+00:00",
+          "before_sha256": "b59b47e5d10179ccece4bd75283aa80206c7c87572322153391e241f4829860d",
+          "after_sha256": "b1498a8a9fdec24331f91eb77ca9d7e2b91cd90a3650af5d40153627274eceab",
+          "current_sha256": "b1498a8a9fdec24331f91eb77ca9d7e2b91cd90a3650af5d40153627274eceab",
+          "current_after_match": true,
+          "declares_immutable_bytes_amended": true,
+          "no_unsanitized_backup_declared": true
+        },
+        {
+          "path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-fdb7e504-604b-49d2-931a-c812dcc08897.json",
+          "at": "2026-10-10T07:48:18+00:00",
+          "before_sha256": "85214592fb4d1c6d3639d466961bc0de30ce44e8b0590a256a7498f6620b12b4",
+          "after_sha256": "2b24ccf90dec145806d91cb5fb8aedf2f034d2716f44129152a40e6395d7df3e",
+          "current_sha256": "2b24ccf90dec145806d91cb5fb8aedf2f034d2716f44129152a40e6395d7df3e",
+          "current_after_match": true,
+          "declares_immutable_bytes_amended": true,
+          "no_unsanitized_backup_declared": true
+        }
+      ]
+    },
+    {
+      "id": "Actual job A correction/history UI",
+      "status": "VERIFIED",
+      "accepted": "Saved UI action text matches recorded API action, task t1 and workflow_correction source; stale UI text exactly matches old instruction on t1. Runner performs mutations, API recovery and Playwright UI selection.",
+      "gap": "Screenshot hash/size accepted, not visual inspection. Runner does not check computed line-through or historical actionability; exact measured UI strings are independently compared here.",
+      "evidence": {
+        "build_id_matches_current": true,
+        "build_id_after_matches_before": true,
+        "runner_hash_matches": true,
+        "network_capture_matches_same_run_receipt": true,
+        "network_responses_count": 12,
+        "network_all_success_status": true,
+        "network_all_parse_success": true,
+        "served_db_is_project_isolated_path": true,
+        "ui_action_matches_api_and_t1_source": true,
+        "ui_historical_note_exact": true,
+        "db_fresh_init_hash_matches": false
+      }
+    },
+    {
+      "id": "Two-job API versus actual B UI",
+      "status": "FAILED",
+      "accepted": "Source creates two jobs in same isolated served DB and records B independent API next.",
+      "gap": "Runner only selects job A in UI. api_b.no_leak compares Revise downstream instruction although injected reason is Revise upstream instruction after output, so wrong-string comparison cannot prove A-to-B isolation. Missing actual job B UI selection and exact retained next/history assertion.",
+      "evidence": "tools/browser_recovery_screening.mjs:jobA/jobB fixtures, api_b, UI selection"
+    },
+    {
+      "id": "Dependency-ready actionable / affected outputs",
+      "status": "FAILED",
+      "accepted": "Separate receipt records dependency regression booleans; other verifier owns backend correctness.",
+      "gap": "Browser fixture corrects upstream t1; it does not exercise corrected downstream t2 while dependency t1 remains unverified. Browser outputs[] leaves no real retained output to invalidate; affected length>=0 is vacuous and absent from overall. Require exact eligible action/task/dependency state and retained actual test output with nonzero affected-output recheck.",
+      "evidence": "tools/browser_recovery_screening.mjs:produce-t1/correct-t1/api_a; tools/recovery_screening_real_paths_acceptance.py:recovery_dependency"
+    },
+    {
+      "id": "Genuine served-process restart",
+      "status": "UNVERIFIED",
+      "accepted": "Runner launches twice and records changed launcher PID plus health before process PID.",
+      "gap": "process_restarted compares spawned npx PIDs. health-after process.pid not retained/compared to health-before; child exit/listener release not awaited. A new launcher can fail against old listener and still pass. Require before/after true served PID, old process exit/new listener identity, same isolated DB path/hash expectations.",
+      "evidence": "tools/browser_recovery_screening.mjs:startServer/restart/health-after"
+    },
+    {
+      "id": "Isolated served DB identity",
+      "status": "VERIFIED",
+      "accepted": "Health runtime path equals exact project fixture DB and differs from default. Source passes LOCAL_DATA_DIR/WORKFLOW_SQLITE_PATH; readonly metadata readback found2jobs.",
+      "gap": "Fresh-init DB hash check is false and omitted from pass gate. Health initialization can change bytes; exact cause not established. Before/after actual served DB identity/content continuity and correct expected initialization state remain required.",
+      "evidence": "app/src/lib/server/paths.ts; browser checks.db_isolated/db_sha256_matches_fresh_init"
+    },
+    {
+      "id": "Build/runner/source binding",
+      "status": "VERIFIED",
+      "accepted": "Two immutable final pointers match bytes. All recorded source hashes, current BUILD_ID and runner hash match; screenshot size/hash match.",
+      "gap": "Build ID now materially stronger than old present fallback. Recorded current source hashes do not alone reconstruct compiler inputs; no broader build/release claim accepted.",
+      "evidence": [
+        {
+          "item": "reports/run-receipts/diagnostic-screening-20261010-0747-33729ebf-1890-4590-93ca-741943ce3586.json",
+          "status": "VERIFIED",
+          "sha256": "0bbee737493d38dc12e1b931d994c273ea86eb163377e7cb6677a7963e868ec6"
+        },
+        {
+          "item": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json",
+          "status": "VERIFIED",
+          "sha256": "6320931b6602bdce8f382e835828c5b3a9f60ec886bb16a103aeac0d80638c8f"
+        },
+        {
+          "item": "app/.next/BUILD_ID",
+          "status": "VERIFIED",
+          "sha256": "140f64e07ea220a4c2e7f899d2fe017a2cba9f16319a588bbf2d93e6822eb4e0"
+        },
+        {
+          "item": "app/src/lib/server/local-auth.ts",
+          "status": "VERIFIED",
+          "sha256": "877292a3771fa6a031ba9337bf33c34a3b485612e9563a62ef83d35cabcc61b2"
+        },
+        {
+          "item": "tools/browser_recovery_screening.mjs",
+          "status": "VERIFIED",
+          "sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec"
+        },
+        {
+          "item": "tools/diagnostic_emission_screening.mjs",
+          "status": "VERIFIED",
+          "sha256": "26fdbabf7c4297b70f19558bb0485606d17816a4440677d58015dad7893b163e"
+        },
+        {
+          "item": "tools/diagnostic_emission_screening.py",
+          "status": "VERIFIED",
+          "sha256": "7aff897ad1847d72c6b5b51d9ba7d13795c2242af3480e7b5b767cfaaa74b527"
+        },
+        {
+          "item": "tools/diagnostic_screening_acceptance.py",
+          "status": "VERIFIED",
+          "sha256": "e9e4b0bc3bd7d4610915075819aa06195f87a60bf5deaba2406ed3f3f177f0b5"
+        },
+        {
+          "item": "tools/recovery_screening_real_paths_acceptance.py",
+          "status": "VERIFIED",
+          "sha256": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411"
+        },
+        {
+          "item": "tools/sanitize_exposed_diagnostic_artifacts.py",
+          "status": "VERIFIED",
+          "sha256": "5ead93bae2fbeb67e2bfeb98990e9cbb975e8254d3894fc8a5c9256e168d2599"
+        },
+        {
+          "item": "app/src/app/api/health/route.ts",
+          "status": "VERIFIED",
+          "sha256": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2"
+        },
+        {
+          "item": "app/src/app/api/workflow/route.ts",
+          "status": "VERIFIED",
+          "sha256": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b"
+        },
+        {
+          "item": "app/src/app/explorer/workflow-panel.tsx",
+          "status": "VERIFIED",
+          "sha256": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78"
+        },
+        {
+          "item": "app/src/lib/server/paths.ts",
+          "status": "VERIFIED",
+          "sha256": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed"
+        },
+        {
+          "item": "app/src/lib/server/python.ts",
+          "status": "VERIFIED",
+          "sha256": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32"
+        },
+        {
+          "item": "tools/browser_recovery_screening.mjs",
+          "status": "VERIFIED",
+          "sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec"
+        },
+        {
+          "item": "tools/job_recovery.py",
+          "status": "VERIFIED",
+          "sha256": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a"
+        },
+        {
+          "item": "tools/local_service.py",
+          "status": "VERIFIED",
+          "sha256": "980d971e9cfdb316368bdabaf2b162aea5e3dfd0731048bc8e485e16e03fc337"
+        },
+        {
+          "item": "tools/node_bridge_screen_probe.ts",
+          "status": "VERIFIED",
+          "sha256": "426b3a7787d23ba00aa0b3c6192b84d25cf78f7cc26a14c9bcf8d0e1894ba2a2"
+        },
+        {
+          "item": "tools/output_screening.py",
+          "status": "VERIFIED",
+          "sha256": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a"
+        },
+        {
+          "item": "tools/recovery_screening_real_paths_acceptance.py",
+          "status": "VERIFIED",
+          "sha256": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411"
+        },
+        {
+          "item": "tools/trace_store.py",
+          "status": "VERIFIED",
+          "sha256": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+        },
+        {
+          "item": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/recovery-real-paths.png",
+          "status": "VERIFIED",
+          "sha256": "abf208cd21ba236f6578102dcc82ac622d8a89c854f26f3ba0121bd12b2eb6bc",
+          "bytes": 112304,
+          "viewed": false,
+          "reason": "No independent token-free raster proof; not opened."
+        }
+      ]
+    },
+    {
+      "id": "Mandatory aggregate fail/pass integrity",
+      "status": "VERIFIED",
+      "accepted": "Parent summarize now requires browser overall passed and exit0; browser exceptions set failed/exit1. Final recorded browser exit0. This corrects prior exclusion of browser failure and passed_api fallback.",
+      "gap": "Runner overall still omits genuine served PID comparison, fresh-init/build stability gate, exact B UI/correction string/dependency/affected output checks. Thus its mandatory subset can pass while full requested browser acceptance fails.",
+      "evidence": "tools/recovery_screening_real_paths_acceptance.py:305-308; tools/browser_recovery_screening.mjs:overall"
+    },
+    {
+      "id": "Prior browser matrix / real source",
+      "status": "UNVERIFIED",
+      "accepted": "Historical independent reports remain present and authoritative for unmet items.",
+      "gap": "This narrow recovery/screening milestone does not close original browser matrix, observer/UI cursor restart or real SDK source acceptance.",
+      "evidence": "reports/independent-recovery-browser-review.json; reports/independent-consolidated-browser-review.json"
+    }
+  ],
+  "verdict": "PARTIAL: diagnostic artifact hygiene, source/runner/build binding and saved A correction text accepted; full two-job UI/dependency/restart acceptance remains withheld",
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "True served PID/old-process-exit/new-listener proof, actual B UI with correct A correction-string exclusion, nonvacuous dependency-ready action and retained-output recheck, before/after served DB continuity; full original browser matrix remains open."
+  }
+}

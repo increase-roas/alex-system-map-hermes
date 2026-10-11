@@ -1,0 +1,232 @@
+{
+  "reviewed_at": "2026-10-10T07:35:34.083225+00:00",
+  "scope": "Bounded read-only APP02 browser/restart review; no backend/screening duplication",
+  "owner_run_id": "a7b9637c-ed4d-430e-80dd-a10b7d5e22ad",
+  "owner_receipt": "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+  "owner_receipt_sha256": "dedb4d329ba163fbbe34fbb52614e30e16a97b93586942947961db03d539963c",
+  "machine_checks": [
+    {
+      "item": "tools/recovery_emitted_screening_acceptance.py",
+      "status": "VERIFIED",
+      "sha256": "e82e8ac8c602f1b290ccb69351104f236d643875084771133b73642e0f9b616a"
+    },
+    {
+      "item": "app/src/app/api/workflow/recover/[jobId]/route.ts",
+      "status": "VERIFIED",
+      "sha256": "210399169ecd48a9f43a2f55fe5fdfef5863f8b4be5f6b656cfe4f07a670088f"
+    },
+    {
+      "item": "app/src/lib/server/python.ts",
+      "status": "VERIFIED",
+      "sha256": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32"
+    },
+    {
+      "item": "app/src/app/explorer/workflow-panel.tsx",
+      "status": "VERIFIED",
+      "sha256": "a5d9b9efda509e4090ca78bc5b10c8d860a9ede62261148b672ab2ff053bc1f5"
+    },
+    {
+      "item": "Immutable final pointer/receipt bytes",
+      "status": "VERIFIED",
+      "sha256": "dedb4d329ba163fbbe34fbb52614e30e16a97b93586942947961db03d539963c"
+    }
+  ],
+  "source_identity": {
+    "tools/browser_recovery_screening.mjs": "129884e401e4f5f8fec8fccf464b608bb8c77e8777ade55e2fc93a062ef92848",
+    "tools/recovery_emitted_screening_acceptance.py": "e82e8ac8c602f1b290ccb69351104f236d643875084771133b73642e0f9b616a",
+    "app/src/app/api/health/route.ts": "caef2d45bab19c274b1dfa6ac5e8dfcc2f1d3c6d9db1a61272a020624da75455",
+    "app/src/app/api/workflow/route.ts": "30f6017b50e4e680fc2d3b4d5c87373b12a345fd5fdebde7357255acbef6484f",
+    "app/src/app/api/workflow/recover/[jobId]/route.ts": "210399169ecd48a9f43a2f55fe5fdfef5863f8b4be5f6b656cfe4f07a670088f",
+    "app/src/lib/server/python.ts": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32",
+    "app/src/lib/server/paths.ts": "9e2a6241434e04b0b7b65ef8f9b91e38545602d87b4255e33d3888a0952dcdac",
+    "app/src/app/explorer/workflow-panel.tsx": "a5d9b9efda509e4090ca78bc5b10c8d860a9ede62261148b672ab2ff053bc1f5",
+    "app/.next/BUILD_ID": "9b9aae1deafc5c111ebe717a1fc5299e9e7195a1d3b4160252bd35056a54cd90",
+    "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json": "dedb4d329ba163fbbe34fbb52614e30e16a97b93586942947961db03d539963c"
+  },
+  "source_stable_during_review": true,
+  "browser_current_runner_hash": "129884e401e4f5f8fec8fccf464b608bb8c77e8777ade55e2fc93a062ef92848",
+  "browser_runner_hash_in_owner_receipt": false,
+  "browser_proof_files": [],
+  "items": [
+    {
+      "id": "APP02-browser-final",
+      "status": "FAILED",
+      "evidence": "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+      "finding": "Final run a7b9637c at07:31:54 reports browser exit1, overallpartial and Unexpected end JSON input. No API recovery flags/UI proof/screenshot recorded; proof output directory empty. Aggregatepassed excludes this browser failure."
+    },
+    {
+      "id": "Prior UI recovery history",
+      "status": "FAILED",
+      "evidence": [
+        {
+          "path": "reports/run-receipts/recovery-emitted-screening-20261010-0722-0aa2569c-b902-4571-b2f5-d129583c6bbb.json",
+          "at": "2026-10-10T07:27:05+00:00",
+          "browser": {
+            "checks": {
+              "api_governing": false,
+              "api_stale_history": false,
+              "build_identity": "present",
+              "error": "TimeoutError: page.selectOption: Timeout 30000ms exceeded.\nCall log:\n  - waiting for locator('select')\n",
+              "health_ok": true,
+              "overall": "partial",
+              "service_restarted": true
+            },
+            "delivery": "recovery-emitted-screening-20261010-0722",
+            "exit": 1
+          },
+          "aggregate": "partial",
+          "unverified_subcases": null
+        },
+        {
+          "path": "reports/run-receipts/recovery-emitted-screening-20261010-0722-fe4b29c5-956c-47ad-867f-378de5002037.json",
+          "at": "2026-10-10T07:28:12+00:00",
+          "browser": {
+            "checks": {
+              "api_actionable_not_stale": true,
+              "api_governing": true,
+              "api_stale_history": true,
+              "build_identity": "present",
+              "error": "TimeoutError: locator.click: Timeout 30000ms exceeded.\nCall log:\n  - waiting for getByRole('button', { name: 'rec-ui-1791617256100', exact: true })\n",
+              "health_ok": true,
+              "overall": "partial",
+              "service_restarted": true
+            },
+            "delivery": "recovery-emitted-screening-20261010-0722",
+            "exit": 1
+          },
+          "aggregate": "partial",
+          "unverified_subcases": null
+        },
+        {
+          "path": "reports/run-receipts/recovery-emitted-screening-20261010-0722-beb85169-e7d0-4827-876b-94d14fed5483.json",
+          "at": "2026-10-10T07:29:38+00:00",
+          "browser": {
+            "checks": {
+              "api_governing": false,
+              "api_stale_history": false,
+              "build_identity": "present",
+              "error": "TimeoutError: locator.waitFor: Timeout 60000ms exceeded.\nCall log:\n  - waiting for getByTestId('workflow-actionable-next') to be visible\n",
+              "health_ok": true,
+              "overall": "partial",
+              "service_restarted": true
+            },
+            "delivery": "recovery-emitted-screening-20261010-0722",
+            "exit": 1
+          },
+          "aggregate": "partial",
+          "unverified_subcases": null
+        },
+        {
+          "path": "reports/run-receipts/recovery-emitted-screening-20261010-0722-fbdf0962-2df3-4555-8f90-760b94603f42.json",
+          "at": "2026-10-10T07:31:06+00:00",
+          "browser": {
+            "checks": {
+              "api_before_governing": false,
+              "api_governing": false,
+              "api_stale_history": false,
+              "build_identity": "present",
+              "error": "TimeoutError: locator.waitFor: Timeout 60000ms exceeded.\nCall log:\n  - waiting for getByTestId('workflow-actionable-next') to be visible\n",
+              "health_ok": true,
+              "overall": "partial",
+              "service_restarted": true
+            },
+            "delivery": "recovery-emitted-screening-20261010-0722",
+            "exit": 1
+          },
+          "aggregate": "partial",
+          "unverified_subcases": null
+        },
+        {
+          "path": "reports/run-receipts/recovery-emitted-screening-20261010-0722-c7828cf6-d50f-4bfa-97fa-f5fc2acc5eff.json",
+          "at": "2026-10-10T07:31:39+00:00",
+          "browser": {
+            "checks": {
+              "build_identity": "present",
+              "error": "SyntaxError: Unexpected end of JSON input",
+              "health_ok": true,
+              "overall": "partial"
+            },
+            "delivery": "recovery-emitted-screening-20261010-0722",
+            "exit": 1
+          },
+          "aggregate": "partial",
+          "unverified_subcases": null
+        }
+      ],
+      "finding": "Earlier07:29:38/07:31:06 attempts timed out waiting for visibleworkflow-actionable-next and reported API governing/stale_historyfalse;07:28:12 recorded APItrue but failed UI job selection. These attempts do not establish required browser recovery."
+    },
+    {
+      "id": "Response failure diagnosis",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:36-46,120-122,137-139",
+        "app/src/app/api/workflow/route.ts:13-19",
+        "app/src/lib/server/python.ts"
+      ],
+      "finding": "Current runner calls response.json before status/content-type handling. POST route does not catch service/authorization exceptions; bridge rejects errors. INFERENCE: an empty/non-JSON workflow error response is likely. Exact request/stage/status/body cannot be established because runner logs no stage/server output/response metadata."
+    },
+    {
+      "id": "Build/startup/test-state binding",
+      "status": "FAILED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:52-65,125-135",
+        "app/src/app/api/health/route.ts",
+        "app/src/lib/server/paths.ts",
+        "app/.next/BUILD_ID"
+      ],
+      "finding": "Health source exposes no build/version; runner falls backpresent. Actual currentBUILD_ID9tY-IZHmhdkJV7NaPzuYv unbound to served run. Browser runner hash not listed in owner source_identity. Runneruses normal app/.data/local.sqlite through shared API, not two isolated CLI job DBs. No source/DB/listener/PID identity in browser receipt. Serverstdioignored; old listener could satisfy readiness."
+    },
+    {
+      "id": "Actual service restart",
+      "status": "UNVERIFIED",
+      "evidence": "tools/browser_recovery_screening.mjs:125-135",
+      "finding": "Kill of npx plus2.5sec wait does not verify Next process exit, listener release or newprocessidentity. service_restarted settrue evenSKIP_SERVER_START. Final failed run never recorded this flag."
+    },
+    {
+      "id": "Browser two-job scope/history/recheck",
+      "status": "UNVERIFIED",
+      "evidence": [
+        "tools/browser_recovery_screening.mjs:67-118,156-162",
+        "app/src/app/explorer/workflow-panel.tsx:402-438"
+      ],
+      "finding": "Runnercreates onlyonejob with outputs[]. It asserts action length/notstale, not exacttask/job/correctionsource; staleline check onlytextcontains, not computedline-through/actionability. No secondjob UI isolation or affected-output check. Current UI source has actionable/superseded/history/recheck rendering, but DOM source/test IDs are not runtime proof."
+    },
+    {
+      "id": "Mandatory browser failure gates",
+      "status": "FAILED",
+      "evidence": [
+        "tools/recovery_emitted_screening_acceptance.py:326-357",
+        "tools/browser_recovery_screening.mjs:168-181"
+      ],
+      "finding": "Summarizer returnsnotfailures independently of browserexit; APIgoverning alone may clearbrowser_unverified despiteUIexit1. Runnerallows passed_api exit0 and api_before_governing substitutespostrestartproof. Browserrestart acceptance must requireactualpostrestartAPI+UI+twojobidentity+history andexactexit0, independentfromcoreCLIresult."
+    },
+    {
+      "id": "Scope separation",
+      "status": "VERIFIED",
+      "evidence": "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+      "finding": "Backendtwojob/screening cases are delegated to other reviewer and not independently regraded here. Original browsermatrix and realSDKsourceinput remainopen. No browserlaunch/rerun/sourceedit/outside-projectread performed."
+    }
+  ],
+  "repair_recommendations": [
+    {
+      "step": 1,
+      "label": "INFERRED smallest diagnostic repair",
+      "action": "Preserve stage/action/job ID, response HTTP status/content-type and bounded screened body before JSON parsing; save screened server startup stderr/exit. Return a typed JSON error from workflow API for caught service/authorization failures. This locates the exact failing POST/recover rather than changing DOM labels."
+    },
+    {
+      "step": 2,
+      "label": "Required run identity/restart repair",
+      "action": "Bind production build to exactBUILD_ID/source hashes and fixtureDB; failifwronglistenerorstartupchild exits. Await actualNextprocessexit/listenerrelease, verifynewprocessidentity andsameDB beforeafter restart; nevermarkrestart when startup skipped."
+    },
+    {
+      "step": 3,
+      "label": "Required acceptance repair",
+      "action": "Require browserexit0 andfullpostrestartUI/APIproof in aggregate. Seedtwojobs inthe same isolated servedappDB with realcorrection/output; assert exactcorrectedaction/job/task/source, unchangedjobB, preservedstalehistorynonactionable/line-through andaffectedoutput recheck; save screenshot and packet hashes. KeepCLIcoresummary separate untilbrowserpasses."
+    }
+  ],
+  "overall": "NOT ACCEPTED: browser/restart/two-job UI proof remains incomplete",
+  "blocker": {
+    "type": "run_failed",
+    "exact_missing": "Successful source/build/DB-bound browser restart recovery for two jobs, exact actionable next and preserved historical note/recheck outputs; final run failedJSONparse and priorUIvisible checks failed."
+  }
+}

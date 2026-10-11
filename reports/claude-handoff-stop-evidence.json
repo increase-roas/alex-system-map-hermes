@@ -1,0 +1,105 @@
+{
+  "at": "2026-10-10T13:59:43.477672+00:00",
+  "purpose": "Safe saved handoff; no more builds/tests/retries",
+  "owner_pid": 87508,
+  "proof_pgid": 90162,
+  "signals": [
+    {
+      "pid": 87508,
+      "signal": "SIGINT"
+    },
+    {
+      "pid": 96339,
+      "signal": "SIGTERM",
+      "reason": "Exact retained Cursor retry descendant; project cwd verified before signal",
+      "record_basis": "Executed cleanup at prior handoff; retrospective signal-log correction, not a new action"
+    },
+    {
+      "pid": 96343,
+      "signal": "SIGTERM",
+      "reason": "Exact retained Cursor retry descendant; project cwd verified before signal",
+      "record_basis": "Executed cleanup at prior handoff; retrospective signal-log correction, not a new action"
+    },
+    {
+      "pid": 96344,
+      "signal": "SIGTERM",
+      "reason": "Exact retained Cursor retry descendant; project cwd verified before signal",
+      "record_basis": "Executed cleanup at prior handoff; retrospective signal-log correction, not a new action"
+    },
+    {
+      "pid": 96358,
+      "signal": "SIGTERM",
+      "reason": "Exact retained Cursor retry descendant; project cwd verified before signal",
+      "record_basis": "Executed cleanup at prior handoff; retrospective signal-log correction, not a new action"
+    }
+  ],
+  "known_descendant_pids": [
+    87508,
+    87645,
+    87646,
+    87647,
+    90176,
+    96339,
+    96343,
+    96344,
+    96358,
+    96360
+  ],
+  "owned_descendants_checked": [
+    {
+      "pid": 96339,
+      "parent": 1,
+      "pgid": 96339,
+      "program": "cursorsandbox",
+      "project_cwd": true
+    },
+    {
+      "pid": 96343,
+      "parent": 96339,
+      "pgid": 96339,
+      "program": "cursorsandbox",
+      "project_cwd": true
+    },
+    {
+      "pid": 96344,
+      "parent": 96339,
+      "pgid": 96339,
+      "program": "zsh",
+      "project_cwd": true
+    },
+    {
+      "pid": 96358,
+      "parent": 96344,
+      "pgid": 96339,
+      "program": "Python",
+      "project_cwd": true
+    },
+    {
+      "pid": 96360,
+      "parent": 96344,
+      "pgid": 96339,
+      "program": "tee",
+      "project_cwd": false
+    }
+  ],
+  "owner_exit_code": 130,
+  "test_cutoff_report": "reports/preparation-proof-supervisory-cutoff-20261010-1355.json",
+  "source_hashes": {
+    "tools/catalog_preparation_runtime_proof.py": "50f5689d2078b31a64a0eecfcc60a1a3547b6547fd6880f72edc34796376560e",
+    "tools/catalog_fixture_clone.py": "afe89446f9aba0f9e9b17b09ae5f1370bb4bef87fb68fad7a3622801dd1bdced",
+    "tools/catalog_isolated_manifest.py": "f6df329825abfac2aa485ca7528a682a5fb99ff568304747e792d61452b96e76",
+    "tools/catalog_preparation_bounded.py": "2c37082b8c471913018cacee9f8a4a00ab7f16a5ec5c6226cfda424e2e88986b",
+    "tools/subprocess_bounded.py": "cfaeb73231f2b9982671cbf5a83761a3afe68cc624eabfb77703d88e0b360e04",
+    "tools/subprocess_output.py": "7a293e12c663ca956a77ceb00fe844834e27cea3ff6c1e6377f1b4f1b8cd4f6d",
+    "tools/bounded_npm_build.py": "b0bed866967531b0ad32dc9e55b56591067b441351893199fa65aa9821ade291",
+    "app/src/app/page.tsx": "8785b1a7ad8a63fe63c34360f5239d7dae6bcbb6ff397a71c2a0adbcb18a859a"
+  },
+  "build_id": null,
+  "git_status": "Not a Git repository (git rev-parse exit128); no commit/diff baseline is available.",
+  "remaining_owned_processes": [],
+  "stopped_verified": true,
+  "verified_at": "2026-10-10T14:01:28.550482+00:00",
+  "scheduler_status": "PAUSED",
+  "retry_cleanup_note": "SIGTERM sent individually to96339,96343,96344,96358 after ownership/cwd checks. Tee96360 was observed but not directly signalled because cwd not matched; final process-table check found it and all tracked descendants absent. Conditional SIGKILL was not sent because no retained group members remained.",
+  "documentation_updated_at": "2026-10-10T14:02:29.305486+00:00"
+}

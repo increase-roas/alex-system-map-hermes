@@ -1,0 +1,3905 @@
+{
+  "id": "table_3b40c6c611ba0a067fbb",
+  "sheet": "S01-31 Route power",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Route power audit, refreshed end of 2026-10-01. Rule it enforces: pick the route with the most reach and write power and the fewest clicks for Alex, proven by tests, never by a tool list; check act-as-Alex and manager options first. Verdicts: STRONGEST = best route found; WEAKER = a stronger one exists or it is a duplicate; UNKNOWN = not compared yet; REMOVED = deleted or taken out 2026-10-01. Sources: work/2026-10-01_route-power-audit/notes/power-audit.md, work/2026-10-01_director-finish/notes/ (power tests, SpyFu), tool cards in ~/.agents/tools/cards, live Composio list 2026-10-01."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app"
+        },
+        {
+          "column": "B",
+          "value": "route"
+        },
+        {
+          "column": "C",
+          "value": "where"
+        },
+        {
+          "column": "D",
+          "value": "login status"
+        },
+        {
+          "column": "E",
+          "value": "identity it acts as"
+        },
+        {
+          "column": "F",
+          "value": "reach"
+        },
+        {
+          "column": "G",
+          "value": "total tools"
+        },
+        {
+          "column": "H",
+          "value": "write tools"
+        },
+        {
+          "column": "I",
+          "value": "example write tools"
+        },
+        {
+          "column": "J",
+          "value": "can_act_as_user_or_manager"
+        },
+        {
+          "column": "K",
+          "value": "clicks to keep alive"
+        },
+        {
+          "column": "L",
+          "value": "verdict"
+        },
+        {
+          "column": "M",
+          "value": "why"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GA4"
+        },
+        {
+          "column": "B",
+          "value": "custom_ga4_admin (ca_RjAXt_4X2K28)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub ga4-admin"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01; in the health check)"
+        },
+        {
+          "column": "E",
+          "value": "tagging-admin SA acting as alex@ (domain-wide delegation)"
+        },
+        {
+          "column": "F",
+          "value": "10 properties in 6 accounts (card ga4.md 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "25"
+        },
+        {
+          "column": "H",
+          "value": "not recounted (9 of 23 at the 2026-10-01 audit; 2 generic request tools added later can also write)"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_PROPERTY, CREATE_WEB_DATA_STREAM, CREATE_KEY_EVENT, DELETE_PROPERTY, ADMIN_API_REQUEST (any GA4 Admin call as alex@), GOOGLE_API_REQUEST (Search Console, Data Manager, Business Profile as alex@)"
+        },
+        {
+          "column": "J",
+          "value": "yes: delegation as alex@ (client 112417209265494842557)"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Settled 2026-10-01. Same day: ADMIN_API_REQUEST and GOOGLE_API_REQUEST added; data retention set from 2 to 14 months on 9 properties (GT Tree is not a client, left at 2). Create+delete of a key event passed on 4 client accounts. Sometimes returns 503: retry once."
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GA4"
+        },
+        {
+          "column": "B",
+          "value": "google_analytics (ca_2_ZbAva8KWdm)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "DELETED 2026-10-01 (not in the live Composio list; its sign-in setup has 0 logins)"
+        },
+        {
+          "column": "E",
+          "value": "alex@ via Composio shared Google app"
+        },
+        {
+          "column": "F",
+          "value": "10 properties, read only"
+        },
+        {
+          "column": "G",
+          "value": "67"
+        },
+        {
+          "column": "H",
+          "value": "11"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_CUSTOM_DIMENSION (fails: no edit scope)"
+        },
+        {
+          "column": "J",
+          "value": "no: analytics.edit blocked on Composio app"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01. It was read-only: Composio's shared Google app cannot get the edit scope (Google shows \"This app is blocked\"). custom_ga4_admin replaced it."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads"
+        },
+        {
+          "column": "B",
+          "value": "googleads (googleads_maned-sprack)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (the 2 expired logins were deleted 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "alex@ via manager account 1640283674"
+        },
+        {
+          "column": "F",
+          "value": "manager account 1640283674 \"Increase Roas Inc.\"; its 8 client accounts are all cancelled, suspended or closed (card google-ads.md, 2026-10-01); admins alex@, franky@, Angel@"
+        },
+        {
+          "column": "G",
+          "value": "31"
+        },
+        {
+          "column": "H",
+          "value": "21"
+        },
+        {
+          "column": "I",
+          "value": "MUTATE_CAMPAIGNS, MUTATE_CAMPAIGN_BUDGETS, MUTATE_CONVERSION_ACTIONS, INGEST_CONVERSION_EVENTS"
+        },
+        {
+          "column": "J",
+          "value": "yes: manager account"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Settled. Card now lists all 31 tools (21 write); it had listed only 8. Lead conversions upload through INGEST_CONVERSION_EVENTS (Data Manager API, validate_only first); not yet proven on a live account. createCustomerClient with validateOnly passed. 2026-10-01: invites sent to make contact@ and anthony@ admins, waiting for franky@ or Angel@ to approve. Developer token is Composio's shared one."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel CRM"
+        },
+        {
+          "column": "B",
+          "value": "custom_ghl_oauth_crm (ca_OIfo_F6scXwN)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > CF Worker gateway"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "IncreaseRoas agency OAuth (gateway)"
+        },
+        {
+          "column": "F",
+          "value": "303 sub-accounts (GHL_LIST_LOCATIONS count 303, 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "10"
+        },
+        {
+          "column": "H",
+          "value": "1"
+        },
+        {
+          "column": "I",
+          "value": "GHL_EXECUTE_OPERATION (generic: any GHL operation)"
+        },
+        {
+          "column": "J",
+          "value": "yes: agency-level OAuth"
+        },
+        {
+          "column": "K",
+          "value": "0 (bearer to gateway)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Settled; 10 tools is a facade, the power is in execute_operation. The one CRM route: the local copies in Claude Code, Cursor, Codex and the claude.ai connector are removed 2026-10-01 (the Claude Desktop leftover was removed 2026-10-02, spp-c21). Javar keeps javar_ghl on the same gateway."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel builds"
+        },
+        {
+          "column": "B",
+          "value": "custom_ghl_command_builder (ca_o1-FA70PbU3x)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > CF Worker > Orgo"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "GHL Command registry (PITs per location)"
+        },
+        {
+          "column": "F",
+          "value": "49 registered accounts (card ghl.md, 2026-10-01). LONESTAR CUSTOMER SERVICE: dropped 2026-10-02 (Alex)"
+        },
+        {
+          "column": "G",
+          "value": "5"
+        },
+        {
+          "column": "H",
+          "value": "1"
+        },
+        {
+          "column": "I",
+          "value": "GHL_WRITE (generic mutation facade)"
+        },
+        {
+          "column": "J",
+          "value": "per-location keys, by design"
+        },
+        {
+          "column": "K",
+          "value": "1+ (DCR OAuth)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Settled; 5-tool facade, the real tool list sits behind ghl_find_tools. Runs on the Orgo services ir-ghl-command-universal and ir-ghl-command-tunnel (both RUNNING in the 2026-10-01 hub check): keep them. Composio sign-in fixed 2026-10-01."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Tag Manager"
+        },
+        {
+          "column": "B",
+          "value": "custom_google_tag_manager (ca_Z9l2oNsyCPgI)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub gtm"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (the expired duplicate quip-salar is not in the 2026-10-01 live list)"
+        },
+        {
+          "column": "E",
+          "value": "tagging-admin service account acting as alex@ (domain-wide delegation; switched from \"as itself\" on 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "2 GTM accounts as alex@: \"Increase Roas\" 6316753028 (2 containers) and \"Increase Roas (Official)\" 6359407641 (5 containers) = 7 containers; 11 Google tags found by G- ID lookup. VERIFIED 2026-10-01"
+        },
+        {
+          "column": "G",
+          "value": "18"
+        },
+        {
+          "column": "H",
+          "value": "16"
+        },
+        {
+          "column": "I",
+          "value": "GTM_TAG, GTM_CONTAINER, GTM_VERSION (publish), GTM_WORKSPACE (multi-action tools), GTM_USER_PERMISSION (needs account admin rights)"
+        },
+        {
+          "column": "J",
+          "value": "yes: acts as alex@. Delegated GTM scopes: readonly, edit.containers, edit.containerversions, publish, plus delete.containers, manage.users and manage.accounts added 2026-10-01"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST (one limit left)"
+        },
+        {
+          "column": "M",
+          "value": "Before: it ran as the service account and saw 1 account; now it acts as alex@ and sees 2. Edit was proven on a test workspace (cleaned up; the notes do not say which account). Limit left: alex@ is only \"user\"/read in the account named \"Increase Roas\"; its admin is analyticsevolutionpro@gmail.com, and acting as alex@ the route can do no more there than alex@ may (not tested). Alex decided 2026-10-02 (ga4 card): read only there, never build; build and publish only in 6359407641 'Increase Roas (Official)' (To do R12). The hub GTM server still does not list Google tags in the account list; use the G- ID lookup (works, 0 clicks)."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Tag Manager"
+        },
+        {
+          "column": "B",
+          "value": "gtm-mcp (local, SA key file)"
+        },
+        {
+          "column": "C",
+          "value": "Cursor (on); Codex (off)"
+        },
+        {
+          "column": "D",
+          "value": "removed 2026-10-01 (Cursor mcp.json now only 1password + orgo; Codex entry removed too)"
+        },
+        {
+          "column": "E",
+          "value": "tagging-admin SA as itself"
+        },
+        {
+          "column": "F",
+          "value": "GTM 6359407641 (workbook)"
+        },
+        {
+          "column": "G",
+          "value": "18"
+        },
+        {
+          "column": "I",
+          "value": "same 18-tool server"
+        },
+        {
+          "column": "J",
+          "value": "not configured"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01: it was a local duplicate of the hub route with the narrower reach. Backups ~/Backups/cursor-config-2026-10-01 and codex-config-2026-10-01."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google HTL tracking"
+        },
+        {
+          "column": "B",
+          "value": "custom_htl_google_tracking (ca_N4CIGdsEw4uj)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "DELETED 2026-10-01 (owner said cut)"
+        },
+        {
+          "column": "E",
+          "value": "htl-readonly identity"
+        },
+        {
+          "column": "F",
+          "value": "GTM 6359407641 (5 containers) + HTL GA4 aggregates. VERIFIED HTL_GTM_COVERAGE"
+        },
+        {
+          "column": "G",
+          "value": "5"
+        },
+        {
+          "column": "H",
+          "value": "0"
+        },
+        {
+          "column": "I",
+          "value": "none"
+        },
+        {
+          "column": "J",
+          "value": "no"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01: a read-only aggregate subset of custom_ga4_admin + GTM, which cover it."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace (Gmail, Drive, Docs, Sheets, Slides, Forms, Calendar, Contacts, Tasks, Admin)"
+        },
+        {
+          "column": "B",
+          "value": "custom_google_robot (ca_vm6rcasgNEIk)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub google-robot (/google-robot/mcp)"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "tagging-admin service account acting as any increaseroas.com user (domain-wide delegation, 39 scopes, client 112417209265494842557)"
+        },
+        {
+          "column": "F",
+          "value": "All 16 increaseroas.com users. Read as alex@, contact@ (Manny) and anthony@ (2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "13"
+        },
+        {
+          "column": "H",
+          "value": "5 by name (google_api can make any write)"
+        },
+        {
+          "column": "I",
+          "value": "google_api (any Workspace REST endpoint), gmail_send, drive_upload, sheets_write, calendar_create"
+        },
+        {
+          "column": "J",
+          "value": "yes: every tool takes user= (default alex@); admin calls run as alex@"
+        },
+        {
+          "column": "K",
+          "value": "0 (never expires)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Replaced Alex's 5 per-person Google logins and the old Workspace Admin connector (3 tools) on 2026-10-01. Proven read and write: a Doc, a Sheet with a formula, a Gmail draft and an Admin group were created and deleted. Search Console, Data Manager and Business Profile calls also go through a robot (this one or custom_ga4_admin). Open: Alex's yes/no on giving the robot Owner at the Google org. Depends on the Orgo hub and the delegation entry staying up; the health check emails through it."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin (old connector)"
+        },
+        {
+          "column": "B",
+          "value": "custom_google_workspace_admin flange-imaret (ca_xwQfSQJlPb3T) and parody-boma (ca_4aaKVTHsWhkZ)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub"
+        },
+        {
+          "column": "D",
+          "value": "both DELETED 2026-10-01 (flange-imaret worked but was replaced; parody-boma returned 401). Hub route removed; files in /opt/mcp-hub/backups/2026-10-01_wsadmin-retired"
+        },
+        {
+          "column": "E",
+          "value": "old workspace-admin service account (deleted in Google Cloud 2026-10-01; Google can restore it for about 30 days)"
+        },
+        {
+          "column": "F",
+          "value": "none now"
+        },
+        {
+          "column": "G",
+          "value": "3"
+        },
+        {
+          "column": "H",
+          "value": "1"
+        },
+        {
+          "column": "I",
+          "value": "RESET_PASSWORD"
+        },
+        {
+          "column": "J",
+          "value": "—"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Replaced by the Google robot. The dead delegation entry for client ID 114216599725767886067 was removed by Alex on 2026-10-01 at 20:51:11Z (verified, notes/k02-verify.md); 112417209265494842557, the entry that carries the robot's scopes, stays."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Workspace Admin"
+        },
+        {
+          "column": "B",
+          "value": "google-workspace-admin (local server.py)"
+        },
+        {
+          "column": "C",
+          "value": "Cursor; Claude Code (2 entries); Claude Desktop; Codex (off)"
+        },
+        {
+          "column": "D",
+          "value": "removed 2026-10-01 from Cursor, Claude Code (2 entries) and Codex; Claude Desktop's entry removed 2026-10-02 (spp-c21)"
+        },
+        {
+          "column": "E",
+          "value": "workspace-admin SA acting as alex@"
+        },
+        {
+          "column": "F",
+          "value": "16 users"
+        },
+        {
+          "column": "G",
+          "value": "3"
+        },
+        {
+          "column": "H",
+          "value": "1"
+        },
+        {
+          "column": "I",
+          "value": "RESET_PASSWORD"
+        },
+        {
+          "column": "J",
+          "value": "yes"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (the last copy, in Claude Desktop, on 2026-10-02)"
+        },
+        {
+          "column": "M",
+          "value": "Duplicate of the old hub route, and its service account was deleted 2026-10-01, so it should fail now (not tested)."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gmail"
+        },
+        {
+          "column": "B",
+          "value": "gmail (Composio-managed OAuth)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "gmail_redry-illeck (agent@, Javante) and gmail_ziffs-thoric (jay@, Javar) ACTIVE. Alex's 3 logins (yana-anime, supawn-inmost, savour-quinin) deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "each login = one user via Composio shared Google app"
+        },
+        {
+          "column": "F",
+          "value": "2 of 16 Workspace mailboxes (the two agents')"
+        },
+        {
+          "column": "G",
+          "value": "60"
+        },
+        {
+          "column": "H",
+          "value": "30"
+        },
+        {
+          "column": "I",
+          "value": "SEND_EMAIL, SEND_DRAFT, BATCH_DELETE_MESSAGES, CREATE_FILTER"
+        },
+        {
+          "column": "J",
+          "value": "no: Composio gmail supports OAUTH2 only (toolkit API); one login per user"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth per agent login)"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER (kept for the agents)"
+        },
+        {
+          "column": "M",
+          "value": "Alex, Manny and Anthony use the Google robot (any of 16 users, 0 clicks, never expires). These 2 logins belong to the Javar and Javante agents and stay for them. Moving them to the robot is open: Alex decides."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive"
+        },
+        {
+          "column": "B",
+          "value": "googledrive (Composio-managed OAuth)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "gaily-perit (agent@, Javante) and prover-wore (jay@, Javar) ACTIVE. Alex's 3 logins (kari-else, rake-percur, orlo-ergot) deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "each login = one user via Composio shared Google app"
+        },
+        {
+          "column": "F",
+          "value": "2 of 16 users (the two agents')"
+        },
+        {
+          "column": "G",
+          "value": "92"
+        },
+        {
+          "column": "H",
+          "value": "45"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_FILE, CREATE_DRIVE, ADD_PARENT, CREATE_COMMENT"
+        },
+        {
+          "column": "J",
+          "value": "no: Composio googledrive supports OAUTH2 only (toolkit API); one login per user"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth per agent login)"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER (kept for the agents)"
+        },
+        {
+          "column": "M",
+          "value": "Alex, Manny and Anthony use the Google robot. These 2 logins belong to the Javar and Javante agents. Moving them to the robot is open: Alex decides."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Docs"
+        },
+        {
+          "column": "B",
+          "value": "googledocs (Composio-managed OAuth)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "defer-knar (jay@, Javar) and tabby-phosis (agent@, Javante) ACTIVE. Alex's 3 logins (rehoe-cocky, flood-codist, khoka-entone) deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "each login = one user via Composio shared Google app"
+        },
+        {
+          "column": "F",
+          "value": "2 of 16 users (the two agents')"
+        },
+        {
+          "column": "G",
+          "value": "41"
+        },
+        {
+          "column": "H",
+          "value": "34"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_DOCUMENT, CREATE_DOCUMENT_MARKDOWN, COPY_DOCUMENT"
+        },
+        {
+          "column": "J",
+          "value": "no: Composio googledocs supports OAUTH2 only (toolkit API); one login per user"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth per agent login)"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER (kept for the agents)"
+        },
+        {
+          "column": "M",
+          "value": "Alex, Manny and Anthony use the Google robot. These 2 logins belong to the Javar and Javante agents. Moving them to the robot is open: Alex decides."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Sheets"
+        },
+        {
+          "column": "B",
+          "value": "googlesheets (Composio-managed OAuth)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "paga-swure (agent@, Javante) and incur-aghan (jay@, Javar) ACTIVE. Alex's 3 logins (gashes-unbag, uppush-istoke, wane-gregal) deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "each login = one user via Composio shared Google app"
+        },
+        {
+          "column": "F",
+          "value": "2 of 16 users (the two agents')"
+        },
+        {
+          "column": "G",
+          "value": "50"
+        },
+        {
+          "column": "H",
+          "value": "29"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_GOOGLE_SHEET1, BATCH_UPDATE_VALUES_BY_DATA_FILTER, ADD_SHEET"
+        },
+        {
+          "column": "J",
+          "value": "no: Composio googlesheets supports OAUTH2 only (toolkit API); one login per user"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth per agent login)"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER (kept for the agents)"
+        },
+        {
+          "column": "M",
+          "value": "Alex, Manny and Anthony use the Google robot. These 2 logins belong to the Javar and Javante agents. Moving them to the robot is open: Alex decides."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Calendar"
+        },
+        {
+          "column": "B",
+          "value": "googlecalendar (Composio-managed OAuth)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "no login now: alex@ (rome-chinny) and the expired fracas-conor deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "none"
+        },
+        {
+          "column": "F",
+          "value": "none through this toolkit; the Google robot reaches every user's calendar"
+        },
+        {
+          "column": "G",
+          "value": "47"
+        },
+        {
+          "column": "H",
+          "value": "22"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_EVENT, CREATE_CALENDAR, ACL_DELETE"
+        },
+        {
+          "column": "J",
+          "value": "no: Composio googlecalendar supports OAUTH2 only (toolkit API); one login per user"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REPLACED by the Google robot"
+        },
+        {
+          "column": "M",
+          "value": "Calendar (calendar_events, calendar_create, or google_api for the rest) goes through custom_google_robot as any of 16 users, 0 clicks."
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google (Docs/Sheets/Drive/Gmail)"
+        },
+        {
+          "column": "B",
+          "value": "google-docs (@a-bonus/google-docs-mcp)"
+        },
+        {
+          "column": "C",
+          "value": "Cursor (removed)"
+        },
+        {
+          "column": "D",
+          "value": "removed 2026-10-01 (Cursor mcp.json now only 1password + orgo)"
+        },
+        {
+          "column": "E",
+          "value": "alex@ via Alex's own Google OAuth client"
+        },
+        {
+          "column": "F",
+          "value": "alex@ only"
+        },
+        {
+          "column": "I",
+          "value": "Docs/Sheets/Drive write, gmail.modify (workbook)"
+        },
+        {
+          "column": "J",
+          "value": "no"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01 from Cursor (backup ~/Backups/cursor-config-2026-10-01). The plaintext client secret in that entry went with it. A leftover token.json dated Jul 31 was not rechecked."
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Drive/Calendar"
+        },
+        {
+          "column": "B",
+          "value": "google-drive@openai-curated, google-calendar@openai-curated"
+        },
+        {
+          "column": "C",
+          "value": "Codex (ChatGPT connectors)"
+        },
+        {
+          "column": "D",
+          "value": "plugins removed from Codex 2026-10-01; no Drive or Calendar app in Codex's config (names-only read 2026-10-03)"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "unverified"
+        },
+        {
+          "column": "I",
+          "value": "Drive batch updates (session logs)"
+        },
+        {
+          "column": "J",
+          "value": "unknown"
+        },
+        {
+          "column": "K",
+          "value": "1+ (hosted OAuth)"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED"
+        },
+        {
+          "column": "M",
+          "value": "Plan was to move each AI to Composio: done. The Drive connector left ChatGPT on 2026-10-01 (AI apps r14 C). Codex's config has no Drive or Calendar entry ([apps]: _default, the Composio app and 2 OpenAI connectors, off; read 2026-10-03), and ChatGPT's plugins are Composio, Finances and Superpowers only (2026-10-03)."
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Search Console"
+        },
+        {
+          "column": "B",
+          "value": "google_search_console (not connected)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "none (not needed)"
+        },
+        {
+          "column": "E",
+          "value": "-"
+        },
+        {
+          "column": "F",
+          "value": "Search Console already works as alex@ through the robot: 5 properties (increaseroas.com x3, revsteadsystems.com, therealtreeservice.com)"
+        },
+        {
+          "column": "G",
+          "value": "9"
+        },
+        {
+          "column": "H",
+          "value": "2"
+        },
+        {
+          "column": "I",
+          "value": "ADD_SITE, DELETE_SITE"
+        },
+        {
+          "column": "J",
+          "value": "no: OAUTH2 only"
+        },
+        {
+          "column": "K",
+          "value": "1+"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER"
+        },
+        {
+          "column": "M",
+          "value": "Not added. Search Console API enabled in project increaseroas-tagging and \"webmasters\" delegated (2026-10-01), so custom_google_robot google_api or custom_ga4_admin GOOGLE_API_REQUEST does it as alex@. Client sites are not verified under Alex yet."
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "YouTube"
+        },
+        {
+          "column": "B",
+          "value": "youtube (not connected)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "none"
+        },
+        {
+          "column": "E",
+          "value": "-"
+        },
+        {
+          "column": "F",
+          "value": "-"
+        },
+        {
+          "column": "G",
+          "value": "48"
+        },
+        {
+          "column": "H",
+          "value": "21"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_PLAYLIST, CREATE_COMMENT_REPLY"
+        },
+        {
+          "column": "J",
+          "value": "unknown (brand channels may not delegate)"
+        },
+        {
+          "column": "K",
+          "value": "1+"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "Only if YouTube becomes a job"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "BigQuery"
+        },
+        {
+          "column": "B",
+          "value": "googlebigquery (not connected)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "none"
+        },
+        {
+          "column": "E",
+          "value": "-"
+        },
+        {
+          "column": "F",
+          "value": "-"
+        },
+        {
+          "column": "G",
+          "value": "63"
+        },
+        {
+          "column": "H",
+          "value": "30"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_DATASET, CANCEL_JOB"
+        },
+        {
+          "column": "J",
+          "value": "yes: toolkit offers GOOGLE_SERVICE_ACCOUNT mode"
+        },
+        {
+          "column": "K",
+          "value": "0 if SA mode"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "If ever added, pick the service-account mode, not OAuth"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google (all apps)"
+        },
+        {
+          "column": "B",
+          "value": "googlesuper (not connected)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "none"
+        },
+        {
+          "column": "E",
+          "value": "-"
+        },
+        {
+          "column": "F",
+          "value": "-"
+        },
+        {
+          "column": "G",
+          "value": "459"
+        },
+        {
+          "column": "H",
+          "value": "216"
+        },
+        {
+          "column": "I",
+          "value": "SEND_EMAIL, CREATE_EVENT, ACL_DELETE"
+        },
+        {
+          "column": "J",
+          "value": "no: one OAuth per user"
+        },
+        {
+          "column": "K",
+          "value": "1+"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER"
+        },
+        {
+          "column": "M",
+          "value": "One login for all Google apps, but still per-user OAuth; not stronger than delegation"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "metaads (metaads_daub-putage, ca_7i7CdMbStKc9)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01). The 2 old expired logins (uncord-taken, bugi-thrimp) were deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "system user \"Manus\" of IR Business Manus App; token from 1Password \"Meta Ads — system user token (IR Business Manus App)\": never expires, 22 permissions incl. ads_management, ads_read, business_management, leads_retrieval, attribution_read"
+        },
+        {
+          "column": "F",
+          "value": "57 ad accounts (METAADS_GET_AD_ACCOUNTS, 2026-10-01), same as the meta CLI"
+        },
+        {
+          "column": "G",
+          "value": "65"
+        },
+        {
+          "column": "H",
+          "value": "13"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_CAMPAIGN, CREATE_AD_SET, CREATE_AD, SEND_CONVERSION_EVENTS"
+        },
+        {
+          "column": "J",
+          "value": "yes: Business Manager system user"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Moved in 2026-10-01 by the key mover (key never typed). In the connector health check. Graph API for everything else through composio proxy. Spend follows the project's Spend approval line. Javar keeps the fenced javar_meta."
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "meta CLI (~/.local/bin/meta)"
+        },
+        {
+          "column": "C",
+          "value": "Mac CLI"
+        },
+        {
+          "column": "D",
+          "value": "removed 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "system user IR Business Manus App (never expires, workbook)"
+        },
+        {
+          "column": "F",
+          "value": "57 ad accounts. VERIFIED meta ads adaccount list 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "campaign/adset/ad create (CLI)"
+        },
+        {
+          "column": "J",
+          "value": "yes: Business Manager system user"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (K04, 2026-10-01): Composio metaads carries the same token and reach"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01 (K04): the token file was deleted after a sha256 match with 1Password, and the launchers and venv moved to ~/Backups/meta-k04-2026-10-01. The same token and reach live on in Composio metaads."
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta Ads"
+        },
+        {
+          "column": "B",
+          "value": "javar_meta (Hermes/Javar)"
+        },
+        {
+          "column": "C",
+          "value": "Orgo (Javar)"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "1Password \"Meta Ads - EA-Javar - PROD\""
+        },
+        {
+          "column": "F",
+          "value": "unverified"
+        },
+        {
+          "column": "I",
+          "value": "ad changes (fenced)"
+        },
+        {
+          "column": "J",
+          "value": "unknown"
+        },
+        {
+          "column": "K",
+          "value": "0 if system user"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "Keep (safety fence); reach not compared with the 57-account token"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "slack (rehood-hinney Alex, east-reps Lonestar)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "both ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "user alex (U0BGPQ2APT7) in Increase ROAS; Lonestar unverified"
+        },
+        {
+          "column": "F",
+          "value": "Increase ROAS workspace (VERIFIED team info); Lonestar unknown"
+        },
+        {
+          "column": "G",
+          "value": "159"
+        },
+        {
+          "column": "H",
+          "value": "70"
+        },
+        {
+          "column": "I",
+          "value": "SEND_MESSAGE, CREATE_A_REMINDER, ARCHIVE_CONVERSATION"
+        },
+        {
+          "column": "J",
+          "value": "yes: user token acts as Alex; no org token (not Enterprise Grid)"
+        },
+        {
+          "column": "K",
+          "value": "0-1 (Slack user tokens do not expire unless rotation is on)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Right identity for reading as Alex; Claude and Codex may post internal messages as Alex; clients, customers and Lone Star ask Alex first; Javar's agents use javar_propose_message (decision I08; slack card). Always pass the account (\"Alex Slack Account\" = slack_rehood-hinney): Composio has no default setting, its MCP refuses without an account, and the CLI default flips if the Lonestar or Javante login updates (card slack.md). Lonestar login (east-reps): workspace not verified. slackbot toolkit (98 tools) is a bot identity, not stronger."
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "slack-session (@jtalk22/slack-mcp, xoxc + d cookie)"
+        },
+        {
+          "column": "C",
+          "value": "Cursor (removed)"
+        },
+        {
+          "column": "D",
+          "value": "removed 2026-10-01 (Cursor mcp.json now only 1password + orgo)"
+        },
+        {
+          "column": "E",
+          "value": "user alex"
+        },
+        {
+          "column": "F",
+          "value": "Increase ROAS"
+        },
+        {
+          "column": "I",
+          "value": "send as Alex, react"
+        },
+        {
+          "column": "J",
+          "value": "yes (browser session)"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01 from Cursor (backup ~/Backups/cursor-config-2026-10-01). Browser-session token whose auto-heal had been stuck since 2026-09-07; Composio Slack replaces it."
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Slack"
+        },
+        {
+          "column": "B",
+          "value": "5 bot tokens in 1Password (javar_ea, ops, finance, csm, media)"
+        },
+        {
+          "column": "C",
+          "value": "Hermes/Javar"
+        },
+        {
+          "column": "D",
+          "value": "working (auth.test, workbook)"
+        },
+        {
+          "column": "E",
+          "value": "bots"
+        },
+        {
+          "column": "F",
+          "value": "Increase ROAS"
+        },
+        {
+          "column": "I",
+          "value": "chat:write (bot scopes)"
+        },
+        {
+          "column": "J",
+          "value": "n/a: bot identities"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Correct for agent identities; not a substitute for acting as Alex"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Notion"
+        },
+        {
+          "column": "B",
+          "value": "notion (notion_lepas-limbie \"Notion full workspace\", ca_hq3X8KNk3nWe)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (reconnected 2026-10-01; the first login notion_alroot-sair was deleted)"
+        },
+        {
+          "column": "E",
+          "value": "Composio OAuth in workspace Increaseroas (owner alex@)"
+        },
+        {
+          "column": "F",
+          "value": "Whole workspace: teamspace, private pages and People (Alex ticked all pages in Notion's picker). NOTION_FETCH_DATA returned 61 items incl. the workspace-level Notes and People databases (2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "57"
+        },
+        {
+          "column": "H",
+          "value": "29"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_DATABASE, CREATE_COMMENT, ADD_MULTIPLE_PAGE_CONTENT"
+        },
+        {
+          "column": "J",
+          "value": "no: OAuth integrations see only what is shared at consent (everything is ticked now). Composio also accepts an internal-integration key (API_KEY mode, 0 clicks): not tested"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "The first login saw only 57 pages under one parent, so it was replaced 2026-10-01. Not checked: whether pages created later are included automatically."
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "github (lipase-modern increaseroasir, tina-inwit IRAGENTJAVANTE)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "both ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "two personal accounts"
+        },
+        {
+          "column": "F",
+          "value": "no organizations on either (VERIFIED 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "874"
+        },
+        {
+          "column": "H",
+          "value": "337"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_A_BLOB, CREATE_A_CHECK_RUN, repo/issue/PR writes"
+        },
+        {
+          "column": "J",
+          "value": "n/a: no org to install an app on"
+        },
+        {
+          "column": "K",
+          "value": "0-1 (GitHub OAuth app tokens do not expire)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Nothing stronger without a GitHub org. Always pass the account (\"GITHUB\" = github_lipase-modern = increaseroasir; card github.md): the Composio default can flip."
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "apify (apify_ruby-asor)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "user increaseroas (workbook)"
+        },
+        {
+          "column": "F",
+          "value": "whole Apify account"
+        },
+        {
+          "column": "G",
+          "value": "182"
+        },
+        {
+          "column": "H",
+          "value": "48"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_ACTOR, CREATE_TASK, run/abort actors"
+        },
+        {
+          "column": "J",
+          "value": "n/a (account key)"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Full API by key"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Apify"
+        },
+        {
+          "column": "B",
+          "value": "apify_mcp (apify_mcp_musgu-jaina)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "DELETED 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "unverified"
+        },
+        {
+          "column": "G",
+          "value": "12"
+        },
+        {
+          "column": "H",
+          "value": "1"
+        },
+        {
+          "column": "I",
+          "value": "ABORT_ACTOR_RUN"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed 2026-10-01: a 12-tool subset of the apify key route."
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "custom_cloudflare_api (ca_IUuu0MrmsQya)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Cloudflare's own API connector (mcp.cloudflare.com)"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01; in the health check). The old OAuth login cloudflare_mcp was deleted 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "account token for account a3f549867f040e13df33e5bd18f785f4 (alex@): Read & Write on every permission group, no expiry; token in 1Password"
+        },
+        {
+          "column": "F",
+          "value": "13 zones and 30 Workers (2026-10-01); the whole Cloudflare API (2,500+ endpoints)"
+        },
+        {
+          "column": "G",
+          "value": "3"
+        },
+        {
+          "column": "H",
+          "value": "1 (EXECUTE runs any Cloudflare API call)"
+        },
+        {
+          "column": "I",
+          "value": "SEARCH, EXECUTE, DOCS"
+        },
+        {
+          "column": "J",
+          "value": "n/a (account token)"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Replaced the OAuth login so it never needs a reconnect. Write test passed: a KV namespace was created and deleted (2026-10-01). Composio's own cloudflare toolkit has only 24 tools. The connector does not support IP-filtered tokens, so the token has no IP filter."
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Asana"
+        },
+        {
+          "column": "B",
+          "value": "asana (asana_logie-fratch)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "Composio OAuth user"
+        },
+        {
+          "column": "F",
+          "value": "workspace increaseroas.com (VERIFIED)"
+        },
+        {
+          "column": "G",
+          "value": "153"
+        },
+        {
+          "column": "H",
+          "value": "70"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_A_PROJECT, task writes"
+        },
+        {
+          "column": "J",
+          "value": "no (OAuth only in Composio)"
+        },
+        {
+          "column": "K",
+          "value": "0-1 (Asana refresh tokens do not expire)"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "No stronger mode in Composio"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Discord"
+        },
+        {
+          "column": "B",
+          "value": "discord (discord_brainy-haired)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "Alex user OAuth"
+        },
+        {
+          "column": "F",
+          "value": "owner of several guilds (VERIFIED DISCORD_LIST_MY_GUILDS)"
+        },
+        {
+          "column": "G",
+          "value": "23"
+        },
+        {
+          "column": "H",
+          "value": "4"
+        },
+        {
+          "column": "I",
+          "value": "none useful (role connections only); cannot post or manage channels"
+        },
+        {
+          "column": "J",
+          "value": "no"
+        },
+        {
+          "column": "K",
+          "value": "1+"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER"
+        },
+        {
+          "column": "M",
+          "value": "discordbot toolkit has 167 tools (83 write: channels, messages, roles). Only matters if Discord is used for business"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ElevenLabs"
+        },
+        {
+          "column": "B",
+          "value": "elevenlabs (elevenlabs_rangle-malo)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "account key (Pro)"
+        },
+        {
+          "column": "F",
+          "value": "whole account"
+        },
+        {
+          "column": "G",
+          "value": "155"
+        },
+        {
+          "column": "H",
+          "value": "59"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_CONVAI agent/KB, ADD_OUTBOUND_PHONE_NUMBER"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Key route, full toolkit"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Exa"
+        },
+        {
+          "column": "B",
+          "value": "exa (exa_beode-vain)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "account key"
+        },
+        {
+          "column": "F",
+          "value": "unverified account"
+        },
+        {
+          "column": "G",
+          "value": "20"
+        },
+        {
+          "column": "H",
+          "value": "not recounted (8 of 19 at the earlier audit)"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_RESEARCH, CREATE_WEBSET, CREATE_MONITOR, CREATE_AGENT_RUN (Exa Agent)"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Key route; 20 tools incl. Exa Agent (tools/exa.md, 2026-10-01). Claude's 3-tool Exa connector and local Exa servers are not routes."
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fireflies"
+        },
+        {
+          "column": "B",
+          "value": "fireflies (fireflies_kiyi-agaze)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "key of Alex: Alexander Bloomfield, increaseroas.com, admin (Fireflies user call, 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "team of 4 users, 1 admin (Alex). 479 distinct transcripts reachable: all 464 team-owned plus 15 shared by 6 outside owners (2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "26"
+        },
+        {
+          "column": "H",
+          "value": "9"
+        },
+        {
+          "column": "I",
+          "value": "DELETE_TRANSCRIPT_BY_ID, SET_USER_ROLE, CREATE_BITE"
+        },
+        {
+          "column": "J",
+          "value": "n/a: an admin API key already sees the whole team. composio proxy to api.fireflies.ai/graphql works for anything beyond the 26 tools"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Settled by test 2026-10-01: the key is the admin's, so team transcripts are not hidden. Fireflies has no key above an admin's. Alex's keep/replace decision is still open; nothing stronger exists. It breaks only if Alex regenerates the key."
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "HeyGen"
+        },
+        {
+          "column": "B",
+          "value": "heygen (heygen_plower-ceiler)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "account key"
+        },
+        {
+          "column": "F",
+          "value": "whole account"
+        },
+        {
+          "column": "G",
+          "value": "71"
+        },
+        {
+          "column": "H",
+          "value": "23"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_WEBM_VIDEO, CREATE_PHOTO_AVATAR_GROUP"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Key route"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jobber"
+        },
+        {
+          "column": "B",
+          "value": "jobber (jobber_clunk-fient)"
+        },
+        {
+          "column": "C",
+          "value": "Composio (own auth config)"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "Jobber account Dynamite Lights LLC (VERIFIED JOBBER_GET_ACCOUNT)"
+        },
+        {
+          "column": "F",
+          "value": "1 Jobber account"
+        },
+        {
+          "column": "G",
+          "value": "36"
+        },
+        {
+          "column": "H",
+          "value": "12"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_CLIENT, CREATE_JOB, CREATE_QUOTE"
+        },
+        {
+          "column": "J",
+          "value": "no: Jobber is per-account OAuth"
+        },
+        {
+          "column": "K",
+          "value": "1+"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "No key or agency mode exists in Composio"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "QuickBooks"
+        },
+        {
+          "column": "B",
+          "value": "quickbooks (genre-lapsed, arris-bigamy)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "both ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "company \"Increase Roas\" (partnership, Phoenix) = quickbooks_genre-lapsed; \"SSA - Start Scale Automate\" (personal brand, S-Corp) = quickbooks_arris-bigamy"
+        },
+        {
+          "column": "F",
+          "value": "2 companies; Alex keeps both (2026-10-01). QuickBooks returns \"No company name\" for the second one"
+        },
+        {
+          "column": "G",
+          "value": "114"
+        },
+        {
+          "column": "H",
+          "value": "36"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_BILL, CREATE_PAYMENT, SEND_CREDIT_MEMO"
+        },
+        {
+          "column": "J",
+          "value": "no: per-company OAuth"
+        },
+        {
+          "column": "K",
+          "value": "1+"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Only route type QuickBooks offers. Always name the company (card quickbooks.md; Increase Roas is the default). Money moves and customer sends ask Alex."
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Retell AI"
+        },
+        {
+          "column": "B",
+          "value": "retellai (retellai_testes-devil)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "account key"
+        },
+        {
+          "column": "F",
+          "value": "whole account"
+        },
+        {
+          "column": "G",
+          "value": "67"
+        },
+        {
+          "column": "H",
+          "value": "36"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_A_NEW_OUTBOUND_PHONE_CALL, PUBLISH_AGENT"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Key route"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Zoom"
+        },
+        {
+          "column": "B",
+          "value": "zoom (zoom_dour-dusk)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "Alex user OAuth; Alex is account Owner (ZOOM_GET_USER, 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "Complete today: every cloud recording in the account is Alex's (Sep 2026: 27 meetings; Aug: 45). 26 user-level scopes, none \":admin\": no account users list, reports or account settings"
+        },
+        {
+          "column": "G",
+          "value": "105 (the 2026-10-01 audit counted 90)"
+        },
+        {
+          "column": "H",
+          "value": "not recounted (40 at the earlier count)"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_A_MEETING, ADD_A_MEETING_REGISTRANT"
+        },
+        {
+          "column": "J",
+          "value": "partly: Owner could make an admin app; Composio zoom is OAUTH2 only (no server-to-server mode)"
+        },
+        {
+          "column": "K",
+          "value": "0 while used (hourly refresh); Zoom refresh tokens die after about 90 days unused, then 1 reconnect"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER on writes; complete on reach"
+        },
+        {
+          "column": "M",
+          "value": "Decision pending (Alex yes/no): his own Zoom Marketplace app with :admin and delete scopes, used as a Composio custom OAuth2 config. Gains: delete meetings and recordings, account settings, usage reports, user list. Cost: Alex signs in to Zoom once and gives 1 consent click; the agent builds the app (about 15 clicks). Server-to-server (never needs consent) would be a new custom MCP on the hub."
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Prime Intellect"
+        },
+        {
+          "column": "B",
+          "value": "custom_prime_intellect (lave-outact)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "account key"
+        },
+        {
+          "column": "F",
+          "value": "account Increaseroas"
+        },
+        {
+          "column": "G",
+          "value": "10"
+        },
+        {
+          "column": "H",
+          "value": "0"
+        },
+        {
+          "column": "I",
+          "value": "none (read-only server by design)"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Read-only is a deliberate spend fence"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SpyFu"
+        },
+        {
+          "column": "B",
+          "value": "custom_spyfu (crural-myaria)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "paid API key"
+        },
+        {
+          "column": "F",
+          "value": "SpyFu paid API key, plan \"Pro Plus API Access\" (10,000 base units a month). 20 new tools each answered a live call through Composio (2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "22"
+        },
+        {
+          "column": "H",
+          "value": "0"
+        },
+        {
+          "column": "I",
+          "value": "none (read-only data API; pay per row returned)"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Widened from 2 to 22 tools on 2026-10-01 from SpyFu's official OpenAPI docs: competitors, keywords, ads, ad history, related keywords, usage. 6 PPC tools returned 0 rows because SpyFu tracks no Google Ads for increaseroas.com: route proven, data not yet seen. Test spend about $0.02, inside the plan credit. Left out on purpose: getAllDomainStats (no row limit), ranking history, matching domains, bulk domain stats, My SpyFu projects (can be added)."
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "xAI Research"
+        },
+        {
+          "column": "B",
+          "value": "custom_xai_research (mir-borgh)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "API key"
+        },
+        {
+          "column": "F",
+          "value": "account behind key"
+        },
+        {
+          "column": "G",
+          "value": "4"
+        },
+        {
+          "column": "H",
+          "value": "0"
+        },
+        {
+          "column": "I",
+          "value": "none (search/research only)"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Fits its job"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Vercel"
+        },
+        {
+          "column": "B",
+          "value": "vercel (vercel_except-cliona)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "DELETED 2026-10-01 (owner: remove Vercel). Still shown in the end-of-day Composio list pull, which was taken before the delete"
+        },
+        {
+          "column": "E",
+          "value": "account key"
+        },
+        {
+          "column": "F",
+          "value": "unverified"
+        },
+        {
+          "column": "G",
+          "value": "132"
+        },
+        {
+          "column": "H",
+          "value": "52"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_DNS_RECORD, CREATE_AUTH_TOKEN"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (dropped by owner)"
+        },
+        {
+          "column": "M",
+          "value": "Owner chose to remove it; login deleted 2026-10-01 (STATUS)."
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Supabase"
+        },
+        {
+          "column": "B",
+          "value": "supabase (deeply-tocome) + Cursor supabase x2"
+        },
+        {
+          "column": "C",
+          "value": "Composio (EXPIRED); Cursor (OAuth)"
+        },
+        {
+          "column": "D",
+          "value": "Composio login deleted (not in the 2026-10-01 live list); Cursor supabase entries removed. The Cursor plugin is still to uninstall"
+        },
+        {
+          "column": "E",
+          "value": "unverified"
+        },
+        {
+          "column": "F",
+          "value": "unverified"
+        },
+        {
+          "column": "G",
+          "value": "124"
+        },
+        {
+          "column": "H",
+          "value": "52"
+        },
+        {
+          "column": "I",
+          "value": "CREATE_A_PROJECT, CREATE_BULK_SECRETS"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (dropped by owner)"
+        },
+        {
+          "column": "M",
+          "value": "Owner dropped it 2026-10-01 (dead login and Cursor entries removed). Cursor plugin uninstall waits for Alex in Cursor Settings > Plugins."
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ClickUp"
+        },
+        {
+          "column": "B",
+          "value": "clickup (pisco-spolia)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "DELETED 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "none"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "162"
+        },
+        {
+          "column": "H",
+          "value": "95"
+        },
+        {
+          "column": "I",
+          "value": "-"
+        },
+        {
+          "column": "J",
+          "value": "-"
+        },
+        {
+          "column": "K",
+          "value": "-"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (dropped by owner)"
+        },
+        {
+          "column": "M",
+          "value": "Dropped by owner; dead login deleted 2026-10-01."
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "WhatsApp"
+        },
+        {
+          "column": "B",
+          "value": "whatsapp (apron-scant, corium-frond)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "both DELETED 2026-10-01"
+        },
+        {
+          "column": "E",
+          "value": "none"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "G",
+          "value": "58"
+        },
+        {
+          "column": "H",
+          "value": "26"
+        },
+        {
+          "column": "I",
+          "value": "-"
+        },
+        {
+          "column": "J",
+          "value": "-"
+        },
+        {
+          "column": "K",
+          "value": "-"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (dropped by owner)"
+        },
+        {
+          "column": "M",
+          "value": "Dropped by owner; dead logins deleted 2026-10-01."
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel"
+        },
+        {
+          "column": "B",
+          "value": "official HighLevel MCP (optional add in STATUS)"
+        },
+        {
+          "column": "C",
+          "value": "not connected"
+        },
+        {
+          "column": "D",
+          "value": "none"
+        },
+        {
+          "column": "E",
+          "value": "one location per Private Integration Token"
+        },
+        {
+          "column": "F",
+          "value": "1 location per connection (guess)"
+        },
+        {
+          "column": "J",
+          "value": "no: location-level"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "WEAKER"
+        },
+        {
+          "column": "M",
+          "value": "Narrower than the agency gateway (303 locations); do not add as a route"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Parallel / Convex"
+        },
+        {
+          "column": "B",
+          "value": "keys planned in Composio (STATUS)"
+        },
+        {
+          "column": "C",
+          "value": "dropped"
+        },
+        {
+          "column": "D",
+          "value": "dropped 2026-10-01 (owner)"
+        },
+        {
+          "column": "E",
+          "value": "none"
+        },
+        {
+          "column": "F",
+          "value": "none"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (dropped by owner)"
+        },
+        {
+          "column": "M",
+          "value": "Alex dropped them 2026-10-01 (no key or use found); the 1Password slots were archived. Make and Foreplay are on their own rows below."
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Atlas Cloud"
+        },
+        {
+          "column": "B",
+          "value": "custom_atlas_cloud (ca_lc_OOuJPDa_0)"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub atlas-cloud (/atlas-cloud/mcp)"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "account key (held on the hub; Composio holds only the route token)"
+        },
+        {
+          "column": "F",
+          "value": "Alex's Atlas Cloud account (balance and model list answered 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "15"
+        },
+        {
+          "column": "H",
+          "value": "generation tools (paid)"
+        },
+        {
+          "column": "I",
+          "value": "atlas_generate_image, atlas_generate_video, atlas_generate_audio (each supports dry_run)"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Moved to the hub 2026-10-01; the local copy in ~/.claude.json was removed (it held the key in plain text). Atlas offers no hosted MCP, so the hub hosts the vendor server. Generation spends money: follows the Spend approval line (dry_run is free). Key copies found in ~/.zshrc and 8 old config backups were redacted 2026-10-01 (0 copies left per the run log)."
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GoHighLevel CRM"
+        },
+        {
+          "column": "B",
+          "value": "ghl-oauth-crm via SSH relay to javar-orgo"
+        },
+        {
+          "column": "C",
+          "value": "Codex"
+        },
+        {
+          "column": "D",
+          "value": "removed 2026-10-01 (Codex has no ghl entry)"
+        },
+        {
+          "column": "E",
+          "value": "same gateway"
+        },
+        {
+          "column": "F",
+          "value": "303 locations"
+        },
+        {
+          "column": "I",
+          "value": "ghl_execute_operation"
+        },
+        {
+          "column": "J",
+          "value": "yes"
+        },
+        {
+          "column": "K",
+          "value": "—"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED (was WEAKER)"
+        },
+        {
+          "column": "M",
+          "value": "Removed from ~/.codex/config.toml 2026-10-01. Composio custom_ghl_oauth_crm has the same power (303 locations) without the fragile SSH socket."
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare"
+        },
+        {
+          "column": "B",
+          "value": "Cursor/Codex cloudflare x5, claude.ai Cloudflare connector, Cursor/Codex Cloudflare plugins; wrangler CLI"
+        },
+        {
+          "column": "C",
+          "value": "Mac CLI, Cursor, Codex, Claude app"
+        },
+        {
+          "column": "D",
+          "value": "all removed 2026-10-01 except the wrangler login on the Mac (still on)"
+        },
+        {
+          "column": "E",
+          "value": "alex@ (wrangler verified)"
+        },
+        {
+          "column": "F",
+          "value": "same 1 account"
+        },
+        {
+          "column": "I",
+          "value": "workers/KV/D1 writes"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth)"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED except wrangler, kept as the build-and-deploy tool (decision S07)"
+        },
+        {
+          "column": "M",
+          "value": "Duplicates of the EXECUTE tool in custom_cloudflare_api. wrangler is the build-and-deploy tool for Pages and Workers from dist-prod, with secrets piped from 1Password (decision S07; cloudflare card; STACK.md line 93). API work goes through custom_cloudflare_api; its Mac login isn't a route."
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GitHub"
+        },
+        {
+          "column": "B",
+          "value": "gh CLI"
+        },
+        {
+          "column": "C",
+          "value": "Mac CLI"
+        },
+        {
+          "column": "D",
+          "value": "on"
+        },
+        {
+          "column": "E",
+          "value": "increaseroasir"
+        },
+        {
+          "column": "F",
+          "value": "personal account"
+        },
+        {
+          "column": "I",
+          "value": "full git/API"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Same account as Composio GITHUB"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Make"
+        },
+        {
+          "column": "B",
+          "value": "make (make_gerbe-ashake, ca_nkMxaCSYt2gD)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "API token with all scopes on us1.make.com (org Increase ROAS 1111422, team My Team)"
+        },
+        {
+          "column": "F",
+          "value": "Whole Make account (GET_CURRENT_AUTHORIZATION showed all scopes; LIST_TEAMS returned My Team, 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "not counted"
+        },
+        {
+          "column": "H",
+          "value": "not counted"
+        },
+        {
+          "column": "I",
+          "value": "full Make toolkit"
+        },
+        {
+          "column": "J",
+          "value": "n/a (account token)"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Added 2026-10-01. It is the only token left on Make's API page: the 4 OAuth grants (ChatGPT + 3 Cursor) were revoked and Cursor's make entry removed."
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Foreplay"
+        },
+        {
+          "column": "B",
+          "value": "custom_foreplay (ca_Ewk5F5TGN7Yg)"
+        },
+        {
+          "column": "C",
+          "value": "Composio custom MCP"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "Alex's Foreplay account key (100k credits a month)"
+        },
+        {
+          "column": "F",
+          "value": "Alex's Foreplay account; boards and usage calls returned data (2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "31"
+        },
+        {
+          "column": "H",
+          "value": "not counted"
+        },
+        {
+          "column": "I",
+          "value": "ad library, boards, swipe files, brand analytics"
+        },
+        {
+          "column": "J",
+          "value": "n/a (account key)"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Added 2026-10-01; Codex's plaintext copy removed. The key was rotated 2026-10-01 (an old one had leaked into a session log) and re-pushed; the old key returns 401."
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Linear"
+        },
+        {
+          "column": "B",
+          "value": "linear (linear_flap-urtica, ca_-3kNQV1b0-xq)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "Composio OAuth as alex@increaseroas.com (LINEAR_WHO_AM_I, 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "Alex's Linear workspace"
+        },
+        {
+          "column": "G",
+          "value": "47"
+        },
+        {
+          "column": "H",
+          "value": "not counted"
+        },
+        {
+          "column": "I",
+          "value": "full Linear toolkit"
+        },
+        {
+          "column": "J",
+          "value": "no: OAuth as Alex"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth; refresh behaviour not checked)"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "Added 2026-10-01 and proven. Not yet compared with other Linear route types."
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Sentry"
+        },
+        {
+          "column": "B",
+          "value": "sentry (sentry_venada-dama, ca_S-viSC950kAZ)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "Composio OAuth; organization \"increaseroas\" (SENTRY_LIST_ORGANIZATIONS, 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "1 organization: increaseroas"
+        },
+        {
+          "column": "G",
+          "value": "209"
+        },
+        {
+          "column": "H",
+          "value": "not counted"
+        },
+        {
+          "column": "I",
+          "value": "full Sentry toolkit"
+        },
+        {
+          "column": "J",
+          "value": "no: OAuth as Alex"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth; refresh behaviour not checked)"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "Added 2026-10-01 and proven. Not yet compared with other Sentry route types."
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Higgsfield"
+        },
+        {
+          "column": "B",
+          "value": "higgsfield (higgsfield_belout-embus, ca_yDkZXqXVoUUy)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (live Composio list 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "account API key (key ID + secret, kept in 1Password)"
+        },
+        {
+          "column": "F",
+          "value": "Alex's Higgsfield account; LIST_SOUL_V2_STYLES returned 33 styles (free call, 2026-10-01)"
+        },
+        {
+          "column": "G",
+          "value": "12"
+        },
+        {
+          "column": "H",
+          "value": "not counted"
+        },
+        {
+          "column": "I",
+          "value": "Soul image, Seedance video, image-to-video, character references, cost estimate"
+        },
+        {
+          "column": "J",
+          "value": "n/a (account key)"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Key route, 0 clicks. 12 tools not compared with Higgsfield's full API. Generation spends credits: follows the Spend approval line."
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Docs readers (Context7, OpenAI Docs, Astro Docs, Qt docs, SkillsMP)"
+        },
+        {
+          "column": "B",
+          "value": "CUSTOM_CONTEXT7, CUSTOM_OPENAI_DOCS, CUSTOM_ASTRO_DOCS, CUSTOM_QT_DOCS, CUSTOM_SKILLSMP"
+        },
+        {
+          "column": "C",
+          "value": "Composio custom toolkits (vendor MCPs)"
+        },
+        {
+          "column": "D",
+          "value": "no login needed (keyless, by design)"
+        },
+        {
+          "column": "E",
+          "value": "none"
+        },
+        {
+          "column": "F",
+          "value": "public docs and the public skills catalog"
+        },
+        {
+          "column": "G",
+          "value": "2 + 5 + 1 + 2 + 3 = 13"
+        },
+        {
+          "column": "H",
+          "value": "0"
+        },
+        {
+          "column": "I",
+          "value": "none (read only)"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "Added 2026-10-01; each answered a live search. Replaces the local docs servers and Ref (Ref removed from Codex and from the Claude app on 2026-10-01, app batch)."
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Business Profile"
+        },
+        {
+          "column": "B",
+          "value": "robot google_api (custom_google_robot), business.manage scope delegated"
+        },
+        {
+          "column": "C",
+          "value": "Composio > Orgo hub"
+        },
+        {
+          "column": "D",
+          "value": "scope delegated; API access not approved yet"
+        },
+        {
+          "column": "E",
+          "value": "tagging-admin service account acting as alex@"
+        },
+        {
+          "column": "F",
+          "value": "nothing visible yet"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "yes: delegation as alex@"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "The Business Profile APIs stay hidden until Google approves the project's access request (project 750448852155). The agent drafts the request; Alex approves the send."
+        }
+      ]
+    },
+    {
+      "row": 67,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Shopify"
+        },
+        {
+          "column": "B",
+          "value": "Composio shopify (planned, not connected)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "none yet"
+        },
+        {
+          "column": "E",
+          "value": "Composio shopify auth S2S_OAUTH2 / OAUTH2"
+        },
+        {
+          "column": "F",
+          "value": "not known yet"
+        },
+        {
+          "column": "G",
+          "value": "—"
+        },
+        {
+          "column": "H",
+          "value": "—"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "unknown"
+        },
+        {
+          "column": "K",
+          "value": "1+ (OAuth) or 0 (server-to-server)"
+        },
+        {
+          "column": "L",
+          "value": "UNKNOWN"
+        },
+        {
+          "column": "M",
+          "value": "Waiting on Alex: create the store app (Settings > Apps > Develop apps > \"Composio\", all Admin API scopes) and fill the 1Password item. Then the agent connects it and proves a read. The Claude app Shopify connector went with the Small Business plugin on 2026-10-01 (Claude app connectors R57, R84), so Composio will be the only route."
+        }
+      ]
+    },
+    {
+      "row": 68,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "firecrawl (firecrawl_che-aday)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "Alex's Firecrawl team key"
+        },
+        {
+          "column": "F",
+          "value": "Personal Team, 1,000 credits a month"
+        },
+        {
+          "column": "G",
+          "value": "30"
+        },
+        {
+          "column": "H",
+          "value": "jobs, not records: crawl, batch and agent starts, 3 cancels; monitors through the proxy"
+        },
+        {
+          "column": "I",
+          "value": "FIRECRAWL_CRAWL_V2, FIRECRAWL_BATCH_SCRAPE, FIRECRAWL_START_AGENT; proxy POST /v2/monitor"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "9 of 9 named jobs (7 as tools; interact and monitor through the proxy, proven from the CLI and the hosted workbench) vs 7 to 8 of 9 for the hosted MCP (no batch, no proxy); 30 vs 27 tools; Composio's custom MCP is experimental with a manual resync"
+        }
+      ]
+    },
+    {
+      "row": 69,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Firecrawl"
+        },
+        {
+          "column": "B",
+          "value": "CUSTOM_FIRECRAWL_MCP (Firecrawl's hosted MCP as a Composio custom toolkit)"
+        },
+        {
+          "column": "C",
+          "value": "Composio custom"
+        },
+        {
+          "column": "D",
+          "value": "deleted 2026-10-01 (Alex's yes, CG-KH45)"
+        },
+        {
+          "column": "E",
+          "value": "the same key"
+        },
+        {
+          "column": "F",
+          "value": "the same team"
+        },
+        {
+          "column": "G",
+          "value": "27"
+        },
+        {
+          "column": "H",
+          "value": "the same kinds"
+        },
+        {
+          "column": "I",
+          "value": "firecrawl_interact, firecrawl_monitor_create"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED"
+        },
+        {
+          "column": "M",
+          "value": "Its scrape passed (log_m8BkYgfoLHV2), but it had no batch scrape, a deprecated Extract tool and no proxy; disabled as the weaker duplicate, then deleted after Alex's yes (404 on readback)"
+        }
+      ]
+    },
+    {
+      "row": 70,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Modal"
+        },
+        {
+          "column": "B",
+          "value": "modal_op.py (terminal)"
+        },
+        {
+          "column": "C",
+          "value": "Mac: Claude Code, Codex"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE (token info 2026-10-02)"
+        },
+        {
+          "column": "E",
+          "value": "Alex (user alex-13722) through API token 'modal'"
+        },
+        {
+          "column": "F",
+          "value": "workspace alex-13722, every environment"
+        },
+        {
+          "column": "G",
+          "value": "n/a (a CLI: every modal command)"
+        },
+        {
+          "column": "H",
+          "value": "compute starts (run, serve, deploy, shell, sandboxes), app stop/rollback, volume, secret, dict, queue and environment creates and deletes, proxy tokens"
+        },
+        {
+          "column": "I",
+          "value": "modal run, modal deploy, modal volume put, modal secret create"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0 (token valid to 2027-10-01)"
+        },
+        {
+          "column": "L",
+          "value": "ONLY ROUTE"
+        },
+        {
+          "column": "M",
+          "value": "Composio has no Modal toolkit (--toolkits modal -> invalid slug, Director 2026-10-01); Modal's documented route without a key file is MODAL_TOKEN_ID/SECRET in the environment (modal.com/docs/sdk/py/latest/config)"
+        }
+      ]
+    },
+    {
+      "row": 71,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face"
+        },
+        {
+          "column": "B",
+          "value": "hugging_face (hugging_face_pricer-drongo)"
+        },
+        {
+          "column": "C",
+          "value": "Composio"
+        },
+        {
+          "column": "D",
+          "value": "ACTIVE"
+        },
+        {
+          "column": "E",
+          "value": "Alex's HF token (fine-grained)"
+        },
+        {
+          "column": "F",
+          "value": "user bloomsterhehe, free plan, no orgs"
+        },
+        {
+          "column": "G",
+          "value": "135"
+        },
+        {
+          "column": "H",
+          "value": "repo create, commits, branches, tags, Space settings/secrets/variables, discussions, collections, webhooks, notifications; deletes and squashes (guard); inference (credits)"
+        },
+        {
+          "column": "I",
+          "value": "HUGGING_FACE_CREATE_REPO, HUGGING_FACE_CREATE_MODELS_COMMIT, HUGGING_FACE_GENERATE_CHAT_COMPLETION"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "STRONGEST"
+        },
+        {
+          "column": "M",
+          "value": "135 tools + proxy over huggingface.co and router.huggingface.co vs 4 read-only MCP tools; every MCP job has a native tool or proxy path; the MCP's one extra kind of job (Gradio Space apps on *.hf.space) is off in Alex's MCP settings and would need his click + a manual Composio resync"
+        }
+      ]
+    },
+    {
+      "row": 72,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hugging Face"
+        },
+        {
+          "column": "B",
+          "value": "custom_hf_mcp (custom_hf_mcp_invite-alose)"
+        },
+        {
+          "column": "C",
+          "value": "Composio custom"
+        },
+        {
+          "column": "D",
+          "value": "deleted 2026-10-02"
+        },
+        {
+          "column": "E",
+          "value": "the same HF token"
+        },
+        {
+          "column": "F",
+          "value": "the same user"
+        },
+        {
+          "column": "G",
+          "value": "4"
+        },
+        {
+          "column": "H",
+          "value": "none (read-only)"
+        },
+        {
+          "column": "I",
+          "value": "—"
+        },
+        {
+          "column": "J",
+          "value": "n/a"
+        },
+        {
+          "column": "K",
+          "value": "0"
+        },
+        {
+          "column": "L",
+          "value": "REMOVED"
+        },
+        {
+          "column": "M",
+          "value": "whoami and search passed; no writes, inference or Jobs tools in Alex's settings; experimental custom MCP with manual resync (docs.composio.dev/docs/extending-sessions/custom-mcp.md); deleted 2026-10-02 after Alex's yes naming CG-QWAA (the guard allowed the call at 23:04:45Z)"
+        }
+      ]
+    }
+  ]
+}

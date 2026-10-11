@@ -1,0 +1,21 @@
+{
+  "at": "2026-10-10T13:39:26.427831+00:00",
+  "event": "new_preparation_implementation_observed_acceptance_gaps",
+  "session_id": 29010,
+  "source": "tools/catalog_fixture_clone.py",
+  "source_sha256": "a14f2cdd1575489fca6d619e4d4cdb609bf366ac3399d22c541ecfc81026be88",
+  "written_changes": [
+    "Native copy-on-write subprocess path with per-copy budget",
+    "Candidate existing complete snapshot lookup",
+    "Missing copied production_hash entry rejected in candidate verify",
+    "New preparation bounded helper and acceptance wrapper; subprocess helper edited"
+  ],
+  "unverified_or_failed_requirements": [
+    "verify_complete_clone only count>=2351 and production_hash subset; first50 MD missing list not used to decide complete",
+    "reconcile_clone hashes random8 component pages; no exact all-page content manifest; missing production_hash copy path silently skipped",
+    "Missing original CLONE_PATHS silently continue, counts>= permit extras",
+    "Per-copy deadline plus elapsed after operation does not alone prove interrupting whole preparation deadline; need actual outer wrapper runtime proof"
+  ],
+  "next_action": "Do not accept current source-only preparation. Await stable measured result; independent scoped verification must require exact sets/all contents/missing-corrupt negatives/isolation and interrupting bounds. No re-audit closed transaction mechanics.",
+  "full_completion": false
+}

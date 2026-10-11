@@ -1,0 +1,278 @@
+{
+  "four_guard_regression": {
+    "controls": {
+      "guard.unrelated_failure_rejects": true,
+      "guard.integer_targets_path_rejects": true,
+      "guard.omitted_required_md_manifest_rejects": true,
+      "guard.extra_evidence_case_rejects": true
+    },
+    "all_passed": true
+  },
+  "catalog_preparation": {
+    "cloned_at": "2026-10-10T13:37:32+00:00",
+    "dest_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/catalog-preparation-recovery-20261010-1333/catalog-clone",
+    "production_binding": "CATALOG_FIXTURE_ROOT",
+    "preparation_method": "verified_snapshot_cp_cR_bounded",
+    "preparation_elapsed_seconds": 1.307,
+    "preparation_deadline_seconds": 600,
+    "preparation_steps": [
+      {
+        "label": "rm_isolated_dest",
+        "cmd": [
+          "rm",
+          "-rf",
+          "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/catalog-preparation-recovery-20261010-1333/catalog-clone"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 0.343,
+        "deadline_seconds": 120,
+        "pgid": 82652,
+        "child_reaped": true,
+        "remaining_pids_in_group": [],
+        "stdout_tail_sanitized": ""
+      },
+      {
+        "label": "cp_snapshot_catalog_clone",
+        "cmd": [
+          "cp",
+          "-cR",
+          "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-sync-recovery-20261010-1249/catalog-clone",
+          "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/catalog-preparation-recovery-20261010-1333/catalog-clone"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 0.938,
+        "deadline_seconds": 540,
+        "pgid": 82654,
+        "child_reaped": true,
+        "remaining_pids_in_group": [],
+        "stdout_tail_sanitized": ""
+      }
+    ],
+    "partial_evidence_preserved": {
+      "at": "2026-10-10T13:37:31+00:00",
+      "partial_dest": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-build-bound-correction-20261010-1320/catalog-clone",
+      "component_md_count": 500,
+      "expected_component_md": 2351,
+      "incomplete": true,
+      "note": "Preserved before replacement; sole partial failure record retained on disk."
+    },
+    "snapshot_source": {
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-sync-recovery-20261010-1249/catalog-clone",
+      "component_md_count": 2351,
+      "components_json_ids": 2351,
+      "production_hash_match_all": true,
+      "hash_ok": {
+        "data/catalog-metadata.json": true,
+        "data/components.json": true,
+        "data/coverage.json": true,
+        "data/evidence.json": true,
+        "data/issues.json": true,
+        "data/layers.json": true,
+        "data/relationships.json": true,
+        "data/source-records.json": true,
+        "data/sources.json": true,
+        "data/table-index.json": true,
+        "views/overview.json": true,
+        "views/Alex_System_Foundation.xlsx": true,
+        "docs/COMPONENT_INDEX.md": true
+      },
+      "sample_missing_md_first50": [],
+      "complete": true
+    },
+    "original_immutable_hashes": {
+      "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+      "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+      "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+      "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+      "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+      "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+      "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+      "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+      "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+      "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+      "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+    },
+    "reconciliation": {
+      "component_md_count": 2351,
+      "components_json_record_count": 2351,
+      "missing_component_md_count": 0,
+      "missing_component_md_sample": [],
+      "representative_readback_sample_ok": {
+        "component_93fd80fb09eaa363434d": true,
+        "component_dee4ff14adb22dbc97a1": true,
+        "component_eaa176fcda71e39a97b6": true,
+        "component_33bb50248f2d879929c6": true,
+        "component_058956c28c695c8d925c": true,
+        "component_71d19045750bec550ded": true,
+        "component_c1c420074ff75d0b1038": true,
+        "component_f3177f39f52febdb9c3d": true
+      },
+      "all_representative_readback_ok": true,
+      "copy_hashes_at_clone": {
+        "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+        "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+        "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+        "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+        "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+        "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+        "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+        "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+        "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+        "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+        "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+        "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+        "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+      },
+      "reconciliation_passed": true
+    },
+    "components_cloned_count": 2351,
+    "copied_file_count": 13
+  },
+  "clone_manifest": {
+    "cloned_at": "2026-10-10T13:37:32+00:00",
+    "dest_root": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/catalog-preparation-recovery-20261010-1333/catalog-clone",
+    "production_binding": "CATALOG_FIXTURE_ROOT",
+    "preparation_method": "verified_snapshot_cp_cR_bounded",
+    "preparation_elapsed_seconds": 1.307,
+    "preparation_deadline_seconds": 600,
+    "preparation_steps": [
+      {
+        "label": "rm_isolated_dest",
+        "cmd": [
+          "rm",
+          "-rf",
+          "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/catalog-preparation-recovery-20261010-1333/catalog-clone"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 0.343,
+        "deadline_seconds": 120,
+        "pgid": 82652,
+        "child_reaped": true,
+        "remaining_pids_in_group": [],
+        "stdout_tail_sanitized": ""
+      },
+      {
+        "label": "cp_snapshot_catalog_clone",
+        "cmd": [
+          "cp",
+          "-cR",
+          "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-sync-recovery-20261010-1249/catalog-clone",
+          "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/catalog-preparation-recovery-20261010-1333/catalog-clone"
+        ],
+        "exit_code": 0,
+        "timed_out": false,
+        "elapsed_seconds": 0.938,
+        "deadline_seconds": 540,
+        "pgid": 82654,
+        "child_reaped": true,
+        "remaining_pids_in_group": [],
+        "stdout_tail_sanitized": ""
+      }
+    ],
+    "partial_evidence_preserved": {
+      "at": "2026-10-10T13:37:31+00:00",
+      "partial_dest": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-build-bound-correction-20261010-1320/catalog-clone",
+      "component_md_count": 500,
+      "expected_component_md": 2351,
+      "incomplete": true,
+      "note": "Preserved before replacement; sole partial failure record retained on disk."
+    },
+    "snapshot_source": {
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/browser-sync-recovery-20261010-1249/catalog-clone",
+      "component_md_count": 2351,
+      "components_json_ids": 2351,
+      "production_hash_match_all": true,
+      "hash_ok": {
+        "data/catalog-metadata.json": true,
+        "data/components.json": true,
+        "data/coverage.json": true,
+        "data/evidence.json": true,
+        "data/issues.json": true,
+        "data/layers.json": true,
+        "data/relationships.json": true,
+        "data/source-records.json": true,
+        "data/sources.json": true,
+        "data/table-index.json": true,
+        "views/overview.json": true,
+        "views/Alex_System_Foundation.xlsx": true,
+        "docs/COMPONENT_INDEX.md": true
+      },
+      "sample_missing_md_first50": [],
+      "complete": true
+    },
+    "original_immutable_hashes": {
+      "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+      "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+      "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+      "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+      "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+      "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+      "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+      "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+      "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+      "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+      "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+      "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+      "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+    },
+    "reconciliation": {
+      "component_md_count": 2351,
+      "components_json_record_count": 2351,
+      "missing_component_md_count": 0,
+      "missing_component_md_sample": [],
+      "representative_readback_sample_ok": {
+        "component_93fd80fb09eaa363434d": true,
+        "component_dee4ff14adb22dbc97a1": true,
+        "component_eaa176fcda71e39a97b6": true,
+        "component_33bb50248f2d879929c6": true,
+        "component_058956c28c695c8d925c": true,
+        "component_71d19045750bec550ded": true,
+        "component_c1c420074ff75d0b1038": true,
+        "component_f3177f39f52febdb9c3d": true
+      },
+      "all_representative_readback_ok": true,
+      "copy_hashes_at_clone": {
+        "data/catalog-metadata.json": "fd582ff3cbccc127d69a43f9951552c766424b3bae6a010aeb17b44f4eac718c",
+        "data/components.json": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+        "data/coverage.json": "3e824e092430c86dc6575c6775b3a419a8b422a17ddf98d3a83eee80e6ca4687",
+        "data/evidence.json": "2f4289ebad3512ef72ecd7b3f716c29cc8655b1350e1446a5351030d8fd28585",
+        "data/issues.json": "7e0952cc5345939a21358a3e8e067a1dd6bd5ad4627dcf14ff961f89c3c2c681",
+        "data/layers.json": "b547234dd2dfffd1dad9b34d558f412aa2b8184e21aafc8584c8054ceb3e3af4",
+        "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+        "data/source-records.json": "f7a635c6797c3cbab70a76ff3476ace1810ba98116de84bda5f9917b606ccbdc",
+        "data/sources.json": "9c46a018775a10f42fe7c473881da03f3007c364338e344fdec263c608b230b6",
+        "data/table-index.json": "da77f05f6be51fa09c4da9bba7e0bee54ca1aa7afb927ab9984a6764f6b64e79",
+        "views/overview.json": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b",
+        "views/Alex_System_Foundation.xlsx": "3fa412ad263ef5d1178a3226c0c5b68ed21fdf9aeba6b90cb2fc8cb85a091d6b",
+        "docs/COMPONENT_INDEX.md": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9"
+      },
+      "reconciliation_passed": true
+    },
+    "components_cloned_count": 2351,
+    "copied_file_count": 13
+  },
+  "build_quality": {
+    "build_exit": 143,
+    "build_timed_out": true,
+    "build_deadline_seconds": 600,
+    "child_reaped_after_timeout": true,
+    "build_log_path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/reports/build-capture/catalog-preparation-recovery-20261010-1333-build-20261010T133732Z.log",
+    "build_phase_tail_sanitized": "npm notice\nnpm notice New major version of npm available! 11.19.0 -> 12.2.0\nnpm notice Changelog: https://github.com/npm/cli/releases/tag/v12.2.0\nnpm notice To update run: npm install -g npm@12.2.0\nnpm notice\n",
+    "used_process_group_bounded_helper": true,
+    "lint_exit": null,
+    "typecheck_exit": null,
+    "build_id_sha256": null,
+    "panel_source_sha256_at_build": "90750124ecac070a427da81c55d20522f610da530b2bcce4f2242db3a74bc18f",
+    "build_diagnosis_closed": "reports/browser-sync-build-wait-diagnosis.json root_cause_unknown"
+  },
+  "original_hashes_unchanged": {
+    "unchanged": true,
+    "before_count": 13,
+    "after_count": 13
+  }
+}

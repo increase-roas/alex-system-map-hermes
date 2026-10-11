@@ -1,0 +1,611 @@
+{
+  "id": "table_5f622214067eed0615d6",
+  "sheet": "S02-34 Director home rebuild",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The Director's home ~/Alex-Director: where it lives on GitHub, what it depends on, the steps to get access and clone it, and which blank templates exist. It closes retest gap G19; Rebuild from zero steps 15.1 to 15.4 point here. Facts from play spp-p20d (notes/gap-facts-repos.md §6). Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/director-home.json; never edit this tab by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The Director home and what it depends on (read live 2026-10-01; GitHub state re-read 2026-10-03)"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "piece"
+        },
+        {
+          "column": "B",
+          "value": "GitHub owner and address"
+        },
+        {
+          "column": "C",
+          "value": "where it goes on the Mac"
+        },
+        {
+          "column": "D",
+          "value": "what it holds"
+        },
+        {
+          "column": "E",
+          "value": "GitHub vs this Mac right now"
+        },
+        {
+          "column": "F",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director home"
+        },
+        {
+          "column": "B",
+          "value": "The organization increase-roas, not Alex's personal account: https://github.com/increase-roas/alex-director.git, private, default branch main, created 2026-09-02. Collaborator: the owner account increaseroasir (admin). The org is on the Team plan (3 seats, 1 used), its base permission is Read, and increaseroasir is its only member."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director"
+        },
+        {
+          "column": "D",
+          "value": "AGENTS.md (the Director's role card), CONCEPTS.md, the ledger DIRECTOR_STATE.md (tracked, so a clone carries the owner's live missions), mission-graphs/ (9 of 64 files tracked; the current mission's graph is not), a skills/ mirror of the two role skills, scripts/, tests/ and STACK.md."
+        },
+        {
+          "column": "E",
+          "value": "GitHub main equals this Mac's HEAD (git ls-remote, 2026-10-03). The Mac also has uncommitted ledger and mission-graph changes (18 paths on 2026-10-03: DIRECTOR_STATE.md and 17 in mission-graphs/), which a clone doesn't get."
+        },
+        {
+          "column": "F",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2 ; ~/Alex-Director/AGENTS.md L1–L4 ; ~/Alex-Director/AGENTS.md L25–L36 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03c.md §8 ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §42"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The two role skills"
+        },
+        {
+          "column": "B",
+          "value": "agents-home (gap G03)."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/skills/alex-director and ~/.agents/skills/alex-workflow-conductor"
+        },
+        {
+          "column": "D",
+          "value": "Version 2.4 (or later) of each SKILL.md with its references/; the ledger scripts ledger_check.py and test_ledger_check.py; claude-edition.md, the thin Claude pointer (W06) that build_zips.py zips for the Claude app."
+        },
+        {
+          "column": "E",
+          "value": "See G03 (agents-home: GitHub main equals this Mac's HEAD, 2026-10-03)."
+        },
+        {
+          "column": "F",
+          "value": "~/.agents/skills/alex-director/SKILL.md L5 ; ~/.agents/skills/alex-workflow-conductor/SKILL.md L5 ; work/2026-10-01_setup-playbook/zips/build_zips.py L6 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6 ; work/2026-10-01_setup-playbook/notes/replication-spotcheck-c4h.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L315 ; work/2026-10-01_setup-playbook/notes/parity-recheck-2026-10-03c.md §8 ; work/2026-10-01_setup-playbook/notes/playbook-tabs.md §42"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One-Shot-Builder (rules and the check script)"
+        },
+        {
+          "column": "B",
+          "value": "The organization increase-roas: https://github.com/increase-roas/one-shot-builder.git, private, main."
+        },
+        {
+          "column": "C",
+          "value": "~/Documents/One-Shot-Builder, exactly: the Director's AGENTS.md reads that path."
+        },
+        {
+          "column": "D",
+          "value": "RULES.md: 21 rule sections; the Director reads section 10, Worker Rules, before spawning workers. docs/LESSONS.md, where new rules are filed; START_HERE.md and SETUP_WIZARD.md; templates/TEMPLATES.md (section 3 below). scripts/check.sh is the check script: 12 checks, including 5 (the live role skills must equal the mirror in ~/Alex-Director/skills) and 12 (local HEAD equals remote main)."
+        },
+        {
+          "column": "E",
+          "value": "In step: GitHub main equals this Mac's HEAD, dcae73c (2026-10-01). 17 uncommitted paths on the Mac."
+        },
+        {
+          "column": "F",
+          "value": "~/Alex-Director/AGENTS.md L32 ; ~/Alex-Director/AGENTS.md L53–L54 ; ~/Documents/One-Shot-Builder/RULES.md L186 ; ~/Documents/One-Shot-Builder/scripts/check.sh L67 ; ~/Documents/One-Shot-Builder/scripts/check.sh L140 ; ~/.agents/skills/alex-director/references/execution.md L110 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Capability map"
+        },
+        {
+          "column": "B",
+          "value": "Not a separate repo: ~/STACK.md is a link to ~/Alex-Director/STACK.md, which alex-director tracks."
+        },
+        {
+          "column": "C",
+          "value": "~/STACK.md (a link)"
+        },
+        {
+          "column": "D",
+          "value": "The capability map. The Director reads it only when a play depends on which tools exist."
+        },
+        {
+          "column": "E",
+          "value": "Comes with the clone; the link is made by hand."
+        },
+        {
+          "column": "F",
+          "value": "~/Alex-Director/AGENTS.md L33 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Steps (after agents-home, step 3.1)"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "step"
+        },
+        {
+          "column": "B",
+          "value": "who"
+        },
+        {
+          "column": "C",
+          "value": "what to do"
+        },
+        {
+          "column": "D",
+          "value": "how you know it worked"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "0. Bring GitHub up to date"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "Push ~/Alex-Director (GitHub is 47 commits behind) after committing what should travel; the current mission graph and most mission-graphs/ files are untracked. Also an owner decision, not taken: whether the ledger should travel at all. Today it is tracked, so every clone carries the live missions."
+        },
+        {
+          "column": "D",
+          "value": "After git fetch, git -C ~/Alex-Director rev-list --count origin/main..HEAD prints 0."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6 ; work/2026-10-01_setup-playbook/notes/g18-g19-content.md \"## Not done or not proven\""
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. Get access"
+        },
+        {
+          "column": "B",
+          "value": "Alex"
+        },
+        {
+          "column": "C",
+          "value": "Two ways; which one is Alex's call. (a) Invite the person to the organization (People > Invite member). A member gets the base permission, Read, on every org repo: 26 today, client sites included, not just these two. The Team plan needs a free seat first (3 seats, 1 used), and invites expire after 7 days. (b) Add the person as an outside collaborator on alex-director and one-shot-builder only, with Read. Base permissions don't apply to outside collaborators, and on a paid plan each outside collaborator on a private repo uses a paid license."
+        },
+        {
+          "column": "D",
+          "value": "https://github.com/increase-roas/alex-director opens for the invited account."
+        },
+        {
+          "column": "E",
+          "value": "https://docs.github.com/en/organizations/managing-membership-in-your-organization/inviting-users-to-join-your-organization (read 2026-10-01) ; https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/setting-base-permissions-for-an-organization (read 2026-10-01) ; https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-outside-collaborators/adding-outside-collaborators-to-repositories-in-your-organization (read 2026-10-01) ; https://docs.github.com/en/organizations/managing-user-access-to-your-organizations-repositories/managing-repository-roles/repository-roles-for-an-organization (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §2"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Clone the Director home"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "git clone https://github.com/increase-roas/alex-director.git ~/Alex-Director, then ln -s ~/Alex-Director/STACK.md ~/STACK.md. Students: skip this step, there's no clone without an invite. Use step 5 (the starter)."
+        },
+        {
+          "column": "D",
+          "value": "~/Alex-Director/AGENTS.md exists and ~/STACK.md opens."
+        },
+        {
+          "column": "E",
+          "value": "~/Alex-Director/AGENTS.md L33 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6 ; https://docs.github.com/en/repositories/creating-and-managing-repositories/cloning-a-repository (read 2026-10-01) ; work/2026-10-01_setup-playbook/notes/replication-spotcheck-c4h.md §2 ; work/2026-10-01_setup-playbook/workbook-updates.md L316"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Clone One-Shot-Builder"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "git clone https://github.com/increase-roas/one-shot-builder.git ~/Documents/One-Shot-Builder. Students: no clone and no invite. The student edition ships repo/one-shot-builder/ with a scrubbed RULES.md and a one-line stand-in for docs/LESSONS.md; put that folder at ~/Documents/One-Shot-Builder."
+        },
+        {
+          "column": "D",
+          "value": "~/Documents/One-Shot-Builder/RULES.md exists. Its check is bash scripts/check.sh (--no-remote skips the GitHub comparison); it wasn't run in this play. Students: ~/Documents/One-Shot-Builder/RULES.md exists (from the edition)."
+        },
+        {
+          "column": "E",
+          "value": "~/Alex-Director/AGENTS.md L32 ; ~/Documents/One-Shot-Builder/scripts/check.sh L2–L3 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L287 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D25 ; work/2026-10-01_setup-playbook/scripts/student_edition.py \"def rule_files\" ; work/2026-10-01_setup-playbook/notes/student-edition.md §7"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Check the ledger safety script"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "From a temporary folder: python3 ~/.agents/skills/alex-director/scripts/test_ledger_check.py"
+        },
+        {
+          "column": "D",
+          "value": "19 of 19 checks pass (19/0 on 2026-10-01)."
+        },
+        {
+          "column": "E",
+          "value": "workbook Rebuild from zero R375 ; workbook Director + Conductor R134 ; system/run-log.md \"ledger self-test 19/0\""
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5. Start a blank ledger (a student, or a fresh Director)"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "Start from the starter in the student edition, repo/alex-director/ (put it at ~/Alex-Director). Its DIRECTOR_STATE.md is already the blank ledger: the title, the one-line rule and the commented-out blank mission block. templates/mission-graph-template.md is the blank graph, and AGENTS.md is the Director's role card. Don't clone Alex's Director home: its ledger and graphs carry live missions. To add a mission, copy the block below the comment and fill it in, with ledger_check.py backup before the edit and verify --mode append after it, as the Director skill says. The starter also holds scrubbed copies of STACK.md and CONCEPTS.md, which the role card reads as ~/STACK.md and ./CONCEPTS.md: after copying it to ~/Alex-Director, run ln -s ~/Alex-Director/STACK.md ~/STACK.md. It also ships an empty mission-graphs/ (with a one-line README) for step 5b and scripts/controller-write-guard.py, the guard that gates.md and RULES.md section 13 run before any shared or live write, as a scrubbed copy. If a build ever lists the guard as a stand-in in build.json, that stand-in refuses every protected write, and live-write missions are out of scope for students until a build ships the real script."
+        },
+        {
+          "column": "D",
+          "value": "ledger_check.py verify prints OK after the first mission is added (not run in this play)."
+        },
+        {
+          "column": "E",
+          "value": "~/Alex-Director/DIRECTOR_STATE.md L1–L30 ; ~/.agents/skills/alex-director/references/ledger.md L33–L44 ; ~/.agents/skills/alex-director/scripts/ledger_check.py L28 ; work/2026-10-01_setup-playbook/scripts/student_edition.py \"def director_starter\" ; work/2026-10-01_setup-playbook/notes/student-edition.md §6 ; work/2026-10-01_setup-playbook/workbook-updates.md L251 ; work/2026-10-01_setup-playbook/notes/replication-retest-final-3.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L287 ; work/2026-10-01_setup-playbook/notes/decision-evidence.csv row D25 ; work/2026-10-01_setup-playbook/scripts/student_edition.py \"def rule_files\" ; work/2026-10-01_setup-playbook/notes/student-edition.md §7 ; work/2026-10-01_setup-playbook/notes/replication-spotcheck-c4f.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L298 ; work/2026-10-01_setup-playbook/scripts/student_edition.py \"GRAPHS_README\" ; work/2026-10-01_setup-playbook/scripts/student_edition.py \"controller-write-guard\" ; work/2026-10-01_setup-playbook/notes/student-edition.md §8"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5a. Make the starter its own git repo (a student)"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "Make the starter its own git repo: cd ~/Alex-Director && git init && git add -A && git commit -m 'Director starter'."
+        },
+        {
+          "column": "D",
+          "value": "git -C ~/Alex-Director status shows a clean tree, and git -C ~/Alex-Director remote prints nothing: a student's Director home has no remote (Rebuild from zero step 15.2)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/replication-spotcheck-c4f.md §1 ; work/2026-10-01_setup-playbook/workbook-updates.md L299"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5b. Start a mission graph"
+        },
+        {
+          "column": "B",
+          "value": "Newcomer"
+        },
+        {
+          "column": "C",
+          "value": "cp ~/Alex-Director/templates/mission-graph-template.md ~/Alex-Director/mission-graphs/<MISSION_ID>.md; replace every <...>, delete the comment, and put that path in the ledger block's MISSION_GRAPH field. Before a protected write, add one '## Node: <NODE_ID>' line for that node to the mission graph (the write guard counts these lines, not the table rows). The guard accepts the ~/Alex-Director/mission-graphs/<id>.md path as written."
+        },
+        {
+          "column": "D",
+          "value": "No <...> placeholder is left, and the ledger's MISSION_GRAPH opens the file (not run in this play)."
+        },
+        {
+          "column": "E",
+          "value": "~/Alex-Director/templates/mission-graph-template.md L2–L6 ; ~/.agents/skills/alex-director/references/ledger.md L13 ; work/2026-10-01_setup-playbook/notes/g18-g19-content.md ; ~/Alex-Director/scripts/controller-write-guard.py \"node_validation_error\" ; ~/Alex-Director/templates/mission-graph-template.md \"## Node: <NODE_ID>\" ; alex-director 7939288 ; work/2026-10-01_setup-playbook/notes/replication-spotcheck-c4g.md §3 ; work/2026-10-01_setup-playbook/workbook-updates.md L305"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6. The thin Claude edition (done)"
+        },
+        {
+          "column": "B",
+          "value": "Alex uploads; the agent builds"
+        },
+        {
+          "column": "C",
+          "value": "The W06 pointers are written and live. build_zips.py zips each claude-edition.md as SKILL.md, and Alex uploaded both as v5 on 2026-10-01 (claude.ai > Customize > Skills > the skill > ⋮ > Replace). Re-upload after every change to claude-edition.md."
+        },
+        {
+          "column": "D",
+          "value": "A fresh terminal Claude Code session lists anthropic-skills:alex-director and anthropic-skills:alex-workflow-conductor once each, as the thin pointers (T7 PASS at 20:47Z)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/zips/build_zips.py L6 ; work/2026-10-01_setup-playbook/notes/app-batch.md L142–L143 ; work/2026-10-01_setup-playbook/notes/skills-cap.md L165"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Blank templates: what exists"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "template"
+        },
+        {
+          "column": "B",
+          "value": "exists?"
+        },
+        {
+          "column": "C",
+          "value": "where"
+        },
+        {
+          "column": "D",
+          "value": "matches today's v2.3 format?"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Blank ledger mission block"
+        },
+        {
+          "column": "B",
+          "value": "Yes, as a commented-out block at the top of the ledger itself."
+        },
+        {
+          "column": "C",
+          "value": "DIRECTOR_STATE.md lines 5–30: a '## Mission: [short name]' heading and 22 empty fields, MISSION_ID through STATUS. The student edition ships these lines as repo/alex-director/DIRECTOR_STATE.md (spp-p32b)."
+        },
+        {
+          "column": "D",
+          "value": "Yes. It has every field the ledger reference lists plus the controller and authorization fields from gates.md. GitHub's 2026-09-02 copy has an older 16-field version."
+        },
+        {
+          "column": "E",
+          "value": "~/Alex-Director/DIRECTOR_STATE.md L5–L30 ; ~/.agents/skills/alex-director/references/ledger.md L7–L31 ; ~/.agents/skills/alex-director/references/gates.md L69–L71 ; work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6 ; work/2026-10-01_setup-playbook/notes/student-edition.md §6"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One-Shot-Builder's ledger template"
+        },
+        {
+          "column": "B",
+          "value": "Yes, but older (2026-09-02)."
+        },
+        {
+          "column": "C",
+          "value": "One-Shot-Builder templates/TEMPLATES.md, section 2, 'Director Ledger Template'."
+        },
+        {
+          "column": "D",
+          "value": "No. It uses '## <MISSION_ID>' headings, which ledger_check.py doesn't read as mission blocks (it needs '## Mission: <name>'), and older field and status names. Use the ledger's own block instead."
+        },
+        {
+          "column": "E",
+          "value": "~/Documents/One-Shot-Builder/templates/TEMPLATES.md L57–L77 ; ~/.agents/skills/alex-director/scripts/ledger_check.py L28"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Blank mission graph"
+        },
+        {
+          "column": "B",
+          "value": "Yes (2026-10-01)."
+        },
+        {
+          "column": "C",
+          "value": "~/Alex-Director/templates/mission-graph-template.md (Director home commit 107585b; GitHub gets it with step 0's push): the header lines MISSION_ID, OWNER_OUTCOME, ACCEPTANCE, SOURCE, PROJECT, CONTROLLER, ALLOWED / BOUNDARIES, OWNER RULES; one table with the 11 node fields; a top-acceptance row; UPDATED_AT. Placeholders only."
+        },
+        {
+          "column": "D",
+          "value": "Yes: the columns are references/mission-graph.md's node fields in its order, and STATUS lists its 7 allowed values. One-Shot-Builder's 'Mission Template' (2026-09-02) predates the format; don't use it."
+        },
+        {
+          "column": "E",
+          "value": "~/Alex-Director/templates/mission-graph-template.md L1–L21 ; ~/.agents/skills/alex-director/references/mission-graph.md L8–L9 ; ~/.agents/skills/alex-director/references/mission-graph.md L42–L47 ; work/2026-10-01_setup-playbook/notes/g18-g19-content.md ; alex-director 107585b"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. Not proven yet"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "what is not proven"
+        },
+        {
+          "column": "B",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloning the org repos as an invited newcomer: no invite was sent and no second account was tried."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "One-Shot-Builder's check.sh on a fresh Mac (not run in this play)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "ledger_check.py on a blank ledger (the documented procedure; not run here)."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/gap-facts-repos.md §6"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "A fresh mission started from the blank mission-graph template."
+        },
+        {
+          "column": "B",
+          "value": "work/2026-10-01_setup-playbook/notes/g18-g19-content.md"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,156 @@
+{
+  "delivery_id": "app-path-corrections-20261010-0514",
+  "acknowledgment": "Delivery app-path-corrections-20261010-0514 acknowledged once; application-path acceptance (owner evidence, not independent).",
+  "at": "2026-10-10T06:24:23+00:00",
+  "source_hashes_at_run": {
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/reliability_gate.py": "27db04905c7c51d6e54d1e56722190378ff6e4185a35f294c75053e19b78b60d",
+    "tools/workflow_apply_guard.py": "fcf4850bfcbafdc537c5583f2caa3a05eb326775520b8dddaf9de5afcbc7c88c",
+    "tools/reliability_store.py": "f0b5fd84f8163df95dc6751d66ff793b5cff375d706016207e925047e7c7137b",
+    "tools/trace_store.py": "3a36705f2eccd67906d80033907c83201dd7a633046d871a4bb4868eadfe0189"
+  },
+  "REL-01": {
+    "status": "unverified",
+    "note": "Cursor fresh-runtime auto skill loading not in bounded local proof"
+  },
+  "gate_complete": {
+    "bad_rejected": true,
+    "bad_reason": "skills_not_verified_in_claim",
+    "good_accepted": true
+  },
+  "recover_restart": {
+    "subprocess_exit": 0,
+    "fresh_process": true,
+    "governing_applied": true,
+    "governing_next": "Use BUILD_SUPERVISION revision 2 and RELIABILITY_ADDENDUM as governing context.",
+    "recheck_count": 1
+  },
+  "handoff_apply": {
+    "stale_owner_rejected": true,
+    "owner_b_apply_ok": true,
+    "operation_count": 1,
+    "task_owner_after_apply": "owner-b",
+    "replay_ok": true
+  },
+  "canary_surfaces": {
+    "diagnostic_no_leak": true,
+    "error_no_leak": true,
+    "trace_export_no_leak": true,
+    "surfaces_exercised_via_local_service": true
+  },
+  "synthetic_mutation": {
+    "baseline_hash": "1ca4f4ae4ba7c020675161994cc90cdec70ba706ebec5d245202c878c0cdd196",
+    "after_mutation_hash": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485",
+    "observed_hash": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485",
+    "hash_changed": true,
+    "receipt_linked_to_mutation": true,
+    "duplicate_import_rejected": true,
+    "restart_subprocess_ok": true
+  },
+  "summary": {
+    "REL-02_gate": "passed",
+    "REL-03_recover": "passed",
+    "REL-04_handoff": "passed",
+    "REL-06_canary": "passed",
+    "synthetic_live_mutation": "passed",
+    "overall": "passed"
+  },
+  "history": [
+    {
+      "at": "2026-10-10T05:54:49+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T05:54:54+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T05:55:02+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T05:55:09+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T05:55:14+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T06:08:40+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T06:17:20+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    },
+    {
+      "at": "2026-10-10T06:24:23+00:00",
+      "delivery_id": "app-path-corrections-20261010-0514",
+      "summary": {
+        "REL-02_gate": "passed",
+        "REL-03_recover": "passed",
+        "REL-04_handoff": "passed",
+        "REL-06_canary": "passed",
+        "synthetic_live_mutation": "passed",
+        "overall": "passed"
+      }
+    }
+  ]
+}

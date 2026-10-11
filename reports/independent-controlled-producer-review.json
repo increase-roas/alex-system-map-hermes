@@ -1,0 +1,487 @@
+{
+  "reviewed_at": "2026-10-10T07:21:07.277562+00:00",
+  "receipt_at": "2026-10-10T07:16:29+00:00",
+  "run_id": "a8668400-2ab0-4a2e-a91f-f2a66131752d",
+  "receipt_path": "reports/run-receipts/controlled-producer-receipt-20261010-0713-a8668400-2ab0-4a2e-a91f-f2a66131752d.json",
+  "receipt_sha256": "44c1e5edf23326538bf3a0c5c55d8c67a6872b7a764923dfc2d34c1bff2a9c07",
+  "scope": "Exact remaining D02 stripped-draft boundary; actual local producer receipt and attachment only",
+  "source_identity": {
+    "tools/bounded_acceptance.py": {
+      "receipt_sha256": "abe1a5d0ba5ed0c2debf8a6c3792129a365949f9b54ff3821ea4af855005e561",
+      "current_sha256": "abe1a5d0ba5ed0c2debf8a6c3792129a365949f9b54ff3821ea4af855005e561",
+      "matches": true
+    },
+    "tools/controlled_producer_receipt_acceptance.py": {
+      "receipt_sha256": "bd6e179f1abbb425407a07e47daf5f9f6ae105ca8ae42a665ca67ded84095228",
+      "current_sha256": "bd6e179f1abbb425407a07e47daf5f9f6ae105ca8ae42a665ca67ded84095228",
+      "matches": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "current_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "matches": true
+    },
+    "tools/receipt_immutable.py": {
+      "receipt_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "current_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "matches": true
+    },
+    "tools/reliability_gate.py": {
+      "receipt_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "current_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "matches": true
+    },
+    "tools/reliability_store.py": {
+      "receipt_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "current_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "matches": true
+    },
+    "tools/verification_evidence.py": {
+      "receipt_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "current_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "matches": true
+    },
+    "tools/workflow_apply_guard.py": {
+      "receipt_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "current_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "matches": true
+    },
+    "tools/workflow_engine.py": {
+      "receipt_sha256": "4833293000484a4c3dac20419b97bdbb89562f1a8689adcf8896edf6289bb2dd",
+      "current_sha256": "4833293000484a4c3dac20419b97bdbb89562f1a8689adcf8896edf6289bb2dd",
+      "matches": true
+    }
+  },
+  "snapshot_stable": true,
+  "items": [
+    {
+      "id": "producer-origin",
+      "status": "VERIFIED",
+      "claim": "Receipt originates actual local controlled materialization",
+      "evidence": [
+        "tools/bounded_acceptance.py:370-435",
+        "tools/bounded_acceptance.py:630-649",
+        "tools/controlled_producer_receipt_acceptance.py:141-147"
+      ],
+      "detail": "Producer loads committed task/declaration and job revision; calls prevalidated artifact materializer, which writes bytes, before inserting server receipt with production_kind=materialized. Normal materialization alone and descriptor attachment do not issue this evidence. Identical bytes under newer contract require another controlled write/receipt. This proves local controlled action only, not external labor or semantic reasoning provenance."
+    },
+    {
+      "id": "binding-consumption",
+      "status": "VERIFIED",
+      "claim": "Receipt binds job/task/contract/path/SHA and producer operation; consumed once at actual attachment",
+      "evidence": [
+        "tools/bounded_acceptance.py:337-355",
+        "tools/bounded_acceptance.py:439-472",
+        "tools/bounded_acceptance.py:571-603",
+        "tools/workflow_engine.py:251-283"
+      ],
+      "detail": "Receipt hash covers producer operation, production job revision, committed declaration revision/hash, artifact path/hash/length and kind. Consumer SELECT requires exact job/task/declaration/path/SHA and unused flag, then records consuming attach operation in Engine transaction. Production history seals producer operation and receipt_id; output history records attachment separately. Saved receipt IDs recompute exactly. Live proof remeasure returns true/ok for positive saved task."
+    },
+    {
+      "id": "stripped-negative",
+      "status": "VERIFIED",
+      "claim": "Ordinary stripped old descriptor and fabricated receipt metadata reject0effects",
+      "evidence": [
+        "tools/controlled_producer_receipt_acceptance.py:249-333",
+        "reports/run-receipts/controlled-producer-receipt-20261010-0713-a8668400-2ab0-4a2e-a91f-f2a66131752d.json"
+      ],
+      "detail": "Actual handler stripped path/SHA request fails controlled_producer_evidence_missing; fake client receipt ID fails client_production_metadata_forbidden. Both requested operations/events0. Saved strip task remainsneeds_rechecking revision4 with empty outputs and one consumed v1 receipt. Historical failure remains valid for superseded source; current mechanism closes it."
+    },
+    {
+      "id": "stale-reuse-crossscope",
+      "status": "VERIFIED",
+      "claim": "Stale contract, used receipt and independent scope mismatch refusal",
+      "evidence": [
+        "tools/controlled_producer_receipt_acceptance.py:336-383",
+        "tools/bounded_acceptance.py:451-464"
+      ],
+      "detail": "Saved stale-v1-under-v2 handler request0op/0event; source exact contract binding/unused flag guard. Read-only actual consumer cannot reuse consumed receipt. Independent read-only SELECT projections of current receipt as unused return1for exact positive and0for each single wrong job/task/revision/contracthash/path/artifacthash. These scope/reuse checks are pure query/helper proof, not saved full application negative handler cases; no such runtime claims made."
+    },
+    {
+      "id": "genuine-positive",
+      "status": "VERIFIED",
+      "claim": "New controlled production after declaration attaches and verifies once",
+      "evidence": [
+        "tools/controlled_producer_receipt_acceptance.py:387-435",
+        "app/.data/workflow-core-tests/legit-controlled-producer-receipt-20261010-0713.sqlite"
+      ],
+      "detail": "Saved declaration-v2 event revision4 precedes second receipt job_revision_at_production4; second receipt producer_op/consumed_by=cpr-legit-produce-v2, sealed attachment eventrevision5. Registry proof5 binds current production ID/contract2 and exact artifact bytes; actual verification reaches jobrevision6/taskverified with1operation/1event. DB SHA62e1f0d65b54f773c432e4afbeb4500678cd11605e46e3a33cc5ce13d23e1ede matches owner readback."
+    },
+    {
+      "id": "identity",
+      "status": "VERIFIED",
+      "claim": "Stable final source identity and immutable history",
+      "evidence": [
+        "reports/run-receipts/controlled-producer-receipt-20261010-0713-a8668400-2ab0-4a2e-a91f-f2a66131752d.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl"
+      ],
+      "detail": "All9 source hashes match final07:16:29 receipt. Immutable bytes/pointer/manifest/history match44c1e5edf23326538bf3a0c5c55d8c67a6872b7a764923dfc2d34c1bff2a9c07. Prior D06/D04/transaction/hash checks remain accepted without broad rerun."
+    }
+  ],
+  "saved_db_readbacks": [
+    {
+      "path": "app/.data/workflow-core-tests/strip-controlled-producer-receipt-20261010-0713.sqlite",
+      "sha256": "28dbbc841a8c99f13ecf1acae40a0ac78f9e30a28ed0deba2f4e08a7f9c3bffe",
+      "job": {
+        "id": "cpr-strip-job",
+        "revision": 4
+      },
+      "task_status": "needs_rechecking",
+      "task_outputs": [],
+      "declarations": [
+        "{\"contract_sha256\":\"595a01496ace02cfcfda0f1767d2c5f9337d62dfbc1893a15fc87a70f5db6a57\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"controlled-producer-v1\\n\",\"revision\":2,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [
+        {
+          "contract_sha256": "3127f37082e89eea5d3306fa4148e0605eeec02d3bda23677f93b513e77e3e8e",
+          "criterion": "proof-bound",
+          "revision": 1,
+          "snapshot": {
+            "criterion": "proof-bound",
+            "expected_result": null,
+            "expected_utf8": "controlled-producer-v1\n",
+            "revision": 1,
+            "schema": "declared_outcome_v1"
+          },
+          "superseded_at_job_revision": 4
+        }
+      ],
+      "production_history": [
+        {
+          "artifact_sha256": "74aef93d6239bdaf5056b18ef50f5e0b6dcbc7c81f591353c4fc08699119c216",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "3127f37082e89eea5d3306fa4148e0605eeec02d3bda23677f93b513e77e3e8e",
+          "producer_receipt_id": "94a590ad7329fa0621b216a559590b1539e43cb4701a5a0b8f57fc8beb0672cd",
+          "production_id": "25e8e39140ad9799c5e688a0f2e8e53603343ccf1ed8d027498276b4eddc407a",
+          "production_job_id": "cpr-strip-job",
+          "production_job_revision": 3,
+          "production_kind": "materialized",
+          "production_operation_id": "cpr-produce-v1",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/cpr-strip-job/t1-74aef93d6239.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "cpr-produce-v1",
+          "outputs": [
+            "{\"byte_length\":23,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"3127f37082e89eea5d3306fa4148e0605eeec02d3bda23677f93b513e77e3e8e\",\"production_id\":\"25e8e39140ad9799c5e688a0f2e8e53603343ccf1ed8d027498276b4eddc407a\",\"production_job_id\":\"cpr-strip-job\",\"production_job_revision\":3,\"production_operation_id\":\"cpr-produce-v1\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/cpr-strip-job/t1-74aef93d6239.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"74aef93d6239bdaf5056b18ef50f5e0b6dcbc7c81f591353c4fc08699119c216\"}"
+          ]
+        }
+      ],
+      "controlled_producer_receipts": [
+        {
+          "receipt_id": "94a590ad7329fa0621b216a559590b1539e43cb4701a5a0b8f57fc8beb0672cd",
+          "job_id": "cpr-strip-job",
+          "task_id": "t1",
+          "producer_operation_id": "cpr-produce-v1",
+          "job_revision_at_production": 2,
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "3127f37082e89eea5d3306fa4148e0605eeec02d3bda23677f93b513e77e3e8e",
+          "relative_path": "work/task-artifacts/cpr-strip-job/t1-74aef93d6239.txt",
+          "artifact_sha256": "74aef93d6239bdaf5056b18ef50f5e0b6dcbc7c81f591353c4fc08699119c216",
+          "byte_length": 23,
+          "production_kind": "materialized",
+          "consumed_by_operation_id": "cpr-produce-v1",
+          "created_at": "2026-10-10T07:16:28+00:00"
+        }
+      ],
+      "producer_receipt_hashes_match": true,
+      "proofs": [],
+      "operation_readbacks": {
+        "cpr-strip-attack": {
+          "operations": 0,
+          "events": 0
+        },
+        "cpr-fake-receipt-id": {
+          "operations": 0,
+          "events": 0
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/cross-controlled-producer-receipt-20261010-0713.sqlite",
+      "sha256": "02f1575e00057b7cef2831f1eb10a9ae79c7182b904b6d2ec88bbd15d832984c",
+      "job": {
+        "id": "cpr-cross-job",
+        "revision": 4
+      },
+      "task_status": "needs_rechecking",
+      "task_outputs": [],
+      "declarations": [
+        "{\"contract_sha256\":\"af406add2cd70e776b9faff53b41d5ad606626a80b764878526845e0c0c386bc\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"cross-contract-bytes\\n\",\"revision\":2,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [
+        {
+          "contract_sha256": "66961117b5a91d2947cae030bc468adca257ef05add23579edfd19c835380ebc",
+          "criterion": "proof-bound",
+          "revision": 1,
+          "snapshot": {
+            "criterion": "proof-bound",
+            "expected_result": null,
+            "expected_utf8": "cross-contract-bytes\n",
+            "revision": 1,
+            "schema": "declared_outcome_v1"
+          },
+          "superseded_at_job_revision": 4
+        }
+      ],
+      "production_history": [
+        {
+          "artifact_sha256": "e297d8ec61af0681e29cb10f89b6444e003f26654415ae392a7621a801f06270",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "66961117b5a91d2947cae030bc468adca257ef05add23579edfd19c835380ebc",
+          "producer_receipt_id": "42cf252ea75585159c36e14797526ac6df181e31310a132e82ba81264b862395",
+          "production_id": "6e2be2533439f6be94bb120dad1e3fee731117f8d75e023a68bc847eb54cd6dd",
+          "production_job_id": "cpr-cross-job",
+          "production_job_revision": 3,
+          "production_kind": "materialized",
+          "production_operation_id": "cpr-cross-produce-v1",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/cpr-cross-job/t1-e297d8ec61af.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "cpr-cross-produce-v1",
+          "outputs": [
+            "{\"byte_length\":21,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"66961117b5a91d2947cae030bc468adca257ef05add23579edfd19c835380ebc\",\"production_id\":\"6e2be2533439f6be94bb120dad1e3fee731117f8d75e023a68bc847eb54cd6dd\",\"production_job_id\":\"cpr-cross-job\",\"production_job_revision\":3,\"production_operation_id\":\"cpr-cross-produce-v1\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/cpr-cross-job/t1-e297d8ec61af.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"e297d8ec61af0681e29cb10f89b6444e003f26654415ae392a7621a801f06270\"}"
+          ]
+        }
+      ],
+      "controlled_producer_receipts": [
+        {
+          "receipt_id": "42cf252ea75585159c36e14797526ac6df181e31310a132e82ba81264b862395",
+          "job_id": "cpr-cross-job",
+          "task_id": "t1",
+          "producer_operation_id": "cpr-cross-produce-v1",
+          "job_revision_at_production": 2,
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "66961117b5a91d2947cae030bc468adca257ef05add23579edfd19c835380ebc",
+          "relative_path": "work/task-artifacts/cpr-cross-job/t1-e297d8ec61af.txt",
+          "artifact_sha256": "e297d8ec61af0681e29cb10f89b6444e003f26654415ae392a7621a801f06270",
+          "byte_length": 21,
+          "production_kind": "materialized",
+          "consumed_by_operation_id": "cpr-cross-produce-v1",
+          "created_at": "2026-10-10T07:16:28+00:00"
+        }
+      ],
+      "producer_receipt_hashes_match": true,
+      "proofs": [],
+      "operation_readbacks": {
+        "cpr-cross-stale-receipt": {
+          "operations": 0,
+          "events": 0
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/legit-controlled-producer-receipt-20261010-0713.sqlite",
+      "sha256": "62e1f0d65b54f773c432e4afbeb4500678cd11605e46e3a33cc5ce13d23e1ede",
+      "job": {
+        "id": "cpr-legit-job",
+        "revision": 6
+      },
+      "task_status": "verified",
+      "task_outputs": [
+        "{\"byte_length\":26,\"declared_contract_revision\":2,\"declared_contract_sha256\":\"dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2\",\"production_id\":\"1b0c204b25cb14519c5dabf3541562469d9af99300551a50035b60b0cce94097\",\"production_job_id\":\"cpr-legit-job\",\"production_job_revision\":5,\"production_operation_id\":\"cpr-legit-produce-v2\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f\"}"
+      ],
+      "declarations": [
+        "{\"contract_sha256\":\"dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"controlled-producer-legit\\n\",\"revision\":2,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "declaration_history": [
+        {
+          "contract_sha256": "ad184742928bd056f60b6791d6b71cae96bea3abc5cf431354f463d71f0dd6c6",
+          "criterion": "proof-bound",
+          "revision": 1,
+          "snapshot": {
+            "criterion": "proof-bound",
+            "expected_result": null,
+            "expected_utf8": "controlled-producer-legit\n",
+            "revision": 1,
+            "schema": "declared_outcome_v1"
+          },
+          "superseded_at_job_revision": 4
+        }
+      ],
+      "production_history": [
+        {
+          "artifact_sha256": "d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "ad184742928bd056f60b6791d6b71cae96bea3abc5cf431354f463d71f0dd6c6",
+          "producer_receipt_id": "bb4afee9d4f66818402e95cd0455e9e180794d662184a1c919df080f261dfa0f",
+          "production_id": "3634c011d8b257c720ea5b2e3af8a4a6f68d36ac8aeff53ddc1ca707a265adf8",
+          "production_job_id": "cpr-legit-job",
+          "production_job_revision": 3,
+          "production_kind": "materialized",
+          "production_operation_id": "cpr-legit-produce-v1",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt"
+        },
+        {
+          "artifact_sha256": "d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f",
+          "declared_contract_revision": 2,
+          "declared_contract_sha256": "dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2",
+          "producer_receipt_id": "8c12ccfa6733fc0d97b2a8b0653812ac5400111637ef1bb0e126755737dce1df",
+          "production_id": "1b0c204b25cb14519c5dabf3541562469d9af99300551a50035b60b0cce94097",
+          "production_job_id": "cpr-legit-job",
+          "production_job_revision": 5,
+          "production_kind": "materialized",
+          "production_operation_id": "cpr-legit-produce-v2",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "cpr-legit-produce-v1",
+          "outputs": [
+            "{\"byte_length\":26,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"ad184742928bd056f60b6791d6b71cae96bea3abc5cf431354f463d71f0dd6c6\",\"production_id\":\"3634c011d8b257c720ea5b2e3af8a4a6f68d36ac8aeff53ddc1ca707a265adf8\",\"production_job_id\":\"cpr-legit-job\",\"production_job_revision\":3,\"production_operation_id\":\"cpr-legit-produce-v1\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f\"}"
+          ]
+        },
+        {
+          "job_revision": 5,
+          "operation_id": "cpr-legit-produce-v2",
+          "outputs": [
+            "{\"byte_length\":26,\"declared_contract_revision\":2,\"declared_contract_sha256\":\"dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2\",\"production_id\":\"1b0c204b25cb14519c5dabf3541562469d9af99300551a50035b60b0cce94097\",\"production_job_id\":\"cpr-legit-job\",\"production_job_revision\":5,\"production_operation_id\":\"cpr-legit-produce-v2\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f\"}"
+          ]
+        }
+      ],
+      "controlled_producer_receipts": [
+        {
+          "receipt_id": "bb4afee9d4f66818402e95cd0455e9e180794d662184a1c919df080f261dfa0f",
+          "job_id": "cpr-legit-job",
+          "task_id": "t1",
+          "producer_operation_id": "cpr-legit-produce-v1",
+          "job_revision_at_production": 2,
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "ad184742928bd056f60b6791d6b71cae96bea3abc5cf431354f463d71f0dd6c6",
+          "relative_path": "work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt",
+          "artifact_sha256": "d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f",
+          "byte_length": 26,
+          "production_kind": "materialized",
+          "consumed_by_operation_id": "cpr-legit-produce-v1",
+          "created_at": "2026-10-10T07:16:29+00:00"
+        },
+        {
+          "receipt_id": "8c12ccfa6733fc0d97b2a8b0653812ac5400111637ef1bb0e126755737dce1df",
+          "job_id": "cpr-legit-job",
+          "task_id": "t1",
+          "producer_operation_id": "cpr-legit-produce-v2",
+          "job_revision_at_production": 4,
+          "declared_contract_revision": 2,
+          "declared_contract_sha256": "dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2",
+          "relative_path": "work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt",
+          "artifact_sha256": "d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f",
+          "byte_length": 26,
+          "production_kind": "materialized",
+          "consumed_by_operation_id": "cpr-legit-produce-v2",
+          "created_at": "2026-10-10T07:16:29+00:00"
+        }
+      ],
+      "producer_receipt_hashes_match": true,
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/13c79b68-de15-445f-8699-c8267daac34f.json",
+          "registry_sha256": "70b457ef8c1f2018253e5ac8924b62f5be1534be8495cd437275fb584e324118",
+          "actual_sha256": "70b457ef8c1f2018253e5ac8924b62f5be1534be8495cd437275fb584e324118",
+          "scope": {
+            "job_id": "cpr-legit-job",
+            "job_revision": 5,
+            "task_id": "t1",
+            "operation_id": "cpr-legit-verify",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/cpr-legit-job/t1-d0977628b1ad.txt",
+              "sha256": "d0977628b1ade78905c5e09249d664b6596a6ff984f6726ed32deb3ab2c36a5f",
+              "byte_length": 26,
+              "production_id": "1b0c204b25cb14519c5dabf3541562469d9af99300551a50035b60b0cce94097",
+              "contract_revision": 2,
+              "contract_sha256": "dcf17f07c0309f75bf56fba50e26baa0c1448266c837a8989d8d36b64cf066b2",
+              "content_matches_declaration": true
+            }
+          ],
+          "live_remeasure": [
+            true,
+            "ok"
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "cpr-legit-produce-v2": {
+          "operations": 1,
+          "events": 1
+        },
+        "cpr-legit-verify": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    }
+  ],
+  "pure_controls": {
+    "strip": {
+      "consumed_receipt_reuse": [
+        null,
+        "controlled_producer_evidence_missing"
+      ]
+    },
+    "cross": {
+      "consumed_receipt_reuse": [
+        null,
+        "controlled_producer_evidence_missing"
+      ]
+    },
+    "legit": {
+      "consumed_receipt_reuse": [
+        null,
+        "controlled_producer_evidence_missing"
+      ]
+    },
+    "isolated_scope_selects": {
+      "method": "Read-only SQL view projects NULL consumed flag for one saved current receipt; each other scope variable changed independently. No records/state changed. Source consumer uses same predicate. Not application handler runs.",
+      "matching_row_counts": {
+        "positive_scope": 1,
+        "wrong_job": 0,
+        "wrong_task": 0,
+        "stale_revision": 0,
+        "wrong_contract_hash": 0,
+        "wrong_path": 0,
+        "wrong_artifact_hash": 0
+      }
+    }
+  },
+  "history_links": {
+    "reports/receipt-hash-manifest.jsonl": [
+      {
+        "content_sha256": "44c1e5edf23326538bf3a0c5c55d8c67a6872b7a764923dfc2d34c1bff2a9c07",
+        "delivery_id": "controlled-producer-receipt-20261010-0713",
+        "immutable_receipt_path": "reports/run-receipts/controlled-producer-receipt-20261010-0713-a8668400-2ab0-4a2e-a91f-f2a66131752d.json",
+        "run_id": "a8668400-2ab0-4a2e-a91f-f2a66131752d"
+      }
+    ],
+    "reports/workflow-core-run-history.jsonl": [
+      {
+        "delivery_id": "controlled-producer-receipt-20261010-0713",
+        "run_id": "a8668400-2ab0-4a2e-a91f-f2a66131752d",
+        "at": "2026-10-10T07:16:29+00:00",
+        "overall": "passed",
+        "immutable_receipt": "reports/run-receipts/controlled-producer-receipt-20261010-0713-a8668400-2ab0-4a2e-a91f-f2a66131752d.json",
+        "content_sha256": "44c1e5edf23326538bf3a0c5c55d8c67a6872b7a764923dfc2d34c1bff2a9c07"
+      }
+    ]
+  },
+  "overall": "VERIFIED for bounded local controlled production mechanism",
+  "historical_failure_disposition": "Retain earlier source-bound failures as history; D02 stripping superseded by this accepted receipt/source snapshot. No full-build acceptance claimed.",
+  "limitations": "Trusted local SQLite/protocol boundary. Producer is callable local helper; no external labor/hostile arbitrary database edit guarantee. Pure crossscope/reuse predicate checks distinguished from saved actual handler negatives.",
+  "methods": "Sources/receipt readbacks, SQLite mode=ro, pure hashing/content/record remeasurement and read-only SQL projection. Consumer table-ensure patched to no-op; no match so no UPDATE. No mutations/reruns/browser/external/helpers.",
+  "next_action": "Accept bounded D02 controlled-producer mechanism; move sole owner to APP02/04 actual recovery+screening. Keep remaining edit/sync/browser/REL01 and real-source queue required.",
+  "scope_blocker": null
+}

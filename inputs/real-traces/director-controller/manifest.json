@@ -1,0 +1,31 @@
+{
+  "schema": "sanitized-controller-write-receipts/v1",
+  "exported_at": "2026-10-10T21:40:30.108497+00:00",
+  "files": [
+    {
+      "file": "receipts.jsonl",
+      "records": 291,
+      "sha256": "226f1a8f96aca8bdef96858a23f79bcd52eddc91b992c275d2f82b884a162c72"
+    }
+  ],
+  "record_fields": [
+    "mission",
+    "action",
+    "status",
+    "timestamps"
+  ],
+  "timestamp_fields": [
+    "created_at",
+    "completed_at",
+    "failed_at"
+  ],
+  "status_counts": {
+    "completed": 268,
+    "failed": 23
+  },
+  "scope": "Existing terminal receipt and failure records, including archived claim history. Statuses are recorded write outcomes, not independent verification of project outcomes.",
+  "sanitization": "Allowlist projection only. No readback, authorization fields or paths, target IDs, claim IDs, controller IDs, evidence, reasons, or secrets. Two long action descriptions generalized to bounded-orgo-launch-and-restore.",
+  "missing_actions": 2,
+  "generalized_actions": 2,
+  "future_records": "Append one sanitized terminal record per newly completed or failed controller write to receipts.jsonl; refresh manifest counts and checksum. Missing source values remain null or absent; never invent timestamps."
+}

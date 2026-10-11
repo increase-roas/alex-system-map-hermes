@@ -1,0 +1,135 @@
+{
+  "id": "table_912152d2b276509493c3",
+  "sheet": "S04-22 Tunnel Fallback Rules",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Tunnel asset key"
+        },
+        {
+          "column": "B",
+          "value": "Rule type"
+        },
+        {
+          "column": "C",
+          "value": "Response action"
+        },
+        {
+          "column": "D",
+          "value": "Rule label"
+        },
+        {
+          "column": "E",
+          "value": "Evidence pointer"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|0900d6d0-02d4-4d82-ab5f-fcfb632bc043",
+          "link": "'S04-05 Cloudflare'!A60"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http_status:404"
+        },
+        {
+          "column": "D",
+          "value": "fallback"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|9b09467d-9c1c-4f4c-9b00-021ad8239f20",
+          "link": "'S04-05 Cloudflare'!A61"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http_status:404"
+        },
+        {
+          "column": "D",
+          "value": "fallback"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|ebfa4bab-cd3a-4b51-9508-3b65613164f0",
+          "link": "'S04-05 Cloudflare'!A62"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http_status:404"
+        },
+        {
+          "column": "D",
+          "value": "fallback"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cloudflare|Tunnel|cd93a127-ac04-407c-8686-c3be371f3559",
+          "link": "'S04-05 Cloudflare'!A63"
+        },
+        {
+          "column": "B",
+          "value": "Tunnel ingress"
+        },
+        {
+          "column": "C",
+          "value": "http_status:404"
+        },
+        {
+          "column": "D",
+          "value": "fallback"
+        },
+        {
+          "column": "E",
+          "value": "work/cloudflare-base.json"
+        }
+      ]
+    }
+  ]
+}

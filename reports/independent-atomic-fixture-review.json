@@ -1,0 +1,258 @@
+{
+  "review_id": "independent-atomic-fixture-review-20261010-0628",
+  "reviewed_at": "2026-10-10T06:28:37.743055+00:00",
+  "scope": "Focused latest atomic-failure-fixture-boundary APP01/03 adjudication. Read-only source, mode=ro SQLite SELECTs, pure scope/registry SELECT/measurement/mocked replay checks. No acceptance rerun, shared edits, browser, outside reads/services, credentials, installs or helpers.",
+  "owner_receipt": {
+    "path": "reports/atomic-failure-fixture-boundary-receipt.json",
+    "at": "2026-10-10T06:24:29+00:00",
+    "run_id": "ac770f61-93bc-477e-ad73-204b6f880de3",
+    "sha256": "c30188425c35e0fd7cd6e501dd010435c60a54750aa143a3bdc3510c2e73557b",
+    "owner_pass_not_acceptance": true
+  },
+  "snapshot": {
+    "stable": true,
+    "first_at": "2026-10-10T06:27:42.910271+00:00",
+    "last_at": "2026-10-10T06:28:37.743055+00:00",
+    "changed_paths": [],
+    "four_recorded_source_hashes_match": true,
+    "source_sha256": {
+      "reports/atomic-failure-fixture-boundary-receipt.json": "c30188425c35e0fd7cd6e501dd010435c60a54750aa143a3bdc3510c2e73557b",
+      "tools/reliability_store.py": "f0b5fd84f8163df95dc6751d66ff793b5cff375d706016207e925047e7c7137b",
+      "tools/verification_evidence.py": "56e6380c976751521f9346293ed5b1a066956b66e6b89a608d40b43c23b8b6ca",
+      "tools/workflow_apply_guard.py": "fcf4850bfcbafdc537c5583f2caa3a05eb326775520b8dddaf9de5afcbc7c88c",
+      "tools/atomic_failure_fixture_boundary_acceptance.py": "084113dd4095b4585ff2b12426a19f4b4c09d78845df06b35af344af9bcf6ba1",
+      "tools/reliability_gate.py": "27db04905c7c51d6e54d1e56722190378ff6e4185a35f294c75053e19b78b60d",
+      "tools/workflow_engine.py": "3bf1cf809420775770647656302f5b73d22819f4e8a61c5e2531e5e914eb2e5a",
+      "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "reports/workflow-core-run-history.jsonl": "f73612eb8433973112f07b48c8600a42319675254f490f77a2637bff7de20b7f",
+      "reports/workflow-core-failures/APP-REVIEW-01.json": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+      "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960"
+    },
+    "coverage_gap": "Receipt omits current gate/Engine/local_service hashes; independent snapshot records these."
+  },
+  "overall": "FAILED; real fixes accepted, post-write rollback and truthful completion still not fully proven",
+  "items": [
+    {
+      "id": "implicit_executescript_commit",
+      "status": "VERIFIED",
+      "accepted": "Previous source defect closed: ensure_schema now executes individual CREATE statements and prepare_connection/prepare_registry occurs before BEGIN. Cached prepared connections make inner reads/CAS no schema scripts/commit. Engine manage_tx=False and handoff commit=False retain caller transaction.",
+      "sources": [
+        "tools/reliability_store.py:26-79",
+        "tools/workflow_apply_guard.py:61-66,93-94,152-167",
+        "tools/verification_evidence.py:32-54"
+      ],
+      "limit": "Current scoped source fix plus stored transfer-wins concurrency proof; genuine failure after Engine writes not exercised by new stale-revision test."
+    },
+    {
+      "id": "genuine_post_write_CAS_rollback",
+      "status": "UNVERIFIED",
+      "accepted": "Receipt retains failed stale-revision attempt with0 operations/events, followed by authorized retry/replay1 operation/event and job/handoffrevision3.",
+      "gap": "cas_failure_zero_side_effects uses expected_revision1 while actual job/handoffrevision2. Guard throws handoff revision conflict at147-148 before Engine.apply and before CAS; this is no test of rollback after writes. Current DB is after authorized retry so same ab-fail-cas ID now has1 event/operation; receipt assertions are transient saved self-report.",
+      "sources": [
+        "tools/atomic_failure_fixture_boundary_acceptance.py:221-257",
+        "tools/workflow_apply_guard.py:147-161"
+      ],
+      "required_next": "Inject a failure after real Engine writes and before/during real handoff CAS, without bypassing real helper behavior; compare before/after task/job/handoff and operation/event count0, then exact retry/replay count1."
+    },
+    {
+      "id": "concurrent_loser_zero_effects",
+      "status": "VERIFIED",
+      "accepted": "Saved concurrent DB: concurrent-job revision2, canonical checkpointowner-c revision2; only ab-create/ab-add operations/events; ab-concurrent count0 operation/event. Thus reported transfer-wins mutation-loses ordering has zero durable loser effects, correcting prior revision3/2 failure.",
+      "db": "app/.data/workflow-core-tests/concurrent-atomic-failure-fixture-boundary-20261010-0622.sqlite",
+      "limit": "One saved ordering. No new runtime rerun; post-write fault still separate unproved item."
+    },
+    {
+      "id": "fixture_exclusion",
+      "status": "VERIFIED",
+      "accepted": "Fixture_only records rejected for workflow verify regardless of job name. Standalone fixture gate requires isolated_test_fixture=true and isolated- job prefix. Saved DB has no ab-verify-fixture operation/event; subsequent nonfixture positive is distinct.",
+      "sources": [
+        "tools/verification_evidence.py:242-252",
+        "tools/reliability_gate.py:287-293",
+        "tools/atomic_failure_fixture_boundary_acceptance.py:364-432"
+      ]
+    },
+    {
+      "id": "exact_registry_and_scope",
+      "status": "VERIFIED",
+      "accepted": "Current resolver compares issued file hash/path/requirement/job/revision. Workflow scope compares task_id/operation_id/verifier. Pure read-only correct registry accepted; wrongSHA/path rejected. Pure individual task/op/verifier mismatch each rejected with exact corresponding reason. Positive registered record/fileSHA matches.",
+      "sources": [
+        "tools/verification_evidence.py:285-293,329-354,390-393",
+        "tools/reliability_gate.py:272-298"
+      ],
+      "proof_record": {
+        "record_id": "b38d1be7-1240-4812-81d6-2386ca312ddb",
+        "path": "work/reliability/verification-records/b38d1be7-1240-4812-81d6-2386ca312ddb.json",
+        "file_sha256": "88026c791ac67fd01a756940260b5a3b651b0a95f2fa953d71eadfbe7b9aff3a",
+        "scope": {
+          "job_id": "real-verify-job",
+          "job_revision": 2,
+          "task_id": "t1",
+          "operation_id": "ab-verify-good",
+          "verifier": "reviewer-b"
+        }
+      },
+      "test_gap": "Owner combined wrongscope test rejects verification_record_revision_mismatch because recordrevision2 is applied at3, so it does not prove its three named scope checks. Independent pure checks establish each validator check; full handler negatives with matching revision remain missing."
+    },
+    {
+      "id": "truthful_measured_positive",
+      "status": "FAILED",
+      "accepted": "REL02 precondition helper now measures local document/skill/module existence and current relationshiphash; checks accurately describe these preconditions. Nonfixture workflow positive record now scope-bound and registered.",
+      "gap": "measure_workflow_verify_checks checks only task_exists, criterion membership in task.acceptance and set equality. It never checks actual task result/output or acceptance outcome. Pure pending task with no outputs/evidence and acceptance ['file exists'] returns allTrue without a file check. issue_measured_workflow_verify_record labels this REL02 actually_used and derives skills_verified from acceptance_set_matches. Saved t1 verified using exactly task_exists/acceptance_proof_bound/acceptance_set_matches. This is circular acceptance-definition proof, not performed-work proof.",
+      "sources": [
+        "tools/verification_evidence.py:68-101,211-235",
+        "tools/atomic_failure_fixture_boundary_acceptance.py:443-481"
+      ],
+      "required_next": "Measure actual acceptance outcomes using bounded check handlers or retain truthful externally run check outputs/handles. Keep precondition/list-membership receipts named as such; do not use them to verify task completion or skill actual use. Add negative pending-task/no-produced-output case."
+    },
+    {
+      "id": "historical_replay_lowers_handoff",
+      "status": "FAILED",
+      "gap": "Replay branch unchanged: any handoffrevision differing from old storedresult is updated to old resultrevision. Pure no-write mocked replay requestedold result2 with currenthandoff4 owner-c and records attemptedCAS4→2. Stale actorowner-b replay also uses currentowner-c for CAS. Historical replay must return receipt without downgrading current state.",
+      "sources": [
+        "tools/workflow_apply_guard.py:95-110"
+      ],
+      "required_next": "Require replay to preserve newer current handoff state; test old operation after at leastone newer mutation/transfer and assert owner/revision/acceptance unchanged."
+    },
+    {
+      "id": "transfer_idempotency",
+      "status": "FAILED",
+      "gap": "Transfer still has no unique operation request/digest/result ledger. Payload operation_id is canonical handoff identity, not unique transfer attempt. Retrying completed owner-a→owner-b transfer hits stale expectedowner instead of reconciling same operation. Engine job revision read remains before BEGIN.",
+      "sources": [
+        "tools/workflow_apply_guard.py:170-228"
+      ],
+      "required_next": "Give transfer an operation identity with digest/result reconciliation in same transaction; assert lost-response retry returns original result with one owner transition and no duplicate effect. Read current job revision under transaction."
+    }
+  ],
+  "readback": {
+    "atomic_db": "app/.data/workflow-core-tests/atomic-atomic-failure-fixture-boundary-20261010-0622.sqlite",
+    "atomic_job_revision": 3,
+    "atomic_handoff_revision": 3,
+    "authorized_retry_operation_id": "ab-fail-cas",
+    "authorized_retry_operation_count": 1,
+    "authorized_retry_matching_event_count": 1,
+    "concurrent_db": "app/.data/workflow-core-tests/concurrent-atomic-failure-fixture-boundary-20261010-0622.sqlite",
+    "concurrent_job_revision": 2,
+    "concurrent_handoff_owner": "owner-c",
+    "concurrent_handoff_revision": 2,
+    "loser_operation_id": "ab-concurrent",
+    "loser_operation_count": 0,
+    "loser_matching_event_count": 0,
+    "fixture_db": "app/.data/workflow-core-tests/fixture-atomic-failure-fixture-boundary-20261010-0622.sqlite",
+    "positive_operation_id": "ab-verify-good",
+    "positive_matching_event_count": 1,
+    "positive_task_status": "verified",
+    "positive_record_checks": {
+      "task_exists": true,
+      "acceptance_proof_bound": true,
+      "acceptance_set_matches": true
+    }
+  },
+  "pure_checks": [
+    {
+      "kind": "pure_scope",
+      "changed": "task_id",
+      "result": [
+        false,
+        "verification_record_task_id_mismatch"
+      ]
+    },
+    {
+      "kind": "pure_scope",
+      "changed": "operation_id",
+      "result": [
+        false,
+        "verification_record_operation_id_mismatch"
+      ]
+    },
+    {
+      "kind": "pure_scope",
+      "changed": "verifier",
+      "result": [
+        false,
+        "verification_record_verifier_mismatch"
+      ]
+    },
+    {
+      "kind": "registry",
+      "hash_correct": true,
+      "path_correct": true,
+      "result": [
+        true,
+        "ok"
+      ]
+    },
+    {
+      "kind": "registry",
+      "hash_correct": false,
+      "path_correct": true,
+      "result": [
+        false,
+        "verification_record_registry_hash_mismatch"
+      ]
+    },
+    {
+      "kind": "registry",
+      "hash_correct": true,
+      "path_correct": false,
+      "result": [
+        false,
+        "verification_record_registry_path_mismatch"
+      ]
+    },
+    {
+      "kind": "pure_replay",
+      "result": {
+        "revision": 2
+      },
+      "attempted_handoff_changes": [
+        {
+          "from_revision": 4,
+          "to_revision": 2,
+          "current_owner": "owner-c"
+        }
+      ]
+    },
+    {
+      "kind": "pure_check",
+      "case": "pending_task_no_outputs_no_proof",
+      "measured": {
+        "task_exists": true,
+        "acceptance_file_exists": true,
+        "acceptance_set_matches": true
+      }
+    }
+  ],
+  "history": {
+    "status": "UNVERIFIED complete immutable receipts; VERIFIED current append entry/original supervisor copy",
+    "history_path": "reports/workflow-core-run-history.jsonl",
+    "entries": 10,
+    "latest_history_receipt_hash_matches": true,
+    "current_fixed_failure_hash": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+    "original_supervisor_copy_hash": "307fe16d04300e6d885d02570306b394889038de26730a31f57832ec890ba960",
+    "distinction": "Fixed APP01 file now49330d rather than previous416816/first307fe. Original307fe remains supervisor copy; these are distinct bytes. Latest receipt links current fixedfile hash and original copy path but no originalcopy hash. Append history keeps dated run/hash entries; immutable original per-run receipts still not stored/linked. Failure history hash is calculated before rewrite adding links. Per-run failure8babfdc3 path exists.",
+    "sources": [
+      "tools/atomic_failure_fixture_boundary_acceptance.py:32-35,601-654"
+    ]
+  },
+  "evidence_handles": [
+    "Read-only exec40de1f: full mode=ro DBreadbacks + pending task measurement",
+    "Read-only execf14522: individualscope/registry checks + pure replaydowngrade + stable sourcehashes"
+  ],
+  "prior_disposition": {
+    "implicit_commit": "VERIFIED source repair",
+    "concurrent_loser_persists": "VERIFIED closed for saved transfer-wins race",
+    "fixture_actual_completion": "VERIFIED exclusion fixed",
+    "registry_hash_path": "VERIFIED fixed",
+    "task_op_verifier_scope": "VERIFIED validators fixed; full handler isolated tests missing",
+    "truthful_actual_work_proof": "FAILED",
+    "post_write_rollback": "UNVERIFIED",
+    "replay_lowers_handoff": "FAILED",
+    "transfer_idempotency": "FAILED",
+    "immutable_history": "UNVERIFIED"
+  },
+  "blocker": {
+    "type": "goal_not_met_yet",
+    "exact_missing": "Real post-write rollback fault proof; actual acceptance-result evidence; historical replay state preservation and idempotent transfer reconciliation; immutable per-run receipt links.",
+    "outside_dependency": "None for these bounded local corrections."
+  }
+}

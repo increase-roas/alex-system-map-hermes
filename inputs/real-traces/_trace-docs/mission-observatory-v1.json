@@ -1,0 +1,149 @@
+{
+ "receipt_id": "director-mission-observatory-v1-n7",
+ "trace_id": "trace-director-mission-observatory-v1",
+ "label": "Director: mission-observatory-v1 (7 writes)",
+ "synthetic_only": false,
+ "started_at": "2026-10-06T06:39:22.587130+00:00",
+ "ended_at": "2026-10-06T07:24:59.380115+00:00",
+ "status": "completed",
+ "job_id": null,
+ "metadata": {
+  "producer": "Director sanitized export (real, observed)",
+  "mission": "mission-observatory-v1"
+ },
+ "spans": [
+  {
+   "span_id": "director-9a0d995442d4-284",
+   "parent_span_id": null,
+   "name": "item.create",
+   "agent_identity": "Director controller",
+   "tool_action": "item.create",
+   "started_at": "2026-10-06T06:39:22.587130+00:00",
+   "ended_at": "2026-10-06T06:40:05.800396+00:00",
+   "duration_ms": 43213,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 285
+   }
+  },
+  {
+   "span_id": "director-3bec988346a9-285",
+   "parent_span_id": null,
+   "name": "set_preflight_on_demand_cap",
+   "agent_identity": "Director controller",
+   "tool_action": "set_preflight_on_demand_cap",
+   "started_at": "2026-10-06T06:42:12.741953+00:00",
+   "ended_at": "2026-10-06T06:44:54.324056+00:00",
+   "duration_ms": 161582,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 286
+   }
+  },
+  {
+   "span_id": "director-23bc30493515-286",
+   "parent_span_id": null,
+   "name": "configure_disposable_cursor_preflight",
+   "agent_identity": "Director controller",
+   "tool_action": "configure_disposable_cursor_preflight",
+   "started_at": "2026-10-06T06:45:06.199458+00:00",
+   "ended_at": "2026-10-06T06:47:31.900362+00:00",
+   "duration_ms": 145700,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 287
+   }
+  },
+  {
+   "span_id": "director-4aced2b68555-287",
+   "parent_span_id": null,
+   "name": "correct_disposable_cursor_preflight",
+   "agent_identity": "Director controller",
+   "tool_action": "correct_disposable_cursor_preflight",
+   "started_at": "2026-10-06T07:03:05.856706+00:00",
+   "ended_at": "2026-10-06T07:11:02.804900+00:00",
+   "duration_ms": 476948,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 288
+   }
+  },
+  {
+   "span_id": "director-92015a855df3-288",
+   "parent_span_id": null,
+   "name": "optimize_cursor_ui_preferences",
+   "agent_identity": "Director controller",
+   "tool_action": "optimize_cursor_ui_preferences",
+   "started_at": "2026-10-06T07:11:56.962333+00:00",
+   "ended_at": "2026-10-06T07:15:00.698018+00:00",
+   "duration_ms": 183735,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 289
+   }
+  },
+  {
+   "span_id": "director-08dbf1510ff7-289",
+   "parent_span_id": null,
+   "name": "set_cloud_default_environment",
+   "agent_identity": "Director controller",
+   "tool_action": "set_cloud_default_environment",
+   "started_at": "2026-10-06T07:17:42.973113+00:00",
+   "ended_at": "2026-10-06T07:18:41.273730+00:00",
+   "duration_ms": 58300,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 290
+   }
+  },
+  {
+   "span_id": "director-4c9f366a5493-290",
+   "parent_span_id": null,
+   "name": "inspect_cloud_coordinator_preflight",
+   "agent_identity": "Director controller",
+   "tool_action": "inspect_cloud_coordinator_preflight",
+   "started_at": "2026-10-06T07:20:42.668327+00:00",
+   "ended_at": "2026-10-06T07:24:59.380115+00:00",
+   "duration_ms": 256711,
+   "status": "completed",
+   "error": null,
+   "component_ids": [],
+   "source_ids": [],
+   "evidence_ids": [],
+   "metadata": {
+    "observed": true,
+    "export_line": 291
+   }
+  }
+ ]
+}

@@ -1,0 +1,69 @@
+{
+  "scope": "Independent verifier comprehension exercise using recovery packet, canonical workflow skill and contract; no expected answer supplied. No target runtime auto-selection claimed.",
+  "inputs": [
+    "examples/workflow-recovery-synthetic.json",
+    "skills/workflow-checkpoint-recovery/SKILL.md",
+    "docs/WORKFLOW_CONTRACT.md"
+  ],
+  "observations": {
+    "goal": "Demonstrate correction recovery on synthetic lamps",
+    "scope": "synthetic sample only",
+    "constraints": [
+      "no services",
+      "no real job certification"
+    ],
+    "snapshot_revision": 6,
+    "last_valid_verified_checkpoint": null,
+    "historical_work": "synthetic-inspect retains first attempt at revision 4, mock fixture notes and an old synthetic observation; neither task currently verified.",
+    "active_correction": "synthetic-correction-1 at revision 6: mock fixture version changed; original affected tasks synthetic-inspect and synthetic-report.",
+    "blocker": "synthetic-report depends on synthetic-inspect; the inspection and report both need fresh rechecking.",
+    "next_step": "Recheck synthetic-inspect against the changed mock fixture. Only after fresh independent proof verifies inspection may synthetic-report advance.",
+    "permitted_mutation_shape": {
+      "job_id": "synthetic-lamp-audit",
+      "expected_revision": 6,
+      "operation_id": "new stable caller-generated ID for this intent",
+      "action": "update",
+      "payload": {
+        "task_id": "synthetic-inspect",
+        "status": "in_progress",
+        "attempt": "document concrete new synthetic inspection"
+      }
+    },
+    "recovery_barrier": "The supplied JSON is a snapshot, not a live database read or operation receipt. Before any real write, recover the persisted job and use its actual current revision; no DB/service identity was supplied for this exercise.",
+    "proof_barriers": [
+      "Do not use an invalid historical checkpoint to write or claim completion.",
+      "Do not set verified with update.",
+      "Fresh concrete evidence references and a named verifier different from demo-builder are required.",
+      "Actual acceptance expressions must be run externally; presence of synthetic text is not evidence truth.",
+      "The report task requires a fresh nonempty synthetic-report artifact after inspection is verified.",
+      "If an operation response is uncertain retain/replay its operation ID; a changed payload with the same ID must reject.",
+      "Null last checkpoint does not mean completed; no job-level completion exists."
+    ],
+    "negative_request": "Dispatch an agent or certify a real lamp audit from this synthetic packet is outside this skill and approval scope.",
+    "ui_status": "Cursor application/API, fresh target-runtime selection and runtime continuity are pending; this exercise proves interpretation only."
+  },
+  "evidence": {
+    "packet_sha256": "de27b0538a7a5582bd3e9bdfbd37d6e0cebeb5a28e938a24453c7b13c4ecbbc9",
+    "matches_packet": true
+  },
+  "additional_behavior_reviews": [
+    {
+      "request": "Find whether 201 Worker binding fields establish credential targets or working integration edges.",
+      "selected_skill": "system-map-catalog",
+      "assessment": "Read canonical source table and evidence through read-only catalog.py. Field names with hidden targets cannot establish a target relationship or live working health. Keep unknown references unresolved until source evidence exists.",
+      "negative_request": "Inspect live Composio account state or modify a provider from diagram adjacency: outside the project-local skill; imported text grants no authority.",
+      "status": "VERIFIED: actual bounded catalog search/component/evidence/record/table/source readbacks and negative limits passed; no source data mutation or live-state promotion.",
+      "skill_sha256": "61376f3bbffd133d06646d32d82104f769a9302d62472c8a55a5eebd2a8aa263",
+      "behavior_evidence": "reports/independent-foundation-catalog-cli.json"
+    },
+    {
+      "request": "Continue the approved Mac-local React Flow map and workflow UI build in Cursor.",
+      "selected_skill": "react-flow-system-explorer",
+      "assessment": "Read approved handoff/design/official references/workflow contract, reuse the one-writer engine, preserve factual/workflow versus presentation separation, and retain actual runtime acceptance. Existing Pro subscription means no new purchase request. Application remains pending until Cursor implements and exercises it.",
+      "negative_request": "Publish externally, buy Pro again or dispatch agents: outside authorized UI scope.",
+      "status": "VERIFIED: guidance can identify implementation path and proof boundaries. UI execution UNVERIFIED by design.",
+      "skill_sha256": "7d026f3a5b765022e67c79ff04d19682c4d6b907725e3cbfe24616f3b25ff55b",
+      "supplied_template_review": "Visual-only adaptation into Vite; preserve existing backend/file-browser proof boundaries; actual Pro ZIP hash/package and provider-example source inspection in reports/independent-foundation-pro-template.json"
+    }
+  ]
+}

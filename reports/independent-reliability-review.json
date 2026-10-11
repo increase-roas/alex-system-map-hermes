@@ -1,0 +1,72 @@
+{
+  "review_id": "independent-reliability-review-20261010-0104",
+  "reviewed_at": "2026-10-10T05:05:40.582750+00:00",
+  "reviewer": "codex-supervisor",
+  "method": "read-only source and saved-receipt inspection; no tests rerun or shared DB writes",
+  "reviewed_owner_receipt_at": "2026-10-10T05:02:05+00:00",
+  "disposition": "owner_reported_pass_independent_acceptance_withheld",
+  "items": [
+    {
+      "id": "REL-01",
+      "status": "not_accepted",
+      "finding": "Explicit subprocess reads named docs and tests skill existence; no automatic entrypoint or actual fresh agent skill selection/use.",
+      "required_proof": "Exercise intended context-loading path in a fresh isolated runtime, record revision, loaded skills and recovered next action. If actual agent runtime proof unavailable, mark UNVERIFIED rather than passed."
+    },
+    {
+      "id": "REL-02",
+      "status": "not_accepted",
+      "finding": "Catalog completeness is substituted for per-requirement actual use; passing checks only document/skill existence.",
+      "required_proof": "Require dated requirement-specific evidence; reject missing/mismatched proof through application completion path. Render evidence plus owner, last verified time and nonempty unresolved step when open."
+    },
+    {
+      "id": "REL-03",
+      "status": "partial",
+      "finding": "SQLite reconnect retrieves a correction, but no recovered decision applies it over older note or invalidates affected outputs; history_retained is hardcoded.",
+      "required_proof": "Restart actual recovery path with conflicting old note; assert corrected next action, retained history and affected results need rechecking."
+    },
+    {
+      "id": "REL-04",
+      "status": "partial",
+      "finding": "Replay and stale-revision behavior exercised, but no actual owner transition/stale owner rejection or explicit exactly-one event/effect count.",
+      "required_proof": "Checkpoint a real owner handoff; reject former owner/stale revision; repeat operation and assert one effect/event and recoverability."
+    },
+    {
+      "id": "REL-05",
+      "status": "not_accepted",
+      "finding": "False-completion helper rejects absent proof, but skipped-skill and stale-data cases are standalone existence/hash comparisons; helper not application gate.",
+      "required_proof": "Run all four negative cases through actual app acceptance/completion path; each fails for correct reason and exposes next unresolved step."
+    },
+    {
+      "id": "REL-06",
+      "status": "partial",
+      "finding": "One screen_text redactor plus JSON serialization only; diagnostic/error/trace/export surfaces not each exercised.",
+      "required_proof": "Fake canaries only through supported diagnostic, error, trace and export paths. Inspect emitted outputs without retrieving actual secrets."
+    }
+  ],
+  "synthetic_sync_trace": {
+    "status": "partial",
+    "finding": "Current source calls observe_all and marker is allowlisted. Test checks row existence, not expected changed hash/refreshed API/UI; DB reconnect and trace dedup useful but not full observer restart/cursor evidence.",
+    "required_proof": "Isolated synthetic local change -> actual refresh -> trace/receipt -> restart with cursor/state persistence and no duplicate effects. Assert new fingerprint equals expected bytes. Does not replace real-source tracing."
+  },
+  "ui": {
+    "status": "implemented_partial_runtime_unverified",
+    "finding": "Owner/time/path/used strings and conditional next field exist; req.evidence is not rendered. Browser proof absent."
+  },
+  "additional_defects": [
+    "browser_proof_status accepts report.json existence without validating its results",
+    "verification runner deletes reliability databases also consumed by status API; isolate tests from durable app state and preserve correction/history across reruns"
+  ],
+  "browser": {
+    "status": "dependency_blocked_not_authority_proven",
+    "known_gap": "Incomplete project-local Chromium framework; browser report missing.",
+    "constraint": "No additional installation/out-of-project changes. Assess already-installed supported route; no evidence yet that every allowed route is unavailable. Update stale README install advice."
+  },
+  "source_sha256": {
+    "tools/reliability_verification.py": "96a006c0fd9274b4f092cb995e014c9be96e90e1030aa2b5a44d222e07e556c7",
+    "tools/reliability_store.py": "f9d809bb8fe11c18a4be468cc082aa1004ab6c11467277eb97ca618b04d59491",
+    "tools/catalog_sync.py": "0ccef1e4300890654fe7e00fd9b36b6dad59f41717943ff8925717dea0cddc75",
+    "app/src/app/explorer/reliability-panel.tsx": "6db86728f90c25d170762026ec312fc76a07fdb5ad3d3159e7c2ab8a90cdd198"
+  },
+  "delivery": "queue one corrections follow-up after verified prior process exit; do not resend revision2 as a new assignment",
+  "original_acceptance_preserved": true
+}

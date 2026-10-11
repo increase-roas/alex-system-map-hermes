@@ -1,0 +1,78 @@
+{
+  "at": "2026-10-10T07:07:44+00:00",
+  "cases": {
+    "json_handler_negatives": {
+      "issuance_wrong_json_type": {
+        "error_contains": true,
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "matching_json_positive": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1
+      },
+      "verify_with_missing_record": {
+        "error": "proof_path_missing",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      }
+    },
+    "prewrite_containment": {
+      "parent_symlink_escape": {
+        "reason": "artifact_outside_artifact_root",
+        "unexpected_files": []
+      },
+      "safe_production_exit": 0,
+      "unsafe_job_id": {
+        "probe_created": false,
+        "reason": "job_id_unsafe"
+      }
+    },
+    "production_identity_relabel": {
+      "forged_production_id_rejected": {
+        "error": "client_production_metadata_forbidden",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "relabel_sealed_descriptor_rejected": {
+        "error": "client_production_metadata_forbidden",
+        "event_count": 0,
+        "exit": 1,
+        "operation_count": 0
+      },
+      "revisioned_production_and_verify": {
+        "error": "",
+        "event_count": 1,
+        "exit": 0,
+        "operation_count": 1,
+        "output_history_len": 2,
+        "production_history_len": 2
+      }
+    }
+  },
+  "delivery_id": "production-identity-prewrite-20261010-0706",
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": false,
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/production-identity-prewrite-20261010-0706-20e5f456-01c2-48ef-8cbf-ccc9f48e25a7.json"
+  },
+  "run_id": "20e5f456-01c2-48ef-8cbf-ccc9f48e25a7",
+  "source_identity": {
+    "tools/bounded_acceptance.py": "c08199dfc64c1c9d9b3840ff31cd4b3f8703e876b9b7019261adaffa0c0dcbd4",
+    "tools/local_service.py": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+    "tools/production_identity_prewrite_acceptance.py": "4c1e3eb09a25f8cd6f860d55ddc52bbca7f0457dcbd4164c7c7f4d3ab84c5586",
+    "tools/receipt_immutable.py": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+    "tools/reliability_gate.py": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/workflow_engine.py": "e769edabb6cc40beab5b3d58a1a52fb00362527d3df8eb5295002cdf6789a3e2"
+  }
+}

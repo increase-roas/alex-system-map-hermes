@@ -1,0 +1,777 @@
+{
+  "id": "table_6ef3ff439f56e9df9470",
+  "sheet": "SDK PLAN & GAPS",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SDK gaps reconciled to the October 9 checkpoint"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All 28 rows retained. Earlier missing-feature headlines must not override the dated integration updates."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Row"
+        },
+        {
+          "column": "B",
+          "value": "Item"
+        },
+        {
+          "column": "C",
+          "value": "Status to carry forward"
+        },
+        {
+          "column": "D",
+          "value": "Evidence date"
+        },
+        {
+          "column": "E",
+          "value": "Source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1"
+        },
+        {
+          "column": "B",
+          "value": "Reproducible source release"
+        },
+        {
+          "column": "C",
+          "value": "Closed locally; current verified artifact is 1.5.1. Publication/merge is separate"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2"
+        },
+        {
+          "column": "B",
+          "value": "Complete package and deployment guide"
+        },
+        {
+          "column": "C",
+          "value": "Closed locally; host-specific setup and portability still require per-target work"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3"
+        },
+        {
+          "column": "B",
+          "value": "Fleet baseline and restore"
+        },
+        {
+          "column": "C",
+          "value": "Historical proof question; establish current per-agent runtime and a real restore"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4"
+        },
+        {
+          "column": "B",
+          "value": "Remote file editing"
+        },
+        {
+          "column": "C",
+          "value": "Live Javar canary only; broader profile edits and Javante remain unproven"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "5"
+        },
+        {
+          "column": "B",
+          "value": "Agent activation and rollback"
+        },
+        {
+          "column": "C",
+          "value": "Historical integration concern; file-byte proof does not close it"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "6"
+        },
+        {
+          "column": "B",
+          "value": "Independent provider-write readback"
+        },
+        {
+          "column": "C",
+          "value": "Historical broad concern; some scoped implementations now have readback. Recheck each required provider operation"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "7"
+        },
+        {
+          "column": "B",
+          "value": "Per-agent accounts/profiles"
+        },
+        {
+          "column": "C",
+          "value": "Implemented and locally tested; live allowed/denied behavior on both agents outstanding"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "8"
+        },
+        {
+          "column": "B",
+          "value": "Hosted shared-skill bridge"
+        },
+        {
+          "column": "C",
+          "value": "Direct Connect proven on the Mac, including 1.5.1 preflight; fleet credential/configuration deployment outstanding"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "9"
+        },
+        {
+          "column": "B",
+          "value": "Shared catalog authoring"
+        },
+        {
+          "column": "C",
+          "value": "Historical concern; a registered authoring skill exists in research records. Verify current SDK wiring and saved-content readback"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "10"
+        },
+        {
+          "column": "B",
+          "value": "Skill installation and triggers"
+        },
+        {
+          "column": "C",
+          "value": "Historical target-proof concern; inspect selected skills and actual runtime selection"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11"
+        },
+        {
+          "column": "B",
+          "value": "Hermes task submission/results"
+        },
+        {
+          "column": "C",
+          "value": "Historical target-adapter concern; prove actual endpoint, acknowledgement, exact result correlation"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "12"
+        },
+        {
+          "column": "B",
+          "value": "Typed fleet-task lifecycle"
+        },
+        {
+          "column": "C",
+          "value": "Historical composition concern; reuse existing workflows/contracts and check complete fleet coverage"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "13"
+        },
+        {
+          "column": "B",
+          "value": "Independent substantive verification"
+        },
+        {
+          "column": "C",
+          "value": "Historical end-to-end concern; local validators and reviewer claims are not the entire acceptance path"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "14"
+        },
+        {
+          "column": "B",
+          "value": "Parallel ownership/stale attempts"
+        },
+        {
+          "column": "C",
+          "value": "Historical fleet concern; same-ledger SDK locks exist, but cross-agent conflicts need their own proof"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "15"
+        },
+        {
+          "column": "B",
+          "value": "Recovery without original chat"
+        },
+        {
+          "column": "C",
+          "value": "Historical fleet proof concern; local durable replay already exists"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "16"
+        },
+        {
+          "column": "B",
+          "value": "Uncertain-operation reconciliation"
+        },
+        {
+          "column": "C",
+          "value": "Historical target/provider concern; inspect existing reconciliation before adding another implementation"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "17"
+        },
+        {
+          "column": "B",
+          "value": "Result consumption/acknowledgement"
+        },
+        {
+          "column": "C",
+          "value": "Historical fleet proof concern; verify coordinator receipt separately from worker completion"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "18"
+        },
+        {
+          "column": "B",
+          "value": "Memory at task start"
+        },
+        {
+          "column": "C",
+          "value": "One 1.5.0 Mac recall proven; worker delivery, relevance, and target-runtime behavior unproven"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "19"
+        },
+        {
+          "column": "B",
+          "value": "Automatic capture/missed-event replay"
+        },
+        {
+          "column": "C",
+          "value": "Historical concern; memory CRUD/recall alone does not demonstrate event-driven capture"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "20"
+        },
+        {
+          "column": "B",
+          "value": "Corrections/stale-work revalidation"
+        },
+        {
+          "column": "C",
+          "value": "Historical concern; test corrected retrieval and dependent-output handling"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "21"
+        },
+        {
+          "column": "B",
+          "value": "Shared memory across both agents"
+        },
+        {
+          "column": "C",
+          "value": "Historical proof question; scope boundaries and second-agent fresh-session retrieval outstanding"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "22"
+        },
+        {
+          "column": "B",
+          "value": "Observatory fleet evidence"
+        },
+        {
+          "column": "C",
+          "value": "Historical integration concern; existing inspection/import paths are not complete live fleet projection"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "23"
+        },
+        {
+          "column": "B",
+          "value": "Recoverable source monitoring"
+        },
+        {
+          "column": "C",
+          "value": "Historical concern; existing knowledge-maintenance primitives should be reused and checked"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "24"
+        },
+        {
+          "column": "B",
+          "value": "Cloud artifact writes"
+        },
+        {
+          "column": "C",
+          "value": "Implemented/local tests; last inspected live blockers were an isolated destination and a registered write/readback skill"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "25"
+        },
+        {
+          "column": "B",
+          "value": "TypeSafe provider binding"
+        },
+        {
+          "column": "C",
+          "value": "Implemented/local tests; last inspected account/skill/model/spend requirements unresolved"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "26"
+        },
+        {
+          "column": "B",
+          "value": "Decision provenance/outcomes"
+        },
+        {
+          "column": "C",
+          "value": "Historical concern; newer TypeSafe receipts cover some provenance, while observed-outcome coverage needs recheck"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "27"
+        },
+        {
+          "column": "B",
+          "value": "TypeSafe quality/fleet use"
+        },
+        {
+          "column": "C",
+          "value": "Historical proof question; schema-valid output is not decision-quality evidence"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "28"
+        },
+        {
+          "column": "B",
+          "value": "Measured speed/usage"
+        },
+        {
+          "column": "C",
+          "value": "No matched full-workflow improvement measurement located in these release records"
+        },
+        {
+          "column": "D",
+          "value": "October 9 checkpoint"
+        },
+        {
+          "column": "E",
+          "value": "Read evidence",
+          "link": "'DOCS - SDK'!A5"
+        }
+      ]
+    }
+  ]
+}

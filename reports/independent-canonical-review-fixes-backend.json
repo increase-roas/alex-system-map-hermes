@@ -1,0 +1,292 @@
+{
+  "at": "2026-10-10T11:16:56.345494+00:00",
+  "scope": "Fresh bounded backend re-review CE02/04/05/06/08/09/10/11/13 and prior backend unverified gaps only. Read-only source/artifacts/SQLite and pure functions; no app/test rerun, source/DB mutation, network, installs, helpers, browser control or credential reads.",
+  "overall": "FAILED",
+  "blocker_type": "goal_not_met_yet",
+  "full_completion": false,
+  "receipt": {
+    "path": "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json",
+    "at": "2026-10-10T11:11:30+00:00",
+    "run_id": "ae094cc8-5a7f-425e-9f4b-5deb31afeec8",
+    "sha256": "6a14ca90496ac42588e2cd7593dce18b953fecdbcc3d72dfe82c7e115aef0cfb",
+    "expected_sha256": "6a14ca90496ac42588e2cd7593dce18b953fecdbcc3d72dfe82c7e115aef0cfb",
+    "owner_overall": "passed",
+    "owner_pass_is_self_report": true
+  },
+  "source_identity": {
+    "app/.next/BUILD_ID": "dd4bbb100d258a44dbfcff3a25377a3f6aa038746f1b4e9742d0420002d8fab3",
+    "app/src/app/api/catalog/edit/route.ts": "8577c4558f1effc42a57ca7fb691c67ec44beb9062a243a832624e82444d4042",
+    "app/src/app/api/catalog/edit/state/route.ts": "03fb4fca81d4696988217841b023fc66373c3db3232509b7fc47fd3ddd2034ca",
+    "app/src/app/api/health/route.ts": "b653f12219dc32571bf6a1e0476f6fe1e97ff1dedc6d9203a0b9b67aa9d00ddb",
+    "app/src/app/api/sync/status/route.ts": "8ce7e7422ecd93515f4d96ff6cdf6daca19f58aedd17a11bff91ae0c60446e3c",
+    "app/src/app/explorer/maintained-edit-panel.tsx": "5b26d06467582a1aca9e2bb0717a40ed7a4f0d842a3958ea9d35d05a3206c497",
+    "app/src/lib/server/python.ts": "477ac57adfaec274ef5fd89fba6838e0cc6f460ea6b68906ee007485d8b5075f",
+    "tools/browser_canonical_edit_sync.mjs": "a6900295086601ebfd54776776e7fd925504744dde658bf77cec0fbee2cfdcac",
+    "tools/browser_canonical_review_fixes.mjs": "1f31aa0fb80396f886794bee124a494b8649078c4dadaff3ac3bd86ad0ec3ab8",
+    "tools/build_catalog.py": "4b65359742dd7f26e52fceb11d062c2718a9887df8f790bfe07689de15403703",
+    "tools/canonical_acceptance_summarize.py": "48d50e9eabc815e5d0443f61cda887f6e50fc42fe6347e2186cfca2076b14a4e",
+    "tools/canonical_derived_render.py": "cfc80bb1f764f22aa46ada561a5cbcb0a412c2450ab0db0e54e81db175d2ac78",
+    "tools/canonical_edit_sync_acceptance.py": "2132d4c0bada4c9b22c8d24fa10af80d6b3930e257b7773df185d2bde5a6cf93",
+    "tools/canonical_maintained_edit.py": "fed9447f7eb245a8fdb0d1642ce7aa309b6eeb72669db69737e01e17a415fcdd",
+    "tools/canonical_review_fixes_acceptance.py": "7dec238880d9ee247884f4199361604fa3a2d0a23ff7c44c58d2067081fd44e9",
+    "tools/catalog_fixture_clone.py": "01f4464904cd959ece8d385e916d8775599eb5d9fa687cb9dd28b3de02905a38",
+    "tools/catalog_reference_validation.py": "716dc9d2007e44bae84022a25f4ca9fe66e614e12b0002cfb171a9afebc42bd7",
+    "tools/catalog_sync.py": "8fd8bdc7c90b7630ef2b66b2674e6f7acdbba395cc810813352b4d4be5cef73f",
+    "tools/local_service.py": "8a198bf7874d53cb56a5243b9bc02bd02be310d799bb3aaaf8837b73f86fc5bd",
+    "tools/subprocess_bounded.py": "923f02524c2789c0953fb7d8e93731a608c38860ab9e415e2e5d7698a979ac7c"
+  },
+  "source_start_matches": true,
+  "source_end_matches": {
+    "app/.next/BUILD_ID": true,
+    "app/src/app/api/catalog/edit/route.ts": true,
+    "app/src/app/api/catalog/edit/state/route.ts": true,
+    "app/src/app/api/health/route.ts": true,
+    "app/src/app/api/sync/status/route.ts": true,
+    "app/src/app/explorer/maintained-edit-panel.tsx": true,
+    "app/src/lib/server/python.ts": true,
+    "tools/browser_canonical_edit_sync.mjs": true,
+    "tools/browser_canonical_review_fixes.mjs": true,
+    "tools/build_catalog.py": true,
+    "tools/canonical_acceptance_summarize.py": true,
+    "tools/canonical_derived_render.py": true,
+    "tools/canonical_edit_sync_acceptance.py": true,
+    "tools/canonical_maintained_edit.py": true,
+    "tools/canonical_review_fixes_acceptance.py": true,
+    "tools/catalog_fixture_clone.py": true,
+    "tools/catalog_reference_validation.py": true,
+    "tools/catalog_sync.py": true,
+    "tools/local_service.py": true,
+    "tools/subprocess_bounded.py": true
+  },
+  "snapshot_stable": true,
+  "authority": "work/supervision/canonical-review-fixes-20261010-1044.txt",
+  "prior_review": {
+    "path": "reports/independent-canonical-edit-backend-review.json",
+    "sha256": "e6cb2631b48e2129f254811382a3de12c46b34ab1f43b11244f2389c710e4b97"
+  },
+  "checks": [
+    {
+      "id": "CE02",
+      "status": "FAILED",
+      "accepted": "Layer membership, kind, actual string evidence/source-reference lookup, immutable record ID and metadata provenance fields are now guarded. Prior unknown-layer/unresolved-evidence/integer-ref/missing-kind pure counterexamples reject.",
+      "remaining": "Required field/type schema still permits missing evidence_ids, source_record_ids=None, integer alias entries and object observed_condition; generator reads required fields directly. Pure actual-function checks accepted all four. Saved zero-write negative checks only bad layer.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:135-174,177-191",
+        "tools/catalog_reference_validation.py:11-36",
+        "tools/canonical_review_fixes_acceptance.py:66-90",
+        "pure command49bb1f"
+      ],
+      "next": "Validate complete canonical required fields/types and actual enum/reference contract before write; retain handler zero-effect negative evidence for each relevant case."
+    },
+    {
+      "id": "CE04",
+      "status": "FAILED",
+      "accepted": "File-scoped components lock repairs the prior different-record lock mismatch; per-root operation ledger/digest repairs clone scope. Source puts reconciliation/read/replay/CAS inside lock; saved cross-record case has one exit0, one exit1 and winner value.",
+      "remaining": "Same-operation simultaneous replay with exact ledger/state effects is not tested. Components and metadata use different locks while both update the same revisions file/fixed .tmp and derived workbook/index; cross-table shared transaction state is not serialized. next_revision remains optional for a new mutation.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:47,73-105,231-270,417-456,497-505",
+        "tools/canonical_review_fixes_acceptance.py:93-156",
+        "pure file-lock check49bb1f"
+      ],
+      "next": "Lock shared revision/derived transaction scope coherently, require request revision identity and prove same-op concurrent retry plus exact loser/ledger effects. Preserve repaired components distinct/cross-record behavior."
+    },
+    {
+      "id": "CE04-replay-newer",
+      "status": "VERIFIED",
+      "accepted": "Explicit immutable request revision digest and per-root ledger replay before current read preserve historical result identity without writing newer canonical bytes. Saved exact helper submits original args after a second newer edit and checks returned hash/disk purpose.",
+      "remaining": "Receipt retains only result Booleans for this case, not run-specific old/new/final canonical/ledger snapshots; runtime readback cannot be independently re-opened. This is source/helper acceptance, not full concurrent-runtime proof.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:231-247,400-440",
+        "tools/canonical_review_fixes_acceptance.py:159-214",
+        "receipt.cases.replay_after_newer"
+      ]
+    },
+    {
+      "id": "CE05",
+      "status": "FAILED",
+      "accepted": "Settled rolled_back/discarded entries are terminal; apply reconciles under lock before replay. Explicit post-rename failure test now invokes two reconciliations; source avoids repeated old rollback for settled entries.",
+      "remaining": "Rollback drops the target revision key instead of restoring the prior committed revision (317-320), so failure after a nonzero revision can reset it to0. Journal contains no before-revision snapshot. Operation receipt is appended before final committed journal (523-538); crash in that window makes recovery roll back while leaving a committed replay entry. Pending recovery can restore bytes without derivative/revision reconciliation. Only post_rename_pre_derived at initial revision0 is tested; pending, post-derived/revision/append, recovery interruption and later-commit protection are not all proven.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:280-342,462-508,523-538",
+        "tools/canonical_review_fixes_acceptance.py:217-246"
+      ],
+      "next": "Journal prior revision/ledger state and make final commit recovery reconcile operations plus canonical/revision/derived consistently. Prove all actual requested interruption windows from a nonzero revision and repeat recovery after newer commits."
+    },
+    {
+      "id": "CE06",
+      "status": "UNVERIFIED",
+      "accepted": "Restore uses the transaction lock, atomic replacement, regeneration and writes a sidecar hash.",
+      "remaining": "No actual restore case is present; restore retains the old revision number, lacks a recoverable restore journal and does not reconcile historical ledger scope. Final-byte/revision/ledger and restore-fault behavior remain unproved.",
+      "evidence": [
+        "tools/canonical_maintained_edit.py:542-565",
+        "receipt.cases"
+      ],
+      "next": "Record actual restore and restart/fault readback with a documented coherent revision/history rule; verify under the same repaired shared transaction."
+    },
+    {
+      "id": "CE08",
+      "status": "FAILED",
+      "accepted": "Run-specific six-file snapshots now include canonical components, revision sidecar, exact target MD, index/map/XLSX. All six retained byte hashes match; canonical target purpose equals MD and XLSX; revision1 matches apply_revision1. Former final-newline hash and missing target-MD evidence defects are repaired.",
+      "remaining": "Only one MD is preserved in the run snapshot, not full2351-page derived coverage. Snapshot precedes metadata/browser edit and records CLI purpose, not the final UI purpose; no saved final UI/restart canonical/MD/map/XLSX lineage. Map overview is copied unchanged; revision/value agreement across all final consumers remains absent. Copier overwrites existing paths and does not enforce immutable snapshot reuse.",
+      "evidence": [
+        "tools/canonical_derived_render.py:58-78",
+        "tools/canonical_review_fixes_acceptance.py:249-258,383-388",
+        "reports/derived-proof/canonical-review-fixes-20261010-1044/run-ae094cc85a7f",
+        "read-only semantic/hash check49bb1f"
+      ],
+      "next": "Preserve complete immutable per-run final served-state canonical/sidecar/MD/map/XLSX bytes after UI/save/restart/replay and compare actual IDs/values/revision lineage."
+    },
+    {
+      "id": "CE09-clone",
+      "status": "VERIFIED",
+      "accepted": "Complete2351 Markdown pages are now copied into the isolated catalog; retained clone count independently matches production. Existing data tree copy uses production schemas and handlers; tracked13original hashes still match.",
+      "remaining": "Clone manifest records13tracked hashes/count plus MD count, not all page hashes; complete per-run final proof is CE08.",
+      "evidence": [
+        "tools/catalog_fixture_clone.py:50-100",
+        "receipt.cases.clone_manifest",
+        "read-only clone/hash count49bb1f/da1222"
+      ]
+    },
+    {
+      "id": "CE09-originals",
+      "status": "UNVERIFIED",
+      "accepted": "All13tracked production catalog/view hashes are unchanged at review; original archive/workbook write paths remain outside editor allowlist.",
+      "remaining": "Milestone original identity map still omits authoritative input workbook/archive bytes and component-page identities. No original\u2192copy manifest fully binds requested originals/full tree.",
+      "evidence": [
+        "receipt.production_immutable_hashes",
+        "tools/catalog_fixture_clone.py:31-47,79-95",
+        "read-only original hash checkda1222"
+      ],
+      "next": "Retain original/copy hash identity for authoritative immutable inputs and full relevant tree; do not infer their delivery-specific unchanged bytes from13catalog/view hashes."
+    },
+    {
+      "id": "CE10",
+      "status": "FAILED",
+      "accepted": "CLI actual launcher now uses run_bounded/start_new_session; invalid TimeoutExpired.process access is gone. JS served child is detached and request/body/probe waits have bounds.",
+      "remaining": "test_timeout_production_path still launches a separate time.sleep Python child, not an injected actual CLI/browser hang. Current browser launcher uses plain subprocess.run with no group cleanup; served child is detached from that parent. terminate_group returns immediately when leader exited without checking remaining group children (pure mocked counterexample performs0cleanup). JS stopServer only sends TERM/sleeps, lacks wait/escalation; browser build deadline does not terminate build. Concurrency/build paths still have plain waits without finally cleanup. Exception path re-raises before immutable safely screened failure receipt.",
+      "evidence": [
+        "tools/subprocess_bounded.py:11-53",
+        "tools/canonical_edit_sync_acceptance.py:84-100,253-256",
+        "tools/canonical_review_fixes_acceptance.py:145-146,261-276,279-337,394-404",
+        "tools/browser_canonical_review_fixes.mjs:46-83,113-124,204-208",
+        "pure group cleanup checkda1222"
+      ],
+      "next": "Inject actual production-path hang and own all child groups including detached browser/server/build; terminate/reap surviving descendants even after leader exits, escalate safely, preserve screened failure receipt."
+    },
+    {
+      "id": "CE11",
+      "status": "FAILED",
+      "accepted": "Selected bool/int fields now reject wrong types exactly; saved final baseline independently passes. A string false bad_layer_rejected is rejected.",
+      "remaining": "Saved six flip tests run before original_hashes_unchanged and canonical_field_flips exist, so their baseline already fails [unchanged,each_flip_fails]; saved negatives contain these unrelated reasons. Coverage is only six fields/one bad value, not each required false/missing/wrongtype. Final validator ignores first_exit1, disk_keeps_newerFalse, wrong snapshot hashes, API matchFalse, strict flipFalse, clonecount1001 and empty control rows; all seven independently mutated current passing baseline still pass.",
+      "evidence": [
+        "tools/canonical_acceptance_summarize.py:27-81",
+        "tools/canonical_review_fixes_acceptance.py:350-364,392-405",
+        "receipt.cases.canonical_field_flips",
+        "pure passing baseline/mutations49bb1f"
+      ],
+      "next": "Finish a genuine independently passing baseline before controls; enumerate exact unique required typed paths/evidence identities and independently reject false/missing/wrongtype for each. Validate control rows/count/reason and actual output/value/hash/exit effects."
+    },
+    {
+      "id": "CE13",
+      "status": "FAILED",
+      "accepted": "/api/sync/status now calls sync-observe before returning status, closing status-only polling source gap. Shared output-screening bridge stays unchanged at accepted hash.",
+      "remaining": "catalog_sync still enumerates only existing glob files and hashes bytes without JSON validation; deletion/rename/malformed/partial/unreadable/LKG evidence is absent from this receipt. Canonical endpoint-specific canary negative/persistence/export proof is absent. No full observer closure is claimed.",
+      "evidence": [
+        "app/src/app/api/sync/status/route.ts:5-9",
+        "tools/catalog_sync.py:18-30,56-85",
+        "receipt.cases"
+      ],
+      "next": "Retain actual canonical-path negative observer and screened emission evidence with visible LKG/recovery; broader browser/observer ownership remains separate."
+    },
+    {
+      "id": "BRIDGE",
+      "status": "VERIFIED",
+      "accepted": "Bridge hash equals the previously independently tested module; recursive nested screening, benign preservation, clone env forwarding, valid-JSON/nonzero rejection and invalid-stream screening passes remain source-bound. New receipt includes python.ts identity.",
+      "remaining": "No new actual endpoint screening proof beyond existing accepted pure process mock is implied.",
+      "evidence": [
+        "app/src/lib/server/python.ts:7-37,58-66,77-119",
+        "reports/independent-canonical-edit-backend-review.json:bridge_pure_regression,extra_source_identity",
+        "source/hash comparisonda1222"
+      ]
+    },
+    {
+      "id": "BUILD-IDENTITY",
+      "status": "UNVERIFIED",
+      "accepted": "All20declared final source hashes including frontend/server/bridge and BUILD_ID match start/end; owner receipt records explicit separate build/lint/typecheck exit0.",
+      "remaining": "Receipt code runs those commands, but no separate immutable lint/typecheck process-output handles or independently observed execution are saved. Source-to-served-build/runtime binding is browser reviewer scope; no full runtime identity acceptance here.",
+      "evidence": [
+        "tools/canonical_review_fixes_acceptance.py:279-312",
+        "receipt.cases.build_quality",
+        "receipt.source_identity"
+      ],
+      "next": "Keep source/runtime verification with browser reviewer and retain actual command evidence for required final-source quality gates."
+    },
+    {
+      "id": "RECEIPT-HISTORY",
+      "status": "VERIFIED",
+      "accepted": "Exact receipt SHA matches assigned handle; all20source identities stable; saved DB hash matches and mode=ro integrity_check ok; failed attempt handle retained. Full completion correctly remains false.",
+      "remaining": "Identity is not owner PASS acceptance. Prior unrelated/core passes are preserved.",
+      "evidence": [
+        "reports/run-receipts/canonical-review-fixes-20261010-1044-ae094cc8-5a7f-425e-9f4b-5deb31afeec8.json",
+        "work/supervision/canonical-review-fixes-20261010-1044-checkpoint.txt",
+        "reports/independent-canonical-edit-backend-review.json",
+        "commands744bd9/da1222"
+      ]
+    }
+  ],
+  "pure_checks": {
+    "final_saved_baseline_passes": true,
+    "actual_pre_control_baseline_passes": false,
+    "pre_control_failures": [
+      "unchanged",
+      "each_flip_fails"
+    ],
+    "selected_str_false_bool_rejected": true,
+    "ignored_independent_mutations": [
+      "idempotent.first_exit=1",
+      "replay_after_newer.disk_keeps_newer=False",
+      "canonical_derived.run_snapshot_hashes=wrong map",
+      "browser.api_readback_matches_ui=False",
+      "strict_types_regression.each_declared_flip_fails=False",
+      "clone_manifest.components_cloned_count=1001",
+      "canonical_field_flips.per_flip=[]"
+    ],
+    "prior_schema_negatives_reject": [
+      "unknown_layer",
+      "unresolved_evidence",
+      "integer_source_ref",
+      "missing_kind"
+    ],
+    "remaining_schema_negatives_accept": [
+      "missing_evidence_ids",
+      "source_record_ids=None",
+      "aliases=[42]",
+      "observed_condition=object"
+    ],
+    "shared_components_lock_equal_for_different_records": true,
+    "rolled_back_terminal": true,
+    "exited_group_leader_cleanup_actions": []
+  },
+  "saved_readback": {
+    "six_run_snapshot_hashes_match": true,
+    "canonical_count": 2351,
+    "md_and_xlsx_exact_component_purpose_agree": true,
+    "revision1_matches_apply_revision1": true,
+    "run_snapshot_md_count": 1,
+    "current_clone_md_count": 2351,
+    "tracked_original13_hashes_match": true,
+    "DB_hash_matches": true,
+    "sqlite_mode": "mode=ro",
+    "integrity_check": "ok"
+  },
+  "preserved_bridge_proof": {
+    "hash_unchanged": true,
+    "prior_pure_regression_preserved": true
+  },
+  "historical_failure": {
+    "path": "reports/workflow-core-failures/canonical-review-fixes-20261010-1044-ea4a6866.json",
+    "exists": true,
+    "sha256": "2bbebacc8d7bd785a3190f0e4b421550a7740f01c34ebcff8d328e3b443a3717"
+  },
+  "next_action": "Same owner repair actual remaining complete schema/transaction/journal prior-revision+ledger boundaries; final complete immutable served-output proof; real production process lifecycle; independently passing full typed controls. Retain accepted narrow fixes and original broader observer/browser/REL01/trace queue; no fullcompletion claim."
+}

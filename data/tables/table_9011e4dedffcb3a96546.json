@@ -1,0 +1,527 @@
+{
+  "id": "table_9011e4dedffcb3a96546",
+  "sheet": "S04-16 Host Observations",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Resource name"
+        },
+        {
+          "column": "B",
+          "value": "Type"
+        },
+        {
+          "column": "C",
+          "value": "Account / container"
+        },
+        {
+          "column": "D",
+          "value": "Purpose / capability"
+        },
+        {
+          "column": "E",
+          "value": "Evidence state"
+        },
+        {
+          "column": "F",
+          "value": "Access route"
+        },
+        {
+          "column": "G",
+          "value": "Proven scope"
+        },
+        {
+          "column": "H",
+          "value": "Provider status"
+        },
+        {
+          "column": "I",
+          "value": "Notes"
+        },
+        {
+          "column": "J",
+          "value": "URL"
+        },
+        {
+          "column": "K",
+          "value": "Provider"
+        },
+        {
+          "column": "L",
+          "value": "Evidence date"
+        },
+        {
+          "column": "M",
+          "value": "Resource ID / reference"
+        },
+        {
+          "column": "N",
+          "value": "Evidence pointer"
+        },
+        {
+          "column": "O",
+          "value": "Asset key"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA — Oct5 observed host details"
+        },
+        {
+          "column": "B",
+          "value": "Dated host details"
+        },
+        {
+          "column": "C",
+          "value": "d9b475e2-47b2-46d4-b8eb-102564f93283"
+        },
+        {
+          "column": "D",
+          "value": "Factual host inventory observation"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Original safe host probe"
+        },
+        {
+          "column": "G",
+          "value": "Oct5 observation only; not re-read by the bounded current probe"
+        },
+        {
+          "column": "I",
+          "value": "Hermes homes/profiles: Javar main + root homes\nmanny-business\n2 canary profiles⁴; installed services/software: Javar gateway; desktop backend; GHL route; Javante proxy; tunnel; filesystem: 49.10 GiB total\n15.95 GiB free; backup observations: 25 local backup / rollback folders observed\nRestore: UNKNOWN; installed version does not establish serving version or runtime health"
+        },
+        {
+          "column": "K",
+          "value": "Host observation"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "d9b475e2-47b2-46d4-b8eb-102564f93283-2026-10-05"
+        },
+        {
+          "column": "N",
+          "value": "work/original-target-backup.xlsx | COMPUTER INVENTORY EA"
+        },
+        {
+          "column": "O",
+          "value": "Host observation|Dated host details|d9b475e2-47b2-46d4-b8eb-102564f93283-2026-10-05"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Alex’s MacBook Pro — Oct5 observed host details"
+        },
+        {
+          "column": "B",
+          "value": "Dated host details"
+        },
+        {
+          "column": "C",
+          "value": "local-mac"
+        },
+        {
+          "column": "D",
+          "value": "Factual host inventory observation"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Original safe host probe"
+        },
+        {
+          "column": "G",
+          "value": "Oct5 observation only; not re-read by the bounded current probe"
+        },
+        {
+          "column": "I",
+          "value": "Hermes homes/profiles: /Users/alexlobaito/.hermes; installed services/software: Hermes desktop; Tailscale. Hermes 0.21.3 installed.; filesystem: 460.43 GiB total\n29.51 GiB free; backup observations: Local backup folder observed\nRestore: UNKNOWN; installed version does not establish serving version or runtime health"
+        },
+        {
+          "column": "K",
+          "value": "Host observation"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "local-mac-2026-10-05"
+        },
+        {
+          "column": "N",
+          "value": "work/original-target-backup.xlsx | COMPUTER INVENTORY Alex’s MacBook Pro"
+        },
+        {
+          "column": "O",
+          "value": "Host observation|Dated host details|local-mac-2026-10-05"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / default"
+        },
+        {
+          "column": "B",
+          "value": "Directory observation"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Observed Hermes directory; no profile settings exposed"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/canary/home/.hermes; profile=default; model settings: No allowlisted settings exposed"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/canary/home/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Directory observation|EA|/home/orgo/lil-smoove/canary/home/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / default"
+        },
+        {
+          "column": "B",
+          "value": "Directory observation"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Observed Hermes directory; no profile settings exposed"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/home/.hermes/.hermes; profile=default; model settings: No allowlisted settings exposed"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/home/.hermes/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Directory observation|EA|/home/orgo/lil-smoove/home/.hermes/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA / default"
+        },
+        {
+          "column": "B",
+          "value": "Directory observation"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Observed Hermes directory; no profile settings exposed"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe host config projection"
+        },
+        {
+          "column": "G",
+          "value": "Observed Oct5 home/profile and allowlisted model settings; serving runtime untested"
+        },
+        {
+          "column": "I",
+          "value": "Path: /home/orgo/lil-smoove/home/.hermes/hermes-agent/.hermes; profile=default; model settings: No allowlisted settings exposed"
+        },
+        {
+          "column": "K",
+          "value": "Hermes"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA|/home/orgo/lil-smoove/home/.hermes/hermes-agent/.hermes"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY G5"
+        },
+        {
+          "column": "O",
+          "value": "Hermes|Directory observation|EA|/home/orgo/lil-smoove/home/.hermes/hermes-agent/.hermes"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "EA — configured programs Oct5"
+        },
+        {
+          "column": "B",
+          "value": "Dated configured programs"
+        },
+        {
+          "column": "C",
+          "value": "EA"
+        },
+        {
+          "column": "D",
+          "value": "Configured host service/program names"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe process/program projection"
+        },
+        {
+          "column": "G",
+          "value": "Program and process names observed Oct5 only; no service-health test"
+        },
+        {
+          "column": "I",
+          "value": "Programs: ea-clock-sync, ghl-command-cloud, javante-a2a-proxy, javar-desktop-backend, javar-reply-alert-health, lil-smoove-cloudflared, lil-smoove-hermes-firewall, lil-smoove-messaging-gateway, tailscaled, websockify; observed processes: cloudflared, hermes, node, python, python3, python3.11, supervisord, tailscaled"
+        },
+        {
+          "column": "K",
+          "value": "Host observation"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "EA-programs-2026-10-05"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY H5"
+        },
+        {
+          "column": "O",
+          "value": "Host observation|Dated configured programs|EA-programs-2026-10-05"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "My OpenClaw — configured programs Oct5"
+        },
+        {
+          "column": "B",
+          "value": "Dated configured programs"
+        },
+        {
+          "column": "C",
+          "value": "My OpenClaw"
+        },
+        {
+          "column": "D",
+          "value": "Configured host service/program names"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe process/program projection"
+        },
+        {
+          "column": "G",
+          "value": "Program and process names observed Oct5 only; no service-health test"
+        },
+        {
+          "column": "I",
+          "value": "Programs: connector-health, ir-ghl-command-tunnel, ir-ghl-command-universal, ir-mcp-increase-roas-meta, mcp-hub-atlas-cloud, mcp-hub-ga4-admin, mcp-hub-google-robot, mcp-hub-google-robot-javante, mcp-hub-gtm, mcp-hub-ir-notes, mcp-hub-prime-intellect, mcp-hub-proxy, mcp-hub-spyfu, mcp-hub-tunnel, mcp-hub-xai-research, openclaw-gateway, openclaw-godmod, sshd, tailscaled, websockify; observed processes: cloudflared, node, openclaw, openclaw-gatewa, python, python3, sshd, supervisord, tailscaled"
+        },
+        {
+          "column": "K",
+          "value": "Host observation"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "My OpenClaw-programs-2026-10-05"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY H6"
+        },
+        {
+          "column": "O",
+          "value": "Host observation|Dated configured programs|My OpenClaw-programs-2026-10-05"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "B2B Sales Agent — configured programs Oct5"
+        },
+        {
+          "column": "B",
+          "value": "Dated configured programs"
+        },
+        {
+          "column": "C",
+          "value": "B2B Sales Agent"
+        },
+        {
+          "column": "D",
+          "value": "Configured host service/program names"
+        },
+        {
+          "column": "E",
+          "value": "STALE"
+        },
+        {
+          "column": "F",
+          "value": "Dated safe process/program projection"
+        },
+        {
+          "column": "G",
+          "value": "Program and process names observed Oct5 only; no service-health test"
+        },
+        {
+          "column": "I",
+          "value": "Programs: hermes-gateway, htl-b2b-cloudflared, htl-b2b-hermes-proxy, htl-b2b-node, tailscaled, websockify; observed processes: cloudflared, hermes, node, python, python3, supervisord, tailscaled"
+        },
+        {
+          "column": "K",
+          "value": "Host observation"
+        },
+        {
+          "column": "L",
+          "value": "2026-10-05"
+        },
+        {
+          "column": "M",
+          "value": "B2B Sales Agent-programs-2026-10-05"
+        },
+        {
+          "column": "N",
+          "value": "work/original-comments.json | COMPUTER INVENTORY H9"
+        },
+        {
+          "column": "O",
+          "value": "Host observation|Dated configured programs|B2B Sales Agent-programs-2026-10-05"
+        }
+      ]
+    }
+  ]
+}

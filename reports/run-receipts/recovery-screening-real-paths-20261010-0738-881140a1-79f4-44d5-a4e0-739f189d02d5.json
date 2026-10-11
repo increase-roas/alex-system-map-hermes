@@ -1,0 +1,423 @@
+{
+  "at": "2026-10-10T07:48:54+00:00",
+  "cases": {
+    "browser": {
+      "api_a": {
+        "actionable": "recheck against correction or changed prerequisites",
+        "actionable_not_stale": true,
+        "affected": true,
+        "correction_blocked": false,
+        "governing": true,
+        "stale_history": true
+      },
+      "api_b": {
+        "next": "Independent B step",
+        "no_governing": true,
+        "no_leak": true
+      },
+      "build_id": "6PA4cNz_L1VC8-17zlh1B",
+      "build_id_after": "6PA4cNz_L1VC8-17zlh1B",
+      "build_id_stable": true,
+      "db_isolated": true,
+      "db_path_served": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+      "db_sha256_before": "7069ef1c278a39b309f33eb35e505ffd851ad9856851078090d2593b74028738",
+      "db_sha256_matches_fresh_init": false,
+      "delivery": "recovery-screening-real-paths-20261010-0738",
+      "diagnostic_capture": {
+        "benign_marker_present": true,
+        "canary_redacted_in_health_preview": true,
+        "local_token_redacted": true
+      },
+      "diagnostic_marker": "LOCAL-SCREENING-OK",
+      "exit": 0,
+      "networkLog": [
+        {
+          "bodyLength": 1404,
+          "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"6PA4cNz_L1VC8-17zlh1B\",\"process\":{\"pid\":17518},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "health-before",
+          "parseError": null,
+          "parsedKeys": [
+            "ok",
+            "loopback_only",
+            "local_token_hint",
+            "build_id",
+            "process",
+            "runtime",
+            "completeness",
+            "sync",
+            "token_redacted"
+          ],
+          "screening_notes": [
+            "local-mutation-token withheld"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/health"
+        },
+        {
+          "bodyLength": 151,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791618509332\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791618509332-create\",\"handoff_operation_id\":\"rec-ui-a-1791618509332-handoff\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791618509332-create",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "handoff_operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 95,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791618509332\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791618509332-add-t1\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791618509332-add-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 95,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791618509332\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791618509332-add-t2\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791618509332-add-t2",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 99,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791618509332\",\"revision\":4,\"operation_id\":\"rec-ui-a-1791618509332-produce-t1\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791618509332-produce-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 99,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791618509332\",\"revision\":5,\"operation_id\":\"rec-ui-a-1791618509332-correct-t1\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791618509332-correct-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 151,
+          "bodyPreview": "{\"job_id\":\"rec-ui-b-1791618509332\",\"revision\":1,\"operation_id\":\"rec-ui-b-1791618509332-create\",\"handoff_operation_id\":\"rec-ui-b-1791618509332-handoff\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-b-1791618509332-create",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "handoff_operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 92,
+          "bodyPreview": "{\"job_id\":\"rec-ui-b-1791618509332\",\"revision\":2,\"operation_id\":\"rec-ui-b-1791618509332-add\"}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-b-1791618509332-add",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 2839,
+          "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-a-1791618509332\",\"current_revision\":5,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job A chain\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[{\"active\":true,\"affected_task_ids\":[\"t1\",\"t2\"],\"id\":\"corr-t1\",\"preserved_attempts\":[{\"details\":\"produce-t1\",\"revision\":4}],\"preserved_outputs\":[],\"reason\":\"Revise upstream instruction after output\",\"revision\":5,\"s",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "recover-a-before-restart",
+          "parseError": null,
+          "parsedKeys": [
+            "contract",
+            "synthetic_only",
+            "job_id",
+            "current_revision",
+            "goal",
+            "last_valid_verified_checkpoint",
+            "active_corrections",
+            "pending_dependencies",
+            "next_permitted_action",
+            "tasks",
+            "affected_outputs_needing_recheck",
+            "governing_next_action",
+            "superseded_next_permitted_action",
+            "correction_governed_task",
+            "reliability_recovery",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-a-1791618509332"
+        },
+        {
+          "bodyLength": 1404,
+          "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"6PA4cNz_L1VC8-17zlh1B\",\"process\":{\"pid\":17939},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "health-after",
+          "parseError": null,
+          "parsedKeys": [
+            "ok",
+            "loopback_only",
+            "local_token_hint",
+            "build_id",
+            "process",
+            "runtime",
+            "completeness",
+            "sync",
+            "token_redacted"
+          ],
+          "screening_notes": [
+            "local-mutation-token withheld"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/health"
+        },
+        {
+          "bodyLength": 2839,
+          "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-a-1791618509332\",\"current_revision\":5,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job A chain\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[{\"active\":true,\"affected_task_ids\":[\"t1\",\"t2\"],\"id\":\"corr-t1\",\"preserved_attempts\":[{\"details\":\"produce-t1\",\"revision\":4}],\"preserved_outputs\":[],\"reason\":\"Revise upstream instruction after output\",\"revision\":5,\"s",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "recover-a",
+          "parseError": null,
+          "parsedKeys": [
+            "contract",
+            "synthetic_only",
+            "job_id",
+            "current_revision",
+            "goal",
+            "last_valid_verified_checkpoint",
+            "active_corrections",
+            "pending_dependencies",
+            "next_permitted_action",
+            "tasks",
+            "affected_outputs_needing_recheck",
+            "governing_next_action",
+            "superseded_next_permitted_action",
+            "correction_governed_task",
+            "reliability_recovery",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-a-1791618509332"
+        },
+        {
+          "bodyLength": 1081,
+          "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-b-1791618509332\",\"current_revision\":2,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job B control\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[],\"pending_dependencies\":{\"b1\":[]},\"next_permitted_action\":{\"task_id\":\"b1\",\"action\":\"Independent B step\",\"source\":\"workflow_engine\",\"actionable\":true},\"tasks\":{\"b1\":{\"acceptance\":[\"check\"],\"attempts\":[],\"blocker",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "recover-b",
+          "parseError": null,
+          "parsedKeys": [
+            "contract",
+            "synthetic_only",
+            "job_id",
+            "current_revision",
+            "goal",
+            "last_valid_verified_checkpoint",
+            "active_corrections",
+            "pending_dependencies",
+            "next_permitted_action",
+            "tasks",
+            "affected_outputs_needing_recheck",
+            "reliability_recovery",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-b-1791618509332"
+        }
+      ],
+      "overall": "passed",
+      "pid_after": 17917,
+      "pid_before": 17518,
+      "process_restarted": true,
+      "recover_a_before": {
+        "governing": true,
+        "stale": "UI stale baseline instruction 0738-A"
+      },
+      "runner_sha256": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec",
+      "screening_notes": [],
+      "screenshot": {
+        "bytes": 112304,
+        "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/recovery-real-paths.png",
+        "sha256": "abf208cd21ba236f6578102dcc82ac622d8a89c854f26f3ba0121bd12b2eb6bc"
+      },
+      "ui_actionable": "recheck against correction or changed prerequisites on t1 (workflow_correction)",
+      "ui_actionable_ok": true,
+      "ui_stale": "UI stale baseline instruction 0738-A on t1",
+      "ui_stale_ok": true
+    },
+    "diagnostic_screening": {
+      "applied": true,
+      "marker": "LOCAL-SCREENING-OK",
+      "notes": []
+    },
+    "emission_boundaries": {
+      "diagnose_text": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "events_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "list_jobs_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "raw_event_contains_canary": true,
+      "raw_trace_label_contains_canary": true,
+      "read_source_error_boundary": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 1,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "recover_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "stderr_read_source_screened": true,
+      "trace_get_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "trace_list_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      }
+    },
+    "independent_ack": {
+      "browser_review": "reports/independent-recovery-browser-review.json (07:35:34)",
+      "controlled_producer_scope": "local action only; prior acceptance preserved",
+      "screening_review": "reports/independent-recovery-screening-review.json (pending path in supervisor queue)"
+    },
+    "node_bridge": {
+      "benign_required": true,
+      "canary_removed": true,
+      "exit": 0,
+      "nonempty_required": true,
+      "parsed": {
+        "benign": true,
+        "init_ok": true,
+        "invalid_command_benign": true,
+        "invalid_command_canary_removed": true,
+        "invalid_command_json_stdout": true,
+        "invalid_command_nonempty": true,
+        "nonempty": true,
+        "read_source_benign": true,
+        "read_source_canary_removed": true,
+        "read_source_intended_error": true,
+        "screened": true
+      },
+      "screened_required": true
+    },
+    "prior_attempts_preserved": [
+      "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+      "reports/independent-recovery-browser-review.json"
+    ],
+    "recovery_dependency": {
+      "blockers_include_t1": true,
+      "corrected_task_blocked": true,
+      "diagnostic_marker": true,
+      "next_not_corrected_downstream": true
+    }
+  },
+  "delivery_id": "recovery-screening-real-paths-20261010-0738",
+  "failures": [],
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": false,
+  "overall": "passed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-881140a1-79f4-44d5-a4e0-739f189d02d5.json"
+  },
+  "run_id": "881140a1-79f4-44d5-a4e0-739f189d02d5",
+  "source_identity": {
+    "app/src/app/api/health/route.ts": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+    "app/src/app/api/workflow/route.ts": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b",
+    "app/src/app/explorer/workflow-panel.tsx": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78",
+    "app/src/lib/server/paths.ts": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed",
+    "app/src/lib/server/python.ts": "f69c42bdf024ec139c2e9da7fcdeb0fe00a8c141d09fc7e5d8205e23a5438f32",
+    "tools/browser_recovery_screening.mjs": "6125f8010fd9f275cc410e02e8d4144ecdb9b532c6df19572779ccc6d93e62ec",
+    "tools/job_recovery.py": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a",
+    "tools/local_service.py": "980d971e9cfdb316368bdabaf2b162aea5e3dfd0731048bc8e485e16e03fc337",
+    "tools/node_bridge_screen_probe.ts": "426b3a7787d23ba00aa0b3c6192b84d25cf78f7cc26a14c9bcf8d0e1894ba2a2",
+    "tools/output_screening.py": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+    "tools/recovery_screening_real_paths_acceptance.py": "bb44036024385ea522d65df78afa8d0c76dad8e08382bc9a7563c3879faf2411",
+    "tools/trace_store.py": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+  }
+}

@@ -1,0 +1,97 @@
+{
+  "delivery_id": "atomic-failure-fixture-boundary-20261010-0622",
+  "run_id": "7acf277f-b936-4e93-85ad-6b0229dec493",
+  "at": "2026-10-10T06:52:55+00:00",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "isolated_db_prefix": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/workflow-core-tests/*-atomic-failure-fixture-boundary-20261010-0622.sqlite",
+  "source_identity": {
+    "tools/reliability_store.py": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+    "tools/verification_evidence.py": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+    "tools/workflow_apply_guard.py": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+    "tools/atomic_failure_fixture_boundary_acceptance.py": "94e8a6cf23090a5ce83ea2444a0069ec7f95a7358361f5e2adc50e11c7261cec"
+  },
+  "atomic_failures": {
+    "cas_failure_zero_side_effects": {
+      "exit": 1,
+      "error": "handoff revision conflict",
+      "operation_count": 0,
+      "matching_event_count": 0,
+      "job_revision_unchanged": true,
+      "handoff_unchanged": true,
+      "no_new_operations": true
+    },
+    "authorized_retry_once": {
+      "first_success_exit": 0,
+      "replay_exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "matching_event_count": 1,
+      "handoff_revision": 3
+    },
+    "concurrent_transfer_vs_mutate": {
+      "transfer_exit": 1,
+      "mutate_exit": 0,
+      "transfer_error": "job_revision mismatch with workflow engine",
+      "mutate_error": "",
+      "exactly_one_succeeded": true,
+      "mutate_lost_race": false,
+      "loser_operation_count": 0,
+      "handoff_job_revision_consistent": true,
+      "snapshot_before_event_count": 2,
+      "snapshot_after_event_count": 3
+    }
+  },
+  "fixture_boundary": {
+    "reject_fixture_on_real_verify": {
+      "exit": 1,
+      "error": "verification_record_fixture_only",
+      "operation_count": 0,
+      "task_status": "pending",
+      "rejected": true
+    },
+    "isolated_fixture_gate_only": {
+      "accepted": true,
+      "reason": "ok"
+    },
+    "measured_positive_verify": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "matching_event_count": 1,
+      "accepted": true
+    },
+    "reject_wrong_task_operation_verifier_scope": {
+      "exit": 1,
+      "error": "verification_record_revision_mismatch",
+      "rejected": true
+    },
+    "reject_tampered_record_checks": {
+      "exit": 1,
+      "error": "verification_record_content_sha256_mismatch",
+      "rejected": true
+    }
+  },
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+      "sha256": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+      "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json"
+    }
+  ],
+  "prior_attempt_hashes_linked": [
+    {
+      "path": "reports/workflow-core-failures/APP-REVIEW-01.json",
+      "sha256": "49330d073f76418b8b50da7037b21e4dbe65e503b672bb1c32f7de52df28c783",
+      "supervisor_copy": "reports/supervisor-history/workflow-core-APP-REVIEW-01-failure-307fe16d0430.json"
+    }
+  ],
+  "independent_verification": "not_claimed",
+  "overall": "passed",
+  "queue_remaining_required": [
+    "APP-REVIEW-02",
+    "APP-REVIEW-04",
+    "controlled-edit/CAS/derived",
+    "browser/REL-01/synthetic",
+    "real SDK BLOCKED"
+  ]
+}

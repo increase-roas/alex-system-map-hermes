@@ -1,0 +1,54 @@
+{
+  "predeclared_outcome": {
+    "missing_artifact": {
+      "reason": "artifact_missing"
+    },
+    "unrelated_allowlisted_path_rejected": {
+      "reason": "output_declaration_binding_stale"
+    },
+    "wrong_content_rejected": {
+      "reason": "declared_content_mismatch"
+    },
+    "handler_positive_once": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1,
+      "observed_proofs": [
+        {
+          "criterion": "proof-bound",
+          "relative_path": "work/task-artifacts/decl-job/t1-0e3b0d4bfd2c.txt",
+          "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd",
+          "byte_length": 23,
+          "contract_revision": 1,
+          "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+          "content_matches_declaration": true
+        }
+      ]
+    }
+  },
+  "consumption_recheck": {
+    "after_tamper_verify": {
+      "exit": 1,
+      "error": "observed_artifact_changed_at_consumption",
+      "operation_count": 0,
+      "event_count": 0
+    },
+    "after_restore_and_fresh_record": {
+      "exit": 0,
+      "error": "",
+      "operation_count": 1,
+      "event_count": 1
+    },
+    "artifact_proof_path": "reports/declared-outcome-live-proof-proofs/declared-outcome-live-proof-20261010-0650-consumption-artifact.txt",
+    "artifact_sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd"
+  },
+  "wrong_task_single_variable": {
+    "exit": 1,
+    "error": "verification_record_task_id_mismatch",
+    "operation_count": 0,
+    "event_count": 0,
+    "record_operation_id": "dolp-record-wt",
+    "request_operation_id": "dolp-record-wt"
+  }
+}

@@ -1,0 +1,456 @@
+{
+  "reviewed_at": "2026-10-10T07:11:24.824420+00:00",
+  "receipt_at": "2026-10-10T07:08:48+00:00",
+  "run_id": "7f8a7aa9-6f44-4897-aebb-d427ba66189f",
+  "receipt_path": "reports/run-receipts/production-identity-prewrite-20261010-0706-7f8a7aa9-6f44-4897-aebb-d427ba66189f.json",
+  "receipt_sha256": "19eceecb24d2426f5f033204ce41a66215e9d33ec9d2e25110356f28c4319115",
+  "scope": "D02 stripping/relabel/production, D06 prewrite containment and D04 actual negative issuer only",
+  "source_identity": {
+    "tools/bounded_acceptance.py": {
+      "receipt_sha256": "c08199dfc64c1c9d9b3840ff31cd4b3f8703e876b9b7019261adaffa0c0dcbd4",
+      "current_sha256": "c08199dfc64c1c9d9b3840ff31cd4b3f8703e876b9b7019261adaffa0c0dcbd4",
+      "matches": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "current_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "matches": true
+    },
+    "tools/production_identity_prewrite_acceptance.py": {
+      "receipt_sha256": "4c1e3eb09a25f8cd6f860d55ddc52bbca7f0457dcbd4164c7c7f4d3ab84c5586",
+      "current_sha256": "4c1e3eb09a25f8cd6f860d55ddc52bbca7f0457dcbd4164c7c7f4d3ab84c5586",
+      "matches": true
+    },
+    "tools/receipt_immutable.py": {
+      "receipt_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "current_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "matches": true
+    },
+    "tools/reliability_gate.py": {
+      "receipt_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "current_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "matches": true
+    },
+    "tools/reliability_store.py": {
+      "receipt_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "current_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "matches": true
+    },
+    "tools/verification_evidence.py": {
+      "receipt_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "current_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "matches": true
+    },
+    "tools/workflow_apply_guard.py": {
+      "receipt_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "current_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "matches": true
+    },
+    "tools/workflow_engine.py": {
+      "receipt_sha256": "e7cde50586368b75cb4825822365a07a70855ac022ff2183bbfdfb39f4d22269",
+      "current_sha256": "e7cde50586368b75cb4825822365a07a70855ac022ff2183bbfdfb39f4d22269",
+      "matches": true
+    }
+  },
+  "snapshot_stable": true,
+  "items": [
+    {
+      "id": "D02-seal",
+      "status": "VERIFIED",
+      "claim": "Server seal binds committed submission to scope/history and rejects client metadata",
+      "evidence": [
+        "tools/bounded_acceptance.py:324-415",
+        "tools/workflow_engine.py:237-267",
+        "tools/production_identity_prewrite_acceptance.py:240-337"
+      ],
+      "detail": "Saved relabel/forged-ID handler attempts reject client_production_metadata_forbidden with0operations/0events. Server seal includes job/task/op/jobrevision and declared contract+artifact path/SHA; two production/output histories retained, current positive task verified6 withone verifyoperation/event. Legitimate descriptor mutation cannot impersonate existing production_history entry."
+    },
+    {
+      "id": "D02-stripping",
+      "status": "FAILED",
+      "claim": "Ordinary stripping/reattachment cannot certify old bytes as freshly produced",
+      "evidence": [
+        "tools/bounded_acceptance.py:358-415",
+        "tools/bounded_acceptance.py:425-439",
+        "tools/workflow_engine.py:237-267",
+        "tools/production_identity_prewrite_acceptance.py:269-307"
+      ],
+      "detail": "Dropping forbidden descriptor keys produces ordinary valid draft with same path/SHA. Under newer declaration, server seal assigns new production operation/revision/id to existing bytes without materialization call or production evidence, and issuance measurement passes. This is ordinary local input, no secret or registry modification. Seal proves fresh attachment and live hash attestation only, not output reproduction after declaration. Owner tests retain forbidden keys and miss stripped path; production helper is outside this boundary."
+    },
+    {
+      "id": "D06-producer",
+      "status": "VERIFIED",
+      "claim": "Materializer validates IDs/suffix/resolved containment before writes",
+      "evidence": [
+        "tools/bounded_acceptance.py:268-298",
+        "tools/bounded_acceptance.py:442-460",
+        "tools/production_identity_prewrite_acceptance.py:342-385"
+      ],
+      "detail": "Unsafe job/task/suffix pure calls reject before any mocked mkdir/write; saved parent symlink resolves to project docs and refuses outside artifactroot. Resolver precedes parent creation and content write. Saved project-local symlink negatives report no leaked docs files; safe production DB contains sealed output atrevision3. Static local containment accepted; race/hostile filesystem guarantees not requested or claimed."
+    },
+    {
+      "id": "D04-issuer",
+      "status": "VERIFIED",
+      "claim": "Actual measured issuance rejects wrong JSON type before record/state effects",
+      "evidence": [
+        "tools/production_identity_prewrite_acceptance.py:389-439",
+        "tools/verification_evidence.py:231-262"
+      ],
+      "detail": "Actual issue_record helper invokes measured issuer and catches declared_result_mismatch. Independent no-write issuer call with saved wrong task/read-only DB fails with full reasons before issue_record; registry remains0. Saved bad DB remainsrevision3/in_progress with0issuance and verifyattempt operations/events. Saved matching JSON produces registered proof and verified4 task with1operation/event. Separately missingrecord verify fails proof_path_missing; this is not wrong-result verification evidence and is not used as such."
+    },
+    {
+      "id": "identity",
+      "status": "VERIFIED",
+      "claim": "Stable source-bound final receipt and history",
+      "evidence": [
+        "reports/run-receipts/production-identity-prewrite-20261010-0706-7f8a7aa9-6f44-4897-aebb-d427ba66189f.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl"
+      ],
+      "detail": "All9 source hashes match final07:08:48 receipt; actual immutable bytes/pointer/manifest/history SHA19eceecb24d2426f5f033204ce41a66215e9d33ec9d2e25110356f28c4319115. Earlier snapshot not used. Prior accepted transaction/liveproof/type/history mechanisms retained without broad repeat."
+    }
+  ],
+  "saved_db_readbacks": [
+    {
+      "path": "app/.data/workflow-core-tests/prod-id-production-identity-prewrite-20261010-0706.sqlite",
+      "sha256": "8e99237d270062730afd44c61fb6315c285507fdffa7c465bd0d9d8bd7d6c5af",
+      "revision": 6,
+      "task_status": "verified",
+      "production_history": [
+        {
+          "artifact_sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "b7a0707f4458dfabbe54f67193c4c628261d8f66fbc8eba9fb248ef0cdfe2ed4",
+          "production_id": "f79f70e14bc5900faaaaae98d377c988e0f2d04229c93f7afa3aa4fe4f0de4fa",
+          "production_job_id": "pip-id-job",
+          "production_job_revision": 3,
+          "production_operation_id": "pip-produce-v1",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt"
+        },
+        {
+          "artifact_sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9",
+          "declared_contract_revision": 2,
+          "declared_contract_sha256": "2de564fe9edf785c82e3197cb32f07d3db0be05cacf6e41d51768e3d4d91ffb3",
+          "production_id": "06a2103325181dbd6373ec63f2e88d30fe4a786536281389f7da161167609717",
+          "production_job_id": "pip-id-job",
+          "production_job_revision": 5,
+          "production_operation_id": "pip-produce-v2",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "pip-produce-v1",
+          "outputs": [
+            "{\"byte_length\":23,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"b7a0707f4458dfabbe54f67193c4c628261d8f66fbc8eba9fb248ef0cdfe2ed4\",\"production_id\":\"f79f70e14bc5900faaaaae98d377c988e0f2d04229c93f7afa3aa4fe4f0de4fa\",\"production_job_id\":\"pip-id-job\",\"production_job_revision\":3,\"production_operation_id\":\"pip-produce-v1\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9\"}"
+          ]
+        },
+        {
+          "job_revision": 5,
+          "operation_id": "pip-produce-v2",
+          "outputs": [
+            "{\"byte_length\":23,\"declared_contract_revision\":2,\"declared_contract_sha256\":\"2de564fe9edf785c82e3197cb32f07d3db0be05cacf6e41d51768e3d4d91ffb3\",\"production_id\":\"06a2103325181dbd6373ec63f2e88d30fe4a786536281389f7da161167609717\",\"production_job_id\":\"pip-id-job\",\"production_job_revision\":5,\"production_operation_id\":\"pip-produce-v2\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9\"}"
+          ]
+        }
+      ],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/e5ac448e-ba96-47d8-ad0d-f1554a9ad57e.json",
+          "registry_sha256": "7ab9275649a4e11848d8adb51f3803d2d6db4ed6aa7067718b29c643d8b06131",
+          "actual_sha256": "7ab9275649a4e11848d8adb51f3803d2d6db4ed6aa7067718b29c643d8b06131",
+          "scope": {
+            "job_id": "pip-id-job",
+            "job_revision": 5,
+            "task_id": "t1",
+            "operation_id": "pip-verify-v2",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt",
+              "sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9",
+              "byte_length": 23,
+              "production_id": "06a2103325181dbd6373ec63f2e88d30fe4a786536281389f7da161167609717",
+              "contract_revision": 2,
+              "contract_sha256": "2de564fe9edf785c82e3197cb32f07d3db0be05cacf6e41d51768e3d4d91ffb3",
+              "content_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "registry_count": 1,
+      "operation_readbacks": {
+        "pip-relabel-attack": {
+          "operations": 0,
+          "events": 0
+        },
+        "pip-forged-id": {
+          "operations": 0,
+          "events": 0
+        },
+        "pip-verify-v2": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/prewrite-safe-production-identity-prewrite-20261010-0706.sqlite",
+      "sha256": "26b90b1e0c7aedb675836361b3d3935f6e6f6252d135508e70adfc1af4b00070",
+      "revision": 3,
+      "task_status": "in_progress",
+      "production_history": [
+        {
+          "artifact_sha256": "8a5e81b1653c9c406424c358357617e8ebff6854229d4cc7402efa455410ae5c",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "c1c153488f8f2198fb2771bab0d95f0d750dac8a0ba248c6764278c398d922fa",
+          "production_id": "aa8a7a825773093fe440f7aea166e46cdc6f1dbb8d4fb85478ac48838baae737",
+          "production_job_id": "pip-safe-job",
+          "production_job_revision": 3,
+          "production_operation_id": "pip-prewrite-good",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/pip-safe-job/t1-8a5e81b1653c.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "pip-prewrite-good",
+          "outputs": [
+            "{\"byte_length\":17,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"c1c153488f8f2198fb2771bab0d95f0d750dac8a0ba248c6764278c398d922fa\",\"production_id\":\"aa8a7a825773093fe440f7aea166e46cdc6f1dbb8d4fb85478ac48838baae737\",\"production_job_id\":\"pip-safe-job\",\"production_job_revision\":3,\"production_operation_id\":\"pip-prewrite-good\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/pip-safe-job/t1-8a5e81b1653c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"8a5e81b1653c9c406424c358357617e8ebff6854229d4cc7402efa455410ae5c\"}"
+          ]
+        }
+      ],
+      "proofs": [],
+      "registry_count": 0,
+      "operation_readbacks": {
+        "pip-prewrite-good": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/json-handler-production-identity-prewrite-20261010-0706.sqlite",
+      "sha256": "4074f5366077394621050d52bc23b5d8ef79a24f9561a163a1f7f3ae54e666e8",
+      "revision": 3,
+      "task_status": "in_progress",
+      "production_history": [
+        {
+          "artifact_sha256": "dd58e715f1096f232650ca1ca323c45ea83bbe3b4b49e021a7ad52dd860dbbc8",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+          "production_id": "71077fe54afa2f811d125f5fe2cc67745cbcf0d111e497a7fda1f3b04153a313",
+          "production_job_id": "pip-json-job",
+          "production_job_revision": 3,
+          "production_operation_id": "pip-json-bad-produce",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/pip-json-job/t1-dd58e715f109.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "pip-json-bad-produce",
+          "outputs": [
+            "{\"byte_length\":9,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c\",\"production_id\":\"71077fe54afa2f811d125f5fe2cc67745cbcf0d111e497a7fda1f3b04153a313\",\"production_job_id\":\"pip-json-job\",\"production_job_revision\":3,\"production_operation_id\":\"pip-json-bad-produce\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/pip-json-job/t1-dd58e715f109.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"dd58e715f1096f232650ca1ca323c45ea83bbe3b4b49e021a7ad52dd860dbbc8\"}"
+          ]
+        }
+      ],
+      "proofs": [],
+      "registry_count": 0,
+      "operation_readbacks": {
+        "pip-json-issue-attempt": {
+          "operations": 0,
+          "events": 0
+        },
+        "pip-json-verify-attempt": {
+          "operations": 0,
+          "events": 0
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/json-handler-ok-production-identity-prewrite-20261010-0706.sqlite",
+      "sha256": "01aa48497280da33ee5ec731e3cefbe7b9e729159b58889559a3af8304f46050",
+      "revision": 4,
+      "task_status": "verified",
+      "production_history": [
+        {
+          "artifact_sha256": "55f66c2c5aeb275ff5b1ae26b321d5c0b8ceda8c034b19c2643e046d024919f3",
+          "declared_contract_revision": 1,
+          "declared_contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+          "production_id": "443cacbc7a19e055aaf98e539fd0a9e2da8bf0a2cd43ff77dbad9e46f977627f",
+          "production_job_id": "pip-json-job",
+          "production_job_revision": 3,
+          "production_operation_id": "pip-json-good-produce",
+          "production_task_id": "t1",
+          "relative_path": "work/task-artifacts/pip-json-job/t1-55f66c2c5aeb.txt"
+        }
+      ],
+      "output_history": [
+        {
+          "job_revision": 3,
+          "operation_id": "pip-json-good-produce",
+          "outputs": [
+            "{\"byte_length\":13,\"declared_contract_revision\":1,\"declared_contract_sha256\":\"4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c\",\"production_id\":\"443cacbc7a19e055aaf98e539fd0a9e2da8bf0a2cd43ff77dbad9e46f977627f\",\"production_job_id\":\"pip-json-job\",\"production_job_revision\":3,\"production_operation_id\":\"pip-json-good-produce\",\"production_task_id\":\"t1\",\"relative_path\":\"work/task-artifacts/pip-json-job/t1-55f66c2c5aeb.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"55f66c2c5aeb275ff5b1ae26b321d5c0b8ceda8c034b19c2643e046d024919f3\"}"
+          ]
+        }
+      ],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/eefb151a-9c8e-4b43-91e2-303b349e637d.json",
+          "registry_sha256": "6f8a6b25e554e7a5257888c1103550a92f142ec26d05a3fdc8f4d2030b50f267",
+          "actual_sha256": "6f8a6b25e554e7a5257888c1103550a92f142ec26d05a3fdc8f4d2030b50f267",
+          "scope": {
+            "job_id": "pip-json-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "pip-json-good-verify",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/pip-json-job/t1-55f66c2c5aeb.txt",
+              "sha256": "55f66c2c5aeb275ff5b1ae26b321d5c0b8ceda8c034b19c2643e046d024919f3",
+              "byte_length": 13,
+              "production_id": "443cacbc7a19e055aaf98e539fd0a9e2da8bf0a2cd43ff77dbad9e46f977627f",
+              "contract_revision": 1,
+              "contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+              "result_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "registry_count": 1,
+      "operation_readbacks": {
+        "pip-json-good-verify": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    }
+  ],
+  "pure_controls": {
+    "strip_reattach": {
+      "old_descriptor": {
+        "byte_length": 23,
+        "declared_contract_revision": 1,
+        "declared_contract_sha256": "b7a0707f4458dfabbe54f67193c4c628261d8f66fbc8eba9fb248ef0cdfe2ed4",
+        "production_id": "f79f70e14bc5900faaaaae98d377c988e0f2d04229c93f7afa3aa4fe4f0de4fa",
+        "production_job_id": "pip-id-job",
+        "production_job_revision": 3,
+        "production_operation_id": "pip-produce-v1",
+        "production_task_id": "t1",
+        "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt",
+        "schema": "bounded_artifact_v1",
+        "sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9"
+      },
+      "stripped_draft": {
+        "byte_length": 23,
+        "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt",
+        "schema": "bounded_artifact_v1",
+        "sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9"
+      },
+      "new_declaration": "{\"contract_sha256\":\"f298f7c5e95ad7e078598ea15ddf0fd28fba7b5a51ce41b146713611c09ba98c\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"production-identity-v1\\n\",\"revision\":3,\"schema\":\"declared_outcome_v1\"}",
+      "validator": [
+        true,
+        "ok"
+      ],
+      "seal_reason": null,
+      "new_records": [
+        {
+          "production_job_id": "pip-id-job",
+          "production_task_id": "t1",
+          "production_operation_id": "independent-reattach-no-materialize",
+          "production_job_revision": 8,
+          "declared_contract_revision": 3,
+          "declared_contract_sha256": "f298f7c5e95ad7e078598ea15ddf0fd28fba7b5a51ce41b146713611c09ba98c",
+          "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt",
+          "artifact_sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9",
+          "production_id": "53b078dd2b1e2602b651ec57180f2b0e543fc1da7d477c438b4e28ba132b2511"
+        }
+      ],
+      "measurement": [
+        {
+          "outcome_proof_bound": true,
+          "artifact_hash_matches": true,
+          "declared_outcome_verified": true
+        },
+        [
+          {
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/pip-id-job/t1-7d55c94d567c.txt",
+            "sha256": "7d55c94d567c5dd64cb93e7ddf0b46f1550321cbb6cc4365d435a30e7ca3d0d9",
+            "byte_length": 23,
+            "production_id": "53b078dd2b1e2602b651ec57180f2b0e543fc1da7d477c438b4e28ba132b2511",
+            "contract_revision": 3,
+            "contract_sha256": "f298f7c5e95ad7e078598ea15ddf0fd28fba7b5a51ce41b146713611c09ba98c",
+            "content_matches_declaration": true
+          }
+        ],
+        null
+      ],
+      "no_materialization_called": true
+    },
+    "actual_json_issuer_error": "workflow verify checks failed: {\"reasons\": [\"declared_result_mismatch\"], \"checks\": {\"task_exists\": true, \"acceptance_criteria_declared\": true, \"declared_result_mismatch\": false, \"all_acceptance_outcomes_verified\": false}}",
+    "registry_after_readonly_negative": 0,
+    "prewrite": {
+      "unsafe_job": {
+        "reason": "job_id_unsafe",
+        "effects": []
+      },
+      "unsafe_task": {
+        "reason": "task_id_unsafe",
+        "effects": []
+      },
+      "unsafe_suffix": {
+        "reason": "artifact_suffix_unsafe",
+        "effects": []
+      },
+      "work/task-artifacts/pip-sym-bba79deb/t1-test.txt": {
+        "resolved_target": "docs",
+        "resolver": [
+          false,
+          "artifact_outside_artifact_root"
+        ]
+      },
+      "work/task-artifacts/pip-sym-0ab80fd7/t1-test.txt": {
+        "resolved_target": "docs",
+        "resolver": [
+          false,
+          "artifact_outside_artifact_root"
+        ]
+      }
+    }
+  },
+  "history_links": {
+    "reports/receipt-hash-manifest.jsonl": [
+      {
+        "content_sha256": "19eceecb24d2426f5f033204ce41a66215e9d33ec9d2e25110356f28c4319115",
+        "delivery_id": "production-identity-prewrite-20261010-0706",
+        "immutable_receipt_path": "reports/run-receipts/production-identity-prewrite-20261010-0706-7f8a7aa9-6f44-4897-aebb-d427ba66189f.json",
+        "run_id": "7f8a7aa9-6f44-4897-aebb-d427ba66189f"
+      }
+    ],
+    "reports/workflow-core-run-history.jsonl": [
+      {
+        "delivery_id": "production-identity-prewrite-20261010-0706",
+        "run_id": "7f8a7aa9-6f44-4897-aebb-d427ba66189f",
+        "at": "2026-10-10T07:08:48+00:00",
+        "overall": "passed",
+        "immutable_receipt": "reports/run-receipts/production-identity-prewrite-20261010-0706-7f8a7aa9-6f44-4897-aebb-d427ba66189f.json",
+        "content_sha256": "19eceecb24d2426f5f033204ce41a66215e9d33ec9d2e25110356f28c4319115"
+      }
+    ]
+  },
+  "overall": "partial: D06 and D04 closed; D02 submission attestation accepted but fresh production boundary not proven",
+  "methods": "Read-only source/receipts and SQLite mode=ro. Pure sealing/measurement and bad-result measured issuance fails before writes; materialization negative calls mock mkdir/write. No mutating reruns, shared state or external actions.",
+  "next_action": "Sole owner: make new production evidence originate from the controlled materialization/production operation and require that receipt at attachment, bound to committed job/task/declaration revision. Reject stripping/re-attaching old draft without new production receipt. If deliberate old-artifact reuse is supported, label and record reuse explicitly rather than fresh production. Add one bounded stripped-draft negative and legitimate production positive; retain accepted D06/D04 and move APP02/04 after scoped acceptance.",
+  "blocker_type": "goal_not_met_yet"
+}

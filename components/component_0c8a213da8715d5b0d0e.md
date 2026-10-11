@@ -1,0 +1,27 @@
+# F0869 / SDK 1.5.1 source / master-agent-operations-sdk/data/agent-bindings.template.json
+
+ID: `component_0c8a213da8715d5b0d0e`
+
+Purpose is recorded in the cited source details.
+
+Category: **historical** · Evidence: **reported** · Observed condition: **unknown**
+
+## Evidence boundary
+
+Saved evidence; no current installation, credential validity, or runtime use inferred.
+
+## Source records
+
+- `record_4e6dbfaef97006f990cd`
+
+## Evidence pointers
+
+- `ev_1fded8ff61d2522f6da5` — FILE CATALOG row 873 (Saved source row; no new live test)
+
+## Recorded relationships
+
+
+## Open questions and issues
+
+
+Read bounded source detail with `python3 tools/catalog.py component <ID>` or `evidence <ID>`.

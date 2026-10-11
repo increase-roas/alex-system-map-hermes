@@ -1,0 +1,866 @@
+{
+  "id": "table_f057132c4776c05c27b9",
+  "sheet": "S03-15 Limits",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "file",
+          "comment": "Connectors owns apps/accounts/routes/rebuild instructions. Javar Gameplan owns mission scope, computer inventory, budgets, execution and gates. Dates below describe evidence, not current health. SEEN WORKING = exact observed operation; CONFIGURED BUT UNTESTED = setup only; BLOCKED = failed prerequisite; UNKNOWN = insufficient evidence; HISTORICAL EVIDENCE = prior dated proof. https://docs.google.com/spreadsheets/d/1pSehqwtrTzhIRgk06lDPd2UBJXDob2nW/edit ; /Users/alexlobaito/Documents/Codex/2026-10-03/openai-director/team/CURRENT_MISSION_STATE.md\nAudit date: 2026-10-05 America/Detroit; retained dated tests are historical, not live health."
+        },
+        {
+          "column": "B",
+          "value": "when it loads"
+        },
+        {
+          "column": "C",
+          "value": "hard limit (the tool cuts, skips or warns)"
+        },
+        {
+          "column": "D",
+          "value": "official guidance"
+        },
+        {
+          "column": "E",
+          "value": "what the tests show"
+        },
+        {
+          "column": "F",
+          "value": "typical in good projects"
+        },
+        {
+          "column": "G",
+          "value": "OUR LIMIT"
+        },
+        {
+          "column": "H",
+          "value": "ours today"
+        },
+        {
+          "column": "I",
+          "value": "status"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Rule count (global + project map together)"
+        },
+        {
+          "column": "B",
+          "value": "Every session"
+        },
+        {
+          "column": "C",
+          "value": "None"
+        },
+        {
+          "column": "D",
+          "value": "None published"
+        },
+        {
+          "column": "E",
+          "value": "All rules obeyed at once: Claude Sonnet 5 94% at 10 rules, 75% at 20, 24% at 40, 0% at 80 (VeyraBench, arXiv 2607.19257). GPT-4o 94%→21% from 1 to 10 rules (ManyIFEval, arXiv 2509.21051). Per-rule accuracy barely drops; \"all at once\" is what breaks."
+        },
+        {
+          "column": "F",
+          "value": "Anthropic's own CLAUDE.md files: 36–82 lines"
+        },
+        {
+          "column": "G",
+          "value": "20 hard rules max, global and project combined. Voice and style live in the output style / developer_instructions, not in the rule file. Most important rules first or last."
+        },
+        {
+          "column": "H",
+          "value": "Recounted at the end of 2026-10-01: Claude global 9 and Codex global 8 (rule lines). This repo's map has 7 numbered rules (earlier today it was counted as 10 with its other rule lines; not recounted that way). Was 49 + 23. Style moved to an output style and Codex developer_instructions (2026-10-01). One more rule (proposal P1) is waiting for Alex's yes. Codex +3 on 2026-10-02 (the live-check rule and the two working lines), so 11 + 7 project = 18 of 20."
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Global instructions (~/.claude/CLAUDE.md, ~/.codex/AGENTS.md; built from ~/.agents/instructions)"
+        },
+        {
+          "column": "B",
+          "value": "Every session, every project"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code warns over 40,000 chars per file (still loads); skips over 4 MiB. Codex: ALL AGENTS.md files together capped at 32,768 bytes; past it, the most specific (project) files get cut."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: under 200 lines per CLAUDE.md"
+        },
+        {
+          "column": "E",
+          "value": "1,650 Claude Code sessions: file length 25–500 lines made no difference to one rule (arXiv 2605.10039). Reasoning slipped past ~500 tokens and fell 0.92→0.68 by 3,000 tokens (~150 lines) of input (arXiv 2402.14848)."
+        },
+        {
+          "column": "F",
+          "value": "Anthropic's: 36–82 lines, 2,000–5,600 chars"
+        },
+        {
+          "column": "G",
+          "value": "80 lines each; 6,000 chars for Claude's file, 8,000 for Codex's (since 2026-10-02 it also carries the Voice and the model-routing sections, which the Codex app reads only from this file)"
+        },
+        {
+          "column": "H",
+          "value": "Now 26 lines / 4,758 chars (Claude) and 49 / 7,602 (Codex: the rules, the Codex-only lines, the Voice and the model-routing sections), measured 2026-10-03 after the 19:54 rebuild. At 18:57 EDT on 2026-10-02: 47 / 7,374. Earlier on 2026-10-02: 32 / 5,579 for Codex. At the end of 2026-10-01: 23 / 3,746 and 20 / 3,599; before that 94 / 8,110 and 66 / 8,821."
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Project map: AGENTS.md"
+        },
+        {
+          "column": "B",
+          "value": "Every session in that folder"
+        },
+        {
+          "column": "C",
+          "value": "Same as above. Codex: global + project AGENTS.md share one 32 KiB budget."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic under 200 lines; Cursor rules under 500 lines"
+        },
+        {
+          "column": "E",
+          "value": "Vercel: a docs index cut from 40 KB to 8 KB (~100 lines) still scored 100% (vercel.com blog 2026-01-27). Cutting an agent's instructions to 75% was free; to 50% broke tool use (93.8%→67.9%, arXiv 2608.01056): remove repeats, not obligations."
+        },
+        {
+          "column": "F",
+          "value": "Median AGENTS.md 335 words (2,303-file study, arXiv 2511.12884); 21 well-known repos median 156 lines"
+        },
+        {
+          "column": "G",
+          "value": "Target 100 lines / 8,000 chars. Cap 150 lines / 12,000 chars."
+        },
+        {
+          "column": "H",
+          "value": "This repo: 79 lines / 7,970 chars (7,997 bytes), unchanged since 5cbe9ab (2026-10-01 14:01); under the 8,000 target. Codex budget: global 7,602 + this map 7,997 = 15,599 of 32,768 bytes (2026-10-03). Dynamite: 98 lines / 7,989 chars (measured at the end of 2026-10-01)."
+        },
+        {
+          "column": "I",
+          "value": "within target"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Project CLAUDE.md"
+        },
+        {
+          "column": "B",
+          "value": "Every Claude session in that folder"
+        },
+        {
+          "column": "C",
+          "value": "Same as above"
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: @AGENTS.md import so both tools read one file"
+        },
+        {
+          "column": "E",
+          "value": "The import cost nothing in 1,650 sessions (68.2% vs 67.7%, arXiv 2605.10039)"
+        },
+        {
+          "column": "F",
+          "value": "Anthropic's own: 36–82 lines"
+        },
+        {
+          "column": "G",
+          "value": "10 lines / 1,000 chars: the line @AGENTS.md plus any Claude-only notes"
+        },
+        {
+          "column": "H",
+          "value": "This repo: 1 line, @AGENTS.md. Dynamite: 1 line, @AGENTS.md (measured at the end of 2026-10-01)."
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "STATUS.md"
+        },
+        {
+          "column": "B",
+          "value": "Read at the start of each task"
+        },
+        {
+          "column": "C",
+          "value": "None"
+        },
+        {
+          "column": "D",
+          "value": "None"
+        },
+        {
+          "column": "E",
+          "value": "No direct test. Models believe wrong context over their own knowledge >60% of the time (ClashEval, arXiv 2404.10198), so stale status hurts."
+        },
+        {
+          "column": "F",
+          "value": "n/a"
+        },
+        {
+          "column": "G",
+          "value": "60 lines / 5,000 chars. Old items move to system/run-log.md."
+        },
+        {
+          "column": "H",
+          "value": "This repo: 55 lines / 11,651 chars (2026-10-03; still over); 61 / 8,315 at the end of 2026-10-01. The long dated \"Next for the agent\" entries should move to system/run-log.md. Dynamite: 12 / 2,672."
+        },
+        {
+          "column": "I",
+          "value": "over limit (this repo)"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "knowledge/<topic>.md"
+        },
+        {
+          "column": "B",
+          "value": "Only when the task needs it"
+        },
+        {
+          "column": "C",
+          "value": "None"
+        },
+        {
+          "column": "D",
+          "value": "None"
+        },
+        {
+          "column": "E",
+          "value": "Lost in the Middle: at ~2k tokens, 75.8% when the fact is first vs 53.8% in the middle (arXiv 2307.03172)."
+        },
+        {
+          "column": "F",
+          "value": "n/a"
+        },
+        {
+          "column": "G",
+          "value": "200 lines / 16,000 chars, one topic per file, key facts at the top"
+        },
+        {
+          "column": "H",
+          "value": "This repo (measured 2026-10-01): README 35 lines / 1,470 chars, business 44 / 2,375, clients 55 / 3,839, offers 37 / 1,721, all under 200 lines / 16,000 chars; tracking-checklist-access.csv (data file) 23 / 6,127. Key-facts-first order not checked."
+        },
+        {
+          "column": "I",
+          "value": "within limit (sizes); order not checked"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tools/<tool>.md (tool card)"
+        },
+        {
+          "column": "B",
+          "value": "Only when that tool is used"
+        },
+        {
+          "column": "C",
+          "value": "None"
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: concise tool descriptions"
+        },
+        {
+          "column": "E",
+          "value": "Longer tool descriptions: +5.85 points success but +67% steps (arXiv 2602.14878). Authors suggest 3–4 sentences of purpose."
+        },
+        {
+          "column": "F",
+          "value": "n/a"
+        },
+        {
+          "column": "G",
+          "value": "60 lines / 5,000 chars per tool family; names the Composio toolkit slug"
+        },
+        {
+          "column": "H",
+          "value": "~/.agents/tools/cards: 9 cards, 18 to 39 lines, largest google-ads at 4,281 chars: all within. This repo's tools/: exa.md 83 lines / 5,017 chars (17 over), browser-and-computer 68 / 3,613, web-search 62 / 2,815, composio 29 / 2,717 (three are over 60 lines but under 5,000 chars). Dynamite: TOOLS.md 40 lines / 6,215 chars (was 143 / 32,667; still 1,215 over) plus per-tool cards in tools/ (largest 3,367). Measured 2026-10-01."
+        },
+        {
+          "column": "I",
+          "value": "over limit (this repo's exa.md by 17 chars; Dynamite TOOLS.md by 1,215)"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "SKILL.md body"
+        },
+        {
+          "column": "B",
+          "value": "When the skill is picked"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code: after compaction only the first 5,000 tokens of a skill stay. Shared team-memory skills over 128 KB are skipped."
+        },
+        {
+          "column": "D",
+          "value": "Vendor numbers: SKILL.md body under 500 lines (Anthropic best practices, Claude Code skills docs, the Agent Skills spec, OpenAI's skill-creator on GitHub) and under 5,000 tokens, about 13,500 to 20,000 chars (Anthropic's Agent Skills overview, the Agent Skills spec). Move detail to references/, one level deep. Pages: platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices and .../agent-skills/overview, code.claude.com/docs/en/skills, agentskills.io/specification (read 2026-10-01)."
+        },
+        {
+          "column": "E",
+          "value": "SkillsBench (87 tasks): skills totalling under ~12 KB per task gained +19 to +21.5 points; over ~43 KB gained +0.7. Per skill: the median skill in its repo is ~4.9 KB (~60 lines) and the 95th percentile ~16 KB (~200 lines); the paper publishes no size cut points, and these sizes aren't tied to results (arXiv 2602.12670 v4; sizes rebuilt from its repo)."
+        },
+        {
+          "column": "F",
+          "value": "Anthropic official median 147 lines; OpenAI 138; 138K public skills median 169"
+        },
+        {
+          "column": "G",
+          "value": "House style, not a vendor or study number: target 60 lines / 5,000 chars; cap 200 lines / 16,000 chars. Both were taken from skill sizes in one benchmark's repo (its median and 95th percentile)."
+        },
+        {
+          "column": "H",
+          "value": "130 local skills: median 127 lines / 8,341 chars. 34 over 200 lines (28 over 16,000 chars); 3 over 500. Only 19 are within the 60-line / 5,000-char target. (Measured earlier on 2026-10-01. A rough recount at the end of the day found 132 skill folders with the same picture: median 122 lines, 33 over 200 lines, 28 over 16,000 chars, 3 over 500 lines, 18 within the target.)"
+        },
+        {
+          "column": "I",
+          "value": "over limit"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill references/ files"
+        },
+        {
+          "column": "B",
+          "value": "Only when the skill points to them"
+        },
+        {
+          "column": "C",
+          "value": "None"
+        },
+        {
+          "column": "D",
+          "value": "One level deep (no references inside references)"
+        },
+        {
+          "column": "E",
+          "value": "Same \"moderate beats exhaustive\" result as above"
+        },
+        {
+          "column": "F",
+          "value": "n/a"
+        },
+        {
+          "column": "G",
+          "value": "300 lines / 25,000 chars each, one level deep"
+        },
+        {
+          "column": "H",
+          "value": "not measured yet"
+        },
+        {
+          "column": "I",
+          "value": "not measured yet"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill name"
+        },
+        {
+          "column": "B",
+          "value": "Every session (skill list)"
+        },
+        {
+          "column": "C",
+          "value": "64 chars, lowercase letters, numbers, hyphens, must match the folder (Agent Skills spec; Codex refuses to load past 64)"
+        },
+        {
+          "column": "D",
+          "value": "Same"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "64 chars, lowercase-hyphen, same as folder name"
+        },
+        {
+          "column": "H",
+          "value": "checked by repo-conform K3"
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill description (\"when to use me\")"
+        },
+        {
+          "column": "B",
+          "value": "Every session (skill list)"
+        },
+        {
+          "column": "C",
+          "value": "1,024 chars: Codex refuses to load the skill past it (spec). Claude Code cuts each at 1,536. Claude app uploads: 200 max."
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: say what it does and when to use it"
+        },
+        {
+          "column": "E",
+          "value": "Skill routing worked best with 20–27-word descriptions and worst above 35 words (SkillRouter, arXiv 2603.22455). Vague, catch-all skills steal other tasks (arXiv 2605.16508)."
+        },
+        {
+          "column": "F",
+          "value": "Anthropic official median 324 chars; OpenAI 287"
+        },
+        {
+          "column": "G",
+          "value": "200 chars (~25 words): what it does + when to use it"
+        },
+        {
+          "column": "H",
+          "value": "Median 354 chars; 109 of 130 over 200; all descriptions together 51,938 chars. (Measured earlier on 2026-10-01; not recounted.)"
+        },
+        {
+          "column": "I",
+          "value": "over limit"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "All skill descriptions together (the skill list)"
+        },
+        {
+          "column": "B",
+          "value": "Every session"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code: 1% of the context window, 8,000 chars on 200k models (30,000–40,000 on 1M). Past it, the least-used skills lose their description and keep only their name. Codex: ~2% of context, or 8,000 chars."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "Picking the right skill: over 90% with 20 or fewer, falling from ~60, about 20% at 200 (arXiv 2601.04748); ~3 points lost every time the library doubles (arXiv 2605.16508)."
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "40 active skills × 200 chars = 8,000 chars. Group the rest by category or turn them off."
+        },
+        {
+          "column": "H",
+          "value": "About 320 skills visible to Claude in this session; 52K chars of descriptions from the 130 local ones alone. (Measured earlier on 2026-10-01; not recounted.)"
+        },
+        {
+          "column": "I",
+          "value": "over limit"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MEMORY.md (Claude's auto-memory index)"
+        },
+        {
+          "column": "B",
+          "value": "Every session"
+        },
+        {
+          "column": "C",
+          "value": "Only the first 200 lines or 25 KB load"
+        },
+        {
+          "column": "D",
+          "value": "One line per memory, under ~200 chars (Claude Code warning text)"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "200 lines / 25,000 chars; each line under 200 chars"
+        },
+        {
+          "column": "H",
+          "value": "11 lines / 1,591 bytes (2026-10-03); 6 lines / 734 chars at the end of 2026-10-01"
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "system/run-log.md, lessons.md"
+        },
+        {
+          "column": "B",
+          "value": "Never auto-loaded"
+        },
+        {
+          "column": "C",
+          "value": "None"
+        },
+        {
+          "column": "D",
+          "value": "None"
+        },
+        {
+          "column": "E",
+          "value": "—"
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "One line per entry, under 300 chars. Move entries older than 90 days to _archive/."
+        },
+        {
+          "column": "H",
+          "value": "28 of 72 run-log lines are over 300 chars (longest 683) at the end of 2026-10-01. lessons.md: 87 lines (the tune-up budget is 100 active lines)."
+        },
+        {
+          "column": "I",
+          "value": "over limit (run-log lines)"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Style: Claude output style, Codex developer_instructions"
+        },
+        {
+          "column": "B",
+          "value": "Every message (Claude: system instructions; Codex: developer instructions before AGENTS.md, in codex exec and the CLI only: the Codex app ignores them, so the voice rules for app chats live in ~/.codex/AGENTS.md, 7,602 of 8,000 chars)"
+        },
+        {
+          "column": "C",
+          "value": "None published"
+        },
+        {
+          "column": "D",
+          "value": "Anthropic: use an output style for voice, length, format or role; set keep-coding-instructions: true to keep the coding instructions"
+        },
+        {
+          "column": "E",
+          "value": "No isolated test. Separating style from rules keeps the rule file short and checkable (see Projects tab section 6)."
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "60 lines / 5,000 chars each"
+        },
+        {
+          "column": "H",
+          "value": "Claude style 36 lines / 2,644 chars; Codex developer_instructions 2,869 chars (27 lines), measured 2026-10-02"
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Director and conductor SKILL.md (alex-director and alex-workflow-conductor)"
+        },
+        {
+          "column": "B",
+          "value": "When the Director or conductor skill is picked; Claude Code re-attaches it after compaction"
+        },
+        {
+          "column": "C",
+          "value": "Claude Code: after compaction only the first 5,000 tokens of each invoked skill are re-attached (25,000 shared, newest first), so a longer file loses its end"
+        },
+        {
+          "column": "D",
+          "value": "Vendor: under 500 lines and 5,000 tokens (row 9)"
+        },
+        {
+          "column": "E",
+          "value": "Split test 2026-10-01 (57 planned runs plus 8 final-text runs, graded blind): the slim v2.3 passed 8 of 8 scenarios on the strict grade, live v2.2 7 of 8, with 8.4% fewer tokens on 24 matched runs"
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "12,000 chars each (about 4,500 tokens on the newer tokenizer), so the whole file stays under Claude Code's 5,000-token re-attach limit. Our derivation from the vendor numbers. Only the every-turn rules; trigger detail goes to references/."
+        },
+        {
+          "column": "H",
+          "value": "Director 2.7: 101 lines / 7,504 chars; conductor 2.5: 89 / 6,615 (measured 2026-10-03)"
+        },
+        {
+          "column": "I",
+          "value": "within limit"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Codex active skills after vendoring (spp-p16a)"
+        },
+        {
+          "column": "B",
+          "value": "Every Codex session (the skill list)"
+        },
+        {
+          "column": "C",
+          "value": "Codex gives the skill list 2% of the context window by default, at most 10,000 tokens (skills.max_context_tokens); a longer list gets its descriptions cut"
+        },
+        {
+          "column": "D",
+          "value": "Same budget as row 13"
+        },
+        {
+          "column": "E",
+          "value": "Measured 2026-10-01, 20:41–20:45Z: fresh catalog of 61 entries, 0 repeated names, 0 descriptions cut; 10 of 10 trigger prompts loaded the expected skill. Cost: on 3 of 10 trigger prompts an extra vendored skill loaded next to the expected one, and it never displaced it"
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "62 active by decision (Director decision 3): 39 triggerable (24 own + 11 Superpowers and compound-engineering keep-list + 4 system) + 23 dependency-only (vendored pinned copies that the keep-list skills' call chains load)"
+        },
+        {
+          "column": "H",
+          "value": "Codex app-server: 63 enabled (58 ~/.agents + 5 system), 0 repeated names. Claude Code: 49 skills in a fresh session, 0 repeated (the 11 Superpowers copies as ~/.claude/skills links)"
+        },
+        {
+          "column": "I",
+          "value": "above the 40 cap by decision; 0 descriptions cut"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "App rules block in the global instructions (~/.agents/instructions/shared.md, built into ~/.claude/CLAUDE.md and ~/.codex/AGENTS.md; spp-p25a)"
+        },
+        {
+          "column": "B",
+          "value": "Every session, every project"
+        },
+        {
+          "column": "C",
+          "value": "None (part of the global file, row 3)"
+        },
+        {
+          "column": "D",
+          "value": "Same as row 3"
+        },
+        {
+          "column": "E",
+          "value": "Blind split test 2026-10-01 (3 graders; Claude Code 2.1.287 and Codex 0.159.2): the 3-bullet block 39/40, a stripped line 36/40, the old 13-entry index 35/40; the spend ask 10/10 vs 6/10 and 5/10 (Fisher p = 0.013 against both pooled). Rule count, not length, drives misses (row 2)."
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "At most 3 bullets and about 1,300 characters. Each card: 60 lines / 5,000 characters, index line at most 70 characters (row 8; the hosted description cuts each index line at 70, row 20)"
+        },
+        {
+          "column": "H",
+          "value": "3 bullets, about 1,311 characters (~/.agents 920f2de: +59 for the modal and huggingface card names)"
+        },
+        {
+          "column": "I",
+          "value": "within"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hosted app-rules description (CUSTOM_IR_NOTES_GET_APP_RULES, written by ~/.agents/tools/connectors/ir_notes/server.py; spp-p41a)"
+        },
+        {
+          "column": "B",
+          "value": "With the tool, in every chat app that reads the cards through Composio (the Claude app, ChatGPT)"
+        },
+        {
+          "column": "C",
+          "value": "1,900-character cut; the description lists the card names and one index line per card"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "spp-p41a, 2026-10-02: at the template's old 100-character index lines the 16-card body needs 2,016 characters (116 over the cut); at 70 it needs 1,609, and the served description is 1,891 characters with all 16 card names. A 17th card at 70 makes about 1,695, over the 1,650-character body budget, so the server drops to about 50 per line."
+        },
+        {
+          "column": "F",
+          "value": "—"
+        },
+        {
+          "column": "G",
+          "value": "Index lines at most 70 characters (row 19). Before adding a 17th card, shorten index lines or move to per-card lookups."
+        },
+        {
+          "column": "H",
+          "value": "1,891 characters, 16 card names, 70-character index lines"
+        },
+        {
+          "column": "I",
+          "value": "within (no room for a 17th card)"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "How to use"
+        },
+        {
+          "column": "B",
+          "value": "Before adding a line to a map, global file or skill: does it fit under its limit, and does it earn its place (\"would removing this cause a mistake?\")? Lines are approximate (about 80 characters per line); characters are the real limit."
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Who checks"
+        },
+        {
+          "column": "B",
+          "value": "repo-conform 2.3 checks the limits on this tab when it audits a project (checks L1 to L4, K4, K6, K17, K18, T5), and its speed pass (SP1–SP27) checks the AI files, Codex settings and recent chats. The tune-up (every 8 hours) checks AGENTS.md size, each SKILL.md size and active lessons (100 lines). Global files are built from ~/.agents/instructions; trim them there, then rebuild."
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Confidence"
+        },
+        {
+          "column": "B",
+          "value": "Hard limits come from the tools' docs and installed programs (Claude Code 2.1.251, Codex 0.150.1). Our limits are judgment calls built on the tests; no study found a single \"cliff\" line count. Several sources are preprints. Full notes: master-connector-repo/work/2026-10-01_file-limits/notes/."
+        }
+      ]
+    }
+  ]
+}

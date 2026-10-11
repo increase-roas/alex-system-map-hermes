@@ -1,0 +1,833 @@
+{
+  "id": "table_113e1eb86941e1db9d35",
+  "sheet": "S06-03 Topic Coverage",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Topic",
+          "comment": "Source: saved AI Money research/current chat. Snapshot 2026-10-07T09:34:35-04:00. Complete source provenance is on Data Sources."
+        },
+        {
+          "column": "B",
+          "value": "Question covered"
+        },
+        {
+          "column": "C",
+          "value": "Answer status"
+        },
+        {
+          "column": "D",
+          "value": "Source document"
+        },
+        {
+          "column": "E",
+          "value": "Remaining gap"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI Money archive, Cloudflare AI Search, and Observatory"
+        },
+        {
+          "column": "B",
+          "value": "Can you access the AI Money search archive? What does Jeff say about harnesses, multi-agent orchestration, durable execution, and the Observatory concept?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered across earlier turns; archive research and synthesis exist"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-observatory-research.md; outputs/ai-money-agent-harness-build.md; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "The archive research is extensive but explicitly incomplete; inventory distinguishes inspected passages/packages from uninspected sources and runtime proof."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Fundamental build gaps and what is already set up"
+        },
+        {
+          "column": "B",
+          "value": "What fundamental infrastructure gaps do we have, and which details can we verify from the three GitHub repositories and our own agent setup?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; source artifacts inspected, current-system comparison is not complete"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-harness-build.md; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Repositories/packages are not proof of installation or runtime behavior. A complete read-only comparison against current agents, permissions, state, queues, and recovery still needs to be done."
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agent communication, collision prevention, truthful reporting"
+        },
+        {
+          "column": "B",
+          "value": "How are agents supposed to communicate, avoid overlapping work, report back, and avoid lying? Is it SQL, contracts, or something else?"
+        },
+        {
+          "column": "C",
+          "value": "Contracts, helper handoffs and checking mechanisms inspected; complete durable coordination/runtime unproven"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-harness-build.md, sections 3–4; outputs/ai-money-bo-agent-dossier.md, section 4"
+        },
+        {
+          "column": "E",
+          "value": "Bo-specific durable task ownership, acknowledged results, retry/recovery and independently verified business outputs remain unlocated or unproven. This is not a current Alex-system absence claim."
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes deployment, hosts, Orgo computers, and Docker"
+        },
+        {
+          "column": "B",
+          "value": "Where does Hermes live? Does Jeff run local computers or Orgo machines? Does he use Docker, why, and did our research miss it?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; guide describes Docker isolation for Hermes beside OpenClaw and optional local install; latest why/missed question awaits final response"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md (Hermes Agent Installation & Setup Guide section); outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "E",
+          "value": "Docker is described as an isolation option to keep separate agent installations/configuration from conflicting; no reusable Dockerfile/Compose package or proof Bo runs in Docker. The guide reports no Orgo setup; no confirmed mapping of the guide environment to Bo's host."
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Hermes profiles and UI agent workspace"
+        },
+        {
+          "column": "B",
+          "value": "How should Hermes profiles be structured, is that done in a UI, and is there a UI agent workspace or 'see your crew' tutorial?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; profile assets and some UI demonstrations were discussed"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-harness-build.md; outputs/ai-money-agent-file-inventory.md; outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "E",
+          "value": "A complete profile-to-UI walkthrough and confirmed current Hermes UI behavior are not established; distinguish course screenshots/tutorials from a running shared agent console."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenClaw and Hermes relationship; NemoClaw"
+        },
+        {
+          "column": "B",
+          "value": "Are OpenClaw and Hermes the same thing? What is NemoClaw and why does Jeff have it?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; user clarified Jeff describes them as same ecosystem/agent identity, while NemoClaw repository presence was not proof of deployment"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "E",
+          "value": "Need preserve distinction between user-reported equivalence in Jeff's framing, separate software packages in vendor sources, and whether Jeff actually uses NemoClaw in production."
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skills, SDKs, plugins, connectors, and MCP inventory"
+        },
+        {
+          "column": "B",
+          "value": "Does Jeff provide downloadable skills/SDKs? What are all the skills, connectors, plugins, MCPs, and tools he uses?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; multiple public packages and integration mentions cataloged"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "E",
+          "value": "Inventory is bounded by inspected sources; some packages remain uninspected, named tools do not prove configured credentials/scopes, and not every mention is an MCP or plugin."
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Public GitHub repositories and full repository inspection"
+        },
+        {
+          "column": "B",
+          "value": "Does Jeff have a GitHub or another public location with the information? Inspect the full public repositories and identify useful build assets."
+        },
+        {
+          "column": "C",
+          "value": "partially answered; 24 visible public repositories catalog/root screened and selected full packages inspected"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "E",
+          "value": "The 24-repository screening was not a full source audit of every repository; selected packages have differing source coverage and releases may change."
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Harness reports, test expectations, and powerful reusable packages"
+        },
+        {
+          "column": "B",
+          "value": "What should a harness test report contain? What are the most valuable build packages shown, and what evidence do they actually provide?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; report contracts, trace validators, handoff kits, and delivery checks were summarized"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-harness-build.md; outputs/ai-money-agent-file-inventory.md; work/router-contract-source-inspection.json; work/router-observer-source-inspection.json"
+        },
+        {
+          "column": "E",
+          "value": "Author reports, static validators, and sample tests are not our executed tests or proof of business truth. No single package provides a complete durable multi-agent runtime."
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Persistent cross-session memory and shared knowledge store"
+        },
+        {
+          "column": "B",
+          "value": "Does Jeff describe automatic memory extraction and retrieval in a shared knowledge store for all agents? What files help, and what is Mem0 used for?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; Persona OS memory procedures and Mem0/Obsidian references inspected, Bo's production configuration remains unknown"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-harness-build.md; outputs/ai-money-agent-file-inventory.md; outputs/ai-money-vector-search-instructions.md; outputs/agent-packages/ai-persona-os-2.0.0/SKILL.md"
+        },
+        {
+          "column": "E",
+          "value": "No confirmed shared Mem0 deployment for Bo; automatic extraction, retrieval filters, write scopes, retention, synchronization, and cross-agent conflict rules are not verified as his live setup."
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Obsidian access and synchronization"
+        },
+        {
+          "column": "B",
+          "value": "Why Obsidian, how do Jeff's agents share its context, and how does he sync it?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; Jeff says agents access shared Obsidian context; a separate Drive lesson says local files are source of truth and Drive is backup/collaboration"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "E",
+          "value": "Exact vault location, sync tool/service, sync schedule, conflict handling, and agent read/write permissions remain unlocated. Search results did not establish Obsidian Sync, Syncthing, Git, rclone, or a CLI route."
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decision logs and learning from tool mistakes"
+        },
+        {
+          "column": "B",
+          "value": "How do agents store decisions and learn when a tool connection fails and later works?"
+        },
+        {
+          "column": "C",
+          "value": "answered at the package-instruction level; no live adherence proof"
+        },
+        {
+          "column": "D",
+          "value": "outputs/agent-packages/ai-persona-os-2.0.0/assets/daily-log-template.md; outputs/agent-packages/ai-persona-os-2.0.0/assets/ERRORS-template.md; outputs/agent-packages/ai-persona-os-2.0.0/assets/LEARNINGS-template.md; outputs/agent-packages/ai-persona-os-2.0.0/assets/TOOLS-template.md; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Templates record attempts, errors, causes/resolutions, durable tool notes, and promotion into operating rules; we have not observed automatic capture or a fresh agent consulting and correctly applying a saved lesson."
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Bo's identity, access, helpers, and coordination"
+        },
+        {
+          "column": "B",
+          "value": "Does Jeff have a main agent he talks to? What is Bo's role, integrations, access versus other agents, and how do helpers report back?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; narrated role/integration timeline and some helper practices documented"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-bo-agent-dossier.md; outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "E",
+          "value": "Bo's complete profile, host, credential scopes, role-by-role comparison, task transport, delivery acknowledgements, retry behavior, and independent completion verification remain unconfirmed."
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Agent hooks and lifecycle events"
+        },
+        {
+          "column": "B",
+          "value": "Does Jeff use hooks, and where does he discuss them?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; Hermes vendor documentation describes lifecycle and tool hooks, while Jeff's custom use remains unverified"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "E",
+          "value": "Need distinguish current vendor-supported hooks from hooks configured in Jeff's or Alex's runtime; no specific deployed hook chain was proven."
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI sales agents and sales assets"
+        },
+        {
+          "column": "B",
+          "value": "Does Jeff discuss AI sales agents, helpers, sales workflows, and useful sales skills?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; sales qualification, prospecting, follow-up, and reply-review sources found"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-bo-agent-dossier.md; outputs/ai-money-agent-file-inventory.md; outputs/agent-packages/ai-money-prospect-finder-v1.0/ai-money-prospect-finder/SKILL.md"
+        },
+        {
+          "column": "E",
+          "value": "Public guides and demos do not prove an autonomous sales closer or production conversion outcomes; full sales blueprint and some assets remain uninspected."
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "New Skool group information and notifications"
+        },
+        {
+          "column": "B",
+          "value": "What is new in the AI Money group, how can we get notified, and where does information first trend?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; selected community/course posts and update-monitoring options were discussed"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-bo-agent-dossier.md"
+        },
+        {
+          "column": "E",
+          "value": "No verified automatic notification/feed subscription or complete live-group monitoring was configured. New findings can only be claimed for searched sources/time window."
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skool browser access and search prompt"
+        },
+        {
+          "column": "B",
+          "value": "Would browser extensions help? What prompt should be used to find all course files and capture dates?"
+        },
+        {
+          "column": "C",
+          "value": "answered as workflow guidance; complete corpus acquisition remains in progress"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Catalog and download coverage are explicitly incomplete; dates must be tracked as publication/update/release/inspection separately."
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Phone SMS integration and parsing error"
+        },
+        {
+          "column": "B",
+          "value": "What is the Workshop Builds phone/SMS integration skill, and did the incoming SMS parsing error get fixed?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; June 18 demo and later error were inspected, successful repair/package not proven"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-agent-file-inventory.md; outputs/ai-money-agent-harness-build.md"
+        },
+        {
+          "column": "E",
+          "value": "A successful incoming-SMS parsing fix and a corrected public listener/skill release remain unverified."
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Airtable, proxies, and contact-list processing"
+        },
+        {
+          "column": "B",
+          "value": "Does AI Money use Airtable as RAG? Do they discuss proxies, large contact lists, and how to prompt/setup contact enrichment?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; Airtable workflow examples and a bulk lead personalization lesson were inspected"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-airtable-proxies.md; outputs/ai-money-contact-list-setup.md"
+        },
+        {
+          "column": "E",
+          "value": "Course examples use Airtable as workflow/storage, not a verified RAG deployment. Proxy setup and robust pagination/retries/checkpointing are not specified in the inspected lesson; the 500-plus/week claim is not reproduced."
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Vector databases, Cloudflare AI Search, SQLite index, and fine-tuning"
+        },
+        {
+          "column": "B",
+          "value": "Does the group discuss vector databases, Cloudflare AI Search, fine tuning, SQLite indexes, and what instructions/tutorials do we have?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; Persona OS vector-search instructions and selected fine-tuning tutorials inspected"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-vector-search-instructions.md; outputs/ai-money-vector-search-finetuning.md; outputs/ai-money-finetuning-tutorial-inspection.md"
+        },
+        {
+          "column": "E",
+          "value": "The inspected Persona OS setup describes per-agent SQLite hybrid indexes, not a fleet-wide shared index. No course-provided Cloudflare AI Search build tutorial or Jev fine-tuning workflow was confirmed; external model tutorials are not AI Money deployment evidence."
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cost optimizer"
+        },
+        {
+          "column": "B",
+          "value": "Did they explain how to use the cost optimizer, and are its savings claims grounded in real usage?"
+        },
+        {
+          "column": "C",
+          "value": "answered from downloaded package source; not installed or executed"
+        },
+        {
+          "column": "D",
+          "value": "outputs/agent-packages/openclaw-cost-optimizer-main/SKILL.md; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Instructions explain setup/audit/presets/advisor and model switching; savings tracker uses estimated task token counts and registry prices, not actual billed usage. Model catalog labels/prices need current verification before adoption."
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev and Clef for CRM contact grading"
+        },
+        {
+          "column": "B",
+          "value": "What should we add from AI Money's Jev/Clef material to a CRM contact-grading design?"
+        },
+        {
+          "column": "C",
+          "value": "substantially answered in attached research guide; a comparison review was requested but no edit was explicitly made"
+        },
+        {
+          "column": "D",
+          "value": "/Users/alexlobaito/.codex/attachments/6a90e699-5b7f-42fb-a219-49cd8ba4139d/Pasted text.txt; outputs/ai-money-contact-list-setup.md; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Document covers decision questions, scoring, evidence, review, errors, evals and model options. Check remaining attachment middle sections before claiming complete review; operational CRM connector and live evaluation are not proven."
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev/Clef connectors, MCPs, plugins, and skills"
+        },
+        {
+          "column": "B",
+          "value": "Which MCPs/plugins/connectors fit the contact-grading build, and how do they connect CRM, retrieval, Jev/Clef, and memory?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; proposed route and public TypeSafe skill/n8n integration named"
+        },
+        {
+          "column": "D",
+          "value": "/Users/alexlobaito/.codex/attachments/6a90e699-5b7f-42fb-a219-49cd8ba4139d/Pasted text.txt; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "No Jeff-specific verified Jev-to-CRM connector. CRM connector, research fetcher, memory plugin, n8n node, MCP, and direct model API are different components; exact CRM/account/scopes remain to be selected and tested."
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "AI Money contact grading source quality and safety"
+        },
+        {
+          "column": "B",
+          "value": "What practical lead-grading rules and downloadable assets can be reused for existing contacts?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; Prospect Finder skill and contact lesson inspected"
+        },
+        {
+          "column": "D",
+          "value": "outputs/agent-packages/ai-money-prospect-finder-v1.0/ai-money-prospect-finder/references/prospect-score.md; outputs/ai-money-contact-list-setup.md; attachment pasted text"
+        },
+        {
+          "column": "E",
+          "value": "Prospect Finder ranks new prospects and its incomplete-candidate exclusion rule must not be applied as deletion of existing CRM records. Source grades and fit evidence should be adapted to the current CRM rubric."
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Full-system links and completeness"
+        },
+        {
+          "column": "B",
+          "value": "Do we have the link to the full system, all files, and everything needed to use it?"
+        },
+        {
+          "column": "C",
+          "value": "answered for Persona OS v2.0.0 download; newer v3 review and private runtime details remain incomplete"
+        },
+        {
+          "column": "D",
+          "value": "outputs/agent-packages/ai-persona-os-2.0.0.zip; outputs/agent-packages/ai-persona-os-2.0.0/SKILL.md; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Package is downloaded and source-inspected, not installed; v3 source review, Bo's private setup, and runtime verification are outstanding."
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Reference sheet deliverable"
+        },
+        {
+          "column": "B",
+          "value": "Why does Jeff use Docker, did we miss it, and can all conversation findings be uploaded into a reference sheet without omissions?"
+        },
+        {
+          "column": "C",
+          "value": "current request; coverage inventory prepared for the parent agent; sheet creation/upload not within this subtask"
+        },
+        {
+          "column": "D",
+          "value": "Inherited conversation; outputs/ai-money-agent-file-inventory.md; outputs/ai-money-agent-harness-build.md; attached Jev/Clef guide"
+        },
+        {
+          "column": "E",
+          "value": "This coverage list is not a complete export of every source/detail. Parent should reconcile it against conversation, canonical inventory, file records and evidence before publishing a workbook; latest Docker rationale is described as runtime/configuration isolation, but exact practical reasons should be cited to the guide."
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev API key, OpenRouter route, and TypeSafe dashboard"
+        },
+        {
+          "column": "B",
+          "value": "Can we get a Jev API key, is anything special in TypeSafe's dashboard, and why not use OpenRouter?"
+        },
+        {
+          "column": "C",
+          "value": "answered for access routes; no TypeSafe key created"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-contact-list-setup.md; official TypeSafe agent skill https://docs.typesafe.ai/agent-skill; official OpenRouter Jev guide https://openrouter.ai/docs/guides/community/jev"
+        },
+        {
+          "column": "E",
+          "value": "The TypeSafe dashboard access attempt was blocked before sign-in; no key was created. OpenRouter was verified for read-only catalog/model calls, but no paid Jev inference was run."
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "OpenAI via Composio and large-list prompting"
+        },
+        {
+          "column": "B",
+          "value": "Is OpenAI connected in Composio? Does the course teach processing a large contact list and what prompt/setup to use?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; the available connector was documentation-oriented, and the lesson's row-by-row personalization workflow was inspected"
+        },
+        {
+          "column": "D",
+          "value": "outputs/ai-money-contact-list-setup.md; AI Money lesson https://www.skool.com/aimoney/classroom/8f75e66b?md=6903d3a7faa84488aa69038dadafec7a"
+        },
+        {
+          "column": "E",
+          "value": "No direct OpenAI model API connector was verified. Course prompt describes website research and personalized opening lines but does not specify production-grade fetching, retries, rate limits, checkpointing or cost controls."
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Jev community updates and Tool Thursday sorter"
+        },
+        {
+          "column": "B",
+          "value": "What new Jev information is in the group, including the Tool Thursday sorter, and what do members say about Jev?"
+        },
+        {
+          "column": "C",
+          "value": "partially answered; two relevant posts were read and summarized"
+        },
+        {
+          "column": "D",
+          "value": "AI Money post https://www.skool.com/aimoney/tool-thursday-put-a-sorter-in-front; AI Money post https://www.skool.com/aimoney/can-we-talk-about-jev; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "Post display dates are relative and publication years are not established in the notes. These two posts do not establish an official Jev API implementation or measured production results."
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Request to contact Jay about update notifications"
+        },
+        {
+          "column": "B",
+          "value": "Can you ping Jay at Increase ROAS about getting notified when new AI Money information appears?"
+        },
+        {
+          "column": "C",
+          "value": "SENT verified by saved Gmail readback receipt; no recurring monitor created"
+        },
+        {
+          "column": "D",
+          "value": "Raw conversation log /Users/alexlobaito/.codex/sessions/2026/10/06/rollout-2026-10-06T15-17-49-01a112a6-9384-7671-b4ee-ad91972a3994.jsonl; work/jay-ai-money-notification-ping-receipt-2026-10-07.json"
+        },
+        {
+          "column": "E",
+          "value": "Recipient reading/action unproven. No recurring notification monitor or settings change."
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Resource organization and research dates"
+        },
+        {
+          "column": "B",
+          "value": "Is Jeff's material organized, and are we tracking lesson dates, release dates, updates, downloads and source links?"
+        },
+        {
+          "column": "C",
+          "value": "answered at the catalog level; a public resource hub and canonical inventory exist"
+        },
+        {
+          "column": "D",
+          "value": "https://github.com/jeffjhunter/ai-money-group-resources; outputs/ai-money-agent-file-inventory.md",
+          "link": "https://github.com/jeffjhunter/ai-money-group-resources; outputs/ai-money-agent-file-inventory.md"
+        },
+        {
+          "column": "E",
+          "value": "The hub/catalog is organized, while source acquisition and inspection coverage remain incomplete. Record publication, update, release, download and inspection dates separately; unknown dates stay unknown."
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Requested working documents and AGENTS.md instructions"
+        },
+        {
+          "column": "B",
+          "value": "Create a full agent/harness build Markdown, add this chat's AGENTS.md, include instructions to reason from Jeff's statements and search with varied terms, and document Bo/helpers/sales/hooks/UI findings."
+        },
+        {
+          "column": "C",
+          "value": "artifacts were created and updated during the conversation"
+        },
+        {
+          "column": "D",
+          "value": "AGENTS.md (workspace); outputs/ai-money-agent-harness-build.md; outputs/ai-money-bo-agent-dossier.md; outputs/ai-money-agent-file-inventory.md; outputs/ai-money-observatory-research.md"
+        },
+        {
+          "column": "E",
+          "value": "The inventory and build synthesis should be reconciled to the newest findings before publishing a reference workbook; do not treat project instructions or written plans as proof of installed/runtime behavior."
+        }
+      ]
+    }
+  ]
+}

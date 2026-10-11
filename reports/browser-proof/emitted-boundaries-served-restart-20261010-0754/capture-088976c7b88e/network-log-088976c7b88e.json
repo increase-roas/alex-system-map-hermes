@@ -1,0 +1,97 @@
+[
+  {
+    "label": "health-before",
+    "url": "http://127.0.0.1:3203/api/health",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 4294,
+    "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":27072},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/emitted-boundaries-served-restart-20261010-0754\",\"workflow_sqlite_path\"",
+    "parsedKeys": [
+      "ok",
+      "loopback_only",
+      "local_token_hint",
+      "build_id",
+      "process",
+      "runtime",
+      "completeness",
+      "sync",
+      "token_redacted"
+    ],
+    "screening_notes": [
+      "local-mutation-token withheld"
+    ],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791619158379-create",
+    "url": "http://127.0.0.1:3203/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 213,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619158379\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791619158379-create\",\"handoff_operation_id\":\"rec-ui-a-1791619158379-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "handoff_operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791619158379-add-t1",
+    "url": "http://127.0.0.1:3203/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 157,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619158379\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791619158379-add-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791619158379-add-t2",
+    "url": "http://127.0.0.1:3203/api/workflow",
+    "status": 200,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 157,
+    "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619158379\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791619158379-add-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+    "parsedKeys": [
+      "job_id",
+      "revision",
+      "operation_id",
+      "diagnostic_marker",
+      "screening_notes"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  },
+  {
+    "label": "workflow-rec-ui-a-1791619158379-produce-t1",
+    "url": "http://127.0.0.1:3203/api/workflow",
+    "status": 502,
+    "contentType": "application/json",
+    "parseError": null,
+    "bodyLength": 205,
+    "bodyPreview": "{\"error\":\"outputs must be a nonempty string\",\"screened\":true,\"payload\":{\"payload\":{\"error\":\"outputs must be a nonempty string\",\"notes\":[]},\"screening_notes\":[],\"error\":\"outputs must be a nonempty string\"}}",
+    "parsedKeys": [
+      "error",
+      "screened",
+      "payload"
+    ],
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK"
+  }
+]

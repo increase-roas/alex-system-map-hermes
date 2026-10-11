@@ -1,0 +1,118 @@
+{
+  "concurrent": {
+    "committed_count": 1,
+    "conflict_count": 1,
+    "one_commit_one_conflict": true,
+    "final_revision": 1,
+    "results": [
+      {
+        "label": "B",
+        "ok": true
+      },
+      {
+        "label": "A",
+        "ok": false,
+        "error": "revision must be exactly 2"
+      }
+    ]
+  },
+  "idempotent": {
+    "first_after_sha": "3379dca89d2eb3a86c77725cbfca222c34643a75a4e4fe9176fb5d6975736631",
+    "second_after_sha": "3379dca89d2eb3a86c77725cbfca222c34643a75a4e4fe9176fb5d6975736631",
+    "idempotent_match": true
+  },
+  "api_derived": {
+    "preview_exit": 0,
+    "preview_has_diff": true,
+    "apply_exit": 0,
+    "after_sha256": "587ef85042d88807ab001a9f55c913e0ef0bc9bfe307f31b8210a03a1a01ee0a",
+    "derived_revision": 1,
+    "lineage_ok": true
+  },
+  "symlink_escape": {
+    "symlink_escape_rejected": true,
+    "error": "symlink not allowed for editable path"
+  },
+  "backup_restore_lkg": {
+    "backup_path_ok": true,
+    "restored_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399",
+    "backup_restores_pre_apply_snapshot": true,
+    "committed_after_sha256": "14a01ac84897f7274be3bb8af62310b5f739bd47e7b51429a7605f637b4be7ff",
+    "before_sha256": "ccbf5edcb2823b4e978708b9c9aae3ac8a51ec7aaaa3692eedb9afd139cdc399"
+  },
+  "negative": {
+    "bad_revision_rejected": true,
+    "canary_rejected": true
+  },
+  "served_restart": {
+    "overall": "failed",
+    "error": "health timeout"
+  },
+  "browser": {
+    "delivery": "maintained-edit-cas-20261010-0844",
+    "overall": "passed",
+    "served_pid_before": 99973,
+    "build_id": "hS45BSvRXG5eWVgdDrbq9",
+    "ui_revision_before": "0",
+    "ui_diff_ok": true,
+    "ui_outcome": "Applied revision 1 \u00b7 after a7f32e630ea1\u2026",
+    "ui_outcome_ok": true,
+    "ui_revision_after": "1",
+    "ui_revision_incremented": true,
+    "derived_meta_ok": true,
+    "derived_revision": 1,
+    "derived_lineage_ok": true,
+    "exit": 0
+  },
+  "strict_types_regression": {
+    "saved_baseline_core_pass": true,
+    "recovery_regression_exit_false_rejected": true,
+    "generated_controls_valid": true,
+    "control_row_wrong_flip_type_rejected": true,
+    "each_declared_flip_fails": true,
+    "per_flip_fail": [
+      {
+        "path": "python_apply_export.no_token_leak",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.screened",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.nonempty",
+        "still_passed": false
+      },
+      {
+        "path": "node_bridge.exit",
+        "still_passed": false
+      },
+      {
+        "path": "browser.overall",
+        "still_passed": false
+      },
+      {
+        "path": "browser.served_process_restarted",
+        "still_passed": false
+      },
+      {
+        "path": "browser.build_id_stable",
+        "still_passed": false
+      },
+      {
+        "path": "browser.restart_stop.portRefusedObserved",
+        "still_passed": false
+      },
+      {
+        "path": "recovery_regression.exit",
+        "still_passed": false
+      },
+      {
+        "path": "diagnostic_plain_token.screened_absent",
+        "still_passed": false
+      }
+    ]
+  },
+  "real_sdk_trace_input": "BLOCKED",
+  "drive_publication": "local-only; not claimed"
+}

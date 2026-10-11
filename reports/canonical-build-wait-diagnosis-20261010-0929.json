@@ -1,0 +1,88 @@
+{
+  "at": "2026-10-10T09:29:39.662302+00:00",
+  "owner_session": 65404,
+  "samples": [
+    {
+      "pid": 12530,
+      "sample_exit": 0,
+      "stack_matches": [
+        "+             786 uv__io_poll  (in node) + 1284  [0x1014e58d8]",
+        "+                                                                           !                                                 :                 |               +               726 uv_fs_read  (in node",
+        "+                                                                           !                                                 :                 |               +                   726 read  (in libsys",
+        "+                                                                           !                                                   |                       +           1 open  (in libsystem_kernel.dylib) ",
+        "+                                                                           !                                                   |                               1 uv_fs_read  (in node) + 248  [0x1014d6",
+        "+                                                                           !                                                   |                                   1 read  (in libsystem_kernel.dylib) ",
+        "+                                                                                                                                                               54 uv_fs_read  (in node) + 248  [0x1014d",
+        "+                                                                                                                                                                   54 read  (in libsystem_kernel.dylib)",
+        "+         786 uv__io_poll  (in node) + 748  [0x1014e56c0]",
+        "+           786 kevent  (in libsystem_kernel.dylib) + 8  [0x189295fc4]",
+        "kevent  (in libsystem_kernel.dylib)        786",
+        "read  (in libsystem_kernel.dylib)        781"
+      ]
+    },
+    {
+      "pid": 12531,
+      "sample_exit": 0,
+      "stack_matches": [
+        "+             789 uv__io_poll  (in node) + 1284  [0x101b9d8d8]",
+        "+                                                                                                                                                                                                       ",
+        "+                                                                                                                                                                                                       ",
+        "+                                                                                                                                                                                                       ",
+        "+                                                                                                                                                                                                       ",
+        "+                                                                                                                                                                                                       ",
+        "+         789 uv__io_poll  (in node) + 748  [0x101b9d6c0]",
+        "+           789 kevent  (in libsystem_kernel.dylib) + 8  [0x189295fc4]",
+        "kevent  (in libsystem_kernel.dylib)        789",
+        "read  (in libsystem_kernel.dylib)        788"
+      ]
+    },
+    {
+      "pid": 12295,
+      "sample_exit": 0,
+      "stack_matches": [
+        "+         795 read  (in libsystem_kernel.dylib) + 8  [0x18929091c]",
+        "read  (in libsystem_kernel.dylib)        795"
+      ]
+    }
+  ],
+  "scope": "Only stack function metadata; raw samples not persisted",
+  "open_project_regular_fds": [
+    {
+      "pid": "12295",
+      "fd": "5",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/components/component_74d5de66476d7572305a.md"
+    },
+    {
+      "pid": "12530",
+      "fd": "13",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/lib.esnext.float16.d.ts"
+    },
+    {
+      "pid": "12531",
+      "fd": "13",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/node_modules/.pnpm/safe-array-concat@1.1.4/node_modules/safe-array-concat/index.js"
+    }
+  ],
+  "bounded_read_probes": [
+    {
+      "pid": "12295",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/components/component_74d5de66476d7572305a.md",
+      "exit": 0,
+      "byte_count": 660
+    },
+    {
+      "pid": "12530",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/node_modules/.pnpm/typescript@5.9.3/node_modules/typescript/lib/lib.esnext.float16.d.ts",
+      "exit": 0,
+      "byte_count": 20528
+    },
+    {
+      "pid": "12531",
+      "path": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/node_modules/.pnpm/safe-array-concat@1.1.4/node_modules/safe-array-concat/index.js",
+      "exit": 0,
+      "byte_count": 1877
+    }
+  ],
+  "updated_at": "2026-10-10T09:30:07.395974+00:00",
+  "diagnosis": "Sampled waits are local regular-file reads; bounded separate reads test readability, root cause unproven. No files changed or build processes signaled."
+}

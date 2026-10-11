@@ -1,0 +1,1068 @@
+{
+  "id": "table_757dd673fa1b7efbca57",
+  "sheet": "S02-32 Tracking access",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What every AI needs to run Alex's universal tracking checklist (UNIVERSAL_SITE_MASTER_CHECKLIST, Company OS drive), step by step: the platform access, our one route, whether we have it (tested 2026-10-01), and the fix. Source of truth: knowledge/tracking-checklist-access.csv; edit that, not this tab."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "checklist part"
+        },
+        {
+          "column": "B",
+          "value": "what an AI must do or check"
+        },
+        {
+          "column": "C",
+          "value": "platform access needed"
+        },
+        {
+          "column": "D",
+          "value": "our route"
+        },
+        {
+          "column": "E",
+          "value": "have it?"
+        },
+        {
+          "column": "F",
+          "value": "gap and fix"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P2.1-2.4 attribution + identity + record"
+        },
+        {
+          "column": "B",
+          "value": "Server middleware, write-once cookies, lead UUID, DB written first, JSON response"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare API token: Workers Scripts edit + Workers KV edit + D1 edit + Workers Routes edit + Zone DNS edit"
+        },
+        {
+          "column": "D",
+          "value": "Composio custom_cloudflare_api (EXECUTE runs any Cloudflare API call; account token with Read & Write on every permission group, no expiry)"
+        },
+        {
+          "column": "E",
+          "value": "YES (2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "Token verified active; 13 zones and 30 Workers listed; a KV namespace was created and deleted. Workers, D1, Routes and DNS writes are covered by the token but each was not run yet: the first real deploy proves them. Production deploys and DNS changes on live sites: say exactly what changes first"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P2.4 failure alerts"
+        },
+        {
+          "column": "B",
+          "value": "Every failed lead/CRM/pixel write alerts the team"
+        },
+        {
+          "column": "C",
+          "value": "Slack or text/email"
+        },
+        {
+          "column": "D",
+          "value": "Connector alerts (GHL SMS + email through the Google robot) or javar_propose_message for Slack"
+        },
+        {
+          "column": "E",
+          "value": "YES"
+        },
+        {
+          "column": "F",
+          "value": "The hub health check already texts and emails Alex and Manny when a route breaks or recovers (2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P2.5 Meta pixel + CAPI with one event_id"
+        },
+        {
+          "column": "B",
+          "value": "Server sends CAPI to the site's dataset; browser pixel shares event_id"
+        },
+        {
+          "column": "C",
+          "value": "Meta system user token with ads_management + business_management; dataset assigned to the system user"
+        },
+        {
+          "column": "D",
+          "value": "Composio metaads: system user \"IR Business Manus App\" token from 1Password (never expires; 22 permissions incl. ads_management ads_read business_management leads_retrieval attribution_read; SEND_CONVERSION_EVENTS)"
+        },
+        {
+          "column": "E",
+          "value": "YES (2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "Done 2026-10-01: token saved in 1Password and pushed into Composio; 57 ad accounts verified. Not checked: that each site's dataset is assigned to the system user. The Mac meta CLI and its token file ~/.codex/secrets/meta-ads.env were removed 2026-10-01 (K04); the token lives only in 1Password and Composio metaads."
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P2.6 stages push back with real value"
+        },
+        {
+          "column": "B",
+          "value": "GHL stage workflows POST /api/lead-stage; Purchase carries opportunity value"
+        },
+        {
+          "column": "C",
+          "value": "GHL workflow builder per sub-account"
+        },
+        {
+          "column": "D",
+          "value": "ghl-command-builder (Composio custom_ghl_command_builder; 49 registered locations of 303)"
+        },
+        {
+          "column": "E",
+          "value": "PARTIAL"
+        },
+        {
+          "column": "F",
+          "value": "Register each client sub-account with the builder before its install. Natural Sanitation was registered 2026-09-30; LONESTAR CUSTOMER SERVICE: dropped 2026-10-02 (Alex)"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P2.6 gclid kept for Google offline conversions"
+        },
+        {
+          "column": "B",
+          "value": "Upload leads/sales to Google Ads with gclid"
+        },
+        {
+          "column": "C",
+          "value": "Google Data Manager API (datamanager)"
+        },
+        {
+          "column": "D",
+          "value": "Composio googleads INGEST_CONVERSION_EVENTS; delegated robot after Alex adds datamanager"
+        },
+        {
+          "column": "E",
+          "value": "YES (API on 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "Data Manager API enabled in increaseroas-tagging; robot authenticates (validate call reaches the API). LIST_DATA_MANAGER_CONVERSION_ACTIONS answers on manager account 1640283674 (none there: conversion actions live in client accounts, and all 8 client accounts are closed or suspended). First real upload is proven on the first live client with gclids. Composio googleads INGEST_CONVERSION_EVENTS (validate_only first) is the other path"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P3 consent"
+        },
+        {
+          "column": "B",
+          "value": "Consent text+version stored; CRM automations gated on consent tag"
+        },
+        {
+          "column": "C",
+          "value": "GHL tags + workflow conditions"
+        },
+        {
+          "column": "D",
+          "value": "ghl-oauth-crm (tags) + ghl-command-builder (workflow conditions)"
+        },
+        {
+          "column": "E",
+          "value": "YES (builder: registered locations)"
+        },
+        {
+          "column": "F",
+          "value": "Same builder coverage gap"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P4 custom fields + custom values + tags + pipeline + users"
+        },
+        {
+          "column": "B",
+          "value": "Create/verify fields by exact ID; stage_webhook_secret custom value; one pipeline; user/role audit"
+        },
+        {
+          "column": "C",
+          "value": "GHL OAuth app scopes for custom fields/values/tags/opportunities/users"
+        },
+        {
+          "column": "D",
+          "value": "ghl-oauth-crm (Composio custom_ghl_oauth_crm; 303 locations verified 2026-10-01; every scope the app allows)"
+        },
+        {
+          "column": "E",
+          "value": "YES"
+        },
+        {
+          "column": "F",
+          "value": "Secrets into custom values only by script from 1Password, never typed"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P4 workflows (intake, stage push, phone-lead mint, alerts)"
+        },
+        {
+          "column": "B",
+          "value": "Build and audit the v2 workflow roster"
+        },
+        {
+          "column": "C",
+          "value": "GHL workflow builder"
+        },
+        {
+          "column": "D",
+          "value": "ghl-command-builder (Composio custom_ghl_command_builder)"
+        },
+        {
+          "column": "E",
+          "value": "PARTIAL"
+        },
+        {
+          "column": "F",
+          "value": "Builder coverage (49 of 303). Same registration step as P2.6"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL A2P 10DLC"
+        },
+        {
+          "column": "B",
+          "value": "Brand + campaign approved before SMS workflows publish"
+        },
+        {
+          "column": "C",
+          "value": "GHL phone system (read) + A2P registration (UI)"
+        },
+        {
+          "column": "D",
+          "value": "ghl-oauth-crm read"
+        },
+        {
+          "column": "E",
+          "value": "READ ONLY"
+        },
+        {
+          "column": "F",
+          "value": "Registration stays a UI step with business details"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 Meta settings"
+        },
+        {
+          "column": "B",
+          "value": "Automatic Events, Automatic + manual Advanced Matching, one dataset, no test_event_code, EMQ 8+"
+        },
+        {
+          "column": "C",
+          "value": "Meta Marketing API ads_management + ads_read"
+        },
+        {
+          "column": "D",
+          "value": "Composio metaads token (same as P2.5)"
+        },
+        {
+          "column": "E",
+          "value": "YES (2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "Same as P2.5"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 client hints header"
+        },
+        {
+          "column": "B",
+          "value": "Permissions-Policy + Accept-CH on landing pages"
+        },
+        {
+          "column": "C",
+          "value": "Cloudflare (site code)"
+        },
+        {
+          "column": "D",
+          "value": "Composio custom_cloudflare_api"
+        },
+        {
+          "column": "E",
+          "value": "YES (same token as P2.1)"
+        },
+        {
+          "column": "F",
+          "value": "Same as P2.1"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 GA4 key event"
+        },
+        {
+          "column": "B",
+          "value": "generate_lead = Key Event"
+        },
+        {
+          "column": "C",
+          "value": "GA4 Admin API analytics.edit"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin acting as alex@ (all 10 properties)"
+        },
+        {
+          "column": "E",
+          "value": "YES (proven 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "generate_lead is a Key Event on 4 of 10 (increaseroas, Paradise Spas, Revstead, Lone Star Spas). Missing on Natural Sanitation, Momentum School, Sun Pool & Spa, IncreaseROAS Master, Real Tree Co: set it per site when the site fires generate_lead (changing key events can shift Ads bidding). Momentum School and Real Tree Co are unconfirmed clients: ask Alex before changing"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 GA4 data retention 14 months"
+        },
+        {
+          "column": "B",
+          "value": "Set retention on every property"
+        },
+        {
+          "column": "C",
+          "value": "GA4 Admin API analytics.edit (dataRetentionSettings)"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "E",
+          "value": "YES (done 2026-10-01)"
+        },
+        {
+          "column": "F",
+          "value": "admin_api_request tool added to the hub GA4 server; 9 properties set from 2 to 14 months; GT Tree (not a client) restored to 2"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 GA4 user-provided data collection ON"
+        },
+        {
+          "column": "B",
+          "value": "Toggle in GA4 admin"
+        },
+        {
+          "column": "C",
+          "value": "GA4 admin (may be UI-only)"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin ADMIN_API_REQUEST (any GA4 Admin call as alex@): not yet tried for this toggle"
+        },
+        {
+          "column": "E",
+          "value": "UNVERIFIED"
+        },
+        {
+          "column": "F",
+          "value": "Not checked whether the Admin API exposes this toggle; else a one-time UI click per property"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 link GA4 to Ads + import conversion"
+        },
+        {
+          "column": "B",
+          "value": "Link, import generate_lead"
+        },
+        {
+          "column": "C",
+          "value": "GA4 CREATE_GOOGLE_ADS_LINK + Google Ads conversion actions"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin + googleads MUTATE_CONVERSION_ACTIONS"
+        },
+        {
+          "column": "E",
+          "value": "YES (tools exist; not run on a live account yet)"
+        },
+        {
+          "column": "F",
+          "value": "The link tool CREATE_GOOGLE_ADS_LINK and MUTATE_CONVERSION_ACTIONS both exist. All 8 client ad accounts under the manager account are closed or suspended, so the first live client proves it"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P5 Ads auto-tagging + enhanced conversions"
+        },
+        {
+          "column": "B",
+          "value": "Turn on per client account"
+        },
+        {
+          "column": "C",
+          "value": "Google Ads API customer settings (adwords)"
+        },
+        {
+          "column": "D",
+          "value": "googleads via composio proxy (customers:mutate)"
+        },
+        {
+          "column": "E",
+          "value": "YES (not run on a live account yet)"
+        },
+        {
+          "column": "F",
+          "value": "Accepting Google's customer data terms is a one-time UI click per client account. createCustomerClient with validateOnly passed 2026-10-01; settings writes wait for a live client account"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P6 sheet projection"
+        },
+        {
+          "column": "B",
+          "value": "Upsert by lead id at an explicit row"
+        },
+        {
+          "column": "C",
+          "value": "Google Sheets write"
+        },
+        {
+          "column": "D",
+          "value": "Google robot sheets_write or google_api as alex@ (Composio custom_google_robot)"
+        },
+        {
+          "column": "E",
+          "value": "YES"
+        },
+        {
+          "column": "F",
+          "value": "Proven 2026-10-01: a Sheet with a formula was created and deleted"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P6 verification walk"
+        },
+        {
+          "column": "B",
+          "value": "Tagged walk, cookies, payload, DB, CAPI, CRM, Events Manager"
+        },
+        {
+          "column": "C",
+          "value": "Browser + Cloudflare D1 read + GHL read + Meta Events Manager read (ads_read)"
+        },
+        {
+          "column": "D",
+          "value": "Playwright/in-app browser + custom_cloudflare_api + ghl-oauth-crm + Composio metaads"
+        },
+        {
+          "column": "E",
+          "value": "YES (routes in place; no full walk run yet)"
+        },
+        {
+          "column": "F",
+          "value": "The Meta route and the Cloudflare token are both done (2026-10-01). A first full walk on a real site proves the whole chain"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P7 secrets vault to worker"
+        },
+        {
+          "column": "B",
+          "value": "vault -> wrangler secret put; never in chat or files"
+        },
+        {
+          "column": "C",
+          "value": "1Password read + Cloudflare Workers Scripts edit"
+        },
+        {
+          "column": "D",
+          "value": "1Password connectors-sync (read-only) or connectors-sync-rw (read + write on Connectors) + custom_cloudflare_api"
+        },
+        {
+          "column": "E",
+          "value": "YES (token covers it; no Worker secret push run yet)"
+        },
+        {
+          "column": "F",
+          "value": "Secrets go from 1Password to Workers by script, never typed or printed"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "P7 new page rule (noindex + robots + sitemap)"
+        },
+        {
+          "column": "B",
+          "value": "Keep steps 2+ out of search; submit sitemaps"
+        },
+        {
+          "column": "C",
+          "value": "Search Console (webmasters)"
+        },
+        {
+          "column": "D",
+          "value": "Google robot google_api or custom_ga4_admin GOOGLE_API_REQUEST as alex@ (webmasters scope delegated; Search Console API enabled 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "PARTIAL"
+        },
+        {
+          "column": "F",
+          "value": "Search Console works as Alex: 5 properties (increaseroas.com x3, revsteadsystems.com, therealtreeservice.com). Client sites aren't verified under Alex yet: verify each (DNS TXT through Cloudflare or an HTML file) before the checklist's sitemap/noindex checks"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Not in the checklist"
+        },
+        {
+          "column": "B",
+          "value": "GTM"
+        },
+        {
+          "column": "C",
+          "value": "tagmanager scopes"
+        },
+        {
+          "column": "D",
+          "value": "custom_google_tag_manager acting as alex@ (switched 2026-10-01)"
+        },
+        {
+          "column": "E",
+          "value": "YES for tags and containers; limited for user admin"
+        },
+        {
+          "column": "F",
+          "value": "Checklist hard-codes gtag on every page (one shared module), so GTM is optional. 2 GTM accounts, 7 containers; edit proven on a test workspace 2026-10-01 (cleaned up). Scopes for manage-users, manage-accounts and delete were added 2026-10-01, but alex@ is only \"user\"/read in the account named \"Increase Roas\" (admin analyticsevolutionpro@gmail.com), so user and account changes there are limited by that role (not tested)"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Not in the checklist"
+        },
+        {
+          "column": "B",
+          "value": "Google Business Profile"
+        },
+        {
+          "column": "C",
+          "value": "business.manage"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        },
+        {
+          "column": "E",
+          "value": "PENDING"
+        },
+        {
+          "column": "F",
+          "value": "Scope delegated. The Business Profile APIs stay hidden until Google approves the project's API access request (form with business details, project number 750448852155). The agent drafts the request; Alex approves the send"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Access by property and client (added 2026-10-01 from the GA4 card, the GTM power test, the Google Ads and Meta cards and knowledge/clients.md)"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "asset (account / property / client)"
+        },
+        {
+          "column": "B",
+          "value": "platform"
+        },
+        {
+          "column": "C",
+          "value": "who we reach it as"
+        },
+        {
+          "column": "D",
+          "value": "our route"
+        },
+        {
+          "column": "E",
+          "value": "tested 2026-10-01"
+        },
+        {
+          "column": "F",
+          "value": "gap and owner decision"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Increaseroas GA4 account 384439939: 6 properties (increaseroas, Paradise Spas, Sun Pool & Spa, IncreaseROAS Master, Revstead Systems, Lone Star Spas)"
+        },
+        {
+          "column": "B",
+          "value": "GA4"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "E",
+          "value": "YES: reports and changes. generate_lead is a Key Event on increaseroas, Paradise Spas, Revstead and Lone Star Spas; missing on Sun Pool & Spa and IncreaseROAS Master"
+        },
+        {
+          "column": "F",
+          "value": "4 client properties (Paradise Spas, Sun Pool & Spa, Lone Star Spas, Revstead) sit in our own account, not the client's. Whether to move ownership is Alex's call (to-do tab)"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Natural Sanitation: account 186020260, property 256987299"
+        },
+        {
+          "column": "B",
+          "value": "GA4"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "E",
+          "value": "YES: client report run on 256987299"
+        },
+        {
+          "column": "F",
+          "value": "Alex's brother's company: treat as a client. generate_lead key event missing"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Momentum School: account 347589515, property 480195223"
+        },
+        {
+          "column": "B",
+          "value": "GA4"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "E",
+          "value": "YES: reachable"
+        },
+        {
+          "column": "F",
+          "value": "Unconfirmed client: ask Alex before changing anything. generate_lead key event missing"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The Real Tree Co: account 398514128, property 542310270"
+        },
+        {
+          "column": "B",
+          "value": "GA4"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "E",
+          "value": "YES: reachable"
+        },
+        {
+          "column": "F",
+          "value": "Unconfirmed client: ask Alex before changing anything. generate_lead key event missing"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GT Tree Experts: account 222911631, property 309267716"
+        },
+        {
+          "column": "B",
+          "value": "GA4"
+        },
+        {
+          "column": "C",
+          "value": "alex@ (Alex only has access)"
+        },
+        {
+          "column": "D",
+          "value": "custom_ga4_admin"
+        },
+        {
+          "column": "E",
+          "value": "Reachable, but not a client"
+        },
+        {
+          "column": "F",
+          "value": "Not a client. Nothing to read for client work and nothing to change. 2026-10-01: retention was raised by mistake and restored to 2 months the same day; the test key event there was deleted the same minute"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GTM account 6316753028 \"Increase Roas\" (2 containers: 1 web, 1 server)"
+        },
+        {
+          "column": "B",
+          "value": "GTM"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_google_tag_manager"
+        },
+        {
+          "column": "E",
+          "value": "YES for reading. alex@ is only \"user\"/read here; the admin is analyticsevolutionpro@gmail.com"
+        },
+        {
+          "column": "F",
+          "value": "Read only: never build here (Alex, 2026-10-02; GA4 card). Its admin is the contractor."
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GTM account 6359407641 \"Increase Roas (Official)\" (5 containers: IncreaseROAS Web, Increaseroas.com Browser + Server, Revstead Systems, Lone Star Spas)"
+        },
+        {
+          "column": "B",
+          "value": "GTM"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_google_tag_manager"
+        },
+        {
+          "column": "E",
+          "value": "YES: alex@ and the robot are admins (GTM API readback 2026-10-02). The default GTM account: build and publish only here."
+        },
+        {
+          "column": "F",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "11 Google tags (several client sites)"
+        },
+        {
+          "column": "B",
+          "value": "GTM"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through the delegated robot"
+        },
+        {
+          "column": "D",
+          "value": "custom_google_tag_manager GTM_CONTAINER lookup by G- ID"
+        },
+        {
+          "column": "E",
+          "value": "YES: 11 of 11 found by lookup; the account list does not show them"
+        },
+        {
+          "column": "F",
+          "value": "Use the G- ID from the GA4 data stream. Listing them needs a small change to the hub GTM server (not recorded as done)"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Google Ads manager account 1640283674 \"Increase Roas Inc.\""
+        },
+        {
+          "column": "B",
+          "value": "Google Ads"
+        },
+        {
+          "column": "C",
+          "value": "alex@ (login googleads_maned-sprack)"
+        },
+        {
+          "column": "D",
+          "value": "Composio googleads (31 tools)"
+        },
+        {
+          "column": "E",
+          "value": "YES: reads and createCustomerClient with validateOnly. All 8 client ad accounts are cancelled, suspended or closed, so no live client account to write to"
+        },
+        {
+          "column": "F",
+          "value": "Admins are alex@, franky@ and Angel@. Invites sent for contact@ and anthony@ as admin: franky@ or Angel@ must approve; removing franky@ and Angel@ is held until the partners are admins"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Meta ad accounts (57 reachable)"
+        },
+        {
+          "column": "B",
+          "value": "Meta"
+        },
+        {
+          "column": "C",
+          "value": "system user \"Manus\" of IR Business Manus App"
+        },
+        {
+          "column": "D",
+          "value": "Composio metaads (the Mac meta CLI was removed 2026-10-01, K04)"
+        },
+        {
+          "column": "E",
+          "value": "YES: 57 ad accounts, 22 permissions, never expires"
+        },
+        {
+          "column": "F",
+          "value": "Not checked: whether each of the 34 live customers' ad accounts (act_ IDs in knowledge/clients.md; Arbotex has none) is among the 57"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "GHL sub-accounts (303 total; 35 live customers in knowledge/clients.md)"
+        },
+        {
+          "column": "B",
+          "value": "GHL"
+        },
+        {
+          "column": "C",
+          "value": "IncreaseRoas agency OAuth gateway; builder uses per-location keys"
+        },
+        {
+          "column": "D",
+          "value": "ghl-oauth-crm (303) and ghl-command-builder (49 registered)"
+        },
+        {
+          "column": "E",
+          "value": "YES for all 303 through the CRM route; builder covers 49"
+        },
+        {
+          "column": "F",
+          "value": "Not checked: which of the 35 live customers are among the 49 registered. LONESTAR CUSTOMER SERVICE: dropped 2026-10-02 (Alex)"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Search Console: 5 properties (increaseroas.com x3, revsteadsystems.com, therealtreeservice.com)"
+        },
+        {
+          "column": "B",
+          "value": "Search Console"
+        },
+        {
+          "column": "C",
+          "value": "alex@ through a robot"
+        },
+        {
+          "column": "D",
+          "value": "Google robot google_api or custom_ga4_admin GOOGLE_API_REQUEST"
+        },
+        {
+          "column": "E",
+          "value": "YES: 5 properties listed"
+        },
+        {
+          "column": "F",
+          "value": "Client sites are not verified under Alex yet: verify each (DNS TXT through Cloudflare or an HTML file) before the sitemap and noindex checks"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+test_cli_init_create_recover (__main__.WorkflowTests.test_cli_init_create_recover) ... ok
+test_correction_retains_original_affected_tasks_after_dependency_edit (__main__.WorkflowTests.test_correction_retains_original_affected_tasks_after_dependency_edit) ... ok
+test_corrections_preserve_history_and_recheck_descendants (__main__.WorkflowTests.test_corrections_preserve_history_and_recheck_descendants) ... ok
+test_cycles_and_atomic_rollback (__main__.WorkflowTests.test_cycles_and_atomic_rollback) ... ok
+test_globally_unique_ids (__main__.WorkflowTests.test_globally_unique_ids) ... ok
+test_malformed_requests_leave_database_unchanged (__main__.WorkflowTests.test_malformed_requests_leave_database_unchanged) ... ok
+test_reopened_task_invalidates_prior_proof (__main__.WorkflowTests.test_reopened_task_invalidates_prior_proof) ... ok
+test_restart_and_recovery (__main__.WorkflowTests.test_restart_and_recovery) ... ok
+test_revision_and_idempotency (__main__.WorkflowTests.test_revision_and_idempotency) ... ok
+test_stale_checkpoint_after_unrelated_revision (__main__.WorkflowTests.test_stale_checkpoint_after_unrelated_revision) ... ok
+test_verification_guardrails (__main__.WorkflowTests.test_verification_guardrails) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.178s
+
+OK

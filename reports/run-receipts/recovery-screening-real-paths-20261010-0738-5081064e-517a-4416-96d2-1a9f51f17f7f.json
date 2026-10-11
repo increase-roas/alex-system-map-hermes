@@ -1,0 +1,566 @@
+{
+  "at": "2026-10-10T08:13:32+00:00",
+  "cases": {
+    "browser": {
+      "api_a": {
+        "actionable": "recheck against correction or changed prerequisites",
+        "actionable_not_stale": true,
+        "affected_count": 1,
+        "affected_has_t1_output": true,
+        "governed_t2_not_actionable": true,
+        "governing": true,
+        "next_not_blocked_t2": true,
+        "next_task_id": "t1",
+        "stale_history": true,
+        "t2_correction_applied": true,
+        "t2_ineligible_next": true,
+        "t2_pending_t1": true,
+        "t2_status": "needs_rechecking"
+      },
+      "api_b": {
+        "next": "Independent B step",
+        "no_governing": true,
+        "no_leak_correction_a": true
+      },
+      "build_id": "NAGwQKIQTJRhmcR9fI-un",
+      "build_id_after": "NAGwQKIQTJRhmcR9fI-un",
+      "build_id_stable": true,
+      "db_isolated": true,
+      "db_path_served": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+      "db_path_served_after": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738/local.sqlite",
+      "db_path_stable_after_restart": true,
+      "db_sha256_before": "5299249c67e15bd902bbb0be75f061457cbbf9e2e4309d51f86da3a743620881",
+      "db_sha256_matches_fresh_init": false,
+      "delivery": "recovery-screening-real-paths-20261010-0738",
+      "diagnostic_capture": {
+        "benign_marker_present": true,
+        "canary_redacted_in_health_preview": true,
+        "local_token_redacted": true
+      },
+      "diagnostic_marker": "LOCAL-SCREENING-OK",
+      "exit": 0,
+      "launcher_pid_after": 53652,
+      "launcher_pid_before": 53199,
+      "networkLog": [
+        {
+          "bodyLength": 1404,
+          "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":53221},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "health-before",
+          "parseError": null,
+          "parsedKeys": [
+            "ok",
+            "loopback_only",
+            "local_token_hint",
+            "build_id",
+            "process",
+            "runtime",
+            "completeness",
+            "sync",
+            "token_redacted"
+          ],
+          "screening_notes": [
+            "local-mutation-token withheld"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/health"
+        },
+        {
+          "bodyLength": 213,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791620005350-create\",\"handoff_operation_id\":\"rec-ui-a-1791620005350-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791620005350-create",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "handoff_operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 157,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791620005350-add-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791620005350-add-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 157,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791620005350-add-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791620005350-add-t2",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 161,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":4,\"operation_id\":\"rec-ui-a-1791620005350-produce-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791620005350-produce-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 161,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":5,\"operation_id\":\"rec-ui-a-1791620005350-correct-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791620005350-correct-t2",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 161,
+          "bodyPreview": "{\"job_id\":\"rec-ui-a-1791620005350\",\"revision\":6,\"operation_id\":\"rec-ui-a-1791620005350-correct-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-a-1791620005350-correct-t1",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 213,
+          "bodyPreview": "{\"job_id\":\"rec-ui-b-1791620005350\",\"revision\":1,\"operation_id\":\"rec-ui-b-1791620005350-create\",\"handoff_operation_id\":\"rec-ui-b-1791620005350-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-b-1791620005350-create",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "handoff_operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 154,
+          "bodyPreview": "{\"job_id\":\"rec-ui-b-1791620005350\",\"revision\":2,\"operation_id\":\"rec-ui-b-1791620005350-add\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "workflow-rec-ui-b-1791620005350-add",
+          "parseError": null,
+          "parsedKeys": [
+            "job_id",
+            "revision",
+            "operation_id",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow"
+        },
+        {
+          "bodyLength": 3979,
+          "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-a-1791620005350\",\"current_revision\":6,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job A chain\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[{\"active\":true,\"affected_task_ids\":[\"t2\"],\"id\":\"corr-t2\",\"preserved_attempts\":[],\"preserved_outputs\":[],\"reason\":\"Revise downstream instruction 0754-t2\",\"revision\":5,\"superseded_next_action\":\"wait for t1\",\"task_id",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "recover-a-before-restart",
+          "parseError": null,
+          "parsedKeys": [
+            "contract",
+            "synthetic_only",
+            "job_id",
+            "current_revision",
+            "goal",
+            "last_valid_verified_checkpoint",
+            "active_corrections",
+            "pending_dependencies",
+            "next_permitted_action",
+            "tasks",
+            "affected_outputs_needing_recheck",
+            "governing_next_action",
+            "superseded_next_permitted_action",
+            "correction_governed_task",
+            "reliability_recovery",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-a-1791620005350"
+        },
+        {
+          "bodyLength": 1404,
+          "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":53674},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/recovery-screening-real-paths-20261010-0738\",\"workflow_sqlite_path\":\"/U",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "health-after",
+          "parseError": null,
+          "parsedKeys": [
+            "ok",
+            "loopback_only",
+            "local_token_hint",
+            "build_id",
+            "process",
+            "runtime",
+            "completeness",
+            "sync",
+            "token_redacted"
+          ],
+          "screening_notes": [
+            "local-mutation-token withheld"
+          ],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/health"
+        },
+        {
+          "bodyLength": 3979,
+          "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-a-1791620005350\",\"current_revision\":6,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job A chain\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[{\"active\":true,\"affected_task_ids\":[\"t2\"],\"id\":\"corr-t2\",\"preserved_attempts\":[],\"preserved_outputs\":[],\"reason\":\"Revise downstream instruction 0754-t2\",\"revision\":5,\"superseded_next_action\":\"wait for t1\",\"task_id",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "recover-a",
+          "parseError": null,
+          "parsedKeys": [
+            "contract",
+            "synthetic_only",
+            "job_id",
+            "current_revision",
+            "goal",
+            "last_valid_verified_checkpoint",
+            "active_corrections",
+            "pending_dependencies",
+            "next_permitted_action",
+            "tasks",
+            "affected_outputs_needing_recheck",
+            "governing_next_action",
+            "superseded_next_permitted_action",
+            "correction_governed_task",
+            "reliability_recovery",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-a-1791620005350"
+        },
+        {
+          "bodyLength": 1081,
+          "bodyPreview": "{\"contract\":\"local-reference-v1\",\"synthetic_only\":true,\"job_id\":\"rec-ui-b-1791620005350\",\"current_revision\":2,\"goal\":{\"acceptance\":[\"check\"],\"constraints\":[],\"goal\":\"Recovery job B control\",\"owner\":\"owner-a\",\"scope\":[\"browser\"]},\"last_valid_verified_checkpoint\":null,\"active_corrections\":[],\"pending_dependencies\":{\"b1\":[]},\"next_permitted_action\":{\"task_id\":\"b1\",\"action\":\"Independent B step\",\"source\":\"workflow_engine\",\"actionable\":true},\"tasks\":{\"b1\":{\"acceptance\":[\"check\"],\"attempts\":[],\"blocker",
+          "contentType": "application/json",
+          "diagnostic_marker": "LOCAL-SCREENING-OK",
+          "label": "recover-b",
+          "parseError": null,
+          "parsedKeys": [
+            "contract",
+            "synthetic_only",
+            "job_id",
+            "current_revision",
+            "goal",
+            "last_valid_verified_checkpoint",
+            "active_corrections",
+            "pending_dependencies",
+            "next_permitted_action",
+            "tasks",
+            "affected_outputs_needing_recheck",
+            "reliability_recovery",
+            "diagnostic_marker",
+            "screening_notes"
+          ],
+          "screening_notes": [],
+          "status": 200,
+          "url": "http://127.0.0.1:3202/api/workflow/recover/rec-ui-b-1791620005350"
+        }
+      ],
+      "network_log_immutable_path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/capture-d7088c47/network-log-d7088c47.json",
+      "network_log_sha256": "d79d0dac5d5700db13542f80eea6f11585d66eefaee05a070bd31eb86647e62e",
+      "overall": "passed",
+      "recover_a_before": {
+        "governing": true,
+        "stale": "UI stale baseline instruction 0754-A"
+      },
+      "restart_stop": {
+        "listenerReleased": true,
+        "loopback_unreachable_observed": true,
+        "oldPidExited": true
+      },
+      "runner_sha256": "dcf76e810ccc7b808264859f0c0ea180da3492c92d9ab76a2ecce42674ffea75",
+      "screening_notes": [],
+      "screenshot": {
+        "bytes": 82784,
+        "path": "reports/browser-proof/recovery-screening-real-paths-20261010-0738/capture-d7088c47/recovery-d7088c47.png",
+        "sha256": "445f9c636d0728271a8fcf42e568171aff0bd3631f79c835ba4e9764d4360799"
+      },
+      "served_pid_after": 53674,
+      "served_pid_before": 53221,
+      "served_process_restarted": true,
+      "ui_a_actionable": "recheck against correction or changed prerequisites on t1 (workflow_correction)",
+      "ui_a_actionable_matches_api": true,
+      "ui_a_actionable_ok": true,
+      "ui_a_affected": "Affected outputs needing recheck: 1",
+      "ui_a_affected_ok": true,
+      "ui_a_history": "Prior decisions retained: wait for t1 \u00b7 UI stale baseline instruction 0754-A",
+      "ui_a_history_ok": true,
+      "ui_a_stale": "UI stale baseline instruction 0754-A on t1",
+      "ui_a_stale_ok": true,
+      "ui_b_actionable": "Independent B step on b1 (workflow_engine)",
+      "ui_b_actionable_ok": true,
+      "ui_b_no_correction_a": true,
+      "ui_b_no_history": true,
+      "ui_t2_downstream_blocked": "",
+      "ui_t2_downstream_blocked_ok": true
+    },
+    "diagnostic_screening": {
+      "applied": true,
+      "marker": "LOCAL-SCREENING-OK",
+      "notes": []
+    },
+    "emission_boundaries": {
+      "diagnose_text": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "events_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "list_jobs_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "raw_event_contains_canary": true,
+      "raw_trace_label_contains_canary": true,
+      "read_source_error_boundary": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 1,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "recover_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "stderr_read_source_screened": true,
+      "trace_get_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      },
+      "trace_list_export": {
+        "benign_marker": true,
+        "canary_removed": true,
+        "exit": 0,
+        "json_shape": true,
+        "nonempty": true
+      }
+    },
+    "independent_ack": {
+      "browser_review": "reports/independent-recovery-browser-review.json (07:35:34)",
+      "controlled_producer_scope": "local action only; prior acceptance preserved",
+      "screening_review": "reports/independent-recovery-screening-review.json (pending path in supervisor queue)"
+    },
+    "node_bridge": {
+      "benign_required": true,
+      "canary_removed": true,
+      "exit": 0,
+      "nonempty_required": true,
+      "parsed": {
+        "benign": true,
+        "init_ok": true,
+        "invalid_command_benign": true,
+        "invalid_command_canary_removed": true,
+        "invalid_command_json_stdout": true,
+        "invalid_command_nonempty": true,
+        "nonempty": true,
+        "nonzero_exit": 1,
+        "nonzero_json_rejected": true,
+        "read_source_benign": true,
+        "read_source_canary_removed": true,
+        "read_source_intended_error": true,
+        "screened": true
+      },
+      "screened_required": true
+    },
+    "prior_attempts_preserved": [
+      "reports/run-receipts/recovery-emitted-screening-20261010-0722-a7b9637c-ed4d-430e-80dd-a10b7d5e22ad.json",
+      "reports/independent-recovery-browser-review.json"
+    ],
+    "recovery_dependency": {
+      "blockers_include_t1": true,
+      "corrected_task_blocked": true,
+      "diagnostic_marker": true,
+      "next_not_corrected_downstream": true
+    },
+    "summarize_negative_controls": {
+      "all_must_fail": false,
+      "cases": [
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "emission_boundaries.events_export.json_shape",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "emission_boundaries.events_export.exit",
+          "value_type": "int"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "emission_boundaries.list_jobs_export.benign_marker",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "emission_boundaries.recover_export.canary_removed",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "emission_boundaries.diagnose_text.nonempty",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "node_bridge.benign_required",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "node_bridge.screened_required",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "node_bridge.nonempty_required",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "browser.overall",
+          "value_type": "str"
+        },
+        {
+          "must_fail": true,
+          "passed": false,
+          "path": "recovery_dependency.corrected_task_blocked",
+          "value_type": "bool"
+        },
+        {
+          "must_fail": true,
+          "passed": true,
+          "path": "summarize_negative_controls.all_must_fail",
+          "value_type": "bool"
+        }
+      ],
+      "count": 11
+    }
+  },
+  "delivery_id": "recovery-screening-real-paths-20261010-0738",
+  "failure_artifacts_preserved": [
+    {
+      "path": "reports/workflow-core-failures/recovery-screening-real-paths-20261010-0738-5081064e.json",
+      "sha256": "0bc8179700a14ae6ac4eed1bdeb9b3fcc0f3fb7d7bca1ff1c0ae5be0f93502b2"
+    }
+  ],
+  "failures": [
+    "summarize_negative_controls"
+  ],
+  "independent_verification": "not_claimed",
+  "intentional_failed_attempt_recorded": true,
+  "overall": "failed",
+  "owner_chat": "4f32e74a-58e3-4abb-ba6f-fb151ba80cd7",
+  "receipt_immutability": {
+    "immutable_path": "reports/run-receipts/recovery-screening-real-paths-20261010-0738-5081064e-517a-4416-96d2-1a9f51f17f7f.json"
+  },
+  "run_id": "5081064e-517a-4416-96d2-1a9f51f17f7f",
+  "source_identity": {
+    "app/src/app/api/health/route.ts": "5a9b3b89545eaab786cb43bd62baec848027140eadb41dfd38f9f3d1d42496e2",
+    "app/src/app/api/workflow/route.ts": "cc7cb6e5c915fcd47dc8e3de90e38ca7357f7c89527abd31fd48e9a2a163983b",
+    "app/src/app/explorer/workflow-panel.tsx": "0febaf970fe1d0935f5c48898c8c0b01ec7d96654edd554ea8d805b7c61bca78",
+    "app/src/lib/server/paths.ts": "6c41081170f9aa33bfc95ef602be082a12221ba5b73fbd18b188a917871febed",
+    "app/src/lib/server/python.ts": "cd793195c8eb543636afcd39a1ca3ecf725d0efb4839cbedf4be28c751b14919",
+    "tools/browser_recovery_screening.mjs": "dcf76e810ccc7b808264859f0c0ea180da3492c92d9ab76a2ecce42674ffea75",
+    "tools/job_recovery.py": "7b68031865878c6332ee9275d537d271abd6dd9731e2cda4962fed4a91f50c5a",
+    "tools/local_service.py": "c381f113218dff924d68e51be42cfcfdafbb82b365a9292772cb927515ddbfd9",
+    "tools/node_bridge_screen_probe.ts": "d75fdd205b28124e819f28dd1f2354847e61e9969e2c92431ab3d95b139d0fb1",
+    "tools/output_screening.py": "a61fd00e23340e3129eab78b56c33aa8d72ca2428e7764406ba7cf018bea0c4a",
+    "tools/recovery_screening_real_paths_acceptance.py": "611ad5f33c743ffa1b5618637ae80a6b469759219983ff2d4515054d6cfc0a70",
+    "tools/trace_store.py": "c2cf53be803f225fe42d9b0bbe88c1fa76c05bde62191593a926b9ff0b58ecc6"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "label": "SYNTHETIC/TEST",
+  "receipt_id": "live-mutation-app-path-corrections-20261010-0514",
+  "trace_id": "trace-live-mutation",
+  "synthetic_only": true,
+  "generated_at": "2026-10-10T06:24:24+00:00",
+  "source_marker_sha256_before": "1ca4f4ae4ba7c020675161994cc90cdec70ba706ebec5d245202c878c0cdd196",
+  "source_marker_sha256_after": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485",
+  "spans": [
+    {
+      "span_id": "span-live-sync",
+      "name": "catalog_sync.observe",
+      "tool_action": "observe_all",
+      "status": "ok",
+      "metadata": {
+        "marker_path": "work/reliability/synthetic-sync-marker.json",
+        "sha256_before": "1ca4f4ae4ba7c020675161994cc90cdec70ba706ebec5d245202c878c0cdd196",
+        "sha256_after": "057f48bb3bc4a15557f5eb982182002ab3bbdb7f18066482cd5db61cb12fd485"
+      }
+    }
+  ]
+}

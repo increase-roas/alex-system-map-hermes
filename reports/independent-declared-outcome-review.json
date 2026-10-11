@@ -1,0 +1,606 @@
+{
+  "reviewed_at": "2026-10-10T06:56:19.119475+00:00",
+  "receipt_at": "2026-10-10T06:53:05+00:00",
+  "run_id": "6b83d885-e2da-4955-b1de-70eaf67ee859",
+  "receipt_path": "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json",
+  "receipt_sha256": "7d56a2cfdf84e744b3b7cef04def0ee122517d4ca792ebcd200ae398c02b2022",
+  "scope": "Changed declared UTF8/JSON outcome, declaration timing/revision, live consumption and isolated wrongtask; no universal verifier or prior transaction reaudit.",
+  "source_identity": {
+    "tools/bounded_acceptance.py": {
+      "receipt_sha256": "48e76eaf7f767dce6352f9ae28610b9f3aaae3406c92b244d77fc9172462555e",
+      "current_sha256": "48e76eaf7f767dce6352f9ae28610b9f3aaae3406c92b244d77fc9172462555e",
+      "matches": true
+    },
+    "tools/declared_outcome_live_proof_acceptance.py": {
+      "receipt_sha256": "b17e84affbdb447c254253491223f9625b0b2094d471c14b88c75664afabe0dd",
+      "current_sha256": "b17e84affbdb447c254253491223f9625b0b2094d471c14b88c75664afabe0dd",
+      "matches": true
+    },
+    "tools/local_service.py": {
+      "receipt_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "current_sha256": "56a76f1d271d1d4fbaf02b5ec6d8aeb64c751ff46109fcf8da4f2718ed211221",
+      "matches": true
+    },
+    "tools/receipt_immutable.py": {
+      "receipt_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "current_sha256": "0f8905a842def48e70fd6298435d6405b461f171f89db59a6ed4f4bf3769d7a3",
+      "matches": true
+    },
+    "tools/reliability_gate.py": {
+      "receipt_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "current_sha256": "5b425f0f2262a7aba0d534e4130017bd31c417cb15567f601cdfc2d6342b3548",
+      "matches": true
+    },
+    "tools/reliability_store.py": {
+      "receipt_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "current_sha256": "d843fbfd2dc80a2c328b1d4382f384caf9dbc72e66de1e5a4437687c4c1676c6",
+      "matches": true
+    },
+    "tools/verification_evidence.py": {
+      "receipt_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "current_sha256": "c369a1ff5a915196400ec90860450abc94c94ec8fc7b736ec227dec5592d4804",
+      "matches": true
+    },
+    "tools/workflow_apply_guard.py": {
+      "receipt_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "current_sha256": "ef3b168c142a7c46299301687c03b6e8db193db50917123b68b44b35b0e379ff",
+      "matches": true
+    },
+    "tools/workflow_engine.py": {
+      "receipt_sha256": "de05c154a0be7ce0f851c0909fe17a54cb8fe9ba4d3cdb2cf4d84803c92602b1",
+      "current_sha256": "de05c154a0be7ce0f851c0909fe17a54cb8fe9ba4d3cdb2cf4d84803c92602b1",
+      "matches": true
+    }
+  },
+  "snapshot_stable": true,
+  "methods": "Source/receipt reads; saved SQLite mode=ro SELECTs; pure in-memory parsed task checks and mocked file SHA. No mutating scripts/DB/source/browser/external actions.",
+  "items": [
+    {
+      "id": "D01",
+      "status": "VERIFIED",
+      "claim": "Saved expectation precedes production and is bound to proof",
+      "evidence": [
+        "tools/workflow_engine.py:139-152",
+        "tools/declared_outcome_live_proof_acceptance.py:129-168",
+        "tools/bounded_acceptance.py:279-286"
+      ],
+      "detail": "Saved add_task event revision2 declares expected UTF8/contract revision1 and hash00ed639c...; output event revision3 occurs later; measured proof records contract hash/revision within job/task/op/verifier-scoped registered proof."
+    },
+    {
+      "id": "D02",
+      "status": "FAILED",
+      "claim": "Enforced preproduction provenance and monotonic expectation revision",
+      "evidence": [
+        "tools/workflow_engine.py:172-195",
+        "tools/bounded_acceptance.py:120-137"
+      ],
+      "detail": "Update accepts valid declared_outcomes after existing production, without comparison to prior contract revision/hash; invalidation changes status but keeps or replaces outputs. Replacing expected bytes with already-produced wrong bytes at revision1 validates and measures true. Cannot claim predeclared expectation enforcement; no producer declaration revision is attached to output descriptor. Actual recorded positive ordering alone does not close permitted update path."
+    },
+    {
+      "id": "D03",
+      "status": "VERIFIED",
+      "claim": "Exact UTF8 outcome, missing/unrelated literal path/wrongcontent refusal, unsupported noncompletion",
+      "evidence": [
+        "tools/bounded_acceptance.py:197-218",
+        "tools/bounded_acceptance.py:246-289",
+        "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json"
+      ],
+      "detail": "Positive saved verified task/content and registered proof match23bytes declared-live-proof-v1 newline; missing artifact and wrongcontent remain incomplete; literal docs path rejected; unsupported criterion returns false acceptance_criterion_unsupported. JSON pure positive and wrong value return expected true/false."
+    },
+    {
+      "id": "D04",
+      "status": "FAILED",
+      "claim": "Exact supported JSON result semantics",
+      "evidence": [
+        "tools/bounded_acceptance.py:210-216"
+      ],
+      "detail": "Python equality conflates boolean/numeric JSON values. Pure expected_result={ok:true} with content={ok:1} returns true/result_matches_declaration. {ok:false} correctly fails. Need type-preserving JSON comparison. No saved handler JSON-result case exists; owner receipt covers UTF8 only."
+    },
+    {
+      "id": "D05",
+      "status": "VERIFIED",
+      "claim": "Live artifact and contract remeasurement at actual workflow consumption",
+      "evidence": [
+        "tools/verification_evidence.py:442-481",
+        "tools/bounded_acceptance.py:292-325",
+        "tools/declared_outcome_live_proof_acceptance.py:299-353"
+      ],
+      "detail": "Consumption calls registered proof resolver then reloads task and remeasures artifact/declared contract. Saved tamper operation has0operations/0events; restored fresh record has1/1. Pure changed-artifact SHA produces observed_artifact_changed_at_consumption; changed contract produces declared_outcome_contract_changed. Proof/check fields are not accepted without live reread. No mutating rerun performed."
+    },
+    {
+      "id": "D06",
+      "status": "FAILED",
+      "claim": "Resolved artifact-directory allowlist",
+      "evidence": [
+        "tools/bounded_acceptance.py:34-40",
+        "tools/bounded_acceptance.py:190-194"
+      ],
+      "detail": "Text prefix is checked before resolution and resolved path only constrained to project. work/task-artifacts/../../docs/RELIABILITY_ADDENDUM.md resolves outside artifact directory yet measures true with matching declaration. Bound resolved path to ARTIFACT_ROOT using path containment; reject traversal/symlink escapes. This is a concrete in-project counterexample, no external path was read."
+    },
+    {
+      "id": "D07",
+      "status": "VERIFIED",
+      "claim": "Isolated single-variable wrongtask with matching remaining scope and0effects",
+      "evidence": [
+        "tools/declared_outcome_live_proof_acceptance.py:377-412",
+        "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json"
+      ],
+      "detail": "Saved wt-job revision3 in_progress, record/request operation dolp-record-wt both equal, verifier reviewer-b/job/revision match; request changes only task t1 to t-other, exact reason verification_record_task_id_mismatch; requested operations/events0."
+    },
+    {
+      "id": "D08",
+      "status": "VERIFIED",
+      "claim": "Source identity and final-byte history/pointer",
+      "evidence": [
+        "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json",
+        "reports/receipt-hash-manifest.jsonl",
+        "reports/workflow-core-run-history.jsonl"
+      ],
+      "detail": "All9 current source hashes match receipt; immutable bytes and both links match7d56a2cfdf84e744b3b7cef04def0ee122517d4ca792ebcd200ae398c02b2022. Prior accepted immutable writer/history and transaction fixes retained; no broad repeat."
+    }
+  ],
+  "pure_controls": {
+    "retroactive_same_revision": {
+      "old_contract": [
+        "{\"contract_sha256\":\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"declared-live-proof-v1\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+      ],
+      "new_contract": "{\"contract_sha256\":\"5a03dd6c3d19a1fe0cb11ca8f5f1884d8365d6447a96d4708306bdbfe23fa973\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"wrong-bytes-not-declared\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}",
+      "validate": [
+        true,
+        "ok"
+      ],
+      "measure": [
+        {
+          "outcome_proof_bound": true,
+          "artifact_hash_matches": true,
+          "declared_outcome_verified": true
+        },
+        [
+          {
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/decl-job/t1-57053829a477.txt",
+            "sha256": "57053829a47765cc63ccc7c4d5ae98f3e9abb19a48be10964c5bcb250d59ed6c",
+            "byte_length": 25,
+            "contract_revision": 1,
+            "contract_sha256": "5a03dd6c3d19a1fe0cb11ca8f5f1884d8365d6447a96d4708306bdbfe23fa973",
+            "content_matches_declaration": true
+          }
+        ],
+        null
+      ]
+    },
+    "changed_contract": [
+      false,
+      "declared_outcome_contract_changed"
+    ],
+    "changed_artifact": [
+      false,
+      "observed_artifact_changed_at_consumption"
+    ],
+    "json_result_positive": [
+      true,
+      "ok",
+      {
+        "contract_revision": 1,
+        "contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+        "result_matches_declaration": true
+      }
+    ],
+    "json_result_wrong_value": [
+      false,
+      "declared_result_mismatch",
+      {
+        "contract_revision": 1,
+        "contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+        "result_matches_declaration": false
+      }
+    ],
+    "json_result_wrong_type": [
+      true,
+      "ok",
+      {
+        "contract_revision": 1,
+        "contract_sha256": "4530ffbe79f7cacd4b40c914c1bbbd4caf658f599c354bd6df503c586298e55c",
+        "result_matches_declaration": true
+      }
+    ],
+    "unsupported": [
+      {
+        "criterion_arbitrary_completion_unsupported": false
+      },
+      [],
+      "acceptance_criterion_unsupported"
+    ],
+    "resolved_allowlist_escape": {
+      "relative_path": "work/task-artifacts/../../docs/RELIABILITY_ADDENDUM.md",
+      "resolved_path": "docs/RELIABILITY_ADDENDUM.md",
+      "result": [
+        {
+          "outcome_proof_bound": true,
+          "artifact_hash_matches": true,
+          "declared_outcome_verified": true
+        },
+        [
+          {
+            "criterion": "proof-bound",
+            "relative_path": "work/task-artifacts/../../docs/RELIABILITY_ADDENDUM.md",
+            "sha256": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640",
+            "byte_length": 4238,
+            "contract_revision": 1,
+            "contract_sha256": "ff91a1362c043447f68e163f6a460721ccb43b127e8897df35c8cc538ea2f3b8",
+            "content_matches_declaration": true
+          }
+        ],
+        null
+      ]
+    }
+  },
+  "saved_db_readbacks": [
+    {
+      "path": "app/.data/workflow-core-tests/declared-contract-declared-outcome-live-proof-20261010-0650.sqlite",
+      "sha256": "9fe6ac43bc866391e2b6121fb2b1863d21e5eee2c640fb132e90b71885dee84e",
+      "job_revision": 3,
+      "task": {
+        "acceptance": [
+          "proof-bound"
+        ],
+        "attempts": [
+          {
+            "details": "produce",
+            "revision": 3
+          }
+        ],
+        "blockers": [],
+        "declared_outcomes": [
+          "{\"contract_sha256\":\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"declared-live-proof-v1\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+        ],
+        "deps": [],
+        "evidence": [],
+        "goal": "Return exactly declared UTF-8 artifact",
+        "id": "t1",
+        "next_action": "perform task",
+        "outputs": [
+          "{\"byte_length\":25,\"relative_path\":\"work/task-artifacts/decl-job/t1-57053829a477.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"57053829a47765cc63ccc7c4d5ae98f3e9abb19a48be10964c5bcb250d59ed6c\"}"
+        ],
+        "owner": "owner-a",
+        "status": "in_progress"
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "job_id": "decl-job",
+          "revision": 1,
+          "payload": "{\"action\":\"create\",\"actor_owner\":\"owner-a\",\"expected_revision\":0,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-create\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"constraints\":[],\"goal\":\"g\",\"owner\":\"owner-a\",\"scope\":[\"l\"]}}"
+        },
+        {
+          "sequence": 2,
+          "job_id": "decl-job",
+          "revision": 2,
+          "payload": "{\"action\":\"add_task\",\"actor_owner\":\"owner-a\",\"expected_revision\":1,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-add\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"declared_outcomes\":[\"{\\\"contract_sha256\\\":\\\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\\\",\\\"criterion\\\":\\\"proof-bound\\\",\\\"expected_utf8\\\":\\\"declared-live-proof-v1\\\\n\\\",\\\"revision\\\":1,\\\"schema\\\":\\\"declared_outcome_v1\\\"}\"],\"deps\":[],\"goal\":\"Return exactly declared UTF-8 artifact\",\"id\":\"t1\",\"owner\":\"owner-a\"}}"
+        },
+        {
+          "sequence": 3,
+          "job_id": "decl-job",
+          "revision": 3,
+          "payload": "{\"action\":\"update\",\"actor_owner\":\"owner-a\",\"expected_revision\":2,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-produce-wrong\",\"payload\":{\"attempt\":\"produce\",\"outputs\":[\"{\\\"byte_length\\\":25,\\\"relative_path\\\":\\\"work/task-artifacts/decl-job/t1-57053829a477.txt\\\",\\\"schema\\\":\\\"bounded_artifact_v1\\\",\\\"sha256\\\":\\\"57053829a47765cc63ccc7c4d5ae98f3e9abb19a48be10964c5bcb250d59ed6c\\\"}\"],\"status\":\"in_progress\",\"task_id\":\"t1\"}}"
+        }
+      ],
+      "proofs": [],
+      "operation_readbacks": {
+        "dolp-produce-wrong": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/declared-positive-declared-outcome-live-proof-20261010-0650.sqlite",
+      "sha256": "0b935eb9109efbea484a9528cf3ee9333660ad86448d7e084b9921dee71274a8",
+      "job_revision": 4,
+      "task": {
+        "acceptance": [
+          "proof-bound"
+        ],
+        "attempts": [
+          {
+            "details": "produce",
+            "revision": 3
+          }
+        ],
+        "blockers": [],
+        "declared_outcomes": [
+          "{\"contract_sha256\":\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"declared-live-proof-v1\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+        ],
+        "deps": [],
+        "evidence": [
+          "work/reliability/verification-records/1631b7c1-cdc0-4f64-8847-140867cc58f3.json"
+        ],
+        "goal": "Return exactly declared UTF-8 artifact",
+        "id": "t1",
+        "next_action": null,
+        "outputs": [
+          "{\"byte_length\":23,\"relative_path\":\"work/task-artifacts/decl-job/t1-0e3b0d4bfd2c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd\"}"
+        ],
+        "owner": "owner-a",
+        "status": "verified"
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "job_id": "decl-job",
+          "revision": 1,
+          "payload": "{\"action\":\"create\",\"actor_owner\":\"owner-a\",\"expected_revision\":0,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-create\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"constraints\":[],\"goal\":\"g\",\"owner\":\"owner-a\",\"scope\":[\"l\"]}}"
+        },
+        {
+          "sequence": 2,
+          "job_id": "decl-job",
+          "revision": 2,
+          "payload": "{\"action\":\"add_task\",\"actor_owner\":\"owner-a\",\"expected_revision\":1,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-add\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"declared_outcomes\":[\"{\\\"contract_sha256\\\":\\\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\\\",\\\"criterion\\\":\\\"proof-bound\\\",\\\"expected_utf8\\\":\\\"declared-live-proof-v1\\\\n\\\",\\\"revision\\\":1,\\\"schema\\\":\\\"declared_outcome_v1\\\"}\"],\"deps\":[],\"goal\":\"Return exactly declared UTF-8 artifact\",\"id\":\"t1\",\"owner\":\"owner-a\"}}"
+        },
+        {
+          "sequence": 3,
+          "job_id": "decl-job",
+          "revision": 3,
+          "payload": "{\"action\":\"update\",\"actor_owner\":\"owner-a\",\"expected_revision\":2,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-produce-good\",\"payload\":{\"attempt\":\"produce\",\"outputs\":[\"{\\\"byte_length\\\":23,\\\"relative_path\\\":\\\"work/task-artifacts/decl-job/t1-0e3b0d4bfd2c.txt\\\",\\\"schema\\\":\\\"bounded_artifact_v1\\\",\\\"sha256\\\":\\\"0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd\\\"}\"],\"status\":\"in_progress\",\"task_id\":\"t1\"}}"
+        },
+        {
+          "sequence": 4,
+          "job_id": "decl-job",
+          "revision": 4,
+          "payload": "{\"action\":\"verify\",\"actor_owner\":\"owner-a\",\"expected_revision\":3,\"job_id\":\"decl-job\",\"operation_id\":\"dolp-record-good\",\"payload\":{\"checks\":{\"proof-bound\":true},\"evidence\":[\"work/reliability/verification-records/1631b7c1-cdc0-4f64-8847-140867cc58f3.json\"],\"id\":\"cp-good\",\"requirement_claims\":[{\"complete\":true,\"evidence\":{\"actually_used\":\"workflow_verify_performed_work\",\"documented_path\":\"docs/RELIABILITY_ADDENDUM.md\",\"proof_path\":\"work/reliability/verification-records/1631b7c1-cdc0-4f64-8847-140867cc58f3.json\",\"proof_sha256\":\"5d22fcd615c986c1880421698ec5d55056045d31051ed4d00eaed0886a814eee\",\"relationships_sha256\":\"a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298\",\"requirement_id\":\"REL-02\",\"skills_verified\":true,\"verified_at\":\"2026-10-10T06:53:04+00:00\"},\"job_id\":\"decl-job\",\"job_revision\":3,\"owner\":\"declared-outcome-acceptance\",\"requirement_id\":\"REL-02\",\"requirement_set\":[\"REL-01\",\"REL-02\",\"REL-03\",\"REL-04\",\"REL-05\",\"REL-06\"]}],\"task_id\":\"t1\",\"verifier\":\"reviewer-b\"}}"
+        }
+      ],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/1631b7c1-cdc0-4f64-8847-140867cc58f3.json",
+          "registry_sha256": "5d22fcd615c986c1880421698ec5d55056045d31051ed4d00eaed0886a814eee",
+          "actual_sha256": "5d22fcd615c986c1880421698ec5d55056045d31051ed4d00eaed0886a814eee",
+          "scope": {
+            "job_id": "decl-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "dolp-record-good",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/decl-job/t1-0e3b0d4bfd2c.txt",
+              "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd",
+              "byte_length": 23,
+              "contract_revision": 1,
+              "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+              "content_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "dolp-record-good": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/consumption-recheck-declared-outcome-live-proof-20261010-0650.sqlite",
+      "sha256": "1984446276a7a40978215484ba2a2531b5b512d940fc82fe147f5fc286588a47",
+      "job_revision": 4,
+      "task": {
+        "acceptance": [
+          "proof-bound"
+        ],
+        "attempts": [
+          {
+            "details": "produce",
+            "revision": 3
+          }
+        ],
+        "blockers": [],
+        "declared_outcomes": [
+          "{\"contract_sha256\":\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"declared-live-proof-v1\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+        ],
+        "deps": [],
+        "evidence": [
+          "work/reliability/verification-records/d45ce0d7-3c7e-4aeb-96ea-76a59f80c6dd.json"
+        ],
+        "goal": "Return exactly declared UTF-8 artifact",
+        "id": "t1",
+        "next_action": null,
+        "outputs": [
+          "{\"byte_length\":23,\"relative_path\":\"work/task-artifacts/live-job/t1-0e3b0d4bfd2c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd\"}"
+        ],
+        "owner": "owner-a",
+        "status": "verified"
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "job_id": "live-job",
+          "revision": 1,
+          "payload": "{\"action\":\"create\",\"actor_owner\":\"owner-a\",\"expected_revision\":0,\"job_id\":\"live-job\",\"operation_id\":\"dolp-create\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"constraints\":[],\"goal\":\"g\",\"owner\":\"owner-a\",\"scope\":[\"l\"]}}"
+        },
+        {
+          "sequence": 2,
+          "job_id": "live-job",
+          "revision": 2,
+          "payload": "{\"action\":\"add_task\",\"actor_owner\":\"owner-a\",\"expected_revision\":1,\"job_id\":\"live-job\",\"operation_id\":\"dolp-add\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"declared_outcomes\":[\"{\\\"contract_sha256\\\":\\\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\\\",\\\"criterion\\\":\\\"proof-bound\\\",\\\"expected_utf8\\\":\\\"declared-live-proof-v1\\\\n\\\",\\\"revision\\\":1,\\\"schema\\\":\\\"declared_outcome_v1\\\"}\"],\"deps\":[],\"goal\":\"Return exactly declared UTF-8 artifact\",\"id\":\"t1\",\"owner\":\"owner-a\"}}"
+        },
+        {
+          "sequence": 3,
+          "job_id": "live-job",
+          "revision": 3,
+          "payload": "{\"action\":\"update\",\"actor_owner\":\"owner-a\",\"expected_revision\":2,\"job_id\":\"live-job\",\"operation_id\":\"dolp-produce-live\",\"payload\":{\"attempt\":\"produce\",\"outputs\":[\"{\\\"byte_length\\\":23,\\\"relative_path\\\":\\\"work/task-artifacts/live-job/t1-0e3b0d4bfd2c.txt\\\",\\\"schema\\\":\\\"bounded_artifact_v1\\\",\\\"sha256\\\":\\\"0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd\\\"}\"],\"status\":\"in_progress\",\"task_id\":\"t1\"}}"
+        },
+        {
+          "sequence": 4,
+          "job_id": "live-job",
+          "revision": 4,
+          "payload": "{\"action\":\"verify\",\"actor_owner\":\"owner-a\",\"expected_revision\":3,\"job_id\":\"live-job\",\"operation_id\":\"dolp-live-record-2\",\"payload\":{\"checks\":{\"proof-bound\":true},\"evidence\":[\"work/reliability/verification-records/d45ce0d7-3c7e-4aeb-96ea-76a59f80c6dd.json\"],\"id\":\"cp-ok\",\"requirement_claims\":[{\"complete\":true,\"evidence\":{\"actually_used\":\"workflow_verify_performed_work\",\"documented_path\":\"docs/RELIABILITY_ADDENDUM.md\",\"proof_path\":\"work/reliability/verification-records/d45ce0d7-3c7e-4aeb-96ea-76a59f80c6dd.json\",\"proof_sha256\":\"966be61b9b550adde4435fde6185f88b36fa761ad4f8ef11936f6468b294a34a\",\"relationships_sha256\":\"a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298\",\"requirement_id\":\"REL-02\",\"skills_verified\":true,\"verified_at\":\"2026-10-10T06:53:04+00:00\"},\"job_id\":\"live-job\",\"job_revision\":3,\"owner\":\"declared-outcome-acceptance\",\"requirement_id\":\"REL-02\",\"requirement_set\":[\"REL-01\",\"REL-02\",\"REL-03\",\"REL-04\",\"REL-05\",\"REL-06\"]}],\"task_id\":\"t1\",\"verifier\":\"reviewer-b\"}}"
+        }
+      ],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/9d7a32d7-1df8-4199-ba39-4f13a1502c18.json",
+          "registry_sha256": "63b43bd74f2661b84e228a9ccb249d74ad5b33d67fc8720d2ce4c73940ca047a",
+          "actual_sha256": "63b43bd74f2661b84e228a9ccb249d74ad5b33d67fc8720d2ce4c73940ca047a",
+          "scope": {
+            "job_id": "live-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "dolp-live-record",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/live-job/t1-0e3b0d4bfd2c.txt",
+              "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd",
+              "byte_length": 23,
+              "contract_revision": 1,
+              "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+              "content_matches_declaration": true
+            }
+          ]
+        },
+        {
+          "path": "work/reliability/verification-records/d45ce0d7-3c7e-4aeb-96ea-76a59f80c6dd.json",
+          "registry_sha256": "966be61b9b550adde4435fde6185f88b36fa761ad4f8ef11936f6468b294a34a",
+          "actual_sha256": "966be61b9b550adde4435fde6185f88b36fa761ad4f8ef11936f6468b294a34a",
+          "scope": {
+            "job_id": "live-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "dolp-live-record-2",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/live-job/t1-0e3b0d4bfd2c.txt",
+              "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd",
+              "byte_length": 23,
+              "contract_revision": 1,
+              "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+              "content_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "dolp-live-record": {
+          "operations": 0,
+          "events": 0
+        },
+        "dolp-live-record-2": {
+          "operations": 1,
+          "events": 1
+        }
+      }
+    },
+    {
+      "path": "app/.data/workflow-core-tests/wrong-task-only-declared-outcome-live-proof-20261010-0650.sqlite",
+      "sha256": "b1d0def0ca1f1d8d0ffc02fe29a1bb4a80d4b30dc661a2436ae080d19029145c",
+      "job_revision": 3,
+      "task": {
+        "acceptance": [
+          "proof-bound"
+        ],
+        "attempts": [
+          {
+            "details": "produce",
+            "revision": 3
+          }
+        ],
+        "blockers": [],
+        "declared_outcomes": [
+          "{\"contract_sha256\":\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\",\"criterion\":\"proof-bound\",\"expected_utf8\":\"declared-live-proof-v1\\n\",\"revision\":1,\"schema\":\"declared_outcome_v1\"}"
+        ],
+        "deps": [],
+        "evidence": [],
+        "goal": "Return exactly declared UTF-8 artifact",
+        "id": "t1",
+        "next_action": "perform task",
+        "outputs": [
+          "{\"byte_length\":23,\"relative_path\":\"work/task-artifacts/wt-job/t1-0e3b0d4bfd2c.txt\",\"schema\":\"bounded_artifact_v1\",\"sha256\":\"0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd\"}"
+        ],
+        "owner": "owner-a",
+        "status": "in_progress"
+      },
+      "events": [
+        {
+          "sequence": 1,
+          "job_id": "wt-job",
+          "revision": 1,
+          "payload": "{\"action\":\"create\",\"actor_owner\":\"owner-a\",\"expected_revision\":0,\"job_id\":\"wt-job\",\"operation_id\":\"dolp-create\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"constraints\":[],\"goal\":\"g\",\"owner\":\"owner-a\",\"scope\":[\"l\"]}}"
+        },
+        {
+          "sequence": 2,
+          "job_id": "wt-job",
+          "revision": 2,
+          "payload": "{\"action\":\"add_task\",\"actor_owner\":\"owner-a\",\"expected_revision\":1,\"job_id\":\"wt-job\",\"operation_id\":\"dolp-add\",\"payload\":{\"acceptance\":[\"proof-bound\"],\"declared_outcomes\":[\"{\\\"contract_sha256\\\":\\\"00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad\\\",\\\"criterion\\\":\\\"proof-bound\\\",\\\"expected_utf8\\\":\\\"declared-live-proof-v1\\\\n\\\",\\\"revision\\\":1,\\\"schema\\\":\\\"declared_outcome_v1\\\"}\"],\"deps\":[],\"goal\":\"Return exactly declared UTF-8 artifact\",\"id\":\"t1\",\"owner\":\"owner-a\"}}"
+        },
+        {
+          "sequence": 3,
+          "job_id": "wt-job",
+          "revision": 3,
+          "payload": "{\"action\":\"update\",\"actor_owner\":\"owner-a\",\"expected_revision\":2,\"job_id\":\"wt-job\",\"operation_id\":\"dolp-produce-wt\",\"payload\":{\"attempt\":\"produce\",\"outputs\":[\"{\\\"byte_length\\\":23,\\\"relative_path\\\":\\\"work/task-artifacts/wt-job/t1-0e3b0d4bfd2c.txt\\\",\\\"schema\\\":\\\"bounded_artifact_v1\\\",\\\"sha256\\\":\\\"0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd\\\"}\"],\"status\":\"in_progress\",\"task_id\":\"t1\"}}"
+        }
+      ],
+      "proofs": [
+        {
+          "path": "work/reliability/verification-records/c93d4e0d-5899-45fa-8ffd-d3ff66a3210c.json",
+          "registry_sha256": "34a12aed336da160323dfb9f19dc6fe8a2956b80c18a3ee4dd505914c7460328",
+          "actual_sha256": "34a12aed336da160323dfb9f19dc6fe8a2956b80c18a3ee4dd505914c7460328",
+          "scope": {
+            "job_id": "wt-job",
+            "job_revision": 3,
+            "task_id": "t1",
+            "operation_id": "dolp-record-wt",
+            "verifier": "reviewer-b"
+          },
+          "observed_proofs": [
+            {
+              "criterion": "proof-bound",
+              "relative_path": "work/task-artifacts/wt-job/t1-0e3b0d4bfd2c.txt",
+              "sha256": "0e3b0d4bfd2c83924aed4a4fb134d93bfda7cac69e69c3704a52bb10224be9bd",
+              "byte_length": 23,
+              "contract_revision": 1,
+              "contract_sha256": "00ed639c68054e05ba5f911fb1c7ceff1baa94758d0a8d37b453b60b592b65ad",
+              "content_matches_declaration": true
+            }
+          ]
+        }
+      ],
+      "operation_readbacks": {
+        "dolp-record-wt": {
+          "operations": 0,
+          "events": 0
+        }
+      }
+    }
+  ],
+  "history_links": {
+    "reports/receipt-hash-manifest.jsonl": [
+      {
+        "content_sha256": "7d56a2cfdf84e744b3b7cef04def0ee122517d4ca792ebcd200ae398c02b2022",
+        "delivery_id": "declared-outcome-live-proof-20261010-0650",
+        "immutable_receipt_path": "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json",
+        "run_id": "6b83d885-e2da-4955-b1de-70eaf67ee859"
+      }
+    ],
+    "reports/workflow-core-run-history.jsonl": [
+      {
+        "delivery_id": "declared-outcome-live-proof-20261010-0650",
+        "run_id": "6b83d885-e2da-4955-b1de-70eaf67ee859",
+        "at": "2026-10-10T06:53:05+00:00",
+        "overall": "passed",
+        "immutable_receipt": "reports/run-receipts/declared-outcome-live-proof-20261010-0650-6b83d885-e2da-4955-b1de-70eaf67ee859.json",
+        "content_sha256": "7d56a2cfdf84e744b3b7cef04def0ee122517d4ca792ebcd200ae398c02b2022"
+      }
+    ]
+  },
+  "overall": "partial",
+  "next_action": "Sole owner: enforce deliberate preproduction contract change with strictly newer revision and output/proof invalidation or immutability after production; prevent reusing prior outputs as newly declared success; compare JSON types exactly; constrain resolved paths to artifact root. Add saved isolated regression cases. Preserve live-recheck/wrongtask/UTF8 fixes, then progress APP02/04/edit/sync/browser/REL01 queue when accepted.",
+  "blocker_type": "goal_not_met_yet"
+}

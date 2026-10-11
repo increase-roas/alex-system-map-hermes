@@ -1,0 +1,23 @@
+{
+  "at": "2026-10-10T13:36:30.786655+00:00",
+  "owner_session": 29010,
+  "benchmark_pgid": 79059,
+  "leader_start": "Sat Oct 10 09:34:24 2026",
+  "limit_seconds": 180,
+  "status": "cutoff_cleanup_verified",
+  "signals": [
+    "TERM"
+  ],
+  "full_completion": false,
+  "verified_pids": [
+    79059,
+    79060,
+    79061,
+    79075
+  ],
+  "remaining_pids": [],
+  "observed_destination_page_files": 720,
+  "required_page_count": 2351,
+  "content_and_isolation_verified": false,
+  "finished_at": "2026-10-10T13:37:26.138106+00:00"
+}

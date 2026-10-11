@@ -1,0 +1,54 @@
+{
+  "recorded_at": "2026-10-10T05:40:32.449835+00:00",
+  "source_receipt": "reports/browser-original-milestone-receipt.json",
+  "source_receipt_at": "2026-10-10T05:38:27+00:00",
+  "source_sha256": "31c704595883417a318cc19b7bd1494c665e4b15e0c782e70a79a9d27cf16e8d",
+  "scope": "Real-source tracing only; local corrections continue independently.",
+  "status": "BLOCKED_REAL_SOURCE_INPUT_PENDING",
+  "finding": "Owner reports no real SDK operation receipt in inspected project examples/reports. Project candidate-name search found fixtures and owner test receipts; no non-synthetic SDK receipt bundle identified. This is not an exhaustive proof of absence in all collected files or external SDK sources.",
+  "minimum_input": {
+    "destination": "inputs/real-traces/<existing-run-id>/",
+    "required": [
+      "At least one sanitized existing real SDK/Director/Observatory execution receipt or linked receipt set, as JSON or JSONL, with actual recorded operation/tool/file action. Preserve original receipt/run/operation identifiers and original structure.",
+      "A small provenance manifest: producer/runtime, original source locator as metadata, collection/export time, preserved IDs, local filenames, content hashes of sanitized files, and redaction description. Original hash may be included if already available; do not retrieve credentials or remote data to create it.",
+      "Retain available agent identity, action name, result/status, timestamps, parent/handoff references, job/task/attempt IDs and touched file/component/source refs. Absent fields remain unknown; never manufacture spans or timestamps."
+    ],
+    "optional_for_broader_acceptance": [
+      "Linked failed/retried/out-of-order child receipts if available, for observed relationships/retry validation. Local synthetic tests can test importer handling but do not prove those real events occurred."
+    ],
+    "do_not_supply": [
+      "Credential values, authorization headers, session tokens, secret-bearing environment dumps, unrestricted logs or hidden reasoning."
+    ],
+    "native_format_ok": true,
+    "conversion_owner": "Existing Cursor owner implements bounded project adapter and catalog/evidence mappings; Alex need not invent the importer JSON or new SDK receipts."
+  },
+  "within_project_delivery_supported": true,
+  "external_access_requested": false,
+  "proof_unlocked": [
+    "Provenance/identity inspection and import of real recorded actions",
+    "Independent matching of displayed spans/links to original sanitized receipts",
+    "Repeat-import deduplication and restart/history/cursor checks",
+    "Browser trace selection, linked evidence/component view, and unknown-field behavior once UI works"
+  ],
+  "not_unlocked_automatically": [
+    "Full tracing acceptance without independent span/source matching and browser proof",
+    "Fresh-agent context loading",
+    "Full automatic sync/observer restart",
+    "Missing source fields or undocumented connections"
+  ],
+  "exact_user_input_if_unavailable": "Provide the project-local path to an already sanitized real receipt bundle, or place/export one inside inputs/real-traces/<existing-run-id>/. No new service, secret, or access grant required. If only an outside-project original exists, a scoped read/export decision would be separate; no outside-project search/read performed here.",
+  "separate_status": {
+    "browser": "NOT_RUN per 05:38:27 owner receipt; current run may still progress",
+    "fresh_agent_runtime": "UNVERIFIED",
+    "local_correction_queue": "All 16 findings retained; no external dependency established",
+    "controlled_edit": "Owner reports fixture pass; maintained-catalog/UI/restart acceptance remains open"
+  },
+  "owner_session": 74810,
+  "no_interruption": true,
+  "coordination_update": {
+    "at": "2026-10-10T05:42:53.928564+00:00",
+    "reported_by": "coordinating_chat",
+    "statement": "Alex asked for outside-project locate/sanitize permission; no answer reported. No approval inferred.",
+    "scope": "No outside-project search/read; project-local real receipt input pending only."
+  }
+}

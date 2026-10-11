@@ -1,0 +1,30 @@
+{
+  "schema_version": "verification_record_v1",
+  "record_id": "66420597-65f8-4822-b611-4df207770194",
+  "fixture_only": false,
+  "outcome": "passed",
+  "requirement_id": "REL-02",
+  "scope": {
+    "job_id": "truth-job",
+    "job_revision": 3,
+    "task_id": "t1",
+    "operation_id": "orr-verify-good",
+    "verifier": "reviewer-b"
+  },
+  "source_fingerprints": {
+    "data/relationships.json": "a23e77ce66167eee853754b4a7800d22c25a89e713d2b7a4b5d9add6dfd4e298",
+    "docs/RELIABILITY_ADDENDUM.md": "db6617a4c7c6d12bf74e7e03ef59383860180e50dd427e3b9d535f2393772640"
+  },
+  "checks": {
+    "task_exists": true,
+    "acceptance_criteria_declared": true,
+    "outcome_proof_bound": true,
+    "all_acceptance_outcomes_verified": true
+  },
+  "actually_used": "workflow_verify_performed_work",
+  "skills_verified_at_issue": false,
+  "verifier": "reviewer-b",
+  "observed_at": "2026-10-10T06:34:27+00:00",
+  "max_age_seconds": 604800,
+  "record_sha256": "2cd4876b47d0346233adafe629fe7d2b2a539828b5557e53da69adef733faf7e"
+}

@@ -1,0 +1,80 @@
+{
+  "at": "2026-10-10T08:43:45.023587+00:00",
+  "scope": "ONLY recovery_regression exit type and individual control-row flip type",
+  "verdict": "VERIFIED \u2014 both scoped residuals repaired; advance maintained-edit/CAS",
+  "owner_receipt": {
+    "path": "reports/run-receipts/strict-two-types-20261010-0838-51615dc1-14cc-4e78-87ff-19337e609772.json",
+    "run_id": "51615dc1-14cc-4e78-87ff-19337e609772",
+    "at": "2026-10-10T08:41:38+00:00",
+    "sha256": "28bb01d856c03e8862ef004d672d429eb932208ea4ac9b8931783ffb5db0b7f9",
+    "actual_sha256": "28bb01d856c03e8862ef004d672d429eb932208ea4ac9b8931783ffb5db0b7f9",
+    "manifest_match": true,
+    "history_match": true
+  },
+  "source_identity": {
+    "tools/acceptance_summarize_strict.py": {
+      "receipt_sha256": "49e2ddfb25c642b906682198a7e44f0a203794a272296da01d00e09d009d8a7b",
+      "observed_sha256": "49e2ddfb25c642b906682198a7e44f0a203794a272296da01d00e09d009d8a7b",
+      "match": true
+    },
+    "tools/strict_two_types_acceptance.py": {
+      "receipt_sha256": "8930e125d550b64fd3020be4058d4221b7d1af595a8fe2414b1a9bee3e4e0085",
+      "observed_sha256": "8930e125d550b64fd3020be4058d4221b7d1af595a8fe2414b1a9bee3e4e0085",
+      "match": true
+    }
+  },
+  "snapshot_stable": true,
+  "items": [
+    {
+      "id": "TT01 legitimate positive",
+      "status": "VERIFIED",
+      "evidence": [
+        "current immutable receipt cases.emitted_boundaries_suite",
+        "pure output 96a456"
+      ],
+      "result": "Actual current saved core/full baseline passes with no failures; legitimate generated control set passes."
+    },
+    {
+      "id": "TT02 strict recovery exit",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:182-185",
+        "pure output 96a456"
+      ],
+      "result": "Single mutation recovery_regression.exit=False rejects solely exit_type."
+    },
+    {
+      "id": "TT03 exact control-row type",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/acceptance_summarize_strict.py:284-304",
+        "pure output 96a456"
+      ],
+      "result": "Single mutation first row value_type=str rejects solely row_type mismatch against expected bool; each row also binds declared flip_value."
+    },
+    {
+      "id": "TT04 identity/preservation",
+      "status": "VERIFIED",
+      "evidence": [
+        "final pointer/receipt/manifest/history",
+        "prior source hash comparison 96a456"
+      ],
+      "result": "Two recorded current source hashes match. All six prior nonvalidator source hashes unchanged. Accepted catalog/browser/core evidence preserved; no relevant collateral source change."
+    }
+  ],
+  "prior_nonvalidator_hashes_unchanged": {
+    "app/.next/BUILD_ID": true,
+    "tools/catalog_controlled_edit.py": true,
+    "tools/catalog_io.py": true,
+    "tools/catalog_screening_probe.py": true,
+    "tools/local_service.py": true,
+    "tools/typed_controls_real_edit_acceptance.py": true
+  },
+  "prior_failure_preserved": {
+    "path": "reports/independent-typed-controls-edit-review.json",
+    "sha256": "c419bd04423e5f8ebf011fdb8194742811c42e36fb117bdde33297c25a4fdac5"
+  },
+  "compatibility_note": "Historical prior control artifacts lack new flip_value field and fail current validator; current updated generated set passes. Historical failures/receipts retained, not reclassified as current acceptance.",
+  "checks": "Pure no-write summaries and hash/JSON readback only; no app writes, browser/network/install/outside/credentials/raw diagnostics.",
+  "next_action": "Proceed to already prepared maintained-edit/CAS milestone; no remaining blocker within this two-item scope."
+}

@@ -1,0 +1,823 @@
+{
+  "id": "table_b132724b1024fccb10c1",
+  "sheet": "S02-03 Glossary",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "The words this workbook uses for the parts of an AI setup, in plain English, and the one home each kind of thing has. Vendors use the same words for different things, so every row says how Alex's setup uses the word, with its source. Built by work/2026-10-01_setup-playbook/build_tabs.py from tabs/glossary.json; never edit this tab by hand."
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "1. The words, in plain English"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "word"
+        },
+        {
+          "column": "B",
+          "value": "what it means here"
+        },
+        {
+          "column": "C",
+          "value": "in Alex's setup"
+        },
+        {
+          "column": "D",
+          "value": "don't confuse it with"
+        },
+        {
+          "column": "E",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tool"
+        },
+        {
+          "column": "B",
+          "value": "One action an AI can call. It has a name and the inputs it needs, and the AI decides when to call it."
+        },
+        {
+          "column": "C",
+          "value": "COMPOSIO_SEARCH_TOOLS and EXA_SEARCH (Composio); send_message_to_thread (Codex); Bash and Read (Claude Code)"
+        },
+        {
+          "column": "D",
+          "value": "Composio calls each action a tool (its old docs said \"action\"). The OpenAI API's tools list also holds built-ins and your own functions."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1a. The MCP spec\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1d. Composio\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\" ; https://modelcontextprotocol.io/specification/2026-07-28/server (spec 2026-07-28, read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "connector"
+        },
+        {
+          "column": "B",
+          "value": "A route from an AI app to an outside service, through a remote MCP server. In this setup every app has one connector: Composio."
+        },
+        {
+          "column": "C",
+          "value": "The claude.ai Composio custom connector; the Composio app inside ChatGPT's official Composio plugin"
+        },
+        {
+          "column": "D",
+          "value": "ChatGPT said \"connector\" until 2025-12-18 and says \"app\" now; the MCP spec uses the word for the link inside the AI app. Built-ins are not connectors."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1b. OpenAI\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1c. Anthropic\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\" ; ~/.agents/instructions/shared.md L10"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app (ChatGPT)"
+        },
+        {
+          "column": "B",
+          "value": "ChatGPT's word for a connector since 2025-12-18. Apps now ship inside plugins."
+        },
+        {
+          "column": "C",
+          "value": "The Composio app (asdk_app_6a585035…) in Codex's [apps] block"
+        },
+        {
+          "column": "D",
+          "value": "A ChatGPT app is not an AI app such as Claude or Codex."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1b. OpenAI\""
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "plugin"
+        },
+        {
+          "column": "B",
+          "value": "An installable bundle for one kind of job: skills, connectors or apps, MCP servers and hooks."
+        },
+        {
+          "column": "C",
+          "value": "ChatGPT and Codex: the Composio plugin v1.0.1 (an app plus a skill), superpowers (skills only), messages (one MCP server). Claude Code: composio@composio 0.2.4."
+        },
+        {
+          "column": "D",
+          "value": "Four different things share the name: OpenAI's 2026 plugins, the retired 2023 ChatGPT plugins, Claude Code plugins and Claude app or Cowork plugins. A plugin for one vendor doesn't install on the other."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1b. OpenAI\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1c. Anthropic\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\""
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill"
+        },
+        {
+          "column": "B",
+          "value": "A folder with a SKILL.md file that teaches one repeatable job. The AI reads its name and description first and opens the rest only when it picks the skill."
+        },
+        {
+          "column": "C",
+          "value": "alex-workflow-conductor in ~/.agents/skills; superpowers:systematic-debugging (a skill inside a plugin)"
+        },
+        {
+          "column": "D",
+          "value": "A skill is a file the AI reads, not a route: it connects to nothing. The format is the same everywhere; each app reads different folders (Skills, where they live tab)."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1b. OpenAI\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1c. Anthropic\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\""
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "built-in"
+        },
+        {
+          "column": "B",
+          "value": "An ability that ships inside the AI app itself, such as web search, the shell and editing files; in Codex also its bundled browser, computer-use and Messages plugins."
+        },
+        {
+          "column": "C",
+          "value": "Codex: exec, apply_patch, web search, the bundled browser and computer-use plugins. Claude Code: Bash, Read, Edit."
+        },
+        {
+          "column": "D",
+          "value": "Built-ins are not connectors, so the Composio-only rule doesn't cover them; each AI keeps a named list of them (AI apps tab). Treating them as connectors caused the 2026-10-01 cleanup break."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1b. OpenAI\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1c. Anthropic\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\" ; ~/.agents/instructions/shared.md L10 ; work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 1. Actor and intent\""
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "MCP server"
+        },
+        {
+          "column": "B",
+          "value": "The program or online service behind a connector. It offers tools (actions), resources (data) and prompts (templates). Local means it runs on the Mac; remote means it runs online."
+        },
+        {
+          "column": "C",
+          "value": "Composio's hosted server (remote); 1password-mcp (local)"
+        },
+        {
+          "column": "D",
+          "value": "Claude Code calls every tool source an \"MCP server\", claude.ai connectors included."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1a. The MCP spec\" ; work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1c. Anthropic\""
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "toolkit (Composio)"
+        },
+        {
+          "column": "B",
+          "value": "Composio's set of tools for one service."
+        },
+        {
+          "column": "C",
+          "value": "exa, metaads, googleads, custom_ir_notes"
+        },
+        {
+          "column": "D",
+          "value": "Composio's old docs called it an \"app\"."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1d. Composio\""
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "sign-in setup (auth config)"
+        },
+        {
+          "column": "B",
+          "value": "Composio's sign-in recipe for a toolkit: the method (OAuth or an API key), the scopes and the app credentials. This sheet calls it a sign-in setup."
+        },
+        {
+          "column": "C",
+          "value": "Meta Ads uses an API-key setup that holds the system-user token; 42 setups on 2026-10-01"
+        },
+        {
+          "column": "D",
+          "value": "A setup is not a login: a setup can have zero logins."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1d. Composio\" ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md \"After-list\""
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "login (connected account)"
+        },
+        {
+          "column": "B",
+          "value": "One signed-in link from a toolkit to one account. Its ID starts with ca_."
+        },
+        {
+          "column": "C",
+          "value": "exa_beode-vain; 43 logins on 2026-10-01"
+        },
+        {
+          "column": "D",
+          "value": "Composio's old docs called it a \"connection\"."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1d. Composio\" ; work/2026-10-01_setup-playbook/notes/fix-k01-w20.md \"After-list\""
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "session (Composio)"
+        },
+        {
+          "column": "B",
+          "value": "Composio's per-user bundle that ties toolkits and logins together and gives one MCP web address with a few meta tools."
+        },
+        {
+          "column": "C",
+          "value": "What the ChatGPT Composio app and the claude.ai connector expose (9 meta tools in Codex)"
+        },
+        {
+          "column": "D",
+          "value": "It used to be called tool router."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1d. Composio\""
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "key"
+        },
+        {
+          "column": "B",
+          "value": "A secret a route needs, such as an API key. Its one home is the 1Password vault Connectors, and it reaches apps only through Composio."
+        },
+        {
+          "column": "C",
+          "value": "The Meta system-user token: kept in 1Password, pushed into Composio metaads by the key mover"
+        },
+        {
+          "column": "D",
+          "value": "A Composio login holds a working copy; the source stays 1Password."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\" ; ~/.agents/instructions/shared.md L10 ; workbook SOP R3"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "route"
+        },
+        {
+          "column": "B",
+          "value": "This sheet's word for the one way an AI reaches an app: a Composio toolkit and login, or a named built-in."
+        },
+        {
+          "column": "C",
+          "value": "custom_ghl_oauth_crm for GHL CRM work; the bundled browser for public pages"
+        },
+        {
+          "column": "D",
+          "value": "Two routes to the same app are the duplicates this setup removes."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/skills/repo-conform/assets/skeleton/tools/_card-template.md L3 ; ~/.agents/tools/cards/ghl.md ; ~/.agents/tools/cards/browser-and-computer.md"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tool card"
+        },
+        {
+          "column": "B",
+          "value": "One page per app or tool family: the one route, what it reaches and can change (tested, with the date), and its rules."
+        },
+        {
+          "column": "C",
+          "value": "~/.agents/tools/cards/ghl.md"
+        },
+        {
+          "column": "D",
+          "value": "A skill is a procedure; a card is a fact sheet about one tool."
+        },
+        {
+          "column": "E",
+          "value": "~/.agents/tools/connectors/cards_to_sheet.py \"A tool card is one page per app\""
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "hook"
+        },
+        {
+          "column": "B",
+          "value": "A script an app runs by itself at a set moment, such as the start of a session."
+        },
+        {
+          "column": "C",
+          "value": "The Claude Code Composio plugin's daily self-update hook"
+        },
+        {
+          "column": "D",
+          "value": "Hooks can run outside the app's sandbox with the user's full rights."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_chatgpt-claude-research/notes/r1-composio-chatgpt.md \"## 4. The 2 hooks in (b)\""
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "expected-state list"
+        },
+        {
+          "column": "B",
+          "value": "What each AI should have, with a reason for every row. It lives in two tabs: AI apps ('only here' and 'why': what each AI keeps) and App decisions (which routes duplicate a proven keeper, as proposals with a removal check). A cleanup removes only what both agree is a duplicate. notes/expected-state.csv in the connector repo is a dated, read-only extract of the workbook (spp-p1a, from the file saved at 11:51 on 2026-10-01), not a list to act on."
+        },
+        {
+          "column": "C",
+          "value": "The AI apps and App decisions tabs (a dated extract: notes/expected-state.csv)"
+        },
+        {
+          "column": "D",
+          "value": "A generated removal list is a proposal, not a permission."
+        },
+        {
+          "column": "E",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"## 3. The three proposed steps\" ; work/2026-10-01_setup-playbook/notes/expected-state.csv ; work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 1. Actor and intent\" ; work/2026-10-01_setup-playbook/notes/expected-state.md L3–L9 ; workbook App decisions R2 ; work/2026-10-01_setup-playbook/notes/replication-retest-interim.md §1"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "2. Alex's sentence: \"tools are what the connector can do\" (QUALIFIED)"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "part"
+        },
+        {
+          "column": "B",
+          "value": "what the evidence says"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Verdict"
+        },
+        {
+          "column": "B",
+          "value": "QUALIFIED: right for connectors, but not the whole picture."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"## 0. Answers\""
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What is right"
+        },
+        {
+          "column": "B",
+          "value": "A connector's tools are the actions it lets the AI take. The MCP spec defines tools as functions that let the model perform actions or retrieve information, and the model decides when to call them."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1f. Alex's sentence\" ; https://modelcontextprotocol.io/specification/2026-07-28/server (spec 2026-07-28, read 2026-10-01)"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qualifier 1"
+        },
+        {
+          "column": "B",
+          "value": "A connector can also offer data (resources) and ready-made templates (prompts), which are not tools."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1f. Alex's sentence\""
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qualifier 2"
+        },
+        {
+          "column": "B",
+          "value": "Many tools belong to no connector: built-ins such as web search and the shell, Claude's server tools and Composio's meta tools."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1f. Alex's sentence\""
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qualifier 3"
+        },
+        {
+          "column": "B",
+          "value": "The MCP spec itself uses \"connector\" for the link inside the AI app; vendors, like Alex, use it for the service side."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1f. Alex's sentence\""
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Qualifier 4"
+        },
+        {
+          "column": "B",
+          "value": "A tool can be listed and still be blocked by the account's permissions or the app's approval settings."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1f. Alex's sentence\""
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Plain wording for this sheet"
+        },
+        {
+          "column": "B",
+          "value": "A tool is one action an AI can call. A connector's tools are what that connector lets the AI do; the AI app also has built-in tools that need no connector."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1f. Alex's sentence\""
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "3. Same word, different meaning"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "word"
+        },
+        {
+          "column": "B",
+          "value": "what each vendor means"
+        },
+        {
+          "column": "C",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "plugin"
+        },
+        {
+          "column": "B",
+          "value": "Four things: OpenAI's 2026 plugin (shared by ChatGPT and Codex), the retired 2023 ChatGPT plugin, the Claude Code plugin, and the Claude app or Cowork plugin (same family as Claude Code's, synced to it). Both vendors use a plugin.json file in different folders."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\""
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "app or connector"
+        },
+        {
+          "column": "B",
+          "value": "ChatGPT said \"connector\" until 2025-12-18, then \"app\"; since July 2026 apps ship inside plugins, and OpenAI's developer docs still say connector. Anthropic says connector for remote MCP in the Claude app, desktop extension for local MCP in Claude Desktop, and MCP server in Claude Code. The MCP spec uses connector for the link inside the AI app."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\""
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "tool"
+        },
+        {
+          "column": "B",
+          "value": "MCP: one function a server offers. Composio: one action, plus meta tools. OpenAI API: anything in the tools list (built-ins, your functions, remote MCP). Claude API: client tools you run and server tools Anthropic runs."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\""
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "skill"
+        },
+        {
+          "column": "B",
+          "value": "One format everywhere (SKILL.md, the open Agent Skills standard); each app reads different folders."
+        },
+        {
+          "column": "C",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1e. Same word, different meaning\""
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "4. One home per kind"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "kind"
+        },
+        {
+          "column": "B",
+          "value": "its one home"
+        },
+        {
+          "column": "C",
+          "value": "why it can't share another kind's home"
+        },
+        {
+          "column": "D",
+          "value": "source"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Connector"
+        },
+        {
+          "column": "B",
+          "value": "Composio (toolkits, sign-in setups, logins), reached in each AI through its Composio plugin, app or connector"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\""
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Key"
+        },
+        {
+          "column": "B",
+          "value": "1Password; scripts read it with the robot logins"
+        },
+        {
+          "column": "C",
+          "value": "—"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\""
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Skill"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents/skills; vendor skill packs come from each app's own marketplace"
+        },
+        {
+          "column": "C",
+          "value": "Skills are files the AI reads, not routes"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\""
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Built-in or app plugin"
+        },
+        {
+          "column": "B",
+          "value": "Each AI's row on the AI apps tab ('only here') and its target settings on the AI app settings tab"
+        },
+        {
+          "column": "C",
+          "value": "Composio can't drive the Mac or the app's own threads; these exist only inside each app"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\" ; ~/.agents/instructions/shared.md L10 ; work/2026-10-01_setup-playbook/notes/replication-retest-interim.md §1"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "What went wrong on 2026-10-01"
+        },
+        {
+          "column": "B",
+          "value": "The connector rule (\"exactly two connectors: 1Password and Composio\") was applied to Codex built-ins and skill packs: App decisions listed 16 Codex built-ins for removal while All connections said they stay"
+        },
+        {
+          "column": "C",
+          "value": "The four kinds need four homes; one rule for all of them removed what the Director's skills depend on"
+        },
+        {
+          "column": "D",
+          "value": "work/2026-10-01_setup-playbook/notes/r5-r6-vocabulary-drift.md \"1g. What this means\" ; work/2026-10-01_setup-playbook/notes/rca-codex-plugins.md \"## 1. Actor and intent\""
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,171 @@
+{
+  "diagnostic_plain_token": {
+    "raw_detected": true,
+    "screened_absent": true,
+    "nested_absent": true,
+    "benign_marker_in_entry": true
+  },
+  "python_apply_export": {
+    "exit": 0,
+    "has_diagnostic_marker": true,
+    "has_job_id": true,
+    "nonempty_screening_notes": true,
+    "no_token_leak": true
+  },
+  "node_bridge": {
+    "read_source_canary_removed": true,
+    "read_source_benign": true,
+    "read_source_intended_error": true,
+    "invalid_command_json_stdout": true,
+    "invalid_command_canary_removed": true,
+    "invalid_command_nonempty": true,
+    "invalid_command_benign": true,
+    "init_ok": true,
+    "nonzero_json_rejected": true,
+    "nonzero_exit": 1,
+    "benign": true,
+    "screened": true,
+    "nonempty": true,
+    "exit": 0
+  },
+  "browser": {
+    "delivery": "emitted-boundaries-served-restart-20261010-0754",
+    "runner_sha256": "a974355cf39de14826efc40dc86e7e6572a423ae2a4600637686cf7d6f70e5de",
+    "networkLog": [
+      {
+        "label": "health-before",
+        "url": "http://127.0.0.1:3203/api/health",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 4294,
+        "bodyPreview": "{\"ok\":true,\"loopback_only\":true,\"local_token_hint\":\"Send X-Local-Token for mutations\",\"token\":\"[REDACTED local-mutation-token]\",\"build_id\":\"NAGwQKIQTJRhmcR9fI-un\",\"process\":{\"pid\":27072},\"runtime\":{\"foundation_root\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1\",\"local_data_dir\":\"/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/emitted-boundaries-served-restart-20261010-0754\",\"workflow_sqlite_path\"",
+        "parsedKeys": [
+          "ok",
+          "loopback_only",
+          "local_token_hint",
+          "build_id",
+          "process",
+          "runtime",
+          "completeness",
+          "sync",
+          "token_redacted"
+        ],
+        "screening_notes": [
+          "local-mutation-token withheld"
+        ],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619158379-create",
+        "url": "http://127.0.0.1:3203/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 213,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619158379\",\"revision\":1,\"operation_id\":\"rec-ui-a-1791619158379-create\",\"handoff_operation_id\":\"rec-ui-a-1791619158379-handoff\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "handoff_operation_id",
+          "diagnostic_marker",
+          "screening_notes"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619158379-add-t1",
+        "url": "http://127.0.0.1:3203/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 157,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619158379\",\"revision\":2,\"operation_id\":\"rec-ui-a-1791619158379-add-t1\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "diagnostic_marker",
+          "screening_notes"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619158379-add-t2",
+        "url": "http://127.0.0.1:3203/api/workflow",
+        "status": 200,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 157,
+        "bodyPreview": "{\"job_id\":\"rec-ui-a-1791619158379\",\"revision\":3,\"operation_id\":\"rec-ui-a-1791619158379-add-t2\",\"diagnostic_marker\":\"LOCAL-SCREENING-OK\",\"screening_notes\":[]}",
+        "parsedKeys": [
+          "job_id",
+          "revision",
+          "operation_id",
+          "diagnostic_marker",
+          "screening_notes"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      },
+      {
+        "label": "workflow-rec-ui-a-1791619158379-produce-t1",
+        "url": "http://127.0.0.1:3203/api/workflow",
+        "status": 502,
+        "contentType": "application/json",
+        "parseError": null,
+        "bodyLength": 205,
+        "bodyPreview": "{\"error\":\"outputs must be a nonempty string\",\"screened\":true,\"payload\":{\"payload\":{\"error\":\"outputs must be a nonempty string\",\"notes\":[]},\"screening_notes\":[],\"error\":\"outputs must be a nonempty string\"}}",
+        "parsedKeys": [
+          "error",
+          "screened",
+          "payload"
+        ],
+        "screening_notes": [],
+        "diagnostic_marker": "LOCAL-SCREENING-OK"
+      }
+    ],
+    "served_pid_before": 27072,
+    "launcher_pid_before": 27050,
+    "build_id": "NAGwQKIQTJRhmcR9fI-un",
+    "db_path_served": "/Users/alexlobaito/Documents/Codex/2026-10-09/l/outputs/agent-system-foundation-v1/app/.data/emitted-boundaries-served-restart-20261010-0754/local.sqlite",
+    "db_sha256_before": "3da08389f9ee0d38f55e188ee9168f6238fb112aa956c190bc3a319033a8ef5a",
+    "db_isolated": true,
+    "db_sha256_matches_fresh_init": false,
+    "overall": "failed",
+    "error": "Error: mutation failed at workflow-rec-ui-a-1791619158379-produce-t1: outputs must be a nonempty string",
+    "network_log_sha256": "c158d907f4e913ec9f04897f1769fc6c883177fb5bde62b30c01b4e435ef40c0",
+    "screening_notes": [],
+    "diagnostic_marker": "LOCAL-SCREENING-OK",
+    "exit": 1
+  },
+  "recovery_regression": {
+    "overall": "failed",
+    "delivery_id": "recovery-screening-real-paths-20261010-0738",
+    "run_id": "272c1403-adf6-4473-85c1-d15ac1c8e75d",
+    "failures": [
+      "browser_required"
+    ],
+    "immutable_content_sha256": "12897dd59a7f3d9ee651f72f5053a237627a316d7abf31f64ca0ed2205578be5",
+    "exit": 1
+  },
+  "independent_reviews_ack": [
+    "reports/independent-diagnostic-backend-review.json",
+    "reports/independent-diagnostic-browser-review.json"
+  ],
+  "remaining_requirements": [
+    "independent review on this receipt",
+    "maintained editing/CAS/derived views/full sync/browser matrix",
+    "REL-01 fresh session",
+    "real SDK trace input BLOCKED"
+  ],
+  "real_sdk_trace_input": "BLOCKED",
+  "diagnostic_screening": {
+    "applied": true,
+    "marker": "LOCAL-SCREENING-OK",
+    "notes": []
+  }
+}

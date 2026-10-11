@@ -1,0 +1,1392 @@
+{
+  "id": "table_ac2aaadcf9663a44156f",
+  "sheet": "S01-27 To do",
+  "rows": [
+    {
+      "row": 1,
+      "cells": [
+        {
+          "column": "A",
+          "value": "type"
+        },
+        {
+          "column": "B",
+          "value": "item"
+        },
+        {
+          "column": "C",
+          "value": "what to do"
+        },
+        {
+          "column": "D",
+          "value": "who"
+        }
+      ]
+    },
+    {
+      "row": 2,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Orgo agent computers answered requests from other devices on the Tailscale network: desktop-api 8080, VNC 6080 and 5999, Chrome debug 9223 (on CSM), Hermes 8644-8646 and 9119, plus helper ports. Found 2026-10-01 after the hub had the same problem (the hub is fixed)"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-03: 'fix properly' = policy v4, saved by Alex at 00:15:55Z (Tailscale R15; Decisions D30)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 3,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Foreplay key leaked into a session log (a redaction bug). The plain-text copy in ~/.codex/config.toml is gone and Foreplay runs in Composio (2026-10-01), and the key was rotated the same day"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01: Alex rotated the key; it was saved to 1Password, pushed into Composio custom_foreplay and proven with a read; the old key returns 401; the item is now 'Foreplay API key' (run-log)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 4,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Shopify is not in Composio yet. It needs its own store app"
+        },
+        {
+          "column": "C",
+          "value": "In Shopify: Settings > Apps > Develop apps > create 'Composio' with all Admin API scopes. Then fill 1Password item 'Shopify API key (paste here)': credential, api_key, api_secret, store_domain. The Claude app's Shopify connector went with the Small Business plugin on 2026-10-01 (Claude app connectors R57, R84), so Composio will be the only route"
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 5,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "ChatGPT had 4 connectors that duplicate Composio: 'Increase ROAS — GoHighLevel', Notion, Slack, Google Drive"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01: all 4 are gone from ChatGPT (AI apps r11, r14)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 6,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app still has the Ref connector (Alex dropped Ref). The Qt docs plugin is undecided"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01 in the app batch: Ref removed, and the Qt Development Skills plugin removed (W05); Qt docs stays available through Composio"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 7,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app connectors that duplicate Composio: Exa, Cloudflare Developer Platform, ElevenLabs, GHL Command Universal, Gmail, Google Drive"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01: all six are gone (Claude app connectors R26, R30, R77–R80; AI apps r9)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 8,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cleanup"
+        },
+        {
+          "column": "B",
+          "value": "Cursor plugins still need uninstalling, including the broken GitHub plugin (token empty) and the ClickUp and Vercel plugins. Alex declined computer use on Cursor (2026-10-01), and moving the plugin cache folders doesn't stick (lesson L-006)"
+        },
+        {
+          "column": "C",
+          "value": "In Cursor > Settings > Plugins uninstall any of: Supabase, Appwrite, ClickUp, Vercel, GitHub, Google Drive, Higgsfield, 1Password plugin, Exa, GitLab, Linear, Sentry, Notion, Slack, Cloudflare. Keep Composio, Superpowers, Compound Engineering and the Cursor kits. Which of these are still installed: not checked"
+        },
+        {
+          "column": "D",
+          "value": "Alex (or the agent, if he allows computer use on Cursor)"
+        }
+      ]
+    },
+    {
+      "row": 9,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Google Admin still has a dead domain-wide delegation entry for client ID 114216599725767886067. It belongs to the old workspace-admin account, which was deleted in Google Cloud (2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Done: Alex removed the entry at 20:51:11Z (Google Admin audit log: REMOVE_API_CLIENT_ACCESS for client 114216599725767886067). Verified by spp-p27a: the old account can't get a token (invalid_grant), Google lists 0 keys for it, and the live robot still works. The Mac copy of the old key is in ~/Backups/google-workspace-admin-retired-2026-10-01/; the hub still keeps a backup of the dead key, our own dead credential, which the final cleanup play (housekeeping-final) retires under the standing yes"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 10,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cleanup"
+        },
+        {
+          "column": "B",
+          "value": "Tailscale: the user Kanwal Singh was removed 2026-10-02; javante is still shared with his outside account"
+        },
+        {
+          "column": "C",
+          "value": "Alex revokes the share: Machines > Filters > Shared > Shared by me > javante > Share > Revoke invite (Tailscale R16)"
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 11,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decide"
+        },
+        {
+          "column": "B",
+          "value": "Should the robot (tagging-admin@increaseroas-tagging) get the Owner role at the Google Cloud organization?"
+        },
+        {
+          "column": "C",
+          "value": "Yes or no. Security settings stay Alex's"
+        },
+        {
+          "column": "D",
+          "value": "Alex decides"
+        }
+      ]
+    },
+    {
+      "row": 12,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decided"
+        },
+        {
+          "column": "B",
+          "value": "GTM: alex@ has only 'user' (read) access in the 'Increase Roas' GTM account. Its admin is analyticsevolutionpro@gmail.com"
+        },
+        {
+          "column": "C",
+          "value": "Decided 2026-10-02 (Alex; GA4 card): read only there, never build. Build and publish only in 6359407641 'Increase Roas (Official)', where alex@ and the robot are admins (Tracking access R34–R35)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 13,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decided"
+        },
+        {
+          "column": "B",
+          "value": "Zoom admin app: a stronger route than the current one"
+        },
+        {
+          "column": "C",
+          "value": "Decided 2026-10-02 (Alex: 'zoom is for me'): no admin app; the user login zoom_dour-dusk is Alex's own and reads his meetings"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 14,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decide"
+        },
+        {
+          "column": "B",
+          "value": "Javar's and Javante's Composio Google logins (Gmail, Docs, Drive, Sheets for each) could move to the robot. Their agents use them today"
+        },
+        {
+          "column": "C",
+          "value": "Alex decides. Not started"
+        },
+        {
+          "column": "D",
+          "value": "Alex decides"
+        }
+      ]
+    },
+    {
+      "row": 15,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Clarify"
+        },
+        {
+          "column": "B",
+          "value": "Composio Google logins labeled 'Javante' and 'Javar': the earlier note says Javante = agent@increaseroas.com and Javar = jay@increaseroas.com. The labels are unchanged in the 2026-10-01 live check"
+        },
+        {
+          "column": "C",
+          "value": "Check the labels match those addresses and rename if wrong. Not re-checked today"
+        },
+        {
+          "column": "D",
+          "value": "Alex decides"
+        }
+      ]
+    },
+    {
+      "row": 16,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Clarify"
+        },
+        {
+          "column": "B",
+          "value": "Composio 'Lonestar Slack Account' is still ACTIVE (2026-10-01). Which Slack workspace it reaches is unknown: the earlier check was denied"
+        },
+        {
+          "column": "C",
+          "value": "Allow one read-only check"
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 17,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Google Ads: contact@ and anthony@ were invited as admins (2026-10-01) and wait for franky@ or Angel@ to approve. franky@ and Angel@ are still admins"
+        },
+        {
+          "column": "C",
+          "value": "Ask franky@ or Angel@ to approve the invites. Then the partners approve removing franky@ and Angel@"
+        },
+        {
+          "column": "D",
+          "value": "Alex + partners"
+        }
+      ]
+    },
+    {
+      "row": 18,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Dropped"
+        },
+        {
+          "column": "B",
+          "value": "LONESTAR CUSTOMER SERVICE (location DnKxVDxzEmWMCIzJVfg6) has no key in ghl-command-builder yet. The earlier key was for LONESTAR SALES"
+        },
+        {
+          "column": "C",
+          "value": "Dropped 2026-10-02 (Alex)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 19,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Google Business Profile API still needs Google's access approval (needs business details and project 750448852155)"
+        },
+        {
+          "column": "C",
+          "value": "Agent drafts the request, Alex approves the send"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex"
+        }
+      ]
+    },
+    {
+      "row": 20,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "Shopify waits on the 1Password item above"
+        },
+        {
+          "column": "C",
+          "value": "When the item is filled: connect Shopify in Composio (check which sign-in type its Shopify app wants) and prove it with a read"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 21,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude Desktop's config listed google-workspace-admin and ghl-oauth-crm (2026-10-01), both duplicate Composio routes. Removed 2026-10-02 by Alex's 2 trash clicks; mcpServers empty (spp-c21)"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-02 (spp-c21)"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 22,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Cleanup"
+        },
+        {
+          "column": "B",
+          "value": "Composio sign-in setups with 0 logins. Done 2026-10-01: 10 deleted (apify_mcp, clickup, cloudflare, cloudflare_mcp, custom_google_workspace_admin, gitlab, google_analytics, googlecalendar, supabase, whatsapp): 52 setups became 42, and the 43 logins were unchanged. Still empty and kept: custom_htl_google_tracking, peopledatalabs, youtube and vercel. firecrawl got its login on 2026-10-01 and is the Firecrawl route (spp-p30a). _1password got a login at 20:40Z (Alex's Cursor chat), which was paused and its auth config disabled at 22:13Z (spp-p31a); its 2 logins were deleted 2026-10-02 (To do R59)."
+        },
+        {
+          "column": "C",
+          "value": "Checked 2026-10-03 (ccf-dc1 and ccf-dc2, work/2026-10-01_director-finish/notes/dead-configs.md): custom_htl_google_tracking stays (the G01 member test uses it). YouTube and People Data Labs: Alex says keep or drop. Vercel's empty setup and the 9 dead leftovers (_1password's disabled config among them) are ready to delete behind Alex's codes CG-67VW and CG-DUTN, CG-MN8Z, CG-4GYH, CG-BQR5, CG-HN25. _1password's 2 logins were deleted 2026-10-02 (To do R59)."
+        },
+        {
+          "column": "D",
+          "value": "Alex (codes, keep or drop), then an agent runs the scripts"
+        }
+      ]
+    },
+    {
+      "row": 23,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gap"
+        },
+        {
+          "column": "B",
+          "value": "Orgo hub rebuild source. Done 2026-10-01: /opt/mcp-hub's scripts, routes, supervisor config and server code (no keys) are in the private agents-home repo, tools/connectors/hub (commit 73a494e); 32 of 32 files matched the live hub."
+        },
+        {
+          "column": "C",
+          "value": "Rebuild with rebuild_hub.py (--dry-run and --check first); keys come from 1Password. Left: remove the dead mcp-hub-google-robot-javante program from the live conf and the mirror together; /opt/increase-roas-mcp is still only on the hub."
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 24,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gap"
+        },
+        {
+          "column": "B",
+          "value": "Lead conversions can't go back to Google Ads the old way: since 2026-06-15 offline conversion and enhanced-conversions-for-leads uploads moved to the Data Manager API"
+        },
+        {
+          "column": "C",
+          "value": "Done so far (2026-10-01): Composio googleads has INGEST_CONVERSION_EVENTS (Data Manager); the Data Manager API is enabled and the robot's login to it works. Still open: the upload itself is untested until a live client Google Ads account exists"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex"
+        }
+      ]
+    },
+    {
+      "row": 25,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Run Google Ads for customers: no live client account under manager account 1640283674 yet (all 8 are cancelled, suspended or closed, checked 2026-10-01)"
+        },
+        {
+          "column": "C",
+          "value": "Per customer: agent opens the ad account (or sends a link invite, with Alex's OK); Alex or the client adds the card; agent builds campaigns and asks before any spend. Campaign writes are untested"
+        },
+        {
+          "column": "D",
+          "value": "Agent + Alex"
+        }
+      ]
+    },
+    {
+      "row": 26,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Gap"
+        },
+        {
+          "column": "B",
+          "value": "No access register: ex-staff (franky@, Angel@) are still Google Ads admins; 4 client GA4 properties (Paradise Spas, Sun Pool & Spa, Lone Star Spas, Revstead) sit in the Increaseroas account instead of the client's"
+        },
+        {
+          "column": "C",
+          "value": "One row per asset: who has access, owner, last verified; review quarterly (CIS 5.1). Source: inflowave.io/resources/client-account-access-for-agencies. Not done as of 2026-10-01"
+        },
+        {
+          "column": "D",
+          "value": "Agent builds; Alex decides ownership moves"
+        }
+      ]
+    },
+    {
+      "row": 27,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "Key sweep leftovers (the sweep was stopped early on 2026-10-01): 6 keys in ~/.zsh_history, .env files in ~/ssa-sales-dashboard, ~/retell-ghl-secretaries and ~/site-launchpad-source, a gcloud service-account key in ~/.config/gcloud"
+        },
+        {
+          "column": "C",
+          "value": "Move the real keys into 1Password, then clean the files. Findings (paths only, no values): work/2026-10-01_key-sweep/findings.csv"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 28,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Skills: one copy per skill in ~/.agents/skills, and skill wording that names a tool (hand count on 2026-10-01: 52 of 130 named a tool; 110 flagged to move)"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01: one copy per skill in ~/.agents/skills (skills cap and vendoring, spp-p11a and spp-p16a). Live counts: Limits R18 and the 'Skills, where they live' tab (check.py prints them)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 29,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "Composio Slack has two accounts. Which one is the 'default' can only change by reconnecting"
+        },
+        {
+          "column": "C",
+          "value": "Until then, name the account ('Alex Slack Account') in every Slack call"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 30,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "Keyless custom connectors are skipped by the 8-hour tune-up refresh (tuneup.py refresh)"
+        },
+        {
+          "column": "C",
+          "value": "Add a way to refresh them. Not done"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 31,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "Director missions 'Orgo agents on one route' and 'Shared brain off the MacBook' are PLANNED and on hold"
+        },
+        {
+          "column": "C",
+          "value": "Wait for Alex to say go. Plan: work/2026-10-01_fleet-and-offmac/plan.md. 'Shared brain' also covers the workbook as a Google Sheet and the tune-up and notes sync running off the Mac. Mission 'Connector consolidation finish' is active and mostly done; what is left is on this tab"
+        },
+        {
+          "column": "D",
+          "value": "Alex says go"
+        }
+      ]
+    },
+    {
+      "row": 32,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "The Mac's disk was full on 2026-10-01 (730 MB free). A 21 GB leftover temp copy of Cursor's database was deleted: 46 GB free. Cursor's real state DB is 22.7 GB of chat history"
+        },
+        {
+          "column": "C",
+          "value": "Offload chat (task 'Offload Mac files to Google Drive, then delete') uploads the big folders to alex@'s Drive, checks them, then deletes. Not finished as of 2026-10-01"
+        },
+        {
+          "column": "D",
+          "value": "Alex (other chat)"
+        }
+      ]
+    },
+    {
+      "row": 33,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "paradise-spas-ga4 (Cursor) was broken: key file missing"
+        },
+        {
+          "column": "C",
+          "value": "Removed (2026-10-01): Composio custom_ga4_admin (acting as alex@) reaches 543642271"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 34,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "htl-ga4-analytics (Codex) was mislabeled: pinned to 524580574 'increaseroas', not HTL"
+        },
+        {
+          "column": "C",
+          "value": "Removed (2026-10-01): Composio custom_ga4_admin covers 524580574"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 35,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Codex increase-roas-ghl couldn't connect (SSH socket missing)"
+        },
+        {
+          "column": "C",
+          "value": "Removed from the Codex config (2026-10-01, backup ~/Backups/codex-config-2026-10-01/). Codex reaches GHL through Composio"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 36,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Cursor slack-session token wouldn't self-refresh since 2026-09-07"
+        },
+        {
+          "column": "C",
+          "value": "Removed from Cursor's mcp.json (2026-10-01; the Slack plugin is on the Cursor plugin list above). Slack runs through Composio ('Alex Slack Account'; the auth test passed)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 37,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Add Meta Ads to Composio"
+        },
+        {
+          "column": "C",
+          "value": "Added (2026-10-01): metaads with the never-expiring system user token from 1Password, 57 ad accounts verified. The health check watches it"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 38,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "GHL: pick ONE route"
+        },
+        {
+          "column": "C",
+          "value": "Alex chose two connectors by job (2026-10-01), both in Composio: ghl-oauth-crm for CRM (303 locations) and ghl-command-builder for workflows, funnels and forms. All other GHL entries were removed from Claude Code, Claude Desktop, Cursor and Codex"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 39,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Add Make, Parallel, Convex to Composio"
+        },
+        {
+          "column": "C",
+          "value": "Make added (2026-10-01, us1, all scopes, proven). Parallel and Convex dropped by Alex (no key or use found)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 40,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Add Foreplay to Composio"
+        },
+        {
+          "column": "C",
+          "value": "Added (2026-10-01): custom_foreplay, 31 tools, proven with a live read. Its key was rotated the same day (To do R3)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 41,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Delete dead Composio logins: 12 old Google, 2 old Meta Ads, GTM quip-salar, ClickUp, WhatsApp x2, Supabase, the broken Workspace Admin parody-boma; delete Vercel (active, but Alex chose to remove it)"
+        },
+        {
+          "column": "C",
+          "value": "Deleted (2026-10-01): 11 expired Google logins (Gmail 2, Google Ads 2, Calendar, Docs 2, Drive 2, Sheets 2), 2 expired Meta Ads, ClickUp, WhatsApp, Supabase, the Workspace Admin login and the Vercel login (Alex: remove Vercel). GTM quip-salar is no longer in the live list. Live pull: all 44 logins ACTIVE (Vercel was deleted after that pull)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 42,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Connect Cursor and Claude Desktop to Composio, then turn off their duplicate servers"
+        },
+        {
+          "column": "C",
+          "value": "Done (2026-10-01): Cursor and Codex reach apps through Composio, each proven with live calls; Claude Code (live calls) and the Claude phone (T1, T2, T4 PASS; Tests R31–R33) are proven; desktop chat, web and Cowork wait on live-tests (Tests R65). Duplicates removed from Claude Code, Cursor and Codex (backups in ~/Backups). Cursor's mcp.json keeps only Orgo (its 1Password MCP was removed 2026-10-01 21:19:53Z, All connections R4); Claude Code keeps only Playwright. Claude Desktop's 2 duplicates were removed 2026-10-02 (spp-c21); Cursor's plugins still need uninstalling (see Cleanup rows)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 43,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "GA4 changes on client properties were blocked: only reports worked there"
+        },
+        {
+          "column": "C",
+          "value": "No longer true (2026-10-01): Composio custom_ga4_admin acts as alex@ on all 10 properties; creating and deleting a key event worked on 4 client accounts. No message to customers was needed. Change only current clients (knowledge/clients.md)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 44,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Connectors break silently: 14 Composio logins were EXPIRED and nobody was told; the Orgo hub had no health check"
+        },
+        {
+          "column": "C",
+          "value": "Live (2026-10-01): Orgo checks the hub routes, the Composio logins and the home exit node every 30 min (read check every 6 h); health 18/18. Texts (877-691-3422, GHL IR NOTIFICATIONS) and emails Alex and Manny on break or recovery (emails go through the Google robot); Monday all-good email. All 44 Composio logins were ACTIVE at the live pull (Vercel was deleted after). Code ~/.agents/tools/connectors/health"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 45,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude settings (~/.claude/settings.json) had allow rules for dead GHL tools and the old claude.ai GHL connector ID (bf9eed35)"
+        },
+        {
+          "column": "C",
+          "value": "Removed 12 dead GHL allow rules (2026-10-01, backup ~/Backups/claude-config-2026-10-01). Checked: no rule with bf9eed35 is left"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 46,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Old Workspace Admin account (workspace-admin service account) is retired"
+        },
+        {
+          "column": "C",
+          "value": "Service account deleted in Google Cloud (2026-10-01; Google keeps it restorable for about 30 days). Its Composio login and hub route were removed; the Google robot replaced it. Its delegation entry in Google Admin was removed by Alex at 20:51:11Z and verified (row 9)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 47,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Tailscale: create the tag:server auth key for the Orgo rollout"
+        },
+        {
+          "column": "C",
+          "value": "Done (2026-10-01): reusable tag:server key saved in 1Password ('Tailscale auth key'); all 7 Orgo computers tagged; Alex saved the Tailscale SSH rule and SSH works on all 7 from the MacBook. The exposure issue is in the Security row"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 48,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decided"
+        },
+        {
+          "column": "B",
+          "value": "Spend has no hard stop: Google Ads runs 'always allow' in Composio, so only the AI's own rules stop a budget change; raw proxy calls skip tool gates"
+        },
+        {
+          "column": "C",
+          "value": "Alex: no app-wide gate. Spend follows each project's 'Spend approval:' line in its AGENTS.md; unset = ask and remind him (2026-10-01) Update, later 2026-10-01: Claude Code now has a hard stop: a guard hook holds Composio spend, client sends and deletes until Alex types the guard code or names the target (agents-home a8959c7, proven live). Codex: the same guard is installed (agents-home 26ee11c) and trusted; Run H passed; no release path."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 49,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decided"
+        },
+        {
+          "column": "B",
+          "value": "Composio has a HighLevel app available but not connected"
+        },
+        {
+          "column": "C",
+          "value": "Not connecting it (2026-10-01): both GHL routes are custom connectors, and the official GHL MCP covers one location per key against 303 for the gateway"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 50,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: a Foreplay connector is added but not signed in (seen on the phone, 2026-10-01). Foreplay is already proven in Composio as custom_foreplay (parity-diff addendum L11)"
+        },
+        {
+          "column": "C",
+          "value": "Removed 2026-10-01 in the app batch (Claude in Chrome, after Alex's yes). The Claude app keeps 2 connectors: Composio and GitHub Integration"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 51,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: a GHL OAuth Gateway connector is added but not signed in (same screenshot). GHL CRM is proven through Composio custom_ghl_oauth_crm (parity-diff addendum L12)"
+        },
+        {
+          "column": "C",
+          "value": "Removed 2026-10-01 in the app batch (Claude in Chrome, after Alex's yes). The Claude app keeps 2 connectors: Composio and GitHub Integration"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 52,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: a Google Calendar connector is added but not signed in (same screenshot). Calendar is reachable through Composio custom_google_robot (parity-diff addendum L13)"
+        },
+        {
+          "column": "C",
+          "value": "Removed 2026-10-01 in the app batch (Claude in Chrome, after Alex's yes). The Claude app keeps 2 connectors: Composio and GitHub Integration"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 53,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: a Notion connector is added but not signed in (same screenshot). Notion is proven in Composio (whole workspace, 2026-10-01) (parity-diff addendum L14)"
+        },
+        {
+          "column": "C",
+          "value": "Removed 2026-10-01 in the app batch (Claude in Chrome, after Alex's yes). The Claude app keeps 2 connectors: Composio and GitHub Integration"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 54,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: the Ref connector was removed 2026-10-01 (app batch), but its API key sat in the connector URL and still works at ref.tools (parity-diff addendum L15)"
+        },
+        {
+          "column": "C",
+          "value": "Done per Alex: he says he revoked the key at ref.tools (owner statement relayed by the Director, about 20:49Z; not verified by an agent). The screenshot that showed the key is still in the session's tool results; delete it if wanted"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 55,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Codex guard: installed (agents-home 26ee11c) and now active (spp-c8: trust the Codex guard)"
+        },
+        {
+          "column": "C",
+          "value": "Done: Alex clicked Trust all in ChatGPT > Settings > Coding > Hooks, and 2 trusted hashes landed at 20:45:39Z. Run H then passed: 10 risky calls were refused before running, through the composio command and the Composio app tools, while every read ran (codex-guard.md section 8)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 56,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "claude.ai instructions: the V05 block was saved in Settings > Account > Instructions for Claude (app batch: claude.ai V05 Save)"
+        },
+        {
+          "column": "C",
+          "value": "Done: Alex clicked Save. A fresh load at 20:50Z read back 1,246 characters, sha256 (first 32) 1fa79bcd2a1c80aebd3ec6de89a679f1, which matches V05 block 1"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 57,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "1Password: secrets an AI or script needs that no robot can read (vault sweep spp-p28a, items A1–A7)"
+        },
+        {
+          "column": "C",
+          "value": "Alex moves them into Connectors. The 3 Lone Star items in 'Local Vault (operator secrets)' and the HTL Dashboard item in Employee: Edit > Move Item > Connectors. The Apify and PageSpeed keys: copy each value from its Environment (Developer > View Environments) into a new API Credential item in Connectors. The 36 GHL location keys only if he agrees first: they are client keys, and Connectors widens who can read them. A move gives the item a new ID"
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 58,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Next"
+        },
+        {
+          "column": "B",
+          "value": "Lone Star scripts read 1Password as Alex, with Touch ID on every run: provision-tracking-secrets.py, connect-ga4-server.py and connect-ghl-stage-secret.py (vault sweep spp-p28a, B1)"
+        },
+        {
+          "column": "C",
+          "value": "After Alex's moves A1–A3: point them at the new item IDs through the Keychain robot (as orgo_op.py does), use the Connectors vault and drop --account"
+        },
+        {
+          "column": "D",
+          "value": "Agent"
+        }
+      ]
+    },
+    {
+      "row": 59,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Composio's 1Password toolkit is cut off on Alex's decision: login paused, auth config disabled (22:13Z) and the robot's token item archived (22:17Z). Alex revoked the token (the server refused it at 22:40Z on 2026-10-01) and the 2 logins were deleted 2026-10-02 (vault sweep spp-p28a, F1)"
+        },
+        {
+          "column": "C",
+          "value": "Done: (1) the robot's token is dead (2026-10-01 22:40:34Z: 403 Service Account Deleted); (2) the 2 Composio logins were deleted 2026-10-02 23:04:44Z after Alex's yes naming CG-SZRA (HTTP 200, readback 404)"
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 60,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Decide"
+        },
+        {
+          "column": "B",
+          "value": "~/.agents pushes: origin also pushes to agency-mini:agents-home, Sasha's Mac mini (Javante's Hermes host, LAN 10.20.189.18, Tailscale javante), and a second remote mini points there too (housekeeping spp-p35a: agency-mini)"
+        },
+        {
+          "column": "C",
+          "value": "Alex decides: keep the Mac mini copy, or remove that push URL and the mini remote. Until then agents push to the GitHub URL only, as spp-p37a did."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 61,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Two retired key files sit in the Trash: the gateway's .dev.vars and the builder's connection-password copy (spp-p35a: Trash)"
+        },
+        {
+          "column": "C",
+          "value": "Alex empties the Trash. Both values are in 1Password (saved first, or matched by sha256); agents don't hard-delete files."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 62,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Company-Ops ghl-command-access.md L42 named the retired local copy of the builder's connection password (spp-p35a: L42 pointer)"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-02 (spp-p37a): L42 names the builder's connection-password item in 1Password Connectors (field credential) and says the local copy is retired."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 63,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Claude app: the uploaded hermes-boss-director and native-fix-research are older than ~/.agents (routes fixed in agents-home 340a34f and af3b811; spp-p36a: re-upload)"
+        },
+        {
+          "column": "C",
+          "value": "Re-upload work/2026-10-01_setup-playbook/zips/hermes-boss-director.zip and native-fix-research.zip (built 02:00Z) in Customize > Skills, replacing the 2 existing skills. Until then the Claude app and Claude Code load the older text."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 64,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Do"
+        },
+        {
+          "column": "B",
+          "value": "Modal token expires 2027-10-01 22:09 EDT (spp-p39a: token expiry)"
+        },
+        {
+          "column": "C",
+          "value": "Before then: a new token in the Modal dashboard, both fields saved to 1Password item 'Modal API token' (same title), the old token revoked in Modal; modal_op.py needs no change."
+        },
+        {
+          "column": "D",
+          "value": "Alex"
+        }
+      ]
+    },
+    {
+      "row": 65,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "modal and huggingface in the always-loaded card list (shared.md, built into ~/.claude/CLAUDE.md and ~/.codex/AGENTS.md; spp-p39a: card list)"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-01 on Alex's yes ('Add both cards'): agents-home 9001942 (modal) and 920f2de (huggingface); CLAUDE.md and AGENTS.md rebuilt."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    },
+    {
+      "row": 66,
+      "cells": [
+        {
+          "column": "A",
+          "value": "Done"
+        },
+        {
+          "column": "B",
+          "value": "Composio guard CG-QWAA: delete the disabled duplicate CUSTOM_HF_MCP (DELETE https://backend.composio.dev/api/v3.1/custom/toolkits/CUSTOM_HF_MCP; it removes ac_1vMgmmQKh5an and ca_YEECCwwIMmni) (spp-p40a: CG-QWAA)"
+        },
+        {
+          "column": "C",
+          "value": "Done 2026-10-02: Alex's yes naming CG-QWAA; the guard allowed the delete at 23:04:45Z, and no custom_hf_mcp login is live (2026-10-03). The hosted-MCP rows now say deleted (All connections R317, Route power R72, Composio custom routes R23)."
+        },
+        {
+          "column": "D",
+          "value": "—"
+        }
+      ]
+    }
+  ]
+}

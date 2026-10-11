@@ -1,0 +1,170 @@
+{
+  "scope": "Fresh independent JSON Schema 2020-12 validation plus in-memory negative mutations; no artifact mutations",
+  "results": [
+    {
+      "item": "components.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/components.schema.json",
+      "file": "data/components.json",
+      "errors": []
+    },
+    {
+      "item": "components.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "components.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "coverage.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/coverage.schema.json",
+      "file": "data/coverage.json",
+      "errors": []
+    },
+    {
+      "item": "coverage.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "coverage.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "evidence.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/evidence.schema.json",
+      "file": "data/evidence.json",
+      "errors": []
+    },
+    {
+      "item": "evidence.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "evidence.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "issues.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/issues.schema.json",
+      "file": "data/issues.json",
+      "errors": []
+    },
+    {
+      "item": "issues.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "issues.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "layers.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/layers.schema.json",
+      "file": "data/layers.json",
+      "errors": []
+    },
+    {
+      "item": "layers.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "layers.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "relationships.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/relationships.schema.json",
+      "file": "data/relationships.json",
+      "errors": []
+    },
+    {
+      "item": "relationships.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "relationships.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "source-records.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/source-records.schema.json",
+      "file": "data/source-records.json",
+      "errors": []
+    },
+    {
+      "item": "source-records.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "source-records.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "sources.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/sources.schema.json",
+      "file": "data/sources.json",
+      "errors": []
+    },
+    {
+      "item": "sources.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "sources.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "table-index.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/table-index.schema.json",
+      "file": "data/table-index.json",
+      "errors": []
+    },
+    {
+      "item": "table-index.schema.json_negative_numeric_id",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; invalid numeric ID must reject."
+    },
+    {
+      "item": "table-index.schema.json_negative_unknown_field",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; extra record field must reject."
+    },
+    {
+      "item": "workflow-request.schema.json",
+      "status": "VERIFIED",
+      "schema": "schemas/workflow-request.schema.json",
+      "file": "examples/workflow-create-request.json",
+      "errors": []
+    },
+    {
+      "item": "workflow-request.schema.json_negative_boolean_revision",
+      "status": "VERIFIED",
+      "evidence": "Mutated in memory only; Boolean revision must reject."
+    }
+  ]
+}
