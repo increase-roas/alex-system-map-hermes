@@ -6,7 +6,7 @@ catalog-export), SKILL.md files, tool cards, rule files, Director state + missio
 plan and rule-audit output. Writes only app/.data/org-map.json.
 
 Layers (top-down): You -> AI apps -> Rules (rules, guards, tool cards) -> Director -> Conductor
--> engine room (SDK) -> missions -> skills/agents -> Composio connectors -> business systems.
+-> engine room (SDK) -> customers/projects with their missions -> skills -> connectors (each names the system it reaches).
 Every node gets a purpose line and a 3-line explanation (what it is / should I care / what to do).
 """
 from __future__ import annotations
@@ -126,6 +126,20 @@ for aid in ('app:claude', 'app:codex', 'app:cursor'):
                 'no', 'It is scanned live and nothing on it is flagged.', 'Nothing.'),
         sources=[APP_FILES[aid].replace('~', str(HOME))], connectors=conns)
     link('you', aid, 'talks', 'you talk through')
+# Claude Code is its own app (the CLI/desktop coding agent) reading ~/.claude; Manus is a cloud agent app.
+if (HOME / '.claude').exists():
+    add('app:claude-code', 'apps', 'app', 'Claude Code', 'Coding agent. Reads ~/.claude/CLAUDE.md and the shared skills.',
+        explain('Claude Code is the coding version of Claude. It reads the same shared rules and skills folder.', 'no',
+                'Its rules file is generated from the shared rules like the others.', 'Nothing.'),
+        sources=[HOME / '.claude' / 'CLAUDE.md'])
+    link('you', 'app:claude-code', 'talks', 'you talk through', str(HOME / '.claude' / 'CLAUDE.md'))
+if Path('/Applications/Manus.app').exists() or (HOME / 'Documents' / 'Manus').exists():
+    mp = Path('/Applications/Manus.app') if Path('/Applications/Manus.app').exists() else HOME / 'Documents' / 'Manus'
+    add('app:manus', 'apps', 'app', 'Manus', 'Cloud agent app. Builds dealer sites with its own Manus skills.',
+        explain('Manus is another AI app you hand jobs to. It runs in the cloud with its own skills, not your shared rules.', 'maybe',
+                'It does not get your generated rules file.', 'Nothing unless Manus starts doing work that needs your gates.'),
+        status='watch', sources=[mp])
+    link('you', 'app:manus', 'talks', 'you talk through', str(mp))
 if Path('/Applications/ChatGPT.app').exists():
     add('app:chatgpt', 'apps', 'app', 'ChatGPT', 'Installed on your Mac; reaches apps through the official Composio plugin (shared.md).',
         explain('ChatGPT is another AI app you talk through. It is installed, but its settings are not files the map can read.',
@@ -286,8 +300,8 @@ SDK_PLUG_FILES = {'Codex': HOME / '.codex/config.toml', 'Cursor': HOME / '.curso
                   'Claude': HOME / 'Library/Application Support/Claude/claude_desktop_config.json'}
 sdk_plugged = [app for app, f in SDK_PLUG_FILES.items() if re.search(r'master-agent-operations|master-ops-mcp', read(f))]
 # Claude Code keeps its servers in ~/.claude.json (the desktop app uses claude_desktop_config.json).
-if 'Claude' not in sdk_plugged and re.search(r'master-agent-operations', read(HOME / '.claude.json', 2_000_000)):
-    sdk_plugged.append('Claude')
+if re.search(r'master-agent-operations', read(HOME / '.claude.json', 2_000_000)):
+    sdk_plugged.append('Claude-Code')
 sdk = [{'step': i + 1, 'title': t, 'status': s, 'why': w, 'proof': tilde(p or plan_file)} for i, (t, s, w, p) in enumerate(SDK_STEPS)]
 plan_note = 'current plan' if plan_file == SDK_PLAN_LIVE else 'backup copy (the live plan file is missing from ~/Documents/Codex/2026-10-06/can/outputs)'
 add('sdk', 'engine', 'sdk', 'SDK engine room (Master Agent Operations SDK 1.3)',
@@ -308,6 +322,9 @@ skill_names = sorted((p.name for p in SKILLS.iterdir() if p.is_dir() and not p.n
 skill_names = [s for s in skill_names if len(s) > 4 and s not in ('synced', 'image')]
 AGENTS = {'Javar': 'agent:javar', 'Javante': 'agent:javante', 'Hermes': 'agent:hermes', 'Manus': 'agent:manus', 'OpenClaw': 'agent:openclaw'}
 mission_skill_evidence = 0
+PROJECTS = [('Dynamite Lighting / Natural Sanitation', r'dynamite|natural.?sanitation'), ('Hot Tub Launch', r'hot.?tub|\bhtl\b'),
+            ('Lone Star Spas', r'lone.?star'), ('Sun Pool', r'sun.?pool'), ('Revstead', r'revstead|fenc'),
+            ('PowersportsLaunch', r'powersport'), ('Increase ROAS', r'increase.?roas|tree.?service')]
 parked = 0
 for block in re.split(r'(?m)^## Mission: ', state_text)[1:]:
     field = lambda k: (re.search(rf'^{k}: (.*)$', block, re.M) or [None, ''])[1].strip()
@@ -316,6 +333,8 @@ for block in re.split(r'(?m)^## Mission: ', state_text)[1:]:
     if status in ('PARKED', 'MISSION_COMPLETE', '?'):
         parked += status == 'PARKED'
         continue
+    proj_txt = (name + ' ' + field('PROJECT') + ' ' + field('MISSION_ID')).lower()
+    project = next((p for p, pat in PROJECTS if re.search(pat, proj_txt)), 'Personal / system')
     mid = 'mission:' + (field('MISSION_ID') or re.sub(r'\W+', '-', name.lower()))[:80]
     q = next((x for x in quiet if x['name'][:60] == name[:60]), None)
     st = 'you' if status == 'WAITING_ON_ALEX' or (q and q['bucket'] == 'needs me') else 'stuck' if q and q['bucket'] == 'looks stuck' else 'done' if q and q['bucket'] == 'looks done' else 'ok'
@@ -326,7 +345,7 @@ for block in re.split(r'(?m)^## Mission: ', state_text)[1:]:
     add(mid, 'missions', 'mission', name, owner or name,
         explain(f'A Director mission: {owner or name}', 'yes' if st in ('you', 'stuck') else 'maybe' if st == 'done' else 'no', why, todo),
         status={'you': 'you', 'stuck': 'broken', 'done': 'watch', 'ok': 'ok'}[st], sources=[DIRECTOR / 'DIRECTOR_STATE.md'],
-        mission_status=status, bucket=q['bucket'] if q else None, quiet_days=q['quiet_days'] if q else None)
+        project=project, mission_status=status, bucket=q['bucket'] if q else None, quiet_days=q['quiet_days'] if q else None)
     link('director', mid, 'runs', 'runs')
     if st == 'you':
         needs_me.append({'title': name, 'why': why, 'todo': todo, 'node_id': mid})
@@ -348,12 +367,6 @@ for block in re.split(r'(?m)^## Mission: ', state_text)[1:]:
                     sources=[SKILLS / s / 'SKILL.md'])
             link(mid, sid, 'used', 'used skill', str(DIRECTOR / 'DIRECTOR_STATE.md'))
             mission_skill_evidence += 1
-    for word, aid in AGENTS.items():
-        if re.search(rf'\b{word}\b', text):
-            if aid not in nodes:
-                add(aid, 'skills', 'agent', word, f'{word}: one of your worker agents named in Director missions.',
-                    explain(f'{word} is one of your worker agents. Director missions hand it work.', 'no', 'It shows up here because a mission names it.', 'Nothing.'))
-            link(mid, aid, 'used', 'used agent', str(DIRECTOR / 'DIRECTOR_STATE.md'))
 if parked:
     add('mission:parked', 'missions', 'mission', f'Parked missions ({parked})', 'Missions the Director parked on purpose.',
         explain(f'{parked} missions the Director paused on purpose.', 'no', 'Parked work does not move until someone restarts it.', 'Nothing.'), status='ok')
@@ -363,15 +376,11 @@ if parked:
 add('hub:composio', 'connectors', 'hub', 'Composio', 'The one door your AI apps use to reach outside apps.',
     explain('Composio is the one door your agents use to reach outside apps like GoHighLevel, Gmail or Meta.',
             'maybe', 'If it is down, every app task stops. The map does not call Composio, so it can\'t prove it is up.', 'Nothing.'))
-for app in ('app:claude', 'app:codex', 'app:cursor', 'app:chatgpt'):
+for app in ('app:claude', 'app:claude-code', 'app:codex', 'app:cursor', 'app:chatgpt'):
     link(app, 'hub:composio', 'reaches', 'reaches apps through', str(INSTR / 'shared.md'))
 for stem, kits in card_routes.items():
     cid = f'card:{stem}'
     system = nodes[cid]['meta']['system']
-    sysid = f'system:{stem}'
-    add(sysid, 'business', 'system', system, f'Your {system} account.',
-        explain(f'{system}: one of the outside systems your business runs on.', 'no',
-                'The map only knows the route to it, not whether the account is healthy.', 'Nothing.'), status='unknown')
     for k in kits:
         tid = f'toolkit:{k}'
         if tid not in nodes:
@@ -380,14 +389,15 @@ for stem, kits in card_routes.items():
                         'Named in its card. The map does not log in to check it.', 'Nothing.'), status='unknown', sources=[CARDS / f'{stem}.md'])
             link('hub:composio', tid, 'contains', 'connection')
         link(cid, tid, 'route', 'route', str(CARDS / f'{stem}.md'))
-        link(tid, sysid, 'reaches', 'reaches', str(CARDS / f'{stem}.md'))
+        nodes[tid]['meta'].setdefault('systems', [])
+        if system not in nodes[tid]['meta']['systems']:
+            nodes[tid]['meta']['systems'].append(system)
     if not kits and stem != 'composio':
         local_id = f'local:{stem}'
         add(local_id, 'connectors', 'local', f'{system} (local route)', nodes[cid]['meta']['route_text'][:160],
             explain(f'{system} is reached without Composio: {nodes[cid]["meta"]["route_text"][:140]}', 'no', 'Its card says this on purpose.', 'Nothing.'),
             sources=[CARDS / f'{stem}.md'])
         link(cid, local_id, 'route', 'route', str(CARDS / f'{stem}.md'))
-        link(local_id, sysid, 'reaches', 'reaches', str(CARDS / f'{stem}.md'))
 for lid, ln in live_nodes.items():
     if ln['kind'] == 'connector':
         cid = f'mcp:{ln["label"]}'
@@ -396,6 +406,11 @@ for lid, ln in live_nodes.items():
         for e in live.get('edges', []):
             if e['target'] == lid:
                 link(e['source'], cid, 'uses', 'uses')
+ORGO = HOME / 'Projects' / 'master-connector-repo' / 'work' / '2026-10-07_orgo-fleet-control'
+if ORGO.exists():
+    add('host:openclaw', 'connectors', 'local', 'OpenClaw (Orgo computer)', 'A cloud computer on Orgo that hosts some connectors.',
+        explain('OpenClaw is a cloud computer you rent on Orgo. Some connectors run on it.', 'maybe',
+                'The map can see its control files, not whether it is switched on.', 'Nothing.'), status='unknown', sources=[ORGO])
 if 'mcp:director-observatory' in nodes and 'card:director-observatory' in nodes:
     link('card:director-observatory', 'mcp:director-observatory', 'route', 'route')
 
@@ -611,6 +626,7 @@ for aid in [n for n in nodes if n.startswith('app:')]:
     if hooks: diff.append(f'guards: {", ".join(hooks)}')
     if conns: diff.append(f'local plugs: {", ".join(conns)}')
     if app == 'chatgpt': diff.append('gets none of your rule files')
+    if app == 'manus': diff.append('own Manus skills, not your shared rules')
     nodes[aid]['meta']['differences'] = diff
 for n in nodes.values():
     if n['layer'] == 'rules':
@@ -653,7 +669,7 @@ def rail_row(layer: str, title: str) -> dict:
 
 
 rail = [rail_row(l, t) for l, t in (('apps', 'AI apps'), ('rail-rules', 'Shared rules and guards'), ('director', 'Director'), ('conductor', 'Conductor'),
-                                    ('missions', 'Missions'), ('skills', 'Skills and agents'), ('connectors', 'Connectors'), ('business', 'Business systems'))]
+                                    ('missions', 'Missions'), ('skills', 'Skills'), ('connectors', 'Connectors'))]
 rail.insert(3, {'layer': 'engine', 'title': 'SDK engine room' + ('' if sdk_plugged else ' (not plugged in)'), 'running': 0,
                 'stuck': sum(1 for s in sdk if s['status'] == 'gap'), 'watch': sum(1 for s in sdk if s['status'] == 'partial'),
                 'unknown': 0, 'total': 8, 'proven': sum(1 for s in sdk if s['status'] == 'proven')})
@@ -663,8 +679,8 @@ OUT.write_text(json.dumps({
     'built_at': datetime.now(timezone.utc).isoformat(),
     'scanned_at': live.get('scanned_at'),
     'layers': [['you', 'You'], ['apps', 'AI apps'], ['director', 'Director (decides)'], ['conductor', 'Conductor (does the work through the controllers)'],
-               ['engine', 'Engine room (SDK)'], ['missions', 'Projects and missions'], ['skills', 'Skills and agents those missions use'],
-               ['connectors', 'Connections (each with its routing card)'], ['business', 'Your business systems']],
+               ['engine', 'Engine room (SDK)'], ['missions', 'Customers and projects (click one to open its missions)'], ['skills', 'Skills those missions used'],
+               ['connectors', 'Connections (each with its routing card)']],
     'nodes': list(nodes.values()), 'edges': edges, 'sdk': sdk, 'route_check': route.get('checked_at'),
     'evidence': {'lines': len(edges), 'proven': len(edges) - len(unproven), 'unproven': [{'from': nodes[e['source']]['label'], 'to': nodes[e['target']]['label'], 'kind': e['kind']} for e in unproven]}, 'sdk_plan': {'file': tilde(plan_file), 'missing_live_copy': plan_file != SDK_PLAN_LIVE},
     'rail': rail, 'last_trace': trace_last, 'needs_me': needs_me, 'rule_audit': audit,

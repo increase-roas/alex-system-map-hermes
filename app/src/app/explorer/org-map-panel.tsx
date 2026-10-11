@@ -66,7 +66,7 @@ function card(n: OrgNode) {
   );
 }
 
-function layout(map: OrgMap, focus: Set<string>) {
+function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
   const nodes: Node[] = [];
   const bandY: Record<string, number> = {};
   const neighbors = new Set<string>();
@@ -80,7 +80,7 @@ function layout(map: OrgMap, focus: Set<string>) {
     const near = neighbors.has(n.id);
     const bad = n.status === 'broken' || n.status === 'conflict';
     return {
-      width: W, borderRadius: 10, padding: '6px 9px', color: 'inherit',
+      width: W, borderRadius: ['director', 'conductor'].includes(n.kind) ? 999 : ['hub', 'toolkit', 'local'].includes(n.kind) ? 22 : 10, padding: '6px 9px', color: 'inherit',
       background: ['you', 'director', 'conductor', 'hub'].includes(n.kind) ? 'rgba(255,0,113,0.10)' : 'var(--card, #1a1a1a)',
       border: `1.5px solid ${hot ? '#ff0071' : bad ? '#ff0071' : n.status === 'you' || n.status === 'watch' ? '#f5a524' : '#3a3a3a'}`,
       boxShadow: hot ? '0 0 18px rgba(255,0,113,0.45)' : undefined,
@@ -120,6 +120,49 @@ function layout(map: OrgMap, focus: Set<string>) {
     }
     if (!list.length) continue;
     bandY[layer] = y;
+    if (layer === 'missions') {
+      // Customer / project boxes (React Flow Pro: parent-child + expand/collapse). Missions live inside their box.
+      nodes.push({ id: `lane:${layer}`, position: { x: 0, y: y - 24 }, selectable: false, draggable: false, data: { label: title },
+        style: { width: 600, border: 'none', background: 'transparent', padding: 0, fontSize: 12, color: '#ff4d9a', textAlign: 'left' } });
+      const groups = new Map<string, OrgNode[]>();
+      for (const n of list) {
+        const p = String(n.meta.project ?? (n.id === 'mission:parked' ? 'Parked' : 'Personal / system'));
+        groups.set(p, [...(groups.get(p) ?? []), n]);
+      }
+      const names = [...groups.keys()].sort((a, b) => (a === 'Personal / system' || a === 'Parked' ? 1 : 0) - (b === 'Personal / system' || b === 'Parked' ? 1 : 0) || a.localeCompare(b));
+      const maxW = PER_ROW * (W + GAP) - GAP;
+      let gx = 0, gy = y, rowH = 0;
+      for (const name of names) {
+        const ms = groups.get(name)!;
+        const isOpen = open.has(name);
+        const cols = isOpen ? Math.min(3, ms.length) : 1;
+        const gw = isOpen ? cols * (W + GAP) + GAP : W + 30;
+        const gh = isOpen ? 44 + Math.ceil(ms.length / cols) * ROW : 78;
+        if (gx > 0 && gx + gw > maxW) { gx = 0; gy += rowH + GAP; rowH = 0; }
+        const bad = ms.filter((m) => m.status === 'broken' || m.status === 'you').length;
+        const gid = `project:${name}`;
+        nodes.push({
+          id: gid, position: { x: gx, y: gy }, draggable: false,
+          data: { label: (
+            <div className="text-left">
+              <div className="flex items-center gap-2 text-[12px] font-semibold"><span aria-hidden>{isOpen ? '▾' : '▸'}</span>{name}</div>
+              <div className="text-muted-foreground text-[10px] tabular-nums">{ms.length} mission{ms.length === 1 ? '' : 's'}{bad ? ` · ${bad} stuck or need you` : ''}{isOpen ? '' : ' · click to open'}</div>
+            </div>
+          ) },
+          style: { width: gw, height: gh, borderRadius: 14, padding: '8px 12px', color: 'inherit', cursor: 'pointer',
+            border: `1.5px dashed ${bad ? '#f5a524' : '#555'}`, background: 'rgba(255,255,255,0.025)',
+            opacity: focus.size && !focus.has(gid) && !ms.some((m) => focus.has(m.id) || neighbors.has(m.id)) ? 0.35 : 1 },
+        });
+        if (isOpen) ms.forEach((m, i) => nodes.push({
+          id: m.id, parentId: gid, extent: 'parent', draggable: false,
+          position: { x: GAP + (i % cols) * (W + GAP), y: 40 + Math.floor(i / cols) * ROW },
+          data: { label: card(m) }, style: style(m),
+        }));
+        gx += gw + GAP; rowH = Math.max(rowH, gh);
+      }
+      y = gy + rowH + BAND_GAP;
+      continue;
+    }
     nodes.push({ id: `lane:${layer}`, position: { x: 0, y: y - 24 }, selectable: false, draggable: false, data: { label: title },
       style: { width: 600, border: 'none', background: 'transparent', padding: 0, fontSize: 12, color: '#ff4d9a', textAlign: 'left' } });
     const order = ['rule', 'hook', 'check', 'card', 'director', 'conductor', 'mission', 'skill', 'agent', 'hub', 'toolkit', 'local'];
@@ -166,8 +209,12 @@ function layout(map: OrgMap, focus: Set<string>) {
     });
   }
   const ids = new Set(nodes.map((n) => n.id));
-  const edges: Edge[] = map.edges
+  const projectEdges: Edge[] = nodes.filter((n) => n.id.startsWith('project:')).map((n) => ({
+    id: `runs:director->${n.id}`, source: 'director', target: n.id, style: { stroke: '#555', strokeWidth: 1, opacity: 0.35 },
+  }));
+  const edges: Edge[] = [...projectEdges, ...map.edges
     .filter((e) => ids.has(e.source) && ids.has(e.target))
+    .filter((e) => !(e.kind === 'runs' && e.source === 'director' && e.target.startsWith('mission:')))
     .filter((e) => BACKBONE.has(e.kind) || focus.has(e.source) || focus.has(e.target))
     .map((e) => {
       const on = focus.has(e.source) || focus.has(e.target);
@@ -186,7 +233,7 @@ function layout(map: OrgMap, focus: Set<string>) {
         },
         labelStyle: red ? { fill: '#ff4d9a', fontSize: 11 } : { fontSize: 10 },
       };
-    });
+    })];
   return { nodes, edges };
 }
 
@@ -196,6 +243,7 @@ export function OrgMapPanel() {
   const [error, setError] = useState<string | null>(null);
   const [busy, setBusy] = useState(false);
   const [focus, setFocus] = useState<Set<string>>(new Set());
+  const [open, setOpen] = useState<Set<string>>(new Set());
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const flow = useRef<ReactFlowInstance | null>(null);
 
@@ -219,12 +267,14 @@ export function OrgMapPanel() {
   }, []);
   usePoll(() => load(false), 60_000);
 
-  const graph = useMemo(() => (map ? layout(map, focus) : null), [map, focus]);
+  const graph = useMemo(() => (map ? layout(map, focus, open) : null), [map, focus, open]);
   const byId = useMemo(() => new Map((map?.nodes ?? []).map((n) => [n.id, n])), [map]);
   const selected = selectedId ? byId.get(selectedId) ?? null : null;
 
   const focusOn = (id: string) => {
     if (!byId.has(id)) return;
+    const proj = byId.get(id)!.meta.project;
+    if (typeof proj === 'string') setOpen((o) => new Set(o).add(proj));
     setSelectedId(id);
     setFocus(new Set([id]));
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -297,7 +347,14 @@ export function OrgMapPanel() {
           minZoom={0.05}
           proOptions={{ hideAttribution: true }}
           onInit={(i) => { flow.current = i; }}
-          onNodeClick={(_, n) => focusOn(n.id)}
+          onNodeClick={(_, n) => {
+            if (n.id.startsWith('project:')) {
+              const name = n.id.slice(8);
+              setOpen((o) => { const x = new Set(o); if (x.has(name)) x.delete(name); else x.add(name); return x; });
+              return;
+            }
+            focusOn(n.id);
+          }}
           onPaneClick={() => { setFocus(new Set()); setSelectedId(null); }}
         >
           <Background />
