@@ -253,7 +253,7 @@ function relayout(nodes: ProNode[], x0: number, rows: Record<Step, string[]>, li
 }
 
 const pro: ProNode[] = [
-  { id: 'p_title', label: 'Anthropic patterns combined: 1 person + agent team', sub: 'One chat, start to finish, top to bottom. Claude Code, the app and SDK agents each use these pieces; they are not one product.', x: P - 290, y: -110, w: 1280, h: 60, band: true, status: ref, why: 'Every box links the Anthropic page it comes from.', sources: [ANT.steer, ANT.research] },
+  { id: 'p_title', label: 'Version 2: Codex review, 12 steps (one chat)', sub: 'One chat, start to finish, top to bottom. Claude Code, the app and SDK agents each use these pieces; they are not one product.', x: P - 290, y: -110, w: 1280, h: 60, band: true, status: ref, why: 'Every box links the Anthropic page it comes from.', sources: [ANT.steer, ANT.research] },
   ...bands('p', P, PRO_STEPS, [ANT.mon, ANT.steer], 'Library: setup + reference', 'Rails (every step)'),
   ...relayout([...proNodes, ...proExtra], P, PRO_LAYOUT, PRO_LIB, PRO_RAILS),
 ];

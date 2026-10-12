@@ -499,3 +499,6 @@ for (const [key, extra] of Object.entries(EXTRA)) {
   }
   PRO_FILL[id] = merged as More;
 }
+
+// Version 1 still has the ledger as its own card (p_x11); give it the same content.
+PRO_FILL['p_x11'] = EXTRA['p_x3__ledger'];

@@ -6,7 +6,8 @@ import {
 } from '@xyflow/react';
 import { useMemo, useState } from 'react';
 
-import { PRO_EDGES, PRO_NODES, type ProNode, type ProStatus } from './pro-map-data';
+import { PRO_EDGES, PRO_NODES } from './pro-map-all';
+import { type ProNode, type ProStatus } from './pro-map-data';
 import type { Example, FlowStep, Picture, Rule, TreeNode } from './pro-map-examples';
 
 const COLOR: Record<ProStatus, string> = { ok: '#17c964', partial: '#f5a524', gap: '#ff0071', reference: '#7f77dd' };
@@ -68,7 +69,7 @@ function Legend({ counts }: { counts: { ok: number; partial: number; gap: number
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b px-3 py-2 text-xs">
       <span className="text-sm font-semibold">Pro Map</span>
-      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: Anthropic's way (Anthropic sources only). Right: yours, same 12 steps. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
+      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: version 1 (original 13 steps). Middle: version 2 (Codex review, 12 steps). Right: yours, 12 steps. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
       {(['ok', 'partial', 'gap', 'reference'] as ProStatus[]).map((s) => (
         <span key={s} className="flex items-center gap-1"><span className="inline-block size-2 rounded-full" style={{ background: COLOR[s] }} />{WORD[s]}</span>
       ))}
