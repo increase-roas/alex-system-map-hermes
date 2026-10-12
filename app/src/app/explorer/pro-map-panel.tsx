@@ -33,6 +33,7 @@ function Card({ data }: NodeProps<Node<CardData>>) {
       <div className="flex items-center gap-1.5">
         <span className="inline-block size-2 shrink-0 rounded-full" style={{ background: c }} />
         <span className="text-[10px] uppercase tracking-wide text-muted-foreground">{WORD[data.status]}</span>
+        {data.badge ? <span className="ml-auto rounded bg-amber-500/15 px-1 text-[9px] font-medium text-amber-600">{data.badge}</span> : null}
       </div>
       <div className="mt-0.5 text-sm font-medium leading-tight">{data.label}</div>
       <div className="text-xs leading-tight text-muted-foreground">{data.sub}</div>
@@ -96,10 +97,12 @@ function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
     animated: e.kind === 'flow' || e.kind === 'loop',
     sourceHandle: e.sh ?? (sameRow ? 'rs' : undefined),
     targetHandle: e.th ?? (sameRow ? 'l' : undefined),
-    style: { stroke: color, strokeWidth: e.kind === 'flow' ? 1.4 : 1.3, strokeDasharray: e.kind === 'flow' ? undefined : e.kind === 'loop' ? '3 3' : '6 4' },
-    markerEnd: { type: MarkerType.ArrowClosed, color, width: 14, height: 14 },
+    style: { stroke: color, strokeWidth: e.kind === 'flow' ? 1.4 : e.kind === 'loop' ? 2 : 1.3, strokeDasharray: e.kind === 'flow' ? undefined : e.kind === 'loop' ? '3 3' : '6 4' },
+    ...(e.offset ? { pathOptions: { offset: e.offset } } : {}),
+    markerEnd: { type: MarkerType.ArrowClosed, color, width: e.kind === 'loop' ? 18 : 14, height: e.kind === 'loop' ? 18 : 14 },
     labelStyle: { fontSize: 11, fill: color },
-    labelBgStyle: { fillOpacity: 0 },
+    labelBgStyle: e.kind === 'flow' || e.kind === 'loop' ? { fill: 'hsl(var(--background))', fillOpacity: 0.92 } : { fillOpacity: 0 },
+    labelBgPadding: [4, 2] as [number, number],
     zIndex: 1,
   };
 }

@@ -1,0 +1,12 @@
+import { createRequire } from 'module';
+const require = createRequire('/Users/alexlobaito/Projects/alex-system-map/app/package.json');
+const { chromium } = require('playwright');
+const [url, out] = process.argv.slice(2);
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1800, height: 1500 }, deviceScaleFactor: 3 });
+await page.goto(url, { waitUntil: 'networkidle' });
+await page.getByRole('button', { name: 'Pro Map' }).click();
+await page.waitForSelector('[data-testid="pro-map"] .react-flow__node', { timeout: 20000 });
+await page.waitForTimeout(1500);
+await page.screenshot({ path: out });
+await browser.close();

@@ -401,6 +401,30 @@ export const PRO_FILL: Record<string, More> = {
 };
 
 const EXTRA: Record<string, More> = {
+  p_load: {
+    plain: ['Happens after the project is known, so the right rules load.', 'Loads: that project\'s CLAUDE.md and rules, the skill list (names only), the first 200 lines of MEMORY.md.', 'Resuming a long job? Also the progress file and git log.'],
+    myths: [{ myth: 'The agent loads every project\'s files at once.', truth: 'It loads the files of the folder it is working in. Open the right project first.', fix: 'Start the session in the client\'s repo, or have the lead switch to it before working.' }],
+    sources: [S.mem, S.harness],
+  },
+  p_plan: {
+    plain: ['Three choices: answer right away, do it itself, or hand parts to helpers.', 'Most requests in one chat: do it itself.'],
+    decide: [{ if: 'Simple question, no tools needed', then: 'Answer (then check if it can be checked)' }, { if: 'Normal task', then: 'Lead does the work' }, { if: 'Big reading job or independent parts', then: 'Optional helpers' }],
+    sources: [S.effective],
+  },
+  p_helpers: {
+    plain: ['Each helper gets a clear handoff: goal, format, tools, when to stop.', 'It loads its own instructions and works in its own context.', 'It uses the same tool loop (find tool, permission, run, read result).', 'It returns a short summary to the lead.'],
+    myths: [{ myth: 'Helpers share the lead\'s context.', truth: 'Only the handoff text reaches them (a fork is the exception).', fix: 'Write handoffs that stand alone: goal, file paths, decisions made, output format, stop point.' }],
+    sources: [S.sdkSub, S.research],
+  },
+  p_combine: {
+    plain: ['The lead reads every helper summary.', 'Gaps or conflicts? Send more helper work.', 'Enough? Move on to checking the combined result.'],
+    sources: [S.research],
+  },
+  p_result: {
+    plain: ['After every tool call the agent reads what came back.', 'Not done: pick the next tool (loop back).', 'Done: go check the work.'],
+    pictures: [{ kind: 'flow', title: 'The tool loop', steps: [{ label: 'Find a tool' }, { label: 'Permission check' }, { label: 'Run it' }, { label: 'Read the result', many: ['more work: loop back', 'ready: check it'] }] }],
+    sources: [S.sdkBlog],
+  },
   p_self: {
     plain: ['In one chat, the lead does most work itself: reads, edits, runs tools, checks.', 'It hands work to a helper only when that keeps its own context clean or saves time.', 'Helpers cost more tokens, so they are a choice, not a step.'],
     decide: [
