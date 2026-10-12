@@ -401,7 +401,24 @@ export const PRO_FILL: Record<string, More> = {
 };
 
 const EXTRA: Record<string, More> = {
-  p_x11: {
+  p_self: {
+    plain: ['In one chat, the lead does most work itself: reads, edits, runs tools, checks.', 'It hands work to a helper only when that keeps its own context clean or saves time.', 'Helpers cost more tokens, so they are a choice, not a step.'],
+    decide: [
+      { if: 'Small or medium task', then: 'Lead does it itself' },
+      { if: 'Needs reading lots of files or logs', then: 'A helper reads them and returns a summary' },
+      { if: 'Splits into independent parts', then: 'Helpers in parallel' },
+      { if: 'Needs a different tool set or strict limits', then: 'A helper with only those tools' },
+    ],
+    myths: [{ myth: 'Every request needs helpers.', truth: 'Anthropic says start simple. Helpers are for context isolation and parallel work; multi-agent runs use about 15 times the tokens.', fix: 'Let the lead do it. Add a helper only when the job reads lots of files or splits into independent parts.' }],
+    sources: ['https://code.claude.com/docs/en/features-overview', S.effective, S.research],
+  },
+  p_check: {
+    plain: ['The check comes from your ask: tests, a build, an eval, a screenshot to compare.', 'Claude runs it, reads pass or fail, fixes, and runs it again.', 'Only after it passes does it answer you. A separate reviewer is an extra layer on top.'],
+    pictures: [{ kind: 'flow', title: 'The check loop', steps: [{ label: 'Do the work' }, { label: 'Run the check' }, { label: 'Pass?', many: ['no: fix and run again', 'yes: answer you'] }] }],
+    myths: [{ myth: 'Verifying means asking a second agent.', truth: 'Anthropic\'s first move is a check Claude can run itself. A separate reviewer is an extra layer for higher stakes.', fix: 'Put the check in the ask ("done when evals/no-price passes") and add a separate reviewer only for client-facing or high-stakes work.' }],
+    sources: [S.best],
+  },
+  p_x3__ledger: {
     plain: [
       'Anthropic never uses the word ledger. Their names: progress file, git history, transcript (also called trace), events.',
       'Progress file: claude-progress.txt + feature_list.json + git log. Answers "what is done and what is next". Every new session reads it first.',
@@ -472,7 +489,8 @@ const EXTRA: Record<string, More> = {
 
 type ArrKey = 'plain' | 'pictures' | 'examples' | 'decide' | 'myths' | 'build' | 'pros' | 'noobs' | 'limits' | 'sources';
 const KEYS: ArrKey[] = ['plain', 'pictures', 'examples', 'decide', 'myths', 'build', 'pros', 'noobs', 'limits', 'sources'];
-for (const [id, extra] of Object.entries(EXTRA)) {
+for (const [key, extra] of Object.entries(EXTRA)) {
+  const id = key.split('__')[0];
   const base: More = PRO_FILL[id] ?? {};
   const merged: Record<string, unknown[]> = {};
   for (const k of KEYS) {

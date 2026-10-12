@@ -20,7 +20,7 @@ export type ProNode = {
   x: number; y: number; w?: number; h?: number; band?: boolean;
 };
 export type ProEdge = {
-  id: string; source: string; target: string; kind: 'flow' | 'link' | 'bypass'; label?: string;
+  id: string; source: string; target: string; kind: 'flow' | 'link' | 'bypass' | 'loop'; label?: string;
   sh?: 'ls' | 'rs'; th?: 'l' | 'r';
 };
 
@@ -57,17 +57,18 @@ const ANT = {
 };
 
 /** The 13 steps, in the order they happen. */
-const STEPS = ['ask', 'ui', 'front', 'plan', 'agents', 'ptr', 'know', 'gw', 'run', 'land', 'review', 'report', 'learn'] as const;
+/** v6 (Codex review 2026-10-12): one chat, top down. The lead reads its files first, picks the client early, helpers are optional, results loop back. */
+const STEPS = ['ask', 'ui', 'front', 'client', 'plan', 'delegate', 'know', 'gw', 'run', 'verify', 'report', 'learn'] as const;
 type Step = (typeof STEPS)[number];
-const BAND_H: Partial<Record<Step, number>> = { ptr: 120, gw: 125, learn: 125 };
-const Y = {} as Record<Step, number>;
+const BAND_H: Partial<Record<Step, number>> = { front: 125, client: 110, delegate: 115, gw: 125, learn: 125 };
+const Y = {} as Record<string, number>;
 let cursor = 0;
 for (const s of STEPS) { Y[s] = cursor; cursor += (BAND_H[s] ?? 100) + 30; }
 const BOTTOM = cursor;
 const ROW_W = 750;
 
 type Spec = { id: string; label: string; sub: string; why: string; sources: string[]; status?: ProStatus; how?: string[] };
-function row(x0: number, step: Step, specs: Spec[], def: ProStatus): ProNode[] {
+function row(x0: number, step: string, specs: Spec[], def: ProStatus): ProNode[] {
   const sp = ROW_W / specs.length;
   const w = Math.min(230, sp - 14);
   return specs.map((s, i) => ({ ...s, status: s.status ?? def, x: x0 + i * sp + (sp - w) / 2, y: Y[step] + 30, w }));
@@ -81,11 +82,11 @@ type StepInfo = { label: string; tag: string; trace: string; status: ProStatus }
 function bands(s: 'p' | 'y', x0: number, info: Record<Step, StepInfo>, sources: string[], libTitle: string, railTitle: string): ProNode[] {
   const out: ProNode[] = STEPS.map((step, i) => ({
     id: `${s}_band_${step}`, label: `${i + 1}. ${info[step].label}`, sub: '', tag: info[step].tag, trace: info[step].trace,
-    why: `Step ${i + 1} of 13.`, status: info[step].status, sources,
+    why: `Step ${i + 1} of ${STEPS.length}.`, status: info[step].status, sources,
     x: x0 - 10, y: Y[step], w: ROW_W + 20, h: BAND_H[step] ?? 100, band: true,
   }));
   out.push(
-    { id: `${s}_band_lib`, label: libTitle, sub: '', why: 'Files the pointers point to.', status: s === 'p' ? 'reference' : 'ok', sources, x: x0 - 290, y: Y.ptr, w: 250, h: BOTTOM - Y.ptr - 30, band: true },
+    { id: `${s}_band_lib`, label: libTitle, sub: '', why: 'Setup and reference: files the agent reads or you set up once.', status: s === 'p' ? 'reference' : 'ok', sources, x: x0 - 290, y: Y.front, w: 250, h: BOTTOM - Y.front - 30, band: true },
     { id: `${s}_band_rails`, label: railTitle, sub: '', why: 'These apply at every step.', status: s === 'p' ? 'reference' : 'partial', sources, x: x0 + 790, y: Y.ui, w: 200, h: BOTTOM - Y.ui - 30, band: true },
   );
   return out;
@@ -95,19 +96,18 @@ function bands(s: 'p' | 'y', x0: number, info: Record<Step, StepInfo>, sources: 
 const P = 0;
 const ref = 'reference' as const;
 const PRO_STEPS: Record<Step, StepInfo> = {
-  ask: { label: 'You ask', tag: 'trace starts: prompt.id', status: ref, trace: 'A user_prompt event starts the trace. Every later event for this request carries the same prompt.id, so one ID pulls up the whole run.' },
+  ask: { label: 'You ask, or an event starts it', tag: 'trace starts: prompt.id', status: ref, trace: 'A user_prompt event starts the trace (or a webhook or schedule starts a session). Every later event for this request carries the same prompt.id.' },
   ui: { label: 'Where you talk', tag: 'session.id', status: ref, trace: 'session.id: one per conversation.' },
-  front: { label: 'Front door: one lead agent', tag: 'model calls + cost', status: ref, trace: 'api_request events for the lead agent: model, tokens, cost.' },
-  plan: { label: 'Plan into tasks', tag: 'plan + progress file', status: ref, trace: 'The plan file, plus a progress file and git commits that show each update.' },
-  agents: { label: 'Subagents pick up tasks (on a computer)', tag: 'per-agent transcript', status: ref, trace: 'Each subagent works in its own context and returns a summary; hooks see which one by its name (agent_type).' },
-  ptr: { label: 'Each agent reads its startup files (pointers)', tag: 'files loaded', status: ref, trace: 'Which CLAUDE.md and rules files loaded at launch (/context shows them).' },
-  know: { label: 'Finds the tool and reads how to use it', tag: 'tool name + inputs', status: ref, trace: 'The tool picked and, if tool detail logging is turned on, its inputs.' },
+  front: { label: 'Lead agent starts: reads its files first', tag: 'files loaded', status: ref, trace: 'Which CLAUDE.md, rules and the first 200 lines of MEMORY.md loaded at start (/context shows them). A resumed job also reads its progress file and git log.' },
+  client: { label: 'Picks the client or project', tag: 'project + vault', status: ref, trace: 'Which project folder the work runs in (its CLAUDE.md, .mcp.json, settings) and, in Managed Agents, which client vault the session started with.' },
+  plan: { label: 'Plans (a plan file only for big jobs)', tag: 'plan + progress file', status: ref, trace: 'For big jobs: the plan file, the progress file and git commits that show each update.' },
+  delegate: { label: 'Does it itself, or hands work to helpers', tag: 'per-agent transcript', status: ref, trace: 'If helpers run: each works in its own context, reads its own startup files, and returns only a summary; hooks see which one by name (agent_type).' },
+  know: { label: 'Finds the tool and reads how to use it', tag: 'tool name + inputs', status: ref, trace: 'The tool picked and, if tool detail logging is on, its inputs.' },
   gw: { label: 'Gateway checks the call', tag: 'tool_decision', status: ref, trace: 'tool_decision event: accepted or rejected, and who decided (a rule, a hook, or you).' },
-  run: { label: 'Tool runs', tag: 'tool_result', status: ref, trace: 'tool_result event: which tool, success or failure, how long it took.' },
-  land: { label: 'Lands in a project or customer account', tag: 'the change: git commit', status: ref, trace: 'The change itself: a git commit with a clear message, so a bad change can be rolled back.' },
-  review: { label: 'Reviewer checks', tag: 'grader scores', status: ref, trace: 'Grader results: pass or fail per check, with the transcript to see why.' },
-  report: { label: 'Reported back to you', tag: 'answer + total cost', status: ref, trace: 'The final answer, plus total tokens and cost for that prompt.id.' },
-  learn: { label: 'Learn for next time', tag: 'transcripts read, files updated', status: ref, trace: 'Transcripts get read; memory, skills and evals get updated in git.' },
+  run: { label: 'Tool runs; the result goes back to the agent', tag: 'tool_result', status: ref, trace: 'tool_result event: which tool, success or failure, how long it took. The agent reads the result and picks the next tool, or moves on to checking.' },
+  verify: { label: 'Verifies the result', tag: 'check output + scores', status: ref, trace: 'The pass or fail of the check (tests, build, eval) and, if a separate reviewer ran, its grader scores.' },
+  report: { label: 'Answers you', tag: 'answer + total cost', status: ref, trace: 'The final answer, plus total tokens and cost for that prompt.id.' },
+  learn: { label: 'Learns: during the work and after', tag: 'memory + files updated', status: ref, trace: 'Memory can update mid-task; transcripts get read later and skills, evals and instructions get updated in git.' },
 };
 
 const proNodes: ProNode[] = [
@@ -118,12 +118,12 @@ const proNodes: ProNode[] = [
     { id: 'p_ui3', label: 'Slack', sub: 'Claude in team chat', why: 'Ask from the team chat; the work still goes to one lead agent.', sources: [ANT.code] },
   ], ref),
   ...row(P, 'front', [{
-    id: 'p_lead', label: 'Lead agent', sub: 'One agent, built with the Agent SDK', sources: [ANT.research, ANT.subBlog, ANT.effective],
+    id: 'p_lead', label: 'Lead agent', sub: 'Reads its files first, then works', sources: [ANT.research, ANT.subBlog, ANT.effective],
     why: 'Anthropic\'s research system: the lead agent thinks through the approach, saves its plan, spins up subagents with specific tasks, combines what they return, decides if more work is needed, then answers you.',
     how: ['You talk to one agent; it hands work to subagents', 'Each subagent gets a clear goal, output format, tools to use and where to stop', 'Start simple: add agents only when one agent is not enough'],
   }], ref),
   ...row(P, 'plan', [
-    { id: 'p_plan1', label: 'Plan written to a file', sub: 'A work file, not MEMORY.md', why: 'The lead writes its plan to a file outside the conversation so it survives when the context window fills up.', sources: [ANT.research] },
+    { id: 'p_plan1', label: 'Plan written to a file', sub: 'Big jobs only; not MEMORY.md', why: 'The lead writes its plan to a file outside the conversation so it survives when the context window fills up.', sources: [ANT.research] },
     { id: 'p_plan2', label: 'Progress file + git', sub: 'claude-progress.txt, commits', why: 'For long jobs the first session sets up the project; every later session makes one step of progress and leaves notes.', sources: [ANT.harness], how: ['First session: setup script, progress file, first git commit', 'Every later session: one step, commit with a clear message, update the progress file'] },
     { id: 'p_plan3', label: 'Pick the pattern', sub: 'Workflow or orchestrator', why: 'Known steps = a fixed workflow. Steps you cannot predict = orchestrator with workers.', sources: [ANT.effective, ANT.patterns] },
   ], ref),
@@ -161,7 +161,7 @@ const proNodes: ProNode[] = [
     { id: 'p_g1', label: 'PreToolUse hook', sub: 'Your code checks each call', sources: [ANT.perm, ANT.hooks], why: 'Your script sees every call before it runs.', how: ['Runs before the permission prompt, on every call', 'Can block, force a prompt, or let it through', 'Cannot override deny or ask rules'] },
     { id: 'p_g2', label: 'Permission rules', sub: 'deny, then ask, then allow', sources: [ANT.perm], why: 'The allowlist.', how: ['Checked in that order; first match wins', 'A narrower allow cannot beat a deny', 'Deny a bare tool name and Claude never sees the tool'] },
     { id: 'p_g3', label: 'Ask you', sub: 'Prompt for risky calls', sources: [ANT.perm], why: 'Calls that match an ask rule wait for your yes.' },
-    { id: 'p_g5', label: 'Keys stay outside', sub: 'Vault per client', why: 'The agent uses a key without ever seeing it.', sources: ['https://platform.claude.com/docs/en/managed-agents/vaults'] },
+    { id: 'p_g5', label: 'Only this client\'s keys', sub: 'Vault picked at start', why: 'The agent uses a key without ever seeing it.', sources: ['https://platform.claude.com/docs/en/managed-agents/vaults'] },
     { id: 'p_g6', label: 'Customer text is data', sub: 'Not instructions', why: 'A lead\'s message can try to give the agent orders. Stack defenses.', sources: ['https://code.claude.com/docs/en/agent-sdk/secure-deployment'] },
     { id: 'p_g4', label: 'Managed settings', sub: 'Admin rules on top', sources: [ANT.perm], why: 'Rules set by the admin that a user or project cannot loosen.' },
   ], ref),
@@ -169,16 +169,16 @@ const proNodes: ProNode[] = [
     { id: 'p_t1', label: 'MCP server', sub: 'Connector to the app', why: 'Agents reach real systems through MCP servers; remote servers for production systems.', sources: [ANT.mcpProd, ANT.mcp] },
     { id: 'p_t2', label: 'Bash and code', sub: 'On the agent\'s computer', why: 'Shell commands, checked by the same rules.', sources: [ANT.perm] },
     { id: 'p_t4', label: 'API, CLI or MCP?', sub: 'Which path, when', why: 'Anthropic\'s answer to "only MCP?": no. Three paths (API, CLI, MCP), each with its place, plus your own functions as SDK tools.', sources: [ANT.mcpProd] },
-    { id: 'p_t3', label: 'Hosted container', sub: 'Agent SDK / Managed Agents', why: 'Runs in an isolated container Anthropic or you host.', sources: [ANT.hosting, ANT.managed] },
+    { id: 'p_t3', label: 'Where agents run', sub: 'Your computer or hosted', why: 'Runs in an isolated container Anthropic or you host.', sources: [ANT.hosting, ANT.managed] },
   ], ref),
   ...row(P, 'land', [
     { id: 'p_l1', label: 'Project A', sub: 'Own repo, CLAUDE.md, .mcp.json', why: 'Each project carries its own instructions and its own tool servers, so an agent working in A only has A\'s tools.', sources: [ANT.mem, ANT.mcp] },
     { id: 'p_l2', label: 'Project B', sub: 'Own repo, CLAUDE.md, .mcp.json', why: 'Same, separate from A.', sources: [ANT.mem, ANT.mcp] },
     { id: 'p_l4', label: 'New client in one move', sub: 'Plugin + repo + vault', why: 'Shared know-how once, client facts per repo, keys per vault.', sources: ['https://code.claude.com/docs/en/plugins/overview'] },
-    { id: 'p_l3', label: 'Git commit', sub: 'Every change saved', why: 'Commit progress with clear messages; git lets you roll back a bad change.', sources: [ANT.harness] },
+    { id: 'p_l3', label: 'Result saved (git)', sub: 'A possible output', why: 'Commit progress with clear messages; git lets you roll back a bad change.', sources: [ANT.harness] },
   ], ref),
   ...row(P, 'review', [
-    { id: 'p_r1', label: 'Evaluator agent', sub: 'Separate from the builder', why: 'A separate agent grades the work; agents judging their own work tend to be too easy on it.', sources: [ANT.harnessDesign] },
+    { id: 'p_r1', label: 'Separate reviewer', sub: 'Optional extra layer', why: 'A separate agent grades the work; agents judging their own work tend to be too easy on it.', sources: [ANT.harnessDesign] },
     { id: 'p_r2', label: 'Citation check', sub: 'Claims match sources', why: 'A citation agent ties every claim to its source before the answer goes out.', sources: [ANT.research] },
     { id: 'p_r4', label: 'Sandbox + fake leads', sub: 'Test before real clients', why: 'A copy world with fake leads and graded test cases before the agent touches a real client.', sources: ['https://platform.claude.com/docs/en/test-and-evaluate/develop-tests'] },
     { id: 'p_r3', label: 'Model judge', sub: 'Rubric, 0 to 1, pass/fail', why: 'One judge call with a rubric: accuracy, citations, completeness, source quality, tool efficiency.', sources: [ANT.research] },
@@ -198,21 +198,64 @@ const proNodes: ProNode[] = [
   ...column(P + 800, Y.ui, [
     { id: 'p_x1', label: 'Fewest tools', sub: 'Each subagent lists its own', why: 'Give each subagent only the tools it needs.', sources: [ANT.sub] },
     { id: 'p_x2', label: 'Rules + hooks', sub: 'Every call checked', why: 'Deny, ask, allow, plus hooks, on every call.', sources: [ANT.perm] },
-    { id: 'p_x3', label: 'Trace', sub: 'OpenTelemetry, prompt.id', why: 'Prompts, model calls, decisions and tool results, joined by prompt.id.', sources: [ANT.mon] },
-    { id: 'p_x11', label: 'Progress file + transcripts', sub: 'Their version of a ledger', why: 'Anthropic never says ledger. Their names: the progress file and git history (what is done), the transcript, also called the trace (every move an agent made), and the event log you keep yourself.', sources: ['https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents'] },
+    { id: 'p_x3', label: 'Trace + transcripts', sub: 'Their version of a ledger', why: 'Prompts, model calls, decisions and tool results, joined by prompt.id.', sources: [ANT.mon] },
     { id: 'p_x4', label: 'Kill switch', sub: 'Deny rule pulls a tool', why: 'A deny rule on a tool name takes the tool away from the next call, even mid-session; managed settings push it to everyone.', sources: [ANT.perm] },
     { id: 'p_x5', label: 'Evals', sub: 'Before every change', why: 'Changes are tested on fixed tasks first.', sources: [ANT.evals] },
     { id: 'p_x7', label: 'Stay current', sub: 'Changelog, weekly digest', why: 'How they keep up: the changelog, the weekly digest, progress files and timestamps.', sources: ['https://code.claude.com/docs/en/changelog'] },
     { id: 'p_x8', label: 'Cost controls', sub: 'Caps, cache, cheaper helpers', why: 'Spend caps, prompt caching, cheaper models for simple work.', sources: ['https://claude.com/blog/reducing-cost-and-improving-performance-with-claude-platform'] },
-    { id: 'p_x9', label: 'Schedules', sub: 'Routines, deployments', why: 'Everything that runs on its own timer.', sources: ['https://claude.com/blog/introducing-routines-in-claude-code'] },
+    { id: 'p_x9', label: 'A schedule starts it', sub: 'Routines, deployments', why: 'Everything that runs on its own timer.', sources: ['https://claude.com/blog/introducing-routines-in-claude-code'] },
     { id: 'p_x10', label: 'Short sessions', sub: '/clear, /compact, subagents', why: 'Keep each session short and on one job.', sources: ['https://code.claude.com/docs/en/best-practices'] },
     { id: 'p_x6', label: 'In git, reviewed', sub: 'Instructions are code', why: 'CLAUDE.md, rules, skills and .mcp.json live in the repo and get reviewed.', sources: [ANT.steer, ANT.mcp] },
   ], ref).map((n) => ({ ...n, w: 170, x: P + 805 })),
 ];
+const proExtra: ProNode[] = [
+  { id: 'p_self', label: 'Lead does it itself', sub: 'The default in one chat', status: ref, why: 'In one chat the lead usually does the work itself. Helpers are for big reading jobs or work that splits into independent parts.', sources: ['https://code.claude.com/docs/en/features-overview', ANT.effective], x: 0, y: 0 },
+  { id: 'p_check', label: 'Runs the check you gave it', sub: 'Tests, build, eval', status: ref, why: 'The first verification is the check from your ask. Claude runs it, reads the result, and keeps working until it passes.', sources: ['https://code.claude.com/docs/en/best-practices'], x: 0, y: 0 },
+];
+
+const PRO_LAYOUT: Record<Step, string[]> = {
+  ask: ['p_trigger', 'p_x9', 'p_you'],
+  ui: ['p_ui1', 'p_ui2', 'p_ui3'],
+  front: ['p_lead', 'p_ptr1', 'p_ptr2', 'p_ptr3', 'p_ptr4', 'p_ptr5'],
+  client: ['p_l1', 'p_l2', 'p_g5'],
+  plan: ['p_plan1', 'p_plan2'],
+  delegate: ['p_self', 'p_a1', 'p_a2', 'p_a3', 'p_a4'],
+  know: ['p_k0', 'p_k1', 'p_k2'],
+  gw: ['p_g1', 'p_g2', 'p_g3', 'p_g4'],
+  run: ['p_t1', 'p_t2', 'p_t4', 'p_l3'],
+  verify: ['p_check', 'p_r1', 'p_r2', 'p_r3'],
+  report: ['p_rep1', 'p_rep2'],
+  learn: ['p_e1', 'p_e5', 'p_e2', 'p_e6', 'p_e3', 'p_e4'],
+};
+const PRO_LIB = ['p_lib_which', 'p_lib_limits', 'p_lib_skills', 'p_lib_memory', 'p_lib_plugins', 'p_lib_mcp', 'p_lib_settings', 'p_plan3', 'p_k3', 'p_k4', 'p_t3', 'p_l4', 'p_lib_evals', 'p_r4'];
+const PRO_RAILS = ['p_x1', 'p_x2', 'p_g6', 'p_x3', 'p_x4', 'p_x5', 'p_x7', 'p_x8', 'p_x10', 'p_x6'];
+
+/** Places every card by id; throws if a card is missing or left unplaced, so nothing is silently dropped. */
+function relayout(nodes: ProNode[], x0: number, rows: Record<Step, string[]>, lib: string[], rails: string[]): ProNode[] {
+  const byId = new Map(nodes.map((n) => [n.id, n]));
+  const out = new Map<string, ProNode>();
+  const get = (id: string) => { const n = byId.get(id); if (!n) throw new Error(`Pro Map layout: unknown card ${id}`); return n; };
+  for (const step of STEPS) {
+    const ids = rows[step];
+    const sp = ROW_W / ids.length;
+    const w = Math.min(230, sp - 14);
+    ids.forEach((id, i) => out.set(id, { ...get(id), x: x0 + i * sp + (sp - w) / 2, y: Y[step] + 30, w }));
+  }
+  const col = (ids: string[], top: number, x: number, w: number) => {
+    const gap = (BOTTOM - top - 90) / ids.length;
+    ids.forEach((id, i) => out.set(id, { ...get(id), x, y: top + 34 + i * gap, w }));
+  };
+  col(lib, Y.front, x0 - 270, 210);
+  col(rails, Y.ui, x0 + 805, 170);
+  const left = nodes.filter((n) => !out.has(n.id)).map((n) => n.id);
+  if (left.length) throw new Error(`Pro Map layout: unplaced cards ${left.join(', ')}`);
+  return nodes.map((n) => out.get(n.id) as ProNode);
+}
+
 const pro: ProNode[] = [
-  { id: 'p_title', label: 'Anthropic\'s way: 1 person + agent team', sub: 'Only Anthropic docs and engineering posts. Top to bottom = the order it happens.', x: P - 290, y: -110, w: 1280, h: 60, band: true, status: ref, why: 'Every box links the Anthropic page it comes from.', sources: [ANT.steer, ANT.research] },
-  ...bands('p', P, PRO_STEPS, [ANT.mon, ANT.steer], 'Library (pointers point here)', 'Rails (every step)'),
-  ...proNodes,
+  { id: 'p_title', label: 'Anthropic patterns combined: 1 person + agent team', sub: 'One chat, start to finish, top to bottom. Claude Code, the app and SDK agents each use these pieces; they are not one product.', x: P - 290, y: -110, w: 1280, h: 60, band: true, status: ref, why: 'Every box links the Anthropic page it comes from.', sources: [ANT.steer, ANT.research] },
+  ...bands('p', P, PRO_STEPS, [ANT.mon, ANT.steer], 'Library: setup + reference', 'Rails (every step)'),
+  ...relayout([...proNodes, ...proExtra], P, PRO_LAYOUT, PRO_LIB, PRO_RAILS),
 ];
 
 // ======================= Alex (each status cites a source) =======================
@@ -220,17 +263,16 @@ const A = OFFSET;
 const YOUR_STEPS: Record<Step, StepInfo> = {
   ask: { label: 'You ask', tag: 'no shared trace id', status: 'partial', trace: 'Nothing central: each app keeps its own chat history.' },
   ui: { label: 'Where you talk', tag: 'each app\'s own history', status: 'partial', trace: 'Each app has its own history; no session ID shared across apps.' },
-  front: { label: 'Front door: none yet', tag: 'nothing logged', status: 'gap', trace: 'No front door, so nothing is logged here.' },
-  plan: { label: 'Plan into tasks', tag: 'Director state + ledger', status: 'ok', trace: 'Director state file and the mission ledger (~/Alex-Director).' },
-  agents: { label: 'Agents pick up tasks (on a computer)', tag: 'Codex threads, SDK ledger', status: 'partial', trace: 'Codex threads through the bridge; Orgo reads in the SDK ledger. Other agents: their own app history.' },
-  ptr: { label: 'Each agent reads its startup file (pointers)', tag: 'drift check at start', status: 'ok', trace: 'drift_check runs at every Claude, Codex and Cursor start and says if the generated files drifted.' },
+  front: { label: 'Lead starts and reads its files: no lead; each app reads its own', tag: 'drift check at start', status: 'partial', trace: 'No lead agent. Each app reads its own generated file; drift_check runs at every Claude, Codex and Cursor start.' },
+  client: { label: 'Picks the client: nothing picks one; one login sees all', tag: 'not logged', status: 'gap', trace: 'No step picks a client: one GHL login reaches all 303 accounts, and nothing records which client a run was for.' },
+  plan: { label: 'Plans', tag: 'Director state + ledger', status: 'ok', trace: 'Director state file and the mission ledger (~/Alex-Director).' },
+  delegate: { label: 'Hands work to agents (you, by opening each app)', tag: 'Codex threads, SDK ledger', status: 'partial', trace: 'Codex threads through the bridge; Orgo reads in the SDK ledger. Other agents: their own app history.' },
   know: { label: 'Finds the tool and reads how to use it', tag: 'not logged', status: 'ok', trace: 'Composio searches and app-card reads are not logged centrally.' },
   gw: { label: 'Gateway checks the call', tag: 'guard decisions.jsonl', status: 'partial', trace: 'Guard decisions in ~/.agents/runtime/composio-guard/decisions.jsonl (Claude, Codex, Cursor only).' },
-  run: { label: 'Tool runs', tag: 'SDK receipts only', status: 'partial', trace: 'SDK ledger receipts for SDK calls; direct Composio calls are not in it.' },
-  land: { label: 'Lands in a project or customer account', tag: 'git only', status: 'partial', trace: 'Git commits in your repos; client account changes outside the SDK leave no receipt.' },
-  review: { label: 'Reviewer checks', tag: 'review packets', status: 'ok', trace: 'Review packets in ~/Projects/alex-system-map/reviews/.' },
-  report: { label: 'Reported back to you', tag: 'completed missions', status: 'partial', trace: 'Completed missions in ~/Alex-Director/ledger-history/completed-missions-2026-10.md.' },
-  learn: { label: 'Learn for next time (needs your yes)', tag: 'lessons + tune-ups', status: 'partial', trace: 'lessons.md (65), tune-up snapshots and proposals in master-connector-repo/system.' },
+  run: { label: 'Tool runs; result back to the agent', tag: 'SDK receipts only', status: 'partial', trace: 'SDK ledger receipts for SDK calls; direct Composio calls are not in it.' },
+  verify: { label: 'Verifies the result', tag: 'review packets', status: 'ok', trace: 'Review packets in ~/Projects/alex-system-map/reviews/.' },
+  report: { label: 'Answers you', tag: 'completed missions', status: 'partial', trace: 'Completed missions in ~/Alex-Director/ledger-history/completed-missions-2026-10.md.' },
+  learn: { label: 'Learns (needs your yes)', tag: 'lessons + tune-ups', status: 'partial', trace: 'lessons.md (65), tune-up snapshots and proposals in master-connector-repo/system.' },
 };
 type Row5 = [string, string, ProStatus, string, string];
 const UIS: Row5[] = [
@@ -326,10 +368,27 @@ const alexNodes: ProNode[] = [
     { id: 'y_x6', label: 'Drift check + CI', sub: 'Every app start', status: 'ok', why: 'SessionStart drift check in Claude, Codex, Cursor; agents-home CI on every PR; weekly docs-freshness check.', sources: ['~/.agents/tools/guards/drift_check.py', '~/.agents/.github/workflows/docs-freshness.yml'] },
   ], 'ok').map((n) => ({ ...n, w: 170, x: A + 805 })),
 ];
+const YOUR_LAYOUT: Record<Step, string[]> = {
+  ask: ['y_you'],
+  ui: ['y_ui1', 'y_ui2', 'y_ui3', 'y_ui4', 'y_ui5', 'y_ui6'],
+  front: ['y_front', 'y_ptr1', 'y_ptr2', 'y_ptr3', 'y_ptr4', 'y_ptr5', 'y_ptr6'],
+  client: ['y_l1', 'y_l2', 'y_l3', 'y_l4', 'y_l5', 'y_l6'],
+  plan: ['y_director', 'y_conductor', 'y_missions'],
+  delegate: ['y_a1', 'y_a2', 'y_a3', 'y_a4', 'y_a5', 'y_a6'],
+  know: ['y_k1', 'y_k2', 'y_k3', 'y_k4'],
+  gw: ['y_g1', 'y_g2', 'y_g3', 'y_g4'],
+  run: ['y_t_composio', 'y_t_orgo', 'y_t_local'],
+  verify: ['y_reviewer', 'y_packets'],
+  report: ['y_rep1', 'y_rep2', 'y_rep3'],
+  learn: ['y_e1', 'y_e2', 'y_e3', 'y_e4'],
+};
+const YOUR_LIB = ['y_lib_rules', 'y_lib_skills', 'y_lib_guides', 'y_lib_memory', 'y_lib_lessons'];
+const YOUR_RAILS = ['y_x1', 'y_x2', 'y_x3', 'y_x4', 'y_x5', 'y_x6'];
+
 const alex: ProNode[] = [
-  { id: 'y_title', label: 'Yours today', sub: 'Same 13 steps; click any box for the file that proves it', x: A - 290, y: -110, w: 1280, h: 60, band: true, status: 'ok', why: 'Every status on this side names its source.', sources: ['app/src/app/explorer/pro-map-data.ts'] },
-  ...bands('y', A, YOUR_STEPS, ['app/src/app/explorer/pro-map-data.ts'], 'Library (pointers point here)', 'Rails (every step)'),
-  ...alexNodes,
+  { id: 'y_title', label: 'Yours today', sub: 'Same 12 steps; click any box for the file that proves it', x: A - 290, y: -110, w: 1280, h: 60, band: true, status: 'ok', why: 'Every status on this side names its source.', sources: ['app/src/app/explorer/pro-map-data.ts'] },
+  ...bands('y', A, YOUR_STEPS, ['app/src/app/explorer/pro-map-data.ts'], 'Library: setup + reference', 'Rails (every step)'),
+  ...relayout(alexNodes, A, YOUR_LAYOUT, YOUR_LIB, YOUR_RAILS),
 ];
 
 const cat = <T,>(...xs: (T[] | undefined)[]): T[] | undefined => {
@@ -360,39 +419,43 @@ export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
 const flow = (a: string, b: string, label?: string): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'flow', label });
 const link = (a: string, b: string, label: string | undefined, sh: 'ls' | 'rs', th: 'l' | 'r'): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'link', label, sh, th });
 const chain = (ids: string[]) => ids.slice(1).map((id, i) => flow(ids[i], id));
-const STEP_LABELS: Partial<Record<Step, string>> = { plan: 'hands out tasks', agents: 'each reads at start', ptr: 'needs a tool', know: 'calls it', gw: 'allowed', run: 'changes', land: 'checked', review: 'passed', report: 'every run feeds' };
+const STEP_LABELS: Partial<Record<Step, string>> = { front: 'which client?', client: 'plans', plan: 'does the work', delegate: 'needs a tool', know: 'calls it', gw: 'allowed', run: 'done? check it', verify: 'passed', report: 'every run feeds' };
+const loop = (a: string, b: string, label: string): ProEdge => ({ id: `${a}-${b}-loop`, source: a, target: b, kind: 'loop', label, sh: 'rs', th: 'r' });
 function spine(s: 'p' | 'y', from: Step): ProEdge[] {
   const i0 = STEPS.indexOf(from);
   return STEPS.slice(i0, -1).map((st, i) => flow(`${s}_band_${st}`, `${s}_band_${STEPS[i0 + i + 1]}`, STEP_LABELS[st]));
 }
 
 export const PRO_EDGES: ProEdge[] = [
-  // Anthropic: you talk to ONE lead agent; it plans and hands out the work.
+  // Anthropic: one chat. The lead starts, reads its files, picks the client, works in a loop.
   flow('p_you', 'p_band_ui', 'asks'),
   link('p_trigger', 'p_lead', 'starts the lead', 'ls', 'l'),
   ...[1, 2, 3].map((i) => flow(`p_ui${i}`, 'p_lead')),
-  flow('p_lead', 'p_band_plan', 'plans'),
-  ...spine('p', 'plan'),
+  ...spine('p', 'front'),
+  loop('p_band_run', 'p_band_know', 'result back: next tool?'),
+  loop('p_band_verify', 'p_band_delegate', 'failed: more work'),
+  loop('p_a1', 'p_lead', 'summaries back to the lead'),
   ...chain(['p_e1', 'p_e5', 'p_e2', 'p_e6', 'p_e3', 'p_e4']),
   link('p_band_report', 'p_you', 'answer back to you', 'rs', 'r'),
-  link('p_band_ptr', 'p_lib_skills', 'points to', 'ls', 'r'),
+  link('p_band_front', 'p_lib_skills', 'skill list', 'ls', 'r'),
+  link('p_band_front', 'p_lib_memory', 'MEMORY.md', 'ls', 'r'),
   link('p_band_learn', 'p_lib_memory', 'saves', 'ls', 'r'),
   link('p_band_know', 'p_lib_mcp', 'tools from', 'ls', 'r'),
   link('p_band_gw', 'p_lib_settings', 'rules from', 'ls', 'r'),
   link('p_band_learn', 'p_lib_evals', 'tests', 'ls', 'r'),
 
-  // Alex: no front door, so you open each app yourself.
+  // Alex: no lead, so you open each app yourself.
   flow('y_you', 'y_band_ui', 'asks'),
   flow('y_band_ui', 'y_front'),
-  { id: 'y_skip_front', source: 'y_band_ui', target: 'y_band_agents', kind: 'bypass', label: 'you open each app yourself', sh: 'rs', th: 'r' },
-  flow('y_front', 'y_band_plan', 'Director, inside Codex only'),
-  ...spine('y', 'plan'),
+  { id: 'y_skip_front', source: 'y_band_ui', target: 'y_band_delegate', kind: 'bypass', label: 'you open each app yourself', sh: 'rs', th: 'r' },
+  ...spine('y', 'front'),
+  loop('y_band_run', 'y_band_know', 'result back: next tool?'),
   ...chain(['y_e1', 'y_e2', 'y_e3', 'y_e4']),
   link('y_band_report', 'y_you', 'each app answers', 'rs', 'r'),
-  link('y_lib_rules', 'y_band_ptr', 'builds 3 of 6', 'rs', 'l'),
-  link('y_band_ptr', 'y_lib_skills', 'points to', 'ls', 'r'),
+  link('y_lib_rules', 'y_band_front', 'builds 3 of 6', 'rs', 'l'),
+  link('y_band_front', 'y_lib_skills', 'points to', 'ls', 'r'),
   link('y_band_know', 'y_lib_guides', 'reads card', 'ls', 'r'),
   link('y_lib_memory', 'y_band_plan', 'recall', 'rs', 'l'),
   link('y_band_learn', 'y_lib_lessons', 'saves lessons', 'ls', 'r'),
-  { id: 'y_bypass', source: 'y_band_agents', target: 'y_t_composio', kind: 'bypass', label: '3 agents: no guard', sh: 'ls', th: 'l' },
+  { id: 'y_bypass', source: 'y_band_delegate', target: 'y_t_composio', kind: 'bypass', label: '3 agents: no guard', sh: 'ls', th: 'l' },
 ];

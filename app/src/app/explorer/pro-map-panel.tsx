@@ -68,13 +68,14 @@ function Legend({ counts }: { counts: { ok: number; partial: number; gap: number
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b px-3 py-2 text-xs">
       <span className="text-sm font-semibold">Pro Map</span>
-      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: Anthropic's way (Anthropic sources only). Right: yours, same 13 steps. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
+      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: Anthropic's way (Anthropic sources only). Right: yours, same 12 steps. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
       {(['ok', 'partial', 'gap', 'reference'] as ProStatus[]).map((s) => (
         <span key={s} className="flex items-center gap-1"><span className="inline-block size-2 rounded-full" style={{ background: COLOR[s] }} />{WORD[s]}</span>
       ))}
       <span className="text-muted-foreground">moving gray line = work flows</span>
       <span style={{ color: '#7f77dd' }}>dashed purple = reads from the library</span>
       <span style={{ color: '#ff0071' }}>dashed red = goes around the SDK</span>
+      <span style={{ color: '#f5a524' }}>dotted orange = loops back</span>
       <span className="font-medium">Yours: {counts.ok} have it, {counts.partial} partly, {counts.gap} missing</span>
     </div>
   );
@@ -84,17 +85,17 @@ const ROW_Y = new Map(PRO_NODES.map((n) => [n.id, n.y]));
 
 function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
   const sameRow = e.kind === 'flow' && !e.source.includes('_band_') && !e.target.includes('_band_') && ROW_Y.get(e.source) === ROW_Y.get(e.target);
-  const color = e.kind === 'bypass' ? '#ff0071' : e.kind === 'link' ? '#7f77dd' : '#8a8a8a';
+  const color = e.kind === 'bypass' ? '#ff0071' : e.kind === 'link' ? '#7f77dd' : e.kind === 'loop' ? '#f5a524' : '#8a8a8a';
   return {
     id: e.id,
     source: e.source,
     target: e.target,
     label: e.label,
     type: 'smoothstep',
-    animated: e.kind === 'flow',
+    animated: e.kind === 'flow' || e.kind === 'loop',
     sourceHandle: e.sh ?? (sameRow ? 'rs' : undefined),
     targetHandle: e.th ?? (sameRow ? 'l' : undefined),
-    style: { stroke: color, strokeWidth: e.kind === 'flow' ? 1.4 : 1.3, strokeDasharray: e.kind === 'flow' ? undefined : '6 4' },
+    style: { stroke: color, strokeWidth: e.kind === 'flow' ? 1.4 : 1.3, strokeDasharray: e.kind === 'flow' ? undefined : e.kind === 'loop' ? '3 3' : '6 4' },
     markerEnd: { type: MarkerType.ArrowClosed, color, width: 14, height: 14 },
     labelStyle: { fontSize: 11, fill: color },
     labelBgStyle: { fillOpacity: 0 },
