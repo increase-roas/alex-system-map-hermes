@@ -23,7 +23,7 @@ export const KIT: NodeKind[] = [
     fields: [model, { key: 'prompt', label: 'Prompt', kind: 'textarea', required: true }, { key: 'schema', label: 'JSON output fields', kind: 'text', placeholder: 'score, feedback' }] },
   { type: 'agent', label: 'Agent', group: 'AI', icon: 'Bot', color: '#2563eb', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'A model that can pick and call tools on its own until the job is done.',
-    fields: [model, { key: 'instructions', label: 'Instructions', kind: 'textarea', required: true }, { key: 'tools', label: 'Tools it may use', kind: 'text', placeholder: 'ghl.conversations, meta.ads' }, { key: 'effect', label: 'Most it can do', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
+    fields: [model, { key: 'instructions', label: 'Instructions', kind: 'textarea', required: true }, { key: 'tools', label: 'Tools it may use', kind: 'text', placeholder: 'ghl.conversations:read, meta.ads:read' }, { key: 'effect', label: 'Most it can do', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'tool', label: 'Tool', group: 'Tools and data', icon: 'Wrench', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs one specific tool with set inputs (no model deciding).',
     fields: [{ key: 'tool', label: 'Tool', kind: 'text', placeholder: 'GOHIGHLEVEL_LIST_CONTACTS', required: true }, { key: 'card', label: 'Connector card (read first)', kind: 'text', placeholder: '.claude/connector-cards/ghl.md', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
@@ -32,7 +32,7 @@ export const KIT: NodeKind[] = [
     fields: [{ key: 'store', label: 'Knowledge store', kind: 'text', placeholder: 'customers/<slug>/objections.md', required: true }, { key: 'k', label: 'How many results', kind: 'number' }] },
   { type: 'http', label: 'HTTP', group: 'Tools and data', icon: 'Globe', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Calls a web address (API) directly.',
-    fields: [{ key: 'method', label: 'Method', kind: 'select', options: ['GET', 'POST', 'PUT', 'DELETE'] }, { key: 'url', label: 'URL', kind: 'text', required: true }] },
+    fields: [{ key: 'method', label: 'Method', kind: 'select', options: ['GET', 'POST', 'PUT', 'DELETE'], required: true }, { key: 'url', label: 'URL', kind: 'text', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'condition', label: 'Condition', group: 'Logic', icon: 'GitBranch', color: '#d97706', inputs: ['in'], outputs: ['yes', 'no'], source: 'agentflow',
     what: 'If/else on a rule you write. Yes goes one way, no the other.',
     fields: [{ key: 'rule', label: 'If', kind: 'text', placeholder: 'score >= 0.9', required: true }] },
@@ -53,10 +53,10 @@ export const KIT: NodeKind[] = [
     fields: [{ key: 'text', label: 'Reply', kind: 'textarea', required: true }] },
   { type: 'customFunction', label: 'Custom Function', group: 'Tools and data', icon: 'Code', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs your own small script, like a scorer or a calculator.',
-    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py', required: true }] },
+    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'executeFlow', label: 'Execute Flow', group: 'Tools and data', icon: 'Workflow', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs another saved flow as one step.',
-    fields: [{ key: 'flow', label: 'Flow name', kind: 'text', required: true }] },
+    fields: [{ key: 'flow', label: 'Flow name', kind: 'text', required: true }, { key: 'effect', label: 'Most the other flow can do', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'stickyNote', label: 'Sticky Note', group: 'Notes', icon: 'StickyNote', color: '#ca8a04', inputs: [], outputs: [], source: 'agentflow',
     what: 'A note on the canvas. Does nothing when the flow runs.',
     fields: [{ key: 'text', label: 'Note', kind: 'textarea' }] },
@@ -83,6 +83,23 @@ export type Flow = { name: string; nodes: FlowNode[]; edges: FlowEdge[] };
 
 export const APPROVAL_EFFECTS = ['spend', 'delete', 'send_to_customer', 'send_to_lead', 'deploy'];
 export const MAX_LOOP = 20;
+/** What each tool can do. Mirrors agency-os-kit/bots.json. "tool:effect" in an agent's tool list narrows it. */
+export const TOOL_EFFECTS: Record<string, string[]> = {
+  'ghl.conversations': ['read', 'send_to_lead'], 'ghl.contacts': ['read', 'write', 'delete'], 'ghl.customer_messages': ['read', 'send_to_customer'],
+  'meta.ads': ['read', 'write', 'spend'], github: ['read', 'write'], cloudflare: ['read', 'deploy'], dashboard: ['read'],
+};
+/** Effects an agent's tool list allows. Unknown tools count as able to do anything that needs approval. */
+export function toolEffects(list: string): { effects: string[]; problems: string[] } {
+  const effects = new Set<string>(), problems: string[] = [];
+  for (const raw of list.split(',').map((t) => t.trim()).filter(Boolean)) {
+    const [tool, narrow] = raw.split(':').map((x) => x.trim());
+    const can = TOOL_EFFECTS[tool];
+    if (!can) { problems.push(`unknown tool ${tool}`); APPROVAL_EFFECTS.forEach((e) => effects.add(e)); continue; }
+    if (narrow) { if (!can.includes(narrow)) problems.push(`${tool} cannot ${narrow}`); else effects.add(narrow); }
+    else can.forEach((e) => effects.add(e));
+  }
+  return { effects: [...effects], problems };
+}
 
 /**
  * Plain-English problems that make the flow unsafe or broken. Empty list = OK.
@@ -121,6 +138,19 @@ export function checkFlow(flow: Flow): string[] {
       const v = n.data.values[f.key];
       if (f.kind === 'select' && v && !f.options?.includes(v)) out.push(`${n.data.label}: "${v}" is not a valid choice for ${f.label}.`);
     }
+    if (k.type === 'agent' && (n.data.values.tools ?? '').trim()) {
+      const { effects, problems } = toolEffects(n.data.values.tools);
+      problems.forEach((p) => out.push(`${n.data.label}: ${p}.`));
+      const gated = effects.filter((x) => APPROVAL_EFFECTS.includes(x));
+      if (gated.length && !gated.includes(n.data.values.effect ?? '')) out.push(`${n.data.label}: says "${n.data.values.effect}" but its tools can ${gated.join(', ')}. Narrow them (tool:read) or set the effect.`);
+    }
+    if (k.type === 'tool' && TOOL_EFFECTS[n.data.values.tool ?? ''] && n.data.values.effect && !TOOL_EFFECTS[n.data.values.tool!].includes(n.data.values.effect))
+      out.push(`${n.data.label}: ${n.data.values.tool} cannot ${n.data.values.effect}.`);
+    if (k.type === 'http') {
+      const m = n.data.values.method, eff = n.data.values.effect;
+      if (m === 'DELETE' && eff !== 'delete') out.push(`${n.data.label}: a DELETE call must be marked "delete".`);
+      if ((m === 'POST' || m === 'PUT') && eff === 'read') out.push(`${n.data.label}: a ${m} call changes things; it cannot be marked "read".`);
+    }
     if (k.type === 'loop') {
       const max = Number(n.data.values.max);
       if (!Number.isInteger(max) || max < 1 || max > MAX_LOOP) out.push(`${n.data.label}: Max rounds must be a whole number from 1 to ${MAX_LOOP}.`);
@@ -148,7 +178,14 @@ export function checkFlow(flow: Flow): string[] {
   for (const n of live) if (start && !all.has(n.id)) out.push(`${n.data.label}: cannot be reached from Start.`);
 
   // Approval: these nodes may only be reached through a Human Input "yes".
-  const needsYes = live.filter((n) => n.data.kind === 'promote' || ((n.data.kind === 'tool' || n.data.kind === 'agent') && APPROVAL_EFFECTS.includes(n.data.values.effect ?? '')));
+  const powers = (n: FlowNode) => {
+    const declared = n.data.values.effect ?? '';
+    const fromTools = n.data.kind === 'agent' ? toolEffects(n.data.values.tools ?? '').effects : [];
+    const http = n.data.kind === 'http' && n.data.values.method === 'DELETE' ? ['delete'] : [];
+    return [declared, ...fromTools, ...http];
+  };
+  const effectful = ['tool', 'agent', 'http', 'customFunction', 'executeFlow'];
+  const needsYes = live.filter((n) => n.data.kind === 'promote' || (effectful.includes(n.data.kind) && powers(n).some((x) => APPROVAL_EFFECTS.includes(x))));
   const aroundYes = reach(() => false, (e) => kindOf(e.source) === 'humanInput' && (e.sourceHandle ?? '') === 'yes');
   for (const n of needsYes) if (aroundYes.has(n.id)) out.push(`${n.data.label}: there is a path to it that skips Alex's "yes".`);
   const fromNo = new Set<string>();
@@ -240,14 +277,14 @@ export function routingPreset(): Flow {
   const who = n('routeCustomer', 'Which customer?', 0, 150, { by: 'location_id, ids, website, name' });
   const unknown = n('directReply', 'Stop: customer unclear', 320, 150, { text: 'Could not tell which customer. Add the location ID.' });
   const fn = n('conditionAgent', 'Which function?', 0, 300, { model: 'claude-haiku-5-5', paths: 'lead_follow_up, website, ads, reporting, customer_update' });
-  const sales = n('agent', 'Sales agent (lead follow-up)', -520, 470, { model: 'claude-sonnet-5-5', tools: 'ghl.conversations, ghl.contacts', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
-  const site = n('agent', 'Hermes site builder (website)', -260, 470, { model: 'claude-sonnet-5-5', tools: 'github, cloudflare', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
-  const ads = n('agent', 'Ads optimizer (ads)', 0, 470, { model: 'claude-sonnet-5-5', tools: 'meta.ads', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
-  const rep = n('agent', 'Reporter (reporting + updates)', 260, 470, { model: 'claude-sonnet-5-5', tools: 'dashboard, ghl.customer_messages', instructions: 'customers/<slug>/AGENTS.md', effect: 'read' });
+  const sales = n('agent', 'Sales agent (lead follow-up)', -520, 470, { model: 'claude-sonnet-5-5', tools: 'ghl.conversations:read, ghl.contacts:read', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
+  const site = n('agent', 'Hermes site builder (website)', -260, 470, { model: 'claude-sonnet-5-5', tools: 'github:read, github:write, cloudflare:read', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
+  const ads = n('agent', 'Ads optimizer (ads)', 0, 470, { model: 'claude-sonnet-5-5', tools: 'meta.ads:read', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
+  const rep = n('agent', 'Reporter (reporting + updates)', 260, 470, { model: 'claude-sonnet-5-5', tools: 'dashboard:read, ghl.customer_messages:read', instructions: 'customers/<slug>/AGENTS.md', effect: 'read' });
   const risky = n('condition', 'Spend, send to customer, delete or deploy?', 0, 630, { rule: 'plan.requires_approval_for is not empty' });
   const ask = n('humanInput', 'Alex approves?', 260, 780, { who: 'Alex', question: 'Approve this action for this customer?' });
-  const safe = n('tool', 'Do the safe step (read or write)', -200, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'write' });
-  const approved = n('tool', 'Do the approved step', 260, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'spend' });
+  const safe = n('tool', 'Do the safe step (read or write)', -200, 930, { tool: 'ghl.contacts', card: 'connector card for that tool', effect: 'write' });
+  const approved = n('tool', 'Do the approved step (gate.py check passed)', 260, 930, { tool: 'meta.ads', card: 'connector card for that tool', effect: 'spend' });
   const no = n('directReply', 'Not approved: saved as draft', 560, 930, { text: 'Saved as a draft for Alex.' });
   const done = n('directReply', 'Report: done, proof, next step', 0, 1080, { text: 'What was done, the proof, and what is next.' });
   return {

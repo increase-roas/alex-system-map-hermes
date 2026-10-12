@@ -43,4 +43,13 @@ f = gepaPreset(); f.edges.push({ id: 'restart', source: id(f, 'llm', 1), target:
 assert(has(f, 'start over forever'), 'iteration restart loop is flagged');
 f = routingPreset(); f.nodes.find((n) => n.data.kind === 'tool')!.data.values.effect = 'send_to_lead';
 assert(has(f, 'skips Alex'), 'texting leads without a yes is flagged');
+// Codex round 3
+f = routingPreset(); f.nodes.find((n) => n.data.label.startsWith('Ads optimizer'))!.data.values.tools = 'meta.ads';
+assert(has(f, 'its tools can spend'), 'agent whose tools can spend but says write is flagged');
+f = routingPreset(); { const fn = id(f, 'conditionAgent'); f.nodes.push({ id: 'http-del', type: 'kit', position: { x: 0, y: 0 }, data: { kind: 'http', label: 'Delete contacts', values: { method: 'DELETE', url: 'https://x', effect: 'read' } } }); f.edges.push({ id: 'h', source: id(f, 'agent'), target: 'http-del' }); f.nodes.push({ id: 'end2', type: 'kit', position: { x: 0, y: 0 }, data: { kind: 'directReply', label: 'End', values: { text: 'x' } } }); f.edges.push({ id: 'h2', source: 'http-del', target: 'end2' }); void fn; }
+assert(has(f, 'DELETE call must be marked') && has(f, 'skips Alex'), 'HTTP DELETE without approval is flagged');
+f = routingPreset(); f.nodes.find((n) => n.data.label.startsWith('Do the safe'))!.data.values.tool = 'meta.ads'; f.nodes.find((n) => n.data.label.startsWith('Do the safe'))!.data.values.effect = 'delete';
+assert(has(f, 'meta.ads cannot delete'), 'tool effect it cannot do is flagged');
+f = routingPreset(); f.nodes.find((n) => n.data.label.startsWith('Sales agent'))!.data.values.tools = 'mystery.tool';
+assert(has(f, 'unknown tool'), 'unknown agent tool is flagged');
 if (fails) process.exit(1);
