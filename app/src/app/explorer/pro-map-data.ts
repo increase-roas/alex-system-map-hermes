@@ -1,7 +1,7 @@
 /**
  * Pro Map v3: a solo operator with an agent team, run at pro level, beside Alex's system in the same layers.
  * Left = published solo patterns (cited). Right = Alex; every status names the file or check that proves it.
- * Layers top down: Customers, You, Where you talk, Front door, Agents (+ computer), Pointers, Orchestration,
+ * Layers top down: You, Customers (who the work is for), Where you talk, Front door, Agents (+ computer), Pointers, Orchestration,
  * Gateway, Tool know-how, Tools, Systems, Self-improving loop.
  * Left column = Library (what pointers point to). Right column = Rails (apply to every layer).
  * Built 2026-10-12. Change a status only with a new source.
@@ -34,7 +34,7 @@ const SOLO = {
 const ref = (why: string, sources: string[]) => ({ status: 'reference' as const, why, sources });
 
 /** Shared geometry, both sides. */
-const Y = { title: -110, cust: 0, you: 130, ui: 220, front: 350, agents: 480, ptr: 610, orch: 760, gw: 900, know: 1040, tools: 1180, sys: 1310, evo: 1440 };
+const Y = { title: -110, you: 0, cust: 100, ui: 220, front: 350, agents: 480, ptr: 610, orch: 760, gw: 900, know: 1040, tools: 1180, sys: 1310, evo: 1440 };
 const AG = (i: number) => i * 125;
 const AW = 112;
 const CH = (i: number) => i * 187;   // 4 chips per row
@@ -48,7 +48,7 @@ function bands(s: 'p' | 'y', x0: number, status: ProStatus, why: string, sources
   const b = (id: string, label: string, y: number, h: number, w = 760, dx = -10): ProNode =>
     ({ id: `${s}_band_${id}`, label, sub: '', x: x0 + dx, y, w, h, band: true, status: override[id] ?? status, why, sources });
   return [
-    b('cust', 'Customers and projects', Y.cust, 100),
+    b('cust', 'Who the work is for: customers and projects', Y.cust, 100),
     b('ui', 'Where you talk to the AI', Y.ui, 100),
     b('front', labels.front, Y.front, 100),
     b('agents', 'Agents (and the computer each runs on)', Y.agents, 100),
@@ -218,7 +218,7 @@ function lower(s: 'p' | 'y', n: number): ProEdge[] {
 
 export const PRO_EDGES: ProEdge[] = [
   // Solo pro: you talk to ONE agent, it hands work out.
-  flow('p_band_cust', 'p_you', 'asks'), flow('p_you', 'p_band_ui'),
+  flow('p_you', 'p_band_cust', 'works for'), flow('p_you', 'p_band_ui'),
   flow('p_ui_phone', 'p_lead'), flow('p_ui_panel', 'p_lead'),
   ...[1, 2, 3, 4, 5].map((i) => flow('p_lead', `p_a${i}`, i === 3 ? 'hands out work' : undefined)),
   ...lower('p', 5),
@@ -231,7 +231,7 @@ export const PRO_EDGES: ProEdge[] = [
   link('p_band_evo', 'p_lib_lessons', 'saves + promotes', 'ls', 'r'),
 
   // Alex: you talk to EACH app directly; no front door yet.
-  flow('y_band_cust', 'y_you', 'asks'),
+  flow('y_you', 'y_band_cust', 'works for'),
   ...[1, 2, 3, 4, 5, 6].map((i) => flow('y_you', `y_ui${i}`)),
   ...[1, 2, 3, 4, 5, 6].map((i) => flow(`y_ui${i}`, `y_a${i}`, i === 1 ? 'each app, separately' : undefined)),
   ...lower('y', 6),
