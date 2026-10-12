@@ -118,7 +118,15 @@ const DET: Record<string, FullDetail> = {
       '  pre_tool_call:',
       '    - command: ~/.hermes/hooks/read-rules-first.sh',
       '      timeout: 10',
-      '      fail_closed: true') }],
+      '      fail_closed: true') },
+      { title: 'Same skill file works in Hermes (agentskills.io format)', file: '~/.hermes/skills/website-build/SKILL.md', why: 'Same frontmatter as Claude: name plus a description of what it does and when to use it.', code: L(
+        '---',
+        'name: website-build',
+        'description: Builds a local-service client website from the agency template. Use when asked to build, rebuild or launch a client site or landing page.',
+        '---',
+        '',
+        '## If / then',
+        '- No photos: generate them. No dataset: build it first. No reviews: leave the section out.') }],
     myths: [{ myth: 'Putting connector rules in AGENTS.md means Javar reads them before every call.', truth: 'AGENTS.md is read at start, and long files get cut. Nothing forces a re-read right before a risky call.', fix: 'Keep a short rules file per connector and gate the first call with a pre_tool_call hook.' }],
   },
   h_soul: {
