@@ -1,0 +1,13 @@
+import { KIT, checkFlow, gepaPreset, routingPreset } from './flow-node-kit.ts';
+const assert = (c: unknown, m: string) => { if (!c) { console.error('FAIL', m); process.exit(1); } else console.log('PASS', m); };
+const agentflow = ['start','llm','agent','tool','retriever','http','condition','conditionAgent','iteration','loop','humanInput','directReply','customFunction','executeFlow','stickyNote'];
+assert(agentflow.every((t) => KIT.some((k) => k.type === t && k.source === 'agentflow')) && KIT.filter((k) => k.source === 'agentflow').length === 15, 'all 15 Agentflow node types');
+assert(['judge','compare','promote','routeCustomer'].every((t) => KIT.some((k) => k.type === t)), 'Judge, Compare, Promote, Route to customer');
+const g = gepaPreset(); assert(checkFlow(g).length === 0, 'GEPA preset passes checks: ' + checkFlow(g).join(' | '));
+const r = routingPreset(); assert(checkFlow(r).length === 0, 'routing preset passes checks: ' + checkFlow(r).join(' | '));
+const bad = gepaPreset(); bad.edges = bad.edges.filter((e) => !(e.target.startsWith('promote')));
+bad.edges.push({ id: 'x', source: bad.nodes.find((n) => n.data.kind === 'compare')!.id, target: bad.nodes.find((n) => n.data.kind === 'promote')!.id, sourceHandle: 'better' });
+assert(checkFlow(bad).some((m) => m.includes('Human Input')), 'Promote without Alex yes is flagged');
+const loop = gepaPreset(); loop.nodes.find((n) => n.data.kind === 'loop')!.data.values.max = ''; assert(checkFlow(loop).some((m) => m.includes('Max rounds')), 'Loop without max is flagged');
+const two = routingPreset(); two.nodes.push({ ...two.nodes[0], id: 'start-x' }); assert(checkFlow(two).some((m) => m.includes('exactly one Start')), 'Two Starts flagged');
+const card = routingPreset(); card.nodes.find((n) => n.data.kind === 'tool')!.data.values.card = ''; assert(checkFlow(card).some((m) => m.includes('connector card')), 'Tool without card flagged');

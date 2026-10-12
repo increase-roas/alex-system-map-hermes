@@ -59,8 +59,8 @@ const SECTIONS: Section[] = [
    {
     "id": "g5",
     "label": "Skill and connector setup checks installed",
-    "status": "gap",
-    "why": "Blocks a badly formatted skill or a connector with a pasted key or no card.",
+    "status": "partial",
+    "why": "Ready-to-use kit in alex-system-map/guardrails-template (install.py, check.py), seen working live in a test folder. Not installed in a real project yet.",
     "sources": [
      "https://code.claude.com/docs/en/hooks",
      "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks"
@@ -86,8 +86,8 @@ const SECTIONS: Section[] = [
    {
     "id": "r1",
     "label": "Customer router: incoming task picks the customer",
-    "status": "gap",
-    "why": "Your map: nothing picks the client today.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/route.py picks the customer by location ID, account ID, website or name and never guesses. Not wired to a live intake yet.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -96,7 +96,7 @@ const SECTIONS: Section[] = [
     "id": "r2",
     "label": "Function router: lead follow-up, website, ads, reporting...",
     "status": "partial",
-    "why": "Director routes missions, but only inside Codex.",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). routing.json if/else rules pick the function. Director still routes Codex missions separately.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -105,7 +105,7 @@ const SECTIONS: Section[] = [
     "id": "r3",
     "label": "Bot router: which bot does which function",
     "status": "partial",
-    "why": "Director picks agents for Codex work; Claude, Cursor, Manus, Javar are opened by you.",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Each customer.json maps function to bot. Bots are still opened by hand.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -114,7 +114,7 @@ const SECTIONS: Section[] = [
     "id": "r4",
     "label": "Tool router: which tool for which job",
     "status": "partial",
-    "why": "App cards already route (e.g. GHL workflows → GHL command builder). Not enforced yet.",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Each function lists its tools; spend, send and delete words need your yes.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -122,8 +122,8 @@ const SECTIONS: Section[] = [
    {
     "id": "r5",
     "label": "Customer IDs baked into each bot (Meta account, GHL sub-account, tracking IDs)",
-    "status": "gap",
-    "why": "Goes in each customer folder's CLAUDE.md / AGENTS.md, plus the client lock.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). customer.json ids + AGENTS.md template bake them in. No real customer filled in yet.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -139,42 +139,42 @@ const SECTIONS: Section[] = [
     "id": "c1",
     "label": "Agency repo with one folder per customer",
     "status": "partial",
-    "why": "Designed (3 example tree clients). Not built.",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). customers/_template is ready; only a SAMPLE customer exists. Raw data stays out of git.",
     "sources": []
    },
    {
     "id": "c2",
     "label": "Sales numbers per customer",
-    "status": "gap",
-    "why": "Leads, booked, sold, revenue, by source.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). numbers/monthly.csv slot (spend, leads, replied, appointments, sales, revenue, cash). Needs real numbers.",
     "sources": []
    },
    {
     "id": "c3",
     "label": "Sales conversations: objections and replies",
-    "status": "gap",
-    "why": "Pulled from GHL conversations into data/, summarized, never dumped in chat.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). objections.md slot (summaries, no names). Needs real GHL conversation summaries.",
     "sources": []
    },
    {
     "id": "c4",
     "label": "Website data per customer",
-    "status": "gap",
-    "why": "Pages, offers, forms, tracking IDs, conversion rates.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). website.md slot. Needs each real site filled in.",
     "sources": []
    },
    {
     "id": "c5",
     "label": "Open gaps list per customer",
-    "status": "gap",
-    "why": "What they still don't have (reviews, photos, follow-up, ads).",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). gaps.md checklist with an updated date. Needs real gaps.",
     "sources": []
    },
    {
     "id": "c6",
     "label": "Grade each customer folder (same A–F rubric)",
-    "status": "gap",
-    "why": "A = complete data, rules, IDs, finish lines and tests for that customer.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/score_customer.py grades A to F with the exact fix list. Sample scores A, blank template F.",
     "sources": []
    }
   ]
@@ -187,8 +187,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n1",
     "label": "Input node",
-    "status": "gap",
-    "why": "Agentflow calls it Start.",
+    "status": "ok",
+    "why": "Flow Builder tab: Start node. Draws and checks flows; it does not run them.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -197,8 +197,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n2",
     "label": "LLM nodes (LLM + Agent)",
-    "status": "gap",
-    "why": "Your Pro Map uses 2 node types (card, band). An agent builder needs real node types.",
+    "status": "ok",
+    "why": "Flow Builder tab: LLM and Agent nodes.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -207,8 +207,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n3",
     "label": "Judge node (score + written feedback)",
-    "status": "gap",
-    "why": "Needed for GEPA.",
+    "status": "ok",
+    "why": "Flow Builder tab: Judge node (score + feedback).",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -217,8 +217,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n4",
     "label": "Compare node (new vs current, per test case)",
-    "status": "gap",
-    "why": "Needed for GEPA.",
+    "status": "ok",
+    "why": "Flow Builder tab: Compare node (new vs current, per case).",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -227,8 +227,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n5",
     "label": "Promote node (needs your yes)",
-    "status": "gap",
-    "why": "Needed for GEPA.",
+    "status": "ok",
+    "why": "Flow Builder tab: Promote node; the flow check refuses it unless it follows a Human Input yes.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -237,8 +237,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n6",
     "label": "Loop node",
-    "status": "gap",
-    "why": "Your Pro Map uses 2 node types (card, band). An agent builder needs real node types.",
+    "status": "ok",
+    "why": "Flow Builder tab: Loop node; the flow check requires Max rounds.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -247,8 +247,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n7",
     "label": "The Agentflow 15: Start, LLM, Agent, Tool, Retriever, HTTP, Condition, Condition Agent, Iteration, Loop, Human Input, Direct Reply, Custom Function, Execute Flow, Sticky Note",
-    "status": "gap",
-    "why": "Use as the design reference; build on your React Flow Pro AI Workflow Editor template.",
+    "status": "ok",
+    "why": "Flow Builder tab has all 15 Agentflow types plus Judge, Compare, Promote, Route to customer, with GEPA and routing templates.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -265,7 +265,7 @@ const SECTIONS: Section[] = [
     "id": "p1",
     "label": "Test set per job (20–50 real cases)",
     "status": "partial",
-    "why": "Golden and held-out tasks exist for the system, not per customer job.",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). gepa/jobs/<job>/testset.jsonl with train and holdout cases. Only the sample speed-to-lead job (8 cases) exists.",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -274,8 +274,8 @@ const SECTIONS: Section[] = [
    {
     "id": "p2",
     "label": "Judge that returns score + feedback text",
-    "status": "gap",
-    "why": "Run → judge with written feedback → reflect and propose a better prompt → compare on a test set → promote with your yes → loop.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Judge returns score + written feedback (rule checks; Claude judge option written, not yet seen working).",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -285,7 +285,7 @@ const SECTIONS: Section[] = [
     "id": "p3",
     "label": "Reflect step that proposes the improved prompt or skill",
     "status": "partial",
-    "why": "Weekly tune-up writes proposals; not GEPA-style.",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Reflect step rewrites the prompt from feedback. Seen working with the offline stub; the Claude version is written, not yet run.",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -294,8 +294,8 @@ const SECTIONS: Section[] = [
    {
     "id": "p4",
     "label": "Keep the best candidates per test case (Pareto)",
-    "status": "gap",
-    "why": "Run → judge with written feedback → reflect and propose a better prompt → compare on a test set → promote with your yes → loop.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Keeps every candidate that is best on at least one case (Pareto).",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -321,8 +321,8 @@ const SECTIONS: Section[] = [
    {
     "id": "s1",
     "label": "Scheduled scans that find problems in each customer account",
-    "status": "gap",
-    "why": "Weekly tune-up exists, but for your system, not customer accounts.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/scan_customer.py finds problems (stale numbers, cost spikes, reply/close drops, negative cash, LTV:CAC under 3, missed updates). Not scheduled yet.",
     "sources": [
      "https://code.claude.com/docs/en/scheduled-tasks"
     ]
@@ -330,8 +330,8 @@ const SECTIONS: Section[] = [
    {
     "id": "s2",
     "label": "2x per week customer update",
-    "status": "unknown",
-    "why": "Not on your map; check if a workflow already sends these.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/draft_update.py drafts Tue/Fri updates. Not scheduled yet.",
     "sources": [
      "https://code.claude.com/docs/en/scheduled-tasks"
     ]
@@ -339,8 +339,8 @@ const SECTIONS: Section[] = [
    {
     "id": "s3",
     "label": "Updates drafted by bots, sent only with your yes",
-    "status": "gap",
-    "why": "Messaging a client needs your approval.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Drafts are marked not sent; nothing sends without your yes.",
     "sources": [
      "https://code.claude.com/docs/en/scheduled-tasks"
     ]
@@ -355,29 +355,29 @@ const SECTIONS: Section[] = [
    {
     "id": "d1",
     "label": "Cash flow view per customer",
-    "status": "gap",
-    "why": "Reverse-engineer scaling companies: cash flow first, LTV to CAC at 3:1 or better.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/dashboard.py: cash flow by month (tested on SAMPLE numbers).",
     "sources": []
    },
    {
     "id": "d2",
     "label": "LTV : CAC with a 3:1 target line",
-    "status": "gap",
-    "why": "Reverse-engineer scaling companies: cash flow first, LTV to CAC at 3:1 or better.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). LTV:CAC tile with the 3:1 target; scan flags under 3.",
     "sources": []
    },
    {
     "id": "d3",
     "label": "Cost per lead that responded (not just cost per lead)",
-    "status": "gap",
-    "why": "Reverse-engineer scaling companies: cash flow first, LTV to CAC at 3:1 or better.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Cost per lead that replied, per month and per test arm.",
     "sources": []
    },
    {
     "id": "d4",
     "label": "Split test: instant form vs website conversion",
-    "status": "gap",
-    "why": "Same offer, same budget, compare responded leads and sales.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Instant form vs website: reply rate, lead-to-sale, cost per replied lead and a plain verdict on whether the gap is real.",
     "sources": []
    },
    {
@@ -397,8 +397,8 @@ const SECTIONS: Section[] = [
    {
     "id": "x1",
     "label": "One database for customer data (Postgres, e.g. Supabase) with per-customer access rules",
-    "status": "gap",
-    "why": "Sheets only as an export or a quick start.",
+    "status": "partial",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). db/schema.sql for Supabase with per-customer locks, tested on Postgres 16. No Supabase project made (needs your yes).",
     "sources": []
    },
    {
@@ -411,8 +411,8 @@ const SECTIONS: Section[] = [
    {
     "id": "x3",
     "label": "Customer-facing views show results only, never prompts or methods",
-    "status": "gap",
-    "why": "Where the numbers live, and how your methods stay yours.",
+    "status": "ok",
+    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). dashboard.py --client shows results only: no grades, bots, routing or methods. Tested.",
     "sources": []
    },
    {
@@ -427,7 +427,7 @@ const SECTIONS: Section[] = [
 ];
 
 const nodes: ProNode[] = [{
-  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "2 done, 8 partly, 29 missing, 2 not checked. Status checked 2026-10-12.",
+  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "18 done, 18 partly, 4 missing, 1 not checked. Updated 2026-10-12 after the agency-os-kit build.",
   why: 'Everything needed to run each customer\'s whole flow: guardrails, routing, customer repo, node kit, feedback loop, schedules, dashboard and privacy. Green = done, orange = partly, pink = missing, gray = not checked.',
   status: 'reference', sources: [], x: KX - 10, y: -110, w: COLS * SP + 20, h: 60, band: true,
 }];
