@@ -19,6 +19,7 @@ export type ProNode = {
   id: string; label: string; sub: string; status: ProStatus; why: string; sources: string[];
   how?: string[]; trace?: string; tag?: string; detail?: FullDetail;
   x: number; y: number; w?: number; h?: number; band?: boolean;
+  grade?: { letter: string; note: string };
 };
 export type ProEdge = {
   id: string; source: string; target: string; kind: 'flow' | 'link' | 'bypass' | 'loop'; label?: string;

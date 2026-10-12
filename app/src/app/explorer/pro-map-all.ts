@@ -33,6 +33,13 @@ function withSticky(n: ProNode): ProNode {
   const card = notes.filter((s) => !s.title || !titles.has(s.title)).map(({ text, src }) => ({ text, src }));
   return { ...n, detail: { ...det, examples, sticky: card.length ? card : det.sticky } };
 }
-export const PRO_NODES: ProNode[] = [...v1Nodes, ...V2_NODES, ...H_NODES].map(withSticky);
+/** Codex grades (harness audit, 2026-10-12). Shown large on each map's title. */
+const GRADES: Record<string, { letter: string; note: string }> = {
+  o_title: { letter: '?', note: 'Not graded yet' },
+  p_title: { letter: 'C', note: 'Codex harness audit 2026-10-12: accuracy C, sources B, order B, completeness B, clarity C' },
+  h_title: { letter: 'B', note: 'Codex re-grade 2026-10-12 (was C): accuracy B, sources B, order B, completeness B, clarity B' },
+};
+export const PRO_NODES: ProNode[] = [...v1Nodes, ...V2_NODES, ...H_NODES].map(withSticky)
+  .map((n) => (GRADES[n.id] ? { ...n, grade: GRADES[n.id] } : n));
 export const PRO_EDGES: ProEdge[] = [...v1Edges, ...V2_EDGES, ...H_EDGES];
 export type { ProEdge, ProNode };

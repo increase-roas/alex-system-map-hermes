@@ -49,9 +49,18 @@ function Band({ data }: NodeProps<Node<CardData>>) {
   const title = data.id.endsWith('_title');
   return (
     <div
-      className="rounded-xl border border-dashed"
+      className="relative rounded-xl border border-dashed"
       style={{ width: data.w ?? 740, height: data.h ?? 110, borderColor: c, background: `${c}10` }}
     >
+      {title && data.grade ? (
+        <div data-testid="map-grade" className="absolute -top-24 right-0 flex items-end gap-3" title={data.grade.note}>
+          <div className="text-right text-sm leading-tight text-muted-foreground" style={{ maxWidth: 520 }}>
+            <div className="font-semibold uppercase tracking-wide" style={{ color: c }}>Codex grade</div>
+            <div>{data.grade.note}</div>
+          </div>
+          <div className="text-[88px] font-black leading-none" style={{ color: { A: '#16a34a', B: '#65a30d', C: '#d97706', D: '#ea580c', F: '#dc2626' }[data.grade.letter] ?? '#6b7280' }}>{data.grade.letter}</div>
+        </div>
+      ) : null}
       <Handle type="target" position={Position.Top} style={hidden} />
       <Handle type="source" position={Position.Bottom} style={hidden} />
       <Handle id="ls" type="source" position={Position.Left} style={hidden} />
