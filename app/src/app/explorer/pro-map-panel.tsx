@@ -1,28 +1,31 @@
 'use client';
 
 import {
-  Background, Controls, Handle, MarkerType, Panel, Position, ReactFlow, ReactFlowProvider,
+  Background, Controls, Handle, MarkerType, Panel, Position, ReactFlow, ReactFlowProvider, useReactFlow,
   type Edge, type Node, type NodeProps,
 } from '@xyflow/react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { PRO_EDGES, PRO_NODES } from './pro-map-all';
 import { type ProNode, type ProStatus } from './pro-map-data';
 import type { Example, FlowStep, Picture, Rule, TreeNode } from './pro-map-examples';
+import { JOBS, type CallStatus } from './pro-map-jobs';
 
 const COLOR: Record<ProStatus, string> = { ok: '#17c964', partial: '#f5a524', gap: '#ff0071', reference: '#7f77dd' };
 const WORD: Record<ProStatus, string> = { ok: 'have it', partial: 'partly', gap: 'missing', reference: 'Anthropic way' };
 const CARD_W = 130;
 const hidden = { opacity: 0, width: 6, height: 6 };
 
-type CardData = ProNode & { selected?: boolean };
+type CardData = ProNode & { selected?: boolean; hl?: string; dim?: boolean };
+const HL: Record<string, string> = { on: '#f59e0b', problem: '#ef4444', fix: '#3b82f6', done: '#22c55e' };
 
 function Card({ data }: NodeProps<Node<CardData>>) {
   const c = COLOR[data.status];
   return (
     <div
-      className="rounded-md border bg-card px-2.5 py-2 text-card-foreground shadow-sm"
-      style={{ width: data.w ?? CARD_W, borderColor: c, borderLeftWidth: 4 }}
+      className="rounded-md border bg-card px-2.5 py-2 text-card-foreground shadow-sm transition-all duration-300"
+      style={{ width: data.w ?? CARD_W, borderColor: c, borderLeftWidth: 4, opacity: data.dim ? 0.25 : 1,
+        boxShadow: data.hl ? `0 0 0 3px ${HL[data.hl]}, 0 0 18px ${HL[data.hl]}` : undefined }}
     >
       <Handle type="target" position={Position.Top} style={hidden} />
       <Handle type="source" position={Position.Bottom} style={hidden} />
@@ -335,7 +338,78 @@ function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
   );
 }
 
+const CALL_COLOR: Record<CallStatus, string> = { ok: '#22c55e', fail: '#ef4444', ask: '#f59e0b', fixed: '#3b82f6', info: '#8a8a8a' };
+
+function Walkthrough({ on, setOn, jobId, setJobId, beat, setBeat, playing, setPlaying }: {
+  on: boolean; setOn: (v: boolean) => void; jobId: string; setJobId: (v: string) => void;
+  beat: number; setBeat: (f: (b: number) => number) => void; playing: boolean; setPlaying: (v: boolean) => void;
+}) {
+  const job = JOBS.find((j) => j.id === jobId) ?? JOBS[0];
+  const b = job.beats[beat];
+  const calls = job.beats.slice(0, beat + 1).flatMap((x, i) => (x.calls ?? []).map((c) => ({ ...c, step: i + 1 })));
+  return (
+    <div className="w-[400px] rounded-xl border bg-card/95 p-3 text-xs shadow-lg backdrop-blur" data-testid="walkthrough">
+      <div className="flex items-center gap-2">
+        <button type="button" data-testid="wt-toggle" onClick={() => { setOn(!on); setPlaying(false); setBeat(() => 0); }}
+          className={`rounded-full px-3 py-1 text-xs font-semibold ${on ? 'bg-emerald-500 text-white' : 'bg-muted text-foreground'}`}>
+          Walkthrough: {on ? 'ON' : 'OFF'}
+        </button>
+        <select className="min-w-0 flex-1 rounded border bg-background px-1 py-1" value={job.id} onChange={(e) => { setJobId(e.target.value); setBeat(() => 0); setPlaying(false); }}>
+          {JOBS.map((j) => <option key={j.id} value={j.id}>{j.name}</option>)}
+        </select>
+      </div>
+      {on && b ? (
+        <>
+          <div className="mt-2 rounded-md bg-muted/50 px-2 py-1.5 text-[11px] leading-snug"><span className="font-semibold">Job:</span> {job.ask}</div>
+          <div className="mt-2 flex items-center gap-1.5">
+            <button type="button" className="rounded border px-2 py-0.5" onClick={() => { setBeat(() => 0); setPlaying(false); }}>Restart</button>
+            <button type="button" className="rounded border px-2 py-0.5" onClick={() => setBeat((x) => Math.max(0, x - 1))}>Back</button>
+            <button type="button" data-testid="wt-play" className="rounded border bg-foreground px-2 py-0.5 text-background" onClick={() => setPlaying(!playing)}>{playing ? 'Pause' : 'Play'}</button>
+            <button type="button" data-testid="wt-next" className="rounded border px-2 py-0.5" onClick={() => setBeat((x) => Math.min(job.beats.length - 1, x + 1))}>Next</button>
+            <span className="ml-auto text-muted-foreground">Step {beat + 1} of {job.beats.length}</span>
+          </div>
+          <div className="mt-2 rounded-md border-l-4 px-2 py-1.5" style={{ borderLeftColor: HL[b.tone ?? 'on'] }}>
+            <div className="text-sm font-semibold" style={{ color: HL[b.tone ?? 'on'] }}>{b.title}</div>
+            <div className="mt-0.5 text-[12px] leading-snug">{b.say}</div>
+          </div>
+          <div className="mt-2 font-semibold">Call list (trace), newest first</div>
+          <div className="mt-1 max-h-[180px] overflow-auto rounded-md border">
+            {calls.length ? [...calls].reverse().map((c, i) => (
+              <div key={i} className="flex items-baseline gap-1.5 border-b px-2 py-1 font-mono text-[10.5px] last:border-b-0">
+                <span className="text-muted-foreground">{c.step}</span>
+                <span className="inline-block size-2 shrink-0 rounded-full" style={{ background: CALL_COLOR[c.status] }} />
+                <span className="text-muted-foreground">{c.agent}</span>
+                <span className="font-semibold">{c.action}</span>
+                <span className="ml-auto text-right" style={{ color: CALL_COLOR[c.status] }}>{c.result}{c.ms ? ` ${c.ms}ms` : ''}{c.cost ? ` ${c.cost}` : ''}</span>
+              </div>
+            )) : <div className="px-2 py-1 text-muted-foreground">No calls yet.</div>}
+          </div>
+          <div className="mt-1.5 text-[10px] text-muted-foreground">DEMO: scripted walkthrough. Nothing is called or changed.</div>
+        </>
+      ) : <div className="mt-1.5 text-[11px] text-muted-foreground">Turn it on to watch one job move through the middle map, break, and fix itself.</div>}
+    </div>
+  );
+}
+
 function ProMap() {
+  const rf = useReactFlow();
+  const [wtOn, setWtOn] = useState(false);
+  const [jobId, setJobId] = useState(JOBS[0].id);
+  const [beat, setBeat] = useState(0);
+  const [playing, setPlaying] = useState(false);
+  const job = JOBS.find((j) => j.id === jobId) ?? JOBS[0];
+  const active = wtOn ? job.beats[beat] : undefined;
+  useEffect(() => {
+    if (!playing || !wtOn) return;
+    const t = setTimeout(() => {
+      if (beat >= job.beats.length - 1) setPlaying(false); else setBeat((x) => x + 1);
+    }, 4200);
+    return () => clearTimeout(t);
+  }, [playing, wtOn, beat, job]);
+  useEffect(() => {
+    if (active) rf.fitView({ nodes: active.ids.map((id) => ({ id })), duration: 700, padding: 0.6, maxZoom: 1.1 });
+    else rf.fitView({ duration: 500, padding: 0.04 });
+  }, [active, rf]);
   const [picked, setPicked] = useState<ProNode | null>(null);
   const nodes = useMemo<Node<CardData>[]>(
     () =>
@@ -343,12 +417,14 @@ function ProMap() {
         id: n.id,
         type: n.band ? 'band' : 'card',
         position: { x: n.x, y: n.y },
-        data: n,
+        data: active && !n.band
+          ? { ...n, hl: active.ids.includes(n.id) ? (active.tone ?? 'on') : undefined, dim: n.id.startsWith('p_') && !active.ids.includes(n.id) }
+          : n,
         draggable: !n.band,
         selectable: !n.band,
         zIndex: n.band ? -1 : 2,
       })),
-    [],
+    [active],
   );
   const edges = useMemo(() => PRO_EDGES.map(edgeFor), []);
   const counts = useMemo(() => {
@@ -373,6 +449,9 @@ function ProMap() {
     >
       <Background gap={24} size={1} />
       <Controls showInteractive={false} />
+      <Panel position="top-left" className="m-2">
+        <Walkthrough on={wtOn} setOn={setWtOn} jobId={jobId} setJobId={setJobId} beat={beat} setBeat={setBeat} playing={playing} setPlaying={setPlaying} />
+      </Panel>
       {picked ? (
         <Panel position="top-right" className="m-0">
           <DetailCard key={picked.id} node={picked} onClose={() => setPicked(null)} />

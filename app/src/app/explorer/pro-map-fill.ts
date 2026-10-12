@@ -401,6 +401,40 @@ export const PRO_FILL: Record<string, More> = {
 };
 
 const EXTRA: Record<string, More> = {
+  p_aftercheck: {
+    plain: [
+      'Self-fixing = fix THIS job and run its checks again. Self-improving = use the failure to make FUTURE jobs better (gotcha + a test that catches it).',
+      'The hook starts the check, the check finds the problem, the agent fixes it, the trace records it.',
+      'PostToolUse hook: after an edit, run a focused test; if it fails, exit 2 so the failure goes back to the agent.',
+      'Stop hook: if required checks still fail, exit 2 so the agent cannot say done yet. Check stop_hook_active so it cannot loop forever.',
+      'Cap it at 2 repair attempts, then report the blocker to you.',
+    ],
+    pictures: [{ kind: 'flow', title: 'Self-fixing loop', steps: [
+      { label: 'Agent edits a file' },
+      { label: 'PostToolUse hook runs the test' },
+      { label: 'Fails?', many: ['yes: failure goes back to the agent', 'no: keep going'], tone: 'bad' },
+      { label: 'Agent repairs (max 2 tries)' },
+      { label: 'Stop hook: checks pass before "done"', tone: 'good' },
+      { label: 'Trace records every step' },
+    ] }],
+    examples: [
+      { title: 'Hook setup', tone: 'good', file: '.claude/settings.json', why: 'Run the check after edits; block "done" while it fails.', code: L(
+        '{ "hooks": {',
+        '  "PostToolUse": [{ "matcher": "Edit|Write",',
+        '    "hooks": [{ "type": "command", "command": ".claude/hooks/after-edit-check.sh" }] }],',
+        '  "Stop": [{ "hooks": [{ "type": "command", "command": ".claude/hooks/block-done-if-failing.sh" }] }]',
+        '} }') },
+      { title: 'The check script', file: '.claude/hooks/after-edit-check.sh', why: 'stderr + exit 2 hands the failure back to the agent. Keep it fast and scoped.', code: L(
+        '#!/bin/bash',
+        'if ! npm run test:quick >/tmp/check.log 2>&1; then',
+        '  tail -20 /tmp/check.log >&2',
+        '  exit 2',
+        'fi',
+        'exit 0') },
+    ],
+    myths: [{ myth: 'A saved lesson means it will never happen again.', truth: 'A lesson is a note. A test that catches that exact mistake is what stops it repeating.', fix: 'Every auto-fix ends with two things: a gotcha in the skill AND a regression test kept in evals/.' }],
+    sources: ['https://code.claude.com/docs/en/hooks', S.best, S.skillUse],
+  },
   p_load: {
     plain: ['Happens after the project is known, so the right rules load.', 'Loads: that project\'s CLAUDE.md and rules, the skill list (names only), the first 200 lines of MEMORY.md.', 'Resuming a long job? Also the progress file and git log.'],
     myths: [{ myth: 'The agent loads every project\'s files at once.', truth: 'It loads the files of the folder it is working in. Open the right project first.', fix: 'Start the session in the client\'s repo, or have the lead switch to it before working.' }],
