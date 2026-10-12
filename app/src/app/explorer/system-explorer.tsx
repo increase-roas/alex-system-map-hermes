@@ -67,6 +67,7 @@ import { LiveSetupPanel } from './live-setup-panel';
 import { OrgMapPanel } from './org-map-panel';
 import { MaintainedEditPanel } from './maintained-edit-panel';
 import { WorkflowPanel } from './workflow-panel';
+import { ProMapPanel } from './pro-map-panel';
 
 const elk = new ELK();
 
@@ -104,7 +105,7 @@ async function layoutTopDown(nodes: Node[], edges: { id: string; source: string;
 }
 
 const VIEW_LABEL: Partial<Record<ExplorerView, string>> = {
-  map: 'Map', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
+  map: 'Map', pro: 'Pro Map', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
   tracing: 'Tracing', reliability: 'Reliability', maintained: 'Maintained', live: 'Live',
 };
 
@@ -150,6 +151,7 @@ export function SystemExplorer() {
         view === 'tracing' ||
         view === 'maintained' ||
         view === 'live' ||
+        view === 'pro' ||
         view === 'map'
       ) {
         return;
@@ -292,6 +294,7 @@ export function SystemExplorer() {
           {(
             [
               'map',
+              'pro',
               'overview',
               'subsystem',
               'files',
@@ -344,8 +347,8 @@ export function SystemExplorer() {
       )}
 
       {/* The map and live views have their own detail panels, so the side column is dropped there. */}
-      <div className={`grid min-h-0 flex-1 grid-cols-1 ${view === 'map' || view === 'live' ? '' : 'lg:grid-cols-[1fr_360px]'}`}>
-        <section className={`min-h-0 border-b lg:h-auto lg:border-b-0 ${view === 'map' || view === 'live' ? 'h-[85vh]' : 'h-[72vh] lg:border-r'}`}>
+      <div className={`grid min-h-0 flex-1 grid-cols-1 ${view === 'map' || view === 'live' || view === 'pro' ? '' : 'lg:grid-cols-[1fr_360px]'}`}>
+        <section className={`min-h-0 border-b lg:h-auto lg:border-b-0 ${view === 'map' || view === 'live' || view === 'pro' ? 'h-[85vh]' : 'h-[72vh] lg:border-r'}`}>
           {view === 'files' ? (
             <div className="h-full overflow-auto p-4">
               <h2 className="mb-3 font-medium">Files</h2>
@@ -399,6 +402,8 @@ export function SystemExplorer() {
             <TracingPanel />
           ) : view === 'reliability' ? (
             <ReliabilityPanel />
+          ) : view === 'pro' ? (
+            <ProMapPanel />
           ) : view === 'map' ? (
             <OrgMapPanel />
           ) : view === 'live' ? (

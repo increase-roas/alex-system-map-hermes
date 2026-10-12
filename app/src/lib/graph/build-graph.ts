@@ -4,6 +4,7 @@ import type { CatalogBundle, CatalogComponent } from '@/lib/types/catalog';
 
 export type ExplorerView =
   | 'map'
+  | 'pro'
   | 'overview'
   | 'subsystem'
   | 'problems'
