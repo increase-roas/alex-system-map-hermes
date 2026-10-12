@@ -401,6 +401,59 @@ export const PRO_FILL: Record<string, More> = {
 };
 
 const EXTRA: Record<string, More> = {
+  p_rulegate: {
+    plain: [
+      'Each connector gets its own rules file (.claude/rules/ghl.md, meta-ads.md...): which tool to use for what, and the never-dos.',
+      'Each repeat job gets a skill with the if/else inside: no photos? generate them. No dataset? build it first. Copy? use this method.',
+      'A rules file with paths: loads when Claude opens matching FILES. A GHL or Composio call is not a file, so connector rules need a hook.',
+      'The gate: a PreToolUse hook matched on the connector. First call this session: deny, with the rules pasted into the reason (Claude reads it). Claude retries; every later call passes.',
+      'additionalContext from PreToolUse lands alongside the tool result, i.e. after the call ran. Use deny-once if the rules must be read BEFORE the call.',
+      'Composio hides the real app inside the call, so the script reads tool_input.tools[0].tool_slug to pick the right rules file.',
+    ],
+    pictures: [{ kind: 'flow', title: 'Read-first gate', steps: [
+      { label: 'Agent calls a GHL tool' },
+      { label: 'PreToolUse hook: rules read this session?', many: ['no: deny + paste rules/ghl.md into the reason', 'yes: allow'], tone: 'bad' },
+      { label: 'Agent reads the rules, retries' },
+      { label: 'Allowed; later calls pass straight through', tone: 'good' },
+    ] }],
+    examples: [
+      { title: 'Hook setup', tone: 'good', file: '.claude/settings.json', why: 'Matches every Composio MCP call.', code: L(
+        '{ "hooks": { "PreToolUse": [{',
+        '  "matcher": "mcp__.*composio.*",',
+        '  "hooks": [{ "type": "command", "command": ".claude/hooks/read-rules-first.sh" }]',
+        '}] } }') },
+      { title: 'The gate script', file: '.claude/hooks/read-rules-first.sh', why: 'Deny once per app per session, with the rules in the reason.', code: L(
+        '#!/bin/bash',
+        'input=$(cat)',
+        'session=$(echo "$input" | jq -r .session_id)',
+        "app=$(echo \"$input\" | jq -r '.tool_input.tools[0].tool_slug // \"\"' | cut -d_ -f1 | tr A-Z a-z)",
+        'rules=".claude/rules/$app.md"; mark="/tmp/rules-read-$session-$app"',
+        '[ -f "$rules" ] || exit 0',
+        '[ -f "$mark" ] && exit 0',
+        'touch "$mark"',
+        "jq -n --arg r \"$(head -40 \"$rules\")\" '{hookSpecificOutput:{hookEventName:\"PreToolUse\",permissionDecision:\"deny\",permissionDecisionReason:(\"Read these rules first, then retry:\\n\"+$r)}}'") },
+      { title: 'A connector rules file', file: '.claude/rules/ghl.md', why: 'Short. Which tool for what, and never-dos.', code: L(
+        '# GHL',
+        '- Workflow edits: GHL command builder, never the UI.',
+        '- Contacts and messages: OAuth gateway connector.',
+        '- Every call names the client sub-account; never another client.',
+        '- Never send, spend or delete without Alex\'s yes.') },
+      { title: 'A job skill with the if/else', file: '.claude/skills/website-build/SKILL.md', why: 'The procedure loads only when this job runs.', code: L(
+        '1. Start from references/template.md',
+        '2. No photos? Generate them (real job-site look, no stock).',
+        '3. No dataset (services, areas, reviews)? Build it from GBP and the site first.',
+        '4. No reviews? Leave the section out. Never invent any.',
+        '5. Done when: phone layout passes and the form sends a test lead to the sandbox.') },
+    ],
+    decide: [
+      { if: 'How to use one connector', then: 'rules/<app>.md, forced by the read-first gate' },
+      { if: 'How to do one kind of job (with if/else)', then: 'A skill' },
+      { if: 'Which job goes to which skill', then: 'One routing line in CLAUDE.md / AGENTS.md' },
+      { if: 'Must never happen (spend, send, delete, wrong client)', then: 'The same hook denies it every time, not just once' },
+    ],
+    myths: [{ myth: 'Putting connector rules in .claude/rules/ means the agent reads them before calling the tool.', truth: 'paths: rules load on file reads. A connector call is not a file, so they may never load.', fix: 'Add the read-first PreToolUse gate on that connector so the first call is denied with the rules in the reason.' }],
+    sources: ['https://code.claude.com/docs/en/hooks', S.mem, S.skills],
+  },
   p_goal: {
     plain: [
       'Done has to be a check, not a feeling. Good: "tests pass", "page has no sideways scroll at phone width", "Dad\'s phone only rings for numbers on the sheet". Bad: "make a good website".',

@@ -152,6 +152,7 @@ const proNodes: ProNode[] = [
     { id: 'p_lib_evals', label: 'Evals', sub: 'Test tasks + graders', sources: [ANT.evals], why: 'How you know a change made things better.', how: ['Task = one test with inputs and success criteria', 'Graders: code checks, a model judge, a human', 'Read the transcripts to trust the scores'] },
   ], ref),
   ...row(P, 'know', [
+    { id: 'p_rulegate', label: 'Read-first gate', sub: 'Connector rules before the call', sources: [ANT.hooks, ANT.mem], why: 'A PreToolUse hook denies the first call to a connector each session, with its rules file in the reason; the agent reads them and retries.' },
     { id: 'p_k0', label: 'Agentic search', sub: 'Folders and grep first', why: 'How agents get the info: they search files themselves before anyone builds a vector database.', sources: ['https://claude.com/blog/building-agents-with-the-claude-agent-sdk'] },
     { id: 'p_k1', label: 'Tool search', sub: 'Loads tools on demand', why: 'With many tools, Claude Code searches tool definitions and loads only the ones it needs.', sources: [ANT.mcp] },
     { id: 'p_k2', label: 'Tool description', sub: 'The tool\'s manual', why: 'The description is how the agent knows when and how to use the tool.', sources: [ANT.tools], how: ['Write it like onboarding a new teammate', 'Clear names, grouped by service', 'Say what every input means'] },

@@ -99,6 +99,28 @@ function bands(): ProNode[] {
 
 // ---------- detail cards ----------
 const DET: Record<string, FullDetail> = {
+  h_rulegate: {
+    plain: [
+      'Same idea as Claude Code: each connector gets a short rules file, each repeat job gets a skill with the if/else inside.',
+      'Hermes has no rules/ folder. Folder rules come from AGENTS.md files, and subfolder ones are picked up as the agent works there.',
+      'A connector call is not a folder, so use a pre_tool_call hook as the gate: first call to that connector this session is blocked, with its rules in the block message; the agent reads them and retries.',
+      'Only hooks you configured and approved run. Set the hook to fail closed so a crashed script still blocks.',
+      'Skills are the same open format (agentskills.io), so the website-build, ad-copy, ghl-workflow-edit and hot-leads skills work here too.',
+    ],
+    pictures: [{ kind: 'flow', title: 'Read-first gate in Hermes', steps: [
+      { label: 'Agent calls a GHL tool' },
+      { label: 'pre_tool_call hook: rules read this session?', many: ['no: block, message carries the GHL rules', 'yes: allow'], tone: 'bad' },
+      { label: 'Agent reads the rules, retries' },
+      { label: 'Allowed; later calls pass', tone: 'good' },
+    ] }],
+    examples: [{ title: 'Shape of the gate hook', file: '~/.hermes/profiles/javar/config.yaml', why: 'Shape only: confirm the exact keys and the block output format on the hooks page for your version.', code: L(
+      'hooks:',
+      '  pre_tool_call:',
+      '    - command: ~/.hermes/hooks/read-rules-first.sh',
+      '      timeout: 10',
+      '      fail_closed: true') }],
+    myths: [{ myth: 'Putting connector rules in AGENTS.md means Javar reads them before every call.', truth: 'AGENTS.md is read at start, and long files get cut. Nothing forces a re-read right before a risky call.', fix: 'Keep a short rules file per connector and gate the first call with a pre_tool_call hook.' }],
+  },
   h_soul: {
     plain: [
       'SOUL.md is WHO the agent is: personality, tone, how it talks, what it avoids. It is the very first thing in the prompt (slot 1) and replaces the built-in identity.',
@@ -298,6 +320,7 @@ const know: Spec[] = [
 const gw: Spec[] = [
   { id: 'h_approve', label: 'Dangerous command check', sub: 'Smart mode by default', why: 'Risky shell commands: low-risk auto-approved, dangerous auto-denied, unsure ones ask you. Cron and webhook runs deny by default.', sources: [H.sec], detail: DET.h_approve },
   { id: 'h_hook', label: 'pre_tool_call hook', sub: 'Can block tool calls', why: 'Your hook sees every tool call first and can block it; plugin hooks fail closed on timeout.', sources: [H.hooks], detail: DET.h_hook },
+  { id: 'h_rulegate', label: 'Read-first gate', sub: 'Connector rules before the call', why: 'A pre_tool_call hook blocks the first call to a connector each session, with that connector\'s rules in the message; the agent reads them and retries.', sources: [H.hooks, H.ctx, H.skills], detail: DET.h_rulegate },
   { id: 'h_box', label: 'Container backend', sub: 'Isolates shell commands', why: 'Docker, Modal, Daytona and others run commands away from your machine; the docs recommend it for production gateways. It does not police API calls.', sources: [H.sec, H.tools] },
 ];
 const run: Spec[] = [
