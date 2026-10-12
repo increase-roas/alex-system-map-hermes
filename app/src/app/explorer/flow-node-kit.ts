@@ -5,73 +5,73 @@
  * Pure data and checks, no React, so it can be tested with plain Node.
  */
 export type FieldKind = 'text' | 'textarea' | 'number' | 'select';
-export type Field = { key: string; label: string; kind: FieldKind; options?: string[]; placeholder?: string };
+export type Field = { key: string; label: string; kind: FieldKind; options?: string[]; placeholder?: string; required?: boolean };
 export type NodeKind = {
   type: string; label: string; group: Group; icon: string; color: string;
   inputs: string[]; outputs: string[]; fields: Field[]; what: string; source: 'agentflow' | 'alex';
 };
 export type Group = 'Start and end' | 'AI' | 'Tools and data' | 'Logic' | 'People' | 'Improve (GEPA)' | 'Notes';
 
-const model: Field = { key: 'model', label: 'Model', kind: 'select', options: ['claude-haiku-5-5', 'claude-sonnet-5-5', 'claude-opus-5-5'] };
+const model: Field = { key: 'model', label: 'Model', kind: 'select', options: ['claude-haiku-5-5', 'claude-sonnet-5-5', 'claude-opus-5-5'], required: true };
 
 export const KIT: NodeKind[] = [
   { type: 'start', label: 'Start', group: 'Start and end', icon: 'Play', color: '#16a34a', inputs: [], outputs: ['out'], source: 'agentflow',
     what: 'Where the flow begins: a chat message, a form, a webhook or a schedule. Your Input node.',
-    fields: [{ key: 'trigger', label: 'Starts on', kind: 'select', options: ['chat message', 'form', 'webhook', 'schedule'] }, { key: 'inputs', label: 'Input fields', kind: 'text', placeholder: 'task, location_id' }] },
+    fields: [{ key: 'trigger', label: 'Starts on', kind: 'select', options: ['chat message', 'form', 'webhook', 'schedule'], required: true }, { key: 'inputs', label: 'Input fields', kind: 'text', placeholder: 'task, location_id' }] },
   { type: 'llm', label: 'LLM', group: 'AI', icon: 'Brain', color: '#2563eb', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'One model call with a prompt. Can return structured JSON.',
-    fields: [model, { key: 'prompt', label: 'Prompt', kind: 'textarea' }, { key: 'schema', label: 'JSON output fields', kind: 'text', placeholder: 'score, feedback' }] },
+    fields: [model, { key: 'prompt', label: 'Prompt', kind: 'textarea', required: true }, { key: 'schema', label: 'JSON output fields', kind: 'text', placeholder: 'score, feedback' }] },
   { type: 'agent', label: 'Agent', group: 'AI', icon: 'Bot', color: '#2563eb', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'A model that can pick and call tools on its own until the job is done.',
-    fields: [model, { key: 'instructions', label: 'Instructions', kind: 'textarea' }, { key: 'tools', label: 'Tools it may use', kind: 'text', placeholder: 'ghl.conversations, meta.ads' }] },
+    fields: [model, { key: 'instructions', label: 'Instructions', kind: 'textarea', required: true }, { key: 'tools', label: 'Tools it may use', kind: 'text', placeholder: 'ghl.conversations, meta.ads' }] },
   { type: 'tool', label: 'Tool', group: 'Tools and data', icon: 'Wrench', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs one specific tool with set inputs (no model deciding).',
-    fields: [{ key: 'tool', label: 'Tool', kind: 'text', placeholder: 'GOHIGHLEVEL_LIST_CONTACTS' }, { key: 'card', label: 'Connector card (read first)', kind: 'text', placeholder: '.claude/connector-cards/ghl.md' }] },
+    fields: [{ key: 'tool', label: 'Tool', kind: 'text', placeholder: 'GOHIGHLEVEL_LIST_CONTACTS', required: true }, { key: 'card', label: 'Connector card (read first)', kind: 'text', placeholder: '.claude/connector-cards/ghl.md', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'retriever', label: 'Retriever', group: 'Tools and data', icon: 'Database', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Looks up matching documents from a knowledge store.',
-    fields: [{ key: 'store', label: 'Knowledge store', kind: 'text', placeholder: 'customers/<slug>/objections.md' }, { key: 'k', label: 'How many results', kind: 'number' }] },
+    fields: [{ key: 'store', label: 'Knowledge store', kind: 'text', placeholder: 'customers/<slug>/objections.md', required: true }, { key: 'k', label: 'How many results', kind: 'number' }] },
   { type: 'http', label: 'HTTP', group: 'Tools and data', icon: 'Globe', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Calls a web address (API) directly.',
-    fields: [{ key: 'method', label: 'Method', kind: 'select', options: ['GET', 'POST', 'PUT', 'DELETE'] }, { key: 'url', label: 'URL', kind: 'text' }] },
+    fields: [{ key: 'method', label: 'Method', kind: 'select', options: ['GET', 'POST', 'PUT', 'DELETE'] }, { key: 'url', label: 'URL', kind: 'text', required: true }] },
   { type: 'condition', label: 'Condition', group: 'Logic', icon: 'GitBranch', color: '#d97706', inputs: ['in'], outputs: ['yes', 'no'], source: 'agentflow',
     what: 'If/else on a rule you write. Yes goes one way, no the other.',
-    fields: [{ key: 'rule', label: 'If', kind: 'text', placeholder: 'score >= 0.9' }] },
+    fields: [{ key: 'rule', label: 'If', kind: 'text', placeholder: 'score >= 0.9', required: true }] },
   { type: 'conditionAgent', label: 'Condition Agent', group: 'Logic', icon: 'Split', color: '#d97706', inputs: ['in'], outputs: ['a', 'b', 'c', 'd', 'e'], source: 'agentflow',
     what: 'A model reads the input and picks one of up to 5 paths (like which function a task is).',
-    fields: [model, { key: 'paths', label: 'Paths (a to e)', kind: 'text', placeholder: 'lead_follow_up, website, ads, reporting, customer_update' }] },
+    fields: [model, { key: 'paths', label: 'Paths (a to e)', kind: 'text', placeholder: 'lead_follow_up, website, ads, reporting, customer_update', required: true }] },
   { type: 'iteration', label: 'Iteration', group: 'Logic', icon: 'Repeat', color: '#d97706', inputs: ['in'], outputs: ['each', 'done'], source: 'agentflow',
     what: 'Runs the next steps once for every item in a list.',
-    fields: [{ key: 'list', label: 'List to go through', kind: 'text', placeholder: 'test cases' }] },
+    fields: [{ key: 'list', label: 'List to go through', kind: 'text', placeholder: 'test cases', required: true }] },
   { type: 'loop', label: 'Loop', group: 'Logic', icon: 'RotateCcw', color: '#d97706', inputs: ['in'], outputs: ['again', 'stop'], source: 'agentflow',
     what: 'Sends the flow back to an earlier step, up to a set number of times. Your hloop node.',
-    fields: [{ key: 'max', label: 'Max rounds', kind: 'number' }, { key: 'back_to', label: 'Back to step', kind: 'text' }] },
+    fields: [{ key: 'max', label: 'Max rounds', kind: 'number', required: true }, { key: 'back_to', label: 'Back to step', kind: 'text', required: true }] },
   { type: 'humanInput', label: 'Human Input', group: 'People', icon: 'UserCheck', color: '#dc2626', inputs: ['in'], outputs: ['yes', 'no'], source: 'agentflow',
     what: 'Stops and waits for a person to approve or reject. Required before spend, send or delete.',
-    fields: [{ key: 'who', label: 'Who approves', kind: 'text', placeholder: 'Alex' }, { key: 'question', label: 'Question', kind: 'text' }] },
+    fields: [{ key: 'who', label: 'Who approves', kind: 'text', placeholder: 'Alex', required: true }, { key: 'question', label: 'Question', kind: 'text', required: true }] },
   { type: 'directReply', label: 'Direct Reply', group: 'Start and end', icon: 'MessageSquare', color: '#16a34a', inputs: ['in'], outputs: [], source: 'agentflow',
     what: 'Sends a fixed answer back and ends the flow.',
-    fields: [{ key: 'text', label: 'Reply', kind: 'textarea' }] },
+    fields: [{ key: 'text', label: 'Reply', kind: 'textarea', required: true }] },
   { type: 'customFunction', label: 'Custom Function', group: 'Tools and data', icon: 'Code', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs your own small script, like a scorer or a calculator.',
-    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py' }] },
+    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py', required: true }] },
   { type: 'executeFlow', label: 'Execute Flow', group: 'Tools and data', icon: 'Workflow', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs another saved flow as one step.',
-    fields: [{ key: 'flow', label: 'Flow name', kind: 'text' }] },
+    fields: [{ key: 'flow', label: 'Flow name', kind: 'text', required: true }] },
   { type: 'stickyNote', label: 'Sticky Note', group: 'Notes', icon: 'StickyNote', color: '#ca8a04', inputs: [], outputs: [], source: 'agentflow',
     what: 'A note on the canvas. Does nothing when the flow runs.',
     fields: [{ key: 'text', label: 'Note', kind: 'textarea' }] },
   { type: 'judge', label: 'Judge', group: 'Improve (GEPA)', icon: 'Gavel', color: '#0d9488', inputs: ['in'], outputs: ['score'], source: 'alex',
     what: 'Grades an output: a score 0 to 1 plus written feedback on what was wrong.',
-    fields: [{ key: 'checks', label: 'Rule checks', kind: 'text', placeholder: 'uses first name, no price, under 40 words, asks a question' }, { key: 'judge', label: 'Model judge', kind: 'select', options: ['rules only', 'rules + claude'] }] },
+    fields: [{ key: 'checks', label: 'Rule checks', kind: 'text', placeholder: 'uses first name, no price, under 40 words, asks a question', required: true }, { key: 'judge', label: 'Model judge', kind: 'select', options: ['rules only', 'rules + claude'] }] },
   { type: 'compare', label: 'Compare', group: 'Improve (GEPA)', icon: 'Scale', color: '#0d9488', inputs: ['new', 'current'], outputs: ['better', 'not better'], source: 'alex',
     what: 'Compares the new prompt with the current one case by case. Keeps any version that is best on at least one case.',
-    fields: [{ key: 'on', label: 'Compare on', kind: 'select', options: ['held-out cases', 'all cases'] }] },
+    fields: [{ key: 'on', label: 'Compare on', kind: 'select', options: ['held-out cases', 'all cases'], required: true }] },
   { type: 'promote', label: 'Promote', group: 'Improve (GEPA)', icon: 'Rocket', color: '#0d9488', inputs: ['in'], outputs: [], source: 'alex',
     what: 'Makes the winning prompt live and saves the old one. Must come after a Human Input yes.',
-    fields: [{ key: 'target', label: 'Live prompt file', kind: 'text', placeholder: 'gepa/jobs/<job>/prompt.md' }] },
+    fields: [{ key: 'target', label: 'Live prompt file', kind: 'text', placeholder: 'gepa/jobs/<job>/prompt.md', required: true }] },
   { type: 'routeCustomer', label: 'Route to customer', group: 'Logic', icon: 'Route', color: '#d97706', inputs: ['in'], outputs: ['found', 'unknown'], source: 'alex',
     what: 'Finds which customer a task is for (location ID, account ID, website or name) and attaches their IDs. Never guesses.',
-    fields: [{ key: 'by', label: 'Match by', kind: 'text', placeholder: 'location_id, ids, website, name' }] },
+    fields: [{ key: 'by', label: 'Match by', kind: 'text', placeholder: 'location_id, ids, website, name', required: true }] },
 ];
 
 export const KIT_BY_TYPE: Record<string, NodeKind> = Object.fromEntries(KIT.map((k) => [k.type, k]));
@@ -81,32 +81,104 @@ export type FlowNode = { id: string; type: 'kit'; position: { x: number; y: numb
 export type FlowEdge = { id: string; source: string; target: string; sourceHandle?: string | null; targetHandle?: string | null; label?: string };
 export type Flow = { name: string; nodes: FlowNode[]; edges: FlowEdge[] };
 
-/** Plain-English problems that would make the flow unsafe or broken. Empty list = OK. */
+export const APPROVAL_EFFECTS = ['spend', 'delete', 'send_to_customer', 'deploy'];
+export const MAX_LOOP = 20;
+const GUARDS_BEFORE_AGENT = ['routeCustomer', 'humanInput'];
+
+/**
+ * Plain-English problems that make the flow unsafe or broken. Empty list = OK.
+ * Checks: one Start; every node reachable from Start; every input and output connected; required settings filled;
+ * every cycle passes an Iteration or a Loop with 1 to 20 rounds; Promote and any spend/delete/send-to-customer/deploy
+ * Tool only reachable through a Human Input "yes" (no path around it, and never from a "no"); agents with tools
+ * only after Route to customer or Human Input; every Tool names the connector card it reads first.
+ */
 export function checkFlow(flow: Flow): string[] {
   const out: string[] = [];
-  const kind = (id: string) => flow.nodes.find((n) => n.id === id)?.data.kind;
-  const name = (id: string) => flow.nodes.find((n) => n.id === id)?.data.label ?? id;
-  const starts = flow.nodes.filter((n) => n.data.kind === 'start');
+  const byId = new Map(flow.nodes.map((n) => [n.id, n]));
+  const kindOf = (id: string) => byId.get(id)?.data.kind ?? '';
+  const name = (id: string) => byId.get(id)?.data.label ?? id;
+  const live = flow.nodes.filter((n) => n.data.kind !== 'stickyNote');
+  const starts = live.filter((n) => n.data.kind === 'start');
   if (starts.length !== 1) out.push(`Needs exactly one Start node (has ${starts.length}).`);
-  for (const n of flow.nodes) {
+
+  for (const e of flow.edges) {
+    if (!byId.has(e.source) || !byId.has(e.target)) { out.push(`Arrow ${e.id} points at a missing node.`); continue; }
+    const s = KIT_BY_TYPE[kindOf(e.source)], t = KIT_BY_TYPE[kindOf(e.target)];
+    if (s && s.outputs.length > 1 && (!e.sourceHandle || !s.outputs.includes(e.sourceHandle))) out.push(`${name(e.source)}: arrow must leave from a named output (${s.outputs.join(', ')}).`);
+    if (t && t.inputs.length > 1 && (!e.targetHandle || !t.inputs.includes(e.targetHandle))) out.push(`${name(e.target)}: arrow must enter a named input (${t.inputs.join(', ')}).`);
+  }
+  const edges = flow.edges.filter((e) => byId.has(e.source) && byId.has(e.target));
+
+  for (const n of live) {
     const k = KIT_BY_TYPE[n.data.kind];
     if (!k) { out.push(`${n.data.label}: unknown node type ${n.data.kind}.`); continue; }
-    if (k.type === 'stickyNote') continue;
-    const into = flow.edges.filter((e) => e.target === n.id);
-    const from = flow.edges.filter((e) => e.source === n.id);
-    if (k.inputs.length && !into.length) out.push(`${n.data.label}: nothing flows into it.`);
+    const into = edges.filter((e) => e.target === n.id), from = edges.filter((e) => e.source === n.id);
+    if (k.inputs.length === 1 && !into.length) out.push(`${n.data.label}: nothing flows into it.`);
+    for (const h of k.inputs.length > 1 ? k.inputs : []) if (!into.some((e) => e.targetHandle === h)) out.push(`${n.data.label}: input "${h}" is not connected.`);
     if (k.outputs.length && !from.length) out.push(`${n.data.label}: goes nowhere.`);
-    if (k.type === 'loop' && !(Number(n.data.values.max) > 0)) out.push(`${n.data.label}: set Max rounds so it cannot run forever.`);
-    if (k.type === 'promote' && !into.some((e) => kind(e.source) === 'humanInput' && (e.sourceHandle ?? 'yes') === 'yes'))
-      out.push(`${n.data.label}: must come right after a Human Input "yes".`);
-    if (k.type === 'tool' && !n.data.values.card) out.push(`${n.data.label}: name the connector card it must read first.`);
+    const missing = k.fields.filter((f) => f.required && !String(n.data.values[f.key] ?? '').trim()).map((f) => f.label);
+    if (missing.length) out.push(`${n.data.label}: fill in ${missing.join(', ')}.`);
+    if (k.type === 'loop') {
+      const max = Number(n.data.values.max);
+      if (!Number.isInteger(max) || max < 1 || max > MAX_LOOP) out.push(`${n.data.label}: Max rounds must be a whole number from 1 to ${MAX_LOOP}.`);
+    }
   }
-  for (const e of flow.edges) {
-    if (!kind(e.source) || !kind(e.target)) out.push(`Arrow ${e.id} points at a missing node.`);
-    const src = KIT_BY_TYPE[kind(e.source) ?? ''];
-    if (src && src.outputs.length > 1 && e.sourceHandle && !src.outputs.includes(e.sourceHandle)) out.push(`${name(e.source)}: no output called ${e.sourceHandle}.`);
+
+  // Reachability from Start, optionally refusing to pass certain nodes or edges.
+  const start = starts[0]?.id;
+  const reach = (blockNode: (id: string) => boolean, blockEdge: (e: FlowEdge) => boolean = () => false) => {
+    const seen = new Set<string>();
+    if (!start) return seen;
+    const stack = [start];
+    while (stack.length) {
+      const id = stack.pop()!;
+      if (seen.has(id)) continue;
+      seen.add(id);
+      if (id !== start && blockNode(id)) continue;
+      for (const e of edges) if (e.source === id && !blockEdge(e)) stack.push(e.target);
+    }
+    return seen;
+  };
+  const all = reach(() => false);
+  for (const n of live) if (start && !all.has(n.id)) out.push(`${n.data.label}: cannot be reached from Start.`);
+
+  // Approval: these nodes may only be reached through a Human Input "yes".
+  const needsYes = live.filter((n) => n.data.kind === 'promote' || (n.data.kind === 'tool' && APPROVAL_EFFECTS.includes(n.data.values.effect ?? '')));
+  const aroundYes = reach(() => false, (e) => kindOf(e.source) === 'humanInput' && (e.sourceHandle ?? '') === 'yes');
+  for (const n of needsYes) if (aroundYes.has(n.id)) out.push(`${n.data.label}: there is a path to it that skips Alex's "yes".`);
+  const fromNo = new Set<string>();
+  for (const e of edges) if (kindOf(e.source) === 'humanInput' && e.sourceHandle === 'no') {
+    const stack = [e.target];
+    while (stack.length) { const id = stack.pop()!; if (fromNo.has(id)) continue; fromNo.add(id); for (const x of edges) if (x.source === id) stack.push(x.target); }
   }
-  return out;
+  for (const n of needsYes) if (fromNo.has(n.id)) out.push(`${n.data.label}: a Human Input "no" leads to it.`);
+
+  // Agents that can use tools only after the customer is fixed or a person approved.
+  const unguarded = reach((id) => GUARDS_BEFORE_AGENT.includes(kindOf(id)));
+  for (const n of live) if (n.data.kind === 'agent' && (n.data.values.tools ?? '').trim() && unguarded.has(n.id))
+    out.push(`${n.data.label}: put Route to customer or a Human Input before an agent with tools.`);
+
+  // Cycles: take out every Iteration and every Loop with a 1 to 20 limit. Any cycle still left could run forever.
+  const bounded = (id: string) => kindOf(id) === 'iteration' || (kindOf(id) === 'loop' && Number(byId.get(id)!.data.values.max) >= 1 && Number(byId.get(id)!.data.values.max) <= MAX_LOOP);
+  const rest = edges.filter((e) => !bounded(e.source) && !bounded(e.target));
+  let index = 0;
+  const idx = new Map<string, number>(), low = new Map<string, number>(), onStack = new Set<string>(), st: string[] = [];
+  const strong = (v: string) => {
+    idx.set(v, index); low.set(v, index); index++; st.push(v); onStack.add(v);
+    for (const x of rest) if (x.source === v) {
+      if (!idx.has(x.target)) { strong(x.target); low.set(v, Math.min(low.get(v)!, low.get(x.target)!)); }
+      else if (onStack.has(x.target)) low.set(v, Math.min(low.get(v)!, idx.get(x.target)!));
+    }
+    if (low.get(v) === idx.get(v)) {
+      const comp: string[] = [];
+      let w: string;
+      do { w = st.pop()!; onStack.delete(w); comp.push(w); } while (w !== v);
+      if (comp.length > 1 || rest.some((x) => x.source === v && x.target === v))
+        out.push(`A loop through ${comp.map(name).join(' → ')} has no Iteration or Loop limit, so it could run forever.`);
+    }
+  };
+  for (const node of flow.nodes) if (!bounded(node.id) && !idx.has(node.id)) strong(node.id);
+  return [...new Set(out)];
 }
 
 let seq = 0;
@@ -114,28 +186,34 @@ function n(kind: string, label: string, x: number, y: number, values: Record<str
   return { id: `${kind}-${++seq}`, type: 'kit', position: { x, y }, data: { kind, label, values } };
 }
 function e(a: FlowNode, b: FlowNode, sourceHandle?: string, targetHandle?: string, label?: string): FlowEdge {
-  return { id: `e-${a.id}-${b.id}-${sourceHandle ?? 'out'}`, source: a.id, target: b.id, sourceHandle: sourceHandle ?? null, targetHandle: targetHandle ?? null, label };
+  return { id: `e-${a.id}-${b.id}-${sourceHandle ?? 'out'}-${targetHandle ?? 'in'}`, source: a.id, target: b.id, sourceHandle: sourceHandle ?? null, targetHandle: targetHandle ?? null, label };
 }
 
 export function gepaPreset(): Flow {
   seq = 0;
   const start = n('start', 'Test set (20 to 50 real cases)', 0, 0, { trigger: 'schedule', inputs: 'job, testset.jsonl' });
-  const each = n('iteration', 'Each training case', 0, 150, { list: 'train cases' });
-  const run = n('llm', 'Run candidate prompt', -260, 300, { model: 'claude-haiku-5-5', prompt: 'candidates/cN.md' });
-  const judge = n('judge', 'Judge: score + feedback', -260, 460, { checks: 'uses first name, no price, under 40 words, asks a question', judge: 'rules only' });
-  const reflect = n('llm', 'Reflect: rewrite the prompt from the feedback', 260, 300, { model: 'claude-sonnet-5-5', prompt: 'Fix what the judge said; keep what worked.' });
-  const compare = n('compare', 'Compare new vs current', 260, 460, { on: 'held-out cases' });
-  const loop = n('loop', 'Another round?', 560, 460, { max: '5', back_to: 'Each training case' });
-  const ask = n('humanInput', 'Alex approves?', 260, 620, { who: 'Alex', question: 'Make this prompt live?' });
-  const promote = n('promote', 'Promote to live', 260, 780, { target: 'gepa/jobs/<job>/prompt.md' });
-  const stop = n('directReply', 'Keep current prompt', 560, 620, { text: 'No change made.' });
-  const note = n('stickyNote', 'How it works', -560, 0, { text: 'Same loop as agency-os-kit/gepa/gepa.py. Run it there: gepa.py loop --job <job>. Nothing goes live without Alex.' });
+  const each = n('iteration', 'Each training case', -280, 150, { list: 'train cases' });
+  const run = n('llm', 'Run best prompt so far', -560, 300, { model: 'claude-haiku-5-5', prompt: 'candidates/cN.md' });
+  const judge = n('judge', 'Judge: score + feedback', -560, 460, { checks: 'uses first name, no price, under 40 words, asks a question', judge: 'rules only' });
+  const reflect = n('llm', 'Reflect: rewrite from training feedback', -280, 300, { model: 'claude-sonnet-5-5', prompt: 'Fix what the judge said; keep what worked. Training feedback only.' });
+  const runNew = n('llm', 'Run new prompt on held-out cases', -280, 460, { model: 'claude-haiku-5-5', prompt: 'candidates/new.md' });
+  const judgeNew = n('judge', 'Judge new prompt', -280, 620, { checks: 'same checks', judge: 'rules only' });
+  const runLive = n('llm', 'Run live prompt on held-out cases', 280, 300, { model: 'claude-haiku-5-5', prompt: 'prompt.md (live)' });
+  const judgeLive = n('judge', 'Judge live prompt', 280, 460, { checks: 'same checks', judge: 'rules only' });
+  const compare = n('compare', 'Compare new vs live', 0, 780, { on: 'held-out cases' });
+  const loop = n('loop', 'Another round?', -420, 940, { max: '5', back_to: 'Reflect' });
+  const ask = n('humanInput', 'Alex approves?', 160, 940, { who: 'Alex', question: 'Make this prompt live?' });
+  const promote = n('promote', 'Promote to live', 160, 1100, { target: 'gepa/jobs/<job>/prompt.md' });
+  const stop = n('directReply', 'Keep current prompt', -120, 1100, { text: 'No change made.' });
+  const note = n('stickyNote', 'How it works', -900, 0, { text: 'Same loop as agency-os-kit/gepa/gepa.py. Run it there: gepa.py loop --job <job>. Nothing goes live without Alex.' });
   return {
     name: 'GEPA feedback loop',
-    nodes: [start, each, run, judge, reflect, compare, loop, ask, promote, stop, note],
+    nodes: [start, each, run, judge, reflect, runNew, judgeNew, runLive, judgeLive, compare, loop, ask, promote, stop, note],
     edges: [e(start, each), e(each, run, 'each'), e(run, judge), e(judge, each, 'score', undefined, 'next case'), e(each, reflect, 'done'),
-      e(reflect, compare, undefined, 'new'), e(compare, ask, 'better'), e(compare, loop, 'not better'), e(loop, reflect, 'again'),
-      e(loop, stop, 'stop'), e(ask, promote, 'yes'), e(ask, stop, 'no')],
+      e(reflect, runNew), e(runNew, judgeNew), e(judgeNew, compare, 'score', 'new'),
+      e(start, runLive), e(runLive, judgeLive), e(judgeLive, compare, 'score', 'current'),
+      e(compare, ask, 'better'), e(compare, loop, 'not better'), e(loop, reflect, 'again'), e(loop, stop, 'stop'),
+      e(ask, promote, 'yes'), e(ask, stop, 'no')],
   };
 }
 
@@ -145,19 +223,21 @@ export function routingPreset(): Flow {
   const who = n('routeCustomer', 'Which customer?', 0, 150, { by: 'location_id, ids, website, name' });
   const unknown = n('directReply', 'Stop: customer unclear', 320, 150, { text: 'Could not tell which customer. Add the location ID.' });
   const fn = n('conditionAgent', 'Which function?', 0, 300, { model: 'claude-haiku-5-5', paths: 'lead_follow_up, website, ads, reporting, customer_update' });
-  const sales = n('agent', 'Sales agent (lead follow-up)', -520, 470, { tools: 'ghl.conversations, ghl.contacts', instructions: 'customers/<slug>/AGENTS.md' });
-  const site = n('agent', 'Hermes site builder (website)', -260, 470, { tools: 'github, cloudflare' });
-  const ads = n('agent', 'Ads optimizer (ads)', 0, 470, { tools: 'meta.ads' });
-  const rep = n('agent', 'Reporter (reporting + updates)', 260, 470, { tools: 'dashboard, ghl.conversations' });
-  const risky = n('condition', 'Spend, send or delete?', 0, 630, { rule: 'needs_alex_yes == true' });
-  const ask = n('humanInput', 'Alex approves?', 260, 780, { who: 'Alex' });
-  const tool = n('tool', 'Do it with the customer\'s IDs', 0, 930, { tool: 'from the plan', card: 'connector card for that tool' });
-  const no = n('directReply', 'Not approved: saved as draft', 520, 930, { text: 'Saved as a draft for Alex.' });
+  const sales = n('agent', 'Sales agent (lead follow-up)', -520, 470, { model: 'claude-sonnet-5-5', tools: 'ghl.conversations, ghl.contacts', instructions: 'customers/<slug>/AGENTS.md' });
+  const site = n('agent', 'Hermes site builder (website)', -260, 470, { model: 'claude-sonnet-5-5', tools: 'github, cloudflare', instructions: 'customers/<slug>/AGENTS.md' });
+  const ads = n('agent', 'Ads optimizer (ads)', 0, 470, { model: 'claude-sonnet-5-5', tools: 'meta.ads', instructions: 'customers/<slug>/AGENTS.md' });
+  const rep = n('agent', 'Reporter (reporting + updates)', 260, 470, { model: 'claude-sonnet-5-5', tools: 'dashboard, ghl.customer_messages', instructions: 'customers/<slug>/AGENTS.md' });
+  const risky = n('condition', 'Spend, send to customer, delete or deploy?', 0, 630, { rule: 'plan.requires_approval_for is not empty' });
+  const ask = n('humanInput', 'Alex approves?', 260, 780, { who: 'Alex', question: 'Approve this action for this customer?' });
+  const safe = n('tool', 'Do the safe step (read, write, text a lead)', -200, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'write' });
+  const approved = n('tool', 'Do the approved step', 260, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'spend' });
+  const no = n('directReply', 'Not approved: saved as draft', 560, 930, { text: 'Saved as a draft for Alex.' });
   const done = n('directReply', 'Report: done, proof, next step', 0, 1080, { text: 'What was done, the proof, and what is next.' });
   return {
     name: 'Lead routing (if/else)',
-    nodes: [start, who, unknown, fn, sales, site, ads, rep, risky, ask, tool, no, done],
+    nodes: [start, who, unknown, fn, sales, site, ads, rep, risky, ask, safe, approved, no, done],
     edges: [e(start, who), e(who, fn, 'found'), e(who, unknown, 'unknown'), e(fn, sales, 'a'), e(fn, site, 'b'), e(fn, ads, 'c'), e(fn, rep, 'd'), e(fn, rep, 'e'),
-      e(sales, risky), e(site, risky), e(ads, risky), e(rep, risky), e(risky, ask, 'yes'), e(risky, tool, 'no'), e(ask, tool, 'yes'), e(ask, no, 'no'), e(tool, done)],
+      e(sales, risky), e(site, risky), e(ads, risky), e(rep, risky), e(risky, ask, 'yes'), e(risky, safe, 'no'), e(ask, approved, 'yes'), e(ask, no, 'no'),
+      e(safe, done), e(approved, done)],
   };
 }

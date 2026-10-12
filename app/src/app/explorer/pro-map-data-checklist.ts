@@ -87,7 +87,7 @@ const SECTIONS: Section[] = [
     "id": "r1",
     "label": "Customer router: incoming task picks the customer",
     "status": "partial",
-    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/route.py picks the customer by location ID, account ID, website or name and never guesses. Not wired to a live intake yet.",
+    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). route.py matches exact slugs, location IDs, account IDs, website hosts or names; conflicting or missing signals return needs_customer, incomplete folders return customer_not_ready. Not wired to a live intake.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -114,7 +114,7 @@ const SECTIONS: Section[] = [
     "id": "r4",
     "label": "Tool router: which tool for which job",
     "status": "partial",
-    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Each function lists its tools; spend, send and delete words need your yes.",
+    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). bots.json lists each tool and what it can do; plans list the spend/delete/send-to-customer/deploy effects that need your yes. Not enforced at run time yet.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -173,8 +173,8 @@ const SECTIONS: Section[] = [
    {
     "id": "c6",
     "label": "Grade each customer folder (same A–F rubric)",
-    "status": "ok",
-    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). tools/score_customer.py grades A to F with the exact fix list. Sample scores A, blank template F.",
+    "status": "partial",
+    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). score_customer.py grades FOLDER COMPLETENESS A to F with blockers (missing IDs, unknown bots, forbidden tools, missing rules, contradicting numbers). Proven on sample folders only, not a real customer.",
     "sources": []
    }
   ]
@@ -227,8 +227,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n5",
     "label": "Promote node (needs your yes)",
-    "status": "ok",
-    "why": "Flow Builder tab: Promote node; the flow check refuses it unless it follows a Human Input yes.",
+    "status": "partial",
+    "why": "Flow Builder Promote node; the check refuses any path to it that skips a Human Input \"yes\". Draws and checks only; it does not run.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -237,8 +237,8 @@ const SECTIONS: Section[] = [
    {
     "id": "n6",
     "label": "Loop node",
-    "status": "ok",
-    "why": "Flow Builder tab: Loop node; the flow check requires Max rounds.",
+    "status": "partial",
+    "why": "Flow Builder Loop node; the check requires 1 to 20 rounds and flags any cycle without a limit. Draws and checks only.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -304,8 +304,8 @@ const SECTIONS: Section[] = [
    {
     "id": "p5",
     "label": "Promote only with your yes",
-    "status": "ok",
-    "why": "Your rules and skills already change only after your approval.",
+    "status": "partial",
+    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). gepa.py promote needs --yes, holdout cases and a win over the live prompt. Your rule says the same, but no real prompt has been promoted this way yet.",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -376,8 +376,8 @@ const SECTIONS: Section[] = [
    {
     "id": "d4",
     "label": "Split test: instant form vs website conversion",
-    "status": "ok",
-    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). Instant form vs website: reply rate, lead-to-sale, cost per replied lead and a plain verdict on whether the gap is real.",
+    "status": "partial",
+    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). Instant form vs website: reply rate, lead-to-sale, cost per replied lead, significance test only after 100+ leads and 10+ sales per side. Tested on SAMPLE numbers only.",
     "sources": []
    },
    {
@@ -411,15 +411,15 @@ const SECTIONS: Section[] = [
    {
     "id": "x3",
     "label": "Customer-facing views show results only, never prompts or methods",
-    "status": "ok",
-    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). dashboard.py --client shows results only: no grades, bots, routing or methods. Tested.",
+    "status": "partial",
+    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). dashboard.py --client and update drafts show results and customer_notes.md only (tested). Not yet used with a real customer.",
     "sources": []
    },
    {
     "id": "x4",
     "label": "Keys only in 1Password / Composio, never in repos or chats",
-    "status": "ok",
-    "why": "Already your rule.",
+    "status": "partial",
+    "why": "Your rule: keys only in 1Password / Composio. Written as a rule; enforcement not verified across every agent.",
     "sources": []
    }
   ]
@@ -427,7 +427,7 @@ const SECTIONS: Section[] = [
 ];
 
 const nodes: ProNode[] = [{
-  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "18 done, 18 partly, 4 missing, 1 not checked. Updated 2026-10-12 after the agency-os-kit build.",
+  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "11 done, 25 partly, 4 missing, 1 not checked. Updated 2026-10-12 after Codex round 1.",
   why: 'Everything needed to run each customer\'s whole flow: guardrails, routing, customer repo, node kit, feedback loop, schedules, dashboard and privacy. Green = done, orange = partly, pink = missing, gray = not checked.',
   status: 'reference', sources: [], x: KX - 10, y: -110, w: COLS * SP + 20, h: 60, band: true,
 }];
