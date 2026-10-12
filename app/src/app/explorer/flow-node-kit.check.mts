@@ -52,4 +52,17 @@ f = routingPreset(); f.nodes.find((n) => n.data.label.startsWith('Do the safe'))
 assert(has(f, 'meta.ads cannot delete'), 'tool effect it cannot do is flagged');
 f = routingPreset(); f.nodes.find((n) => n.data.label.startsWith('Sales agent'))!.data.values.tools = 'mystery.tool';
 assert(has(f, 'unknown tool'), 'unknown agent tool is flagged');
+// Codex round 4
+const addAfter = (f: Flow, kind: string, label: string, values: Record<string, string>) => {
+  const nid = `x-${kind}`; f.nodes.push({ id: nid, type: 'kit', position: { x: 0, y: 0 }, data: { kind, label, values } });
+  const end = `end-${kind}`; f.nodes.push({ id: end, type: 'kit', position: { x: 0, y: 0 }, data: { kind: 'directReply', label: 'End', values: { text: 'x' } } });
+  f.edges.push({ id: `a-${nid}`, source: id(f, 'routeCustomer'), target: nid, sourceHandle: 'found' }, { id: `b-${nid}`, source: nid, target: end });
+  return f;
+};
+f = addAfter(routingPreset(), 'tool', 'Mystery', { tool: 'mystery.api', card: 'x.md', effect: 'read' });
+assert(has(f, 'unknown tool mystery.api') && has(f, 'skips Alex'), 'unknown standalone tool is flagged and gated');
+f = addAfter(routingPreset(), 'executeFlow', 'Run ghost', { flow: 'Ghost flow', effect: 'read' });
+assert(has(f, 'no saved flow called') && has(f, 'skips Alex'), 'nonexistent nested flow is flagged and gated');
+f = addAfter(routingPreset(), 'executeFlow', 'Run routing', { flow: 'Lead routing (if/else)', effect: 'read' });
+assert(has(f, 'the flow it runs can'), 'nested flow that can spend must say so');
 if (fails) process.exit(1);

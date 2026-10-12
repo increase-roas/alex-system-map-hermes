@@ -144,8 +144,19 @@ export function checkFlow(flow: Flow): string[] {
       const gated = effects.filter((x) => APPROVAL_EFFECTS.includes(x));
       if (gated.length && !gated.includes(n.data.values.effect ?? '')) out.push(`${n.data.label}: says "${n.data.values.effect}" but its tools can ${gated.join(', ')}. Narrow them (tool:read) or set the effect.`);
     }
-    if (k.type === 'tool' && TOOL_EFFECTS[n.data.values.tool ?? ''] && n.data.values.effect && !TOOL_EFFECTS[n.data.values.tool!].includes(n.data.values.effect))
-      out.push(`${n.data.label}: ${n.data.values.tool} cannot ${n.data.values.effect}.`);
+    if (k.type === 'tool' && n.data.values.tool) {
+      const can = TOOL_EFFECTS[n.data.values.tool];
+      if (!can) out.push(`${n.data.label}: unknown tool ${n.data.values.tool}; add it to the tool list (bots.json) first.`);
+      else if (n.data.values.effect && !can.includes(n.data.values.effect)) out.push(`${n.data.label}: ${n.data.values.tool} cannot ${n.data.values.effect}.`);
+    }
+    if (k.type === 'executeFlow' && n.data.values.flow) {
+      const nested = KNOWN_FLOWS[n.data.values.flow];
+      if (!nested) out.push(`${n.data.label}: no saved flow called "${n.data.values.flow}", so what it does cannot be checked.`);
+      else {
+        const gated = flowEffects(nested()).filter((x) => APPROVAL_EFFECTS.includes(x));
+        if (gated.length && !gated.includes(n.data.values.effect ?? '')) out.push(`${n.data.label}: the flow it runs can ${gated.join(', ')}; set the effect to match.`);
+      }
+    }
     if (k.type === 'http') {
       const m = n.data.values.method, eff = n.data.values.effect;
       if (m === 'DELETE' && eff !== 'delete') out.push(`${n.data.label}: a DELETE call must be marked "delete".`);
@@ -182,7 +193,9 @@ export function checkFlow(flow: Flow): string[] {
     const declared = n.data.values.effect ?? '';
     const fromTools = n.data.kind === 'agent' ? toolEffects(n.data.values.tools ?? '').effects : [];
     const http = n.data.kind === 'http' && n.data.values.method === 'DELETE' ? ['delete'] : [];
-    return [declared, ...fromTools, ...http];
+    const unknownTool = n.data.kind === 'tool' && !TOOL_EFFECTS[n.data.values.tool ?? ''] ? APPROVAL_EFFECTS : [];
+    const nestedFlow = n.data.kind === 'executeFlow' ? (KNOWN_FLOWS[n.data.values.flow ?? ''] ? flowEffects(KNOWN_FLOWS[n.data.values.flow!]()) : APPROVAL_EFFECTS) : [];
+    return [declared, ...fromTools, ...http, ...unknownTool, ...nestedFlow];
   };
   const effectful = ['tool', 'agent', 'http', 'customFunction', 'executeFlow'];
   const needsYes = live.filter((n) => n.data.kind === 'promote' || (effectful.includes(n.data.kind) && powers(n).some((x) => APPROVAL_EFFECTS.includes(x))));
@@ -295,3 +308,18 @@ export function routingPreset(): Flow {
       e(safe, done), e(approved, done)],
   };
 }
+
+/** Every effect any node in a flow can have (declared, from tools, HTTP DELETE). */
+export function flowEffects(flow: Flow): string[] {
+  const out = new Set<string>();
+  for (const n of flow.nodes) {
+    if (n.data.values.effect) out.add(n.data.values.effect);
+    if (n.data.kind === 'agent') toolEffects(n.data.values.tools ?? '').effects.forEach((e) => out.add(e));
+    if (n.data.kind === 'http' && n.data.values.method === 'DELETE') out.add('delete');
+    if (n.data.kind === 'promote') out.add('write');
+  }
+  return [...out];
+}
+
+/** Flows an Execute Flow node may run, by name. */
+export const KNOWN_FLOWS: Record<string, () => Flow> = { 'GEPA feedback loop': gepaPreset, 'Lead routing (if/else)': routingPreset };
