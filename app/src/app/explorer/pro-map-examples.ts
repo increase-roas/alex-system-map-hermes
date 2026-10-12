@@ -458,8 +458,21 @@ export const PRO_EXAMPLES: Record<string, ProExamples> = {
         code: L(
           '{ "hooks": { "PreToolUse": [',
           '  { "matcher": "mcp__ghl__.*sms.*",',
-          '    "hooks": [{ "type": "command", "command": ".claude/hooks/needs-approval.sh" }] }',
+          '    "hooks": [{ "type": "command", "command": "${CLAUDE_PROJECT_DIR}/.claude/hooks/needs-approval.sh", "onFailure": "block" }] }',
           '] } }',
+        ),
+      },
+      {
+        title: 'The approval script', tone: 'good', file: '.claude/hooks/needs-approval.sh',
+        why: 'Returns permissionDecision "ask", so Claude Code shows you the call and waits for your yes. chmod +x this file.',
+        code: L(
+          '#!/bin/bash',
+          '# PreToolUse: every matching call waits for your yes.',
+          'input=$(cat)',
+          "tool=$(echo \"$input\" | jq -r '.tool_name')",
+          "jq -n --arg t \"$tool\" '{hookSpecificOutput: {hookEventName: \"PreToolUse\",",
+          "  permissionDecision: \"ask\",",
+          "  permissionDecisionReason: (\"Client message via \" + $t + \": approve before it sends.\")}}'",
         ),
       },
       {
