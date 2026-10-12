@@ -29,7 +29,18 @@ assert(has(f, 'input "current"'), 'Compare without the live baseline is flagged'
 f = routingPreset(); f.nodes.find((n) => n.data.kind === 'tool')!.data.values.card = '';
 assert(has(f, 'Connector card'), 'Tool without card is flagged');
 f = routingPreset(); f.edges = f.edges.filter((e) => e.source !== id(f, 'routeCustomer')); f.edges.push({ id: 'skip', source: id(f, 'start'), target: id(f, 'conditionAgent') });
-assert(has(f, 'before an agent with tools'), 'agent with tools without a customer route is flagged');
+assert(has(f, 'Route to customer "found"'), 'agent with tools without a customer route is flagged');
 f = routingPreset(); f.nodes.push({ ...f.nodes[0], id: 'start-x' });
 assert(has(f, 'exactly one Start'), 'two Starts flagged');
+// Codex round 2
+f = routingPreset(); { const who = id(f, 'routeCustomer'); f.edges = f.edges.map((e) => (e.source === who && e.sourceHandle === 'found' ? { ...e, sourceHandle: 'unknown' } : e.source === who && e.sourceHandle === 'unknown' ? { ...e, sourceHandle: 'found' } : e)); }
+assert(has(f, 'Route to customer "found"'), 'agent on the "unknown" branch is flagged');
+f = routingPreset(); f.nodes.find((n) => n.data.kind === 'tool')!.data.values.effect = 'launch_rockets';
+assert(has(f, 'not a valid choice'), 'made-up effect is flagged');
+f = routingPreset(); f.nodes.find((n) => n.data.kind === 'agent')!.data.values.effect = 'spend';
+assert(has(f, "skips Alex"), 'agent that can spend before any yes is flagged');
+f = gepaPreset(); f.edges.push({ id: 'restart', source: id(f, 'llm', 1), target: id(f, 'iteration') });
+assert(has(f, 'start over forever'), 'iteration restart loop is flagged');
+f = routingPreset(); f.nodes.find((n) => n.data.kind === 'tool')!.data.values.effect = 'send_to_lead';
+assert(has(f, 'skips Alex'), 'texting leads without a yes is flagged');
 if (fails) process.exit(1);

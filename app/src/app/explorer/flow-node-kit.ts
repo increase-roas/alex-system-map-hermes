@@ -23,7 +23,7 @@ export const KIT: NodeKind[] = [
     fields: [model, { key: 'prompt', label: 'Prompt', kind: 'textarea', required: true }, { key: 'schema', label: 'JSON output fields', kind: 'text', placeholder: 'score, feedback' }] },
   { type: 'agent', label: 'Agent', group: 'AI', icon: 'Bot', color: '#2563eb', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'A model that can pick and call tools on its own until the job is done.',
-    fields: [model, { key: 'instructions', label: 'Instructions', kind: 'textarea', required: true }, { key: 'tools', label: 'Tools it may use', kind: 'text', placeholder: 'ghl.conversations, meta.ads' }] },
+    fields: [model, { key: 'instructions', label: 'Instructions', kind: 'textarea', required: true }, { key: 'tools', label: 'Tools it may use', kind: 'text', placeholder: 'ghl.conversations, meta.ads' }, { key: 'effect', label: 'Most it can do', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'tool', label: 'Tool', group: 'Tools and data', icon: 'Wrench', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs one specific tool with set inputs (no model deciding).',
     fields: [{ key: 'tool', label: 'Tool', kind: 'text', placeholder: 'GOHIGHLEVEL_LIST_CONTACTS', required: true }, { key: 'card', label: 'Connector card (read first)', kind: 'text', placeholder: '.claude/connector-cards/ghl.md', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
@@ -81,9 +81,8 @@ export type FlowNode = { id: string; type: 'kit'; position: { x: number; y: numb
 export type FlowEdge = { id: string; source: string; target: string; sourceHandle?: string | null; targetHandle?: string | null; label?: string };
 export type Flow = { name: string; nodes: FlowNode[]; edges: FlowEdge[] };
 
-export const APPROVAL_EFFECTS = ['spend', 'delete', 'send_to_customer', 'deploy'];
+export const APPROVAL_EFFECTS = ['spend', 'delete', 'send_to_customer', 'send_to_lead', 'deploy'];
 export const MAX_LOOP = 20;
-const GUARDS_BEFORE_AGENT = ['routeCustomer', 'humanInput'];
 
 /**
  * Plain-English problems that make the flow unsafe or broken. Empty list = OK.
@@ -118,11 +117,17 @@ export function checkFlow(flow: Flow): string[] {
     if (k.outputs.length && !from.length) out.push(`${n.data.label}: goes nowhere.`);
     const missing = k.fields.filter((f) => f.required && !String(n.data.values[f.key] ?? '').trim()).map((f) => f.label);
     if (missing.length) out.push(`${n.data.label}: fill in ${missing.join(', ')}.`);
+    for (const f of k.fields) {
+      const v = n.data.values[f.key];
+      if (f.kind === 'select' && v && !f.options?.includes(v)) out.push(`${n.data.label}: "${v}" is not a valid choice for ${f.label}.`);
+    }
     if (k.type === 'loop') {
       const max = Number(n.data.values.max);
       if (!Number.isInteger(max) || max < 1 || max > MAX_LOOP) out.push(`${n.data.label}: Max rounds must be a whole number from 1 to ${MAX_LOOP}.`);
     }
   }
+
+  const bounded = (id: string) => kindOf(id) === 'iteration' || (kindOf(id) === 'loop' && Number(byId.get(id)!.data.values.max) >= 1 && Number(byId.get(id)!.data.values.max) <= MAX_LOOP);
 
   // Reachability from Start, optionally refusing to pass certain nodes or edges.
   const start = starts[0]?.id;
@@ -143,7 +148,7 @@ export function checkFlow(flow: Flow): string[] {
   for (const n of live) if (start && !all.has(n.id)) out.push(`${n.data.label}: cannot be reached from Start.`);
 
   // Approval: these nodes may only be reached through a Human Input "yes".
-  const needsYes = live.filter((n) => n.data.kind === 'promote' || (n.data.kind === 'tool' && APPROVAL_EFFECTS.includes(n.data.values.effect ?? '')));
+  const needsYes = live.filter((n) => n.data.kind === 'promote' || ((n.data.kind === 'tool' || n.data.kind === 'agent') && APPROVAL_EFFECTS.includes(n.data.values.effect ?? '')));
   const aroundYes = reach(() => false, (e) => kindOf(e.source) === 'humanInput' && (e.sourceHandle ?? '') === 'yes');
   for (const n of needsYes) if (aroundYes.has(n.id)) out.push(`${n.data.label}: there is a path to it that skips Alex's "yes".`);
   const fromNo = new Set<string>();
@@ -153,13 +158,25 @@ export function checkFlow(flow: Flow): string[] {
   }
   for (const n of needsYes) if (fromNo.has(n.id)) out.push(`${n.data.label}: a Human Input "no" leads to it.`);
 
-  // Agents that can use tools only after the customer is fixed or a person approved.
-  const unguarded = reach((id) => GUARDS_BEFORE_AGENT.includes(kindOf(id)));
+  // Agents with tools only after the customer was FOUND (or a person said yes): no path may skip both.
+  const unguarded = reach(() => false, (e) => (kindOf(e.source) === 'routeCustomer' && e.sourceHandle === 'found') || (kindOf(e.source) === 'humanInput' && e.sourceHandle === 'yes'));
   for (const n of live) if (n.data.kind === 'agent' && (n.data.values.tools ?? '').trim() && unguarded.has(n.id))
-    out.push(`${n.data.label}: put Route to customer or a Human Input before an agent with tools.`);
+    out.push(`${n.data.label}: an agent with tools must come after Route to customer "found" (or a Human Input "yes") on every path.`);
+
+  // Iteration restart: going out "done" and coming back into the same Iteration restarts it forever.
+  for (const it of live.filter((n) => n.data.kind === 'iteration')) {
+    const seen = new Set<string>();
+    const stack = edges.filter((x) => x.source === it.id && x.sourceHandle === 'done').map((x) => x.target);
+    while (stack.length) {
+      const id = stack.pop()!;
+      if (seen.has(id) || (kindOf(id) === 'loop' && bounded(id))) continue;
+      seen.add(id);
+      for (const x of edges) if (x.source === id) stack.push(x.target);
+    }
+    if (seen.has(it.id)) out.push(`${it.data.label}: its "done" path leads back into it, so it would start over forever.`);
+  }
 
   // Cycles: take out every Iteration and every Loop with a 1 to 20 limit. Any cycle still left could run forever.
-  const bounded = (id: string) => kindOf(id) === 'iteration' || (kindOf(id) === 'loop' && Number(byId.get(id)!.data.values.max) >= 1 && Number(byId.get(id)!.data.values.max) <= MAX_LOOP);
   const rest = edges.filter((e) => !bounded(e.source) && !bounded(e.target));
   let index = 0;
   const idx = new Map<string, number>(), low = new Map<string, number>(), onStack = new Set<string>(), st: string[] = [];
@@ -223,13 +240,13 @@ export function routingPreset(): Flow {
   const who = n('routeCustomer', 'Which customer?', 0, 150, { by: 'location_id, ids, website, name' });
   const unknown = n('directReply', 'Stop: customer unclear', 320, 150, { text: 'Could not tell which customer. Add the location ID.' });
   const fn = n('conditionAgent', 'Which function?', 0, 300, { model: 'claude-haiku-5-5', paths: 'lead_follow_up, website, ads, reporting, customer_update' });
-  const sales = n('agent', 'Sales agent (lead follow-up)', -520, 470, { model: 'claude-sonnet-5-5', tools: 'ghl.conversations, ghl.contacts', instructions: 'customers/<slug>/AGENTS.md' });
-  const site = n('agent', 'Hermes site builder (website)', -260, 470, { model: 'claude-sonnet-5-5', tools: 'github, cloudflare', instructions: 'customers/<slug>/AGENTS.md' });
-  const ads = n('agent', 'Ads optimizer (ads)', 0, 470, { model: 'claude-sonnet-5-5', tools: 'meta.ads', instructions: 'customers/<slug>/AGENTS.md' });
-  const rep = n('agent', 'Reporter (reporting + updates)', 260, 470, { model: 'claude-sonnet-5-5', tools: 'dashboard, ghl.customer_messages', instructions: 'customers/<slug>/AGENTS.md' });
+  const sales = n('agent', 'Sales agent (lead follow-up)', -520, 470, { model: 'claude-sonnet-5-5', tools: 'ghl.conversations, ghl.contacts', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
+  const site = n('agent', 'Hermes site builder (website)', -260, 470, { model: 'claude-sonnet-5-5', tools: 'github, cloudflare', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
+  const ads = n('agent', 'Ads optimizer (ads)', 0, 470, { model: 'claude-sonnet-5-5', tools: 'meta.ads', instructions: 'customers/<slug>/AGENTS.md', effect: 'write' });
+  const rep = n('agent', 'Reporter (reporting + updates)', 260, 470, { model: 'claude-sonnet-5-5', tools: 'dashboard, ghl.customer_messages', instructions: 'customers/<slug>/AGENTS.md', effect: 'read' });
   const risky = n('condition', 'Spend, send to customer, delete or deploy?', 0, 630, { rule: 'plan.requires_approval_for is not empty' });
   const ask = n('humanInput', 'Alex approves?', 260, 780, { who: 'Alex', question: 'Approve this action for this customer?' });
-  const safe = n('tool', 'Do the safe step (read, write, text a lead)', -200, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'write' });
+  const safe = n('tool', 'Do the safe step (read or write)', -200, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'write' });
   const approved = n('tool', 'Do the approved step', 260, 930, { tool: 'from the plan', card: 'connector card for that tool', effect: 'spend' });
   const no = n('directReply', 'Not approved: saved as draft', 560, 930, { text: 'Saved as a draft for Alex.' });
   const done = n('directReply', 'Report: done, proof, next step', 0, 1080, { text: 'What was done, the proof, and what is next.' });

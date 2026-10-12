@@ -87,7 +87,7 @@ const SECTIONS: Section[] = [
     "id": "r1",
     "label": "Customer router: incoming task picks the customer",
     "status": "partial",
-    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). route.py matches exact slugs, location IDs, account IDs, website hosts or names; conflicting or missing signals return needs_customer, incomplete folders return customer_not_ready. Not wired to a live intake.",
+    "why": "agency-os-kit (after Codex round 2, 63 tests). route.py matches exact slugs, location IDs and account IDs, names only outside links, links only by their real host; conflicts return needs_customer, incomplete folders customer_not_ready. Not wired to a live intake.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -114,7 +114,7 @@ const SECTIONS: Section[] = [
     "id": "r4",
     "label": "Tool router: which tool for which job",
     "status": "partial",
-    "why": "agency-os-kit (fixed after Codex round 1, 50 tests). bots.json lists each tool and what it can do; plans list the spend/delete/send-to-customer/deploy effects that need your yes. Not enforced at run time yet.",
+    "why": "agency-os-kit (after Codex round 2, 63 tests). bots.json lists what each tool can do; plans list the spend/delete/send/deploy effects that need your yes (texting leads too, unless you pre-approve it per customer). Not enforced at run time yet.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -228,7 +228,7 @@ const SECTIONS: Section[] = [
     "id": "n5",
     "label": "Promote node (needs your yes)",
     "status": "partial",
-    "why": "Flow Builder Promote node; the check refuses any path to it that skips a Human Input \"yes\". Draws and checks only; it does not run.",
+    "why": "Flow Builder Promote node; the check flags any path to Promote, or to an agent or tool that spends, deletes, messages a customer or lead, or deploys, that skips a Human Input \"yes\". Draws and checks only.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -238,7 +238,7 @@ const SECTIONS: Section[] = [
     "id": "n6",
     "label": "Loop node",
     "status": "partial",
-    "why": "Flow Builder Loop node; the check requires 1 to 20 rounds and flags any cycle without a limit. Draws and checks only.",
+    "why": "Flow Builder Loop node; the check requires 1 to 20 rounds, flags cycles without an Iteration or bounded Loop, and flags an Iteration whose \"done\" path leads back into it. Draws and checks only.",
     "sources": [
      "https://docs.flowiseai.com/using-flowise/agentflowv2",
      "https://reactflow.dev/"
@@ -398,7 +398,7 @@ const SECTIONS: Section[] = [
     "id": "x1",
     "label": "One database for customer data (Postgres, e.g. Supabase) with per-customer access rules",
     "status": "partial",
-    "why": "Built in ~/Projects/agency-os-kit (2026-10-12, 26 tests). db/schema.sql for Supabase with per-customer locks, tested on Postgres 16. No Supabase project made (needs your yes).",
+    "why": "agency-os-kit (after Codex round 2, 63 tests). db/schema.sql for Supabase with per-customer locks and number checks; db/rls_test.sql passed 9 of 9 on Postgres 16 in Claude's workspace (Codex could not rerun it: no Postgres on the Mac). No Supabase project made.",
     "sources": []
    },
    {
@@ -427,7 +427,7 @@ const SECTIONS: Section[] = [
 ];
 
 const nodes: ProNode[] = [{
-  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "11 done, 25 partly, 4 missing, 1 not checked. Updated 2026-10-12 after Codex round 1.",
+  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "11 done, 25 partly, 4 missing, 1 not checked. Updated 2026-10-12 after Codex round 2.",
   why: 'Everything needed to run each customer\'s whole flow: guardrails, routing, customer repo, node kit, feedback loop, schedules, dashboard and privacy. Green = done, orange = partly, pink = missing, gray = not checked.',
   status: 'reference', sources: [], x: KX - 10, y: -110, w: COLS * SP + 20, h: 60, band: true,
 }];
