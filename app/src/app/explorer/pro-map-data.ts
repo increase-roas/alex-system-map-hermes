@@ -230,10 +230,15 @@ const proExtra: ProNode[] = [
   { id: 'p_result', label: 'Read the tool result', sub: 'More work, or ready to check?', status: ref, why: 'After every tool call the agent reads the result and decides: call another tool, or check the work.', sources: ['https://claude.com/blog/building-agents-with-the-claude-agent-sdk'], x: 0, y: 0 },
   { id: 'p_self', label: 'Lead does the work', sub: 'No helpers needed', status: ref, why: 'In one chat the lead usually does the work itself. Helpers are for big reading jobs or work that splits into independent parts.', sources: ['https://code.claude.com/docs/en/features-overview', ANT.effective], x: 0, y: 0 },
   { id: 'p_check', label: 'Runs the check you gave it', sub: 'Tests, build, eval', status: ref, why: 'The first verification is the check from your ask. Claude runs it, reads the result, and keeps working until it passes.', sources: ['https://code.claude.com/docs/en/best-practices'], x: 0, y: 0 },
+  { id: 'p_goal', label: 'Set the finish line', sub: '/goal or a Stop hook', status: ref, why: 'Before work starts, write what done looks like as a check. A Stop hook (or the built-in /goal command) keeps Claude working until that check passes.', sources: [ANT.hooks, 'https://code.claude.com/docs/en/best-practices'], x: 0, y: 0 },
+  { id: 'p_evidence', label: 'Evidence trail', sub: 'Proof saved for every check', status: ref, why: 'Tracing shows what happened. Evidence proves whether it worked: each check result is saved with its transcript, tool output and changed files.', sources: [ANT.evals, ANT.hooks], x: 0, y: 0 },
+  { id: 'p_testset', label: 'Test set: real jobs', sub: 'Every failure becomes a test', status: ref, why: 'Real jobs and past failures saved as test tasks. Run them all before you change a skill, prompt, model or search.', sources: [ANT.evals], x: 0, y: 0 },
+  { id: 'p_ckpt', label: 'Checkpoints', sub: 'Save before compact, reload after', status: ref, why: 'A PreCompact hook saves the handoff note; a SessionStart hook loads it back after compact, /clear or resume.', sources: [ANT.hooks, 'https://code.claude.com/docs/en/costs', ANT.harness], x: 0, y: 0 },
+  { id: 'p_toolload', label: 'Tool load check', sub: 'Turn off what you do not use', status: ref, why: 'Every connected server adds tool names to every call. /context shows the load; /mcp turns off unused servers.', sources: ['https://code.claude.com/docs/en/costs', ANT.sub], x: 0, y: 0 },
 ];
 
 const PRO_LAYOUT: Record<string, string[]> = {
-  ask: ['p_you', 'p_trigger', 'p_x9'],
+  ask: ['p_you', 'p_goal', 'p_trigger', 'p_x9'],
   ui: ['p_ui1', 'p_ui2', 'p_ui3'],
   client: ['p_lead', 'p_l1', 'p_l2', 'p_g5'],
   front: ['p_load', 'p_ptr1', 'p_ptr2', 'p_ptr3', 'p_ptr4'],
@@ -242,12 +247,12 @@ const PRO_LAYOUT: Record<string, string[]> = {
   know: ['p_k0', 'p_k1', 'p_k2'],
   gw: ['p_g1', 'p_g2', 'p_g3', 'p_g4'],
   run: ['p_t1', 'p_t2', 'p_l3', 'p_result', 'p_aftercheck'],
-  verify: ['p_check', 'p_r1', 'p_r2', 'p_r3'],
+  verify: ['p_check', 'p_evidence', 'p_r1', 'p_r2', 'p_r3'],
   report: ['p_rep1', 'p_rep2'],
   learn: ['p_e1', 'p_e5', 'p_e2', 'p_e6', 'p_e3', 'p_e4'],
 };
-const PRO_LIB = ['p_lib_which', 'p_lib_limits', 'p_small', 'p_ptr5', 'p_lib_skills', 'p_lib_memory', 'p_lib_plugins', 'p_lib_mcp', 'p_lib_settings', 'p_plan3', 'p_k3', 'p_k4', 'p_t4', 'p_t3', 'p_a4', 'p_l4', 'p_lib_evals', 'p_r4'];
-const PRO_RAILS = ['p_x1', 'p_x2', 'p_g6', 'p_x3', 'p_x4', 'p_x5', 'p_x7', 'p_x8', 'p_x10', 'p_x6'];
+const PRO_LIB = ['p_lib_which', 'p_lib_limits', 'p_small', 'p_ptr5', 'p_lib_skills', 'p_lib_memory', 'p_lib_plugins', 'p_lib_mcp', 'p_lib_settings', 'p_plan3', 'p_k3', 'p_k4', 'p_t4', 'p_t3', 'p_a4', 'p_l4', 'p_lib_evals', 'p_testset', 'p_r4'];
+const PRO_RAILS = ['p_x1', 'p_toolload', 'p_x2', 'p_g6', 'p_x3', 'p_x4', 'p_x5', 'p_x7', 'p_x8', 'p_x10', 'p_ckpt', 'p_x6'];
 
 /** Places every card by id; throws if a card is missing or left unplaced, so nothing is silently dropped. */
 function relayout(nodes: ProNode[], x0: number, rows: Record<string, string[]>, lib: string[], rails: string[],
@@ -488,6 +493,8 @@ export const PRO_EDGES: ProEdge[] = [
   link('p_band_learn', 'p_lib_memory', 'saves', 'ls', 'r'),
   link('p_band_know', 'p_lib_mcp', 'tool definitions', 'ls', 'r'),
   link('p_band_gw', 'p_lib_settings', 'rules from', 'ls', 'r'),
+  link('p_band_learn', 'p_testset', 'failures become tests', 'ls', 'r'),
+  link('p_ckpt', 'p_load', 'handoff reloads', 'ls', 'r'),
 
   // Alex: no lead, so you open each app yourself.
   flow('y_you', 'y_band_ui', 'asks'),

@@ -401,6 +401,148 @@ export const PRO_FILL: Record<string, More> = {
 };
 
 const EXTRA: Record<string, More> = {
+  p_goal: {
+    plain: [
+      'Done has to be a check, not a feeling. Good: "tests pass", "page has no sideways scroll at phone width", "Dad\'s phone only rings for numbers on the sheet". Bad: "make a good website".',
+      'Built in: type /goal with the finish line. Under the hood it is a Stop hook that has a model judge "met or not" before Claude may stop.',
+      'For every job in a project: a Stop hook in .claude/settings.json runs your check. If it fails, the hook returns decision "block" with the reason, and Claude keeps working.',
+      'Safety rails from Anthropic: the hook gets stop_hook_active so it can tell it already pushed once, and Claude Code stops after 8 forced continues in a row.',
+      'Does Claude ask you for a finish line by itself? No. Anthropic\'s rule is that YOU give it a way to check its work. If you want it to ask, add a UserPromptSubmit hook that injects "no finish line? ask for one" (our add-on, not an Anthropic feature).',
+    ],
+    pictures: [{ kind: 'flow', title: 'Finish line in action', steps: [
+      { label: 'You: goal + the check that proves it' },
+      { label: 'Claude works' },
+      { label: 'Claude tries to stop' },
+      { label: 'Stop hook runs the check', many: ['fails: blocked, reason goes back to Claude', 'passes: Claude may stop'], tone: 'bad' },
+      { label: 'Done only when the check passes', tone: 'good' },
+    ] }],
+    examples: [
+      { title: 'One-off finish line', file: 'In the chat', why: 'No setup. Lasts for this session.', code: L('/goal npm test passes and the page has no sideways scroll at 390px wide') },
+      { title: 'Project-wide finish line', tone: 'good', file: '.claude/settings.json', why: 'Runs every time Claude tries to stop.', code: L(
+        '{ "hooks": { "Stop": [{ "hooks": [',
+        '  { "type": "command", "command": ".claude/hooks/finish-line.sh" }',
+        '] }] } }') },
+      { title: 'The check', file: '.claude/hooks/finish-line.sh', why: 'stderr + exit 2 = "not done, here is why". Exit 0 lets Claude stop.', code: L(
+        '#!/bin/bash',
+        'if ! npm test >/tmp/finish.log 2>&1; then',
+        '  echo "Not done: tests fail. Last lines:" >&2',
+        '  tail -15 /tmp/finish.log >&2',
+        '  exit 2',
+        'fi',
+        'exit 0') },
+    ],
+    decide: [
+      { if: 'One job, right now', then: '/goal with the check in plain words' },
+      { if: 'Every job in this project needs the same check', then: 'Stop hook in .claude/settings.json' },
+      { if: 'The check needs judgment (tone, layout looks right)', then: 'A prompt or agent hook (type "prompt" / "agent") judges it' },
+      { if: 'Helpers do the work', then: 'SubagentStop hook checks each helper before it hands back' },
+    ],
+    myths: [{ myth: 'Claude knows when it is done.', truth: 'It stops when it thinks it is done. Without a check, "done" is a guess.', fix: 'Give every job a check, and put it in /goal or a Stop hook so Claude cannot stop until it passes.' }],
+    sources: ['https://code.claude.com/docs/en/hooks', S.best],
+  },
+  p_ckpt: {
+    plain: [
+      'No hook can open a fresh chat for you. Claude Code\'s built-in answer is auto-compact: near the limit it summarizes old history and keeps going.',
+      'PreCompact hook fires right before that (auto, or when you type /compact). Use it to write the handoff note: what is done, what is next, last test results.',
+      'SessionStart hook with matcher compact|clear|resume prints that note, and Claude Code adds it to Claude\'s context. So after a compact, a /clear or a resume, the agent picks up where it left off.',
+      'New unrelated job = /clear. It costs nothing; /compact itself is a big request. /rename first so you can /resume later.',
+      'A "# Compact instructions" section in CLAUDE.md tells the summary what to keep (for example test output and code changes).',
+      'This is the same pattern as Anthropic\'s long-running agents: a claude-progress.txt file plus git history so a fresh context gets up to speed fast.',
+    ],
+    pictures: [{ kind: 'flow', title: 'Never lose your place', steps: [
+      { label: 'Chat fills up (or you start a new job)' },
+      { label: 'PreCompact hook', note: 'writes progress.md: done, next, test results' },
+      { label: 'Compact or /clear', note: 'old history shrinks or resets' },
+      { label: 'SessionStart hook (compact|clear|resume)', note: 'prints progress.md into context' },
+      { label: 'Agent continues from the note', tone: 'good' },
+    ] }],
+    examples: [
+      { title: 'Save and reload hooks', tone: 'good', file: '.claude/settings.json', why: 'One saves before compacting, one reloads after.', code: L(
+        '{ "hooks": {',
+        '  "PreCompact": [{ "hooks": [{ "type": "command", "command": ".claude/hooks/save-handoff.sh" }] }],',
+        '  "SessionStart": [{ "matcher": "compact|clear|resume",',
+        '    "hooks": [{ "type": "command", "command": "cat work/progress.md 2>/dev/null" }] }]',
+        '} }') },
+      { title: 'The handoff note', file: 'work/progress.md', why: 'Short. Current job only. Old versions move to archive/.', code: L(
+        '# Job: Acme landing page',
+        'Done: hero, form, phone layout',
+        'Next: connect form to GHL test sub-account',
+        'Last check: npm test PASS, mobile overflow PASS',
+        'Blocker: none') },
+      { title: 'What the summary keeps', file: 'CLAUDE.md', why: 'Anthropic\'s own example.', code: L('# Compact instructions', 'When you are using compact, please focus on test output and code changes') },
+    ],
+    decide: [
+      { if: 'Same job, chat getting long', then: 'Let auto-compact run; PreCompact saves the note first' },
+      { if: 'New, unrelated job', then: '/rename, then /clear (free, clean start)' },
+      { if: 'Coming back tomorrow', then: '/resume; SessionStart reloads the note' },
+      { if: 'Not sure what is filling the chat', then: '/context' },
+    ],
+    myths: [
+      { myth: 'A hook can automatically start a new chat.', truth: 'Hooks can save, reload, block or add context. They cannot open a new chat. Auto-compact is the built-in way to keep going.', fix: 'PreCompact saves the handoff, SessionStart reloads it, and you /clear between unrelated jobs.' },
+      { myth: 'One long chat is fine because of caching.', truth: 'Caching makes repeats cheaper, not free. Stale context is paid for on every message.', fix: 'One chat per job. /clear between unrelated work.' },
+    ],
+    sources: ['https://code.claude.com/docs/en/hooks', 'https://code.claude.com/docs/en/costs', S.harness],
+  },
+  p_toolload: {
+    plain: [
+      'Every connected MCP server puts its tool names into every call. Full tool details load only when a tool is used (deferred by default).',
+      'A few servers is fine. Twenty servers with hundreds of tools is a full backpack before work starts.',
+      'Run /context to see what is taking space. Run /mcp to turn off servers you are not using in this project.',
+      'CLI tools (gh, gcloud, aws) cost nothing until they run, so Anthropic says prefer them when one exists.',
+      'Helpers get only the tools they need: list them in the subagent\'s tools field.',
+      '/usage shows which MCP servers and skills used the most, so you know what to cut.',
+    ],
+    examples: [
+      { title: 'Check and cut', file: 'Claude Code commands', why: 'The two commands Anthropic points to.', code: L('/context   what is loaded and how big', '/mcp       turn servers on or off', '/usage     which servers and skills cost the most') },
+      { title: 'A helper with only 3 tools', file: '.claude/agents/researcher.md', why: 'Fewer tools = smaller context and fewer wrong picks.', code: L('---', 'name: researcher', 'description: Reads docs and returns a short summary', 'tools: Read, Grep, WebFetch', 'model: haiku', '---') },
+    ],
+    decide: [
+      { if: 'A CLI exists for the app', then: 'Use the CLI, skip the MCP server' },
+      { if: 'A server is used in one project only', then: 'Put it in that project\'s .mcp.json, not your global config' },
+      { if: 'A helper only reads', then: 'Give it Read, Grep, Glob only' },
+    ],
+    myths: [{ myth: 'More tools makes the agent smarter.', truth: 'More tools means more names to read every call and more chances to pick the wrong one.', fix: 'Turn off what this project does not use; give helpers only their tools.' }],
+    sources: ['https://code.claude.com/docs/en/costs', S.sdkSub],
+  },
+  p_evidence: {
+    plain: [
+      'Trace vs evidence. The TRACE is the call list: who did what, how long, what it cost. EVIDENCE is the proof for one check: what was checked, pass or fail, and the files that show it.',
+      'Anthropic\'s eval words: the transcript is everything that happened; the outcome is the real end state (the booking exists in the database, not just "booked!" in the chat). You need both.',
+      'A score alone does not tell you why it failed. Evidence links the failed check to its transcript, the tool result and the changed files.',
+      'How: a Stop or SubagentStop hook gets transcript_path and last_assistant_message. It writes one line per check to evidence/<job>/checks.jsonl.',
+      'In a review you click the failed check and open exactly that transcript, diff or screenshot.',
+    ],
+    pictures: [{ kind: 'flow', title: 'From a red check to the cause in one click', steps: [
+      { label: 'Check fails' },
+      { label: 'Hook writes evidence line', note: 'check, result, transcript, diff, screenshot' },
+      { label: 'Review opens the line' },
+      { label: 'See the exact call and file that broke it', tone: 'good' },
+    ] }],
+    examples: [{ title: 'One evidence line', file: 'evidence/acme-landing/checks.jsonl', why: 'Everything needed to see why, in one place.', code: L(
+      '{"check":"mobile overflow","result":"fail",',
+      ' "transcript":"~/.claude/projects/acme/8f2c.jsonl",',
+      ' "tool_result":"page width 412px > 390px",',
+      ' "files":["src/hero.tsx"],"screenshot":"evidence/acme-landing/390.png"}') }],
+    myths: [{ myth: 'Tracing is the same as evidence.', truth: 'A trace says what ran. It does not say whether the result was right.', fix: 'Save a check result with links to its transcript and files for every check, next to the trace.' }],
+    sources: [S.evals, 'https://code.claude.com/docs/en/hooks', S.mon],
+  },
+  p_testset: {
+    plain: [
+      'Save real jobs as test tasks: the input, plus the check that says done.',
+      'Every failure you fix becomes a new test, so it can never quietly come back.',
+      'Before changing a skill, prompt, model or search setup: run the whole set. Keep the change only if it scores the same or better.',
+      'Anthropic: 20 to 50 simple tasks drawn from real failures is a great start. You do not need hundreds.',
+      'Grade with code checks first, a model judge for fuzzy things, and read the transcripts so you trust the scores.',
+      'Anything that touches clients runs against fake data (a sandbox sub-account with fake leads).',
+    ],
+    examples: [{ title: 'One test task', file: 'evals/tasks/dad-calls-filter.yaml', why: 'Came from a real failure (phone formats did not match).', code: L(
+      'input: Only ring Dad for customers on the sheet',
+      'setup: sandbox sub-account, 3 fake leads, 2 on the sheet',
+      'check: only the 2 sheet numbers route to Dad',
+      'why_added: 2026-10 phone formats mismatched (+1 vs (517))') }],
+    myths: [{ myth: 'You need hundreds of tests before evals are worth it.', truth: 'Anthropic says 20 to 50 tasks from real failures is a great start, and evals get harder to build the longer you wait.', fix: 'Start with the jobs you already check by hand and every bug you have fixed.' }],
+    sources: [S.evals],
+  },
   p_small: {
     plain: [
       'Two layers. The ARCHIVE is big and never loaded: transcripts, traces, eval results, old logs. The WORKING SET is small and loaded: CLAUDE.md, MEMORY.md, skill names, the one skill in use.',
