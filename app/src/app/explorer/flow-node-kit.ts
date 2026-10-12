@@ -53,7 +53,7 @@ export const KIT: NodeKind[] = [
     fields: [{ key: 'text', label: 'Reply', kind: 'textarea', required: true }] },
   { type: 'customFunction', label: 'Custom Function', group: 'Tools and data', icon: 'Code', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs your own small script, like a scorer or a calculator.',
-    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
+    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py --all', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'executeFlow', label: 'Execute Flow', group: 'Tools and data', icon: 'Workflow', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs another saved flow as one step.',
     fields: [{ key: 'flow', label: 'Flow name', kind: 'text', required: true }, { key: 'effect', label: 'Most the other flow can do', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
@@ -88,6 +88,17 @@ export const TOOL_EFFECTS: Record<string, string[]> = {
   'ghl.conversations': ['read', 'send_to_lead'], 'ghl.contacts': ['read', 'write', 'delete'], 'ghl.customer_messages': ['read', 'send_to_customer'],
   'meta.ads': ['read', 'write', 'spend'], github: ['read', 'write'], cloudflare: ['read', 'deploy'], dashboard: ['read'],
 };
+/** Scripts a Custom Function node may run, and what each does. Anything else is unverified and gated. */
+export const SCRIPTS: Record<string, string> = {
+  'python3 tools/score_customer.py': 'read', 'python3 tools/metrics.py': 'read', 'python3 tools/route.py': 'read',
+  'python3 tools/gate.py check': 'read', 'python3 tools/scan_customer.py': 'write', 'python3 tools/draft_update.py': 'write',
+  'python3 tools/dashboard.py': 'write', 'python3 gepa/gepa.py loop': 'write', 'python3 gepa/gepa.py report': 'read',
+};
+export function scriptEffect(command: string): string | null {
+  const c = command.trim().replace(/\s+/g, ' ');
+  const hit = Object.keys(SCRIPTS).filter((k) => c === k || c.startsWith(k + ' ')).sort((a, b) => b.length - a.length)[0];
+  return hit && !/[;&|`$<>]/.test(c) ? SCRIPTS[hit] : null;
+}
 /** Effects an agent's tool list allows. Unknown tools count as able to do anything that needs approval. */
 export function toolEffects(list: string): { effects: string[]; problems: string[] } {
   const effects = new Set<string>(), problems: string[] = [];
@@ -149,6 +160,11 @@ export function checkFlow(flow: Flow): string[] {
       if (!can) out.push(`${n.data.label}: unknown tool ${n.data.values.tool}; add it to the tool list (bots.json) first.`);
       else if (n.data.values.effect && !can.includes(n.data.values.effect)) out.push(`${n.data.label}: ${n.data.values.tool} cannot ${n.data.values.effect}.`);
     }
+    if (k.type === 'customFunction' && n.data.values.command) {
+      const eff = scriptEffect(n.data.values.command);
+      if (!eff) out.push(`${n.data.label}: "${n.data.values.command}" is not a registered script, so what it does cannot be checked.`);
+      else if (n.data.values.effect && n.data.values.effect !== eff) out.push(`${n.data.label}: that script does "${eff}", not "${n.data.values.effect}".`);
+    }
     if (k.type === 'executeFlow' && n.data.values.flow) {
       const nested = KNOWN_FLOWS[n.data.values.flow];
       if (!nested) out.push(`${n.data.label}: no saved flow called "${n.data.values.flow}", so what it does cannot be checked.`);
@@ -195,7 +211,8 @@ export function checkFlow(flow: Flow): string[] {
     const http = n.data.kind === 'http' && n.data.values.method === 'DELETE' ? ['delete'] : [];
     const unknownTool = n.data.kind === 'tool' && !TOOL_EFFECTS[n.data.values.tool ?? ''] ? APPROVAL_EFFECTS : [];
     const nestedFlow = n.data.kind === 'executeFlow' ? (KNOWN_FLOWS[n.data.values.flow ?? ''] ? flowEffects(KNOWN_FLOWS[n.data.values.flow!]()) : APPROVAL_EFFECTS) : [];
-    return [declared, ...fromTools, ...http, ...unknownTool, ...nestedFlow];
+    const script = n.data.kind === 'customFunction' ? (scriptEffect(n.data.values.command ?? '') ? [scriptEffect(n.data.values.command ?? '')!] : APPROVAL_EFFECTS) : [];
+    return [declared, ...fromTools, ...http, ...unknownTool, ...nestedFlow, ...script];
   };
   const effectful = ['tool', 'agent', 'http', 'customFunction', 'executeFlow'];
   const needsYes = live.filter((n) => n.data.kind === 'promote' || (effectful.includes(n.data.kind) && powers(n).some((x) => APPROVAL_EFFECTS.includes(x))));

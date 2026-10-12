@@ -87,7 +87,7 @@ const SECTIONS: Section[] = [
     "id": "r1",
     "label": "Customer router: incoming task picks the customer",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). route.py matches exact slugs, location IDs and account IDs, names only outside links, links only by their real host; conflicts return needs_customer, incomplete folders customer_not_ready. Not wired to a live intake.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). route.py matches exact slugs, location IDs and account IDs, names only outside links, links only by their real host; conflicts return needs_customer, incomplete folders customer_not_ready. Not wired to a live intake.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -96,7 +96,7 @@ const SECTIONS: Section[] = [
     "id": "r2",
     "label": "Function router: lead follow-up, website, ads, reporting...",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). routing.json if/else rules pick the function. Director still routes Codex missions separately.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). routing.json if/else rules pick the function. Director still routes Codex missions separately.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -105,7 +105,7 @@ const SECTIONS: Section[] = [
     "id": "r3",
     "label": "Bot router: which bot does which function",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). Each customer.json maps function to bot. Bots are still opened by hand.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). Each customer.json maps function to bot. Bots are still opened by hand.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -114,7 +114,7 @@ const SECTIONS: Section[] = [
     "id": "r4",
     "label": "Tool router: which tool for which job",
     "status": "partial",
-    "why": "agency-os-kit: bots.json says what each tool can do. tools/gate.py re-reads the bot, tools and IDs from trusted files and blocks spend, delete, messaging a customer or lead, and deploy until you approve that exact action (same IDs, tool, amount or recipient) once, within 24 hours, or record a standing approval; checks run under a file lock and every outcome is logged. Tested; not wired into the live bots, and the approval files still need the guardrail hooks to protect them.",
+    "why": "agency-os-kit: tools/gate.py re-routes the task and requires the customer's own mapping; every action must be a registered operation (bots.json) with exact arguments and this customer's account IDs, and its effect comes from the registry, not the bot. Spend, delete, messaging a customer or lead, and deploy need your yes for that exact action (once, within 24 hours) or a standing approval; file lock; every outcome logged. Tested; not wired into the live bots, and the approval files still need the guardrail hooks to protect them.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -123,7 +123,7 @@ const SECTIONS: Section[] = [
     "id": "r5",
     "label": "Customer IDs baked into each bot (Meta account, GHL sub-account, tracking IDs)",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). customer.json ids + AGENTS.md template bake them in. No real customer filled in yet.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). customer.json ids + AGENTS.md template bake them in. No real customer filled in yet.",
     "sources": [
      "https://code.claude.com/docs/en/memory"
     ]
@@ -139,42 +139,42 @@ const SECTIONS: Section[] = [
     "id": "c1",
     "label": "Agency repo with one folder per customer",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). customers/_template is ready; only a SAMPLE customer exists. Raw data stays out of git.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). customers/_template is ready; only a SAMPLE customer exists. Raw data stays out of git.",
     "sources": []
    },
    {
     "id": "c2",
     "label": "Sales numbers per customer",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). numbers/monthly.csv slot (spend, leads, replied, appointments, sales, revenue, cash). Needs real numbers.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). numbers/monthly.csv slot (spend, leads, replied, appointments, sales, revenue, cash). Needs real numbers.",
     "sources": []
    },
    {
     "id": "c3",
     "label": "Sales conversations: objections and replies",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). objections.md slot (summaries, no names). Needs real GHL conversation summaries.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). objections.md slot (summaries, no names). Needs real GHL conversation summaries.",
     "sources": []
    },
    {
     "id": "c4",
     "label": "Website data per customer",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). website.md slot. Needs each real site filled in.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). website.md slot. Needs each real site filled in.",
     "sources": []
    },
    {
     "id": "c5",
     "label": "Open gaps list per customer",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). gaps.md checklist with an updated date. Needs real gaps.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). gaps.md checklist with an updated date. Needs real gaps.",
     "sources": []
    },
    {
     "id": "c6",
     "label": "Grade each customer folder (same A–F rubric)",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). score_customer.py grades FOLDER COMPLETENESS A to F with blockers (missing IDs, unknown bots, forbidden tools, missing rules, contradicting numbers). Proven on sample folders only, not a real customer.",
+    "why": "agency-os-kit (after Codex round 5): score_customer.py grades folder completeness A to F; A needs 90+ points and no blockers (missing IDs, economics, website facts, customer notes or rules; unknown bots; forbidden tools; bad, future or repeated months; nonsense economics or update days). Proven on SAMPLE folders only.",
     "sources": []
    }
   ]
@@ -265,7 +265,7 @@ const SECTIONS: Section[] = [
     "id": "p1",
     "label": "Test set per job (20–50 real cases)",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). gepa/jobs/<job>/testset.jsonl with train and holdout cases. Only the sample speed-to-lead job (8 cases) exists.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). gepa/jobs/<job>/testset.jsonl with train and holdout cases. Only the sample speed-to-lead job (8 cases) exists.",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -275,7 +275,7 @@ const SECTIONS: Section[] = [
     "id": "p2",
     "label": "Judge that returns score + feedback text",
     "status": "ok",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). Judge returns score + written feedback (rule checks; Claude judge option written, not yet seen working).",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). Judge returns score + written feedback (rule checks; Claude judge option written, not yet seen working).",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -285,7 +285,7 @@ const SECTIONS: Section[] = [
     "id": "p3",
     "label": "Reflect step that proposes the improved prompt or skill",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). Reflect step rewrites the prompt from feedback. Seen working with the offline stub; the Claude version is written, not yet run.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). Reflect step rewrites the prompt from feedback. Seen working with the offline stub; the Claude version is written, not yet run.",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -295,7 +295,7 @@ const SECTIONS: Section[] = [
     "id": "p4",
     "label": "Keep the best candidates per test case (Pareto)",
     "status": "ok",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). Keeps every candidate that is best on at least one case (Pareto).",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). Keeps every candidate that is best on at least one case (Pareto).",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -305,7 +305,7 @@ const SECTIONS: Section[] = [
     "id": "p5",
     "label": "Promote only with your yes",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). gepa.py promote needs --yes, holdout cases and a win over the live prompt. Your rule says the same, but no real prompt has been promoted this way yet.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). gepa.py promote needs --yes, holdout cases and a win over the live prompt. Your rule says the same, but no real prompt has been promoted this way yet.",
     "sources": [
      "https://arxiv.org/abs/2507.19457",
      "https://dspy.ai/api/optimizers/GEPA/overview/"
@@ -322,7 +322,7 @@ const SECTIONS: Section[] = [
     "id": "s1",
     "label": "Scheduled scans that find problems in each customer account",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). tools/scan_customer.py finds problems (stale numbers, cost spikes, reply/close drops, negative cash, LTV:CAC under 3, missed updates). Not scheduled yet.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). tools/scan_customer.py finds problems (stale numbers, cost spikes, reply/close drops, negative cash, LTV:CAC under 3, missed updates). Not scheduled yet.",
     "sources": [
      "https://code.claude.com/docs/en/scheduled-tasks"
     ]
@@ -331,7 +331,7 @@ const SECTIONS: Section[] = [
     "id": "s2",
     "label": "2x per week customer update",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). tools/draft_update.py drafts Tue/Fri updates. Not scheduled yet.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). tools/draft_update.py drafts Tue/Fri updates. Not scheduled yet.",
     "sources": [
      "https://code.claude.com/docs/en/scheduled-tasks"
     ]
@@ -340,7 +340,7 @@ const SECTIONS: Section[] = [
     "id": "s3",
     "label": "Updates drafted by bots, sent only with your yes",
     "status": "ok",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). Drafts are marked not sent; nothing sends without your yes.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). Drafts are marked not sent; nothing sends without your yes.",
     "sources": [
      "https://code.claude.com/docs/en/scheduled-tasks"
     ]
@@ -356,21 +356,21 @@ const SECTIONS: Section[] = [
     "id": "d1",
     "label": "Cash flow view per customer",
     "status": "ok",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). tools/dashboard.py: cash flow by month (tested on SAMPLE numbers).",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). tools/dashboard.py: cash flow by month (tested on SAMPLE numbers).",
     "sources": []
    },
    {
     "id": "d2",
     "label": "LTV : CAC with a 3:1 target line",
     "status": "ok",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). LTV:CAC tile with the 3:1 target; scan flags under 3.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). LTV:CAC tile with the 3:1 target; scan flags under 3.",
     "sources": []
    },
    {
     "id": "d3",
     "label": "Cost per lead that responded (not just cost per lead)",
     "status": "ok",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). Cost per lead that replied, per month and per test arm.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). Cost per lead that replied, per month and per test arm.",
     "sources": []
    },
    {
@@ -398,7 +398,7 @@ const SECTIONS: Section[] = [
     "id": "x1",
     "label": "One database for customer data (Postgres, e.g. Supabase) with per-customer access rules",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). db/schema.sql for Supabase with per-customer locks and number checks; db/rls_test.sql passed 11 of 11 on Postgres 16 in Claude's workspace (Codex could not rerun it: no Postgres on the Mac). No Supabase project made.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). db/schema.sql for Supabase with per-customer locks and number checks; db/rls_test.sql passed 11 of 11 on Postgres 16 in Claude's workspace (Codex could not rerun it: no Postgres on the Mac). No Supabase project made.",
     "sources": []
    },
    {
@@ -412,7 +412,7 @@ const SECTIONS: Section[] = [
     "id": "x3",
     "label": "Customer-facing views show results only, never prompts or methods",
     "status": "partial",
-    "why": "agency-os-kit (after Codex round 4: 75 tests pass + 1 database test). dashboard.py --client and update drafts show results and customer_notes.md only (tested). Not yet used with a real customer.",
+    "why": "agency-os-kit (after Codex round 5: 79 tests pass + 1 database test). dashboard.py --client and update drafts show results and customer_notes.md only (tested). Not yet used with a real customer.",
     "sources": []
    },
    {
@@ -427,7 +427,7 @@ const SECTIONS: Section[] = [
 ];
 
 const nodes: ProNode[] = [{
-  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "11 done, 25 partly, 4 missing, 1 not checked. Updated 2026-10-12 after Codex round 4.",
+  id: 'k_title', label: 'Version 5: Agency OS checklist, 41 items', sub: "11 done, 25 partly, 4 missing, 1 not checked. Updated 2026-10-12 after Codex round 5.",
   why: 'Everything needed to run each customer\'s whole flow: guardrails, routing, customer repo, node kit, feedback loop, schedules, dashboard and privacy. Green = done, orange = partly, pink = missing, gray = not checked.',
   status: 'reference', sources: [], x: KX - 10, y: -110, w: COLS * SP + 20, h: 60, band: true,
 }];
