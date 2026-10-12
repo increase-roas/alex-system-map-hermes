@@ -327,7 +327,7 @@ export const PRO_FILL: Record<string, More> = {
     sources: [S.steer, S.best],
   },
   p_e5: {
-    examples: [{ title: 'A gotchas section that grew', tone: 'good', file: 'SKILL.md', why: 'Each line is a real failure that will not happen twice.', code: L('## Gotchas', '- "Won" is the stage Job Sold, not the status field. (2026-09-14)', '- GHL returns 100 rows per page; always paginate. (2026-09-20)', '- Acme\'s Sunday leads come from Angi; tag them before counting. (2026-10-02)') }],
+    examples: [{ title: 'A gotchas section that grew', tone: 'good', file: '.claude/skills/weekly-report/SKILL.md (bottom section)', why: 'Each line is a real failure that will not happen twice.', code: L('## Gotchas', '- "Won" is the stage Job Sold, not the status field. (2026-09-14)', '- GHL returns 100 rows per page; always paginate. (2026-09-20)', '- Acme\'s Sunday leads come from Angi; tag them before counting. (2026-10-02)') }],
     myths: [{ myth: 'Lessons go in one big lessons file.', truth: 'Anthropic puts the lesson inside the skill it is about, where it loads exactly when needed.' }],
   },
   p_e6: {
@@ -496,8 +496,9 @@ const EXTRA: Record<string, More> = {
         '{ "hooks": { "Stop": [{ "hooks": [',
         '  { "type": "command", "command": ".claude/hooks/finish-line.sh" }',
         '] }] } }') },
-      { title: 'The check', file: '.claude/hooks/finish-line.sh', why: 'stderr + exit 2 = "not done, here is why". Exit 0 lets Claude stop.', code: L(
+      { title: 'The check', file: '.claude/hooks/finish-line.sh', why: 'stderr + exit 2 = "not done, here is why". Exit 0 lets Claude stop. The hook input says stop_hook_active when it already pushed once; Claude Code also stops after 8 forced continues in a row.', code: L(
         '#!/bin/bash',
+        'input=$(cat)   # JSON from Claude Code; .stop_hook_active is true on a repeat push',
         'if ! npm test >/tmp/finish.log 2>&1; then',
         '  echo "Not done: tests fail. Last lines:" >&2',
         '  tail -15 /tmp/finish.log >&2',
@@ -568,7 +569,7 @@ const EXTRA: Record<string, More> = {
     ],
     examples: [
       { title: 'Check and cut', file: 'Claude Code commands', why: 'The two commands Anthropic points to.', code: L('/context   what is loaded and how big', '/mcp       turn servers on or off', '/usage     which servers and skills cost the most') },
-      { title: 'A helper with only 3 tools', file: '.claude/agents/researcher.md', why: 'Fewer tools = smaller context and fewer wrong picks.', code: L('---', 'name: researcher', 'description: Reads docs and returns a short summary', 'tools: Read, Grep, WebFetch', 'model: haiku', '---') },
+      { title: 'A helper with only 3 tools', file: '.claude/agents/researcher.md', why: 'Fewer tools = smaller context and fewer wrong picks.', code: L('---', 'name: researcher', 'description: Reads docs and files and returns a short summary. Use when a question needs reading, not editing.', 'tools: Read, Grep, WebFetch', 'model: haiku', '---') },
     ],
     decide: [
       { if: 'A CLI exists for the app', then: 'Use the CLI, skip the MCP server' },
