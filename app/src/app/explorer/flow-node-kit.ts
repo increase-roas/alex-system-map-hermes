@@ -89,18 +89,19 @@ export const TOOL_EFFECTS: Record<string, string[]> = {
   'meta.ads': ['read', 'write', 'spend'], github: ['read', 'write'], cloudflare: ['read', 'deploy'], dashboard: ['read'],
 };
 /** Scripts a Custom Function node may run: what each does and the only arguments it accepts.
- * A flag maps to a pattern its value must match ('' = flag without a value). raises = flag value that makes it do more. */
-type Script = { effect: string; flags: Record<string, string>; positional?: string; raises?: Record<string, string> };
+ * A flag maps to a pattern its value must match ('' = flag without a value). raises = flag value that makes it do more.
+ * exactlyOne: each group must be given exactly once ('<target>' = the positional customer folder). Mirrors each script's own command-line rules. */
+type Script = { effect: string; flags: Record<string, string>; positional?: string; raises?: Record<string, string>; exactlyOne: string[][] };
 const SLUG = '^customers/[a-z0-9-]+$', DATE = '^\\d{4}-\\d{2}-\\d{2}$', NAME = '^[a-z0-9-]+$', PATH = '^[A-Za-z0-9_./-]+$';
 export const SCRIPTS: Record<string, Script> = {
-  'tools/score_customer.py': { effect: 'read', flags: { '--all': '', '--json': '', '--today': DATE }, positional: SLUG },
-  'tools/metrics.py': { effect: 'read', flags: {}, positional: SLUG },
-  'tools/gate.py check': { effect: 'write', flags: { '--plan': PATH, '--action': PATH } },
-  'tools/scan_customer.py': { effect: 'write', flags: { '--all': '', '--print': '', '--today': DATE }, positional: SLUG },
-  'tools/draft_update.py': { effect: 'write', flags: { '--all': '', '--due': '', '--today': DATE }, positional: SLUG },
-  'tools/dashboard.py': { effect: 'write', flags: { '--out': PATH, '--client': NAME, '--today': DATE } },
-  'gepa/gepa.py loop': { effect: 'write', flags: { '--job': NAME, '--rounds': '^([1-9]|1[0-9]|20)$', '--model': '^(stub|claude)$', '--judge': '^(rules|claude)$' }, raises: { '--model claude': 'spend', '--judge claude': 'spend' } },
-  'gepa/gepa.py report': { effect: 'write', flags: { '--job': NAME, '--model': '^(stub|claude)$', '--judge': '^(rules|claude)$' }, raises: { '--model claude': 'spend', '--judge claude': 'spend' } },
+  'tools/score_customer.py': { effect: 'read', flags: { '--all': '', '--json': '', '--today': DATE }, positional: SLUG, exactlyOne: [['<target>', '--all']] },
+  'tools/metrics.py': { effect: 'read', flags: {}, positional: SLUG, exactlyOne: [['<target>']] },
+  'tools/gate.py check': { effect: 'write', flags: { '--plan': PATH, '--action': PATH }, exactlyOne: [['--plan'], ['--action']] },
+  'tools/scan_customer.py': { effect: 'write', flags: { '--all': '', '--print': '', '--today': DATE }, positional: SLUG, exactlyOne: [['<target>', '--all']] },
+  'tools/draft_update.py': { effect: 'write', flags: { '--all': '', '--due': '', '--today': DATE }, positional: SLUG, exactlyOne: [['<target>', '--all']] },
+  'tools/dashboard.py': { effect: 'write', flags: { '--out': PATH, '--client': NAME, '--today': DATE }, exactlyOne: [['--out']] },
+  'gepa/gepa.py loop': { effect: 'write', flags: { '--job': NAME, '--rounds': '^([1-9]|1[0-9]|20)$', '--model': '^(stub|claude)$', '--judge': '^(rules|claude)$' }, raises: { '--model claude': 'spend', '--judge claude': 'spend' }, exactlyOne: [['--job']] },
+  'gepa/gepa.py report': { effect: 'write', flags: { '--job': NAME, '--model': '^(stub|claude)$', '--judge': '^(rules|claude)$' }, raises: { '--model claude': 'spend', '--judge claude': 'spend' }, exactlyOne: [['--job']] },
 };
 /** The effects a registered script would have with these arguments, or a reason it is not allowed. */
 export function scriptEffect(script: string, args: string): { effects: string[] } | { problem: string } {
@@ -109,11 +110,14 @@ export function scriptEffect(script: string, args: string): { effects: string[] 
   if (/[\u0000-\u001f\u007f;&|`$<>()'"\\*?{}]/.test(args)) return { problem: 'arguments contain characters that are not allowed (no newlines, quotes or shell symbols)' };
   const toks = args.split(' ').filter(Boolean);
   const effects = new Set([sc.effect]);
+  const seen: string[] = [];
   let positional = 0;
   for (let i = 0; i < toks.length; i++) {
     const t = toks[i];
     if (t.startsWith('--')) {
       if (!(t in sc.flags)) return { problem: `${script} does not accept ${t}` };
+      if (seen.includes(t)) return { problem: `${t} is given twice` };
+      seen.push(t);
       const pat = sc.flags[t];
       if (pat) {
         const v = toks[++i];
@@ -123,7 +127,14 @@ export function scriptEffect(script: string, args: string): { effects: string[] 
       }
     } else {
       if (!sc.positional || !new RegExp(sc.positional).test(t) || ++positional > 1) return { problem: `unexpected argument ${t}` };
+      seen.push('<target>');
     }
+  }
+  for (const group of sc.exactlyOne) {
+    const n = group.filter((g) => seen.includes(g)).length;
+    const say = group.map((g) => (g === '<target>' ? 'a customer folder' : g)).join(' or ');
+    if (n === 0) return { problem: `needs ${say}` };
+    if (n > 1) return { problem: `use only one of ${say}` };
   }
   return { effects: [...effects] };
 }

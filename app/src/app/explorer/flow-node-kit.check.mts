@@ -78,6 +78,14 @@ f = addAfter(routingPreset(), 'customFunction', 'Gate', { script: 'tools/gate.py
 assert(has(f, 'it does "write"'), 'gate check is write, not read');
 f = addAfter(routingPreset(), 'customFunction', 'GEPA', { script: 'gepa/gepa.py loop', args: '--job speed-to-lead --model claude', effect: 'write' });
 assert(has(f, 'it does "spend"') && has(f, 'skips Alex'), 'GEPA with Claude counts as spend and is gated');
-f = addAfter(routingPreset(), 'customFunction', 'Odd', { script: 'tools/dashboard.py', args: '--rm-rf', effect: 'write' });
+f = addAfter(routingPreset(), 'customFunction', 'Odd', { script: 'tools/dashboard.py', args: '--out d.html --rm-rf', effect: 'write' });
 assert(has(f, 'does not accept --rm-rf'), 'unknown flag refused');
+// Codex round 7: incomplete commands are not OK
+for (const [script, args, want] of [['tools/gate.py check', '', 'needs --plan'], ['tools/gate.py check', '--plan p.json', 'needs --action'],
+  ['tools/dashboard.py', '--client example-tree-co', 'needs --out'], ['gepa/gepa.py loop', '--rounds 3', 'needs --job'],
+  ['tools/metrics.py', '', 'needs a customer folder'], ['tools/score_customer.py', 'customers/x --all', 'use only one of'],
+  ['tools/scan_customer.py', '--all --all', 'given twice']] as const) {
+  f = addAfter(routingPreset(), 'customFunction', 'Run', { script, args, effect: script === 'tools/metrics.py' || script === 'tools/score_customer.py' ? 'read' : 'write' });
+  assert(has(f, want), `${script} "${args}" -> ${want}`);
+}
 if (fails) process.exit(1);
