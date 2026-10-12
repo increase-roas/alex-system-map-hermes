@@ -222,7 +222,7 @@ function Builder() {
             ) : (
               <p className="text-xs text-muted-foreground">No problems: one Start, every node reachable and wired, settings filled, every loop limited to 20 rounds, agents with tools come after the customer is known, every tool names its connector card, and nothing that spends, deletes, messages a customer, deploys or promotes can be reached without Alex&apos;s yes.</p>
             )}
-            <p className="mt-4 text-[11px] text-muted-foreground">This tab draws and checks flows. To run them: agency-os-kit (gepa.py for the GEPA loop, route.py for routing).</p>
+            <p className="mt-4 text-[11px] text-muted-foreground">This tab draws and checks flows. OK means the flow is wired safely and every script has allowed, complete arguments; it does not mean anything has run. To run them: agency-os-kit (gepa.py for the GEPA loop, route.py and gate.py for routing).</p>
           </div>
         )}
       </aside>

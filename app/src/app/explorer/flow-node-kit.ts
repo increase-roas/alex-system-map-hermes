@@ -92,7 +92,8 @@ export const TOOL_EFFECTS: Record<string, string[]> = {
  * A flag maps to a pattern its value must match ('' = flag without a value). raises = flag value that makes it do more.
  * exactlyOne: each group must be given exactly once ('<target>' = the positional customer folder). Mirrors each script's own command-line rules. */
 type Script = { effect: string; flags: Record<string, string>; positional?: string; raises?: Record<string, string>; exactlyOne: string[][] };
-const SLUG = '^customers/[a-z0-9-]+$', DATE = '^\\d{4}-\\d{2}-\\d{2}$', NAME = '^[a-z0-9-]+$', PATH = '^[A-Za-z0-9_./-]+$';
+const SLUG = '^customers/[a-z0-9][a-z0-9-]*$', DATE = 'DATE', NAME = '^[a-z0-9][a-z0-9-]*$', PATH = '^[A-Za-z0-9_][A-Za-z0-9_./-]*$';
+const realDate = (v: string) => { const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(v); if (!m) return false; const d = new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])); return d.getUTCFullYear() === +m[1] && d.getUTCMonth() === +m[2] - 1 && d.getUTCDate() === +m[3]; };
 export const SCRIPTS: Record<string, Script> = {
   'tools/score_customer.py': { effect: 'read', flags: { '--all': '', '--json': '', '--today': DATE }, positional: SLUG, exactlyOne: [['<target>', '--all']] },
   'tools/metrics.py': { effect: 'read', flags: {}, positional: SLUG, exactlyOne: [['<target>']] },
@@ -121,7 +122,8 @@ export function scriptEffect(script: string, args: string): { effects: string[] 
       const pat = sc.flags[t];
       if (pat) {
         const v = toks[++i];
-        if (v === undefined || !new RegExp(pat).test(v)) return { problem: `${t} needs a valid value` };
+        if (v === undefined || v.startsWith('-')) return { problem: `${t} needs a value` };
+        if (pat === DATE ? !realDate(v) : !new RegExp(pat).test(v)) return { problem: `${t} needs a valid value` };
         const raised = sc.raises?.[`${t} ${v}`];
         if (raised) effects.add(raised);
       }

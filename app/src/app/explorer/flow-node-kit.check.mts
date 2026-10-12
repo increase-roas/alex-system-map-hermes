@@ -88,4 +88,12 @@ for (const [script, args, want] of [['tools/gate.py check', '', 'needs --plan'],
   f = addAfter(routingPreset(), 'customFunction', 'Run', { script, args, effect: script === 'tools/metrics.py' || script === 'tools/score_customer.py' ? 'read' : 'write' });
   assert(has(f, want), `${script} "${args}" -> ${want}`);
 }
+// Codex round 8: values follow the real command-line rules
+for (const [args, want] of [['--out --help', 'needs a value'], ['--out report.html --today 2026-99-99', '--today needs a valid value'],
+  ['--out report.html --today 2026-02-30', '--today needs a valid value'], ['--out -x.html', 'needs a value']] as const) {
+  f = addAfter(routingPreset(), 'customFunction', 'Dash', { script: 'tools/dashboard.py', args, effect: 'write' });
+  assert(has(f, want), `dashboard "${args}" -> ${want}`);
+}
+f = addAfter(routingPreset(), 'customFunction', 'Dash', { script: 'tools/dashboard.py', args: '--out report.html --today 2026-10-12', effect: 'write' });
+assert(!has(f, 'Dash:'), 'valid dashboard command passes');
 if (fails) process.exit(1);
