@@ -177,7 +177,7 @@ export const PRO_DETAILS: Record<string, ProDetail> = {
       'Define helpers in the agents option: each has a description (when to use it), a prompt, tools and a model.',
       'Allow the Agent tool so the lead can hand work out.',
       'Only the handoff text reaches a helper, so put file paths, errors and decisions in it.',
-      'Save the plan to memory before fanning out, so it survives a full context window.',
+      'Write the plan to a file (not MEMORY.md) before fanning out, so it survives a full context window.',
     ],
     pros: [
       'Every handoff has an objective, an output format, which tools and sources to use, and where to stop.',
