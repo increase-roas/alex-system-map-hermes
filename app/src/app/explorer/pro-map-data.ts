@@ -96,7 +96,7 @@ const PRO_STEPS: Record<Step, StepInfo> = {
   ask: { label: 'You ask', tag: 'trace starts: prompt.id', status: ref, trace: 'A user_prompt event starts the trace. Every later event for this request carries the same prompt.id, so one ID pulls up the whole run.' },
   ui: { label: 'Where you talk', tag: 'session.id', status: ref, trace: 'session.id: one per conversation.' },
   front: { label: 'Front door: one lead agent', tag: 'model calls + cost', status: ref, trace: 'api_request events for the lead agent: model, tokens, cost.' },
-  plan: { label: 'Plan into tasks', tag: 'plan + progress file', status: ref, trace: 'The plan saved to memory, plus a progress file and git commits that show each update.' },
+  plan: { label: 'Plan into tasks', tag: 'plan + progress file', status: ref, trace: 'The plan file, plus a progress file and git commits that show each update.' },
   agents: { label: 'Subagents pick up tasks (on a computer)', tag: 'per-agent transcript', status: ref, trace: 'Each subagent works in its own context and returns a summary; hooks see which one by its name (agent_type).' },
   ptr: { label: 'Each agent reads its startup files (pointers)', tag: 'files loaded', status: ref, trace: 'Which CLAUDE.md and rules files loaded at launch (/context shows them).' },
   know: { label: 'Finds the tool and reads how to use it', tag: 'tool name + inputs', status: ref, trace: 'The tool picked and, if tool detail logging is turned on, its inputs.' },
