@@ -8,6 +8,7 @@
 import { PRO_DETAILS, type ProDetail } from './pro-map-details';
 import { PRO_EXAMPLES, type ProExamples } from './pro-map-examples';
 import { PRO_MORE, type More } from './pro-map-more';
+import { PRO_FILL } from './pro-map-fill';
 
 export type FullDetail = ProDetail & ProExamples & Pick<More, 'myths'>;
 
@@ -337,20 +338,21 @@ export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
   const d = PRO_DETAILS[n.id];
   const ex = PRO_EXAMPLES[n.id];
   const mo = PRO_MORE[n.id];
-  if (!d && !ex && !mo && !n.how) return n;
+  const fi = PRO_FILL[n.id];
+  if (!d && !ex && !mo && !fi && !n.how) return n;
   const detail: FullDetail = {
-    limits: cat(d?.limits, mo?.limits),
-    build: cat(d?.build ?? n.how, mo?.build),
-    pros: cat(d?.pros, mo?.pros),
-    noobs: cat(d?.noobs, mo?.noobs),
+    limits: cat(d?.limits, mo?.limits, fi?.limits),
+    build: cat(d?.build ?? n.how, mo?.build, fi?.build),
+    pros: cat(d?.pros, mo?.pros, fi?.pros),
+    noobs: cat(d?.noobs, mo?.noobs, fi?.noobs),
     extra: d?.extra,
-    plain: cat(ex?.plain, mo?.plain),
-    pictures: cat(ex?.pictures, mo?.pictures),
-    examples: cat(ex?.examples, mo?.examples),
-    decide: cat(ex?.decide, mo?.decide),
-    myths: mo?.myths,
+    plain: cat(ex?.plain, mo?.plain, fi?.plain),
+    pictures: cat(ex?.pictures, mo?.pictures, fi?.pictures),
+    examples: cat(ex?.examples, mo?.examples, fi?.examples),
+    decide: cat(ex?.decide, mo?.decide, fi?.decide),
+    myths: cat(mo?.myths, fi?.myths),
   };
-  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? []), ...(mo?.sources ?? [])])] };
+  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? []), ...(mo?.sources ?? []), ...(fi?.sources ?? [])])] };
 });
 
 const flow = (a: string, b: string, label?: string): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'flow', label });
