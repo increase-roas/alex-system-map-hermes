@@ -169,7 +169,10 @@ export const PRO_DETAILS: Record<string, ProDetail> = {
   },
   p_lead: {
     build: [
-      'Build it with the Agent SDK: the same agent loop that runs Claude Code, called from your own code.',
+      'There is one lead agent. The Agent SDK is not a second agent; it is the engine the lead runs on: Claude Code\'s agent loop and tools, called from your own Python or TypeScript with query().',
+      'Options set what it can do: allowed tools, helpers (agents), MCP servers, and which settings folders load (skills, CLAUDE.md).',
+      'Your own functions become tools: @tool, then create_sdk_mcp_server. It runs inside your app, no separate server.',
+      'Host it in a container when it has to run without your computer.',
       'The loop: gather context, take action, verify the work, repeat.',
       'Define helpers in the agents option: each has a description (when to use it), a prompt, tools and a model.',
       'Allow the Agent tool so the lead can hand work out.',
@@ -183,6 +186,7 @@ export const PRO_DETAILS: Record<string, ProDetail> = {
       'Start 3 to 5 helpers at once instead of one after another (cut research time up to 90%).',
     ],
     noobs: [
+      'Building a vector database first: start with agentic search (folders, grep) and add vectors only if you need speed.',
       'Short vague handoffs like "research the chip shortage": helpers repeat each other and leave gaps.',
       'Too much effort on simple questions: Anthropic\'s early versions over-invested here.',
       'Going multi-agent when one agent would do. Start simple.',
@@ -196,19 +200,7 @@ export const PRO_DETAILS: Record<string, ProDetail> = {
       'A citation agent checks every claim against its source before the answer goes out.',
       'Managed Agents: lead plus specialists on a shared filesystem, every step traced in the Console.',
     ],
-    sources: [S.research, S.sdk, S.sdkBlog, S.sdkSub, S.effective, S.managedNew, S.latency, S.whatsNew],
-  },
-  p_sdk: {
-    build: [
-      'Agent SDK (Python or TypeScript): call query() with a prompt and options; it runs the full agent loop with Claude Code\'s tools.',
-      'Options include allowed tools, helpers (agents), MCP servers, and which settings folders to load (skills, CLAUDE.md).',
-      'Your own functions become tools: @tool, then create_sdk_mcp_server. It runs inside your app, no separate server.',
-      'Tool names come out as mcp__<server>__<tool>; list them in allowed tools to skip the prompt.',
-      'Host it in a container when it needs to run without your computer.',
-    ],
-    pros: ['Start with agentic search (folders, grep) before building a vector database.', 'Give the agent a way to check its own work.'],
-    noobs: ['Building a vector search first: slower to maintain and less transparent; add it only if you need speed.'],
-    sources: [S.sdk, S.sdkBlog, S.sdkTools, S.sdkSub],
+    sources: [S.research, S.sdk, S.sdkBlog, S.sdkSub, S.sdkTools, S.effective, S.managedNew, S.latency, S.whatsNew],
   },
   p_a1: {
     build: [
