@@ -6,11 +6,14 @@
  * Built 2026-10-12. Change a status only with a new source.
  */
 import { PRO_DETAILS, type ProDetail } from './pro-map-details';
+import { PRO_EXAMPLES, type ProExamples } from './pro-map-examples';
+
+export type FullDetail = ProDetail & ProExamples;
 
 export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference';
 export type ProNode = {
   id: string; label: string; sub: string; status: ProStatus; why: string; sources: string[];
-  how?: string[]; trace?: string; tag?: string; detail?: ProDetail;
+  how?: string[]; trace?: string; tag?: string; detail?: FullDetail;
   x: number; y: number; w?: number; h?: number; band?: boolean;
 };
 export type ProEdge = {
@@ -318,9 +321,10 @@ const alex: ProNode[] = [
 
 export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
   const d = PRO_DETAILS[n.id];
-  if (!d && !n.how) return n;
-  const detail: ProDetail = { ...d, build: d?.build ?? n.how };
-  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? [])])] };
+  const ex = PRO_EXAMPLES[n.id];
+  if (!d && !ex && !n.how) return n;
+  const detail: FullDetail = { ...d, ...ex, build: d?.build ?? n.how, sources: undefined };
+  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? [])])] };
 });
 
 const flow = (a: string, b: string, label?: string): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'flow', label });

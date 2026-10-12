@@ -7,6 +7,7 @@ import {
 import { useMemo, useState } from 'react';
 
 import { PRO_EDGES, PRO_NODES, type ProNode, type ProStatus } from './pro-map-data';
+import type { Example, FlowStep, Picture, Rule, TreeNode } from './pro-map-examples';
 
 const COLOR: Record<ProStatus, string> = { ok: '#17c964', partial: '#f5a524', gap: '#ff0071', reference: '#7f77dd' };
 const WORD: Record<ProStatus, string> = { ok: 'have it', partial: 'partly', gap: 'missing', reference: 'Anthropic way' };
@@ -101,8 +102,12 @@ function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
   };
 }
 
-type TileKey = 'limits' | 'build' | 'pros' | 'noobs' | 'extra' | 'trace' | 'sources';
+type TileKey = 'plain' | 'pictures' | 'examples' | 'decide' | 'limits' | 'build' | 'pros' | 'noobs' | 'extra' | 'trace' | 'sources';
 const TILES: { key: TileKey; title: string; tone: string }[] = [
+  { key: 'plain', title: 'In plain steps', tone: '#22d3ee' },
+  { key: 'pictures', title: 'Pictures', tone: '#a78bfa' },
+  { key: 'examples', title: 'Examples', tone: '#38bdf8' },
+  { key: 'decide', title: 'If this, then that', tone: '#facc15' },
   { key: 'limits', title: 'Size limits', tone: '#0ea5e9' },
   { key: 'build', title: 'How to build it', tone: '#7f77dd' },
   { key: 'pros', title: 'Pros always do this', tone: '#17c964' },
@@ -112,9 +117,24 @@ const TILES: { key: TileKey; title: string; tone: string }[] = [
   { key: 'sources', title: 'Sources', tone: '#8a8a8a' },
 ];
 
+function countFor(n: ProNode, k: TileKey): number {
+  const d = n.detail;
+  if (k === 'pictures') return d?.pictures?.length ?? 0;
+  if (k === 'examples') return d?.examples?.length ?? 0;
+  if (k === 'decide') return d?.decide?.length ?? 0;
+  return itemsFor(n, k).length;
+}
+function previewFor(n: ProNode, k: TileKey): string {
+  const d = n.detail;
+  if (k === 'pictures') return (d?.pictures ?? []).map((p) => p.title).join(' · ');
+  if (k === 'examples') return (d?.examples ?? []).map((e) => e.title).join(' · ');
+  if (k === 'decide') return d?.decide?.[0] ? `If ${d.decide[0].if}: ${d.decide[0].then}` : '';
+  return itemsFor(n, k)[0] ?? '';
+}
 function itemsFor(n: ProNode, k: TileKey): string[] {
   if (k === 'trace') return n.trace ? [n.trace] : [];
   if (k === 'sources') return n.sources;
+  if (k === 'pictures' || k === 'examples' || k === 'decide') return [];
   return n.detail?.[k] ?? [];
 }
 
@@ -124,10 +144,114 @@ function Item({ text }: { text: string }) {
     : <span>{text}</span>;
 }
 
+const TONE: Record<string, string> = { good: '#17c964', bad: '#ff0071', neutral: '#8a8a8a' };
+
+function Box({ label, note, tone }: { label: string; note?: string; tone?: string }) {
+  const c = tone ? TONE[tone] : '#7f77dd';
+  return (
+    <div className="rounded-md border bg-background/70 px-2.5 py-1.5 text-center" style={{ borderColor: c, borderLeftWidth: 3 }}>
+      <div className="whitespace-nowrap font-mono text-[12px] leading-tight">{label}</div>
+      {note ? <div className="text-[11px] leading-tight text-muted-foreground">{note}</div> : null}
+    </div>
+  );
+}
+
+function TreeView({ node }: { node: TreeNode }) {
+  return (
+    <div className="flex flex-col items-center">
+      <Box label={node.label} note={node.note} tone={node.tone} />
+      {node.children?.length ? (
+        <>
+          <div className="h-3 w-px bg-muted-foreground/50" />
+          <div className="flex justify-center gap-2 border-t border-muted-foreground/50">
+            {node.children.map((c) => (
+              <div key={c.label} className="flex flex-col items-center">
+                <div className="h-3 w-px bg-muted-foreground/50" />
+                <TreeView node={c} />
+              </div>
+            ))}
+          </div>
+        </>
+      ) : null}
+    </div>
+  );
+}
+
+function fileRows(node: TreeNode, prefix = '', last = true, root = true): { line: string; note?: string; tone?: string }[] {
+  const me = { line: root ? node.label : `${prefix}${last ? '└─ ' : '├─ '}${node.label}`, note: node.note, tone: node.tone };
+  const kids = node.children ?? [];
+  const next = root ? '' : `${prefix}${last ? '   ' : '│  '}`;
+  return [me, ...kids.flatMap((c, i) => fileRows(c, next, i === kids.length - 1, false))];
+}
+
+function FilesView({ node }: { node: TreeNode }) {
+  return (
+    <div className="overflow-x-auto rounded-md bg-black/30 p-3">
+      {fileRows(node).map((r, i) => (
+        <div key={i} className="flex items-baseline gap-3 whitespace-pre">
+          <span className="font-mono text-[12px]" style={{ color: r.tone ? TONE[r.tone] : undefined }}>{r.line}</span>
+          {r.note ? <span className="text-[11px] text-muted-foreground">{r.note}</span> : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function FlowView({ steps }: { steps: FlowStep[] }) {
+  return (
+    <div className="flex flex-col items-center">
+      {steps.map((st, i) => (
+        <div key={st.label} className="flex w-full flex-col items-center">
+          {i > 0 ? <div className="text-muted-foreground">↓</div> : null}
+          <div className="w-full max-w-[460px]"><Box label={st.label} note={st.note} tone={st.tone} /></div>
+          {st.many?.length ? (
+            <div className="mt-1 flex flex-wrap justify-center gap-1.5">
+              {st.many.map((m) => <span key={m} className="rounded border border-dashed px-2 py-0.5 font-mono text-[11px] text-muted-foreground">{m}</span>)}
+            </div>
+          ) : null}
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PictureView({ p }: { p: Picture }) {
+  return (
+    <div className="rounded-lg border p-3">
+      <div className="mb-2 text-sm font-semibold">{p.title}</div>
+      <div className="overflow-x-auto">
+        {p.kind === 'tree' ? <div className="mx-auto w-max"><TreeView node={p.root} /></div> : p.kind === 'files' ? <FilesView node={p.root} /> : <FlowView steps={p.steps} />}
+      </div>
+      {p.caption ? <div className="mt-2 text-xs text-muted-foreground">{p.caption}</div> : null}
+    </div>
+  );
+}
+
+function ExampleView({ e }: { e: Example }) {
+  const c = e.tone ? TONE[e.tone] : '#38bdf8';
+  return (
+    <div className="rounded-lg border p-3" style={{ borderLeftColor: c, borderLeftWidth: 4 }}>
+      <div className="text-sm font-semibold">{e.title}</div>
+      <div className="mt-0.5 text-xs leading-snug text-muted-foreground">{e.why}</div>
+      {e.file ? <div className="mt-2 font-mono text-[11px]" style={{ color: c }}>{e.file}</div> : null}
+      <pre className="mt-1 overflow-x-auto rounded-md bg-black/40 p-3 font-mono text-[12px] leading-snug">{e.code}</pre>
+    </div>
+  );
+}
+
+function RuleView({ r }: { r: Rule }) {
+  return (
+    <div className="rounded-lg border px-3 py-2 text-sm leading-snug">
+      <div><span className="mr-1.5 font-semibold text-yellow-500">IF</span>{r.if}</div>
+      <div className="mt-0.5"><span className="mr-1.5 font-semibold text-emerald-500">THEN</span>{r.then}</div>
+    </div>
+  );
+}
+
 function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
   const [open, setOpen] = useState<TileKey | null>(null);
   const tile = TILES.find((t) => t.key === open);
-  const shell = 'max-h-[78vh] w-[440px] overflow-auto rounded-xl border bg-card/95 p-4 text-card-foreground shadow-lg backdrop-blur';
+  const shell = `max-h-[80vh] ${open ? 'w-[640px]' : 'w-[440px]'} overflow-auto rounded-xl border bg-card/95 p-4 text-card-foreground shadow-lg backdrop-blur`;
   const head = (
     <div className="flex items-start gap-2">
       <span className="mt-1.5 inline-block size-2.5 shrink-0 rounded-full" style={{ background: COLOR[node.status] }} />
@@ -145,22 +269,32 @@ function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
         <button type="button" className="mb-2 text-xs text-muted-foreground hover:underline" onClick={() => setOpen(null)}>{'<'} Back to {node.label}</button>
         {head}
         <div className="mt-3 text-sm font-semibold" style={{ color: tile.tone }}>{tile.title}</div>
-        <ul className="mt-2 space-y-2 text-sm leading-snug">
-          {items.map((t) => (
-            <li key={t} className="rounded-md border-l-4 bg-muted/40 px-3 py-2" style={{ borderLeftColor: tile.tone }}><Item text={t} /></li>
-          ))}
-        </ul>
+        {tile.key === 'pictures' ? (
+          <div className="mt-2 space-y-3">{(node.detail?.pictures ?? []).map((p) => <PictureView key={p.title} p={p} />)}</div>
+        ) : tile.key === 'examples' ? (
+          <div className="mt-2 space-y-3">{(node.detail?.examples ?? []).map((e) => <ExampleView key={e.title} e={e} />)}</div>
+        ) : tile.key === 'decide' ? (
+          <div className="mt-2 space-y-2">{(node.detail?.decide ?? []).map((r) => <RuleView key={r.if} r={r} />)}</div>
+        ) : (
+          <ul className="mt-2 space-y-2 text-sm leading-snug">
+            {items.map((t, i) => (
+              <li key={t} className="flex gap-2 rounded-md border-l-4 bg-muted/40 px-3 py-2" style={{ borderLeftColor: tile.tone }}>
+                {tile.key === 'plain' ? <span className="font-semibold" style={{ color: tile.tone }}>{i + 1}.</span> : null}
+                <Item text={t} />
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }
-  const tiles = TILES.filter((t) => itemsFor(node, t.key).length > 0);
+  const tiles = TILES.filter((t) => countFor(node, t.key) > 0);
   return (
     <div className={shell} data-testid="pro-map-detail">
       {head}
       <p className="mt-3 text-sm leading-snug">{node.why}</p>
       <div className="mt-3 space-y-2">
         {tiles.map((t) => {
-          const items = itemsFor(node, t.key);
           return (
             <button
               key={t.key}
@@ -172,9 +306,9 @@ function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
             >
               <div className="flex items-center justify-between text-sm font-medium">
                 <span>{t.title}</span>
-                <span className="text-xs text-muted-foreground">{items.length} {'>'}</span>
+                <span className="text-xs text-muted-foreground">{countFor(node, t.key)} {'>'}</span>
               </div>
-              <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{items[0]}</div>
+              <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{previewFor(node, t.key)}</div>
             </button>
           );
         })}
