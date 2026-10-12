@@ -47,12 +47,12 @@ export const GRADES: Record<string, MapGrade> = {
     proof: areas.map((area) => ({ area, grade: '?', why: 'Not checked in this audit; no new grade claimed.', check: 'Original v1 content preserved.' })),
   },
   p_title: {
-    letter: 'B', note: 'Map audit, 2026-10-12. Custom guard scripts tested offline; live installation and screen review still unverified.',
+    letter: 'B', note: 'Map audit, 2026-10-12. Guards seen working in live Claude Code sessions (scratch project). Grade awaits Codex re-grade.',
     proof: [
-      { area: 'Accuracy', grade: 'B', why: 'Custom setup and read-first scripts exercise real hook payloads. Live SDK/hook registration is not proven.', sources: [CC + 'hooks', CC + 'agent-sdk/permissions'] },
+      { area: 'Accuracy', grade: 'B', why: 'Seen working live 2026-10-12: 5 real Claude Code sessions (v2.1.296) in a throwaway project with the hooks registered. Call before card read: blocked, never ran. Read card then call: ran. Bad skill and pasted key: blocked. Not installed in your real setup.', sources: [CC + 'hooks', CC + 'agent-sdk/permissions'] },
       { area: 'Sources', grade: 'A', why: 'Claims link to the relevant Anthropic reference; product limits are stated.', sources: [CC + 'memory', CC + 'agent-sdk/python', CC + 'monitoring-usage'] },
       { area: 'Top-down order', grade: 'A', why: 'Load instructions, check old work, act, read results, combine, verify, report and learn.', sources: ['https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents'], check: 'pro-map-audit-check.cjs: result input, combine order and learning loop pass.' },
-      { area: 'Harness completeness', grade: 'B', why: 'Tested skill, connector, card-read and setup checks; full-route protection still needs a protected installation.', sources: [CC + 'hooks', CC + 'permissions'], check: '31 setup + 31 read-gate tests pass; open p_rulegate, p_lib_skills, p_lib_mcp, p_ptr4. Offline examples, not installed guards.' },
+      { area: 'Harness completeness', grade: 'B', why: 'Tested skill, connector, card-read and setup checks; full-route protection still needs a protected installation.', sources: [CC + 'hooks', CC + 'permissions'], check: 'Offline: 31 setup + 31 read-gate tests pass. Live: pro-map-guardrails/live-test/live-receipt.json (5 runs, transcript hashes, tool call log shows only the allowed call). Good skill passed the guard; Claude Code then asked before writing in .claude/. Scratch project only.' },
       { area: 'Plain English', grade: 'B', why: 'Plain labels and visible limits; final worktree screen review still needed.', check: 'TypeScript and title-render checks pass; browser readability remains unverified.' },
     ],
   },

@@ -1,0 +1,82 @@
+{
+ "what": "5 real Claude Code sessions (claude -p, v2.1.296, haiku) in a throwaway project ~/Projects/pro-map-live-test with asset_guard.py + read_gate.py registered in .claude/settings.json. Not Alex's real settings.",
+ "date": "2026-10-12",
+ "scripts": {
+  "asset_guard.py": "f08fdd4fff85418c2edbaf0e4bdd51f5130ab2dc03f3e42e522e92246a60464f",
+  "read_gate.py": "ee3591bb18020aa73abb301cb7efc77a4bf84463b56270739e2c0a018abe5380"
+ },
+ "runs": [
+  {
+   "run": "1-call-before-read",
+   "expected": "blocked by read gate; tool never executed (calls.log has no \"before read\")",
+   "transcript_sha256": "3b74eff7a64eda18516329f2fc10611854ba767f4c518699c5cba079429892fa",
+   "tool_results": [
+    {
+     "error": false,
+     "text": "[{\"type\": \"tool_reference\", \"tool_name\": \"mcp__demo__echo_note\"}]"
+    },
+    {
+     "error": true,
+     "text": "PreToolUse:mcp__demo__echo_note hook error: Read gate: missing current full-card Read, unknown route, or malformed batch. Read every configured card in this session/project, then retry with a new tool ID."
+    }
+   ]
+  },
+  {
+   "run": "2-read-then-call",
+   "expected": "card read in full, then tool allowed and executed (\"echo: after read\" in calls.log)",
+   "transcript_sha256": "13500483a78de063263267fc175357b5342bb26b74dcefd66815badc457f830f",
+   "tool_results": [
+    {
+     "error": false,
+     "text": "1\t# demo connector card\n2\t\n3\tTool: echo_note. Use only for test notes. Never send client data.\n4\t"
+    },
+    {
+     "error": false,
+     "text": "[{\"type\": \"tool_reference\", \"tool_name\": \"mcp__demo__echo_note\"}]"
+    },
+    {
+     "error": false,
+     "text": "[{\"type\": \"text\", \"text\": \"echo: after read\"}]"
+    }
+   ]
+  },
+  {
+   "run": "3-bad-skill",
+   "expected": "SKILL.md without frontmatter blocked by asset_guard; file not created",
+   "transcript_sha256": "07686ae22477aef30b41a75690917edaa6793d1bdcb71815659666c2ab118d60",
+   "tool_results": [
+    {
+     "error": true,
+     "text": "PreToolUse:Write hook error: Claude Code custom policy v1 (not full vendor JSON Schema): frontmatter must start on first line"
+    }
+   ]
+  },
+  {
+   "run": "4-good-skill",
+   "expected": "valid SKILL.md passed asset_guard; then Claude Code built-in protection for .claude/ asked for approval (headless, so not written). Guard allow shown, write not completed.",
+   "transcript_sha256": "78f400779de76fc3fd9a98ad8f4fba2cea22b977ff6f0db2f985250fcbae8044",
+   "tool_results": [
+    {
+     "error": true,
+     "text": "Claude requested permissions to write to /Users/alexlobaito/Projects/pro-map-live-test/.claude/skills/note-check/SKILL.md, but you haven't granted it yet."
+    }
+   ]
+  },
+  {
+   "run": "5-key-in-connector",
+   "expected": "connector with a pasted Bearer key blocked by asset_guard; .mcp.json unchanged",
+   "transcript_sha256": "63138049a3e245af75ccfed12e38eede6366aa976e9e91516de2971e89451e58",
+   "tool_results": [
+    {
+     "error": false,
+     "text": "1\t{\n2\t  \"mcpServers\": {\n3\t    \"demo\": {\n4\t      \"type\": \"stdio\",\n5\t      \"command\": \"python3\",\n6\t      \"args\": [\n7\t        \"/Users/alexlobaito/Projects/pro-map-live-test/demo_server.py\"\n8\t      ]\n9\t    }\n10\t  }\n11\t}"
+    },
+    {
+     "error": true,
+     "text": "PreToolUse:Edit hook error: Claude Code custom policy v1 (not full vendor JSON Schema): custom headers require exact ${VAR} or Bearer ${VAR}"
+    }
+   ]
+  }
+ ],
+ "calls_log": "after read (only line; read on Mac 2026-10-12)"
+}
