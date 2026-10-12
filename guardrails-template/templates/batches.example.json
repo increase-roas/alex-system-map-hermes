@@ -1,0 +1,11 @@
+{
+  "mcp__composio__COMPOSIO_MULTI_EXECUTE_TOOL": {
+    "actions_key": "tools",
+    "action_name_key": "tool_slug",
+    "arguments_key": "arguments",
+    "optional_fields": { "session_id": "string" },
+    "actions": {
+      "GOHIGHLEVEL_LIST_CONTACTS": ["composio.md", "ghl.md"]
+    }
+  }
+}

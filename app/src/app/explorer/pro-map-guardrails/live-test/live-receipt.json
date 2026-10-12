@@ -1,15 +1,20 @@
 {
- "what": "5 real Claude Code sessions (claude -p, v2.1.296, haiku) in a throwaway project ~/Projects/pro-map-live-test with asset_guard.py + read_gate.py registered in .claude/settings.json. Not Alex's real settings.",
+ "what": "5 real Claude Code sessions (claude -p, v2.1.296, haiku) in throwaway project ~/Projects/pro-map-live-test, INSTALLED BY guardrails-template/install.py (check.py PASS before the runs). Not Alex's real settings.",
  "date": "2026-10-12",
- "scripts": {
-  "asset_guard.py": "f08fdd4fff85418c2edbaf0e4bdd51f5130ab2dc03f3e42e522e92246a60464f",
-  "read_gate.py": "ee3591bb18020aa73abb301cb7efc77a4bf84463b56270739e2c0a018abe5380"
+ "template_files": {
+  "check.py": "c5a580166f41f25cc5f0b4aa8b063d0d96462a8b0977fc7e416d4bc1b7b9f350",
+  "hermes/hermes_guard.py": "514c462fc38c9a29b35c3885d2471d3f3afb477677c353b6a2f5ca51520405f9",
+  "hermes/install_hermes.py": "4d845dae04dcb6a39e46dbac09ba30b5bed88e1aff6792dd7e7ad6a69d37b5a3",
+  "hooks/asset_guard.py": "f08fdd4fff85418c2edbaf0e4bdd51f5130ab2dc03f3e42e522e92246a60464f",
+  "hooks/read_gate.py": "ee3591bb18020aa73abb301cb7efc77a4bf84463b56270739e2c0a018abe5380",
+  "install.py": "6349188690a2ecc62d27570840246491dc97976c7d450378f4516b3f0a0345be",
+  "uninstall.py": "8de40f6b729df397fc3bc1a40d24d5813babc435a705a7541c1d2b0602df2728"
  },
  "runs": [
   {
    "run": "1-call-before-read",
-   "expected": "blocked by read gate; tool never executed (calls.log has no \"before read\")",
-   "transcript_sha256": "3b74eff7a64eda18516329f2fc10611854ba767f4c518699c5cba079429892fa",
+   "expected": "blocked by read gate; tool never executed",
+   "transcript_sha256": "deb33ae81f9c2a7667005d40fd84b148fe3208f8aba2e987e0384b483abce45f",
    "tool_results": [
     {
      "error": false,
@@ -23,8 +28,8 @@
   },
   {
    "run": "2-read-then-call",
-   "expected": "card read in full, then tool allowed and executed (\"echo: after read\" in calls.log)",
-   "transcript_sha256": "13500483a78de063263267fc175357b5342bb26b74dcefd66815badc457f830f",
+   "expected": "card read in full, then tool ran (\"after read\" is the only line in calls.log)",
+   "transcript_sha256": "173a13d9ca7f47aa4b3910c61dc9efdff186ca19f120cafc7ff5754e086005a9",
    "tool_results": [
     {
      "error": false,
@@ -42,8 +47,8 @@
   },
   {
    "run": "3-bad-skill",
-   "expected": "SKILL.md without frontmatter blocked by asset_guard; file not created",
-   "transcript_sha256": "07686ae22477aef30b41a75690917edaa6793d1bdcb71815659666c2ab118d60",
+   "expected": "SKILL.md with no header blocked; not created",
+   "transcript_sha256": "813ec13c466694bf7ae8bb7c02b5393b0d5d81633d3a156c3bf5218c5e53bc5b",
    "tool_results": [
     {
      "error": true,
@@ -53,8 +58,8 @@
   },
   {
    "run": "4-good-skill",
-   "expected": "valid SKILL.md passed asset_guard; then Claude Code built-in protection for .claude/ asked for approval (headless, so not written). Guard allow shown, write not completed.",
-   "transcript_sha256": "78f400779de76fc3fd9a98ad8f4fba2cea22b977ff6f0db2f985250fcbae8044",
+   "expected": "valid SKILL.md reached Claude Code's own .claude/ approval step (hooks run before that step, none refused it); headless, so not written",
+   "transcript_sha256": "f611edeb9cdfcb7672f9ae9001561d42f014c8cec083726deea6bd0b37cd9376",
    "tool_results": [
     {
      "error": true,
@@ -64,8 +69,8 @@
   },
   {
    "run": "5-key-in-connector",
-   "expected": "connector with a pasted Bearer key blocked by asset_guard; .mcp.json unchanged",
-   "transcript_sha256": "63138049a3e245af75ccfed12e38eede6366aa976e9e91516de2971e89451e58",
+   "expected": "connector with pasted Bearer key blocked; .mcp.json unchanged",
+   "transcript_sha256": "525908f86c975f4cbc6e37b71500751e00fbb46eaf9467cbb1661c09d823e879",
    "tool_results": [
     {
      "error": false,
@@ -78,5 +83,5 @@
    ]
   }
  ],
- "calls_log": "after read (only line; read on Mac 2026-10-12)"
+ "calls_log": "after read"
 }

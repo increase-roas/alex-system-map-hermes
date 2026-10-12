@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "local-tool": {
+      "type": "stdio",
+      "command": "python3",
+      "args": ["/absolute/path/to/server.py"],
+      "env": { "API_KEY": "${LOCAL_TOOL_API_KEY}" }
+    },
+    "remote-tool": {
+      "type": "http",
+      "url": "https://example.com/mcp",
+      "headers": { "Authorization": "Bearer ${REMOTE_TOOL_TOKEN}" }
+    }
+  }
+}
