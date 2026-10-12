@@ -1,0 +1,32 @@
+{
+  "verified_date": "2026-10-12",
+  "hook_source": "https://code.claude.com/docs/en/hooks",
+  "read_source": "https://code.claude.com/docs/en/agent-sdk/typescript#read-2",
+  "verification_method": "web browser DOM extraction of official primary Read input/output definitions",
+  "read_input": {
+    "file_path": "string",
+    "offset": "optional number",
+    "limit": "optional number",
+    "pages": "optional string"
+  },
+  "read_text_output": {
+    "type": "text",
+    "file": {
+      "filePath": "string",
+      "content": "string",
+      "numLines": "number",
+      "startLine": "number",
+      "totalLines": "number",
+      "truncatedByTokenCap": "optional boolean"
+    }
+  },
+  "reject_variants": [
+    "image",
+    "notebook",
+    "pdf",
+    "parts",
+    "file_unchanged"
+  ],
+  "required_runtime_version_for_onFailure_block": "2.1.295",
+  "quality_scope": "Syntactic completeness and exact content hash, not semantic quality or understanding"
+}

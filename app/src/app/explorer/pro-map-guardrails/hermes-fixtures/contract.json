@@ -1,0 +1,131 @@
+{
+  "scope": "Local written/subprocess-tested adapter only; no installation, live/fleet proof or A claim.",
+  "pinned_runtime": "f594424e58f18ebc2607decaa72f300e0a26a24b",
+  "hooks": {
+    "hooks": {
+      "pre_tool_call": [
+        {
+          "command": "python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py --policy /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+          "timeout": 10,
+          "fail_closed": true
+        }
+      ],
+      "post_tool_call": [
+        {
+          "command": "python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py --policy /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+          "timeout": 10
+        }
+      ],
+      "pre_verify": [
+        {
+          "command": "python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py --policy /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+          "timeout": 10
+        }
+      ]
+    }
+  },
+  "policy": {
+    "home": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile",
+    "profile": "fixture",
+    "cards_dir": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/cards",
+    "state_dir": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/state",
+    "routes": {
+      "mcp__github__get_issue": {
+        "server": "github",
+        "card": "github.md"
+      }
+    }
+  },
+  "input_examples": {
+    "pre_tool_call": {
+      "hook_event_name": "pre_tool_call",
+      "tool_name": "read_file",
+      "tool_input": {
+        "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/cards/github.md"
+      },
+      "session_id": "fixture-session",
+      "cwd": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile",
+      "profile": "fixture",
+      "extra": {
+        "tool_call_id": "fixture-read-1",
+        "task_id": "fixture-task"
+      }
+    },
+    "post_tool_call": {
+      "hook_event_name": "post_tool_call",
+      "tool_name": "read_file",
+      "tool_input": {
+        "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/cards/github.md"
+      },
+      "session_id": "fixture-session",
+      "cwd": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile",
+      "profile": "fixture",
+      "extra": {
+        "tool_call_id": "fixture-read-1",
+        "task_id": "fixture-task",
+        "result": "{\"content\": \"1|# Fixture connector card\\n2|Synthetic read-only example, not a live account or server.\", \"total_lines\": 2, \"file_size\": 84, \"truncated\": false}",
+        "status": "success",
+        "duration_ms": 1,
+        "error_type": null,
+        "error_message": null
+      }
+    },
+    "pre_verify": {
+      "hook_event_name": "pre_verify",
+      "tool_name": null,
+      "tool_input": null,
+      "session_id": "fixture-session",
+      "cwd": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile",
+      "profile": "fixture",
+      "extra": {
+        "coding": true,
+        "attempt": 0,
+        "platform": "cli",
+        "model": "fixture",
+        "changed_paths": [
+          "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile/skills/demo/SKILL.md"
+        ],
+        "final_response": "Fixture only"
+      }
+    }
+  },
+  "runtime_prerequisites": [
+    "POSIX Python 3 (fcntl); JSON-formatted YAML mode needs stdlib only.",
+    "General YAML requires PyYAML in the SAME Python interpreter used by the hook command. Current local python3 has no PyYAML; general-YAML branch is unverified.",
+    "Active HERMES_HOME must exactly match policy.home; profile payload must exactly match policy.profile.",
+    "Operator policy/routes and state directory must be protected from tool/user-controlled alteration.",
+    "Use local filesystem paths visible to the hook host; remote/container read mapping is unsupported."
+  ],
+  "setup": [
+    "Copy hermes_guard.py to the operator-selected installation path. Do not install from this fixture without review.",
+    "Create operator policy JSON using actual active profile home, cards_dir and state_dir (absolute nonsymlink paths). Route keys must be exact discovered MCP names. The github/get_issue example is synthetic native-shaped data, not live discovery.",
+    "Generate the hooks block with python3 -B <installed-script> --policy <policy.json> --print-hook-config. Merge the generated hooks into that profile config.yaml; do not replace existing settings. Use an absolute operator-selected Python interpreter if PATH is uncertain.",
+    "Set HERMES_HOME to active profile home using the normal Hermes profile launcher. Consent to these exact hook commands through the normal Hermes approval flow. No auto-accept was added. Restart/reload the appropriate Hermes runtime to load configuration.",
+    "Load MCP credential values through the existing operator-approved profile .env/secret source. Config may reference ${ENV} or ${env:ENV}; no credential values belong in this policy or handoff. This guard does not validate live secret availability.",
+    "Before an exact mapped MCP call, issue read_file(path=<absolute card path>,offset=1,limit=<enough for full file>). Read evidence is marked only after the native post result proves complete, unredacted matching content with stable pre/post hash.",
+    "Inspect state_dir/findings.json after post calls. Invalid on-disk assets request action:continue at pre_verify, when Hermes actually emits that bounded event. Post results cannot veto or roll back."
+  ],
+  "custom_skill_policy": [
+    "name is lowercase letters/digits/hyphens, <=64 chars, equals folder name",
+    "description >=20 characters and contains literal Use when",
+    "nonempty Markdown body, <=500 body lines",
+    "inline/reference-definition local links go to nonempty direct files within at most one subdirectory; no self, escape, symlink or chained local links",
+    "bare prose and dynamic references are not resolved; these are custom checks, not native Hermes limits"
+  ],
+  "supported": [
+    "full write_file overwrites of active home/config.yaml or home/skills/**/SKILL.md, pre-simulated and post/pre_verify rechecked",
+    "local read_file; card proof is session+profile+home+path+content hash with pending pre snapshot; native extra.tool_call_id when present, single pending session/file when absent",
+    "exact configured nonaggregate MCP route keys with enabled native mcp_servers entry and current successful card-read proof",
+    "MCP env/header placeholders, Authorization Bearer placeholder, HTTPS URL or simple stdio command template"
+  ],
+  "unsupported": [
+    "skill_manage flat actions and every operations batch",
+    "COMPOSIO_MULTI_EXECUTE_TOOL and other aggregate tools; aggregate-shaped args on any mapped route denied as a whole",
+    "terminal, patch, execute_code, delegation, manage_connections, unknown tools/MCP routes",
+    "append writes, arbitrary files/supporting-file authoring, external/project/plugin skills, nonlocal file mappings",
+    "unsupported MCP server options/transports, shell command wrappers, credential command arguments, plaintext env/header values",
+    "no pre-write protection for terminal arbitrary edits or out-of-band mutations; terminal dispatch is denied, not simulated",
+    "post_tool_call is observer-only; pre_verify continuation is bounded and not guaranteed to fire on every change",
+    "unapproved/skipped hooks, startup MCP server launches outside tool dispatch, other plugin modifications and same-user tampering not covered"
+  ]
+}

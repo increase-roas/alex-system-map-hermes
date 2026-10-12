@@ -1,0 +1,69 @@
+{
+  "status": "LOCAL_SUBPROCESS_VERIFIED",
+  "date": "2026-10-12",
+  "runtime_pin": "f594424e58f18ebc2607decaa72f300e0a26a24b",
+  "tests": {
+    "total": 57,
+    "passed": 56,
+    "skipped": 1,
+    "skipped_test": "test_general_yaml_with_actual_pyyaml",
+    "reason": "PyYAML missing in exact current python3 interpreter; no install"
+  },
+  "acceptance": {
+    "items": 10,
+    "verified": 10,
+    "command": "python3 -B /Users/alexlobaito/.agents/skills/verify-before-done/scripts/check_acceptance.py --from /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/acceptance.txt"
+  },
+  "example_subprocess": [
+    {
+      "input": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/pre-read.json",
+      "exit": 0,
+      "stdout": {}
+    },
+    {
+      "input": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/post-read.json",
+      "exit": 0,
+      "stdout": {}
+    },
+    {
+      "input": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/pre-verify.json",
+      "exit": 0,
+      "stdout": {}
+    },
+    {
+      "input": "synthetic exact route after full card read; NO MCP invocation",
+      "exit": 0,
+      "stdout": {}
+    }
+  ],
+  "written_files": [
+    {
+      "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py",
+      "sha256": "cfaacd5be34cd0ad7856270ba6a4277634e739a32eade72916cc0fd13e65e116"
+    },
+    {
+      "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/test_hermes_guard.py",
+      "sha256": "97fad418a8feabf35fb11ecf2a6440735c73841d8884d683b95ffa674ea90936"
+    },
+    {
+      "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/contract.json",
+      "sha256": "276781c679e4bb16c773649f9463618e911bf662fb7fcff14048cb459e0edd55"
+    },
+    {
+      "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+      "sha256": "73db431ea334f717bb1af6de8777ed888edb1403f79ca69e19cced2d030bbafd"
+    },
+    {
+      "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/hook-config.json",
+      "sha256": "1e038f488de82377335766ddb61cd85d8c44dc95b021989fa0a81eab2b68afd6"
+    }
+  ],
+  "no_live_install_or_connector_execution": true,
+  "blocked": [
+    {
+      "type": "missing_evidence",
+      "item": "General-YAML parser runtime verification",
+      "missing": "PyYAML in the exact hook Python interpreter; optional test skipped"
+    }
+  ]
+}

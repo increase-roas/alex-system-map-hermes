@@ -1,0 +1,41 @@
+{
+  "authored_file_scope": [
+    "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py",
+    "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/test_read_gate.py",
+    "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read-fixtures"
+  ],
+  "python_files": {
+    "read_gate.py": {
+      "sha256": "ee3591bb18020aa73abb301cb7efc77a4bf84463b56270739e2c0a018abe5380",
+      "bytes": 18554
+    },
+    "test_read_gate.py": {
+      "sha256": "54dcefce98dfb74ecb077644fa4912c99ccd929775f361c92e4d7b799397f7a0",
+      "bytes": 19335
+    }
+  },
+  "python_ast_parse": "PASS",
+  "implementation_status": "written and locally subprocess-tested; not installed",
+  "runtime_agent_inaccessible_state": "NOT_PROVEN; trusted launcher/isolation required",
+  "semantic_card_quality": "NOT_ASSESSED",
+  "covered_routes": [
+    "native MCP tool names",
+    "explicitly configured batch adapter"
+  ],
+  "not_covered": [
+    "Bash wrappers",
+    "external process connector calls",
+    "hook or policy tampering by same UID"
+  ],
+  "tests": {
+    "tests_run": 31,
+    "failures": 0,
+    "errors": 0,
+    "successful": true,
+    "test_command": "python3 -B test_read_gate.py",
+    "scope": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails",
+    "subprocess_contract": true
+  },
+  "route_policy": "Exact direct_tools allowlist plus configured batches; known server alone never grants a route",
+  "example_policy_validation": "PASS actual policy parser; server/action identifiers illustrative, not live-discovered"
+}

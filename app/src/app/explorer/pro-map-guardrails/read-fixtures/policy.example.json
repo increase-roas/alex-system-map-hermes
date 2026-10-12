@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "project_root": "${CLAUDE_PROJECT_DIR}",
+  "servers": {
+    "ghl": [
+      "/Users/alexlobaito/.agents/tools/cards/ghl.md"
+    ],
+    "composio": [
+      "/Users/alexlobaito/.agents/tools/cards/composio.md"
+    ]
+  },
+  "batches": {
+    "mcp__composio__COMPOSIO_MULTI_EXECUTE_TOOL": {
+      "actions_key": "tools",
+      "action_name_key": "tool_slug",
+      "arguments_key": "arguments",
+      "optional_fields": {
+        "session_id": "string",
+        "sync_response_to_workbench": "boolean"
+      },
+      "actions": {
+        "GHL_GET_CONTACT": [
+          "/Users/alexlobaito/.agents/tools/cards/ghl.md"
+        ],
+        "GOOGLESHEETS_GET_SPREADSHEET": [
+          "/Users/alexlobaito/.agents/tools/cards/google-workspace.md"
+        ]
+      }
+    }
+  },
+  "direct_tools": [
+    "mcp__ghl__contacts_list"
+  ]
+}

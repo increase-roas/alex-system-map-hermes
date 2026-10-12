@@ -1,0 +1,71 @@
+{
+  "sha": "f594424e58f18ebc2607decaa72f300e0a26a24b",
+  "verified_date": "2026-10-12",
+  "docs": [
+    "https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/features/mcp",
+    "https://hermes-agent.nousresearch.com/docs/user-guide/features/skills"
+  ],
+  "sources": [
+    {
+      "path": "agent/conversation_loop.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/agent/conversation_loop.py",
+      "sha256": "926435d563ef1b7de1049f5c36897f1cda7376508b98164a68a0cb5192656270"
+    },
+    {
+      "path": "agent/shell_hooks.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/agent/shell_hooks.py",
+      "sha256": "92b55fbff1be18ea047b748afe77555ce57a64fcba6cbc378ddd6a3b7dc7481b"
+    },
+    {
+      "path": "hermes_cli/plugins.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/hermes_cli/plugins.py",
+      "sha256": "f5a1c27a22025984bbf956b58154ce23914592307bd945d7a1c0167cc443d771"
+    },
+    {
+      "path": "tools/file_operations.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/file_operations.py",
+      "sha256": "d6241403fb3466a0da823efd1ac61681655c6f80d56aac907d8b1ad5371cd7ce"
+    },
+    {
+      "path": "tools/file_tools.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/file_tools.py",
+      "sha256": "1a23773abe410feb5dd99276d08b6c0837624309ea489c508d683c6965408f94"
+    },
+    {
+      "path": "tools/mcp_tool.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/mcp_tool.py",
+      "sha256": "8c20af5a8da975b44ea7909bea53865179a7557a044d0623ee8d050030a1aa0a"
+    },
+    {
+      "path": "tools/mcp_tool_config.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/mcp_tool_config.py",
+      "sha256": "d51491d494a93b0f6ba6f8661e46de8b08cf0e386ed735d0876412705b4d520b"
+    },
+    {
+      "path": "tools/mcp_tool_discovery.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/mcp_tool_discovery.py",
+      "sha256": "cf2dc204fd293727e0e13a045428152f8e1925aa48ea521f6ec97035dd1e86d9"
+    },
+    {
+      "path": "tools/mcp_tool_registration.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/mcp_tool_registration.py",
+      "sha256": "7e73a415283c5255fedeb9318fceeb556eb31a19cea2e9bd3d9fdfc0f9297ade"
+    },
+    {
+      "path": "tools/mcp_tool_schema.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/mcp_tool_schema.py",
+      "sha256": "21ab2ef8b122add133af4ef387b32f6e8c6711f6e1b2f6f4744bcb279fa2135b"
+    },
+    {
+      "path": "tools/skill_manager_tool.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/skill_manager_tool.py",
+      "sha256": "10f5ad4260ab8e56eccaabd3e1563a838903805e02bd9c9ac49c0458766e62fc"
+    },
+    {
+      "path": "tools/skills_tool.py",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/f594424e58f18ebc2607decaa72f300e0a26a24b/tools/skills_tool.py",
+      "sha256": "a5fac64ae3c2f2496cd7da46aacd396d6a50a0dd5d9f4ef4d1ba2d8d7ba9df2f"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+test_500_body_lines_allowed (__main__.HermesGuardTests.test_500_body_lines_allowed) ... ok
+test_501_body_lines_denied (__main__.HermesGuardTests.test_501_body_lines_denied) ... ok
+test_actual_pinned_serializer_envelope (__main__.HermesGuardTests.test_actual_pinned_serializer_envelope) ... ok
+test_append_denied (__main__.HermesGuardTests.test_append_denied) ... ok
+test_chained_reference_denied (__main__.HermesGuardTests.test_chained_reference_denied) ... ok
+test_change_between_pre_and_post_invalidates_read (__main__.HermesGuardTests.test_change_between_pre_and_post_invalidates_read) ... ok
+test_changed_card_invalidates_read (__main__.HermesGuardTests.test_changed_card_invalidates_read) ... ok
+test_claude_payload_not_accepted (__main__.HermesGuardTests.test_claude_payload_not_accepted) ... ok
+test_connector_batch_explicitly_denied_even_after_read (__main__.HermesGuardTests.test_connector_batch_explicitly_denied_even_after_read) ... ok
+test_copied_adapter_uses_operator_state_location (__main__.HermesGuardTests.test_copied_adapter_uses_operator_state_location) ... ok
+test_deep_reference_denied (__main__.HermesGuardTests.test_deep_reference_denied) ... ok
+test_description_requires_use_when_custom_policy (__main__.HermesGuardTests.test_description_requires_use_when_custom_policy) ... ok
+test_disabled_mcp_server_denied (__main__.HermesGuardTests.test_disabled_mcp_server_denied) ... ok
+test_embedded_plaintext_with_placeholder_denied (__main__.HermesGuardTests.test_embedded_plaintext_with_placeholder_denied) ... ok
+test_env_placeholders_supported (__main__.HermesGuardTests.test_env_placeholders_supported) ... ok
+test_failed_read_never_marks (__main__.HermesGuardTests.test_failed_read_never_marks) ... ok
+test_false_full_content_never_marks (__main__.HermesGuardTests.test_false_full_content_never_marks) ... ok
+test_full_read_allows_exact_route (__main__.HermesGuardTests.test_full_read_allows_exact_route) ... ok
+test_general_yaml_missing_dependency_blocks (__main__.HermesGuardTests.test_general_yaml_missing_dependency_blocks) ... ok
+test_general_yaml_with_actual_pyyaml (__main__.HermesGuardTests.test_general_yaml_with_actual_pyyaml) ... skipped 'PyYAML prerequisite missing; no install authorized'
+test_header_placeholders_supported (__main__.HermesGuardTests.test_header_placeholders_supported) ... ok
+test_invalid_skill_blocks_write (__main__.HermesGuardTests.test_invalid_skill_blocks_write) ... ok
+test_json_core_imports_stdlib_only (__main__.HermesGuardTests.test_json_core_imports_stdlib_only) ... ok
+test_mapped_tool_cannot_hide_batch (__main__.HermesGuardTests.test_mapped_tool_cannot_hide_batch) ... ok
+test_mcp_command_argument_secret_blocks (__main__.HermesGuardTests.test_mcp_command_argument_secret_blocks) ... ok
+test_mcp_plaintext_secret_blocks_write (__main__.HermesGuardTests.test_mcp_plaintext_secret_blocks_write) ... ok
+test_missing_card_blocks (__main__.HermesGuardTests.test_missing_card_blocks) ... ok
+test_missing_reference_denied (__main__.HermesGuardTests.test_missing_reference_denied) ... ok
+test_missing_session_blocks (__main__.HermesGuardTests.test_missing_session_blocks) ... ok
+test_native_name_from_pinned_runtime_function (__main__.HermesGuardTests.test_native_name_from_pinned_runtime_function) ... ok
+test_no_claude_mcp_config_substitution (__main__.HermesGuardTests.test_no_claude_mcp_config_substitution) ... ok
+test_one_level_existing_reference_allowed (__main__.HermesGuardTests.test_one_level_existing_reference_allowed) ... ok
+test_other_session_cannot_reuse_read (__main__.HermesGuardTests.test_other_session_cannot_reuse_read) ... ok
+test_overlapping_no_id_reads_are_denied (__main__.HermesGuardTests.test_overlapping_no_id_reads_are_denied) ... ok
+test_partial_offset_never_marks (__main__.HermesGuardTests.test_partial_offset_never_marks) ... ok
+test_patch_denied (__main__.HermesGuardTests.test_patch_denied) ... ok
+test_post_detects_actual_invalid_edit_observer_only (__main__.HermesGuardTests.test_post_detects_actual_invalid_edit_observer_only) ... ok
+test_post_without_pre_never_marks (__main__.HermesGuardTests.test_post_without_pre_never_marks) ... ok
+test_pre_read_alone_never_marks (__main__.HermesGuardTests.test_pre_read_alone_never_marks) ... ok
+test_pre_verify_catches_actual_invalid_edit (__main__.HermesGuardTests.test_pre_verify_catches_actual_invalid_edit) ... ok
+test_pre_verify_valid_is_noop (__main__.HermesGuardTests.test_pre_verify_valid_is_noop) ... ok
+test_print_exact_hook_config (__main__.HermesGuardTests.test_print_exact_hook_config) ... ok
+test_profile_home_mismatch_blocks (__main__.HermesGuardTests.test_profile_home_mismatch_blocks) ... ok
+test_read_without_ids_uses_pending_session_file (__main__.HermesGuardTests.test_read_without_ids_uses_pending_session_file) ... ok
+test_redacted_result_never_marks (__main__.HermesGuardTests.test_redacted_result_never_marks) ... ok
+test_reference_definition_escape_denied (__main__.HermesGuardTests.test_reference_definition_escape_denied) ... ok
+test_script_exists (__main__.HermesGuardTests.test_script_exists) ... ok
+test_skill_batch_explicitly_denied (__main__.HermesGuardTests.test_skill_batch_explicitly_denied) ... ok
+test_status_error_never_marks (__main__.HermesGuardTests.test_status_error_never_marks) ... ok
+test_symlink_card_escape_denied (__main__.HermesGuardTests.test_symlink_card_escape_denied) ... ok
+test_terminal_denied_no_simulated_prewrite_claim (__main__.HermesGuardTests.test_terminal_denied_no_simulated_prewrite_claim) ... ok
+test_truncated_read_never_marks (__main__.HermesGuardTests.test_truncated_read_never_marks) ... ok
+test_unknown_mcp_route_denied (__main__.HermesGuardTests.test_unknown_mcp_route_denied) ... ok
+test_unread_card_blocks (__main__.HermesGuardTests.test_unread_card_blocks) ... ok
+test_valid_skill_full_write_allowed (__main__.HermesGuardTests.test_valid_skill_full_write_allowed) ... ok
+test_write_outside_native_assets_denied (__main__.HermesGuardTests.test_write_outside_native_assets_denied) ... ok
+test_wrong_call_id_cannot_mark (__main__.HermesGuardTests.test_wrong_call_id_cannot_mark) ... ok
+
+----------------------------------------------------------------------
+Ran 57 tests in 3.688s
+
+OK (skipped=1)

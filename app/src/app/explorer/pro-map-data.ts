@@ -10,6 +10,8 @@ import { PRO_EXAMPLES, type ProExamples } from './pro-map-examples';
 import { PRO_MORE, type More } from './pro-map-more';
 import { PRO_FILL } from './pro-map-fill';
 import { FIXES } from './pro-map-fixes';
+import { correctV2Node } from './pro-map-v2-corrections';
+import { withGuardrails } from './pro-map-guardrail-cards';
 
 export type FullDetail = ProDetail & ProExamples & Pick<More, 'myths'>;
 
@@ -19,7 +21,7 @@ export type ProNode = {
   id: string; label: string; sub: string; status: ProStatus; why: string; sources: string[];
   how?: string[]; trace?: string; tag?: string; detail?: FullDetail;
   x: number; y: number; w?: number; h?: number; band?: boolean;
-  grade?: { letter: string; note: string };
+  grade?: { letter: string; note: string; proof?: { area: string; grade: string; why: string; sources?: string[]; check?: string }[] };
 };
 export type ProEdge = {
   id: string; source: string; target: string; kind: 'flow' | 'link' | 'bypass' | 'loop'; label?: string;
@@ -75,7 +77,7 @@ function yLayout(steps: readonly string[], bandH: Record<string, number>): { y: 
 }
 /** Version 2 (middle map) has its own order: the lead identifies the project BEFORE loading its files (Codex spec 2026-10-12). */
 const P_STEPS = ['ask', 'ui', 'client', 'front', 'plan', 'delegate', 'know', 'gw', 'run', 'verify', 'report', 'learn'] as const;
-const P_BAND_H = { client: 125, front: 130, plan: 110, delegate: 245, gw: 125, run: 115, verify: 115, learn: 125 };
+const P_BAND_H = { ask: 310, ui: 310, client: 310, front: 310, plan: 155, delegate: 380, know: 155, gw: 310, run: 310, verify: 310, report: 155, learn: 310 };
 const PY = yLayout(P_STEPS, P_BAND_H);
 const ROW_W = 750;
 
@@ -222,6 +224,9 @@ const proNodes: ProNode[] = [
   ], ref).map((n) => ({ ...n, w: 170, x: P + 805 })),
 ];
 const proExtra: ProNode[] = [
+  { id: 'p_session', label: 'Session/router instructions', sub: 'Built-in startup; custom router has its own prompt', status: ref, why: 'Load session instructions and the system prompt before the first model decision. A custom router has its own instructions before target-project selection.', sources: [ANT.mem, 'https://code.claude.com/docs/en/agent-sdk/modifying-system-prompts'], x: 0, y: 0 },
+  { id: 'p_pending', label: 'Approval pending', sub: 'Built-in Code prompt; custom SDK approval UI', status: ref, why: 'Wait without execution. Only an authorized approval advances the call; denial ends this route as BLOCKED.', sources: [ANT.perm, 'https://code.claude.com/docs/en/agent-sdk/permissions'], x: 0, y: 0 },
+  { id: 'p_blocked', label: 'BLOCKED: unmet acceptance', sub: 'Denied, failed, budget capped or interrupted', status: ref, why: 'A terminal stop is not a pass. Preserve progress, reconcile uncertain writes and report the exact unmet check before any authorized resume.', sources: [ANT.hooks, 'https://code.claude.com/docs/en/agent-sdk/python'], x: 0, y: 0 },
   { id: 'p_load', label: 'Load instructions', sub: 'Project rules, skills, memory; progress if resuming', status: ref, why: 'Once the project is known, the lead loads that project\'s CLAUDE.md and rules, the skill list, the first 200 lines of MEMORY.md, and, if it is resuming a job, the progress file and git log.', sources: [ANT.mem], x: 0, y: 0 },
   { id: 'p_plan', label: 'Choose the next action', sub: 'Answer, work alone, or delegate', status: ref, why: 'The lead decides: answer straight away, do the work itself, or hand parts to helpers.', sources: [ANT.effective], x: 0, y: 0 },
   { id: 'p_helpers', label: 'Optional helpers', sub: 'Each gets a task and its own instructions', status: ref, why: 'Only when it helps: each helper gets a clear handoff, loads its own instructions, works in its own context, and returns a summary.', sources: [ANT.sub, ANT.research], x: 0, y: 0 },
@@ -241,16 +246,16 @@ const proExtra: ProNode[] = [
 
 const PRO_LAYOUT: Record<string, string[]> = {
   ask: ['p_you', 'p_goal', 'p_trigger', 'p_x9'],
-  ui: ['p_ui1', 'p_ui2', 'p_ui3'],
+  ui: ['p_ui1', 'p_ui2', 'p_ui3', 'p_session'],
   client: ['p_lead', 'p_l1', 'p_l2', 'p_g5'],
   front: ['p_load', 'p_ptr1', 'p_ptr2', 'p_ptr3', 'p_ptr4'],
   plan: ['p_plan', 'p_plan1', 'p_plan2'],
-  delegate: ['p_self', 'p_helpers', 'p_a1', 'p_a2', 'p_a3', 'p_combine'],
+  delegate: ['p_self', 'p_helpers', 'p_a1', 'p_a2', 'p_a3'],
   know: ['p_k0', 'p_k1', 'p_k2'],
-  gw: ['p_g1', 'p_rulegate', 'p_g2', 'p_g3', 'p_g4'],
+  gw: ['p_g1', 'p_rulegate', 'p_g2', 'p_g3', 'p_g4', 'p_pending'],
   run: ['p_t1', 'p_t2', 'p_l3', 'p_result', 'p_aftercheck'],
-  verify: ['p_check', 'p_evidence', 'p_r1', 'p_r2', 'p_r3'],
-  report: ['p_rep1', 'p_rep2'],
+  verify: ['p_combine', 'p_check', 'p_evidence', 'p_r1', 'p_r2', 'p_r3'],
+  report: ['p_rep1', 'p_rep2', 'p_blocked'],
   learn: ['p_e1', 'p_e5', 'p_e2', 'p_e6', 'p_e3', 'p_e4'],
 };
 const PRO_LIB = ['p_lib_which', 'p_lib_limits', 'p_small', 'p_ptr5', 'p_lib_skills', 'p_lib_memory', 'p_lib_plugins', 'p_lib_mcp', 'p_lib_settings', 'p_plan3', 'p_k3', 'p_k4', 'p_t4', 'p_t3', 'p_a4', 'p_l4', 'p_lib_evals', 'p_testset', 'p_r4'];
@@ -264,9 +269,19 @@ function relayout(nodes: ProNode[], x0: number, rows: Record<string, string[]>, 
   const get = (id: string) => { const n = byId.get(id); if (!n) throw new Error(`Pro Map layout: unknown card ${id}`); return n; };
   for (const step of steps) {
     const ids = rows[step];
-    const sp = ROW_W / ids.length;
+    const v2 = steps === P_STEPS;
+    const columns = v2 ? Math.min(3, ids.length) : ids.length;
+    const sp = ROW_W / columns;
     const w = Math.min(230, sp - 14);
-    ids.forEach((id, i) => out.set(id, { ...get(id), x: x0 + i * sp + (sp - w) / 2, y: y[step] + 30 + (rowOff[step] ?? 0), w }));
+    ids.forEach((id, i) => {
+      if (v2 && step === 'delegate') {
+        const placements = [[15, 70], [275, 70], [515, 70], [275, 230], [515, 230]];
+        const [dx, dy] = placements[i];
+        out.set(id, { ...get(id), x: x0 + dx, y: y[step] + dy, w: 220 });
+      } else {
+        out.set(id, { ...get(id), x: x0 + (i % columns) * sp + (sp - w) / 2, y: y[step] + (v2 ? 40 : 30) + Math.floor(i / columns) * (v2 ? 145 : 0) + (rowOff[step] ?? 0), w });
+      }
+    });
   }
   const col = (ids: string[], top: number, x: number, w: number) => {
     const gap = (bottom - top - 90) / ids.length;
@@ -288,7 +303,7 @@ function helperGroup(nodes: ProNode[]): ProNode[] {
   const x1 = Math.min(...g.map((n) => n.x)) - 6;
   const x2 = Math.max(...g.map((n) => n.x + (n.w ?? 130))) + 6;
   const y1 = Math.min(...g.map((n) => n.y)) - 26;
-  return [...nodes, { id: 'p_grp_helpers', label: 'Optional: hand out tasks', sub: '', band: true, status: ref, why: 'Only when it helps. Helpers load their own instructions and use the same tool loop.', sources: [ANT.sub], x: x1, y: y1, w: x2 - x1, h: 205 }];
+  return [...nodes, { id: 'p_grp_helpers', label: 'Optional: hand out tasks', sub: '', band: true, status: ref, why: 'Only when it helps. Custom helpers inherit loaded CLAUDE.md; built-in Explore/Plan skip it. Forks carry the conversation.', sources: [ANT.sub], x: x1, y: y1, w: x2 - x1, h: 305 }];
 }
 
 const pro: ProNode[] = [
@@ -455,7 +470,7 @@ export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
     myths: cat(mo?.myths, fi?.myths)?.map((m) => ({ ...m, fix: m.fix ?? FIXES[m.myth] })),
   };
   return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? []), ...(mo?.sources ?? []), ...(fi?.sources ?? [])])] };
-});
+}).map(correctV2Node).map(withGuardrails);
 
 const flow = (a: string, b: string, label?: string): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'flow', label });
 const link = (a: string, b: string, label: string | undefined, sh: 'ls' | 'rs', th: 'l' | 'r'): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'link', label, sh, th });
@@ -470,9 +485,10 @@ function spine(s: 'p' | 'y', from: Step): ProEdge[] {
 export const PRO_EDGES: ProEdge[] = [
   // Middle map (Codex spec): exact arrows, no automatic spine.
   flow('p_you', 'p_band_ui', 'Choose your interface'),
-  ...[1, 2, 3].map((i) => flow(`p_ui${i}`, 'p_lead', i === 2 ? 'Request' : undefined)),
-  { ...flow('p_trigger', 'p_lead', 'Starts a request'), sh: 'ls', th: 'l', offset: 20 },
-  { ...flow('p_x9', 'p_lead'), sh: 'ls', th: 'l', offset: 35 },
+  ...[1, 2, 3].map((i) => flow(`p_ui${i}`, 'p_session', i === 2 ? 'Request' : undefined)),
+  { ...flow('p_trigger', 'p_session', 'Starts a request'), sh: 'ls', th: 'l', offset: 20 },
+  { ...flow('p_x9', 'p_session'), sh: 'ls', th: 'l', offset: 35 },
+  flow('p_session', 'p_lead', 'Instructions before project decision'),
   flow('p_lead', 'p_load', 'Project identified'),
   flow('p_load', 'p_plan', 'Context ready'),
   flow('p_plan', 'p_self'),
@@ -482,10 +498,19 @@ export const PRO_EDGES: ProEdge[] = [
   flow('p_helpers', 'p_band_know', 'Helpers use this same tool loop'),
   flow('p_band_know', 'p_band_gw', 'Proposed call'),
   flow('p_band_gw', 'p_band_run', 'Allowed'),
-  flow('p_band_run', 'p_check', 'Ready to check'),
-  { ...flow('p_band_run', 'p_combine', 'Helper task finished'), sh: 'rs', th: 'r', offset: 45 },
+  { ...flow('p_g3', 'p_pending', 'Needs approval'), sh: 'rs', th: 'l' },
+  flow('p_pending', 'p_band_run', 'Approved'),
+  flow('p_pending', 'p_blocked', 'Denied or unavailable'),
+  flow('p_band_gw', 'p_blocked', 'Denied'),
+  ...['p_t1', 'p_t2', 'p_l3'].map((id) => flow(id, 'p_result', 'Execution result')),
+  flow('p_result', 'p_check', 'Ready to check'),
+  flow('p_result', 'p_blocked', 'Failed; no authorized repair'),
+  { ...flow('p_result', 'p_combine', 'Helper result received'), sh: 'rs', th: 'r', offset: 45 },
   { ...flow('p_combine', 'p_check', 'Combined result ready'), sh: 'rs', th: 'r', offset: 60 },
   flow('p_check', 'p_rep1', 'Passed'),
+  flow('p_check', 'p_blocked', 'Still failing at retry cap'),
+  link('p_x8', 'p_blocked', 'Budget exhausted', 'ls', 'r'),
+  link('p_session', 'p_blocked', 'Interrupted: preserve progress', 'rs', 'r'),
   { ...flow('p_rep1', 'p_you', 'Answer'), sh: 'rs', th: 'r', offset: 75 },
   { ...loop('p_result', 'p_band_know', 'More work'), offset: 15 },
   { ...loop('p_check', 'p_band_know', 'Needs correction'), offset: 30 },
@@ -495,8 +520,16 @@ export const PRO_EDGES: ProEdge[] = [
   link('p_band_learn', 'p_lib_memory', 'saves', 'ls', 'r'),
   link('p_band_know', 'p_lib_mcp', 'tool definitions', 'ls', 'r'),
   link('p_band_gw', 'p_lib_settings', 'rules from', 'ls', 'r'),
+  link('p_lib_skills', 'p_x2', 'check setup edits', 'rs', 'l'),
+  link('p_lib_mcp', 'p_rulegate', 'requires connector card', 'rs', 'l'),
+  { ...loop('p_rulegate', 'p_k1', 'blocked: Read full card, then retry'), offset: 25 },
   link('p_band_learn', 'p_testset', 'failures become tests', 'ls', 'r'),
-  link('p_ckpt', 'p_load', 'handoff reloads', 'ls', 'r'),
+  link('p_ckpt', 'p_load', 'Selected handoff/resume; not clear', 'ls', 'r'),
+  flow('p_rep1', 'p_e1', 'Report evidence informs learning'),
+  flow('p_blocked', 'p_band_learn', 'Failure evidence, not PASS'),
+  flow('p_check', 'p_band_learn', 'Check evidence'),
+  ...chain(['p_e1', 'p_e5', 'p_e3', 'p_e4']),
+  { ...loop('p_e4', 'p_load', 'Reviewed future instructions: next session'), offset: 90 },
 
   // Alex: no lead, so you open each app yourself.
   flow('y_you', 'y_band_ui', 'asks'),

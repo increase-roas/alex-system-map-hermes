@@ -1,3 +1,4 @@
+import { GUARD_STICKY } from './pro-map-guardrail-cards';
 /**
  * Sticky notes: things a first-timer forgets that make a template fail. From Codex's audit 2026-10-12.
  * ids list every map the card appears on (o_ = v1, p_ = v2, h_ = Hermes). title = example title; no title = whole card.
@@ -7,7 +8,8 @@ type Entry = { ids: string[]; title?: string; text: string; src: string };
 const HK = 'https://code.claude.com/docs/en/hooks';
 const HG = 'https://code.claude.com/docs/en/hooks-guide';
 const HH = 'https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks';
-export const STICKY: Entry[] = [
+import { V2_CORRECTED_IDS, V2_STICKY } from './pro-map-v2-corrections';
+const LEGACY_STICKY: Entry[] = [
   { ids: ['p_g1', 'o_g1'], title: 'Block a dangerous command', text: 'Save the script at that path, install jq, and run chmod +x on it. Then register it under PreToolUse with matcher Bash; saving the file alone does nothing.', src: HG },
   { ids: ['p_rulegate', 'o_rulegate'], title: 'Hook setup', text: '"onFailure": "block" needs Claude Code 2.1.295 or newer. On older versions a missing script, crash or timeout lets the call go through, so update first.', src: HK },
   { ids: ['p_g1', 'o_g1'], title: 'The approval script', text: 'Save it at .claude/hooks/needs-approval.sh, run chmod +x on it, and install jq. Test once with a fake contact before trusting it.', src: HG },
@@ -19,7 +21,8 @@ export const STICKY: Entry[] = [
   { ids: ['p_aftercheck'], title: 'The check script', text: 'This runs AFTER the edit. A failure tells Claude to fix it; it does not undo the changed file.', src: HG },
   { ids: ['p_ckpt'], title: 'The save script', text: 'Save it and chmod +x it. PreCompact does not fire on /clear, so ask Claude to update work/progress.md before you clear.', src: HK },
   { ids: ['h_hook', 'h_rulegate'], text: 'Approve these hooks interactively before relying on them unattended. Unapproved hooks are skipped when nobody is there to approve them.', src: HH },
-  { ids: ['h_hook', 'h_rulegate'], text: 'The scripts are not included: write them. To block a call, return Hermes\'s documented block response, or write the reason to stderr and exit 2.', src: HH },
+  { ids: ['h_rulegate'], text: 'The agency-policy script is not included: implement and review it. To block a call, use Hermes\'s documented block response, or stderr plus exit 2. A retry alone is not acknowledgment or approval.', src: HH },
+  { ids: ['h_hook'], text: 'The complete Python demo is included. Save it, make it executable, configure it in the active profile and approve hook consent interactively. It blocks ALL matched calls; it is not a client-specific policy.', src: HH },
   { ids: ['h_goal'], title: 'Finish line with a real test gate', text: 'Write and test checks/oak_ridge_form_test.py first; exit code 0 must mean it really passed. Adding gates from a chat app needs an authorized gateway admin.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/features/goals' },
   { ids: ['p_lib_mcp', 'o_lib_mcp'], title: 'One remote server, one local server', text: 'Replace mcp.example.com with your real server, and set GHL_ACME_TOKEN in the environment that launches Claude. Writing ${GHL_ACME_TOKEN} here does not create the token.', src: 'https://code.claude.com/docs/en/mcp' },
   { ids: ['p_lib_mcp', 'o_lib_mcp'], title: 'One remote server, one local server', text: 'Approve the project\'s .mcp.json servers when Claude Code asks, then check /mcp shows them connected. A saved file is not a working connection.', src: 'https://code.claude.com/docs/en/mcp' },
@@ -35,7 +38,15 @@ export const STICKY: Entry[] = [
   { ids: ['p_x3', 'o_x3'], title: 'Turn the trace on', text: 'Start a telemetry collector first. For localhost:4317 also set OTEL_EXPORTER_OTLP_PROTOCOL=grpc, then launch Claude from that same shell.', src: 'https://code.claude.com/docs/en/monitoring-usage' },
   { ids: ['p_g2', 'o_g2'], title: 'Allow, ask, deny', text: 'Read(./.env) is not full secret protection: it does not stop every indirect read through Python or another program. Do not treat it as a locked vault.', src: 'https://code.claude.com/docs/en/permissions' },
   { ids: ['p_x6', 'o_x6'], text: 'Add .env files to .gitignore before your first commit. Saying "not in git" does not make git ignore them.', src: 'https://github.com/motdotla/dotenv#should-i-commit-my-env-file' },
-  { ids: ['h_rulegate'], title: 'Same skill file works in Hermes (agentskills.io format)', text: 'Put the skill in the active profile\'s skills/ folder. The hook example uses the javar profile; ~/.hermes/skills is the default profile, a different place.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/profiles' },
+  { ids: ['h_rulegate'], title: 'Same skill file works in Hermes (agentskills.io format)', text: 'Use $HERMES_HOME for the selected active profile consistently: its skills/ folder, config.yaml and hook registration must belong to the same profile. Do not mix a named profile with the default ~/.hermes home.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/profiles' },
   { ids: ['h_workdir'], text: 'Give scheduled jobs an existing, absolute workdir path. Without it, cron jobs load no project instruction files.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/features/cron' },
   { ids: ['p_r4', 'o_r4'], title: 'One graded case (Claude Code plugin eval format)', text: 'Run claude plugin eval init in the plugin first and use the format it generates. This sample is a sketch, not a complete test setup.', src: 'https://code.claude.com/docs/en/plugin-evals' },
+];
+
+/** Preserve V1/Hermes notes; replace only corrected V2 notes with exact current example titles. */
+export const STICKY: Entry[] = [
+  ...LEGACY_STICKY.map((note) => ({ ...note, ids: note.ids.filter((id) => !V2_CORRECTED_IDS.includes(id) && id !== 'h_rulegate') }))
+    .filter((note) => note.ids.length > 0),
+  ...V2_STICKY.filter((note) => !note.ids.includes('p_rulegate')),
+  ...GUARD_STICKY,
 ];

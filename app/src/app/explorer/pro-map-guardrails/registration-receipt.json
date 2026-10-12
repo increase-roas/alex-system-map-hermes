@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "checks": 37,
+  "hashes": {
+    "../pro-map-guardrail-config.ts": "0d6f88a6e9304c4fb544b48233f470e24dc51f7e6805b47d403df2ea9142ddda",
+    "asset_guard.py": "f08fdd4fff85418c2edbaf0e4bdd51f5130ab2dc03f3e42e522e92246a60464f",
+    "read_gate.py": "ee3591bb18020aa73abb301cb7efc77a4bf84463b56270739e2c0a018abe5380",
+    "hermes_guard.py": "514c462fc38c9a29b35c3885d2471d3f3afb477677c353b6a2f5ca51520405f9",
+    "check_registration.cjs": "5eef9a8717308f973e44841a1de2c9322e3b38158af60fa0a64be07e7bdaf9ab"
+  },
+  "scope": "Displayed Claude and Hermes registration commands, offline fixtures; not native runtime installation"
+}

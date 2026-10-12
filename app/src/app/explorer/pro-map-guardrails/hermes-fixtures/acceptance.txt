@@ -1,0 +1,10 @@
+file:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py non-empty
+file:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/test_hermes_guard.py non-empty
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/contract.json
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/sources/manifest.json
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/hook-config.json
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py::custom skill BODY limit is 500 lines
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py::No simulation or pre-write protection for terminal arbitrary edits.
+absent:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py::hooks_auto_accept
+cmd:python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/test_hermes_guard.py -v > /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/test-output.txt 2>&1

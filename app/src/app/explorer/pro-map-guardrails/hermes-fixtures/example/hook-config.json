@@ -1,0 +1,23 @@
+{
+  "hooks": {
+    "pre_tool_call": [
+      {
+        "command": "python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py --policy /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+        "timeout": 10,
+        "fail_closed": true
+      }
+    ],
+    "post_tool_call": [
+      {
+        "command": "python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py --policy /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+        "timeout": 10
+      }
+    ],
+    "pre_verify": [
+      {
+        "command": "python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes_guard.py --policy /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/policy.json",
+        "timeout": 10
+      }
+    ]
+  }
+}

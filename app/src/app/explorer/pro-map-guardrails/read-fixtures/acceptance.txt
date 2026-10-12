@@ -1,0 +1,14 @@
+file:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py non-empty
+file:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/test_read_gate.py non-empty
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py::fcntl.flock
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py::os.replace
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py::truncatedByTokenCap
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py::IS NOT a security boundary
+absent:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py::import requests
+cmd:python3 -B /Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/test_read_gate.py
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read-fixtures/test-results.json
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read-fixtures/schema-evidence.json
+cmd:python3 -B -c 'import json; from pathlib import Path; r=json.loads(Path("/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read-fixtures/test-results.json").read_text()); assert r["successful"] and r["tests_run"] == 31 and r["failures"] == 0 and r["errors"] == 0'
+contains:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read_gate.py::require(name in cfg['direct_tools'] or name in cfg['batches'])
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read-fixtures/policy.example.json
+json:/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/read-fixtures/settings.example.json

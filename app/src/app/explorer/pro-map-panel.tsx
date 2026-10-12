@@ -14,9 +14,10 @@ import { JOBS, type CallStatus } from './pro-map-jobs';
 const COLOR: Record<ProStatus, string> = { ok: '#17c964', partial: '#f5a524', gap: '#ff0071', reference: '#7f77dd', hermes: '#0d9488' };
 const WORD: Record<ProStatus, string> = { ok: 'have it', partial: 'partly', gap: 'missing', reference: 'Anthropic way', hermes: 'Hermes way' };
 const CARD_W = 130;
+const GRADE_COLOR: Record<string, string> = { A: '#15803d', B: '#4d7c0f', C: '#b45309', D: '#c2410c', F: '#b91c1c' };
 const hidden = { opacity: 0, width: 6, height: 6 };
 
-type CardData = ProNode & { selected?: boolean; hl?: string; dim?: boolean };
+type CardData = ProNode & { onEvidence?: (id: string) => void; selected?: boolean; hl?: string; dim?: boolean };
 const HL: Record<string, string> = { on: '#f59e0b', problem: '#ef4444', fix: '#3b82f6', done: '#22c55e' };
 
 function Card({ data }: NodeProps<Node<CardData>>) {
@@ -52,15 +53,6 @@ function Band({ data }: NodeProps<Node<CardData>>) {
       className="relative rounded-xl border border-dashed"
       style={{ width: data.w ?? 740, height: data.h ?? 110, borderColor: c, background: `${c}10` }}
     >
-      {title && data.grade ? (
-        <div data-testid="map-grade" className="absolute -top-24 right-0 flex items-end gap-3" title={data.grade.note}>
-          <div className="text-right text-sm leading-tight text-muted-foreground" style={{ maxWidth: 520 }}>
-            <div className="font-semibold uppercase tracking-wide" style={{ color: c }}>Codex grade</div>
-            <div>{data.grade.note}</div>
-          </div>
-          <div className="text-[88px] font-black leading-none" style={{ color: { A: '#16a34a', B: '#65a30d', C: '#d97706', D: '#ea580c', F: '#dc2626' }[data.grade.letter] ?? '#6b7280' }}>{data.grade.letter}</div>
-        </div>
-      ) : null}
       <Handle type="target" position={Position.Top} style={hidden} />
       <Handle type="source" position={Position.Bottom} style={hidden} />
       <Handle id="ls" type="source" position={Position.Left} style={hidden} />
@@ -71,7 +63,39 @@ function Band({ data }: NodeProps<Node<CardData>>) {
         <span>{data.label}</span>
         {data.tag ? <span className="text-[10px] font-normal text-muted-foreground">trace: {data.tag}</span> : null}
       </div>
-      {title ? <div className="px-3 text-xs text-muted-foreground">{data.sub}</div> : null}
+      {title ? <div className="px-3 text-sm text-muted-foreground">{data.sub}</div> : null}
+      {title && data.grade ? (
+        <section data-testid="map-grade" aria-label={`${data.label}: grade and evidence`} className="nodrag nopan mt-3 px-4 pb-4">
+          <div className="mb-2 flex items-center gap-4">
+            <div className="text-xs font-semibold uppercase tracking-wide">Codex grade</div>
+            <div className="text-[64px] font-black leading-none" style={{ color: GRADE_COLOR[data.grade.letter] ?? '#6b7280' }}>{data.grade.letter}</div>
+            <p className="text-sm font-medium">{data.grade.note}</p>
+          </div>
+          <div className="min-w-0 flex-1">
+            <ul className="space-y-2 text-sm leading-snug">
+              {(data.grade.proof ?? []).map((proof) => (
+                <li key={proof.area} className="border-t border-current/10 pt-1.5">
+                  <span className="font-bold">{proof.area}: {proof.grade}. </span>{proof.why}
+                  <div className="text-xs text-muted-foreground">
+                    {proof.check ? <span>{proof.check.split(/([pyh]_[a-z0-9_]+)/g).map((part, i) =>
+                      /^[pyh]_[a-z0-9_]+$/.test(part)
+                        ? <button key={i} type="button" className="mx-0.5 underline underline-offset-2" onClick={(event) => { event.stopPropagation(); data.onEvidence?.(part); }}
+                            title={`Open evidence: ${part}`}>{PRO_NODES.find((n) => n.id === part)?.label ?? part}</button>
+                        : <span key={i}>{part}</span>)} </span> : null}
+                    {proof.sources?.map((url, index) => (
+                      <a key={url} href={url} target="_blank" rel="noopener noreferrer" onClick={(event) => event.stopPropagation()}
+                        className="mr-2 inline-block underline underline-offset-2 focus-visible:outline focus-visible:outline-2"
+                        aria-label={`${proof.area} source ${index + 1}: ${url}`} title={url}>
+                        {url.split('/').filter(Boolean).at(-1)}
+                      </a>
+                    ))}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      ) : null}
     </div>
   );
 }
@@ -447,7 +471,10 @@ function ProMap() {
         position: { x: n.x, y: n.y },
         data: active && !n.band
           ? { ...n, hl: active.ids.includes(n.id) ? (active.tone ?? 'on') : undefined, dim: n.id.startsWith('p_') && !active.ids.includes(n.id) }
-          : n,
+          : n.grade ? { ...n, onEvidence: (id: string) => {
+              const evidence = PRO_NODES.find((candidate) => candidate.id === id);
+              if (evidence) setPicked(evidence);
+            } } : n,
         draggable: !n.band,
         selectable: !n.band,
         zIndex: n.band ? -1 : 2,
@@ -493,7 +520,7 @@ function ProMap() {
       nodeTypes={nodeTypes}
       fitView
       fitViewOptions={{ padding: 0.04 }}
-      minZoom={0.2}
+      minZoom={0.08}
       onNodeClick={(_, n) => setPicked(n.data as CardData)}
       onPaneClick={() => setPicked(null)}
       proOptions={{ hideAttribution: true }}

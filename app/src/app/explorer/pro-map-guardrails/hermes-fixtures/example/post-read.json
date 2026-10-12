@@ -1,0 +1,19 @@
+{
+  "hook_event_name": "post_tool_call",
+  "tool_name": "read_file",
+  "tool_input": {
+    "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/cards/github.md"
+  },
+  "session_id": "fixture-session",
+  "cwd": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile",
+  "profile": "fixture",
+  "extra": {
+    "tool_call_id": "fixture-read-1",
+    "task_id": "fixture-task",
+    "result": "{\"content\": \"1|# Fixture connector card\\n2|Synthetic read-only example, not a live account or server.\", \"total_lines\": 2, \"file_size\": 84, \"truncated\": false}",
+    "status": "success",
+    "duration_ms": 1,
+    "error_type": null,
+    "error_message": null
+  }
+}

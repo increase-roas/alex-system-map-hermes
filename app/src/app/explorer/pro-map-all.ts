@@ -33,13 +33,49 @@ function withSticky(n: ProNode): ProNode {
   const card = notes.filter((s) => !s.title || !titles.has(s.title)).map(({ text, src }) => ({ text, src }));
   return { ...n, detail: { ...det, examples, sticky: card.length ? card : det.sticky } };
 }
-/** Codex grades (harness audit, 2026-10-12). Shown large on each map's title. */
-const GRADES: Record<string, { letter: string; note: string }> = {
-  o_title: { letter: '?', note: 'Not graded yet' },
-  p_title: { letter: 'C', note: 'Codex harness audit 2026-10-12: accuracy C, sources B, order B, completeness B, clarity C' },
-  h_title: { letter: 'B', note: 'Codex re-grade 2026-10-12 (was C): accuracy B, sources B, order B, completeness B, clarity B' },
+/** Grades assess the described harness, not a promise that a live job will pass.
+ * Source review: 2026-10-12. Unknown proof is visible, never upgraded to a pass.
+ */
+type MapGrade = NonNullable<ProNode['grade']>;
+const CC = 'https://code.claude.com/docs/en/';
+const areas = ['Accuracy', 'Sources', 'Top-down order', 'Harness completeness', 'Plain English'];
+export const GRADES: Record<string, MapGrade> = {
+  o_title: {
+    letter: '?', note: 'Original kept for comparison. Not re-audited in this change.',
+    proof: areas.map((area) => ({ area, grade: '?', why: 'Not checked in this audit; no new grade claimed.', check: 'Original v1 content preserved.' })),
+  },
+  p_title: {
+    letter: 'B', note: 'Map audit, 2026-10-12. Custom guard scripts tested offline; live installation and screen review still unverified.',
+    proof: [
+      { area: 'Accuracy', grade: 'B', why: 'Custom setup and read-first scripts exercise real hook payloads. Live SDK/hook registration is not proven.', sources: [CC + 'hooks', CC + 'agent-sdk/permissions'] },
+      { area: 'Sources', grade: 'A', why: 'Claims link to the relevant Anthropic reference; product limits are stated.', sources: [CC + 'memory', CC + 'agent-sdk/python', CC + 'monitoring-usage'] },
+      { area: 'Top-down order', grade: 'A', why: 'Load instructions, check old work, act, read results, combine, verify, report and learn.', sources: ['https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents'], check: 'pro-map-audit-check.cjs: result input, combine order and learning loop pass.' },
+      { area: 'Harness completeness', grade: 'B', why: 'Tested skill, connector, card-read and setup checks; full-route protection still needs a protected installation.', sources: [CC + 'hooks', CC + 'permissions'], check: '31 setup + 31 read-gate tests pass; open p_rulegate, p_lib_skills, p_lib_mcp, p_ptr4. Offline examples, not installed guards.' },
+      { area: 'Plain English', grade: 'B', why: 'Plain labels and visible limits; final worktree screen review still needed.', check: 'TypeScript and title-render checks pass; browser readability remains unverified.' },
+    ],
+  },
+  h_title: {
+    letter: 'B', note: 'Hermes map audit, 2026-10-12. Native hooks plus tested custom guard script; protected installation and screen review remain.',
+    proof: [
+      { area: 'Accuracy', grade: 'B', why: 'Custom native-file and read-first guard now has sample-input tests. Live consent/registration is not proven.', sources: ['https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks', 'https://hermes-agent.nousresearch.com/docs/user-guide/features/delegation'] },
+      { area: 'Sources', grade: 'A', why: 'Official feature pages and implementation references identify what each claim rests on.', sources: ['https://hermes-agent.nousresearch.com/docs/user-guide/features/context-files', 'https://github.com/NousResearch/hermes-agent/blob/main/agent/system_prompt.py'], check: 'Checked 2026-10-12; GitHub main is a moving reference, not a pinned installed version.' },
+      { area: 'Top-down order', grade: 'A', why: 'Instructions precede decisions; tool results return to the loop; goal checks have explicit non-success exits.', sources: ['https://hermes-agent.nousresearch.com/docs/developer-guide/prompt-assembly', 'https://hermes-agent.nousresearch.com/docs/user-guide/features/goals'], check: 'Graph check: endpoints exist; result follows tool cards, not its enclosing band.' },
+      { area: 'Harness completeness', grade: 'B', why: 'Tested custom guard covers supported native setup and connector calls. Other routes and client walls still require enforcement.', sources: ['https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks', 'https://hermes-agent.nousresearch.com/docs/user-guide/features/goals'], check: '59 tests pass; general-YAML test skipped (PyYAML absent). Open h_rulegate for tested script and unsupported routes.' },
+      { area: 'Plain English', grade: 'B', why: 'Built-in/custom labels and wider cards; final worktree screen and arrow review still needed.', check: 'Title component and graph checked without a server; not a browser screenshot.' },
+    ],
+  },
+  y_title: {
+    letter: 'D', note: 'Your REAL system as the unchanged cards describe it. Snapshot assessment, not a new live audit.',
+    proof: [
+      { area: 'Accuracy', grade: 'C', why: 'Shared access can reach the wrong client. To reach A: enforce and test client-specific access on every call.', check: 'Card evidence: y_l2, y_g4 (303 accounts; no client walls).' },
+      { area: 'Sources', grade: 'C', why: 'Receipts cover only some work. To reach A: connect each job, call, approval and result to saved evidence.', check: 'Card evidence: y_rep3, y_x3 (SDK-only receipts; no shared request ID).' },
+      { area: 'Top-down order', grade: 'C', why: 'You bridge separate chats. To reach A: one intake, client selection, job state and checked handoffs.', check: 'Card evidence: y_front, y_rep1; Director and Conductor already exist.' },
+      { area: 'Harness completeness', grade: 'D', why: 'Spend/send/delete guards cover 3 apps. New skill, connector-setup and successful-read gates are NOT PROVEN installed. Add them to every route plus client walls and a kill switch.', check: 'Evidence: y_x2, y_x4, y_g4, y_lib_guides. Card-reading instructions are not a read receipt. Rules/subagent/settings validators also unproven; test before upgrading.' },
+      { area: 'Plain English', grade: 'C', why: 'Results live in separate apps. To reach A: one plain job report with done, blocked, proof and next action.', check: 'Card evidence: y_rep1, y_rep2. This grades operating clarity, not the drawing.' },
+    ],
+  },
 };
 export const PRO_NODES: ProNode[] = [...v1Nodes, ...V2_NODES, ...H_NODES].map(withSticky)
-  .map((n) => (GRADES[n.id] ? { ...n, grade: GRADES[n.id] } : n));
+  .map((n) => (GRADES[n.id] ? { ...n, y: -500, h: 450, grade: GRADES[n.id] } : n));
 export const PRO_EDGES: ProEdge[] = [...v1Edges, ...V2_EDGES, ...H_EDGES];
 export type { ProEdge, ProNode };

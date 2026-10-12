@@ -1,0 +1,88 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "^(Read|mcp__.*)$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "-B",
+              "/opt/claude-read-gate/read_gate.py",
+              "--policy",
+              "/opt/claude-read-gate/policy.json",
+              "--state-dir",
+              "/opt/claude-read-gate/state"
+            ],
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "^Read$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "-B",
+              "/opt/claude-read-gate/read_gate.py",
+              "--policy",
+              "/opt/claude-read-gate/policy.json",
+              "--state-dir",
+              "/opt/claude-read-gate/state"
+            ],
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "^Read$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "-B",
+              "/opt/claude-read-gate/read_gate.py",
+              "--policy",
+              "/opt/claude-read-gate/policy.json",
+              "--state-dir",
+              "/opt/claude-read-gate/state"
+            ],
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ],
+    "PermissionDenied": [
+      {
+        "matcher": "^Read$",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python3",
+            "args": [
+              "-B",
+              "/opt/claude-read-gate/read_gate.py",
+              "--policy",
+              "/opt/claude-read-gate/policy.json",
+              "--state-dir",
+              "/opt/claude-read-gate/state"
+            ],
+            "timeout": 10,
+            "onFailure": "block"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "hook_event_name": "pre_tool_call",
+  "tool_name": "read_file",
+  "tool_input": {
+    "path": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/cards/github.md"
+  },
+  "session_id": "fixture-session",
+  "cwd": "/Users/alexlobaito/Projects/alex-system-map-pro-map4/app/src/app/explorer/pro-map-guardrails/hermes-fixtures/example/profile",
+  "profile": "fixture",
+  "extra": {
+    "tool_call_id": "fixture-read-1",
+    "task_id": "fixture-task"
+  }
+}
