@@ -13,8 +13,17 @@ function hostName(value: string | null): string | null {
   }
 }
 
+// Tailscale Serve (Alex, 2026-10-12): read-only viewing from his own devices on his tailnet.
+// Serve proxies to 127.0.0.1 and adds Tailscale-User-Login; the dev server binds 127.0.0.1 only,
+// so nothing on the LAN can reach it to fake these headers. Changes (POST etc.) stay Mac-only.
+function viaTailnet(request: NextRequest, host: string | null): boolean {
+  return !!host && host.endsWith('.ts.net') && !!request.headers.get('tailscale-user-login') &&
+    (request.method === 'GET' || request.method === 'HEAD');
+}
+
 export function middleware(request: NextRequest) {
   const host = hostName(request.headers.get('host'));
+  if (viaTailnet(request, host)) return NextResponse.next();
   if (!host || !LOCAL_HOSTS.has(host)) {
     return NextResponse.json({ error: 'local access only' }, { status: 403 });
   }
