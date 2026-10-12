@@ -401,6 +401,35 @@ export const PRO_FILL: Record<string, More> = {
 };
 
 const EXTRA: Record<string, More> = {
+  p_small: {
+    plain: [
+      'Two layers. The ARCHIVE is big and never loaded: transcripts, traces, eval results, old logs. The WORKING SET is small and loaded: CLAUDE.md, MEMORY.md, skill names, the one skill in use.',
+      'A finding never goes into one big file. It goes to where it applies: a gotcha in that skill, a line in that project\'s CLAUDE.md, a memory topic file, or a test in evals/.',
+      'Tests don\'t cost context: they are run, not read.',
+      'Search the archive only when needed: the agent greps the transcripts or trace (agentic search). No vector database needed to start.',
+      'Every loaded file has a cap: CLAUDE.md under 200 lines, MEMORY.md 200 lines or 25KB (Claude Code warns and makes Claude rewrite it), SKILL.md under 500 lines with details split one level down.',
+      'Pruning is part of the loop: merge or drop stale lines, /doctor proposes cuts to CLAUDE.md, /skill-doctor finds skills that never fire, dreaming (Managed Agents) restructures memory to stay high-signal.',
+    ],
+    pictures: [{ kind: 'flow', title: 'From a failure to a small, permanent fix', steps: [
+      { label: 'Archive: transcripts + trace', note: 'big, on disk, never loaded', tone: 'neutral' },
+      { label: 'Agent searches it when something fails', note: 'grep, read only what matches' },
+      { label: 'Distill one finding', note: 'one line, not the whole story' },
+      { label: 'File it where it applies', many: ['gotcha in that skill', 'line in that CLAUDE.md', 'memory topic file', 'test in evals/'] },
+      { label: 'Prune', note: 'merge or drop stale lines; caps enforce it', tone: 'good' },
+    ] }],
+    decide: [
+      { if: 'It is about one tool or procedure', then: 'Gotcha in that skill (loads only when the skill is used)' },
+      { if: 'It is about one client or project', then: 'That project\'s CLAUDE.md (under 200 lines)' },
+      { if: 'It is a preference or correction', then: 'A memory topic file, one line in MEMORY.md' },
+      { if: 'It is a mistake that must never repeat', then: 'A test in evals/ (run, not read)' },
+      { if: 'It is raw history (what happened)', then: 'Leave it in the archive; search it when needed' },
+    ],
+    myths: [
+      { myth: 'Self-improving means a big box with all the findings.', truth: 'One big findings file grows forever and has to be loaded to be useful, so it gets ignored or eats context. Anthropic keeps a tree of small files that load only when needed.', fix: 'Keep the big box as an archive nobody loads (transcripts, trace). Put each distilled finding in the small file it is about, and keep a test for anything that must never repeat.' },
+      { myth: 'You need an AI search engine over all your findings.', truth: 'Anthropic starts with agentic search: the agent greps folders and opens only matching files. Vector search is an add-on if that gets too slow.', fix: 'Name archive folders by date and client (logs/2026-10-12/acme/), and tell the agent in CLAUDE.md where the archive lives.' },
+    ],
+    sources: [S.mem, S.skillUse, S.skills, S.sdkBlog, S.managedNew, S.ctx, 'https://code.claude.com/docs/en/whats-new/2026-w36'],
+  },
   p_aftercheck: {
     plain: [
       'Self-fixing = fix THIS job and run its checks again. Self-improving = use the failure to make FUTURE jobs better (gotcha + a test that catches it).',

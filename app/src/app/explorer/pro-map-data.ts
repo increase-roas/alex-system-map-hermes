@@ -225,6 +225,7 @@ const proExtra: ProNode[] = [
   { id: 'p_plan', label: 'Choose the next action', sub: 'Answer, work alone, or delegate', status: ref, why: 'The lead decides: answer straight away, do the work itself, or hand parts to helpers.', sources: [ANT.effective], x: 0, y: 0 },
   { id: 'p_helpers', label: 'Optional helpers', sub: 'Each gets a task and its own instructions', status: ref, why: 'Only when it helps: each helper gets a clear handoff, loads its own instructions, works in its own context, and returns a summary.', sources: [ANT.sub, ANT.research], x: 0, y: 0 },
   { id: 'p_combine', label: 'Lead combines results', sub: 'Reviews helper findings first', status: ref, why: 'The lead reads every helper summary, decides if more helper work is needed, then moves on to checking.', sources: [ANT.research], x: 0, y: 0 },
+  { id: 'p_small', label: 'Keep working files small', sub: 'Big archive, small working set', status: ref, why: 'Self-improving without bloat: raw history stays on disk and gets searched; only short, capped files load into the agent.', sources: [ANT.mem, ANT.skillUse], x: 0, y: 0 },
   { id: 'p_aftercheck', label: 'After-edit check', sub: 'A hook runs a quick test', status: ref, why: 'Right after an edit, a PostToolUse hook runs a focused check and hands any failure back to the agent, so problems are caught while it is still working.', sources: [ANT.hooks], x: 0, y: 0 },
   { id: 'p_result', label: 'Read the tool result', sub: 'More work, or ready to check?', status: ref, why: 'After every tool call the agent reads the result and decides: call another tool, or check the work.', sources: ['https://claude.com/blog/building-agents-with-the-claude-agent-sdk'], x: 0, y: 0 },
   { id: 'p_self', label: 'Lead does the work', sub: 'No helpers needed', status: ref, why: 'In one chat the lead usually does the work itself. Helpers are for big reading jobs or work that splits into independent parts.', sources: ['https://code.claude.com/docs/en/features-overview', ANT.effective], x: 0, y: 0 },
@@ -245,7 +246,7 @@ const PRO_LAYOUT: Record<string, string[]> = {
   report: ['p_rep1', 'p_rep2'],
   learn: ['p_e1', 'p_e5', 'p_e2', 'p_e6', 'p_e3', 'p_e4'],
 };
-const PRO_LIB = ['p_lib_which', 'p_lib_limits', 'p_ptr5', 'p_lib_skills', 'p_lib_memory', 'p_lib_plugins', 'p_lib_mcp', 'p_lib_settings', 'p_plan3', 'p_k3', 'p_k4', 'p_t4', 'p_t3', 'p_a4', 'p_l4', 'p_lib_evals', 'p_r4'];
+const PRO_LIB = ['p_lib_which', 'p_lib_limits', 'p_small', 'p_ptr5', 'p_lib_skills', 'p_lib_memory', 'p_lib_plugins', 'p_lib_mcp', 'p_lib_settings', 'p_plan3', 'p_k3', 'p_k4', 'p_t4', 'p_t3', 'p_a4', 'p_l4', 'p_lib_evals', 'p_r4'];
 const PRO_RAILS = ['p_x1', 'p_x2', 'p_g6', 'p_x3', 'p_x4', 'p_x5', 'p_x7', 'p_x8', 'p_x10', 'p_x6'];
 
 /** Places every card by id; throws if a card is missing or left unplaced, so nothing is silently dropped. */
