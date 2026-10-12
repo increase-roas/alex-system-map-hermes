@@ -1,7 +1,7 @@
 'use client';
 
 import {
-  Background, Controls, Handle, MarkerType, MiniMap, Panel, Position, ReactFlow, ReactFlowProvider,
+  Background, Controls, Handle, MarkerType, Panel, Position, ReactFlow, ReactFlowProvider,
   type Edge, type Node, type NodeProps,
 } from '@xyflow/react';
 import { useMemo, useState } from 'react';
@@ -49,6 +49,9 @@ function Band({ data }: NodeProps<Node<CardData>>) {
       <Handle type="target" position={Position.Top} style={hidden} />
       <Handle type="source" position={Position.Bottom} style={hidden} />
       <Handle id="ls" type="source" position={Position.Left} style={hidden} />
+      <Handle id="l" type="target" position={Position.Left} style={hidden} />
+      <Handle id="r" type="target" position={Position.Right} style={hidden} />
+      <Handle id="rs" type="source" position={Position.Right} style={hidden} />
       <div className={`px-3 pt-2 font-semibold ${title ? 'text-base' : 'text-xs'}`} style={{ color: c }}>
         {data.label}
       </div>
@@ -63,23 +66,23 @@ function Legend({ counts }: { counts: { ok: number; partial: number; gap: number
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b px-3 py-2 text-xs">
       <span className="text-sm font-semibold">Pro Map</span>
-      <span className="text-muted-foreground">Left: how big shops run it. Right: yours, same shape. Click a box for its source.</span>
+      <span className="text-muted-foreground">Left: a solo pro with an agent team. Right: yours, same layers. Click any box for where it lives and its source.</span>
       {(['ok', 'partial', 'gap', 'reference'] as ProStatus[]).map((s) => (
         <span key={s} className="flex items-center gap-1"><span className="inline-block size-2 rounded-full" style={{ background: COLOR[s] }} />{WORD[s]}</span>
       ))}
       <span className="text-muted-foreground">moving gray line = work flows</span>
+      <span style={{ color: '#7f77dd' }}>dashed purple = reads from the library</span>
       <span style={{ color: '#ff0071' }}>dashed red = goes around the SDK</span>
       <span className="font-medium">Yours: {counts.ok} have it, {counts.partial} partly, {counts.gap} missing</span>
     </div>
   );
 }
 
+const ROW_Y = new Map(PRO_NODES.map((n) => [n.id, n.y]));
+
 function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
-  const railLeft = e.kind === 'rail' && (e.source.includes('_r_'));
-  const railRight = e.kind === 'rail' && !railLeft;
-  const isBand = (id: string) => id.includes('_band_') || id === 'p_people' || id === 'y_you';
-  const sideways = e.kind === 'flow' && !isBand(e.source) && !isBand(e.target);
-  const color = e.kind === 'bypass' ? '#ff0071' : e.kind === 'rail' ? '#7f77dd' : '#8a8a8a';
+  const sameRow = e.kind === 'flow' && !e.source.includes('_band_') && !e.target.includes('_band_') && ROW_Y.get(e.source) === ROW_Y.get(e.target);
+  const color = e.kind === 'bypass' ? '#ff0071' : e.kind === 'link' ? '#7f77dd' : '#8a8a8a';
   return {
     id: e.id,
     source: e.source,
@@ -87,13 +90,13 @@ function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
     label: e.label,
     type: 'smoothstep',
     animated: e.kind === 'flow',
-    sourceHandle: e.kind === 'bypass' ? 'ls' : sideways ? 'rs' : railLeft ? 'ls' : railRight ? 'rs' : undefined,
-    targetHandle: e.kind === 'bypass' ? 'l' : sideways ? 'l' : railLeft ? 'r' : railRight ? 'l' : undefined,
-    style: { stroke: color, strokeWidth: e.kind === 'flow' ? 1.4 : 1.2, strokeDasharray: e.kind === 'flow' ? undefined : '5 4', opacity: e.kind === 'bypass' ? 0.75 : 1 },
+    sourceHandle: e.sh ?? (sameRow ? 'rs' : undefined),
+    targetHandle: e.th ?? (sameRow ? 'l' : undefined),
+    style: { stroke: color, strokeWidth: e.kind === 'flow' ? 1.4 : 1.3, strokeDasharray: e.kind === 'flow' ? undefined : '6 4' },
     markerEnd: { type: MarkerType.ArrowClosed, color, width: 14, height: 14 },
-    labelStyle: { fontSize: 11, fill: e.kind === 'bypass' ? '#ff0071' : '#8a8a8a' },
+    labelStyle: { fontSize: 11, fill: color },
     labelBgStyle: { fillOpacity: 0 },
-    zIndex: e.kind === 'bypass' ? 0 : 1,
+    zIndex: 1,
   };
 }
 
@@ -135,7 +138,6 @@ function ProMap() {
     >
       <Background gap={24} size={1} />
       <Controls showInteractive={false} />
-      <MiniMap pannable zoomable nodeColor={(n) => COLOR[(n.data as CardData).status]} />
       {picked ? (
         <Panel position="top-right" className="w-[340px] rounded-md border bg-card/95 p-3 text-xs shadow-sm" data-testid="pro-map-detail">
           <div className="flex items-center gap-2">
