@@ -67,7 +67,7 @@ function Legend({ counts }: { counts: { ok: number; partial: number; gap: number
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b px-3 py-2 text-xs">
       <span className="text-sm font-semibold">Pro Map</span>
-      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: Anthropic's way (Anthropic sources only). Right: yours, same 13 steps. Click a box for how to build it; click a band for what the trace records.</span>
+      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: Anthropic's way (Anthropic sources only). Right: yours, same 13 steps. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
       {(['ok', 'partial', 'gap', 'reference'] as ProStatus[]).map((s) => (
         <span key={s} className="flex items-center gap-1"><span className="inline-block size-2 rounded-full" style={{ background: COLOR[s] }} />{WORD[s]}</span>
       ))}
@@ -99,6 +99,88 @@ function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
     labelBgStyle: { fillOpacity: 0 },
     zIndex: 1,
   };
+}
+
+type TileKey = 'limits' | 'build' | 'pros' | 'noobs' | 'extra' | 'trace' | 'sources';
+const TILES: { key: TileKey; title: string; tone: string }[] = [
+  { key: 'limits', title: 'Size limits', tone: '#0ea5e9' },
+  { key: 'build', title: 'How to build it', tone: '#7f77dd' },
+  { key: 'pros', title: 'Pros always do this', tone: '#17c964' },
+  { key: 'noobs', title: 'Beginner mistakes', tone: '#ff0071' },
+  { key: 'extra', title: 'They also do this (not on your map yet)', tone: '#f5a524' },
+  { key: 'trace', title: 'What the trace records here', tone: '#8a8a8a' },
+  { key: 'sources', title: 'Sources', tone: '#8a8a8a' },
+];
+
+function itemsFor(n: ProNode, k: TileKey): string[] {
+  if (k === 'trace') return n.trace ? [n.trace] : [];
+  if (k === 'sources') return n.sources;
+  return n.detail?.[k] ?? [];
+}
+
+function Item({ text }: { text: string }) {
+  return text.startsWith('http')
+    ? <a className="break-all underline" href={text} target="_blank" rel="noreferrer">{text}</a>
+    : <span>{text}</span>;
+}
+
+function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
+  const [open, setOpen] = useState<TileKey | null>(null);
+  const tile = TILES.find((t) => t.key === open);
+  const shell = 'max-h-[78vh] w-[440px] overflow-auto rounded-xl border bg-card/95 p-4 text-card-foreground shadow-lg backdrop-blur';
+  const head = (
+    <div className="flex items-start gap-2">
+      <span className="mt-1.5 inline-block size-2.5 shrink-0 rounded-full" style={{ background: COLOR[node.status] }} />
+      <div className="min-w-0 flex-1">
+        <div className="text-base font-semibold leading-tight">{node.label}</div>
+        <div className="text-xs text-muted-foreground">{WORD[node.status]}{node.sub ? ` · ${node.sub}` : ''}</div>
+      </div>
+      <button type="button" className="rounded px-1.5 text-muted-foreground hover:bg-muted" onClick={onClose} aria-label="Close">x</button>
+    </div>
+  );
+  if (tile) {
+    const items = itemsFor(node, tile.key);
+    return (
+      <div className={shell} data-testid="pro-map-detail">
+        <button type="button" className="mb-2 text-xs text-muted-foreground hover:underline" onClick={() => setOpen(null)}>{'<'} Back to {node.label}</button>
+        {head}
+        <div className="mt-3 text-sm font-semibold" style={{ color: tile.tone }}>{tile.title}</div>
+        <ul className="mt-2 space-y-2 text-sm leading-snug">
+          {items.map((t) => (
+            <li key={t} className="rounded-md border-l-4 bg-muted/40 px-3 py-2" style={{ borderLeftColor: tile.tone }}><Item text={t} /></li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+  const tiles = TILES.filter((t) => itemsFor(node, t.key).length > 0);
+  return (
+    <div className={shell} data-testid="pro-map-detail">
+      {head}
+      <p className="mt-3 text-sm leading-snug">{node.why}</p>
+      <div className="mt-3 space-y-2">
+        {tiles.map((t) => {
+          const items = itemsFor(node, t.key);
+          return (
+            <button
+              key={t.key}
+              type="button"
+              data-testid={`tile-${t.key}`}
+              className="block w-full rounded-lg border bg-background/60 px-3 py-2 text-left transition hover:bg-muted"
+              style={{ borderLeftColor: t.tone, borderLeftWidth: 4 }}
+              onClick={() => setOpen(t.key)}
+            >
+              <div className="flex items-center justify-between text-sm font-medium">
+                <span>{t.title}</span>
+                <span className="text-xs text-muted-foreground">{items.length} {'>'}</span>
+              </div>
+              <div className="mt-0.5 line-clamp-2 text-xs text-muted-foreground">{items[0]}</div>
+            </button>
+          );
+        })}
+      </div>
+    </div>
+  );
 }
 
 function ProMap() {
@@ -140,31 +222,8 @@ function ProMap() {
       <Background gap={24} size={1} />
       <Controls showInteractive={false} />
       {picked ? (
-        <Panel position="top-right" className="max-h-[70vh] w-[360px] overflow-auto rounded-md border bg-card/95 p-3 text-xs shadow-sm" data-testid="pro-map-detail">
-          <div className="flex items-center gap-2">
-            <span className="inline-block size-2.5 rounded-full" style={{ background: COLOR[picked.status] }} />
-            <span className="text-sm font-semibold">{picked.label}</span>
-            <span className="text-muted-foreground">{WORD[picked.status]}</span>
-          </div>
-          <div className="mt-1.5">{picked.why}</div>
-          {picked.how?.length ? (
-            <>
-              <div className="mt-2 font-medium">How to build it</div>
-              <ul className="mt-0.5 list-disc space-y-0.5 pl-4">{picked.how.map((h) => <li key={h}>{h}</li>)}</ul>
-            </>
-          ) : null}
-          {picked.trace ? (
-            <>
-              <div className="mt-2 font-medium">What the trace records here</div>
-              <div className="mt-0.5">{picked.trace}</div>
-            </>
-          ) : null}
-          <div className="mt-2 font-medium">Source</div>
-          <ul className="mt-0.5 list-disc space-y-0.5 pl-4 text-muted-foreground">
-            {picked.sources.map((s) => (
-              <li key={s} className="break-all">{s.startsWith('http') ? <a className="underline" href={s} target="_blank" rel="noreferrer">{s}</a> : s}</li>
-            ))}
-          </ul>
+        <Panel position="top-right" className="m-0">
+          <DetailCard key={picked.id} node={picked} onClose={() => setPicked(null)} />
         </Panel>
       ) : null}
     </ReactFlow>

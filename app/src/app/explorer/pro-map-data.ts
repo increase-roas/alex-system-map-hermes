@@ -5,10 +5,12 @@
  * Every band says what the trace records at that step. Click a box for "how to build it" + sources.
  * Built 2026-10-12. Change a status only with a new source.
  */
+import { PRO_DETAILS, type ProDetail } from './pro-map-details';
+
 export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference';
 export type ProNode = {
   id: string; label: string; sub: string; status: ProStatus; why: string; sources: string[];
-  how?: string[]; trace?: string; tag?: string;
+  how?: string[]; trace?: string; tag?: string; detail?: ProDetail;
   x: number; y: number; w?: number; h?: number; band?: boolean;
 };
 export type ProEdge = {
@@ -92,7 +94,7 @@ const PRO_STEPS: Record<Step, StepInfo> = {
   front: { label: 'Front door: one lead agent', tag: 'model calls + cost', status: ref, trace: 'api_request events for the lead agent: model, tokens, cost.' },
   plan: { label: 'Plan into tasks', tag: 'plan + progress file', status: ref, trace: 'The plan saved to memory, plus a progress file and git commits that show each update.' },
   agents: { label: 'Subagents pick up tasks (on a computer)', tag: 'per-agent transcript', status: ref, trace: 'Each subagent works in its own context and returns a summary; hooks see which one by its name (agent_type).' },
-  ptr: { label: 'Each agent reads its startup files (pointers)', tag: 'files loaded', status: ref, trace: 'Which instruction files loaded for this session (/memory lists them).' },
+  ptr: { label: 'Each agent reads its startup files (pointers)', tag: 'files loaded', status: ref, trace: 'Which CLAUDE.md and rules files loaded at launch (/context shows them).' },
   know: { label: 'Finds the tool and reads how to use it', tag: 'tool name + inputs', status: ref, trace: 'The tool picked and, if tool detail logging is turned on, its inputs.' },
   gw: { label: 'Gateway checks the call', tag: 'tool_decision', status: ref, trace: 'tool_decision event: accepted or rejected, and who decided (a rule, a hook, or you).' },
   run: { label: 'Tool runs', tag: 'tool_result', status: ref, trace: 'tool_result event: which tool, success or failure, how long it took.' },
@@ -113,7 +115,7 @@ const proNodes: ProNode[] = [
     id: 'p_lead', label: 'Lead agent', sub: 'The only one you talk to', sources: [ANT.research, ANT.subBlog, ANT.effective],
     why: 'Anthropic\'s research system: the lead agent thinks through the approach, saves its plan, spins up subagents with specific tasks, combines what they return, decides if more work is needed, then answers you.',
     how: ['You talk to one agent; it hands work to subagents', 'Each subagent gets a clear goal, output format, tools to use and where to stop', 'Start simple: add agents only when one agent is not enough'],
-  }], ref),
+  }, { id: 'p_sdk', label: 'Built with the Agent SDK', sub: 'Claude Code\'s engine, in your code', why: 'The lead agent and its helpers can be built in your own Python or TypeScript with the Agent SDK: the same loop and tools that run Claude Code.', sources: ['https://code.claude.com/docs/en/agent-sdk/overview'] }], ref),
   ...row(P, 'plan', [
     { id: 'p_plan1', label: 'Plan saved', sub: 'Lead writes it to memory', why: 'The lead saves its plan to memory so it survives when the context window fills up.', sources: [ANT.research] },
     { id: 'p_plan2', label: 'Progress file + git', sub: 'claude-progress.txt, commits', why: 'For long jobs the first session sets up the project; every later session makes one step of progress and leaves notes.', sources: [ANT.harness], how: ['First session: setup script, progress file, first git commit', 'Every later session: one step, commit with a clear message, update the progress file'] },
@@ -133,6 +135,7 @@ const proNodes: ProNode[] = [
     { id: 'p_ptr5', label: 'Is a pointer JSON?', sub: 'No: markdown', sources: [ANT.mem, ANT.skills, ANT.mcp, ANT.perm], why: 'Pointers are plain markdown: @path lines in CLAUDE.md and links inside SKILL.md. JSON is only for settings: settings.json (permissions, hooks) and .mcp.json (tool servers). Anthropic describes no reverse pointers (no back-link from a file to who uses it). Instead: keep links one level deep from SKILL.md, and keep MEMORY.md as an index that points to topic files.' },
   ], ref),
   ...column(P - 270, Y.ptr, [
+    { id: 'p_lib_limits', label: 'Every size limit', sub: 'Lines, KB, counts', why: 'Every line, size and count rule Anthropic publishes, in one place.', sources: [ANT.mem, ANT.skills] },
     { id: 'p_lib_skills', label: 'Skills', sub: '.claude/skills/<name>/SKILL.md', sources: [ANT.skills, ANT.skillUse], why: 'How-to procedures. Only the name and description load at start; the rest loads when used.', how: ['name: lowercase and hyphens, up to 64 characters', 'description: up to 1024 characters, third person, what it does and when to use it', 'Body under 500 lines; SKILL.md is the table of contents', 'Reference files one level deep from SKILL.md', 'Build evals first, then write the skill'] },
     { id: 'p_lib_memory', label: 'Auto memory', sub: 'MEMORY.md index + topic files', sources: [ANT.mem], why: 'Claude saves what it learns while working.', how: ['Lives in ~/.claude/projects/<project>/memory/', 'MEMORY.md: one line per memory; first 200 lines or 25KB load', 'Details go in topic files read when needed'] },
     { id: 'p_lib_mcp', label: 'Tool servers', sub: '.mcp.json in the repo', sources: [ANT.mcp], why: 'Which tools this project gets.', how: ['Project scope: .mcp.json at the repo root, committed to git', 'Everyone on the project gets the same tools', 'You approve project servers before they are used'] },
@@ -140,6 +143,7 @@ const proNodes: ProNode[] = [
     { id: 'p_lib_evals', label: 'Evals', sub: 'Test tasks + graders', sources: [ANT.evals], why: 'How you know a change made things better.', how: ['Task = one test with inputs and success criteria', 'Graders: code checks, a model judge, a human', 'Read the transcripts to trust the scores'] },
   ], ref),
   ...row(P, 'know', [
+    { id: 'p_k0', label: 'Agentic search', sub: 'Folders and grep first', why: 'How agents get the info: they search files themselves before anyone builds a vector database.', sources: ['https://claude.com/blog/building-agents-with-the-claude-agent-sdk'] },
     { id: 'p_k1', label: 'Tool search', sub: 'Loads tools on demand', why: 'With many tools, Claude Code searches tool definitions and loads only the ones it needs.', sources: [ANT.mcp] },
     { id: 'p_k2', label: 'Tool description', sub: 'The tool\'s manual', why: 'The description is how the agent knows when and how to use the tool.', sources: [ANT.tools], how: ['Write it like onboarding a new teammate', 'Clear names, grouped by service', 'Say what every input means'] },
     { id: 'p_k3', label: 'One tool per job', sub: 'Not one per API call', why: 'Combine steps into tools that match a task, instead of wrapping every endpoint.', sources: [ANT.tools] },
@@ -154,6 +158,7 @@ const proNodes: ProNode[] = [
   ...row(P, 'run', [
     { id: 'p_t1', label: 'MCP server', sub: 'Connector to the app', why: 'Agents reach real systems through MCP servers; remote servers for production systems.', sources: [ANT.mcpProd, ANT.mcp] },
     { id: 'p_t2', label: 'Bash and code', sub: 'On the agent\'s computer', why: 'Shell commands, checked by the same rules.', sources: [ANT.perm] },
+    { id: 'p_t4', label: 'API, CLI or MCP?', sub: 'Which path, when', why: 'Anthropic\'s answer to "only MCP?": no. Three paths (API, CLI, MCP), each with its place, plus your own functions as SDK tools.', sources: [ANT.mcpProd] },
     { id: 'p_t3', label: 'Hosted container', sub: 'Agent SDK / Managed Agents', why: 'Runs in an isolated container Anthropic or you host.', sources: [ANT.hosting, ANT.managed] },
   ], ref),
   ...row(P, 'land', [
@@ -172,7 +177,9 @@ const proNodes: ProNode[] = [
   ], ref),
   ...row(P, 'learn', [
     { id: 'p_e1', label: 'Read transcripts', sub: 'Why it passed or failed', why: 'Anthropic reads transcripts regularly; that is how you know the graders are right.', sources: [ANT.evals] },
+    { id: 'p_e5', label: 'Gotchas grow', sub: 'Each failure added to its skill', why: 'Every skill has a Gotchas section that grows as Claude hits new failures.', sources: [ANT.skillUse] },
     { id: 'p_e2', label: 'Auto memory', sub: 'Claude saves what it learned', why: 'Learnings land in MEMORY.md and topic files.', sources: [ANT.mem, ANT.ctx] },
+    { id: 'p_e6', label: 'Dreaming', sub: 'Reviews past sessions', why: 'A scheduled pass reviews past sessions and memory, finds patterns and cleans memory up.', sources: ['https://claude.com/blog/new-in-claude-managed-agents'] },
     { id: 'p_e3', label: 'Evals before changes', sub: 'Test on real tasks', why: 'Build evals first, then change the skill or instructions and re-run.', sources: [ANT.skills, ANT.evals] },
     { id: 'p_e4', label: 'Update the files', sub: 'CLAUDE.md, skills, reviewed', why: 'Instruction changes go through review like code, with an owner.', sources: [ANT.steer] },
   ], ref),
@@ -182,6 +189,7 @@ const proNodes: ProNode[] = [
     { id: 'p_x3', label: 'Trace', sub: 'OpenTelemetry, prompt.id', why: 'Prompts, model calls, decisions and tool results, joined by prompt.id.', sources: [ANT.mon] },
     { id: 'p_x4', label: 'Kill switch', sub: 'Deny rule pulls a tool', why: 'A deny rule on a tool name takes the tool away from the next call, even mid-session; managed settings push it to everyone.', sources: [ANT.perm] },
     { id: 'p_x5', label: 'Evals', sub: 'Before every change', why: 'Changes are tested on fixed tasks first.', sources: [ANT.evals] },
+    { id: 'p_x7', label: 'Stay current', sub: 'Changelog, weekly digest', why: 'How they keep up: the changelog, the weekly digest, progress files and timestamps.', sources: ['https://code.claude.com/docs/en/changelog'] },
     { id: 'p_x6', label: 'In git, reviewed', sub: 'Instructions are code', why: 'CLAUDE.md, rules, skills and .mcp.json live in the repo and get reviewed.', sources: [ANT.steer, ANT.mcp] },
   ], ref).map((n) => ({ ...n, w: 170, x: P + 805 })),
 ];
@@ -308,7 +316,12 @@ const alex: ProNode[] = [
   ...alexNodes,
 ];
 
-export const PRO_NODES: ProNode[] = [...pro, ...alex];
+export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
+  const d = PRO_DETAILS[n.id];
+  if (!d && !n.how) return n;
+  const detail: ProDetail = { ...d, build: d?.build ?? n.how };
+  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? [])])] };
+});
 
 const flow = (a: string, b: string, label?: string): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'flow', label });
 const link = (a: string, b: string, label: string | undefined, sh: 'ls' | 'rs', th: 'l' | 'r'): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'link', label, sh, th });
@@ -325,7 +338,7 @@ export const PRO_EDGES: ProEdge[] = [
   ...[1, 2, 3].map((i) => flow(`p_ui${i}`, 'p_lead')),
   flow('p_lead', 'p_band_plan', 'plans'),
   ...spine('p', 'plan'),
-  ...chain(['p_e1', 'p_e2', 'p_e3', 'p_e4']),
+  ...chain(['p_e1', 'p_e5', 'p_e2', 'p_e6', 'p_e3', 'p_e4']),
   link('p_band_report', 'p_you', 'answer back to you', 'rs', 'r'),
   link('p_band_ptr', 'p_lib_skills', 'points to', 'ls', 'r'),
   link('p_band_learn', 'p_lib_memory', 'saves', 'ls', 'r'),

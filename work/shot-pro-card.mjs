@@ -1,0 +1,20 @@
+// Screenshot a Pro Map card and one opened tile. Usage: node work/shot-pro-card.mjs <url> <out-prefix> <box-text> <tile>
+import { createRequire } from 'module';
+const require = createRequire('/Users/alexlobaito/Projects/alex-system-map/app/package.json');
+const { chromium } = require('playwright');
+const [url, out, box, tile] = process.argv.slice(2);
+const browser = await chromium.launch({ channel: 'chrome', headless: true });
+const page = await browser.newPage({ viewport: { width: 1800, height: 1300 } });
+await page.goto(url, { waitUntil: 'networkidle' });
+await page.getByRole('button', { name: 'Pro Map' }).click();
+await page.waitForSelector('[data-testid="pro-map"] .react-flow__node', { timeout: 20000 });
+await page.waitForTimeout(1200);
+const nodes = await page.locator('[data-testid="pro-map"] .react-flow__node').count();
+await page.locator('.react-flow__node', { hasText: box }).first().click();
+const card = page.locator('[data-testid="pro-map-detail"]');
+await card.waitFor();
+await card.screenshot({ path: `${out}-card.png` });
+await page.getByTestId(`tile-${tile}`).click();
+await card.screenshot({ path: `${out}-tile.png` });
+console.log(JSON.stringify({ nodes, tile: (await card.innerText()).slice(0, 160) }));
+await browser.close();

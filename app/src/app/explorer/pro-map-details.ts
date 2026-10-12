@@ -1,0 +1,353 @@
+/**
+ * Numbers re-read live from the docs on 2026-10-12 (newest items: weeks 33 to 37 of 2026).
+ * Deep detail for the Anthropic side of the Pro Map. Each entry opens as tiles in the click card;
+ * each tile opens a full card. Anthropic sources only, read 2026-10-12. No em dashes.
+ * limits = size and count rules; build = how to build it; pros = what Anthropic always does;
+ * noobs = mistakes Anthropic calls out; extra = things they do that are not on Alex's map yet.
+ */
+export type ProDetail = {
+  limits?: string[]; build?: string[]; pros?: string[]; noobs?: string[]; extra?: string[]; sources?: string[];
+};
+
+const S = {
+  mem: 'https://code.claude.com/docs/en/memory',
+  steer: 'https://claude.com/blog/steering-claude-code-skills-hooks-rules-subagents-and-more',
+  ctx: 'https://claude.com/blog/the-new-rules-of-context-engineering-for-claude-5-generation-models',
+  skills: 'https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices',
+  skillUse: 'https://claude.com/blog/lessons-from-building-claude-code-how-we-use-skills',
+  skillsExplained: 'https://claude.com/blog/skills-explained',
+  sub: 'https://code.claude.com/docs/en/sub-agents',
+  sdk: 'https://code.claude.com/docs/en/agent-sdk/overview',
+  sdkSub: 'https://code.claude.com/docs/en/agent-sdk/subagents',
+  sdkSkills: 'https://code.claude.com/docs/en/agent-sdk/skills',
+  sdkTools: 'https://code.claude.com/docs/en/agent-sdk/custom-tools',
+  sdkBlog: 'https://claude.com/blog/building-agents-with-the-claude-agent-sdk',
+  research: 'https://www.anthropic.com/engineering/multi-agent-research-system',
+  effective: 'https://www.anthropic.com/engineering/building-effective-agents',
+  harness: 'https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents',
+  tools: 'https://www.anthropic.com/engineering/writing-tools-for-agents',
+  advTools: 'https://www.anthropic.com/engineering/advanced-tool-use',
+  codeMcp: 'https://www.anthropic.com/engineering/code-execution-with-mcp',
+  mcpProd: 'https://claude.com/blog/building-agents-that-reach-production-systems-with-mcp',
+  mcp: 'https://code.claude.com/docs/en/mcp',
+  perm: 'https://code.claude.com/docs/en/permissions',
+  managedNew: 'https://claude.com/blog/new-in-claude-managed-agents',
+  evals: 'https://www.anthropic.com/engineering/demystifying-evals-for-ai-agents',
+  changelog: 'https://code.claude.com/docs/en/changelog',
+  whatsNew: 'https://code.claude.com/docs/en/whats-new/index',
+  w36: 'https://code.claude.com/docs/en/whats-new/2026-w36',
+  llms: 'https://code.claude.com/docs/llms.txt',
+  latency: 'https://platform.claude.com/cookbook/patterns-agents-latency-multi-agent',
+};
+
+export const PRO_DETAILS: Record<string, ProDetail> = {
+  p_lib_limits: {
+    limits: [
+      'CLAUDE.md: aim for under 200 lines per file. It will load up to 4 MiB, but shorter files get followed better.',
+      'AGENTS.md: same rule as CLAUDE.md (it is read in its place).',
+      '@ imports: up to 4 hops deep. They do not save space: every imported file loads at launch.',
+      'MEMORY.md: only the first 200 lines or 25KB load, whichever comes first. Everything past that is dropped.',
+      'Memory topic files: no limit published; they never load at start, Claude opens them when needed.',
+      'SKILL.md body: under 500 lines. Split the rest into reference files.',
+      'Skill name: up to 64 characters, lowercase and hyphens. Skill description: up to 1024 characters.',
+      'Reference files longer than 100 lines: put a table of contents at the top.',
+      'Links from SKILL.md: one level deep only.',
+      'Skill name cannot contain "anthropic" or "claude" or XML tags.',
+      'Subagent name: up to 256 characters.',
+      'Subagent nesting: 3 layers deep by default (CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH).',
+      'Subagents at once: 20 by default (CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS).',
+      'Spend cap per run: max_budget_usd in the Agent SDK (no cap unless you set one).',
+      'Tool results: Claude Code cuts them at 25,000 tokens by default.',
+      'Tool search pays off at 10+ tools or more than 10K tokens of tool definitions.',
+      'Research effort: simple fact = 1 agent, 3 to 10 tool calls. Comparison = 2 to 4 subagents, 10 to 15 calls each. Complex = 10+ subagents.',
+      'Parallel: the lead starts 3 to 5 subagents at once; each subagent runs 3+ tools at once.',
+      'Rules files: no line limit published, but an unscoped rule costs the same as putting it in CLAUDE.md.',
+    ],
+    noobs: ['Treating CLAUDE.md as a place for every practice you know. Anthropic says use a tree of small files that load at the right time.'],
+    extra: ['/skill-doctor (Sept 2026) shows what each skill costs in context and how often it is used, so you can turn off dead ones.', '/doctor is a full setup checkup that can fix issues.', '/context shows which CLAUDE.md and rules files actually loaded.'],
+    sources: [S.mem, S.skills, S.sub, S.sdkSub, S.tools, S.advTools, S.research, S.steer, S.ctx, S.w36],
+  },
+  p_ptr1: {
+    limits: ['Under 200 lines per file.', 'Loads in full up to 4 MiB; bigger files are skipped.'],
+    build: [
+      'Short line on what the repo is for, then spend most of the space on gotchas: things Claude would get wrong.',
+      'Build commands, folder layout, team conventions: facts Claude needs all the time.',
+      'Explain the why behind each rule and show an example.',
+      'Point to more detail with @path lines or let Claude find files itself.',
+    ],
+    pros: ['Give it an owner.', 'Review changes to it like code.', 'Keep a tree of small files instead of one giant one.', 'Re-check old workarounds: Anthropic deleted over 80% of Claude Code\'s own system prompt for Claude 5 models with no loss.'],
+    noobs: [
+      '"Every time X, always do Y": that should be a hook, so it always happens.',
+      '"Never do this": a rule in text can fail under pressure; use a hook or a deny rule.',
+      'A 30-line procedure: that belongs in a skill.',
+      'An API-only rule without paths: scope it so it does not load for unrelated work.',
+      'Stating the obvious that Claude can see in the files.',
+    ],
+    extra: ['/context to see what loaded; /doctor to rightsize it.'],
+    sources: [S.mem, S.steer, S.ctx],
+  },
+  p_ptr2: {
+    limits: ['Same as CLAUDE.md: under 200 lines.'],
+    build: ['Put it at the repo root. Claude Code reads it as the project instructions when there is no CLAUDE.md.', 'If you have both, a setting chooses: CLAUDE.md only, AGENTS.md only when no CLAUDE.md (default), or both.'],
+    noobs: ['Expecting Claude Code to read AGENTS.local.md, AGENTS.override.md or files under a .agents/ folder. It does not.'],
+    extra: ['The usual pattern for many coding agents: one AGENTS.md, and CLAUDE.md either absent or pulling it in with an import.'],
+    sources: [S.mem],
+  },
+  p_ptr3: {
+    limits: ['Up to 4 hops (a file importing a file importing a file...).'],
+    build: ['Write @docs/git.md on its own line in CLAUDE.md.', 'Relative paths start from the file that has the import; absolute paths also work.', 'Files outside the project ask for your approval the first time.'],
+    noobs: ['Thinking imports save space. They do not: imported files load at launch too.', 'Putting the path in backticks: then it is just text, not an import.'],
+    extra: ['For things only needed sometimes, use a skill or a path-scoped rule instead; those load only when needed.'],
+    sources: [S.mem, S.steer],
+  },
+  p_ptr4: {
+    build: ['One topic per file in .claude/rules/.', 'Add paths: in the frontmatter so it only loads when Claude touches matching files.', 'Symlink shared rules into each project.', 'Personal rules go in ~/.claude/rules/.'],
+    noobs: ['A rule with no paths: it is the same as putting it in CLAUDE.md, always loaded and always costing space.'],
+    sources: [S.mem, S.steer],
+  },
+  p_ptr5: {
+    build: [
+      'Pointer = a plain line of markdown: @path in CLAUDE.md, or a link inside SKILL.md like references/api.md.',
+      'JSON is only for settings: settings.json (permission rules, hooks) and .mcp.json (tool servers). Plugins also use JSON manifests.',
+    ],
+    pros: ['Keep links one level deep from SKILL.md.', 'Keep MEMORY.md as an index: one line per memory pointing to topic files.', 'Tell Claude what files are in a skill folder and it reads them when needed.'],
+    noobs: ['Building chains of files that point to files that point to files. Claude may only read part of a deeply nested file.'],
+    extra: ['Reverse pointers (a file listing who uses it) are not an Anthropic practice. Your passports pointing back to cards are your own addition.'],
+    sources: [S.mem, S.skills, S.skillUse, S.perm, S.mcp],
+  },
+  p_lib_skills: {
+    limits: ['name: 64 characters, lowercase letters, numbers and hyphens; no "anthropic" or "claude".', 'description: 1024 characters.', 'Every skill in the list costs context on every turn, used or not.', 'Body under 500 lines.', 'References one level deep; 100+ line references get a table of contents.'],
+    build: [
+      'Where they live: ~/.claude/skills/ (yours, every project) and .claude/skills/ in the project (and parent folders up to the repo root). Plugins can carry skills too.',
+      'At start only the name and description load, as a list Claude scans. The body loads when the skill is used.',
+      'A skill is a folder, not just a file: SKILL.md plus references/, scripts/ and examples Claude reads when needed.',
+      'In the Agent SDK, skills load from the same folders through settingSources (user and project).',
+    ],
+    pros: [
+      'Write the description for the model, not for people: say when to use it and include trigger words.',
+      'Every skill has a Gotchas section built from real failures, and it grows over time.',
+      'One skill = one job. Anthropic\'s internal skills fall into nine categories; skills that straddle several confuse the agent.',
+      'Build evals first, then write the skill.',
+    ],
+    noobs: ['A description that summarizes instead of saying when to trigger.', 'Overconstrained skills: keep them as light guides except in high-risk areas.', 'Copying the same instructions into many projects or subagents: make it one skill instead.'],
+    extra: [
+      'Skills can keep their own memory: an append-only log, JSON, or SQLite, stored in ${CLAUDE_PLUGIN_DATA}.',
+      'Anthropic logs every skill use with a PreToolUse hook to find skills that trigger too little.',
+      '/skill-doctor (Sept 2026) shows each skill\'s context cost and use count; claude plugin eval (Sept 2026) tests a plugin\'s skills against a no-plugin baseline.',
+      'Agents can save working code as reusable functions and add a SKILL.md, building their own toolbox.',
+    ],
+    sources: [S.skills, S.skillUse, S.sdkSkills, S.skillsExplained, S.codeMcp, S.w36, S.whatsNew],
+  },
+  p_lib_memory: {
+    limits: ['MEMORY.md: first 200 lines or 25KB load at start.', 'Topic files: not loaded at start.'],
+    build: [
+      'Stored in ~/.claude/projects/<project>/memory/, shared across worktrees of the same repo.',
+      'MEMORY.md is the index: one line per memory. Details go in topic files like feedback_testing.md.',
+      'Claude writes it itself: your corrections, your preferences, context it cannot get from the code.',
+      'Near the limit, Claude Code tells Claude to shorten it; over the limit, it must rewrite the index.',
+    ],
+    pros: ['CLAUDE.md = rules you write. Auto memory = learnings Claude writes. Keep them separate.', 'Each memory file gets a modified timestamp so you and Claude can see how fresh a fact is.'],
+    noobs: ['Expecting subagents to see the main memory: they do not (forks are the exception). A subagent can get its own memory folder.'],
+    extra: ['Managed Agents add dreaming: a scheduled pass that reviews past sessions and memory, finds patterns and cleans memory up.'],
+    sources: [S.mem, S.managedNew],
+  },
+  p_lib_mcp: {
+    build: ['Project tools go in .mcp.json at the repo root, committed to git, so everyone gets the same tools.', 'You approve project servers before they run.'],
+    extra: ['Remote MCP servers are what reach web, phone and cloud agents; local ones only reach this computer.'],
+    sources: [S.mcp, S.mcpProd],
+  },
+  p_lib_settings: {
+    build: ['settings.json holds permission rules (allow, ask, deny) and hooks.', 'Managed settings are set by the admin and cannot be loosened by a user or project.'],
+    pros: ['Anything that must never happen goes here, not in CLAUDE.md text.'],
+    sources: [S.perm, S.steer],
+  },
+  p_lib_evals: {
+    build: ['Task = one test with inputs and success criteria.', 'Trial = one attempt; run several because outputs vary.', 'Graders: code checks, a model judge, a human.', 'Transcript = the full record of a trial: every tool call, result and step.'],
+    pros: ['Read transcripts regularly; it is how you know the grader is fair.', 'Start early with a small set; do not wait for the perfect suite.'],
+    noobs: ['Trusting scores without reading why a task failed.'],
+    sources: [S.evals, S.skills],
+  },
+  p_lead: {
+    build: [
+      'Build it with the Agent SDK: the same agent loop that runs Claude Code, called from your own code.',
+      'The loop: gather context, take action, verify the work, repeat.',
+      'Define helpers in the agents option: each has a description (when to use it), a prompt, tools and a model.',
+      'Allow the Agent tool so the lead can hand work out.',
+      'Only the handoff text reaches a helper, so put file paths, errors and decisions in it.',
+      'Save the plan to memory before fanning out, so it survives a full context window.',
+    ],
+    pros: [
+      'Every handoff has an objective, an output format, which tools and sources to use, and where to stop.',
+      'Scaling rules in the prompt: how many helpers for how hard a question.',
+      'Plan in thinking first: which tools, how many helpers, what each one does.',
+      'Start 3 to 5 helpers at once instead of one after another (cut research time up to 90%).',
+    ],
+    noobs: [
+      'Short vague handoffs like "research the chip shortage": helpers repeat each other and leave gaps.',
+      'Too much effort on simple questions: Anthropic\'s early versions over-invested here.',
+      'Going multi-agent when one agent would do. Start simple.',
+    ],
+    limits: ['Helpers can nest 3 layers deep and 20 can run at once by default.', 'Set max_budget_usd to cap what one run can spend, helpers included.'],
+    extra: [
+      'Latency (Sept 2026 cookbook): show every agent a shared clock like [elapsed 252s / 600s], or add one sentence that time matters, and the team paces itself.',
+      'Fork mode (Aug 2026, on by default): a helper can start with the whole conversation instead of a blank slate.',
+      'Helpers run in the background by default, so the lead keeps working while they run.',
+      'Multi-agent runs use about 15 times the tokens of a chat, so they save it for work worth that.',
+      'A citation agent checks every claim against its source before the answer goes out.',
+      'Managed Agents: lead plus specialists on a shared filesystem, every step traced in the Console.',
+    ],
+    sources: [S.research, S.sdk, S.sdkBlog, S.sdkSub, S.effective, S.managedNew, S.latency, S.whatsNew],
+  },
+  p_sdk: {
+    build: [
+      'Agent SDK (Python or TypeScript): call query() with a prompt and options; it runs the full agent loop with Claude Code\'s tools.',
+      'Options include allowed tools, helpers (agents), MCP servers, and which settings folders to load (skills, CLAUDE.md).',
+      'Your own functions become tools: @tool, then create_sdk_mcp_server. It runs inside your app, no separate server.',
+      'Tool names come out as mcp__<server>__<tool>; list them in allowed tools to skip the prompt.',
+      'Host it in a container when it needs to run without your computer.',
+    ],
+    pros: ['Start with agentic search (folders, grep) before building a vector database.', 'Give the agent a way to check its own work.'],
+    noobs: ['Building a vector search first: slower to maintain and less transparent; add it only if you need speed.'],
+    sources: [S.sdk, S.sdkBlog, S.sdkTools, S.sdkSub],
+  },
+  p_a1: {
+    build: [
+      'In the SDK: agents={"researcher": AgentDefinition(description="Use for web research ...", prompt="You are ...", tools=["WebSearch", "WebFetch", "Read"])}.',
+      'Or as a file: .claude/agents/researcher.md with name, description, tools, model in the frontmatter.',
+      'Runs in its own conversation; only its final message comes back to the lead.',
+    ],
+    pros: [
+      'Getting the info you want: the lead says exactly what to find, in what format, from which sources.',
+      'Start with short broad searches, see what exists, then narrow.',
+      'Think after each result: judge quality, spot gaps, refine the next search.',
+      'Run 3+ searches at once.',
+    ],
+    noobs: [
+      'Long, very specific queries that return almost nothing.',
+      'The wrong tool: searching the web for something that only lives in Slack is doomed from the start.',
+      'Several helpers doing the exact same searches because the handoff was vague.',
+    ],
+    extra: ['A tool-testing agent used a flawed tool dozens of times and rewrote its description: future agents finished tasks 40% faster.'],
+    sources: [S.sdkSub, S.sub, S.research, S.sdkBlog],
+  },
+  p_a2: {
+    build: ['List only the tools it needs. Leave the list out and it gets every tool.', 'Pick the model per helper (for example a smaller model for simple work).'],
+    sources: [S.sub, S.sdkSub],
+  },
+  p_k0: {
+    build: [
+      'Agentic search: the agent uses the file system itself (ls, grep, tail) to pull in just what it needs.',
+      'The folder structure becomes context: name and arrange files so the agent can find things.',
+      'Semantic (vector) search is faster but less accurate, harder to maintain and less transparent.',
+    ],
+    pros: ['Start with agentic search; add semantic search only if you need faster results.'],
+    sources: [S.sdkBlog],
+  },
+  p_k1: {
+    limits: ['Worth it at 10+ tools or more than 10K tokens of tool definitions.'],
+    build: ['Mark tools defer_loading: true; Claude sees only the search tool plus your most-used tools.', 'In the Agent SDK, tool search is on by default for your custom tools; alwaysLoad keeps one loaded.'],
+    pros: ['Anthropic measured about 85% fewer tokens and better tool picking (one model went from 49% to 74% right).'],
+    sources: [S.advTools, S.sdkTools, S.mcp],
+  },
+  p_k2: {
+    limits: ['Claude Code caps a tool result at 25,000 tokens by default.'],
+    build: ['Describe it like onboarding a new hire: spell out formats, terms and how things relate.', 'Unambiguous input names: user_id, not user. Enforce them with a strict schema.', 'Group names by service and resource: asana_projects_search, asana_users_search.'],
+    pros: ['Put how-to-use-it instructions in the tool description, not repeated in the system prompt.', 'Track tool runtime, call count, tokens and errors to see what to merge.'],
+    noobs: ['Returning uuids, mime types and raw dumps instead of names and useful fields.', 'Opaque error codes; errors should say what to change.'],
+    sources: [S.tools, S.ctx],
+  },
+  p_k3: {
+    build: ['One tool can do several API calls under the hood.', 'Example: create_issue_from_thread beats get_thread + parse_messages + create_issue + link_attachment.'],
+    noobs: ['Wrapping an API into an MCP server one endpoint per tool.'],
+    sources: [S.tools, S.mcpProd],
+  },
+  p_k4: {
+    build: ['Paginate, filter, pick a range or truncate, with sensible defaults.', 'If you cut a result, tell the agent how to get more (many small searches beat one broad one).'],
+    sources: [S.tools],
+  },
+  p_g1: {
+    build: ['A PreToolUse hook sees every call; exit code 2 blocks it.', 'It runs before the permission prompt and cannot override deny or ask rules.'],
+    pros: ['Use hooks for anything that must happen every time: linters after edits, blocking commands, logging.'],
+    extra: ['Anthropic uses a PreToolUse hook to log every skill use across the company.'],
+    sources: [S.perm, S.steer, S.skillUse],
+  },
+  p_g2: {
+    build: ['Order is deny, then ask, then allow; first match wins.', 'A bare tool name in deny removes the tool from Claude entirely.'],
+    noobs: ['Expecting a narrow allow rule to beat a broad deny. It cannot.'],
+    sources: [S.perm],
+  },
+  p_t1: {
+    build: ['Build remote MCP servers so agents reach your system from web, phone and cloud.', 'For login, the current MCP spec supports CIMD so users approve once without surprise re-logins.', 'In Managed Agents, vaults store each user\'s tokens and inject them per call.'],
+    noobs: ['Mirroring the whole API one tool per endpoint.'],
+    sources: [S.mcpProd],
+  },
+  p_t4: {
+    build: [
+      'Direct API: the agent writes code that calls the API, or uses one generic tool. Fine for one agent and one service. At scale every agent and service pair becomes custom work.',
+      'CLI: the agent runs a command-line tool. Fast and light, best on a local computer or container; login lives in a file on disk.',
+      'MCP: one shared layer. One remote server reaches every client (Claude, ChatGPT, Cursor, VS Code).',
+      'Mature integrations ship all three: the API as the base, a CLI for local, MCP for cloud agents.',
+      'Your own functions: Agent SDK custom tools (an in-process MCP server inside your app).',
+      'Code execution with MCP: show MCP servers to the agent as code files it imports; one example went from 150,000 tokens to 2,000.',
+    ],
+    pros: ['MCP gives access; skills teach what to do with it. Use both.', 'Fewer, well-described tools beat a full API mirror.'],
+    noobs: ['Assuming tools must be MCP. Bash, scripts and generated code are tools too.'],
+    extra: ['With code execution, private data can pass between tools without ever entering the model\'s context.'],
+    sources: [S.mcpProd, S.sdkBlog, S.sdkTools, S.codeMcp, S.skillsExplained],
+  },
+  p_l3: {
+    build: ['Commit progress with a clear message after each step.', 'Write a summary in a progress file so the next session knows where things stand.'],
+    pros: ['Git is the undo button: roll back a bad change and get back to a working state.'],
+    sources: [S.harness],
+  },
+  p_r1: {
+    build: ['Write a rubric for what good looks like; a separate grader checks the work in its own context, so the builder\'s reasoning cannot sway it.', 'When something is off, the grader says what to change and the agent takes another pass.'],
+    sources: [S.managedNew],
+  },
+  p_r3: {
+    build: ['One judge call with a rubric: factual accuracy, citation accuracy, completeness, source quality, tool efficiency.', 'Scores from 0.0 to 1.0 plus pass or fail.'],
+    pros: ['A single judge prompt matched human judgment better than several judges.'],
+    sources: [S.research],
+  },
+  p_e1: {
+    build: ['Open the transcripts of failed runs and check: real mistake, or a grader that rejected a good answer?'],
+    pros: ['Anthropic built tooling just to view transcripts and reads them regularly.'],
+    sources: [S.evals],
+  },
+  p_e2: {
+    build: ['Claude saves corrections and preferences on its own ("Saved 2 memories").', 'Ask "remember X" and it goes to auto memory; ask "add this to CLAUDE.md" for a rule.'],
+    sources: [S.mem, S.ctx],
+  },
+  p_e5: {
+    build: ['Each skill has a Gotchas section.', 'When Claude hits a new failure using the skill, add it there.'],
+    pros: ['Most of Anthropic\'s best skills started as a few lines and one gotcha and grew as Claude hit new edge cases.'],
+    extra: ['This is Anthropic\'s version of a lessons file: the lesson lives inside the skill it is about, not in one big list.'],
+    sources: [S.skillUse],
+  },
+  p_e6: {
+    build: ['A scheduled job reviews past sessions and memory stores, finds patterns (repeat mistakes, workflows agents settle on, shared preferences) and cleans memory up.', 'You choose: it updates memory on its own, or you review changes first.'],
+    extra: ['Research preview in Managed Agents (May 2026).'],
+    sources: [S.managedNew],
+  },
+  p_e3: {
+    build: ['Write the test tasks first, then change the skill or instructions, then re-run.'],
+    sources: [S.skills, S.evals],
+  },
+  p_e4: {
+    build: ['Instruction changes go through review like code, with an owner.'],
+    extra: ['Agents can improve their own prompts: given a prompt and a failure, Claude diagnoses why and suggests a fix.'],
+    sources: [S.steer, S.research],
+  },
+  p_x7: {
+    build: [
+      'Claude Code changelog: every fix and change.',
+      'Weekly "What\'s new" digest: the features most likely to change how you work, with runnable examples.',
+      'llms.txt: a machine-readable index of every docs page, so an agent can look up the current docs itself instead of guessing.',
+      'Inside a project: the progress file and git history are the ledger of work.',
+      'Memory files carry a modified timestamp, so stale facts are visible.',
+      'Managed Agents trace every step in the Console: which agent did what, in what order, and why.',
+    ],
+    pros: ['When a new model lands, remove old workarounds; run /doctor to rightsize skills and CLAUDE.md.'],
+    sources: [S.changelog, S.whatsNew, S.llms, S.harness, S.mem, S.managedNew, S.ctx],
+  },
+};
