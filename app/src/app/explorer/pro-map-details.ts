@@ -7,6 +7,7 @@
  */
 export type ProDetail = {
   limits?: string[]; build?: string[]; pros?: string[]; noobs?: string[]; extra?: string[]; sources?: string[];
+  sticky?: { text: string; src: string }[];
 };
 
 const S = {

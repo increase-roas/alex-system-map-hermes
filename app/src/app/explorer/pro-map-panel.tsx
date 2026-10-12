@@ -246,6 +246,20 @@ function ExampleView({ e }: { e: Example }) {
       <div className="mt-0.5 text-xs leading-snug text-muted-foreground">{e.why}</div>
       {e.file ? <div className="mt-2 font-mono text-[11px]" style={{ color: c }}>{e.file}</div> : null}
       <pre className="mt-1 overflow-x-auto rounded-md bg-black/40 p-3 font-mono text-[12px] leading-snug">{e.code}</pre>
+      {e.sticky?.length ? <StickyNote notes={e.sticky} /> : null}
+    </div>
+  );
+}
+
+function StickyNote({ notes }: { notes: { text: string; src: string }[] }) {
+  return (
+    <div data-testid="sticky-note" className="mt-2 rounded-md border border-yellow-400/60 bg-yellow-200/90 p-2.5 text-[12px] leading-snug text-yellow-950 shadow-sm" style={{ transform: 'rotate(-0.4deg)' }}>
+      <div className="mb-1 text-[10px] font-bold uppercase tracking-wide">Sticky note: don't forget</div>
+      {notes.map((s) => (
+        <div key={s.text} className="mt-1">
+          {s.text} <a href={s.src} target="_blank" rel="noreferrer" className="underline opacity-70">source</a>
+        </div>
+      ))}
     </div>
   );
 }
@@ -314,6 +328,11 @@ function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
     <div className={shell} data-testid="pro-map-detail">
       {head}
       <p className="mt-3 text-sm leading-snug">{node.why}</p>
+      {node.detail?.sticky?.length ? <StickyNote notes={node.detail.sticky} /> : null}
+      {(() => {
+        const n = (node.detail?.examples ?? []).reduce((a, e) => a + (e.sticky?.length ?? 0), 0);
+        return n ? <div className="mt-2 text-xs font-medium text-yellow-600">{n} sticky {n === 1 ? 'note' : 'notes'} inside Examples</div> : null;
+      })()}
       <div className="mt-3 space-y-2">
         {tiles.map((t) => {
           return (

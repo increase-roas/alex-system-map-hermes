@@ -9,7 +9,7 @@ export type Picture =
   | { kind: 'tree'; title: string; caption?: string; root: TreeNode }
   | { kind: 'files'; title: string; caption?: string; root: TreeNode }
   | { kind: 'flow'; title: string; caption?: string; steps: FlowStep[] };
-export type Example = { title: string; why: string; file?: string; code: string; tone?: 'good' | 'bad' };
+export type Example = { title: string; why: string; file?: string; code: string; tone?: 'good' | 'bad'; sticky?: { text: string; src: string }[] };
 export type Rule = { if: string; then: string };
 export type ProExamples = { plain?: string[]; pictures?: Picture[]; examples?: Example[]; decide?: Rule[]; sources?: string[] };
 

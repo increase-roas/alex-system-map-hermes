@@ -1,0 +1,41 @@
+/**
+ * Sticky notes: things a first-timer forgets that make a template fail. From Codex's audit 2026-10-12.
+ * ids list every map the card appears on (o_ = v1, p_ = v2, h_ = Hermes). title = example title; no title = whole card.
+ */
+export type Sticky = { text: string; src: string };
+type Entry = { ids: string[]; title?: string; text: string; src: string };
+const HK = 'https://code.claude.com/docs/en/hooks';
+const HG = 'https://code.claude.com/docs/en/hooks-guide';
+const HH = 'https://hermes-agent.nousresearch.com/docs/user-guide/features/hooks';
+export const STICKY: Entry[] = [
+  { ids: ['p_g1', 'o_g1'], title: 'Block a dangerous command', text: 'Save the script at that path, install jq, and run chmod +x on it. Then register it under PreToolUse with matcher Bash; saving the file alone does nothing.', src: HG },
+  { ids: ['p_rulegate', 'o_rulegate'], title: 'Hook setup', text: 'Add "onFailure": "block" to the hook (Claude Code 2.1.295 or newer). Otherwise a missing script, crash or timeout can let the call go through.', src: HK },
+  { ids: ['p_g1', 'o_g1'], title: 'Hold every client text for approval', text: 'needs-approval.sh is not included: write it first. It must print the permissionDecision "ask" JSON; printing "please approve" does not ask you anything.', src: HK },
+  { ids: ['p_g1', 'o_g1'], title: 'Hold every client text for approval', text: 'Open /mcp and copy your server\'s real tool names into the matcher. A different name or capital letter means the send tool is never matched.', src: 'https://code.claude.com/docs/en/mcp' },
+  { ids: ['p_rulegate', 'o_rulegate'], title: 'The gate script', text: 'This assumes the call has tools[0].tool_slug. Check what your tool really sends, and handle every action in a batch, not just the first one.', src: HK },
+  { ids: ['p_goal'], title: 'The check', text: 'Add a retry limit or check stop_hook_active. The comment alone does neither, so a test that keeps failing can keep Claude from stopping.', src: HK },
+  { ids: ['p_aftercheck'], title: 'Hook setup', text: 'block-done-if-failing.sh is not included: write it. A filename in settings does not create the check.', src: HG },
+  { ids: ['p_aftercheck'], title: 'The check script', text: 'Add a real test:quick script to package.json and run it yourself first. npm run test:quick does not exist just because the example names it.', src: 'https://docs.npmjs.com/cli/v10/commands/npm-run-script/' },
+  { ids: ['p_aftercheck'], title: 'The check script', text: 'This runs AFTER the edit. A failure tells Claude to fix it; it does not undo the changed file.', src: HG },
+  { ids: ['p_ckpt'], title: 'Save and reload hooks', text: 'save-handoff.sh is not included: write it. PreCompact does not fire on /clear, so save before clearing too; add startup to the matcher if fresh launches should reload the note.', src: HK },
+  { ids: ['h_hook', 'h_rulegate'], text: 'Approve these hooks interactively before relying on them unattended. Unapproved hooks are skipped when nobody is there to approve them.', src: HH },
+  { ids: ['h_hook', 'h_rulegate'], text: 'The scripts are not included: write them. To block a call, return Hermes\'s documented block response, or write the reason to stderr and exit 2.', src: HH },
+  { ids: ['h_goal'], title: 'Finish line with a real test gate', text: 'Write and test checks/oak_ridge_form_test.py first; exit code 0 must mean it really passed. Adding gates from a chat app needs an authorized gateway admin.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/features/goals' },
+  { ids: ['p_lib_mcp', 'o_lib_mcp'], title: 'One remote server, one local server', text: 'Replace mcp.example.com with your real server, and set GHL_ACME_TOKEN in the environment that launches Claude. Writing ${GHL_ACME_TOKEN} here does not create the token.', src: 'https://code.claude.com/docs/en/mcp' },
+  { ids: ['p_lib_mcp', 'o_lib_mcp'], title: 'One remote server, one local server', text: 'Approve the project\'s .mcp.json servers when Claude Code asks, then check /mcp shows them connected. A saved file is not a working connection.', src: 'https://code.claude.com/docs/en/mcp' },
+  { ids: ['p_lead', 'o_lead'], title: 'Lead agent with one helper (Python)', text: 'Wrap it in async def main(): and call asyncio.run(main()). async for cannot run at the top level of a normal Python file.', src: 'https://code.claude.com/docs/en/agent-sdk/quickstart' },
+  { ids: ['p_lead', 'o_lead'], title: 'Lead agent with one helper (Python)', text: 'pip install claude-agent-sdk and set up authentication first. The SDK does not load .env for you; load it yourself or set the key in the environment.', src: 'https://code.claude.com/docs/en/agent-sdk/quickstart' },
+  { ids: ['p_ptr2', 'o_ptr2'], title: 'Type 1: AGENTS.md only (every app reads it)', text: 'Claude Code\'s automatic AGENTS.md fallback depends on version and is skipped if a CLAUDE.md exists here or above. For a sure link, use a CLAUDE.md that says @AGENTS.md.', src: 'https://code.claude.com/docs/en/memory' },
+  { ids: ['p_ptr3', 'o_ptr3'], title: 'Import lines', text: 'Paths are relative to the file doing the import. Imports from outside the project may ask for your approval; a declined import stays off.', src: 'https://code.claude.com/docs/en/memory' },
+  { ids: ['p_rulegate', 'o_rulegate'], title: 'A connector rules file (Anthropic rules format)', text: 'paths: matches project files, not GHL tool calls. Keep the gate hook if the rules must be read before using GHL.', src: 'https://code.claude.com/docs/en/memory' },
+  { ids: ['p_lib_skills', 'o_lib_skills'], title: 'A real-shaped SKILL.md', text: 'Put the scripts, templates and reference files inside the skill\'s own folder. In shell commands use ${CLAUDE_SKILL_DIR}/scripts/...; the shell may be running from the project folder.', src: 'https://code.claude.com/docs/en/skills' },
+  { ids: ['p_a1', 'o_a1'], title: 'The helper as a file', text: 'If this creates your first .claude/agents/ folder while Claude Code is open, restart it. New agent folders are not picked up until then.', src: 'https://code.claude.com/docs/en/sub-agents' },
+  { ids: ['p_lib_plugins', 'o_lib_plugins'], title: 'The manifest', text: 'Keep skills/, agents/ and hooks/ next to .claude-plugin/, not inside it. Test with claude --plugin-dir <folder>; the manifest alone does not turn the plugin on.', src: 'https://code.claude.com/docs/en/plugins' },
+  { ids: ['p_l4', 'o_l4'], title: 'Install the shared plugin in a new client repo', text: 'Pick project scope if it belongs to one client repo; installs default to your user account. Swap the sample marketplace and plugin names for real ones.', src: 'https://code.claude.com/docs/en/discover-plugins' },
+  { ids: ['p_x3', 'o_x3'], title: 'Turn the trace on', text: 'Start a telemetry collector first. For localhost:4317 also set OTEL_EXPORTER_OTLP_PROTOCOL=grpc, then launch Claude from that same shell.', src: 'https://code.claude.com/docs/en/monitoring-usage' },
+  { ids: ['p_g2', 'o_g2'], title: 'Allow, ask, deny', text: 'Read(./.env) is not full secret protection: it does not stop every indirect read through Python or another program. Do not treat it as a locked vault.', src: 'https://code.claude.com/docs/en/permissions' },
+  { ids: ['p_x6', 'o_x6'], text: 'Add .env files to .gitignore before your first commit. Saying "not in git" does not make git ignore them.', src: 'https://github.com/motdotla/dotenv#should-i-commit-my-env-file' },
+  { ids: ['h_rulegate'], title: 'Same skill file works in Hermes (agentskills.io format)', text: 'Put the skill in the active profile\'s skills/ folder. The hook example uses the javar profile; ~/.hermes/skills is the default profile, a different place.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/profiles' },
+  { ids: ['h_workdir'], text: 'Give scheduled jobs an existing, absolute workdir path. Without it, cron jobs load no project instruction files.', src: 'https://hermes-agent.nousresearch.com/docs/user-guide/features/cron' },
+  { ids: ['p_r4', 'o_r4'], title: 'One graded case (Claude Code plugin eval format)', text: 'Run claude plugin eval init in the plugin first and use the format it generates. This sample is a sketch, not a complete test setup.', src: 'https://code.claude.com/docs/en/plugin-evals' },
+];
