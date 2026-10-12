@@ -115,7 +115,7 @@ const proNodes: ProNode[] = [
     id: 'p_lead', label: 'Lead agent', sub: 'One agent, built with the Agent SDK', sources: [ANT.research, ANT.subBlog, ANT.effective],
     why: 'Anthropic\'s research system: the lead agent thinks through the approach, saves its plan, spins up subagents with specific tasks, combines what they return, decides if more work is needed, then answers you.',
     how: ['You talk to one agent; it hands work to subagents', 'Each subagent gets a clear goal, output format, tools to use and where to stop', 'Start simple: add agents only when one agent is not enough'],
-  }}], ref),
+  }], ref),
   ...row(P, 'plan', [
     { id: 'p_plan1', label: 'Plan saved', sub: 'Lead writes it to memory', why: 'The lead saves its plan to memory so it survives when the context window fills up.', sources: [ANT.research] },
     { id: 'p_plan2', label: 'Progress file + git', sub: 'claude-progress.txt, commits', why: 'For long jobs the first session sets up the project; every later session makes one step of progress and leaves notes.', sources: [ANT.harness], how: ['First session: setup script, progress file, first git commit', 'Every later session: one step, commit with a clear message, update the progress file'] },
