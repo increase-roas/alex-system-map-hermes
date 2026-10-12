@@ -24,8 +24,19 @@ class ReviewParseTests(unittest.TestCase):
     def test_latest_per_node_review_wins(self):
         self.assertEqual(parse_review('LAST_REVIEW: a: /a PASS 2026-10-12T01:00:00Z\nLAST_REVIEW: b: /b FAIL 2026-10-12T02:00:00Z')['verdict'], 'FAIL')
 
-    def test_verified_with_failed_review_is_flagged(self):
-        self.assertEqual(parse_review('STATUS: VERIFIED\nLAST_REVIEW: /a FAIL 2026-10-12T01:00:00Z')['verdict'], 'verified_without_review')
+    def test_verified_with_failed_review_is_red(self):
+        self.assertEqual(parse_review('STATUS: VERIFIED\nLAST_REVIEW: /a FAIL 2026-10-12T01:00:00Z')['verdict'], 'fail')
+
+    def test_verified_in_acceptance_or_prose_is_not_status(self):
+        for block in ['ACCEPTANCE: must be VERIFIED', 'Notes: previously VERIFIED',
+                      'STATUS: ACTIVE\nACCEPTANCE: VERIFIED',
+                      'STATUS:\nVERIFIED in prose']:
+            with self.subTest(block=block):
+                self.assertEqual(parse_review(block), {'verdict': 'none'})
+
+    def test_verified_checkpoint_is_status(self):
+        self.assertEqual(parse_review('ACCEPTED_CHECKPOINT: VERIFIED'),
+                         {'verdict': 'verified_without_review'})
 
     def test_unverified_is_not_verified(self):
         self.assertEqual(parse_review('STATUS: UNVERIFIED'), {'verdict': 'none'})

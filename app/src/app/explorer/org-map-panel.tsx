@@ -58,7 +58,7 @@ function reviewBadge(n: OrgNode) {
   if (n.kind !== 'mission') return null;
   const review = n.meta.review as { verdict?: string; path?: string; at?: string } | undefined;
   const badge = review?.verdict === 'PASS' ? ['PASS', '#17c964']
-    : review?.verdict === 'FAIL' ? ['FAIL', '#ff0071']
+    : (review?.verdict === 'FAIL' || review?.verdict === 'fail') ? ['FAIL', '#ff0071']
       : review?.verdict === 'verified_without_review' ? ['no review', '#f5a524'] : null;
   return badge ? <span className="ml-1 inline-block shrink-0 rounded border px-1 text-[10px] font-semibold"
     style={{ color: badge[1], borderColor: badge[1] }} title={[review?.path, review?.at].filter(Boolean).join(' ')}>{badge[0]}</span> : null;

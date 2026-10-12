@@ -19,6 +19,10 @@ def parse_review(block: str) -> dict:
             continue
         reviews.append((stamp, {'verdict': verdict, 'path': path, 'at': at}))
     review = max(reviews, key=lambda item: item[0])[1].copy() if reviews else {'verdict': 'none'}
-    if re.search(r'\bVERIFIED\b', block) and review['verdict'] != 'PASS':
+    status_values = re.findall(r'^[ \t]*(?:STATUS|ACCEPTED_CHECKPOINT):[ \t]*([^\n]*)$', block, re.M)
+    verified = any(re.search(r'\bVERIFIED\b', value) for value in status_values)
+    if verified and review['verdict'] == 'FAIL':
+        review['verdict'] = 'fail'
+    elif verified and review['verdict'] == 'none':
         review['verdict'] = 'verified_without_review'
     return review
