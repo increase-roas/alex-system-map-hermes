@@ -17,6 +17,7 @@ import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
+from review_parse import parse_review
 
 HOME = Path.home()
 ROOT = Path(__file__).resolve().parents[1]
@@ -270,6 +271,15 @@ add('conductor', 'director', 'conductor', 'Conductor', 'Carries out the plays th
     explain('The Conductor is the worker playbook: it takes the Director\'s next play and carries it out with the right tools.',
             'no', 'It is installed for every app and its rules are in place.', 'Nothing.'),
     sources=[SKILLS / 'alex-workflow-conductor' / 'SKILL.md'])
+add('reviewer', 'conductor', 'reviewer', 'Reviewer',
+    "Checks the worker's proof before anything counts as done. Always the other AI family (GPT work gets a Claude check, and the reverse).",
+    explain('The Reviewer opens the proof and checks it against the agreed finish line.',
+            'maybe', 'A different AI family checks the work before the Director accepts it.',
+            'Read the verdict. Failed checks go back to the Conductor.'),
+    sources=[SKILLS / 'alex-reviewer' / 'SKILL.md'])
+link('conductor', 'reviewer', 'reviews', 'sends proof to', '~/.agents/skills/alex-workflow-conductor/SKILL.md (Review packet)')
+link('reviewer', 'director', 'verdict', 'pass / fail to', '~/.agents/skills/alex-reviewer/SKILL.md rule 5')
+link('reviewer', 'conductor', 'sendback', 'fail: sends back', '~/.agents/skills/alex-director/SKILL.md rule 3')
 link('director', 'conductor', 'dispatches', 'sends plays to')
 for app in ('app:claude', 'app:codex', 'app:cursor'):
     link(app, 'director', 'loads', 'can run Director')
@@ -345,7 +355,7 @@ for block in re.split(r'(?m)^## Mission: ', state_text)[1:]:
     add(mid, 'missions', 'mission', name, owner or name,
         explain(f'A Director mission: {owner or name}', 'yes' if st in ('you', 'stuck') else 'maybe' if st == 'done' else 'no', why, todo),
         status={'you': 'you', 'stuck': 'broken', 'done': 'watch', 'ok': 'ok'}[st], sources=[DIRECTOR / 'DIRECTOR_STATE.md'],
-        project=project, mission_status=status, bucket=q['bucket'] if q else None, quiet_days=q['quiet_days'] if q else None)
+        review=parse_review(block), project=project, mission_status=status, bucket=q['bucket'] if q else None, quiet_days=q['quiet_days'] if q else None)
     link('director', mid, 'runs', 'runs')
     if st == 'you':
         needs_me.append({'title': name, 'why': why, 'todo': todo, 'node_id': mid})
@@ -381,6 +391,11 @@ for app in ('app:claude', 'app:claude-code', 'app:codex', 'app:cursor', 'app:cha
 for stem, kits in card_routes.items():
     cid = f'card:{stem}'
     system = nodes[cid]['meta']['system']
+    registry = json.loads(read(HOME / '.agents/registry/connectors' / f'{stem}.json') or '{}')
+    if registry.get('kind') == 'skill':
+        if stem == 'alex-reviewer':
+            link(cid, 'reviewer', 'route', 'review skill', str(CARDS / f'{stem}.md'))
+        continue
     for k in kits:
         tid = f'toolkit:{k}'
         if tid not in nodes:
@@ -587,8 +602,9 @@ for cid in [n for n in list(nodes) if n.startswith('card:')]:
         tn = nodes[t]
         tn['meta'].update(card=stem, card_rule_lines=card['meta'].get('rule_lines', []), card_file=card['sources'][0] if card['sources'] else '',
                           system=card['meta'].get('system'))
-        tn['label'] = f"{card['meta'].get('system')} · {tn['label']}" if not tn['label'].startswith(card['meta'].get('system', '~')) else tn['label']
-        tn['purpose'] = '; '.join(card['meta'].get('rule_lines', [])) or tn['purpose']
+        if t != 'reviewer':
+            tn['label'] = f"{card['meta'].get('system')} · {tn['label']}" if not tn['label'].startswith(card['meta'].get('system', '~')) else tn['label']
+            tn['purpose'] = '; '.join(card['meta'].get('rule_lines', [])) or tn['purpose']
         kit = t.split(':', 1)[1] if t.startswith('toolkit:') else None
         if kit and kit in live_ids:
             named = set(re.findall(rf'\b({re.escape(kit)}_[a-z]+-[a-z]+)\b', text))
@@ -612,6 +628,9 @@ for cid in [n for n in list(nodes) if n.startswith('card:')]:
         if card['meta'].get('catalog'):
             tn['meta'].setdefault('catalog', []).extend(card['meta']['catalog'])
     nodes.pop(cid)
+for e in edges:
+    if e['target'] == 'local:alex-reviewer':
+        e['target'] = 'reviewer'
 edges[:] = [e for e in edges if e['source'] in nodes and e['target'] in nodes]
 needs_me[:0] = login_problems
 # Per-app differences on the app box; shared rules/guards drop their per-app wires.

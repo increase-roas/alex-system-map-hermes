@@ -1,0 +1,12 @@
+SUMMARY: 91 nodes, 193 edges
+PASS: reviewer in conductor; no local:alex-reviewer; 3 reviewer edges proven; mission review metadata present
+.....
+----------------------------------------------------------------------
+Ran 5 tests in 0.000s
+
+OK
+npx tsc --noEmit -p .: exit 0, no output
+HTTP /explorer: 200
+BROWSER PASS: Reviewer beside Conductor, smaller; legend rendered
+BROWSER FIXTURE PASS: PASS green; FAIL red; no review amber; none hidden (browser-only fixture, ledger unchanged)
+git diff --check: exit 0, no output

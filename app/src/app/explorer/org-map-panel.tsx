@@ -45,13 +45,23 @@ const SDK_COLOR = { proven: '#17c964', partial: '#f5a524', gap: '#ff0071' } as c
 const W = 214, GAP = 22, ROW = 92, PER_ROW = 9, BAND_GAP = 70;
 const RAIL_X = PER_ROW * (W + GAP) + 80;
 /** Lines always drawn (the org chart's backbone); everything else appears when you click a box. */
-const BACKBONE = new Set(['talks', 'dispatches', 'runs-on', 'runs', 'reaches']);
+const BACKBONE = new Set(['talks', 'dispatches', 'runs-on', 'runs', 'reaches', 'reviews', 'verdict', 'sendback']);
 const RAIL_LEFT_X = -(W + 90);
 
 function ago(iso?: string | null) {
   if (!iso) return '?';
   const s = Math.max(0, Math.round((Date.now() - new Date(iso).getTime()) / 1000));
   return s < 90 ? `${s}s ago` : s < 5400 ? `${Math.round(s / 60)} min ago` : s < 129600 ? `${Math.round(s / 3600)} h ago` : `${Math.round(s / 86400)} days ago`;
+}
+
+function reviewBadge(n: OrgNode) {
+  if (n.kind !== 'mission') return null;
+  const review = n.meta.review as { verdict?: string; path?: string; at?: string } | undefined;
+  const badge = review?.verdict === 'PASS' ? ['PASS', '#17c964']
+    : review?.verdict === 'FAIL' ? ['FAIL', '#ff0071']
+      : review?.verdict === 'verified_without_review' ? ['no review', '#f5a524'] : null;
+  return badge ? <span className="ml-1 inline-block shrink-0 rounded border px-1 text-[10px] font-semibold"
+    style={{ color: badge[1], borderColor: badge[1] }} title={[review?.path, review?.at].filter(Boolean).join(' ')}>{badge[0]}</span> : null;
 }
 
 function card(n: OrgNode) {
@@ -62,7 +72,7 @@ function card(n: OrgNode) {
         {n.kind}
         <span className="ml-auto normal-case">{STATUS_WORD[n.status]}</span>
       </div>
-      <div className="mt-0.5 truncate text-[13px]">{n.label}</div>
+      <div className="mt-0.5 flex items-center text-[13px]"><span className="truncate">{n.label}</span>{reviewBadge(n)}</div>
       <div className="text-muted-foreground mt-0.5 line-clamp-2 text-[10px]">
         {n.kind === 'app' && Array.isArray(n.meta.differences)
           ? ((n.meta.differences as string[]).join(' · ') || 'nothing different from the shared setup')
@@ -78,6 +88,7 @@ function card(n: OrgNode) {
 const SHAPE: Record<string, [ShapeType, number, number, string]> = {
   director: ['diamond', 320, 132, '30px 70px'],
   conductor: ['hexagon', 290, 96, '14px 40px'],
+  reviewer: ['hexagon', 230, 88, '10px 30px'],
   hub: ['circle', W, 86, '18px 34px'],
   toolkit: ['cylinder', W, 84, '20px 14px 6px'],
   local: ['cylinder', W, 84, '20px 14px 6px'],
@@ -115,7 +126,7 @@ function finish(nodes: Node[], byId: Map<string, OrgNode>) {
     const st = (n.style ?? {}) as CSSProperties;
     const [type, w, h, pad] = sh;
     n.data = { ...n.data, shape: type, pad, stroke: String(st.border ?? '').match(/#[0-9a-f]{3,8}/i)?.[0] ?? '#3a3a3a',
-      fill: ['director', 'conductor', 'hub'].includes(o!.kind) ? 'rgba(255,0,113,0.10)' : 'hsl(var(--card))' };
+      fill: ['director', 'conductor', 'reviewer', 'hub'].includes(o!.kind) ? 'rgba(255,0,113,0.10)' : 'hsl(var(--card))' };
     n.style = { ...st, width: w, height: h, padding: 0, border: 'none', background: 'transparent', borderRadius: 0,
       filter: st.boxShadow ? 'drop-shadow(0 0 10px rgba(255,0,113,0.55))' : undefined, boxShadow: undefined };
   }
@@ -222,7 +233,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
     }
     nodes.push({ id: `lane:${layer}`, position: { x: 0, y: y - 24 }, selectable: false, draggable: false, data: { label: title },
       style: { width: 600, border: 'none', background: 'transparent', padding: 0, fontSize: 12, color: '#ff4d9a', textAlign: 'left' } });
-    const order = ['rule', 'hook', 'check', 'card', 'director', 'conductor', 'mission', 'skill', 'agent', 'hub', 'toolkit', 'local'];
+    const order = ['rule', 'hook', 'check', 'card', 'director', 'conductor', 'reviewer', 'mission', 'skill', 'agent', 'hub', 'toolkit', 'local'];
     // Auto-layout ordering (the idea behind the Pro "Auto Layout" layered engines): put each box under the
     // boxes it connects to above it, so lines run short and straight instead of crossing the whole map.
     const bary = (n: OrgNode) => {
@@ -231,6 +242,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
       return xs.length ? xs.reduce((a, b) => a + b, 0) / xs.length : Number.POSITIVE_INFINITY;
     };
     const sorted = [...list].sort((a, b) => order.indexOf(a.kind) - order.indexOf(b.kind) || bary(a) - bary(b) || a.label.localeCompare(b.label));
+    const columnStep = layer === 'conductor' ? Math.max(W, ...sorted.map((n) => SHAPE[n.kind]?.[1] ?? W)) + GAP : W + GAP;
     const rows = Math.ceil(sorted.length / PER_ROW);
     const rowH = Math.max(ROW, ...sorted.map((n) => (SHAPE[n.kind]?.[2] ?? 72) + 18));
     sorted.forEach((n, i) => {
@@ -239,7 +251,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
       // Short rows are centred on the same column grid, so every column lines up top to bottom.
       const offset = Math.floor((PER_ROW - inRow) / 2) * (W + GAP);
       const w = SHAPE[n.kind]?.[1] ?? W;
-      const x = offset + (i % PER_ROW) * (W + GAP) - (w - W) / 2;
+      const x = offset + (i % PER_ROW) * columnStep - (w - W) / 2;
       placedX.set(n.id, x + w / 2);
       nodes.push({ id: n.id, position: { x, y: y + r * rowH }, data: { label: card(n) }, style: style(n) });
     });
@@ -442,6 +454,10 @@ export function OrgMapPanel() {
           <Button size="sm" variant="outline" onClick={() => setOpen(new Set(map.nodes.map((n) => n.meta.project).filter((p): p is string => typeof p === 'string')))}>Open all customers</Button>
           <Button size="sm" variant="outline" disabled={open.size === 0} onClick={() => setOpen(new Set())}>Close all</Button>
         </div>
+
+        <p className="text-muted-foreground border-b px-3 py-2 text-xs" title="~/.agents/skills/alex-reviewer/SKILL.md; ~/.agents/skills/alex-director/references/ledger.md">
+          Reviewer badge: green passed, red failed, amber marked done with no review
+        </p>
 
         {map.needs_me.length > 0 && (
           <section className="border-b px-3 py-2" aria-label="Needs me">
