@@ -5,7 +5,8 @@
  */
 export type CallStatus = 'ok' | 'fail' | 'ask' | 'fixed' | 'info';
 export type Call = { agent: string; action: string; result: string; status: CallStatus; ms?: number; cost?: string };
-export type Beat = { title: string; say: string; ids: string[]; tone?: 'problem' | 'fix' | 'done'; calls?: Call[] };
+/** path = the green arrows for this step (from, to). Without it, the cards are chained in order. */
+export type Beat = { title: string; say: string; ids: string[]; tone?: 'problem' | 'fix' | 'done'; calls?: Call[]; path?: [string, string][] };
 export type Job = { id: string; name: string; ask: string; beats: Beat[] };
 
 export const JOBS: Job[] = [
@@ -46,23 +47,37 @@ export const JOBS: Job[] = [
   },
   {
     id: 'website',
-    name: 'Build a landing page',
-    ask: 'Build a mobile-friendly landing page for Acme. Don\'t publish.',
+    name: 'Build a landing page (with helpers)',
+    ask: 'Build a mobile-friendly landing page for Acme, based on what the top 3 competitors do. Don\'t publish.',
     beats: [
-      { title: 'You ask', ids: ['p_you', 'p_ui1'], say: 'You ask for a mobile-friendly landing page, not published yet.', calls: [{ agent: 'you', action: 'user_prompt', result: 'job received', status: 'info' }] },
-      { title: 'Prepare', ids: ['p_lead', 'p_l1', 'p_load', 'p_plan'], say: 'The lead picks Acme\'s project, loads its instructions, and sets the checks: builds, and fits a phone screen.',
+      { title: 'You ask', ids: ['p_you', 'p_ui1'], say: 'You ask for a landing page based on the top 3 competitors, not published yet.',
+        calls: [{ agent: 'you', action: 'user_prompt', result: 'job received', status: 'info' }] },
+      { title: 'Prepare', ids: ['p_lead', 'p_l1', 'p_load', 'p_plan'], say: 'The lead picks Acme\'s project, loads its instructions, and decides: this job splits into two parts that can run at the same time.',
+        path: [['p_ui1', 'p_lead'], ['p_lead', 'p_l1'], ['p_l1', 'p_load'], ['p_load', 'p_plan']],
         calls: [{ agent: 'lead', action: 'Read CLAUDE.md', result: 'loaded', status: 'ok', ms: 40 }] },
-      { title: 'Build', ids: ['p_self', 'p_k0', 'p_k2', 'p_g1', 'p_g2', 'p_t2'], say: 'It writes the page. Each file edit passes the permission check first.',
-        calls: [{ agent: 'lead', action: 'Write website/index.html', result: 'created', status: 'ok', ms: 120 }, { agent: 'lead', action: 'Bash npm run build', result: 'build ok', status: 'ok', ms: 4200 }] },
-      { title: 'Problem', ids: ['p_aftercheck', 'p_check'], tone: 'problem', say: 'The after-edit check tests a phone-width screen. The page spills off the side.',
+      { title: 'Split: hand out tasks', ids: ['p_helpers', 'p_a1', 'p_a2'], say: 'Here it breaks into helpers. Research helper: study 3 competitor pages. Build helper: write the page. Each gets its own handoff and loads its own instructions.',
+        path: [['p_plan', 'p_helpers'], ['p_helpers', 'p_a1'], ['p_helpers', 'p_a2']],
+        calls: [{ agent: 'lead', action: 'Agent(researcher)', result: 'started', status: 'ok' }, { agent: 'lead', action: 'Agent(site-builder)', result: 'started', status: 'ok' }] },
+      { title: 'Where the helpers go', ids: ['p_a1', 'p_a2', 'p_k0', 'p_g2', 'p_t1', 'p_t2'], say: 'Both helpers run the same tool loop: find the tool, pass the permission check, run it. Research uses web search; the builder writes files.',
+        path: [['p_a1', 'p_k0'], ['p_a2', 'p_k0'], ['p_k0', 'p_g2'], ['p_g2', 'p_t1'], ['p_g2', 'p_t2']],
+        calls: [{ agent: 'researcher', action: 'WebSearch x3', result: '3 competitor pages', status: 'ok', ms: 5200 }, { agent: 'site-builder', action: 'Write website/index.html', result: 'created', status: 'ok', ms: 120 }] },
+      { title: 'Problem', ids: ['p_t2', 'p_aftercheck', 'p_check'], tone: 'problem', say: 'After the builder\'s edit, the after-edit check tests a phone-width screen. The page spills off the side.',
+        path: [['p_t2', 'p_aftercheck'], ['p_aftercheck', 'p_check']],
         calls: [{ agent: 'hook', action: 'PostToolUse -> phone-width test', result: 'FAIL: horizontal overflow', status: 'fail', ms: 2600 }] },
-      { title: 'Diagnose', ids: ['p_x3', 'p_result'], tone: 'problem', say: 'The trace shows the failing screenshot and the cause: a box with a fixed 1200px width.',
-        calls: [{ agent: 'lead', action: 'read screenshot + CSS', result: '.hero { width: 1200px }', status: 'info' }] },
-      { title: 'Repair', ids: ['p_k0', 'p_g1', 'p_g2', 'p_t2'], tone: 'fix', say: 'It swaps the fixed width for one that fits any screen.',
-        calls: [{ agent: 'lead', action: 'Edit .hero width -> 100%, max 1200px', result: 'edited', status: 'fixed', ms: 90 }] },
-      { title: 'Retest', ids: ['p_aftercheck', 'p_check', 'p_rep1'], tone: 'done', say: 'Same phone test passes. It answers you with before and after screenshots.',
-        calls: [{ agent: 'hook', action: 'phone-width test', result: 'PASS', status: 'ok', ms: 2500 }, { agent: 'lead', action: 'answer', result: 'before/after', status: 'ok', cost: '$0.22' }] },
+      { title: 'Diagnose', ids: ['p_check', 'p_x3'], tone: 'problem', say: 'The trace shows the failing screenshot and the cause: a box with a fixed 1200px width.',
+        path: [['p_check', 'p_x3']],
+        calls: [{ agent: 'site-builder', action: 'read screenshot + CSS', result: '.hero { width: 1200px }', status: 'info' }] },
+      { title: 'Auto-fix', ids: ['p_a2', 'p_t2'], tone: 'fix', say: 'The failure goes back to the build helper. It swaps the fixed width for one that fits any screen. Repair 1 of 2.',
+        path: [['p_x3', 'p_a2'], ['p_a2', 'p_t2']],
+        calls: [{ agent: 'site-builder', action: 'Edit .hero width -> 100%, max 1200px', result: 'edited', status: 'fixed', ms: 90 }] },
+      { title: 'Helpers come back together', ids: ['p_a1', 'p_a2', 'p_combine'], say: 'Both helpers hand back short summaries. The lead combines the competitor notes with the page.',
+        path: [['p_a1', 'p_combine'], ['p_a2', 'p_combine']],
+        calls: [{ agent: 'lead', action: 'combine summaries', result: 'copy updated from research', status: 'ok' }] },
+      { title: 'Retest and answer', ids: ['p_combine', 'p_check', 'p_rep1'], tone: 'done', say: 'Same phone test passes on the combined page. The lead answers you with before and after screenshots.',
+        path: [['p_combine', 'p_check'], ['p_check', 'p_rep1']],
+        calls: [{ agent: 'hook', action: 'phone-width test', result: 'PASS', status: 'ok', ms: 2500 }, { agent: 'lead', action: 'answer', result: 'before/after', status: 'ok', cost: '$0.48' }] },
       { title: 'Learn', ids: ['p_e1', 'p_e5', 'p_e3', 'p_e4'], tone: 'done', say: 'It proposes a gotcha ("never fixed widths on sections") and keeps the phone test. You review, then it lands.',
+        path: [['p_rep1', 'p_e1'], ['p_e1', 'p_e5'], ['p_e5', 'p_e3'], ['p_e3', 'p_e4']],
         calls: [{ agent: 'lead', action: 'propose gotcha + keep test', result: 'evals/phone-width', status: 'ok' }] },
     ],
   },

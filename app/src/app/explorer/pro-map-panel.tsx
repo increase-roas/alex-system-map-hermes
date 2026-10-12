@@ -426,7 +426,30 @@ function ProMap() {
       })),
     [active],
   );
-  const edges = useMemo(() => PRO_EDGES.map(edgeFor), []);
+  const baseEdges = useMemo(() => PRO_EDGES.map(edgeFor), []);
+  const edges = useMemo<Edge[]>(() => {
+    if (!wtOn) return baseEdges;
+    const faded = baseEdges.map((e) => ({ ...e, style: { ...e.style, opacity: 0.18 }, labelStyle: { ...e.labelStyle, opacity: 0.25 } }));
+    const green: Edge[] = [];
+    let prevLast: string | undefined;
+    job.beats.slice(0, beat + 1).forEach((b, bi) => {
+      let pairs: [string, string][] = b.path ?? b.ids.slice(1).map((id, i) => [b.ids[i], id] as [string, string]);
+      if (!b.path && prevLast && prevLast !== b.ids[0]) pairs = [[prevLast, b.ids[0]], ...pairs];
+      prevLast = b.ids[b.ids.length - 1];
+      const now = bi === beat;
+      pairs.forEach(([a, c], k) => {
+        const same = ROW_Y.get(a) === ROW_Y.get(c);
+        green.push({
+          id: `wt-${bi}-${k}-${a}-${c}`, source: a, target: c, type: 'smoothstep', animated: true,
+          sourceHandle: same ? 'rs' : undefined, targetHandle: same ? 'l' : undefined,
+          style: { stroke: '#22c55e', strokeWidth: now ? 5 : 3, opacity: now ? 1 : 0.75, filter: now ? 'drop-shadow(0 0 6px #22c55e)' : undefined },
+          markerEnd: { type: MarkerType.ArrowClosed, color: '#22c55e', width: 22, height: 22 },
+          zIndex: 5,
+        });
+      });
+    });
+    return [...faded, ...green];
+  }, [wtOn, job, beat, baseEdges]);
   const counts = useMemo(() => {
     const mine = PRO_NODES.filter((n) => n.id.startsWith('y_') && !n.band);
     return { ok: mine.filter((n) => n.status === 'ok').length, partial: mine.filter((n) => n.status === 'partial').length, gap: mine.filter((n) => n.status === 'gap').length };
