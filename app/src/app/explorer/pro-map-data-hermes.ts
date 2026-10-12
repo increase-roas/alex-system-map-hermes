@@ -42,6 +42,7 @@ const H = {
   ccPerm: 'https://code.claude.com/docs/en/permissions',
   ccMem: 'https://code.claude.com/docs/en/memory',
   ccSdk: 'https://code.claude.com/docs/en/agent-sdk/overview',
+  ccHooks: 'https://code.claude.com/docs/en/hooks',
 };
 const L = (...lines: string[]) => lines.join('\n');
 const hw = 'hermes' as ProStatus;
@@ -129,7 +130,7 @@ const DET: Record<string, FullDetail> = {
     plain: [
       'The project file holds the rules for the folder the agent works in.',
       'One kind of project file is picked, first match wins: .hermes.md, then AGENTS.override.md, then AGENTS.md, then CLAUDE.md, then .cursorrules.',
-      'At start it reads from the git root down to the starting folder; more AGENTS.md files are picked up from subfolders as the agent works in them.',
+      'AGENTS.md loads as a chain from the git root down to the working folder (outside git, only the working folder); more are picked up from subfolders as it works. Other file types have their own discovery rules.',
       'Every file is scanned for prompt-injection text before it loads. Files over the size cap get cut (70% head, 20% tail).',
       'So the agency repo we designed works for Hermes too: one AGENTS.md at the top, one per client folder.',
     ],
@@ -167,7 +168,9 @@ const DET: Record<string, FullDetail> = {
       'The judge uses your main model by default; you can point it at a cheaper model.',
       'Gates are stronger than the judge: /goal gate add <command> adds a shell command that must pass before the goal can be done. A failing gate feeds its output back so the agent fixes the real failure.',
       'Default budget: 20 continuation turns, then it pauses and asks you to /goal resume or /goal clear.',
-      'The judge can still misjudge prose; gates are what make "done" mean done.',
+      'Gates block completion while your checks fail; passing checks do not prove anything you did not test. The judge can still misjudge prose.',
+      'In chat apps, adding a gate needs a configured gateway admin.',
+      'A failing gate retries (3 times by default, 5-minute command timeout) and then the goal pauses.',
     ],
     examples: [{ title: 'Finish line with a real test gate', file: 'In the Hermes chat', why: 'The gate must pass before the judge is even asked.', code: L(
       '/goal Oak Ridge test form routes a fake lead into the GHL test sub-account',
@@ -186,6 +189,7 @@ const DET: Record<string, FullDetail> = {
       'Children inherit the parent\'s tools minus blocked ones: no asking you questions (clarify), no memory writes, no scheduling.',
       'Flat by default. A child can only hand out work if it is given the orchestrator role AND max_spawn_depth is raised.',
       'How many at once: the delegation page says 10 by default (configurable); the features overview page says 3. Check your config.',
+      'A top-level delegate_task returns a handle right away; the summaries arrive later. A child can also come back with a budget or stall failure, so the parent must check the outcome.',
       '/review starts a background reviewer helper that checks a piece of work against the loaded skills and project rules.',
     ],
     myths: [{ myth: 'A helper knows everything the main chat knows.', truth: 'It has the project files but none of the chat history and no SOUL.md.', fix: 'Have the parent pass the client, the files that matter and the finish line in the delegate_task context.' }],
@@ -205,6 +209,7 @@ const DET: Record<string, FullDetail> = {
       'Hermes has four hook systems: gateway hooks (logging, alerts), plugin hooks (code), shell hooks (scripts listed in config.yaml) and outbound webhooks.',
       'A pre_tool_call hook can block a tool call. Any block beats any approve.',
       'A plugin pre_tool_call hook that times out or crashes blocks the tool (fails closed). A shell hook can be set to fail closed too; check the hooks page for your version.',
+      'Only hooks that are configured, consented to and matching run; an unapproved hook is skipped, so fail_closed alone protects nothing until the hook is registered.',
       'Your map shows Javar without a Composio guard (not re-checked today). If that is still true, this is where a client lock and spend guard would go.',
     ],
     examples: [{ title: 'Shape of a blocking shell hook', file: '~/.hermes/profiles/javar/config.yaml', why: 'Shape only: confirm the exact keys on the hooks page for your Hermes version.', code: L(
@@ -229,7 +234,7 @@ const DET: Record<string, FullDetail> = {
       'Skills are procedures that load only when needed (progressive disclosure), in the agentskills.io format.',
       'The agent writes and edits its own skills with skill_manage when it figures out a non-trivial workflow.',
       'write_approval: true stages every skill change in ~/.hermes/pending for you to review first.',
-      'A background review after sessions can suggest or stage memory and skill changes.',
+      'After turns, a background review can apply memory and skill updates; approval settings can make it wait for your review first.',
       'The curator is separate upkeep: agent-created skills unused 14 days go stale, 30 days get archived (recoverable). Pinned skills and skills used by cron jobs are skipped.',
     ],
     myths: [{ myth: 'Self-written skills are always improvements.', truth: 'They are drafts from one session.', fix: 'Turn on write_approval and keep a few real test jobs to rerun before accepting big skill changes.' }],
@@ -244,7 +249,7 @@ const DET: Record<string, FullDetail> = {
   },
   h_x_vs: {
     plain: [
-      'Same idea in both: a project rules file, skills, small memory, helpers with fresh context, hooks that can block, a /goal finish line, compression.',
+      'Same idea in both: a project rules file, skills, small memory, helpers with fresh context, hooks that can block, compression, and a /goal command (Claude Code\'s is a built-in Stop hook; Hermes credits Codex CLI for its version).',
       'Hermes adds: the SOUL.md identity file, a messaging gateway on 20+ apps, built-in cron, any model provider, and self-written skills with a curator.',
       'Claude Code adds: permission rules (deny, ask, allow) on every tool, auto memory with a 200-line index, and the Agent SDK to build your own agent.',
       'Hermes can import a Claude Code or Codex setup in one command. It is a partial move: instructions become memory, credentials are not copied, and permissions do not carry over the same way.',
@@ -264,7 +269,7 @@ const ui: Spec[] = [
 ];
 const client: Spec[] = [
   { id: 'h_profile', label: 'Profile = one agent', sub: 'Own SOUL, memory, keys', why: 'Each profile is its own home folder: config, secrets, SOUL.md, memory, sessions, skills, cron.', sources: [H.profiles], detail: DET.h_profile },
-  { id: 'h_workdir', label: 'Working folder', sub: 'Picks the project rules', why: 'Project files load from the git root down to where the agent starts. Cron jobs load none unless you set workdir.', sources: [H.ctx, H.cron] },
+  { id: 'h_workdir', label: 'Working folder', sub: 'Picks the project rules', why: 'AGENTS.md loads as a chain from the git root down to the working folder (outside git, just the working folder). Cron jobs load none unless you set workdir.', sources: [H.ctx, H.cron] },
   { id: 'h_bots', label: 'Bot Mode', sub: 'Named bots, own chats', why: 'Profiles become named bots with their own role, model, memory and skills; they share group chats and message each other.', sources: [H.bots], badge: 'Optional' },
 ];
 const front: Spec[] = [
@@ -303,17 +308,17 @@ const run: Spec[] = [
   { id: 'h_ckpt', label: 'Checkpoints + /rollback', sub: 'Opt-in snapshots', why: 'Snapshots before file writes and destructive commands; /rollback normally keeps your own hand edits.', sources: [H.ckpt], badge: 'Opt-in' },
 ];
 const verify: Spec[] = [
-  { id: 'h_gate', label: 'Goal gates: your tests', sub: '/goal gate add <command>', why: 'Shell commands that must pass before the goal can be done; a failure is fed back so the agent fixes it.', sources: [H.goals] },
+  { id: 'h_gate', label: 'Goal gates: your tests', sub: '/goal gate add <command>', why: 'Shell commands that must pass before the judge is asked; a failure is fed back so the agent fixes it. No gates set: straight to the judge.', sources: [H.goals] },
   { id: 'h_judge', label: 'Goal judge', sub: 'done, continue, wait, blocked', why: 'After gates pass, a judge (your main model by default) reads the reply against the goal.', sources: [H.goals] },
   { id: 'h_review', label: '/review', sub: 'Background reviewer', why: 'A helper that checks the work against the loaded skills and project rules.', sources: [H.deleg], badge: 'Optional' },
 ];
 const report: Spec[] = [
   { id: 'h_reply', label: 'Reply in the same chat', sub: 'Files as attachments', why: 'The final answer lands in the chat; charts, PDFs and sheets arrive as native attachments.', sources: [H.deliver] },
-  { id: 'h_paused', label: 'Or paused / blocked', sub: 'Tells you why', why: 'With /goal: blocked, waiting on a background job, or out of turns. You resume, unwait or clear.', sources: [H.goals] },
+  { id: 'h_paused', label: 'Or paused / blocked', sub: 'Tells you why', why: 'With /goal: the judge said blocked, gates kept failing, or the turn budget ran out. You /goal resume or /goal clear. (Waiting is different: it resumes by itself when the background job ends.)', sources: [H.goals] },
 ];
 const learn: Spec[] = [
   { id: 'h_memtool', label: 'memory tool', sub: 'Saves short facts', why: 'The agent adds, replaces or removes memory entries; you can require approval.', sources: [H.mem, H.config] },
-  { id: 'h_bgreview', label: 'Background review', sub: 'Suggests updates', why: 'After sessions, a review can suggest or stage memory and skill changes.', sources: [H.skills, H.config] },
+  { id: 'h_bgreview', label: 'Background review', sub: 'Updates memory, skills', why: 'After turns, a background review can apply memory and skill updates; approval settings can make it wait for you.', sources: [H.mem, H.skills, H.config] },
   { id: 'h_skills', label: 'Writes its own skills', sub: 'skill_manage', why: 'After a hard workflow it saves the steps as a skill for next time.', sources: [H.skills], detail: DET.h_skills },
   { id: 'h_wapprove', label: 'write_approval', sub: 'You review changes', why: 'Skill and memory writes can be staged for your review before they land.', sources: [H.skills, H.config] },
   { id: 'h_curator', label: 'Curator', sub: 'Stale, then archived', why: 'Agent-created skills: unused 14 days = stale, 30 = archived (recoverable). Pinned and cron-used skills are skipped.', sources: [H.curator] },
@@ -333,7 +338,7 @@ const rails: Spec[] = [
   { id: 'h_x_seen', label: 'Progress you can stop', sub: 'Display is configurable', why: 'Tool progress shows if that platform\'s setting is on; stopping a run does not undo finished actions.', sources: [H.msg, H.arch] },
   { id: 'h_compress', label: 'Compression', sub: 'Long chat gets summarized', why: 'Middle turns get summarized when the chat passes a threshold; /compress does it on demand.', sources: [H.arch, H.sessions, H.mem], detail: DET.h_compress },
   { id: 'h_dash', label: 'Web dashboard', sub: 'Sessions, logs, analytics', why: 'Browser panel for config, keys, MCP servers, pairing, sessions, logs, analytics, cron and skills.', sources: [H.dash] },
-  { id: 'h_x_vs', label: 'vs Claude Code', sub: 'Same ideas, different files', why: 'What matches and what differs between Hermes and Claude Code.', sources: [H.importer, H.ctx, H.soul, H.ccPerm, H.ccMem, H.ccSdk], detail: DET.h_x_vs },
+  { id: 'h_x_vs', label: 'vs Claude Code', sub: 'Same ideas, different files', why: 'What matches and what differs between Hermes and Claude Code.', sources: [H.importer, H.ctx, H.soul, H.goals, H.ccPerm, H.ccMem, H.ccSdk, H.ccHooks], detail: DET.h_x_vs },
 ];
 
 export const H_NODES: ProNode[] = [
@@ -366,12 +371,13 @@ export const H_EDGES: ProEdge[] = [
   flow('h_band_gw', 'h_band_run', 'allowed'),
   { ...loop('h_result', 'h_loop', 'next move'), offset: 15 },
   { ...flow('h_loop', 'h_reply', 'no tool, no goal: answer'), sh: 'ls', th: 'l', offset: 40 },
-  flow('h_band_run', 'h_gate', 'answer drafted (with /goal)'),
+  { ...flow('h_loop', 'h_gate', 'turn done, goal active'), sh: 'rs', th: 'r', offset: 60 },
   flow('h_gate', 'h_judge', 'gates pass'),
   { ...loop('h_gate', 'h_loop', 'gate failed'), offset: 45 },
-  { ...loop('h_judge', 'h_loop', 'continue'), offset: 30 },
+  { ...loop('h_judge', 'h_loop', 'continue (or wait, then resume)'), offset: 30 },
   flow('h_judge', 'h_reply', 'done'),
-  flow('h_judge', 'h_paused', 'wait, blocked, out of turns'),
+  flow('h_judge', 'h_paused', 'blocked'),
+  flow('h_gate', 'h_paused', 'gates kept failing'),
   flow('h_band_report', 'h_band_learn', 'after'),
   link('h_band_front', 'h_lib_home', 'reads', 'ls', 'r'),
   link('h_band_gw', 'h_lib_config', 'rules from', 'ls', 'r'),
