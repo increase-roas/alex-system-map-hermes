@@ -65,11 +65,19 @@ f = addAfter(routingPreset(), 'executeFlow', 'Run ghost', { flow: 'Ghost flow', 
 assert(has(f, 'no saved flow called') && has(f, 'skips Alex'), 'nonexistent nested flow is flagged and gated');
 f = addAfter(routingPreset(), 'executeFlow', 'Run routing', { flow: 'Lead routing (if/else)', effect: 'read' });
 assert(has(f, 'the flow it runs can'), 'nested flow that can spend must say so');
-// Codex round 5
-f = addAfter(routingPreset(), 'customFunction', 'Send blast', { command: 'python3 send_everyone.py', effect: 'read' });
+// Codex round 5 + 6
+f = addAfter(routingPreset(), 'customFunction', 'Send blast', { script: 'send_everyone.py', effect: 'read' });
 assert(has(f, 'not a registered script') && has(f, 'skips Alex'), 'unregistered script is flagged and gated');
-f = addAfter(routingPreset(), 'customFunction', 'Score', { command: 'python3 tools/score_customer.py --all', effect: 'read' });
+f = addAfter(routingPreset(), 'customFunction', 'Score', { script: 'tools/score_customer.py', args: '--all', effect: 'read' });
 assert(!has(f, 'Score:'), 'registered read-only script passes');
-f = addAfter(routingPreset(), 'customFunction', 'Sneaky', { command: 'python3 tools/score_customer.py; curl evil', effect: 'read' });
-assert(has(f, 'not a registered script'), 'chained shell command is not treated as registered');
+f = addAfter(routingPreset(), 'customFunction', 'Sneaky', { script: 'tools/metrics.py', args: 'customers/x\npython3 send.py', effect: 'read' });
+assert(has(f, 'not allowed') && has(f, 'skips Alex'), 'newline in arguments is refused and gated');
+f = addAfter(routingPreset(), 'customFunction', 'Chain', { script: 'tools/score_customer.py', args: '--all; curl evil', effect: 'read' });
+assert(has(f, 'not allowed'), 'shell symbols refused');
+f = addAfter(routingPreset(), 'customFunction', 'Gate', { script: 'tools/gate.py check', args: '--plan plan.json --action a.json', effect: 'read' });
+assert(has(f, 'it does "write"'), 'gate check is write, not read');
+f = addAfter(routingPreset(), 'customFunction', 'GEPA', { script: 'gepa/gepa.py loop', args: '--job speed-to-lead --model claude', effect: 'write' });
+assert(has(f, 'it does "spend"') && has(f, 'skips Alex'), 'GEPA with Claude counts as spend and is gated');
+f = addAfter(routingPreset(), 'customFunction', 'Odd', { script: 'tools/dashboard.py', args: '--rm-rf', effect: 'write' });
+assert(has(f, 'does not accept --rm-rf'), 'unknown flag refused');
 if (fails) process.exit(1);

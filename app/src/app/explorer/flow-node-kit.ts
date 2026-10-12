@@ -52,8 +52,8 @@ export const KIT: NodeKind[] = [
     what: 'Sends a fixed answer back and ends the flow.',
     fields: [{ key: 'text', label: 'Reply', kind: 'textarea', required: true }] },
   { type: 'customFunction', label: 'Custom Function', group: 'Tools and data', icon: 'Code', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
-    what: 'Runs your own small script, like a scorer or a calculator.',
-    fields: [{ key: 'command', label: 'Command', kind: 'text', placeholder: 'python3 tools/score_customer.py --all', required: true }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
+    what: 'Runs one of your registered scripts with checked arguments, like the scorer or the dashboard builder.',
+    fields: [{ key: 'script', label: 'Script', kind: 'select', options: ['tools/score_customer.py', 'tools/metrics.py', 'tools/gate.py check', 'tools/scan_customer.py', 'tools/draft_update.py', 'tools/dashboard.py', 'gepa/gepa.py loop', 'gepa/gepa.py report'], required: true }, { key: 'args', label: 'Arguments', kind: 'text', placeholder: '--all' }, { key: 'effect', label: 'What it does', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
   { type: 'executeFlow', label: 'Execute Flow', group: 'Tools and data', icon: 'Workflow', color: '#9333ea', inputs: ['in'], outputs: ['out'], source: 'agentflow',
     what: 'Runs another saved flow as one step.',
     fields: [{ key: 'flow', label: 'Flow name', kind: 'text', required: true }, { key: 'effect', label: 'Most the other flow can do', kind: 'select', options: ['read', 'write', 'send_to_lead', 'send_to_customer', 'spend', 'delete', 'deploy'], required: true }] },
@@ -88,16 +88,44 @@ export const TOOL_EFFECTS: Record<string, string[]> = {
   'ghl.conversations': ['read', 'send_to_lead'], 'ghl.contacts': ['read', 'write', 'delete'], 'ghl.customer_messages': ['read', 'send_to_customer'],
   'meta.ads': ['read', 'write', 'spend'], github: ['read', 'write'], cloudflare: ['read', 'deploy'], dashboard: ['read'],
 };
-/** Scripts a Custom Function node may run, and what each does. Anything else is unverified and gated. */
-export const SCRIPTS: Record<string, string> = {
-  'python3 tools/score_customer.py': 'read', 'python3 tools/metrics.py': 'read', 'python3 tools/route.py': 'read',
-  'python3 tools/gate.py check': 'read', 'python3 tools/scan_customer.py': 'write', 'python3 tools/draft_update.py': 'write',
-  'python3 tools/dashboard.py': 'write', 'python3 gepa/gepa.py loop': 'write', 'python3 gepa/gepa.py report': 'read',
+/** Scripts a Custom Function node may run: what each does and the only arguments it accepts.
+ * A flag maps to a pattern its value must match ('' = flag without a value). raises = flag value that makes it do more. */
+type Script = { effect: string; flags: Record<string, string>; positional?: string; raises?: Record<string, string> };
+const SLUG = '^customers/[a-z0-9-]+$', DATE = '^\\d{4}-\\d{2}-\\d{2}$', NAME = '^[a-z0-9-]+$', PATH = '^[A-Za-z0-9_./-]+$';
+export const SCRIPTS: Record<string, Script> = {
+  'tools/score_customer.py': { effect: 'read', flags: { '--all': '', '--json': '', '--today': DATE }, positional: SLUG },
+  'tools/metrics.py': { effect: 'read', flags: {}, positional: SLUG },
+  'tools/gate.py check': { effect: 'write', flags: { '--plan': PATH, '--action': PATH } },
+  'tools/scan_customer.py': { effect: 'write', flags: { '--all': '', '--print': '', '--today': DATE }, positional: SLUG },
+  'tools/draft_update.py': { effect: 'write', flags: { '--all': '', '--due': '', '--today': DATE }, positional: SLUG },
+  'tools/dashboard.py': { effect: 'write', flags: { '--out': PATH, '--client': NAME, '--today': DATE } },
+  'gepa/gepa.py loop': { effect: 'write', flags: { '--job': NAME, '--rounds': '^([1-9]|1[0-9]|20)$', '--model': '^(stub|claude)$', '--judge': '^(rules|claude)$' }, raises: { '--model claude': 'spend', '--judge claude': 'spend' } },
+  'gepa/gepa.py report': { effect: 'write', flags: { '--job': NAME, '--model': '^(stub|claude)$', '--judge': '^(rules|claude)$' }, raises: { '--model claude': 'spend', '--judge claude': 'spend' } },
 };
-export function scriptEffect(command: string): string | null {
-  const c = command.trim().replace(/\s+/g, ' ');
-  const hit = Object.keys(SCRIPTS).filter((k) => c === k || c.startsWith(k + ' ')).sort((a, b) => b.length - a.length)[0];
-  return hit && !/[;&|`$<>]/.test(c) ? SCRIPTS[hit] : null;
+/** The effects a registered script would have with these arguments, or a reason it is not allowed. */
+export function scriptEffect(script: string, args: string): { effects: string[] } | { problem: string } {
+  const sc = SCRIPTS[script];
+  if (!sc) return { problem: `"${script}" is not a registered script` };
+  if (/[\u0000-\u001f\u007f;&|`$<>()'"\\*?{}]/.test(args)) return { problem: 'arguments contain characters that are not allowed (no newlines, quotes or shell symbols)' };
+  const toks = args.split(' ').filter(Boolean);
+  const effects = new Set([sc.effect]);
+  let positional = 0;
+  for (let i = 0; i < toks.length; i++) {
+    const t = toks[i];
+    if (t.startsWith('--')) {
+      if (!(t in sc.flags)) return { problem: `${script} does not accept ${t}` };
+      const pat = sc.flags[t];
+      if (pat) {
+        const v = toks[++i];
+        if (v === undefined || !new RegExp(pat).test(v)) return { problem: `${t} needs a valid value` };
+        const raised = sc.raises?.[`${t} ${v}`];
+        if (raised) effects.add(raised);
+      }
+    } else {
+      if (!sc.positional || !new RegExp(sc.positional).test(t) || ++positional > 1) return { problem: `unexpected argument ${t}` };
+    }
+  }
+  return { effects: [...effects] };
 }
 /** Effects an agent's tool list allows. Unknown tools count as able to do anything that needs approval. */
 export function toolEffects(list: string): { effects: string[]; problems: string[] } {
@@ -160,10 +188,13 @@ export function checkFlow(flow: Flow): string[] {
       if (!can) out.push(`${n.data.label}: unknown tool ${n.data.values.tool}; add it to the tool list (bots.json) first.`);
       else if (n.data.values.effect && !can.includes(n.data.values.effect)) out.push(`${n.data.label}: ${n.data.values.tool} cannot ${n.data.values.effect}.`);
     }
-    if (k.type === 'customFunction' && n.data.values.command) {
-      const eff = scriptEffect(n.data.values.command);
-      if (!eff) out.push(`${n.data.label}: "${n.data.values.command}" is not a registered script, so what it does cannot be checked.`);
-      else if (n.data.values.effect && n.data.values.effect !== eff) out.push(`${n.data.label}: that script does "${eff}", not "${n.data.values.effect}".`);
+    if (k.type === 'customFunction' && n.data.values.script) {
+      const r = scriptEffect(n.data.values.script, n.data.values.args ?? '');
+      if ('problem' in r) out.push(`${n.data.label}: ${r.problem}, so what it does cannot be checked.`);
+      else {
+        const top = r.effects.find((x) => APPROVAL_EFFECTS.includes(x)) ?? (r.effects.includes('write') ? 'write' : 'read');
+        if (n.data.values.effect && n.data.values.effect !== top) out.push(`${n.data.label}: with these arguments it does "${top}", not "${n.data.values.effect}".`);
+      }
     }
     if (k.type === 'executeFlow' && n.data.values.flow) {
       const nested = KNOWN_FLOWS[n.data.values.flow];
@@ -211,7 +242,8 @@ export function checkFlow(flow: Flow): string[] {
     const http = n.data.kind === 'http' && n.data.values.method === 'DELETE' ? ['delete'] : [];
     const unknownTool = n.data.kind === 'tool' && !TOOL_EFFECTS[n.data.values.tool ?? ''] ? APPROVAL_EFFECTS : [];
     const nestedFlow = n.data.kind === 'executeFlow' ? (KNOWN_FLOWS[n.data.values.flow ?? ''] ? flowEffects(KNOWN_FLOWS[n.data.values.flow!]()) : APPROVAL_EFFECTS) : [];
-    const script = n.data.kind === 'customFunction' ? (scriptEffect(n.data.values.command ?? '') ? [scriptEffect(n.data.values.command ?? '')!] : APPROVAL_EFFECTS) : [];
+    const sr = n.data.kind === 'customFunction' ? scriptEffect(n.data.values.script ?? '', n.data.values.args ?? '') : null;
+    const script = sr ? ('problem' in sr ? APPROVAL_EFFECTS : sr.effects) : [];
     return [declared, ...fromTools, ...http, ...unknownTool, ...nestedFlow, ...script];
   };
   const effectful = ['tool', 'agent', 'http', 'customFunction', 'executeFlow'];
