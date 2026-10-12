@@ -20,6 +20,7 @@ Home: `~/Projects/alex-system-map`. The old path `~/Documents/Codex/2026-10-09/l
 ## Rules
 - **Read-only on the Mac.** Builders read Alex's files and write only inside this folder (`app/.data/`). Never edit `~/.agents`, `~/Alex-Director` or app settings from here.
 - **The map never invents state.** Every node and line needs a source file. Unknown stays unknown. When two sources disagree, show a conflict; don't pick one silently.
+- **Every claim is proven by a source (Alex, 2026-10-12).** Each Pro Map card except "not checked" (unknown) needs at least one source: a web link, or a file that exists (repo-relative or ~/ path). Observations go in `reviews/receipts/<date>-<topic>` first, then the card cites that file. Mark reasoning without a source as "not checked" instead of claiming it. `node app/src/app/explorer/pro-map-audit-check.cjs` fails on any unsourced claim; Alex's own y_ cards are reported as warnings only, never edited.
 - **Back up before editing** a file you didn't create this session.
 - **No branch switching, stash, reset or clean** in this folder. Use a worktree: `git worktree add ../alex-system-map-<topic> -b <topic>`. Commit as soon as a check passes.
 - **Done needs the reviewer.** Finish with a review packet (node or task ID, the acceptance text, evidence paths, your model) for `alex-reviewer`, run by the other model family. Only the Director marks it verified.

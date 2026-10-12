@@ -143,6 +143,33 @@ if (process.argv.includes('--exercise-hooks')) {
  check(stale.status === 0,'Missing/stale receipt rejection failed: ' + stale.stderr);
  finishHookCases += 2;
 }
-const result = { checkedAt: new Date().toISOString(), nodes: nodes.length, edges: edges.length, pythonExamples, shellExamples, jsonExamples, finishHookCases, guardTestsPassed: guardReceipt.passed, guardTestsSkipped: guardReceipt.skipped, registrationChecks: registrationReceipt.checks, checks: ['IDs and edge endpoints', 'finite positions', 'V2 result/combine and learning connections', 'Alex cards and merged details unchanged from HEAD', 'five evidence rows on each title', 'titles clear first row', 'sticky example title matches', 'actual title component renders five rows and source links', 'Python, shell and JSON example syntax', 'Guard scripts exactly match displayed code', 'Hash-bound offline test and displayed registration receipts'], errors };
+// Every claim needs a source (Alex, 2026-10-12): a web link, or a file that exists. Only "not checked" (unknown) may have none.
+const os = require('node:os');
+const REPO = path.resolve(__dirname, '../../../..');
+const HOME = process.env.SOURCE_HOME || os.homedir();
+const onAlexMac = fs.existsSync(path.join(HOME, 'Projects', 'alex-system-map'));
+const sourceWarnings = []; // Alex's own y_ cards are never edited by agents: their source problems are reported, not failed
+const sourceStats = { claims: 0, links: 0, files: 0, filesChecked: 0, filesSkipped: 0 };
+for (const n of nodes) {
+  if (n.band) continue;
+  const srcs = [...(n.sources || []), ...((n.grade?.proof || []).flatMap(r => r.sources || []))].filter(s => typeof s === 'string' && s.trim());
+  if (n.status === 'unknown') continue;
+  sourceStats.claims++;
+  const check = (ok, msg) => { if (!ok) (n.id.startsWith('y_') ? sourceWarnings : errors).push(msg); };
+  check(srcs.length > 0, 'No source for claim: ' + n.id + ' (' + n.label + ')');
+  for (const raw of srcs) {
+    const s = raw.replace(/\s+\(.*\)\s*$/, '');
+    if (/^https?:\/\/\S+\.\S+/.test(s)) { sourceStats.links++; continue; }
+    const looksLikePath = /^(~\/|\/|\.{0,2}\/|[\w.-]+\/)/.test(s);
+    check(looksLikePath, 'Source is not a link or a file path: ' + n.id + ' -> ' + raw);
+    if (!looksLikePath) continue;
+    sourceStats.files++;
+    const abs = s.startsWith('~/') ? path.join(HOME, s.slice(2)) : path.isAbsolute(s) ? s : path.join(REPO, s);
+    if (s.startsWith('~/') && !onAlexMac) { sourceStats.filesSkipped++; continue; }
+    sourceStats.filesChecked++;
+    check(fs.existsSync(abs.replace(/[#:].*$/, '')), 'Source file does not exist: ' + n.id + ' -> ' + s);
+  }
+}
+const result = { checkedAt: new Date().toISOString(), nodes: nodes.length, edges: edges.length, pythonExamples, shellExamples, jsonExamples, finishHookCases, guardTestsPassed: guardReceipt.passed, guardTestsSkipped: guardReceipt.skipped, registrationChecks: registrationReceipt.checks, checks: ['IDs and edge endpoints', 'finite positions', 'V2 result/combine and learning connections', 'Alex cards and merged details unchanged from HEAD', 'five evidence rows on each title', 'titles clear first row', 'sticky example title matches', 'actual title component renders five rows and source links', 'Python, shell and JSON example syntax', 'Guard scripts exactly match displayed code', 'Hash-bound offline test and displayed registration receipts', 'every claim has a source (link or existing file); only not-checked cards may have none'], sourceStats, sourceWarnings, errors };
 console.log(JSON.stringify(result, null, 2));
 process.exitCode = errors.length ? 1 : 0;

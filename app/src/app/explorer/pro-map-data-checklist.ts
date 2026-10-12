@@ -81,7 +81,7 @@ const SECTIONS: Section[] = [
  {
   "key": "r",
   "label": "2. Routing (the if/else)",
-  "why": "Incoming task → which customer → which function → which bot → which tools → execute. No \"which customer?\" questions.",
+  "why": "Incoming task \u2192 which customer \u2192 which function \u2192 which bot \u2192 which tools \u2192 execute. No \"which customer?\" questions.",
   "items": [
    {
     "id": "r1",
@@ -140,42 +140,56 @@ const SECTIONS: Section[] = [
     "label": "Agency repo with one folder per customer",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). customers/_template is ready; only a SAMPLE customer exists. Raw data stays out of git.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/customers/_template",
+     "~/Projects/agency-os-kit/customers/example-tree-co"
+    ]
    },
    {
     "id": "c2",
     "label": "Sales numbers per customer",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). numbers/monthly.csv slot (spend, leads, replied, appointments, sales, revenue, cash). Needs real numbers.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/customers/_template/numbers/monthly.csv"
+    ]
    },
    {
     "id": "c3",
     "label": "Sales conversations: objections and replies",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). objections.md slot (summaries, no names). Needs real GHL conversation summaries.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/customers/_template/objections.md"
+    ]
    },
    {
     "id": "c4",
     "label": "Website data per customer",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). website.md slot. Needs each real site filled in.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/customers/_template/website.md"
+    ]
    },
    {
     "id": "c5",
     "label": "Open gaps list per customer",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). gaps.md checklist with an updated date. Needs real gaps.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/customers/_template/gaps.md"
+    ]
    },
    {
     "id": "c6",
-    "label": "Grade each customer folder (same A–F rubric)",
+    "label": "Grade each customer folder (same A\u2013F rubric)",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round): score_customer.py grades folder completeness A to F; A needs 90+ points and no blockers (missing base IDs or any ID the customer's mapped tools need, economics, website facts, customer notes or rules; unknown bots; forbidden tools; bad, future or repeated months; nonsense economics or update days). Proven on SAMPLE folders only.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/tools/score_customer.py",
+     "reviews/receipts/2026-10-12-codex-round12.md"
+    ]
    }
   ]
  },
@@ -259,11 +273,11 @@ const SECTIONS: Section[] = [
  {
   "key": "p",
   "label": "5. GEPA feedback harness",
-  "why": "Run → judge with written feedback → reflect and propose a better prompt → compare on a test set → promote with your yes → loop.",
+  "why": "Run \u2192 judge with written feedback \u2192 reflect and propose a better prompt \u2192 compare on a test set \u2192 promote with your yes \u2192 loop.",
   "items": [
    {
     "id": "p1",
-    "label": "Test set per job (20–50 real cases)",
+    "label": "Test set per job (20\u201350 real cases)",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). gepa/jobs/<job>/testset.jsonl with train and holdout cases. Only the sample speed-to-lead job (8 cases) exists.",
     "sources": [
@@ -357,28 +371,38 @@ const SECTIONS: Section[] = [
     "label": "Cash flow view per customer",
     "status": "ok",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). tools/dashboard.py: cash flow by month (tested on SAMPLE numbers).",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/tools/dashboard.py",
+     "~/Projects/agency-os-kit/tools/metrics.py"
+    ]
    },
    {
     "id": "d2",
     "label": "LTV : CAC with a 3:1 target line",
     "status": "ok",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). LTV:CAC tile with the 3:1 target; scan flags under 3.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/tools/metrics.py",
+     "~/Projects/agency-os-kit/tools/dashboard.py"
+    ]
    },
    {
     "id": "d3",
     "label": "Cost per lead that responded (not just cost per lead)",
     "status": "ok",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). Cost per lead that replied, per month and per test arm.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/tools/metrics.py"
+    ]
    },
    {
     "id": "d4",
     "label": "Split test: instant form vs website conversion",
     "status": "partial",
     "why": "agency-os-kit: instant form vs website judged once at a planned end month (no peeking), floors of 100 leads and 10 sales per side that cannot be lowered, test arms must add up to the totals. Tested on SAMPLE numbers only.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/tools/metrics.py"
+    ]
    },
    {
     "id": "d5",
@@ -399,28 +423,40 @@ const SECTIONS: Section[] = [
     "label": "One database for customer data (Postgres, e.g. Supabase) with per-customer access rules",
     "status": "partial",
     "why": "agency-os-kit db/schema.sql (Supabase) with per-customer locks and number checks; db/rls_test.sql passed 11 of 11 on Postgres 16 on your Mac (receipt db/rls-receipt-2026-10-12-mac.txt). No Supabase project made (needs your yes).",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/db/schema.sql",
+     "~/Projects/agency-os-kit/db/rls-receipt-2026-10-12-mac.txt"
+    ]
    },
    {
     "id": "x2",
     "label": "Proprietary layer kept private: skills, prompts, scoring, playbooks",
     "status": "partial",
     "why": "Lives in your private ~/.agents repo today.",
-    "sources": []
+    "sources": [
+     "~/.agents"
+    ]
    },
    {
     "id": "x3",
     "label": "Customer-facing views show results only, never prompts or methods",
     "status": "partial",
     "why": "agency-os-kit (after the Composio round: 101 tests pass + 1 database test). dashboard.py --client and update drafts show results and customer_notes.md only (tested). Not yet used with a real customer.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/tools/dashboard.py",
+     "~/Projects/agency-os-kit/tools/draft_update.py",
+     "~/Projects/agency-os-kit/PRIVACY.md"
+    ]
    },
    {
     "id": "x4",
     "label": "Keys only in 1Password / Composio, never in repos or chats",
     "status": "partial",
     "why": "Your rule: keys only in 1Password / Composio. Written as a rule; enforcement not verified across every agent.",
-    "sources": []
+    "sources": [
+     "~/Projects/agency-os-kit/composio.accounts.example.json",
+     "~/Projects/agency-os-kit/PRIVACY.md"
+    ]
    }
   ]
  }
