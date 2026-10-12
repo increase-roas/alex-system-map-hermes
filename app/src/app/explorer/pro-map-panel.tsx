@@ -102,9 +102,10 @@ function edgeFor(e: (typeof PRO_EDGES)[number]): Edge {
   };
 }
 
-type TileKey = 'plain' | 'pictures' | 'examples' | 'decide' | 'limits' | 'build' | 'pros' | 'noobs' | 'extra' | 'trace' | 'sources';
+type TileKey = 'myths' | 'plain' | 'pictures' | 'examples' | 'decide' | 'limits' | 'build' | 'pros' | 'noobs' | 'extra' | 'trace' | 'sources';
 const TILES: { key: TileKey; title: string; tone: string }[] = [
   { key: 'plain', title: 'In plain steps', tone: '#22d3ee' },
+  { key: 'myths', title: 'Myth vs reality', tone: '#fb7185' },
   { key: 'pictures', title: 'Pictures', tone: '#a78bfa' },
   { key: 'examples', title: 'Examples', tone: '#38bdf8' },
   { key: 'decide', title: 'If this, then that', tone: '#facc15' },
@@ -122,6 +123,7 @@ function countFor(n: ProNode, k: TileKey): number {
   if (k === 'pictures') return d?.pictures?.length ?? 0;
   if (k === 'examples') return d?.examples?.length ?? 0;
   if (k === 'decide') return d?.decide?.length ?? 0;
+  if (k === 'myths') return d?.myths?.length ?? 0;
   return itemsFor(n, k).length;
 }
 function previewFor(n: ProNode, k: TileKey): string {
@@ -129,12 +131,13 @@ function previewFor(n: ProNode, k: TileKey): string {
   if (k === 'pictures') return (d?.pictures ?? []).map((p) => p.title).join(' · ');
   if (k === 'examples') return (d?.examples ?? []).map((e) => e.title).join(' · ');
   if (k === 'decide') return d?.decide?.[0] ? `If ${d.decide[0].if}: ${d.decide[0].then}` : '';
+  if (k === 'myths') return d?.myths?.[0] ? `Myth: ${d.myths[0].myth}` : '';
   return itemsFor(n, k)[0] ?? '';
 }
 function itemsFor(n: ProNode, k: TileKey): string[] {
   if (k === 'trace') return n.trace ? [n.trace] : [];
   if (k === 'sources') return n.sources;
-  if (k === 'pictures' || k === 'examples' || k === 'decide') return [];
+  if (k === 'pictures' || k === 'examples' || k === 'decide' || k === 'myths') return [];
   return n.detail?.[k] ?? [];
 }
 
@@ -273,6 +276,15 @@ function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
           <div className="mt-2 space-y-3">{(node.detail?.pictures ?? []).map((p) => <PictureView key={p.title} p={p} />)}</div>
         ) : tile.key === 'examples' ? (
           <div className="mt-2 space-y-3">{(node.detail?.examples ?? []).map((e) => <ExampleView key={e.title} e={e} />)}</div>
+        ) : tile.key === 'myths' ? (
+          <div className="mt-2 space-y-2">
+            {(node.detail?.myths ?? []).map((m) => (
+              <div key={m.myth} className="rounded-lg border px-3 py-2 text-sm leading-snug">
+                <div><span className="mr-1.5 font-semibold text-rose-500">MYTH</span>{m.myth}</div>
+                <div className="mt-1"><span className="mr-1.5 font-semibold text-emerald-500">REALITY</span>{m.truth}</div>
+              </div>
+            ))}
+          </div>
         ) : tile.key === 'decide' ? (
           <div className="mt-2 space-y-2">{(node.detail?.decide ?? []).map((r) => <RuleView key={r.if} r={r} />)}</div>
         ) : (

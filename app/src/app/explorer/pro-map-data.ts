@@ -7,8 +7,9 @@
  */
 import { PRO_DETAILS, type ProDetail } from './pro-map-details';
 import { PRO_EXAMPLES, type ProExamples } from './pro-map-examples';
+import { PRO_MORE, type More } from './pro-map-more';
 
-export type FullDetail = ProDetail & ProExamples;
+export type FullDetail = ProDetail & ProExamples & Pick<More, 'myths'>;
 
 export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference';
 export type ProNode = {
@@ -56,7 +57,7 @@ const ANT = {
 /** The 13 steps, in the order they happen. */
 const STEPS = ['ask', 'ui', 'front', 'plan', 'agents', 'ptr', 'know', 'gw', 'run', 'land', 'review', 'report', 'learn'] as const;
 type Step = (typeof STEPS)[number];
-const BAND_H: Partial<Record<Step, number>> = { ptr: 120 };
+const BAND_H: Partial<Record<Step, number>> = { ptr: 120, gw: 125, learn: 125 };
 const Y = {} as Record<Step, number>;
 let cursor = 0;
 for (const s of STEPS) { Y[s] = cursor; cursor += (BAND_H[s] ?? 100) + 30; }
@@ -108,7 +109,7 @@ const PRO_STEPS: Record<Step, StepInfo> = {
 };
 
 const proNodes: ProNode[] = [
-  ...row(P, 'ask', [{ id: 'p_you', label: 'You', sub: 'One goal, plain words', why: 'You give the lead agent the goal and the context it cannot guess. Your message is the start of the trace.', sources: [ANT.context, ANT.mon], how: ['Say the goal and what done looks like', 'Give the context Claude cannot guess', 'Give it a way to check its own work'] }], ref),
+  ...row(P, 'ask', [{ id: 'p_trigger', label: 'Or an event starts it', sub: 'New lead, schedule, webhook', why: 'Not every run starts with you typing. A new lead or a schedule can start the agent.', sources: ['https://platform.claude.com/docs/en/managed-agents/webhooks'] }, { id: 'p_you', label: 'You', sub: 'One goal, plain words', why: 'You give the lead agent the goal and the context it cannot guess. Your message is the start of the trace.', sources: [ANT.context, ANT.mon], how: ['Say the goal and what done looks like', 'Give the context Claude cannot guess', 'Give it a way to check its own work'] }], ref),
   ...row(P, 'ui', [
     { id: 'p_ui1', label: 'Claude Code', sub: 'Terminal, desktop, web', why: 'Where you talk to the lead agent while it works on your files.', sources: [ANT.code] },
     { id: 'p_ui2', label: 'Claude app', sub: 'Desktop and phone', why: 'Same lead agent from the app; you can check in from your phone.', sources: [ANT.code] },
@@ -138,9 +139,11 @@ const proNodes: ProNode[] = [
     { id: 'p_ptr5', label: 'Is a pointer JSON?', sub: 'No: markdown', sources: [ANT.mem, ANT.skills, ANT.mcp, ANT.perm], why: 'Pointers are plain markdown: @path lines in CLAUDE.md and links inside SKILL.md. JSON is only for settings: settings.json (permissions, hooks) and .mcp.json (tool servers). Anthropic describes no reverse pointers (no back-link from a file to who uses it). Instead: keep links one level deep from SKILL.md, and keep MEMORY.md as an index that points to topic files.' },
   ], ref),
   ...column(P - 270, Y.ptr, [
+    { id: 'p_lib_which', label: 'Which one do I use?', sub: 'CLAUDE.md, skill, hook, MCP...', why: 'One chart for where anything belongs.', sources: ['https://code.claude.com/docs/en/features-overview'] },
     { id: 'p_lib_limits', label: 'Every size limit', sub: 'Lines, KB, counts', why: 'Every line, size and count rule Anthropic publishes, in one place.', sources: [ANT.mem, ANT.skills] },
     { id: 'p_lib_skills', label: 'Skills', sub: '.claude/skills/<name>/SKILL.md', sources: [ANT.skills, ANT.skillUse], why: 'How-to procedures. Only the name and description load at start; the rest loads when used.', how: ['name: lowercase and hyphens, up to 64 characters', 'description: up to 1024 characters, third person, what it does and when to use it', 'Body under 500 lines; SKILL.md is the table of contents', 'Reference files one level deep from SKILL.md', 'Build evals first, then write the skill'] },
     { id: 'p_lib_memory', label: 'Auto memory', sub: 'MEMORY.md index + topic files', sources: [ANT.mem], why: 'Claude saves what it learns while working.', how: ['Lives in ~/.claude/projects/<project>/memory/', 'MEMORY.md: one line per memory; first 200 lines or 25KB load', 'Details go in topic files read when needed'] },
+    { id: 'p_lib_plugins', label: 'Plugins', sub: 'The box the pieces ship in', why: 'Skills, agents, hooks and tool servers packaged as one install.', sources: ['https://code.claude.com/docs/en/plugins/overview'] },
     { id: 'p_lib_mcp', label: 'Tool servers', sub: '.mcp.json in the repo', sources: [ANT.mcp], why: 'Which tools this project gets.', how: ['Project scope: .mcp.json at the repo root, committed to git', 'Everyone on the project gets the same tools', 'You approve project servers before they are used'] },
     { id: 'p_lib_settings', label: 'Settings', sub: 'settings.json', sources: [ANT.perm, ANT.hooks, ANT.steer], why: 'Where the gateway rules live.', how: ['Permission rules: allow, ask, deny', 'Hooks registered here', 'Managed settings: set by the admin, cannot be loosened'] },
     { id: 'p_lib_evals', label: 'Evals', sub: 'Test tasks + graders', sources: [ANT.evals], why: 'How you know a change made things better.', how: ['Task = one test with inputs and success criteria', 'Graders: code checks, a model judge, a human', 'Read the transcripts to trust the scores'] },
@@ -156,6 +159,8 @@ const proNodes: ProNode[] = [
     { id: 'p_g1', label: 'PreToolUse hook', sub: 'Your code checks each call', sources: [ANT.perm, ANT.hooks], why: 'Your script sees every call before it runs.', how: ['Runs before the permission prompt, on every call', 'Can block, force a prompt, or let it through', 'Cannot override deny or ask rules'] },
     { id: 'p_g2', label: 'Permission rules', sub: 'deny, then ask, then allow', sources: [ANT.perm], why: 'The allowlist.', how: ['Checked in that order; first match wins', 'A narrower allow cannot beat a deny', 'Deny a bare tool name and Claude never sees the tool'] },
     { id: 'p_g3', label: 'Ask you', sub: 'Prompt for risky calls', sources: [ANT.perm], why: 'Calls that match an ask rule wait for your yes.' },
+    { id: 'p_g5', label: 'Keys stay outside', sub: 'Vault per client', why: 'The agent uses a key without ever seeing it.', sources: ['https://platform.claude.com/docs/en/managed-agents/vaults'] },
+    { id: 'p_g6', label: 'Customer text is data', sub: 'Not instructions', why: 'A lead\'s message can try to give the agent orders. Stack defenses.', sources: ['https://code.claude.com/docs/en/agent-sdk/secure-deployment'] },
     { id: 'p_g4', label: 'Managed settings', sub: 'Admin rules on top', sources: [ANT.perm], why: 'Rules set by the admin that a user or project cannot loosen.' },
   ], ref),
   ...row(P, 'run', [
@@ -167,11 +172,13 @@ const proNodes: ProNode[] = [
   ...row(P, 'land', [
     { id: 'p_l1', label: 'Project A', sub: 'Own repo, CLAUDE.md, .mcp.json', why: 'Each project carries its own instructions and its own tool servers, so an agent working in A only has A\'s tools.', sources: [ANT.mem, ANT.mcp] },
     { id: 'p_l2', label: 'Project B', sub: 'Own repo, CLAUDE.md, .mcp.json', why: 'Same, separate from A.', sources: [ANT.mem, ANT.mcp] },
+    { id: 'p_l4', label: 'New client in one move', sub: 'Plugin + repo + vault', why: 'Shared know-how once, client facts per repo, keys per vault.', sources: ['https://code.claude.com/docs/en/plugins/overview'] },
     { id: 'p_l3', label: 'Git commit', sub: 'Every change saved', why: 'Commit progress with clear messages; git lets you roll back a bad change.', sources: [ANT.harness] },
   ], ref),
   ...row(P, 'review', [
     { id: 'p_r1', label: 'Evaluator agent', sub: 'Separate from the builder', why: 'A separate agent grades the work; agents judging their own work tend to be too easy on it.', sources: [ANT.harnessDesign] },
     { id: 'p_r2', label: 'Citation check', sub: 'Claims match sources', why: 'A citation agent ties every claim to its source before the answer goes out.', sources: [ANT.research] },
+    { id: 'p_r4', label: 'Sandbox + fake leads', sub: 'Test before real clients', why: 'A copy world with fake leads and graded test cases before the agent touches a real client.', sources: ['https://platform.claude.com/docs/en/test-and-evaluate/develop-tests'] },
     { id: 'p_r3', label: 'Model judge', sub: 'Rubric, 0 to 1, pass/fail', why: 'One judge call with a rubric: accuracy, citations, completeness, source quality, tool efficiency.', sources: [ANT.research] },
   ], ref),
   ...row(P, 'report', [
@@ -193,6 +200,9 @@ const proNodes: ProNode[] = [
     { id: 'p_x4', label: 'Kill switch', sub: 'Deny rule pulls a tool', why: 'A deny rule on a tool name takes the tool away from the next call, even mid-session; managed settings push it to everyone.', sources: [ANT.perm] },
     { id: 'p_x5', label: 'Evals', sub: 'Before every change', why: 'Changes are tested on fixed tasks first.', sources: [ANT.evals] },
     { id: 'p_x7', label: 'Stay current', sub: 'Changelog, weekly digest', why: 'How they keep up: the changelog, the weekly digest, progress files and timestamps.', sources: ['https://code.claude.com/docs/en/changelog'] },
+    { id: 'p_x8', label: 'Cost controls', sub: 'Caps, cache, cheaper helpers', why: 'Spend caps, prompt caching, cheaper models for simple work.', sources: ['https://claude.com/blog/reducing-cost-and-improving-performance-with-claude-platform'] },
+    { id: 'p_x9', label: 'Schedules', sub: 'Routines, deployments', why: 'Everything that runs on its own timer.', sources: ['https://claude.com/blog/introducing-routines-in-claude-code'] },
+    { id: 'p_x10', label: 'Short sessions', sub: '/clear, /compact, subagents', why: 'Keep each session short and on one job.', sources: ['https://code.claude.com/docs/en/best-practices'] },
     { id: 'p_x6', label: 'In git, reviewed', sub: 'Instructions are code', why: 'CLAUDE.md, rules, skills and .mcp.json live in the repo and get reviewed.', sources: [ANT.steer, ANT.mcp] },
   ], ref).map((n) => ({ ...n, w: 170, x: P + 805 })),
 ];
@@ -319,12 +329,28 @@ const alex: ProNode[] = [
   ...alexNodes,
 ];
 
+const cat = <T,>(...xs: (T[] | undefined)[]): T[] | undefined => {
+  const out = xs.flatMap((x) => x ?? []);
+  return out.length ? out : undefined;
+};
 export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
   const d = PRO_DETAILS[n.id];
   const ex = PRO_EXAMPLES[n.id];
-  if (!d && !ex && !n.how) return n;
-  const detail: FullDetail = { ...d, ...ex, build: d?.build ?? n.how, sources: undefined };
-  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? [])])] };
+  const mo = PRO_MORE[n.id];
+  if (!d && !ex && !mo && !n.how) return n;
+  const detail: FullDetail = {
+    limits: cat(d?.limits, mo?.limits),
+    build: cat(d?.build ?? n.how, mo?.build),
+    pros: cat(d?.pros, mo?.pros),
+    noobs: cat(d?.noobs, mo?.noobs),
+    extra: d?.extra,
+    plain: cat(ex?.plain, mo?.plain),
+    pictures: cat(ex?.pictures, mo?.pictures),
+    examples: cat(ex?.examples, mo?.examples),
+    decide: cat(ex?.decide, mo?.decide),
+    myths: mo?.myths,
+  };
+  return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? []), ...(mo?.sources ?? [])])] };
 });
 
 const flow = (a: string, b: string, label?: string): ProEdge => ({ id: `${a}-${b}`, source: a, target: b, kind: 'flow', label });
@@ -339,6 +365,7 @@ function spine(s: 'p' | 'y', from: Step): ProEdge[] {
 export const PRO_EDGES: ProEdge[] = [
   // Anthropic: you talk to ONE lead agent; it plans and hands out the work.
   flow('p_you', 'p_band_ui', 'asks'),
+  link('p_trigger', 'p_lead', 'starts the lead', 'ls', 'l'),
   ...[1, 2, 3].map((i) => flow(`p_ui${i}`, 'p_lead')),
   flow('p_lead', 'p_band_plan', 'plans'),
   ...spine('p', 'plan'),
