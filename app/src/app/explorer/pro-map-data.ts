@@ -13,7 +13,7 @@ import { FIXES } from './pro-map-fixes';
 
 export type FullDetail = ProDetail & ProExamples & Pick<More, 'myths'>;
 
-export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference';
+export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference' | 'hermes';
 export type ProNode = {
   badge?: string;
   id: string; label: string; sub: string; status: ProStatus; why: string; sources: string[];

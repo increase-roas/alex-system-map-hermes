@@ -11,8 +11,8 @@ import { type ProNode, type ProStatus } from './pro-map-data';
 import type { Example, FlowStep, Picture, Rule, TreeNode } from './pro-map-examples';
 import { JOBS, type CallStatus } from './pro-map-jobs';
 
-const COLOR: Record<ProStatus, string> = { ok: '#17c964', partial: '#f5a524', gap: '#ff0071', reference: '#7f77dd' };
-const WORD: Record<ProStatus, string> = { ok: 'have it', partial: 'partly', gap: 'missing', reference: 'Anthropic way' };
+const COLOR: Record<ProStatus, string> = { ok: '#17c964', partial: '#f5a524', gap: '#ff0071', reference: '#7f77dd', hermes: '#0d9488' };
+const WORD: Record<ProStatus, string> = { ok: 'have it', partial: 'partly', gap: 'missing', reference: 'Anthropic way', hermes: 'Hermes way' };
 const CARD_W = 130;
 const hidden = { opacity: 0, width: 6, height: 6 };
 
@@ -73,8 +73,8 @@ function Legend({ counts }: { counts: { ok: number; partial: number; gap: number
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b px-3 py-2 text-xs">
       <span className="text-sm font-semibold">Pro Map</span>
-      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: version 1 (original 13 steps). Middle: version 2 (Codex review, 12 steps). Right: yours, 12 steps. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
-      {(['ok', 'partial', 'gap', 'reference'] as ProStatus[]).map((s) => (
+      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: version 1 (original 13 steps). Middle: version 2 (Codex review, 12 steps). Right: yours, 12 steps. Far right: version 4, Hermes Agent (Nous Research). Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
+      {(['ok', 'partial', 'gap', 'reference', 'hermes'] as ProStatus[]).map((s) => (
         <span key={s} className="flex items-center gap-1"><span className="inline-block size-2 rounded-full" style={{ background: COLOR[s] }} />{WORD[s]}</span>
       ))}
       <span className="text-muted-foreground">moving gray line = work flows</span>
