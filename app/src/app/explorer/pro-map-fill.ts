@@ -403,27 +403,37 @@ export const PRO_FILL: Record<string, More> = {
 const EXTRA: Record<string, More> = {
   p_x11: {
     plain: [
-      'Work ledger: claude-progress.txt + feature_list.json + git log. Answers "what is done and what is next". Every new session reads it first.',
-      'Action ledger: the trace (every model call, tool decision, result and cost under one prompt.id) plus a per-agent tool log written by hooks. Answers "who did what, when".',
-      'Event ledger: your own log of every webhook and trigger you receive. Anthropic says webhooks can be dropped, so this is the only complete record.',
+      'Anthropic never uses the word ledger. Their names: progress file, git history, transcript (also called trace), events.',
+      'Progress file: claude-progress.txt + feature_list.json + git log. Answers "what is done and what is next". Every new session reads it first.',
+      'Transcript: the trace (every model call, tool decision, result and cost under one prompt.id) plus a per-agent tool log written by hooks. Answers "who did what, when".',
+      'Event log: your own log of every webhook and trigger you receive. Anthropic says webhooks can be dropped, so this is the only complete record.',
       'Who-for: in Managed Agents the vault ties each action to the client it was done for.',
       'Managed Agents keeps every step and shows which agent did what, in what order, and why in the Console.',
     ],
-    pictures: [{ kind: 'tree', title: 'Three ledgers', root: { label: 'The ledger', children: [
-      { label: 'Work', note: 'progress file, feature list, git log', tone: 'good' },
-      { label: 'Actions', note: 'trace by prompt.id, tool_calls.jsonl', tone: 'good' },
-      { label: 'Events', note: 'your own log of webhooks', tone: 'good' },
+    build: [
+      'Work record, step 1: in CLAUDE.md write "Start of session: read claude-progress.txt and git log -20. End of session: update claude-progress.txt and commit."',
+      'Work record, step 2: keep feature_list.json with "passes": false items; agents flip one to true only after testing it.',
+      'Transcript, step 1: Claude Code already saves every session to ~/.claude/projects/<project>/ as a .jsonl file.',
+      'Transcript, step 2: turn on telemetry (CLAUDE_CODE_ENABLE_TELEMETRY=1, OTEL_LOGS_EXPORTER=otlp, an endpoint) so every request is recorded under one prompt.id with cost.',
+      'Transcript, step 3: for your own SDK agents, add PreToolUse and PostToolUse hooks that append each tool call to logs/<session>/tool_calls.jsonl, tagged by agent (Anthropic research demo).',
+      'Event log: your webhook receiver appends every event (id, type, time) to an append-only file or table BEFORE acting, and ignores ids it has already seen.',
+    ],
+    pictures: [{ kind: 'tree', title: 'What Anthropic keeps instead of a ledger', root: { label: 'Records', children: [
+      { label: 'Progress file + git', note: 'what is done, what is next', tone: 'good' },
+      { label: 'Transcript (trace)', note: 'every call, result, cost', tone: 'good' },
+      { label: 'Event log', note: 'every webhook you received', tone: 'good' },
     ] } }],
     examples: [
-      { title: 'Action ledger line (Anthropic research demo)', tone: 'good', file: 'logs/session_<time>/tool_calls.jsonl', why: 'Written by PreToolUse and PostToolUse hooks; every call tagged with the agent that made it.', code: L('{"event":"tool_call_start","agent_id":"RESEARCHER-1","tool_name":"WebSearch",...}', '{"event":"tool_call_complete","success":true,"output_size":15234}') },
-      { title: 'Work ledger', tone: 'good', file: 'claude-progress.txt + git log', why: 'What a new session reads before touching anything.', code: L('$ cat claude-progress.txt', '- Done: lead form posts to GHL (tested)', '- Next: first reply within 5 minutes', '$ git log --oneline -3', 'a1c2 Lead form: normalize phone to +1', '9f0e Add fake-lead evals', '7b3d Initial setup') },
+      { title: 'Transcript tool log (Anthropic research demo)', tone: 'good', file: 'logs/session_<time>/tool_calls.jsonl', why: 'Written by PreToolUse and PostToolUse hooks; every call tagged with the agent that made it.', code: L('{"event":"tool_call_start","agent_id":"RESEARCHER-1","tool_name":"WebSearch",...}', '{"event":"tool_call_complete","success":true,"output_size":15234}') },
+      { title: 'Progress file + git log', tone: 'good', file: 'claude-progress.txt + git log', why: 'What a new session reads before touching anything.', code: L('$ cat claude-progress.txt', '- Done: lead form posts to GHL (tested)', '- Next: first reply within 5 minutes', '$ git log --oneline -3', 'a1c2 Lead form: normalize phone to +1', '9f0e Add fake-lead evals', '7b3d Initial setup') },
     ],
     decide: [
-      { if: 'You need to know what is finished', then: 'Work ledger (progress file + git)' },
-      { if: 'You need to know what an agent did and what it cost', then: 'Action ledger (trace + tool log)' },
+      { if: 'You need to know what is finished', then: 'Progress file + git log' },
+      { if: 'You need to know what an agent did and what it cost', then: 'Transcript: telemetry by prompt.id + hook tool log' },
       { if: 'You need to prove an event arrived (new lead, approval)', then: 'Your own event log' },
+      { if: 'Your SDK ledger (receipts)', then: 'Closest to their transcript, but only for SDK calls; direct Composio calls are missing from it' },
     ],
-    myths: [{ myth: 'One ledger file can hold everything.', truth: 'Anthropic splits it: work state lives with the code, actions live in the trace, events live in your own log. Each answers a different question.', fix: 'Keep three: progress file + git for work, telemetry + hook log for actions, an append-only log for every webhook. Link them by session or prompt.id.' }],
+    myths: [{ myth: 'Pros keep one ledger file for everything.', truth: 'Anthropic splits it: work state lives with the code, actions live in the trace, events live in your own log. Each answers a different question.', fix: 'Keep three: progress file + git for work, telemetry + hook log for actions, an append-only log for every webhook. Link them by session or prompt.id.' }],
     sources: [S.harness, S.mon, S.researchDemo, S.managedNew, 'https://platform.claude.com/docs/en/managed-agents/webhooks', 'https://platform.claude.com/docs/en/managed-agents/vaults'],
   },
   p_x3: {
