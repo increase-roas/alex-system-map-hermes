@@ -106,7 +106,7 @@ function Legend({ counts }: { counts: { ok: number; partial: number; gap: number
   return (
     <div className="flex flex-wrap items-center gap-x-4 gap-y-1 border-b px-3 py-2 text-xs">
       <span className="text-sm font-semibold">Pro Map</span>
-      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: version 1 (original 13 steps). Middle: version 2 (Codex review, 12 steps). Right: yours, 12 steps. Then version 4, Hermes Agent (Nous Research). Far right: version 5, the Agency OS checklist (41 items, what is done and what is left). Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
+      <span className="text-muted-foreground">Top to bottom = the order it happens. Left: version 1 (original 13 steps). Middle: version 2 (Codex review, 12 steps). Right: yours, 12 steps. Then version 4, Hermes Agent (Nous Research). Then version 5, the Agency OS checklist (41 items, what is done and what is left). Far right: version 6, Agency OS: where everything lives, who uses it, how a job runs, and the to-do list. Click a box, then a tile to open it. Anthropic side re-checked live 2026-10-12.</span>
       {(['ok', 'partial', 'gap', 'reference', 'hermes', 'unknown'] as ProStatus[]).map((s) => (
         <span key={s} className="flex items-center gap-1"><span className="inline-block size-2 rounded-full" style={{ background: COLOR[s] }} />{WORD[s]}</span>
       ))}
