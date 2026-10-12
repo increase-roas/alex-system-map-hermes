@@ -5,7 +5,7 @@
  */
 import type { ProExamples } from './pro-map-examples';
 
-export type Myth = { myth: string; truth: string };
+export type Myth = { myth: string; truth: string; fix?: string };
 export type More = ProExamples & { myths?: Myth[]; build?: string[]; pros?: string[]; noobs?: string[]; limits?: string[] };
 
 const L = (...lines: string[]) => lines.join('\n');

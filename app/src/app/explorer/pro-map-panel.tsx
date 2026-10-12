@@ -282,6 +282,7 @@ function DetailCard({ node, onClose }: { node: ProNode; onClose: () => void }) {
               <div key={m.myth} className="rounded-lg border px-3 py-2 text-sm leading-snug">
                 <div><span className="mr-1.5 font-semibold text-rose-500">MYTH</span>{m.myth}</div>
                 <div className="mt-1"><span className="mr-1.5 font-semibold text-emerald-500">REALITY</span>{m.truth}</div>
+                {m.fix ? <div className="mt-1.5 rounded-md bg-sky-500/10 px-2 py-1.5"><span className="mr-1.5 font-semibold text-sky-500">FIX</span>{m.fix}</div> : null}
               </div>
             ))}
           </div>

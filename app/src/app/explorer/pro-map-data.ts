@@ -9,6 +9,7 @@ import { PRO_DETAILS, type ProDetail } from './pro-map-details';
 import { PRO_EXAMPLES, type ProExamples } from './pro-map-examples';
 import { PRO_MORE, type More } from './pro-map-more';
 import { PRO_FILL } from './pro-map-fill';
+import { FIXES } from './pro-map-fixes';
 
 export type FullDetail = ProDetail & ProExamples & Pick<More, 'myths'>;
 
@@ -350,7 +351,7 @@ export const PRO_NODES: ProNode[] = [...pro, ...alex].map((n) => {
     pictures: cat(ex?.pictures, mo?.pictures, fi?.pictures),
     examples: cat(ex?.examples, mo?.examples, fi?.examples),
     decide: cat(ex?.decide, mo?.decide, fi?.decide),
-    myths: cat(mo?.myths, fi?.myths),
+    myths: cat(mo?.myths, fi?.myths)?.map((m) => ({ ...m, fix: m.fix ?? FIXES[m.myth] })),
   };
   return { ...n, detail, sources: [...new Set([...n.sources, ...(d?.sources ?? []), ...(ex?.sources ?? []), ...(mo?.sources ?? []), ...(fi?.sources ?? [])])] };
 });
