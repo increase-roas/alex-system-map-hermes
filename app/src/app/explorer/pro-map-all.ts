@@ -4,11 +4,13 @@
  *   middle = Version 2, Codex review, 12 steps (pro-map-data.ts)
  *   right  = Yours, 12 steps (pro-map-data.ts)
  *   far right = Version 4, Hermes Agent (pro-map-data-hermes.ts), ids prefixed h_
+ *   farthest right = Version 5, Agency OS checklist (pro-map-data-checklist.ts), ids prefixed k_
  */
 import { PRO_EDGES as V2_EDGES, PRO_NODES as V2_NODES, type ProEdge, type ProNode } from './pro-map-data';
 import { V1_EDGES, V1_NODES } from './pro-map-data-v1';
 import { H_EDGES, H_NODES } from './pro-map-data-hermes';
 import { STICKY } from './pro-map-sticky';
+import { K_EDGES, K_NODES } from './pro-map-data-checklist';
 
 const SHIFT = -1480;
 const rename = (id: string) => (id.startsWith('p_') ? `o_${id.slice(2)}` : id);
@@ -75,7 +77,7 @@ export const GRADES: Record<string, MapGrade> = {
     ],
   },
 };
-export const PRO_NODES: ProNode[] = [...v1Nodes, ...V2_NODES, ...H_NODES].map(withSticky)
+export const PRO_NODES: ProNode[] = [...v1Nodes, ...V2_NODES, ...H_NODES, ...K_NODES].map(withSticky)
   .map((n) => (GRADES[n.id] ? { ...n, y: -500, h: 450, grade: GRADES[n.id] } : n));
-export const PRO_EDGES: ProEdge[] = [...v1Edges, ...V2_EDGES, ...H_EDGES];
+export const PRO_EDGES: ProEdge[] = [...v1Edges, ...V2_EDGES, ...H_EDGES, ...K_EDGES];
 export type { ProEdge, ProNode };

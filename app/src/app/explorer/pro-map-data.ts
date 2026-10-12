@@ -15,7 +15,7 @@ import { withGuardrails } from './pro-map-guardrail-cards';
 
 export type FullDetail = ProDetail & ProExamples & Pick<More, 'myths'>;
 
-export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference' | 'hermes';
+export type ProStatus = 'ok' | 'partial' | 'gap' | 'reference' | 'hermes' | 'unknown';
 export type ProNode = {
   badge?: string;
   id: string; label: string; sub: string; status: ProStatus; why: string; sources: string[];
