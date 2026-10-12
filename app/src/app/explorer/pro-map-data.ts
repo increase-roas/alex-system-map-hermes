@@ -205,6 +205,7 @@ const proNodes: ProNode[] = [
     { id: 'p_x8', label: 'Cost controls', sub: 'Caps, cache, cheaper helpers', why: 'Spend caps, prompt caching, cheaper models for simple work.', sources: ['https://claude.com/blog/reducing-cost-and-improving-performance-with-claude-platform'] },
     { id: 'p_x9', label: 'Schedules', sub: 'Routines, deployments', why: 'Everything that runs on its own timer.', sources: ['https://claude.com/blog/introducing-routines-in-claude-code'] },
     { id: 'p_x10', label: 'Short sessions', sub: '/clear, /compact, subagents', why: 'Keep each session short and on one job.', sources: ['https://code.claude.com/docs/en/best-practices'] },
+    { id: 'p_x11', label: 'The ledger', sub: 'Work, actions, events', why: 'Anthropic does not call it a ledger, but they keep three records: what is done (progress file + git), every move an agent made (trace + tool log), and every event received (your own log).', sources: ['https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents'] },
     { id: 'p_x6', label: 'In git, reviewed', sub: 'Instructions are code', why: 'CLAUDE.md, rules, skills and .mcp.json live in the repo and get reviewed.', sources: [ANT.steer, ANT.mcp] },
   ], ref).map((n) => ({ ...n, w: 170, x: P + 805 })),
 ];
