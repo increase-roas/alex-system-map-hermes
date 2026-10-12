@@ -121,7 +121,7 @@ const proNodes: ProNode[] = [
     how: ['You talk to one agent; it hands work to subagents', 'Each subagent gets a clear goal, output format, tools to use and where to stop', 'Start simple: add agents only when one agent is not enough'],
   }], ref),
   ...row(P, 'plan', [
-    { id: 'p_plan1', label: 'Plan saved', sub: 'Lead writes it to memory', why: 'The lead saves its plan to memory so it survives when the context window fills up.', sources: [ANT.research] },
+    { id: 'p_plan1', label: 'Plan written to a file', sub: 'A work file, not MEMORY.md', why: 'The lead saves its plan to memory so it survives when the context window fills up.', sources: [ANT.research] },
     { id: 'p_plan2', label: 'Progress file + git', sub: 'claude-progress.txt, commits', why: 'For long jobs the first session sets up the project; every later session makes one step of progress and leaves notes.', sources: [ANT.harness], how: ['First session: setup script, progress file, first git commit', 'Every later session: one step, commit with a clear message, update the progress file'] },
     { id: 'p_plan3', label: 'Pick the pattern', sub: 'Workflow or orchestrator', why: 'Known steps = a fixed workflow. Steps you cannot predict = orchestrator with workers.', sources: [ANT.effective, ANT.patterns] },
   ], ref),

@@ -629,7 +629,7 @@ export const PRO_EXAMPLES: Record<string, ProExamples> = {
       steps: [
         { label: 'You ask one question' },
         { label: 'Lead plans first', note: 'how hard? which tools? how many helpers?' },
-        { label: 'Saves the plan to memory', note: 'survives a full context window' },
+        { label: 'Writes the plan to a file', note: 'like plan.md; not MEMORY.md. Survives a full context window' },
         { label: 'Hands out 3 to 5 tasks at once', many: ['Goal', 'Output format', 'Tools + sources', 'When to stop'] },
         { label: 'Helpers search in parallel', many: ['Helper 1', 'Helper 2', 'Helper 3'] },
         { label: 'Summaries come back', note: 'not their full notes' },
@@ -707,6 +707,8 @@ export const PRO_EXAMPLES: Record<string, ProExamples> = {
   p_plan1: {
     plain: [
       'It writes the plan to a file outside its own head, then reads it back when needed.',
+      '"Memory" here just means a file outside the conversation. It is NOT MEMORY.md: MEMORY.md is Claude Code\'s notebook about you and your project that carries across sessions; the plan is a work file for this one job.',
+      'Anthropic\'s research-agent demo does exactly this with plain folders: helpers write to files/research_notes/ and the next agent reads from there.',
       'Claude API: the memory tool gives Claude a /memories folder it can create, read and edit files in; you choose where that folder really lives.',
       'Claude Code or Agent SDK: a normal file in the project (a plan or progress file), committed to git.',
       'Managed Agents: hosted memory stores.',
