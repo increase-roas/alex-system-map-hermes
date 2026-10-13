@@ -100,3 +100,10 @@ Review: `reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-202610
 `reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-20261013T184854Z.md` (Codex, alex-reviewer v1.1):
 VERDICT PASS, all seven rows PASS under the approved acceptance, MISSING none. Not a Director VERIFIED state.
 The two stale lines it noted are corrected in this packet.
+
+## Sign-off
+
+Signed off by Alex in chat, 2026-10-13 ("Sign off"), after the round-3 other-family review PASS.
+Live check at sign-off: the tailnet-served server (127.0.0.1:3200, Tailscale Serve, running this checkout) answers
+the component route on lfx 1.12.5 with 63 components and 18 runnable, and refuses a nested fake secret in a dry
+run that wrote nothing. There is no git remote, so there is nothing to push; the work goes to main by fast-forward.
