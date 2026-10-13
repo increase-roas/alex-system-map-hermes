@@ -1,10 +1,13 @@
 # Langflow control dashboard
 
-**Status: seen working locally and through Tailscale Serve on October 12, 2026.** Browser import, edit, save, reload and a harmless engine run passed. Tailnet viewing is read-only. Other-family review and a physical second-device check remain pending. Evidence: `reviews/receipts/2026-10-12-langflow-fix/RESULTS.md`.
+**Status: seen working locally on October 13, 2026 (nodes build).** Add, delete, connect and disconnect components, the richer setting editors, and local runs of 18 components were seen working on the real engine and in the browser (desktop 1280 px and a 375 px phone-sized viewport, both emulated in the Claude desktop app's browser on this Mac). Tailnet stays read-only. Not yet done: other-family review, a real phone or second device, and a tailnet re-check of the new build. Evidence: `reviews/receipts/2026-10-13-langflow-nodes/`. Earlier evidence (October 12): `reviews/receipts/2026-10-12-langflow-fix/RESULTS.md`.
 
 ## What it does
 
 - Pick a saved flow, see its canvas, change the supported settings, save with a version check, import and export the Langflow JSON, and run the flow.
+- Add any of the engine's 63 current components from a searchable palette (keyboard: Tab to the search box, arrow keys, Enter; Escape returns to the search box). Delete components, connect and disconnect them by dragging between their typed connection points, with the Delete key, or with the Connect, Disconnect and Delete buttons in Settings (the keyboard and touch way).
+- Every unsaved change is previewed by the server with the same rules as a save (a dry run that writes nothing). A change the server refuses is taken back out, with its reason. Each change has an Undo button.
+- Settings: text, long text and prompts, numbers and sliders (with their range), on/off, dropdowns and tabs, and JSON boxes for dictionaries and tables (table rows must use the table's own columns). Editing a prompt creates or removes its `{variable}` inputs the way Langflow does.
 - Each run shows its status, timestamps, the flow version it used, the engine version, the output, and any error.
 
 ## Three things, kept apart
@@ -17,19 +20,33 @@
 
 Each run gets its own copy of the exact bytes it ran (`run-inputs/<run-id>.json`), so a save made mid-run cannot change which version ran.
 
+## What runs here (Alex's rule, 2026-10-13: runs stay local)
+
+The component list and every template come from the installed engine's own `lfx/_assets/component_index.json` (`GET /api/langflow/components`). Legacy components are not offered. Tiers: `app/src/lib/langflow/tiers.ts`.
+
+| Group | Count | Runs here |
+|---|---|---|
+| Local, proven on the real engine | 18 | Yes: Chat Input, Chat Output, Calculator, Current Date, Mock Data, If-Else, Notify, Listen, Loop, Character, Recursive Character and Language Recursive text splitters, HTML Link Extractor, Prompt Template, Dynamic Create Data, Parser, Split Text, Type Convert |
+| Local, not proven | 4 | No: Natural Language Text Splitter (NLTK not installed), Data Operations (its settings need a Langflow server), Message History (returned nothing), Fake Embeddings (no local consumer can show its output) |
+| AI model, internet, code or files, Langflow server | 41 | No: show and edit only |
+
+- A run needs a Chat Output. Chat Input is optional (flows such as Current Date to Chat Output run without it, and the message is then not used).
+- A component runs only when its code is byte-identical (full sha256) to the installed engine's built-in component. An edited, older or relabelled component is refused with the reason, so a flow from elsewhere cannot run its own Python under an enabled name. A real component labelled as a note is an error (the engine only skips `type: noteNode`).
+- Runs record the engine that actually ran, read from the engine's files (for example `lfx 1.12.6rc3`).
+
 ## Not supported yet (on purpose)
 
-- Adding or deleting components or connections on the canvas. Use Langflow's own editor for that. That editor is not running in this build.
-- Editing the `code` field (Langflow runs it). Read-only.
-- Secret values. The dashboard never stores them. Imports have secrets removed (and the count is reported), and exports show them as `[redacted]`.
-- Running flows that use a model, tool or code step. Refused until Alex approves, because AI execution is turned off in this app (`/api/generate-text` points to `disabled-ai`). Only Chat Input to Chat Output flows run.
+- Editing the `code` field (Langflow runs it). Read-only, shown as its line count.
+- Secret values. The dashboard never stores them: password fields, and values under secret-looking names (token, key, password, authorization and the like) inside JSON settings. Edits with them are refused, imports have them removed (and the count is reported), exports and the panel show `[redacted]`.
+- Settings that need a running Langflow server to show their real fields (Data Operations' operation picker, Human Input's action picker) or that pick files, models or MCP servers. Read-only, with the reason.
+- Running AI model, internet, code, file or server components (see above). `/api/generate-text` still points to `disabled-ai`.
 - Cancel inside Langflow. Stop kills the local engine process. That path is tested with a stand-in process, and the real engine is not separately tested for Stop.
 
 ## Run it on the Mac
 
 The app binds only to 127.0.0.1. Tailscale Serve proxies port 3200. Use the current system-map-ir checkout.
 
-Install the pinned engine (once):
+Install the pinned engine (once). Note: in the current venv pip installed lfx 1.12.6rc3 (a release candidate) next to langflow 1.12.5, because the provider add-ons (lfx-openai and others) declare `lfx>=1.12.0.dev0`, which lets pip pick pre-releases. lfx 1.12.5 exists on PyPI (2026-10-06). Everything in the October 13 receipts ran on 1.12.6rc3. Moving to 1.12.5 is Alex's call; afterwards rerun the live tests below:
 
 ```bash
 python3.11 -m venv ~/.venvs/langflow-dashboard
@@ -37,6 +54,10 @@ python3.11 -m venv ~/.venvs/langflow-dashboard
 
 ```bash
 ~/.venvs/langflow-dashboard/bin/pip install langflow==1.12.5
+```
+
+```bash
+~/.venvs/langflow-dashboard/bin/pip install 'lfx==1.12.5'
 ```
 
 Start the app on port 3200 (the port Tailscale Serve uses):
@@ -50,14 +71,18 @@ cd ~/Projects/system-map-ir/app && LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashbo
 Unit and route tests (no port needed, about 2 seconds):
 
 ```bash
-cd ~/Projects/system-map-ir/app && node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts
+cd ~/Projects/system-map-ir/app && node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts src/lib/langflow/tests/network-boundary.test.mts src/lib/langflow/tests/catalog.test.mts src/lib/langflow/tests/edits.test.mts src/lib/langflow/tests/settings.test.mts src/lib/langflow/tests/review-fixes.test.mts
 ```
 
 Live engine acceptance (runs the real `lfx` engine, about 3 seconds):
 
 ```bash
-cd ~/Projects/system-map-ir/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/live-engine.test.mts
+cd ~/Projects/system-map-ir/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/live-engine.test.mts src/lib/langflow/tests/live-components.test.mts src/lib/langflow/tests/components-live.test.mts
 ```
+
+`live-components` builds one small flow per enabled component through the save route and runs it on the real engine (about 40 seconds). `components-live` adds each of the 63 current components through the save route and runs `lfx validate` on the saved file (about 3 minutes).
+
+To build or serve for a check without touching the `.next` folder of a dev server that is already running from this checkout, set `NEXT_DIST_DIR=.next-verify`.
 
 ## Access
 
@@ -77,7 +102,26 @@ cd ~/Projects/system-map-ir/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME
 - Run history: `app/.data/langflow/runs.json`. A damaged file is renamed to `runs.json.corrupt-<time>` and never deleted.
 - `app/.data/` is git-ignored, so backups are yours: copy that folder.
 
-## Evidence
+## Evidence (nodes build, October 13, 2026)
+
+All in `reviews/receipts/2026-10-13-langflow-nodes/`. Engine: lfx 1.12.6rc3 in `~/.venvs/langflow-dashboard`.
+
+| Requirement | Status | Evidence |
+|---|---|---|
+| Catalog: 63 current components, tiers 22 local and 41 show only, 0 unknown | PASS (live) | `step1-catalog.txt` |
+| Each of the 63 added through the save route; `lfx validate` levels 1 and 3 clean | PASS (live) | `step2-palette.txt` (the engine's own level 2 check cannot load its registry in this build; recorded) |
+| Palette by keyboard, add and save in the browser | PASS (browser, 1024 px) | `step2-palette.txt` |
+| Add, delete, connect, disconnect; refused edits save nothing; Langflow-identical handle bytes | PASS (API) | `step3-edits.txt` |
+| Tailnet and token-less callers get 403 on every new edit kind and on dry runs | PASS (API) | `edits.test.mts`; middleware and policy unchanged |
+| Canvas wiring in the browser; rewired flow validates and runs on the engine | PASS (browser, 1280 px) | `step4-canvas.txt` |
+| Setting editors; every editable setting round-trips byte for byte | PASS (API and browser) | `step5-settings.txt` |
+| 18 enabled components produce their real output on the engine; 4 local ones refused with reasons | PASS (live) | `live-components.txt` |
+| Security and correctness review findings fixed, one regression test each | PASS (API, live recheck) | `review-fixes.txt` |
+| Desktop: build a Calculator flow, save and run (result 14) | PASS (browser, 1280 px) | `final-checks.txt`, `desktop-1280-calculator-run.jpg` |
+| Phone-sized viewport: palette by tap, Undo, run (result 42), no horizontal overflow | PASS (emulated 375 px viewport, not a real phone) | `final-checks.txt`, `phone-375-calculator-run.jpg` |
+| Real phone or second device, touch gestures on the canvas, tailnet check of this build | NOT RUN | |
+
+## Evidence (October 12, 2026)
 
 | Requirement | Status | Evidence |
 |---|---|---|
@@ -107,7 +151,7 @@ cd ~/Projects/system-map-ir/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME
 - The existing Tailscale owner login is configured for read only in the ignored local `app/.data/langflow/access.json`. Other logins are denied by the Langflow policy.
 - Development and start commands bind loopback by default. Serve configuration remains private to the tailnet.
 - The local credential was rotated after closing the exposure. No credential is in the receipts.
-- Only harmless Chat Input to Chat Output flows execute. Paid model/tool flows remain disabled.
+- Only the 18 proven local components execute, and only with the engine's own code. Paid model and tool flows remain disabled.
 - Browser reload, 390px viewport measurement and same-Mac HTTPS Serve access were tested. A physical phone, touch gestures and a separate remote device were not tested.
 - A same-family independent technical check passed. Formal other-family alex-reviewer and Director acceptance are pending; no paid review was launched.
 
@@ -117,7 +161,7 @@ Labels: Working, Needs implementation, Blocked, Not required for this milestone,
 
 | Item | Label | Evidence |
 |---|---|---|
-| Langflow 1.12.5 engine (`lfx` run and validate) | Working | Live test PASS; `lfx validate` clean |
+| Langflow engine (`lfx` run and validate) | Working on lfx 1.12.6rc3 (langflow 1.12.5) | Live tests PASS on 2026-10-13; the docs pin 1.12.5 (see "Run it on the Mac") |
 | Langflow server API (`/api/v1/run`, `/api/v1/flows`) | Needs implementation (blocked by port) | Routes read from installed 1.12.5 source; not called live |
 | Model providers (OpenAI, Anthropic, others) | Not required for this milestone | AI execution off; no provider keys stored or passed |
 | Data stores | Working (local files) | `app/.data/langflow/` store and run records |

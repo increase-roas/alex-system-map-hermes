@@ -1,0 +1,59 @@
+Final checks receipt (step 7). 2026-10-13 about 12:05 EDT. claude-opus-5-5. Branch langflow-dashboard.
+
+Gates from .claude/commands/verify.md (base 3572d39 for this work):
+(a) tsc --noEmit (app): PASS, exit 0.
+(b) npm run lint: PRE-EXISTING. Exit 1 with 20 errors, all in files this work did not touch and exactly the base
+    count named in verify.md: pro-map-audit-check.cjs 13, pro-map-guardrails/check_registration.cjs 6,
+    pro-map-panel.tsx 1. No error in a changed file (changed files also checked with next lint --file: clean).
+(c) Build: PASS. NEXT_DIST_DIR=.next-verify npm run build, exit 0, /explorer 732 kB (834 kB first load).
+    Deviation, on purpose: built into .next-verify instead of .next, because Alex's dev server (PID 51330,
+    127.0.0.1:3200, this checkout) serves from .next and a production build there would overwrite it.
+(d) Check scripts: PASS. flow-node-kit.check.mts 51 PASS 0 FAIL. pro-map-audit-check.cjs exit 0, errors [],
+    8 sourceWarnings (Alex's y_ cards, reported only). No Pro Map file changed in this work.
+(e) Acceptance: FAIL as run (4 of 4 selected scripts exit 1). Selected by verify.md's rule because every changed
+    API file is named route.ts; none of the 4 mentions langflow or any changed file (grep: they reference
+    catalog/edit, health, sync/status, workflow routes). Seen causes:
+      maintained_edit_cas: PermissionError writing /tmp/maintained-edit-cas-...json (sandbox blocks /tmp).
+      recovery_emitted_screening: failures ["browser_recovery"] (headless Chrome cannot start in this sandbox,
+        seen directly: "Failed to create a ProcessSingleton", crashpad permission denied).
+      canonical_edit_sync: failures include "browser_ui" and "clone_manifest".
+      recovery_screening_real_paths: 16 failures incl. node_bridge_nonzero_exit and browser_required_overall.
+    Not proven either way: whether these 4 also fail at base in this sandbox (not run at base). Inference: sandbox
+    and browser limits, not this change. They rewrote tracked receipts under reports/ and created
+    work/maintained/derived/ (untracked). Left as they are, not committed, per verify.md.
+Verdict by the gate's own rule: NOT-READY because (e) did not pass, with the reason above.
+
+Unit, route and live tests on the final code (app):
+  10 unit and route files: 99 tests, 99 pass (live catalog included).
+  Live engine: live-engine, live-components, components-live: 5 tests, 5 pass (18/18 enabled components produce
+  their real output, 4/4 not-enabled local components refused, 63/63 added and validated).
+
+Critical-fix check through the running production build (127.0.0.1:3217, scratch data):
+  Import of the disguised flow (genericNode with data.type "note", payload in the method): HTTP 422,
+    "\"CurrentDate-zzzzz\" is labelled as a note but is a real component that the engine would run."
+  Import of the plain edited-code flow, then run: HTTP 422, "\"Current Date\" has code that differs from the
+    installed engine's built-in CurrentDate. ..." No marker file was written (the payload did not run).
+  Panel showed that reason under Run before pressing it.
+
+Browser, built-in browser pane of the Claude desktop app on this Mac, production build on 127.0.0.1:3217:
+  Desktop, viewport emulated 1280x800: on flow "Calculator browser check" (Chat Input -> Chat Output):
+    palette search "calculator" + Enter added Calculator; Connect form offered only "Chat Output -> Inputs"
+    (JSON type); earlier, a mouse drag from Chat Input "Chat Message" to Calculator "Expression" queued
+    "Connect Chat Input -> Calculator (message -> expression)"; a wrong connection was removed with its Undo
+    button; disconnect + 2 connects + add saved: "Saved 4 changes. New version ceb89e8091.", Problems (0);
+    Run with "2*(3+4)": "Finished ... flow ceb89e8091 . engine lfx 1.12.6rc3 ... {\"result\": \"14\"}".
+    Screenshot: desktop-1280-calculator-run.jpg
+  Phone-sized, the pane's mobile preset 375x812 (phone user agent, 5 touch points; clicks still arrive as mouse
+    events): document width 375 of 375, no element past the right edge; canvas (top 567, height 445) and the
+    side panel (top 1070) stacked without overlap; palette opened by tap, "split" -> 6 of 63 with honest
+    labels (e.g. "Natural Language Text Splitter. Local: not enabled."); tap added Split Text, Undo removed it;
+    Run with "6*7" -> "Finished ... {\"result\": \"42\"}". Screenshot: phone-375-calculator-run.jpg
+  NOT tested: a real phone or tablet, real touch gestures (pinch, drag on the canvas by finger), a second device,
+    and tailnet access to this build (the 3200 server Alex runs is a dev server that hot-reloads this checkout,
+    but it was not opened through the tailnet in this session).
+
+Environment notes:
+  Loopback bind: seen working in this session (python and node bind 127.0.0.1:0; curl 127.0.0.1:3200 -> 200).
+  megapowers Go hook-runner failure: did not occur in this session (no hook error in any tool output); go is not
+    on PATH, so it may recur in another session. Doctor not run (instruction: only if it still occurs).
+  Engine drift: see docs/LANGFLOW_DASHBOARD.md "Run it on the Mac" and the review packet.

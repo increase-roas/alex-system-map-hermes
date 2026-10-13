@@ -1,6 +1,7 @@
 # Langflow nodes audit and build plan
 
-Date: 2026-10-13. Prepared by claude-opus-5-5 (Anthropic family). Status: **audit WRITTEN, build NOT STARTED** (see Blockers).
+Date: 2026-10-13. Prepared by claude-opus-5-5 (Anthropic family). Status at writing: audit written, build not started.
+**Update 2026-10-13 (same model, new session in ~/Projects/system-map-ir): steps 1 to 7 built and seen working; awaiting other-family review.** See `reviews/2026-10-13-langflow-nodes-review-packet.md`. Changes from this plan: 16 of the 20 local components were enabled (4 failed live and stay off), Chat Input became optional for runs, and runs now also require engine-identical component code. Blockers 1 and 2 below were resolved by the new session; blocker 3 (engine drift) is explained, not changed.
 Dashboard code audited: branch `langflow-dashboard`, HEAD 3572d39, in `~/Projects/system-map-ir`.
 Engine audited: `~/.venvs/langflow-dashboard`, langflow 1.12.5 with lfx 1.12.6rc3.
 
