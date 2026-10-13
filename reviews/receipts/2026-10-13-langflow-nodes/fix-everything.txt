@@ -19,7 +19,8 @@
 6. Tailnet check of this build: BLOCKED. Shell: sandbox denies connecting to this Mac's own tailnet address
    ("deny network-outbound alexs-macbook-pro.tailde26a1.ts.net:443"). Built-in browser: the page shell loaded,
    but every script and /api request failed with net::ERR_BLOCKED_BY_CLIENT (blocked by the browser pane).
-7. Second-device-like check: BLOCKED. iOS Simulator needs a full Xcode install (only command-line tools here).
+7. Second-device-like check: DROPPED (Alex, 2026-10-13). The brief asked for phone-sized viewport checks, done at
+   375 px and labelled as emulation; a real device was not required. The simulator needed a 10+ GB Xcode install.
 8. Other-family review: BLOCKED. The handoff Codex thread "Retry audit in new Claude session"
    (01a135ca-1feb-7c60-94b3-4b55794fbfbe) is held by the Codex desktop app, so the bridge refuses to write to it.
 
