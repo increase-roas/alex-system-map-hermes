@@ -66,6 +66,18 @@ Start the app on port 3200 (the port Tailscale Serve uses):
 cd ~/Projects/system-map-ir/app && LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config npm run dev -- -p 3200
 ```
 
+## Start at login (set up 2026-10-13)
+
+Two login items keep both servers running after a restart (originals backed up to `~/Backups/launchagents-20261013/`):
+
+| Login item | Runs | Address |
+|---|---|---|
+| `~/Library/LaunchAgents/com.alex.system-map.plist` | `next dev` directly (no npm wrapper) from `~/Projects/system-map-ir/app`, with `LANGFLOW_LFX_BIN` and `LANGFLOW_CONFIG_DIR` set | 127.0.0.1:3200 (Tailscale Serve proxies it) |
+| `~/Library/LaunchAgents/com.alex.langflow-server.plist` | `tools/langflow_server.sh` | 127.0.0.1:7860 (this Mac only) |
+
+Restart either one: `launchctl kickstart -k gui/$(id -u)/com.alex.system-map` (or `com.alex.langflow-server`).
+Logs: `app/.data/dev-server.log` and `app/.data/langflow-server.log`.
+
 ## Langflow on this Mac (Open in Langflow)
 
 The palette's **Open this flow in Langflow** sends a copy of the saved flow to the real Langflow app on this Mac

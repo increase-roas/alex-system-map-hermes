@@ -30,3 +30,12 @@ Browser (built-in pane, 1280x800, production build on 127.0.0.1:3217, scratch da
   Open this flow in Langflow -> the pane blocks pop-up tabs, so the fallback showed the address; opening it showed
   "Message router (from dashboard)" in Langflow's editor with If-Else wired to two Chat Outputs
   (open-in-langflow-router.jpg). The fallback is now a clickable link.
+
+Start at login (done by Codex through the codex-bridge, outside Claude's sandbox; verified by Claude after):
+  Attempt 1: Langflow login item PASS; dashboard login item FAILED verification (the old item grabbed port 3200
+  first, and its npm wrapper left a next child running), rolled back, dashboard restarted by hand.
+  Attempt 2: login item now starts next directly from ~/Projects/system-map-ir/app with the two LANGFLOW_ variables;
+  Codex: bootstrap PASS, forced restart (launchctl kickstart -k) PASS, tailnet components HTTP 200.
+  Claude's own check afterwards: 3200 served from system-map-ir/app, bound 127.0.0.1 only; engine configured,
+  lfx 1.12.5; Langflow reachable; 63 components, 18 runnable; saved flow visible; Langflow /health ok on
+  127.0.0.1:7860 only. Backups: ~/Backups/launchagents-20261013/.
