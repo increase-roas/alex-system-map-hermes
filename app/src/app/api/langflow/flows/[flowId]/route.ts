@@ -1,6 +1,6 @@
 import { fail, ok, readJson, screenDeep } from '@/lib/langflow/api';
 import { componentTemplate } from '@/lib/langflow/catalog';
-import { applyEdits, editSubject, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, validateFlow } from '@/lib/langflow/model';
+import { applyEdits, editSubject, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, type JsonValue, validateFlow } from '@/lib/langflow/model';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
 import { runnerConfig } from '@/lib/langflow/runner';
 import { isValidFlowId, readFlow, saveFlow, StoreConflictError } from '@/lib/langflow/store';
@@ -51,6 +51,8 @@ function parseEdit(value: unknown): FlowEdit | null {
     if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') {
       return { kind: 'setField', nodeId: e.nodeId, field: e.field, value: v };
     }
+    // JSON settings (dict, table): an object or a list, already parsed from the request body.
+    if (v !== null && typeof v === 'object') return { kind: 'setField', nodeId: e.nodeId, field: e.field, value: v as JsonValue };
   }
   return null;
 }

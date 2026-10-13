@@ -1,0 +1,27 @@
+Step 5 receipt (richer setting editors). 2026-10-13 11:44 EDT. claude-opus-5-5.
+
+A. Tests (LANGFLOW_LFX_BIN set, live catalog included)
+✔ code is read-only and the rejection says where to edit it (0.273541ms)
+✔ secret settings cannot be set from the dashboard, and the placeholder is never saved back (0.436ms)
+✔ editors: each setting type gets the right editor, and read-only ones say why (10.24825ms)
+✔ round trip: saving every editable setting back unchanged leaves the file byte for byte the same (4.568958ms)
+✔ numbers, sliders, choices and switches are checked (1.25175ms)
+✔ JSON settings: objects for dictionaries, rows with known columns for tables (0.72275ms)
+✔ prompt: each {variable} becomes a message input like Langflow, and goes away when removed (0.819167ms)
+✔ route: JSON settings travel through the save route; a bad table row saves nothing (6.625666ms)
+ℹ tests 84
+ℹ pass 84
+ℹ fail 0
+ℹ skipped 0
+tsc --noEmit exit 0
+✔ No ESLint warnings or errors
+
+Bug found and fixed by the round-trip test: re-saving an empty Prompt Template wrote custom_fields.template: [] where there was none. Variables are now synced only when they change.
+
+B. Browser, built-in browser pane, 1280x800, isolated server 127.0.0.1:3217 (restarted so it serves the new code)
+   Palette search "dynamic create" + Enter added Dynamic Create Data. Settings showed:
+   code -> "358 lines of Python" plus the read-only reason (step 2 had printed the whole code text).
+   Input Configuration (table) -> JSON box, hint "A list of rows with the columns field_name, field_type."
+   Typed '[{"field_name": "city", ' -> aria-invalid=true, "Not valid JSON yet. Nothing is queued until it is.", change list unchanged.
+   Finished '[{"field_name": "city", "field_type": "Text"}]' -> aria-invalid=false, change 'Set "form_fields" on Dynamic Create Data' queued, server dry run accepted it (no refusal).
+   Not saved (test flow left as it was).

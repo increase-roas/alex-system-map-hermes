@@ -13,7 +13,7 @@ import '@xyflow/react/dist/style.css';
 import { Background, Controls, Handle, Position, ReactFlow, useEdgesState, useNodesState, type Connection, type Edge, type Node, type NodeProps } from '@xyflow/react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, CanvasPort, ExecutionPlan, FlowEdit, Problem } from '@/lib/langflow/model';
+import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, CanvasPort, ExecutionPlan, FlowEdit, JsonValue, Problem } from '@/lib/langflow/model';
 
 type Status = {
   engine: { name: string; pinnedLangflowVersion: string; configured: boolean; binaryFound: boolean };
@@ -272,21 +272,91 @@ const LangflowNode = memo(function LangflowNode({ data, selected }: NodeProps<No
 
 const nodeTypes = { lf: LangflowNode };
 
-function fieldInput(field: CanvasField, value: string | number | boolean | null, onChange: (v: string | number | boolean) => void, id: string) {
-  if (field.fieldType === 'bool') {
-    return <input id={id} type="checkbox" className="size-4" checked={value === true} onChange={(e) => onChange(e.target.checked)} />;
+const inputClass = 'w-full rounded border bg-background px-2 py-1 text-sm';
+
+/** JSON setting (dict or table): edits as text, queues a change only when the text is valid JSON. */
+function JsonEditor({ id, value, onChange, hint }: { id: string; value: JsonValue; onChange: (v: JsonValue) => void; hint: string }) {
+  const [text, setText] = useState(() => JSON.stringify(value ?? null, null, 2));
+  const [error, setError] = useState<string | null>(null);
+  return (
+    <>
+      <textarea
+        id={id}
+        className={`${inputClass} font-mono text-xs`}
+        rows={Math.min(10, Math.max(3, text.split('\n').length))}
+        value={text}
+        aria-invalid={!!error}
+        aria-describedby={`${id}-hint`}
+        spellCheck={false}
+        onChange={(e) => {
+          setText(e.target.value);
+          try {
+            const parsed = JSON.parse(e.target.value) as JsonValue;
+            setError(null);
+            onChange(parsed);
+          } catch {
+            setError('Not valid JSON yet. Nothing is queued until it is.');
+          }
+        }}
+      />
+      <p id={`${id}-hint`} className={`text-[11px] ${error ? 'text-red-700 dark:text-red-400' : 'text-muted-foreground'}`}>{error ?? hint}</p>
+    </>
+  );
+}
+
+function FieldEditorInput({ field, value, onChange, id }: { field: CanvasField; value: JsonValue; onChange: (v: JsonValue) => void; id: string }) {
+  const text = value === null || typeof value === 'object' ? '' : String(value);
+  switch (field.editor) {
+    case 'bool':
+      return <input id={id} type="checkbox" className="size-4" checked={value === true} onChange={(e) => onChange(e.target.checked)} />;
+    case 'select':
+      return (
+        <select id={id} className={inputClass} value={text} onChange={(e) => onChange(e.target.value)}>
+          {field.options.includes(text) ? null : <option value={text}>{text || '(not set)'}</option>}
+          {field.options.map((o) => <option key={o} value={o}>{o}</option>)}
+        </select>
+      );
+    case 'number':
+      return (
+        <>
+          <input
+            id={id}
+            type="number"
+            className={inputClass}
+            step={field.range?.step ?? (field.fieldType === 'int' ? 1 : 'any')}
+            min={field.range?.min}
+            max={field.range?.max}
+            value={text}
+            onChange={(e) => onChange(e.target.value === '' ? '' : Number(e.target.value))}
+          />
+          {field.range ? <p className="text-[11px] text-muted-foreground">From {field.range.min} to {field.range.max}.</p> : null}
+        </>
+      );
+    case 'multiline':
+      return (
+        <>
+          <textarea id={id} className={inputClass} rows={field.fieldType === 'prompt' ? 6 : 4} value={text} onChange={(e) => onChange(e.target.value)} />
+          {field.fieldType === 'prompt' ? <p className="text-[11px] text-muted-foreground">Each {'{name}'} becomes an input that takes a message, as in Langflow.</p> : null}
+        </>
+      );
+    case 'json':
+      return (
+        <JsonEditor
+          id={id}
+          value={value}
+          onChange={onChange}
+          hint={field.fieldType === 'table' ? `A list of rows${field.columns ? ` with the columns ${field.columns.join(', ')}` : ''}.` : 'A JSON object, like {"key": "value"}.'}
+        />
+      );
+    default:
+      return <input id={id} type="text" className={inputClass} value={text} onChange={(e) => onChange(e.target.value)} />;
   }
-  if (field.options.length > 0) {
-    return (
-      <select id={id} className="w-full rounded border bg-background px-2 py-1 text-sm" value={String(value ?? '')} onChange={(e) => onChange(e.target.value)}>
-        {field.options.map((o) => <option key={o} value={o}>{o}</option>)}
-      </select>
-    );
-  }
-  if (field.fieldType === 'int' || field.fieldType === 'float') {
-    return <input id={id} type="number" step={field.fieldType === 'int' ? 1 : 'any'} className="w-full rounded border bg-background px-2 py-1 text-sm" value={value === null ? '' : String(value)} onChange={(e) => onChange(e.target.value === '' ? '' : Number(e.target.value))} />;
-  }
-  return <input id={id} type="text" className="w-full rounded border bg-background px-2 py-1 text-sm" value={value === null ? '' : String(value)} onChange={(e) => onChange(e.target.value)} />;
+}
+
+function shownValue(field: CanvasField): string {
+  if (field.summary) return field.summary;
+  if (field.value === null || field.value === '') return '(empty)';
+  return typeof field.value === 'object' ? JSON.stringify(field.value) : String(field.value);
 }
 
 /** Keyboard and touch way to wire, unwire and delete the selected component (the canvas needs a mouse). */
@@ -599,7 +669,7 @@ export function LangflowPanel() {
   const selected: CanvasNode | undefined = useMemo(() => view?.nodes.find((n) => n.id === selectedNode), [view, selectedNode]);
   const labelFor = (id: string) => view?.nodes.find((n) => n.id === id)?.label ?? detail?.canvas.nodes.find((n) => n.id === id)?.label ?? id;
 
-  const valueOf = (field: CanvasField): string | number | boolean | null => {
+  const valueOf = (field: CanvasField): JsonValue => {
     const edit = pending.find((e) => e.kind === 'setField' && e.nodeId === selectedNode && e.field === field.name);
     return edit && edit.kind === 'setField' ? edit.value : field.value;
   };
@@ -791,10 +861,10 @@ export function LangflowPanel() {
                     <label htmlFor={id} className="block text-xs font-medium">
                       {f.label}{f.required ? ' *' : ''}
                     </label>
-                    {f.editable && canSave ? (
-                      fieldInput(f, value, (v) => queueEdit({ kind: 'setField', nodeId: selected.id, field: f.name, value: v }), id)
+                    {f.editable && canSave && !f.connected ? (
+                      <FieldEditorInput key={`${selected.id}-${f.name}`} field={f} value={value} id={id} onChange={(v) => queueEdit({ kind: 'setField', nodeId: selected.id, field: f.name, value: v })} />
                     ) : (
-                      <p id={id} className="text-xs text-muted-foreground">{f.value === null ? '(empty)' : String(f.value)}</p>
+                      <p id={id} className="break-words text-xs text-muted-foreground">{f.connected ? 'Set by its connection.' : shownValue(f)}</p>
                     )}
                     {!f.editable && f.readOnlyReason ? <p className="text-[11px] text-muted-foreground">{f.readOnlyReason}</p> : null}
                   </div>

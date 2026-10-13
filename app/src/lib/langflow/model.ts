@@ -23,7 +23,35 @@ const READ_ONLY_REASON: Record<string, string> = {
   _type: 'Internal field.',
 };
 
-const EDITABLE_TYPES = new Set(['str', 'int', 'float', 'bool']);
+/** How the panel edits a setting. "readonly" settings come with the reason. */
+export type FieldEditor = 'text' | 'multiline' | 'number' | 'bool' | 'select' | 'json' | 'readonly';
+
+/** Settings of these types the dashboard can edit. Everything else stays read-only with a reason. */
+const EDITOR_BY_TYPE: Record<string, FieldEditor> = {
+  str: 'text',
+  prompt: 'multiline',
+  int: 'number',
+  float: 'number',
+  slider: 'number',
+  bool: 'bool',
+  tab: 'select',
+  dict: 'json',
+  NestedDict: 'json',
+  table: 'json',
+};
+
+const READ_ONLY_BY_TYPE: Record<string, string> = {
+  file: 'File setting. Reading files is off in this app, so it is set in Langflow.',
+  model: 'Model picker. Running AI models is off in this app, so it is set in Langflow.',
+  mcp: 'MCP server setting. Tools are off in this app, so it is set in Langflow.',
+  sortableList: "Picker that changes the component's own settings through a running Langflow server. Set it in Langflow.",
+  actionPicker: 'Action picker that needs a running Langflow server. Set it in Langflow.',
+  query: 'Query setting. Set it in Langflow.',
+  duration: 'Duration setting. Set it in Langflow.',
+  data_display: 'Display only.',
+};
+
+export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
 export type LfTemplateField = JsonObject & {
   type?: string;
@@ -65,12 +93,19 @@ export type CanvasField = {
   name: string;
   label: string;
   fieldType: string;
-  value: string | number | boolean | null;
+  /** Primitive for text, number and choice settings; object or list for JSON settings; null when hidden or empty. */
+  value: JsonValue;
   required: boolean;
   editable: boolean;
+  editor: FieldEditor;
   secret: boolean;
   readOnlyReason?: string;
+  /** Short stand-in shown instead of a long read-only value (for example "42 lines of Python"). */
+  summary?: string;
   options: string[];
+  range?: { min: number; max: number; step: number };
+  /** Column names a table setting accepts. */
+  columns?: string[];
   connected: boolean;
 };
 
@@ -118,7 +153,7 @@ export type CanvasFlow = {
 
 export type FlowEdit =
   | { kind: 'move'; nodeId: string; position: { x: number; y: number } }
-  | { kind: 'setField'; nodeId: string; field: string; value: string | number | boolean }
+  | { kind: 'setField'; nodeId: string; field: string; value: JsonValue }
   | { kind: 'rename'; nodeId: string; label: string }
   | { kind: 'addNode'; nodeId: string; componentType: string; position: { x: number; y: number } }
   | { kind: 'deleteNode'; nodeId: string }
@@ -216,34 +251,73 @@ function labelOf(node: LfNode): string {
   return componentTypeOf(node) || node.id;
 }
 
+function isPlainObject(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === 'object' && !Array.isArray(value);
+}
+
+function rangeOf(field: JsonObject): CanvasField['range'] {
+  const r = field.range_spec;
+  if (!isPlainObject(r)) return undefined;
+  const min = Number(r.min);
+  const max = Number(r.max);
+  const step = Number(r.step);
+  return Number.isFinite(min) && Number.isFinite(max) ? { min, max, step: Number.isFinite(step) && step > 0 ? step : 1 } : undefined;
+}
+
+function columnsOf(field: JsonObject): string[] | undefined {
+  if (!Array.isArray(field.table_schema)) return undefined;
+  const names = field.table_schema.map((c) => (isPlainObject(c) && typeof c.name === 'string' ? c.name : null)).filter((n): n is string => !!n);
+  return names.length ? names : undefined;
+}
+
 function fieldsOf(node: LfNode, connected: Set<string>): CanvasField[] {
   const out: CanvasField[] = [];
   for (const [name, raw] of Object.entries(templateOf(node))) {
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
-    const field = raw as LfTemplateField;
+    const field = raw as LfTemplateField & { list?: unknown; multiline?: unknown; input_types?: unknown };
     if (field.show === false) continue;
     const fieldType = typeof field.type === 'string' ? field.type : '';
     const options = Array.isArray(field.options) ? field.options.filter((o): o is string => typeof o === 'string') : [];
     const isConnected = connected.has(`${node.id}:${name}`);
+    const secret = field.password === true;
+    let editor: FieldEditor = EDITOR_BY_TYPE[fieldType] ?? 'readonly';
     let readOnlyReason: string | undefined = READ_ONLY_REASON[name];
-    if (!readOnlyReason && field.password === true) {
+    if (!readOnlyReason && secret) {
       readOnlyReason = 'Secret. Set it in Langflow\'s native editor; the dashboard never stores secrets.';
     }
-    if (!readOnlyReason && !EDITABLE_TYPES.has(fieldType)) {
-      readOnlyReason = 'Structured setting. Edit it in Langflow\'s native editor.';
+    if (!readOnlyReason && fieldType === 'str' && (field.list === true || Array.isArray(field.value))) {
+      readOnlyReason = 'List setting. Edit it in Langflow\'s native editor.';
     }
-    const secret = field.password === true;
-    const shown = secret && !isEmpty(field.value) ? REDACTED : asPrimitive(field.value);
+    if (!readOnlyReason && editor === 'readonly') {
+      readOnlyReason = READ_ONLY_BY_TYPE[fieldType]
+        ?? (stringList(field.input_types).length ? 'Takes a connection. Connect a component to it on the canvas.' : 'Structured setting. Edit it in Langflow\'s native editor.');
+    }
+    if (readOnlyReason) editor = 'readonly';
+    else if (editor === 'text' && (field.multiline === true || (typeof field.value === 'string' && field.value.includes('\n')))) editor = 'multiline';
+    else if ((editor === 'text' || editor === 'select') && options.length > 0) editor = 'select';
+    let value: JsonValue;
+    let summary: string | undefined;
+    if (secret) value = isEmpty(field.value) ? '' : REDACTED;
+    else if (name === 'code' && typeof field.value === 'string') {
+      value = null;
+      summary = `${field.value.split('\n').length} lines of Python`;
+    } else if (editor === 'json' || (editor === 'readonly' && (Array.isArray(field.value) || isPlainObject(field.value)))) {
+      value = (field.value ?? null) as JsonValue;
+    } else value = asPrimitive(field.value);
     out.push({
       name,
       label: typeof field.display_name === 'string' && field.display_name ? field.display_name : name,
       fieldType,
-      value: shown,
+      value,
       required: field.required === true,
       editable: !readOnlyReason,
+      editor,
       secret,
       readOnlyReason,
+      ...(summary ? { summary } : {}),
       options,
+      ...(fieldType === 'slider' ? { range: rangeOf(field) } : {}),
+      ...(fieldType === 'table' ? { columns: columnsOf(field) } : {}),
       connected: isConnected,
     });
   }
@@ -347,7 +421,27 @@ function findNode(raw: LfFlow, id: string): LfNode | undefined {
   return raw.data.nodes.find((n) => String(n.id) === id);
 }
 
-function coerce(field: CanvasField, value: string | number | boolean): { ok: true; value: string | number | boolean } | { ok: false; reason: string } {
+function coerce(field: CanvasField, value: JsonValue): { ok: true; value: JsonValue } | { ok: false; reason: string } {
+  if (field.editor === 'json') {
+    if (field.fieldType === 'table') {
+      if (!Array.isArray(value) || !value.every((row) => isPlainObject(row))) return { ok: false, reason: `"${field.label}" takes a list of rows, like [{"name": "value"}].` };
+      if (field.columns) {
+        const unknown = value.flatMap((row) => Object.keys(row as object)).filter((k) => !field.columns!.includes(k));
+        if (unknown.length) return { ok: false, reason: `"${field.label}" has no column named ${[...new Set(unknown)].map((k) => `"${k}"`).join(', ')}. Columns: ${field.columns.join(', ')}.` };
+      }
+      return { ok: true, value };
+    }
+    if (!isPlainObject(value)) return { ok: false, reason: `"${field.label}" takes a JSON object, like {"key": "value"}.` };
+    return { ok: true, value };
+  }
+  if (typeof value === 'object' && value !== null) return { ok: false, reason: `"${field.label}" takes a single value, not a list or object.` };
+  if (value === null) return { ok: false, reason: `"${field.label}" needs a value.` };
+  if (field.fieldType === 'slider') {
+    const n = typeof value === 'number' ? value : Number(value);
+    if (!Number.isFinite(n)) return { ok: false, reason: `"${field.label}" takes a number.` };
+    if (field.range && (n < field.range.min || n > field.range.max)) return { ok: false, reason: `"${field.label}" takes a number from ${field.range.min} to ${field.range.max}.` };
+    return { ok: true, value: n };
+  }
   if (field.fieldType === 'bool') {
     if (typeof value === 'boolean') return { ok: true, value };
     if (value === 'true' || value === 'false') return { ok: true, value: value === 'true' };
@@ -435,10 +529,68 @@ export function applyEdits(raw: LfFlow, edits: FlowEdit[], ctx: EditContext = {}
       rejected.push({ edit, reason: `"${field.label}" must be one of: ${field.options.join(', ')}.` });
       continue;
     }
+    if (field.fieldType === 'prompt' && typeof result.value === 'string') {
+      const sync = syncPromptVariables(flow, node, result.value);
+      if (sync) {
+        rejected.push({ edit, reason: `"${label}" → ${sync}` });
+        continue;
+      }
+    }
     (rawField as LfTemplateField).value = result.value;
     applied += 1;
   }
   return { flow, applied, rejected };
+}
+
+const VARIABLE_NAME = /^[A-Za-z_][A-Za-z0-9_]*$/;
+
+/** The {variables} of a prompt, in order (or {{variables}} when the component uses double brackets). */
+export function promptVariables(text: string, doubleBrackets = false): string[] {
+  const pattern = doubleBrackets ? /\{\{([^{}]+)\}\}/g : /(?<!\{)\{([^{}]+)\}(?!\})/g;
+  const out: string[] = [];
+  for (const m of text.matchAll(pattern)) {
+    const name = m[1].trim();
+    if (!out.includes(name)) out.push(name);
+  }
+  return out;
+}
+
+/**
+ * Langflow gives each {variable} of a prompt its own text input that takes a Message, and lists them in
+ * custom_fields.template. Its server does this when the prompt is edited; the dashboard does the same so the
+ * engine can fill the prompt. Returns a reason when the edit must be refused.
+ */
+function syncPromptVariables(flow: LfFlow, node: LfNode, text: string): string | null {
+  const template = templateOf(node);
+  const double = (template.use_double_brackets as LfTemplateField | undefined)?.value === true;
+  const wanted = promptVariables(text, double);
+  const bad = wanted.find((v) => !VARIABLE_NAME.test(v));
+  if (bad) return `"{${bad}}" is not a usable variable name: use letters, digits and _ only.`;
+  const nodeData = node.data!.node!;
+  const custom = isPlainObject(nodeData.custom_fields) ? (nodeData.custom_fields as Record<string, unknown>) : {};
+  const previous = stringList(custom.template);
+  for (const v of wanted) {
+    if (!previous.includes(v) && template[v] !== undefined) return `"{${v}}" clashes with the existing setting "${v}". Pick another name.`;
+  }
+  if (wanted.length === previous.length && wanted.every((v, i) => v === previous[i])) return null;
+  const removed = previous.filter((v) => !wanted.includes(v));
+  const connected = connectedInputs(flow);
+  const stillWired = removed.find((v) => connected.has(`${String(node.id)}:${v}`));
+  if (stillWired) return `"{${stillWired}}" is still connected. Disconnect it before removing it from the prompt.`;
+  for (const v of removed) delete template[v];
+  for (const v of wanted) {
+    if (template[v] !== undefined) continue;
+    template[v] = {
+      _input_type: 'MessageTextInput', advanced: false, display_name: v, dynamic: false, field_type: 'str', fileTypes: [],
+      file_path: '', info: '', input_types: ['Message'], list: false, load_from_db: false, multiline: true, name: v,
+      placeholder: '', required: false, show: true, title_case: false, type: 'str', value: '',
+    };
+  }
+  nodeData.custom_fields = { ...custom, template: wanted };
+  if (Array.isArray(nodeData.field_order)) {
+    nodeData.field_order = [...(nodeData.field_order as unknown[]).filter((f) => typeof f !== 'string' || !removed.includes(f)), ...wanted.filter((v) => !(nodeData.field_order as unknown[]).includes(v))];
+  }
+  return null;
 }
 
 function addNode(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'addNode' }>, ctx: EditContext): string | null {

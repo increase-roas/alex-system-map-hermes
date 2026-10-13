@@ -1336,6 +1336,420 @@
    }
   ],
   [
+   "langchain_utilities",
+   {
+    "CSVAgent": {
+     "base_classes": [
+      "AgentExecutor",
+      "Message"
+     ],
+     "beta": false,
+     "conditional_paths": [],
+     "custom_fields": {},
+     "description": "Construct a CSV agent from a CSV and tools.",
+     "display_name": "CSV Agent",
+     "documentation": "https://python.langchain.com/docs/modules/agents/toolkits/csv",
+     "edited": false,
+     "field_order": [
+      "input_value",
+      "handle_parsing_errors",
+      "verbose",
+      "max_iterations",
+      "model",
+      "api_key",
+      "base_url_ibm_watsonx",
+      "project_id",
+      "path",
+      "agent_type",
+      "input_value",
+      "pandas_kwargs",
+      "allow_dangerous_code"
+     ],
+     "frozen": false,
+     "icon": "LangChain",
+     "legacy": false,
+     "metadata": {
+      "code_hash": "01d5f714d2de",
+      "dependencies": {
+       "dependencies": [
+        {
+         "name": "lfx",
+         "version": null
+        },
+        {
+         "name": "langchain_experimental",
+         "version": "0.4.2"
+        }
+       ],
+       "total_dependencies": 2
+      },
+      "module": "lfx.components.langchain_utilities.csv_agent.CSVAgentComponent"
+     },
+     "minimized": false,
+     "output_types": [],
+     "outputs": [
+      {
+       "allows_loop": false,
+       "cache": true,
+       "display_name": "Response",
+       "group_outputs": false,
+       "method": "build_agent_response",
+       "name": "response",
+       "selected": "Message",
+       "tool_mode": true,
+       "types": [
+        "Message"
+       ],
+       "value": "__UNDEFINED__"
+      },
+      {
+       "allows_loop": false,
+       "cache": true,
+       "display_name": "Agent",
+       "group_outputs": false,
+       "hidden": true,
+       "method": "build_agent",
+       "name": "agent",
+       "selected": "AgentExecutor",
+       "tool_mode": false,
+       "types": [
+        "AgentExecutor"
+       ],
+       "value": "__UNDEFINED__"
+      }
+     ],
+     "pinned": false,
+     "template": {
+      "_type": "Component",
+      "agent_type": {
+       "_input_type": "DropdownInput",
+       "advanced": true,
+       "api_editable": false,
+       "combobox": false,
+       "dialog_inputs": {},
+       "display_name": "Agent Type",
+       "dynamic": false,
+       "external_options": {},
+       "info": "",
+       "name": "agent_type",
+       "options": [
+        "zero-shot-react-description",
+        "openai-functions",
+        "openai-tools"
+       ],
+       "options_metadata": [],
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "toggle": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "str",
+       "value": "openai-tools"
+      },
+      "allow_dangerous_code": {
+       "_input_type": "BoolInput",
+       "advanced": false,
+       "api_editable": false,
+       "display_name": "Allow Dangerous Code",
+       "dynamic": false,
+       "info": "SECURITY WARNING: Enabling this allows the agent to execute arbitrary Python code on the server, which can lead to remote code execution vulnerabilities. Only enable this if you fully trust the input sources and understand the security implications. When disabled, the agent can still analyze CSV data but cannot execute custom Python code.",
+       "list": false,
+       "list_add_label": "Add More",
+       "name": "allow_dangerous_code",
+       "override_skip": false,
+       "placeholder": "",
+       "required": true,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "bool",
+       "value": false
+      },
+      "api_key": {
+       "_input_type": "SecretStrInput",
+       "advanced": true,
+       "api_editable": false,
+       "display_name": "API Key",
+       "dynamic": false,
+       "info": "Overrides global provider settings. Leave blank to use your pre-configured API Key.",
+       "input_types": [],
+       "load_from_db": true,
+       "name": "api_key",
+       "override_skip": false,
+       "password": true,
+       "placeholder": "",
+       "real_time_refresh": true,
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "track_in_telemetry": false,
+       "type": "str",
+       "value": ""
+      },
+      "base_url_ibm_watsonx": {
+       "_input_type": "DropdownInput",
+       "advanced": false,
+       "api_editable": false,
+       "combobox": false,
+       "dialog_inputs": {},
+       "display_name": "watsonx API Endpoint",
+       "dynamic": false,
+       "external_options": {},
+       "info": "The base URL of the API (IBM watsonx.ai only)",
+       "name": "base_url_ibm_watsonx",
+       "options": [
+        "https://us-south.ml.cloud.ibm.com",
+        "https://eu-de.ml.cloud.ibm.com",
+        "https://eu-gb.ml.cloud.ibm.com",
+        "https://au-syd.ml.cloud.ibm.com",
+        "https://jp-tok.ml.cloud.ibm.com",
+        "https://ca-tor.ml.cloud.ibm.com"
+       ],
+       "options_metadata": [],
+       "override_skip": false,
+       "placeholder": "",
+       "real_time_refresh": true,
+       "required": false,
+       "show": false,
+       "title_case": false,
+       "toggle": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "str",
+       "value": "https://us-south.ml.cloud.ibm.com"
+      },
+      "code": {
+       "advanced": true,
+       "api_editable": false,
+       "dynamic": true,
+       "fileTypes": [],
+       "file_path": "",
+       "info": "",
+       "list": false,
+       "load_from_db": false,
+       "multiline": true,
+       "name": "code",
+       "password": false,
+       "placeholder": "",
+       "required": true,
+       "show": true,
+       "title_case": false,
+       "type": "code",
+       "value": "import contextlib\nimport tempfile\nfrom pathlib import Path\n\nfrom lfx.base.agents.agent import LCAgentComponent\nfrom lfx.base.agents.utils import resolve_agent_verbose\nfrom lfx.base.data.storage_utils import read_file_bytes\nfrom lfx.base.models.unified_models import get_language_model_options, get_llm, handle_model_input_update\nfrom lfx.base.models.watsonx_constants import IBM_WATSONX_URLS\nfrom lfx.field_typing import AgentExecutor\nfrom lfx.inputs.inputs import (\n    DictInput,\n    DropdownInput,\n    FileInput,\n    MessageTextInput,\n    ModelInput,\n)\nfrom lfx.io import BoolInput, SecretStrInput, StrInput\nfrom lfx.schema.message import Message\nfrom lfx.services.deps import get_settings_service\nfrom lfx.template.field.base import Output\nfrom lfx.utils.async_helpers import run_until_complete\nfrom lfx.utils.file_path_security import component_file_access_scopes, enforce_local_file_access\n\n\nclass CSVAgentComponent(LCAgentComponent):\n    display_name = \"CSV Agent\"\n    description = \"Construct a CSV agent from a CSV and tools.\"\n    documentation = \"https://python.langchain.com/docs/modules/agents/toolkits/csv\"\n    name = \"CSVAgent\"\n    icon = \"LangChain\"\n\n    inputs = [\n        *LCAgentComponent.get_base_inputs(),\n        ModelInput(\n            name=\"model\",\n            display_name=\"Language Model\",\n            info=\"Select your model provider or connect a Language Model component.\",\n            real_time_refresh=True,\n            required=True,\n        ),\n        SecretStrInput(\n            name=\"api_key\",\n            display_name=\"API Key\",\n            info=\"Overrides global provider settings. Leave blank to use your pre-configured API Key.\",\n            real_time_refresh=True,\n            advanced=True,\n        ),\n        DropdownInput(\n            name=\"base_url_ibm_watsonx\",\n            display_name=\"watsonx API Endpoint\",\n            info=\"The base URL of the API (IBM watsonx.ai only)\",\n            options=IBM_WATSONX_URLS,\n            value=IBM_WATSONX_URLS[0],\n            show=False,\n            real_time_refresh=True,\n        ),\n        StrInput(\n            name=\"project_id\",\n            display_name=\"watsonx Project ID\",\n            info=\"The project ID associated with the foundation model (IBM watsonx.ai only)\",\n            show=False,\n            required=False,\n        ),\n        FileInput(\n            name=\"path\",\n            display_name=\"File Path\",\n            file_types=[\"csv\"],\n            input_types=[\"str\", \"Message\"],\n            required=True,\n            info=\"A CSV File or File Path.\",\n        ),\n        DropdownInput(\n            name=\"agent_type\",\n            display_name=\"Agent Type\",\n            advanced=True,\n            options=[\"zero-shot-react-description\", \"openai-functions\", \"openai-tools\"],\n            value=\"openai-tools\",\n        ),\n        MessageTextInput(\n            name=\"input_value\",\n            display_name=\"Text\",\n            info=\"Text to be passed as input and extract info from the CSV File.\",\n            required=True,\n            # Redeclared here because this input shadows LCAgentComponent's\n            # `input_value`, which carries tool_mode=True. The runtime scans the\n            # inputs list and still sees the base one, but the serialized template\n            # is keyed by name and keeps only this one \u2014 so without the flag the\n            # index reports CSVAgent as not tool-capable when it is.\n            tool_mode=True,\n        ),\n        DictInput(\n            name=\"pandas_kwargs\",\n            display_name=\"Pandas Kwargs\",\n            info=\"Pandas Kwargs to be passed to the agent.\",\n            advanced=True,\n            is_list=True,\n        ),\n        BoolInput(\n            name=\"allow_dangerous_code\",\n            display_name=\"Allow Dangerous Code\",\n            value=False,\n            required=True,\n            info=(\n                \"SECURITY WARNING: Enabling this allows the agent to execute arbitrary Python code \"\n                \"on the server, which can lead to remote code execution vulnerabilities. \"\n                \"Only enable this if you fully trust the input sources and understand the security implications. \"\n                \"When disabled, the agent can still analyze CSV data but cannot execute custom Python code.\"\n            ),\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"Response\", name=\"response\", method=\"build_agent_response\"),\n        Output(display_name=\"Agent\", name=\"agent\", method=\"build_agent\", hidden=True, tool_mode=False),\n    ]\n\n    def _path(self) -> str:\n        if isinstance(self.path, Message) and isinstance(self.path.text, str):\n            return self.path.text\n        return self.path\n\n    def _get_llm(self):\n        \"\"\"Resolve the language model from dropdown selection or connected component.\"\"\"\n        return get_llm(\n            model=self.model,\n            user_id=self.user_id,\n            api_key=getattr(self, \"api_key\", None),\n            watsonx_url=getattr(self, \"base_url_ibm_watsonx\", None),\n            watsonx_project_id=getattr(self, \"project_id\", None),\n        )\n\n    def update_build_config(self, build_config: dict, field_value: str, field_name: str | None = None) -> dict:\n        \"\"\"Dynamically update build config with user-filtered model options (tool-calling capable models).\"\"\"\n        return handle_model_input_update(\n            self,\n            dict(build_config),\n            field_value,\n            field_name,\n            cache_key_prefix=\"language_model_options_tool_calling\",\n            get_options_func=lambda user_id=None: get_language_model_options(user_id=user_id, tool_calling=True),\n        )\n\n    def build_agent_response(self) -> Message:\n        \"\"\"Build and execute the CSV agent, returning the response.\"\"\"\n        try:\n            from langchain_experimental.agents.agent_toolkits.csv.base import create_csv_agent\n        except ImportError as e:\n            msg = (\n                \"langchain-experimental is not installed. Please install it with `pip install langchain-experimental`.\"\n            )\n            raise ImportError(msg) from e\n\n        try:\n            # Use False as default if allow_dangerous_code is not set (secure by default)\n            allow_dangerous = getattr(self, \"allow_dangerous_code\", False) or False\n\n            agent_kwargs = {\n                # Gate LangChain's stdout chain markers on LANGCHAIN_VERBOSE (off by\n                # default) instead of the always-True component input. See\n                # resolve_agent_verbose().\n                \"verbose\": resolve_agent_verbose(),\n                \"allow_dangerous_code\": allow_dangerous,\n            }\n\n            # Get local path (downloads from S3 if needed)\n            local_path = self._get_local_path()\n            llm = self._get_llm()\n\n            agent_csv = create_csv_agent(\n                llm=llm,\n                path=local_path,\n                agent_type=self.agent_type,\n                handle_parsing_errors=self.handle_parsing_errors,\n                pandas_kwargs=self.pandas_kwargs,\n                **agent_kwargs,\n            )\n\n            result = agent_csv.invoke({\"input\": self.input_value})\n            return Message(text=str(result[\"output\"]))\n\n        finally:\n            # Clean up temp file if created\n            self._cleanup_temp_file()\n\n    def build_agent(self) -> AgentExecutor:\n        try:\n            from langchain_experimental.agents.agent_toolkits.csv.base import create_csv_agent\n        except ImportError as e:\n            msg = (\n                \"langchain-experimental is not installed. Please install it with `pip install langchain-experimental`.\"\n            )\n            raise ImportError(msg) from e\n\n        # Use False as default if allow_dangerous_code is not set (secure by default)\n        allow_dangerous = getattr(self, \"allow_dangerous_code\", False) or False\n\n        agent_kwargs = {\n            # Gate LangChain's stdout chain markers on LANGCHAIN_VERBOSE (off by\n            # default) instead of the always-True component input. See\n            # resolve_agent_verbose().\n            \"verbose\": resolve_agent_verbose(),\n            \"allow_dangerous_code\": allow_dangerous,\n        }\n\n        # Get local path (downloads from S3 if needed)\n        local_path = self._get_local_path()\n        llm = self._get_llm()\n\n        agent_csv = create_csv_agent(\n            llm=llm,\n            path=local_path,\n            agent_type=self.agent_type,\n            handle_parsing_errors=self.handle_parsing_errors,\n            pandas_kwargs=self.pandas_kwargs,\n            **agent_kwargs,\n        )\n\n        self.status = Message(text=str(agent_csv))\n\n        # Note: Temp file will be cleaned up when the component is destroyed or\n        # when build_agent_response is called\n        return agent_csv\n\n    def _get_local_path(self) -> str:\n        \"\"\"Get a local file path, downloading from S3 storage if necessary.\n\n        Returns:\n            str: Local file path that can be used by LangChain\n        \"\"\"\n        file_path = self._path()\n        settings = get_settings_service().settings\n\n        # If using S3 storage, download the file to temp\n        if settings.storage_type == \"s3\":\n            # Download from S3 to temp file. A genuine absolute local path is read from disk\n            # instead of S3 (#13798), so hand the reader the same scoped confinement the\n            # local-storage branch below applies.\n            csv_bytes = run_until_complete(read_file_bytes(file_path, resolve_path=self._confine_local_path))\n\n            # Create temp file with .csv extension\n            suffix = Path(file_path.split(\"/\")[-1]).suffix or \".csv\"\n            with tempfile.NamedTemporaryFile(mode=\"wb\", suffix=suffix, delete=False) as tmp_file:\n                tmp_file.write(csv_bytes)\n                temp_path = tmp_file.name\n\n            # Store temp path for cleanup\n            self._temp_file_path = temp_path\n            return temp_path\n\n        # Local storage - confine tenant-controlled path to the storage dir when\n        # LANGFLOW_RESTRICT_LOCAL_FILE_ACCESS is enabled (blocks /etc/passwd etc.).\n        return self._confine_local_path(file_path)\n\n    def _confine_local_path(self, path: str) -> str:\n        \"\"\"Confine a tenant-controlled local path to this component's storage scope.\"\"\"\n        return str(enforce_local_file_access(path, scope_ids=component_file_access_scopes(self)))\n\n    def _cleanup_temp_file(self) -> None:\n        \"\"\"Clean up temporary file if one was created.\"\"\"\n        if hasattr(self, \"_temp_file_path\"):\n            with contextlib.suppress(Exception):\n                Path(self._temp_file_path).unlink()  # Ignore cleanup errors\n"
+      },
+      "handle_parsing_errors": {
+       "_input_type": "BoolInput",
+       "advanced": true,
+       "api_editable": false,
+       "display_name": "Handle Parse Errors",
+       "dynamic": false,
+       "info": "Should the Agent fix errors when reading user input for better processing?",
+       "list": false,
+       "list_add_label": "Add More",
+       "name": "handle_parsing_errors",
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "bool",
+       "value": true
+      },
+      "input_value": {
+       "_input_type": "MessageTextInput",
+       "advanced": false,
+       "api_editable": false,
+       "display_name": "Text",
+       "dynamic": false,
+       "info": "Text to be passed as input and extract info from the CSV File.",
+       "input_types": [
+        "Message"
+       ],
+       "list": false,
+       "list_add_label": "Add More",
+       "load_from_db": false,
+       "name": "input_value",
+       "override_skip": false,
+       "placeholder": "",
+       "required": true,
+       "show": true,
+       "title_case": false,
+       "tool_mode": true,
+       "trace_as_input": true,
+       "trace_as_metadata": true,
+       "track_in_telemetry": false,
+       "type": "str",
+       "value": ""
+      },
+      "max_iterations": {
+       "_input_type": "IntInput",
+       "advanced": true,
+       "api_editable": false,
+       "display_name": "Max Iterations",
+       "dynamic": false,
+       "info": "The maximum number of attempts the agent can make to complete its task before it stops.",
+       "list": false,
+       "list_add_label": "Add More",
+       "name": "max_iterations",
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "int",
+       "value": 15
+      },
+      "model": {
+       "_input_type": "ModelInput",
+       "advanced": false,
+       "api_editable": false,
+       "display_name": "Language Model",
+       "dynamic": false,
+       "external_options": {
+        "fields": {
+         "data": {
+          "node": {
+           "display_name": "Connect other models",
+           "icon": "CornerDownLeft",
+           "name": "connect_other_models"
+          }
+         }
+        }
+       },
+       "info": "Select your model provider or connect a Language Model component.",
+       "input_types": [
+        "LanguageModel"
+       ],
+       "list": false,
+       "list_add_label": "Add More",
+       "model_type": "language",
+       "name": "model",
+       "override_skip": false,
+       "placeholder": "Setup Provider",
+       "real_time_refresh": true,
+       "refresh_button": true,
+       "required": true,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_input": true,
+       "track_in_telemetry": false,
+       "type": "model",
+       "value": ""
+      },
+      "pandas_kwargs": {
+       "_input_type": "DictInput",
+       "advanced": true,
+       "api_editable": false,
+       "display_name": "Pandas Kwargs",
+       "dynamic": false,
+       "info": "Pandas Kwargs to be passed to the agent.",
+       "list": true,
+       "list_add_label": "Add More",
+       "name": "pandas_kwargs",
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_input": true,
+       "track_in_telemetry": false,
+       "type": "dict",
+       "value": {}
+      },
+      "path": {
+       "_input_type": "FileInput",
+       "advanced": false,
+       "api_editable": false,
+       "display_name": "File Path",
+       "dynamic": false,
+       "fileTypes": [
+        "csv"
+       ],
+       "file_path": "",
+       "info": "A CSV File or File Path.",
+       "input_types": [
+        "str",
+        "Message"
+       ],
+       "list": false,
+       "list_add_label": "Add More",
+       "name": "path",
+       "override_skip": false,
+       "placeholder": "",
+       "required": true,
+       "show": true,
+       "temp_file": false,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": false,
+       "type": "file",
+       "value": ""
+      },
+      "project_id": {
+       "_input_type": "StrInput",
+       "advanced": false,
+       "api_editable": false,
+       "display_name": "watsonx Project ID",
+       "dynamic": false,
+       "info": "The project ID associated with the foundation model (IBM watsonx.ai only)",
+       "list": false,
+       "list_add_label": "Add More",
+       "load_from_db": false,
+       "name": "project_id",
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": false,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": false,
+       "type": "str",
+       "value": ""
+      },
+      "verbose": {
+       "_input_type": "BoolInput",
+       "advanced": true,
+       "api_editable": false,
+       "display_name": "Verbose",
+       "dynamic": false,
+       "info": "Legacy toggle. The '> Entering new ... chain' / '> Finished chain.' markers it used to print to stdout are now gated on the LANGCHAIN_VERBOSE environment variable (off by default); set LANGCHAIN_VERBOSE=true to emit them. Toggling this input on its own no longer attaches LangChain's stdout handler. Agent steps remain visible in the UI regardless of this setting.",
+       "list": false,
+       "list_add_label": "Add More",
+       "name": "verbose",
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "bool",
+       "value": true
+      }
+     },
+     "tool_mode": false
+    }
+   }
+  ],
+  [
    "models_and_agents",
    {
     "LanguageModelComponent": {
@@ -1911,6 +2325,167 @@
   [
    "processing",
    {
+    "DynamicCreateData": {
+     "base_classes": [
+      "JSON",
+      "Message"
+     ],
+     "beta": false,
+     "conditional_paths": [],
+     "custom_fields": {},
+     "description": "Dynamically create a Data with a specified number of fields.",
+     "display_name": "Dynamic Create Data",
+     "documentation": "",
+     "edited": false,
+     "field_order": [
+      "form_fields",
+      "include_metadata"
+     ],
+     "frozen": false,
+     "icon": "ListFilter",
+     "legacy": false,
+     "metadata": {
+      "code_hash": "8af479187c18",
+      "dependencies": {
+       "dependencies": [
+        {
+         "name": "lfx",
+         "version": null
+        }
+       ],
+       "total_dependencies": 1
+      },
+      "module": "lfx.components.processing.dynamic_create_data.DynamicCreateDataComponent"
+     },
+     "minimized": false,
+     "output_types": [],
+     "outputs": [
+      {
+       "allows_loop": false,
+       "cache": true,
+       "display_name": "JSON",
+       "group_outputs": false,
+       "method": "process_form",
+       "name": "form_data",
+       "selected": "JSON",
+       "tool_mode": true,
+       "types": [
+        "JSON"
+       ],
+       "value": "__UNDEFINED__"
+      },
+      {
+       "allows_loop": false,
+       "cache": true,
+       "display_name": "Message",
+       "group_outputs": false,
+       "method": "get_message",
+       "name": "message",
+       "selected": "Message",
+       "tool_mode": true,
+       "types": [
+        "Message"
+       ],
+       "value": "__UNDEFINED__"
+      }
+     ],
+     "pinned": false,
+     "template": {
+      "_type": "Component",
+      "code": {
+       "advanced": true,
+       "api_editable": false,
+       "dynamic": true,
+       "fileTypes": [],
+       "file_path": "",
+       "info": "",
+       "list": false,
+       "load_from_db": false,
+       "multiline": true,
+       "name": "code",
+       "password": false,
+       "placeholder": "",
+       "required": true,
+       "show": true,
+       "title_case": false,
+       "type": "code",
+       "value": "from typing import Any\n\nfrom lfx.custom import Component\nfrom lfx.io import (\n    BoolInput,\n    FloatInput,\n    HandleInput,\n    IntInput,\n    MultilineInput,\n    Output,\n    StrInput,\n    TableInput,\n)\nfrom lfx.schema.data import Data\nfrom lfx.schema.message import Message\n\n\nclass DynamicCreateDataComponent(Component):\n    display_name: str = \"Dynamic Create Data\"\n    description: str = \"Dynamically create a Data with a specified number of fields.\"\n    name: str = \"DynamicCreateData\"\n    MAX_FIELDS = 15  # Define a constant for maximum number of fields\n    icon = \"ListFilter\"\n\n    def __init__(self, **kwargs):\n        super().__init__(**kwargs)\n\n    inputs = [\n        TableInput(\n            name=\"form_fields\",\n            display_name=\"Input Configuration\",\n            info=(\n                \"Define the dynamic form fields. Each row creates a new input field \"\n                \"that can connect to other components.\"\n            ),\n            table_schema=[\n                {\n                    \"name\": \"field_name\",\n                    \"display_name\": \"Field Name\",\n                    \"type\": \"str\",\n                    \"description\": \"Name for the field (used as both internal name and display label)\",\n                },\n                {\n                    \"name\": \"field_type\",\n                    \"display_name\": \"Field Type\",\n                    \"type\": \"str\",\n                    \"description\": \"Type of input field to create\",\n                    \"options\": [\"Text\", \"Data\", \"Number\", \"Handle\", \"Boolean\"],\n                    \"value\": \"Text\",\n                },\n            ],\n            value=[],\n            real_time_refresh=True,\n        ),\n        BoolInput(\n            name=\"include_metadata\",\n            display_name=\"Include Metadata\",\n            info=\"Include form configuration metadata in the output.\",\n            value=False,\n            advanced=True,\n        ),\n    ]\n\n    outputs = [\n        Output(display_name=\"JSON\", name=\"form_data\", method=\"process_form\"),\n        Output(display_name=\"Message\", name=\"message\", method=\"get_message\"),\n    ]\n\n    def update_build_config(self, build_config: dict, field_value: Any, field_name: str | None = None) -> dict:\n        \"\"\"Update build configuration to add dynamic inputs that can connect to other components.\"\"\"\n        if field_name == \"form_fields\":\n            # Clear existing dynamic inputs from build config\n            keys_to_remove = [key for key in build_config if key.startswith(\"dynamic_\")]\n            for key in keys_to_remove:\n                del build_config[key]\n\n            # Add dynamic inputs based on table configuration\n            # Safety check to ensure field_value is not None and is iterable\n            if field_value is None:\n                field_value = []\n\n            for i, field_config in enumerate(field_value):\n                # Safety check to ensure field_config is not None\n                if field_config is None:\n                    continue\n\n                field_name = field_config.get(\"field_name\", f\"field_{i}\")\n                display_name = field_name  # Use field_name as display_name\n                field_type_option = field_config.get(\"field_type\", \"Text\")\n                default_value = \"\"  # All fields have empty default value\n                required = False  # All fields are optional by default\n                help_text = \"\"  # All fields have empty help text\n\n                # Map field type options to actual field types and input types\n                field_type_mapping = {\n                    \"Text\": {\"field_type\": \"multiline\", \"input_types\": [\"Text\", \"Message\"]},\n                    \"Data\": {\"field_type\": \"data\", \"input_types\": [\"Data\"]},\n                    \"Number\": {\"field_type\": \"number\", \"input_types\": [\"Text\", \"Message\"]},\n                    \"Handle\": {\"field_type\": \"handle\", \"input_types\": [\"Text\", \"Data\", \"Message\"]},\n                    \"Boolean\": {\"field_type\": \"boolean\", \"input_types\": None},\n                }\n\n                field_config_mapped = field_type_mapping.get(\n                    field_type_option, {\"field_type\": \"text\", \"input_types\": []}\n                )\n                if not isinstance(field_config_mapped, dict):\n                    field_config_mapped = {\"field_type\": \"text\", \"input_types\": []}\n                field_type = field_config_mapped[\"field_type\"]\n                input_types_list = field_config_mapped[\"input_types\"]\n\n                # Create the appropriate input type based on field_type\n                dynamic_input_name = f\"dynamic_{field_name}\"\n\n                if field_type == \"text\":\n                    if input_types_list:\n                        build_config[dynamic_input_name] = StrInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=f\"{help_text} (Can connect to: {', '.join(input_types_list)})\",\n                            value=default_value,\n                            required=required,\n                            input_types=input_types_list,\n                        )\n                    else:\n                        build_config[dynamic_input_name] = StrInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=help_text,\n                            value=default_value,\n                            required=required,\n                        )\n\n                elif field_type == \"multiline\":\n                    if input_types_list:\n                        build_config[dynamic_input_name] = MultilineInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=f\"{help_text} (Can connect to: {', '.join(input_types_list)})\",\n                            value=default_value,\n                            required=required,\n                            input_types=input_types_list,\n                        )\n                    else:\n                        build_config[dynamic_input_name] = MultilineInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=help_text,\n                            value=default_value,\n                            required=required,\n                        )\n\n                elif field_type == \"number\":\n                    try:\n                        default_int = int(default_value) if default_value else 0\n                    except ValueError:\n                        default_int = 0\n\n                    if input_types_list:\n                        build_config[dynamic_input_name] = IntInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=f\"{help_text} (Can connect to: {', '.join(input_types_list)})\",\n                            value=default_int,\n                            required=required,\n                            input_types=input_types_list,\n                        )\n                    else:\n                        build_config[dynamic_input_name] = IntInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=help_text,\n                            value=default_int,\n                            required=required,\n                        )\n\n                elif field_type == \"float\":\n                    try:\n                        default_float = float(default_value) if default_value else 0.0\n                    except ValueError:\n                        default_float = 0.0\n\n                    if input_types_list:\n                        build_config[dynamic_input_name] = FloatInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=f\"{help_text} (Can connect to: {', '.join(input_types_list)})\",\n                            value=default_float,\n                            required=required,\n                            input_types=input_types_list,\n                        )\n                    else:\n                        build_config[dynamic_input_name] = FloatInput(\n                            name=dynamic_input_name,\n                            display_name=display_name,\n                            info=help_text,\n                            value=default_float,\n                            required=required,\n                        )\n\n                elif field_type == \"boolean\":\n                    default_bool = default_value.lower() in [\"true\", \"1\", \"yes\"] if default_value else False\n\n                    # Boolean fields don't use input_types parameter to avoid errors\n                    build_config[dynamic_input_name] = BoolInput(\n                        name=dynamic_input_name,\n                        display_name=display_name,\n                        info=help_text,\n                        value=default_bool,\n                        input_types=[],\n                        required=required,\n                    )\n\n                elif field_type == \"handle\":\n                    # HandleInput for generic data connections\n                    build_config[dynamic_input_name] = HandleInput(\n                        name=dynamic_input_name,\n                        display_name=display_name,\n                        info=f\"{help_text} (Accepts: {', '.join(input_types_list) if input_types_list else 'Any'})\",\n                        input_types=input_types_list if input_types_list else [\"Data\", \"Text\", \"Message\"],\n                        required=required,\n                    )\n\n                elif field_type == \"data\":\n                    # Specialized for Data type connections\n                    build_config[dynamic_input_name] = HandleInput(\n                        name=dynamic_input_name,\n                        display_name=display_name,\n                        info=f\"{help_text} (Data input)\",\n                        input_types=input_types_list if input_types_list else [\"Data\"],\n                        required=required,\n                    )\n\n                else:\n                    # Default to text input for unknown types\n                    build_config[dynamic_input_name] = StrInput(\n                        name=dynamic_input_name,\n                        display_name=display_name,\n                        info=f\"{help_text} (Unknown type '{field_type}', defaulting to text)\",\n                        value=default_value,\n                        required=required,\n                    )\n\n        return build_config\n\n    def get_dynamic_values(self) -> dict[str, Any]:\n        \"\"\"Extract simple values from all dynamic inputs, handling both manual and connected inputs.\"\"\"\n        dynamic_values = {}\n        connection_info = {}\n        form_fields = getattr(self, \"form_fields\", [])\n\n        for field_config in form_fields:\n            # Safety check to ensure field_config is not None\n            if field_config is None:\n                continue\n\n            field_name = field_config.get(\"field_name\", \"\")\n            if field_name:\n                dynamic_input_name = f\"dynamic_{field_name}\"\n                value = getattr(self, dynamic_input_name, None)\n\n                # Extract simple values from connections or manual input\n                if value is not None:\n                    try:\n                        extracted_value = self._extract_simple_value(value)\n                        dynamic_values[field_name] = extracted_value\n\n                        # Determine connection type for status\n                        if hasattr(value, \"text\") and hasattr(value, \"timestamp\"):\n                            connection_info[field_name] = \"Connected (Message)\"\n                        elif hasattr(value, \"data\"):\n                            connection_info[field_name] = \"Connected (Data)\"\n                        elif isinstance(value, (str, int, float, bool, list, dict)):\n                            connection_info[field_name] = \"Manual input\"\n                        else:\n                            connection_info[field_name] = \"Connected (Object)\"\n\n                    except (AttributeError, TypeError, ValueError):\n                        # Fallback to string representation if all else fails\n                        dynamic_values[field_name] = str(value)\n                        connection_info[field_name] = \"Error\"\n                else:\n                    # Use empty default value if nothing connected\n                    dynamic_values[field_name] = \"\"\n                    connection_info[field_name] = \"Empty default\"\n\n        # Store connection info for status output\n        self._connection_info = connection_info\n        return dynamic_values\n\n    def _extract_simple_value(self, value: Any) -> Any:\n        \"\"\"Extract the simplest, most useful value from any input type.\"\"\"\n        # Handle None\n        if value is None:\n            return None\n\n        # Handle simple types directly\n        if isinstance(value, (str, int, float, bool)):\n            return value\n\n        # Handle lists and tuples - keep simple\n        if isinstance(value, (list, tuple)):\n            return [self._extract_simple_value(item) for item in value]\n\n        # Handle dictionaries - keep simple\n        if isinstance(value, dict):\n            return {str(k): self._extract_simple_value(v) for k, v in value.items()}\n\n        # Handle Message objects - extract only the text\n        if hasattr(value, \"text\"):\n            return str(value.text) if value.text is not None else \"\"\n\n        # Handle Data objects - extract the data content\n        if hasattr(value, \"data\") and value.data is not None:\n            return self._extract_simple_value(value.data)\n\n        # For any other object, convert to string\n        return str(value)\n\n    def process_form(self) -> Data:\n        \"\"\"Process all dynamic form inputs and return clean data with just field values.\"\"\"\n        # Get all dynamic values (just the key:value pairs)\n        dynamic_values = self.get_dynamic_values()\n\n        # Update status with connection info\n        connected_fields = len([v for v in getattr(self, \"_connection_info\", {}).values() if \"Connected\" in v])\n        total_fields = len(dynamic_values)\n\n        self.status = f\"Form processed successfully. {connected_fields}/{total_fields} fields connected to components.\"\n\n        # Return clean Data object with just the field values\n        return Data(data=dynamic_values)\n\n    def get_message(self) -> Message:\n        \"\"\"Return form data as a formatted text message.\"\"\"\n        # Get all dynamic values\n        dynamic_values = self.get_dynamic_values()\n\n        if not dynamic_values:\n            return Message(text=\"No form data available\")\n\n        # Format as text message\n        message_lines = [\"\ud83d\udccb Form Data:\"]\n        message_lines.append(\"=\" * 40)\n\n        for field_name, value in dynamic_values.items():\n            # Use field_name as display_name\n            display_name = field_name\n\n            message_lines.append(f\"\u2022 {display_name}: {value}\")\n\n        message_lines.append(\"=\" * 40)\n        message_lines.append(f\"Total fields: {len(dynamic_values)}\")\n\n        message_text = \"\\n\".join(message_lines)\n        self.status = f\"Message formatted with {len(dynamic_values)} fields\"\n\n        return Message(text=message_text)\n"
+      },
+      "form_fields": {
+       "_input_type": "TableInput",
+       "advanced": false,
+       "api_editable": false,
+       "display_name": "Input Configuration",
+       "dynamic": false,
+       "info": "Define the dynamic form fields. Each row creates a new input field that can connect to other components.",
+       "input_types": [
+        "DataFrame",
+        "Table"
+       ],
+       "is_list": true,
+       "list_add_label": "Add More",
+       "name": "form_fields",
+       "override_skip": false,
+       "placeholder": "",
+       "real_time_refresh": true,
+       "required": false,
+       "show": true,
+       "table_icon": "Table",
+       "table_schema": [
+        {
+         "description": "Name for the field (used as both internal name and display label)",
+         "display_name": "Field Name",
+         "name": "field_name",
+         "type": "str"
+        },
+        {
+         "description": "Type of input field to create",
+         "display_name": "Field Type",
+         "name": "field_type",
+         "options": [
+          "Text",
+          "Data",
+          "Number",
+          "Handle",
+          "Boolean"
+         ],
+         "type": "str",
+         "value": "Text"
+        }
+       ],
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": false,
+       "trigger_icon": "Table",
+       "trigger_text": "Open table",
+       "type": "table",
+       "value": []
+      },
+      "include_metadata": {
+       "_input_type": "BoolInput",
+       "advanced": true,
+       "api_editable": false,
+       "display_name": "Include Metadata",
+       "dynamic": false,
+       "info": "Include form configuration metadata in the output.",
+       "list": false,
+       "list_add_label": "Add More",
+       "name": "include_metadata",
+       "override_skip": false,
+       "placeholder": "",
+       "required": false,
+       "show": true,
+       "title_case": false,
+       "tool_mode": false,
+       "trace_as_metadata": true,
+       "track_in_telemetry": true,
+       "type": "bool",
+       "value": false
+      }
+     },
+     "tool_mode": false
+    },
     "ParserComponent": {
      "base_classes": [
       "Message"
