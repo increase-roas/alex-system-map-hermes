@@ -26,6 +26,18 @@ function position(value: unknown): { x: number; y: number } | null {
   return { x: p.x, y: p.y };
 }
 
+const MAX_JSON_DEPTH = 20;
+const MAX_JSON_ITEMS = 10_000;
+const MAX_ADDS_PER_SAVE = 100;
+
+function jsonWithin(value: unknown, depth: number, budget: { left: number }): boolean {
+  if (--budget.left < 0) return false;
+  if (value === null || typeof value !== 'object') return true;
+  if (depth <= 0) return false;
+  const items = Array.isArray(value) ? value : Object.values(value as Record<string, unknown>);
+  return items.every((item) => jsonWithin(item, depth - 1, budget));
+}
+
 /** Accepts only the edit shapes the canvas can make. Anything else is refused before it reaches the model. */
 function parseEdit(value: unknown): FlowEdit | null {
   if (!value || typeof value !== 'object') return null;
@@ -53,11 +65,15 @@ function parseEdit(value: unknown): FlowEdit | null {
   }
   if (e.kind === 'setField' && typeof e.field === 'string' && e.field.length <= 200) {
     const v = e.value;
-    if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean') {
+    // null reaches the model so it is refused with a reason and an index, like any other bad value.
+    if (typeof v === 'string' || typeof v === 'number' || typeof v === 'boolean' || v === null) {
       return { kind: 'setField', nodeId: e.nodeId, field: e.field, value: v };
     }
-    // JSON settings (dict, table): an object or a list, already parsed from the request body.
-    if (v !== null && typeof v === 'object') return { kind: 'setField', nodeId: e.nodeId, field: e.field, value: v as JsonValue };
+    // JSON settings (dict, table): an object or a list, already parsed from the request body. Bounded so
+    // deep nesting cannot exhaust the stack in clone, hash or screening.
+    if (v !== null && typeof v === 'object' && jsonWithin(v, MAX_JSON_DEPTH, { left: MAX_JSON_ITEMS })) {
+      return { kind: 'setField', nodeId: e.nodeId, field: e.field, value: v as JsonValue };
+    }
   }
   return null;
 }
@@ -105,6 +121,9 @@ export async function PATCH(request: Request, { params }: Params) {
     const parsed = parseEdit(raw);
     if (!parsed) return fail(422, 'One of the edits has an unsupported shape, so nothing was saved.');
     edits.push(parsed);
+  }
+  if (edits.filter((e) => e.kind === 'addNode').length > MAX_ADDS_PER_SAVE) {
+    return fail(422, `Add at most ${MAX_ADDS_PER_SAVE} components per save.`);
   }
   const stored = readFlow(flowId);
   if (!stored) return fail(404, 'No such flow.');

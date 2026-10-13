@@ -62,7 +62,8 @@ test('catalog: templates are fresh copies and code hashes follow the index schem
     const b = componentTemplate(cfg, 'CalculatorComponent')!;
     assert.equal((b.template as Record<string, { value: unknown }>).expression.value, '', 'editing one copy never changes the cache');
     const indexHash = (b.metadata as { code_hash: string }).code_hash;
-    assert.equal(builtinCodeHash(cfg, 'CalculatorComponent'), indexHash);
+    assert.ok(builtinCodeHash(cfg, 'CalculatorComponent')!.startsWith(indexHash), 'full sha256 whose first 12 characters are the index code_hash');
+    assert.equal(builtinCodeHash(cfg, 'CalculatorComponent')!.length, 64);
     assert.equal(componentTemplate(cfg, 'CrewAIAgentComponent'), null, 'legacy is not addable');
     assert.equal(componentTemplate(cfg, 'NoSuchComponent'), null);
   });

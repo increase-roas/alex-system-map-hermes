@@ -1,0 +1,142 @@
+Review fixes receipt. 2026-10-13. claude-opus-5-5. Reviews run by this session's project agents
+security-reviewer and correctness-reviewer (Sonnet, same Anthropic family: not the required other-family review).
+
+Security review: CRITICAL 1, HIGH 1, MEDIUM 2, LOW 3. Correctness review: HIGH 2, MEDIUM 4, LOW 3. All fixed except
+security L3 (engine error text can contain local paths; shown only to the owner, who already owns those paths) and
+correctness L9 (an invalid half-typed {variable} is refused while typing; working as designed).
+
+C1 reproduced on the real engine before the fix (scratch probe, harmless marker file):
+  A CurrentDate node whose method body also writes a marker file, run with lfx run (no Chat Input):
+    data.type "CurrentDate" (plain edit)  -> output "Current date and time in UTC: ..." and MARKER-method written.
+    data.type "note", node.type genericNode -> same output and MARKER-method-note written.
+  So code in the file runs, and the engine treats only node.type == "noteNode" as a note
+  (lfx/graph/graph/base.py line 2933). The dashboard had also skipped data.type "note": that node bypassed the gate.
+  Top-level statements after the class did not run (only the class is loaded), so the payload has to be in a method.
+Fix: a note is only node.type noteNode; a component labelled as a note is an error and blocks the run.
+H1: code check is now the full sha256 (64 hex), not the first 12 characters.
+M1: JSON settings: values under token, secret, password, api key, authorization, cookie, credential, bearer keys
+    (or table rows {"key": "Authorization", "value": ...}) are refused on edit, emptied on import (counted), shown and
+    exported as [redacted]. "Bearer <token>" added to the text screen.
+M2: setField JSON values are limited to depth 20 and 10,000 items. L2: at most 100 added components per save.
+L1: prompts are limited to 50,000 characters and 100 {variables}; variables are collected with a Set.
+Correctness H1: loop feedback accepts the loop's loop_types (Message) in the panel too.
+Correctness H2: a newer value of the same setting keeps its place in the change list (queue.ts), so a later
+    connection to a new prompt variable still follows it.
+M3: loop feedback edges are not cycles (connect order and the validator warning). M4: empty, hex, exponent and
+    boolean values are not numbers. M5: the JSON box shows the value again after an undo or a refusal.
+M6: a null value is refused with a reason and an index. L7: own-property lookups for tier tables.
+L8: switching use_double_brackets resyncs the prompt variables.
+Regression tests: app/src/lib/langflow/tests/review-fixes.test.mts (one test per finding).
+
+Unit and route tests after the fixes (live catalog included):
+✔ security C1: a real component labelled as a note is not skipped; only node.type noteNode is a note (engine rule) (8.521375ms)
+✔ security H1: the code check compares the full sha256, not a 48-bit prefix (0.086584ms)
+✔ security M1: values under secret-looking keys in JSON settings are refused, stripped on import, hidden on display and export (7.342458ms)
+✔ security M2 and L2: deeply nested JSON values and oversized add batches are refused before the model (3.440792ms)
+✔ security L1: prompts with too many variables are refused (0.434167ms)
+✔ correctness H1: a Message output can feed a loop back (loop_types), and the canvas port carries those types (0.547917ms)
+✔ correctness H2: a newer prompt value keeps its place, so a connection to its new variable still follows it (0.278375ms)
+✔ correctness M3: a loop feedback is not a cycle, whatever order the wires are made in (0.26375ms)
+✔ correctness M4: empty, hex, exponent and boolean values are not numbers (0.455792ms)
+✔ correctness M6: a null value is refused with a reason and an index, not as an unreadable batch (2.666708ms)
+✔ correctness L7: names like "constructor" are unknown, not object internals (0.0535ms)
+✔ correctness L8: switching to double brackets resyncs the prompt variables (0.267625ms)
+ℹ tests 99
+ℹ pass 99
+ℹ fail 0
+ℹ skipped 0
+
+Live engine tests after the fixes:
+PASS agentics/AgenerateComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS agentics/AMapComponent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 1
+PASS agentics/AreduceComponent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 1
+PASS custom_component/CustomComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/APIRequest: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/MockDataGenerator: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/SQLComponent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS data_source/URLComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/UnifiedWebSearch: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS files_and_knowledge/FileSystemTool: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_and_knowledge/Knowledge: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS files_and_knowledge/MemoryBase: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS files_and_knowledge/File: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_and_knowledge/SaveToFile: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS files_ingestion/FileContentRetriever: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_ingestion/FileDescriptionGeneratorComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_ingestion/MergeFlows: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS flow_controls/HumanInput: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS flow_controls/ConditionalRouter: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS flow_controls/Listen: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS flow_controls/LoopComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS flow_controls/Notify: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS flow_controls/RunFlow: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS input_output/ChatInput: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS input_output/ChatOutput: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS input_output/Webhook: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS langchain_utilities/CharacterTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/CSVAgent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 1
+PASS langchain_utilities/LangChainFakeEmbeddings: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS langchain_utilities/HtmlLinkExtractor: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/LanguageRecursiveTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/NaturalLanguageTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/OpenAIToolsAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS langchain_utilities/OpenAPIAgent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS langchain_utilities/LangChain Hub Prompt: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS langchain_utilities/RecursiveCharacterTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/RunnableExecutor: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS langchain_utilities/SemanticTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS langchain_utilities/SQLAgent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS langchain_utilities/SQLDatabase: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/ToolCallingAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS langchain_utilities/XMLAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS llm_operations/BatchRunComponent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/GuardrailValidatorV2: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/LLMSelectorComponent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 0
+PASS llm_operations/SmartRouter: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/Smart Transform: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/StructuredOutput: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS models_and_agents/A2AAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/Agent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/EmbeddingModel: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/LanguageModelComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/MCPTools: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS models_and_agents/Memory: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS models_and_agents/Prompt Template: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS processing/Operations: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS processing/DynamicCreateData: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS processing/ParserComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS processing/SplitText: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS processing/TypeConverterComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS utilities/CalculatorComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS utilities/CurrentDate: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS utilities/PythonREPLComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+SUMMARY added 63/63, validator failures 0, engine skipped level 2 (registry gap) on 63 files
+ALL-IN-ONE flow: 63 components saved, other issues: 0, L1 orphaned or unused warnings: 124, L4 empty required inputs: 62, L4 empty secret fields: 20
+PASS ChatInput: succeeded in 3s on lfx 1.12.6rc3; expected to contain "chat echo through the route"; output: chat echo through the route
+PASS ChatOutput: succeeded in 2s on lfx 1.12.6rc3; expected to contain "chat output receives it"; output: chat output receives it
+PASS CalculatorComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "14"; output: ```json { "result": "14" } ```
+PASS CurrentDate: succeeded in 2s on lfx 1.12.6rc3; expected to contain "2026"; output: Current date and time in UTC: 2026-10-13 15:57:55 UTC
+PASS MockDataGenerator: succeeded in 2s on lfx 1.12.6rc3; expected to match /^[A-Za-z][A-Za-z ,.]{39,}/; output: Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in c
+PASS ConditionalRouter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "ROUTE-TRUE"; output: ROUTE-TRUE
+PASS Notify: succeeded in 2s on lfx 1.12.6rc3; expected to contain "notify-payload"; output: notify-payload
+PASS Listen: succeeded in 2s on lfx 1.12.6rc3; expected to contain "listen-payload"; output: listen-payload
+PASS LoopComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "loop-item"; output: | text | |:----------| | loop-item |
+PASS CharacterTextSplitter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` ```json { "text": "delta" } ``` ```json { "text": "epsilon" } ``` ```json { "text": "zeta" 
+PASS RecursiveCharacterTextSplitter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` ```json { "text": "delta" } ``` ```json { "text": "epsilon" } ``` ```json { "text": "zeta" 
+PASS LanguageRecursiveTextSplitter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` ```json { "text": "delta" } ``` ```json { "text": "epsilon" } ``` ```json { "text": "zeta" 
+PASS HtmlLinkExtractor: succeeded in 2s on lfx 1.12.6rc3; expected to contain "https://example.com/page"; output: ```json { "source": "https://example.com/", "links": [ { "kind": "hyperlink", "direction": "in", "tag": "https://example.com/" }, { "kind": "hyperlink", "direct
+PASS Prompt Template: succeeded in 2s on lfx 1.12.6rc3; expected to contain "Say: prompt-var-ok"; output: Say: prompt-var-ok
+PASS DynamicCreateData: succeeded in 2s on lfx 1.12.6rc3; expected to contain "\"city\""; output: ```json { "city": "" } ```
+PASS ParserComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "Parsed: parser-input"; output: Parsed: parser-input
+PASS SplitText: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: | text | run_id | properties | category | content_blocks | duration | session_metadata | id | sender | sender_name | session_id | context_id | files | timestamp
+PASS TypeConverterComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "\"text\": \"convert-me\""; output: ```json { "text": "convert-me" } ```
+SUMMARY 18/18 enabled components produced their real output
+REFUSED NaturalLanguageTextSplitter: run HTTP 422; plan says: "Natural Language Text Splitter" (NaturalLanguageTextSplitter) is local but not enabled: Its engine package NLTK is not installed, so it failed on the real engine. It stays off rather than downloading anything.
+REFUSED Operations: run HTTP 422; plan says: "Data Operations" (Operations) is local but not enabled: Its operation picker shows its real settings only through a running Langflow server, which this build does not have. On the engine it passed the text through unchanged.
+REFUSED Memory: run HTTP 422; plan says: "Message History" (Memory) is local but not enabled: On the engine it returned an empty result for both store and retrieve, so it is not proven. Its messages live in Langflow's database.
+REFUSED LangChainFakeEmbeddings: run HTTP 422; plan says: "Fake Embeddings" (LangChainFakeEmbeddings) is local but not enabled: Its output (Embeddings) only feeds components that are show only here, so a run cannot show what it did.
+LIVE run b765966e succeeded in 3s on engine lfx 1.12.6rc3
+ℹ tests 5
+ℹ pass 5
+ℹ fail 0
+tsc --noEmit exit 0

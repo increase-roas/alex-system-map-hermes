@@ -125,7 +125,7 @@ export const LOCAL_NOT_ENABLED: Record<string, string> = {
 };
 
 export function tierOf(componentType: string): RunTier {
-  return COMPONENT_TIERS[componentType] ?? 'unknown';
+  return Object.hasOwn(COMPONENT_TIERS, componentType) ? COMPONENT_TIERS[componentType] : 'unknown';
 }
 
 export function isExecutable(componentType: string): boolean {
@@ -138,7 +138,7 @@ export function runBlockReason(componentType: string, label: string): string | n
   const tier = tierOf(componentType);
   const name = `"${label}" (${componentType || 'unknown'})`;
   if (tier === 'local') {
-    return `${name} is local but not enabled: ${LOCAL_NOT_ENABLED[componentType] ?? 'it has no live engine proof yet.'}`;
+    return `${name} is local but not enabled: ${Object.hasOwn(LOCAL_NOT_ENABLED, componentType) ? LOCAL_NOT_ENABLED[componentType] : 'it has no live engine proof yet.'}`;
   }
   return `${name} ${TIER_REASON[tier]}. Running those is off in this app: runs stay local (Alex, 2026-10-13).`;
 }

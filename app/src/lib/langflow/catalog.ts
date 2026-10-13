@@ -14,7 +14,7 @@ import type { JsonObject } from './model';
 import type { RunnerConfig } from './runner';
 import { isExecutable, LOCAL_NOT_ENABLED, tierOf, TIER_LABEL, type RunTier } from './tiers';
 
-export type CatalogPort = { name: string; label: string; types: string[]; list: boolean; loop: boolean };
+export type CatalogPort = { name: string; label: string; types: string[]; list: boolean; loop: boolean; loopTypes?: string[] };
 
 export type CatalogComponent = {
   type: string;
@@ -111,6 +111,7 @@ function portsOf(entry: IndexEntry): { outputs: CatalogPort[]; inputs: CatalogPo
       types: stringList(o.types),
       list: false,
       loop: o.allows_loop === true,
+      ...(o.allows_loop === true ? { loopTypes: stringList(o.loop_types) } : {}),
     });
   }
   const inputs: CatalogPort[] = [];
@@ -136,7 +137,7 @@ function summarize(type: string, category: string, entry: IndexEntry): CatalogCo
     beta: entry.beta === true,
     tier,
     tierLabel: runs ? 'Runs here' : tier === 'local' ? 'Local: not enabled' : TIER_LABEL[tier],
-    runNote: runs ? null : tier === 'local' ? (LOCAL_NOT_ENABLED[type] ?? 'No live engine proof yet.') : null,
+    runNote: runs ? null : tier === 'local' ? (Object.hasOwn(LOCAL_NOT_ENABLED, type) ? LOCAL_NOT_ENABLED[type] : 'No live engine proof yet.') : null,
     runs,
     ...portsOf(entry),
   };
@@ -216,7 +217,7 @@ export function componentTemplate(config: RunnerConfig, componentType: string): 
   return entry ? (structuredClone(entry) as JsonObject) : null;
 }
 
-/** sha256 of the engine's built-in code for a component, first 12 hex characters (the index's own code_hash scheme). */
+/** Full sha256 (hex) of the engine's built-in code for a component. Full length: this gates code execution. */
 export function builtinCodeHash(config: RunnerConfig, componentType: string): string | null {
   const loaded = load(config);
   if ('error' in loaded) return null;
@@ -225,7 +226,7 @@ export function builtinCodeHash(config: RunnerConfig, componentType: string): st
 }
 
 export function codeHash(code: string): string {
-  return createHash('sha256').update(code).digest('hex').slice(0, 12);
+  return createHash('sha256').update(code).digest('hex');
 }
 
 /** Human label for the engine that actually runs, e.g. "lfx 1.12.6rc3". */

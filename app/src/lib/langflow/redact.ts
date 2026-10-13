@@ -6,6 +6,7 @@ const PATTERNS: Array<[RegExp, string]> = [
   [/\beyJ[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}\.[A-Za-z0-9_-]{8,}/g, '[redacted token]'],
   [/\bsk-[A-Za-z0-9_-]{16,}/g, '[redacted key]'],
   [/\bAKIA[0-9A-Z]{16}\b/g, '[redacted key]'],
+  [/\bBearer\s+[A-Za-z0-9._~+/=-]{8,}/g, 'Bearer [redacted]'],
   [/(x-api-key|api[_-]?key|secret|token|password)(\s*[:=]\s*)["']?[^\s"',}]{6,}/gi, '$1$2[redacted]'],
 ];
 

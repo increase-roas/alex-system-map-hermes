@@ -53,6 +53,35 @@ const READ_ONLY_BY_TYPE: Record<string, string> = {
 
 export type JsonValue = string | number | boolean | null | JsonValue[] | { [key: string]: JsonValue };
 
+/** Keys whose values are treated as secrets inside JSON settings (headers, tables, dictionaries). */
+const SECRET_KEY = /authorization|cookie|token|secret|passw|api[_-]?key|private[_-]?key|credential|bearer/i;
+
+/** Calls fn on every string stored under a secret-looking key, anywhere in a JSON value. Returns the count. */
+function visitSecretValues(value: unknown, fn: (holder: Record<string, unknown>, key: string) => void): number {
+  let count = 0;
+  const walk = (v: unknown) => {
+    if (Array.isArray(v)) v.forEach(walk);
+    else if (v && typeof v === 'object') {
+      const obj = v as Record<string, unknown>;
+      // Table rows often say {"key": "Authorization", "value": "..."}: the secret is the sibling value.
+      const named = typeof obj.key === 'string' ? obj.key : typeof obj.name === 'string' ? obj.name : null;
+      for (const [k, inner] of Object.entries(obj)) {
+        const secretHere = SECRET_KEY.test(k) || (k === 'value' && named !== null && SECRET_KEY.test(named));
+        if (secretHere && typeof inner === 'string' && inner !== '' && inner !== REDACTED) {
+          fn(obj, k);
+          count += 1;
+        } else walk(inner);
+      }
+    }
+  };
+  walk(value);
+  return count;
+}
+
+function hasSecretValues(value: unknown): boolean {
+  return visitSecretValues(structuredClone(value), () => {}) > 0;
+}
+
 export type LfTemplateField = JsonObject & {
   type?: string;
   value?: unknown;
@@ -110,7 +139,7 @@ export type CanvasField = {
 };
 
 /** A connection point: an output (source) or an input field that accepts connections (target). */
-export type CanvasPort = { name: string; label: string; types: string[]; list: boolean; loop: boolean };
+export type CanvasPort = { name: string; label: string; types: string[]; list: boolean; loop: boolean; /** Extra types a loop's feedback point accepts. */ loopTypes?: string[] };
 
 export type CanvasNode = {
   id: string;
@@ -226,8 +255,14 @@ export function parseFlowInput(value: unknown): { ok: true; flow: LfFlow } | { o
   return { ok: true, flow };
 }
 
+function isNoteNode(node: LfNode): boolean {
+  return node.type === 'noteNode';
+}
+
 function componentTypeOf(node: LfNode): string {
-  if (node.type === 'noteNode' || node.data?.type === 'note') return 'note';
+  // Only node.type decides, exactly as the engine does (lfx graph/base.py skips type == "noteNode" and builds
+  // everything else). A real component whose data.type says "note" is still a component and must be gated.
+  if (isNoteNode(node)) return 'note';
   return typeof node.data?.type === 'string' ? node.data.type : '';
 }
 
@@ -305,7 +340,8 @@ function fieldsOf(node: LfNode, connected: Set<string>): CanvasField[] {
       value = null;
       summary = `${field.value.split('\n').length} lines of Python`;
     } else if (editor === 'json' || (editor === 'readonly' && (Array.isArray(field.value) || isPlainObject(field.value)))) {
-      value = (field.value ?? null) as JsonValue;
+      value = structuredClone(field.value ?? null) as JsonValue;
+      visitSecretValues(value, (holder, key) => { holder[key] = REDACTED; });
     } else value = asPrimitive(field.value);
     out.push({
       name,
@@ -341,7 +377,14 @@ function outputsOf(node: LfNode): LfOutput[] {
 function portsOf(node: LfNode): { outputs: CanvasPort[]; inputs: CanvasPort[] } {
   const outputs: CanvasPort[] = outputsOf(node)
     .filter((o) => o.hidden !== true)
-    .map((o) => ({ name: String(o.name), label: typeof o.display_name === 'string' ? o.display_name : String(o.name), types: stringList(o.types), list: false, loop: o.allows_loop === true }));
+    .map((o) => ({
+      name: String(o.name),
+      label: typeof o.display_name === 'string' ? o.display_name : String(o.name),
+      types: stringList(o.types),
+      list: false,
+      loop: o.allows_loop === true,
+      ...(o.allows_loop === true ? { loopTypes: stringList(o.loop_types) } : {}),
+    }));
   const inputs: CanvasPort[] = [];
   for (const [name, raw] of Object.entries(templateOf(node))) {
     if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
@@ -370,7 +413,7 @@ export function toCanvas(raw: LfFlow): CanvasFlow {
   const connected = connectedInputs(raw);
   const nodes: CanvasNode[] = raw.data.nodes.map((node) => {
     const componentType = componentTypeOf(node);
-    const isNote = componentType === 'note';
+    const isNote = isNoteNode(node);
     const position = node.position ?? node.positionAbsolute ?? { x: 0, y: 0 };
     return {
       id: String(node.id),
@@ -426,6 +469,9 @@ function findNode(raw: LfFlow, id: string): LfNode | undefined {
 
 function coerce(field: CanvasField, value: JsonValue): { ok: true; value: JsonValue } | { ok: false; reason: string } {
   if (field.editor === 'json') {
+    if (hasSecretValues(value)) {
+      return { ok: false, reason: `"${field.label}" holds a value under a secret-looking name (token, key, password, authorization). The dashboard never stores secrets: set it in Langflow's native editor.` };
+    }
     if (field.fieldType === 'table') {
       if (!Array.isArray(value) || !value.every((row) => isPlainObject(row))) return { ok: false, reason: `"${field.label}" takes a list of rows, like [{"name": "value"}].` };
       if (field.columns) {
@@ -439,6 +485,11 @@ function coerce(field: CanvasField, value: JsonValue): { ok: true; value: JsonVa
   }
   if (typeof value === 'object' && value !== null) return { ok: false, reason: `"${field.label}" takes a single value, not a list or object.` };
   if (value === null) return { ok: false, reason: `"${field.label}" needs a value.` };
+  const NUMERIC = /^\s*-?(\d+\.?\d*|\.\d+)\s*$/;
+  const isNumberField = field.fieldType === 'slider' || field.fieldType === 'int' || field.fieldType === 'float';
+  if (isNumberField && (typeof value === 'boolean' || (typeof value === 'string' && !NUMERIC.test(value)))) {
+    return { ok: false, reason: `"${field.label}" takes a ${field.fieldType === 'int' ? 'whole number' : 'number'}.` };
+  }
   if (field.fieldType === 'slider') {
     const n = typeof value === 'number' ? value : Number(value);
     if (!Number.isFinite(n)) return { ok: false, reason: `"${field.label}" takes a number.` };
@@ -532,6 +583,16 @@ export function applyEdits(raw: LfFlow, edits: FlowEdit[], ctx: EditContext = {}
       rejected.push({ edit, reason: `"${field.label}" must be one of: ${field.options.join(', ')}.` });
       continue;
     }
+    const promptField = Object.entries(template).find(([, f]) => (f as LfTemplateField | undefined)?.type === 'prompt');
+    if (edit.field === 'use_double_brackets' && promptField && typeof (promptField[1] as LfTemplateField).value === 'string') {
+      (rawField as LfTemplateField).value = result.value;
+      const sync = syncPromptVariables(flow, node, (promptField[1] as LfTemplateField).value as string);
+      if (sync) {
+        (rawField as LfTemplateField).value = (field.value as JsonValue);
+        rejected.push({ edit, reason: `"${label}" → ${sync}` });
+        continue;
+      }
+    }
     if (field.fieldType === 'prompt' && typeof result.value === 'string') {
       const sync = syncPromptVariables(flow, node, result.value);
       if (sync) {
@@ -546,16 +607,15 @@ export function applyEdits(raw: LfFlow, edits: FlowEdit[], ctx: EditContext = {}
 }
 
 const VARIABLE_NAME = /^[A-Za-z_][A-Za-z0-9_]*$/;
+const MAX_PROMPT_CHARS = 50_000;
+const MAX_PROMPT_VARIABLES = 100;
 
 /** The {variables} of a prompt, in order (or {{variables}} when the component uses double brackets). */
 export function promptVariables(text: string, doubleBrackets = false): string[] {
   const pattern = doubleBrackets ? /\{\{([^{}]+)\}\}/g : /(?<!\{)\{([^{}]+)\}(?!\})/g;
-  const out: string[] = [];
-  for (const m of text.matchAll(pattern)) {
-    const name = m[1].trim();
-    if (!out.includes(name)) out.push(name);
-  }
-  return out;
+  const out = new Set<string>();
+  for (const m of text.matchAll(pattern)) out.add(m[1].trim());
+  return [...out];
 }
 
 /**
@@ -566,7 +626,9 @@ export function promptVariables(text: string, doubleBrackets = false): string[] 
 function syncPromptVariables(flow: LfFlow, node: LfNode, text: string): string | null {
   const template = templateOf(node);
   const double = (template.use_double_brackets as LfTemplateField | undefined)?.value === true;
+  if (text.length > MAX_PROMPT_CHARS) return `the prompt is longer than ${MAX_PROMPT_CHARS} characters.`;
   const wanted = promptVariables(text, double);
+  if (wanted.length > MAX_PROMPT_VARIABLES) return `the prompt has more than ${MAX_PROMPT_VARIABLES} {variables}.`;
   const bad = wanted.find((v) => !VARIABLE_NAME.test(v));
   if (bad) return `"{${bad}}" is not a usable variable name: use letters, digits and _ only.`;
   const nodeData = node.data!.node!;
@@ -628,9 +690,22 @@ function disconnect(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'disconnect' }
   return flow.data.edges.length === before ? 'That connection is not in this flow.' : null;
 }
 
+/** A loop's feedback connection lands on the loop's output handle (no fieldName). It is not a cycle. */
+function isFeedbackEdge(edge: LfEdge): boolean {
+  try {
+    const t = decodeHandle(edge.targetHandle);
+    return typeof t.fieldName !== 'string' && typeof t.name === 'string';
+  } catch {
+    return false;
+  }
+}
+
 function reaches(flow: LfFlow, from: string, to: string): boolean {
   const next = new Map<string, string[]>();
-  for (const e of flow.data.edges) next.set(String(e.source), [...(next.get(String(e.source)) ?? []), String(e.target)]);
+  for (const e of flow.data.edges) {
+    if (isFeedbackEdge(e)) continue;
+    next.set(String(e.source), [...(next.get(String(e.source)) ?? []), String(e.target)]);
+  }
   const seen = new Set<string>();
   const stack = [from];
   while (stack.length) {
@@ -649,7 +724,7 @@ function connect(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'connect' }>): st
   if (!source) return `No component with id "${edit.nodeId}" in this flow.`;
   if (!target) return `No component with id "${edit.target}" in this flow.`;
   if (source === target) return 'A component cannot connect to itself.';
-  if (componentTypeOf(source) === 'note' || componentTypeOf(target) === 'note') return 'Notes cannot be connected.';
+  if (isNoteNode(source) || isNoteNode(target)) return 'Notes cannot be connected.';
   const sLabel = labelOf(source);
   const tLabel = labelOf(target);
   const output = outputsOf(source).find((o) => o.name === edit.sourceOutput && o.hidden !== true);
@@ -744,9 +819,11 @@ export function validateFlow(raw: LfFlow): Problem[] {
     }
     connectedNodes.add(String(edge.source));
     connectedNodes.add(String(edge.target));
-    const list = adjacency.get(String(edge.source)) ?? [];
-    list.push(String(edge.target));
-    adjacency.set(String(edge.source), list);
+    if (!isFeedbackEdge(edge)) {
+      const list = adjacency.get(String(edge.source)) ?? [];
+      list.push(String(edge.target));
+      adjacency.set(String(edge.source), list);
+    }
     try {
       const s = decodeHandle(edge.sourceHandle);
       const t = decodeHandle(edge.targetHandle);
@@ -771,7 +848,10 @@ export function validateFlow(raw: LfFlow): Problem[] {
   const connected = connectedInputs(raw);
   for (const node of raw.data.nodes) {
     const id = String(node.id);
-    if (componentTypeOf(node) === 'note') continue;
+    if (isNoteNode(node)) continue;
+    if (node.data?.type === 'note') {
+      problems.push({ level: 'error', nodeId: id, message: `"${id}" is labelled as a note but is a real component that the engine would run. Remove it, or export the flow from Langflow again.` });
+    }
     const label = labelOf(node);
     for (const field of fieldsOf(node, connected)) {
       if (field.required && !field.connected && field.name !== 'code' && isEmpty(field.value)) {
@@ -813,12 +893,12 @@ function hasCycle(adjacency: Map<string, string[]>): boolean {
 
 function nodeCodeHash(node: LfNode): string | null {
   const code = (templateOf(node).code as LfTemplateField | undefined)?.value;
-  return typeof code === 'string' ? createHash('sha256').update(code).digest('hex').slice(0, 12) : null;
+  return typeof code === 'string' ? createHash('sha256').update(code).digest('hex') : null;
 }
 
 /**
  * What a dashboard run would execute, and what blocks it. A component runs only when its type is enabled
- * AND its code is byte-identical to the installed engine's built-in component: the engine runs the code
+ * AND its code is byte-identical (full sha256) to the installed engine's built-in component: the engine runs the code
  * in the file, so a renamed or edited component must never pass as an enabled one.
  */
 export function executionPlan(raw: LfFlow, ctx: RunContext = {}): ExecutionPlan {
@@ -827,7 +907,7 @@ export function executionPlan(raw: LfFlow, ctx: RunContext = {}): ExecutionPlan 
   let hasChatOutput = false;
   for (const node of raw.data.nodes) {
     const componentType = componentTypeOf(node);
-    if (componentType === 'note') continue;
+    if (isNoteNode(node)) continue;
     if (componentType === 'ChatInput') hasChatInput = true;
     if (componentType === 'ChatOutput') hasChatOutput = true;
     const label = labelOf(node);
@@ -855,6 +935,8 @@ export function stripSecretsForImport(raw: LfFlow): { flow: LfFlow; removed: num
       if (field && typeof field === 'object' && (field as LfTemplateField).password === true && !isEmpty((field as LfTemplateField).value)) {
         (field as LfTemplateField).value = '';
         removed += 1;
+      } else if (field && typeof field === 'object') {
+        removed += visitSecretValues((field as LfTemplateField).value, (holder, key) => { holder[key] = ''; });
       }
     }
   }
@@ -870,6 +952,8 @@ export function redactForExport(raw: LfFlow): { flow: LfFlow; redacted: number }
       if (field && typeof field === 'object' && (field as LfTemplateField).password === true && !isEmpty((field as LfTemplateField).value)) {
         (field as LfTemplateField).value = REDACTED;
         redacted += 1;
+      } else if (field && typeof field === 'object') {
+        redacted += visitSecretValues((field as LfTemplateField).value, (holder, key) => { holder[key] = REDACTED; });
       }
     }
   }

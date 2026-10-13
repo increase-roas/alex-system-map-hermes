@@ -13,6 +13,7 @@ import '@xyflow/react/dist/style.css';
 import { Background, Controls, Handle, Position, ReactFlow, useEdgesState, useNodesState, type Connection, type Edge, type Node, type NodeProps } from '@xyflow/react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import { queueEditInto } from '@/lib/langflow/queue';
 import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, CanvasPort, ExecutionPlan, FlowEdit, JsonValue, Problem } from '@/lib/langflow/model';
 
 type Status = {
@@ -80,11 +81,6 @@ function newNodeId(componentType: string): string {
   return `${componentType}-${Array.from(bytes, (b) => chars[b % chars.length]).join('')}`;
 }
 
-function editKey(e: FlowEdit): string | null {
-  if (e.kind === 'setField') return `${e.nodeId}|${e.field}`;
-  if (e.kind === 'move' || e.kind === 'rename') return `${e.kind}|${e.nodeId}`;
-  return null; // structural edits are never merged
-}
 
 function describeEdit(e: FlowEdit, label: (id: string) => string): string {
   switch (e.kind) {
@@ -228,6 +224,11 @@ function typesMatch(out: CanvasPort, accepts: string[]): boolean {
   return accepts.includes('Any') || out.types.some((t) => accepts.includes(t));
 }
 
+/** Types a loop's feedback point accepts: its own types plus its loop types (same rule as the server). */
+function loopAccepts(p: CanvasPort): string[] {
+  return [...p.types, ...(p.loopTypes ?? [])];
+}
+
 const LangflowNode = memo(function LangflowNode({ data, selected }: NodeProps<Node<{ node: CanvasNode }>>) {
   const node = data.node;
   const shown = node.fields.filter((f) => f.value !== null && f.value !== '' && typeof f.value !== 'object' && f.name !== 'code').slice(0, 2);
@@ -278,9 +279,26 @@ const inputClass = 'w-full rounded border bg-background px-2 py-1 text-sm';
 function JsonEditor({ id, value, onChange, hint }: { id: string; value: JsonValue; onChange: (v: JsonValue) => void; hint: string }) {
   const [text, setText] = useState(() => JSON.stringify(value ?? null, null, 2));
   const [error, setError] = useState<string | null>(null);
+  const box = useRef<HTMLTextAreaElement>(null);
+  // An undo or a server refusal changes the value from outside: show it, unless the person is typing here.
+  useEffect(() => {
+    if (document.activeElement === box.current) return;
+    let same = false;
+    try {
+      same = JSON.stringify(JSON.parse(text)) === JSON.stringify(value ?? null);
+    } catch {
+      same = false;
+    }
+    if (!same) {
+      setText(JSON.stringify(value ?? null, null, 2));
+      setError(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- only an outside change of value should resync
+  }, [value]);
   return (
     <>
       <textarea
+        ref={box}
         id={id}
         className={`${inputClass} font-mono text-xs`}
         rows={Math.min(10, Math.max(3, text.split('\n').length))}
@@ -292,6 +310,10 @@ function JsonEditor({ id, value, onChange, hint }: { id: string; value: JsonValu
           setText(e.target.value);
           try {
             const parsed = JSON.parse(e.target.value) as JsonValue;
+            if (parsed === null || typeof parsed !== 'object') {
+              setError('Use a JSON object or a list. Nothing is queued until it is.');
+              return;
+            }
             setError(null);
             onChange(parsed);
           } catch {
@@ -369,7 +391,7 @@ function NodeConnections({ node, view, canEdit, onEdit }: { node: CanvasNode; vi
   const destinations = out
     ? view.nodes.filter((n) => n.id !== node.id).flatMap((n) => [
       ...n.inputs.filter((p) => typesMatch(out, p.types)).map((p) => ({ value: `${n.id}|in|${p.name}`, text: `${n.label} → ${p.label}` })),
-      ...n.outputs.filter((p) => p.loop && typesMatch(out, p.types)).map((p) => ({ value: `${n.id}|loop|${p.name}`, text: `${n.label} → ${p.label} (loop feedback)` })),
+      ...n.outputs.filter((p) => p.loop && typesMatch(out, loopAccepts(p))).map((p) => ({ value: `${n.id}|loop|${p.name}`, text: `${n.label} → ${p.label} (loop feedback)` })),
     ])
     : [];
   const chosen = destinations.find((d) => d.value === dest) ?? destinations[0];
@@ -600,11 +622,7 @@ export function LangflowPanel() {
   const queueEdit = useCallback((edit: FlowEdit) => {
     setRejections([]);
     setSaveMessage(null);
-    setPending((list) => {
-      const key = editKey(edit);
-      const without = key ? list.filter((e) => editKey(e) !== key) : list;
-      return [...without, edit];
-    });
+    setPending((list) => queueEditInto(list, edit));
   }, []);
 
   const addComponent = useCallback((item: PaletteItem) => {
@@ -632,7 +650,7 @@ export function LangflowPanel() {
     const from = portOf(c.source, c.sourceHandle);
     const to = portOf(c.target, c.targetHandle);
     if (!from?.port || from.kind !== 'out' || !to?.port) return false;
-    return typesMatch(from.port, to.port.types);
+    return typesMatch(from.port, to.kind === 'loop' ? loopAccepts(to.port) : to.port.types);
   }, [portOf]);
 
   const onConnect = useCallback((c: Connection) => {
