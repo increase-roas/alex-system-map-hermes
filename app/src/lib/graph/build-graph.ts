@@ -6,6 +6,7 @@ export type ExplorerView =
   | 'map'
   | 'pro'
   | 'flow'
+  | 'langflow'
   | 'overview'
   | 'subsystem'
   | 'problems'

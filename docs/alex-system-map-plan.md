@@ -300,3 +300,7 @@ Not blocking: who Astra is (U1); the Tailscale check (U5).
 - `MAP/docs/alex-system-map-plan.md`
 
 Both copies are identical. No app code was changed.
+
+## Langflow control dashboard (2026-10-12)
+
+Requirement and evidence checklist: `docs/LANGFLOW_DASHBOARD.md`. Status: local prototype. The pinned Langflow 1.12.5 engine run is verified (live acceptance test). Browser, phone and Tailscale checks are blocked by the sandbox port binding and an unreadable Tailscale status.

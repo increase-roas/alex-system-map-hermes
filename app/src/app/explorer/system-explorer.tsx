@@ -69,6 +69,7 @@ import { MaintainedEditPanel } from './maintained-edit-panel';
 import { WorkflowPanel } from './workflow-panel';
 import { ProMapPanel } from './pro-map-panel';
 import { FlowBuilderPanel } from './flow-builder-panel';
+import { LangflowPanel } from './langflow-panel';
 
 const elk = new ELK();
 
@@ -106,7 +107,7 @@ async function layoutTopDown(nodes: Node[], edges: { id: string; source: string;
 }
 
 const VIEW_LABEL: Partial<Record<ExplorerView, string>> = {
-  map: 'Map', pro: 'Pro Map', flow: 'Flow Builder', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
+  map: 'Map', pro: 'Pro Map', flow: 'Flow Builder', langflow: 'Langflow', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
   tracing: 'Tracing', reliability: 'Reliability', maintained: 'Maintained', live: 'Live',
 };
 
@@ -154,6 +155,7 @@ export function SystemExplorer() {
         view === 'live' ||
         view === 'pro' ||
         view === 'flow' ||
+        view === 'langflow' ||
         view === 'map'
       ) {
         return;
@@ -298,6 +300,7 @@ export function SystemExplorer() {
               'map',
               'pro',
               'flow',
+              'langflow',
               'overview',
               'subsystem',
               'files',
@@ -350,8 +353,8 @@ export function SystemExplorer() {
       )}
 
       {/* The map and live views have their own detail panels, so the side column is dropped there. */}
-      <div className={`grid min-h-0 flex-1 grid-cols-1 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' ? '' : 'lg:grid-cols-[1fr_360px]'}`}>
-        <section className={`min-h-0 border-b lg:h-auto lg:border-b-0 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' ? 'h-[85vh]' : 'h-[72vh] lg:border-r'}`}>
+      <div className={`grid min-h-0 flex-1 grid-cols-1 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' || view === 'langflow' ? '' : 'lg:grid-cols-[1fr_360px]'}`}>
+        <section className={`min-h-0 border-b lg:h-auto lg:border-b-0 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' || view === 'langflow' ? 'h-[85vh]' : 'h-[72vh] lg:border-r'}`}>
           {view === 'files' ? (
             <div className="h-full overflow-auto p-4">
               <h2 className="mb-3 font-medium">Files</h2>
@@ -407,6 +410,8 @@ export function SystemExplorer() {
             <ReliabilityPanel />
           ) : view === 'pro' ? (
             <ProMapPanel />
+          ) : view === 'langflow' ? (
+            <LangflowPanel />
           ) : view === 'flow' ? (
             <FlowBuilderPanel />
           ) : view === 'map' ? (
