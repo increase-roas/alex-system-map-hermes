@@ -50,7 +50,7 @@ Evidence: `reviews/receipts/2026-10-13-langflow-nodes/fix-everything.txt`, `engi
 - Engine drift: the venv still has lfx 1.12.6rc3 (the sandbox refused the switch). The full live suite also
   passes on a separate lfx 1.12.5 engine; code differs only for Type Convert and Data Operations. The
   validator's skipped level 2 happens on 1.12.5 too (upstream). Switching is Alex's one command, in the doc.
-- Tailnet: a write through Tailscale Serve was refused (403, Alex's Terminal). Proof that the tailnet serves the
-  new build is pending. Sending this packet to Codex: the thread is held by the Codex app. A real-device check was
+- Tailnet: done. Through Tailscale Serve the new component route answers (new build served) and a write is
+  refused with 403 (both run by Alex in his Terminal). Sending this packet to Codex: the thread is held by the Codex app. A real-device check was
   dropped by Alex (not required; the 375 px emulated check stands). See `fix-everything.txt`.
 - Not proven: whether Langflow's own server UI opens these saved flows identically (no Langflow server ran).

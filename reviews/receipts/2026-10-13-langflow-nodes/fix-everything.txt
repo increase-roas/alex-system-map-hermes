@@ -37,3 +37,15 @@ Update (Alex, in his own Terminal outside the sandbox, after this receipt was wr
   Proves: a dry-run edit through Tailscale Serve is refused. Does not prove which refusal ("Tailnet access is
   read-only" vs "local access only", body not shown) or that the 3200 server runs the new build.
   Next check (not yet run): GET /api/langflow/components through the same URL; "count":63 proves the new build.
+
+Update 2 (Alex, own Terminal, 2026-10-13):
+  curl -s https://alexs-macbook-pro.tailde26a1.ts.net/api/langflow/components | head -c 160
+  -> {"engine":{"lfxVersion":"1.12.6rc3","langflowVersion":"1.12.5","indexSha256":"73e4713a81f27c5f72931f263a3eee0c38690efd48cd99236bc526178c8eb24a"},"totalInIndex":...
+  Proves: the tailnet (Tailscale Serve -> 127.0.0.1:3200) serves the new build (this route was added in 8fcf028)
+  and a tailnet read is allowed, while the earlier tailnet PATCH dry run got 403: read-only holds end to end.
+  The indexSha256 equals the sha256 of the installed engine's component_index.json (checked on this Mac).
+  The response carries versions and a hash only, no paths or secrets.
+  Item 6: DONE.
+  Side note: an earlier "!curl" typed in Terminal triggered zsh history expansion and re-ran the Composio
+  installer with a bad argument; it stopped at its version check. Composio CLI afterwards: 0.4.2, link dated
+  Sep 30 (unchanged).
