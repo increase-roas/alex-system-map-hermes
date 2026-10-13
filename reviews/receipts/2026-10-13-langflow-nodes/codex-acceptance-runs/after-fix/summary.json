@@ -1,0 +1,60 @@
+[
+  {
+    "script": "canonical_edit_sync_acceptance",
+    "command": "python3 -B tools/canonical_edit_sync_acceptance.py",
+    "exit_code": 1,
+    "seconds": 100.1,
+    "summary": {
+      "overall": "failed",
+      "run_id": "0dab6372-b750-4fd9-a593-e3e0f7eb515c",
+      "failures": [
+        "browser_ui"
+      ]
+    },
+    "error_tail": null
+  },
+  {
+    "script": "recovery_emitted_screening_acceptance",
+    "command": "python3 -B tools/recovery_emitted_screening_acceptance.py",
+    "exit_code": 0,
+    "seconds": 12.0,
+    "summary": {
+      "overall": "passed",
+      "delivery_id": "recovery-emitted-screening-20261010-0722",
+      "run_id": "1df77eff-0aab-4c70-b689-a1dd18c3ef59",
+      "failures": [],
+      "immutable_content_sha256": "a0ace73191e3618434177d14749f5411b2c2b74892995d3a24318b10fab95c50"
+    },
+    "error_tail": null
+  },
+  {
+    "script": "maintained_edit_cas_acceptance",
+    "command": "python3 -B tools/maintained_edit_cas_acceptance.py",
+    "exit_code": 1,
+    "seconds": 16.5,
+    "summary": {
+      "overall": "failed",
+      "delivery_id": "maintained-edit-cas-20261010-0844",
+      "run_id": "3a5fab81-5ded-4e85-ad24-76a4fb59b7c8",
+      "failures": [
+        "browser_ui"
+      ],
+      "immutable_content_sha256": "e9cc8b4148139c0f3e78b836c8abd112564770a7ca9eceaaa4bb078023df9826"
+    },
+    "error_tail": null
+  },
+  {
+    "script": "recovery_screening_real_paths_acceptance",
+    "command": "python3 -B tools/recovery_screening_real_paths_acceptance.py",
+    "exit_code": 0,
+    "seconds": 10.2,
+    "summary": {
+      "overall": "passed",
+      "delivery_id": "recovery-screening-real-paths-20261010-0738",
+      "run_id": "4164e136-7889-48d1-b700-adf0e2dd3ef8",
+      "failures": [],
+      "immutable_content_sha256": "9ea329a15f6a4c5616188e6efd96f7c25521e0fd5030fcf7508b1b00a2cc3fb4"
+    },
+    "error_tail": null
+  }
+]

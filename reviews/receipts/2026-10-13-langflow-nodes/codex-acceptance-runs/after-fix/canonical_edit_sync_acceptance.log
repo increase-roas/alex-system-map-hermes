@@ -1,0 +1,38 @@
+{
+  "applied_at": "2026-10-13T18:24:08+00:00",
+  "path": "data/components.json",
+  "record_id": "component_6f112167c8a413f0f3ab",
+  "operation_id": "conc-a-198058",
+  "mutation_digest": "e9579df5894d7471b20a0a29d325bfe19cc9abbe0c05dec48382f089315acb9b",
+  "backup": "app/.data/catalog-backups/components.json.f769f32bae5c.bak",
+  "before_sha256": "f769f32bae5cda948fee4e244a1c353f56c353ce0076c9d2dc7a95677b8b0cf9",
+  "after_sha256": "164a970c156848b5ed00ebf197e95e49a8d38cd5c5863f0abdf05e0677e94aba",
+  "revision": 1,
+  "derived": {
+    "catalog_root": "/Users/alexlobaito/Projects/system-map-ir-acceptance/app/.data/canonical-edit-sync-20261010-0913/catalog-clone",
+    "table": "data/components.json",
+    "record_id": "component_6f112167c8a413f0f3ab",
+    "drive_publication": "local-only; not registered Drive update",
+    "xlsx_sha256": "ddea7c4389481cc2d189788d6f4022de76798a4d8b02ef5b0d49bf97ff319956",
+    "xlsx_path": "views/Alex_System_Foundation.xlsx",
+    "component_index_sha256": "30a44242a24b0fd3973cea5db69555a394cf5db7e71b333f3db140e2b76b25d9",
+    "component_markdown_path": "components/component_6f112167c8a413f0f3ab.md",
+    "component_markdown_sha256": "42d1155e3f5680f8cf576723e313d142631ffe083aff26e6a49d5747a19590d0",
+    "component_markdown_bytes": 802,
+    "overview_sha256": "a0ee4c5589308cbe90413cf3f010fec4d71e43492bb7a2b1a9f3d3c8e1587f1b"
+  },
+  "diagnostic_marker": "LOCAL-SCREENING-OK",
+  "screening_notes": []
+}
+{
+  "error": "revision must be exactly 2",
+  "screening_notes": [],
+  "diagnostic_marker": "LOCAL-SCREENING-OK"
+}
+{
+  "overall": "failed",
+  "run_id": "0dab6372-b750-4fd9-a593-e3e0f7eb515c",
+  "failures": [
+    "browser_ui"
+  ]
+}

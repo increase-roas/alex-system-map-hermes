@@ -1,0 +1,69 @@
+ACCEPTANCE GATE CODEX RESULT: PASS
+Date: 2026-10-13
+Environment: Codex CLI 0.160.0; Codex host execution, danger-full-access, no filesystem sandbox; approval policy never.
+Host: Darwin arm64; Python 3.14.6; Node v26.7.0; installed Next.js 15.5.25.
+Worktree: /Users/alexlobaito/Projects/system-map-ir-acceptance
+Branch: acceptance-gate-fix
+Base commit tested unchanged: 2908d190b6fe536410aeeeff00f43a198d57e394
+Product commit tested: 01f2f616cdd1f80fbb5f0054681e9a6b9d73c430
+All final runs used the exact product bytes subsequently committed above.
+No test scripts, browser acceptance helpers, thresholds, expected values or acceptance predicates were changed.
+
+INITIAL UNCHANGED RUNS
+python3 -B tools/canonical_edit_sync_acceptance.py
+exit_code=1; failures=["clone_manifest", "browser_ui"]
+python3 -B tools/recovery_emitted_screening_acceptance.py
+exit_code=1; failures=["browser_recovery"]
+python3 -B tools/maintained_edit_cas_acceptance.py
+exit_code=1; failures=["browser_ui"]
+python3 -B tools/recovery_screening_real_paths_acceptance.py
+exit_code=1; failures=["browser_required_overall", "exit_value_1", "summarize_negative_controls_baseline"]
+
+FINAL RUNS
+python3 -B tools/canonical_edit_sync_acceptance.py
+exit_code=0; failures=[]; elapsed_seconds=46.7; run_id=3353cb13-1a29-4efa-9792-469980be23aa
+python3 -B tools/recovery_emitted_screening_acceptance.py
+exit_code=0; failures=[]; elapsed_seconds=12.6; run_id=64a9102f-7149-4667-870b-714c1932d078
+python3 -B tools/maintained_edit_cas_acceptance.py
+exit_code=0; failures=[]; elapsed_seconds=17.1; run_id=372ada8d-15e8-44da-aa0c-9687282e6cac
+python3 -B tools/recovery_screening_real_paths_acceptance.py
+exit_code=0; failures=[]; elapsed_seconds=12.3; run_id=44d73c87-6e0f-466a-abcf-77f63cd72930
+
+CHANGES AND CAUSES
+1. system-explorer.tsx: restored stable accessible names for the Maintained and Workflows navigation buttons. Existing browser clients could not find the renamed controls. Visual labels are preserved.
+2. catalog_fixture_clone.py: restored copy_hashes_at_clone from actual cloned file content. Existing canonical-edit consumers require these per-file hashes alongside the newer full-tree reconciliation. No clone validation was removed.
+3. maintained-edit-panel.tsx: removed draft/preview state from refresh callback identity. Those changes formerly retriggered the forced target reload and discarded the draft/preview. Current guards are read from a ref.
+4. Restored backend-allowlisted staging document path, label and note controls. Staging requests increment the document revision, as required by the existing compare-and-swap validator. Target changes clear stale state and previews.
+5. Editable path remains visible text and an editable textbox, preserving both existing browser contracts. Path is committed on blur; backend allowlisting remains authoritative.
+
+ADDITIONAL CHECKS
+TypeScript: node node_modules/typescript/bin/tsc --noEmit --incremental false (from app), exit 0.
+git diff --check: exit 0.
+Acceptance scripts and browser helpers match base unchanged (git diff --exit-code over tools/*acceptance* and tools/browser_*).
+Live Chrome check: catalog and metadata path text checks pass; staging path can be filled; label/note controls visible. Screenshot inspected.
+Proof: codex-acceptance-runs/commit-check/ui-compatibility.json and maintained-editor.png.
+Original dev server preserved: PID 84229 still listening on 127.0.0.1:3200. No stop/restart or build in its app/.next.
+Only isolated worktree builds and test servers were used. app/node_modules links to the already installed original dependencies; no package install.
+
+EVIDENCE
+Initial commands/results: codex-acceptance-runs/summary.json and matching .log files.
+Intermediate diagnostic results: codex-acceptance-runs/after-fix, final, verified. The directory named final was an intermediate run; commit-check is authoritative.
+Final commands/results: codex-acceptance-runs/commit-check/summary.json and matching .log files.
+Pre-edit backups: codex-acceptance-runs/backups (local, not committed).
+Generated runtime reports, isolated databases and caches remain local evidence and are not included in the product commit.
+
+REVIEW PACKET
+Task: Alex four non-waived acceptance gates. Executor: Codex, GPT-6 family.
+Acceptance: each of the four original commands exits 0 with empty failures, unchanged checks, isolated branch, dev server untouched. All observed locally.
+Independent other-family review / Director verification: not claimed. This file is the handoff packet; no outside messages sent.
+No push, deploy, spend, external settings/permission changes or protected-folder edits.
+Needs Alex: nothing to run these four gates. Changes remain on acceptance-gate-fix for the existing review/integration process.
+
+SOURCE HASHES
+fc8061d1cc33bd83b10bf5246c90b6be90b7e94e494305c4909ac583a134470e  app/src/app/explorer/maintained-edit-panel.tsx
+c6b6df8dde3ae69dca75e9b9673b0efae01853ef59a1b4f081afd4677dc6fea9  app/src/app/explorer/system-explorer.tsx
+fd76d29b63a3d0f6ff124fab399ff70e40d36d520f77584c1110a95974029dad  tools/catalog_fixture_clone.py
+2132d4c0bada4c9b22c8d24fa10af80d6b3930e257b7773df185d2bde5a6cf93  tools/canonical_edit_sync_acceptance.py
+8829d8175ba1276a887c61bb656f30e82436de912e9cb82049a8b56fc18c8cca  tools/recovery_emitted_screening_acceptance.py
+879d6216c89a223380bc15d6b1aca2b0297ee169d4dd7ddc9089a8260c24ee7f  tools/maintained_edit_cas_acceptance.py
+e1172a9432e5965def1160b037ba73b4be2749b1e1ea0858e6d9d5bf44c1c0d2  tools/recovery_screening_real_paths_acceptance.py

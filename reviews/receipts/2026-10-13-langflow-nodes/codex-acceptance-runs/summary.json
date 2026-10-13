@@ -1,0 +1,67 @@
+[
+  {
+    "script": "canonical_edit_sync_acceptance",
+    "command": "python3 -B tools/canonical_edit_sync_acceptance.py",
+    "exit_code": 1,
+    "seconds": 77.2,
+    "summary": {
+      "overall": "failed",
+      "run_id": "1ce4e103-eadb-4a4f-b57b-4a64f5fa8a76",
+      "failures": [
+        "clone_manifest",
+        "browser_ui"
+      ]
+    },
+    "error_tail": null
+  },
+  {
+    "script": "recovery_emitted_screening_acceptance",
+    "command": "python3 -B tools/recovery_emitted_screening_acceptance.py",
+    "exit_code": 1,
+    "seconds": 39.9,
+    "summary": {
+      "overall": "partial",
+      "delivery_id": "recovery-emitted-screening-20261010-0722",
+      "run_id": "ba860c5e-13c9-4888-a79c-b1ff7a78b333",
+      "failures": [
+        "browser_recovery"
+      ],
+      "immutable_content_sha256": "0711ab5825c618381cc3ad30e4a3c834b7b1f9862f2aa99c0a200642a9ee8d05"
+    },
+    "error_tail": null
+  },
+  {
+    "script": "maintained_edit_cas_acceptance",
+    "command": "python3 -B tools/maintained_edit_cas_acceptance.py",
+    "exit_code": 1,
+    "seconds": 47.1,
+    "summary": {
+      "overall": "failed",
+      "delivery_id": "maintained-edit-cas-20261010-0844",
+      "run_id": "1b1ae4b2-018f-415c-bc88-47ffa366dd0b",
+      "failures": [
+        "browser_ui"
+      ],
+      "immutable_content_sha256": "2e2557e55ce8a1f6240f51c32eb150bc13d2ab1c748e8897fcdcbf6993e04c4e"
+    },
+    "error_tail": null
+  },
+  {
+    "script": "recovery_screening_real_paths_acceptance",
+    "command": "python3 -B tools/recovery_screening_real_paths_acceptance.py",
+    "exit_code": 1,
+    "seconds": 39.3,
+    "summary": {
+      "overall": "failed",
+      "delivery_id": "recovery-screening-real-paths-20261010-0738",
+      "run_id": "0f7f97c1-6d0a-4d2c-bc92-e78d7038784d",
+      "failures": [
+        "browser_required_overall",
+        "exit_value_1",
+        "summarize_negative_controls_baseline"
+      ],
+      "immutable_content_sha256": "4c860e71f16fe25911b12bdbc8db158c7f3cdec74365ac1d25a9b3b1f6753de0"
+    },
+    "error_tail": null
+  }
+]
