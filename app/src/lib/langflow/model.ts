@@ -112,7 +112,19 @@ export type CanvasFlow = {
 export type FlowEdit =
   | { kind: 'move'; nodeId: string; position: { x: number; y: number } }
   | { kind: 'setField'; nodeId: string; field: string; value: string | number | boolean }
-  | { kind: 'rename'; nodeId: string; label: string };
+  | { kind: 'rename'; nodeId: string; label: string }
+  | { kind: 'addNode'; nodeId: string; componentType: string; position: { x: number; y: number } };
+
+/** What applyEdits needs from the engine. Server side it is backed by catalog.ts. */
+export type EditContext = {
+  /** A fresh copy of the engine's node template for a current component, or null when it is not offered. */
+  template?: (componentType: string) => JsonObject | null;
+};
+
+/** Langflow's own id style for a new component: "<Type>-<5 letters or digits>". */
+export function newNodeIdPattern(componentType: string): RegExp {
+  return new RegExp(`^${componentType.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-[A-Za-z0-9]{5}$`);
+}
 
 export type EditRejection = { edit: FlowEdit; reason: string };
 
@@ -182,7 +194,10 @@ function asPrimitive(value: unknown): string | number | boolean | null {
 
 function labelOf(node: LfNode): string {
   const display = node.data?.display_name;
-  return typeof display === 'string' && display.trim() ? display : componentTypeOf(node) || node.id;
+  if (typeof display === 'string' && display.trim()) return display;
+  const fromTemplate = node.data?.node?.display_name;
+  if (typeof fromTemplate === 'string' && fromTemplate.trim()) return fromTemplate;
+  return componentTypeOf(node) || node.id;
 }
 
 function fieldsOf(node: LfNode, connected: Set<string>): CanvasField[] {
@@ -299,11 +314,17 @@ function coerce(field: CanvasField, value: string | number | boolean): { ok: tru
 }
 
 /** Applies supported edits to a copy of the flow. Unknown fields and metadata pass through untouched. */
-export function applyEdits(raw: LfFlow, edits: FlowEdit[]): { flow: LfFlow; applied: number; rejected: EditRejection[] } {
+export function applyEdits(raw: LfFlow, edits: FlowEdit[], ctx: EditContext = {}): { flow: LfFlow; applied: number; rejected: EditRejection[] } {
   const flow = structuredClone(raw) as LfFlow;
   const rejected: EditRejection[] = [];
   let applied = 0;
   for (const edit of edits) {
+    if (edit.kind === 'addNode') {
+      const reason = addNode(flow, edit, ctx);
+      if (reason) rejected.push({ edit, reason });
+      else applied += 1;
+      continue;
+    }
     const node = findNode(flow, edit.nodeId);
     if (!node) {
       rejected.push({ edit, reason: `No component with id "${edit.nodeId}" in this flow.` });
@@ -366,8 +387,29 @@ export function applyEdits(raw: LfFlow, edits: FlowEdit[]): { flow: LfFlow; appl
   return { flow, applied, rejected };
 }
 
+function addNode(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'addNode' }>, ctx: EditContext): string | null {
+  const { x, y } = edit.position;
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return 'A new component needs a finite position.';
+  const template = ctx.template?.(edit.componentType) ?? null;
+  if (!template) return `"${edit.componentType}" is not a current component of the installed engine, so it cannot be added.`;
+  if (!newNodeIdPattern(edit.componentType).test(edit.nodeId)) {
+    return `The new component id must look like "${edit.componentType}-" plus 5 letters or digits.`;
+  }
+  if (findNode(flow, edit.nodeId)) return `The id "${edit.nodeId}" is already used in this flow.`;
+  flow.data.nodes.push({
+    id: edit.nodeId,
+    type: 'genericNode',
+    position: { x, y },
+    data: { id: edit.nodeId, type: edit.componentType, node: template, showNode: template.minimized !== true },
+  });
+  return null;
+}
+
 export function validateFlow(raw: LfFlow): Problem[] {
   const problems: Problem[] = [];
+  if (typeof raw.id !== 'string' || !raw.id) {
+    problems.push({ level: 'warning', message: "The flow has no top-level id, so Langflow's own validator will refuse it. Export it from Langflow again to get one." });
+  }
   const ids = new Set<string>();
   for (const node of raw.data.nodes) {
     const id = typeof node.id === 'string' ? node.id : '';

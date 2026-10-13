@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next';
 
 const nextConfig: NextConfig = {
+  // NEXT_DIST_DIR lets a check build or serve into its own folder (for example .next-verify), so it never
+  // overwrites the .next folder of a dev server that is already running from this checkout.
+  distDir: process.env.NEXT_DIST_DIR || '.next',
   eslint: { ignoreDuringBuilds: true },
   productionBrowserSourceMaps: true,
   async redirects() {

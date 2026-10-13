@@ -44,7 +44,140 @@ type RunRecord = {
   startedAt: string;
   finishedAt: string | null;
 };
-type Rejection = { kind: string; nodeId: string; reason: string };
+type Rejection = { kind: string; nodeId: string; reason: string; index?: number };
+type PaletteItem = {
+  type: string;
+  displayName: string;
+  category: string;
+  description: string;
+  tier: string;
+  tierLabel: string;
+  runs: boolean;
+  runNote: string | null;
+};
+type Catalog = { engine: { lfxVersion: string; langflowVersion: string | null }; count: number; components: PaletteItem[] };
+type Preview = { canvas: CanvasFlow; problems: Problem[]; plan: ExecutionPlan };
+
+const CATEGORY_LABEL: Record<string, string> = {
+  agentics: 'Agentics',
+  custom_component: 'Custom',
+  data_source: 'Data sources',
+  files_and_knowledge: 'Files and knowledge',
+  files_ingestion: 'File ingestion',
+  flow_controls: 'Flow controls',
+  input_output: 'Input and output',
+  langchain_utilities: 'LangChain utilities',
+  llm_operations: 'LLM operations',
+  models_and_agents: 'Models and agents',
+  processing: 'Processing',
+  utilities: 'Utilities',
+};
+
+function newNodeId(componentType: string): string {
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  const bytes = new Uint8Array(5);
+  crypto.getRandomValues(bytes);
+  return `${componentType}-${Array.from(bytes, (b) => chars[b % chars.length]).join('')}`;
+}
+
+function editKey(e: FlowEdit): string | null {
+  if (e.kind === 'setField') return `${e.nodeId}|${e.field}`;
+  if (e.kind === 'move' || e.kind === 'rename') return `${e.kind}|${e.nodeId}`;
+  return null; // structural edits are never merged
+}
+
+function describeEdit(e: FlowEdit, label: (id: string) => string): string {
+  switch (e.kind) {
+    case 'move': return `Move ${label(e.nodeId)}`;
+    case 'rename': return `Rename ${label(e.nodeId)}`;
+    case 'setField': return `Set "${e.field}" on ${label(e.nodeId)}`;
+    case 'addNode': return `Add ${label(e.nodeId)}`;
+    default: return 'Change';
+  }
+}
+
+/** Searchable component list. Arrow keys move between items, Enter or click adds, Escape returns to the search box. */
+function Palette({ catalog, disabled, onAdd }: { catalog: Catalog; disabled: boolean; onAdd: (item: PaletteItem) => void }) {
+  const [query, setQuery] = useState('');
+  const listRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const q = query.trim().toLowerCase();
+  const matches = catalog.components.filter((c) => !q || `${c.displayName} ${c.type} ${c.category} ${c.description}`.toLowerCase().includes(q));
+  const groups = new Map<string, PaletteItem[]>();
+  for (const c of matches) groups.set(c.category, [...(groups.get(c.category) ?? []), c]);
+  const items = () => Array.from(listRef.current?.querySelectorAll<HTMLButtonElement>('[data-palette-item]') ?? []);
+  const onListKey = (e: React.KeyboardEvent) => {
+    const all = items();
+    const at = all.indexOf(document.activeElement as HTMLButtonElement);
+    if (e.key === 'ArrowDown' || e.key === 'ArrowUp') {
+      e.preventDefault();
+      const next = e.key === 'ArrowDown' ? Math.min(all.length - 1, at + 1) : at - 1;
+      if (next < 0) searchRef.current?.focus();
+      else all[next]?.focus();
+    } else if (e.key === 'Home') {
+      e.preventDefault();
+      all[0]?.focus();
+    } else if (e.key === 'End') {
+      e.preventDefault();
+      all[all.length - 1]?.focus();
+    } else if (e.key === 'Escape') {
+      e.preventDefault();
+      searchRef.current?.focus();
+    }
+  };
+  return (
+    <div className="space-y-2">
+      <input
+        ref={searchRef}
+        type="search"
+        aria-label="Search components"
+        aria-describedby="lf-palette-count"
+        placeholder="Search components, for example split or date"
+        className="w-full rounded border bg-background px-2 py-1 text-sm"
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'ArrowDown') {
+            e.preventDefault();
+            items()[0]?.focus();
+          } else if (e.key === 'Enter' && matches.length === 1 && !disabled) {
+            e.preventDefault();
+            onAdd(matches[0]);
+          }
+        }}
+      />
+      <p id="lf-palette-count" aria-live="polite" className="text-[11px] text-muted-foreground">
+        {matches.length} of {catalog.count} components from engine lfx {catalog.engine.lfxVersion}.{disabled ? ' Adding is off: changes stay with the owner on the Mac.' : ' Enter or click adds one to the flow.'}
+      </p>
+      <div ref={listRef} onKeyDown={onListKey} className="max-h-64 space-y-2 overflow-y-auto pr-1" data-testid="lf-palette">
+        {[...groups.entries()].map(([category, list]) => (
+          <section key={category} aria-label={CATEGORY_LABEL[category] ?? category}>
+            <h3 className="sticky top-0 bg-background py-0.5 text-[11px] font-semibold uppercase tracking-wide text-muted-foreground">{CATEGORY_LABEL[category] ?? category}</h3>
+            <ul className="grid gap-1 sm:grid-cols-2">
+              {list.map((c) => (
+                <li key={c.type}>
+                  <button
+                    type="button"
+                    data-palette-item
+                    disabled={disabled}
+                    title={c.description}
+                    aria-label={`Add ${c.displayName}. ${c.tierLabel}.`}
+                    className="flex w-full items-center justify-between gap-2 rounded border px-2 py-1.5 text-left text-xs hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+                    onClick={() => onAdd(c)}
+                  >
+                    <span className="truncate font-medium">{c.displayName}</span>
+                    <span className={`shrink-0 text-[10px] ${c.runs ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground'}`}>{c.tierLabel}</span>
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))}
+        {matches.length === 0 ? <p className="text-xs text-muted-foreground">No component matches &quot;{query}&quot;.</p> : null}
+      </div>
+    </div>
+  );
+}
 
 const SESSION_KEY = 'langflow-browser-session';
 const STATUS_LABEL: Record<RunRecord['status'], string> = {
@@ -151,6 +284,12 @@ export function LangflowPanel() {
   const [runMessage, setRunMessage] = useState<string | null>(null);
   const [runBlockers, setRunBlockers] = useState<string[]>([]);
   const [importMessage, setImportMessage] = useState<string | null>(null);
+  const [catalog, setCatalog] = useState<Catalog | null>(null);
+  const [catalogError, setCatalogError] = useState<string | null>(null);
+  const [paletteOpen, setPaletteOpen] = useState(false);
+  const [preview, setPreview] = useState<Preview | null>(null);
+  const [previewing, setPreviewing] = useState(false);
+  const previewSeq = useRef(0);
   const session = useRef<string>('');
   const flowsRequested = useRef(false);
   const importInput = useRef<HTMLInputElement>(null);
@@ -198,6 +337,17 @@ export function LangflowPanel() {
     void loadFlows();
   }, [loadFlows]);
 
+  const showCanvas = useCallback((canvas: CanvasFlow) => {
+    setNodes(canvas.nodes.map((n) => ({ id: n.id, type: 'lf', position: n.position, data: { node: n } })));
+    setEdges(canvas.edges.map((e: CanvasEdge) => ({
+      id: e.id,
+      source: e.source,
+      target: e.target,
+      label: e.sourceOutput && e.targetInput ? `${e.sourceOutput} → ${e.targetInput}` : undefined,
+      style: e.decodeError ? { stroke: '#dc2626', strokeDasharray: '4 4' } : undefined,
+    })));
+  }, [setEdges, setNodes]);
+
   const loadDetail = useCallback(async (id: string) => {
     const r = await api<Detail>(`/api/langflow/flows/${encodeURIComponent(id)}`, {}, token);
     if (!r.ok) {
@@ -211,15 +361,9 @@ export function LangflowPanel() {
     setRejections([]);
     setConflict(false);
     setSelectedNode(null);
-    setNodes(r.data.canvas.nodes.map((n) => ({ id: n.id, type: 'lf', position: n.position, data: { node: n } })));
-    setEdges(r.data.canvas.edges.map((e: CanvasEdge) => ({
-      id: e.id,
-      source: e.source,
-      target: e.target,
-      label: e.sourceOutput && e.targetInput ? `${e.sourceOutput} → ${e.targetInput}` : undefined,
-      style: e.decodeError ? { stroke: '#dc2626', strokeDasharray: '4 4' } : undefined,
-    })));
-  }, [setEdges, setNodes, token]);
+    setPreview(null);
+    showCanvas(r.data.canvas);
+  }, [showCanvas, token]);
 
   // Run history belongs to the owner: without the local token the server returns none, so the token is sent.
   const loadRuns = useCallback(async (id: string, tok: string | null) => {
@@ -237,27 +381,88 @@ export function LangflowPanel() {
   }, [selectedId, token, loadRuns]);
 
   useEffect(() => {
+    if (!accessReady) return;
+    let cancelled = false;
+    void api<Catalog>('/api/langflow/components', {}, token).then((r) => {
+      if (cancelled) return;
+      if (r.ok) setCatalog(r.data);
+      else setCatalogError(r.error);
+    });
+    return () => { cancelled = true; };
+  }, [accessReady, token]);
+
+  // Unsaved changes are previewed by the server with the same rules as a save (dry run, nothing written).
+  // An edit the server refuses is taken back out of the list, with its reason shown.
+  useEffect(() => {
+    if (!detail || !token || !canSave) return;
+    const seq = ++previewSeq.current;
+    if (pending.length === 0) {
+      setPreview(null);
+      showCanvas(detail.canvas);
+      return;
+    }
+    setPreviewing(true);
+    void api<Preview & { applied: number }>(
+      `/api/langflow/flows/${encodeURIComponent(detail.id)}`,
+      { method: 'PATCH', body: JSON.stringify({ expectedHash: detail.hash, edits: pending, dryRun: true }) },
+      token,
+    ).then((r) => {
+      if (seq !== previewSeq.current) return;
+      setPreviewing(false);
+      if (r.ok) {
+        setPreview(r.data);
+        showCanvas(r.data.canvas);
+        return;
+      }
+      if (r.status === 409) {
+        setConflict(true);
+        setSaveMessage(r.error);
+        return;
+      }
+      const list = Array.isArray(r.body.rejected) ? (r.body.rejected as Rejection[]) : [];
+      if (list.length) {
+        const drop = new Set(list.map((x) => x.index).filter((i): i is number => typeof i === 'number'));
+        setRejections(list);
+        setSaveMessage('That change is not allowed, so it was taken back out. The reason is below.');
+        setPending((cur) => (cur === pending ? cur.filter((_, i) => !drop.has(i)) : cur));
+      } else {
+        setSaveMessage(r.error);
+      }
+    });
+  }, [pending, detail, token, canSave, showCanvas]);
+
+  useEffect(() => {
     if (!selectedId || !hasRunning) return;
     const timer = window.setInterval(() => void loadRuns(selectedId, token), 2000);
     return () => window.clearInterval(timer);
   }, [selectedId, hasRunning, loadRuns, token]);
 
   const queueEdit = useCallback((edit: FlowEdit) => {
+    setRejections([]);
+    setSaveMessage(null);
     setPending((list) => {
-      const key = edit.kind === 'setField' ? `${edit.nodeId}|${edit.field}` : `${edit.kind}|${edit.nodeId}`;
-      const without = list.filter((e) => {
-        const k = e.kind === 'setField' ? `${e.nodeId}|${e.field}` : `${e.kind}|${e.nodeId}`;
-        return k !== key;
-      });
+      const key = editKey(edit);
+      const without = key ? list.filter((e) => editKey(e) !== key) : list;
       return [...without, edit];
     });
   }, []);
+
+  const addComponent = useCallback((item: PaletteItem) => {
+    const shown = preview?.canvas.nodes ?? detail?.canvas.nodes ?? [];
+    const maxX = shown.reduce((m, n) => Math.max(m, n.position.x), -320);
+    const minY = shown.reduce((m, n) => Math.min(m, n.position.y), Number.POSITIVE_INFINITY);
+    const nodeId = newNodeId(item.type);
+    queueEdit({ kind: 'addNode', nodeId, componentType: item.type, position: { x: maxX + 320, y: Number.isFinite(minY) ? minY : 0 } });
+    setSelectedNode(nodeId);
+  }, [detail, preview, queueEdit]);
 
   const onNodeDragStop = useCallback((_: unknown, node: Node) => {
     queueEdit({ kind: 'move', nodeId: node.id, position: { x: node.position.x, y: node.position.y } });
   }, [queueEdit]);
 
-  const selected: CanvasNode | undefined = useMemo(() => detail?.canvas.nodes.find((n) => n.id === selectedNode), [detail, selectedNode]);
+  const view: CanvasFlow | undefined = preview?.canvas ?? detail?.canvas;
+  const selected: CanvasNode | undefined = useMemo(() => view?.nodes.find((n) => n.id === selectedNode), [view, selectedNode]);
+  const labelFor = (id: string) => view?.nodes.find((n) => n.id === id)?.label ?? detail?.canvas.nodes.find((n) => n.id === id)?.label ?? id;
 
   const valueOf = (field: CanvasField): string | number | boolean | null => {
     const edit = pending.find((e) => e.kind === 'setField' && e.nodeId === selectedNode && e.field === field.name);
@@ -341,6 +546,8 @@ export function LangflowPanel() {
     if (detail) await loadRuns(detail.id, token);
   };
 
+  const problems = preview?.problems ?? detail?.problems;
+
   const flowOptions = flows.map((f) => (
     <option key={f.id} value={f.id}>{f.name}</option>
   ));
@@ -380,6 +587,15 @@ export function LangflowPanel() {
         {loadError ? <p role="alert" className="text-sm text-red-700 dark:text-red-400">{loadError}</p> : null}
         {importMessage ? <p role="status" className="text-sm">{importMessage}</p> : null}
 
+        {detail ? (
+          <details className="shrink-0 rounded border p-2 text-sm" open={paletteOpen} onToggle={(e) => setPaletteOpen((e.currentTarget as HTMLDetailsElement).open)}>
+            <summary className="cursor-pointer font-medium">Add a component {catalog ? `(${catalog.count})` : ''}</summary>
+            <div className="mt-2">
+              {catalog ? <Palette catalog={catalog} disabled={!canSave} onAdd={addComponent} /> : <p className="text-xs text-muted-foreground">{catalogError ?? 'Loading the component list from the engine…'}</p>}
+            </div>
+          </details>
+        ) : null}
+
         <div className="h-[55vh] min-h-[320px] shrink-0 rounded border bg-background lg:h-auto lg:min-h-0 lg:flex-1 lg:shrink">
           {detail ? (
             <ReactFlow
@@ -406,9 +622,9 @@ export function LangflowPanel() {
         </div>
 
         <details className="shrink-0 rounded border p-2 text-sm lg:max-h-[30vh] lg:overflow-y-auto">
-          <summary className="cursor-pointer font-medium">Components ({detail?.canvas.nodes.length ?? 0})</summary>
+          <summary className="cursor-pointer font-medium">Components ({view?.nodes.length ?? 0})</summary>
           <ul className="mt-2 grid gap-1 sm:grid-cols-2">
-            {detail?.canvas.nodes.map((n) => (
+            {view?.nodes.map((n) => (
               <li key={n.id}>
                 <button type="button" className={`w-full rounded px-2 py-1 text-left text-xs hover:bg-muted ${selectedNode === n.id ? 'bg-muted font-semibold' : ''}`} onClick={() => setSelectedNode(n.id)}>
                   {n.label} <span className="text-muted-foreground">({n.componentType || 'unknown'})</span>
@@ -456,8 +672,12 @@ export function LangflowPanel() {
           {pending.length === 0 ? <p className="text-xs text-muted-foreground">No unsaved changes. Moving a component or changing a setting queues a change.</p> : (
             <ul className="space-y-1 text-xs">
               {pending.map((e, i) => (
-                <li key={`${e.kind}-${e.nodeId}-${i}`}>{e.kind === 'move' ? 'Move' : e.kind === 'rename' ? 'Rename' : 'Set'} {e.kind === 'setField' ? `"${e.field}"` : ''} on {detail?.canvas.nodes.find((n) => n.id === e.nodeId)?.label ?? e.nodeId}</li>
+                <li key={`${e.kind}-${i}`} className="flex items-center justify-between gap-2">
+                  <span>{describeEdit(e, labelFor)}</span>
+                  <button type="button" className="rounded border px-1.5 py-0.5 text-[11px] hover:bg-muted" aria-label={`Undo: ${describeEdit(e, labelFor)}`} onClick={() => setPending((list) => list.filter((_, j) => j !== i))}>Undo</button>
+                </li>
               ))}
+              {previewing ? <li className="text-muted-foreground">Checking the change…</li> : null}
             </ul>
           )}
           {saveMessage ? <p role="status" className="mt-2 text-xs">{saveMessage}</p> : null}
@@ -470,10 +690,10 @@ export function LangflowPanel() {
         </div>
 
         <div className="rounded border p-3">
-          <h2 className="mb-2 text-sm font-semibold">Problems {detail ? `(${detail.problems.length})` : ''}</h2>
-          {!detail || detail.problems.length === 0 ? <p className="text-xs text-muted-foreground">No problems found.</p> : (
+          <h2 className="mb-2 text-sm font-semibold">Problems {problems ? `(${problems.length})` : ''}{preview ? ' · with unsaved changes' : ''}</h2>
+          {!problems || problems.length === 0 ? <p className="text-xs text-muted-foreground">No problems found.</p> : (
             <ul className="space-y-1 text-xs">
-              {detail.problems.map((p, i) => (
+              {problems.map((p, i) => (
                 <li key={i} className={p.level === 'error' ? 'text-red-700 dark:text-red-400' : 'text-amber-700 dark:text-amber-400'}>
                   <span className="font-medium">{p.level === 'error' ? 'Error' : 'Warning'}:</span> {p.message}
                   {p.nodeId ? <button type="button" className="ml-2 underline" onClick={() => setSelectedNode(p.nodeId ?? null)}>show</button> : null}

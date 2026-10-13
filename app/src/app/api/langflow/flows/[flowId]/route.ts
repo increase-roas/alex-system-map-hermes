@@ -1,6 +1,8 @@
 import { fail, ok, readJson, screenDeep } from '@/lib/langflow/api';
-import { applyEdits, executionPlan, problemsHaveErrors, toCanvas, type FlowEdit, validateFlow } from '@/lib/langflow/model';
+import { componentTemplate } from '@/lib/langflow/catalog';
+import { applyEdits, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, validateFlow } from '@/lib/langflow/model';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
+import { runnerConfig } from '@/lib/langflow/runner';
 import { isValidFlowId, readFlow, saveFlow, StoreConflictError } from '@/lib/langflow/store';
 
 export const runtime = 'nodejs';
@@ -8,15 +10,29 @@ export const dynamic = 'force-dynamic';
 
 type Params = { params: Promise<{ flowId: string }> };
 
-/** Accepts only the three edit shapes the canvas can make. Anything else is refused before it reaches the model. */
+function editContext(): EditContext {
+  const cfg = runnerConfig();
+  return { template: (type) => componentTemplate(cfg, type) };
+}
+
+function position(value: unknown): { x: number; y: number } | null {
+  const p = value as Record<string, unknown> | undefined;
+  if (!p || typeof p !== 'object' || typeof p.x !== 'number' || typeof p.y !== 'number') return null;
+  return { x: p.x, y: p.y };
+}
+
+/** Accepts only the edit shapes the canvas can make. Anything else is refused before it reaches the model. */
 function parseEdit(value: unknown): FlowEdit | null {
   if (!value || typeof value !== 'object') return null;
   const e = value as Record<string, unknown>;
   if (typeof e.nodeId !== 'string' || e.nodeId.length > 200) return null;
   if (e.kind === 'move') {
-    const p = e.position as Record<string, unknown> | undefined;
-    if (!p || typeof p.x !== 'number' || typeof p.y !== 'number') return null;
-    return { kind: 'move', nodeId: e.nodeId, position: { x: p.x, y: p.y } };
+    const p = position(e.position);
+    return p ? { kind: 'move', nodeId: e.nodeId, position: p } : null;
+  }
+  if (e.kind === 'addNode' && typeof e.componentType === 'string' && e.componentType.length <= 120) {
+    const p = position(e.position);
+    return p ? { kind: 'addNode', nodeId: e.nodeId, componentType: e.componentType, position: p } : null;
   }
   if (e.kind === 'rename' && typeof e.label === 'string') {
     return { kind: 'rename', nodeId: e.nodeId, label: e.label };
@@ -64,8 +80,8 @@ export async function PATCH(request: Request, { params }: Params) {
   if (!save.ok) return fail(save.status, save.reason);
   const body = await readJson(request);
   if (!body.ok) return fail(body.status, body.message);
-  const b = body.value as { expectedHash?: unknown; edits?: unknown };
-  if (typeof b.expectedHash !== 'string' || !Array.isArray(b.edits) || b.edits.length > 500) {
+  const b = body.value as { expectedHash?: unknown; edits?: unknown; dryRun?: unknown };
+  if (typeof b.expectedHash !== 'string' || !Array.isArray(b.edits) || b.edits.length > 500 || (b.dryRun !== undefined && typeof b.dryRun !== 'boolean')) {
     return fail(422, 'Send expectedHash and a list of up to 500 edits.');
   }
   const edits: FlowEdit[] = [];
@@ -79,11 +95,15 @@ export async function PATCH(request: Request, { params }: Params) {
   if (stored.hash !== b.expectedHash) {
     return fail(409, 'This flow changed since you opened it. Reload it, then apply your edits again.', { currentHash: stored.hash });
   }
-  const { flow, applied, rejected } = applyEdits(stored.flow, edits);
+  const { flow, applied, rejected } = applyEdits(stored.flow, edits, editContext());
   if (rejected.length > 0) {
     return fail(422, 'Some edits are not allowed, so nothing was saved.', {
-      rejected: rejected.map((r) => ({ kind: r.edit.kind, nodeId: r.edit.nodeId, reason: r.reason })),
+      rejected: rejected.map((r) => ({ kind: r.edit.kind, nodeId: r.edit.nodeId, index: edits.indexOf(r.edit), reason: r.reason })),
     });
+  }
+  if (b.dryRun === true) {
+    // Preview only: the same rules as a save, nothing written.
+    return ok(screenDeep({ hash: stored.hash, applied, dryRun: true, canvas: toCanvas(flow), problems: validateFlow(flow), plan: executionPlan(flow) }));
   }
   if (applied === 0) return ok({ hash: stored.hash, updatedAt: stored.updatedAt, applied: 0, problems: validateFlow(stored.flow) });
   try {

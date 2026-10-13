@@ -1,0 +1,87 @@
+Step 2 receipt (palette and add component). 2026-10-13 11:32 EDT. claude-opus-5-5.
+
+A. LIVE add of every current component through the real save route, then lfx validate -f json on each saved file
+Engine: lfx 1.12.6rc3 in ~/.venvs/langflow-dashboard (langflow 1.12.5). Command: LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=... node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/components-live.test.mts
+PASS agentics/AgenerateComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS agentics/AMapComponent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 1
+PASS agentics/AreduceComponent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 1
+PASS custom_component/CustomComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/APIRequest: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/MockDataGenerator: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/SQLComponent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS data_source/URLComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS data_source/UnifiedWebSearch: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS files_and_knowledge/FileSystemTool: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_and_knowledge/Knowledge: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS files_and_knowledge/MemoryBase: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS files_and_knowledge/File: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_and_knowledge/SaveToFile: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS files_ingestion/FileContentRetriever: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_ingestion/FileDescriptionGeneratorComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS files_ingestion/MergeFlows: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS flow_controls/HumanInput: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS flow_controls/ConditionalRouter: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS flow_controls/Listen: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS flow_controls/LoopComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS flow_controls/Notify: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS flow_controls/RunFlow: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS input_output/ChatInput: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS input_output/ChatOutput: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS input_output/Webhook: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS langchain_utilities/CharacterTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/CSVAgent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 1
+PASS langchain_utilities/LangChainFakeEmbeddings: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS langchain_utilities/HtmlLinkExtractor: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/LanguageRecursiveTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/NaturalLanguageTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/OpenAIToolsAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS langchain_utilities/OpenAPIAgent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS langchain_utilities/LangChain Hub Prompt: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS langchain_utilities/RecursiveCharacterTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/RunnableExecutor: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS langchain_utilities/SemanticTextSplitter: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 0
+PASS langchain_utilities/SQLAgent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS langchain_utilities/SQLDatabase: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS langchain_utilities/ToolCallingAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS langchain_utilities/XMLAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS llm_operations/BatchRunComponent: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/GuardrailValidatorV2: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/LLMSelectorComponent: saved, L1 and L3 clean, L4 empty required inputs: 3, L4 empty secret fields: 0
+PASS llm_operations/SmartRouter: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/Smart Transform: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS llm_operations/StructuredOutput: saved, L1 and L3 clean, L4 empty required inputs: 2, L4 empty secret fields: 1
+PASS models_and_agents/A2AAgent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/Agent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/EmbeddingModel: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/LanguageModelComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 1
+PASS models_and_agents/MCPTools: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS models_and_agents/Memory: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS models_and_agents/Prompt Template: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS processing/Operations: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS processing/DynamicCreateData: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS processing/ParserComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS processing/SplitText: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS processing/TypeConverterComponent: saved, L1 and L3 clean, L4 empty required inputs: 1, L4 empty secret fields: 0
+PASS utilities/CalculatorComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS utilities/CurrentDate: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+PASS utilities/PythonREPLComponent: saved, L1 and L3 clean, L4 empty required inputs: 0, L4 empty secret fields: 0
+SUMMARY added 63/63, validator failures 0, engine skipped level 2 (registry gap) on 63 files
+ALL-IN-ONE flow: 63 components saved, other issues: 0, L1 orphaned or unused warnings: 124, L4 empty required inputs: 62, L4 empty secret fields: 20
+ℹ tests 2
+ℹ pass 2
+ℹ fail 0
+
+Engine gap seen: lfx/cli/validation/semantic.py line 52 imports initialize_components, which lfx/interface/utils.py does not define, so the engine skips its own level 2 (component exists) check on every file. Seen on all 63 files above.
+
+B. Browser check, built-in browser pane of the Claude desktop app, viewport 1024 px wide, isolated server 127.0.0.1:3217 (scratch LOCAL_DATA_DIR, not app/.data)
+Keyboard only after the page loaded: focus 'Add a component (63)', Enter opened it, Tab reached 'Search components', typed 'current date' -> '1 of 63 components from engine lfx 1.12.6rc3', ArrowDown focused 'Add Current Date. Local: not enabled.', Enter queued 'Add Current Date' (Undo button shown), preview warned 'Current Date is not connected to anything', focus Save changes + Enter -> 'Saved 1 change. New version 63215c8874.'
+Canvas after save: lf-node-ChatInput-b6UCc, lf-node-ChatOutput-yK0AU, lf-node-CurrentDate-L8kQF. Document width 1024 of 1024 (no horizontal overflow).
+Seen problem, fixed in step 5: the Settings panel printed the whole Python code field as text.
+
+C. Unit and route tests (with LANGFLOW_LFX_BIN set, so the live catalog check runs too)
+ℹ tests 70
+ℹ pass 70
+ℹ fail 0
+ℹ skipped 0
+tsc --noEmit exit 0
+✔ No ESLint warnings or errors

@@ -48,13 +48,8 @@ function lastJsonLine(text: string): Record<string, unknown> | null {
   return null;
 }
 
-export function startLfxRun(args: { flowFile: string; input: string }, config: RunnerConfig): StartedRun {
-  if (!config.lfxBin) {
-    return failed('not_configured', 'The Langflow engine is not configured. Set LANGFLOW_LFX_BIN to the pinned lfx binary.');
-  }
-  if (!fs.existsSync(config.lfxBin)) {
-    return failed('missing_binary', 'The Langflow engine binary was not found at the configured path.');
-  }
+/** The only environment the engine gets: no provider keys, no tracking. */
+export function engineEnv(config: RunnerConfig): Record<string, string> {
   const env: Record<string, string> = {
     PATH: process.env.PATH ?? '/usr/bin:/bin',
     HOME: process.env.HOME ?? '',
@@ -64,6 +59,17 @@ export function startLfxRun(args: { flowFile: string; input: string }, config: R
     LANGFLOW_LOG_LEVEL: 'error',
   };
   if (config.configDir) env.LANGFLOW_CONFIG_DIR = config.configDir;
+  return env;
+}
+
+export function startLfxRun(args: { flowFile: string; input: string }, config: RunnerConfig): StartedRun {
+  if (!config.lfxBin) {
+    return failed('not_configured', 'The Langflow engine is not configured. Set LANGFLOW_LFX_BIN to the pinned lfx binary.');
+  }
+  if (!fs.existsSync(config.lfxBin)) {
+    return failed('missing_binary', 'The Langflow engine binary was not found at the configured path.');
+  }
+  const env = engineEnv(config);
 
   let child: ChildProcess;
   try {
