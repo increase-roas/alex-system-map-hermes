@@ -171,9 +171,15 @@ test('correctness M3: a loop feedback is not a cycle, whatever order the wires a
   assert.ok(!validateFlow(feedbackFirst.flow).some((p) => /loops back on itself/.test(p.message)), 'a valid loop gets no cycle warning');
 });
 
-test('correctness M4: empty, hex, exponent and boolean values are not numbers', () => {
+test('correctness M4: an emptied box is never saved as 0; hex, exponent and boolean values are not numbers', () => {
   const flow = applyEdits(empty(), [add('ConditionalRouter', 'ccccc')], ctx()).flow;
-  for (const value of ['', '  ', '0x10', '1e3', true]) {
+  // Empty on an optional number is stored as empty (never as 0); see review2.test.mts F2.
+  for (const value of ['', '  ']) {
+    const r = applyEdits(flow, [{ kind: 'setField', nodeId: 'ConditionalRouter-ccccc', field: 'max_iterations', value }], ctx());
+    assert.deepEqual(r.rejected, []);
+    assert.equal((r.flow.data.nodes[0].data!.node!.template as Record<string, { value: unknown }>).max_iterations.value, '', 'empty, not 0');
+  }
+  for (const value of ['0x10', '1e3', true]) {
     const r = applyEdits(flow, [{ kind: 'setField', nodeId: 'ConditionalRouter-ccccc', field: 'max_iterations', value }], ctx());
     assert.equal(r.applied, 0, JSON.stringify(value));
     assert.match(r.rejected[0].reason, /whole number/);

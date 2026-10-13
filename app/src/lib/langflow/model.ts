@@ -56,25 +56,40 @@ export type JsonValue = string | number | boolean | null | JsonValue[] | { [key:
 /** Keys whose values are treated as secrets inside JSON settings (headers, tables, dictionaries). */
 const SECRET_KEY = /authorization|cookie|token|secret|passw|api[_-]?key|private[_-]?key|credential|bearer/i;
 
-/** Calls fn on every string stored under a secret-looking key, anywhere in a JSON value. Returns the count. */
-function visitSecretValues(value: unknown, fn: (holder: Record<string, unknown>, key: string) => void): number {
+type SecretHolder = Record<string, unknown> | unknown[];
+
+function isSecretLeaf(v: unknown): boolean {
+  return (typeof v === 'string' && v !== '' && v !== REDACTED) || (typeof v === 'number' && Number.isFinite(v));
+}
+
+/**
+ * Calls fn on every secret leaf in a JSON value and returns the count. A leaf is secret when it is a non-empty
+ * string or a number anywhere under a secret-looking key (at any depth, in objects and lists), or the "value" of
+ * a row whose "key" or "name" is secret-looking ({"key": "Authorization", "value": ...}).
+ */
+function visitSecretValues(value: unknown, fn: (holder: SecretHolder, key: string | number) => void): number {
   let count = 0;
-  const walk = (v: unknown) => {
-    if (Array.isArray(v)) v.forEach(walk);
-    else if (v && typeof v === 'object') {
+  const walk = (v: unknown, inSecret: boolean) => {
+    if (Array.isArray(v)) {
+      v.forEach((item, i) => {
+        if (inSecret && isSecretLeaf(item)) {
+          fn(v, i);
+          count += 1;
+        } else walk(item, inSecret);
+      });
+    } else if (v && typeof v === 'object') {
       const obj = v as Record<string, unknown>;
-      // Table rows often say {"key": "Authorization", "value": "..."}: the secret is the sibling value.
       const named = typeof obj.key === 'string' ? obj.key : typeof obj.name === 'string' ? obj.name : null;
       for (const [k, inner] of Object.entries(obj)) {
-        const secretHere = SECRET_KEY.test(k) || (k === 'value' && named !== null && SECRET_KEY.test(named));
-        if (secretHere && typeof inner === 'string' && inner !== '' && inner !== REDACTED) {
+        const secret = inSecret || SECRET_KEY.test(k) || (k === 'value' && named !== null && SECRET_KEY.test(named));
+        if (secret && isSecretLeaf(inner)) {
           fn(obj, k);
           count += 1;
-        } else walk(inner);
+        } else walk(inner, secret);
       }
     }
   };
-  walk(value);
+  walk(value, false);
   return count;
 }
 
@@ -341,7 +356,7 @@ function fieldsOf(node: LfNode, connected: Set<string>): CanvasField[] {
       summary = `${field.value.split('\n').length} lines of Python`;
     } else if (editor === 'json' || (editor === 'readonly' && (Array.isArray(field.value) || isPlainObject(field.value)))) {
       value = structuredClone(field.value ?? null) as JsonValue;
-      visitSecretValues(value, (holder, key) => { holder[key] = REDACTED; });
+      visitSecretValues(value, (holder, key) => { (holder as Record<string | number, unknown>)[key] = REDACTED; });
     } else value = asPrimitive(field.value);
     out.push({
       name,
@@ -487,6 +502,8 @@ function coerce(field: CanvasField, value: JsonValue): { ok: true; value: JsonVa
   if (value === null) return { ok: false, reason: `"${field.label}" needs a value.` };
   const NUMERIC = /^\s*-?(\d+\.?\d*|\.\d+)\s*$/;
   const isNumberField = field.fieldType === 'slider' || field.fieldType === 'int' || field.fieldType === 'float';
+  // An optional number may be left empty, the way Langflow stores it (""). A required one may not.
+  if (isNumberField && typeof value === 'string' && value.trim() === '' && !field.required) return { ok: true, value: '' };
   if (isNumberField && (typeof value === 'boolean' || (typeof value === 'string' && !NUMERIC.test(value)))) {
     return { ok: false, reason: `"${field.label}" takes a ${field.fieldType === 'int' ? 'whole number' : 'number'}.` };
   }
@@ -568,6 +585,11 @@ export function applyEdits(raw: LfFlow, edits: FlowEdit[], ctx: EditContext = {}
     }
     if (!field.editable) {
       rejected.push({ edit, reason: `"${label}" → "${field.label}": ${field.readOnlyReason}` });
+      continue;
+    }
+    // "No value" sent back for a setting that has no value is no change at all (nothing is written).
+    if (edit.value === null && ((rawField as LfTemplateField).value === undefined || (rawField as LfTemplateField).value === null)) {
+      applied += 1;
       continue;
     }
     if (typeof edit.value === 'string' && edit.value === REDACTED) {
@@ -936,7 +958,7 @@ export function stripSecretsForImport(raw: LfFlow): { flow: LfFlow; removed: num
         (field as LfTemplateField).value = '';
         removed += 1;
       } else if (field && typeof field === 'object') {
-        removed += visitSecretValues((field as LfTemplateField).value, (holder, key) => { holder[key] = ''; });
+        removed += visitSecretValues((field as LfTemplateField).value, (holder, key) => { (holder as Record<string | number, unknown>)[key] = ''; });
       }
     }
   }
@@ -953,7 +975,7 @@ export function redactForExport(raw: LfFlow): { flow: LfFlow; redacted: number }
         (field as LfTemplateField).value = REDACTED;
         redacted += 1;
       } else if (field && typeof field === 'object') {
-        redacted += visitSecretValues((field as LfTemplateField).value, (holder, key) => { holder[key] = REDACTED; });
+        redacted += visitSecretValues((field as LfTemplateField).value, (holder, key) => { (holder as Record<string | number, unknown>)[key] = REDACTED; });
       }
     }
   }
