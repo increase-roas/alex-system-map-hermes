@@ -1,0 +1,29 @@
+"Fix everything" follow-up receipt. 2026-10-13 16:31 to 16:55 UTC. claude-opus-5-5.
+
+1. Acceptance-script leftovers: FIXED. Every tracked file under reports/ written back to its HEAD bytes
+   (git show HEAD:<path>), the 12 untracked report files and work/maintained/derived/ moved out of the repo to
+   this session's scratch folder (19 files kept there). git status afterwards: only the pre-existing .codex/
+   and tools/__pycache__ entries.
+2. Run button: FIXED, seen in the browser (production build, 127.0.0.1:3217): flow "probe" (edited Current
+   Date code) -> Run disabled, reason shown; flow "Calculator browser check" -> Run enabled.
+3. Engine error text: FIXED. Home folder replaced by "~" (redact.ts stripLocalPaths, used in runner.ts).
+   Unit test in review-fixes.test.mts.
+4. Prompt typing: FIXED, seen in the browser. Typing "Hi {my var} {topic}" kept the whole text in the box and
+   showed "\"{my var}\" is not a usable variable name"; replacing it with "Hi {my_var} {topic}" queued
+   'Set "template"' and showed the new inputs my_var and topic.
+   Checks for 2 to 4: unit exit 0 (99 pass, 1 live skipped), tsc exit 0, next lint on changed files clean,
+   NEXT_DIST_DIR=.next-verify npm run build exit 0. Commit 651e6b4.
+5. Engine drift: PROVEN, NOT SWITCHED. The sandbox refused writing ~/.venvs (pip rolled back; lfx still
+   1.12.6rc3 and working). Full live suite passed on a separate lfx 1.12.5 engine. See engine-1125.txt.
+   Commit ec2abd0.
+6. Tailnet check of this build: BLOCKED. Shell: sandbox denies connecting to this Mac's own tailnet address
+   ("deny network-outbound alexs-macbook-pro.tailde26a1.ts.net:443"). Built-in browser: the page shell loaded,
+   but every script and /api request failed with net::ERR_BLOCKED_BY_CLIENT (blocked by the browser pane).
+7. Second-device-like check: BLOCKED. iOS Simulator needs a full Xcode install (only command-line tools here).
+8. Other-family review: BLOCKED. The handoff Codex thread "Retry audit in new Claude session"
+   (01a135ca-1feb-7c60-94b3-4b55794fbfbe) is held by the Codex desktop app, so the bridge refuses to write to it.
+
+Also: megapowers hooks ran in this session (its verify-and-finish gate fired before a commit), so its hook runner
+works here; no Go failure seen.
+Incident: while checking proxy settings, one command printed this sandbox's short-lived proxy credential to the
+session output. It is the sandbox's own per-session proxy login, not one of Alex's keys; not written to any file.

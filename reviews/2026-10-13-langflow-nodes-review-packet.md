@@ -33,6 +33,12 @@ Only the Director marks it verified.
 3. Secret handling inside JSON settings is name-based (token, key, password, authorization and similar).
    A secret under an innocent name would not be caught.
 
+## Follow-up ("fix everything", same day)
+
+Commits 651e6b4 (Run disabled for unrunnable flows, home paths stripped from engine errors, steady prompt typing)
+and ec2abd0 (full live suite also passes on lfx 1.12.5). Acceptance-script leftovers removed from the repo.
+Evidence: `reviews/receipts/2026-10-13-langflow-nodes/fix-everything.txt`, `engine-1125.txt`.
+
 ## Not done, and why
 
 - Real phone, real touch gestures, second device: not available here. Phone result is a 375 px emulated viewport.
@@ -40,9 +46,10 @@ Only the Director marks it verified.
   route tests with synthetic Tailscale headers only.
 - 4 acceptance scripts selected by `/verify` (they match only on the generic file name route.ts) exit 1:
   sandbox /tmp write denied and headless Chrome blocked are the seen causes; not run at base to compare.
-  They rewrote tracked receipts under `reports/` and created `work/maintained/derived/`; left uncommitted.
-- Engine drift: the venv has lfx 1.12.6rc3 (pulled in because provider add-ons declare `lfx>=1.12.0.dev0`);
-  all evidence ran on it. lfx 1.12.5 exists on PyPI. Its `lfx validate` cannot load its registry
-  (`lfx/cli/validation/semantic.py` imports a missing `initialize_components`), so level 2 is skipped by the
-  engine. Downgrading is Alex's call; the exact commands are in the doc.
+  The files they wrote were removed again (tracked files back to their committed bytes).
+- Engine drift: the venv still has lfx 1.12.6rc3 (the sandbox refused the switch). The full live suite also
+  passes on a separate lfx 1.12.5 engine; code differs only for Type Convert and Data Operations. The
+  validator's skipped level 2 happens on 1.12.5 too (upstream). Switching is Alex's one command, in the doc.
+- Tailnet check of this build, iOS Simulator check, and sending this packet to Codex: blocked this session
+  (sandbox, no full Xcode, Codex thread held by the Codex app). See `fix-everything.txt`.
 - Not proven: whether Langflow's own server UI opens these saved flows identically (no Langflow server ran).
