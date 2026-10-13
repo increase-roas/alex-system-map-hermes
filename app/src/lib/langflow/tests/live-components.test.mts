@@ -5,6 +5,7 @@
 //   LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=<lfx> LANGFLOW_CONFIG_DIR=<dir> \
 //     node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/live-components.test.mts
 import assert from 'node:assert/strict';
+import { spawnSync } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
 import fs from 'node:fs';
 import os from 'node:os';
@@ -15,11 +16,14 @@ import { getOrCreateLocalToken } from '../../server/local-auth';
 import * as flowsRoute from '../../../app/api/langflow/flows/route';
 import * as flowRoute from '../../../app/api/langflow/flows/[flowId]/route';
 import * as runsRoute from '../../../app/api/langflow/flows/[flowId]/runs/route';
+import { engineEnv, runnerConfig } from '../runner';
+import { flowFilePath } from '../store';
 import { EXECUTABLE_COMPONENTS, LOCAL_NOT_ENABLED } from '../tiers';
 
 const enabled = process.env.LANGFLOW_LIVE_ENGINE === '1' && !!process.env.LANGFLOW_LFX_BIN;
 const tmp = fs.mkdtempSync(path.join(process.env.TMPDIR ?? os.tmpdir(), 'lf-live-components-'));
 const SESSION = 'live-components-0001';
+const validation = new Map<string, string>();
 const YEAR = String(new Date().getUTCFullYear());
 
 type Edit = Record<string, unknown>;
@@ -153,6 +157,28 @@ async function buildAndRun(c: Case): Promise<{ status: string; output: string | 
   const saved = await flowRoute.PATCH(new Request(`http://127.0.0.1:3200/api/langflow/flows/${id}`, { method: 'PATCH', headers: headers(), body: JSON.stringify({ expectedHash: hash, edits }) }), { params: Promise.resolve({ flowId: id }) });
   const savedBody = (await saved.json()) as Record<string, unknown>;
   assert.equal(saved.status, 200, `${c.component}: save ${JSON.stringify(savedBody).slice(0, 400)}`);
+  // Full validation of the wired flow, exit status checked. All levels the engine can run; level 2 cannot run in
+  // this engine (see components-live.test.mts), and secrets are never stored, so key fields are empty by design.
+  // The engine's level-3 check is a heuristic: it compares the source type with the target field's widget kind
+  // (targetHandle.type, e.g. "str" or "other"), not with the types the input accepts (targetHandle.inputTypes),
+  // so it warns on every normal connection, including Langflow's own export (fixtures/chat-echo.json).
+  // A type warning is accepted only after this test proves, in the saved file, that every edge's source type is
+  // in the target's accepted types (Langflow's real rule). "Unused node" is accepted only for the Notify node of
+  // the Listen case, which runs for its side effect. Anything else fails.
+  const cfg = runnerConfig();
+  const v = spawnSync(cfg.lfxBin!, ['validate', '--skip-components', '--skip-credentials', '-f', 'json', flowFilePath(id)], { env: engineEnv(cfg) as NodeJS.ProcessEnv, encoding: 'utf8', timeout: 120_000 });
+  const vIssues = (JSON.parse(v.stdout.slice(v.stdout.indexOf('['))) as Array<{ issues: Array<{ level: number; severity: string; message: string }> }>)[0].issues;
+  const savedFlow = JSON.parse(fs.readFileSync(flowFilePath(id), 'utf8')) as { data: { edges: Array<{ data: { sourceHandle: { output_types?: string[] }; targetHandle: { inputTypes?: string[]; output_types?: string[]; fieldName?: string } } }> } };
+  const realMismatch = savedFlow.data.edges.filter((e) => {
+    const src = e.data.sourceHandle.output_types?.[0];
+    const accepts = e.data.targetHandle.fieldName ? (e.data.targetHandle.inputTypes ?? []) : [src];
+    return !src || !(accepts.includes(src) || accepts.includes('Any'));
+  }).length;
+  const typeWarnings = vIssues.filter((i) => i.level === 3 && i.severity === 'warning' && /^Possible type mismatch on edge/.test(i.message));
+  const unusedNotify = vIssues.filter((i) => c.component === 'Listen' && i.level === 1 && i.severity === 'warning' && /^Unused node/.test(i.message));
+  const other = vIssues.filter((i) => !typeWarnings.includes(i) && !unusedNotify.includes(i));
+  const fine = v.status === 0 && realMismatch === 0 && other.length === 0 && unusedNotify.length <= 2;
+  validation.set(c.component, `${fine ? 'ok' : 'NOT OK'}: exit ${v.status}, ${savedFlow.data.edges.length} edges all type-compatible by inputTypes: ${realMismatch === 0}, heuristic type warnings: ${typeWarnings.length}, other issues: ${other.length ? other.map((i) => `L${i.level} ${i.severity}: ${i.message}`).join(' | ') : 0}`);
   const started = await runsRoute.POST(new Request(`http://127.0.0.1:3200/api/langflow/flows/${id}/runs`, {
     method: 'POST', headers: headers({ 'x-browser-session': SESSION, 'idempotency-key': `live-${randomUUID()}` }), body: JSON.stringify({ input: c.input }),
   }), { params: Promise.resolve({ flowId: id }) });
@@ -180,9 +206,10 @@ test('LIVE: every enabled local component returns its real output on the real en
   const failures: string[] = [];
   for (const c of CASES) {
     const r = await buildAndRun(c);
-    const ok = r.status === 'succeeded' && (typeof c.expect === 'string' ? (r.output ?? '').includes(c.expect) : c.expect.test(r.output ?? ''));
+    const valid = (validation.get(c.component) ?? '').startsWith('ok:');
+    const ok = valid && r.status === 'succeeded' && (typeof c.expect === 'string' ? (r.output ?? '').includes(c.expect) : c.expect.test(r.output ?? ''));
     const shown = (r.output ?? r.error ?? '').replace(/\s+/g, ' ').slice(0, 160);
-    console.log(`${ok ? 'PASS' : 'FAIL'} ${c.component}: ${r.status} in ${r.seconds}s on ${r.engine}; expected ${typeof c.expect === 'string' ? `to contain ${JSON.stringify(c.expect)}` : `to match ${String(c.expect)}`}; output: ${shown}`);
+    console.log(`${ok ? 'PASS' : 'FAIL'} ${c.component}: validator ${validation.get(c.component)}; run ${r.status} in ${r.seconds}s on ${r.engine}; expected ${typeof c.expect === 'string' ? `to contain ${JSON.stringify(c.expect)}` : `to match ${String(c.expect)}`}; output: ${shown}`);
     if (!ok) failures.push(c.component);
   }
   console.log(`SUMMARY ${CASES.length - failures.length}/${CASES.length} enabled components produced their real output`);

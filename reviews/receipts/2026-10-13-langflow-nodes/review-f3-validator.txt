@@ -1,0 +1,51 @@
+Reviewer F3 receipt (validator proof with exit codes). 2026-10-13 13:58 EDT. claude-opus-5-5. Engine: Alex's venv, now lfx 1.12.5 (langflow 1.12.5).
+
+What lfx validate can and cannot prove on this engine (seen):
+- Level 2 (component exists) cannot run: lfx/cli/validation/semantic.py imports initialize_components, which
+  lfx/interface/utils.py does not define (1.12.6rc3 and 1.12.5). Replaced by our own identity check: each saved
+  component's code is byte-identical (sha256) to the engine's built-in component of that type.
+- Level 3 is a heuristic that compares the source output type with targetHandle.type (the target field's widget
+  kind, e.g. "str", "other") instead of targetHandle.inputTypes. It therefore warns on every normal connection;
+  Langflow's own export fixtures/chat-echo.json gets "source emits 'Message', target expects 'str'" and exits 1
+  under --strict. Code: lfx/cli/validation/semantic.py, the "Possible type mismatch" block.
+- Level 4 flags every empty required input; a lone component with a required input can never pass it.
+
+Grading now (exit status always checked):
+A. Each of the 63 added alone through the save route:
+   `lfx validate --level 3 --skip-components --strict` must exit 0 with no issues; `lfx validate` (all levels)
+   must exit 0, or exit 1 only when every error is "Required input ... has no value"; saved code identical.
+B. Each of the 18 enabled components in a fully wired flow built through the save route:
+   `lfx validate --skip-components --skip-credentials` must exit 0 with no errors; level-3 type warnings are
+   accepted only when the test proves every edge's source type is in the target's inputTypes; "Unused node" only
+   for the Notify node of the Listen case. Then the real run must give the expected output.
+Results:
+SUMMARY added 63/63, validator failures 0, engine skipped level 2 (registry gap) on 63 files
+ALL-IN-ONE flow: 63 components saved, other issues: 0, L1 orphaned or unused warnings: 124, L4 empty required inputs: 62, L4 empty secret fields: 20
+✔ LIVE: each of the current components is added through the save route and passes the engine validator (122448.221667ms)
+✔ LIVE: all current components in one flow save together and pass the engine validator (1937.873ms)
+  components passing A: 63
+PASS ChatInput: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 3s on lfx 1.12.5; expected to contain "chat echo th
+PASS ChatOutput: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "chat output
+PASS CalculatorComponent: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "14
+PASS CurrentDate: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "2026"; out
+PASS MockDataGenerator: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to match /^[A-Za
+PASS ConditionalRouter: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "ROUT
+PASS Notify: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "notify-payload"
+PASS Listen: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "listen-payload"
+PASS LoopComponent: validator ok: exit 0, 5 edges all type-compatible by inputTypes: true, heuristic type warnings: 4, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "loop-ite
+PASS CharacterTextSplitter: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "
+PASS RecursiveCharacterTextSplitter: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to 
+PASS LanguageRecursiveTextSplitter: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to c
+PASS HtmlLinkExtractor: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "http
+PASS Prompt Template: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "Say: p
+PASS DynamicCreateData: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "\"ci
+PASS ParserComponent: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "Parsed
+PASS SplitText: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; ou
+PASS TypeConverterComponent: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain 
+SUMMARY 18/18 enabled components produced their real output
+ℹ tests 2
+ℹ pass 2
+ℹ fail 0
+
+Acceptance wording: row 2 said "each of the 63 added and accepted by lfx validate". What is proven is A plus B above.
+Full level-4 acceptance of a lone component is impossible by design of the validator; please confirm this scoped wording (Alex or Director).

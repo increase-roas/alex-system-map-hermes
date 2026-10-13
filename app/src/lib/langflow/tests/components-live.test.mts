@@ -3,7 +3,18 @@
 //   LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=<lfx> LANGFLOW_CONFIG_DIR=<dir> \
 //     node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/components-live.test.mts
 //
-// Grading of `lfx validate -f json` (levels from `lfx validate --help`):
+// Two validator runs per saved file, both with their exit status checked:
+//   A. `lfx validate --level 3 --skip-components --strict`: structure (level 1) and edge types (level 3) with
+//      warnings treated as errors. Must exit 0 with no issues.
+//   B. `lfx validate` (all levels, default): exit status and every issue recorded. A lone component cannot pass
+//      level 4 when it has a required input (nothing is wired into it), so exit 1 is accepted only when every
+//      error is "Required input ... has no value". Components without required inputs must exit 0.
+//   Level 2 (component exists) cannot run in this engine: lfx/cli/validation/semantic.py imports
+//   initialize_components, which lfx/interface/utils.py lacks (seen on 1.12.6rc3 and 1.12.5). Instead the test
+//   proves registry identity itself: every saved component's code is byte-identical (sha256) to the engine's
+//   built-in component of that type. Fully wired flows pass all levels strictly: live-components.test.mts.
+//
+// Issue categories in run B (levels from `lfx validate --help`):
 //   level 1 (structure) and level 3 (edge types): must be clean.
 //   level 2 (component exists): this engine build cannot load its registry
 //     (lfx/cli/validation/semantic.py imports initialize_components, which lfx/interface/utils.py lacks),
@@ -23,7 +34,8 @@ import { test } from 'node:test';
 import { getOrCreateLocalToken } from '../../server/local-auth';
 import * as flowsRoute from '../../../app/api/langflow/flows/route';
 import * as flowRoute from '../../../app/api/langflow/flows/[flowId]/route';
-import { loadCatalog } from '../catalog';
+import { builtinCodeHash, codeHash, loadCatalog } from '../catalog';
+import type { LfFlow } from '../model';
 import { engineEnv, runnerConfig } from '../runner';
 import { flowFilePath } from '../store';
 
@@ -57,14 +69,20 @@ async function patch(id: string, body: unknown): Promise<{ status: number; body:
   return { status: res.status, body: (await res.json()) as Record<string, unknown> };
 }
 
-function validate(file: string): Issue[] {
+function validateRun(file: string, extra: string[] = []): { status: number | null; issues: Issue[] } {
   const cfg = runnerConfig();
-  const r = spawnSync(cfg.lfxBin!, ['validate', '-f', 'json', file], { env: engineEnv(cfg) as NodeJS.ProcessEnv, encoding: 'utf8', timeout: 120_000 });
+  const r = spawnSync(cfg.lfxBin!, ['validate', ...extra, '-f', 'json', file], { env: engineEnv(cfg) as NodeJS.ProcessEnv, encoding: 'utf8', timeout: 120_000 });
   const start = r.stdout.indexOf('[');
-  assert.ok(start >= 0, `validate printed no JSON: ${r.stderr.slice(-300)}`);
+  assert.ok(start >= 0, `validate printed no JSON (exit ${r.status}): ${r.stderr.slice(-300)}`);
   const report = JSON.parse(r.stdout.slice(start)) as Array<{ issues: Issue[] }>;
-  return report[0].issues;
+  return { status: r.status, issues: report[0].issues };
 }
+
+function validate(file: string): Issue[] {
+  return validateRun(file).issues;
+}
+
+const STRICT_STRUCTURE = ['--level', '3', '--skip-components', '--strict'];
 
 function grade(issues: Issue[]): { bad: Issue[]; requiredEmpty: number; secretsEmpty: number; registryGap: boolean } {
   const bad: Issue[] = [];
@@ -97,13 +115,27 @@ test('LIVE: each of the current components is added through the save route and p
       failures.push(`${comp.type}: save returned ${saved.status} ${JSON.stringify(saved.body).slice(0, 200)}`);
       continue;
     }
-    const stored = JSON.parse(fs.readFileSync(flowFilePath(id), 'utf8')) as { data: { nodes: Array<{ id: string; data: { type: string } }> } };
+    const stored = JSON.parse(fs.readFileSync(flowFilePath(id), 'utf8')) as LfFlow;
     assert.equal(stored.data.nodes.length, 1);
-    assert.equal(stored.data.nodes[0].data.type, comp.type);
-    const { bad, requiredEmpty, secretsEmpty, registryGap } = grade(validate(flowFilePath(id)));
+    assert.equal(stored.data.nodes[0].data?.type, comp.type);
+    // Registry identity (stands in for the engine's level 2, which cannot run): the saved code is the engine's.
+    const code = (stored.data.nodes[0].data?.node?.template?.code as { value?: unknown } | undefined)?.value;
+    const identical = typeof code === 'string' && codeHash(code) === builtinCodeHash(runnerConfig(), comp.type);
+    // Run A: structure and edge types, strict, exit status checked.
+    const a = validateRun(flowFilePath(id), STRICT_STRUCTURE);
+    // Run B: all levels, exit status and issues recorded.
+    const b = validateRun(flowFilePath(id));
+    const { bad, requiredEmpty, secretsEmpty, registryGap } = grade(b.issues);
     if (registryGap) registryGapSeen += 1;
-    if (bad.length) failures.push(`${comp.type}: ${bad.map((b) => `L${b.level} ${b.severity}: ${b.message}`).join(' | ')}`);
-    rows.push(`${bad.length ? 'FAIL' : 'PASS'} ${comp.category}/${comp.type}: saved, L1 and L3 clean, L4 empty required inputs: ${requiredEmpty}, L4 empty secret fields: ${secretsEmpty}`);
+    const expectedB = requiredEmpty > 0 ? 1 : 0;
+    const problems = [
+      ...(identical ? [] : ['saved code is not the engine built-in']),
+      ...(a.status === 0 && a.issues.length === 0 ? [] : [`run A exit ${a.status}: ${a.issues.map((i) => `L${i.level} ${i.severity}: ${i.message}`).join(' | ')}`]),
+      ...(b.status === expectedB ? [] : [`run B exit ${b.status}, expected ${expectedB}`]),
+      ...bad.map((i) => `run B L${i.level} ${i.severity}: ${i.message}`),
+    ];
+    if (problems.length) failures.push(`${comp.type}: ${problems.join(' | ')}`);
+    rows.push(`${problems.length ? 'FAIL' : 'PASS'} ${comp.category}/${comp.type}: engine code identical; strict levels 1+3 exit ${a.status}; all levels exit ${b.status} (required inputs empty: ${requiredEmpty}, empty secret fields: ${secretsEmpty})`);
   }
   for (const row of rows) console.log(row);
   console.log(`SUMMARY added ${rows.length}/63, validator failures ${failures.length}, engine skipped level 2 (registry gap) on ${registryGapSeen} files`);
