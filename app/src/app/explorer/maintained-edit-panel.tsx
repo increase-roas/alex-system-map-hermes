@@ -9,6 +9,7 @@ import { Textarea } from '@/components/ui/textarea';
 const CATALOG_TABLE = 'data/components.json';
 const DEFAULT_RECORD_ID = 'component_6f112167c8a413f0f3ab';
 const METADATA_PATH = 'data/catalog-metadata.json';
+const STAGING_PATH = 'work/maintained/staging-catalog-record.json';
 const FETCH_DEADLINE_MS = 120_000;
 
 type EditState = {
@@ -53,8 +54,8 @@ function previewToken(body: Record<string, unknown>, req: FrozenApplyRequest): s
   return `pv-${h.toString(16)}`;
 }
 
-function targetKey(mode: 'catalog_record' | 'maintained_doc', recordId: string): string {
-  return mode === 'catalog_record' ? `${CATALOG_TABLE}#${recordId}` : METADATA_PATH;
+function targetKey(mode: 'catalog_record' | 'maintained_doc', recordId: string, documentPath: string): string {
+  return mode === 'catalog_record' ? `${CATALOG_TABLE}#${recordId}` : documentPath;
 }
 
 async function fetchJsonWithDeadline(url: string, init?: RequestInit): Promise<{ ok: boolean; json: unknown }> {
@@ -77,6 +78,7 @@ async function fetchJsonWithDeadline(url: string, init?: RequestInit): Promise<{
 
 export function MaintainedEditPanel({ localToken }: { localToken: string }) {
   const [mode, setMode] = useState<'catalog_record' | 'maintained_doc'>('catalog_record');
+  const [documentPath, setDocumentPath] = useState(METADATA_PATH);
   const [recordId, setRecordId] = useState(DEFAULT_RECORD_ID);
   const [state, setState] = useState<EditState | null>(null);
   const [preview, setPreview] = useState<Record<string, unknown> | null>(null);
@@ -91,34 +93,41 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
   const lastGoodRef = useRef(lastGood);
   const purposeRef = useRef<HTMLTextAreaElement>(null);
   const policyRef = useRef<HTMLTextAreaElement>(null);
+  const labelRef = useRef<HTMLInputElement>(null);
+  const noteRef = useRef<HTMLTextAreaElement>(null);
+  // Read current edit guards without making a draft/preview change recreate
+  // refresh and retrigger the target-loading effect below.
+  const editGuard = useRef({ draftDirty, frozenApply });
+  editGuard.current = { draftDirty, frozenApply };
   const refreshGen = useRef(0);
   const refreshAbort = useRef<AbortController | null>(null);
   const previewGen = useRef(0);
   const previewAbort = useRef<AbortController | null>(null);
   const pollInflight = useRef(false);
   const pollAbort = useRef<AbortController | null>(null);
-  const activeTarget = useRef(targetKey(mode, recordId));
+  const activeTarget = useRef(targetKey(mode, recordId, documentPath));
 
   useEffect(() => {
     lastGoodRef.current = lastGood;
   }, [lastGood]);
 
   useEffect(() => {
-    activeTarget.current = targetKey(mode, recordId);
-  }, [mode, recordId]);
+    activeTarget.current = targetKey(mode, recordId, documentPath);
+  }, [mode, recordId, documentPath]);
 
-  const editPath = mode === 'catalog_record' ? CATALOG_TABLE : METADATA_PATH;
+  const editPath = mode === 'catalog_record' ? CATALOG_TABLE : documentPath;
+  const stagingDocument = mode === 'maintained_doc' && editPath === STAGING_PATH;
 
   const refresh = useCallback(
     async (opts?: { force?: boolean; preserveOutcome?: boolean }) => {
-      if (!opts?.force && (draftDirty || frozenApply)) {
+      if (!opts?.force && (editGuard.current.draftDirty || editGuard.current.frozenApply)) {
         return;
       }
       const gen = ++refreshGen.current;
       refreshAbort.current?.abort();
       const ac = new AbortController();
       refreshAbort.current = ac;
-      const requestedTarget = targetKey(mode, recordId);
+      const requestedTarget = targetKey(mode, recordId, documentPath);
       setError(null);
       const qs = new URLSearchParams({ path: editPath });
       if (mode === 'catalog_record') {
@@ -180,13 +189,15 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
         setError(String(e));
       }
     },
-    [draftDirty, editPath, frozenApply, mode, recordId],
+    [editPath, mode, recordId, documentPath],
   );
 
   useEffect(() => {
     refreshGen.current += 1;
     refreshAbort.current?.abort();
     previewAbort.current?.abort();
+    setState(null);
+    setDraftDirty(false);
     setPreview(null);
     setFrozenApply(null);
     void refresh({ force: true });
@@ -239,7 +250,8 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
   }, [draftDirty, frozenApply, refresh]);
 
   async function runPreview() {
-    if (!state || !localToken) return;
+    if (!state || !localToken || state.path !== editPath ||
+        (mode === 'catalog_record' && state.record_id !== recordId)) return;
     const gen = ++previewGen.current;
     previewAbort.current?.abort();
     const ac = new AbortController();
@@ -247,11 +259,13 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
     setError(null);
     const purposeValue = purposeRef.current?.value ?? '';
     const policyValue = policyRef.current?.value ?? '';
-    const tk = targetKey(mode, recordId);
+    const tk = targetKey(mode, recordId, documentPath);
     const nextDoc =
       mode === 'catalog_record'
         ? { ...state.document, purpose: purposeValue }
-        : { ...state.document, update_policy: policyValue };
+        : stagingDocument
+          ? { ...state.document, revision: state.revision + 1, label: labelRef.current?.value ?? '', note: noteRef.current?.value ?? '' }
+          : { ...state.document, update_policy: policyValue };
     const req: FrozenApplyRequest = {
       path: state.path,
       record_id: state.record_id,
@@ -315,7 +329,7 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
       setError('Draft changed since preview; preview again');
       return;
     }
-    if (frozenApply.target_key !== targetKey(mode, recordId)) {
+    if (frozenApply.target_key !== targetKey(mode, recordId, documentPath)) {
       setError('Frozen preview target mismatch; preview again');
       return;
     }
@@ -366,11 +380,29 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
         <Button
           size="sm"
           variant={mode === 'maintained_doc' ? 'default' : 'outline'}
-          onClick={() => setMode('maintained_doc')}
+          onClick={() => { setDocumentPath(METADATA_PATH); setMode('maintained_doc'); }}
           data-testid="maintained-edit-mode-doc"
         >
           Maintained document
         </Button>
+      </div>
+      <div className="space-y-2">
+        <label htmlFor="maintained-target-path" className="text-xs font-medium">Editable path</label>
+        <div
+          id="maintained-target-path"
+          data-testid="maintained-edit-path"
+          role="textbox"
+          aria-label="Editable path"
+          contentEditable
+          suppressContentEditableWarning
+          className="border-input min-h-9 rounded-md border px-3 py-2 text-sm"
+          onBlur={(event) => {
+            const next = event.currentTarget.textContent?.trim() ?? '';
+            if (next === CATALOG_TABLE) setMode('catalog_record');
+            else { setDocumentPath(next); setMode('maintained_doc'); }
+          }}
+        >{editPath}</div>
+        <p className="text-muted-foreground text-xs">Only backend-allowlisted maintained files can be edited.</p>
       </div>
       {mode === 'catalog_record' ? (
         <div className="space-y-2">
@@ -387,7 +419,7 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
           <dt className="text-muted-foreground">Observation revision</dt>
           <dd data-testid="maintained-edit-revision">{state.revision}</dd>
           <dt className="text-muted-foreground">Editable path</dt>
-          <dd data-testid="maintained-edit-path">{state.path}</dd>
+          <dd data-testid="maintained-edit-observed-path">{state.path}</dd>
           <dt className="text-muted-foreground">Content SHA256</dt>
           <dd className="break-all" data-testid="maintained-edit-sha256">
             {state.sha256}
@@ -433,6 +465,27 @@ export function MaintainedEditPanel({ localToken }: { localToken: string }) {
               onInput={() => {
                 setDraftDirty(true);
               }}
+            />
+          </>
+        ) : stagingDocument ? (
+          <>
+            <label htmlFor="maintained-label" className="text-xs font-medium">Label</label>
+            <Input
+              id="maintained-label"
+              key={`label-${state?.sha256 ?? 'none'}-${state?.revision ?? 0}`}
+              ref={labelRef}
+              defaultValue={String(state?.document?.label ?? '')}
+              data-testid="maintained-edit-label"
+              onInput={() => setDraftDirty(true)}
+            />
+            <label htmlFor="maintained-note" className="text-xs font-medium">Note</label>
+            <Textarea
+              id="maintained-note"
+              key={`note-${state?.sha256 ?? 'none'}-${state?.revision ?? 0}`}
+              ref={noteRef}
+              defaultValue={String(state?.document?.note ?? '')}
+              data-testid="maintained-edit-note"
+              onInput={() => setDraftDirty(true)}
             />
           </>
         ) : (

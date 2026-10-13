@@ -315,6 +315,7 @@ export function SystemExplorer() {
             (item) => (
               <Button
                 key={item}
+                aria-label={item === 'maintained' || item === 'workflows' ? item : undefined}
                 size="sm"
                 variant={view === item ? 'default' : 'outline'}
                 onClick={() => setView(item)}

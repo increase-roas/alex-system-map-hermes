@@ -236,6 +236,14 @@ def clone_complete_catalog(dest_root: Path, *, preparation_deadline_s: float = 6
         'required_path_count': reconciliation['required_path_count'],
         'production_manifest_sha256': reconciliation['production_manifest_sha256'],
         'isolated_manifest_sha256': reconciliation['isolated_manifest_sha256'],
+        # Retain the per-file clone evidence consumed by canonical-edit callers,
+        # alongside the newer full-tree reconciliation and aggregate digests.
+        'copy_hashes_at_clone': {
+            rel: row['sha256']
+            for rel, row in content_manifest(
+                dest_root, rel_paths, deadline_check=overall.check
+            ).items()
+        },
         'reconciliation': reconciliation,
         'components_cloned_count': len(
             [p for p in required_relative_paths(ROOT) if p.startswith('components/')]
