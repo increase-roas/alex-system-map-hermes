@@ -78,10 +78,6 @@ function validateRun(file: string, extra: string[] = []): { status: number | nul
   return { status: r.status, issues: report[0].issues };
 }
 
-function validate(file: string): Issue[] {
-  return validateRun(file).issues;
-}
-
 const STRICT_STRUCTURE = ['--level', '3', '--skip-components', '--strict'];
 
 function grade(issues: Issue[]): { bad: Issue[]; requiredEmpty: number; secretsEmpty: number; registryGap: boolean } {
@@ -156,10 +152,33 @@ test('LIVE: all current components in one flow save together and pass the engine
   const saved = await patch(id, { expectedHash: hash, edits });
   assert.equal(saved.status, 200);
   assert.equal(saved.body.applied, 63);
-  const graded = grade(validate(flowFilePath(id)));
-  // 63 unconnected components side by side: the engine warns that each one is orphaned or unused. Counted, not hidden.
-  const orphaned = graded.bad.filter((i) => i.level === 1 && i.severity === 'warning' && /^(Orphaned node|Unused node)/.test(i.message));
-  const bad = graded.bad.filter((i) => !orphaned.includes(i));
-  console.log(`ALL-IN-ONE flow: 63 components saved, other issues: ${bad.length}, L1 orphaned or unused warnings: ${orphaned.length}, L4 empty required inputs: ${graded.requiredEmpty}, L4 empty secret fields: ${graded.secretsEmpty}`);
+  // Exit status checked on both runs. 63 unconnected components side by side: the engine warns that each one
+  // is orphaned or unused (level 1 warnings). Counted, not hidden.
+  const unconnected = (i: Issue) => i.level === 1 && i.severity === 'warning' && /^(Orphaned node|Unused node)/.test(i.message);
+  const a = validateRun(flowFilePath(id), ['--level', '3', '--skip-components']);
+  const aOther = a.issues.filter((i) => !unconnected(i));
+  const b = validateRun(flowFilePath(id));
+  const graded = grade(b.issues);
+  const orphaned = graded.bad.filter(unconnected);
+  const bad = graded.bad.filter((i) => !unconnected(i));
+  console.log(`ALL-IN-ONE flow: 63 components saved; levels 1+3 exit ${a.status}, other issues ${aOther.length}, unconnected warnings ${a.issues.length - aOther.length}; all levels exit ${b.status}, other issues ${bad.length}, unconnected warnings ${orphaned.length}, L4 empty required inputs ${graded.requiredEmpty}, L4 empty secret fields ${graded.secretsEmpty}`);
+  assert.equal(a.status, 0, 'levels 1 and 3 exit 0');
+  assert.deepEqual(aOther, []);
+  assert.equal(b.status, graded.requiredEmpty > 0 ? 1 : 0, 'all levels exit 1 only because of empty required inputs');
   assert.deepEqual(bad, []);
+});
+
+test('LIVE negative controls: a broken file makes the validator exit non-zero and the grading reports it', { skip: !enabled && 'set LANGFLOW_LIVE_ENGINE=1 and LANGFLOW_LFX_BIN to run', timeout: 120_000 }, () => {
+  const file = path.join(tmp, 'broken-edge.json');
+  fs.writeFileSync(file, JSON.stringify({ id: randomUUID(), name: 'broken', data: { nodes: [], edges: [{ id: 'e1', source: 'Missing-aaaaa', target: 'Missing-bbbbb', data: { sourceHandle: {}, targetHandle: {} } }] } }));
+  const a = validateRun(file, STRICT_STRUCTURE);
+  const b = validateRun(file);
+  assert.notEqual(a.status, 0, 'strict levels 1+3 fail on an edge to a missing component');
+  assert.notEqual(b.status, 0);
+  assert.ok(grade(b.issues).bad.length > 0, 'the grading does not accept the error');
+  const noId = path.join(tmp, 'no-id.json');
+  fs.writeFileSync(noId, JSON.stringify({ name: 'no id', data: { nodes: [], edges: [] } }));
+  const c = validateRun(noId, STRICT_STRUCTURE);
+  assert.notEqual(c.status, 0, 'a flow without a top-level id fails level 1');
+  console.log(`NEGATIVE controls: broken edge strict exit ${a.status}, all levels exit ${b.status} (${grade(b.issues).bad.length} unaccepted issues); missing id strict exit ${c.status}`);
 });

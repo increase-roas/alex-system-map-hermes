@@ -18,6 +18,7 @@ import * as flowRoute from '../../../app/api/langflow/flows/[flowId]/route';
 import * as runsRoute from '../../../app/api/langflow/flows/[flowId]/runs/route';
 import { engineEnv, runnerConfig } from '../runner';
 import { flowFilePath } from '../store';
+import { edgeTypeMismatches, type SavedFlow } from './edge-compat';
 import { EXECUTABLE_COMPONENTS, LOCAL_NOT_ENABLED } from '../tiers';
 
 const enabled = process.env.LANGFLOW_LIVE_ENGINE === '1' && !!process.env.LANGFLOW_LFX_BIN;
@@ -168,17 +169,14 @@ async function buildAndRun(c: Case): Promise<{ status: string; output: string | 
   const cfg = runnerConfig();
   const v = spawnSync(cfg.lfxBin!, ['validate', '--skip-components', '--skip-credentials', '-f', 'json', flowFilePath(id)], { env: engineEnv(cfg) as NodeJS.ProcessEnv, encoding: 'utf8', timeout: 120_000 });
   const vIssues = (JSON.parse(v.stdout.slice(v.stdout.indexOf('['))) as Array<{ issues: Array<{ level: number; severity: string; message: string }> }>)[0].issues;
-  const savedFlow = JSON.parse(fs.readFileSync(flowFilePath(id), 'utf8')) as { data: { edges: Array<{ data: { sourceHandle: { output_types?: string[] }; targetHandle: { inputTypes?: string[]; output_types?: string[]; fieldName?: string } } }> } };
-  const realMismatch = savedFlow.data.edges.filter((e) => {
-    const src = e.data.sourceHandle.output_types?.[0];
-    const accepts = e.data.targetHandle.fieldName ? (e.data.targetHandle.inputTypes ?? []) : [src];
-    return !src || !(accepts.includes(src) || accepts.includes('Any'));
-  }).length;
+  const savedFlow = JSON.parse(fs.readFileSync(flowFilePath(id), 'utf8')) as SavedFlow;
+  const mismatches = edgeTypeMismatches(savedFlow);
+  const realMismatch = mismatches.length;
   const typeWarnings = vIssues.filter((i) => i.level === 3 && i.severity === 'warning' && /^Possible type mismatch on edge/.test(i.message));
   const unusedNotify = vIssues.filter((i) => c.component === 'Listen' && i.level === 1 && i.severity === 'warning' && /^Unused node/.test(i.message));
   const other = vIssues.filter((i) => !typeWarnings.includes(i) && !unusedNotify.includes(i));
   const fine = v.status === 0 && realMismatch === 0 && other.length === 0 && unusedNotify.length <= 2;
-  validation.set(c.component, `${fine ? 'ok' : 'NOT OK'}: exit ${v.status}, ${savedFlow.data.edges.length} edges all type-compatible by inputTypes: ${realMismatch === 0}, heuristic type warnings: ${typeWarnings.length}, other issues: ${other.length ? other.map((i) => `L${i.level} ${i.severity}: ${i.message}`).join(' | ') : 0}`);
+  validation.set(c.component, `${fine ? 'ok' : 'NOT OK'}: exit ${v.status}, ${savedFlow.data.edges.length} edges all type-compatible by inputTypes: ${realMismatch === 0}, heuristic type warnings: ${typeWarnings.length}, other issues: ${other.length ? other.map((i) => `L${i.level} ${i.severity}: ${i.message}`).join(' | ') : 0}${mismatches.length ? `; incompatible: ${mismatches.join(' | ')}` : ''}`);
   const started = await runsRoute.POST(new Request(`http://127.0.0.1:3200/api/langflow/flows/${id}/runs`, {
     method: 'POST', headers: headers({ 'x-browser-session': SESSION, 'idempotency-key': `live-${randomUUID()}` }), body: JSON.stringify({ input: c.input }),
   }), { params: Promise.resolve({ flowId: id }) });

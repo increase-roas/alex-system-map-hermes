@@ -181,3 +181,19 @@ test('F2 LIVE: every editable default of all 63 installed components re-saves by
     useIndex(SUBSET);
   }
 });
+
+// ---- re-review: the edge compatibility proof used by the live tests must reject bad edges ----
+
+test('edge proof: compatible normal and loop edges pass; incompatible ones (including a loop feedback) are reported', async () => {
+  const { edgeTypeMismatches } = await import('./edge-compat');
+  const node = (id: string, outputs: unknown[] = []) => ({ id, data: { node: { outputs } } });
+  const loopOut = { name: 'item', types: ['Data', 'JSON'], loop_types: ['Message'], allows_loop: true };
+  const edge = (source: string, target: string, out: string, th: Record<string, unknown>) => ({ source, target, data: { sourceHandle: { output_types: [out] }, targetHandle: th } });
+  const flow = (edges: unknown[]) => ({ data: { nodes: [node('A'), node('L', [loopOut]), node('C')], edges } }) as never;
+  assert.deepEqual(edgeTypeMismatches(flow([edge('A', 'C', 'Message', { fieldName: 'input_value', inputTypes: ['Message'] })])), []);
+  assert.deepEqual(edgeTypeMismatches(flow([edge('A', 'L', 'Message', { name: 'item', output_types: ['Data'] })])), [], 'Message is in the loop_types');
+  assert.deepEqual(edgeTypeMismatches(flow([edge('A', 'L', 'JSON', { name: 'item', output_types: ['Data'] })])), [], 'JSON is in the loop output types');
+  assert.equal(edgeTypeMismatches(flow([edge('A', 'L', 'Embeddings', { name: 'item', output_types: ['Data'] })])).length, 1, 'Embeddings into a loop feedback is refused');
+  assert.equal(edgeTypeMismatches(flow([edge('A', 'C', 'Embeddings', { fieldName: 'input_value', inputTypes: ['Message'] })])).length, 1);
+  assert.equal(edgeTypeMismatches(flow([edge('A', 'C', 'Message', { name: 'nope', output_types: ['Data'] })])).length, 1, 'a feedback onto a component with no such loop output is refused');
+});
