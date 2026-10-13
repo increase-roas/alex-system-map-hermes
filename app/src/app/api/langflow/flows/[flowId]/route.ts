@@ -1,6 +1,6 @@
 import { fail, ok, readJson, screenDeep } from '@/lib/langflow/api';
 import { componentTemplate } from '@/lib/langflow/catalog';
-import { applyEdits, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, validateFlow } from '@/lib/langflow/model';
+import { applyEdits, editSubject, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, validateFlow } from '@/lib/langflow/model';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
 import { runnerConfig } from '@/lib/langflow/runner';
 import { isValidFlowId, readFlow, saveFlow, StoreConflictError } from '@/lib/langflow/store';
@@ -25,7 +25,16 @@ function position(value: unknown): { x: number; y: number } | null {
 function parseEdit(value: unknown): FlowEdit | null {
   if (!value || typeof value !== 'object') return null;
   const e = value as Record<string, unknown>;
+  if (e.kind === 'disconnect') {
+    return typeof e.edgeId === 'string' && e.edgeId.length <= 2000 ? { kind: 'disconnect', edgeId: e.edgeId } : null;
+  }
   if (typeof e.nodeId !== 'string' || e.nodeId.length > 200) return null;
+  if (e.kind === 'deleteNode') return { kind: 'deleteNode', nodeId: e.nodeId };
+  if (e.kind === 'connect') {
+    const ok = [e.sourceOutput, e.target, e.targetInput].every((v) => typeof v === 'string' && v.length > 0 && v.length <= 200);
+    if (!ok || (e.targetLoop !== undefined && typeof e.targetLoop !== 'boolean')) return null;
+    return { kind: 'connect', nodeId: e.nodeId, sourceOutput: e.sourceOutput as string, target: e.target as string, targetInput: e.targetInput as string, ...(e.targetLoop === true ? { targetLoop: true } : {}) };
+  }
   if (e.kind === 'move') {
     const p = position(e.position);
     return p ? { kind: 'move', nodeId: e.nodeId, position: p } : null;
@@ -98,7 +107,7 @@ export async function PATCH(request: Request, { params }: Params) {
   const { flow, applied, rejected } = applyEdits(stored.flow, edits, editContext());
   if (rejected.length > 0) {
     return fail(422, 'Some edits are not allowed, so nothing was saved.', {
-      rejected: rejected.map((r) => ({ kind: r.edit.kind, nodeId: r.edit.nodeId, index: edits.indexOf(r.edit), reason: r.reason })),
+      rejected: rejected.map((r) => ({ kind: r.edit.kind, nodeId: editSubject(r.edit), index: edits.indexOf(r.edit), reason: r.reason })),
     });
   }
   if (b.dryRun === true) {

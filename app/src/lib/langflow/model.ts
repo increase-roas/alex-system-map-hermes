@@ -8,7 +8,7 @@
 
 import { createHash } from 'node:crypto';
 
-import { decodeHandle, HandleDecodeError } from './handles';
+import { decodeHandle, encodeHandle, HandleDecodeError, type HandleObject } from './handles';
 import { EXECUTABLE_COMPONENTS, runBlockReason } from './tiers';
 
 export { EXECUTABLE_COMPONENTS };
@@ -74,6 +74,9 @@ export type CanvasField = {
   connected: boolean;
 };
 
+/** A connection point: an output (source) or an input field that accepts connections (target). */
+export type CanvasPort = { name: string; label: string; types: string[]; list: boolean; loop: boolean };
+
 export type CanvasNode = {
   id: string;
   componentType: string;
@@ -82,6 +85,8 @@ export type CanvasNode = {
   isNote: boolean;
   executable: boolean;
   fields: CanvasField[];
+  outputs: CanvasPort[];
+  inputs: CanvasPort[];
 };
 
 export type CanvasEdge = {
@@ -90,6 +95,8 @@ export type CanvasEdge = {
   target: string;
   sourceOutput: string | null;
   targetInput: string | null;
+  /** True for a loop's feedback connection: it lands on the loop's output, not on an input field. */
+  targetLoop: boolean;
   sourceTypes: string[];
   targetTypes: string[];
   decodeError?: string;
@@ -113,7 +120,16 @@ export type FlowEdit =
   | { kind: 'move'; nodeId: string; position: { x: number; y: number } }
   | { kind: 'setField'; nodeId: string; field: string; value: string | number | boolean }
   | { kind: 'rename'; nodeId: string; label: string }
-  | { kind: 'addNode'; nodeId: string; componentType: string; position: { x: number; y: number } };
+  | { kind: 'addNode'; nodeId: string; componentType: string; position: { x: number; y: number } }
+  | { kind: 'deleteNode'; nodeId: string }
+  /** nodeId is the source component. targetLoop: connect into a loop's feedback (an output that allows loops). */
+  | { kind: 'connect'; nodeId: string; sourceOutput: string; target: string; targetInput: string; targetLoop?: boolean }
+  | { kind: 'disconnect'; edgeId: string };
+
+/** The component or connection an edit is about, for messages. */
+export function editSubject(edit: FlowEdit): string {
+  return edit.kind === 'disconnect' ? edit.edgeId : edit.nodeId;
+}
 
 /** What applyEdits needs from the engine. Server side it is backed by catalog.ts. */
 export type EditContext = {
@@ -234,6 +250,32 @@ function fieldsOf(node: LfNode, connected: Set<string>): CanvasField[] {
   return out;
 }
 
+function stringList(value: unknown): string[] {
+  return Array.isArray(value) ? value.filter((v): v is string => typeof v === 'string') : [];
+}
+
+type LfOutput = JsonObject & { name?: unknown; display_name?: unknown; types?: unknown; selected?: unknown; allows_loop?: unknown; loop_types?: unknown; hidden?: unknown };
+
+function outputsOf(node: LfNode): LfOutput[] {
+  const outputs = node.data?.node?.outputs;
+  return Array.isArray(outputs) ? outputs.filter((o): o is LfOutput => !!o && typeof o === 'object' && typeof (o as LfOutput).name === 'string') : [];
+}
+
+function portsOf(node: LfNode): { outputs: CanvasPort[]; inputs: CanvasPort[] } {
+  const outputs: CanvasPort[] = outputsOf(node)
+    .filter((o) => o.hidden !== true)
+    .map((o) => ({ name: String(o.name), label: typeof o.display_name === 'string' ? o.display_name : String(o.name), types: stringList(o.types), list: false, loop: o.allows_loop === true }));
+  const inputs: CanvasPort[] = [];
+  for (const [name, raw] of Object.entries(templateOf(node))) {
+    if (!raw || typeof raw !== 'object' || Array.isArray(raw)) continue;
+    const f = raw as LfTemplateField & { input_types?: unknown; list?: unknown };
+    const types = stringList(f.input_types);
+    if (f.show === false || types.length === 0) continue;
+    inputs.push({ name, label: typeof f.display_name === 'string' && f.display_name ? f.display_name : name, types, list: f.list === true, loop: false });
+  }
+  return { outputs, inputs };
+}
+
 function connectedInputs(raw: LfFlow): Set<string> {
   const set = new Set<string>();
   for (const edge of raw.data.edges) {
@@ -261,6 +303,7 @@ export function toCanvas(raw: LfFlow): CanvasFlow {
       isNote,
       executable: (EXECUTABLE_COMPONENTS as readonly string[]).includes(componentType),
       fields: isNote ? [] : fieldsOf(node, connected),
+      ...(isNote ? { outputs: [], inputs: [] } : portsOf(node)),
     };
   });
   const edges: CanvasEdge[] = raw.data.edges.map((edge) => {
@@ -270,6 +313,7 @@ export function toCanvas(raw: LfFlow): CanvasFlow {
       target: String(edge.target),
       sourceOutput: null as string | null,
       targetInput: null as string | null,
+      targetLoop: false,
       sourceTypes: [] as string[],
       targetTypes: [] as string[],
     };
@@ -278,8 +322,14 @@ export function toCanvas(raw: LfFlow): CanvasFlow {
       const t = decodeHandle(edge.targetHandle);
       base.sourceOutput = typeof s.name === 'string' ? s.name : null;
       base.sourceTypes = Array.isArray(s.output_types) ? s.output_types.filter((x): x is string => typeof x === 'string') : [];
-      base.targetInput = typeof t.fieldName === 'string' ? t.fieldName : null;
-      base.targetTypes = Array.isArray(t.inputTypes) ? t.inputTypes.filter((x): x is string => typeof x === 'string') : [];
+      if (typeof t.fieldName === 'string') {
+        base.targetInput = t.fieldName;
+        base.targetTypes = stringList(t.inputTypes);
+      } else if (typeof t.name === 'string') {
+        base.targetInput = t.name;
+        base.targetLoop = true;
+        base.targetTypes = stringList(t.output_types);
+      }
     } catch (err) {
       return { ...base, decodeError: err instanceof HandleDecodeError ? err.message : 'handle could not be read' };
     }
@@ -319,8 +369,12 @@ export function applyEdits(raw: LfFlow, edits: FlowEdit[], ctx: EditContext = {}
   const rejected: EditRejection[] = [];
   let applied = 0;
   for (const edit of edits) {
-    if (edit.kind === 'addNode') {
-      const reason = addNode(flow, edit, ctx);
+    if (edit.kind === 'addNode' || edit.kind === 'deleteNode' || edit.kind === 'connect' || edit.kind === 'disconnect') {
+      const reason =
+        edit.kind === 'addNode' ? addNode(flow, edit, ctx)
+          : edit.kind === 'deleteNode' ? deleteNode(flow, edit)
+            : edit.kind === 'connect' ? connect(flow, edit)
+              : disconnect(flow, edit);
       if (reason) rejected.push({ edit, reason });
       else applied += 1;
       continue;
@@ -401,6 +455,106 @@ function addNode(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'addNode' }>, ctx
     type: 'genericNode',
     position: { x, y },
     data: { id: edit.nodeId, type: edit.componentType, node: template, showNode: template.minimized !== true },
+  });
+  return null;
+}
+
+function deleteNode(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'deleteNode' }>): string | null {
+  const node = findNode(flow, edit.nodeId);
+  if (!node) return `No component with id "${edit.nodeId}" in this flow.`;
+  flow.data.nodes = flow.data.nodes.filter((n) => n !== node);
+  flow.data.edges = flow.data.edges.filter((e) => String(e.source) !== edit.nodeId && String(e.target) !== edit.nodeId);
+  return null;
+}
+
+function disconnect(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'disconnect' }>): string | null {
+  const before = flow.data.edges.length;
+  flow.data.edges = flow.data.edges.filter((e) => String(e.id) !== edit.edgeId);
+  return flow.data.edges.length === before ? 'That connection is not in this flow.' : null;
+}
+
+function reaches(flow: LfFlow, from: string, to: string): boolean {
+  const next = new Map<string, string[]>();
+  for (const e of flow.data.edges) next.set(String(e.source), [...(next.get(String(e.source)) ?? []), String(e.target)]);
+  const seen = new Set<string>();
+  const stack = [from];
+  while (stack.length) {
+    const id = stack.pop()!;
+    if (id === to) return true;
+    if (seen.has(id)) continue;
+    seen.add(id);
+    stack.push(...(next.get(id) ?? []));
+  }
+  return false;
+}
+
+function connect(flow: LfFlow, edit: Extract<FlowEdit, { kind: 'connect' }>): string | null {
+  const source = findNode(flow, edit.nodeId);
+  const target = findNode(flow, edit.target);
+  if (!source) return `No component with id "${edit.nodeId}" in this flow.`;
+  if (!target) return `No component with id "${edit.target}" in this flow.`;
+  if (source === target) return 'A component cannot connect to itself.';
+  if (componentTypeOf(source) === 'note' || componentTypeOf(target) === 'note') return 'Notes cannot be connected.';
+  const sLabel = labelOf(source);
+  const tLabel = labelOf(target);
+  const output = outputsOf(source).find((o) => o.name === edit.sourceOutput && o.hidden !== true);
+  if (!output) return `"${sLabel}" has no output named "${edit.sourceOutput}".`;
+  const sendTypes = stringList(output.types);
+  const selected = typeof output.selected === 'string' && output.selected ? output.selected : null;
+  const outputTypes = selected ? [selected] : sendTypes;
+  const sendAll = Array.from(new Set([...sendTypes, ...outputTypes]));
+  const sourceHandle: HandleObject = { dataType: componentTypeOf(source), id: String(source.id), name: String(output.name), output_types: outputTypes };
+
+  let targetHandle: HandleObject;
+  let accepts: string[];
+  let multiple = false;
+  if (edit.targetLoop) {
+    const loopOut = outputsOf(target).find((o) => o.name === edit.targetInput && o.allows_loop === true);
+    if (!loopOut) return `"${tLabel}" has no loop output named "${edit.targetInput}".`;
+    const loopSelected = typeof loopOut.selected === 'string' && loopOut.selected ? [loopOut.selected] : stringList(loopOut.types);
+    targetHandle = { dataType: componentTypeOf(target), id: String(target.id), name: String(loopOut.name), output_types: loopSelected };
+    accepts = Array.from(new Set([...stringList(loopOut.types), ...stringList(loopOut.loop_types)]));
+  } else {
+    const field = templateOf(target)[edit.targetInput] as (LfTemplateField & { input_types?: unknown; list?: unknown }) | undefined;
+    if (!field || typeof field !== 'object' || field.show === false) return `"${tLabel}" has no input named "${edit.targetInput}".`;
+    accepts = stringList(field.input_types);
+    if (accepts.length === 0) return `"${tLabel}" → "${field.display_name ?? edit.targetInput}" is a setting, not an input that takes a connection.`;
+    multiple = field.list === true;
+    targetHandle = { fieldName: edit.targetInput, id: String(target.id), inputTypes: accepts, type: typeof field.type === 'string' ? field.type : 'str' };
+    if (typeof field.type === 'string') accepts = [...accepts, field.type];
+  }
+  const compatible = accepts.includes('Any') || sendAll.some((t) => accepts.includes(t));
+  if (!compatible) {
+    return `Types do not match: "${sLabel}" → "${String(output.name)}" sends ${sendAll.join(' or ') || 'nothing typed'}, but "${tLabel}" → "${edit.targetInput}" takes ${accepts.join(' or ')}.`;
+  }
+  const sh = encodeHandle(sourceHandle);
+  const th = encodeHandle(targetHandle);
+  const incoming = flow.data.edges.filter((e) => {
+    if (String(e.target) !== String(target.id)) return false;
+    try {
+      const t = decodeHandle(e.targetHandle);
+      return edit.targetLoop ? t.name === edit.targetInput && t.fieldName === undefined : t.fieldName === edit.targetInput;
+    } catch {
+      return false;
+    }
+  });
+  if (incoming.some((e) => String(e.source) === String(source.id) && e.sourceHandle === sh)) return 'That connection already exists.';
+  if (incoming.length > 0 && !multiple && !edit.targetLoop) {
+    return `"${tLabel}" → "${edit.targetInput}" already has a connection and takes only one. Disconnect it first.`;
+  }
+  if (!edit.targetLoop && reaches(flow, String(target.id), String(source.id))) {
+    return 'That connection would make the flow loop back on itself. Only a Loop component may feed back.';
+  }
+  flow.data.edges.push({
+    id: `xy-edge__${String(source.id)}${sh}-${String(target.id)}${th}`,
+    source: String(source.id),
+    target: String(target.id),
+    sourceHandle: sh,
+    targetHandle: th,
+    data: { sourceHandle, targetHandle },
+    animated: false,
+    className: '',
+    selected: false,
   });
   return null;
 }

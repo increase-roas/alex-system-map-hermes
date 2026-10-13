@@ -27,7 +27,17 @@ export function decodeHandle(raw: unknown): HandleObject {
   return parsed as HandleObject;
 }
 
-/** Same encoding Langflow uses (default JSON separators, quotes swapped for "œ"). */
+/** Langflow's handle text: keys sorted, ", " and ": " separators (as in its exported flows). */
+function langflowStringify(value: unknown): string {
+  if (Array.isArray(value)) return `[${value.map(langflowStringify).join(', ')}]`;
+  if (value && typeof value === 'object') {
+    const obj = value as Record<string, unknown>;
+    return `{${Object.keys(obj).sort().map((k) => `${JSON.stringify(k)}: ${langflowStringify(obj[k])}`).join(', ')}}`;
+  }
+  return JSON.stringify(value) ?? 'null';
+}
+
+/** Same bytes Langflow writes: sorted keys, ", " and ": " separators, every double quote swapped for "œ". */
 export function encodeHandle(handle: HandleObject): string {
-  return JSON.stringify(handle).replaceAll('"', 'œ');
+  return langflowStringify(handle).replaceAll('"', 'œ');
 }

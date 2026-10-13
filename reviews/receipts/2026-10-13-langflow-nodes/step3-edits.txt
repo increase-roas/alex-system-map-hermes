@@ -1,0 +1,35 @@
+Step 3 receipt (delete, connect, disconnect with type-safe handles). 2026-10-13 11:35 EDT. claude-opus-5-5.
+Command: LANGFLOW_LFX_BIN=... node --import ./src/lib/langflow/tests/register.mjs --test <8 test files>
+✔ catalog route: owner and listed tailnet read; unlisted tailnet is refused; no file paths leak (3.805375ms)
+✔ route: malformed structural edits are refused before they reach the model (1.270917ms)
+✔ route: tailnet and token-less callers get 403 on structural edits and dry runs (5.886875ms)
+✔ connect: rebuilding the fixture connection gives the exact bytes Langflow wrote (0.429958ms)
+✔ connect: compatible types connect; the canvas shows ports and the typed connection (0.412833ms)
+✔ connect: mismatched types, self links, settings, unknown ports, second links, duplicates and cycles are refused (8.978541ms)
+✔ connect: a loop feedback lands on the loop output, like Langflow loops (0.30675ms)
+✔ disconnect and deleteNode: connections and components go away cleanly (0.45ms)
+✔ route: a type mismatch is refused and nothing is saved; a valid connect, disconnect and delete save (6.7595ms)
+✔ route: malformed connect, disconnect and delete shapes are refused (1.229709ms)
+✔ handles: decode and encode round trip in Langflow form (0.753292ms)
+✔ handles: encoding reproduces the exact bytes of every handle Langflow wrote in the fixtures (0.683708ms)
+✔ handles: unreadable handles throw a typed error (0.183458ms)
+✔ policy: a tailnet device is read-only even when the access file grants more (0.393125ms)
+✔ policy: a tailnet login that is not listed is refused (0.185333ms)
+✔ policy: a malformed access file denies everything and says why (1.573916ms)
+✔ harmless chat-echo flow reads as two executable components joined by one typed connection (3.249875ms)
+✔ an unreadable connection is an error that names the edge (0.303833ms)
+✔ tailnet identity cannot bypass read-only boundary with a loopback Host and valid token (2.666917ms)
+✔ tailnet GET requires a tailnet Host even with a spoofed local Host (0.221833ms)
+✔ tailnet reads pass middleware but every non-read method is refused (0.654209ms)
+✔ status: a tailnet device that is not listed is refused; the owner sees save and run (22.247417ms)
+✔ import: a flow with a broken connection is refused, not saved (1.025167ms)
+✔ save: malformed edits are refused before they reach the model (0.239792ms)
+✔ tailnet: a listed device can read but not save or run (1.429875ms)
+✔ stop and unknown ids: malformed or missing ids get a plain 404 (0.877333ms)
+ℹ tests 78
+ℹ pass 78
+ℹ fail 0
+ℹ skipped 0
+tsc --noEmit exit 0
+✔ No ESLint warnings or errors
+Engine proof of connect-built handles: see live-components.txt (step 6), where every flow is wired through this connect edit.

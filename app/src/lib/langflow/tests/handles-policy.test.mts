@@ -25,6 +25,20 @@ test('handles: decode and encode round trip in Langflow form', () => {
   assert.deepEqual(decodeHandle(encoded), handle);
 });
 
+test('handles: encoding reproduces the exact bytes of every handle Langflow wrote in the fixtures', () => {
+  let checked = 0;
+  for (const name of ['chat-echo.json', 'basic-prompting.json']) {
+    const flow = JSON.parse(fs.readFileSync(new URL(`../fixtures/${name}`, import.meta.url), 'utf8')) as { data: { edges: Array<{ sourceHandle: string; targetHandle: string }> } };
+    for (const edge of flow.data.edges) {
+      for (const raw of [edge.sourceHandle, edge.targetHandle]) {
+        assert.equal(encodeHandle(decodeHandle(raw)), raw);
+        checked += 1;
+      }
+    }
+  }
+  assert.ok(checked >= 8, `checked ${checked} handles`);
+});
+
 test('handles: unreadable handles throw a typed error', () => {
   assert.throws(() => decodeHandle('not json'), HandleDecodeError);
   assert.throws(() => decodeHandle(42), HandleDecodeError);
