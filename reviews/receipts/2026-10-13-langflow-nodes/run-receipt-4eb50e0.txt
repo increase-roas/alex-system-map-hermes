@@ -1,0 +1,229 @@
+Run receipt. Commit 4eb50e0 (branch langflow-dashboard, clean tree apart from pre-existing .codex/ and tools/__pycache__). 2026-10-13T18:13Z. claude-opus-5-5.
+Engine: lfx 1.12.5; component_index.json sha256 18a74ad8e33b19f91da9e8277fb1376496b226484933d99f0e4ed116d244bb6f
+
+1. Unit and route suite (11 files, live catalog and F2 sweep enabled by LANGFLOW_LFX_BIN):
+   cd app && LANGFLOW_LFX_BIN=~/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=~/.venvs/langflow-dashboard/config node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts src/lib/langflow/tests/network-boundary.test.mts src/lib/langflow/tests/catalog.test.mts src/lib/langflow/tests/edits.test.mts src/lib/langflow/tests/settings.test.mts src/lib/langflow/tests/review-fixes.test.mts src/lib/langflow/tests/review2.test.mts
+   LIVE catalog: lfx 1.12.5, langflow 1.12.5, 63 current, tiers {"ai":21,"code_files":13,"internet":3,"local":22,"server":4}, runs 18
+   ✔ catalog: legacy components are left out and every entry carries ports and a tier (12.7785ms)
+   ✔ catalog: templates are fresh copies and code hashes follow the index scheme (0.901625ms)
+   ✔ catalog: missing or broken index is reported, not invented (0.290125ms)
+   ✔ catalog route: owner and listed tailnet read; unlisted tailnet is refused; no file paths leak (4.370042ms)
+   ✔ LIVE catalog: the installed engine offers 63 current components in the audited tiers (32.204834ms)
+   ✔ addNode: the engine template is copied in with Langflow's node shape and id style (13.94075ms)
+   ✔ addNode: unknown, legacy, badly named, duplicate or unplaced components are refused with a reason (0.430125ms)
+   ✔ addNode: names with spaces get Langflow-style ids (0.127375ms)
+   ✔ route addNode: saves for the owner; a dry run previews and writes nothing; a refused add saves nothing (9.972542ms)
+   ✔ route: malformed structural edits are refused before they reach the model (1.472458ms)
+   ✔ route: tailnet and token-less callers get 403 on structural edits and dry runs (50.355541ms)
+   ✔ content hash is stable: an add then nothing else changes exactly one node (0.3005ms)
+   ✔ connect: rebuilding the fixture connection gives the exact bytes Langflow wrote (0.447917ms)
+   ✔ connect: compatible types connect; the canvas shows ports and the typed connection (0.521292ms)
+   ✔ connect: mismatched types, self links, settings, unknown ports, second links, duplicates and cycles are refused (19.466208ms)
+   ✔ connect: a loop feedback lands on the loop output, like Langflow loops (2.093084ms)
+   ✔ disconnect and deleteNode: connections and components go away cleanly (2.224167ms)
+   ✔ route: a type mismatch is refused and nothing is saved; a valid connect, disconnect and delete save (11.629959ms)
+   ✔ route: malformed connect, disconnect and delete shapes are refused (3.832458ms)
+   ✔ handles: decode and encode round trip in Langflow form (1.260583ms)
+   ✔ handles: encoding reproduces the exact bytes of every handle Langflow wrote in the fixtures (19.102625ms)
+   ✔ handles: unreadable handles throw a typed error (0.257125ms)
+   ✔ policy: missing access file gives the owner everything on this Mac and nobody else (33.715625ms)
+   ✔ policy: loopback with the local token is the owner (0.350959ms)
+   ✔ policy: a tailnet device is read-only even when the access file grants more (0.433875ms)
+   ✔ policy: a tailnet login that is not listed is refused (0.208625ms)
+   ✔ policy: non-loopback hosts and foreign origins are refused (0.201083ms)
+   ✔ policy: a flow allow-list stops the owner from reaching other flows (1.419125ms)
+   ✔ policy: a malformed access file denies everything and says why (2.550583ms)
+   ✔ harmless chat-echo flow reads as two executable components joined by one typed connection (1.715334ms)
+   ✔ chat-echo validates with no errors and can run (29.7315ms)
+   ✔ basic-prompting needs a model and is blocked from running here (5.967583ms)
+   ✔ no edits: applying nothing returns exactly the saved flow (7.500916ms)
+   ✔ move edit changes only that node position and keeps unknown fields (0.529291ms)
+   ✔ code is read-only and the rejection says where to edit it (0.28975ms)
+   ✔ secret settings cannot be set from the dashboard, and the placeholder is never saved back (0.972125ms)
+   ✔ typed settings are checked: whole numbers, true/false, and listed options (0.241625ms)
+   ✔ unknown component, bad position and bad name are rejected with a reason (3.731167ms)
+   ✔ rename sets the visible name only (0.5195ms)
+   ✔ a cycle is reported as a warning, not an error (0.258625ms)
+   ✔ an unreadable connection is an error that names the edge (0.277916ms)
+   ✔ export replaces every secret value and leaves nothing that looks like a key (2.146209ms)
+   ✔ content hash does not depend on key order, and changes when content changes (0.325ms)
+   ✔ run gate: an enabled component whose code differs from the engine is refused (1.293334ms)
+   ✔ run gate: without the engine nothing can be checked, so nothing runs (0.16175ms)
+   ✔ run gate: a component renamed to an enabled type still needs the engine code to match (0.92125ms)
+   ✔ tailnet identity cannot bypass read-only boundary with a loopback Host and valid token (2.84225ms)
+   ✔ tailnet GET requires a tailnet Host even with a spoofed local Host (0.232541ms)
+   ✔ tailnet reads pass middleware but every non-read method is refused (1.236958ms)
+   ✔ cross-site local requests cannot bootstrap access and local owner still works (1.488041ms)
+   ✔ remote health response never exposes the local token or runtime paths (3.266ms)
+   ✔ security C1: a real component labelled as a note is not skipped; only node.type noteNode is a note (engine rule) (10.915334ms)
+   ✔ security H1: the code check compares the full sha256, not a 48-bit prefix (0.11375ms)
+   ✔ security M1: values under secret-looking keys in JSON settings are refused, stripped on import, hidden on display and export (9.253125ms)
+   ✔ security M2 and L2: deeply nested JSON values and oversized add batches are refused before the model (4.174166ms)
+   ✔ security L1: prompts with too many variables are refused (0.500709ms)
+   ✔ correctness H1: a Message output can feed a loop back (loop_types), and the canvas port carries those types (0.590958ms)
+   ✔ correctness H2: a newer prompt value keeps its place, so a connection to its new variable still follows it (0.333166ms)
+   ✔ correctness M3: a loop feedback is not a cycle, whatever order the wires are made in (0.270959ms)
+   ✔ correctness M4: an emptied box is never saved as 0; hex, exponent and boolean values are not numbers (0.497459ms)
+   ✔ correctness M6: a null value is refused with a reason and an index, not as an unreadable batch (30.365708ms)
+   ✔ correctness L7: names like "constructor" are unknown, not object internals (0.192875ms)
+   ✔ correctness L8: switching to double brackets resyncs the prompt variables (0.681667ms)
+   ✔ security L3: engine error text loses the home folder path (0.187666ms)
+   LIVE F2 sweep: lfx 1.12.5, 63 components, 256 editable settings re-saved byte for byte, 0 refused
+   ✔ F1: a secret nested in a list or object under a secret-looking key is refused on edit (13.8365ms)
+   ✔ F1: nested secrets are removed on import before the file reaches disk, and the count is reported (8.009ms)
+   ✔ F1: a file that already holds nested secrets never shows them in read, dry run or export responses (34.616958ms)
+   ✔ F2: an optional number can be left empty or cleared; a required one cannot (0.441833ms)
+   ✔ F2: "no value" sent back for a setting without a value changes nothing (0.205541ms)
+   ✔ F2: every editable default of every component in the test index re-saves byte for byte (46.172958ms)
+   ✔ F2 LIVE: every editable default of all 63 installed components re-saves byte for byte (43.51325ms)
+   ✔ edge proof: compatible normal and loop edges pass; incompatible ones (including a loop feedback) are reported (1.117ms)
+   ✔ status: a tailnet device that is not listed is refused; the owner sees save and run (12.399959ms)
+   ✔ import: bad input is refused with a reason; only the owner can import (3.222209ms)
+   ✔ import: a flow with a broken connection is refused, not saved (1.934917ms)
+   ✔ import: secret values are removed on the way in and reported (5.595708ms)
+   ✔ list and detail: the saved flow is shown with its version and no secret values (2.525458ms)
+   ✔ save: a stale version is refused; a valid move saves; a refused edit saves nothing (39.852041ms)
+   ✔ save: malformed edits are refused before they reach the model (0.380166ms)
+   ✔ tailnet: a listed device can read but not save or run (9.3215ms)
+   ✔ runs: the run gate refuses missing session, empty message, unrunnable and unconfigured runs (7.266708ms)
+   ✔ runs: a harmless run returns a real result, a repeat click returns the same run, and history is per session (817.555458ms)
+   ✔ runs: a second click while a run is going is refused, and Stop ends it (104.895458ms)
+   ✔ stop and unknown ids: malformed or missing ids get a plain 404 (0.5085ms)
+   ✔ runner: no engine configured is a clear failure, not a crash (0.456709ms)
+   ✔ runner: a missing engine binary is reported by path-free message (0.086334ms)
+   ✔ runner: a successful engine result is returned as the output (289.228917ms)
+   ✔ runner: an engine error is reported with its message (911.833416ms)
+   ✔ runner: output with no readable result is bad_output (759.869791ms)
+   ✔ runner: the input is passed as an argument, never through a shell (168.355792ms)
+   ✔ runner: provider keys in the dashboard environment do not reach the engine (173.821042ms)
+   ✔ runner: a run that exceeds its time limit is killed and reported as a timeout (303.143541ms)
+   ✔ runner: stop kills the engine process and reports stopped (207.185792ms)
+   ✔ editors: each setting type gets the right editor, and read-only ones say why (12.572709ms)
+   ✔ round trip: saving every editable setting back unchanged leaves the file byte for byte the same (6.4235ms)
+   ✔ numbers, sliders, choices and switches are checked (1.488875ms)
+   ✔ JSON settings: objects for dictionaries, rows with known columns for tables (0.83225ms)
+   ✔ prompt: each {variable} becomes a message input like Langflow, and goes away when removed (0.933541ms)
+   ✔ route: JSON settings travel through the save route; a bad table row saves nothing (23.825916ms)
+   ✔ store: create, read and list a flow; the hash matches the saved content (29.390167ms)
+   ✔ store: a save with a stale hash is refused and the current hash is returned (10.094292ms)
+   ✔ store: every save keeps the previous version so it can be rolled back (4.66675ms)
+   ✔ store: ids that are not plain identifiers never reach the disk (0.073208ms)
+   ✔ runs: a second request for the same owner and flow is refused while one is running (57.995458ms)
+   ✔ runs: a finished run records the flow version it ran, the output, and no secrets (771.03275ms)
+   ✔ runs: a history is only visible to the browser session that made it (773.18ms)
+   ✔ runs: a run still marked running after a backend restart becomes unknown, not succeeded (1.727583ms)
+   ✔ runs: a snapshot that does not match the claimed version is refused before anything runs (1.337166ms)
+   ℹ tests 108
+   ℹ suites 0
+   ℹ pass 108
+   ℹ fail 0
+   ℹ cancelled 0
+   ℹ skipped 0
+   ℹ todo 0
+   ℹ duration_ms 3001.796834
+   exit status: 0
+
+2. Live engine suite:
+   LANGFLOW_LIVE_ENGINE=1 (same env) node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/{components-live,live-components,live-engine}.test.mts
+   PASS agentics/AgenerateComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS agentics/AMapComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 3, empty secret fields: 1)
+   PASS agentics/AreduceComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 3, empty secret fields: 1)
+   PASS custom_component/CustomComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS data_source/APIRequest: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS data_source/MockDataGenerator: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS data_source/SQLComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 0)
+   PASS data_source/URLComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS data_source/UnifiedWebSearch: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS files_and_knowledge/FileSystemTool: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS files_and_knowledge/Knowledge: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS files_and_knowledge/MemoryBase: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS files_and_knowledge/File: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS files_and_knowledge/SaveToFile: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 0)
+   PASS files_ingestion/FileContentRetriever: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS files_ingestion/FileDescriptionGeneratorComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS files_ingestion/MergeFlows: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS flow_controls/HumanInput: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS flow_controls/ConditionalRouter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 0)
+   PASS flow_controls/Listen: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS flow_controls/LoopComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS flow_controls/Notify: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS flow_controls/RunFlow: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS input_output/ChatInput: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS input_output/ChatOutput: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS input_output/Webhook: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS langchain_utilities/CharacterTextSplitter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS langchain_utilities/CSVAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 3, empty secret fields: 1)
+   PASS langchain_utilities/LangChainFakeEmbeddings: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS langchain_utilities/HtmlLinkExtractor: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS langchain_utilities/LanguageRecursiveTextSplitter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS langchain_utilities/NaturalLanguageTextSplitter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS langchain_utilities/OpenAIToolsAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS langchain_utilities/OpenAPIAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS langchain_utilities/LangChain Hub Prompt: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS langchain_utilities/RecursiveCharacterTextSplitter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS langchain_utilities/RunnableExecutor: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 0)
+   PASS langchain_utilities/SemanticTextSplitter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 0)
+   PASS langchain_utilities/SQLAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS langchain_utilities/SQLDatabase: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS langchain_utilities/ToolCallingAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS langchain_utilities/XMLAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS llm_operations/BatchRunComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS llm_operations/GuardrailValidatorV2: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS llm_operations/LLMSelectorComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 3, empty secret fields: 0)
+   PASS llm_operations/SmartRouter: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS llm_operations/Smart Transform: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS llm_operations/StructuredOutput: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 2, empty secret fields: 1)
+   PASS models_and_agents/A2AAgent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS models_and_agents/Agent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS models_and_agents/EmbeddingModel: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS models_and_agents/LanguageModelComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 1)
+   PASS models_and_agents/MCPTools: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS models_and_agents/Memory: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS models_and_agents/Prompt Template: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS processing/Operations: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS processing/DynamicCreateData: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS processing/ParserComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS processing/SplitText: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS processing/TypeConverterComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 1 (required inputs empty: 1, empty secret fields: 0)
+   PASS utilities/CalculatorComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS utilities/CurrentDate: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   PASS utilities/PythonREPLComponent: engine code identical; strict levels 1+3 exit 0; all levels exit 0 (required inputs empty: 0, empty secret fields: 0)
+   SUMMARY added 63/63, validator failures 0, engine skipped level 2 (registry gap) on 63 files
+   ALL-IN-ONE flow: 63 components saved; levels 1+3 exit 0, other issues 0, unconnected warnings 124; all levels exit 1, other issues 0, unconnected warnings 124, L4 empty required inputs 62, L4 empty secret fields 20
+   NEGATIVE controls: broken edge strict exit 1, all levels exit 1 (1 unaccepted issues); missing id strict exit 1
+   ✔ LIVE: each of the current components is added through the save route and passes the engine validator (116281.015458ms)
+   ✔ LIVE: all current components in one flow save together and pass the engine validator (1747.497292ms)
+   ✔ LIVE negative controls: a broken file makes the validator exit non-zero and the grading reports it (1762.971583ms)
+   PASS ChatInput: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 3s on lfx 1.12.5; expected to contain "chat echo through the route"; output: chat echo through the route
+   PASS ChatOutput: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "chat output receives it"; output: chat output receives it
+   PASS CalculatorComponent: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "14"; output: ```json { "result": "14" } ```
+   PASS CurrentDate: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "2026"; output: Current date and time in UTC: 2026-10-13 18:13:22 UTC
+   PASS MockDataGenerator: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to match /^[A-Za-z][A-Za-z ,.]{39,}/; output: Neque porro quisquam est, qui 
+   PASS ConditionalRouter: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "ROUTE-TRUE"; output: ROUTE-TRUE
+   PASS Notify: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "notify-payload"; output: notify-payload
+   PASS Listen: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "listen-payload"; output: listen-payload
+   PASS LoopComponent: validator ok: exit 0, 5 edges all type-compatible by inputTypes: true, heuristic type warnings: 4, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "loop-item"; output: | text | |:----------| | loop-item |
+   PASS CharacterTextSplitter: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```js
+   PASS RecursiveCharacterTextSplitter: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } 
+   PASS LanguageRecursiveTextSplitter: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } `
+   PASS HtmlLinkExtractor: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "https://example.com/page"; output: ```json { "source": "https://
+   PASS Prompt Template: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "Say: prompt-var-ok"; output: Say: prompt-var-ok
+   PASS DynamicCreateData: validator ok: exit 0, 1 edges all type-compatible by inputTypes: true, heuristic type warnings: 1, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "\"city\""; output: ```json { "city": "" } ```
+   PASS ParserComponent: validator ok: exit 0, 3 edges all type-compatible by inputTypes: true, heuristic type warnings: 3, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "Parsed: parser-input"; output: Parsed: parser-input
+   PASS SplitText: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: | text | run_id | properties | category | content_bloc
+   PASS TypeConverterComponent: validator ok: exit 0, 2 edges all type-compatible by inputTypes: true, heuristic type warnings: 2, other issues: 0; run succeeded in 2s on lfx 1.12.5; expected to contain "\"text\": \"convert-me\""; output: ```json { "text": "conve
+   SUMMARY 18/18 enabled components produced their real output
+   REFUSED NaturalLanguageTextSplitter: run HTTP 422; plan says: "Natural Language Text Splitter" (NaturalLanguageTextSplitter) is local but not enabled: Its engine package NLTK is not installed, so it failed on the real engine. It stays off rather than downloadi
+   REFUSED Operations: run HTTP 422; plan says: "Data Operations" (Operations) is local but not enabled: Its operation picker shows its real settings only through a running Langflow server, which this build does not have. On the engine it passed the text through 
+   REFUSED Memory: run HTTP 422; plan says: "Message History" (Memory) is local but not enabled: On the engine it returned an empty result for both store and retrieve, so it is not proven. Its messages live in Langflow's database.
+   REFUSED LangChainFakeEmbeddings: run HTTP 422; plan says: "Fake Embeddings" (LangChainFakeEmbeddings) is local but not enabled: Its output (Embeddings) only feeds components that are show only here, so a run cannot show what it did.
+   ✔ LIVE: every enabled local component returns its real output on the real engine (47226.457958ms)
+   ✔ LIVE: local components that are not enabled are refused by the run route with their reason (12.747458ms)
+   LIVE run ddcd9ce9 succeeded in 3s on engine lfx 1.12.5
+   ✔ LIVE: a saved harmless flow runs on the real Langflow engine and returns the real output (3037.529292ms)
+   ℹ tests 6
+   ℹ pass 6
+   ℹ fail 0
+   exit status: 0
+
+3. tsc --noEmit exit 0

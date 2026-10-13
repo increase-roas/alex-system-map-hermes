@@ -1,6 +1,6 @@
 # Langflow control dashboard
 
-**Status: seen working locally on October 13, 2026 (nodes build).** Add, delete, connect and disconnect components, the richer setting editors, and local runs of 18 components were seen working on the real engine and in the browser (desktop 1280 px and a 375 px phone-sized viewport, both emulated in the Claude desktop app's browser on this Mac). Tailnet stays read-only. Not yet done: other-family review, a real phone or second device, and a tailnet re-check of the new build. Evidence: `reviews/receipts/2026-10-13-langflow-nodes/`. Earlier evidence (October 12): `reviews/receipts/2026-10-12-langflow-fix/RESULTS.md`.
+**Status: seen working locally on October 13, 2026 (nodes build).** Add, delete, connect and disconnect components, the richer setting editors, and local runs of 18 components were seen working on the real engine and in the browser (desktop 1280 px and a 375 px phone-sized viewport, both emulated in the Claude desktop app's browser on this Mac). Tailnet stays read-only, checked on the new build through Tailscale Serve (read answers, write gets 403). Other-family review: in progress (findings fixed, two acceptance decisions pending). A real phone was not required. Evidence: `reviews/receipts/2026-10-13-langflow-nodes/`. Earlier evidence (October 12): `reviews/receipts/2026-10-12-langflow-fix/RESULTS.md`.
 
 ## What it does
 
@@ -104,14 +104,14 @@ To build or serve for a check without touching the `.next` folder of a dev serve
 
 ## Evidence (nodes build, October 13, 2026)
 
-All in `reviews/receipts/2026-10-13-langflow-nodes/`. Engine: lfx 1.12.6rc3 in `~/.venvs/langflow-dashboard`.
+All in `reviews/receipts/2026-10-13-langflow-nodes/`. Engine: lfx 1.12.5 in `~/.venvs/langflow-dashboard` since 2026-10-13 (earlier rows ran on 1.12.6rc3). Latest full execution: `run-receipt-4eb50e0.txt`.
 
 | Requirement | Status | Evidence |
 |---|---|---|
 | Catalog: 63 current components, tiers 22 local and 41 show only, 0 unknown | PASS (live) | `step1-catalog.txt` |
 | Each of the 63 added through the save route; strict `lfx validate` levels 1 and 3 exit 0; saved code identical to the engine's | PASS (live) | `review-f3-validator.txt` (the engine's level 2 cannot run and its level 3 compares the wrong field: both upstream, recorded) |
-| Each of the 18 enabled in a wired flow: `lfx validate` all levels exit 0, edges proven compatible, real run output | PASS (live, 1.12.5) | `review-f3-validator.txt` |
-| Secrets nested in JSON settings refused, stripped on import, hidden in read, dry run and export | PASS (API) | `review2.test.mts`, `review-fixes.txt` |
+| Each of the 18 enabled in a wired flow: `lfx validate --skip-components --skip-credentials` exit 0 (level 2 cannot run in this engine; credentials are never stored), every edge proven compatible, real run output | PASS (live, 1.12.5) | `review-f3-validator.txt`, `run-receipt-4eb50e0.txt` |
+| Secrets nested in JSON settings refused, stripped on import, hidden in read, dry run and export | PASS (API) | `review2.test.mts`, executed in `run-receipt-4eb50e0.txt` |
 | Every editable setting of all 63 components re-saves byte for byte (256 settings) | PASS (live sweep) | `review2.test.mts` |
 | Palette by keyboard, add and save in the browser | PASS (browser, 1024 px) | `step2-palette.txt` |
 | Add, delete, connect, disconnect; refused edits save nothing; Langflow-identical handle bytes | PASS (API) | `step3-edits.txt` |
@@ -122,7 +122,8 @@ All in `reviews/receipts/2026-10-13-langflow-nodes/`. Engine: lfx 1.12.6rc3 in `
 | Security and correctness review findings fixed, one regression test each | PASS (API, live recheck) | `review-fixes.txt` |
 | Desktop: build a Calculator flow, save and run (result 14) | PASS (browser, 1280 px) | `final-checks.txt`, `desktop-1280-calculator-run.jpg` |
 | Phone-sized viewport: palette by tap, Undo, run (result 42), no horizontal overflow | PASS (emulated 375 px viewport, not a real phone) | `final-checks.txt`, `phone-375-calculator-run.jpg` |
-| Real phone or second device, touch gestures on the canvas, tailnet check of this build | NOT RUN | |
+| Tailnet check of this build: read answers, write refused | PASS (Alex's Terminal, Tailscale Serve) | `fix-everything.txt` |
+| Real phone or second device, touch gestures on the canvas | NOT RUN (not required by the brief) | |
 
 ## Evidence (October 12, 2026)
 

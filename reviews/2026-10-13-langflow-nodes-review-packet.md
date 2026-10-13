@@ -28,7 +28,7 @@ Review: `reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-202610
 
 | Finding | Fix | Proof |
 |---|---|---|
-| F1 high: secrets nested in lists or objects under a secret-looking key passed edit, import, export and display | Any non-empty text or number anywhere under such a key, or inside an Authorization-style row value, is a secret: refused on edit, emptied on import before disk, redacted in read, dry run and export (commit 1a21322) | `app/src/lib/langflow/tests/review2.test.mts` (fake canaries: edit refusal, file on disk, read, dry run, export, canvas; benign nested values still round-trip) |
+| F1 high: secrets nested in lists or objects under a secret-looking key passed edit, import, export and display | Any non-empty text or number anywhere under such a key, or inside an Authorization-style row value, is a secret: refused on edit, emptied on import before disk, redacted in read, dry run and export (commit 1a21322) | `review2.test.mts` (fake canaries: edit refusal, file on disk, read, dry run, export, canvas; benign nested values still round-trip); execution: `run-receipt-4eb50e0.txt` |
 | F2 medium: round trip proven for 12 component types; 2 of 256 defaults refused | Optional numbers may stay empty (never 0); "no value" for a setting without one is no change (1a21322) | Live sweep over all 63 installed components: 256 editable settings re-saved byte for byte, 0 refused (`review2.test.mts` F2 LIVE) |
 | F3 medium: validator test ignored exit status and allowed errors | Exit status checked in every run; strict levels 1 and 3 for each of the 63; all levels for the 18 wired flows; saved code identity replaces the engine's broken level 2 (1af26c7) | `review-f3-validator.txt`. Needs a decision: full level 4 is impossible for a lone component, so row 2 is proven in the scoped form stated there |
 | F4 medium: four acceptance scripts red, no base comparison | Same scripts run on base 3572d39 and on the current code in the same environment | `review-f4-baseline.txt`: all four fail identically on base and current (same failing checks); causes are the sandbox (/tmp, headless Chrome). Not run outside the sandbox |
@@ -51,18 +51,33 @@ Commits 651e6b4 (Run disabled for unrunnable flows, home paths stripped from eng
 and ec2abd0 (full live suite also passes on lfx 1.12.5). Acceptance-script leftovers removed from the repo.
 Evidence: `reviews/receipts/2026-10-13-langflow-nodes/fix-everything.txt`, `engine-1125.txt`.
 
-## Not done, and why
+## Current status (as of the second response, commit 4eb50e0 and later)
 
-- Real phone, real touch gestures, second device: not available here. Phone result is a 375 px emulated viewport.
-- Tailnet check of this build: not run this session. Code path unchanged (middleware.ts, policy.ts) and covered by
-  route tests with synthetic Tailscale headers only.
-- 4 acceptance scripts selected by `/verify` (they match only on the generic file name route.ts) exit 1:
-  sandbox /tmp write denied and headless Chrome blocked are the seen causes; not run at base to compare.
-  The files they wrote were removed again (tracked files back to their committed bytes).
-- Engine drift: the venv still has lfx 1.12.6rc3 (the sandbox refused the switch). The full live suite also
-  passes on a separate lfx 1.12.5 engine; code differs only for Type Convert and Data Operations. The
-  validator's skipped level 2 happens on 1.12.5 too (upstream). Switching is Alex's one command, in the doc.
-- Tailnet: done. Through Tailscale Serve the new component route answers (new build served) and a write is
-  refused with 403 (both run by Alex in his Terminal). Sending this packet to Codex: the thread is held by the Codex app. A real-device check was
-  dropped by Alex (not required; the 375 px emulated check stands). See `fix-everything.txt`.
+- Engine: Alex's venv runs lfx 1.12.5 (langflow 1.12.5). Earlier receipts ran on 1.12.6rc3 and are historical.
+- Tailnet: checked on the new build by Alex in his Terminal: the new component route answers through Tailscale
+  Serve and a dry-run write is refused with 403 (`fix-everything.txt`).
+- Acceptance scripts: the four selected by `/verify` fail identically on base 3572d39 and on the current code in
+  the same sandbox (`review-f4-baseline.txt`). They do not pass here; the gate needs a scope decision (below).
+- Validator: proof and limits in `review-f3-validator.txt`; the latest execution is `run-receipt-4eb50e0.txt`.
+- Real device: not required by the brief (dropped by Alex); the 375 px emulated check stands.
+- Decisions pending from Alex or the Director: (1) the scoped wording of acceptance row 2; (2) the scope
+  disposition of the four baseline-failing acceptance scripts.
+
+## Historical notes (superseded, kept for the record)
+
+- Before 16:40 UTC the venv had lfx 1.12.6rc3 and the sandbox refused the switch; Alex switched it later.
+- Before the F4 comparison, the acceptance scripts had not been run at base.
+- Before Alex's Terminal checks, the tailnet check of the new build had not been run.
 - Not proven: whether Langflow's own server UI opens these saved flows identically (no Langflow server ran).
+
+## Second response (re-review FAIL, 2026-10-13T18:06Z)
+
+Review: `reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-20261013T1806Z.md`.
+- Execution receipt for review2 and the whole suite: `run-receipt-4eb50e0.txt` (commit 4eb50e0, lfx 1.12.5,
+  index sha256 recorded; unit and route 108/108 exit 0; live 6/6 exit 0; tsc exit 0).
+- Combined-flow exit status now asserted on both validator runs; live negative controls prove a broken file
+  exits non-zero and is reported (commit 4eb50e0).
+- Loop-feedback proof now reads the target loop's types and loop_types (`tests/edge-compat.mts`); unit negatives
+  (Embeddings into a loop, a feedback onto a missing loop output) are reported (commit 4eb50e0).
+- Doc and packet status reconciled; historical statements labelled.
+- Still open: the two decisions in "Current status".
