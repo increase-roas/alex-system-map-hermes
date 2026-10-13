@@ -1,0 +1,61 @@
+Engine 1.12.5 receipt. 2026-10-13 about 12:40 EDT. claude-opus-5-5.
+
+Alex's venv (~/.venvs/langflow-dashboard) was NOT changed: `pip install lfx==1.12.5` there was refused by the
+sandbox ("Operation not permitted: .../bin/lfx"); pip rolled back; afterwards lfx --version still printed
+1.12.6rc3 and a Calculator run still returned 14. pip needed --use-deprecated=legacy-certs and pip's own CA
+bundle because the sandbox blocks the macOS keychain trust check (TLS still verified).
+
+Instead, a separate scratch engine was built in this session's scratch folder (temporary, outside the repo):
+  python 3.11.16 venv + lfx==1.12.5 from PyPI, plus the exact versions Alex's venv has of
+  langchain 1.3.18, langchain-core 1.6.10, langchain-community 0.4.2, langchain-text-splitters 1.1.3,
+  tabulate 0.10.0 (a bare lfx lacks tabulate and langchain-community; without them Loop, Split Text and
+  HTML Link Extractor failed with "Missing optional dependency 'tabulate'" and a missing langchain-community).
+
+Component index, rc3 vs 1.12.5: both 128 entries, 63 current, same names.
+  Built-in code identical for 61 of 63. Differs for: Operations, TypeConverterComponent.
+  Effect: after a switch, a saved flow holding rc3's Type Convert is refused by the code check with
+  "Add it again from the palette" (by design). Data Operations does not run either way.
+
+Live tests with LANGFLOW_LFX_BIN pointing at the scratch 1.12.5 engine:
+  LIVE catalog: lfx 1.12.5, langflow null, 63 current, tiers {"ai":21,"code_files":13,"internet":3,"local":22,"server":4}, runs 18
+  ✔ catalog: legacy components are left out and every entry carries ports and a tier (9.863083ms)
+  ✔ catalog: templates are fresh copies and code hashes follow the index scheme (1.521292ms)
+  ✔ catalog: missing or broken index is reported, not invented (0.344584ms)
+  ✔ catalog route: owner and listed tailnet read; unlisted tailnet is refused; no file paths leak (4.906ms)
+  ✔ LIVE catalog: the installed engine offers 63 current components in the audited tiers (11.017709ms)
+  SUMMARY added 63/63, validator failures 0, engine skipped level 2 (registry gap) on 63 files
+  ALL-IN-ONE flow: 63 components saved, other issues: 0, L1 orphaned or unused warnings: 124, L4 empty required inputs: 62, L4 empty secret fields: 20
+  ✔ LIVE: each of the current components is added through the save route and passes the engine validator (73226.241375ms)
+  ✔ LIVE: all current components in one flow save together and pass the engine validator (1007.346375ms)
+  SUMMARY 15/18 enabled components produced their real output
+  ✔ LIVE: local components that are not enabled are refused by the run route with their reason (13.232166ms)
+  LIVE run daf54b50 succeeded in 12s on engine lfx 1.12.5
+  ✔ LIVE: a saved harmless flow runs on the real Langflow engine and returns the real output (13049.481416ms)
+  ✖ failing tests:
+  per-component run, after the extras:
+  PASS ChatInput: succeeded in 4s on lfx 1.12.5; expected to contain "chat echo through the route"; output: chat echo through the route
+  PASS ChatOutput: succeeded in 2s on lfx 1.12.5; expected to contain "chat output receives it"; output: chat output receives it
+  PASS CalculatorComponent: succeeded in 2s on lfx 1.12.5; expected to contain "14"; output: ```json { "result": "14" } ```
+  PASS CurrentDate: succeeded in 2s on lfx 1.12.5; expected to contain "2026"; output: Current date and time in UTC: 2026-10-13 16:36:48 UTC
+  PASS MockDataGenerator: succeeded in 2s on lfx 1.12.5; expected to match /^[A-Za-z][A-Za-z ,.]{39,}/; output: Duis aute irure dolor in reprehenderit in voluptate velit 
+  PASS ConditionalRouter: succeeded in 2s on lfx 1.12.5; expected to contain "ROUTE-TRUE"; output: ROUTE-TRUE
+  PASS Notify: succeeded in 2s on lfx 1.12.5; expected to contain "notify-payload"; output: notify-payload
+  PASS Listen: succeeded in 2s on lfx 1.12.5; expected to contain "listen-payload"; output: listen-payload
+  PASS LoopComponent: succeeded in 2s on lfx 1.12.5; expected to contain "loop-item"; output: | text | |:----------| | loop-item |
+  PASS CharacterTextSplitter: succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` `
+  PASS RecursiveCharacterTextSplitter: succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma
+  PASS LanguageRecursiveTextSplitter: succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma"
+  PASS HtmlLinkExtractor: succeeded in 2s on lfx 1.12.5; expected to contain "https://example.com/page"; output: ```json { "source": "https://example.com/", "links": [ { 
+  PASS Prompt Template: succeeded in 2s on lfx 1.12.5; expected to contain "Say: prompt-var-ok"; output: Say: prompt-var-ok
+  PASS DynamicCreateData: succeeded in 1s on lfx 1.12.5; expected to contain "\"city\""; output: ```json { "city": "" } ```
+  PASS ParserComponent: succeeded in 2s on lfx 1.12.5; expected to contain "Parsed: parser-input"; output: Parsed: parser-input
+  PASS SplitText: succeeded in 2s on lfx 1.12.5; expected to contain "epsilon"; output: | text | run_id | properties | category | content_blocks | duration | session_meta
+  PASS TypeConverterComponent: succeeded in 2s on lfx 1.12.5; expected to contain "\"text\": \"convert-me\""; output: ```json { "text": "convert-me" } ```
+  SUMMARY 18/18 enabled components produced their real output
+  ℹ pass 2
+  ℹ fail 0
+Finding: on 1.12.5 the validator also skips level 2 ("Could not load component registry") on all 63 files,
+so that gap is upstream Langflow, not caused by the release candidate.
+To switch Alex's engine (his call, in his own Terminal, outside the sandbox):
+  ~/.venvs/langflow-dashboard/bin/pip install 'lfx==1.12.5'
+then rerun the live tests in docs/LANGFLOW_DASHBOARD.md. To go back: pip install 'lfx==1.12.6rc3'.

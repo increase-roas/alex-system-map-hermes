@@ -46,7 +46,7 @@ The component list and every template come from the installed engine's own `lfx/
 
 The app binds only to 127.0.0.1. Tailscale Serve proxies port 3200. Use the current system-map-ir checkout.
 
-Install the pinned engine (once). Note: in the current venv pip installed lfx 1.12.6rc3 (a release candidate) next to langflow 1.12.5, because the provider add-ons (lfx-openai and others) declare `lfx>=1.12.0.dev0`, which lets pip pick pre-releases. lfx 1.12.5 exists on PyPI (2026-10-06). Everything in the October 13 receipts ran on 1.12.6rc3. Moving to 1.12.5 is Alex's call; afterwards rerun the live tests below:
+Install the pinned engine (once). Note: in the current venv pip installed lfx 1.12.6rc3 (a release candidate) next to langflow 1.12.5, because the provider add-ons (lfx-openai and others) declare `lfx>=1.12.0.dev0`, which lets pip pick pre-releases. lfx 1.12.5 exists on PyPI (2026-10-06). The October 13 receipts ran on 1.12.6rc3, and the full live suite also passed on a separate lfx 1.12.5 engine built for the check (`reviews/receipts/2026-10-13-langflow-nodes/engine-1125.txt`): 18/18 components, 63/63 validate. Code differs between the two for Type Convert and Data Operations only, so a flow saved with rc3's Type Convert must have it re-added from the palette after a switch. Switching this venv is Alex's call; afterwards rerun the live tests below:
 
 ```bash
 python3.11 -m venv ~/.venvs/langflow-dashboard
