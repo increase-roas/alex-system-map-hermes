@@ -285,6 +285,69 @@ for app in ('app:claude', 'app:codex', 'app:cursor'):
     link(app, 'director', 'loads', 'can run Director')
 link('rule:gates', 'director', 'governs', 'gates')
 
+# ---------------------------------------------------------------------------------------------- 4b. Your agents (top-down)
+# One box per agent with role, host, model, tools, status and what stays switched off (Alex 2026-10-13: "a section
+# for my agents ... the top-down view"). Facts come from Agent-Team-Setup; live health is not read here yet, so
+# status is the recorded one and each box says when it was last checked.
+TEAM = HOME / 'Documents' / 'Agent-Team-Setup' / 'agents'
+HARDEN = HOME / 'Documents' / 'Codex' / '2026-10-12' / 'javar-hardening'
+
+
+def _yaml_tools(p):
+    t = read(p)
+    m = re.search(r'(?ms)^provides_tools:\n((?:\s+-\s*.+\n?)+)', t)
+    return [x.strip(' -\'"') for x in m.group(1).splitlines() if x.strip()] if m else []
+
+
+def _manifest(role):
+    try:
+        return json.loads(read(TEAM / role / 'manifest.json') or '{}')
+    except ValueError:
+        return {}
+
+
+try:
+    _reg = json.loads(read(TEAM / 'team-template' / 'worker-registry.json') or '{}')
+except ValueError:
+    _reg = {}
+_setter_models = ', '.join(m.get('model', '') for m in _reg.get('sales_b2b', {}).get('models', [])) or 'unknown'
+AGENT_ROWS = [
+    # id, name, role, host, model, tools, status, off, sources
+    ('javar', 'Javar', 'Executive assistant: runs Alex\'s requests across GHL, Meta, Google, Cloudflare',
+     'Hermes 0.21.5 on Orgo (javar-orgo)', 'z-ai/glm-5.2',
+     'javar_ghl, javar_meta, Composio, GA4/GTM, Cloudflare, rea (166 after limits)', 'ok',
+     'guard: protected setup + new connectors blocked; card-first and client wall in watch mode until about 2026-10-20',
+     [HARDEN / 'HANDOFF-javar-to-A.md', TEAM / 'ea']),
+    ('javante', 'Javante', 'Second Hermes agent on the Mac mini; takes work only when Alex asks Javar to hand it over',
+     'Hermes on Mac mini (Tailscale exit node)', 'unknown', 'A2A handoff from Javar', 'unknown',
+     'no customer sends without Alex', [TEAM / 'javante' / 'setup' / 'IDENTITY.md']),
+    ('setter', 'Setter (sales B2B)', 'Qualifies new leads for Increase ROAS', 'Hermes worker',
+     _setter_models, ', '.join(_yaml_tools(TEAM / 'setter' / 'plugin.yaml')) or 'setter tools', 'watch',
+     'sends need Alex\'s exact-message yes', [TEAM / 'setter' / 'plugin.yaml', TEAM / 'team-template' / 'worker-registry.json']),
+    ('hunter', 'Hunter', 'First touch: researches new prospects inside the Setter lane', 'Hermes on Orgo (Setter lane)',
+     _setter_models, 'research + handoff', 'watch', 'no outreach accepted; research only (proven once, 2026-09-10)',
+     [TEAM / 'hunter' / 'README.md']),
+]
+for role, name, job in (('csm', 'CSM', 'Customer success: check-ins and customer updates'),
+                        ('finance', 'Finance', 'Books, reports and payments')):
+    man = _manifest(role)
+    caps = man.get('capabilities') or {}
+    AGENT_ROWS.append((role, name, job, 'Hermes (not deployed)', 'not set',
+                       ', '.join(sorted(caps.keys() if isinstance(caps, dict) else map(str, caps))) or 'planned',
+                       'unknown', 'off until bound: ' + ', '.join(man.get('disabled_until_bound', [])[:6]),
+                       [TEAM / role / 'manifest.json']))
+for aid, name, role, host, model, tools, status, off, srcs in AGENT_ROWS:
+    recorded = {'csm': _manifest('csm').get('status'), 'finance': _manifest('finance').get('status')}.get(aid)
+    add(f'agent:{aid}', 'agents', 'agent', name, role,
+        explain(f'{name}: {role}. Runs on {host}; model {model}. Tools: {tools}.',
+                'no' if status == 'ok' else 'maybe',
+                (f'Recorded status {recorded}. ' if recorded else '') + f'Switched off or gated: {off}.',
+                'Nothing.' if status == 'ok' else 'Live health is not read by the map yet; ask the Director or the observatory.'),
+        status=status, sources=[s for s in srcs if s.exists()], host=host, model=model, tools=tools, gated=off)
+    link('director', f'agent:{aid}', 'runs', 'can hand work to', str(TEAM))
+link('agent:javar', 'agent:javante', 'handoff', 'hands work to (only when Alex asks)', str(TEAM / 'ea'))
+link('agent:setter', 'agent:hunter', 'contains', 'includes', str(TEAM / 'hunter' / 'README.md'))
+
 # SDK engine room: the 8 parts of the build plan, graded from the plan's own dated gap list.
 plan_file = SDK_PLAN_LIVE if SDK_PLAN_LIVE.exists() else SDK_PLAN_BACKUP
 plan = read(plan_file)
@@ -697,7 +760,7 @@ trace_last = dir_live.get('last_trace')
 OUT.write_text(json.dumps({
     'built_at': datetime.now(timezone.utc).isoformat(),
     'scanned_at': live.get('scanned_at'),
-    'layers': [['you', 'You'], ['apps', 'AI apps'], ['director', 'Director (decides)'], ['conductor', 'Conductor (does the work through the controllers)'],
+    'layers': [['you', 'You'], ['apps', 'AI apps'], ['director', 'Director (decides)'], ['conductor', 'Conductor (does the work through the controllers)'], ['agents', 'Your agents (who does what, top-down)'],
                ['engine', 'Engine room (SDK)'], ['missions', 'Customers and projects (click one to open its missions)'], ['skills', 'Skills those missions used'],
                ['connectors', 'Connections (each with its routing card)']],
     'nodes': list(nodes.values()), 'edges': edges, 'sdk': sdk, 'route_check': route.get('checked_at'),
