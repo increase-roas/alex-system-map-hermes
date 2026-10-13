@@ -22,6 +22,18 @@ Only the Director marks it verified.
 | 6 Run scope | One live engine test per enabled local component; failures stay off and are listed | Seen working (live): 18/18 enabled produce real output; 4 stay off with reasons | `live-components.txt` |
 | 7 Docs and checks | Doc updated; tsc, build, unit and route tests, live tests, desktop and phone browser checks | tsc PASS, build PASS (into .next-verify), lint PRE-EXISTING, checks PASS, 99/99 unit, 5/5 live, browser PASS; acceptance scripts FAIL (see below) | `final-checks.txt`, `docs/LANGFLOW_DASHBOARD.md` |
 
+## Response to the other-family review (FAIL, 2026-10-13T17:50Z)
+
+Review: `reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-20261013T1750Z.md` (Codex, alex-reviewer).
+
+| Finding | Fix | Proof |
+|---|---|---|
+| F1 high: secrets nested in lists or objects under a secret-looking key passed edit, import, export and display | Any non-empty text or number anywhere under such a key, or inside an Authorization-style row value, is a secret: refused on edit, emptied on import before disk, redacted in read, dry run and export (commit 1a21322) | `app/src/lib/langflow/tests/review2.test.mts` (fake canaries: edit refusal, file on disk, read, dry run, export, canvas; benign nested values still round-trip) |
+| F2 medium: round trip proven for 12 component types; 2 of 256 defaults refused | Optional numbers may stay empty (never 0); "no value" for a setting without one is no change (1a21322) | Live sweep over all 63 installed components: 256 editable settings re-saved byte for byte, 0 refused (`review2.test.mts` F2 LIVE) |
+| F3 medium: validator test ignored exit status and allowed errors | Exit status checked in every run; strict levels 1 and 3 for each of the 63; all levels for the 18 wired flows; saved code identity replaces the engine's broken level 2 (1af26c7) | `review-f3-validator.txt`. Needs a decision: full level 4 is impossible for a lone component, so row 2 is proven in the scoped form stated there |
+| F4 medium: four acceptance scripts red, no base comparison | Same scripts run on base 3572d39 and on the current code in the same environment | `review-f4-baseline.txt`: all four fail identically on base and current (same failing checks); causes are the sandbox (/tmp, headless Chrome). Not run outside the sandbox |
+| Stale docs and packet (engine now 1.12.5) | Doc and packet updated | `docs/LANGFLOW_DASHBOARD.md` |
+
 ## What to look at hardest
 
 1. The run gate (`app/src/lib/langflow/model.ts` `executionPlan`): runs need every component enabled AND its code

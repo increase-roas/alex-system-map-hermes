@@ -46,7 +46,7 @@ The component list and every template come from the installed engine's own `lfx/
 
 The app binds only to 127.0.0.1. Tailscale Serve proxies port 3200. Use the current system-map-ir checkout.
 
-Install the pinned engine (once). Note: in the current venv pip installed lfx 1.12.6rc3 (a release candidate) next to langflow 1.12.5, because the provider add-ons (lfx-openai and others) declare `lfx>=1.12.0.dev0`, which lets pip pick pre-releases. lfx 1.12.5 exists on PyPI (2026-10-06). The October 13 receipts ran on 1.12.6rc3, and the full live suite also passed on a separate lfx 1.12.5 engine built for the check (`reviews/receipts/2026-10-13-langflow-nodes/engine-1125.txt`): 18/18 components, 63/63 validate. Code differs between the two for Type Convert and Data Operations only, so a flow saved with rc3's Type Convert must have it re-added from the palette after a switch. Switching this venv is Alex's call; afterwards rerun the live tests below:
+Install the pinned engine (once). Note: a plain install picks lfx 1.12.6rc3 (a release candidate), because the provider add-ons (lfx-openai and others) declare `lfx>=1.12.0.dev0`, which lets pip pick pre-releases; the second command below pins lfx 1.12.5. Alex's venv runs lfx 1.12.5 since 2026-10-13. Most October 13 receipts ran on 1.12.6rc3; the later ones (review fixes, validator proof) ran on Alex's venv after it moved to lfx 1.12.5. Code differs between the two for Type Convert and Data Operations only, so a flow saved with rc3's Type Convert must have it re-added from the palette (the run gate says so). After any engine change, rerun the live tests below:
 
 ```bash
 python3.11 -m venv ~/.venvs/langflow-dashboard
@@ -109,7 +109,10 @@ All in `reviews/receipts/2026-10-13-langflow-nodes/`. Engine: lfx 1.12.6rc3 in `
 | Requirement | Status | Evidence |
 |---|---|---|
 | Catalog: 63 current components, tiers 22 local and 41 show only, 0 unknown | PASS (live) | `step1-catalog.txt` |
-| Each of the 63 added through the save route; `lfx validate` levels 1 and 3 clean | PASS (live) | `step2-palette.txt` (the engine's own level 2 check cannot load its registry in this build; recorded) |
+| Each of the 63 added through the save route; strict `lfx validate` levels 1 and 3 exit 0; saved code identical to the engine's | PASS (live) | `review-f3-validator.txt` (the engine's level 2 cannot run and its level 3 compares the wrong field: both upstream, recorded) |
+| Each of the 18 enabled in a wired flow: `lfx validate` all levels exit 0, edges proven compatible, real run output | PASS (live, 1.12.5) | `review-f3-validator.txt` |
+| Secrets nested in JSON settings refused, stripped on import, hidden in read, dry run and export | PASS (API) | `review2.test.mts`, `review-fixes.txt` |
+| Every editable setting of all 63 components re-saves byte for byte (256 settings) | PASS (live sweep) | `review2.test.mts` |
 | Palette by keyboard, add and save in the browser | PASS (browser, 1024 px) | `step2-palette.txt` |
 | Add, delete, connect, disconnect; refused edits save nothing; Langflow-identical handle bytes | PASS (API) | `step3-edits.txt` |
 | Tailnet and token-less callers get 403 on every new edit kind and on dry runs | PASS (API) | `edits.test.mts`; middleware and policy unchanged |
@@ -161,7 +164,7 @@ Labels: Working, Needs implementation, Blocked, Not required for this milestone,
 
 | Item | Label | Evidence |
 |---|---|---|
-| Langflow engine (`lfx` run and validate) | Working on lfx 1.12.6rc3 (langflow 1.12.5) | Live tests PASS on 2026-10-13; the docs pin 1.12.5 (see "Run it on the Mac") |
+| Langflow engine (`lfx` run and validate) | Working on lfx 1.12.5 (langflow 1.12.5) | Live tests PASS on 2026-10-13 on 1.12.6rc3 and 1.12.5; validator limits in `review-f3-validator.txt` |
 | Langflow server API (`/api/v1/run`, `/api/v1/flows`) | Needs implementation (blocked by port) | Routes read from installed 1.12.5 source; not called live |
 | Model providers (OpenAI, Anthropic, others) | Not required for this milestone | AI execution off; no provider keys stored or passed |
 | Data stores | Working (local files) | `app/.data/langflow/` store and run records |

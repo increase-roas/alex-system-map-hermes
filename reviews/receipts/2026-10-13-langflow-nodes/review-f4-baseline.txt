@@ -1,0 +1,30 @@
+Reviewer F4 receipt (acceptance scripts: base vs current, same environment). 2026-10-13. claude-opus-5-5.
+
+Method: a detached worktree of base 3572d39 (before any nodes work) was made in this session's scratch folder,
+sharing app/node_modules. Both trees were built (base: npm run build into its own .next; current:
+NEXT_DIST_DIR=.next-verify npm run build), then each of the four scripts selected by /verify ran on base and
+on current, one after the other, in the same Claude Code sandbox. Exit codes and the failing check names
+(the "failures" list each script prints) were compared.
+  base build exit 0
+  current build exit 0
+  base canonical_edit_sync exit 1
+  current canonical_edit_sync exit 1
+  base recovery_emitted_screening exit 1
+  current recovery_emitted_screening exit 1
+  base maintained_edit_cas exit 1
+  current maintained_edit_cas exit 1
+  base recovery_screening_real_paths exit 1
+  current recovery_screening_real_paths exit 1
+  [exited with code 0]
+  canonical_edit_sync: base ['browser_ui', 'clone_manifest']; current ['browser_ui', 'clone_manifest']; identical: True
+  recovery_emitted_screening: base ['browser_recovery']; current ['browser_recovery']; identical: True
+  maintained_edit_cas: base ["PermissionError: [Errno 1] Operation not permitted: '/tmp/maintained-edit-cas-20261010-0844-outside-target.json'"]; current ["PermissionError: [Errno 1] Operation not permitted: '/tmp/maintained-edit-cas-20261010-0844-outside-target.json'"]; identical: True
+  recovery_screening_real_paths: base ['benign', 'benign_required', 'browser_required_overall', 'exit_value_1', 'init_ok', 'invalid_command_json_stdout', 'node_bridge_nonzero_exit', 'nonempty', 'nonempty_required', 'nonzero_json_rejected', 'read_source_benign', 'read_source_intended_error', 'screened', 'screened_required', 'summarize_negative_controls_baseline']; current ['benign', 'benign_required', 'browser_required_overall', 'exit_value_1', 'init_ok', 'invalid_command_json_stdout', 'node_bridge_nonzero_exit', 'nonempty', 'nonempty_required', 'nonzero_json_rejected', 'read_source_benign', 'read_source_intended_error', 'screened', 'screened_required', 'summarize_negative_controls_baseline']; identical: True
+Result: every script fails on base exactly as on current (same exit code, same failing checks, same
+PermissionError). The nodes work did not cause any of these failures. Seen causes in this environment: the
+sandbox blocks writing /tmp (maintained_edit_cas) and headless Chrome cannot start (browser_ui,
+browser_recovery, browser_required_overall); the remaining recovery_screening_real_paths checks fail on base
+too. None of the four scripts mentions langflow or any file changed by this work.
+Not established: that these scripts pass outside the sandbox (not run there).
+Cleanup: the files these runs rewrote under reports/ were set back to their HEAD bytes and the new ones moved to
+the session scratch folder; the base worktree was removed (git worktree list no longer shows it).
