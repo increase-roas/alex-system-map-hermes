@@ -326,6 +326,32 @@ function JsonEditor({ id, value, onChange, hint }: { id: string; value: JsonValu
   );
 }
 
+/**
+ * Long text and prompts: the box keeps what is being typed, even while a half-typed value is refused
+ * (for example "{my var" in a prompt). When focus leaves, it shows the value that is actually queued or saved.
+ */
+function TextAreaEditor({ id, value, rows, onChange }: { id: string; value: string; rows: number; onChange: (v: string) => void }) {
+  const [text, setText] = useState(value);
+  const [editing, setEditing] = useState(false);
+  useEffect(() => {
+    if (!editing) setText(value);
+  }, [value, editing]);
+  return (
+    <textarea
+      id={id}
+      className={inputClass}
+      rows={rows}
+      value={text}
+      onFocus={() => setEditing(true)}
+      onBlur={() => setEditing(false)}
+      onChange={(e) => {
+        setText(e.target.value);
+        onChange(e.target.value);
+      }}
+    />
+  );
+}
+
 function FieldEditorInput({ field, value, onChange, id }: { field: CanvasField; value: JsonValue; onChange: (v: JsonValue) => void; id: string }) {
   const text = value === null || typeof value === 'object' ? '' : String(value);
   switch (field.editor) {
@@ -357,7 +383,7 @@ function FieldEditorInput({ field, value, onChange, id }: { field: CanvasField; 
     case 'multiline':
       return (
         <>
-          <textarea id={id} className={inputClass} rows={field.fieldType === 'prompt' ? 6 : 4} value={text} onChange={(e) => onChange(e.target.value)} />
+          <TextAreaEditor id={id} rows={field.fieldType === 'prompt' ? 6 : 4} value={text} onChange={onChange} />
           {field.fieldType === 'prompt' ? <p className="text-[11px] text-muted-foreground">Each {'{name}'} becomes an input that takes a message, as in Langflow.</p> : null}
         </>
       );
@@ -950,7 +976,7 @@ export function LangflowPanel() {
           <label htmlFor="lf-run-input" className="block text-xs font-medium">Message to the flow</label>
           <textarea id="lf-run-input" className="mt-1 w-full rounded border bg-background px-2 py-1 text-sm" rows={2} maxLength={2000} value={runInput} onChange={(e) => setRunInput(e.target.value)} />
           <div className="mt-2 flex items-center gap-2">
-            <button type="button" className="rounded bg-primary px-3 py-1 text-xs text-primary-foreground disabled:opacity-50" disabled={!canRun || starting || pending.length > 0 || runInput.trim() === ''} onClick={() => void startRun()}>
+            <button type="button" className="rounded bg-primary px-3 py-1 text-xs text-primary-foreground disabled:opacity-50" disabled={!canRun || starting || pending.length > 0 || runInput.trim() === '' || (!!detail && !detail.runnable)} onClick={() => void startRun()}>
               {starting ? 'Starting…' : 'Run flow'}
             </button>
             {pending.length > 0 ? <span className="text-xs text-muted-foreground">Save your changes first: a run uses the saved version.</span> : null}

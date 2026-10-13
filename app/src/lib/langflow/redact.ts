@@ -21,3 +21,9 @@ export function screenText(value: string): string {
 export function clip(value: string, max: number): string {
   return value.length > max ? `${value.slice(0, max)}… (${value.length - max} more characters)` : value;
 }
+
+/** Replaces this Mac's home folder with "~" so engine errors do not reveal local paths (user name, venv). */
+export function stripLocalPaths(value: string, home = process.env.HOME ?? ''): string {
+  if (!home || home === '/') return value;
+  return value.split(home).join('~');
+}

@@ -204,3 +204,10 @@ test('correctness L8: switching to double brackets resyncs the prompt variables'
   assert.deepEqual(flipped.rejected, []);
   assert.deepEqual(custom(flipped.flow), ['b']);
 });
+
+test('security L3: engine error text loses the home folder path', async () => {
+  const { stripLocalPaths } = await import('../redact');
+  assert.equal(stripLocalPaths('cannot open /Users/someone/.venvs/x/run.json', '/Users/someone'), 'cannot open ~/.venvs/x/run.json');
+  assert.equal(stripLocalPaths('no paths here', '/Users/someone'), 'no paths here');
+  assert.equal(stripLocalPaths('/a/b', '/'), '/a/b', 'a root home is never stripped');
+});

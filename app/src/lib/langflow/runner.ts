@@ -6,6 +6,8 @@
 import { spawn, type ChildProcess } from 'node:child_process';
 import fs from 'node:fs';
 
+import { stripLocalPaths } from './redact';
+
 /** The version the docs pin. The engine that actually runs is read from its own files (catalog.ts engineLabel). */
 export const PINNED_LANGFLOW_VERSION = '1.12.5';
 const MAX_CAPTURE_BYTES = 2_000_000;
@@ -128,7 +130,7 @@ export function startLfxRun(args: { flowFile: string; input: string }, config: R
       }
       if (parsed && parsed.success === false) {
         const detail = typeof parsed.exception_message === 'string' ? parsed.exception_message : 'The flow reported an error.';
-        resolve({ status: 'failed', code: 'engine_error', message: detail });
+        resolve({ status: 'failed', code: 'engine_error', message: stripLocalPaths(detail) });
         return;
       }
       resolve({
