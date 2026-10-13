@@ -172,6 +172,9 @@ export type EditContext = {
   template?: (componentType: string) => JsonObject | null;
 };
 
+/** What executionPlan needs from the engine: the built-in code hash per component (catalog.ts builtinCodeHash). */
+export type RunContext = { builtinCodeHash?: (componentType: string) => string | null };
+
 /** Langflow's own id style for a new component: "<Type>-<5 letters or digits>". */
 export function newNodeIdPattern(componentType: string): RegExp {
   return new RegExp(`^${componentType.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}-[A-Za-z0-9]{5}$`);
@@ -808,8 +811,17 @@ function hasCycle(adjacency: Map<string, string[]>): boolean {
   return false;
 }
 
-/** What a dashboard run would execute, and what blocks it. */
-export function executionPlan(raw: LfFlow): ExecutionPlan {
+function nodeCodeHash(node: LfNode): string | null {
+  const code = (templateOf(node).code as LfTemplateField | undefined)?.value;
+  return typeof code === 'string' ? createHash('sha256').update(code).digest('hex').slice(0, 12) : null;
+}
+
+/**
+ * What a dashboard run would execute, and what blocks it. A component runs only when its type is enabled
+ * AND its code is byte-identical to the installed engine's built-in component: the engine runs the code
+ * in the file, so a renamed or edited component must never pass as an enabled one.
+ */
+export function executionPlan(raw: LfFlow, ctx: RunContext = {}): ExecutionPlan {
   const blockers: ExecutionBlocker[] = [];
   let hasChatInput = false;
   let hasChatOutput = false;
@@ -818,14 +830,17 @@ export function executionPlan(raw: LfFlow): ExecutionPlan {
     if (componentType === 'note') continue;
     if (componentType === 'ChatInput') hasChatInput = true;
     if (componentType === 'ChatOutput') hasChatOutput = true;
+    const label = labelOf(node);
+    const block = (reason: string) => blockers.push({ nodeId: String(node.id), componentType: componentType || 'unknown', label, reason });
     if (!(EXECUTABLE_COMPONENTS as readonly string[]).includes(componentType)) {
-      const label = labelOf(node);
-      blockers.push({
-        nodeId: String(node.id),
-        componentType: componentType || 'unknown',
-        label,
-        reason: runBlockReason(componentType, label) ?? `"${label}" does not run here.`,
-      });
+      block(runBlockReason(componentType, label) ?? `"${label}" does not run here.`);
+      continue;
+    }
+    const builtin = ctx.builtinCodeHash?.(componentType) ?? null;
+    if (!builtin) {
+      block(`"${label}" cannot be checked against the installed engine's built-in component, so it does not run.`);
+    } else if (nodeCodeHash(node) !== builtin) {
+      block(`"${label}" has code that differs from the installed engine's built-in ${componentType}. Edited or older component code does not run here. Add it again from the palette to get the engine's version.`);
     }
   }
   return { hasChatInput, hasChatOutput, blockers };

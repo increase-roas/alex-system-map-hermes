@@ -2,10 +2,21 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import { test } from 'node:test';
 
-import { applyEdits, contentHash, executionPlan, redactForExport, REDACTED, toCanvas, validateFlow, type LfFlow } from '../model';
+import { fileURLToPath } from 'node:url';
+
+import { builtinCodeHash, resetCatalogCache } from '../catalog';
+import { applyEdits, contentHash, executionPlan, redactForExport, REDACTED, toCanvas, validateFlow, type LfFlow, type RunContext } from '../model';
+import { runnerConfig } from '../runner';
 
 const fixture = (name: string): LfFlow => JSON.parse(fs.readFileSync(new URL(`../fixtures/${name}`, import.meta.url), 'utf8')) as LfFlow;
 const clone = <T>(v: T): T => structuredClone(v);
+const SUBSET = fileURLToPath(new URL('../fixtures/component-index.subset.json', import.meta.url));
+/** Built-in code hashes from real engine entries (subset of the installed lfx index). */
+function engine(): RunContext {
+  process.env.LANGFLOW_COMPONENT_INDEX = SUBSET;
+  resetCatalogCache();
+  return { builtinCodeHash: (t) => builtinCodeHash(runnerConfig({}), t) };
+}
 
 test('harmless chat-echo flow reads as two executable components joined by one typed connection', () => {
   const canvas = toCanvas(fixture('chat-echo.json'));
@@ -24,7 +35,7 @@ test('chat-echo validates with no errors and can run', () => {
   const flow = fixture('chat-echo.json');
   const problems = validateFlow(flow);
   assert.equal(problems.filter((p) => p.level === 'error').length, 0, JSON.stringify(problems));
-  const plan = executionPlan(flow);
+  const plan = executionPlan(flow, engine());
   assert.equal(plan.hasChatInput, true);
   assert.equal(plan.hasChatOutput, true);
   assert.deepEqual(plan.blockers, []);
@@ -32,11 +43,12 @@ test('chat-echo validates with no errors and can run', () => {
 
 test('basic-prompting needs a model and is blocked from running here', () => {
   const flow = fixture('basic-prompting.json');
-  const plan = executionPlan(flow);
+  const plan = executionPlan(flow, engine());
   const blocked = plan.blockers.map((b) => b.componentType);
   assert.ok(blocked.includes('LanguageModelComponent'), `blockers: ${blocked.join(', ')}`);
   assert.ok(blocked.includes('Prompt'), `blockers: ${blocked.join(', ')}`);
-  assert.match(plan.blockers[0].reason, /Running those is off in this app/);
+  assert.match(plan.blockers.find((b) => b.componentType === 'LanguageModelComponent')!.reason, /calls an AI model\. Running those is off in this app/);
+  assert.ok(!blocked.includes('ChatInput') && !blocked.includes('ChatOutput'), 'the engine-identical chat components pass');
   const problems = validateFlow(flow);
   assert.ok(problems.some((p) => p.level === 'error' && /required but empty/.test(p.message)), 'required empty setting should be an error');
 });
@@ -180,4 +192,28 @@ test('content hash does not depend on key order, and changes when content change
   assert.equal(contentHash(a), contentHash(b));
   const c = { ...a, name: 'y' };
   assert.notEqual(contentHash(a), contentHash(c));
+});
+
+test('run gate: an enabled component whose code differs from the engine is refused', () => {
+  const flow = clone(fixture('chat-echo.json'));
+  const input = flow.data.nodes.find((n) => n.data?.type === 'ChatInput')!;
+  (input.data!.node!.template!.code as { value: string }).value += '\nimport os  # edited';
+  const plan = executionPlan(flow, engine());
+  assert.equal(plan.blockers.length, 1);
+  assert.match(plan.blockers[0].reason, /code that differs from the installed engine's built-in ChatInput/);
+});
+
+test('run gate: without the engine nothing can be checked, so nothing runs', () => {
+  const plan = executionPlan(fixture('chat-echo.json'));
+  assert.equal(plan.blockers.length, 2);
+  assert.match(plan.blockers[0].reason, /cannot be checked against the installed engine/);
+});
+
+test('run gate: a component renamed to an enabled type still needs the engine code to match', () => {
+  const flow = clone(fixture('basic-prompting.json'));
+  const lm = flow.data.nodes.find((n) => n.data?.type === 'LanguageModelComponent')!;
+  lm.data!.type = 'CalculatorComponent';
+  const plan = executionPlan(flow, engine());
+  const forged = plan.blockers.find((b) => b.nodeId === String(lm.id))!;
+  assert.match(forged.reason, /differs from the installed engine's built-in CalculatorComponent/);
 });

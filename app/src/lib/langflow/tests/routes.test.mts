@@ -6,6 +6,7 @@ import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
 import { randomUUID } from 'node:crypto';
+import { fileURLToPath } from 'node:url';
 import { after, before, test } from 'node:test';
 
 import { getOrCreateLocalToken } from '../../server/local-auth';
@@ -45,10 +46,13 @@ let hash = '';
 
 before(() => {
   process.env.LOCAL_DATA_DIR = tmp;
+  // Built-in code hashes from real engine entries, so the run gate can check component code.
+  process.env.LANGFLOW_COMPONENT_INDEX = fileURLToPath(new URL('../fixtures/component-index.subset.json', import.meta.url));
   fs.mkdirSync(path.join(tmp, 'langflow'), { recursive: true });
 });
 after(() => {
   delete process.env.LANGFLOW_LFX_BIN;
+  delete process.env.LANGFLOW_COMPONENT_INDEX;
 });
 
 test('status: a tailnet device that is not listed is refused; the owner sees save and run', async () => {

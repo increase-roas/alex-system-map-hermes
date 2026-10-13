@@ -1,6 +1,6 @@
 import { fail, ok, readJson, screenDeep } from '@/lib/langflow/api';
-import { componentTemplate } from '@/lib/langflow/catalog';
-import { applyEdits, editSubject, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, type JsonValue, validateFlow } from '@/lib/langflow/model';
+import { builtinCodeHash, componentTemplate } from '@/lib/langflow/catalog';
+import { applyEdits, editSubject, executionPlan, problemsHaveErrors, toCanvas, type EditContext, type FlowEdit, type JsonValue, type RunContext, validateFlow } from '@/lib/langflow/model';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
 import { runnerConfig } from '@/lib/langflow/runner';
 import { isValidFlowId, readFlow, saveFlow, StoreConflictError } from '@/lib/langflow/store';
@@ -13,6 +13,11 @@ type Params = { params: Promise<{ flowId: string }> };
 function editContext(): EditContext {
   const cfg = runnerConfig();
   return { template: (type) => componentTemplate(cfg, type) };
+}
+
+function runContext(): RunContext {
+  const cfg = runnerConfig();
+  return { builtinCodeHash: (type) => builtinCodeHash(cfg, type) };
 }
 
 function position(value: unknown): { x: number; y: number } | null {
@@ -66,8 +71,8 @@ export async function GET(request: Request, { params }: Params) {
   const stored = readFlow(flowId);
   if (!stored) return fail(404, 'No such flow.');
   const problems = validateFlow(stored.flow);
-  const plan = executionPlan(stored.flow);
-  const runnable = !problemsHaveErrors(problems) && plan.blockers.length === 0 && plan.hasChatInput && plan.hasChatOutput;
+  const plan = executionPlan(stored.flow, runContext());
+  const runnable = !problemsHaveErrors(problems) && plan.blockers.length === 0 && plan.hasChatOutput;
   return ok(
     screenDeep({
       id: flowId,
@@ -114,7 +119,7 @@ export async function PATCH(request: Request, { params }: Params) {
   }
   if (b.dryRun === true) {
     // Preview only: the same rules as a save, nothing written.
-    return ok(screenDeep({ hash: stored.hash, applied, dryRun: true, canvas: toCanvas(flow), problems: validateFlow(flow), plan: executionPlan(flow) }));
+    return ok(screenDeep({ hash: stored.hash, applied, dryRun: true, canvas: toCanvas(flow), problems: validateFlow(flow), plan: executionPlan(flow, runContext()) }));
   }
   if (applied === 0) return ok({ hash: stored.hash, updatedAt: stored.updatedAt, applied: 0, problems: validateFlow(stored.flow) });
   try {

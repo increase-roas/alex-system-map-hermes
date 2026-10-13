@@ -95,7 +95,26 @@ export const COMPONENT_TIERS: Record<string, RunTier> = {
 };
 
 /** Local components that produced their real output on the real engine (live receipt). Only these run. */
-export const EXECUTABLE_COMPONENTS = ['ChatInput', 'ChatOutput'] as const;
+export const EXECUTABLE_COMPONENTS = [
+  'ChatInput',
+  'ChatOutput',
+  'CalculatorComponent',
+  'CurrentDate',
+  'MockDataGenerator',
+  'ConditionalRouter',
+  'Notify',
+  'Listen',
+  'LoopComponent',
+  'CharacterTextSplitter',
+  'RecursiveCharacterTextSplitter',
+  'LanguageRecursiveTextSplitter',
+  'HtmlLinkExtractor',
+  'Prompt Template',
+  'DynamicCreateData',
+  'ParserComponent',
+  'SplitText',
+  'TypeConverterComponent',
+] as const;
 
 /** Local components that did not prove themselves live. They stay show and edit only, with the reason. */
 export const LOCAL_NOT_ENABLED: Record<string, string> = {

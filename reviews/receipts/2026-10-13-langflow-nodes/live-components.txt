@@ -1,0 +1,64 @@
+Step 6 receipt (local run scope, live on the real engine). 2026-10-13 11:50 EDT. claude-opus-5-5.
+Engine: ~/.venvs/langflow-dashboard, lfx 1.12.6rc3 (langflow 1.12.5). Minimal engine environment from runner.ts engineEnv (no provider keys).
+
+A. Route-built live runs: app/src/lib/langflow/tests/live-components.test.mts
+   Each flow made only through POST /api/langflow/flows and PATCH (addNode, connect, setField), then run through POST .../runs.
+PASS ChatInput: succeeded in 2s on lfx 1.12.6rc3; expected to contain "chat echo through the route"; output: chat echo through the route
+PASS ChatOutput: succeeded in 2s on lfx 1.12.6rc3; expected to contain "chat output receives it"; output: chat output receives it
+PASS CalculatorComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "14"; output: ```json { "result": "14" } ```
+PASS CurrentDate: succeeded in 2s on lfx 1.12.6rc3; expected to contain "2026"; output: Current date and time in UTC: 2026-10-13 15:47:42 UTC
+PASS MockDataGenerator: succeeded in 2s on lfx 1.12.6rc3; expected to match /^[A-Za-z][A-Za-z ,.]{39,}/; output: Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis
+PASS ConditionalRouter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "ROUTE-TRUE"; output: ROUTE-TRUE
+PASS Notify: succeeded in 2s on lfx 1.12.6rc3; expected to contain "notify-payload"; output: notify-payload
+PASS Listen: succeeded in 2s on lfx 1.12.6rc3; expected to contain "listen-payload"; output: listen-payload
+PASS LoopComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "loop-item"; output: | text | |:----------| | loop-item |
+PASS CharacterTextSplitter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` ```json { "text": "delta" } ``` ```json { "text": "epsilon" } ``` ```json { "text": "zeta" 
+PASS RecursiveCharacterTextSplitter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` ```json { "text": "delta" } ``` ```json { "text": "epsilon" } ``` ```json { "text": "zeta" 
+PASS LanguageRecursiveTextSplitter: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: ```json { "text": "alpha beta" } ``` ```json { "text": "gamma" } ``` ```json { "text": "delta" } ``` ```json { "text": "epsilon" } ``` ```json { "text": "zeta" 
+PASS HtmlLinkExtractor: succeeded in 2s on lfx 1.12.6rc3; expected to contain "https://example.com/page"; output: ```json { "source": "https://example.com/", "links": [ { "kind": "hyperlink", "direction": "in", "tag": "https://example.com/" }, { "kind": "hyperlink", "direct
+PASS Prompt Template: succeeded in 2s on lfx 1.12.6rc3; expected to contain "Say: prompt-var-ok"; output: Say: prompt-var-ok
+PASS DynamicCreateData: succeeded in 2s on lfx 1.12.6rc3; expected to contain "\"city\""; output: ```json { "city": "" } ```
+PASS ParserComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "Parsed: parser-input"; output: Parsed: parser-input
+PASS SplitText: succeeded in 2s on lfx 1.12.6rc3; expected to contain "epsilon"; output: | text | run_id | properties | category | content_blocks | duration | session_metadata | id | sender | sender_name | session_id | context_id | files | timestamp
+PASS TypeConverterComponent: succeeded in 2s on lfx 1.12.6rc3; expected to contain "\"text\": \"convert-me\""; output: ```json { "text": "convert-me" } ```
+SUMMARY 18/18 enabled components produced their real output
+REFUSED NaturalLanguageTextSplitter: run HTTP 422; plan says: "Natural Language Text Splitter" (NaturalLanguageTextSplitter) is local but not enabled: Its engine package NLTK is not installed, so it failed on the real engine. It stays off rather than downloading anything.
+REFUSED Operations: run HTTP 422; plan says: "Data Operations" (Operations) is local but not enabled: Its operation picker shows its real settings only through a running Langflow server, which this build does not have. On the engine it passed the text through unchanged.
+REFUSED Memory: run HTTP 422; plan says: "Message History" (Memory) is local but not enabled: On the engine it returned an empty result for both store and retrieve, so it is not proven. Its messages live in Langflow's database.
+REFUSED LangChainFakeEmbeddings: run HTTP 422; plan says: "Fake Embeddings" (LangChainFakeEmbeddings) is local but not enabled: Its output (Embeddings) only feeds components that are show only here, so a run cannot show what it did.
+ℹ tests 2
+ℹ pass 2
+ℹ fail 0
+
+B. Older live tests rerun on this code
+SUMMARY added 63/63, validator failures 0, engine skipped level 2 (registry gap) on 63 files
+ALL-IN-ONE flow: 63 components saved, other issues: 0, L1 orphaned or unused warnings: 124, L4 empty required inputs: 62, L4 empty secret fields: 20
+LIVE run cdbd84e4 succeeded in 2s on engine lfx 1.12.6rc3
+ℹ tests 3
+ℹ pass 3
+ℹ fail 0
+
+C. First-pass engine probes (same session, before any code; flows built by a scratch Python builder,
+   run with `lfx run <file> --input-value <x> -f json` in the runner's environment). Kept to show why 4 stay off.
+   First pass with an unconnected Chat Input: CurrentDate, MockDataGenerator, Prompt Template, DynamicCreateData, Memory
+     all answered {"text": "No response generated", "success": false}. Without Chat Input all but Memory returned output,
+     so the run gate now requires Chat Output and makes Chat Input optional.
+   NaturalLanguageTextSplitter: ComponentBuildError "NLTK is not installed". Stays off (no download).
+   HtmlLinkExtractor: needs a "source" in its input; passes with {"text": ..., "source": "https://example.com/"} (no fetch, parse only).
+   Operations (Data Operations): returned the input unchanged ("one two three" for Word Count); its operation fields
+     appear only through a Langflow server's build-config round trip. Stays off.
+   Memory (Message History): returned "" for retrieve and for store mode. Not proven. Stays off.
+   LoopComponent: needs its feedback connection (handle on the loop's "item" output); with it, returned the item.
+   LangChainFakeEmbeddings: ran, but its Embeddings output has no local consumer, so nothing observable. Stays off.
+
+D. Run gate change (security): a component runs only if its code is byte-identical (sha256, 12 hex, the index's own
+   code_hash scheme) to the installed engine's built-in component. Tests: model.test.mts "run gate: ..." (edited Chat
+   Input refused; Language Model relabelled as Calculator refused; no engine means nothing runs).
+
+E. Unit and route tests
+ℹ tests 87
+ℹ pass 87
+ℹ fail 0
+ℹ skipped 0
+tsc --noEmit exit 0
+✔ No ESLint warnings or errors

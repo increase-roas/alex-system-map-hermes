@@ -1,7 +1,7 @@
 import { fail, ok, readJson, screenDeep } from '@/lib/langflow/api';
 import { executionPlan, problemsHaveErrors, validateFlow } from '@/lib/langflow/model';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
-import { engineLabel } from '@/lib/langflow/catalog';
+import { builtinCodeHash, engineLabel } from '@/lib/langflow/catalog';
 import { runnerConfig } from '@/lib/langflow/runner';
 import { beginRun, listRuns } from '@/lib/langflow/runs';
 import { isValidFlowId, readFlow } from '@/lib/langflow/store';
@@ -50,14 +50,15 @@ export async function POST(request: Request, { params }: Params) {
   if (problemsHaveErrors(problems)) {
     return fail(422, 'Fix the errors in this flow before running it.', { problems: screenDeep(problems) });
   }
-  const plan = executionPlan(stored.flow);
+  const cfgForPlan = runnerConfig();
+  const plan = executionPlan(stored.flow, { builtinCodeHash: (type) => builtinCodeHash(cfgForPlan, type) });
   if (plan.blockers.length > 0) {
     return fail(422, 'This flow needs something this app does not run yet, so it was not started.', {
       blockers: screenDeep(plan.blockers.map((b) => ({ nodeId: b.nodeId, componentType: b.componentType, reason: b.reason }))),
     });
   }
-  if (!plan.hasChatInput || !plan.hasChatOutput) {
-    return fail(422, 'The flow needs a Chat Input and a Chat Output to run here.');
+  if (!plan.hasChatOutput) {
+    return fail(422, 'The flow needs a Chat Output to run here, so its result has somewhere to go.');
   }
   const cfg = runnerConfig();
   if (!cfg.lfxBin) {

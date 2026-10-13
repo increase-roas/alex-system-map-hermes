@@ -919,9 +919,16 @@ export function LangflowPanel() {
         <div className="rounded border p-3">
           <h2 className="mb-2 text-sm font-semibold">Run</h2>
           {detail && !detail.runnable ? (
-            <p className="mb-2 text-xs text-muted-foreground">This flow cannot run here yet. It needs Chat Input and Chat Output, no errors, and no model, tool or code steps (those are off in this app until Alex approves).</p>
+            <p className="mb-2 text-xs text-muted-foreground">This flow cannot run here yet. It needs a Chat Output, no errors, and only components that run here (runs stay local: no AI model, internet, code, file or server steps). </p>
+          ) : null}
+          {detail && !detail.runnable && !runBlockers.length && detail.plan.blockers.length ? (
+            <ul className="mb-2 space-y-1 text-xs text-amber-700 dark:text-amber-400" aria-label="Why this flow does not run here">
+              {detail.plan.blockers.slice(0, 6).map((b) => <li key={b.nodeId}>{b.reason}</li>)}
+              {detail.plan.blockers.length > 6 ? <li>and {detail.plan.blockers.length - 6} more.</li> : null}
+            </ul>
           ) : null}
           {runBlockers.length ? <ul className="mb-2 space-y-1 text-xs text-red-700 dark:text-red-400">{runBlockers.map((b, i) => <li key={i}>{b}</li>)}</ul> : null}
+          {detail && detail.runnable && !detail.plan.hasChatInput ? <p className="mb-2 text-xs text-muted-foreground">This flow has no Chat Input, so the message below is not used.</p> : null}
           <label htmlFor="lf-run-input" className="block text-xs font-medium">Message to the flow</label>
           <textarea id="lf-run-input" className="mt-1 w-full rounded border bg-background px-2 py-1 text-sm" rows={2} maxLength={2000} value={runInput} onChange={(e) => setRunInput(e.target.value)} />
           <div className="mt-2 flex items-center gap-2">
