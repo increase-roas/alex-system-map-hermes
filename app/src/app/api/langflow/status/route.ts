@@ -2,6 +2,7 @@ import fs from 'node:fs';
 
 import { fail, ok } from '@/lib/langflow/api';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
+import { loadCatalog } from '@/lib/langflow/catalog';
 import { PINNED_LANGFLOW_VERSION, runnerConfig } from '@/lib/langflow/runner';
 
 export const runtime = 'nodejs';
@@ -14,8 +15,19 @@ export async function GET(request: Request) {
     return fail(403, 'This device is not allowed to use the Langflow panel.');
   }
   const cfg = runnerConfig();
+  const catalog = loadCatalog(cfg);
+  const installed = catalog.ok ? catalog.catalog.engine : null;
   return ok({
-    engine: { name: 'lfx', pinnedLangflowVersion: PINNED_LANGFLOW_VERSION, configured: !!cfg.lfxBin, binaryFound: !!cfg.lfxBin && fs.existsSync(cfg.lfxBin) },
+    engine: {
+      name: 'lfx',
+      pinnedLangflowVersion: PINNED_LANGFLOW_VERSION,
+      configured: !!cfg.lfxBin,
+      binaryFound: !!cfg.lfxBin && fs.existsSync(cfg.lfxBin),
+      lfxVersion: installed?.lfxVersion ?? null,
+      langflowVersion: installed?.langflowVersion ?? null,
+      versionDrift: !!installed && installed.lfxVersion !== PINNED_LANGFLOW_VERSION,
+      catalogError: catalog.ok ? null : catalog.reason,
+    },
     server: { native_editor: 'not running in this build; advanced editing stays in Langflow' },
     caller: {
       network: caller.network,

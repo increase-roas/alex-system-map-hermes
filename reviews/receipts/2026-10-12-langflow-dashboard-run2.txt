@@ -1,0 +1,47 @@
+Langflow dashboard check run 2. Claude Code session, model claude-opus-5-5. 2026-10-12 about 22:30 to 22:34 EDT.
+All lines below were seen in this session's tool output.
+
+1. Project hooks
+   Command: git -C ~/Projects/system-map-ir switch --help  (prints help only)
+   Harness result: "PreToolUse:Bash hook error: [node "$CLAUDE_PROJECT_DIR/.claude/hooks/guard-bash.cjs"]:
+   BLOCKED (guard-bash): git switch changes repo state in a shared folder ..."
+   No "Cannot find module" on any Bash call in this session.
+   This session has no debug log (~/.claude/debug/852bca28-...txt does not exist).
+   ~/.claude/debug/latest points to d7a69b26-...txt, a different session whose project is
+   "/Users/alexlobaito/Dynamite Lights Website"; its 4 "Cannot find module" errors are for that folder, not this one.
+   Note: the session started in worktree alex-system-map/.claude/worktrees/langflow-dashboard-testing-54f5a0 (branch from main c833d7f),
+   which has no .claude/hooks. The hooks live only on branch langflow-dashboard (~/Projects/system-map-ir).
+
+2. App start (from ~/Projects/system-map-ir/app)
+   Command: LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config npm run dev -- -p 3200 -H 127.0.0.1
+   Output: "Error: listen EPERM: operation not permitted 127.0.0.1:3200" then "Failed to start server".
+   Bind probe with node net.listen on 127.0.0.1: port 3201 EPERM, port 3200 EPERM (sandbox, not "address in use").
+   sandbox.network.allowLocalBinding is not set in ~/.claude/settings.json, ~/.claude/settings.local.json
+   or ~/Projects/system-map-ir/.claude/settings.json (sandbox.enabled=true in ~/.claude/settings.json).
+   curl to http://127.0.0.1:3200 from the sandbox: http_code 000 (connect refused by sandbox).
+
+3. Port 3200 already taken
+   lsof: node PID 2978 LISTEN on TCP *:3200 (all interfaces, IPv6 wildcard).
+   Its working directory: /Users/alexlobaito/Projects/alex-system-map/app (main checkout, c833d7f).
+   main has 0 entries matching "langflow" under app/src/app/api, so that server is not the dashboard.
+
+4. Engine version
+   lfx --version: "lfx 1.12.6rc3". pip show: langflow 1.12.5, lfx 1.12.6rc3.
+
+5. Tailscale
+   tailscale serve status and tailscale status --self: "The Tailscale CLI failed to start: Failed to load preferences." exit 0.
+
+6. Tailscale Serve, run by Alex in his own Terminal.app outside the sandbox, pasted into chat 2026-10-12:
+   $ tailscale serve status
+   https://alexs-macbook-pro.tailde26a1.ts.net (tailnet only)
+   |-- / proxy http://127.0.0.1:3200
+   Reading: Serve is tailnet only (not Funnel, not public) and proxies to loopback port 3200.
+   Port 3200 is held by PID 2978 from ~/Projects/alex-system-map/app (main, no Langflow routes, see item 3),
+   so the tailnet URL currently serves the main map, not the Langflow dashboard. Inference from items 3 and 6; not fetched through the tailnet.
+
+7. Dashboard started by Alex in his own terminal (outside the sandbox), seen 2026-10-12 about 23:13 EDT:
+   lsof: node PID 51330 LISTEN on TCP 127.0.0.1:3200 (IPv4 loopback only). cwd /Users/alexlobaito/Projects/system-map-ir/app.
+   The old main-app listener on *:3200 (PID 2978) is gone.
+   Alex's desktop screenshot of http://127.0.0.1:3200/explorer: Langflow tab selected, "No saved flows yet",
+   Import JSON button, Settings, Changes, Problems, Run panels, "Run flow" button, "No runs yet". Dark theme.
+   Seen in screenshot only; no keyboard, touch, import or run actions tested yet.

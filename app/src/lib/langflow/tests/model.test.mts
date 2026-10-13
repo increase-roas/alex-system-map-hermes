@@ -36,7 +36,7 @@ test('basic-prompting needs a model and is blocked from running here', () => {
   const blocked = plan.blockers.map((b) => b.componentType);
   assert.ok(blocked.includes('LanguageModelComponent'), `blockers: ${blocked.join(', ')}`);
   assert.ok(blocked.includes('Prompt'), `blockers: ${blocked.join(', ')}`);
-  assert.match(plan.blockers[0].reason, /Running those is off in this app until Alex approves/);
+  assert.match(plan.blockers[0].reason, /Running those is off in this app/);
   const problems = validateFlow(flow);
   assert.ok(problems.some((p) => p.level === 'error' && /required but empty/.test(p.message)), 'required empty setting should be an error');
 });

@@ -9,13 +9,13 @@
 import { createHash } from 'node:crypto';
 
 import { decodeHandle, HandleDecodeError } from './handles';
+import { EXECUTABLE_COMPONENTS, runBlockReason } from './tiers';
+
+export { EXECUTABLE_COMPONENTS };
 
 export type JsonObject = Record<string, unknown>;
 
 export const REDACTED = '[redacted]';
-
-/** Components a dashboard run may execute. Everything else needs a model, tool or code step. */
-export const EXECUTABLE_COMPONENTS = ['ChatInput', 'ChatOutput'] as const;
 
 /** Settings the dashboard never edits. */
 const READ_ONLY_REASON: Record<string, string> = {
@@ -476,7 +476,7 @@ export function executionPlan(raw: LfFlow): ExecutionPlan {
         nodeId: String(node.id),
         componentType: componentType || 'unknown',
         label,
-        reason: `"${label}" (${componentType || 'unknown'}) needs a model, tool or code step. Running those is off in this app until Alex approves.`,
+        reason: runBlockReason(componentType, label) ?? `"${label}" does not run here.`,
       });
     }
   }

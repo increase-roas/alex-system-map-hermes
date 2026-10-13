@@ -54,6 +54,6 @@ test('LIVE: a saved harmless flow runs on the real Langflow engine and returns t
   assert.equal(record.status, 'succeeded', `status ${record.status}: ${record.error ?? ''}`);
   assert.equal(record.output, MESSAGE, 'the engine echoed the message through Chat Input and Chat Output');
   assert.equal(record.flowHash, hash, 'the run records the saved version it used');
-  assert.equal(record.engineVersion, '1.12.5');
+  assert.match(String(record.engineVersion), /^lfx \d+\.\d+/, 'the run records the engine that actually ran, read from its own files');
   console.log(`LIVE run ${runId.slice(0, 8)} succeeded in ${Math.round((Date.parse(record.finishedAt) - Date.parse(record.startedAt)) / 1000)}s on engine ${record.engineVersion}`);
 });

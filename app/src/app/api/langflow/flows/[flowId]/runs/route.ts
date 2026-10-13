@@ -1,7 +1,8 @@
 import { fail, ok, readJson, screenDeep } from '@/lib/langflow/api';
 import { executionPlan, problemsHaveErrors, validateFlow } from '@/lib/langflow/model';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
-import { PINNED_LANGFLOW_VERSION, runnerConfig } from '@/lib/langflow/runner';
+import { engineLabel } from '@/lib/langflow/catalog';
+import { runnerConfig } from '@/lib/langflow/runner';
 import { beginRun, listRuns } from '@/lib/langflow/runs';
 import { isValidFlowId, readFlow } from '@/lib/langflow/store';
 
@@ -76,7 +77,7 @@ export async function POST(request: Request, { params }: Params) {
       input,
       idempotencyKey,
       config: cfg,
-      engineVersion: PINNED_LANGFLOW_VERSION,
+      engineVersion: engineLabel(cfg),
     });
   } catch {
     return fail(500, 'The run could not be recorded, so it was not started.');

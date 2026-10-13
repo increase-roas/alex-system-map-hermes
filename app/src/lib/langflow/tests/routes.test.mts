@@ -162,12 +162,12 @@ test('runs: the run gate refuses missing session, empty message, unrunnable and 
   assert.equal(empty.status, 422);
 
   const withCalc = structuredClone(chatEcho) as { data: { nodes: Array<Record<string, unknown>> } };
-  withCalc.data.nodes.push({ id: 'CalculatorComponent-zz9', type: 'genericNode', position: { x: 0, y: 400 }, data: { type: 'CalculatorComponent', display_name: 'Calculator', node: { template: {} } } });
+  withCalc.data.nodes.push({ id: 'LanguageModelComponent-zz9', type: 'genericNode', position: { x: 0, y: 400 }, data: { type: 'LanguageModelComponent', display_name: 'Language Model', node: { template: {} } } });
   const calcFlow = await json(await flowsRoute.POST(req('POST', '/api/langflow/flows', { body: withCalc })));
   assert.equal(calcFlow.status, 201);
   const blocked = await json(await runsRoute.POST(req('POST', `/api/langflow/flows/${calcFlow.body.id}/runs`, { session: SESSION, body: { input: 'hi' } }), params({ flowId: calcFlow.body.id as string })));
   assert.equal(blocked.status, 422);
-  assert.match(blocked.body.blockers[0].reason, /Running those is off in this app until Alex approves/);
+  assert.match(blocked.body.blockers[0].reason, /calls an AI model\. Running those is off in this app/);
 
   delete process.env.LANGFLOW_LFX_BIN;
   const unconfigured = await json(await runsRoute.POST(req('POST', `/api/langflow/flows/${flowId}/runs`, { session: SESSION, body: { input: 'hi' } }), params({ flowId })));
