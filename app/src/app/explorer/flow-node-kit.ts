@@ -172,6 +172,11 @@ export function checkFlow(flow: Flow): string[] {
   for (const e of flow.edges) {
     if (!byId.has(e.source) || !byId.has(e.target)) { out.push(`Arrow ${e.id} points at a missing node.`); continue; }
     const s = KIT_BY_TYPE[kindOf(e.source)], t = KIT_BY_TYPE[kindOf(e.target)];
+    if (s && !s.outputs.length) out.push(`${name(e.source)}: has no outputs, so an arrow cannot leave it.`);
+    if (t && !t.inputs.length) out.push(`${name(e.target)}: has no inputs, so an arrow cannot enter it.`);
+    // Single ports accept omitted IDs from older saved flows, but any explicit ID must exist.
+    if (s && s.outputs.length === 1 && e.sourceHandle != null && !s.outputs.includes(e.sourceHandle)) out.push(`${name(e.source)}: output "${e.sourceHandle}" does not exist (${s.outputs.join(', ')}).`);
+    if (t && t.inputs.length === 1 && e.targetHandle != null && !t.inputs.includes(e.targetHandle)) out.push(`${name(e.target)}: input "${e.targetHandle}" does not exist (${t.inputs.join(', ')}).`);
     if (s && s.outputs.length > 1 && (!e.sourceHandle || !s.outputs.includes(e.sourceHandle))) out.push(`${name(e.source)}: arrow must leave from a named output (${s.outputs.join(', ')}).`);
     if (t && t.inputs.length > 1 && (!e.targetHandle || !t.inputs.includes(e.targetHandle))) out.push(`${name(e.target)}: arrow must enter a named input (${t.inputs.join(', ')}).`);
   }

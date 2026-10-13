@@ -3,8 +3,9 @@ import path from 'node:path';
 
 import { NextResponse } from 'next/server';
 
+import { isLocalRequest } from '@/lib/server/request-origin';
+
 import { getOrCreateLocalToken } from '@/lib/server/local-auth';
-import { ensureServiceInitialized, runLocalService } from '@/lib/server/python';
 import { foundationRoot, localDataDir, sqlitePath } from '@/lib/server/paths';
 
 function readBuildId(): string | null {
@@ -15,7 +16,14 @@ function readBuildId(): string | null {
   return fs.readFileSync(buildIdPath, 'utf8').trim();
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  // Remote health is deliberately minimal: no token or local filesystem details.
+  if (!isLocalRequest(request)) {
+    return NextResponse.json({ ok: true, loopback_only: false }, {
+      headers: { 'Cache-Control': 'no-store', 'Vary': 'Host, Origin, Tailscale-User-Login', 'Cross-Origin-Resource-Policy': 'same-origin' },
+    });
+  }
+  const { ensureServiceInitialized, runLocalService } = await import('@/lib/server/python');
   await ensureServiceInitialized();
   const [completeness, sync] = await Promise.all([
     runLocalService(['catalog-completeness']),
@@ -43,5 +51,5 @@ export async function GET() {
     },
     completeness,
     sync,
-  });
+  }, { headers: { 'Cache-Control': 'no-store', 'Vary': 'Host, Origin, Tailscale-User-Login', 'Cross-Origin-Resource-Policy': 'same-origin' } });
 }

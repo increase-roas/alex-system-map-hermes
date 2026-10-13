@@ -132,6 +132,7 @@ function fieldInput(field: CanvasField, value: string | number | boolean | null,
 export function LangflowPanel() {
   const [status, setStatus] = useState<Status | null>(null);
   const [token, setToken] = useState<string | null>(null);
+  const [accessReady, setAccessReady] = useState(false);
   const [flows, setFlows] = useState<FlowSummary[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<Detail | null>(null);
@@ -152,23 +153,33 @@ export function LangflowPanel() {
   const [importMessage, setImportMessage] = useState<string | null>(null);
   const session = useRef<string>('');
   const flowsRequested = useRef(false);
+  const importInput = useRef<HTMLInputElement>(null);
 
+  const canImport = status?.caller.network === 'local' && !!status.caller.canSave && !!token;
   const canSave = !!status?.caller.canSave && !!detail?.caller.canSave && !!token;
   const canRun = !!status?.caller.canRun && !!detail?.caller.canRun && !!token && !!status?.engine.configured;
   const hasRunning = runs.some((r) => r.status === 'running');
 
   useEffect(() => {
     session.current = browserSession();
-    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' || window.location.hostname === '[::1]') {
-      void fetch('/api/health', { cache: 'no-store' })
-        .then((r) => (r.ok ? r.json() : null))
-        .then((body: { token?: string } | null) => setToken(body?.token ?? null))
-        .catch(() => setToken(null));
-    }
-    void api<Status>('/api/langflow/status').then((r) => {
-      if (r.ok) setStatus(r.data);
-      else setLoadError(r.error);
-    });
+    let cancelled = false;
+    const loadAccess = async () => {
+      let localToken: string | null = null;
+      if (['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname)) {
+        const health = await api<{ token?: string }>('/api/health');
+        if (health.ok) localToken = health.data.token ?? null;
+      }
+      if (cancelled) return;
+      setToken(localToken);
+      // Permission reads must use the same token as mutations, after health has answered.
+      const result = await api<Status>('/api/langflow/status', {}, localToken);
+      if (cancelled) return;
+      if (result.ok) setStatus(result.data);
+      else setLoadError(result.error);
+      setAccessReady(true);
+    };
+    void loadAccess();
+    return () => { cancelled = true; };
   }, []);
 
   const loadFlows = useCallback(async () => {
@@ -188,7 +199,7 @@ export function LangflowPanel() {
   }, [loadFlows]);
 
   const loadDetail = useCallback(async (id: string) => {
-    const r = await api<Detail>(`/api/langflow/flows/${encodeURIComponent(id)}`);
+    const r = await api<Detail>(`/api/langflow/flows/${encodeURIComponent(id)}`, {}, token);
     if (!r.ok) {
       setDetail(null);
       setLoadError(r.error);
@@ -208,7 +219,7 @@ export function LangflowPanel() {
       label: e.sourceOutput && e.targetInput ? `${e.sourceOutput} → ${e.targetInput}` : undefined,
       style: e.decodeError ? { stroke: '#dc2626', strokeDasharray: '4 4' } : undefined,
     })));
-  }, [setEdges, setNodes]);
+  }, [setEdges, setNodes, token]);
 
   // Run history belongs to the owner: without the local token the server returns none, so the token is sent.
   const loadRuns = useCallback(async (id: string, tok: string | null) => {
@@ -217,9 +228,9 @@ export function LangflowPanel() {
   }, []);
 
   useEffect(() => {
-    if (!selectedId) return;
+    if (!selectedId || !accessReady) return;
     void loadDetail(selectedId);
-  }, [selectedId, loadDetail]);
+  }, [selectedId, accessReady, loadDetail]);
 
   useEffect(() => {
     if (selectedId) void loadRuns(selectedId, token);
@@ -281,7 +292,7 @@ export function LangflowPanel() {
   };
 
   const onImport = async (file: File | undefined) => {
-    if (!file || !token) return;
+    if (!file || !canImport) return;
     setImportMessage(null);
     let parsed: unknown;
     try {
@@ -335,8 +346,8 @@ export function LangflowPanel() {
   ));
 
   return (
-    <div className="flex h-full min-h-0 flex-col gap-3 p-3 lg:flex-row">
-      <section className="flex min-h-0 min-w-0 flex-1 flex-col gap-2">
+    <div className="flex h-full min-h-0 flex-col gap-3 overflow-y-auto p-3 lg:flex-row lg:overflow-hidden">
+      <section className="flex min-w-0 shrink-0 flex-col gap-2 lg:min-h-0 lg:flex-1 lg:shrink">
         <div className="flex flex-wrap items-center gap-2">
           <label htmlFor="lf-flow" className="text-xs uppercase tracking-wide text-muted-foreground">Saved flow</label>
           <select id="lf-flow" className="min-w-[180px] rounded border bg-background px-2 py-1 text-sm" value={selectedId ?? ''} onChange={(e) => setSelectedId(e.target.value || null)} disabled={flows.length === 0}>
@@ -348,10 +359,13 @@ export function LangflowPanel() {
               <a className="rounded border px-2 py-1 text-xs hover:bg-muted" href={`/api/langflow/flows/${encodeURIComponent(detail.id)}/export`} download>Export JSON</a>
             </>
           ) : null}
-          <label className={`rounded border px-2 py-1 text-xs ${token && status?.caller.canSave ? 'cursor-pointer hover:bg-muted' : 'opacity-50'}`}>
+          <button type="button" className="rounded border px-2 py-1 text-xs hover:bg-muted disabled:opacity-50" disabled={!canImport} onClick={() => importInput.current?.click()}>
             Import JSON
-            <input type="file" accept="application/json,.json" className="sr-only" disabled={!token || !status?.caller.canSave} onChange={(e) => void onImport(e.target.files?.[0])} />
-          </label>
+          </button>
+          <input ref={importInput} type="file" aria-label="Import Langflow JSON file" accept="application/json,.json" className="hidden" disabled={!canImport} onChange={(e) => {
+            void onImport(e.target.files?.[0]);
+            e.target.value = '';
+          }} />
         </div>
 
         {status ? (
@@ -366,7 +380,7 @@ export function LangflowPanel() {
         {loadError ? <p role="alert" className="text-sm text-red-700 dark:text-red-400">{loadError}</p> : null}
         {importMessage ? <p role="status" className="text-sm">{importMessage}</p> : null}
 
-        <div className="h-[55vh] min-h-[320px] rounded border bg-background lg:h-auto lg:flex-1">
+        <div className="h-[55vh] min-h-[320px] shrink-0 rounded border bg-background lg:h-auto lg:min-h-0 lg:flex-1 lg:shrink">
           {detail ? (
             <ReactFlow
               nodes={nodes}
@@ -378,6 +392,7 @@ export function LangflowPanel() {
               onNodeClick={(_, n) => setSelectedNode(n.id)}
               fitView
               fitViewOptions={{ padding: 0.2 }}
+              nodesDraggable={canSave}
               nodesConnectable={false}
               nodesFocusable
               proOptions={{ hideAttribution: true }}
@@ -390,7 +405,7 @@ export function LangflowPanel() {
           )}
         </div>
 
-        <details className="rounded border p-2 text-sm">
+        <details className="shrink-0 rounded border p-2 text-sm lg:max-h-[30vh] lg:overflow-y-auto">
           <summary className="cursor-pointer font-medium">Components ({detail?.canvas.nodes.length ?? 0})</summary>
           <ul className="mt-2 grid gap-1 sm:grid-cols-2">
             {detail?.canvas.nodes.map((n) => (
@@ -404,7 +419,7 @@ export function LangflowPanel() {
         </details>
       </section>
 
-      <aside className="flex min-h-0 w-full flex-col gap-3 overflow-auto lg:w-[380px]">
+      <aside className="flex w-full shrink-0 flex-col gap-3 lg:min-h-0 lg:w-[380px] lg:overflow-y-auto">
         <div className="rounded border p-3">
           <h2 className="mb-2 text-sm font-semibold">Settings {selected ? `· ${selected.label}` : ''}</h2>
           {!selected ? <p className="text-xs text-muted-foreground">Select a component on the canvas or in the list.</p> : (
@@ -432,7 +447,7 @@ export function LangflowPanel() {
         </div>
 
         <div className="rounded border p-3">
-          <div className="mb-2 flex items-center justify-between">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-2">
             <h2 className="text-sm font-semibold">Changes {pending.length ? `(${pending.length})` : ''}</h2>
             <button type="button" className="rounded bg-primary px-3 py-1 text-xs text-primary-foreground disabled:opacity-50" disabled={!canSave || saving || pending.length === 0} onClick={() => void save()}>
               {saving ? 'Saving…' : 'Save changes'}

@@ -8,6 +8,25 @@ assert(['judge','compare','promote','routeCustomer'].every((t) => KIT.some((k) =
 assert(checkFlow(gepaPreset()).length === 0, 'GEPA preset passes: ' + checkFlow(gepaPreset()).join(' | '));
 assert(checkFlow(routingPreset()).length === 0, 'routing preset passes: ' + checkFlow(routingPreset()).join(' | '));
 const id = (f: Flow, kind: string, i = 0) => f.nodes.filter((n) => n.data.kind === kind)[i].id;
+// Named single ports must resolve just like branching ports. Legacy omitted IDs remain valid.
+for (const preset of [gepaPreset, routingPreset]) {
+  const named = preset();
+  for (const edge of named.edges) {
+    const source = KIT.find((k) => k.type === named.nodes.find((n) => n.id === edge.source)!.data.kind)!;
+    const target = KIT.find((k) => k.type === named.nodes.find((n) => n.id === edge.target)!.data.kind)!;
+    if (source.outputs.length === 1) edge.sourceHandle = source.outputs[0];
+    if (target.inputs.length === 1) edge.targetHandle = target.inputs[0];
+  }
+  assert(checkFlow(named).length === 0, `${named.name}: explicit single-port IDs pass`);
+}
+let broken = gepaPreset(); broken.edges.find((e) => e.source === id(broken, 'judge'))!.sourceHandle = 'missing-score';
+assert(has(broken, 'output "missing-score" does not exist'), 'missing Judge score output is flagged instead of Flow check OK');
+broken = gepaPreset(); broken.edges.find((e) => e.target === id(broken, 'judge'))!.targetHandle = 'missing-input';
+assert(has(broken, 'input "missing-input" does not exist'), 'missing single input is flagged');
+broken = gepaPreset(); broken.edges.push({ id: 'no-output', source: id(broken, 'promote'), target: id(broken, 'judge') });
+assert(has(broken, 'has no outputs'), 'arrow from a terminal node is flagged');
+broken = gepaPreset(); broken.edges.push({ id: 'no-input', source: id(broken, 'judge'), target: id(broken, 'start'), sourceHandle: 'score' });
+assert(has(broken, 'has no inputs'), 'arrow into Start is flagged');
 // approval bypass: an extra arrow around Human Input into Promote
 let f = gepaPreset(); f.edges.push({ id: 'x', source: id(f, 'compare'), target: id(f, 'promote'), sourceHandle: 'better' });
 assert(has(f, 'skips Alex'), 'Promote reachable around the yes is flagged');

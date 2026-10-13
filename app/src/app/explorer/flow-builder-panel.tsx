@@ -48,14 +48,14 @@ const KitNode = memo(function KitNode({ data, selected }: NodeProps<Node<KitData
           : <div className="line-clamp-2">{k.what}</div>}
       </div>
       {k.inputs.map((h, i) => (
-        <Handle key={`in-${h}`} id={k.inputs.length > 1 ? h : undefined} type="target" position={Position.Top}
+        <Handle key={`in-${h}`} id={h} type="target" position={Position.Top}
           style={{ left: `${((i + 1) / (k.inputs.length + 1)) * 100}%`, background: k.color }} />
       ))}
       {k.inputs.length > 1 && (
         <div className="pointer-events-none absolute -top-4 left-0 flex w-full justify-around text-[9px] text-muted-foreground">{k.inputs.map((h) => <span key={h}>{h}</span>)}</div>
       )}
       {k.outputs.map((h, i) => (
-        <Handle key={`out-${h}`} id={k.outputs.length > 1 ? h : undefined} type="source" position={Position.Bottom}
+        <Handle key={`out-${h}`} id={h} type="source" position={Position.Bottom}
           style={{ left: `${((i + 1) / (k.outputs.length + 1)) * 100}%`, background: k.color }} />
       ))}
       {k.outputs.length > 1 && (

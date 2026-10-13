@@ -2,6 +2,7 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 
 import { ensureLocalDataDir, localDataDir } from './paths';
+import { isLocalRequest } from './request-origin';
 
 const TOKEN_FILE = 'local-token.json';
 
@@ -17,28 +18,13 @@ export function getOrCreateLocalToken(): string {
     return parsed.token;
   }
   const token = crypto.randomBytes(24).toString('hex');
-  fs.writeFileSync(file, JSON.stringify({ token, created_at: new Date().toISOString() }));
+  fs.writeFileSync(file, JSON.stringify({ token, created_at: new Date().toISOString() }), { mode: 0o600 });
   return token;
 }
 
-const LOCAL_HOSTS = new Set(['127.0.0.1', 'localhost', '[::1]']);
-
-function hostName(value: string): string | null {
-  try {
-    return new URL(value.includes('://') ? value : `http://${value}`).hostname;
-  } catch {
-    return null;
-  }
-}
-
 export function assertMutationAuthorized(request: Request): void {
-  const host = hostName(request.headers.get('host') ?? '');
-  if (!host || !LOCAL_HOSTS.has(host)) {
+  if (!isLocalRequest(request)) {
     throw new Response('Mutations allowed on loopback only', { status: 403 });
-  }
-  const origin = request.headers.get('origin');
-  if (origin && !LOCAL_HOSTS.has(hostName(origin) ?? '')) {
-    throw new Response('Origin not allowed', { status: 403 });
   }
   const token = request.headers.get('x-local-token');
   if (!token || token !== getOrCreateLocalToken()) {
