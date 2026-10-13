@@ -42,7 +42,7 @@ python3.11 -m venv ~/.venvs/langflow-dashboard
 Start the app on port 3200 (the port Tailscale Serve uses):
 
 ```bash
-cd ~/Projects/alex-system-map-langflow-dashboard/app && LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config npm run dev -- -p 3200
+cd ~/Projects/system-map-ir/app && LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config npm run dev -- -p 3200
 ```
 
 ## Tests
@@ -50,13 +50,13 @@ cd ~/Projects/alex-system-map-langflow-dashboard/app && LANGFLOW_LFX_BIN=$HOME/.
 Unit and route tests (no port needed, about 2 seconds):
 
 ```bash
-cd ~/Projects/alex-system-map-langflow-dashboard/app && node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts
+cd ~/Projects/system-map-ir/app && node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts
 ```
 
 Live engine acceptance (runs the real `lfx` engine, about 3 seconds):
 
 ```bash
-cd ~/Projects/alex-system-map-langflow-dashboard/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/live-engine.test.mts
+cd ~/Projects/system-map-ir/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/live-engine.test.mts
 ```
 
 ## Access
