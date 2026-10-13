@@ -1,0 +1,32 @@
+Palette upgrade and Open in Langflow receipt. 2026-10-13T19:30Z. claude-opus-5-5. Engine lfx 1.12.5.
+
+Langflow server: tools/langflow_server.sh (127.0.0.1:7860, data in app/.data/langflow-server, auto-login). /health {"status":"ok"}.
+First attempt failed: 'unable to open database file' (Langflow defaults its database into its install folder); fixed with LANGFLOW_DATABASE_URL in the script.
+At start Langflow tried to fetch LiteLLM's price list from raw.githubusercontent.com; blocked by Claude's sandbox; it uses its bundled copy.
+
+Starters on the real engine (LANGFLOW_LIVE_ENGINE=1):
+  LIVE starter reply-template ("Jordan"): succeeded: Hi Jordan, thanks for reaching out! I'll send the details today.
+  LIVE starter router ("what is the price?"): succeeded: Pricing: our plans start at $99/month.
+  LIVE starter router ("hello there"): succeeded: Thanks! A teammate will reply shortly.
+  LIVE starter chunker ("First point about the offer.\nSecond point about timing.\nThird point about next steps."): succeeded: - First point about the offer. / - Second point about timing. / - Third point about next steps.
+  LIVE starter dated-note ("Called 3 leads, 1 booked."): succeeded: Note (Current date and time in UTC: 2026-10-13 19:26:03 UTC): Called 3 leads, 1 booked.
+  ✔ LIVE starters: each one runs on the real engine and gives the expected answer (13083.717083ms)
+  LIVE Langflow handoff: created e2807895-31d1-4f60-a9e6-1c4e48536b51 with 2 components and 1 connection, editor page HTTP 200, test copy deleted (HTTP 200)
+  ✔ LIVE Langflow: open in Langflow creates the flow in the real Langflow on this Mac (52.156667ms)
+
+Full unit and route suite with LANGFLOW_SERVER_LIVE=1 (Langflow started by the script):
+  LIVE Langflow handoff: created 1ed1c0a9-156a-4e3e-a322-512dae067e0c with 2 components and 1 connection, editor page HTTP 200, test copy deleted (HTTP 200)
+  ✔ LIVE Langflow: open in Langflow creates the flow in the real Langflow on this Mac (62.248791ms)
+  ℹ tests 116
+  ℹ pass 115
+  ℹ fail 0
+  ℹ skipped 1
+
+Browser (built-in pane, 1280x800, production build on 127.0.0.1:3217, scratch data):
+  Palette shows the note ("Runs here components run on this Mac... open it in Langflow"), 4 starter buttons,
+  "Open this flow in Langflow", and a description under every component.
+  Tap "Message router" -> "Created \"Message router\". Press Run flow..." with sample input "what is the price?";
+  Run flow -> "Finished ... engine lfx 1.12.5 ... Pricing: our plans start at $99/month."
+  Open this flow in Langflow -> the pane blocks pop-up tabs, so the fallback showed the address; opening it showed
+  "Message router (from dashboard)" in Langflow's editor with If-Else wired to two Chat Outputs
+  (open-in-langflow-router.jpg). The fallback is now a clickable link.

@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import { fail, ok } from '@/lib/langflow/api';
 import { authorize, loadAccess, resolveCaller } from '@/lib/langflow/policy';
 import { loadCatalog } from '@/lib/langflow/catalog';
+import { langflowReachable, langflowServer } from '@/lib/langflow/langflow-server';
 import { PINNED_LANGFLOW_VERSION, runnerConfig } from '@/lib/langflow/runner';
 
 export const runtime = 'nodejs';
@@ -28,7 +29,10 @@ export async function GET(request: Request) {
       versionDrift: !!installed && installed.lfxVersion !== PINNED_LANGFLOW_VERSION,
       catalogError: catalog.ok ? null : catalog.reason,
     },
-    server: { native_editor: 'not running in this build; advanced editing stays in Langflow' },
+    // Only the owner on this Mac can open flows in Langflow, so only the owner is told whether it is running.
+    server: caller.ops.includes('save')
+      ? { langflow: { configured: !!langflowServer().url, reachable: await langflowReachable() } }
+      : { langflow: null },
     caller: {
       network: caller.network,
       canSave: caller.ops.includes('save'),
