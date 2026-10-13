@@ -1,0 +1,66 @@
+- button "Open Next.js Dev Tools":
+- alert
+- banner:
+  - heading "Alex system map" [level=1]
+  - paragraph: Snapshot 2026-10-13T03:24:24+00:00 · 2351 components · 59 relationships · catalog complete
+  - textbox "Search IDs, names, files, issues"
+  - button "Map"
+  - button "Pro Map"
+  - button "Flow Builder"
+  - button "Langflow"
+  - button "Full Catalog"
+  - button "Subsystem"
+  - button "Files"
+  - button "Problems"
+  - button "Workflows"
+  - button "Tracing"
+  - button "Reliability"
+  - button "Maintained"
+  - button "Live"
+  - button "Toggle theme":
+  - button "★ Director & Conductor only"
+- 'button "Catalog sync: last observation 2026-10-13T03:26:10+00:00 · fingerprint 0000d638 · allowlisted files readable (details)"'
+- generic: Saved flow
+- combobox "Saved flow":
+  - option "Chat echo (harmless test)" [selected]
+- generic: version d4bbfd5349 · saved 10/12/2026, 11:22:19 PM
+- link "Export JSON":
+  - /url: /api/langflow/flows/e92fd1f1-98cb-4c03-a2c7-c90b6f874df3/export
+- button "Import JSON" [disabled]
+- paragraph: Read-only from this device. Changes and runs stay on the Mac (Alex, 2026-10-12).
+- paragraph: Langflow's own editor is not running in this build, so advanced edits stay in Langflow for now.
+- application:
+  - generic: Chat Input
+  - generic: ChatInput
+  - generic: runs here
+  - generic: "code:"
+  - generic: "Input Text:"
+  - text: Local browser save verified
+  - generic: ChatOutput
+  - generic: ChatOutput
+  - generic: runs here
+  - generic: "Basic Clean Data:"
+  - text: "true"
+  - generic: "code:"
+  - generic "Control Panel":
+    - button "Zoom In":
+    - button "Zoom Out":
+    - button "Fit View" [active]:
+- generic "Components (2)"
+- complementary:
+  - heading "Settings" [level=2]
+  - paragraph: Select a component on the canvas or in the list.
+  - heading "Changes" [level=2]
+  - button "Save changes" [disabled]
+  - paragraph: No unsaved changes. Moving a component or changing a setting queues a change.
+  - heading "Problems (0)" [level=2]
+  - paragraph: No problems found.
+  - heading "Run" [level=2]
+  - generic: Message to the flow
+  - textbox "Message to the flow": Hello from the dashboard
+  - button "Run flow" [disabled]
+  - heading "Runs in this browser session" [level=3]
+  - paragraph: No runs yet in this session.
+- complementary:
+  - heading "Detail and provenance" [level=2]
+  - paragraph: Select a component or issue.

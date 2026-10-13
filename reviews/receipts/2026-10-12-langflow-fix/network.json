@@ -1,0 +1,46 @@
+[
+  {
+    "check": "tailnet health omits token and runtime",
+    "pass": true
+  },
+  {
+    "check": "local owner can save and run",
+    "pass": true
+  },
+  {
+    "check": "tailnet status is read-only",
+    "pass": true
+  },
+  {
+    "check": "tailnet reads saved flow",
+    "pass": true
+  },
+  {
+    "check": "tailnet refuses POST /api/langflow/flows",
+    "pass": true
+  },
+  {
+    "check": "tailnet refuses PATCH /api/langflow/flows/e92fd1f1-98cb-4c03-a2c7-c90b6f874df3",
+    "pass": true
+  },
+  {
+    "check": "tailnet refuses POST /api/langflow/flows/e92fd1f1-98cb-4c03-a2c7-c90b6f874df3/runs",
+    "pass": true
+  },
+  {
+    "check": "tailnet refuses POST /api/langflow/runs/nonexistent/stop",
+    "pass": true
+  },
+  {
+    "check": "real Serve rejects spoofed localhost Host",
+    "pass": true
+  },
+  {
+    "check": "unlisted identity denied synthetic",
+    "pass": true
+  },
+  {
+    "check": "untrusted Host denied",
+    "pass": true
+  }
+]

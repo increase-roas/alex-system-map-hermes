@@ -1,6 +1,6 @@
 # Langflow control dashboard
 
-**Status: local prototype.** The engine path is proven on the pinned Langflow 1.12.5 engine. Browser, phone, and Tailscale checks are blocked (see Blockers). This is not a private deployed dashboard yet.
+**Status: seen working locally and through Tailscale Serve on October 12, 2026.** Browser import, edit, save, reload and a harmless engine run passed. Tailnet viewing is read-only. Other-family review and a physical second-device check remain pending. Evidence: `reviews/receipts/2026-10-12-langflow-fix/RESULTS.md`.
 
 ## What it does
 
@@ -27,7 +27,7 @@ Each run gets its own copy of the exact bytes it ran (`run-inputs/<run-id>.json`
 
 ## Run it on the Mac
 
-These commands run in your own terminal. They are not run inside the Claude sandbox.
+The app binds only to 127.0.0.1. Tailscale Serve proxies port 3200. Use the current system-map-ir checkout.
 
 Install the pinned engine (once):
 
@@ -93,23 +93,23 @@ cd ~/Projects/system-map-ir/app && LANGFLOW_LIVE_ENGINE=1 LANGFLOW_LFX_BIN=$HOME
 | Engine missing or not configured | PASS (API) | 503 when not configured; `runner.test.mts` for missing binary |
 | Duplicate clicks | PASS (API) | Second run gets 409 with the running record; same Idempotency-Key returns the first run |
 | Stop | PASS (stand-in process) | `runner.test.mts`, `routes.test.mts`: process killed, record says stopped |
-| Refresh and reconnect show real state | PASS (API), not browser | Records persist; runs left "running" after a restart become "unknown" |
+| Refresh and reconnect show real state | PASS (API and browser reload) | Saved setting and completed run remained visible after a browser reload; server restart recovery retains its API test coverage |
 | Histories isolated per browser session | PASS (API) | Another session sees none of the runs |
 | Secrets absent from responses, exports, engine environment | PASS (API) | Export and import tests; engine receives no provider keys |
 | Tailnet is read-only; unlisted devices denied | PASS (synthetic headers) | `handles-policy.test.mts`, `routes.test.mts` |
-| Real Tailscale private access | BLOCKED | `tailscale serve status` fails here ("Failed to load preferences") |
-| Desktop and phone layout, keyboard and touch | BLOCKED | The server cannot bind a local port in this sandbox |
+| Real Tailscale private access | PASS from this Mac through Serve | Browser renders saved flow; import/save/run/stop return 403 remotely; remote health has no token |
+| Desktop and narrow layout, keyboard | PASS for browser checks | Actual 390px viewport measured; no document overflow or component/aside overlap; Tab reaches Run. Physical phone/touch remains untested |
 
-## Blockers
+## Current access and remaining verification
 
-1. **Local port binding is blocked** in this Claude session's sandbox (`EPERM`). The server, browser checks and Tailscale tests need it. Fix: set `sandbox.network.allowLocalBinding: true` in your Claude settings. Alex decides this.
-2. **Tailscale status is unreadable from here.** Private access and the denial tests stay unverified until it is readable.
-3. **Phone and desktop checks** wait on item 1.
-4. **Open decisions for Alex:**
-   - Should tailnet devices be allowed to save or run? The current rule says no.
-   - Should LLM-calling flows run? AI execution is off in this app today.
-   - Keep `lfx` (no server, no port) as the execution path, or move to the Langflow server API once port binding is allowed?
-   - `/api/health` returns the local mutation token, and middleware lets tailnet devices read `/api/*`. Mutations also check the `Host` header. Whether a tailnet client could spoof it is not verified. Recommend removing the token from `/api/health`. That is an authentication change, so it needs Alex's approval.
+- Local owner controls initialize only after the local credential loads. Status and flow-detail requests use that credential.
+- Tailnet health returns a minimal health object, never the local credential or filesystem paths. Responses are not cached. Tailnet identities cannot become local owners by changing Host.
+- The existing Tailscale owner login is configured for read only in the ignored local `app/.data/langflow/access.json`. Other logins are denied by the Langflow policy.
+- Development and start commands bind loopback by default. Serve configuration remains private to the tailnet.
+- The local credential was rotated after closing the exposure. No credential is in the receipts.
+- Only harmless Chat Input to Chat Output flows execute. Paid model/tool flows remain disabled.
+- Browser reload, 390px viewport measurement and same-Mac HTTPS Serve access were tested. A physical phone, touch gestures and a separate remote device were not tested.
+- A same-family independent technical check passed. Formal other-family alex-reviewer and Director acceptance are pending; no paid review was launched.
 
 ## Integration checklist
 

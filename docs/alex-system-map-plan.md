@@ -303,4 +303,4 @@ Both copies are identical. No app code was changed.
 
 ## Langflow control dashboard (2026-10-12)
 
-Requirement and evidence checklist: `docs/LANGFLOW_DASHBOARD.md`. Status: local prototype. The pinned Langflow 1.12.5 engine run is verified (live acceptance test). Browser, phone and Tailscale checks are blocked by the sandbox port binding and an unreadable Tailscale status.
+Requirement and evidence checklist: `docs/LANGFLOW_DASHBOARD.md`. Status: locally and through Tailscale Serve seen working on October 12, 2026. Browser import/save/reload/run and read-only tailnet checks passed. Token exposure and narrow layout overlap are fixed. Physical phone/second-device proof and formal other-family review remain pending. See `reviews/receipts/2026-10-12-langflow-fix/RESULTS.md`.
