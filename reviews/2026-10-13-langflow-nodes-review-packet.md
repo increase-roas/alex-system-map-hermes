@@ -20,7 +20,7 @@ Only the Director marks it verified.
 | 4 Canvas wiring | Owner can wire; tailnet gets 403 on every new edit kind | Seen working (browser 1280 px; API 403 tests); middleware and policy unchanged | `step4-canvas.txt` |
 | 5 Setting editors | Multiline, slider, tab, dict, table; secrets never stored; untouched round trip unchanged | Seen working (API and browser); byte-identical round trip of every editable setting | `step5-settings.txt` |
 | 6 Run scope | One live engine test per enabled local component; failures stay off and are listed | Seen working (live): 18/18 enabled produce real output; 4 stay off with reasons | `live-components.txt` |
-| 7 Docs and checks | Doc updated; tsc, build, unit and route tests, live tests, desktop and phone browser checks | tsc PASS, build PASS (into .next-verify), lint PRE-EXISTING, checks PASS, 99/99 unit, 5/5 live, browser PASS; acceptance scripts FAIL (see below) | `final-checks.txt`, `docs/LANGFLOW_DASHBOARD.md` |
+| 7 Docs and checks | Doc updated; tsc, build, unit and route tests, live tests, desktop and phone browser checks | Historical first result: acceptance scripts FAIL. Current: tsc and build PASS, lint PRE-EXISTING in untouched files, checks PASS, 108/108 unit, 6/6 live, browser PASS, four acceptance scripts PASS (Codex, outside the sandbox) | `final-checks.txt`, `docs/LANGFLOW_DASHBOARD.md` |
 
 ## Response to the other-family review (FAIL, 2026-10-13T17:50Z)
 
@@ -93,4 +93,10 @@ Review: `reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-202610
 - Loop-feedback proof now reads the target loop's types and loop_types (`tests/edge-compat.mts`); unit negatives
   (Embeddings into a loop, a feedback onto a missing loop output) are reported (commit 4eb50e0).
 - Doc and packet status reconciled; historical statements labelled.
-- Still open: the two decisions in "Current status".
+- The two decisions are resolved: see "Current status" (Decision 1 approved by Alex, Decision 2 passing).
+
+## Third review (2026-10-13T18:48Z): PASS
+
+`reviews/receipts/2026-10-13-langflow-nodes/review-langflow-nodes-20261013T184854Z.md` (Codex, alex-reviewer v1.1):
+VERDICT PASS, all seven rows PASS under the approved acceptance, MISSING none. Not a Director VERIFIED state.
+The two stale lines it noted are corrected in this packet.
