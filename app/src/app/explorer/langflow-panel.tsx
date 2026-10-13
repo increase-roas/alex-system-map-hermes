@@ -10,10 +10,10 @@
  */
 import '@xyflow/react/dist/style.css';
 
-import { Background, Controls, Handle, Position, ReactFlow, useEdgesState, useNodesState, type Edge, type Node, type NodeProps } from '@xyflow/react';
+import { Background, Controls, Handle, Position, ReactFlow, useEdgesState, useNodesState, type Connection, type Edge, type Node, type NodeProps } from '@xyflow/react';
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, ExecutionPlan, FlowEdit, Problem } from '@/lib/langflow/model';
+import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, CanvasPort, ExecutionPlan, FlowEdit, Problem } from '@/lib/langflow/model';
 
 type Status = {
   engine: { name: string; pinnedLangflowVersion: string; configured: boolean; binaryFound: boolean };
@@ -92,6 +92,9 @@ function describeEdit(e: FlowEdit, label: (id: string) => string): string {
     case 'rename': return `Rename ${label(e.nodeId)}`;
     case 'setField': return `Set "${e.field}" on ${label(e.nodeId)}`;
     case 'addNode': return `Add ${label(e.nodeId)}`;
+    case 'deleteNode': return `Delete ${label(e.nodeId)}`;
+    case 'connect': return `Connect ${label(e.nodeId)} → ${label(e.target)} (${e.sourceOutput} → ${e.targetInput})`;
+    case 'disconnect': return 'Disconnect a connection';
     default: return 'Change';
   }
 }
@@ -216,16 +219,24 @@ async function api<T>(path: string, init: RequestInit = {}, token?: string | nul
 
 const LAYOUT_NODE_WIDTH = 230;
 
+/** Handle ids on the canvas: inputs "in:<field>", outputs "out:<output>", a loop's feedback point "loop:<output>". */
+const inHandle = (name: string) => `in:${name}`;
+const outHandle = (name: string) => `out:${name}`;
+const loopHandle = (name: string) => `loop:${name}`;
+
+function typesMatch(out: CanvasPort, accepts: string[]): boolean {
+  return accepts.includes('Any') || out.types.some((t) => accepts.includes(t));
+}
+
 const LangflowNode = memo(function LangflowNode({ data, selected }: NodeProps<Node<{ node: CanvasNode }>>) {
   const node = data.node;
-  const shown = node.fields.filter((f) => f.value !== null && f.value !== '').slice(0, 2);
+  const shown = node.fields.filter((f) => f.value !== null && f.value !== '' && typeof f.value !== 'object' && f.name !== 'code').slice(0, 2);
   return (
     <div
       data-testid={`lf-node-${node.id}`}
       className={`rounded-lg border bg-card text-card-foreground shadow-sm ${selected ? 'ring-2 ring-offset-1' : ''} ${node.isNote ? 'bg-yellow-50 dark:bg-yellow-950/40' : ''}`}
       style={{ width: LAYOUT_NODE_WIDTH }}
     >
-      <Handle type="target" position={Position.Top} />
       <div className="border-b px-3 py-2">
         <div className="truncate text-[13px] font-semibold">{node.label}</div>
         <div className="flex items-center gap-2 text-[10px] uppercase tracking-wide text-muted-foreground">
@@ -238,7 +249,23 @@ const LangflowNode = memo(function LangflowNode({ data, selected }: NodeProps<No
           <div key={f.name} className="truncate"><span className="font-medium text-foreground">{f.label}:</span> {String(f.value)}</div>
         )) : <div>No settings to show</div>}
       </div>
-      <Handle type="source" position={Position.Bottom} />
+      {node.inputs.length || node.outputs.length ? (
+        <div className="space-y-1 border-t py-1.5 text-[10px]">
+          {node.inputs.map((p) => (
+            <div key={`i-${p.name}`} className="relative px-3" title={`Input: takes ${p.types.join(' or ')}`}>
+              <Handle type="target" id={inHandle(p.name)} position={Position.Left} className="!size-2.5 !bg-sky-500" />
+              <span className="text-muted-foreground">{p.label}</span>
+            </div>
+          ))}
+          {node.outputs.map((p) => (
+            <div key={`o-${p.name}`} className="relative px-3 text-right" title={`Output: sends ${p.types.join(' or ')}`}>
+              {p.loop ? <Handle type="target" id={loopHandle(p.name)} position={Position.Left} className="!size-2.5 !bg-violet-500" /> : null}
+              <span className="font-medium">{p.label}</span>
+              <Handle type="source" id={outHandle(p.name)} position={Position.Right} className="!size-2.5 !bg-emerald-500" />
+            </div>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 });
@@ -260,6 +287,66 @@ function fieldInput(field: CanvasField, value: string | number | boolean | null,
     return <input id={id} type="number" step={field.fieldType === 'int' ? 1 : 'any'} className="w-full rounded border bg-background px-2 py-1 text-sm" value={value === null ? '' : String(value)} onChange={(e) => onChange(e.target.value === '' ? '' : Number(e.target.value))} />;
   }
   return <input id={id} type="text" className="w-full rounded border bg-background px-2 py-1 text-sm" value={value === null ? '' : String(value)} onChange={(e) => onChange(e.target.value)} />;
+}
+
+/** Keyboard and touch way to wire, unwire and delete the selected component (the canvas needs a mouse). */
+function NodeConnections({ node, view, canEdit, onEdit }: { node: CanvasNode; view: CanvasFlow; canEdit: boolean; onEdit: (e: FlowEdit) => void }) {
+  const [output, setOutput] = useState('');
+  const [dest, setDest] = useState('');
+  const label = (id: string) => view.nodes.find((n) => n.id === id)?.label ?? id;
+  const mine = view.edges.filter((e) => e.source === node.id || e.target === node.id);
+  const out = node.outputs.find((p) => p.name === output) ?? node.outputs[0];
+  const destinations = out
+    ? view.nodes.filter((n) => n.id !== node.id).flatMap((n) => [
+      ...n.inputs.filter((p) => typesMatch(out, p.types)).map((p) => ({ value: `${n.id}|in|${p.name}`, text: `${n.label} → ${p.label}` })),
+      ...n.outputs.filter((p) => p.loop && typesMatch(out, p.types)).map((p) => ({ value: `${n.id}|loop|${p.name}`, text: `${n.label} → ${p.label} (loop feedback)` })),
+    ])
+    : [];
+  const chosen = destinations.find((d) => d.value === dest) ?? destinations[0];
+  return (
+    <div className="mt-3 space-y-2 border-t pt-2">
+      <h3 className="text-xs font-semibold">Connections</h3>
+      {mine.length === 0 ? <p className="text-[11px] text-muted-foreground">Not connected.</p> : (
+        <ul className="space-y-1 text-[11px]">
+          {mine.map((e) => (
+            <li key={e.id} className="flex items-center justify-between gap-2">
+              <span>{e.source === node.id ? `${e.sourceOutput} → ${label(e.target)} (${e.targetInput})` : `${label(e.source)} (${e.sourceOutput}) → ${e.targetInput}`}</span>
+              {canEdit ? <button type="button" className="rounded border px-1.5 py-0.5 hover:bg-muted" onClick={() => onEdit({ kind: 'disconnect', edgeId: e.id })}>Disconnect</button> : null}
+            </li>
+          ))}
+        </ul>
+      )}
+      {canEdit && node.outputs.length ? (
+        <div className="space-y-1">
+          <label htmlFor="lf-connect-output" className="block text-[11px] font-medium">Connect output</label>
+          <select id="lf-connect-output" className="w-full rounded border bg-background px-2 py-1 text-xs" value={out?.name ?? ''} onChange={(e) => { setOutput(e.target.value); setDest(''); }}>
+            {node.outputs.map((p) => <option key={p.name} value={p.name}>{p.label} (sends {p.types.join(' or ')})</option>)}
+          </select>
+          <label htmlFor="lf-connect-dest" className="block text-[11px] font-medium">To</label>
+          <select id="lf-connect-dest" className="w-full rounded border bg-background px-2 py-1 text-xs" value={chosen?.value ?? ''} onChange={(e) => setDest(e.target.value)} disabled={destinations.length === 0}>
+            {destinations.length === 0 ? <option value="">No input in this flow takes this type</option> : destinations.map((d) => <option key={d.value} value={d.value}>{d.text}</option>)}
+          </select>
+          <button
+            type="button"
+            className="rounded border px-2 py-1 text-xs hover:bg-muted disabled:opacity-50"
+            disabled={!out || !chosen}
+            onClick={() => {
+              if (!out || !chosen) return;
+              const [target, kind, input] = chosen.value.split('|');
+              onEdit({ kind: 'connect', nodeId: node.id, sourceOutput: out.name, target, targetInput: input, ...(kind === 'loop' ? { targetLoop: true } : {}) });
+            }}
+          >
+            Connect
+          </button>
+        </div>
+      ) : null}
+      {canEdit ? (
+        <button type="button" className="rounded border border-red-300 px-2 py-1 text-xs text-red-700 hover:bg-red-50 dark:border-red-800 dark:text-red-400 dark:hover:bg-red-950/40" onClick={() => onEdit({ kind: 'deleteNode', nodeId: node.id })}>
+          Delete this component
+        </button>
+      ) : null}
+    </div>
+  );
 }
 
 export function LangflowPanel() {
@@ -343,6 +430,9 @@ export function LangflowPanel() {
       id: e.id,
       source: e.source,
       target: e.target,
+      sourceHandle: e.sourceOutput ? outHandle(e.sourceOutput) : undefined,
+      targetHandle: e.targetInput ? (e.targetLoop ? loopHandle(e.targetInput) : inHandle(e.targetInput)) : undefined,
+      ariaLabel: `Connection ${e.sourceOutput ?? '?'} to ${e.targetInput ?? '?'}`,
       label: e.sourceOutput && e.targetInput ? `${e.sourceOutput} → ${e.targetInput}` : undefined,
       style: e.decodeError ? { stroke: '#dc2626', strokeDasharray: '4 4' } : undefined,
     })));
@@ -455,6 +545,51 @@ export function LangflowPanel() {
     queueEdit({ kind: 'addNode', nodeId, componentType: item.type, position: { x: maxX + 320, y: Number.isFinite(minY) ? minY : 0 } });
     setSelectedNode(nodeId);
   }, [detail, preview, queueEdit]);
+
+  const portOf = useCallback((nodeId: string, handleId: string | null | undefined) => {
+    const node = (preview?.canvas ?? detail?.canvas)?.nodes.find((n) => n.id === nodeId);
+    if (!node || !handleId) return null;
+    const [kind, name] = [handleId.slice(0, handleId.indexOf(':')), handleId.slice(handleId.indexOf(':') + 1)];
+    if (kind === 'out') return { kind, port: node.outputs.find((p) => p.name === name) };
+    if (kind === 'in') return { kind, port: node.inputs.find((p) => p.name === name) };
+    if (kind === 'loop') return { kind, port: node.outputs.find((p) => p.name === name && p.loop) };
+    return null;
+  }, [detail, preview]);
+
+  // Fast check while dragging; the server makes the final decision with the same rule.
+  const isValidConnection = useCallback((c: Connection | Edge) => {
+    if (!c.source || !c.target || c.source === c.target) return false;
+    const from = portOf(c.source, c.sourceHandle);
+    const to = portOf(c.target, c.targetHandle);
+    if (!from?.port || from.kind !== 'out' || !to?.port) return false;
+    return typesMatch(from.port, to.port.types);
+  }, [portOf]);
+
+  const onConnect = useCallback((c: Connection) => {
+    if (!canSave || !c.sourceHandle || !c.targetHandle) return;
+    const targetLoop = c.targetHandle.startsWith('loop:');
+    queueEdit({
+      kind: 'connect',
+      nodeId: c.source,
+      sourceOutput: c.sourceHandle.slice('out:'.length),
+      target: c.target,
+      targetInput: c.targetHandle.slice(c.targetHandle.indexOf(':') + 1),
+      ...(targetLoop ? { targetLoop: true } : {}),
+    });
+  }, [canSave, queueEdit]);
+
+  const onNodesDelete = useCallback((deleted: Node[]) => {
+    if (!canSave) return;
+    for (const n of deleted) queueEdit({ kind: 'deleteNode', nodeId: n.id });
+    setSelectedNode(null);
+  }, [canSave, queueEdit]);
+
+  const onEdgesDelete = useCallback((deleted: Edge[]) => {
+    if (!canSave) return;
+    // Connections of a deleted component go with it; only queue the ones removed on their own.
+    const gone = new Set(nodes.filter((n) => n.selected).map((n) => n.id));
+    for (const e of deleted) if (!gone.has(e.source) && !gone.has(e.target)) queueEdit({ kind: 'disconnect', edgeId: e.id });
+  }, [canSave, nodes, queueEdit]);
 
   const onNodeDragStop = useCallback((_: unknown, node: Node) => {
     queueEdit({ kind: 'move', nodeId: node.id, position: { x: node.position.x, y: node.position.y } });
@@ -609,7 +744,14 @@ export function LangflowPanel() {
               fitView
               fitViewOptions={{ padding: 0.2 }}
               nodesDraggable={canSave}
-              nodesConnectable={false}
+              nodesConnectable={canSave}
+              onConnect={onConnect}
+              isValidConnection={isValidConnection}
+              onNodesDelete={onNodesDelete}
+              onEdgesDelete={onEdgesDelete}
+              deleteKeyCode={canSave ? ['Backspace', 'Delete'] : null}
+              elementsSelectable
+              edgesFocusable
               nodesFocusable
               proOptions={{ hideAttribution: true }}
             >
@@ -658,6 +800,7 @@ export function LangflowPanel() {
                   </div>
                 );
               })}
+              {view && !selected.isNote ? <NodeConnections key={selected.id} node={selected} view={view} canEdit={canSave} onEdit={(e) => { queueEdit(e); if (e.kind === 'deleteNode') setSelectedNode(null); }} /> : null}
             </div>
           )}
         </div>

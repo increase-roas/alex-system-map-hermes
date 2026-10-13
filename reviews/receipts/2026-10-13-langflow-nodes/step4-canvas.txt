@@ -1,0 +1,24 @@
+Step 4 receipt (owner-only canvas wiring). 2026-10-13 about 11:40 EDT. claude-opus-5-5.
+
+A. Browser, built-in browser pane of the Claude desktop app, viewport emulated 1280x800,
+   isolated server 127.0.0.1:3217 (NEXT_DIST_DIR=.next-verify, scratch LOCAL_DATA_DIR, not app/.data).
+   Flow 45a775c0-3a68-45e4-9d07-63f48d44f59c (Chat Input -> Chat Output, plus Current Date from step 2).
+   1. Canvas showed 11 connection points (react-flow handles) for the 3 components.
+   2. Current Date selected (keyboard, Problems "show" + Enter). Connect form offered output
+      "Current Date (sends Message)" and only Message-accepting inputs (8 options, e.g. "Chat Output -> Inputs").
+   3. Refused path: Connect to "Chat Output -> Inputs" (already wired). Shown:
+      "\"Chat Output\" -> \"input_value\" already has a connection and takes only one. Disconnect it first."
+      and "That change is not allowed, so it was taken back out." Change list stayed empty.
+   4. Chat Output selected (click on canvas), Disconnect (keyboard Enter) on "Chat Input (message) -> input_value".
+   5. Current Date -> Chat Output Inputs via the form and Connect (Enter). Preview edge "Connection current_date to input_value".
+   6. Chat Input selected on the canvas, Delete key: removed from the canvas, change "Delete Chat Input" queued.
+   7. Save changes (Enter): "Saved 3 changes. New version c9c9f2fb34."
+      Server after save: nodes ChatOutput-yK0AU, CurrentDate-L8kQF; edge CurrentDate-L8kQF.current_date -> ChatOutput-yK0AU.input_value; problems [].
+B. Engine on the saved file (same minimal environment as runner.ts):
+   lfx validate: pass (check mark).
+   lfx run --input-value hi -f json: {"result": "Current date and time in UTC: 2026-10-13 15:39:28 UTC", "component": "Chat Output", "success": true}
+C. Tailnet stays read-only: middleware.ts and policy.ts unchanged (git diff empty). edits.test.mts "route: tailnet and
+   token-less callers get 403 on structural edits and dry runs" covers addNode, deleteNode, disconnect and connect,
+   saved and dry run, for a listed tailnet login, an unlisted one and a loopback caller without the token.
+   The panel turns off connecting, deleting and the palette unless the caller can save.
+middleware and policy unchanged
