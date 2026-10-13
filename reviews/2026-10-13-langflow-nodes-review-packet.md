@@ -56,8 +56,8 @@ Evidence: `reviews/receipts/2026-10-13-langflow-nodes/fix-everything.txt`, `engi
 - Engine: Alex's venv runs lfx 1.12.5 (langflow 1.12.5). Earlier receipts ran on 1.12.6rc3 and are historical.
 - Tailnet: checked on the new build by Alex in his Terminal: the new component route answers through Tailscale
   Serve and a dry-run write is refused with 403 (`fix-everything.txt`).
-- Acceptance scripts: the four selected by `/verify` fail identically on base 3572d39 and on the current code in
-  the same sandbox (`review-f4-baseline.txt`). They do not pass here; the gate needs a scope decision (below).
+- Acceptance scripts: they fail identically on base and current inside Claude's sandbox (`review-f4-baseline.txt`);
+  outside it, after Codex's fixes, all four pass (Decision 2 below).
 - Validator: proof and limits in `review-f3-validator.txt`; the latest execution is `run-receipt-4eb50e0.txt`.
 - Real device: not required by the brief (dropped by Alex); the 375 px emulated check stands.
 - Decision 1, APPROVED by Alex in chat 2026-10-13 (answer: "Approve scoped wording"): acceptance row 2 is met by
@@ -66,8 +66,15 @@ Evidence: `reviews/receipts/2026-10-13-langflow-nodes/fix-everything.txt`, `engi
   in a wired flow, every edge proven compatible, and the real run gives the expected output. Skipped checks are
   named: level 2 (cannot run in this engine), credentials (never stored)." Evidence: `review-f3-validator.txt`,
   `run-receipt-4eb50e0.txt`.
-- Decision 2 (Alex in chat 2026-10-13): the four baseline-failing acceptance scripts are not waived; Alex asked
-  for Codex to get them passing outside this sandbox. Pending Codex's receipt.
+- Decision 2 (Alex in chat 2026-10-13): the four baseline-failing acceptance scripts are not waived; Codex was
+  asked through the codex-bridge to get them passing outside Claude's sandbox. RESOLVED: Codex found they also
+  failed outside the sandbox (real pre-existing regressions, present at base), fixed product code only
+  (maintained-edit-panel.tsx, system-explorer.tsx accessible names, catalog_fixture_clone.py per-file hashes; no
+  acceptance script or browser helper changed, verified by git diff), and all four now exit 0 with empty failures:
+  `acceptance-gate-codex.txt` and `codex-acceptance-runs/commit-check/`. Commits 01f2f61, e3760c0 on branch
+  acceptance-gate-fix, fast-forwarded into langflow-dashboard after Claude reviewed the diff. On the combined code:
+  tsc exit 0, lint on the changed files clean, Langflow unit and route 108/108, flow-node-kit 0 FAIL, Pro Map audit
+  exit 0, build exit 0 (Claude's sandbox; the four scripts themselves were run by Codex outside it).
 
 ## Historical notes (superseded, kept for the record)
 
