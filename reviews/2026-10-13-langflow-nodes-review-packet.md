@@ -60,8 +60,14 @@ Evidence: `reviews/receipts/2026-10-13-langflow-nodes/fix-everything.txt`, `engi
   the same sandbox (`review-f4-baseline.txt`). They do not pass here; the gate needs a scope decision (below).
 - Validator: proof and limits in `review-f3-validator.txt`; the latest execution is `run-receipt-4eb50e0.txt`.
 - Real device: not required by the brief (dropped by Alex); the 375 px emulated check stands.
-- Decisions pending from Alex or the Director: (1) the scoped wording of acceptance row 2; (2) the scope
-  disposition of the four baseline-failing acceptance scripts.
+- Decision 1, APPROVED by Alex in chat 2026-10-13 (answer: "Approve scoped wording"): acceptance row 2 is met by
+  "All 63: strict `lfx validate --level 3 --skip-components --strict` exits 0 and the saved code is byte-identical
+  to the engine's built-in component. All 18 runnable: `lfx validate --skip-components --skip-credentials` exits 0
+  in a wired flow, every edge proven compatible, and the real run gives the expected output. Skipped checks are
+  named: level 2 (cannot run in this engine), credentials (never stored)." Evidence: `review-f3-validator.txt`,
+  `run-receipt-4eb50e0.txt`.
+- Decision 2 (Alex in chat 2026-10-13): the four baseline-failing acceptance scripts are not waived; Alex asked
+  for Codex to get them passing outside this sandbox. Pending Codex's receipt.
 
 ## Historical notes (superseded, kept for the record)
 
