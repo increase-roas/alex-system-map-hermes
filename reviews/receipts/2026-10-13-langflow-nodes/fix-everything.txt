@@ -27,3 +27,12 @@ Also: megapowers hooks ran in this session (its verify-and-finish gate fired bef
 works here; no Go failure seen.
 Incident: while checking proxy settings, one command printed this sandbox's short-lived proxy credential to the
 session output. It is the sandbox's own per-session proxy login, not one of Alex's keys; not written to any file.
+
+Update (Alex, in his own Terminal outside the sandbox, after this receipt was written):
+  curl -s -o /dev/null -w "%{http_code}\n" -X PATCH -H 'content-type: application/json' \
+    -d '{"expectedHash":"x","edits":[],"dryRun":true}' \
+    https://alexs-macbook-pro.tailde26a1.ts.net/api/langflow/flows/nonexistent-00000000
+  -> 403 (seen, pasted into chat 2026-10-13).
+  Proves: a dry-run edit through Tailscale Serve is refused. Does not prove which refusal ("Tailnet access is
+  read-only" vs "local access only", body not shown) or that the 3200 server runs the new build.
+  Next check (not yet run): GET /api/langflow/components through the same URL; "count":63 proves the new build.
