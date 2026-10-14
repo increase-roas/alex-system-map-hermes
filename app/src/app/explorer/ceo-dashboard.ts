@@ -45,11 +45,11 @@ export type CeoDashboard = {
   parity: { columns: string[]; rows: ParityRow[] } | null;
   fix_now: FixNowItem[] | null;
   logins: { total: number; not_active: number; bad: { toolkit: string; name: string; status: string }[] } | null;
-  spend: { state: 'unknown'; why: string; langfuse_links: { label: string; url: string }[] };
+  spend: SpendView & { langfuse_links: { label: string; url: string }[] };
   rotation: { state: 'unknown'; why: string };
 };
 
-export const STALE_MS = { board: 24 * 3600_000, director: 7 * 24 * 3600_000, parity: 7 * 24 * 3600_000, logins: 3600_000, fix_now: 7 * 24 * 3600_000 };
+export const STALE_MS = { board: 24 * 3600_000, director: 7 * 24 * 3600_000, parity: 7 * 24 * 3600_000, logins: 3600_000, fix_now: 7 * 24 * 3600_000, spend: 8 * 24 * 3600_000 }; // spend runs weekly
 
 export function freshness(modifiedMs: number | null, nowMs: number, staleAfterMs: number): Freshness {
   if (modifiedMs === null || !Number.isFinite(modifiedMs)) return 'unknown';
@@ -157,5 +157,38 @@ export function progressTail(md: string, n = 12): string[] {
   return md.split('\n').filter((l) => l.startsWith('- ')).slice(-n).reverse();
 }
 
-export const SPEND_WHY = 'Not wired yet: the spend check is board ticket agent-ops-foundation-55 (design) then -82 (live). Until it lands this stays unknown; no number is shown that a source did not give.';
+export const SPEND_WHY = 'No spend snapshot yet: run python3 ~/.agents/tools/spend/spend_check.py run (ticket -55; weekly schedule is -82). Until then this stays unknown; no number is shown that a source did not give.';
 export const ROTATION_WHY = 'Not wired yet: the rotation script is board ticket agent-ops-foundation-72, proven end to end in -83. Until it lands every key\'s rotation state is unknown.';
+
+// Spend: read from ~/.agents/runtime/spend/latest.json, written by ~/.agents/tools/spend/spend_check.py (ticket -55).
+export type SpendRow = { name: string; kind: string; state: 'ok' | 'unknown'; why: string | null; figures: [string, string][]; alerts: string[] };
+export type SpendView = { state: 'ok' | 'unknown'; why: string; generated_at: string | null; alerts: string[]; rows: SpendRow[] };
+
+const FIGURES: [string, string, 'usd' | 'n' | 'text'][] = [
+  ['credits_left_usd', 'credits left', 'usd'], ['credits_used_usd', 'credits used', 'usd'], ['credits_bought_usd', 'credits bought', 'usd'],
+  ['key_month_usd', 'this key this month', 'usd'], ['plan_usd_month', 'plan per month', 'usd'], ['api_wallet_usd', 'API wallet', 'usd'],
+  ['balance_usd', 'balance', 'usd'], ['month_usd', 'this month', 'usd'], ['tier', 'plan', 'text'],
+  ['characters_used', 'characters used', 'n'], ['characters_limit', 'character limit', 'n'],
+];
+
+/** Only fields the snapshot actually holds are shown; a missing field is left out, never printed as 0. */
+export function spendView(doc: unknown): SpendView {
+  const d = doc as { generated_at?: string; alerts?: unknown; services?: Record<string, Record<string, unknown>> } | null;
+  if (!d || typeof d !== 'object' || !d.services || typeof d.services !== 'object') {
+    return { state: 'unknown', why: SPEND_WHY, generated_at: null, alerts: [], rows: [] };
+  }
+  const rows: SpendRow[] = Object.entries(d.services).map(([name, s]) => {
+    const figures: [string, string][] = [];
+    for (const [key, label, fmt] of FIGURES) {
+      const v = s[key];
+      if (v === null || v === undefined || v === '') continue;
+      if (fmt === 'usd' && typeof v === 'number') figures.push([label, `$${v.toFixed(2)}`]);
+      else if (fmt === 'n' && typeof v === 'number') figures.push([label, v.toLocaleString('en-US')]);
+      else if (fmt === 'text') figures.push([label, String(v)]);
+    }
+    const state = s.state === 'ok' ? 'ok' : 'unknown';
+    return { name, kind: String(s.kind ?? '?'), state, why: state === 'ok' ? null : String(s.why ?? 'no reason given'), figures, alerts: Array.isArray(s.alerts) ? s.alerts.map(String) : [] };
+  });
+  rows.sort((a, b) => b.alerts.length - a.alerts.length || Number(b.state === 'ok') - Number(a.state === 'ok') || a.name.localeCompare(b.name));
+  return { state: 'ok', why: 'From the last spend check run.', generated_at: d.generated_at ?? null, alerts: Array.isArray(d.alerts) ? d.alerts.map(String) : [], rows };
+}

@@ -5,7 +5,6 @@ import path from 'node:path';
 
 import {
   ROTATION_WHY,
-  SPEND_WHY,
   STALE_MS,
   badges,
   boardCounts,
@@ -15,6 +14,7 @@ import {
   needsAlex,
   parseParity,
   progressTail,
+  spendView,
   type CeoDashboard,
   type FixNowItem,
   type Source,
@@ -88,6 +88,17 @@ export async function buildCeoDashboard(): Promise<CeoDashboard> {
     }
   }
 
+  const spendFile = await readSource(path.join(A, 'runtime', 'spend', 'latest.json'), STALE_MS.spend);
+  sources.spend = spendFile.source;
+  let spendDoc: unknown = null;
+  if (spendFile.text) {
+    try {
+      spendDoc = screenParsedValue(JSON.parse(spendFile.text));
+    } catch {
+      sources.spend = { ...spendFile.source, freshness: 'unknown', note: 'not valid JSON' };
+    }
+  }
+
   let logins: CeoDashboard['logins'] = null;
   const snap = (await readConnectorLogins()) as {
     generated_at?: string;
@@ -118,8 +129,7 @@ export async function buildCeoDashboard(): Promise<CeoDashboard> {
     fix_now: fixNow,
     logins,
     spend: {
-      state: 'unknown',
-      why: SPEND_WHY,
+      ...spendView(spendDoc),
       langfuse_links: Object.values(PROJECTS).map((p) => ({ label: `Langfuse ${p.label}: cost dashboard`, url: `${LANGFUSE_HOST}/project/${p.projectId}/dashboards` })),
     },
     rotation: { state: 'unknown', why: ROTATION_WHY },

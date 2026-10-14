@@ -1,4 +1,4 @@
-import { agentPrompt, badges, boardCounts, deepLink, directorMissions, fixNowItem, freshness, needsAlex, parityVerdict, parseParity, progressTail, ROTATION_WHY, SPEND_WHY, type Ticket } from './ceo-dashboard.ts';
+import { spendView, agentPrompt, badges, boardCounts, deepLink, directorMissions, fixNowItem, freshness, needsAlex, parityVerdict, parseParity, progressTail, ROTATION_WHY, SPEND_WHY, type Ticket } from './ceo-dashboard.ts';
 let fails = 0;
 const assert = (c: unknown, m: string) => { if (!c) { fails++; console.error('FAIL', m); } else console.log('PASS', m); };
 const T: Ticket[] = [
@@ -38,4 +38,13 @@ assert(SPEND_WHY.includes('-55') && ROTATION_WHY.includes('-72'), 'unknown state
 const em = directorMissions('## Mission: E\nSTATUS:\nPRIORITY: HIGH\n## Mission: F\nPRIORITY:\nSTATUS: ok\n');
 assert(em[0].status.startsWith('unknown') && em[0].priority === 'HIGH', 'empty STATUS stays unknown, never borrows the next line');
 assert(em[1].priority === null && em[1].status === 'ok', 'empty PRIORITY is null');
+const sv = spendView({ generated_at: 'g', alerts: ['A'], services: {
+  openrouter: { kind: 'ai', state: 'ok', credits_left_usd: 10.72, credits_used_usd: null, alerts: ['A'] },
+  ghl: { kind: 'sales', state: 'unknown', why: 'not wired: x', alerts: [] },
+  heygen: { kind: 'ai', state: 'ok', api_wallet_usd: 0, alerts: [] } } });
+assert(sv.state === 'ok' && sv.rows[0].name === 'openrouter', 'rows with alerts first');
+assert(sv.rows[0].figures.join('|') === 'credits left,$10.72', 'null figures are left out, never 0');
+assert(sv.rows.find((r) => r.name === 'heygen')!.figures[0][1] === '$0.00', 'a real 0 from the source is shown');
+assert(sv.rows.find((r) => r.name === 'ghl')!.why === 'not wired: x', 'unknown keeps its reason');
+assert(spendView(null).state === 'unknown' && spendView({ x: 1 }).state === 'unknown', 'missing or bad snapshot is unknown');
 if (fails) { console.error(`${fails} failed`); process.exit(1); }

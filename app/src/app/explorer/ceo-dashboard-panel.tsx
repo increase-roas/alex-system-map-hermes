@@ -194,8 +194,36 @@ export function CeoDashboardPanel({ localToken }: { localToken: string }) {
         )}
       </Section>
 
-      <Section title="Spend and ROI per agent">
-        <p className="rounded bg-zinc-200 p-2">Unknown. {d.spend.why}</p>
+      <Section title={`Spend (${d.spend.alerts.length} alerts)`} src={[d.sources.spend]}>
+        {d.spend.state === 'unknown' ? (
+          <p className="rounded bg-zinc-200 p-2">Unknown. {d.spend.why}</p>
+        ) : (
+          <>
+            {d.spend.alerts.length > 0 && (
+              <ul className="mb-2 space-y-1">
+                {d.spend.alerts.map((a) => (
+                  <li key={a} className="flex flex-wrap items-center gap-2 rounded border border-red-200 bg-red-50 p-2 text-red-900">
+                    <span>{a}</span>
+                    <CopyButton text={`Spend alert: "${a}". Check it on the vendor's billing page, tell me the exact page and what to do, and ask me before any payment or purchase.`} />
+                  </li>
+                ))}
+              </ul>
+            )}
+            <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+              {d.spend.rows.map((r) => (
+                <div key={r.name} className={`rounded border p-2 ${r.state === 'ok' ? '' : 'bg-zinc-100'}`}>
+                  <div className="font-medium">{r.name} <span className="text-[11px] text-zinc-500">{r.kind}</span></div>
+                  {r.state === 'ok' ? (
+                    <ul className="text-xs">{r.figures.map(([k, v]) => <li key={k}>{k}: {v}</li>)}</ul>
+                  ) : (
+                    <p className="text-xs text-zinc-600">Unknown: {r.why}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+            <p className="mt-2 text-[11px] text-zinc-600">ROI per agent needs Langfuse cost per agent and the sales feed; both show unknown until wired. No caps are set yet (you said: track first).</p>
+          </>
+        )}
         <div className="mt-2 flex flex-wrap gap-2">
           {d.spend.langfuse_links.map((l) => (
             <a key={l.url} className="rounded border px-2 py-1 text-xs underline" href={l.url} target="_blank" rel="noreferrer">{l.label}</a>
