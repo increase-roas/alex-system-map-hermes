@@ -301,7 +301,7 @@ function LangfuseTraces() {
     <div className="h-full overflow-auto p-4">
       <h2 className="font-medium">Langfuse traces (live)</h2>
       <p className="text-muted-foreground mt-1 text-xs">
-        The last 24 hours, newest first, up to 100 runs. Langfuse shows traces a few minutes late.
+        The last 24 hours, newest first, up to 100 runs. Langfuse shows traces up to about 15 minutes late.
       </p>
       <div className="mt-3 flex flex-wrap items-center gap-4">
         <SwitchRow label="Project" value={project} options={[['agents', 'Agents'], ['langflow', 'Langflow']]} onChange={setProject} />

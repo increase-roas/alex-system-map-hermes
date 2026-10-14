@@ -5,3 +5,6 @@ Langfuse project and OpenRouter key for Langflow (2026-10-14, Claude Opus 5.5 wi
   Saved as new 1Password item "OpenRouter - Langflow" (daz37abakr3thickvjpfxle5ni): shape sk-or-v1- length 73, readback match True, clipboard cleared. Spend approval: Alex, 2026-10-14, "$100/pm".
 - tools/langflow_server.sh reads both at start. Log after restart (05:00Z): "langflow_server: Langfuse tracing on (keys from 1Password item rxoo6lpuxbca67oj4yofie45sm)" and "langflow_server: OpenRouter key on (1Password item daz37abakr3thickvjpfxle5ni, capped in OpenRouter)"; /health 200.
 No key value was printed, written to a file or shown in chat.
+- End to end into the new project: Langflow run "Langflow project check" at 05:00:36Z, HTTP 200 (Codex). Not visible after 6 minutes (Codex polls) or 7 minutes (dashboard).
+  Seen at 05:15:54Z in the dashboard Tracing tab, Langfuse (live), project Langflow: 1 of 1 runs, "Langflow project check", 262 ms, 4 steps, no errors. No claude_code.* observations in this project (Codex).
+  Verdict: Langflow tracing into the separate project is seen working; ingestion lag between 5 and 15 minutes.

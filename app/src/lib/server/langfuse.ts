@@ -26,7 +26,7 @@ export const PROJECTS: Record<LangfuseProject, { item: string; publicField: stri
   langflow: { item: 'rxoo6lpuxbca67oj4yofie45sm', publicField: 'public key', secretField: 'credential', projectId: 'cmv7mth3h01tjad0j3q7b0okl', label: 'Langflow' },
 };
 
-export const LATE_NOTE = 'Langfuse shows traces a few minutes late, so the newest runs may not be here yet.';
+export const LATE_NOTE = 'Langfuse shows traces up to about 15 minutes late, so the newest runs may not be here yet.';
 
 export function isProject(value: unknown): value is LangfuseProject {
   return value === 'agents' || value === 'langflow';

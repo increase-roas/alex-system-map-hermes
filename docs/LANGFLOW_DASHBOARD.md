@@ -98,7 +98,7 @@ Keys (read from 1Password at every Langflow start by `tools/langflow_server.sh`,
 | Key | 1Password item (Connectors vault) | What it does |
 |---|---|---|
 | OpenRouter | "OpenRouter - Langflow" (daz37abakr3thickvjpfxle5ni) | AI models in Langflow: pick the OpenRouter component and the `OPENROUTER_API_KEY` global variable. Capped at $100 a month in OpenRouter (key "Langflow (system map, $100/mo)", resets monthly). Spend approval: Alex, 2026-10-14. Langflow keeps the variable encrypted in its own database. |
-| Langfuse | "Langfuse - Langflow" (rxoo6lpuxbca67oj4yofie45sm) | Traces of every Langflow run go to the Langfuse project "Langflow" (us.cloud.langfuse.com, set up 2026-10-14), kept apart from the Claude Code and Codex traces in "Increase Roas". Traces show up a few minutes after a run. |
+| Langfuse | "Langfuse - Langflow" (rxoo6lpuxbca67oj4yofie45sm) | Traces of every Langflow run go to the Langfuse project "Langflow" (us.cloud.langfuse.com, set up 2026-10-14), kept apart from the Claude Code and Codex traces in "Increase Roas". Traces show up up to about 15 minutes after a run (seen 2026-10-14: between 5 and 15 minutes). |
 
 AI runs happen only in Langflow, never in the dashboard; that is the only place money is spent.
 
