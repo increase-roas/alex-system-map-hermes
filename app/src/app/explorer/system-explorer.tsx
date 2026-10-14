@@ -70,6 +70,7 @@ import { WorkflowPanel } from './workflow-panel';
 import { ProMapPanel } from './pro-map-panel';
 import { FlowBuilderPanel } from './flow-builder-panel';
 import { LangflowPanel } from './langflow-panel';
+import { localTime } from '@/lib/local-time';
 
 const elk = new ELK();
 
@@ -280,7 +281,7 @@ export function SystemExplorer() {
         <div>
           <h1 className="text-base font-medium">Alex system map</h1>
           <p className="text-muted-foreground text-xs" data-testid="catalog-stats">
-            Snapshot {bundle.loaded_at} · {bundle.data.components.length} components ·{' '}
+            Snapshot <span title={bundle.loaded_at}>{localTime(bundle.loaded_at)}</span> · {bundle.data.components.length} components ·{' '}
             {bundle.data.relationships.length} relationships ·{' '}
             {bundle.completeness?.complete ? 'catalog complete' : 'catalog incomplete'}
           </p>

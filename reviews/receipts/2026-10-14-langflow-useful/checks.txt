@@ -1,0 +1,18 @@
+Branch langflow-useful-first (base origin/main eca6498), claude-opus-5-5, 2026-10-14 ~03:10Z.
+
+Alex's asks (chat, 2026-10-14): "for the langflow can we have most useful components for us at the top?",
+"the problems catalog sync was on 10-14??", "does the workflows work?"
+
+1. Langflow palette: new app/src/lib/langflow/useful.ts ranks by use in the starter flows (starters.ts) plus the open flow,
+   then the rest that run here. With no search, a "Most useful for you" group comes first; search works as before.
+   Browser (next start 127.0.0.1:3211, engine env set): first group = Chat Output, Chat Input, Prompt Template, Current Date,
+   If-Else, Parser, Split Text, then the other local components (18 total); next groups Agentics, Custom...
+2. Times: header "Snapshot" and "Catalog sync" now show local time (seen: "Oct 13, 11:04 PM EDT"); raw UTC in the hover title.
+   Cause: the stored times are UTC, 4 hours ahead of EDT, so late evening on the 13th read as the 14th.
+3. Workflows: GET /api/workflow on :3200 answers (0 jobs ever created, 3 templates, dispatch_enabled false).
+   tools/authoritative_workflow_core_acceptance.py: overall passed. tools/app_acceptance.py was stale (no actor_owner, which the
+   job service requires): added it to the 4 apply payloads; now 11/13 pass, all workflow checks pass. The 2 remaining failures are
+   file_browser_archived and file_proof_read_only (source F0002), which depend on catalog data this fresh worktree lacks; not checked further.
+
+Checks: tsc PASS; next lint on the 5 changed app files: no warnings or errors; build PASS;
+Langflow unit tests 119 total, 115 pass, 0 fail, 4 skipped (includes the new useful.test.mts, 3 tests).

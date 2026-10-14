@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { localTime } from '@/lib/local-time';
 
 type SyncFile = {
   path: string;
@@ -68,7 +69,7 @@ export function SyncStatusBar() {
   return (
     <div className="text-muted-foreground border-b px-4 py-1.5 text-xs">
       <button type="button" className="hover:text-foreground text-left" onClick={() => setExpanded((v) => !v)}>
-        Catalog sync: last observation {status.last_observation ?? 'unknown'}
+        Catalog sync: last observation <span title={status.last_observation ?? undefined}>{localTime(status.last_observation)}</span>
         {catalogHash ? ` · fingerprint ${catalogHash}` : null}
         {staleFiles.length ? (
           <span className="text-amber-700 dark:text-amber-300">

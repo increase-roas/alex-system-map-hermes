@@ -139,6 +139,7 @@ def main() -> int:
         'expected_revision': 0,
         'operation_id': 'acceptance-create-1',
         'action': 'create',
+        'actor_owner': 'owner-a',  # the job service requires the acting owner
         'payload': {
             'goal': 'Acceptance workflow job',
             'scope': ['local'],
@@ -153,6 +154,7 @@ def main() -> int:
         'expected_revision': 1,
         'operation_id': 'acceptance-add-1',
         'action': 'add_task',
+        'actor_owner': 'owner-a',  # the job service requires the acting owner
         'payload': {
             'id': 'task-a',
             'goal': 'Inspect catalog record',
@@ -187,6 +189,7 @@ def main() -> int:
         'expected_revision': 1,
         'operation_id': 'acceptance-stale-1',
         'action': 'update',
+        'actor_owner': 'owner-a',  # the job service requires the acting owner
         'payload': {'task_id': 'task-a', 'status': 'in_progress'},
     }
     stale_result = subprocess.run(
@@ -206,6 +209,7 @@ def main() -> int:
         'expected_revision': 0,
         'operation_id': 'acceptance-create-1',
         'action': 'create',
+        'actor_owner': 'owner-a',  # the job service requires the acting owner
         'payload': create['payload'],
     }
     replay_result = run_service('apply', stdin=json.dumps(replay))

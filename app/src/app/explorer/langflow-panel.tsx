@@ -14,6 +14,7 @@ import { Background, Controls, Handle, Position, ReactFlow, useEdgesState, useNo
 import { memo, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { queueEditInto } from '@/lib/langflow/queue';
+import { mostUseful } from '@/lib/langflow/useful';
 import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, CanvasPort, ExecutionPlan, FlowEdit, JsonValue, Problem } from '@/lib/langflow/model';
 
 type Status = {
@@ -60,7 +61,9 @@ type PaletteItem = {
 type Catalog = { engine: { lfxVersion: string; langflowVersion: string | null }; count: number; components: PaletteItem[] };
 type Preview = { canvas: CanvasFlow; problems: Problem[]; plan: ExecutionPlan };
 
+const USEFUL_GROUP = '__useful';
 const CATEGORY_LABEL: Record<string, string> = {
+  [USEFUL_GROUP]: 'Most useful for you (used in your flows, then the rest that run here)',
   agentics: 'Agentics',
   custom_component: 'Custom',
   data_source: 'Data sources',
@@ -154,14 +157,18 @@ function PaletteHeader({ starters, canEdit, langflow, openBlocked, onStarter, on
 }
 
 /** Searchable component list. Arrow keys move between items, Enter or click adds, Escape returns to the search box. */
-function Palette({ catalog, disabled, disabledReason, onAdd }: { catalog: Catalog; disabled: boolean; disabledReason?: string; onAdd: (item: PaletteItem) => void }) {
+function Palette({ catalog, disabled, disabledReason, onAdd, openFlowTypes = [] }: { catalog: Catalog; disabled: boolean; disabledReason?: string; onAdd: (item: PaletteItem) => void; openFlowTypes?: string[] }) {
   const [query, setQuery] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const q = query.trim().toLowerCase();
   const matches = catalog.components.filter((c) => !q || `${c.displayName} ${c.type} ${c.category} ${c.description}`.toLowerCase().includes(q));
   const groups = new Map<string, PaletteItem[]>();
-  for (const c of matches) groups.set(c.category, [...(groups.get(c.category) ?? []), c]);
+  // With no search, the components Alex actually uses come first (starter flows and the open flow), then the rest that run here.
+  const top = q ? [] : mostUseful(matches, openFlowTypes);
+  const onTop = new Set(top.map((c) => c.type));
+  if (top.length) groups.set(USEFUL_GROUP, top);
+  for (const c of matches) if (!onTop.has(c.type)) groups.set(c.category, [...(groups.get(c.category) ?? []), c]);
   const items = () => Array.from(listRef.current?.querySelectorAll<HTMLButtonElement>('[data-palette-item]') ?? []);
   const onListKey = (e: React.KeyboardEvent) => {
     const all = items();
@@ -961,7 +968,7 @@ export function LangflowPanel() {
             <div className="mt-2 space-y-2">
               <PaletteHeader starters={starters} canEdit={canImport} langflow={canImport ? langflow : null} openBlocked={openBlocked}
                 onStarter={(st) => { setPaletteLink(null); void startFromStarter(st); }} onOpen={() => void openInLangflow()} busy={paletteBusy} message={paletteMessage} link={paletteLink} />
-              {catalog ? <Palette catalog={catalog} disabled={!canSave || !detail} disabledReason={canImport && !detail ? 'Pick or start a flow first to add components.' : undefined} onAdd={addComponent} /> : <p className="text-xs text-muted-foreground">{catalogError ?? 'Loading the component list from the engine…'}</p>}
+              {catalog ? <Palette catalog={catalog} openFlowTypes={view?.nodes.map((n) => n.componentType) ?? []} disabled={!canSave || !detail} disabledReason={canImport && !detail ? 'Pick or start a flow first to add components.' : undefined} onAdd={addComponent} /> : <p className="text-xs text-muted-foreground">{catalogError ?? 'Loading the component list from the engine…'}</p>}
             </div>
           </details>
         ) : null}
