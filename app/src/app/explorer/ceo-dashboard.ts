@@ -166,7 +166,7 @@ export type SpendView = { state: 'ok' | 'unknown'; why: string; generated_at: st
 
 const FIGURES: [string, string, 'usd' | 'n' | 'text'][] = [
   ['credits_left_usd', 'credits left', 'usd'], ['credits_used_usd', 'credits used', 'usd'], ['credits_bought_usd', 'credits bought', 'usd'],
-  ['key_month_usd', 'this key this month', 'usd'], ['plan_usd_month', 'plan per month', 'usd'], ['api_wallet_usd', 'API wallet', 'usd'],
+  ['key_month_usd', 'this key this month', 'usd'], ['key_limit_usd', 'key limit', 'usd'], ['key_limit_period', 'key limit resets', 'text'], ['next_invoice_usd', 'next invoice', 'usd'], ['api_wallet_usd', 'API wallet', 'usd'],
   ['balance_usd', 'balance', 'usd'], ['month_usd', 'this month', 'usd'], ['tier', 'plan', 'text'],
   ['characters_used', 'characters used', 'n'], ['characters_limit', 'character limit', 'n'],
 ];
