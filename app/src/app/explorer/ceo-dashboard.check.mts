@@ -1,4 +1,4 @@
-import { agentPrompt, badges, boardCounts, deepLink, directorMissions, fixNowItem, freshness, needsAlex, parityVerdict, parseParity, progressTail, ROTATION_WHY, SPEND_WHY, type Ticket } from './ceo-dashboard.ts';
+import { spendView, agentPrompt, badges, boardCounts, deepLink, directorMissions, fixNowItem, freshness, needsAlex, parityVerdict, parseParity, progressTail, ROTATION_WHY, SPEND_WHY, type Ticket } from './ceo-dashboard.ts';
 let fails = 0;
 const assert = (c: unknown, m: string) => { if (!c) { fails++; console.error('FAIL', m); } else console.log('PASS', m); };
 const T: Ticket[] = [
@@ -38,4 +38,23 @@ assert(SPEND_WHY.includes('-55') && ROTATION_WHY.includes('-72'), 'unknown state
 const em = directorMissions('## Mission: E\nSTATUS:\nPRIORITY: HIGH\n## Mission: F\nPRIORITY:\nSTATUS: ok\n');
 assert(em[0].status.startsWith('unknown') && em[0].priority === 'HIGH', 'empty STATUS stays unknown, never borrows the next line');
 assert(em[1].priority === null && em[1].status === 'ok', 'empty PRIORITY is null');
+const sv = spendView({ generated_at: 'g', alerts: ['A'], services: {
+  openrouter: { kind: 'ai', state: 'ok', credits_left_usd: 10.72, credits_used_usd: null, alerts: ['A'] },
+  ghl: { kind: 'sales', state: 'unknown', why: 'not wired: x', alerts: [] },
+  atlas: { kind: 'ai', state: 'ok', balance_usd: 1, alerts: ['low balance'] },
+  heygen: { kind: 'ai', state: 'ok', api_wallet_usd: 0, alerts: [] } } });
+assert(sv.state === 'ok' && sv.rows.slice(0, 2).map((r) => r.name).sort().join() === 'atlas,openrouter', 'rows with alerts first');
+assert(sv.rows.find((r) => r.name === 'openrouter')!.figures.join('|') === 'credits left,$10.72', 'null figures are left out, never 0');
+assert(sv.rows.find((r) => r.name === 'heygen')!.figures[0][1] === '$0.00', 'a real 0 from the source is shown');
+assert(sv.rows.find((r) => r.name === 'ghl')!.why === 'not wired: x', 'unknown keeps its reason');
+assert(spendView(null).state === 'unknown' && spendView({ x: 1 }).state === 'unknown', 'missing or bad snapshot is unknown');
+assert(spendView({ services: { vendor: null } }).state === 'unknown', 'null service record is unknown, no crash');
+assert(spendView({ services: [] }).state === 'unknown', 'services array is unknown');
+assert(sv.alerts.join('|') === 'A|low balance', 'service-level alerts are shown even when the top-level list misses them');
+assert(spendView({ services: {} }).state === 'unknown', 'empty services is unknown, not an all-clear');
+assert(spendView({ generated_at: 'g', services: { v: { state: 'ok', balance_usd: 12, alerts: [] } }, alerts: 'BILLING ALERT' }).state === 'unknown', 'non-list alerts is unknown');
+assert(spendView({ generated_at: 'g', alerts: [], services: { v: { state: 'ok' } } }).state === 'unknown', 'service without an alerts list is unknown');
+const fig = (v: unknown) => spendView({ generated_at: 'g', alerts: [], services: { v: { state: 'ok', balance_usd: v, alerts: [] } } }).state;
+assert(fig('billing unavailable') === 'unknown' && fig({ error: 'unauthorized' }) === 'unknown' && fig(Infinity) === 'unknown', 'wrong-type or nonfinite figure makes the section unknown');
+assert(fig(null) === 'ok' && fig(0) === 'ok', 'a missing figure or a real 0 is still fine');
 if (fails) { console.error(`${fails} failed`); process.exit(1); }

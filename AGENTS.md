@@ -15,6 +15,7 @@ Home: `~/Projects/alex-system-map`. The old path `~/Documents/Codex/2026-10-09/l
 - Live scan: `python3 -B tools/live_scan.py`
 - Traces: `python3 -B tools/local_service.py trace-list` and `trace-get <id>`. Director feed: `tools/load_director_traces.py`.
 - Run the app: `cd app && npm run dev -- -p 3200` (Tailscale Serve proxies `127.0.0.1:3200`; plain `npm run dev` uses 3000 and Tailscale will not reach it).
+- CEO dashboard (main checkout): `~/Library/LaunchAgents/com.alex.ceo-dashboard.plist` runs `next dev` from `~/Projects/alex-system-map/app` on `127.0.0.1:3201` (3200 stays with the Langflow checkout, `system-map-ir`, until it merges). Open http://127.0.0.1:3201/explorer and click CEO.
 - Before saying done: run the acceptance check that matches the change (`tools/*_acceptance.py`), and look at the result in the browser for UI changes.
 
 ## Rules
