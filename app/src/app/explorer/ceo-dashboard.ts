@@ -184,6 +184,12 @@ export function spendView(doc: unknown): SpendView {
   ) {
     return { state: 'unknown', why: `${SPEND_WHY} (the snapshot is missing or not in the expected shape)`, generated_at: null, alerts: [], rows: [] };
   }
+  // Every supplied figure must have its type (finite number, or text); one malformed value makes the section unknown.
+  const okFigure = (v: unknown, fmt: string) =>
+    v === null || v === undefined || (fmt === 'text' ? typeof v === 'string' : typeof v === 'number' && Number.isFinite(v));
+  if (!Object.values(d.services).every((s) => FIGURES.every(([key, , fmt]) => okFigure(s[key], fmt)))) {
+    return { state: 'unknown', why: `${SPEND_WHY} (a figure in the snapshot has the wrong type)`, generated_at: null, alerts: [], rows: [] };
+  }
   const rows: SpendRow[] = Object.entries(d.services).map(([name, s]) => {
     const figures: [string, string][] = [];
     for (const [key, label, fmt] of FIGURES) {

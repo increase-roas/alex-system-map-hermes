@@ -54,4 +54,7 @@ assert(sv.alerts.join('|') === 'A|low balance', 'service-level alerts are shown 
 assert(spendView({ services: {} }).state === 'unknown', 'empty services is unknown, not an all-clear');
 assert(spendView({ generated_at: 'g', services: { v: { state: 'ok', balance_usd: 12, alerts: [] } }, alerts: 'BILLING ALERT' }).state === 'unknown', 'non-list alerts is unknown');
 assert(spendView({ generated_at: 'g', alerts: [], services: { v: { state: 'ok' } } }).state === 'unknown', 'service without an alerts list is unknown');
+const fig = (v: unknown) => spendView({ generated_at: 'g', alerts: [], services: { v: { state: 'ok', balance_usd: v, alerts: [] } } }).state;
+assert(fig('billing unavailable') === 'unknown' && fig({ error: 'unauthorized' }) === 'unknown' && fig(Infinity) === 'unknown', 'wrong-type or nonfinite figure makes the section unknown');
+assert(fig(null) === 'ok' && fig(0) === 'ok', 'a missing figure or a real 0 is still fine');
 if (fails) { console.error(`${fails} failed`); process.exit(1); }
