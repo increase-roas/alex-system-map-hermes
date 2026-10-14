@@ -1,0 +1,8 @@
+Langflow to Langfuse tracing receipt (2026-10-14, observed by Codex thread 01a1333c-a339-7ef0-8a22-b32cb1d7c195, relayed by Claude Opus 5.5)
+Keys: 1Password item "Langfuse - Langflow" (rxoo6lpuxbca67oj4yofie45sm), host https://us.cloud.langfuse.com. No key printed or written.
+Server: tools/langflow_server.sh log line "langflow_server: Langfuse tracing on (keys from 1Password item rxoo6lpuxbca67oj4yofie45sm)".
+Check at 04:35Z (45 s after the run): 0 observations. Re-check at about 04:40Z (fromStartTime 04:30Z): 4 observations, names
+"Langfuse trace check", "Chat Input", "Chat Output", trace id 4f99c39d55b6d882711a4769578dbb5c; Metrics API agreed (4 observations). HTTP 200.
+Direct SDK test (langfuse 3.15.0): auth_check True, flush True, span not yet visible after 90 s.
+Verdict: Langflow runs reach Langfuse (seen working). Ingestion lag is several minutes; the first empty check was too early.
+Open: the same Langfuse project also receives claude_code.* traces.
