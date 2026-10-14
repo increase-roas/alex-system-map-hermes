@@ -76,8 +76,10 @@ export function CeoDashboardPanel({ localToken }: { localToken: string }) {
     <div className="h-full space-y-3 overflow-auto p-4 text-sm">
       <p className="text-xs text-zinc-600">Read live from the source files at {new Date(d.generated_at).toLocaleTimeString()}; refreshes every minute. Grey means unknown, amber means the source is old.</p>
 
-      <Section title={`Needs you (${d.needs_alex.length})`} src={[d.sources.board]}>
-        {d.needs_alex.length === 0 ? (
+      <Section title={`Needs you (${d.needs_alex ? d.needs_alex.length : 'unknown'})`} src={[d.sources.board]}>
+        {d.needs_alex === null ? (
+          <p className="rounded bg-zinc-200 p-2">Unknown: the board could not be read, so this is not an all-clear.</p>
+        ) : d.needs_alex.length === 0 ? (
           <p>Nothing on the board is waiting on you.</p>
         ) : (
           <ul className="space-y-2">
@@ -147,7 +149,7 @@ export function CeoDashboardPanel({ localToken }: { localToken: string }) {
       </Section>
 
       <Section title="Agent badges (from the board's owner field)" src={[d.sources.board]}>
-        <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+        {d.badges === null ? <p>Unknown: board not readable.</p> : <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {d.badges.map((b) => (
             <div key={b.owner} className="rounded border p-2">
               <div className="font-medium">{b.owner}</div>
@@ -155,7 +157,7 @@ export function CeoDashboardPanel({ localToken }: { localToken: string }) {
               {b.doing.length > 0 && <div className="text-[11px] text-zinc-600">{b.doing.join(', ')}</div>}
             </div>
           ))}
-        </div>
+        </div>}
       </Section>
 
       <Section title={`Fix-now queue (${d.fix_now === null ? 'unknown' : d.fix_now.length})`} src={[d.sources.fix_now_correction, d.sources.fix_now_session]}>

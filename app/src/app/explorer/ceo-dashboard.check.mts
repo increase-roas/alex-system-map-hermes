@@ -35,4 +35,7 @@ assert(fixNowItem('session', 'i', 'not json') === null, 'bad line skipped');
 assert(progressTail('- a\n- b\nx\n- c', 2).join() === '- c,- b', 'newest progress first');
 assert(freshness(null, 0, 1) === 'unknown' && freshness(0, 10, 5) === 'stale' && freshness(8, 10, 5) === 'fresh', 'freshness');
 assert(SPEND_WHY.includes('-55') && ROTATION_WHY.includes('-72'), 'unknown states name the ticket that wires them');
+const em = directorMissions('## Mission: E\nSTATUS:\nPRIORITY: HIGH\n## Mission: F\nPRIORITY:\nSTATUS: ok\n');
+assert(em[0].status.startsWith('unknown') && em[0].priority === 'HIGH', 'empty STATUS stays unknown, never borrows the next line');
+assert(em[1].priority === null && em[1].status === 'ok', 'empty PRIORITY is null');
 if (fails) { console.error(`${fails} failed`); process.exit(1); }

@@ -34,7 +34,7 @@ export function ConnectorLoginsPanel({ localToken }: { localToken: string }) {
 
   const load = useCallback(async () => {
     try {
-      const res = await fetch('/api/connector-logins', { cache: 'no-store' });
+      const res = await fetch('/api/connector-logins', { cache: 'no-store', headers: localToken ? { 'x-local-token': localToken } : {} });
       const body = await res.json();
       if (!res.ok) throw new Error(body.error ?? `HTTP ${res.status}`);
       setSnap(body as LoginSnapshot);

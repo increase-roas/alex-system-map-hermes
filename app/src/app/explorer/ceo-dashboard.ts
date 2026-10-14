@@ -37,10 +37,10 @@ export type FixNowItem = { id: string; kind: string; text: string };
 export type CeoDashboard = {
   generated_at: string;
   sources: Record<string, Source>;
-  board: { counts: Record<string, number>; total: number } | null;
+  board: { counts: Record<string, number>; total: number } | null; // null = board unreadable or invalid: needs_alex and badges are unknown too
   missions: MissionRow[];
-  needs_alex: NeedsAlex[];
-  badges: AgentBadge[];
+  needs_alex: NeedsAlex[] | null;
+  badges: AgentBadge[] | null;
   progress_tail: string[];
   parity: { columns: string[]; rows: ParityRow[] } | null;
   fix_now: FixNowItem[] | null;
@@ -101,8 +101,8 @@ export function directorMissions(md: string): MissionRow[] {
   const parts = md.replace(/<!--[\s\S]*?-->/g, '').split(/^## Mission: /m).slice(1);
   for (const p of parts) {
     const name = p.split('\n', 1)[0].trim();
-    const status = p.match(/^STATUS:\s*(.+)$/m)?.[1].trim() ?? 'unknown (no STATUS line)';
-    const priority = p.match(/^PRIORITY:\s*(.+)$/m)?.[1].trim() ?? null;
+    const status = p.match(/^STATUS:[ \t]*(.*)$/m)?.[1].trim() || 'unknown (no STATUS value)';
+    const priority = p.match(/^PRIORITY:[ \t]*(.*)$/m)?.[1].trim() || null;
     out.push({ name, status, priority, source: 'director' });
   }
   return out;

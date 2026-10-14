@@ -50,12 +50,13 @@ export async function buildCeoDashboard(): Promise<CeoDashboard> {
 
   const board = await readSource(path.join(A, 'board', 'tasks.json'), STALE_MS.board);
   sources.board = board.source;
-  let tickets: Ticket[] = [];
+  let tickets: Ticket[] | null = null; // stays null unless the board parses and has a tickets array
   let boardMissions: CeoDashboard['missions'] = [];
   if (board.text) {
     try {
       const parsed = screenParsedValue(JSON.parse(board.text)) as { tickets?: Ticket[]; missions?: Record<string, { status?: string }> };
-      tickets = Array.isArray(parsed.tickets) ? parsed.tickets : [];
+      if (Array.isArray(parsed.tickets) && parsed.tickets.every((t) => t && typeof t === 'object' && typeof t.id === 'string')) tickets = parsed.tickets;
+      else sources.board = { ...board.source, freshness: 'unknown', note: 'no valid tickets array' };
       boardMissions = Object.entries(parsed.missions ?? {}).map(([name, m]) => ({ name, status: String(m?.status ?? 'unknown'), priority: null, source: 'board' as const }));
     } catch {
       sources.board = { ...board.source, read: false, freshness: 'unknown', note: 'not valid JSON' };
@@ -108,10 +109,10 @@ export async function buildCeoDashboard(): Promise<CeoDashboard> {
   return {
     generated_at: new Date().toISOString(),
     sources,
-    board: board.text ? boardCounts(tickets) : null,
+    board: tickets ? boardCounts(tickets) : null,
     missions: [...boardMissions, ...(director.text ? directorMissions(director.text) : [])],
-    needs_alex: needsAlex(tickets),
-    badges: badges(tickets),
+    needs_alex: tickets ? needsAlex(tickets) : null,
+    badges: tickets ? badges(tickets) : null,
     progress_tail: progress.text ? progressTail(progress.text) : [],
     parity: parity.text ? parseParity(parity.text) : null,
     fix_now: fixNow,

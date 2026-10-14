@@ -3,13 +3,20 @@ import {
   readConnectorLogins,
   runConnectorLoginsExport,
 } from '@/lib/server/connector-logins';
+import { fail } from '@/lib/langflow/api';
+import { loadAccess, resolveCaller } from '@/lib/langflow/policy';
 import { mutationAuthError } from '@/lib/server/local-auth';
 
 // The alarm (health_check.py) runs every 30 min; the view refreshes a little faster when someone looks.
 const STALE_AFTER_MS = 10 * 60_000;
 
 /** Latest Composio login snapshot (no secrets: toolkit, ids, alias, status, dates). Refreshes itself when stale. */
-export async function GET() {
+export async function GET(request: Request) {
+  // Owner on this Mac only (same gate as /api/ceo-dashboard): aliases, ids and login status stay off the tailnet.
+  const caller = resolveCaller(request.headers, loadAccess());
+  if (!caller || caller.network !== 'local' || !caller.ops.includes('save')) {
+    return fail(403, 'Connector logins are only shown to the owner on this Mac.');
+  }
   let snapshot = await readConnectorLogins();
   if (!snapshot) {
     try {
