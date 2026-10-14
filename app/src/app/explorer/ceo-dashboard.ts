@@ -173,9 +173,15 @@ const FIGURES: [string, string, 'usd' | 'n' | 'text'][] = [
 
 /** Only fields the snapshot actually holds are shown; a missing field is left out, never printed as 0. */
 export function spendView(doc: unknown): SpendView {
-  const d = doc as { generated_at?: string; alerts?: unknown; services?: Record<string, Record<string, unknown>> } | null;
+  const d = doc as { generated_at?: unknown; alerts?: unknown; services?: Record<string, Record<string, unknown>> } | null;
   const isRecord = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
-  if (!isRecord(d) || !isRecord(d.services) || !Object.values(d.services).every(isRecord)) {
+  const strings = (v: unknown): v is string[] => Array.isArray(v) && v.every((x) => typeof x === 'string');
+  // The whole contract must hold before anything is called ok: top-level alerts, every service's state and alerts.
+  if (
+    !isRecord(d) || !isRecord(d.services) || Object.keys(d.services).length === 0 || !strings(d.alerts) ||
+    typeof d.generated_at !== 'string' ||
+    !Object.values(d.services).every((s) => isRecord(s) && (s.state === 'ok' || s.state === 'unknown') && strings(s.alerts))
+  ) {
     return { state: 'unknown', why: `${SPEND_WHY} (the snapshot is missing or not in the expected shape)`, generated_at: null, alerts: [], rows: [] };
   }
   const rows: SpendRow[] = Object.entries(d.services).map(([name, s]) => {
@@ -191,5 +197,7 @@ export function spendView(doc: unknown): SpendView {
     return { name, kind: String(s.kind ?? '?'), state, why: state === 'ok' ? null : String(s.why ?? 'no reason given'), figures, alerts: Array.isArray(s.alerts) ? s.alerts.map(String) : [] };
   });
   rows.sort((a, b) => b.alerts.length - a.alerts.length || Number(b.state === 'ok') - Number(a.state === 'ok') || a.name.localeCompare(b.name));
-  return { state: 'ok', why: 'From the last spend check run.', generated_at: d.generated_at ?? null, alerts: Array.isArray(d.alerts) ? d.alerts.map(String) : [], rows };
+  // Show the union of the top-level list and every service's own alerts, so neither can hide the other.
+  const alerts = [...new Set([...(d.alerts as string[]), ...rows.flatMap((r) => r.alerts)])];
+  return { state: 'ok', why: 'From the last spend check run.', generated_at: d.generated_at as string, alerts, rows };
 }
