@@ -55,7 +55,7 @@ export const HX = 2950;
 const ROW_W = 750;
 const STEPS = ['ask', 'ui', 'client', 'front', 'plan', 'delegate', 'know', 'gw', 'run', 'verify', 'report', 'learn'] as const;
 type Step = (typeof STEPS)[number];
-const BAND_H: Partial<Record<Step, number>> = { ask: 155, ui: 155, client: 155, front: 310, plan: 155, delegate: 155, know: 310, gw: 310, run: 310, verify: 310, report: 310, learn: 310 };
+const BAND_H: Partial<Record<Step, number>> = { ask: 155, ui: 155, client: 155, front: 310, plan: 155, delegate: 155, know: 310, gw: 460, run: 310, verify: 310, report: 310, learn: 310 };
 const Y = {} as Record<Step, number>;
 let cur = 0;
 for (const s of STEPS) { Y[s] = cur; cur += (BAND_H[s] ?? 100) + 30; }
@@ -63,7 +63,7 @@ const BOTTOM = cur;
 
 type Spec = { id: string; label: string; sub: string; why: string; sources: string[]; badge?: string; detail?: FullDetail };
 // Visible classification: extension points are built-in; their agency policies are custom.
-const CUSTOM = new Set(['h_rulegate', 'h_contract']);
+const CUSTOM = new Set(['h_rulegate', 'h_contract', 'h_skillgate', 'h_mcpgate']);
 const REFERENCE = new Set(['h_x_vs']);
 const node = (s: Spec, x: number, y: number, w: number): ProNode => ({
   ...s, sub: `${CUSTOM.has(s.id) ? 'Custom' : REFERENCE.has(s.id) ? 'Comparison' : 'Built-in'}: ${s.sub}`,
@@ -321,6 +321,8 @@ const gw: Spec[] = [
   { id: 'h_rulegate', label: 'Read-first gate', sub: 'Custom restricted adapter', why: 'Tested native hook examples are attached by withGuardrails. Not a shipped client policy or proof of installation.', sources: [H.hooks, H.ctx, H.skills] },
   { id: 'h_box', label: 'Container backend', sub: 'Isolates shell commands', why: 'Container backends isolate command execution and bypass dangerous-command checks. Mounted files, network access and forwarded credentials still matter; they do not enforce client/API permissions.', sources: [H.sec, H.tools] },
   { id: 'h_humanapprove', label: 'Wait for your approval', sub: 'A hook requests a human decision', why: 'A pre_tool_call approve result requests human approval; it is not an automatic allow. Denial or timeout returns a blocked result. This is separate from dangerous-shell-command classification.', sources: [H.hooks, H.sec] },
+  { id: 'h_skillgate', label: 'New skill check', sub: 'Proposed, not built: skill rules before a skill saves', why: 'Built-in today: skills.write_approval stages every skill_manage write for your review (Hermes skills docs). Proposed, not built: a pre_tool_call hook on skill_manage and on file writes into skills/ that runs your skill rules (a name, a description that says when to use it, a size cap, no keys) and blocks a skill that fails. The tested guard (hermes_guard.py, checked 2026-10-12) blocks skill_manage outright, checks only skill structure on direct writes, and does not scan skill bodies for keys.', sources: [H.skills, H.hooks, '~/.agents/tools/unify/skill-lifecycle.md'] },
+  { id: 'h_mcpgate', label: 'Connectors only through Composio', sub: 'Proposed, not built: one MCP entry, locked config', why: 'Built-in today: Hermes reads MCP servers from mcp_servers in config.yaml and can filter their tools (Hermes MCP docs). Proposed, not built: Composio as the only entry, a pre_tool_call hook that blocks config.yaml or .env writes adding another server, and config.yaml locked outside the agent. The tested guard (hermes_guard.py, checked 2026-10-12) accepts a config with another server and with empty hooks, so an agent edit could remove its own guard. Claude Code solves the same problem with admin-managed settings.', sources: [H.mcp, H.hooks, H.config, '~/.agents/tools/cards/composio.md', 'https://code.claude.com/docs/en/managed-settings'] },
 ];
 const run: Spec[] = [
   { id: 'h_term', label: 'Terminal backends', sub: 'Local, Docker, SSH, cloud', why: 'Commands run where you choose: your machine, a container, a remote server or a cloud sandbox.', sources: [H.tools] },
@@ -433,4 +435,6 @@ export const H_EDGES: ProEdge[] = [
   flow('h_band_report', 'h_band_learn', 'after'),
   link('h_band_front', 'h_lib_home', 'reads', 'ls', 'r'),
   link('h_band_gw', 'h_lib_config', 'rules from', 'ls', 'r'),
+  link('h_lib_skills', 'h_skillgate', 'new skill is checked', 'rs', 'l'),
+  link('h_lib_config', 'h_mcpgate', 'only Composio is added', 'rs', 'l'),
 ];
