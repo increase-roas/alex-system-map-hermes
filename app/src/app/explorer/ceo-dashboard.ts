@@ -174,8 +174,9 @@ const FIGURES: [string, string, 'usd' | 'n' | 'text'][] = [
 /** Only fields the snapshot actually holds are shown; a missing field is left out, never printed as 0. */
 export function spendView(doc: unknown): SpendView {
   const d = doc as { generated_at?: string; alerts?: unknown; services?: Record<string, Record<string, unknown>> } | null;
-  if (!d || typeof d !== 'object' || !d.services || typeof d.services !== 'object') {
-    return { state: 'unknown', why: SPEND_WHY, generated_at: null, alerts: [], rows: [] };
+  const isRecord = (v: unknown): v is Record<string, unknown> => !!v && typeof v === 'object' && !Array.isArray(v);
+  if (!isRecord(d) || !isRecord(d.services) || !Object.values(d.services).every(isRecord)) {
+    return { state: 'unknown', why: `${SPEND_WHY} (the snapshot is missing or not in the expected shape)`, generated_at: null, alerts: [], rows: [] };
   }
   const rows: SpendRow[] = Object.entries(d.services).map(([name, s]) => {
     const figures: [string, string][] = [];

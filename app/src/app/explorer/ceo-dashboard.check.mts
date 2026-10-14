@@ -47,4 +47,6 @@ assert(sv.rows[0].figures.join('|') === 'credits left,$10.72', 'null figures are
 assert(sv.rows.find((r) => r.name === 'heygen')!.figures[0][1] === '$0.00', 'a real 0 from the source is shown');
 assert(sv.rows.find((r) => r.name === 'ghl')!.why === 'not wired: x', 'unknown keeps its reason');
 assert(spendView(null).state === 'unknown' && spendView({ x: 1 }).state === 'unknown', 'missing or bad snapshot is unknown');
+assert(spendView({ services: { vendor: null } }).state === 'unknown', 'null service record is unknown, no crash');
+assert(spendView({ services: [] }).state === 'unknown', 'services array is unknown');
 if (fails) { console.error(`${fails} failed`); process.exit(1); }

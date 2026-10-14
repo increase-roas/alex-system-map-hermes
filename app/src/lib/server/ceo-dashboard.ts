@@ -44,6 +44,14 @@ async function readSource(file: string, staleAfterMs: number): Promise<{ text: s
 
 const sha8 = (line: string) => createHash('sha1').update(line.trim()).digest('hex').slice(0, 8);
 
+function safeSpend(doc: unknown) {
+  try {
+    return spendView(doc);
+  } catch {
+    return spendView(null); // a snapshot that breaks the view is unknown, never a crashed dashboard
+  }
+}
+
 export async function buildCeoDashboard(): Promise<CeoDashboard> {
   const A = agentsHome();
   const sources: Record<string, Source> = {};
@@ -129,7 +137,7 @@ export async function buildCeoDashboard(): Promise<CeoDashboard> {
     fix_now: fixNow,
     logins,
     spend: {
-      ...spendView(spendDoc),
+      ...safeSpend(spendDoc),
       langfuse_links: Object.values(PROJECTS).map((p) => ({ label: `Langfuse ${p.label}: cost dashboard`, url: `${LANGFUSE_HOST}/project/${p.projectId}/dashboards` })),
     },
     rotation: { state: 'unknown', why: ROTATION_WHY },

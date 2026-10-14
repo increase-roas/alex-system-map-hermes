@@ -194,7 +194,7 @@ export function CeoDashboardPanel({ localToken }: { localToken: string }) {
         )}
       </Section>
 
-      <Section title={`Spend (${d.spend.alerts.length} alerts)`} src={[d.sources.spend]}>
+      <Section title={`Spend (${d.spend.state === "ok" ? `${d.spend.alerts.length} alerts` : "unknown"})`} src={[d.sources.spend]}>
         {d.spend.state === 'unknown' ? (
           <p className="rounded bg-zinc-200 p-2">Unknown. {d.spend.why}</p>
         ) : (
