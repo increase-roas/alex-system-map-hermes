@@ -15,7 +15,8 @@ export type ExplorerView =
   | 'tracing'
   | 'reliability'
   | 'maintained'
-  | 'live';
+  | 'live'
+  | 'logins';
 
 export function layerCounts(bundle: CatalogBundle): Map<string, number> {
   const counts = new Map<string, number>();

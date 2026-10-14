@@ -8,7 +8,7 @@ const CANARY_PATTERN =
   /\bFAKE[-_]canary[-_]token[-_][A-Za-z0-9-]+\b|sk-fake-canary-rel06-do-not-use-[A-Za-z0-9]+/gi;
 const PLAIN_FIXTURE_TOKEN = /\b[a-f0-9]{48}\b/gi;
 
-function screenServiceText(value: string): string {
+export function screenServiceText(value: string): string {
   return value
     .replace(CANARY_PATTERN, '[REDACTED test-canary]')
     .replace(PLAIN_FIXTURE_TOKEN, '[REDACTED local-mutation-token]')
@@ -16,7 +16,7 @@ function screenServiceText(value: string): string {
     .replace(/(api[_-]?key\s*[:=]\s*)[^\s'"]+/gi, '$1[REDACTED credential-shaped value]');
 }
 
-function screenParsedValue(value: unknown): unknown {
+export function screenParsedValue(value: unknown): unknown {
   if (typeof value === 'string') {
     return screenServiceText(value);
   }

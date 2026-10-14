@@ -71,6 +71,7 @@ import { ProMapPanel } from './pro-map-panel';
 import { FlowBuilderPanel } from './flow-builder-panel';
 import { LangflowPanel } from './langflow-panel';
 import { localTime } from '@/lib/local-time';
+import { ConnectorLoginsPanel } from './connector-logins-panel';
 
 const elk = new ELK();
 
@@ -109,7 +110,7 @@ async function layoutTopDown(nodes: Node[], edges: { id: string; source: string;
 
 const VIEW_LABEL: Partial<Record<ExplorerView, string>> = {
   map: 'Map', pro: 'Pro Map', flow: 'Flow Builder', langflow: 'Langflow', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
-  tracing: 'Tracing', reliability: 'Reliability', maintained: 'Maintained', live: 'Live',
+  tracing: 'Tracing', reliability: 'Reliability', maintained: 'Maintained', live: 'Live', logins: 'Connector logins',
 };
 
 export function SystemExplorer() {
@@ -154,6 +155,7 @@ export function SystemExplorer() {
         view === 'tracing' ||
         view === 'maintained' ||
         view === 'live' ||
+        view === 'logins' ||
         view === 'pro' ||
         view === 'flow' ||
         view === 'langflow' ||
@@ -311,6 +313,7 @@ export function SystemExplorer() {
               'reliability',
               'maintained',
               'live',
+              'logins',
             ] as ExplorerView[]
           ).map(
             (item) => (
@@ -420,6 +423,8 @@ export function SystemExplorer() {
             <OrgMapPanel />
           ) : view === 'live' ? (
             <LiveSetupPanel />
+          ) : view === 'logins' ? (
+            <ConnectorLoginsPanel localToken={localToken} />
           ) : view === 'maintained' ? (
             <MaintainedEditPanel localToken={localToken} />
           ) : (
