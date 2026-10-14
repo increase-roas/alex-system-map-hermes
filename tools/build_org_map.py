@@ -748,7 +748,7 @@ if lf_receipt:
     add('obs:langfuse', 'observability', 'observability', 'Langfuse (Increase Roas)',
         f'Records runs from the senders below as traces. {live_n} live, {planned_n} planned, Codex not wired.',
         explain('Langfuse is the flight recorder for your agents: each run shows up as a trace with its steps, tools and cost.',
-                'maybe', 'Only senders marked live are recorded. Codex sends nothing, and a Hermes agent whose tracing breaks goes quiet without an error.',
+                'maybe', 'Only senders marked live are recorded, and Codex sends nothing. Langfuse\'s Hermes guide says plugin errors are silent (not tested here), so a quiet agent may be idle or broken.',
                 'Open the Agent fleet dashboard in Langfuse for runs, spend, errors and speed per agent.'),
         status='ok', sources=[LF_REL, LF_CARD], url=LF_URL, dashboard=LF_DASH, plan='Hobby (free, 50k units/month, 30-day retention): from Alex\'s brief 2026-10-14, not checked',
         senders=[{'name': n, 'state': st, 'env': env, 'how': how, 'proof': pr, 'node': nid} for nid, n, st, env, how, pr in SENDERS])

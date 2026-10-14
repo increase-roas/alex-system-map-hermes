@@ -64,6 +64,17 @@ Read back with `CUSTOM_LANGFUSE_MCP_GET_DASHBOARD` (log log_59xNgfORn8nf): 7 cha
 errors per agent, p95 model latency, tokens by model, most used tools). One duplicate tile of "Spend per agent" (placement
 6c558eaf) came from a retry after a 429; removing it is a delete, which the Langfuse card sends to Alex.
 
+## Round 3 (2026-10-14T02:36Z, after the Codex round-2 FAIL)
+- Hermes failure mode: https://langfuse.com/integrations/other/hermes (read 2026-10-14) says a missing SDK, missing credentials or a
+  transient Langfuse error "all turn into a silent no-op". Documented by Langfuse, not tested here; the map says so.
+- Log IDs: log_59xNgfORn8nf is one multi-execute call that held two reads (GET_DASHBOARD and QUERY_METRICS), which is why it is cited twice.
+- Dashboard charts read back one by one: latency chart cmv7h2gv705r8ad0joq2mqgdu (p95 latency, filter type = GENERATION,
+  by environment; log_lwqQ4jmQP1QL) and tools chart cmv7h2msr070yad0jomlwkquw (sum of toolCallInvocations by calledToolNames;
+  log_Q7Uxjk6s0nyk). The other five were read by Codex in round 2.
+- "Runs per agent" description corrected to "a gap can mean idle or stopped tracing" (UPDATE_DASHBOARD_WIDGET, log_XBI4ymDwSz9I).
+- Why the dashboard exists: Alex asked "where is the dashboard wiht the stats?" in chat on 2026-10-14 (about 02:07Z), and none existed
+  (LIST_DASHBOARDS returned 0, log_MZX8--qhcVsC). The card puts creating dashboards in the no-ask tier (T2).
+
 ## Machine-read sender states (the map builder reads these lines)
 LIVE: default
 LIVE: javar-lab
