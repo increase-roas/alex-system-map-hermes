@@ -144,6 +144,9 @@ function PaletteHeader({ starters, canEdit, langflow, openBlocked, onStarter, on
           <span id="lf-open-langflow-note" className="text-[11px] text-muted-foreground">
             {openBlocked ?? 'Opens a copy in Langflow on this Mac, in a new tab. Secrets are never sent.'}
           </span>
+          <a className="text-[11px] underline" href="https://us.cloud.langfuse.com/project/cmv7mth3h01tjad0j3q7b0okl/traces" target="_blank" rel="noopener noreferrer">
+            See Langflow runs in Langfuse
+          </a>
         </div>
       ) : null}
       {message ? (

@@ -120,7 +120,7 @@ function TraceGraph({ spans }: { spans: SpanRow[] }) {
   );
 }
 
-export function TracingPanel() {
+function LocalTracing() {
   const [traces, setTraces] = useState<TraceRow[]>([]);
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [detail, setDetail] = useState<{ trace: TraceRow; spans: SpanRow[] } | null>(null);
@@ -248,6 +248,166 @@ export function TracingPanel() {
           <p className="text-muted-foreground text-sm">Select a trace.</p>
         )}
       </div>
+    </div>
+  );
+}
+
+type LfRow = {
+  traceId: string;
+  name: string;
+  startTime: string;
+  durationMs: number | null;
+  totalCost: number | null;
+  hasError: boolean;
+  observationCount: number;
+};
+type LfPayload =
+  | { ok: true; projectId: string; asOf: string; note: string; truncated: boolean; traces: LfRow[] }
+  | { ok: false; state: 'unknown'; reason: string; asOf: string; note: string }
+  | { error: string };
+
+type LfProject = 'agents' | 'langflow';
+const LF_HOST = 'https://us.cloud.langfuse.com';
+
+function formatDuration(ms: number | null): string {
+  if (ms === null) return 'unknown';
+  if (ms < 1000) return `${Math.round(ms)} ms`;
+  if (ms < 60_000) return `${(ms / 1000).toFixed(1)} s`;
+  return `${Math.floor(ms / 60_000)} min ${Math.round((ms % 60_000) / 1000)} s`;
+}
+
+function SwitchRow<T extends string>({ label, value, options, onChange }: {
+  label: string;
+  value: T;
+  options: Array<[T, string]>;
+  onChange: (v: T) => void;
+}) {
+  return (
+    <div role="group" aria-label={label} className="flex flex-wrap items-center gap-1">
+      <span className="text-muted-foreground mr-1 text-xs">{label}</span>
+      {options.map(([key, text]) => (
+        <Button key={key} size="sm" variant={key === value ? 'default' : 'outline'} aria-pressed={key === value} onClick={() => onChange(key)}>
+          {text}
+        </Button>
+      ))}
+    </div>
+  );
+}
+
+function LangfuseTraces() {
+  const [project, setProject] = useState<LfProject>('agents');
+  const [needsLook, setNeedsLook] = useState(false);
+  return (
+    <div className="h-full overflow-auto p-4">
+      <h2 className="font-medium">Langfuse traces (live)</h2>
+      <p className="text-muted-foreground mt-1 text-xs">
+        The last 24 hours, newest first, up to 100 runs. Langfuse shows traces a few minutes late.
+      </p>
+      <div className="mt-3 flex flex-wrap items-center gap-4">
+        <SwitchRow label="Project" value={project} options={[['agents', 'Agents'], ['langflow', 'Langflow']]} onChange={setProject} />
+        <label className="flex items-center gap-1.5 text-xs">
+          <input type="checkbox" checked={needsLook} onChange={(e) => setNeedsLook(e.target.checked)} />
+          Needs a look (runs with an error)
+        </label>
+      </div>
+      {/* key remounts the poller so a project change fetches at once */}
+      <LangfuseTable key={project} project={project} needsLook={needsLook} />
+    </div>
+  );
+}
+
+function LangfuseTable({ project, needsLook }: { project: LfProject; needsLook: boolean }) {
+  const [current, setCurrent] = useState<LfPayload | null>(null);
+
+  usePoll(async () => {
+    let token: string | null = null;
+    if (['localhost', '127.0.0.1', '[::1]'].includes(window.location.hostname)) {
+      const health = await fetch('/api/health', { cache: 'no-store' }).then((r) => r.json()).catch(() => null);
+      token = typeof health?.token === 'string' ? health.token : null;
+    }
+    const headers: Record<string, string> = token ? { 'x-local-token': token } : {};
+    const data = (await fetch(`/api/langfuse/traces?project=${project}`, { cache: 'no-store', headers })
+      .then((r) => r.json())
+      .catch(() => null)) as LfPayload | null;
+    setCurrent(data ?? { ok: false, state: 'unknown', reason: 'The map could not reach its own server.', asOf: new Date().toISOString(), note: '' });
+  }, 60_000);
+
+  const rows = current && 'traces' in current ? current.traces : [];
+  const shown = needsLook ? rows.filter((r) => r.hasError) : rows;
+  const projectId = current && 'projectId' in current ? current.projectId : null;
+
+  return (
+    <div>
+      {!current ? (
+        <p className="text-muted-foreground mt-4 text-sm">Loading from Langfuse...</p>
+      ) : 'error' in current ? (
+        <p role="alert" className="mt-4 text-sm text-red-700 dark:text-red-400">{current.error}</p>
+      ) : !current.ok ? (
+        <div role="status" className="mt-4 rounded border p-3 text-sm">
+          <div className="font-medium">Unknown: Langfuse did not give an answer.</div>
+          <div className="text-muted-foreground mt-1 text-xs">{current.reason}</div>
+        </div>
+      ) : (
+        <>
+          <p className="text-muted-foreground mt-3 text-xs">
+            As of {new Date(current.asOf).toLocaleTimeString()}. {current.truncated ? 'More runs exist than were loaded. ' : ''}
+            {shown.length} of {rows.length} runs shown.
+          </p>
+          {shown.length === 0 ? (
+            <p className="text-muted-foreground mt-3 text-sm">
+              {needsLook ? 'No runs with an error in the last 24 hours.' : 'No runs in the last 24 hours.'}
+            </p>
+          ) : (
+            <table className="mt-2 w-full text-left text-xs">
+              <thead className="text-muted-foreground border-b">
+                <tr>
+                  <th className="py-1 pr-3 font-medium">Name</th>
+                  <th className="py-1 pr-3 font-medium">Started</th>
+                  <th className="py-1 pr-3 font-medium">Duration</th>
+                  <th className="py-1 pr-3 font-medium">Cost</th>
+                  <th className="py-1 pr-3 font-medium">Errors</th>
+                  <th className="py-1 pr-3 font-medium">Steps</th>
+                  <th className="py-1 font-medium">Open</th>
+                </tr>
+              </thead>
+              <tbody>
+                {shown.map((r) => (
+                  <tr key={r.traceId} className="border-b align-top">
+                    <td className="py-1.5 pr-3 break-all">{r.name}</td>
+                    <td className="py-1.5 pr-3 whitespace-nowrap">{new Date(r.startTime).toLocaleString()}</td>
+                    <td className="py-1.5 pr-3 whitespace-nowrap">{formatDuration(r.durationMs)}</td>
+                    <td className="py-1.5 pr-3 whitespace-nowrap">{r.totalCost === null ? 'not reported' : `$${r.totalCost.toFixed(4)}`}</td>
+                    <td className={`py-1.5 pr-3 ${r.hasError ? 'font-medium text-red-700 dark:text-red-400' : ''}`}>{r.hasError ? 'Yes' : 'No'}</td>
+                    <td className="py-1.5 pr-3">{r.observationCount}</td>
+                    <td className="py-1.5">
+                      {projectId ? (
+                        <a className="text-primary underline-offset-2 hover:underline" target="_blank" rel="noopener noreferrer"
+                          href={`${LF_HOST}/project/${encodeURIComponent(projectId)}/traces/${encodeURIComponent(r.traceId)}`}>
+                          Open in Langfuse
+                        </a>
+                      ) : (
+                        <span className="text-muted-foreground">Link unavailable</span>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+        </>
+      )}
+    </div>
+  );
+}
+
+export function TracingPanel() {
+  const [source, setSource] = useState<'local' | 'langfuse'>('local');
+  return (
+    <div className="flex h-full flex-col">
+      <div className="border-b px-4 py-2">
+        <SwitchRow label="Source" value={source} options={[['local', 'Local (Director)'], ['langfuse', 'Langfuse (live)']]} onChange={setSource} />
+      </div>
+      <div className="min-h-0 flex-1">{source === 'local' ? <LocalTracing /> : <LangfuseTraces />}</div>
     </div>
   );
 }
