@@ -722,32 +722,35 @@ LF_RECEIPT = ROOT / 'reviews' / 'receipts' / '2026-10-14-langfuse' / 'observabil
 LF_CARD = CARDS / 'langfuse.md'
 LF_REL = 'reviews/receipts/2026-10-14-langfuse/observability.md'  # repo-relative, so the cite survives the merge
 LF_URL = 'https://us.cloud.langfuse.com/project/cmv733aoq01e7ad0mfeqexnrx'
+LF_DASH = LF_URL + '/dashboards/cmv7h0unq0500ad0ey1io48r9'  # Agent fleet dashboard (receipt)
 lf_receipt = read(LF_RECEIPT)
 cc_settings = read(HOME / '.claude' / 'settings.json')
 cc_wired = 'langfuse_otel_headers.py' in cc_settings and 'cloud.langfuse.com' in cc_settings
 if lf_receipt:
+    seen = set(re.findall(r'(?m)^LIVE: ([a-z0-9_-]+)$', lf_receipt))  # environments whose traces the receipt saw land
     SENDERS = [
         # node, name, state, env, how, proof (receipt row must say it)
-        ('app:claude-code', 'Claude Code', 'live' if cc_wired and 'claude_code.' in lf_receipt else 'unknown', 'default',
-         'OpenTelemetry, traces only, prompts redacted; keys from 1Password at run time', 'seen working 2026-10-13'),
-        ('agent:javar-lab', 'JAVAR-LAB', 'live' if 'Hermes turn' in lf_receipt else 'unknown', 'javar-lab',
-         'Hermes 0.21.7 langfuse plugin via hermes-lab; keys from its own 1Password vault', 'seen working 2026-10-14'),
-        ('agent:javar', 'Javar (live)', 'planned', 'javar', 'same plugin on Hermes 0.21.5; needs Alex\'s go for a short restart', 'not sending yet'),
+        ('app:claude-code', 'Claude Code', 'live' if cc_wired and 'default' in seen else 'unknown', 'default',
+         'OpenTelemetry, traces only; prompt and tool text redacted (Claude Code default, no OTEL_LOG_* switch set); keys from 1Password at run time',
+         'traces seen 2026-10-14'),
+        ('agent:javar-lab', 'JAVAR-LAB', 'live' if 'javar-lab' in seen else 'unknown', 'javar-lab',
+         'Hermes langfuse plugin (env javar-lab)', 'traces seen 2026-10-14'),
+        ('agent:javar', 'Javar (live)', 'live' if 'javar' in seen else 'planned', 'javar', 'Hermes langfuse plugin (env javar)',
+         'traces seen 2026-10-14' if 'javar' in seen else 'no traces seen'),
         (None, 'Codex', 'not wired', '', 'nothing sends from Codex', 'not wired'),
     ]
-    add('agent:javar-lab', 'agents', 'agent', 'JAVAR-LAB', 'Test copy of Javar on Hermes 0.21.7; new versions are tried here before live Javar.',
-        explain('JAVAR-LAB is the practice copy of Javar. Upgrades and new add-ons are proven here first, so live Javar never breaks.',
-                'no', 'Its Langfuse tracing is on and its traces land (see the receipt).', 'Nothing.'),
-        status='ok', sources=[LF_REL], host='JAVAR-LAB (Orgo)', model='not checked', tools='hermes-lab wrapper')
-    link('agent:javar', 'agent:javar-lab', 'tests', 'tries upgrades first on', LF_REL)
+    add('agent:javar-lab', 'agents', 'agent', 'JAVAR-LAB', 'Hermes agent whose runs reach Langfuse as environment "javar-lab".',
+        explain('JAVAR-LAB is a Hermes agent that sends its runs to Langfuse under the name "javar-lab".',
+                'no', 'Its traces were seen landing in Langfuse (see the receipt). Host, model and role are not checked by the map.', 'Nothing.'),
+        status='ok', sources=[LF_REL], host='not checked', model='not checked', tools='not checked')
     live_n = sum(1 for s in SENDERS if s[2] == 'live')
     planned_n = sum(1 for s in SENDERS if s[2] == 'planned')
     add('obs:langfuse', 'observability', 'observability', 'Langfuse (Increase Roas)',
-        f'Records every agent run as a trace. {live_n} live, {planned_n} planned, Codex not wired.',
+        f'Records runs from the senders below as traces. {live_n} live, {planned_n} planned, Codex not wired.',
         explain('Langfuse is the flight recorder for your agents: each run shows up as a trace with its steps, tools and cost.',
-                'maybe', 'Live Javar is not sending yet, so his runs are invisible until his tracing is switched on. Free Hobby plan: 50k units a month, 30-day history.',
-                'Say go for live Javar\'s short restart to turn his tracing on.'),
-        status='ok', sources=[LF_REL, LF_CARD], url=LF_URL, plan='Hobby (free, 50k units/month, 30-day retention)',
+                'maybe', 'Only senders marked live are recorded. Codex sends nothing, and a Hermes agent whose tracing breaks goes quiet without an error.',
+                'Open the Agent fleet dashboard in Langfuse for runs, spend, errors and speed per agent.'),
+        status='ok', sources=[LF_REL, LF_CARD], url=LF_URL, dashboard=LF_DASH, plan='Hobby (free, 50k units/month, 30-day retention): from Alex\'s brief 2026-10-14, not checked',
         senders=[{'name': n, 'state': st, 'env': env, 'how': how, 'proof': pr, 'node': nid} for nid, n, st, env, how, pr in SENDERS])
     for nid, n, st, env, how, pr in SENDERS:
         if nid and nid in nodes and st in ('live', 'planned'):

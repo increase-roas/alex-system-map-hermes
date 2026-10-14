@@ -549,6 +549,11 @@ export function OrgMapPanel() {
                     Open the Langfuse project ↗
                   </a>
                 )}
+                {typeof selected.meta.dashboard === 'string' && (
+                  <a className="mt-1 ml-3 inline-block text-xs text-[#ff4d9a] underline underline-offset-2" href={selected.meta.dashboard} target="_blank" rel="noreferrer">
+                    Agent fleet stats ↗
+                  </a>
+                )}
                 {Array.isArray(selected.meta.senders) && (
                   <div className="mt-2 text-xs">
                     <div className="text-muted-foreground text-[10px] uppercase">Who sends traces</div>

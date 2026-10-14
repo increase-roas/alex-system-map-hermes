@@ -27,3 +27,10 @@ Dev server note: next dev (Turbopack) refused the worktree's symlinked node_modu
 
 Rebuild after the "planned" count fix (computed instead of a fixed 1): builder exit 0, purpose "2 live, 1 planned, Codex not wired",
 273 of 273 lines carry evidence (the total grew from 250 because the running app's auto live scan added route-check data), audit check exit 0.
+
+Round 2 (2026-10-14 ~02:15Z), after the Codex FAIL:
+- tsc --noEmit: PASS. npm run build: PASS ("Compiled successfully"). Builder: exit 0.
+- python3 -B tools/org_map_sources_acceptance.py obs: -> PASS, 0 gaps (new Langfuse nodes and lines).
+  Whole map (no scope): FAIL, 19 older nodes with no source (pre-existing; listed in the packet).
+- Browser (next start, 127.0.0.1:3211): box shows Claude Code LIVE, JAVAR-LAB LIVE, Javar (live) LIVE, Codex NOT WIRED;
+  all three traces lines solid; links "Open the Langfuse project" and "Agent fleet stats" point to the project and the dashboard.
