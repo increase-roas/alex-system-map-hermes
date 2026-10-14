@@ -77,7 +77,7 @@ function yLayout(steps: readonly string[], bandH: Record<string, number>): { y: 
 }
 /** Version 2 (middle map) has its own order: the lead identifies the project BEFORE loading its files (Codex spec 2026-10-12). */
 const P_STEPS = ['ask', 'ui', 'client', 'front', 'plan', 'delegate', 'know', 'gw', 'run', 'verify', 'report', 'learn'] as const;
-const P_BAND_H = { ask: 310, ui: 310, client: 310, front: 310, plan: 155, delegate: 380, know: 155, gw: 310, run: 310, verify: 310, report: 155, learn: 310 };
+const P_BAND_H = { ask: 310, ui: 310, client: 310, front: 310, plan: 155, delegate: 380, know: 155, gw: 460, run: 310, verify: 310, report: 155, learn: 310 };
 const PY = yLayout(P_STEPS, P_BAND_H);
 const ROW_W = 750;
 
@@ -241,6 +241,8 @@ const proExtra: ProNode[] = [
   { id: 'p_evidence', label: 'Evidence trail', sub: 'Proof saved for every check', status: ref, why: 'Tracing shows what happened. Evidence proves whether it worked: each check result is saved with its transcript, tool output and changed files.', sources: [ANT.evals, ANT.hooks], x: 0, y: 0 },
   { id: 'p_testset', label: 'Test set: real jobs', sub: 'Every failure becomes a test', status: ref, why: 'Real jobs and past failures saved as test tasks. Run them all before you change a skill, prompt, model or search.', sources: [ANT.evals], x: 0, y: 0 },
   { id: 'p_ckpt', label: 'Checkpoints', sub: 'Save before compact, reload after', status: ref, why: 'A PreCompact hook saves the handoff note; a SessionStart hook loads it back after compact, /clear or resume.', sources: [ANT.hooks, 'https://code.claude.com/docs/en/costs', ANT.harness], x: 0, y: 0 },
+  { id: 'p_skillgate', label: 'New skill check', sub: 'Built: structure check on Write/Edit; more proposed', status: ref, why: 'Built today: asset_guard.py runs a PreToolUse check when Write or Edit saves a SKILL.md. It checks structure, the name, the description, size and references, and blocks a failing write. Bash or outside writes are only found afterwards by the PostToolUse scan, which cannot undo them. Proposed, not built: also run claude plugin validate (Claude Code 2.1.233 or later) and scan skill bodies for keys.', sources: [ANT.hooks, 'https://code.claude.com/docs/en/skills', '~/.agents/tools/unify/skill-lifecycle.md', 'app/src/app/explorer/pro-map-guardrails/asset_guard.py', 'app/src/app/explorer/pro-map-guardrails/test-receipt.json'], x: 0, y: 0 },
+  { id: 'p_mcpgate', label: 'Connectors only through Composio', sub: 'Proposed, not built: three layers', status: ref, why: 'Proposed, not built. 1) Managed settings: allowedMcpServers (or managed-mcp.json) names Composio as the only connector; a user or project cannot loosen it. 2) A ConfigChange hook stops a changed setting from taking effect in a running session. It does not stop the file being written, does not watch .mcp.json or ~/.claude.json, and cannot block managed policy changes. 3) A PreToolUse hook blocks claude mcp add in Bash and any .mcp.json write that is not Composio. A new connector gets a tool card and a named login before first use.', sources: [ANT.mcp, ANT.hooks, 'https://code.claude.com/docs/en/hooks#configchange', 'https://code.claude.com/docs/en/settings', ANT.perm, '~/.agents/tools/cards/composio.md'], x: 0, y: 0 },
   { id: 'p_toolload', label: 'Tool load check', sub: 'Turn off what you do not use', status: ref, why: 'Every connected server adds tool names to every call. /context shows the load; /mcp turns off unused servers.', sources: ['https://code.claude.com/docs/en/costs', ANT.sub], x: 0, y: 0 },
 ];
 
@@ -252,7 +254,7 @@ const PRO_LAYOUT: Record<string, string[]> = {
   plan: ['p_plan', 'p_plan1', 'p_plan2'],
   delegate: ['p_self', 'p_helpers', 'p_a1', 'p_a2', 'p_a3'],
   know: ['p_k0', 'p_k1', 'p_k2'],
-  gw: ['p_g1', 'p_rulegate', 'p_g2', 'p_g3', 'p_g4', 'p_pending'],
+  gw: ['p_g1', 'p_rulegate', 'p_g2', 'p_g3', 'p_g4', 'p_pending', 'p_skillgate', 'p_mcpgate'],
   run: ['p_t1', 'p_t2', 'p_l3', 'p_result', 'p_aftercheck'],
   verify: ['p_combine', 'p_check', 'p_evidence', 'p_r1', 'p_r2', 'p_r3'],
   report: ['p_rep1', 'p_rep2', 'p_blocked'],
@@ -522,6 +524,8 @@ export const PRO_EDGES: ProEdge[] = [
   link('p_band_gw', 'p_lib_settings', 'rules from', 'ls', 'r'),
   link('p_lib_skills', 'p_x2', 'check setup edits', 'rs', 'l'),
   link('p_lib_mcp', 'p_rulegate', 'requires connector card', 'rs', 'l'),
+  link('p_lib_skills', 'p_skillgate', 'new skill is checked', 'rs', 'l'),
+  link('p_lib_mcp', 'p_mcpgate', 'only Composio is added', 'rs', 'l'),
   { ...loop('p_rulegate', 'p_k1', 'blocked: Read full card, then retry'), offset: 25 },
   link('p_band_learn', 'p_testset', 'failures become tests', 'ls', 'r'),
   link('p_ckpt', 'p_load', 'Selected handoff/resume; not clear', 'ls', 'r'),
