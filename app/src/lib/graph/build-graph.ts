@@ -3,6 +3,7 @@ import type { Edge, Node } from '@xyflow/react';
 import type { CatalogBundle, CatalogComponent } from '@/lib/types/catalog';
 
 export type ExplorerView =
+  | 'ceo'
   | 'map'
   | 'pro'
   | 'flow'
@@ -15,7 +16,8 @@ export type ExplorerView =
   | 'tracing'
   | 'reliability'
   | 'maintained'
-  | 'live';
+  | 'live'
+  | 'logins';
 
 export function layerCounts(bundle: CatalogBundle): Map<string, number> {
   const counts = new Map<string, number>();

@@ -1,0 +1,107 @@
+{
+  "check": "connector-logins",
+  "ran_at": "2026-10-13T22:18:19+00:00",
+  "passed": true,
+  "results": [
+    {
+      "name": "follows next_cursor",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "status passes for EXPIRED and FAILED",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "dedupes by account id",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "only allowlisted host",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "project header sent",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "curl uses --compressed and -K -",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "key never on argv",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "key only on stdin",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "no key, org or token in snapshot",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "whitelisted fields only",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "EXPIRED is red with fix",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "FAILED is red with fix and reason",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "ACTIVE has no fix",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "gmail maps to google-workspace card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "custom toolkit maps to its card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "unknown toolkit has no card",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "summary counts not ACTIVE",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "groups with dead logins first",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "HTTP error raised without body or key",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "live snapshot has no real key or org id",
+      "passed": true,
+      "detail": ""
+    }
+  ]
+}
