@@ -715,6 +715,47 @@ for n in nodes.values():
         n['layer'] = 'rail-rules'
 edges[:] = [e for e in edges if e['kind'] not in ('follows', 'enforced', 'governs') and not (e['kind'] == 'runs' and e['target'].startswith(('hook:', 'check:')))]
 
+# ---------------------------------------------------------------------------------------------- 10. Observability (Langfuse)
+# Who records what the agents do (Alex 2026-10-14). The map makes no network call: every fact comes from the receipt,
+# the Langfuse card and Claude Code's settings file. A sender is "live" only when the receipt shows its traces landed.
+LF_RECEIPT = ROOT / 'reviews' / 'receipts' / '2026-10-14-langfuse' / 'observability.md'
+LF_CARD = CARDS / 'langfuse.md'
+LF_REL = 'reviews/receipts/2026-10-14-langfuse/observability.md'  # repo-relative, so the cite survives the merge
+LF_URL = 'https://us.cloud.langfuse.com/project/cmv733aoq01e7ad0mfeqexnrx'
+lf_receipt = read(LF_RECEIPT)
+cc_settings = read(HOME / '.claude' / 'settings.json')
+cc_wired = 'langfuse_otel_headers.py' in cc_settings and 'cloud.langfuse.com' in cc_settings
+if lf_receipt:
+    SENDERS = [
+        # node, name, state, env, how, proof (receipt row must say it)
+        ('app:claude-code', 'Claude Code', 'live' if cc_wired and 'claude_code.' in lf_receipt else 'unknown', 'default',
+         'OpenTelemetry, traces only, prompts redacted; keys from 1Password at run time', 'seen working 2026-10-13'),
+        ('agent:javar-lab', 'JAVAR-LAB', 'live' if 'Hermes turn' in lf_receipt else 'unknown', 'javar-lab',
+         'Hermes 0.21.7 langfuse plugin via hermes-lab; keys from its own 1Password vault', 'seen working 2026-10-14'),
+        ('agent:javar', 'Javar (live)', 'planned', 'javar', 'same plugin on Hermes 0.21.5; needs Alex\'s go for a short restart', 'not sending yet'),
+        (None, 'Codex', 'not wired', '', 'nothing sends from Codex', 'not wired'),
+    ]
+    add('agent:javar-lab', 'agents', 'agent', 'JAVAR-LAB', 'Test copy of Javar on Hermes 0.21.7; new versions are tried here before live Javar.',
+        explain('JAVAR-LAB is the practice copy of Javar. Upgrades and new add-ons are proven here first, so live Javar never breaks.',
+                'no', 'Its Langfuse tracing is on and its traces land (see the receipt).', 'Nothing.'),
+        status='ok', sources=[LF_REL], host='JAVAR-LAB (Orgo)', model='not checked', tools='hermes-lab wrapper')
+    link('agent:javar', 'agent:javar-lab', 'tests', 'tries upgrades first on', LF_REL)
+    live_n = sum(1 for s in SENDERS if s[2] == 'live')
+    planned_n = sum(1 for s in SENDERS if s[2] == 'planned')
+    add('obs:langfuse', 'observability', 'observability', 'Langfuse (Increase Roas)',
+        f'Records every agent run as a trace. {live_n} live, {planned_n} planned, Codex not wired.',
+        explain('Langfuse is the flight recorder for your agents: each run shows up as a trace with its steps, tools and cost.',
+                'maybe', 'Live Javar is not sending yet, so his runs are invisible until his tracing is switched on. Free Hobby plan: 50k units a month, 30-day history.',
+                'Say go for live Javar\'s short restart to turn his tracing on.'),
+        status='ok', sources=[LF_REL, LF_CARD], url=LF_URL, plan='Hobby (free, 50k units/month, 30-day retention)',
+        senders=[{'name': n, 'state': st, 'env': env, 'how': how, 'proof': pr, 'node': nid} for nid, n, st, env, how, pr in SENDERS])
+    for nid, n, st, env, how, pr in SENDERS:
+        if nid and nid in nodes and st in ('live', 'planned'):
+            link(nid, 'obs:langfuse', 'traces', f'sends traces ({st})', LF_REL)
+            edges[-1]['state'] = st
+    if 'toolkit:custom_langfuse_mcp' in nodes:
+        link('toolkit:custom_langfuse_mcp', 'obs:langfuse', 'reads', 'agents read and write it through', str(LF_CARD))
+
 # ---------------------------------------------------------------------------------------------- Real chain + evidence rule
 # Director AGENTS.md line 7: "You judge missions; controllers do the work." Controllers load the Conductor.
 AG = str(DIRECTOR / 'AGENTS.md')
@@ -751,7 +792,7 @@ def rail_row(layer: str, title: str) -> dict:
 
 
 rail = [rail_row(l, t) for l, t in (('apps', 'AI apps'), ('rail-rules', 'Shared rules and guards'), ('director', 'Director'), ('conductor', 'Conductor'),
-                                    ('missions', 'Missions'), ('skills', 'Skills'), ('connectors', 'Connectors'))]
+                                    ('observability', 'Observability'), ('missions', 'Missions'), ('skills', 'Skills'), ('connectors', 'Connectors'))]
 rail.insert(3, {'layer': 'engine', 'title': 'SDK engine room' + ('' if sdk_plugged else ' (not plugged in)'), 'running': 0,
                 'stuck': sum(1 for s in sdk if s['status'] == 'gap'), 'watch': sum(1 for s in sdk if s['status'] == 'partial'),
                 'unknown': 0, 'total': 8, 'proven': sum(1 for s in sdk if s['status'] == 'proven')})
@@ -760,7 +801,7 @@ trace_last = dir_live.get('last_trace')
 OUT.write_text(json.dumps({
     'built_at': datetime.now(timezone.utc).isoformat(),
     'scanned_at': live.get('scanned_at'),
-    'layers': [['you', 'You'], ['apps', 'AI apps'], ['director', 'Director (decides)'], ['conductor', 'Conductor (does the work through the controllers)'], ['agents', 'Your agents (who does what, top-down)'],
+    'layers': [['you', 'You'], ['apps', 'AI apps'], ['director', 'Director (decides)'], ['conductor', 'Conductor (does the work through the controllers)'], ['agents', 'Your agents (who does what, top-down)'], ['observability', 'Observability (who records what the agents do)'],
                ['engine', 'Engine room (SDK)'], ['missions', 'Customers and projects (click one to open its missions)'], ['skills', 'Skills those missions used'],
                ['connectors', 'Connections (each with its routing card)']],
     'nodes': list(nodes.values()), 'edges': edges, 'sdk': sdk, 'route_check': route.get('checked_at'),

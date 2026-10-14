@@ -1,0 +1,29 @@
+Checks for branch langfuse-observability (base origin/main 0ca5037), run 2026-10-14 ~01:55Z by claude-opus-5-5.
+
+(a) tsc: cd app && npx tsc --noEmit -> PASS (no output)
+(b) lint: cd app && npm run lint -> PRE-EXISTING. Error lines only in untouched files:
+    pro-map-audit-check.cjs (13), pro-map-guardrails/check_registration.cjs (6), pro-map-panel.tsx:290 (1).
+    No error in org-map-panel.tsx (the only changed TS file).
+(c) build: cd app && npm run build -> PASS
+(d) node app/src/app/explorer/flow-node-kit.check.mts -> exit 0
+    node app/src/app/explorer/pro-map-audit-check.cjs -> exit 0, errors [], 7 sourceWarnings (unchanged y_ cards)
+(e) No tools/*_acceptance.py mentions build_org_map. tools/ changed, so per /verify: python3 -B tools/app_acceptance.py
+    -> FAIL at line 150, run_service('apply') for the job create: local_service.py answers "actor_owner required".
+    Pre-existing: this branch does not touch tools/local_service.py or tools/app_acceptance.py (git diff --stat origin/main).
+Builder: python3 -B tools/build_org_map.py -> 112 nodes, 250 edges, 250 of 250 carry evidence.
+    obs:langfuse (layer observability, status ok); agent:javar-lab (new); edges
+    traces:app:claude-code->obs:langfuse state live, traces:agent:javar-lab->obs:langfuse state live,
+    traces:agent:javar->obs:langfuse state planned, reads:toolkit:custom_langfuse_mcp->obs:langfuse, tests:agent:javar->agent:javar-lab.
+
+Browser (production build via next start on 127.0.0.1:3211, viewport 1600x1000), /explorer:
+- Header: "112 boxes · 250 of 250 lines backed by a proof file". Legend shows the new traces line.
+- DOM: [data-id="obs:langfuse"] text: Langfuse (Increase Roas) / Claude Code LIVE / JAVAR-LAB LIVE / Javar (live) PLANNED / Codex NOT WIRED
+- Edges: claude-code and javar-lab lines stroke rgb(23,201,100) solid; javar line stroke rgb(245,165,36) dash "6, 4".
+- Click opens the details panel: "Open the Langfuse project" -> https://us.cloud.langfuse.com/project/cmv733aoq01e7ad0mfeqexnrx (target _blank),
+  "Who sends traces" list with the four badges, plan line.
+- Console errors: none.
+- Screenshot: browser-1600-langfuse-box.jpg
+Dev server note: next dev (Turbopack) refused the worktree's symlinked node_modules, so the check used the production build.
+
+Rebuild after the "planned" count fix (computed instead of a fixed 1): builder exit 0, purpose "2 live, 1 planned, Codex not wired",
+273 of 273 lines carry evidence (the total grew from 250 because the running app's auto live scan added route-check data), audit check exit 0.

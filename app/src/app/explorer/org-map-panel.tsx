@@ -23,7 +23,8 @@ type OrgNode = {
   id: string; layer: string; kind: string; label: string; purpose: string; explain: Explanation;
   status: Status; sources: string[]; meta: Record<string, unknown>;
 };
-type OrgEdge = { id: string; source: string; target: string; kind: string; label: string; evidence: string; proven?: boolean };
+type OrgEdge = { id: string; source: string; target: string; kind: string; label: string; evidence: string; proven?: boolean; state?: string };
+type Sender = { name: string; state: string; env: string; how: string; proof: string; node: string | null };
 type SdkStep = { step: number; title: string; status: 'proven' | 'partial' | 'gap'; why: string; proof: string };
 type Rail = { layer: string; title: string; running: number; stuck: number; watch: number; unknown: number; total: number };
 type NeedsMe = { title: string; why: string; todo: string; node_id: string };
@@ -45,7 +46,13 @@ const SDK_COLOR = { proven: '#17c964', partial: '#f5a524', gap: '#ff0071' } as c
 const W = 214, GAP = 22, ROW = 92, PER_ROW = 9, BAND_GAP = 70;
 const RAIL_X = PER_ROW * (W + GAP) + 80;
 /** Lines always drawn (the org chart's backbone); everything else appears when you click a box. */
-const BACKBONE = new Set(['talks', 'dispatches', 'runs-on', 'runs', 'reaches', 'reviews', 'verdict', 'sendback']);
+const BACKBONE = new Set(['talks', 'dispatches', 'runs-on', 'runs', 'reaches', 'reviews', 'verdict', 'sendback', 'traces']);
+/** Sender badges on the Observability box: live = traces seen landing, planned = drawn dashed until it is live. */
+const SENDER_COLOR: Record<string, string> = { live: '#17c964', planned: '#f5a524', 'not wired': '#6b6b6b', unknown: '#6b6b6b' };
+function SenderBadge({ state }: { state: string }) {
+  const c = SENDER_COLOR[state] ?? '#6b6b6b';
+  return <span className="inline-block shrink-0 rounded border px-1 text-[9px] font-semibold uppercase" style={{ color: c, borderColor: c }}>{state}</span>;
+}
 const RAIL_LEFT_X = -(W + 90);
 
 function ago(iso?: string | null) {
@@ -76,6 +83,8 @@ function card(n: OrgNode) {
       <div className="text-muted-foreground mt-0.5 line-clamp-2 text-[10px]">
         {n.kind === 'app' && Array.isArray(n.meta.differences)
           ? ((n.meta.differences as string[]).join(' · ') || 'nothing different from the shared setup')
+          : n.kind === 'observability' && Array.isArray(n.meta.senders)
+            ? <span className="flex flex-wrap gap-1">{(n.meta.senders as Sender[]).map((x) => <span key={x.name} className="inline-flex items-center gap-0.5">{x.name}<SenderBadge state={x.state} /></span>)}</span>
           : Array.isArray(n.meta.logins_missing) && (n.meta.logins_missing as string[]).length
             ? `card login gone: ${(n.meta.logins_missing as string[]).join(', ')}`
             : n.purpose}
@@ -233,7 +242,7 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
     }
     nodes.push({ id: `lane:${layer}`, position: { x: 0, y: y - 24 }, selectable: false, draggable: false, data: { label: title },
       style: { width: 600, border: 'none', background: 'transparent', padding: 0, fontSize: 12, color: '#ff4d9a', textAlign: 'left' } });
-    const order = ['rule', 'hook', 'check', 'card', 'director', 'conductor', 'reviewer', 'mission', 'skill', 'agent', 'hub', 'toolkit', 'local'];
+    const order = ['rule', 'hook', 'check', 'card', 'director', 'conductor', 'reviewer', 'mission', 'skill', 'agent', 'observability', 'hub', 'toolkit', 'local'];
     // Auto-layout ordering (the idea behind the Pro "Auto Layout" layered engines): put each box under the
     // boxes it connects to above it, so lines run short and straight instead of crossing the whole map.
     const bary = (n: OrgNode) => {
@@ -300,17 +309,20 @@ function layout(map: OrgMap, focus: Set<string>, open: Set<string>) {
     .map((e) => {
       const on = focus.has(e.source) || focus.has(e.target);
       const red = e.kind === 'conflict' || e.kind === 'one-agent';
+      const planned = e.state === 'planned';
+      const live = e.kind === 'traces' && e.state === 'live';
       return {
         id: e.id, source: e.source, target: e.target,
-        label: on || e.kind === 'conflict' ? e.label : undefined,
+        label: on || e.kind === 'conflict' || e.kind === 'traces' ? e.label : undefined,
         animated: on && !red,
         style: {
-          stroke: red ? '#ff0071' : on ? '#ff4d9a' : '#555',
+          stroke: red ? '#ff0071' : on ? '#ff4d9a' : live ? '#17c964' : planned ? '#f5a524' : '#555',
           strokeWidth: red ? 2.5 : on ? 2 : 1,
           // A line with no proof file is drawn grey and dashed: the map is claiming something it can't show.
-          strokeDasharray: e.kind === 'one-agent' || e.proven === false ? '6 4' : undefined,
+          // A planned line (not sending yet) is dashed too, until its first trace lands.
+          strokeDasharray: e.kind === 'one-agent' || e.proven === false || planned ? '6 4' : undefined,
           ...(e.proven === false ? { stroke: '#777' } : {}),
-          opacity: dim && !on && !red ? 0.08 : red ? 0.95 : on ? 0.95 : 0.35,
+          opacity: dim && !on && !red ? 0.08 : red ? 0.95 : on ? 0.95 : e.kind === 'traces' ? 0.8 : 0.35,
         },
         labelStyle: red ? { fill: '#ff4d9a', fontSize: 11 } : { fontSize: 10 },
       };
@@ -481,6 +493,7 @@ export function OrgMapPanel() {
           <span><span style={{ color: STATUS_COLOR.broken }}>●</span> stuck or rule conflict</span>
           <span><span style={{ color: STATUS_COLOR.unknown }}>●</span> not checked (cloud)</span>
           <span><span style={{ color: '#ff0071' }}>━</span> red line: rules that clash · <span style={{ color: '#ff0071' }}>┅</span> dashed: a rule only one app sees</span>
+          <span><span style={{ color: '#17c964' }}>━</span> sends traces to Langfuse (live) · <span style={{ color: '#f5a524' }}>┅</span> planned, not sending yet</span>
           <span>Click any box for what it is, should I care, what to do.</span>
         </div>
 
@@ -529,6 +542,26 @@ export function OrgMapPanel() {
                     <ul className="mt-1 list-disc space-y-0.5 pl-4">
                       {(selected.meta.rule_lines as string[]).map((l, i) => <li key={i}>{l}</li>)}
                     </ul>
+                  </div>
+                )}
+                {typeof selected.meta.url === 'string' && (
+                  <a className="mt-2 inline-block text-xs text-[#ff4d9a] underline underline-offset-2" href={selected.meta.url} target="_blank" rel="noreferrer">
+                    Open the Langfuse project ↗
+                  </a>
+                )}
+                {Array.isArray(selected.meta.senders) && (
+                  <div className="mt-2 text-xs">
+                    <div className="text-muted-foreground text-[10px] uppercase">Who sends traces</div>
+                    <ul className="mt-1 space-y-1">
+                      {(selected.meta.senders as Sender[]).map((x) => (
+                        <li key={x.name} className="flex items-start gap-1.5">
+                          <SenderBadge state={x.state} />
+                          <span><span className="font-medium">{x.name}</span>{x.env ? <span className="text-muted-foreground"> · env {x.env}</span> : null}<br />
+                            <span className="text-muted-foreground">{x.how}; {x.proof}</span></span>
+                        </li>
+                      ))}
+                    </ul>
+                    {typeof selected.meta.plan === 'string' && <div className="text-muted-foreground mt-1 text-[10px]">Plan: {selected.meta.plan}</div>}
                   </div>
                 )}
                 {Array.isArray(selected.meta.loaded_by) && (
