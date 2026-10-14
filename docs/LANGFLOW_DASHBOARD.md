@@ -66,12 +66,43 @@ Start the app on port 3200 (the port Tailscale Serve uses):
 cd ~/Projects/system-map-ir/app && LANGFLOW_LFX_BIN=$HOME/.venvs/langflow-dashboard/bin/lfx LANGFLOW_CONFIG_DIR=$HOME/.venvs/langflow-dashboard/config npm run dev -- -p 3200
 ```
 
+## Start at login (set up 2026-10-13)
+
+Two login items keep both servers running after a restart (originals backed up to `~/Backups/launchagents-20261013/`):
+
+| Login item | Runs | Address |
+|---|---|---|
+| `~/Library/LaunchAgents/com.alex.system-map.plist` | `next dev` directly (no npm wrapper) from `~/Projects/system-map-ir/app`, with `LANGFLOW_LFX_BIN` and `LANGFLOW_CONFIG_DIR` set | 127.0.0.1:3200 (Tailscale Serve proxies it) |
+| `~/Library/LaunchAgents/com.alex.langflow-server.plist` | `tools/langflow_server.sh` | 127.0.0.1:7860 (this Mac only) |
+
+Restart either one: `launchctl kickstart -k gui/$(id -u)/com.alex.system-map` (or `com.alex.langflow-server`).
+Logs: `app/.data/dev-server.log` and `app/.data/langflow-server.log`.
+
+## Langflow on this Mac (Open in Langflow)
+
+The palette's **Open this flow in Langflow** sends a copy of the saved flow to the real Langflow app on this Mac
+and opens its editor in a new tab. Use it for everything that only runs in Langflow (AI models, internet, files).
+Secrets are never sent. Only the owner on this Mac sees the button; the tailnet never does (403).
+
+Start Langflow (loopback only, port 7860, data in `app/.data/langflow-server`):
+
+```bash
+~/Projects/system-map-ir/tools/langflow_server.sh
+```
+
+The dashboard finds it at `LANGFLOW_SERVER_URL` (default `http://127.0.0.1:7860`); any non-loopback address is
+refused. If Langflow is not running, the button says so instead of failing. AI components run in Langflow only
+after you add a provider key in Langflow's own settings; that is the only place money could be spent.
+
+The palette also has four **starter flows** (Reply template, Message router, Text chunker, Dated note) that run
+here with one tap. Each is proven on the real engine in `starters-langflow.test.mts`.
+
 ## Tests
 
 Unit and route tests (no port needed, about 2 seconds):
 
 ```bash
-cd ~/Projects/system-map-ir/app && node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts src/lib/langflow/tests/network-boundary.test.mts src/lib/langflow/tests/catalog.test.mts src/lib/langflow/tests/edits.test.mts src/lib/langflow/tests/settings.test.mts src/lib/langflow/tests/review-fixes.test.mts
+cd ~/Projects/system-map-ir/app && node --import ./src/lib/langflow/tests/register.mjs --test src/lib/langflow/tests/handles-policy.test.mts src/lib/langflow/tests/model.test.mts src/lib/langflow/tests/runner.test.mts src/lib/langflow/tests/store-runs.test.mts src/lib/langflow/tests/routes.test.mts src/lib/langflow/tests/network-boundary.test.mts src/lib/langflow/tests/catalog.test.mts src/lib/langflow/tests/edits.test.mts src/lib/langflow/tests/settings.test.mts src/lib/langflow/tests/review-fixes.test.mts src/lib/langflow/tests/review2.test.mts src/lib/langflow/tests/starters-langflow.test.mts
 ```
 
 Live engine acceptance (runs the real `lfx` engine, about 3 seconds):

@@ -18,6 +18,7 @@ import type { CanvasEdge, CanvasField, CanvasFlow, CanvasNode, CanvasPort, Execu
 
 type Status = {
   engine: { name: string; pinnedLangflowVersion: string; configured: boolean; binaryFound: boolean };
+  server?: { langflow: { configured: boolean; reachable: boolean } | null };
   caller: { network: 'local' | 'tailnet'; canSave: boolean; canRun: boolean; canStop: boolean };
   accessError: string | null;
 };
@@ -95,8 +96,65 @@ function describeEdit(e: FlowEdit, label: (id: string) => string): string {
   }
 }
 
+type StarterInfo = { key: string; title: string; description: string; sampleInput: string };
+
+/**
+ * Top of the palette: how running works, one-tap starter flows, and "Open in Langflow" for everything that
+ * only runs in the real Langflow (AI, internet, files). Each control says why when it cannot be used.
+ */
+function PaletteHeader({ starters, canEdit, langflow, openBlocked, onStarter, onOpen, busy, message, link }: {
+  starters: StarterInfo[];
+  canEdit: boolean;
+  langflow: { configured: boolean; reachable: boolean } | null;
+  openBlocked: string | null;
+  onStarter: (s: StarterInfo) => void;
+  onOpen: () => void;
+  busy: boolean;
+  message: string | null;
+  link?: string | null;
+}) {
+  return (
+    <div className="space-y-2 border-b pb-2">
+      <p className="text-[11px] text-muted-foreground">
+        <span className="font-medium text-green-700 dark:text-green-400">Runs here</span> components run on this Mac, free and private.
+        Everything else (AI, internet, files): build it here, then open it in Langflow to run it.
+      </p>
+      {canEdit && starters.length ? (
+        <div>
+          <p className="mb-1 text-[11px] font-medium">Start from a ready flow (runs here):</p>
+          <div className="flex flex-wrap gap-1.5">
+            {starters.map((st) => (
+              <button key={st.key} type="button" disabled={busy} title={st.description} aria-label={`New flow from starter: ${st.title}. ${st.description}`}
+                className="rounded border px-2 py-1 text-xs hover:bg-muted disabled:opacity-60" onClick={() => onStarter(st)}>
+                {st.title}
+              </button>
+            ))}
+          </div>
+        </div>
+      ) : null}
+      {langflow ? (
+        <div className="flex flex-wrap items-center gap-2">
+          <button type="button" disabled={busy || !!openBlocked} aria-describedby="lf-open-langflow-note"
+            className="rounded border px-2 py-1 text-xs font-medium hover:bg-muted disabled:opacity-60" onClick={onOpen}>
+            Open this flow in Langflow
+          </button>
+          <span id="lf-open-langflow-note" className="text-[11px] text-muted-foreground">
+            {openBlocked ?? 'Opens a copy in Langflow on this Mac, in a new tab. Secrets are never sent.'}
+          </span>
+        </div>
+      ) : null}
+      {message ? (
+        <p role="status" className="text-[11px]">
+          {message}
+          {link ? <> <a className="underline" href={link} target="_blank" rel="noopener noreferrer">Open it in Langflow</a></> : null}
+        </p>
+      ) : null}
+    </div>
+  );
+}
+
 /** Searchable component list. Arrow keys move between items, Enter or click adds, Escape returns to the search box. */
-function Palette({ catalog, disabled, onAdd }: { catalog: Catalog; disabled: boolean; onAdd: (item: PaletteItem) => void }) {
+function Palette({ catalog, disabled, disabledReason, onAdd }: { catalog: Catalog; disabled: boolean; disabledReason?: string; onAdd: (item: PaletteItem) => void }) {
   const [query, setQuery] = useState('');
   const listRef = useRef<HTMLDivElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
@@ -146,7 +204,7 @@ function Palette({ catalog, disabled, onAdd }: { catalog: Catalog; disabled: boo
         }}
       />
       <p id="lf-palette-count" aria-live="polite" className="text-[11px] text-muted-foreground">
-        {matches.length} of {catalog.count} components from engine lfx {catalog.engine.lfxVersion}.{disabled ? ' Adding is off: changes stay with the owner on the Mac.' : ' Enter or click adds one to the flow.'}
+        {matches.length} of {catalog.count} components from engine lfx {catalog.engine.lfxVersion}.{disabled ? ` ${disabledReason ?? 'Adding is off: changes stay with the owner on the Mac.'}` : ' Enter or click adds one to the flow.'}
       </p>
       <div ref={listRef} onKeyDown={onListKey} className="max-h-64 space-y-2 overflow-y-auto pr-1" data-testid="lf-palette">
         {[...groups.entries()].map(([category, list]) => (
@@ -161,11 +219,14 @@ function Palette({ catalog, disabled, onAdd }: { catalog: Catalog; disabled: boo
                     disabled={disabled}
                     title={c.description}
                     aria-label={`Add ${c.displayName}. ${c.tierLabel}.`}
-                    className="flex w-full items-center justify-between gap-2 rounded border px-2 py-1.5 text-left text-xs hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
+                    className="flex w-full flex-col gap-0.5 rounded border px-2 py-1.5 text-left text-xs hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-ring disabled:opacity-60"
                     onClick={() => onAdd(c)}
                   >
-                    <span className="truncate font-medium">{c.displayName}</span>
-                    <span className={`shrink-0 text-[10px] ${c.runs ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground'}`}>{c.tierLabel}</span>
+                    <span className="flex w-full items-center justify-between gap-2">
+                      <span className="truncate font-medium">{c.displayName}</span>
+                      <span className={`shrink-0 text-[10px] ${c.runs ? 'text-green-700 dark:text-green-400' : 'text-muted-foreground'}`}>{c.tierLabel}</span>
+                    </span>
+                    {c.description ? <span className="line-clamp-2 text-[10px] leading-snug text-muted-foreground">{c.description}</span> : null}
                   </button>
                 </li>
               ))}
@@ -492,6 +553,10 @@ export function LangflowPanel() {
   const [catalog, setCatalog] = useState<Catalog | null>(null);
   const [catalogError, setCatalogError] = useState<string | null>(null);
   const [paletteOpen, setPaletteOpen] = useState(false);
+  const [starters, setStarters] = useState<StarterInfo[]>([]);
+  const [paletteBusy, setPaletteBusy] = useState(false);
+  const [paletteMessage, setPaletteMessage] = useState<string | null>(null);
+  const [paletteLink, setPaletteLink] = useState<string | null>(null);
   const [preview, setPreview] = useState<Preview | null>(null);
   const [previewing, setPreviewing] = useState(false);
   const previewSeq = useRef(0);
@@ -524,6 +589,10 @@ export function LangflowPanel() {
     };
     void loadAccess();
     return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    void api<{ starters: StarterInfo[] }>('/api/langflow/starters').then((r) => { if (r.ok) setStarters(r.data.starters); });
   }, []);
 
   const loadFlows = useCallback(async () => {
@@ -797,6 +866,52 @@ export function LangflowPanel() {
 
   const problems = preview?.problems ?? detail?.problems;
 
+  const langflow = status?.server?.langflow ?? null;
+  const openBlocked = !detail ? 'Pick or start a flow first.'
+    : pending.length > 0 ? 'Save your changes first: Langflow gets the saved version.'
+      : langflow && !langflow.reachable ? "Langflow isn't running on this Mac. Start it with tools/langflow_server.sh."
+        : null;
+
+  const startFromStarter = async (st: StarterInfo) => {
+    if (!token || paletteBusy) return;
+    setPaletteBusy(true);
+    setPaletteMessage(null);
+    const r = await api<{ id: string; sampleInput: string }>('/api/langflow/starters', { method: 'POST', body: JSON.stringify({ key: st.key }) }, token);
+    setPaletteBusy(false);
+    if (!r.ok) {
+      setPaletteMessage(r.error);
+      return;
+    }
+    await loadFlows();
+    setSelectedId(r.data.id);
+    setRunInput(r.data.sampleInput);
+    setPaletteMessage(`Created "${st.title}". Press Run flow to try it with the sample message.`);
+  };
+
+  const openInLangflow = async () => {
+    if (!detail || !token || paletteBusy || openBlocked) return;
+    // Open the tab first (inside the click), so the browser does not block it as a pop-up.
+    const tab = window.open('about:blank', '_blank');
+    setPaletteBusy(true);
+    setPaletteMessage(null);
+    setPaletteLink(null);
+    const r = await api<{ url: string }>(`/api/langflow/flows/${encodeURIComponent(detail.id)}/langflow`, { method: 'POST', body: '{}' }, token);
+    setPaletteBusy(false);
+    if (!r.ok) {
+      tab?.close();
+      setPaletteMessage(r.error);
+      return;
+    }
+    setPaletteLink(r.data.url);
+    if (tab) {
+      tab.opener = null;
+      tab.location.href = r.data.url;
+      setPaletteMessage('Opened in Langflow in a new tab. If it did not open:');
+    } else {
+      setPaletteMessage('Sent to Langflow. Your browser blocked the new tab:');
+    }
+  };
+
   const flowOptions = flows.map((f) => (
     <option key={f.id} value={f.id}>{f.name}</option>
   ));
@@ -830,17 +945,23 @@ export function LangflowPanel() {
             {status.caller.network === 'tailnet' ? <p>Read-only from this device. Changes and runs stay on the Mac (Alex, 2026-10-12).</p> : null}
             {status.caller.network === 'local' && !token ? <p>Read-only until the local token loads. Reload this page on the Mac.</p> : null}
             {status.accessError ? <p className="text-red-700 dark:text-red-400">{status.accessError}</p> : null}
-            <p>Langflow&apos;s own editor is not running in this build, so advanced edits stay in Langflow for now.</p>
+            {status.server?.langflow?.reachable ? (
+              <p>Langflow is running on this Mac: use Open this flow in Langflow (in Add a component) for anything that only runs there.</p>
+            ) : status.server?.langflow ? (
+              <p>Langflow is not running on this Mac, so flows can only be exported. Start it with tools/langflow_server.sh to open flows there.</p>
+            ) : null}
           </div>
         ) : null}
         {loadError ? <p role="alert" className="text-sm text-red-700 dark:text-red-400">{loadError}</p> : null}
         {importMessage ? <p role="status" className="text-sm">{importMessage}</p> : null}
 
-        {detail ? (
-          <details className="shrink-0 rounded border p-2 text-sm" open={paletteOpen} onToggle={(e) => setPaletteOpen((e.currentTarget as HTMLDetailsElement).open)}>
+        {status ? (
+          <details className="shrink-0 rounded border p-2 text-sm" open={paletteOpen || (flows.length === 0 && canImport)} onToggle={(e) => setPaletteOpen((e.currentTarget as HTMLDetailsElement).open)}>
             <summary className="cursor-pointer font-medium">Add a component {catalog ? `(${catalog.count})` : ''}</summary>
-            <div className="mt-2">
-              {catalog ? <Palette catalog={catalog} disabled={!canSave} onAdd={addComponent} /> : <p className="text-xs text-muted-foreground">{catalogError ?? 'Loading the component list from the engine…'}</p>}
+            <div className="mt-2 space-y-2">
+              <PaletteHeader starters={starters} canEdit={canImport} langflow={canImport ? langflow : null} openBlocked={openBlocked}
+                onStarter={(st) => { setPaletteLink(null); void startFromStarter(st); }} onOpen={() => void openInLangflow()} busy={paletteBusy} message={paletteMessage} link={paletteLink} />
+              {catalog ? <Palette catalog={catalog} disabled={!canSave || !detail} disabledReason={canImport && !detail ? 'Pick or start a flow first to add components.' : undefined} onAdd={addComponent} /> : <p className="text-xs text-muted-foreground">{catalogError ?? 'Loading the component list from the engine…'}</p>}
             </div>
           </details>
         ) : null}
