@@ -1,0 +1,32 @@
+Served by: next start in ~/Projects/alex-system-map-merge/app (branch langflow-useful-first, commit 1207b987cdf3860e6691e54dbbf23ffce3c79249), port 3211. Date 2026-10-14T03:21:03Z
+$ curl -sS -i http://127.0.0.1:3211/api/workflow
+HTTP/1.1 200 OK
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+Date: Wed, 14 Oct 2026 03:21:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"jobs":[],"diagnostic_marker":"LOCAL-SCREENING-OK","screening_notes":[]}
+$ curl -sS -i http://127.0.0.1:3211/api/workflow/templates
+HTTP/1.1 200 OK
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+Date: Wed, 14 Oct 2026 03:21:03 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"templates":[{"name":"investigate","path":"workflows/investigate.json","document":{"contract_version":1,"kind":"investigate","guided":true,"dispatch_enabled":false,"instructions":["Fill every required input before creating a real local record.","Use concrete check_acceptance.py expressions for acceptance.","Choose a verifier identity different from task owner.","Attach evidence references; independent verification checks evidence truth outside this engine.","Corrections trigger downstream rechecking."],"required_inputs":["goal","scope","constraints","owner","allowed_files","account_or_local_only","acceptance"],"job":{"id":"investigate-JOB_ID","goal":"REQUIRED","scope":["REQUIRED approved files and records"],"constraints":["REQUIRED permissions and stop gates"],"owner":"REQUIRED","acceptance":["file:REQUIRED non-empty"],"account_or_local_only":"REQUIRED"},"tasks":[{"id":"investigate-frame-TASK_ID","goal":"Confirm question, boundaries and authoritative sources","owner":"REQUIRED","deps":[],"acceptance":["file:REQUIRED non-empty"],"next_action":"Confirm question, boundaries and authoritative sources"},{"id":"investigate-collect-TASK_ID","goal":"Collect bounded evidence","owner":"REQUIRED","deps":["investigate-frame-TASK_ID"],"accept
+Live map, port 3200 (system-map-ir, commit eca64989a2a2c7feb3a2142b9fa78de935d78348):
+$ curl -sS -i http://127.0.0.1:3200/api/workflow
+HTTP/1.1 200 OK
+vary: rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch
+content-type: application/json
+Date: Wed, 14 Oct 2026 03:21:04 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+Transfer-Encoding: chunked
+
+{"jobs":[],"diagnostic_marker":"LOCAL-SCREENING-OK","screening_notes":[]}

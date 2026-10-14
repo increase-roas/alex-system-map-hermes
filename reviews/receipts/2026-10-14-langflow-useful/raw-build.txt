@@ -1,0 +1,64 @@
+commit 1207b987cdf3860e6691e54dbbf23ffce3c79249  date 2026-10-14T03:20:37Z
+$ cd app && npm run build
+
+> ai-workflow-editor@0.0.0 build
+> next build
+
+   ▲ Next.js 15.5.25
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 1628ms
+   Skipping linting
+   Checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/17) ...
+   Generating static pages (4/17) 
+   Generating static pages (8/17) 
+   Generating static pages (12/17) 
+ ✓ Generating static pages (17/17)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                   Size  First Load JS
+┌ ○ /                                       3.5 kB         106 kB
+├ ○ /_not-found                            1.03 kB         104 kB
+├ ƒ /api/catalog                             183 B         103 kB
+├ ƒ /api/catalog/edit                        183 B         103 kB
+├ ƒ /api/catalog/edit/state                  183 B         103 kB
+├ ƒ /api/disabled-ai                         183 B         103 kB
+├ ƒ /api/generate-text                       183 B         103 kB
+├ ƒ /api/health                              183 B         103 kB
+├ ƒ /api/langflow/components                 183 B         103 kB
+├ ƒ /api/langflow/flows                      183 B         103 kB
+├ ƒ /api/langflow/flows/[flowId]             183 B         103 kB
+├ ƒ /api/langflow/flows/[flowId]/export      183 B         103 kB
+├ ƒ /api/langflow/flows/[flowId]/langflow    183 B         103 kB
+├ ƒ /api/langflow/flows/[flowId]/runs        183 B         103 kB
+├ ƒ /api/langflow/runs/[runId]/stop          183 B         103 kB
+├ ƒ /api/langflow/starters                   183 B         103 kB
+├ ƒ /api/langflow/status                     183 B         103 kB
+├ ƒ /api/live-setup                          183 B         103 kB
+├ ƒ /api/org-map                             183 B         103 kB
+├ ƒ /api/presentation                        183 B         103 kB
+├ ƒ /api/reliability/status                  183 B         103 kB
+├ ƒ /api/sources/[sourceId]                  183 B         103 kB
+├ ƒ /api/sync/status                         183 B         103 kB
+├ ƒ /api/traces                              183 B         103 kB
+├ ƒ /api/traces/[traceId]                    183 B         103 kB
+├ ƒ /api/workflow                            183 B         103 kB
+├ ƒ /api/workflow/events/[jobId]             183 B         103 kB
+├ ƒ /api/workflow/recover/[jobId]            183 B         103 kB
+├ ƒ /api/workflow/templates                  183 B         103 kB
+└ ○ /explorer                               736 kB         839 kB
++ First Load JS shared by all               103 kB
+  ├ chunks/2-f70c9bb08a3a603a.js           46.4 kB
+  ├ chunks/c495ecf6-3649408e8885cc7f.js    54.3 kB
+  └ other shared chunks (total)            2.03 kB
+
+
+ƒ Middleware                               33.1 kB
+
+○  (Static)   prerendered as static content
+ƒ  (Dynamic)  server-rendered on demand
+
+exit=0
