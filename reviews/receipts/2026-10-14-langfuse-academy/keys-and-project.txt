@@ -1,0 +1,7 @@
+Langfuse project and OpenRouter key for Langflow (2026-10-14, Claude Opus 5.5 with Codex thread 01a1333c-a339-7ef0-8a22-b32cb1d7c195 for host steps)
+- Langfuse project "Langflow" created in org "Increase Roas" (Hobby): project id cmv7mth3h01tjad0j3q7b0okl, us.cloud.langfuse.com. Seen in Chrome at /project/cmv7mth3h01tjad0j3q7b0okl/traces.
+- New API key pair saved into 1Password item "Langfuse - Langflow" (rxoo6lpuxbca67oj4yofie45sm), fields credential (sk-lf-, length 42) and public key (pk-lf-, length 42): readback match True for both; clipboard cleared. Old pair (project Increase Roas) remains in the item's 1Password history.
+- OpenRouter key "Langflow (system map, $100/mo)" created at openrouter.ai/settings/keys: credit limit $100, reset Monthly ("Requests are rejected once this key has used $100 in a month, until the limit resets on the 1st of the month at midnight UTC"), no expiration. Email verification code supplied by Alex in chat.
+  Saved as new 1Password item "OpenRouter - Langflow" (daz37abakr3thickvjpfxle5ni): shape sk-or-v1- length 73, readback match True, clipboard cleared. Spend approval: Alex, 2026-10-14, "$100/pm".
+- tools/langflow_server.sh reads both at start. Log after restart (05:00Z): "langflow_server: Langfuse tracing on (keys from 1Password item rxoo6lpuxbca67oj4yofie45sm)" and "langflow_server: OpenRouter key on (1Password item daz37abakr3thickvjpfxle5ni, capped in OpenRouter)"; /health 200.
+No key value was printed, written to a file or shown in chat.

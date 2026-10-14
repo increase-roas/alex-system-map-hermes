@@ -91,8 +91,16 @@ Start Langflow (loopback only, port 7860, data in `app/.data/langflow-server`):
 ```
 
 The dashboard finds it at `LANGFLOW_SERVER_URL` (default `http://127.0.0.1:7860`); any non-loopback address is
-refused. If Langflow is not running, the button says so instead of failing. AI components run in Langflow only
-after you add a provider key in Langflow's own settings; that is the only place money could be spent.
+refused. If Langflow is not running, the button says so instead of failing.
+
+Keys (read from 1Password at every Langflow start by `tools/langflow_server.sh`, never written to a file or printed):
+
+| Key | 1Password item (Connectors vault) | What it does |
+|---|---|---|
+| OpenRouter | "OpenRouter - Langflow" (daz37abakr3thickvjpfxle5ni) | AI models in Langflow: pick the OpenRouter component and the `OPENROUTER_API_KEY` global variable. Capped at $100 a month in OpenRouter (key "Langflow (system map, $100/mo)", resets monthly). Spend approval: Alex, 2026-10-14. Langflow keeps the variable encrypted in its own database. |
+| Langfuse | "Langfuse - Langflow" (rxoo6lpuxbca67oj4yofie45sm) | Traces of every Langflow run go to the Langfuse project "Langflow" (us.cloud.langfuse.com, set up 2026-10-14), kept apart from the Claude Code and Codex traces in "Increase Roas". Traces show up a few minutes after a run. |
+
+AI runs happen only in Langflow, never in the dashboard; that is the only place money is spent.
 
 The palette also has four **starter flows** (Reply template, Message router, Text chunker, Dated note) that run
 here with one tap. Each is proven on the real engine in `starters-langflow.test.mts`.
