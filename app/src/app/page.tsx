@@ -10,6 +10,12 @@ export default function Home() {
       <Link className="underline" href="/explorer">
         Open explorer
       </Link>
+      <Link className="underline" href="/queue">
+        Fix-now queue
+      </Link>
+      <Link className="underline" href="/waiting">
+        Waiting on you
+      </Link>
     </main>
   );
 }
