@@ -28,22 +28,54 @@ export type AnsweredItem = { id: string; title: string; answer: BoardAnswer };
 
 // Alex's gates: spend, messages to real people, production/DNS, deletes.
 // Matching is deliberately broad: when unsure, it's a gate.
-const GATE_PATTERN =
-  /\b(spend|spending|pay|payment|paid|budget|bill|billing|buy|purchase|subscription|price|\$\d|cost|customer|client|email|message|send|post|publish|dm|text|prod|production|live|dns|domain|deploy|rotate|delete|deletion|remove|scrub|purge|wipe|drop)\b/i;
+const GATE_PATTERN = new RegExp(
+  [
+    // money
+    'spend', 'pay', 'paid', 'budget', 'bill', 'buy', 'purchase', 'subscri', 'price', 'cost', 'charge', 'card',
+    'invoice', 'refund', 'dollar', 'usd', '\\$', 'money', 'fund', 'order', 'trade', 'transfer', 'upgrade', 'plan tier',
+    // real people
+    'customer', 'client', 'email', 'mail', 'message', 'send', 'sms', 'text', 'call', 'contact', 'reach out',
+    'post', 'publish', 'dm', 'reply', 'invite', 'announce', 'tweet', 'notify', 'outreach', 'jane', 'person', 'people',
+    // production / DNS
+    'prod', 'live', 'dns', 'domain', 'deploy', 'release', 'launch', 'rotate', 'revoke', 'credential', 'token', 'key',
+    'password', 'secret', 'cloudflare', 'vercel', 'server', 'ship',
+    // deletes
+    'delete', 'remove', 'scrub', 'purge', 'wipe', 'drop', 'erase', 'destroy', 'discard', 'uninstall', 'cancel',
+    'clean', 'trash', 'archive', 'overwrite', 'reset', 'rewrite history', 'force',
+  ].join('|'),
+  'i',
+);
+
+// A question too short to judge is treated as a gate ("Proceed?" could mean anything).
+const MIN_CLEAR_QUESTION = 40;
 
 export function isGate(ticket: BoardTicket): boolean {
+  const ask = (ticket.need ?? '').trim();
+  if (ask.length < MIN_CLEAR_QUESTION) return true;
   const text = [ticket.title, ticket.need, ticket.done_means].filter(Boolean).join(' ');
   return GATE_PATTERN.test(text);
 }
 
-export function waitingItems(tickets: BoardTicket[]): WaitingItem[] {
+// When each ticket was last marked blocked on Alex, from board progress lines:
+// "- <ts> | <id> | blocked | <owner> | on alex: ...". Notes do not reset it.
+export function blockedSince(progress: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const line of progress.split('\n')) {
+    const m = /^- (\S+) \| (\S+) \| blocked \| [^|]* \| on alex/.exec(line);
+    if (m) out[m[2]] = m[1];
+  }
+  return out;
+}
+
+export function waitingItems(tickets: BoardTicket[], since: Record<string, string> = {}): WaitingItem[] {
   return tickets
     .filter((t) => t.status !== 'done' && (t.owner === 'alex' || t.blocked_on === 'alex'))
     .map((t) => ({
       id: t.id,
       title: t.title,
       ask: t.need || t.done_means || 'No question written down.',
-      since: t.progressed || t.updated || null,
+      // Unknown rather than guessed: progressed/updated move on unrelated notes.
+      since: since[t.id] ?? null,
       // board.py answer only unblocks tickets blocked on Alex.
       answerable: t.status === 'blocked' && t.blocked_on === 'alex',
       gate: isGate(t),

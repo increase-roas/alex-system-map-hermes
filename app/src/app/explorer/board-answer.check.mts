@@ -14,13 +14,14 @@ const BASE = `http://127.0.0.1:${PORT}`;
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'board-test-'));
 const boardDir = path.join(root, 'board');
 let server;
+let serverOutput = '';
 
 before(async () => {
   fs.mkdirSync(boardDir);
   const board = JSON.parse(fs.readFileSync(LIVE, 'utf8'));
   board.tickets.push(
-    { id: 'test-q-1', mission: Object.keys(board.missions)[0], title: 'Pick a color for the map',
-      status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'Blue or green for the header?',
+    { id: 'test-q-1', mission: Object.keys(board.missions)[0], title: 'Map header layout',
+      status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'Which layout do you prefer for the map header, the left one or the top one?',
       updated: '2026-10-14T00:00:00Z', progressed: '2026-10-14T00:00:00Z', proof: [] },
     { id: 'test-gate-1', mission: Object.keys(board.missions)[0], title: 'Raise ad budget',
       status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'Spend $50 more per day?',
@@ -31,8 +32,10 @@ before(async () => {
   server = spawn(path.join(APP, 'node_modules', '.bin', 'next'), ['start', '--hostname', '127.0.0.1', '-p', String(PORT)], {
     cwd: APP,
     env: { ...process.env, AGENTS_BOARD_DIR: boardDir, LOCAL_DATA_DIR: path.join(root, 'data') },
-    stdio: 'ignore',
+    stdio: ['ignore', 'pipe', 'pipe'],
   });
+  server.stdout.on('data', (d) => { serverOutput += d; });
+  server.stderr.on('data', (d) => { serverOutput += d; });
   for (let i = 0; i < 60; i++) {
     try { if ((await fetch(`${BASE}/api/board`)).ok) return; } catch {}
     await new Promise((r) => setTimeout(r, 500));
@@ -90,4 +93,5 @@ test('answer round-trips through board.py', async () => {
   assert.ok(!v.waiting.some((w) => w.id === 'test-q-1'));
   assert.equal(v.answered[0].answer.text, 'Blue please');
   assert.equal(fs.statSync(LIVE).mtimeMs, before, 'live board must not change');
+  assert.ok(!serverOutput.includes('Blue please'), 'answer text must not reach server logs');
 });

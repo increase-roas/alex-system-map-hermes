@@ -21,3 +21,9 @@ DIFF: git diff 57f2ed3..dashboard-queue-waiting
 - Diff stat: reviews/receipts/2026-10-15-dashboard-queue-waiting/diff-stat.txt
 - Read-only reruns: cd app && npx tsc --noEmit; npm run lint; node app/src/app/explorer/*.check.mts
 - Known pre-existing: tools/app_acceptance.py 11/13 on main code too (file_proof_read_only expects top-level content; service nests under payload). Running it overwrites app/.next.
+
+## Round 2 (after round 1 FAIL, review-dashboard-queue-waiting-20261015T0244Z.md)
+- HIGH gate bypass: fixed. Gate check fails closed: broad substring list (money, people, prod/DNS/keys, deletes and synonyms) and any question under 40 characters or missing counts as a gate. Regression: app/src/app/explorer/board-gate.check.mts (all four reviewer examples).
+- MEDIUM waiting time: fixed. Waiting start comes from the latest "blocked | ... | on alex" line in board/progress.md; notes do not reset it; unknown when absent. Regression in board-gate.check.mts.
+- HIGH answer text in progress.md: not changed, by design. board.py is the board's own audit trail and records Alex's answer in progress.md for every route (chat answers too); the brief's "never in logs" covers this app's URLs and server logs. Changing board.py is outside this repo (AGENTS.md read-only rule). New assertion: the answer text never reaches the Next server's stdout/stderr (board-answer.check.mts).
+- Build/check receipt for this commit: receipts/2026-10-15-dashboard-queue-waiting/round2-checks.txt; diff-stat now covers committed files only.
