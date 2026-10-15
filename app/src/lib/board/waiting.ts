@@ -42,17 +42,28 @@ const GATE_PATTERN = new RegExp(
     // deletes
     'delete', 'remove', 'scrub', 'purge', 'wipe', 'drop', 'erase', 'destroy', 'discard', 'uninstall', 'cancel',
     'clean', 'trash', 'archive', 'overwrite', 'reset', 'rewrite history', 'force',
+    // blanket approvals
+    'proceed', 'go ahead', 'approve', 'previously discussed', 'as planned', 'tell ',
   ].join('|'),
   'i',
 );
 
-// A question too short to judge is treated as a gate ("Proceed?" could mean anything).
-const MIN_CLEAR_QUESTION = 40;
+// Fail closed: a question is answerable here only when the asking agent marked it
+// explicitly, by starting its --need with this tag (board.py block --on alex --need "dashboard-ok: ...").
+// Even then, any money/people/production/delete wording keeps it a gate.
+export const DASHBOARD_OK = 'dashboard-ok:';
+
+export function askText(ticket: BoardTicket): string {
+  const need = (ticket.need ?? '').trim();
+  return need.toLowerCase().startsWith(DASHBOARD_OK) ? need.slice(DASHBOARD_OK.length).trim() : need;
+}
 
 export function isGate(ticket: BoardTicket): boolean {
-  const ask = (ticket.need ?? '').trim();
-  if (ask.length < MIN_CLEAR_QUESTION) return true;
-  const text = [ticket.title, ticket.need, ticket.done_means].filter(Boolean).join(' ');
+  const need = (ticket.need ?? '').trim();
+  if (!need.toLowerCase().startsWith(DASHBOARD_OK)) return true;
+  // Too short to judge ("Proceed?") or a blanket go-ahead: chat only.
+  if (askText(ticket).length < 40) return true;
+  const text = [ticket.title, askText(ticket), ticket.done_means].filter(Boolean).join(' ');
   return GATE_PATTERN.test(text);
 }
 
@@ -73,7 +84,7 @@ export function waitingItems(tickets: BoardTicket[], since: Record<string, strin
     .map((t) => ({
       id: t.id,
       title: t.title,
-      ask: t.need || t.done_means || 'No question written down.',
+      ask: askText(t) || t.done_means || 'No question written down.',
       // Unknown rather than guessed: progressed/updated move on unrelated notes.
       since: since[t.id] ?? null,
       // board.py answer only unblocks tickets blocked on Alex.

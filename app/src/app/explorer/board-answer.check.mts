@@ -21,10 +21,10 @@ before(async () => {
   const board = JSON.parse(fs.readFileSync(LIVE, 'utf8'));
   board.tickets.push(
     { id: 'test-q-1', mission: Object.keys(board.missions)[0], title: 'Map header layout',
-      status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'Which layout do you prefer for the map header, the left one or the top one?',
+      status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'dashboard-ok: Which layout do you prefer for the map header, the left one or the top one?',
       updated: '2026-10-14T00:00:00Z', progressed: '2026-10-14T00:00:00Z', proof: [] },
     { id: 'test-gate-1', mission: Object.keys(board.missions)[0], title: 'Raise ad budget',
-      status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'Spend $50 more per day?',
+      status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'dashboard-ok: Spend $50 more per day?',
       updated: '2026-10-14T00:00:00Z', progressed: '2026-10-14T00:00:00Z', proof: [] },
   );
   fs.writeFileSync(path.join(boardDir, 'tasks.json'), JSON.stringify(board, null, 1));
