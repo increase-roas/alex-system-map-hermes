@@ -3,17 +3,17 @@
  app/src/app/api/board/route.ts                     |  37 ++++++
  app/src/app/api/review-queue/route.ts              |  17 +++
  app/src/app/explorer/board-answer.check.mts        |  97 +++++++++++++++
- app/src/app/explorer/board-gate.check.mts          |  25 ++++
+ app/src/app/explorer/board-gate.check.mts          |  33 ++++++
  app/src/app/page.tsx                               |   6 +
  app/src/app/queue/fix-queue.tsx                    | 120 +++++++++++++++++++
  app/src/app/queue/page.tsx                         |   5 +
  app/src/app/waiting/page.tsx                       |   5 +
  app/src/app/waiting/waiting-on-you.tsx             | 131 +++++++++++++++++++++
- app/src/lib/board/waiting.ts                       |  92 +++++++++++++++
+ app/src/lib/board/waiting.ts                       | 103 ++++++++++++++++
  app/src/lib/server/paths.ts                        |  25 ++++
- reports/application-verification.json              |  33 ++++--
  ...-10-15-dashboard-queue-waiting-review-packet.md |  29 +++++
  .../board-answer-check.txt                         |  12 ++
- .../diff-stat.txt                                  |   0
+ .../diff-stat.txt                                  |  19 +++
  ...eview-dashboard-queue-waiting-20261015T0244Z.md |  54 +++++++++
- 18 files changed, 732 insertions(+), 13 deletions(-)
+ .../round2-checks.txt                              |   8 ++
+ 18 files changed, 757 insertions(+), 1 deletion(-)

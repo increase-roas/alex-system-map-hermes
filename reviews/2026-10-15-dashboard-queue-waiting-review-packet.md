@@ -27,3 +27,8 @@ DIFF: git diff 57f2ed3..dashboard-queue-waiting
 - MEDIUM waiting time: fixed. Waiting start comes from the latest "blocked | ... | on alex" line in board/progress.md; notes do not reset it; unknown when absent. Regression in board-gate.check.mts.
 - HIGH answer text in progress.md: not changed, by design. board.py is the board's own audit trail and records Alex's answer in progress.md for every route (chat answers too); the brief's "never in logs" covers this app's URLs and server logs. Changing board.py is outside this repo (AGENTS.md read-only rule). New assertion: the answer text never reaches the Next server's stdout/stderr (board-answer.check.mts).
 - Build/check receipt for this commit: receipts/2026-10-15-dashboard-queue-waiting/round2-checks.txt; diff-stat now covers committed files only.
+
+## Round 3 (after round 2 FAIL, review-dashboard-queue-waiting-20261015T0252Z.md)
+- HIGH gate: answerable only when the asking agent starts --need with "dashboard-ok:"; untagged is always a gate; tagged still gates on risky words, blanket go-aheads and anything under 40 characters. Both round 2 examples covered in board-gate.check.mts. Receipt: receipts/.../round3-checks.txt (commit e23c150).
+- LOW diff-stat: regenerated from 57f2ed3..e23c150.
+- MEDIUM criterion 6 (answer text in board progress.md): waiting on Alex's decision in chat.
