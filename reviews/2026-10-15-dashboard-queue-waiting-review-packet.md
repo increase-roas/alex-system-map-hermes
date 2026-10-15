@@ -33,3 +33,6 @@ DIFF: git diff 57f2ed3..dashboard-queue-waiting
 - LOW diff-stat: regenerated from 57f2ed3..e23c150.
 - MEDIUM criterion 6 (answer text in board progress.md): waiting on Alex's decision in chat.
 - Criterion 6 decision (Alex, in chat 2026-10-15, relayed by session local_0bace12e): "Yes, the board's progress log can keep my answer text; it's my own words in a local file." Accepted amendment: answer text may be stored in ~/.agents/board/progress.md by board.py; it must stay out of URLs and this app's server logs (asserted in board-answer.check.mts).
+
+## Round 4 (after round 3 FAIL, review-dashboard-queue-waiting-20261015T0309Z.md)
+- HIGH test target: round-trip test now takes an OS-assigned free port, fails if its server exits, and waits until the server serves a random per-run fixture ticket before taking a token or POSTing. New test proves an unrelated server answering /api/board fails the identity check. The stray listener on 3210 was the worker's own preview server and is stopped. Receipt: final-checks.txt.
