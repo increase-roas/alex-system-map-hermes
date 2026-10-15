@@ -32,3 +32,4 @@ DIFF: git diff 57f2ed3..dashboard-queue-waiting
 - HIGH gate: answerable only when the asking agent starts --need with "dashboard-ok:"; untagged is always a gate; tagged still gates on risky words, blanket go-aheads and anything under 40 characters. Both round 2 examples covered in board-gate.check.mts. Receipt: receipts/.../round3-checks.txt (commit e23c150).
 - LOW diff-stat: regenerated from 57f2ed3..e23c150.
 - MEDIUM criterion 6 (answer text in board progress.md): waiting on Alex's decision in chat.
+- Criterion 6 decision (Alex, in chat 2026-10-15, relayed by session local_0bace12e): "Yes, the board's progress log can keep my answer text; it's my own words in a local file." Accepted amendment: answer text may be stored in ~/.agents/board/progress.md by board.py; it must stay out of URLs and this app's server logs (asserted in board-answer.check.mts).
