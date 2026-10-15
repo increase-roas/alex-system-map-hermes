@@ -19,7 +19,7 @@ Home: `~/Projects/alex-system-map`. The old path `~/Documents/Codex/2026-10-09/l
 - Before saying done: run the acceptance check that matches the change (`tools/*_acceptance.py`), and look at the result in the browser for UI changes.
 
 ## Rules
-- **Read-only on the Mac.** Builders read Alex's files and write only inside this folder (`app/.data/`). Never edit `~/.agents`, `~/Alex-Director` or app settings from here.
+- **Read-only on the Mac.** Builders read Alex's files and write only inside this folder (`app/.data/`). Never edit `~/.agents`, `~/Alex-Director` or app settings from here. One exception (Alex approved, 2026-10-14): the `/waiting` page's Answer button may record Alex's answer on the task board, only by running `~/.agents/tools/board/board.py answer` from `/api/board/answer` (loopback plus local token, never for gate questions).
 - **The map never invents state.** Every node and line needs a source file. Unknown stays unknown. When two sources disagree, show a conflict; don't pick one silently.
 - **Every claim is proven by a source (Alex, 2026-10-12).** Each Pro Map card except "not checked" (unknown) needs at least one source: a web link, or a file that exists (repo-relative or ~/ path). Observations go in `reviews/receipts/<date>-<topic>` first, then the card cites that file. Mark reasoning without a source as "not checked" instead of claiming it. `node app/src/app/explorer/pro-map-audit-check.cjs` fails on any unsourced claim; Alex's own y_ cards are reported as warnings only, never edited.
 - **Back up before editing** a file you didn't create this session.
