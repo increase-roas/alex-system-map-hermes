@@ -1,17 +1,17 @@
 {
   "schema": "sanitized-controller-write-receipts/v1",
-  "exported_at": "2026-10-15T23:55:00Z",
+  "exported_at": "2026-10-16T20:28:31Z",
   "files": [
     {
       "file": "receipts.jsonl",
-      "records": 469,
-      "sha256": "f5a1598baf3fab357e74da8e3e6b537e77dbc40b95cdff9c8e7e8828b238387d",
+      "records": 470,
+      "sha256": "e826c500b792a58bbd23fecd886e6dc42e39647613d9e02acc27d0a50a61381d",
       "status_counts": {
-        "completed": 436,
+        "completed": 437,
         "failed": 32,
         "queued": 1
       },
-      "updated_at": "2026-10-16T20:18:03Z"
+      "updated_at": "2026-10-16T20:28:31Z"
     }
   ],
   "record_fields": [
@@ -30,12 +30,12 @@
   "missing_actions": 2,
   "generalized_actions": 2,
   "status_counts": {
-    "completed": 436,
+    "completed": 437,
     "failed": 32,
     "queued": 1
   },
   "future_records": "Append one sanitized terminal record per newly completed or failed controller write to receipts.jsonl; refresh manifest counts and checksum. Missing source values remain null or absent; never invent timestamps.",
-  "record_count": 469,
-  "updated_at": "2026-10-16T20:18:03Z",
-  "sha256": "f5a1598baf3fab357e74da8e3e6b537e77dbc40b95cdff9c8e7e8828b238387d"
+  "record_count": 470,
+  "updated_at": "2026-10-16T20:28:31Z",
+  "sha256": "e826c500b792a58bbd23fecd886e6dc42e39647613d9e02acc27d0a50a61381d"
 }
