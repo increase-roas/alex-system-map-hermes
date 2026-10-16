@@ -1,17 +1,17 @@
 {
   "schema": "sanitized-controller-write-receipts/v1",
-  "exported_at": "2026-10-15T16:59:37Z",
+  "exported_at": "2026-10-15T23:55:00Z",
   "files": [
     {
       "file": "receipts.jsonl",
-      "records": 420,
-      "sha256": "fa1394c1bdb1d0ff2f512bc5a7d33302a772f57d9a83f862ec5207940cfea157",
+      "records": 456,
+      "sha256": "2e36a1c6d12a79dd8dda279a8af0bd709f9b87dce2f3d853e4bbccc6d894730b",
       "status_counts": {
-        "completed": 391,
-        "failed": 28,
+        "completed": 423,
+        "failed": 32,
         "queued": 1
       },
-      "updated_at": "2026-10-15T16:59:37Z"
+      "updated_at": "2026-10-16T05:37:45Z"
     }
   ],
   "record_fields": [
@@ -25,17 +25,17 @@
     "completed_at",
     "failed_at"
   ],
-  "status_counts": {
-    "completed": 391,
-    "failed": 28,
-    "queued": 1
-  },
   "scope": "Existing terminal receipt and failure records, including archived claim history. Statuses are recorded write outcomes, not independent verification of project outcomes.",
   "sanitization": "Allowlist projection only. No readback, authorization fields or paths, target IDs, claim IDs, controller IDs, evidence, reasons, or secrets. Two long action descriptions generalized to bounded-orgo-launch-and-restore.",
   "missing_actions": 2,
   "generalized_actions": 2,
+  "status_counts": {
+    "completed": 423,
+    "failed": 32,
+    "queued": 1
+  },
   "future_records": "Append one sanitized terminal record per newly completed or failed controller write to receipts.jsonl; refresh manifest counts and checksum. Missing source values remain null or absent; never invent timestamps.",
-  "record_count": 420,
-  "updated_at": "2026-10-15T16:59:37Z",
-  "sha256": "7c6e19b74b75535460a7a05138822ca32f2c149dc78837886b41cd1fd7460e2a"
+  "record_count": 456,
+  "updated_at": "2026-10-16T05:37:45Z",
+  "sha256": "2e36a1c6d12a79dd8dda279a8af0bd709f9b87dce2f3d853e4bbccc6d894730b"
 }
