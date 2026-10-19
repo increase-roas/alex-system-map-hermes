@@ -1,0 +1,121 @@
+{
+  "checked_at": "2026-10-19T17:16:36Z",
+  "project": "agents",
+  "window_days": 7,
+  "senders": [
+    {
+      "name": "Claude Code",
+      "kind": "app",
+      "environment": "default",
+      "reporting": true,
+      "observations": 110816,
+      "cost": 0,
+      "days_active": 7,
+      "last_day": "2026-10-19"
+    },
+    {
+      "name": "Codex app",
+      "kind": "app",
+      "environment": "codex-worker",
+      "reporting": true,
+      "observations": 6633357,
+      "cost": 0,
+      "days_active": 4,
+      "last_day": "2026-10-19"
+    },
+    {
+      "name": "Claude desktop",
+      "kind": "app",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Cursor",
+      "kind": "app",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "ChatGPT",
+      "kind": "app",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Manus",
+      "kind": "app",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Javar",
+      "kind": "agent",
+      "environment": "javar",
+      "reporting": true,
+      "observations": 758,
+      "cost": 7.040673,
+      "days_active": 4,
+      "last_day": "2026-10-18"
+    },
+    {
+      "name": "JAVAR-LAB",
+      "kind": "agent",
+      "environment": "javar-lab",
+      "reporting": true,
+      "observations": 34,
+      "cost": 0.070248,
+      "days_active": 1,
+      "last_day": "2026-10-14"
+    },
+    {
+      "name": "Javante",
+      "kind": "agent",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Setter",
+      "kind": "agent",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Hunter",
+      "kind": "agent",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "CSM",
+      "kind": "agent",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Finance",
+      "kind": "agent",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Director",
+      "kind": "role",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Conductor",
+      "kind": "role",
+      "environment": null,
+      "reporting": false
+    },
+    {
+      "name": "Reviewer",
+      "kind": "role",
+      "environment": null,
+      "reporting": false
+    }
+  ],
+  "reporting": 4,
+  "total": 16
+}

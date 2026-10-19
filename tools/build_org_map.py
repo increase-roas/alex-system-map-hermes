@@ -15,7 +15,7 @@ import json
 import re
 import subprocess
 import sys
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from pathlib import Path
 from review_parse import parse_review
 
@@ -721,6 +721,13 @@ edges[:] = [e for e in edges if e['kind'] not in ('follows', 'enforced', 'govern
 LF_RECEIPT = ROOT / 'reviews' / 'receipts' / '2026-10-14-langfuse' / 'observability.md'
 LF_CARD = CARDS / 'langfuse.md'
 LF_REL = 'reviews/receipts/2026-10-14-langfuse/observability.md'  # repo-relative, so the cite survives the merge
+# Measured coverage, written by `python3 -B tools/langfuse_coverage.py --save app/.data/langfuse-coverage.json`.
+# When it is present it decides each sender's state, because a sighting on 2026-10-14 does not prove a sender is
+# still alive today. When it is absent the map falls back to the receipt's LIVE: lines and says so.
+LF_COVERAGE = ROOT / 'app' / '.data' / 'langfuse-coverage.json'
+LF_COVERAGE_REL = 'app/.data/langfuse-coverage.json'
+LF_COVERAGE_RECEIPT_REL = 'reviews/receipts/20261019-trace-coverage/coverage.md'
+LF_QUIET_DAYS = 2  # seen within this many days of the measurement = live; older = quiet
 LF_URL = 'https://us.cloud.langfuse.com/project/cmv733aoq01e7ad0mfeqexnrx'
 LF_DASH = LF_URL + '/dashboards/cmv7h0unq0500ad0ey1io48r9'  # Agent fleet dashboard (receipt)
 lf_receipt = read(LF_RECEIPT)
@@ -728,33 +735,88 @@ cc_settings = read(HOME / '.claude' / 'settings.json')
 cc_wired = 'langfuse_otel_headers.py' in cc_settings and 'cloud.langfuse.com' in cc_settings
 if lf_receipt:
     seen = set(re.findall(r'(?m)^LIVE: ([a-z0-9_-]+)$', lf_receipt))  # environments whose traces the receipt saw land
-    SENDERS = [
-        # node, name, state, env, how, proof (receipt row must say it)
-        ('app:claude-code', 'Claude Code', 'live' if cc_wired and 'default' in seen else 'unknown', 'default',
-         'OpenTelemetry, traces only; prompt and tool text redacted (Claude Code default, no OTEL_LOG_* switch set); keys from 1Password at run time',
-         'traces seen 2026-10-14'),
-        ('agent:javar-lab', 'JAVAR-LAB', 'live' if 'javar-lab' in seen else 'unknown', 'javar-lab',
-         'Hermes langfuse plugin (env javar-lab)', 'traces seen 2026-10-14'),
-        ('agent:javar', 'Javar (live)', 'live' if 'javar' in seen else 'planned', 'javar', 'Hermes langfuse plugin (env javar)',
-         'traces seen 2026-10-14' if 'javar' in seen else 'no traces seen'),
-        (None, 'Codex', 'not wired', '', 'nothing sends from Codex', 'not wired'),
-    ]
+    # How each thing reports, and which Langfuse environment it lands in. An empty env means nothing sends for it.
+    HOW = {
+        'app:claude-code': ('Claude Code', 'default',
+                            'OpenTelemetry, traces only; prompt and tool text redacted (Claude Code default, no OTEL_LOG_* switch set); keys from 1Password at run time'),
+        'app:codex': ('Codex app', 'codex-worker',
+                      'Codex [otel] table posts to the loopback relay com.alex.codex-otlp-relay (127.0.0.1:4319), which forwards to Langfuse'),
+        'agent:javar': ('Javar', 'javar', 'Hermes langfuse plugin (env javar)'),
+        'agent:javar-lab': ('JAVAR-LAB', 'javar-lab', 'Hermes langfuse plugin (env javar-lab)'),
+        'app:claude': ('Claude desktop', '', 'nothing sends: the desktop app has no trace export'),
+        'app:cursor': ('Cursor', '', 'nothing sends: no trace export wired'),
+        'app:chatgpt': ('ChatGPT', '', 'nothing sends: no trace export wired'),
+        'app:manus': ('Manus', '', 'nothing sends: no trace export wired'),
+        'agent:javante': ('Javante', '', 'nothing sends: Hermes langfuse plugin not enabled'),
+        'agent:setter': ('Setter (sales B2B)', '', 'nothing sends: Hermes langfuse plugin not enabled'),
+        'agent:hunter': ('Hunter', '', 'nothing sends: Hermes langfuse plugin not enabled'),
+        'agent:csm': ('CSM', '', 'nothing sends: Hermes langfuse plugin not enabled'),
+        'agent:finance': ('Finance', '', 'nothing sends: Hermes langfuse plugin not enabled'),
+        'director': ('Director', '', 'nothing sends under its own name: its runs land inside Claude Code env "default"'),
+        'conductor': ('Conductor', '', 'nothing sends under its own name: its runs land inside Claude Code env "default"'),
+        'reviewer': ('Reviewer', '', 'nothing sends under its own name: its runs land inside Claude Code env "default"'),
+    }
+    cov = {}
+    cov_checked = ''
+    try:
+        _raw = json.loads(LF_COVERAGE.read_text())
+        cov_checked = str(_raw.get('checked_at') or '')
+        for _row in _raw.get('senders', []):
+            if _row.get('environment'):
+                cov[_row['environment']] = _row
+    except Exception:
+        cov = {}  # no measurement on disk: fall back to the receipt below
+
+    def _state(env):
+        """live, quiet, unknown or not wired, from the measurement when there is one."""
+        if not env:
+            return 'not wired', 'nothing sends for it'
+        row = cov.get(env)
+        if row is None:
+            if not cov:
+                return ('live' if env in seen else 'unknown'), ('traces seen 2026-10-14 (receipt)' if env in seen
+                                                                else 'no traces seen in the receipt')
+            return 'unknown', 'not measured'
+        if not row.get('reporting'):
+            return 'quiet', f'0 observations in the last {_raw.get("window_days", 7)} days (measured {cov_checked[:10]})'
+        last = str(row.get('last_day') or '')
+        obs = row.get('observations') or 0
+        fresh = bool(last) and bool(cov_checked) and (
+            (date.fromisoformat(cov_checked[:10]) - date.fromisoformat(last)).days <= LF_QUIET_DAYS)
+        proof = f'{obs} observations, last on {last} (measured {cov_checked[:10]})'
+        return ('live' if fresh else 'quiet'), proof
+
+    SENDERS = []
+    for _nid, (_name, _env, _how) in HOW.items():
+        _st, _proof = _state(_env)
+        if _nid == 'app:claude-code' and _st == 'live' and not cc_wired:
+            _st, _proof = 'unknown', 'traces arrive but ~/.claude/settings.json no longer shows the exporter'
+        SENDERS.append((_nid, _name, _st, _env, _how, _proof))
     add('agent:javar-lab', 'agents', 'agent', 'JAVAR-LAB', 'Hermes agent whose runs reach Langfuse as environment "javar-lab".',
         explain('JAVAR-LAB is a Hermes agent that sends its runs to Langfuse under the name "javar-lab".',
                 'no', 'Its traces were seen landing in Langfuse (see the receipt). Host, model and role are not checked by the map.', 'Nothing.'),
         status='ok', sources=[LF_REL], host='not checked', model='not checked', tools='not checked')
     live_n = sum(1 for s in SENDERS if s[2] == 'live')
-    planned_n = sum(1 for s in SENDERS if s[2] == 'planned')
+    quiet_n = sum(1 for s in SENDERS if s[2] == 'quiet')
+    silent_n = sum(1 for s in SENDERS if s[2] == 'not wired')
+    _measured = f'Measured {cov_checked[:10]}.' if cov_checked else 'Not measured: states come from the 2026-10-14 receipt.'
+    _why = ('Only senders marked live are recorded. A sender marked quiet reported once but has gone silent, and nothing '
+            'shouts when that happens, so a quiet agent may be idle or broken. Langfuse\'s Hermes guide says plugin errors '
+            'all turn into a silent no-op (not tested here).')
+    _sources = [LF_REL, LF_CARD]
+    if cov:
+        _sources = [LF_COVERAGE_RECEIPT_REL, LF_COVERAGE_REL, LF_REL, LF_CARD]
     add('obs:langfuse', 'observability', 'observability', 'Langfuse (Increase Roas)',
-        f'Records runs from the senders below as traces. {live_n} live, {planned_n} planned, Codex not wired.',
+        f'Records runs from the senders below as traces. {live_n} live, {quiet_n} gone quiet, {silent_n} send nothing. {_measured}',
         explain('Langfuse is the flight recorder for your agents: each run shows up as a trace with its steps, tools and cost.',
-                'maybe', 'Only senders marked live are recorded, and Codex sends nothing. Langfuse\'s Hermes guide says plugin errors are silent (not tested here), so a quiet agent may be idle or broken.',
+                'maybe', _why,
                 'Open the Agent fleet dashboard in Langfuse for runs, spend, errors and speed per agent.'),
-        status='ok', sources=[LF_REL, LF_CARD], url=LF_URL, dashboard=LF_DASH, plan='Hobby (free, 50k units/month, 30-day retention): from Alex\'s brief 2026-10-14, not checked',
+        status='ok', sources=_sources, url=LF_URL, dashboard=LF_DASH, plan='Hobby (free, 50k units/month, 30-day retention): from Alex\'s brief 2026-10-14, not checked',
         senders=[{'name': n, 'state': st, 'env': env, 'how': how, 'proof': pr, 'node': nid} for nid, n, st, env, how, pr in SENDERS])
     for nid, n, st, env, how, pr in SENDERS:
-        if nid and nid in nodes and st in ('live', 'planned'):
-            link(nid, 'obs:langfuse', 'traces', f'sends traces ({st})', LF_REL)
+        if nid and nid in nodes and st in ('live', 'quiet'):
+            link(nid, 'obs:langfuse', 'traces', f'sends traces ({st})',
+                 LF_COVERAGE_RECEIPT_REL if cov else LF_REL)
             edges[-1]['state'] = st
     if 'toolkit:custom_langfuse_mcp' in nodes:
         link('toolkit:custom_langfuse_mcp', 'obs:langfuse', 'reads', 'agents read and write it through', str(LF_CARD))
