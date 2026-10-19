@@ -1,0 +1,49 @@
+CHECKS RUN 2026-10-19, merge of dashboard-queue-waiting into main plus three fixes.
+Sandbox: Claude Code macOS Seatbelt sandbox (the default per-command sandbox for this
+session), inside ~/Projects/alex-system-map. No command ran with the sandbox disabled.
+Everything below ran on the merged working tree before the commit.
+
+tsc --noEmit (app/)                               PASS  exit 0, no output
+next build (NEXT_DIST_DIR=.next-verify)           PASS  exit 0
+next lint (app/)                                  exit 1, 20 errors - ALL PRE-EXISTING.
+  Flagged files: connector-logins-panel.tsx, pro-map-audit-check.cjs,
+  pro-map-guardrails/check_registration.cjs, pro-map-panel.tsx, vendor/libavoid/index.js.
+  None of those five files is touched by this commit (verified against the commit's
+  own file list), so none of the findings comes from this work.
+
+node check scripts (app/src/app/explorer/*.check.mts), all five:
+  board-answer.check.mts    PASS  5/5 tests
+  board-gate.check.mts      PASS
+  ceo-dashboard.check.mts   PASS
+  connector-logins.check.mts PASS
+  flow-node-kit.check.mts   PASS
+  board-answer.check.mts needs a production build; it spawns `next start`. Run it with
+  NEXT_DIST_DIR=.next-verify so it never touches the .next folder a dev server is using.
+  Its 5th test, "answer round-trips through board.py", exercises the real
+  ~/.agents/tools/board/board.py against a TEMP fixture board (AGENTS_BOARD_DIR), and
+  board.py line 54 honours that override while line 814 skips its remote read entirely.
+  Proof it stayed contained: mtime and size of ~/.agents/board/tasks.json,
+  ~/.agents/board/progress.md and ~/.agents/runtime/review-queue.json were identical
+  before and after the whole run.
+
+node app/src/app/explorer/pro-map-audit-check.cjs  PASS  exit 0, "errors": []
+  7 sourceWarnings, all on Alex's own y_ cards, which AGENTS.md says are warnings only.
+
+python3 -B tools/app_acceptance.py                exit 1, 11 of 13 passed.
+  Both failures are PRE-EXISTING and unrelated to this commit:
+    file_browser_archived   detail {"mode": null, "label": null}
+    file_proof_read_only    detail {"source_id": "F0002"}
+  Cause, observed directly, not inferred: tools/local_service.py now returns its result
+  wrapped as {"payload": {...}}, while tools/app_acceptance.py lines 123-132 still read
+  .get('content') and .get('label') at the TOP level, so both read None. Running
+  `python3 -B tools/local_service.py --db app/.data/acceptance.sqlite read-source F0001`
+  by hand returns a correct payload with mode "current_file" and real content, so the
+  file browser itself is fine; it is the acceptance script that has drifted.
+  tools/local_service.py and tools/app_acceptance.py are both untouched by this commit.
+  Follow-up: realign app_acceptance.py with the payload envelope. Not done here, because
+  it is unrelated to the merge and would hide the merge in an unrelated fix.
+
+reports/application-verification.json: app_acceptance.py rewrote this tracked file with
+  the FAIL run above. Restored to main's committed version (b7524f8) because the FAIL is
+  the pre-existing drift described above, not a result of this change. The full output of
+  the run is kept beside this file as app_acceptance-full-output.json.

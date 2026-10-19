@@ -12,6 +12,7 @@ import {
 } from '@xyflow/react';
 import ELK from 'elkjs/lib/elk.bundled.js';
 import { Moon, Search, Sun } from 'lucide-react';
+import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { useEffect, useMemo, useState } from 'react';
 
@@ -331,6 +332,16 @@ export function SystemExplorer() {
               </Button>
             ),
           )}
+          {(
+            [
+              { href: '/queue', label: 'Fix-now queue' },
+              { href: '/waiting', label: 'Waiting on you' },
+            ] as const
+          ).map((item) => (
+            <Button key={item.href} asChild size="sm" variant="outline">
+              <Link href={item.href}>{item.label}</Link>
+            </Button>
+          ))}
           <Button
             size="sm"
             variant="outline"

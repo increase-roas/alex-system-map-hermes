@@ -1,0 +1,28 @@
+STEP 0: director-controller receipts, data-loss check before merging dashboard-queue-waiting
+Checked 2026-10-19 by Claude Opus 5 in ~/Projects/alex-system-map on main.
+
+inputs/real-traces/director-controller/receipts.jsonl
+  main      (b7524f8, 2026-10-16): 485 lines
+  branch    (a11caf7, 2026-10-14): 291 lines
+  lines present on main but absent from branch: 194
+  lines present on branch but absent from main:   0
+
+VERDICT: merging the branch as-is would have deleted 194 lines of an append-only
+audit record and added nothing. The branch is strictly older.
+
+inputs/real-traces/director-controller/manifest.json
+  main   exported_at 2026-10-17T03:12:00Z, record_count 485
+  branch exported_at 2026-10-10T21:40:30Z, records 291
+
+ACTION: merged with --no-commit, then restored both paths from b7524f8 before committing.
+
+AFTER RESTORE (verified by sha256, not by eye):
+  receipts.jsonl  485 lines
+    main sha256 260b0c211e2d7474877e60aa1299a0563cb764ea21c6ec5dc4512ca67b2cd841
+    now  sha256 260b0c211e2d7474877e60aa1299a0563cb764ea21c6ec5dc4512ca67b2cd841  MATCH
+    (this is also the sha256 that main's own manifest records for the file, so the
+     manifest and the data agree)
+  manifest.json
+    main sha256 f0980ba138ee893ae276125067a6cbc2e8c4c682232414e4edafe400a1cf7f05
+    now  sha256 f0980ba138ee893ae276125067a6cbc2e8c4c682232414e4edafe400a1cf7f05  MATCH
+  `git diff --cached b7524f8 -- inputs/` is empty: the merge commit changes nothing under inputs/.

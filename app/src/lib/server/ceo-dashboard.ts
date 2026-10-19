@@ -9,7 +9,6 @@ import {
   badges,
   boardCounts,
   directorMissions,
-  fixNowItem,
   freshness,
   needsAlex,
   parseParity,
@@ -80,19 +79,31 @@ export async function buildCeoDashboard(): Promise<CeoDashboard> {
   const parity = await readSource(path.join(A, 'board', 'parity.md'), STALE_MS.parity);
   sources.parity = parity.source;
 
-  let fixNow: FixNowItem[] | null = [];
-  const queues: [string, string][] = [['correction', 'lesson-candidates.jsonl'], ['session', 'session-reviews.jsonl']];
-  for (const [kind, name] of queues) {
-    const q = await readSource(path.join(A, 'runtime', name), STALE_MS.fix_now);
-    sources[`fix_now_${kind}`] = q.source;
-    if (q.text === null) {
-      fixNow = null; // one queue unreadable: the count is unknown, not zero
-      continue;
-    }
-    for (const line of q.text.split('\n')) {
-      if (!line.trim() || fixNow === null) continue;
-      const item = fixNowItem(kind, sha8(line), line);
-      if (item) fixNow.push({ ...item, text: screenServiceText(item.text) });
+  // One Fix-now number only. review-queue.json is the deduplicated, curated queue that the
+  // /queue page shows. The raw lesson-candidates.jsonl plus session-reviews.jsonl line counts
+  // are retired: added together they double counted the same items (127 raw versus 93 real).
+  // Resolved through agentsHome so AGENTS_HOME still redirects this module at a fixture; it is
+  // the same file that reviewQueuePath() in lib/server/paths.ts serves to the /queue page.
+  let fixNow: FixNowItem[] | null = null;
+  const queue = await readSource(path.join(A, 'runtime', 'review-queue.json'), STALE_MS.fix_now);
+  sources.fix_now_queue = queue.source;
+  if (queue.text !== null) {
+    try {
+      const parsed: unknown = JSON.parse(queue.text);
+      const open = (parsed as { open?: unknown }).open;
+      // open missing or not an array means the queue shape drifted: the count stays unknown
+      if (Array.isArray(open)) {
+        fixNow = open.map((raw) => {
+          const row = raw as { id?: unknown; kind?: unknown; summary?: unknown };
+          return {
+            id: typeof row.id === 'string' ? row.id : sha8(JSON.stringify(raw)),
+            kind: typeof row.kind === 'string' ? row.kind : 'unknown',
+            text: screenServiceText(typeof row.summary === 'string' ? row.summary : ''),
+          };
+        });
+      }
+    } catch {
+      fixNow = null; // unparseable queue: the count is unknown, not zero
     }
   }
 

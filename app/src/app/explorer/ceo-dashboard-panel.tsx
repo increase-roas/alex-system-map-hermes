@@ -160,7 +160,7 @@ export function CeoDashboardPanel({ localToken }: { localToken: string }) {
         </div>}
       </Section>
 
-      <Section title={`Fix-now queue (${d.fix_now === null ? 'unknown' : d.fix_now.length})`} src={[d.sources.fix_now_correction, d.sources.fix_now_session]}>
+      <Section title={`Fix-now queue (${d.fix_now === null ? 'unknown' : d.fix_now.length})`} src={[d.sources.fix_now_queue]}>
         {d.fix_now === null ? (
           <p>Unknown: a queue file could not be read.</p>
         ) : (
