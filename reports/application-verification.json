@@ -70,7 +70,7 @@
       "passed": true,
       "detail": {
         "unreadable_count": 0,
-        "file_count": 12
+        "file_count": 13
       }
     },
     {
@@ -91,7 +91,7 @@
           "spans": 2,
           "synthetic_only": true
         },
-        "trace_count": 2
+        "trace_count": 3
       }
     },
     {
@@ -106,7 +106,9 @@
       "name": "file_proof_read_only",
       "passed": true,
       "detail": {
-        "source_id": "F0002"
+        "source_id": "F0002",
+        "mode": "current_file",
+        "label": "Current file"
       }
     },
     {
@@ -146,16 +148,21 @@
             ],
             "attempts": [],
             "blockers": [],
+            "declaration_history": [],
             "deps": [],
             "evidence": [],
             "goal": "Inspect catalog record",
             "id": "task-a",
             "next_action": "perform task",
+            "output_history": [],
             "outputs": [],
             "owner": "owner-a",
+            "production_history": [],
             "status": "pending"
           }
-        }
+        },
+        "diagnostic_marker": "LOCAL-SCREENING-OK",
+        "screening_notes": []
       }
     },
     {
@@ -172,7 +179,7 @@
     {
       "name": "revision_conflict",
       "passed": true,
-      "detail": "{\n  \"error\": \"revision conflict\"\n}"
+      "detail": "{\n  \"payload\": {\n    \"error\": \"handoff revision conflict\",\n    \"notes\": []\n  },\n  \"screening_notes\": []\n}"
     },
     {
       "name": "operation_reconciliation",
@@ -180,7 +187,9 @@
       "detail": {
         "job_id": "acceptance-job",
         "operation_id": "acceptance-create-1",
-        "revision": 1
+        "revision": 1,
+        "diagnostic_marker": "LOCAL-SCREENING-OK",
+        "screening_notes": []
       }
     },
     {
@@ -210,7 +219,9 @@
         "value": {
           "x": 1
         },
-        "updated_at": "2026-10-10T05:04:03+00:00"
+        "updated_at": "2026-10-19T21:29:00+00:00",
+        "diagnostic_marker": "LOCAL-SCREENING-OK",
+        "screening_notes": []
       }
     }
   ]

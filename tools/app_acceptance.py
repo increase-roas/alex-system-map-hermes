@@ -34,6 +34,17 @@ def run_service(*args: str, stdin: str | None = None, db: Path | None = None) ->
     return json.loads(result.stdout)
 
 
+def read_source_body(source_id: str) -> dict:
+    """The `read-source` command wraps its result as {"payload": {...}} while the other commands
+    print their keys flat, so reading `content` or `label` off the top level silently sees None and
+    the check fails for the envelope rather than for the file browser. Unwrap when the envelope is
+    there and fall through when it is not, so this keeps working whichever shape a caller produces.
+    """
+    response = run_service('read-source', source_id)
+    body = response.get('payload')
+    return body if isinstance(body, dict) else response
+
+
 def http(method: str, url: str, body: dict | None = None, token: str | None = None) -> dict:
     data = None if body is None else json.dumps(body).encode()
     headers = {'Content-Type': 'application/json'}
@@ -120,18 +131,20 @@ def main() -> int:
         },
     )
 
-    archived = run_service('read-source', 'F0001')
+    archived = read_source_body('F0001')
     record(
         'file_browser_archived',
         archived.get('content') and archived.get('label') in {'Archived snapshot', 'Current file'},
         {'mode': archived.get('mode'), 'label': archived.get('label')},
     )
 
-    blocked = run_service('read-source', 'F0002')
+    blocked = read_source_body('F0002')
     record(
         'file_proof_read_only',
         'content' in blocked or blocked.get('mode') in {'archived_snapshot', 'current_file'},
-        {'source_id': 'F0002'},
+        # mode and label travel with the verdict: a bare source id gives a future reader nothing
+        # to tell "the browser broke" from "the response shape moved again".
+        {'source_id': 'F0002', 'mode': blocked.get('mode'), 'label': blocked.get('label')},
     )
 
     create = {
