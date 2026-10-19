@@ -1,0 +1,18 @@
+# command: git reflog --date=iso -n 15
+# captured_at: 2026-10-19T21:34:44Z
+# exit: 0
+f74623a HEAD@{2026-10-19 17:31:49 -0400}: commit: Fix the false FAIL in app_acceptance.py: unwrap the read-source payload envelope
+93c3ad7 HEAD@{2026-10-19 14:27:51 -0400}: commit: Trace coverage: measure who reports into Langfuse, and watch for silence
+ea82632 HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (finish): returning to refs/heads/main
+ea82632 HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (pick): Review round 4: PASS
+18d17cc HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (pick): Packet: correct 3210 note
+33821fe HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (pick): Review round 3 saved, round 4 receipts
+b407ac6 HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (pick): Round-trip test: OS-assigned port and fixture identity check before any POST
+7ab0af3 HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (pick): Record Alex's decision: board progress log may keep answer text
+61eb85f HEAD@{2026-10-19 12:13:29 -0400}: pull --rebase --no-autostash (pick): Review round 2 saved, round 3 receipts
+7441476 HEAD@{2026-10-19 12:13:28 -0400}: pull --rebase --no-autostash (pick): Gate fails closed: answerable only when the asker tags dashboard-ok
+fecf9c7 HEAD@{2026-10-19 12:13:28 -0400}: pull --rebase --no-autostash (pick): Round 2 check receipt
+056c52f HEAD@{2026-10-19 12:13:28 -0400}: pull --rebase --no-autostash (pick): Fail-closed gate check, true waiting time, review round 1 fixes
+60a3f24 HEAD@{2026-10-19 12:13:28 -0400}: pull --rebase --no-autostash (pick): Review packet and check receipt for dashboard-queue-waiting
+77744af HEAD@{2026-10-19 12:13:28 -0400}: pull --rebase --no-autostash (pick): AGENTS.md: note the board-answer exception to read-only
+3ba6077 HEAD@{2026-10-19 12:13:28 -0400}: pull --rebase --no-autostash (pick): Add Fix-now queue and Waiting on you pages

@@ -1,0 +1,15 @@
+# command: sh reviews/receipts/20261019-app-acceptance-envelope/remote-state-probe.sh
+# captured_at: 2026-10-19T21:34:44Z
+# exit: 0
+local HEAD                = f74623ace907ae0d79f5eb905d41789e6070e4a8
+prior commit (merge)      = 4dcdf361de7bd77e7a738377166d14e8edd3da74
+local origin/main ref     = ea82632601c3e3baec91f68b72e596d6e88903cb
+LIVE remote main (ls-remote, fresh over the network):
+ea82632601c3e3baec91f68b72e596d6e88903cb	refs/heads/main
+
+remote branches containing local HEAD (empty means unpublished):
+[end of remote-branch list]
+
+open/closed PRs whose head is main (this branch):
+[]
+gh exit status for that query = 0

@@ -1,0 +1,9 @@
+# command: git show --stat --format=%H%n%s HEAD
+# captured_at: 2026-10-19T21:34:44Z
+# exit: 0
+f74623ace907ae0d79f5eb905d41789e6070e4a8
+Fix the false FAIL in app_acceptance.py: unwrap the read-source payload envelope
+
+ reports/application-verification.json | 25 ++++++++++++++++++-------
+ tools/app_acceptance.py               | 19 ++++++++++++++++---
+ 2 files changed, 34 insertions(+), 10 deletions(-)

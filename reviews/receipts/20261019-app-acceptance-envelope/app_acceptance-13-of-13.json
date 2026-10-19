@@ -1,0 +1,228 @@
+{
+  "status": "PASS",
+  "passed": 13,
+  "total": 13,
+  "strict_catalog_checks": {
+    "relationships": 59,
+    "coverage": 2377,
+    "require_empty_load_gaps": true
+  },
+  "crash_resume_subprocess": {
+    "name": "crash_resume_subprocess_recover",
+    "passed": true,
+    "detail": {
+      "note": "Separate subprocess opens SQLite after apply completes (simulated crash between sessions).",
+      "current_revision": 2,
+      "task_ids": [
+        "task-a"
+      ]
+    }
+  },
+  "strict_failures": [],
+  "results": [
+    {
+      "name": "catalog_strict_counts_and_gaps",
+      "passed": true,
+      "detail": {
+        "relationships": 59,
+        "expected_relationships": 59,
+        "coverage": 2377,
+        "expected_coverage": 2377,
+        "load_gaps": [],
+        "completeness": {
+          "components": 2351,
+          "relationships": 59,
+          "coverage": 2377,
+          "overview_memberships": 2351,
+          "expected": {
+            "components": 2351,
+            "relationships": 59,
+            "coverage": 2377,
+            "overview_memberships": 2351
+          },
+          "load_gaps": 0,
+          "dangling_relationships": 0,
+          "complete": true
+        }
+      }
+    },
+    {
+      "name": "catalog_completeness_command",
+      "passed": true,
+      "detail": {
+        "components": 2351,
+        "relationships": 59,
+        "coverage": 2377,
+        "overview_memberships": 2351,
+        "expected": {
+          "components": 2351,
+          "relationships": 59,
+          "coverage": 2377,
+          "overview_memberships": 2351
+        },
+        "load_gaps": 0,
+        "dangling_relationships": 0,
+        "complete": true
+      }
+    },
+    {
+      "name": "catalog_sync_watch",
+      "passed": true,
+      "detail": {
+        "unreadable_count": 0,
+        "file_count": 13
+      }
+    },
+    {
+      "name": "trace_import_fixture_and_synthetic",
+      "passed": true,
+      "detail": {
+        "fixture": {
+          "imported": true,
+          "receipt_id": "local-instrumented-trace-2026-10-10",
+          "trace_id": "trace-local-map-read",
+          "spans": 2,
+          "synthetic_only": false
+        },
+        "synthetic": {
+          "imported": true,
+          "receipt_id": "workflow-recovery-synthetic-lamp-audit",
+          "trace_id": "trace-synthetic-lamp-audit",
+          "spans": 2,
+          "synthetic_only": true
+        },
+        "trace_count": 3
+      }
+    },
+    {
+      "name": "file_browser_archived",
+      "passed": true,
+      "detail": {
+        "mode": "current_file",
+        "label": "Current file"
+      }
+    },
+    {
+      "name": "file_proof_read_only",
+      "passed": true,
+      "detail": {
+        "source_id": "F0002",
+        "mode": "current_file",
+        "label": "Current file"
+      }
+    },
+    {
+      "name": "fresh_agent_recover_packet",
+      "passed": true,
+      "detail": {
+        "contract": "local-reference-v1",
+        "synthetic_only": true,
+        "job_id": "acceptance-job",
+        "current_revision": 2,
+        "goal": {
+          "acceptance": [
+            "check-one"
+          ],
+          "constraints": [
+            "no external services"
+          ],
+          "goal": "Acceptance workflow job",
+          "owner": "owner-a",
+          "scope": [
+            "local"
+          ]
+        },
+        "last_valid_verified_checkpoint": null,
+        "active_corrections": [],
+        "pending_dependencies": {
+          "task-a": []
+        },
+        "next_permitted_action": {
+          "task_id": "task-a",
+          "action": "perform task"
+        },
+        "tasks": {
+          "task-a": {
+            "acceptance": [
+              "check-one"
+            ],
+            "attempts": [],
+            "blockers": [],
+            "declaration_history": [],
+            "deps": [],
+            "evidence": [],
+            "goal": "Inspect catalog record",
+            "id": "task-a",
+            "next_action": "perform task",
+            "output_history": [],
+            "outputs": [],
+            "owner": "owner-a",
+            "production_history": [],
+            "status": "pending"
+          }
+        },
+        "diagnostic_marker": "LOCAL-SCREENING-OK",
+        "screening_notes": []
+      }
+    },
+    {
+      "name": "crash_resume_subprocess_recover",
+      "passed": true,
+      "detail": {
+        "note": "Separate subprocess opens SQLite after apply completes (simulated crash between sessions).",
+        "current_revision": 2,
+        "task_ids": [
+          "task-a"
+        ]
+      }
+    },
+    {
+      "name": "revision_conflict",
+      "passed": true,
+      "detail": "{\n  \"payload\": {\n    \"error\": \"handoff revision conflict\",\n    \"notes\": []\n  },\n  \"screening_notes\": []\n}"
+    },
+    {
+      "name": "operation_reconciliation",
+      "passed": true,
+      "detail": {
+        "job_id": "acceptance-job",
+        "operation_id": "acceptance-create-1",
+        "revision": 1,
+        "diagnostic_marker": "LOCAL-SCREENING-OK",
+        "screening_notes": []
+      }
+    },
+    {
+      "name": "loopback_catalog_api",
+      "passed": true,
+      "detail": {
+        "components": 2351,
+        "relationships": 59,
+        "coverage": 2377,
+        "load_gaps": []
+      }
+    },
+    {
+      "name": "ai_routes_disabled",
+      "passed": true,
+      "detail": {
+        "disabled": true,
+        "reason": "Sample AI provider routes are disabled for the local system map. No OpenAI key is required."
+      }
+    },
+    {
+      "name": "visual_isolation_presentation_write",
+      "passed": true,
+      "detail": {
+        "scope": "acceptance",
+        "key": "layout",
+        "value": {
+          "x": 1
+        },
+        "updated_at": "2026-10-19T21:28:01+00:00",
+        "diagnostic_marker": "LOCAL-SCREENING-OK",
+        "screening_notes": []
+      }
+    }
+  ]
+}
