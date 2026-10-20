@@ -1,0 +1,5 @@
+# command: lsof -nP -iTCP:4320
+# captured_at: 2026-10-20T03:37:54Z
+# exit: 0
+COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  72360 alexlobaito    4u  IPv4 0x28d161828ef46c04      0t0  TCP 127.0.0.1:4320 (LISTEN)

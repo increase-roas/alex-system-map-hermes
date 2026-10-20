@@ -1,0 +1,6 @@
+captured 2026-10-20T03:40:49Z from ~/.agents/runtime/otel-collector.jsonl
+these rows were written BY the collector during the 03:34Z verify_durable.py run
+{"ts": "2026-10-20T03:32:22Z", "bytes_in": 191, "kept": {}, "dropped": {"(unnamed)": 0}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:32:22Z", "bytes_in": 134, "kept": {}, "dropped": {"(unnamed)": 0}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:34:07Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T03:34:07Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}

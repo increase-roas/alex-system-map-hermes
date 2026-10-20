@@ -1,0 +1,85 @@
+# command: launchctl print gui/501/com.alex.signoz-collector
+# captured_at: 2026-10-20T03:37:54Z
+# exit: 0
+gui/501/com.alex.signoz-collector = {
+	active count = 1
+	path = /Users/alexlobaito/Library/LaunchAgents/com.alex.signoz-collector.plist
+	type = LaunchAgent
+	state = running
+
+	program = /usr/bin/python3
+	arguments = {
+		/usr/bin/python3
+		-B
+		/Users/alexlobaito/Projects/alex-system-map/tools/otel_collector.py
+		--port
+		4320
+		--upstream
+		signoz
+		--upstream
+		langfuse
+		--log
+		/Users/alexlobaito/.agents/runtime/otel-collector.jsonl
+	}
+
+	working directory = /Users/alexlobaito/Projects/alex-system-map
+
+	stdout path = /Users/alexlobaito/.agents/runtime/signoz-collector.out.log
+	stderr path = /Users/alexlobaito/.agents/runtime/signoz-collector.err.log
+	inherited environment = {
+		SSH_AUTH_SOCK => /var/run/com.apple.launchd.CpTxU8YEew/Listeners
+	}
+
+	default environment = {
+		PATH => /usr/bin:/bin:/usr/sbin:/sbin
+	}
+
+	environment = {
+		OSLogRateLimit => 64
+		XPC_SERVICE_NAME => com.alex.signoz-collector
+	}
+
+	domain = gui/501 [100025]
+	asid = 100025
+	minimum runtime = 120
+	exit timeout = 5
+	runs = 2
+	pid = 72360
+	immediate reason = inefficient
+	forks = 2
+	execs = 3
+	initialized = 1
+	trampolined = 1
+	started suspended = 0
+	proxy started suspended = 0
+	checked allocations = 0 (queried = 1)
+	checked allocations reason = no host
+	checked allocations flags = 0x0
+	last terminating signal = Killed: 9
+
+	resource coalition = {
+		ID = 86204
+		type = resource
+		state = active
+		active count = 1
+		name = com.alex.signoz-collector
+	}
+
+	jetsam coalition = {
+		ID = 86205
+		type = jetsam
+		state = active
+		active count = 1
+		name = com.alex.signoz-collector
+	}
+
+	spawn type = daemon (3)
+	jetsam priority = 40
+	jetsam memory limit (active) = (unlimited)
+	jetsam memory limit (inactive) = (unlimited)
+	jetsamproperties category = daemon
+	jetsam thread limit = 32
+	cpumon = default
+
+	properties = keepalive | runatload | inferred program
+}

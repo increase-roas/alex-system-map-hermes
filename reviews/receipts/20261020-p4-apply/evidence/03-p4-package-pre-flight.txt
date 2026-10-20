@@ -1,0 +1,29 @@
+# command: python3 -B work/signoz-relay/validate_p4.py
+# captured_at: 2026-10-20T03:37:54Z
+# exit: 0
+  pass  verify_durable.py compiles here           
+  pass  canary_through_relay.py compiles here     
+  pass  make_patch.py compiles here               
+  pass  make_patch_codex_traced.py compiles here  
+  pass  test_relay_collector.py compiles here     
+  pass  collector self-test on Python 3.9.6       
+  pass  collector self-test on Python 3.14.6      
+  pass  rendered plist lints                      
+  pass  rendered plist parses                     
+  pass  label is com.alex.signoz-collector        
+  pass  KeepAlive and RunAtLoad are both on       
+  pass  uses /usr/bin/python3, not a Homebrew path
+  pass  points at the collector in this repo      
+  pass  port 4320                                 
+  pass  both upstreams for the side-by-side day   
+  pass  no <HOME> placeholder left unresolved     
+  pass  every path in the plist is absolute       
+  pass  the collector file exists                 
+  pass  collector accepts --port                  
+  pass  collector accepts --upstream              
+  pass  collector accepts --log                   
+  pass  collector accepts --dry-run               
+  pass  collector accepts --self-test             
+  pass  no key-shaped literal in the package      
+
+24/24 checks passed

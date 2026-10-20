@@ -1,0 +1,38 @@
+# command: python3 -B work/signoz-relay/test_relay_collector.py
+# captured_at: 2026-10-20T03:37:50Z
+# exit: 0
+  pass  named service kept                                    
+  pass  no resource attributes at all -> dropped unnamed      
+  pass  empty service.name -> dropped unnamed                 
+  pass  codex-worker refused outright                         
+  pass  unknown name counted, never silently kept             
+  pass  rate guard passes the first burst                     
+  pass  rate guard trips on the flood                         
+  pass  a throttled sender cannot starve another              
+  pass  mixed batch: named kept, unnamed dropped              
+  pass  re-emitted body is still parseable OTLP               
+  pass  malformed protobuf raises rather than forwarding      
+  pass  a non-loopback, non-SigNoz destination is refused     
+  pass  named span: relay answers 200                         
+  pass  named span reaches SigNoz                             
+  pass  named span is mirrored to Langfuse                    
+  pass  what SigNoz received is the named span                
+  pass  SigNoz got the ingestion-key header                   
+  pass  Langfuse got Authorization, not the SigNoz header     
+  pass  unnamed span: relay still answers 200 (no retry storm)
+  pass  unnamed span never reaches SigNoz                     
+  pass  unnamed span never reaches Langfuse                   
+  pass  codex-worker never leaves the machine                 
+  pass  wrong path still 404                                  
+  pass  chunked framing still refused                         
+  pass  log row carries kept counts                           
+  pass  log row carries dropped counts                        
+  pass  drop counter shows the unnamed drop                   
+  pass  drop counter shows codex-worker blocked               
+  pass  no key value anywhere in the log                      
+  pass  no span name in the log                               
+  pass  --no-langfuse-mirror: SigNoz still gets it            
+  pass  --no-langfuse-mirror: Langfuse gets nothing           
+  pass  a failing SigNoz is reported upstream, not hidden     
+
+33/33 checks passed
