@@ -123,7 +123,11 @@ def payload(service, name: str, trace_id: bytes, host: str = 'macbook') -> bytes
     resource = b''
     if service:
         resource = _d(1, _kv('service.name', service)) + _d(1, _kv('host.name', host))
-    return _d(1, _d(1, _d(1, resource) + _d(2, _d(2, span))))
+    # ResourceSpans body = resource(field 1) + scope_spans(field 2); the whole thing
+    # is then ONE field-1 wrapper (ExportTraceServiceRequest.resource_spans). An extra
+    # wrapper here made every span parse as unnamed with a count of zero, and the
+    # collector correctly refused it. Second time I have made this nesting mistake.
+    return _d(1, _d(1, resource) + _d(2, _d(2, span)))
 
 
 def post(body: bytes) -> int:
@@ -144,12 +148,17 @@ def read_key() -> str:
                       '-s', 'op-service-account-connectors-sync', '-w'])
     if code:
         raise SystemExit('could not read the service account token')
-    env = {'PATH': '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin',
-           'HOME': os.environ.get('HOME', ''),
-           'OP_SERVICE_ACCOUNT_TOKEN': token.strip(),
-           'OP_BIOMETRIC_UNLOCK_ENABLED': 'false'}
-    proc = subprocess.run([OP_BIN, 'read', READ_KEY_REF], capture_output=True, text=True,
-                          env=env, timeout=45)
+    # Through op_items.robot_env, not the real HOME. Under the real HOME op stalls for
+    # minutes before any network step and makes macOS prompt for app data access; this
+    # script hit that itself after the collector had already been fixed for it.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'op_items', os.path.expanduser('~/.agents/tools/connectors/op_items.py'))
+    op_items = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(op_items)
+    with op_items.robot_env(token.strip()) as env:
+        proc = subprocess.run([OP_BIN, 'read', READ_KEY_REF], capture_output=True, text=True,
+                              env=env, stdin=subprocess.DEVNULL, timeout=15)
     if proc.returncode:
         raise SystemExit('could not read the SigNoz read key')
     return proc.stdout.strip()
@@ -206,7 +215,7 @@ def main() -> int:
     dropped_now = after.get('dropped_spans', {})
     check('the kept counter moved', kept_now > before_kept, f'{before_kept} -> {kept_now}')
     check('the drop counter shows the unnamed span',
-          dropped_now.get('unnamed', 0) >= 1, f'dropped={dropped_now}')
+          dropped_now.get('(unnamed)', 0) >= 1, f'dropped={dropped_now}')
     upstream = after.get('upstream_responses', {})
     check('SigNoz accepted it, so the key WAS read inside launchd',
           any(k.startswith('signoz:200') for k in upstream), f'upstream={upstream}')

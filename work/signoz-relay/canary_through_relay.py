@@ -82,7 +82,11 @@ def payload(service: str | None, name: str, trace_id: bytes) -> bytes:
     resource = b''
     if service:
         resource = _d(1, _kv('service.name', service)) + _d(1, _kv('host.name', 'macbook'))
-    return _d(1, _d(1, _d(1, resource) + _d(2, _d(2, span))))
+    # ResourceSpans body = resource(field 1) + scope_spans(field 2); the whole thing
+    # is then ONE field-1 wrapper (ExportTraceServiceRequest.resource_spans). An extra
+    # wrapper here made every span parse as unnamed with a count of zero, and the
+    # collector correctly refused it. Second time I have made this nesting mistake.
+    return _d(1, _d(1, resource) + _d(2, _d(2, span)))
 
 
 def post(url: str, body: bytes) -> int:
