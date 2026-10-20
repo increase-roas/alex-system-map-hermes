@@ -9,6 +9,19 @@ updated: 2026-10-20
 ---
 # SigNoz: read traces through the vendor MCP, send through the local collector
 
+## Status, 2026-10-20
+
+**SENDING IS LIVE.** Spans from the local collector reach SigNoz. Proven end to end: trace
+`baf7b95f550196411ce98cc4ffdbc2f6`, `ServiceName='codex'`, forwarded with `signoz:200`. The
+collector runs as launchd job `com.alex.signoz-collector` on `127.0.0.1:4320` and has passed two
+cross-family reviews. Point a local agent at that port and its traces will arrive, provided it sets
+`service.name` to one of the allowed names below.
+
+**AGENT READ ACCESS OVER MCP IS NOT WIRED.** The hosted MCP at `https://mcp.us2.signoz.cloud/mcp` is
+documented on this card, but it has NOT been connected for Claude Code, Codex or Cursor. No agent
+can yet ask SigNoz what broke. Reading traces with the viewer key over the REST API does work and is
+described below, so that is the route to use until the MCP connection is made.
+
 ## Before the first call
 1. **Two different jobs, two different routes.** Reading traces is the hosted MCP with the viewer key.
    **Sending** traces is never this route: every agent on this MacBook posts OTLP to
