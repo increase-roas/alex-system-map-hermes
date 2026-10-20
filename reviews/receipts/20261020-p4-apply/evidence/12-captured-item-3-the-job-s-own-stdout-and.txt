@@ -1,0 +1,29 @@
+COMMAND:    bash -c echo '--- stdout, last 12 ---'; tail -12 "$HOME/.agents/runtime/signoz-collector.out.log"; echo '--- stderr, last 6 ---'; tail -6 "$HOME/.agents/runtime/signoz-collector.err.log"
+DESCRIPTION:the job's own stdout and stderr as launchd captured them
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:59Z
+---- output ----
+--- stdout, last 12 ---
+  "kept_spans": {},
+  "kept_spans_per_hour": {},
+  "dropped_spans": {},
+  "upstream_responses": {}
+}
+  listening on 127.0.0.1:4320/v1/traces
+  upstreams: signoz, langfuse
+  rate guard: 600 spans/min per service
+  blocked: codex-worker
+  counts: GET http://127.0.0.1:4320/stats
+  signoz key read from 1Password (value not shown)
+  langfuse key read from 1Password (value not shown)
+--- stderr, last 6 ---
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: op did not answer within 90s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: op did not answer within 90s
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: op did not answer within 90s
+---- end output ----
+UTC_END:    2026-10-20T03:42:59Z
+EXIT_STATUS:0

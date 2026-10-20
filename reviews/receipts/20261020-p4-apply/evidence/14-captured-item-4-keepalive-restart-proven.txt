@@ -1,0 +1,18 @@
+COMMAND:    poll launchd pid and port every 15s for up to 180s after the verifier's kill
+DESCRIPTION:prove KeepAlive DOES restart it; the verifier waited 60s while ThrottleInterval is 120s
+SANDBOX:    Seatbelt DISABLED
+UTC_START:  2026-10-20T03:44:45Z
+NOTE:       the killed pid was 74762; a DIFFERENT pid plus a listener proves the restart
+---- output ----
+03:44:45Z  t+15s  state=spawn scheduled  pid=none  listening=0
+03:45:00Z  t+30s  state=running  pid=76005  listening=1
+RESTARTED: new pid 76005, was 74762, listening again
+--- /stats from a separate process ---
+{
+  "uptime_hours": 0.003,
+  "kept_spans": {},
+  "kept_spans_per_hour": {},
+  "dropped_spans": {},
+  "upstream_responses": {}
+}---- end output ----
+UTC_END:    2026-10-20T03:45:00Z

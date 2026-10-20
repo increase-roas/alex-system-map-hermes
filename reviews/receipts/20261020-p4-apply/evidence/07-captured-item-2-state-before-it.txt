@@ -1,0 +1,17 @@
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector 2>&1 | grep -E '^[[:space:]]*(state|pid|path)'; echo '--- port ---'; lsof -nP -iTCP:4320 2>&1 | head -3
+DESCRIPTION:launchd job state and port holder before this run
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:46Z
+---- output ----
+	path = /Users/alexlobaito/Library/LaunchAgents/com.alex.signoz-collector.plist
+	state = running
+	pid = 72360
+		state = active
+		state = active
+--- port ---
+COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  72360 alexlobaito    4u  IPv4 0x28d161828ef46c04      0t0  TCP 127.0.0.1:4320 (LISTEN)
+---- end output ----
+UTC_END:    2026-10-20T03:42:46Z
+EXIT_STATUS:0

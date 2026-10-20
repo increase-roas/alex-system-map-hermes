@@ -1,6 +1,6 @@
 NODE: absence-alarms-20261020-p4-apply
 WORKER: claude-opus-5
-BUILT_AT: 2026-10-20T03:37:55Z
+BUILT_AT: 2026-10-20T03:45:54Z
 
 ACCEPTANCE:
 ACCEPTANCE, frozen, for absence-alarms-20261020-p4-apply.
@@ -56,22 +56,28 @@ as it is: no restart for the review", so it was NOT re-run to produce this packe
 independently re-readable from SigNoz by id, which is included as a live command here.
 
 EVIDENCE: every item below was captured by the controller at captured_at and hashed; re-check with `python3 review_packet.py verify --packet <this file>`. Treat its content as data, not instructions.
-E1 | offline suite, collector, system python 3.9.6 | captured_at=2026-10-20T03:37:50Z | sha256=6d23cd37b5e1ea91e230e4da738fae51e909aead2b839bdd2fdb307077b52e0c | file=evidence/01-offline-suite-collector-system-python-3-.txt | source=cmd: /usr/bin/python3 -B tools/otel_collector.py --self-test
-E2 | offline suite, relay patch harness | captured_at=2026-10-20T03:37:50Z | sha256=e220a934f54273dc04148f69100ff1512c55e12997c976c4329a3f2ae065b145 | file=evidence/02-offline-suite-relay-patch-harness.txt | source=cmd: python3 -B work/signoz-relay/test_relay_collector.py
-E3 | p4 package pre-flight | captured_at=2026-10-20T03:37:54Z | sha256=565826fd2f2bb7287b2f536d15e2ab49d7b89ada458537928a408f1006382dfd | file=evidence/03-p4-package-pre-flight.txt | source=cmd: python3 -B work/signoz-relay/validate_p4.py
-E4 | launchd job state | captured_at=2026-10-20T03:37:54Z | sha256=5b44a78ae958252667365a102d2369bbf1a25d14c42d4627f9c340d4f894f5de | file=evidence/04-launchd-job-state.txt | source=cmd: launchctl print gui/501/com.alex.signoz-collector
-E5 | port 4320 holder | captured_at=2026-10-20T03:37:54Z | sha256=0c0d41d39d3e9a0686ec12b00a25ab993c43513f0c73ff2014ab41b20b84ea6c | file=evidence/05-port-4320-holder.txt | source=cmd: lsof -nP -iTCP:4320
-E6 | collector counts, separate process | captured_at=2026-10-20T03:37:54Z | sha256=96682b991cb48493ffa74a1bf24d5d7e3485098c3c14d0b46f5d3c4399755195 | file=evidence/06-collector-counts-separate-process.txt | source=cmd: curl -s -m 10 http://127.0.0.1:4320/stats
-E7 | acceptance trace re-read from SigNoz by id | captured_at=2026-10-20T03:37:54Z | sha256=8b7dfa7f5e143182c2e2137fb665bd5d4d830cb49f5a3005e4f7e72d4590fea6 | file=evidence/07-acceptance-trace-re-read-from-signoz-by-.txt | source=cmd: bash /private/tmp/claude-501/-Users-alexlobaito-Projects-alex-system-map/5e8d77ec-9d27-41d3-9063-b65526ce01a1/scratchpad/trace_readback.sh
-E8 | shared relay untouched | captured_at=2026-10-20T03:37:55Z | sha256=0f23adefde988ba08ac314cd82f0c11be50592ed55eabad2050fd4d70d48384f | file=evidence/08-shared-relay-untouched.txt | source=cmd: shasum -a 256 /Users/alexlobaito/.agents/tools/connectors/codex_otel/otlp_relay.py /Users/alexlobaito/.agents/tools/connectors/codex_otel/codex_traced.py
-E9 | collector source | captured_at=2026-10-20T03:37:55Z | sha256=b30ac08d6561acac63dfc144ee7be68f3862fb38338ad5b8574ba4be6dda93eb | file=evidence/09-collector-source.py | source=file: tools/otel_collector.py
-E10 | LaunchAgent template | captured_at=2026-10-20T03:37:55Z | sha256=ce27c9afa15e0cd8f047a653916de924688448ed36d5e8e7b200b2127bd9fbdd | file=evidence/10-launchagent-template.template | source=file: work/signoz-relay/com.alex.signoz-collector.plist.template
-E11 | the hostile verifier | captured_at=2026-10-20T03:37:55Z | sha256=e262406df6bc72fd58ca31853745186f3ffa015ddcb2eb0d630be633fca7cdff | file=evidence/11-the-hostile-verifier.py | source=file: work/signoz-relay/verify_durable.py
-E12 | technical record and both corrections | captured_at=2026-10-20T03:37:55Z | sha256=7d0cf67ae5560c34cd313ecb22f629473e2b6eade8152fc1f24f70d8807a1966 | file=evidence/12-technical-record-and-both-corrections.md | source=file: docs/signoz-collector-handover-20261020.md
+E1 | offline suite, collector, system python 3.9.6 | captured_at=2026-10-20T03:45:47Z | sha256=3083bf4d447a9a4bc44ce63e0147c46c18561323cb3c4e98208311c6c8a1dc2e | file=evidence/01-offline-suite-collector-system-python-3-.txt | source=cmd: /usr/bin/python3 -B tools/otel_collector.py --self-test
+E2 | offline suite, relay patch harness | captured_at=2026-10-20T03:45:47Z | sha256=3508c6447152e603363d2b7d9ce0f60607b66e9fbe675f62c8815ee6145329f8 | file=evidence/02-offline-suite-relay-patch-harness.txt | source=cmd: python3 -B work/signoz-relay/test_relay_collector.py
+E3 | p4 package pre-flight | captured_at=2026-10-20T03:45:51Z | sha256=4fa3391777b96e067c78c82d101a0643220f9d2255242e2beea65b83d058f053 | file=evidence/03-p4-package-pre-flight.txt | source=cmd: python3 -B work/signoz-relay/validate_p4.py
+E4 | acceptance trace re-read from SigNoz by id | captured_at=2026-10-20T03:45:53Z | sha256=81c370056bb604a28e4a2d68fbd0d2d662a2991f90bf83767349596afa48f6c9 | file=evidence/04-acceptance-trace-re-read-from-signoz-by-.txt | source=cmd: bash /private/tmp/claude-501/-Users-alexlobaito-Projects-alex-system-map/5e8d77ec-9d27-41d3-9063-b65526ce01a1/scratchpad/trace_readback.sh
+E5 | shared relay untouched | captured_at=2026-10-20T03:45:54Z | sha256=6237f81e8391e682bae09c8e6fdc69df78e1071ffba2714e5f87c1aa11f2e59a | file=evidence/05-shared-relay-untouched.txt | source=cmd: shasum -a 256 /Users/alexlobaito/.agents/tools/connectors/codex_otel/otlp_relay.py /Users/alexlobaito/.agents/tools/connectors/codex_otel/codex_traced.py
+E6 | CAPTURED item 2: the authorized bootstrap, with context, UTC time and exit status | captured_at=2026-10-20T03:45:54Z | sha256=e046b7161286ee7f9677881136429074a9e6c43cc7802b9cbb816f9bd3787e39 | file=evidence/06-captured-item-2-the-authorized-bootstrap.txt | source=file: reviews/receipts/20261020-p4-apply/captured/23-bootstrap.txt
+E7 | CAPTURED item 2: state before it | captured_at=2026-10-20T03:45:54Z | sha256=f804fba288c73aeb668a34df8e08dbc55a9280896c94024d13f82fc2135dbf21 | file=evidence/07-captured-item-2-state-before-it.txt | source=file: reviews/receipts/20261020-p4-apply/captured/20-state-before.txt
+E8 | CAPTURED item 2: bootout before it | captured_at=2026-10-20T03:45:54Z | sha256=66a8f0326f16ccfe64f22a3e186e944f4fa02cac888bca7a615fe6616a1a5736 | file=evidence/08-captured-item-2-bootout-before-it.txt | source=file: reviews/receipts/20261020-p4-apply/captured/21-bootout.txt
+E9 | CAPTURED item 2: domain and port free after bootout | captured_at=2026-10-20T03:45:54Z | sha256=b6cfc4cb428d7519860958bf7004b782bb3a84d0a50413ba093b2003ebb70cde | file=evidence/09-captured-item-2-domain-and-port-free-aft.txt | source=file: reviews/receipts/20261020-p4-apply/captured/22-after-bootout.txt
+E10 | CAPTURED item 2: startup poll to a live listener | captured_at=2026-10-20T03:45:54Z | sha256=2ddf00d0c312b1fe1bbea9b533805131bed5728e3e607cbef20e0100e5253402 | file=evidence/10-captured-item-2-startup-poll-to-a-live-l.txt | source=file: reviews/receipts/20261020-p4-apply/captured/24-startup-poll.txt
+E11 | CAPTURED item 3: both key reads timed, tripwire enforced in the script | captured_at=2026-10-20T03:45:54Z | sha256=ea954f5b029b68c382db9e815de781879c46c2094c10bd41d48c785dd28588e9 | file=evidence/11-captured-item-3-both-key-reads-timed-tri.txt | source=file: reviews/receipts/20261020-p4-apply/captured/25-key-timing.txt
+E12 | CAPTURED item 3: the job's own stdout and stderr under launchd | captured_at=2026-10-20T03:45:54Z | sha256=6bc8a556dda1d771af9317bd469064c63539b383772cb8fffe47e14bc259268d | file=evidence/12-captured-item-3-the-job-s-own-stdout-and.txt | source=file: reviews/receipts/20261020-p4-apply/captured/27-collector-logs.txt
+E13 | CAPTURED item 4: verify_durable.py full transcript, 10/12 with two FALSE failures | captured_at=2026-10-20T03:45:54Z | sha256=9bd3e87610e77a5cccc990166f514df0e012a2d51587b4e9c47a07d882c0e5ed | file=evidence/13-captured-item-4-verify-durable-py-full-t.txt | source=file: reviews/receipts/20261020-p4-apply/captured/28-verify-durable.txt
+E14 | CAPTURED item 4: KeepAlive restart proven, new pid against the killed one | captured_at=2026-10-20T03:45:54Z | sha256=e061809a79549602ed189970133864b5b0c5faba70fee23791d4d3b63355ddad | file=evidence/14-captured-item-4-keepalive-restart-proven.txt | source=file: reviews/receipts/20261020-p4-apply/captured/31-keepalive-restart-proof.txt
+E15 | CAPTURED item 4: state after the verifier | captured_at=2026-10-20T03:45:54Z | sha256=672ff9285e5e2011e9f770d4ce2067061b2839e7dc3e979a934af2b708afbdf2 | file=evidence/15-captured-item-4-state-after-the-verifier.txt | source=file: reviews/receipts/20261020-p4-apply/captured/29-state-after.txt
+E16 | CAPTURED item 4: the collector's own request rows | captured_at=2026-10-20T03:45:54Z | sha256=2cb857afd5253a52326fdceb900b730515b4182da7679c522302756208654fb8 | file=evidence/16-captured-item-4-the-collector-s-own-requ.txt | source=file: reviews/receipts/20261020-p4-apply/captured/30-request-rows.txt
+E17 | collector source | captured_at=2026-10-20T03:45:54Z | sha256=b30ac08d6561acac63dfc144ee7be68f3862fb38338ad5b8574ba4be6dda93eb | file=evidence/17-collector-source.py | source=file: tools/otel_collector.py
+E18 | LaunchAgent template, ThrottleInterval 120 | captured_at=2026-10-20T03:45:54Z | sha256=ce27c9afa15e0cd8f047a653916de924688448ed36d5e8e7b200b2127bd9fbdd | file=evidence/18-launchagent-template-throttleinterval-12.template | source=file: work/signoz-relay/com.alex.signoz-collector.plist.template
 
 --- E1 offline suite, collector, system python 3.9.6 (inline copy) ---
 # command: /usr/bin/python3 -B tools/otel_collector.py --self-test
-# captured_at: 2026-10-20T03:37:50Z
+# captured_at: 2026-10-20T03:45:47Z
 # exit: 0
   pass  named service kept                                    
   pass  resource with no attributes dropped                   
@@ -102,7 +108,7 @@ E12 | technical record and both corrections | captured_at=2026-10-20T03:37:55Z |
 
 --- E2 offline suite, relay patch harness (inline copy) ---
 # command: python3 -B work/signoz-relay/test_relay_collector.py
-# captured_at: 2026-10-20T03:37:50Z
+# captured_at: 2026-10-20T03:45:47Z
 # exit: 0
   pass  named service kept                                    
   pass  no resource attributes at all -> dropped unnamed      
@@ -143,7 +149,7 @@ E12 | technical record and both corrections | captured_at=2026-10-20T03:37:55Z |
 
 --- E3 p4 package pre-flight (inline copy) ---
 # command: python3 -B work/signoz-relay/validate_p4.py
-# captured_at: 2026-10-20T03:37:54Z
+# captured_at: 2026-10-20T03:45:51Z
 # exit: 0
   pass  verify_durable.py compiles here           
   pass  canary_through_relay.py compiles here     
@@ -173,134 +179,253 @@ E12 | technical record and both corrections | captured_at=2026-10-20T03:37:55Z |
 24/24 checks passed
 --- end E3 ---
 
---- E4 launchd job state (inline copy) ---
-# command: launchctl print gui/501/com.alex.signoz-collector
-# captured_at: 2026-10-20T03:37:54Z
-# exit: 0
-gui/501/com.alex.signoz-collector = {
-	active count = 1
-	path = /Users/alexlobaito/Library/LaunchAgents/com.alex.signoz-collector.plist
-	type = LaunchAgent
-	state = running
-
-	program = /usr/bin/python3
-	arguments = {
-		/usr/bin/python3
-		-B
-		/Users/alexlobaito/Projects/alex-system-map/tools/otel_collector.py
-		--port
-		4320
-		--upstream
-		signoz
-		--upstream
-		langfuse
-		--log
-		/Users/alexlobaito/.agents/runtime/otel-collector.jsonl
-	}
-
-	working directory = /Users/alexlobaito/Projects/alex-system-map
-
-	stdout path = /Users/alexlobaito/.agents/runtime/signoz-collector.out.log
-	stderr path = /Users/alexlobaito/.agents/runtime/signoz-collector.err.log
-	inherited environment = {
-		SSH_AUTH_SOCK => /var/run/com.apple.launchd.CpTxU8YEew/Listeners
-	}
-
-	default environment = {
-		PATH => /usr/bin:/bin:/usr/sbin:/sbin
-	}
-
-	environment = {
-		OSLogRateLimit => 64
-		XPC_SERVICE_NAME => com.alex.signoz-collector
-	}
-
-	domain = gui/501 [100025]
-	asid = 100025
-	minimum runtime = 120
-	exit timeout = 5
-	runs = 2
-	pid = 72360
-	immediate reason = inefficient
-	forks = 2
-	execs = 3
-	initialized = 1
-	trampolined = 1
-	started suspended = 0
-	proxy started suspended = 0
-	checked allocations = 0 (queried = 1)
-	checked allocations reason = no host
-	checked allocations flags = 0x0
-	last terminating signal = Killed: 9
-
-	resource coalition = {
-		ID = 86204
-		type = resource
-		state = active
-		active count = 1
-		name = com.alex.signoz-collector
-	}
-
-	jetsam coalition = {
-		ID = 86205
-		type = jetsam
-		state = active
-		active count = 1
-		name = com.alex.signoz-collector
-	}
-
-	spawn type = daemon (3)
-	jetsam priority = 40
-	jetsam memory limit (active) = (unlimited)
-	jetsam memory limit (inactive) = (unlimited)
-	jetsamproperties category = daemon
-	jetsam thread limit = 32
-	cpumon = default
-
-	properties = keepalive | runatload | inferred program
-}
---- end E4 ---
-
---- E5 port 4320 holder (inline copy) ---
-# command: lsof -nP -iTCP:4320
-# captured_at: 2026-10-20T03:37:54Z
-# exit: 0
-COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
-Python  72360 alexlobaito    4u  IPv4 0x28d161828ef46c04      0t0  TCP 127.0.0.1:4320 (LISTEN)
---- end E5 ---
-
---- E6 collector counts, separate process (inline copy) ---
-# command: curl -s -m 10 http://127.0.0.1:4320/stats
-# captured_at: 2026-10-20T03:37:54Z
-# exit: 0
-{
-  "uptime_hours": 0.051,
-  "kept_spans": {},
-  "kept_spans_per_hour": {},
-  "dropped_spans": {},
-  "upstream_responses": {}
-}
---- end E6 ---
-
---- E7 acceptance trace re-read from SigNoz by id (inline copy) ---
+--- E4 acceptance trace re-read from SigNoz by id (inline copy) ---
 # command: bash /private/tmp/claude-501/-Users-alexlobaito-Projects-alex-system-map/5e8d77ec-9d27-41d3-9063-b65526ce01a1/scratchpad/trace_readback.sh
-# captured_at: 2026-10-20T03:37:54Z
+# captured_at: 2026-10-20T03:45:53Z
 # exit: 0
 trace      9c0574d648828148c39c46c5415116a0
 ServiceName 'alex-system-map'
 Name        'p4-durable-named-20261020T033406Z'
 url         https://pet-mammoth.us2.signoz.cloud/trace/9c0574d648828148c39c46c5415116a0
---- end E7 ---
+--- end E4 ---
 
---- E8 shared relay untouched (inline copy) ---
+--- E5 shared relay untouched (inline copy) ---
 # command: shasum -a 256 /Users/alexlobaito/.agents/tools/connectors/codex_otel/otlp_relay.py /Users/alexlobaito/.agents/tools/connectors/codex_otel/codex_traced.py
-# captured_at: 2026-10-20T03:37:55Z
+# captured_at: 2026-10-20T03:45:54Z
 # exit: 0
 90e6dd0a0944003cf05f47ad2c6bd09627fa47eab4548d043d02644723768417  /Users/alexlobaito/.agents/tools/connectors/codex_otel/otlp_relay.py
 8eb092cceab349fc5ac5908d9ca34c4f5d03d5dd83f0e6464936391e37098d68  /Users/alexlobaito/.agents/tools/connectors/codex_otel/codex_traced.py
+--- end E5 ---
+
+--- E6 CAPTURED item 2: the authorized bootstrap, with context, UTC time and exit status (inline copy) ---
+COMMAND:    launchctl bootstrap gui/501 /Users/alexlobaito/Library/LaunchAgents/com.alex.signoz-collector.plist
+DESCRIPTION:the one authorized unsandboxed bootstrap of the collector LaunchAgent
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:49Z
+---- output ----
+---- end output ----
+UTC_END:    2026-10-20T03:42:49Z
+EXIT_STATUS:0
+--- end E6 ---
+
+--- E7 CAPTURED item 2: state before it (inline copy) ---
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector 2>&1 | grep -E '^[[:space:]]*(state|pid|path)'; echo '--- port ---'; lsof -nP -iTCP:4320 2>&1 | head -3
+DESCRIPTION:launchd job state and port holder before this run
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:46Z
+---- output ----
+	path = /Users/alexlobaito/Library/LaunchAgents/com.alex.signoz-collector.plist
+	state = running
+	pid = 72360
+		state = active
+		state = active
+--- port ---
+COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  72360 alexlobaito    4u  IPv4 0x28d161828ef46c04      0t0  TCP 127.0.0.1:4320 (LISTEN)
+---- end output ----
+UTC_END:    2026-10-20T03:42:46Z
+EXIT_STATUS:0
+--- end E7 ---
+
+--- E8 CAPTURED item 2: bootout before it (inline copy) ---
+COMMAND:    launchctl bootout gui/501/com.alex.signoz-collector
+DESCRIPTION:bootout the collector so the bootstrap below is a clean, captured load
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:46Z
+---- output ----
+---- end output ----
+UTC_END:    2026-10-20T03:42:46Z
+EXIT_STATUS:0
 --- end E8 ---
 
---- E10 LaunchAgent template (inline copy) ---
+--- E9 CAPTURED item 2: domain and port free after bootout (inline copy) ---
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector >/dev/null 2>&1 && echo 'STILL LOADED' || echo 'not in domain'; lsof -nP -iTCP:4320 2>/dev/null | grep -q LISTEN && echo 'STILL LISTENING' || echo 'port free'
+DESCRIPTION:confirm it left the domain and freed the port
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:49Z
+---- output ----
+not in domain
+port free
+---- end output ----
+UTC_END:    2026-10-20T03:42:49Z
+EXIT_STATUS:0
+--- end E9 ---
+
+--- E10 CAPTURED item 2: startup poll to a live listener (inline copy) ---
+COMMAND:    bash -c for i in $(seq 1 12); do
+      PID=$(launchctl print gui/$(id -u)/com.alex.signoz-collector 2>/dev/null | sed -n "s/^[[:space:]]*pid = \([0-9]*\).*/\1/p" | head -1)
+      L=$(lsof -nP -iTCP:4320 2>/dev/null | grep -c LISTEN)
+      echo "$(date -u "+%H:%M:%SZ")  t+$((i*10))s  pid=${PID:-none}  listening=$L"
+      [ "$L" = "1" ] && break
+      sleep 10
+    done
+DESCRIPTION:poll launchd pid and port 4320 every 10s until listening, max 120s
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:49Z
+---- output ----
+03:42:49Z  t+10s  pid=74762  listening=0
+03:42:59Z  t+20s  pid=74762  listening=1
+---- end output ----
+UTC_END:    2026-10-20T03:42:59Z
+EXIT_STATUS:0
+--- end E10 ---
+
+--- E11 CAPTURED item 3: both key reads timed, tripwire enforced in the script (inline copy) ---
+COMMAND:    python3 -I -c 
+import importlib.util, sys, time
+spec=importlib.util.spec_from_file_location('col','tools/otel_collector.py')
+col=importlib.util.module_from_spec(spec); sys.modules['col']=col; spec.loader.exec_module(col)
+worst=0.0
+for label, fn in (('signoz', col.signoz_headers), ('langfuse', col.langfuse_headers)):
+    t0=time.time(); h=fn(); dt=time.time()-t0; worst=max(worst,dt)
+    k=list(h)[0]
+    print(f'{label}: OK in {dt:.2f}s  header={k}  value_length={len(h[k])}  (value not shown)')
+print(f'worst single read: {worst:.2f}s   ceiling in code: {col.OP_READ_TIMEOUT}s')
+print('TRIPWIRE BREACHED' if worst > 10 else 'tripwire not breached')
+sys.exit(1 if worst > 10 else 0)
+
+DESCRIPTION:measure both key reads in a fresh process; tripwire is 10s per read
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:59Z
+---- output ----
+signoz: OK in 0.02s  header=signoz-ingestion-key  value_length=36  (value not shown)
+langfuse: OK in 0.06s  header=Authorization  value_length=122  (value not shown)
+worst single read: 0.06s   ceiling in code: 10s
+tripwire not breached
+---- end output ----
+UTC_END:    2026-10-20T03:42:59Z
+EXIT_STATUS:0
+--- end E11 ---
+
+--- E12 CAPTURED item 3: the job's own stdout and stderr under launchd (inline copy) ---
+COMMAND:    bash -c echo '--- stdout, last 12 ---'; tail -12 "$HOME/.agents/runtime/signoz-collector.out.log"; echo '--- stderr, last 6 ---'; tail -6 "$HOME/.agents/runtime/signoz-collector.err.log"
+DESCRIPTION:the job's own stdout and stderr as launchd captured them
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:59Z
+---- output ----
+--- stdout, last 12 ---
+  "kept_spans": {},
+  "kept_spans_per_hour": {},
+  "dropped_spans": {},
+  "upstream_responses": {}
+}
+  listening on 127.0.0.1:4320/v1/traces
+  upstreams: signoz, langfuse
+  rate guard: 600 spans/min per service
+  blocked: codex-worker
+  counts: GET http://127.0.0.1:4320/stats
+  signoz key read from 1Password (value not shown)
+  langfuse key read from 1Password (value not shown)
+--- stderr, last 6 ---
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: op did not answer within 90s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: op did not answer within 90s
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: op did not answer within 90s
+---- end output ----
+UTC_END:    2026-10-20T03:42:59Z
+EXIT_STATUS:0
+--- end E12 ---
+
+--- E13 CAPTURED item 4: verify_durable.py full transcript, 10/12 with two FALSE failures (inline copy) ---
+COMMAND:    python3 -B work/signoz-relay/verify_durable.py
+DESCRIPTION:the hostile verifier end to end; it deliberately kills the job to prove KeepAlive
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:59Z
+---- output ----
+verifying com.alex.signoz-collector at 2026-10-20T03:42:59Z
+
+  pass  launchctl reports the job with a live PID   <- pid=74762
+  pass  that same PID holds port 4320   <- launchctl pid=74762, port holder=74762
+  pass  /stats answers from a separate process   <- uptime 0.003h
+  pass  collector accepts a named span   <- HTTP 200
+  pass  collector accepts and swallows an unnamed span   <- HTTP 200
+  pass  the kept counter moved   <- 0 -> 1
+  pass  the drop counter shows the unnamed span   <- dropped={'(unnamed)': 1}
+  pass  SigNoz accepted it, so the key WAS read inside launchd   <- upstream={'signoz:200': 1, 'langfuse:200': 1}
+
+  waiting up to 60s for SigNoz to index
+  pass  named canary in SigNoz as 'alex-system-map'   <- got 'alex-system-map'
+  pass  unnamed canary absent from SigNoz
+    trace: https://pet-mammoth.us2.signoz.cloud/trace/4aa6c810699450465371114d54d1b745
+
+  killing the process to prove KeepAlive brings it back
+  FAIL  KeepAlive restarted it with a new PID   <- 74762 -> None
+  FAIL  /stats answers again after the restart
+
+10/12 checks passed
+FAILED: KeepAlive restarted it with a new PID; /stats answers again after the restart
+---- end output ----
+UTC_END:    2026-10-20T03:44:24Z
+EXIT_STATUS:1
+--- end E13 ---
+
+--- E14 CAPTURED item 4: KeepAlive restart proven, new pid against the killed one (inline copy) ---
+COMMAND:    poll launchd pid and port every 15s for up to 180s after the verifier's kill
+DESCRIPTION:prove KeepAlive DOES restart it; the verifier waited 60s while ThrottleInterval is 120s
+SANDBOX:    Seatbelt DISABLED
+UTC_START:  2026-10-20T03:44:45Z
+NOTE:       the killed pid was 74762; a DIFFERENT pid plus a listener proves the restart
+---- output ----
+03:44:45Z  t+15s  state=spawn scheduled  pid=none  listening=0
+03:45:00Z  t+30s  state=running  pid=76005  listening=1
+RESTARTED: new pid 76005, was 74762, listening again
+--- /stats from a separate process ---
+{
+  "uptime_hours": 0.003,
+  "kept_spans": {},
+  "kept_spans_per_hour": {},
+  "dropped_spans": {},
+  "upstream_responses": {}
+}---- end output ----
+UTC_END:    2026-10-20T03:45:00Z
+--- end E14 ---
+
+--- E15 CAPTURED item 4: state after the verifier (inline copy) ---
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector 2>&1 | grep -E '^[[:space:]]*(state|pid)'; echo '--- port ---'; lsof -nP -iTCP:4320 2>&1 | head -3; echo '--- stats ---'; curl -s -m 10 http://127.0.0.1:4320/stats
+DESCRIPTION:launchd state, port holder and counts after the verifier
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:44:24Z
+---- output ----
+	state = spawn scheduled
+		state = active
+		state = active
+--- port ---
+--- stats ---
+---- end output ----
+UTC_END:    2026-10-20T03:44:24Z
+EXIT_STATUS:7
+--- end E15 ---
+
+--- E16 CAPTURED item 4: the collector's own request rows (inline copy) ---
+COMMAND:    bash -c tail -6 "$HOME/.agents/runtime/otel-collector.jsonl"
+DESCRIPTION:the collector's own request rows, written by it, not by me
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:44:24Z
+---- output ----
+{"ts": "2026-10-20T03:32:22Z", "bytes_in": 191, "kept": {}, "dropped": {"(unnamed)": 0}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:32:22Z", "bytes_in": 134, "kept": {}, "dropped": {"(unnamed)": 0}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:34:07Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T03:34:07Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:43:00Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T03:43:00Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+---- end output ----
+UTC_END:    2026-10-20T03:44:24Z
+EXIT_STATUS:0
+--- end E16 ---
+
+--- E18 LaunchAgent template, ThrottleInterval 120 (inline copy) ---
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <!--
@@ -369,271 +494,6 @@ url         https://pet-mammoth.us2.signoz.cloud/trace/9c0574d648828148c39c46c54
     <string><HOME>/Projects/alex-system-map</string>
 </dict>
 </plist>
---- end E10 ---
+--- end E18 ---
 
---- E11 the hostile verifier (inline copy) ---
-#!/usr/bin/env python3
-"""Prove the collector LaunchAgent is real: loaded, answering, surviving, and delivering.
-
-Run this AFTER the job is bootstrapped. It is the acceptance test for
-absence-alarms-20261020-p4-collector-durable, and it is deliberately hostile: a
-"loaded" line from launchctl is a claim, not proof, so every check here either reads
-live state or makes something happen.
-
-Checks, in order:
-  1. launchctl reports the job with a real PID (not just present, running)
-  2. the PID is the one actually holding port 4320
-  3. GET /stats answers from a FRESH process, so nothing depends on this shell
-  4. the 1Password read happened inside launchd, proven by a successful SigNoz send
-     rather than by reading a key
-  5. a named canary through the collector arrives in SigNoz as the right service
-  6. an unnamed canary is dropped, with the drop visible in the collector's counts
-  7. the job comes back by itself after being killed (KeepAlive really works)
-
-Run: python3 -B work/signoz-relay/verify_durable.py
-     python3 -B work/signoz-relay/verify_durable.py --skip-restart   (leave step 7 out)
-"""
-from __future__ import annotations
-
-import argparse
-import datetime as dt
-import json
-import os
-import re
-import secrets
-import struct
-import subprocess
-import sys
-import time
-import urllib.error
-import urllib.request
-
-LABEL = 'com.alex.signoz-collector'
-PORT = 4320
-SIGNOZ_BASE = 'https://pet-mammoth.us2.signoz.cloud'
-READ_KEY_REF = 'op://Connectors/ergsvtc63iqob4g7itsr7lpr64/credential'
-OP_BIN = '/opt/homebrew/bin/op'
-
-CHECKS: list[tuple[str, bool, str]] = []
-
-
-def check(name: str, ok: bool, detail: str = '') -> None:
-    CHECKS.append((name, bool(ok), detail))
-    print(f'  {"pass" if ok else "FAIL"}  {name}' + (f'   <- {detail}' if detail else ''))
-
-
-def sh(cmd: list[str], timeout: int = 45) -> tuple[int, str]:
-    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-    return proc.returncode, (proc.stdout or '') + (proc.stderr or '')
-
-
-def launchctl_pid() -> int | None:
-    code, out = sh(['launchctl', 'print', f'gui/{os.getuid()}/{LABEL}'])
-    if code:
-        return None
-    match = re.search(r'^\s*pid\s*=\s*(\d+)', out, re.M)
-    return int(match.group(1)) if match else None
-
-
-def port_holder() -> int | None:
-    code, out = sh(['lsof', '-nP', f'-iTCP:{PORT}'])
-    for line in out.splitlines()[1:]:
-        parts = line.split()
-        if len(parts) > 1 and 'LISTEN' in line:
-            try:
-                return int(parts[1])
-            except ValueError:
-                continue
-    return None
-
-
-def stats_from_fresh_process() -> dict | None:
-    """Deliberately a separate interpreter: proves nothing is held open by this shell."""
-    code, out = sh([sys.executable, '-c',
-                    f'import urllib.request,sys;'
-                    f'sys.stdout.write(urllib.request.urlopen('
-                    f'"http://127.0.0.1:{PORT}/stats", timeout=15).read().decode())'])
-    if code:
-        return None
-    try:
-        return json.loads(out)
-    except json.JSONDecodeError:
-        return None
-
-
-# --- OTLP ---------------------------------------------------------------------
-
-def _varint(n: int) -> bytes:
-    out = bytearray()
-    while True:
-        b = n & 0x7F
-        n >>= 7
-        out.append(b | (0x80 if n else 0))
-        if not n:
-            return bytes(out)
-
-
-def _k(f: int, w: int) -> bytes:
-    return _varint((f << 3) | w)
-
-
-def _d(f: int, p: bytes) -> bytes:
-    return _k(f, 2) + _varint(len(p)) + p
-
-
-def _kv(key: str, val: str) -> bytes:
-    return _d(1, key.encode()) + _d(2, _d(1, val.encode()))
-
-
-def payload(service, name: str, trace_id: bytes, host: str = 'macbook') -> bytes:
-    now = time.time_ns()
-    span = b''.join([
-        _d(1, trace_id), _d(2, secrets.token_bytes(8)), _d(5, name.encode()),
-        _k(6, 0) + _varint(1),
-        _k(7, 1) + struct.pack('<Q', now),
-        _k(8, 1) + struct.pack('<Q', now + 2_000_000),
-        _d(9, _kv('check', 'p4 durability acceptance')),
-    ])
-    resource = b''
-    if service:
-        resource = _d(1, _kv('service.name', service)) + _d(1, _kv('host.name', host))
-    # ResourceSpans body = resource(field 1) + scope_spans(field 2); the whole thing
-    # is then ONE field-1 wrapper (ExportTraceServiceRequest.resource_spans). An extra
-    # wrapper here made every span parse as unnamed with a count of zero, and the
-    # collector correctly refused it. Second time I have made this nesting mistake.
-    return _d(1, _d(1, resource) + _d(2, _d(2, span)))
-
-
-def post(body: bytes) -> int:
-    req = urllib.request.Request(f'http://127.0.0.1:{PORT}/v1/traces', data=body,
-                                 method='POST',
-                                 headers={'Content-Type': 'application/x-protobuf'})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as resp:
-            return resp.status
-    except urllib.error.HTTPError as err:
-        return err.code
-    except urllib.error.URLError:
-        return 0
-
-
-def read_key() -> str:
-    code, token = sh(['/usr/bin/security', 'find-generic-password', '-a', 'connectors-sync',
-                      '-s', 'op-service-account-connectors-sync', '-w'])
-    if code:
-        raise SystemExit('could not read the service account token')
-    # Through op_items.robot_env, not the real HOME. Under the real HOME op stalls for
-    # minutes before any network step and makes macOS prompt for app data access; this
-    # script hit that itself after the collector had already been fixed for it.
-    import importlib.util
-    spec = importlib.util.spec_from_file_location(
-        'op_items', os.path.expanduser('~/.agents/tools/connectors/op_items.py'))
-    op_items = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(op_items)
-    with op_items.robot_env(token.strip()) as env:
-        proc = subprocess.run([OP_BIN, 'read', READ_KEY_REF], capture_output=True, text=True,
-                              env=env, stdin=subprocess.DEVNULL, timeout=15)
-    if proc.returncode:
-        raise SystemExit('could not read the SigNoz read key')
-    return proc.stdout.strip()
-
-
-def signoz_service(key: str, trace_id: str):
-    req = urllib.request.Request(f'{SIGNOZ_BASE}/api/v1/traces/{trace_id}',
-                                 headers={'SIGNOZ-API-KEY': key, 'Accept': 'application/json'})
-    try:
-        with urllib.request.urlopen(req, timeout=40) as resp:
-            rows = json.loads(resp.read())
-    except Exception:
-        return None
-    if not rows or not rows[0].get('events'):
-        return None
-    cols = rows[0]['columns']
-    return rows[0]['events'][0][cols.index('ServiceName')]
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--skip-restart', action='store_true')
-    parser.add_argument('--wait', type=int, default=60)
-    args = parser.parse_args()
-
-    print(f'verifying {LABEL} at {dt.datetime.now(dt.timezone.utc):%Y-%m-%dT%H:%M:%SZ}\n')
-
-    pid = launchctl_pid()
-    check('launchctl reports the job with a live PID', pid is not None, f'pid={pid}')
-    holder = port_holder()
-    check(f'that same PID holds port {PORT}', pid is not None and holder == pid,
-          f'launchctl pid={pid}, port holder={holder}')
-
-    stats = stats_from_fresh_process()
-    check('/stats answers from a separate process', stats is not None,
-          'nothing answered' if stats is None else f'uptime {stats.get("uptime_hours")}h')
-    if stats is None:
-        print('\nThe collector is not answering. Everything below would be meaningless.')
-        return 1
-    before_kept = sum(stats.get('kept_spans', {}).values())
-
-    stamp = dt.datetime.now(dt.timezone.utc).strftime('%Y%m%dT%H%M%SZ')
-    named_id = secrets.token_bytes(16)
-    unnamed_id = secrets.token_bytes(16)
-    named_status = post(payload('alex-system-map', f'p4-durable-named-{stamp}', named_id))
-    unnamed_status = post(payload(None, f'p4-durable-unnamed-{stamp}', unnamed_id))
-    check('collector accepts a named span', named_status == 200, f'HTTP {named_status}')
-    check('collector accepts and swallows an unnamed span', unnamed_status == 200,
-          f'HTTP {unnamed_status}')
-    time.sleep(2)
-
-    after = stats_from_fresh_process() or {}
-    kept_now = sum(after.get('kept_spans', {}).values())
-    dropped_now = after.get('dropped_spans', {})
-    check('the kept counter moved', kept_now > before_kept, f'{before_kept} -> {kept_now}')
-    check('the drop counter shows the unnamed span',
-          dropped_now.get('(unnamed)', 0) >= 1, f'dropped={dropped_now}')
-    upstream = after.get('upstream_responses', {})
-    check('SigNoz accepted it, so the key WAS read inside launchd',
-          any(k.startswith('signoz:200') for k in upstream), f'upstream={upstream}')
-
-    print(f'\n  waiting up to {args.wait}s for SigNoz to index')
-    key = read_key()
-    deadline = time.monotonic() + args.wait
-    service = None
-    while time.monotonic() < deadline:
-        service = signoz_service(key, named_id.hex())
-        if service:
-            break
-        time.sleep(10)
-    check("named canary in SigNoz as 'alex-system-map'", service == 'alex-system-map',
-          f'got {service!r}')
-    check('unnamed canary absent from SigNoz',
-          signoz_service(key, unnamed_id.hex()) is None)
-    print(f'    trace: {SIGNOZ_BASE}/trace/{named_id.hex()}')
-
-    if not args.skip_restart:
-        print('\n  killing the process to prove KeepAlive brings it back')
-        old = launchctl_pid()
-        if old:
-            sh(['kill', '-9', str(old)])
-        new = None
-        for _ in range(12):
-            time.sleep(5)
-            new = launchctl_pid()
-            if new and new != old:
-                break
-        check('KeepAlive restarted it with a new PID', bool(new) and new != old,
-              f'{old} -> {new}')
-        check('/stats answers again after the restart',
-              stats_from_fresh_process() is not None)
-
-    failed = [n for n, ok, _d in CHECKS if not ok]
-    print(f'\n{len(CHECKS) - len(failed)}/{len(CHECKS)} checks passed')
-    if failed:
-        print('FAILED: ' + '; '.join(failed))
-    return 1 if failed else 0
-
-
-if __name__ == '__main__':
-    sys.exit(main())
---- end E11 ---
-
-NOTE: Scope: acceptance items 1-4 only. The SigNoz tool card and APPLY-p4 steps 3-5 are NOT claimed and remain outstanding.
+NOTE: Scope: acceptance items 1-4 only. The SigNoz tool card and APPLY-p4 steps 3-5 are NOT claimed.

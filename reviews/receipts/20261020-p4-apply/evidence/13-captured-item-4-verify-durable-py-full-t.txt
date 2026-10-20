@@ -1,0 +1,31 @@
+COMMAND:    python3 -B work/signoz-relay/verify_durable.py
+DESCRIPTION:the hostile verifier end to end; it deliberately kills the job to prove KeepAlive
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:59Z
+---- output ----
+verifying com.alex.signoz-collector at 2026-10-20T03:42:59Z
+
+  pass  launchctl reports the job with a live PID   <- pid=74762
+  pass  that same PID holds port 4320   <- launchctl pid=74762, port holder=74762
+  pass  /stats answers from a separate process   <- uptime 0.003h
+  pass  collector accepts a named span   <- HTTP 200
+  pass  collector accepts and swallows an unnamed span   <- HTTP 200
+  pass  the kept counter moved   <- 0 -> 1
+  pass  the drop counter shows the unnamed span   <- dropped={'(unnamed)': 1}
+  pass  SigNoz accepted it, so the key WAS read inside launchd   <- upstream={'signoz:200': 1, 'langfuse:200': 1}
+
+  waiting up to 60s for SigNoz to index
+  pass  named canary in SigNoz as 'alex-system-map'   <- got 'alex-system-map'
+  pass  unnamed canary absent from SigNoz
+    trace: https://pet-mammoth.us2.signoz.cloud/trace/4aa6c810699450465371114d54d1b745
+
+  killing the process to prove KeepAlive brings it back
+  FAIL  KeepAlive restarted it with a new PID   <- 74762 -> None
+  FAIL  /stats answers again after the restart
+
+10/12 checks passed
+FAILED: KeepAlive restarted it with a new PID; /stats answers again after the restart
+---- end output ----
+UTC_END:    2026-10-20T03:44:24Z
+EXIT_STATUS:1
