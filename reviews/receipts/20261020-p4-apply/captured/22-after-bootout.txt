@@ -1,0 +1,11 @@
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector >/dev/null 2>&1 && echo 'STILL LOADED' || echo 'not in domain'; lsof -nP -iTCP:4320 2>/dev/null | grep -q LISTEN && echo 'STILL LISTENING' || echo 'port free'
+DESCRIPTION:confirm it left the domain and freed the port
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:49Z
+---- output ----
+not in domain
+port free
+---- end output ----
+UTC_END:    2026-10-20T03:42:49Z
+EXIT_STATUS:0

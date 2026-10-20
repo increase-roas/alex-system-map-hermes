@@ -1,0 +1,14 @@
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector 2>&1 | grep -E '^[[:space:]]*(state|pid)'; echo '--- port ---'; lsof -nP -iTCP:4320 2>&1 | head -3; echo '--- stats ---'; curl -s -m 10 http://127.0.0.1:4320/stats
+DESCRIPTION:launchd state, port holder and counts after the verifier
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:44:24Z
+---- output ----
+	state = spawn scheduled
+		state = active
+		state = active
+--- port ---
+--- stats ---
+---- end output ----
+UTC_END:    2026-10-20T03:44:24Z
+EXIT_STATUS:7

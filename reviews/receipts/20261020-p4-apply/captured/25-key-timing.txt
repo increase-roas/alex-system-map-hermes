@@ -1,0 +1,25 @@
+COMMAND:    python3 -I -c 
+import importlib.util, sys, time
+spec=importlib.util.spec_from_file_location('col','tools/otel_collector.py')
+col=importlib.util.module_from_spec(spec); sys.modules['col']=col; spec.loader.exec_module(col)
+worst=0.0
+for label, fn in (('signoz', col.signoz_headers), ('langfuse', col.langfuse_headers)):
+    t0=time.time(); h=fn(); dt=time.time()-t0; worst=max(worst,dt)
+    k=list(h)[0]
+    print(f'{label}: OK in {dt:.2f}s  header={k}  value_length={len(h[k])}  (value not shown)')
+print(f'worst single read: {worst:.2f}s   ceiling in code: {col.OP_READ_TIMEOUT}s')
+print('TRIPWIRE BREACHED' if worst > 10 else 'tripwire not breached')
+sys.exit(1 if worst > 10 else 0)
+
+DESCRIPTION:measure both key reads in a fresh process; tripwire is 10s per read
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:59Z
+---- output ----
+signoz: OK in 0.02s  header=signoz-ingestion-key  value_length=36  (value not shown)
+langfuse: OK in 0.06s  header=Authorization  value_length=122  (value not shown)
+worst single read: 0.06s   ceiling in code: 10s
+tripwire not breached
+---- end output ----
+UTC_END:    2026-10-20T03:42:59Z
+EXIT_STATUS:0

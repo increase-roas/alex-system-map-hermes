@@ -1,0 +1,9 @@
+COMMAND:    launchctl bootstrap gui/501 /Users/alexlobaito/Library/LaunchAgents/com.alex.signoz-collector.plist
+DESCRIPTION:the one authorized unsandboxed bootstrap of the collector LaunchAgent
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED for this process (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:42:49Z
+---- output ----
+---- end output ----
+UTC_END:    2026-10-20T03:42:49Z
+EXIT_STATUS:0

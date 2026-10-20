@@ -181,7 +181,11 @@ def signoz_service(key: str, trace_id: str):
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument('--skip-restart', action='store_true')
-    parser.add_argument('--wait', type=int, default=60)
+    parser.add_argument('--wait', type=int, default=60,
+                        help='seconds to allow SigNoz to index the canary')
+    parser.add_argument('--restart-wait', type=int, default=180,
+                        help='seconds to allow KeepAlive to respawn; must exceed '
+                             'ThrottleInterval in the plist (currently 120)')
     args = parser.parse_args()
 
     print(f'verifying {LABEL} at {dt.datetime.now(dt.timezone.utc):%Y-%m-%dT%H:%M:%SZ}\n')
@@ -240,8 +244,14 @@ def main() -> int:
         old = launchctl_pid()
         if old:
             sh(['kill', '-9', str(old)])
+        # Wait LONGER than the job's ThrottleInterval, which is 120s in the plist.
+        # On 2026-10-20 this loop waited 60s, reported "74762 -> None" and failed a
+        # check that was actually fine: launchd showed "state = spawn scheduled" and
+        # brought it back about 90s after the kill. A verifier whose patience is
+        # shorter than the thing it measures produces a false failure, which is the
+        # same class of error as a green claim with nothing behind it.
         new = None
-        for _ in range(12):
+        for _ in range(36):
             time.sleep(5)
             new = launchctl_pid()
             if new and new != old:
