@@ -157,3 +157,59 @@ which is worse than no alarm.
 `paperclip-reviewer`, `dynamite-chatbot` have sent nothing. `javar` and `javar-lab` report to
 Langfuse from Orgo, not from this Mac. Only `claude-code` and `codex` have ever reached SigNoz, and
 both only from my canaries.
+
+## Apply attempt, 2026-10-20: blocked at launchctl bootstrap
+
+Alex approved the Codex-worker route in his own chat. A worker ran APPLY-p4.md through
+`codex_traced.py` with narrow writable roots (`-C ~/.agents`, plus `--add-dir` for
+`~/Library/LaunchAgents`, `~/Backups` and this repo; `--approve-for-me`, which is workspace-write,
+never `danger-full-access`).
+
+It installed the plist, `plutil -lint` said OK, and then stopped at step 1 with:
+
+```
+Bootstrap failed: 5: Input/output error
+Try re-running the command as root for richer errors.
+```
+
+followed by `Could not find service "com.alex.signoz-collector" in domain for user gui: 501`.
+
+The worker did the right thing: it stopped, reported, retried nothing and took no other route.
+
+### What has been ruled out
+
+| candidate | ruled out by |
+|---|---|
+| the plist is malformed | `plutil -lint` OK, and `plistlib` parses it; Label, KeepAlive, RunAtLoad and all arguments read back correct |
+| already loaded | `launchctl print` says the service is not in the domain |
+| disabled | not present in `launchctl print-disabled gui/501` |
+| the sandbox | the identical error appears with the sandbox switched off |
+| our plist specifically | the same error appears for a path that does not exist, **and** for the already-loaded relay plist, which should have said "already loaded" |
+| session context | `launchctl managername` is `Aqua`, and `launchctl print gui/501` reads the whole domain, 467 active services |
+
+So `EIO 5` is launchctl's generic failure here and carries no information, and **the cause is not
+established.** What is established is narrower and still useful: `launchctl bootstrap` cannot
+perform any domain write from a process in this harness, by any route available to it, while
+`launchctl print` reads the same domain perfectly.
+
+### State left behind
+
+- `~/Library/LaunchAgents/com.alex.signoz-collector.plist` **is installed but not loaded.** An
+  unloaded plist does nothing at all, so this is inert rather than half-working. It is left in place
+  so the one remaining command is a single step.
+- `otlp_relay.py` still hashes to `90e6dd0a0944003cf05f47ad2c6bd09627fa47eab4548d043d02644723768417`
+  and the old relay is still running, pid unchanged, unharmed by the bootstrap attempts.
+- `codex_traced.py` unchanged at `8eb092cc...`; the tool card not placed; nothing committed in
+  `~/.agents`. Steps 2 to 5 were never reached.
+
+### The one command that finishes it
+
+Run from Terminal.app, as Alex, not through an agent:
+
+```sh
+launchctl bootstrap "gui/$(id -u)" ~/Library/LaunchAgents/com.alex.signoz-collector.plist
+launchctl print "gui/$(id -u)/com.alex.signoz-collector" | grep -E "state|pid"
+```
+
+Then the rest of APPLY-p4.md from step 2, which an agent can do: `verify_durable.py` needs no
+launchd write, only reads and HTTP.
