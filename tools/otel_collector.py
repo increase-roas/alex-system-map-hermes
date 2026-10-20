@@ -61,13 +61,16 @@ from pathlib import Path
 # Allowlist. The only hosts this file may reach, named here as tools/** requires.
 ALLOWED_HOSTS = ('ingest.us2.signoz.cloud', 'us.cloud.langfuse.com')
 
+SIGNOZ_HEADER = 'signoz-ingestion-key'
+# 1Password vault Connectors, item "SigNoz ingestion key", field credential.
+SIGNOZ_OP_REF = 'op://Connectors/hfy4llw7gassge2w5xuz64kgyu/credential'
+
 UPSTREAMS = {
-    # name: (url, header name, 1Password vault, item id, field)
-    'signoz': ('https://ingest.us2.signoz.cloud/v1/traces', 'signoz-ingestion-key',
-               'Connectors', 'hfy4llw7gassge2w5xuz64kgyu', 'credential'),
-    # Langfuse uses Basic auth built from a public/secret pair, handled separately.
-    'langfuse': ('https://us.cloud.langfuse.com/api/public/otel/v1/traces', 'Authorization',
-                 'r6z62bjyy3c5ipilbgs4lyakwi', 'xvpwk4vkwbmogmld2hxcq4pply', None),
+    # name: (url, header name). The credential route per upstream lives in auth_for():
+    # SigNoz through robot_env plus a Keychain cache, Langfuse through the existing
+    # langfuse_otel_headers.py helper, which already owns its own cache.
+    'signoz': ('https://ingest.us2.signoz.cloud/v1/traces', SIGNOZ_HEADER),
+    'langfuse': ('https://us.cloud.langfuse.com/api/public/otel/v1/traces', 'Authorization'),
 }
 
 # Names that are allowed through at all. Anything else is counted and dropped, so a
@@ -304,31 +307,125 @@ def _run(cmd: list[str], env: dict | None = None) -> str:
     return proc.stdout.strip()
 
 
-def _op_env() -> dict:
-    token = _run(['/usr/bin/security', 'find-generic-password', '-a', 'connectors-sync',
-                  '-s', 'op-service-account-connectors-sync', '-w'])
-    return {'PATH': '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin',
-            'HOME': os.environ.get('HOME', ''),
-            'OP_SERVICE_ACCOUNT_TOKEN': token,
-            'OP_BIOMETRIC_UNLOCK_ENABLED': 'false'}
+# The proven credential path, reused rather than reimplemented.
+#
+# The hang I spent hours on is documented in op_items.robot_env: "Under the real HOME,
+# op 2.39.0 on Alex's MacBook stalls for minutes before any network step; with a private
+# HOME it answers in about a second". It also records that OP_BIOMETRIC_UNLOCK_ENABLED
+# and OP_CACHE alone do NOT stop it. I had set exactly those two and passed the real
+# HOME, which is why every launchd read timed out and why macOS kept asking Alex to let
+# "op" reach other apps: with the real HOME, op goes near the 1Password app's data.
+#
+# robot_env gives op a private HOME, OP_CONFIG_DIR and TMPDIR under
+# ~/.agents/runtime/op-robot, drops XDG_RUNTIME_DIR, and lets one `op daemon` serve every
+# robot call. Nothing here is hand-rolled any more.
+#
+# On top of that, finished headers are cached in the login Keychain, the same pattern
+# langfuse_otel_headers.py added on 2026-10-15 after 7,200 op calls a day starved every
+# other op tool. `security` works fine under launchd and never prompts, so the common
+# path touches 1Password not at all.
+CONNECTORS = Path.home() / '.agents/tools/connectors'
+LANGFUSE_HELPER = CONNECTORS / 'langfuse_otel_headers.py'
+SECURITY = '/usr/bin/security'
+CACHE_ACCOUNT = 'connectors-sync'
+CACHE_TTL_SECONDS = 12 * 3600
+SIGNOZ_CACHE_SERVICE = 'signoz-ingestion-header-cache'
+ROBOT_TOKEN_SERVICE = 'op-service-account-connectors-sync'
+# A single read gets a SHORT ceiling on purpose. A long one is worse than useless when
+# the failure mode is a modal dialog waiting on a human: it holds the prompt on screen.
+# A healthy robot call answers in about a second.
+OP_READ_TIMEOUT = 10
+
+
+def _load_op_items():
+    """Import the shared op_items module from ~/.agents. Read-only use of their code."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location('op_items', CONNECTORS / 'op_items.py')
+    if spec is None or spec.loader is None:
+        raise Blocked('op_items.py not found; cannot read credentials the proven way')
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module
+
+
+def _keychain_get(service: str) -> dict | None:
+    proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
+                           '-s', service, '-w'], capture_output=True, text=True,
+                          timeout=OP_READ_TIMEOUT)
+    if proc.returncode:
+        return None
+    try:
+        held = json.loads(proc.stdout.strip())
+    except ValueError:
+        return None
+    if not isinstance(held, dict) or time.time() - float(held.get('ts', 0)) >= CACHE_TTL_SECONDS:
+        return None
+    headers = held.get('headers')
+    return headers if isinstance(headers, dict) and headers else None
+
+
+def _keychain_put(service: str, headers: dict) -> None:
+    # security(1) -i reads its command from stdin, so no credential rides in argv.
+    import shlex
+    command = ['add-generic-password', '-U', '-a', CACHE_ACCOUNT, '-s', service, '-w',
+               json.dumps({'ts': time.time(), 'headers': headers})]
+    subprocess.run([SECURITY, '-i'], input=shlex.join(command) + '\n',
+                   capture_output=True, text=True, timeout=OP_READ_TIMEOUT)
+
+
+def _robot_token() -> str:
+    proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
+                           '-s', ROBOT_TOKEN_SERVICE, '-w'], capture_output=True, text=True,
+                          timeout=OP_READ_TIMEOUT)
+    if proc.returncode or not proc.stdout.strip():
+        raise Blocked('the robot service-account token is not readable')
+    return proc.stdout.strip()
+
+
+def signoz_headers() -> dict:
+    """SigNoz ingestion header, Keychain-cached, read through robot_env on a miss."""
+    cached = _keychain_get(SIGNOZ_CACHE_SERVICE)
+    if cached:
+        return cached
+    op_items = _load_op_items()
+    token = _robot_token()
+    with op_items.robot_env(token) as env:
+        proc = subprocess.run(['op', 'read', SIGNOZ_OP_REF], capture_output=True, text=True,
+                              env=env, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
+    if proc.returncode or not proc.stdout.strip():
+        raise Blocked('the SigNoz key could not be read from 1Password')
+    key = proc.stdout.strip()
+    if '\n' in key or '\r' in key:
+        raise Blocked('the SigNoz key does not have the expected shape')
+    headers = {SIGNOZ_HEADER: key}
+    _keychain_put(SIGNOZ_CACHE_SERVICE, headers)
+    return headers
+
+
+def langfuse_headers() -> dict:
+    """Langfuse headers from the EXISTING helper, which already owns its own 12h cache."""
+    if not LANGFUSE_HELPER.exists():
+        raise Blocked('the Langfuse header helper is missing')
+    proc = subprocess.run([sys.executable, '-B', str(LANGFUSE_HELPER)], capture_output=True,
+                          text=True, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
+    if proc.returncode:
+        raise Blocked('the Langfuse header helper would not answer')
+    try:
+        headers = json.loads(proc.stdout.strip())
+    except ValueError:
+        raise Blocked('the Langfuse header helper returned nothing usable') from None
+    if not isinstance(headers, dict) or 'Authorization' not in headers:
+        raise Blocked('the Langfuse header helper returned no Authorization')
+    return headers
 
 
 def auth_for(name: str) -> str:
     """Header VALUE for one upstream. Never print or log the return value."""
-    url, header, vault, item, field = UPSTREAMS[name]
-    env = _op_env()
-    op = os.environ.get('LANGFUSE_OP_BIN', '/opt/homebrew/bin/op')
+    if name == 'signoz':
+        return signoz_headers()[SIGNOZ_HEADER]
     if name == 'langfuse':
-        import base64
-        public = _run([op, 'read', f'op://{vault}/{item}/public_key'], env)
-        secret = _run([op, 'read', f'op://{vault}/{item}/secret_key'], env)
-        if not public.startswith('pk-lf-') or not secret.startswith('sk-lf-'):
-            raise Blocked('the Langfuse keys do not have the expected shape')
-        return 'Basic ' + base64.b64encode(f'{public}:{secret}'.encode()).decode()
-    value = _run([op, 'read', f'op://{vault}/{item}/{field}'], env)
-    if not value or '\n' in value:
-        raise Blocked(f'the {name} key does not have the expected shape')
-    return value
+        return langfuse_headers()['Authorization']
+    raise Blocked(f'no credential route for upstream {name}')
 
 
 class KeyCache:
@@ -402,7 +499,7 @@ class KeyCache:
 
 
 def forward(name: str, body: bytes, keys: KeyCache) -> int:
-    url, header, *_ = UPSTREAMS[name]
+    url, header = UPSTREAMS[name]
     from urllib.parse import urlsplit
     if urlsplit(url).hostname not in ALLOWED_HOSTS:
         raise Blocked('refused: upstream host is not in ALLOWED_HOSTS')
