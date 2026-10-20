@@ -54,6 +54,41 @@ it fixed. `op_items.robot_env` documents the cause; nothing else should hand `op
 3. **low:** `_run` and `HELPER_TIMEOUT = 90` in `tools/otel_collector.py` are dead code and
    unreachable. Delete them; a reader would otherwise believe a 90s credential path exists.
 
+### UPDATE 04:40Z: R2 PASSED, wrapper applied, two commits stuck in the shared folder
+
+`GATE PASS` on R2, commit `d3da1e6`, all four criteria, no high findings, acceptance hash unchanged
+between rounds. Criterion 4 met.
+
+APPLY-p4 step 3 DONE and verified: precondition `8eb092cc...` checked first, original backed up at
+`~/Backups/codex-traced-20261020T002743` mode 600, installed file and source both `d4ffc783...`,
+`ENDPOINT` now `http://127.0.0.1:4320/v1/traces`, compiles. `otlp_relay.py` still `90e6dd0a...`,
+so p3 stays unapplied.
+
+Step 4 DONE: card placed, `6848b856...`, saying sending is LIVE and that MCP read access is NOT
+wired.
+
+**BLOCKED, on other agents' work rather than ours.** Both commits in `~/.agents` are refused by its
+pre-commit hook because of **29 untracked files from other agents** (`.board-detached-*/`, `board`,
+`skills/firecrawl-*/`, `tools/guards/test_*.py` and more). I verified that count myself rather than
+relaying it. The hook offers `AGENTS_ALLOW_UNTRACKED=1` as a deliberate-WIP override; a subagent
+declined to use it and so did I, because it is a guard override nobody authorised. Both files are
+APPLIED, backed up, readback-verified and STAGED (`A tools/cards/signoz.md`,
+`M codex_traced.py`). Autosave covers them. They need either the other agent to commit or ignore
+its files, or explicit permission for that override.
+
+**Also still true:** the card does not conform to its template, so `registry/connectors/signoz.json`
+is absent and the hosted lookup cannot find the card even though the file is there. It needs the
+`tool-card` skill: a `## Failure and fix` section, the passport, and trimming from 107 lines to the
+60-line, 5,000-char, 70-char-index limits. Do NOT hand-trim it into something that passes the
+checker while losing that sending is live, that MCP read access is unwired, or that `op` must go
+through `op_items.robot_env`. A conforming card that no longer tells the truth is worse than a
+rejected one.
+
+**Lesson for any future review subagent:** `codex_review.py` cannot reach its backend from inside
+the Seatbelt sandbox and exits 1 with no verdict. Run it unsandboxed. A subagent reported the gate
+blocked for exactly this and was right to stop rather than invent a review; the identical command
+outside the sandbox passed immediately.
+
 ### Remaining on p4-refresh and p4-apply
 
 - **R2 cross-family review** on frozen ACCEPTANCE sha `c50b8c6f...` (criterion 4). Two-round rule
