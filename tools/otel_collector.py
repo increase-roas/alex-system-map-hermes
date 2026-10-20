@@ -79,7 +79,14 @@ KNOWN_SERVICES = (
     'claude-code', 'codex', 'cursor', 'javar', 'javante', 'auditor',
     'task-codex', 'task-claude', 'paperclip-worker', 'paperclip-reviewer',
     'dynamite-chatbot', 'alex-system-map',
+    # Added 2026-10-20 (Alex: "switch everything to signoz"). paperclip = the Paperclip
+    # server's own default service.name; hermes-agent = the Hermes Langfuse plugin's default.
+    'paperclip', 'hermes-agent',
 )
+
+# Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
+# Hermes Langfuse plugin) post when their base URL points here; the body is plain OTLP.
+TRACE_PATHS = ('/v1/traces', '/api/public/otel/v1/traces')
 
 # Never forwarded. The ChatGPT app's built-in Codex sent roughly 4.7M events a week
 # into Langfuse with no per-run session id; Alex switched it off on 2026-10-19 and the
@@ -397,8 +404,28 @@ def _robot_token() -> str:
     return proc.stdout.strip()
 
 
+# Keychain-only mode, for a machine with no 1Password robot (the Mac mini, 2026-10-20).
+# Set by --key-keychain SERVICE: the raw ingestion key sits in the login Keychain under
+# account CACHE_ACCOUNT and that service, and 1Password is never called.
+STATIC_KEY_SERVICE: str | None = None
+
+
+def _keychain_raw(service: str) -> str:
+    try:
+        proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT, '-s', service, '-w'],
+                              capture_output=True, text=True, timeout=OP_READ_TIMEOUT)
+    except subprocess.SubprocessError:
+        raise Blocked('the Keychain did not answer') from None
+    key = proc.stdout.strip()
+    if proc.returncode or not key or '\n' in key:
+        raise Blocked(f'no usable SigNoz key in Keychain service {service}')
+    return key
+
+
 def signoz_headers() -> dict:
     """SigNoz ingestion header, Keychain-cached, read through robot_env on a miss."""
+    if STATIC_KEY_SERVICE:
+        return {SIGNOZ_HEADER: _keychain_raw(STATIC_KEY_SERVICE)}
     cached = _keychain_get(SIGNOZ_CACHE_SERVICE)
     if cached:
         return cached
@@ -662,7 +689,7 @@ class Handler(BaseHTTPRequestHandler):
         if not is_loopback(self.client_address[0]):
             self._reply(403)
             return
-        if self.path != '/v1/traces':
+        if self.path.split('?', 1)[0] not in TRACE_PATHS:
             self._reply(404)
             return
         try:
@@ -1000,10 +1027,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--rate-per-min', type=int, default=DEFAULT_RATE_PER_MIN)
     parser.add_argument('--log', default=None, help='JSONL path for per-request counts')
     parser.add_argument('--self-test', action='store_true')
+    parser.add_argument('--key-keychain', default=None, metavar='SERVICE',
+                        help='read the SigNoz key from this login Keychain service only (no 1Password)')
     args = parser.parse_args(argv)
 
     if args.self_test:
         return self_test()
+    if args.key_keychain:
+        globals()['STATIC_KEY_SERVICE'] = args.key_keychain
 
     upstreams = args.upstream or []
     if not upstreams and not args.dry_run:
