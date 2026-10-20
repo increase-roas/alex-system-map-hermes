@@ -36,13 +36,24 @@ def run(cmd, env=None):
 
 
 def read_key() -> str:
+    # Through op_items.robot_env, NOT the real HOME. Third place this bug appeared
+    # tonight: under the real HOME op stalls for minutes before any network step, which
+    # op_items.robot_env documents itself, and it also makes macOS prompt for app-data
+    # access. The collector was fixed, then verify_durable.py, and this file was missed
+    # because I patched one and assumed both. It cost a 45s timeout on a live canary.
+    import importlib.util
+    spec = importlib.util.spec_from_file_location(
+        'op_items', os.path.expanduser('~/.agents/tools/connectors/op_items.py'))
+    op_items = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(op_items)
     token = run(['/usr/bin/security', 'find-generic-password', '-a', 'connectors-sync',
                  '-s', 'op-service-account-connectors-sync', '-w'])
-    env = {'PATH': '/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin',
-           'HOME': os.environ.get('HOME', ''),
-           'OP_SERVICE_ACCOUNT_TOKEN': token,
-           'OP_BIOMETRIC_UNLOCK_ENABLED': 'false'}
-    return run([OP_BIN, 'read', READ_KEY_REF], env)
+    with op_items.robot_env(token) as env:
+        proc = subprocess.run([OP_BIN, 'read', READ_KEY_REF], capture_output=True,
+                              text=True, env=env, stdin=subprocess.DEVNULL, timeout=15)
+    if proc.returncode or not proc.stdout.strip():
+        raise SystemExit('could not read the SigNoz viewer key')
+    return proc.stdout.strip()
 
 
 # --- minimal OTLP writer -----------------------------------------------------

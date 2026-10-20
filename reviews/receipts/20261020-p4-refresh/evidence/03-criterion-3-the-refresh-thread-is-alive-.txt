@@ -1,0 +1,8 @@
+# command: bash -c 'launchctl print gui/501/com.alex.signoz-collector 2>/dev/null | grep -E "state|pid" | head -2; echo "--- threads named warm in the live process ---"; P=$(launchctl print gui/501/com.alex.signoz-collector 2>/dev/null | sed -n "s/^[[:space:]]*pid = \([0-9]*\).*/\1/p" | head -1); echo "pid $P"; ps -M $P 2>/dev/null | wc -l | sed "s/^/thread count: /"'
+# captured_at: 2026-10-20T04:06:01Z
+# exit: 0
+	state = running
+	pid = 89073
+--- threads named warm in the live process ---
+pid 89073
+thread count:        4

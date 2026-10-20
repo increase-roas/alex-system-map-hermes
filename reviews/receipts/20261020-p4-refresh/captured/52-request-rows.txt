@@ -1,0 +1,7 @@
+COMMAND:    tail of the collector request log
+UTC: 2026-10-20T04:14:57Z
+---- output ----
+{"ts": "2026-10-20T04:06:02Z", "bytes_in": 141, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T04:14:12Z", "bytes_in": 188, "kept": {"codex": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T04:14:12Z", "bytes_in": 141, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+---- end ----

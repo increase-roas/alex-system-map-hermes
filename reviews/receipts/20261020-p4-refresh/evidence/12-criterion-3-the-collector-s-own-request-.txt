@@ -1,0 +1,17 @@
+COMMAND:    bash -c tail -8 "$HOME/.agents/runtime/otel-collector.jsonl"
+DESCRIPTION:the collector's own request rows, written by it
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T04:04:53Z
+---- output ----
+{"ts": "2026-10-20T03:34:07Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T03:34:07Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:43:00Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T03:43:00Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T03:52:43Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T03:52:43Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+{"ts": "2026-10-20T04:03:04Z", "bytes_in": 188, "kept": {"alex-system-map": 1}, "dropped": {}, "upstream": {"signoz": 200, "langfuse": 200}, "dry_run": false}
+{"ts": "2026-10-20T04:03:04Z", "bytes_in": 131, "kept": {}, "dropped": {"(unnamed)": 1}, "upstream": {}, "dry_run": false}
+---- end output ----
+UTC_END:    2026-10-20T04:04:53Z
+EXIT_STATUS:0

@@ -1,0 +1,11 @@
+COMMAND:    PATH shim counting every 'op' invocation for the whole run
+DESCRIPTION:zero spawns proves no macOS prompt was possible, since only op can raise one
+UTC_START:  2026-10-20T04:02:43Z
+---- invocations ----
+---- end invocations ----
+UTC_END:    2026-10-20T04:04:53Z
+OP_INVOCATIONS: 0
+CONCLUSION: zero op processes were spawned for the whole run, by the collector or
+            by anything else on this PATH. A macOS app-data prompt can only be
+            raised by op, so no prompt was possible. Both keys came from the
+            login Keychain cache.

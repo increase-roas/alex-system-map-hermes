@@ -1,0 +1,37 @@
+COMMAND:    python3 -B work/signoz-relay/canary_through_relay.py --port 4320
+DESCRIPTION:live canary through the restarted collector; exit status NOT masked by a pipe
+SANDBOX:    Seatbelt DISABLED
+UTC_START:  2026-10-20T04:14:11Z
+---- output ----
+sending through the relay at http://127.0.0.1:4320/v1/traces
+  named   service.name='codex'  relay answered HTTP 200  trace=c2b1a773cb3c0305726e0529ef5d847c
+  unnamed no service.name      relay answered HTTP 200  trace=40256bea0f1acd398bd93ffe9f095d63
+
+waiting 45s for SigNoz to index, then reading back with the read-only key
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/canary_through_relay.py", line 170, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "/Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/canary_through_relay.py", line 143, in main
+    key = read_key()
+  File "/Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/canary_through_relay.py", line 45, in read_key
+    return run([OP_BIN, 'read', READ_KEY_REF], env)
+  File "/Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/canary_through_relay.py", line 32, in run
+    proc = subprocess.run(cmd, capture_output=True, text=True, env=env, timeout=45)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 557, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1221, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 2154, in _communicate
+    self._check_timeout(endtime, orig_timeout, stdout, stderr)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1268, in _check_timeout
+    raise TimeoutExpired(
+    ...<2 lines>...
+            stderr=b''.join(stderr_seq) if stderr_seq else None)
+subprocess.TimeoutExpired: Command '['/opt/homebrew/bin/op', 'read', 'op://Connectors/ergsvtc63iqob4g7itsr7lpr64/credential']' timed out after 45 seconds
+---- end output ----
+UTC_END:    2026-10-20T04:14:57Z
+EXIT_STATUS:1

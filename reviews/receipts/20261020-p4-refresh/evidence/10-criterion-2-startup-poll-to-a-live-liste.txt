@@ -1,0 +1,17 @@
+COMMAND:    bash -c for i in $(seq 1 12); do
+      PID=$(launchctl print gui/$(id -u)/com.alex.signoz-collector 2>/dev/null | sed -n "s/^[[:space:]]*pid = \([0-9]*\).*/\1/p" | head -1)
+      L=$(lsof -nP -iTCP:4320 2>/dev/null | grep -c LISTEN)
+      echo "$(date -u "+%H:%M:%SZ")  t+$((i*10))s  pid=${PID:-none}  listening=$L"
+      [ "$L" = "1" ] && break
+      sleep 10
+    done
+DESCRIPTION:poll launchd pid and port until listening, max 120s
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T04:02:52Z
+---- output ----
+04:02:52Z  t+10s  pid=88086  listening=0
+04:03:02Z  t+20s  pid=88086  listening=1
+---- end output ----
+UTC_END:    2026-10-20T04:03:03Z
+EXIT_STATUS:0

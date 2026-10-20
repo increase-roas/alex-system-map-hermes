@@ -1,0 +1,51 @@
+COMMAND:    /usr/bin/python3 -B tools/otel_collector.py --self-test
+DESCRIPTION:collector suite on /usr/bin/python3 3.9.6, the interpreter the plist uses
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T04:02:43Z
+---- output ----
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key read from 1Password (value not shown)
+  signoz key read from 1Password (value not shown)
+  signoz key read from 1Password (value not shown)
+  signoz key read from 1Password (value not shown)
+  signoz key read from 1Password (value not shown)
+  signoz key read from 1Password (value not shown)
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: simulated 1Password failure
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: simulated 1Password failure
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (3 in a row); holding off 120s so 1Password is not hammered
+  signoz key still unavailable: simulated 1Password failure
+  signoz key still unavailable: signoz key unavailable; not retrying for 90s
+  signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  pass  named service kept                                    
+  pass  resource with no attributes dropped                   
+  pass  empty service.name dropped                            
+  pass  blocked service refused                               
+  pass  unknown name counted, not silently kept               
+  pass  rate guard passes the first burst                     
+  pass  rate guard throttles the flood                        
+  pass  one sender cannot starve another                      
+  pass  mixed batch keeps the named and drops the rest        
+  pass  re-emitted body is parseable OTLP                     
+  pass  loopback check rejects a public address               
+  pass  loopback check accepts 127.0.0.1                      
+  pass  five requests cause ONE call to 1Password, not five   
+  pass  later requests are refused without calling out        
+  pass  backoff grows with consecutive failures               
+  pass  backoff is capped                                     
+  pass  a recovered key is cached and the failure count resets
+  pass  peek on a cold cache refuses instead of blocking      
+  pass  peek makes NO call to 1Password                       
+  pass  warmer outlives the TTL and keeps a header available  
+  pass  refresh is scheduled, not a storm                     
+  pass  an unrefreshed header is refused after the TTL        
+  pass  failed reads keep the warmer alive and are backed off 
+
+23/23 checks passed
+---- end output ----
+UTC_END:    2026-10-20T04:02:44Z
+EXIT_STATUS:0
