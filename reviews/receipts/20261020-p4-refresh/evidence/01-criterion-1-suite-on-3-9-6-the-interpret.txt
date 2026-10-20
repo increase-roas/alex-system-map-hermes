@@ -1,37 +1,62 @@
 # command: /usr/bin/python3 -B tools/otel_collector.py --self-test
-# captured_at: 2026-10-20T04:06:01Z
+# captured_at: 2026-10-20T04:20:51Z
 # exit: 0
+  key warmer started: thread=MainThread
   signoz key read from 1Password (value not shown)
   signoz key read from 1Password (value not shown)
   signoz key read from 1Password (value not shown)
   signoz key read from 1Password (value not shown)
   signoz key read from 1Password (value not shown)
   signoz key read from 1Password (value not shown)
-  pass  named service kept                                    
-  pass  resource with no attributes dropped                   
-  pass  empty service.name dropped                            
-  pass  blocked service refused                               
-  pass  unknown name counted, not silently kept               
-  pass  rate guard passes the first burst                     
-  pass  rate guard throttles the flood                        
-  pass  one sender cannot starve another                      
-  pass  mixed batch keeps the named and drops the rest        
-  pass  re-emitted body is parseable OTLP                     
-  pass  loopback check rejects a public address               
-  pass  loopback check accepts 127.0.0.1                      
-  pass  five requests cause ONE call to 1Password, not five   
-  pass  later requests are refused without calling out        
-  pass  backoff grows with consecutive failures               
-  pass  backoff is capped                                     
-  pass  a recovered key is cached and the failure count resets
-  pass  peek on a cold cache refuses instead of blocking      
-  pass  peek makes NO call to 1Password                       
-  pass  warmer outlives the TTL and keeps a header available  
-  pass  refresh is scheduled, not a storm                     
-  pass  an unrefreshed header is refused after the TTL        
-  pass  failed reads keep the warmer alive and are backed off 
+  key warmer started: thread=MainThread
+  key warmer started: thread=MainThread
+  key warmer started: thread=MainThread
+  key warmer started: thread=MainThread
+  key warmer started: thread=MainThread
+  key warmer started: thread=MainThread
+  pass  named service kept                                                                           
+  pass  resource with no attributes dropped                                                          
+  pass  empty service.name dropped                                                                   
+  pass  blocked service refused                                                                      
+  pass  unknown name counted, not silently kept                                                      
+  pass  rate guard passes the first burst                                                            
+  pass  rate guard throttles the flood                                                               
+  pass  one sender cannot starve another                                                             
+  pass  mixed batch keeps the named and drops the rest                                               
+  pass  re-emitted body is parseable OTLP                                                            
+  pass  loopback check rejects a public address                                                      
+  pass  loopback check accepts 127.0.0.1                                                             
+  pass  five requests cause ONE call to 1Password, not five                                          
+  pass  later requests are refused without calling out                                               
+  pass  backoff grows with consecutive failures                                                      
+  pass  backoff is capped                                                                            
+  pass  a recovered key is cached and the failure count resets                                       
+  pass  peek on a cold cache refuses instead of blocking                                             
+  pass  peek makes NO call to 1Password                                                              
+  pass  warmer outlives the TTL and keeps a header available                                         
+  pass  refresh is scheduled, not a storm                                                            
+  pass  an unrefreshed header is refused after the TTL                                               
+  pass  failed reads keep the warmer alive and are backed off                                        
+  pass  subprocess.TimeoutExpired from the reader is counted as a failure                            
+  pass  subprocess.TimeoutExpired gets the same attempt count as Blocked (not a fixed-interval retry)
+  pass  subprocess.TimeoutExpired sets a hold, and the warmer stays alive                            
+  pass  subprocess.TimeoutExpired reaches callers as Blocked                                         
+  pass  an arbitrary RuntimeError from the reader is counted as a failure                            
+  pass  an arbitrary RuntimeError gets the same attempt count as Blocked (not a fixed-interval retry)
+  pass  an arbitrary RuntimeError sets a hold, and the warmer stays alive                            
+  pass  an arbitrary RuntimeError reaches callers as Blocked                                         
+  pass  _keychain_get: timeout becomes Blocked                                                       
+  pass  _keychain_put: timeout does not escape                                                       
+  pass  _robot_token: timeout becomes Blocked                                                        
+  pass  langfuse_headers: timeout becomes Blocked                                                    
+  pass  signoz_headers op read: timeout becomes Blocked                                              
+  pass  _keychain_get: subprocess error becomes Blocked                                              
+  pass  _keychain_put: subprocess error does not escape                                              
+  pass  _robot_token: subprocess error becomes Blocked                                               
+  pass  langfuse_headers: subprocess error becomes Blocked                                           
+  pass  signoz_headers op read: subprocess error becomes Blocked                                     
 
-23/23 checks passed
+41/41 checks passed
 
 --- stderr ---
   signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
@@ -45,3 +70,83 @@
   signoz key still unavailable: simulated 1Password failure
   signoz key still unavailable: signoz key unavailable; not retrying for 90s
   signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: simulated
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: simulated
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (3 in a row); holding off 120s so 1Password is not hammered
+  signoz key still unavailable: simulated
+  signoz key still unavailable: signoz key unavailable; not retrying for 90s
+  signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (4 in a row); holding off 240s so 1Password is not hammered
+  signoz key still unavailable: simulated
+  signoz key still unavailable: signoz key unavailable; not retrying for 210s
+  signoz key still unavailable: signoz key unavailable; not retrying for 180s
+  signoz key still unavailable: signoz key unavailable; not retrying for 150s
+  signoz key still unavailable: signoz key unavailable; not retrying for 120s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (3 in a row); holding off 120s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key still unavailable: signoz key unavailable; not retrying for 90s
+  signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (4 in a row); holding off 240s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key still unavailable: signoz key unavailable; not retrying for 210s
+  signoz key still unavailable: signoz key unavailable; not retrying for 180s
+  signoz key still unavailable: signoz key unavailable; not retrying for 150s
+  signoz key still unavailable: signoz key unavailable; not retrying for 120s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (3 in a row); holding off 120s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key still unavailable: signoz key unavailable; not retrying for 90s
+  signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (4 in a row); holding off 240s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (TimeoutExpired)
+  signoz key still unavailable: signoz key unavailable; not retrying for 210s
+  signoz key still unavailable: signoz key unavailable; not retrying for 180s
+  signoz key still unavailable: signoz key unavailable; not retrying for 150s
+  signoz key still unavailable: signoz key unavailable; not retrying for 120s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (3 in a row); holding off 120s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key still unavailable: signoz key unavailable; not retrying for 90s
+  signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (4 in a row); holding off 240s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key still unavailable: signoz key unavailable; not retrying for 210s
+  signoz key still unavailable: signoz key unavailable; not retrying for 180s
+  signoz key still unavailable: signoz key unavailable; not retrying for 150s
+  signoz key still unavailable: signoz key unavailable; not retrying for 120s
+  signoz key read failed (1 in a row); holding off 30s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key read failed (2 in a row); holding off 60s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (3 in a row); holding off 120s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key still unavailable: signoz key unavailable; not retrying for 90s
+  signoz key still unavailable: signoz key unavailable; not retrying for 60s
+  signoz key still unavailable: signoz key unavailable; not retrying for 30s
+  signoz key read failed (4 in a row); holding off 240s so 1Password is not hammered
+  signoz key still unavailable: signoz key read failed (RuntimeError)
+  signoz key still unavailable: signoz key unavailable; not retrying for 210s
+  signoz key still unavailable: signoz key unavailable; not retrying for 180s
+  signoz key still unavailable: signoz key unavailable; not retrying for 150s
+  signoz key still unavailable: signoz key unavailable; not retrying for 120s

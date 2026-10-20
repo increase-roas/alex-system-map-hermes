@@ -1,0 +1,17 @@
+COMMAND:    launchctl kickstart -k gui/$(id -u)/com.alex.signoz-collector, then read the warmer line
+DESCRIPTION:restart so the running process carries ec4c42c, then prove the named refresh thread started
+SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T04:13:51Z
+---- output ----
+kickstart exit: 0
+04:13:52Z  t+10s pid=93330 listening=0
+04:14:02Z  t+20s pid=93330 listening=1
+--- the named refresh thread, from the job's own stdout ---
+156:  key warmer started: thread=warm-keys
+--- last stdout lines ---
+  counts: GET http://127.0.0.1:4320/stats
+  key warmer started: thread=warm-keys
+  signoz key read from 1Password (value not shown)
+  langfuse key read from 1Password (value not shown)
+---- end output ----
+UTC_END:    2026-10-20T04:14:02Z

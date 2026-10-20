@@ -1,0 +1,19 @@
+COMMAND:    python3 -B work/signoz-relay/canary_through_relay.py --port 4320
+DESCRIPTION:live canary after fixing the canary's own key read to use robot_env
+UTC_START:  2026-10-20T04:16:09Z
+---- output ----
+sending through the relay at http://127.0.0.1:4320/v1/traces
+  named   service.name='codex'  relay answered HTTP 200  trace=baf7b95f550196411ce98cc4ffdbc2f6
+  unnamed no service.name      relay answered HTTP 200  trace=a59d880df04279d716b5ba5d62308a64
+
+waiting 45s for SigNoz to index, then reading back with the read-only key
+
+  PASS  named span in SigNoz: PRESENT ServiceName='codex'   (expected PRESENT as codex)
+  PASS  unnamed span in SigNoz: ABSENT   (expected ABSENT, dropped by the relay)
+
+  SigNoz UI: https://pet-mammoth.us2.signoz.cloud/trace/baf7b95f550196411ce98cc4ffdbc2f6
+  drop counter: tail -5 ~/.agents/runtime/codex-otlp-relay.jsonl
+                expect a row with "dropped":{"unnamed":1}
+---- end output ----
+UTC_END:    2026-10-20T04:16:22Z
+EXIT_STATUS:0
