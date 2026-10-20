@@ -48,6 +48,7 @@ import ipaddress
 import json
 import os
 import re
+import signal
 import subprocess
 import sys
 import threading
@@ -590,12 +591,29 @@ def main(argv: list[str] | None = None) -> int:
     print(f'  rate guard: {args.rate_per_min} spans/min per service')
     print(f'  blocked: {", ".join(BLOCKED_SERVICES)}')
     print(f'  counts: GET http://127.0.0.1:{server.server_address[1]}/stats')
+    sys.stdout.flush()
+
+    # Under launchd a stop arrives as SIGTERM, not KeyboardInterrupt. shutdown()
+    # cannot be called from the serving thread, so the handler only sets a flag and
+    # the main thread closes the listener and lets in-flight requests finish.
+    stop = threading.Event()
+    previous = {}
+    worker = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': 0.5})
     try:
-        server.serve_forever(poll_interval=0.5)
-    except KeyboardInterrupt:
-        print('\n' + json.dumps(server.stats.snapshot(), indent=2))
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            previous[sig] = signal.signal(sig, lambda *_: stop.set())
+        worker.start()
+        stop.wait()
     finally:
+        if worker.is_alive():
+            server.shutdown()
+            worker.join(timeout=10)
         server.server_close()
+        for sig, handler in previous.items():
+            signal.signal(sig, handler)
+    # The final counts go to stdout, which launchd captures in the job's log.
+    print(json.dumps(server.stats.snapshot(), indent=2))
+    sys.stdout.flush()
     return 0
 
 

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  The one local OTLP collector for this MacBook.
+
+  Agents post to 127.0.0.1:4320 and hold no vendor key. This job reads the SigNoz
+  ingestion key from 1Password at run time, drops any span group with no
+  service.name, refuses the ChatGPT app's codex-worker, rate guards each service
+  separately, and sends to SigNoz while mirroring named spans to Langfuse for the
+  side by side day.
+
+  Interpreter is /usr/bin/python3 (3.9.6) deliberately, matching the existing relay
+  job: the collector is stdlib only and its test suite passes on both 3.9.6 and
+  3.14.6, so it does not depend on a Homebrew Python that an update could move.
+
+  Verified before install, 2026-10-20:
+    the 1Password robot read works with a launchd shaped environment and no TTY
+    (keychain exit 0, op read exit 0); SIGTERM shuts the collector down cleanly and
+    flushes its final counts to stdout, which launchd captures in the log below.
+
+  AFTER THE SIDE BY SIDE DAY: delete the two argument entries that say "upstream"
+  and "langfuse" from the array below, leaving the SigNoz pair, then reload the job.
+  SigNoz is then the only destination.
+
+  NOTE on this comment: XML forbids a double hyphen inside a comment, so flag names
+  are written here without their leading dashes. plutil lint accepts a file that
+  breaks that rule but plistlib rejects it, which is how the mistake was caught.
+
+  Install, uninstall and proof: work/signoz-relay/APPLY-p4.md in
+  ~/Projects/alex-system-map.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.alex.signoz-collector</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/usr/bin/python3</string>
+        <string>-B</string>
+        <string><HOME>/Projects/alex-system-map/tools/otel_collector.py</string>
+        <string>--port</string>
+        <string>4320</string>
+        <string>--upstream</string>
+        <string>signoz</string>
+        <string>--upstream</string>
+        <string>langfuse</string>
+        <string>--log</string>
+        <string><HOME>/.agents/runtime/otel-collector.jsonl</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>ThrottleInterval</key>
+    <integer>10</integer>
+    <key>StandardOutPath</key>
+    <string><HOME>/.agents/runtime/signoz-collector.out.log</string>
+    <key>StandardErrorPath</key>
+    <string><HOME>/.agents/runtime/signoz-collector.err.log</string>
+    <key>WorkingDirectory</key>
+    <string><HOME>/Projects/alex-system-map</string>
+</dict>
+</plist>
