@@ -354,9 +354,13 @@ def _load_op_items():
 
 
 def _keychain_get(service: str) -> dict | None:
-    proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
-                           '-s', service, '-w'], capture_output=True, text=True,
-                          timeout=OP_READ_TIMEOUT)
+    try:
+        proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
+                               '-s', service, '-w'], capture_output=True, text=True,
+                              timeout=OP_READ_TIMEOUT)
+    except subprocess.SubprocessError:
+        # Blocked, not a miss: a hung Keychain must not fall through to a 1Password read.
+        raise Blocked('the Keychain cache did not answer') from None
     if proc.returncode:
         return None
     try:
@@ -374,14 +378,20 @@ def _keychain_put(service: str, headers: dict) -> None:
     import shlex
     command = ['add-generic-password', '-U', '-a', CACHE_ACCOUNT, '-s', service, '-w',
                json.dumps({'ts': time.time(), 'headers': headers})]
-    subprocess.run([SECURITY, '-i'], input=shlex.join(command) + '\n',
-                   capture_output=True, text=True, timeout=OP_READ_TIMEOUT)
+    try:
+        subprocess.run([SECURITY, '-i'], input=shlex.join(command) + '\n',
+                       capture_output=True, text=True, timeout=OP_READ_TIMEOUT)
+    except subprocess.SubprocessError:
+        pass  # best effort: the key is already read, a missed cache write only costs a re-read
 
 
 def _robot_token() -> str:
-    proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
-                           '-s', ROBOT_TOKEN_SERVICE, '-w'], capture_output=True, text=True,
-                          timeout=OP_READ_TIMEOUT)
+    try:
+        proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
+                               '-s', ROBOT_TOKEN_SERVICE, '-w'], capture_output=True, text=True,
+                              timeout=OP_READ_TIMEOUT)
+    except subprocess.SubprocessError:
+        raise Blocked('the robot service-account token could not be read') from None
     if proc.returncode or not proc.stdout.strip():
         raise Blocked('the robot service-account token is not readable')
     return proc.stdout.strip()
@@ -395,8 +405,11 @@ def signoz_headers() -> dict:
     op_items = _load_op_items()
     token = _robot_token()
     with op_items.robot_env(token) as env:
-        proc = subprocess.run(['op', 'read', SIGNOZ_OP_REF], capture_output=True, text=True,
-                              env=env, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
+        try:
+            proc = subprocess.run(['op', 'read', SIGNOZ_OP_REF], capture_output=True, text=True,
+                                  env=env, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
+        except subprocess.SubprocessError:
+            raise Blocked('op did not answer for the SigNoz key') from None
     if proc.returncode or not proc.stdout.strip():
         raise Blocked('the SigNoz key could not be read from 1Password')
     key = proc.stdout.strip()
@@ -411,8 +424,11 @@ def langfuse_headers() -> dict:
     """Langfuse headers from the EXISTING helper, which already owns its own 12h cache."""
     if not LANGFUSE_HELPER.exists():
         raise Blocked('the Langfuse header helper is missing')
-    proc = subprocess.run([sys.executable, '-B', str(LANGFUSE_HELPER)], capture_output=True,
-                          text=True, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
+    try:
+        proc = subprocess.run([sys.executable, '-B', str(LANGFUSE_HELPER)], capture_output=True,
+                              text=True, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
+    except subprocess.SubprocessError:
+        raise Blocked('the Langfuse header helper did not answer') from None
     if proc.returncode:
         raise Blocked('the Langfuse header helper would not answer')
     try:
@@ -470,7 +486,9 @@ class KeyCache:
                 raise Blocked(f'{name} key unavailable; not retrying for {wait:.0f}s')
         try:
             value = auth_for(name)
-        except Blocked:
+        except Exception as err:
+            # Any failure counts, not just Blocked: a raw TimeoutExpired once skipped
+            # this bookkeeping and the warmer retried at a fixed interval forever.
             with self.lock:
                 self.failures[name] = self.failures.get(name, 0) + 1
                 delay = self.backoff_for(self.failures[name])
@@ -479,7 +497,9 @@ class KeyCache:
             print(f'  {name} key read failed ({count} in a row); holding off {delay:.0f}s '
                   f'so 1Password is not hammered', file=sys.stderr)
             sys.stderr.flush()
-            raise
+            if isinstance(err, Blocked):
+                raise
+            raise Blocked(f'{name} key read failed ({type(err).__name__})') from None
         with self.lock:
             self.cache[name] = (value, self.clock())
             self.failures.pop(name, None)
@@ -511,6 +531,9 @@ def warm_loop(keys: KeyCache, names: list[str], stop, interval: float = KEY_REFR
     on a failed read: a failure waits KEY_BACKOFF_BASE (KeyCache's own backoff stops
     the actual 1Password calls), a success waits `interval`. Uses stop.wait, so a
     SIGTERM ends it promptly."""
+    # Reported once so the thread can be identified from outside, in the job log.
+    print(f'  key warmer started: thread={threading.current_thread().name}')
+    sys.stdout.flush()
     while not stop.is_set():
         failed = False
         for name in names:
@@ -845,6 +868,114 @@ def self_test() -> int:
         warm_loop(down, ['signoz'], fs2, interval=ttl // 2)
         check('failed reads keep the warmer alive and are backed off',
               len(fs2.waits) == 6 and calls['n'] < 6, f'waits {len(fs2.waits)}, calls {calls["n"]}')
+
+        # The backoff bypass: a reader that raised anything but Blocked skipped the
+        # bookkeeping, so the warmer retried at a fixed interval forever. Each failure
+        # type must produce the same attempt count and the same growing hold as Blocked.
+        def run_failing(make_exc):
+            attempts = {'n': 0}
+
+            def failing_auth(name):
+                attempts['n'] += 1
+                raise make_exc()
+
+            globals()['auth_for'] = failing_auth
+            clock = {'t': 0.0}
+            kc = KeyCache(['signoz'], ttl=100, clock=lambda: clock['t'])
+
+            class Stop:
+                def __init__(self):
+                    self.waits = []
+                def is_set(self):
+                    return len(self.waits) >= 12
+                def wait(self, t):
+                    self.waits.append(t)
+                    clock['t'] += t
+                    return self.is_set()
+
+            st = Stop()
+            try:
+                warm_loop(kc, ['signoz'], st, interval=50)
+                survived = True
+            except BaseException:
+                survived = False
+            hold = kc.blocked_until.get('signoz', 0.0) - clock['t']
+            return attempts['n'], kc.failures.get('signoz', 0), survived, len(st.waits), hold, kc
+
+        ref = run_failing(lambda: Blocked('simulated'))
+        for label, make_exc in (
+                ('subprocess.TimeoutExpired', lambda: subprocess.TimeoutExpired(['op', 'read'], 10)),
+                ('an arbitrary RuntimeError', lambda: RuntimeError('boom'))):
+            got = run_failing(make_exc)
+            check(f'{label} from the reader is counted as a failure',
+                  got[1] >= 1, f'failure_count {got[1]}')
+            check(f'{label} gets the same attempt count as Blocked (not a fixed-interval retry)',
+                  got[0] == ref[0] and got[1] == ref[1],
+                  f'attempts {got[0]} vs {ref[0]}, failure_count {got[1]} vs {ref[1]}')
+            check(f'{label} sets a hold, and the warmer stays alive',
+                  got[2] and got[3] == 12 and got[4] > 0 and ref[0] < 12,
+                  f'survived {got[2]}, waits {got[3]}, hold {got[4]:.0f}s')
+            try:
+                run_failing(make_exc)[5].get('signoz')
+                shape = 'no exception'
+            except Blocked:
+                shape = 'Blocked'
+            except BaseException as err:
+                shape = type(err).__name__
+            check(f'{label} reaches callers as Blocked', shape == 'Blocked', shape)
+        globals()['auth_for'] = real_auth
+
+        # Half one: each credential function turns a subprocess failure into Blocked.
+        real_run = subprocess.run
+        real_helper = globals()['LANGFUSE_HELPER']
+        real_get, real_put = globals()['_keychain_get'], globals()['_keychain_put']
+        real_tok, real_load = globals()['_robot_token'], globals()['_load_op_items']
+
+        def raiser(exc):
+            def fake(*a, **k):
+                raise exc
+            return fake
+
+        def outcome(fn, *args):
+            try:
+                fn(*args)
+                return 'returned'
+            except Blocked:
+                return 'Blocked'
+            except BaseException as err:
+                return type(err).__name__
+
+        class FakeOps:
+            @staticmethod
+            def robot_env(token):
+                import contextlib
+                return contextlib.nullcontext({})
+
+        try:
+            globals()['LANGFUSE_HELPER'] = Path(__file__)
+            for label, exc in (('timeout', subprocess.TimeoutExpired(['x'], 10)),
+                               ('subprocess error', subprocess.SubprocessError('x'))):
+                subprocess.run = raiser(exc)
+                check(f'_keychain_get: {label} becomes Blocked', outcome(real_get, 'svc') == 'Blocked',
+                      outcome(real_get, 'svc'))
+                check(f'_keychain_put: {label} does not escape', outcome(real_put, 'svc', {'h': 'v'}) == 'returned',
+                      outcome(real_put, 'svc', {'h': 'v'}))
+                check(f'_robot_token: {label} becomes Blocked', outcome(real_tok) == 'Blocked', outcome(real_tok))
+                check(f'langfuse_headers: {label} becomes Blocked',
+                      outcome(langfuse_headers) == 'Blocked', outcome(langfuse_headers))
+                globals()['_keychain_get'] = lambda service: None
+                globals()['_keychain_put'] = lambda service, headers: None
+                globals()['_robot_token'] = lambda: 'tok'
+                globals()['_load_op_items'] = lambda: FakeOps
+                check(f'signoz_headers op read: {label} becomes Blocked',
+                      outcome(signoz_headers) == 'Blocked', outcome(signoz_headers))
+                globals()['_keychain_get'], globals()['_keychain_put'] = real_get, real_put
+                globals()['_robot_token'], globals()['_load_op_items'] = real_tok, real_load
+        finally:
+            subprocess.run = real_run
+            globals()['LANGFUSE_HELPER'] = real_helper
+            globals()['_keychain_get'], globals()['_keychain_put'] = real_get, real_put
+            globals()['_robot_token'], globals()['_load_op_items'] = real_tok, real_load
     finally:
         globals()['auth_for'] = real_auth
 
