@@ -79,7 +79,38 @@ Then, separately, confirm it outlives your session: after you have finished and 
 a later check of `curl -s http://127.0.0.1:4320/stats` should still answer. The kill-and-restart
 check above is the stronger version of the same thing.
 
-## Step 3: place the SigNoz tool card
+## Step 3: point the Codex CLI wrapper at the collector
+
+One anchored edit. `codex_traced.py` currently posts straight to Langfuse; it should go through the
+collector on 4320 like every other local agent, so it stops holding a vendor route of its own. The
+wrapper already sets `service.name` itself, default `codex`, so nothing about naming changes.
+
+**Precondition.** Confirm the hash first, because the patch is anchored to this exact file:
+
+```sh
+shasum -a 256 ~/.agents/tools/connectors/codex_otel/codex_traced.py
+# must be 8eb092cceab349fc5ac5908d9ca34c4f5d03d5dd83f0e6464936391e37098d68
+```
+
+**If it differs, STOP** and report. Another agent has edited it since the patch was built.
+
+```sh
+W=/Users/alexlobaito/Projects/alex-system-map/work/signoz-relay
+ts=$(date +%Y%m%dT%H%M%S)
+mkdir -p "$HOME/Backups/codex-traced-$ts"
+(umask 077; cp -p ~/.agents/tools/connectors/codex_otel/codex_traced.py "$HOME/Backups/codex-traced-$ts/")
+cp "$W/codex_traced.PATCHED.py" ~/.agents/tools/connectors/codex_otel/codex_traced.py
+shasum -a 256 ~/.agents/tools/connectors/codex_otel/codex_traced.py "$W/codex_traced.PATCHED.py"
+# the pair must match, and must be d4ffc783e9e8235d4a35fdf379e22977b1afbb73a537cdc17e3012c58ab3319d
+python3 -m py_compile ~/.agents/tools/connectors/codex_otel/codex_traced.py && echo "wrapper compiles"
+```
+
+Two things to know. **`otlp_relay.py` is NOT patched** in this play: it stays byte-identical at
+`90e6dd0a0944003cf05f47ad2c6bd09627fa47eab4548d043d02644723768417`, and the old relay keeps running
+on 4319 with no clients until Alex cancels Langfuse. And this edit only affects **future** launches
+of the wrapper, so it does not disturb the session applying it.
+
+## Step 4: place the SigNoz tool card
 
 ```sh
 W=/Users/alexlobaito/Projects/alex-system-map/work/signoz-relay
@@ -97,15 +128,15 @@ Check it against whatever card lint or registry step the card workflow uses on t
 (`~/.agents/tools/unify/` holds the lifecycle rules). If a check fails, report the failure text
 rather than editing the card to satisfy it.
 
-## Step 4: commit, and what to do if the hook objects
+## Step 5: commit, and what to do if the hook objects
 
 `~/.agents` is a shared live folder and the Agent Setup Auditor chat is editing skills in it. Commit
 only the card:
 
 ```sh
 cd ~/.agents
-git add tools/cards/signoz.md
-git commit -m "SigNoz tool card: read through the vendor MCP, send through the local collector"
+git add tools/cards/signoz.md tools/connectors/codex_otel/codex_traced.py
+git commit -m "SigNoz: tool card, and point the Codex CLI wrapper at the local collector"
 ```
 
 **Do not stash, reset, clean, switch branches or bypass a hook.** If the commit is rejected because
@@ -127,7 +158,9 @@ Nothing else changes. The collector holds no state beyond its log and its in-mem
 
 - Do not touch `~/.claude/settings.json`. The Boss Director is handling Claude Code's exporter.
 - Do not add an `[otel]` section back to `~/.codex/config.toml`.
-- Do not apply the p3 relay patch in this session; that is `APPLY.md` and a separate decision.
+- **Do not apply the p3 relay patch.** `APPLY.md` and `make_patch.py` in this folder are kept as a
+  record only. `otlp_relay.py` must stay byte-identical. The Boss Director ruled the standalone
+  collector is the one door, precisely so a reviewed shared component stays unmodified.
 - Do not create, change or delete any SigNoz key, alert, dashboard, plan or retention setting.
 - Do not touch `~/.agents/skills/`, `skills/task-list`, `memory_mcp/` or `director-control-db`.
 - Do not print, log or paste a key value anywhere, including in your report. Lengths are fine.

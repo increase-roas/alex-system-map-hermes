@@ -1,20 +1,26 @@
 # SigNoz collector: what is built, what is proven, what one person still has to do
 
-> **SUPERSEDED IN PART, 2026-10-20.** The Boss Director ruled that there is **one door, not two**:
-> the patched relay at `127.0.0.1:4319` is THE collector, because it already runs under launchd and
-> has been proving 1Password robot reads there for days, so durability needs no new job.
+> **RULING, 2026-10-20, and it reverses an earlier banner on this same file.** The standalone
+> collector in this repo, `tools/otel_collector.py` on `127.0.0.1:4320` under LaunchAgent
+> `com.alex.signoz-collector`, **IS the one door.** Install it. Everything below describing that
+> install is live, not cancelled.
 >
-> **`tools/otel_collector.py` is NOT DEPLOYED and will not be.** It stays in this repo as a test
-> harness: its filter logic is the same policy, its 12-check suite is useful, and it was the vehicle
-> for proving that policy end to end before any of it touched a shared file. Do not install it, and
-> do not install the LaunchAgent described below.
+> The earlier banner here said the opposite: that the patched relay was the collector and this
+> file's install was cancelled. That is **withdrawn.** It was written on a ruling that crossed with
+> the p4 evidence; once the launchd-shaped 1Password read, clean SIGTERM handling, the Python 3.9.6
+> suite and the hostile verifier with its KeepAlive kill test were all in hand, the standalone
+> collector was the stronger package, and it leaves a reviewed shared component untouched. I am
+> leaving the reversal visible rather than quietly rewriting history, because anyone who read this
+> file in the last hour was told not to install the thing that is now the plan.
 >
-> The LaunchAgent install in "What is still blocked" is **CANCELLED**. The plist template,
-> `verify_durable.py` and `validate_p4.py` in `work/signoz-relay/` are kept for their checks and
-> their record, not as an install path.
+> **What is NOT applied:** the relay patch in `work/signoz-relay/APPLY.md` and
+> `make_patch.py`. `~/.agents/.../otlp_relay.py` and `codex_traced.py` stay byte-identical, except
+> for one named step pointing the CLI wrapper at port 4320, which now lives in `APPLY-p4.md`.
 >
-> The live plan is `work/signoz-relay/APPLY.md`: the patched relay plus the CLI wrapper, applied
-> through the route Alex chooses. The SigNoz tool card waits for that same route.
+> **The relay keeps running** with zero clients. Retiring it comes after Alex cancels Langfuse, as
+> a proposal, not an action.
+>
+> The live plan is `work/signoz-relay/APPLY-p4.md`, applied through the route Alex chooses.
 
 2026-10-20, written by Claude Code (claude-opus-5) in `~/Projects/alex-system-map`.
 Play `absence-alarms-20261020-p2-signoz-hookup`. Source of truth for the account:

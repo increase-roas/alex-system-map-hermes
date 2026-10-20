@@ -24,14 +24,16 @@ EXPECTED_SHA256 = '8eb092cceab349fc5ac5908d9ca34c4f5d03d5dd83f0e6464936391e37098
 
 OLD = '''ENDPOINT = "https://us.cloud.langfuse.com/api/public/otel/v1/traces"'''
 
-NEW = '''# The local relay is now the one collector for this Mac: it reads the SigNoz key,
-# drops anything unnamed, refuses the ChatGPT app's codex-worker, and rate-guards each
-# service, so no agent holds a vendor key and policy lives in one place.
+NEW = '''# The local collector is the one door for this Mac: it reads the SigNoz key, drops
+# anything with no service.name, refuses the ChatGPT app's codex-worker, and rate
+# guards each service, so no agent holds a vendor key and policy lives in one place.
 # This wrapper already sets service.name (default "codex") through
 # OTEL_RESOURCE_ATTRIBUTES below, so its spans arrive named.
-# Changed 2026-10-20 as part of absence-alarms-20261020-p3-relay-collector. To go back
-# to sending direct, restore the Langfuse URL on the line below.
-ENDPOINT = "http://127.0.0.1:4319/v1/traces"
+# Port 4320 is the standalone collector (LaunchAgent com.alex.signoz-collector), NOT
+# the old relay on 4319, which stays running with no clients until Alex cancels
+# Langfuse. Changed 2026-10-20, play absence-alarms-20261020-p4-apply. To send direct
+# again, restore the Langfuse URL on the line below.
+ENDPOINT = "http://127.0.0.1:4320/v1/traces"
 LANGFUSE_DIRECT_ENDPOINT = "https://us.cloud.langfuse.com/api/public/otel/v1/traces"'''
 
 
