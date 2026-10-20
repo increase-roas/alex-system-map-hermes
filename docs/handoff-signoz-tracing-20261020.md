@@ -19,7 +19,52 @@ service, and refuses the unnamed, so a flood cannot recur and a silent agent bec
 - Director route: read it with `python3 ~/.agents/tools/jobs/director_route.py get` **at report
   time**. It changed three times today. Do not reuse a remembered id.
 
-## UPDATE 03:58Z: GATE PASS, with one HIGH finding that must be fixed next
+## UPDATE 04:20Z: the HIGH finding is FIXED and verified live
+
+Commits `ec4c42c` and `9674fd1`. The collector no longer stops forwarding after an hour: the warmer
+lives for the process and force-refreshes every `KEY_REFRESH_INTERVAL = KEY_TTL // 2`.
+
+**The review of that fix FAILED first, and found a second real bug.** `KeyCache.get` did its backoff
+bookkeeping in `except Blocked` only, while the credential functions called `subprocess.run(...,
+timeout=...)` with no `TimeoutExpired` handler, so a timeout escaped the backoff entirely and
+`warm_loop` retried at a fixed interval forever. That is the same 1Password-hammering risk through a
+different door. Closed two ways: every credential function converts any `SubprocessError` to
+`Blocked`, AND `KeyCache.get` treats any exception as a backoff failure, so a future call site that
+forgets to convert cannot reopen it. Suite 19 to 41 checks, seen RED first (23/41) then 41/41 on
+both 3.9.6 and 3.14.6.
+
+Live, captured in `reviews/receipts/20261020-p4-refresh/captured/`: the named refresh thread starts
+(`key warmer started: thread=warm-keys`), and a canary forwards with `upstream {"signoz": 200,
+"langfuse": 200}`, `kept {"codex": 1}`, canary exit 0, trace `baf7b95f550196411ce98cc4ffdbc2f6`.
+
+**Step 3's precondition is now OBSERVED, not reasoned:** `service.name=codex` forwards and lands in
+SigNoz as `codex`, so the collector's `codex-worker` refusal will not eat Codex wrapper traces.
+
+### THE PATTERN THAT COST THE MOST TIME TONIGHT
+
+The real-HOME `op` bug bit **three times**: the collector, then `verify_durable.py`, then
+`canary_through_relay.py`. Each time I fixed the pattern in one file and moved on. If you find a
+credential read anywhere in this repo, check EVERY sibling that does the same thing before calling
+it fixed. `op_items.robot_env` documents the cause; nothing else should hand `op` the real HOME.
+
+### Tickets, still not filed (Agent OS is Alex's ChatGPT build; we are read-only on it)
+
+1. **medium:** item 3's op-shim coverage of launchd and helper children is not established.
+2. **low:** the p4-apply packet narrative conflates the 03:34Z run with the 03:52Z captured rerun.
+3. **low:** `_run` and `HELPER_TIMEOUT = 90` in `tools/otel_collector.py` are dead code and
+   unreachable. Delete them; a reader would otherwise believe a 90s credential path exists.
+
+### Remaining on p4-refresh and p4-apply
+
+- **R2 cross-family review** on frozen ACCEPTANCE sha `c50b8c6f...` (criterion 4). Two-round rule
+  applies from R3.
+- **Then** the SigNoz tool card: LIVE for traces, and say plainly that agent read access over MCP is
+  not wired.
+- **Then** `APPLY-p4.md` steps 3 to 5: wrapper repoint to 4320 behind its hash precondition
+  (`8eb092cc...`), plus the commit.
+- No further collector restarts unless a step needs one, and tell the Director first if so.
+
+## EARLIER UPDATE 03:58Z: GATE PASS, with one HIGH finding that must be fixed next
 
 `review_gate.py` line, quoted:
 `GATE PASS: reviews/receipts/20261020-p4-apply/review-absence-alarms-20261020-p4-apply-R3.md`
