@@ -1,0 +1,475 @@
+--- /Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/otlp_relay.ORIGINAL.py	2026-10-16 04:50:33
++++ /Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/otlp_relay.PATCHED.py	2026-10-19 22:27:32
+@@ -22,13 +22,250 @@
+ from urllib.parse import urlsplit
+ 
+ UPSTREAM = "https://us.cloud.langfuse.com/api/public/otel/v1/traces"
++# SigNoz is now the tracing home; this relay is the one local collector for this Mac.
++# Agents never hold the SigNoz key: they post to loopback and the key is read here.
++SIGNOZ_UPSTREAM = "https://ingest.us2.signoz.cloud/v1/traces"
++SIGNOZ_HEADER = "signoz-ingestion-key"
++# 1Password: vault Connectors, item "SigNoz ingestion key", field credential.
++SIGNOZ_OP_REF = "op://Connectors/hfy4llw7gassge2w5xuz64kgyu/credential"
++OP_BIN = "/opt/homebrew/bin/op"
++
++# Policy. Spans are grouped per resource; a group is kept only if it is named, allowed
++# and inside its budget. Nothing unnamed is forwarded: SigNoz accepts a span with no
++# resource attributes at all (HTTP 200, 2026-10-20), so the drop has to happen here.
++KNOWN_SERVICES = (
++    "claude-code", "codex", "cursor", "javar", "javante", "auditor",
++    "task-codex", "task-claude", "paperclip-worker", "paperclip-reviewer",
++    "dynamite-chatbot", "alex-system-map",
++)
++# The ChatGPT app's built-in Codex. It sent ~4.7M labelled events a week into Langfuse
++# with no per-run session id; Alex switched it off on 2026-10-19. Refused here too, so
++# re-enabling it upstream cannot quietly restart the flood.
++BLOCKED_SERVICES = ("codex-worker",)
++
++# Spans per minute per service, with its own bucket each, so one sender cannot flood
++# the account and cannot starve another. The ceiling is set from measured rates: the
++# 2026-10-19 flood ran at 0.9M-1.4M observations an hour (about 15,000-23,000 a minute)
++# from spans that WERE labelled, while Claude Code's honest rate over the same week was
++# roughly 11 a minute. 600 leaves nearly two orders of magnitude of headroom above
++# normal use and still stops a runaway inside a minute. Raise a single service in
++# RATE_OVERRIDES deliberately, with its reason, rather than lifting the ceiling.
++RATE_PER_MIN = 600
++RATE_OVERRIDES = {}
++
+ MAX_BODY = 16 * 1024 * 1024
+ MAX_RESPONSE = 64 * 1024
+ HEADER_TTL = 3600
+ HELPER_TIMEOUT = 10
+ IO_TIMEOUT = 30
++
++
++def read_varint(buf, index):
++    shift = 0
++    value = 0
++    while True:
++        if index >= len(buf):
++            raise ValueError("truncated varint")
++        byte = buf[index]
++        index += 1
++        value |= (byte & 0x7F) << shift
++        if not byte & 0x80:
++            return value, index
++        shift += 7
++        if shift > 63:
++            raise ValueError("varint too long")
++
++
++def iter_fields(buf):
++    """Yield (field_number, wire_type, payload) over one protobuf message."""
++    index = 0
++    while index < len(buf):
++        key, index = read_varint(buf, index)
++        field, wire = key >> 3, key & 0x7
++        if wire == 0:
++            value, index = read_varint(buf, index)
++            yield field, wire, value
++        elif wire == 1:
++            yield field, wire, buf[index:index + 8]
++            index += 8
++        elif wire == 2:
++            length, index = read_varint(buf, index)
++            if index + length > len(buf):
++                raise ValueError("truncated length-delimited field")
++            yield field, wire, buf[index:index + length]
++            index += length
++        elif wire == 5:
++            yield field, wire, buf[index:index + 4]
++            index += 4
++        else:
++            raise ValueError("unsupported wire type")
++
++
++def encode_varint(value):
++    out = bytearray()
++    while True:
++        byte = value & 0x7F
++        value >>= 7
++        out.append(byte | (0x80 if value else 0))
++        if not value:
++            return bytes(out)
++
++
++def delimited(field, payload):
++    return encode_varint((field << 3) | 2) + encode_varint(len(payload)) + payload
++
++
++def service_name_of(resource):
++    """service.name from a Resource message, or '' when absent or empty.
++
++    Resource.attributes = field 1 (repeated KeyValue); KeyValue.key = field 1,
++    KeyValue.value = field 2 (AnyValue); AnyValue.string_value = field 1.
++    """
++    for field, wire, payload in iter_fields(resource):
++        if field != 1 or wire != 2:
++            continue
++        key = value = None
++        for key_field, key_wire, key_payload in iter_fields(payload):
++            if key_field == 1 and key_wire == 2:
++                key = key_payload
++            elif key_field == 2 and key_wire == 2:
++                for any_field, any_wire, any_payload in iter_fields(key_payload):
++                    if any_field == 1 and any_wire == 2:
++                        value = any_payload
++                        break
++        if key == b"service.name" and value:
++            try:
++                return value.decode("utf-8").strip()
++            except UnicodeDecodeError:
++                return ""
++    return ""
++
++
++def count_spans(resource_spans):
++    """ResourceSpans.scope_spans = field 2; ScopeSpans.spans = field 2."""
++    total = 0
++    for field, wire, payload in iter_fields(resource_spans):
++        if field == 2 and wire == 2:
++            for scope_field, scope_wire, _ in iter_fields(payload):
++                if scope_field == 2 and scope_wire == 2:
++                    total += 1
++    return total
++
++
++class RateGuard:
++    """One token bucket per service. Refills continuously; never blocks a thread."""
++
++    def __init__(self, per_min=RATE_PER_MIN, overrides=None, clock=time.monotonic):
++        self.per_min = per_min
++        self.overrides = dict(overrides or RATE_OVERRIDES)
++        self.clock = clock
++        self.lock = threading.Lock()
++        self.state = {}
++
++    def limit_for(self, service):
++        return self.overrides.get(service, self.per_min)
++
++    def allow(self, service, spans):
++        limit = self.limit_for(service)
++        if limit <= 0:
++            return False
++        now = self.clock()
++        with self.lock:
++            tokens, last = self.state.get(service, (float(limit), now))
++            tokens = min(float(limit), tokens + (now - last) * (limit / 60.0))
++            if tokens >= spans:
++                self.state[service] = (tokens - spans, now)
++                return True
++            self.state[service] = (tokens, now)
++            return False
++
++
++def filter_payload(body, guard, known=KNOWN_SERVICES, blocked=BLOCKED_SERVICES):
++    """Return (kept_body, kept_counts, dropped_counts).
++
++    Counts only. No span name, attribute or body text is ever recorded or logged.
++    """
++    kept_counts = {}
++    dropped = {}
++
++    def bump(table, key, spans):
++        table[key] = table.get(key, 0) + spans
++
++    out = bytearray()
++    for field, wire, payload in iter_fields(body):
++        if field != 1 or wire != 2:
++            continue  # ExportTraceServiceRequest.resource_spans only
++        resource = b""
++        for res_field, res_wire, res_payload in iter_fields(payload):
++            if res_field == 1 and res_wire == 2:
++                resource = res_payload
++                break
++        service = service_name_of(resource)
++        spans = count_spans(payload)
++        if not service:
++            bump(dropped, "unnamed", spans)
++            continue
++        if service in blocked:
++            bump(dropped, "blocked:" + service, spans)
++            continue
++        if known and service not in known:
++            bump(dropped, "unknown:" + service, spans)
++            continue
++        if not guard.allow(service, spans):
++            bump(dropped, "throttled:" + service, spans)
++            continue
++        bump(kept_counts, service, spans)
++        out += delimited(1, payload)
++    return bytes(out), kept_counts, dropped
+ 
+ 
++def validate_signoz_headers(headers):
++    """SigNoz authenticates with its own header, not Authorization.
++
++    HeaderCache's default validator is validate_headers, which REQUIRES an
++    authorization header and injects the Langfuse ingestion version. Neither is
++    correct here, so the SigNoz cache gets this validator instead. Found by the
++    acceptance test: reusing the Langfuse validator made every SigNoz send fail
++    with "missing auth header" while the relay still answered 200.
++    """
++    if not isinstance(headers, dict) or not headers:
++        raise ValueError("empty headers")
++    for key, value in headers.items():
++        if not isinstance(key, str) or not re.fullmatch(r"[!#$%&'*+.^_`|~0-9A-Za-z-]+", key):
++            raise ValueError("invalid header name")
++        if not isinstance(value, str) or not value.strip() or any(c in value for c in "\r\n\0"):
++            raise ValueError("invalid header value")
++    if not any(key.lower() == SIGNOZ_HEADER for key in headers):
++        raise ValueError("missing signoz ingestion key")
++    return {key.lower(): value for key, value in headers.items()}
++
++
++def fetch_signoz_key(op_bin=None):
++    """SigNoz ingestion key, read from 1Password at run time. Never logged or printed."""
++    token_helper = subprocess.run(
++        ["/usr/bin/security", "find-generic-password", "-a", "connectors-sync",
++         "-s", "op-service-account-connectors-sync", "-w"],
++        stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
++        timeout=HELPER_TIMEOUT)
++    if token_helper.returncode:
++        raise ValueError("signoz key helper unavailable")
++    env = {
++        "PATH": "/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin",
++        "HOME": os.environ.get("HOME", ""),
++        "OP_SERVICE_ACCOUNT_TOKEN": token_helper.stdout.decode("utf-8").strip(),
++        "OP_BIOMETRIC_UNLOCK_ENABLED": "false",
++    }
++    read = subprocess.run([op_bin or OP_BIN, "read", SIGNOZ_OP_REF],
++                          stdin=subprocess.DEVNULL, stdout=subprocess.PIPE,
++                          stderr=subprocess.DEVNULL, timeout=HELPER_TIMEOUT, env=env)
++    if read.returncode:
++        raise ValueError("signoz key helper unavailable")
++    key = read.stdout.decode("utf-8").strip()
++    if not key or any(char in key for char in "\r\n\0"):
++        raise ValueError("invalid signoz key")
++    return {SIGNOZ_HEADER: key}
++
++
+ def is_loopback(host):
+     # Numeric addresses only: no DNS rebinding or hostname-dependent validation.
+     try:
+@@ -75,20 +312,23 @@
+ 
+ 
+ class HeaderCache:
+-    def __init__(self, loader, clock=time.monotonic, stopping=None):
++    def __init__(self, loader, clock=time.monotonic, stopping=None, validator=None):
+         self.loader = loader
+         self.clock = clock
+         self.lock = threading.Lock()
+         self.headers = None
+         self.expires = 0.0
+         self.stopping = stopping
++        # Langfuse and SigNoz authenticate differently, so each cache validates with
++        # its own rule. Default stays validate_headers so the Langfuse path is unchanged.
++        self.validator = validator or validate_headers
+ 
+     def _load(self):
+         if self.stopping is not None and self.stopping.is_set():
+             raise ValueError("relay stopping")
+         # A failed refresh must never leave rejected/expired headers usable.
+         self.headers = None
+-        headers = validate_headers(self.loader())
++        headers = self.validator(self.loader())
+         self.headers = headers
+         self.expires = self.clock() + HEADER_TTL
+         return headers
+@@ -112,13 +352,15 @@
+     daemon_threads = False
+     block_on_close = True
+ 
+-    def __init__(self, address, *, log_path=None, header_loader=None, upstream_url=UPSTREAM):
++    def __init__(self, address, *, log_path=None, header_loader=None, upstream_url=UPSTREAM,
++                 signoz_url=SIGNOZ_UPSTREAM, signoz_loader=None, mirror_langfuse=True,
++                 guard=None):
+         if not is_loopback(address[0]) or address[0] != "127.0.0.1":
+             raise ValueError("bind host must be 127.0.0.1")
+         target = urlsplit(upstream_url)
+         # The only alternate destination is an explicitly injected loopback test
+         # server. No environment/CLI destination override, proxies or redirects.
+-        if upstream_url != UPSTREAM and not (
++        if upstream_url not in (UPSTREAM, SIGNOZ_UPSTREAM) and not (
+             target.scheme == "http" and target.hostname and is_loopback(target.hostname)
+             and not target.username and not target.password and not target.fragment
+         ):
+@@ -128,6 +370,26 @@
+         self.socket_lock = threading.Lock()
+         self.sockets = set()
+         self.header_cache = HeaderCache(header_loader or fetch_headers, stopping=self.stopping)
++        # SigNoz is the primary destination; Langfuse is a mirror during the
++        # side-by-side day and takes NAMED services only, never the dropped ones.
++        # Validated exactly as strictly as the Langfuse upstream above: the only
++        # alternate destination is an explicitly injected loopback test server.
++        if signoz_url is not None:
++            signoz_parsed = urlsplit(signoz_url)
++            if signoz_url != SIGNOZ_UPSTREAM and not (
++                signoz_parsed.scheme == "http" and signoz_parsed.hostname
++                and is_loopback(signoz_parsed.hostname) and not signoz_parsed.username
++                and not signoz_parsed.password and not signoz_parsed.fragment
++            ):
++                raise ValueError("invalid signoz upstream")
++            self.signoz_target = signoz_parsed
++        else:
++            self.signoz_target = None
++        self.signoz_cache = HeaderCache(signoz_loader or fetch_signoz_key,
++                                        stopping=self.stopping,
++                                        validator=validate_signoz_headers)
++        self.mirror_langfuse = mirror_langfuse
++        self.guard = guard or RateGuard()
+         self.log_path = Path(log_path) if log_path is not None else (
+             Path.home() / ".agents/runtime/codex-otlp-relay.jsonl"
+         )
+@@ -174,26 +436,32 @@
+         # SocketServer's default traceback can expose header-bearing exceptions.
+         pass
+ 
+-    def log_request_row(self, status, bytes_in, upstream_ms):
++    def log_request_row(self, status, bytes_in, upstream_ms, kept=None, dropped=None):
+         row = {"ts": datetime.now(timezone.utc).isoformat(), "status": status,
+                "bytes_in": bytes_in, "upstream_ms": upstream_ms}
++        # Counts only. A service name is a configured label, never request content.
++        if kept:
++            row["kept"] = kept
++        if dropped:
++            row["dropped"] = dropped
+         try:
+             with self.log_lock, self.log_path.open("a", encoding="utf-8") as log:
+                 log.write(json.dumps(row, separators=(",", ":")) + "\n")
+         except OSError:
+             print("otlp_relay: request log unavailable", file=sys.stderr)
+ 
+-    def _send_upstream(self, body, headers):
+-        factory = http.client.HTTPSConnection if self.target.scheme == "https" else http.client.HTTPConnection
+-        connection = factory(self.target.hostname, self.target.port, timeout=IO_TIMEOUT)
++    def _send_upstream(self, body, headers, target=None):
++        target = target or self.target
++        factory = http.client.HTTPSConnection if target.scheme == "https" else http.client.HTTPConnection
++        connection = factory(target.hostname, target.port, timeout=IO_TIMEOUT)
+         upstream_socket = None
+         try:
+             connection.connect()
+             upstream_socket = connection.sock
+             self.track_socket(upstream_socket)
+-            path = self.target.path or "/"
+-            if self.target.query:
+-                path += "?" + self.target.query
++            path = target.path or "/"
++            if target.query:
++                path += "?" + target.query
+             connection.request("POST", path, body=body, headers=headers)
+             response = connection.getresponse()
+             return response.status, response.read(MAX_RESPONSE)
+@@ -203,12 +471,42 @@
+                 with self.socket_lock:
+                     self.sockets.discard(upstream_socket)
+ 
++    def forward_filtered(self, body, content_headers):
++        """Apply policy, then fan out. Returns (status, response, ms, kept, dropped)."""
++        try:
++            kept_body, kept, dropped = filter_payload(body, self.guard)
++        except ValueError:
++            return 400, b"invalid payload\n", 0.0, {}, {"malformed": 1}
++        if not kept_body:
++            # Everything was dropped on purpose. Accept so the sender does not retry
++            # forever, and record why in counts.
++            return 200, b"", 0.0, kept, dropped
++        status, response, upstream_ms = self._forward_to(
++            self.signoz_target, self.signoz_cache, kept_body, content_headers)
++        if self.mirror_langfuse:
++            try:
++                mirror_status, _mirror_body, mirror_ms = self._forward_to(
++                    self.target, self.header_cache, kept_body, content_headers)
++                upstream_ms = round(upstream_ms + mirror_ms, 3)
++                dropped = dict(dropped)
++                if mirror_status != 200:
++                    dropped["mirror_status:" + str(mirror_status)] = 1
++            except Exception:
++                dropped = dict(dropped)
++                dropped["mirror_failed"] = 1
++        return status, response, upstream_ms, kept, dropped
++
+     def forward(self, body, content_headers):
++        return self._forward_to(self.target, self.header_cache, body, content_headers)
++
++    def _forward_to(self, target, cache, body, content_headers):
+         upstream_ms = 0.0
+         if self.stopping.is_set():
+             return 503, b"upstream unavailable\n", upstream_ms
++        if target is None:
++            return 503, b"upstream unavailable\n", upstream_ms
+         try:
+-            headers = self.header_cache.get()
++            headers = cache.get()
+         except Exception:
+             return 502, b"header helper unavailable\n", upstream_ms
+         for attempt in range(2):
+@@ -216,7 +514,8 @@
+                 return 503, b"upstream unavailable\n", round(upstream_ms, 3)
+             start = time.monotonic()
+             try:
+-                status, response = self._send_upstream(body, dict(headers, **content_headers))
++                status, response = self._send_upstream(
++                    body, dict(headers, **content_headers), target=target)
+             except Exception:
+                 upstream_ms += (time.monotonic() - start) * 1000
+                 return 503, b"upstream unavailable\n", round(upstream_ms, 3)
+@@ -224,7 +523,7 @@
+             if status not in (401, 403) or attempt:
+                 return status, response, round(upstream_ms, 3)
+             try:
+-                headers = self.header_cache.refresh(headers)
++                headers = cache.refresh(headers)
+             except Exception:
+                 return 502, b"header helper unavailable\n", round(upstream_ms, 3)
+ 
+@@ -234,6 +533,8 @@
+         self.request.settimeout(IO_TIMEOUT)
+         self.bytes_in = 0
+         self.upstream_ms = 0.0
++        self.kept = None
++        self.dropped = None
+         super().setup()
+ 
+     def log_message(self, *args):
+@@ -262,7 +563,8 @@
+     def respond(self, status, body):
+         self.close_connection = True
+         # Commit the single safe row before the client can observe completion.
+-        self.server.log_request_row(status, self.bytes_in, self.upstream_ms)
++        self.server.log_request_row(status, self.bytes_in, self.upstream_ms,
++                                    getattr(self, "kept", None), getattr(self, "dropped", None))
+         try:
+             self.send_response(status)
+             self.send_header("Content-Type", "application/octet-stream")
+@@ -303,7 +605,8 @@
+             return
+         content_headers = {key: self.headers[key] for key in ("content-type", "content-encoding")
+                            if key in self.headers}
+-        status, response, self.upstream_ms = self.server.forward(body, content_headers)
++        (status, response, self.upstream_ms,
++         self.kept, self.dropped) = self.server.forward_filtered(body, content_headers)
+         self.respond(status, response)
+ 
+ 
+@@ -311,6 +614,8 @@
+     parser = argparse.ArgumentParser(description="Loopback Codex OTLP trace relay")
+     parser.add_argument("--port", type=int, default=None)
+     parser.add_argument("--check", action="store_true", help="Check headers without starting a server")
++    parser.add_argument("--no-langfuse-mirror", action="store_true",
++                        help="stop mirroring to Langfuse (use after the side-by-side day)")
+     args = parser.parse_args(argv)
+     if args.check:
+         try:
+@@ -324,7 +629,8 @@
+         port = args.port if args.port is not None else int(os.environ.get("CODEX_OTLP_RELAY_PORT", "4319"))
+         if not 0 <= port <= 65535:
+             raise ValueError("invalid port")
+-        server = RelayServer(("127.0.0.1", port))
++        server = RelayServer(("127.0.0.1", port),
++                             mirror_langfuse=not args.no_langfuse_mirror)
+     except Exception:
+         print("otlp_relay: could not start", file=sys.stderr)
+         return 1

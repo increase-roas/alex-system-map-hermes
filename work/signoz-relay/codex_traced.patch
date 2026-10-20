@@ -1,0 +1,19 @@
+--- /Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/codex_traced.ORIGINAL.py	2026-10-19 22:25:57
++++ /Users/alexlobaito/Projects/alex-system-map/work/signoz-relay/codex_traced.PATCHED.py	2026-10-19 22:25:57
+@@ -43,7 +43,15 @@
+     tomllib = None  # Python < 3.11 must still launch Codex safely, without tracing.
+ 
+ HEADER_NAMES = ("OTEL_EXPORTER_OTLP_TRACES_HEADERS", "OTEL_EXPORTER_OTLP_HEADERS")
+-ENDPOINT = "https://us.cloud.langfuse.com/api/public/otel/v1/traces"
++# The local relay is now the one collector for this Mac: it reads the SigNoz key,
++# drops anything unnamed, refuses the ChatGPT app's codex-worker, and rate-guards each
++# service, so no agent holds a vendor key and policy lives in one place.
++# This wrapper already sets service.name (default "codex") through
++# OTEL_RESOURCE_ATTRIBUTES below, so its spans arrive named.
++# Changed 2026-10-20 as part of absence-alarms-20261020-p3-relay-collector. To go back
++# to sending direct, restore the Langfuse URL on the line below.
++ENDPOINT = "http://127.0.0.1:4319/v1/traces"
++LANGFUSE_DIRECT_ENDPOINT = "https://us.cloud.langfuse.com/api/public/otel/v1/traces"
+ HELPER_TIMEOUT = 10
+ RECORD_TIMEOUT = 3
+ EXCLUDE_KEY = "shell_environment_policy.exclude"
