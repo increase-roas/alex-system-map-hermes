@@ -82,6 +82,9 @@ KNOWN_SERVICES = (
     # Added 2026-10-20 (Alex: "switch everything to signoz"). paperclip = the Paperclip
     # server's own default service.name; hermes-agent = the Hermes Langfuse plugin's default.
     'paperclip', 'hermes-agent',
+    # Claude Code sessions run from the Claude desktop app (Code tab, Cowork on this computer)
+    # report as claude-code-desktop; found dropped as unknown 2026-10-20.
+    'claude-code-desktop',
 )
 
 # Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
