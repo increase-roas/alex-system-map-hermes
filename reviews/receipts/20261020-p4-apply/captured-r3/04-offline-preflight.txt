@@ -2,7 +2,7 @@ COMMAND:    python3 -B work/signoz-relay/validate_p4.py
 DESCRIPTION:p4 package pre-flight: plist renders, lints, parses, flags present
 CWD:        /Users/alexlobaito/Projects/alex-system-map
 SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
-UTC_START:  2026-10-20T03:52:28Z
+UTC_START:  2026-10-20T04:02:48Z
 ---- output ----
   pass  verify_durable.py compiles here           
   pass  canary_through_relay.py compiles here     
@@ -31,5 +31,5 @@ UTC_START:  2026-10-20T03:52:28Z
 
 24/24 checks passed
 ---- end output ----
-UTC_END:    2026-10-20T03:52:28Z
+UTC_END:    2026-10-20T04:02:49Z
 EXIT_STATUS:0

@@ -105,6 +105,11 @@ IO_TIMEOUT = 30
 # this project exists to remove, so the timeout is generous and the retry is explicit.
 HELPER_TIMEOUT = 90
 KEY_TTL = 3600
+# The warmer re-reads every key at half the TTL, so a cached header is replaced well
+# before peek() would refuse it, and one failed refresh still leaves a second attempt
+# (after the backoff) inside the old header's lifetime. Without this the warmer exited
+# after the first success and an hour later every span was dropped with no error.
+KEY_REFRESH_INTERVAL = KEY_TTL // 2
 # Backoff after a failed key read, doubling each time, so a credential problem costs
 # 1Password a handful of calls rather than one every few seconds forever.
 KEY_BACKOFF_BASE = 30
@@ -440,9 +445,10 @@ class KeyCache:
     of a new subprocess.
     """
 
-    def __init__(self, names: list[str], ttl: int = KEY_TTL):
+    def __init__(self, names: list[str], ttl: int = KEY_TTL, clock=time.monotonic):
         self.names = names
         self.ttl = ttl
+        self.clock = clock
         self.lock = threading.Lock()
         self.cache: dict[str, tuple[str, float]] = {}
         self.failures: dict[str, int] = {}
@@ -451,11 +457,13 @@ class KeyCache:
     def backoff_for(self, failures: int) -> float:
         return min(KEY_BACKOFF_BASE * (2 ** max(failures - 1, 0)), KEY_BACKOFF_MAX)
 
-    def get(self, name: str) -> str:
-        now = time.monotonic()
+    def get(self, name: str, force: bool = False) -> str:
+        """Cached value, or a read. force=True skips the cache hit (the refresh path)
+        but still honours the failure backoff."""
+        now = self.clock()
         with self.lock:
             hit = self.cache.get(name)
-            if hit and now - hit[1] < self.ttl:
+            if hit and not force and now - hit[1] < self.ttl:
                 return hit[0]
             wait = self.blocked_until.get(name, 0.0) - now
             if wait > 0:
@@ -466,14 +474,14 @@ class KeyCache:
             with self.lock:
                 self.failures[name] = self.failures.get(name, 0) + 1
                 delay = self.backoff_for(self.failures[name])
-                self.blocked_until[name] = time.monotonic() + delay
+                self.blocked_until[name] = self.clock() + delay
                 count = self.failures[name]
             print(f'  {name} key read failed ({count} in a row); holding off {delay:.0f}s '
                   f'so 1Password is not hammered', file=sys.stderr)
             sys.stderr.flush()
             raise
         with self.lock:
-            self.cache[name] = (value, time.monotonic())
+            self.cache[name] = (value, self.clock())
             self.failures.pop(name, None)
             self.blocked_until.pop(name, None)
         return value
@@ -489,13 +497,36 @@ class KeyCache:
         """
         with self.lock:
             hit = self.cache.get(name)
-            if hit and time.monotonic() - hit[1] < self.ttl:
+            if hit and self.clock() - hit[1] < self.ttl:
                 return hit[0]
         raise Blocked(f'{name} key not cached yet')
 
     def drop(self, name: str) -> None:
         with self.lock:
             self.cache.pop(name, None)
+
+
+def warm_loop(keys: KeyCache, names: list[str], stop, interval: float = KEY_REFRESH_INTERVAL) -> None:
+    """Keep every key fresh for the life of the process. Never raises, never exits
+    on a failed read: a failure waits KEY_BACKOFF_BASE (KeyCache's own backoff stops
+    the actual 1Password calls), a success waits `interval`. Uses stop.wait, so a
+    SIGTERM ends it promptly."""
+    while not stop.is_set():
+        failed = False
+        for name in names:
+            if stop.is_set():
+                return
+            try:
+                keys.get(name, force=True)
+                print(f'  {name} key read from 1Password (value not shown)')
+                sys.stdout.flush()
+            except Exception as err:  # a bad read must never end the warmer
+                failed = True
+                print(f'  {name} key still unavailable: {err if isinstance(err, Blocked) else type(err).__name__}',
+                      file=sys.stderr)
+                sys.stderr.flush()
+        if stop.wait(KEY_BACKOFF_BASE if failed else interval):
+            return
 
 
 def forward(name: str, body: bytes, keys: KeyCache) -> int:
@@ -762,6 +793,58 @@ def self_test() -> int:
         check('peek on a cold cache refuses instead of blocking', peeked == 'refused', peeked)
         check('peek makes NO call to 1Password', calls['n'] == before,
               f'calls before {before}, after {calls["n"]}')
+
+        # The one-hour failure: the warmer used to exit after its first success, so the
+        # header expired and every span was dropped. Fake clock, tiny TTL, no network.
+        now = {'t': 0.0}
+        reads = {'n': 0}
+
+        def good_auth(name):
+            reads['n'] += 1
+            return f'hdr-{reads["n"]}'
+
+        globals()['auth_for'] = good_auth
+        ttl = 100
+        live = KeyCache(['signoz'], ttl=ttl, clock=lambda: now['t'])
+
+        class FakeStop:
+            """Each wait() advances the clock by the requested time; ends after 6 waits."""
+            def __init__(self):
+                self.waits = []
+            def is_set(self):
+                return len(self.waits) >= 6
+            def wait(self, t):
+                self.waits.append(t)
+                now['t'] += t
+                return self.is_set()
+
+        fs = FakeStop()
+        warm_loop(live, ['signoz'], fs, interval=ttl // 2)
+        check('warmer outlives the TTL and keeps a header available',
+              now['t'] >= 3 * ttl and live.peek('signoz') == f'hdr-{reads["n"]}',
+              f'clock {now["t"]}, reads {reads["n"]}')
+        check('refresh is scheduled, not a storm', 5 <= reads['n'] <= 7 and set(fs.waits) == {ttl // 2},
+              f'reads {reads["n"]}, waits {sorted(set(fs.waits))}')
+        # Without any refresh, the same cache must have expired (proves the clock works).
+        stale = KeyCache(['signoz'], ttl=ttl, clock=lambda: now['t'])
+        stale.get('signoz')
+        now['t'] += ttl + 1
+        try:
+            stale.peek('signoz')
+            expired = 'still served'
+        except Blocked:
+            expired = 'refused'
+        check('an unrefreshed header is refused after the TTL', expired == 'refused', expired)
+
+        # A failing read must not end the warmer or hammer 1Password.
+        globals()['auth_for'] = counting_auth
+        calls['n'] = 0
+        now['t'] = 0.0
+        down = KeyCache(['signoz'], ttl=ttl, clock=lambda: now['t'])
+        fs2 = FakeStop()
+        warm_loop(down, ['signoz'], fs2, interval=ttl // 2)
+        check('failed reads keep the warmer alive and are backed off',
+              len(fs2.waits) == 6 and calls['n'] < 6, f'waits {len(fs2.waits)}, calls {calls["n"]}')
     finally:
         globals()['auth_for'] = real_auth
 
@@ -821,22 +904,8 @@ def main(argv: list[str] | None = None) -> int:
     # while the process was perfectly healthy. Binding first means /stats answers at
     # once, a span that cannot be forwarded is counted rather than lost, and the thing
     # is diagnosable from outside. KeyCache's backoff keeps the retries cheap.
-    def warm_keys():
-        for name in upstreams:
-            while not stop.is_set():
-                try:
-                    keys.get(name)
-                    print(f'  {name} key read from 1Password (value not shown)')
-                    sys.stdout.flush()
-                    break
-                except Blocked as err:
-                    print(f'  {name} key still unavailable: {err}', file=sys.stderr)
-                    sys.stderr.flush()
-                    if stop.wait(KEY_BACKOFF_BASE):
-                        return
-
     if upstreams and not args.dry_run:
-        threading.Thread(target=warm_keys, daemon=True, name='warm-keys').start()
+        threading.Thread(target=warm_loop, args=(keys, upstreams, stop), daemon=True, name='warm-keys').start()
 
     previous = {}
     worker = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': 0.5})

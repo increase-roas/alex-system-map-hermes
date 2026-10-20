@@ -2,10 +2,10 @@ COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector >/dev
 DESCRIPTION:confirm it left the domain and freed the port
 CWD:        /Users/alexlobaito/Projects/alex-system-map
 SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
-UTC_START:  2026-10-20T03:52:32Z
+UTC_START:  2026-10-20T04:02:52Z
 ---- output ----
 not in domain
 port free
 ---- end output ----
-UTC_END:    2026-10-20T03:52:32Z
+UTC_END:    2026-10-20T04:02:52Z
 EXIT_STATUS:0

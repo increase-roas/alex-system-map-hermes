@@ -2,7 +2,7 @@ COMMAND:    python3 -B work/signoz-relay/test_relay_collector.py
 DESCRIPTION:the filter and rate-guard harness against the patched relay copy
 CWD:        /Users/alexlobaito/Projects/alex-system-map
 SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
-UTC_START:  2026-10-20T03:52:24Z
+UTC_START:  2026-10-20T04:02:44Z
 ---- output ----
   pass  named service kept                                    
   pass  no resource attributes at all -> dropped unnamed      
@@ -40,5 +40,5 @@ UTC_START:  2026-10-20T03:52:24Z
 
 33/33 checks passed
 ---- end output ----
-UTC_END:    2026-10-20T03:52:28Z
+UTC_END:    2026-10-20T04:02:48Z
 EXIT_STATUS:0

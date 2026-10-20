@@ -8,10 +8,10 @@ COMMAND:    bash -c for i in $(seq 1 12); do
 DESCRIPTION:poll launchd pid and port until listening, max 120s
 CWD:        /Users/alexlobaito/Projects/alex-system-map
 SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
-UTC_START:  2026-10-20T03:52:32Z
+UTC_START:  2026-10-20T04:02:52Z
 ---- output ----
-03:52:32Z  t+10s  pid=84282  listening=0
-03:52:42Z  t+20s  pid=84282  listening=1
+04:02:52Z  t+10s  pid=88086  listening=0
+04:03:02Z  t+20s  pid=88086  listening=1
 ---- end output ----
-UTC_END:    2026-10-20T03:52:42Z
+UTC_END:    2026-10-20T04:03:03Z
 EXIT_STATUS:0
