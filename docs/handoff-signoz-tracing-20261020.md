@@ -19,7 +19,45 @@ service, and refuses the unnamed, so a flood cannot recur and a silent agent bec
 - Director route: read it with `python3 ~/.agents/tools/jobs/director_route.py get` **at report
   time**. It changed three times today. Do not reuse a remembered id.
 
-## UPDATE 03:36Z: IT WORKS. verify_durable.py 12/12.
+## UPDATE 03:58Z: GATE PASS, with one HIGH finding that must be fixed next
+
+`review_gate.py` line, quoted:
+`GATE PASS: reviews/receipts/20261020-p4-apply/review-absence-alarms-20261020-p4-apply-R3.md`
+Round 3, reviewer gpt-6, VERDICT PASS, same frozen ACCEPTANCE sha `3e7c8619...`, 17 evidence hashes
+matched. Items 1, 2 and 4 PASS. Item 3 UNVERIFIED at medium, which does not block from round 3.
+Captured run: verify_durable.py 12/12 EXIT_STATUS 0, worst key read 0.06s against a 10s ceiling,
+OP_INVOCATIONS 0, secret scan clean. All in `reviews/receipts/20261020-p4-apply/captured-r3/`.
+
+### THE NEXT THING TO FIX, and it is serious
+
+**SEVERITY high, from the R3 review: the collector stops forwarding about an hour after it starts.**
+I verified it in the source rather than taking the reviewer's word: `KEY_TTL` is 3600, `peek()`
+refuses once a cached header is older than that, and `warm_keys` breaks out of its loop on first
+success so the thread exits and never refreshes. After the TTL elapses both upstreams go to -1,
+every span is counted as dropped, and nothing forwards. **It fails silently, which is the exact class
+of failure this whole project exists to remove, and my own tests did not catch it because they all
+run inside one TTL.**
+
+Fix: refresh on a schedule rather than exiting after first success, and add an expiry-path case to
+the offline suite so it can never regress. The Director's hard stop forbade further mutations on
+this component today, so it is NOT fixed. Treat the collector as proven for a session, not proven
+for a week.
+
+### Tickets from R3, which the board REFUSED to accept
+
+`python3 ~/.agents/tools/board/board.py add ...` answered:
+`board: director.tasks is a generated read-only export; use the task-list MCP for mutations`
+I did not route around it. They are recorded here instead and need filing through the task-list MCP:
+
+1. **high, in scope:** the key-refresh bug above.
+2. **medium, in scope:** item 3's evidence does not establish which executable paths the op shim
+   covered, including launchd and helper children, nor directly record prompt absence. The zero
+   count is sound; its coverage is not demonstrated.
+3. **low, in scope:** the packet narrative conflates the 03:34Z verifier run with the 03:52Z
+   captured rerun, and the trace readback points at the earlier trace rather than the captured run's
+   own. Correct the narrative; E14 independently supports criterion 4 either way.
+
+## EARLIER UPDATE 03:36Z: IT WORKS. verify_durable.py 12/12.
 
 The collector is live and a trace has landed in SigNoz:
 https://pet-mammoth.us2.signoz.cloud/trace/9c0574d648828148c39c46c5415116a0

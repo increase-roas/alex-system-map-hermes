@@ -1,0 +1,23 @@
+COMMAND:    bash -c launchctl print gui/$(id -u)/com.alex.signoz-collector 2>&1 | grep -E '^[[:space:]]*(state|pid)'; echo '--- port ---'; lsof -nP -iTCP:4320 2>&1 | head -3; echo '--- stats ---'; curl -s -m 10 http://127.0.0.1:4320/stats
+DESCRIPTION:launchd state, port holder and counts after the verifier
+CWD:        /Users/alexlobaito/Projects/alex-system-map
+SANDBOX:    Seatbelt DISABLED (launchd domain writes are refused inside it)
+UTC_START:  2026-10-20T03:54:37Z
+---- output ----
+	state = running
+	pid = 84591
+		state = active
+		state = active
+--- port ---
+COMMAND   PID        USER   FD   TYPE             DEVICE SIZE/OFF NODE NAME
+Python  84591 alexlobaito    4u  IPv4 0x25c205eafc3bfbd1      0t0  TCP 127.0.0.1:4320 (LISTEN)
+--- stats ---
+{
+  "uptime_hours": 0.001,
+  "kept_spans": {},
+  "kept_spans_per_hour": {},
+  "dropped_spans": {},
+  "upstream_responses": {}
+}---- end output ----
+UTC_END:    2026-10-20T03:54:37Z
+EXIT_STATUS:0
