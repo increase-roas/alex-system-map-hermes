@@ -116,6 +116,28 @@ BLOCKED_SERVICES = ('codex-worker',)
 DEFAULT_RATE_PER_MIN = 600
 RATE_OVERRIDES: dict[str, int] = {}
 
+# Per-signal caps that apply on top of RATE_OVERRIDES for one signal only.
+# task-claude logs (the Codex desktop app, below): measured 2026-10-20 on a count-only listener
+# at about 630 bytes a record, 16 records at app start and 19 for a minimal turn. 200 a minute
+# is roughly 10 busy turns a minute of headroom, and caps a runaway at about 288k records
+# (~180 MB on the wire) a day, inside the 1 GiB/day SigNoz logs cap with the other senders.
+# Claude Code traces run from Codex shells also report as task-claude; they keep the default.
+SIGNAL_RATE_OVERRIDES: dict[str, dict[str, int]] = {
+    'logs': {'task-claude': 200},
+}
+
+# Exact incoming service.name -> stored name, per signal, for a sender that cannot set its own.
+# Codex's [otel] config has no service-name setting (the reference lists environment, exporter,
+# trace_exporter, metrics_exporter, log_user_prompt); it stamps service.name with its originator.
+# The Codex desktop app (ChatGPT.app's `codex app-server`) reports `codex-app-server`, measured
+# 2026-10-20. Alex: "Send its OTel logs to 127.0.0.1:4320 as task-claude". Exact names only; the
+# original is kept on the resource as collector.renamed_from. Blocked names are refused BEFORE
+# any rename, so a rename can never let codex-worker through.
+SERVICE_RENAMES: dict[str, dict[str, str]] = {
+    'logs': {'codex-app-server': 'task-claude'},
+}
+RENAMED_FROM_KEY = 'collector.renamed_from'
+
 MAX_BODY = 16 * 1024 * 1024
 IO_TIMEOUT = 30
 # `op read` needs considerably longer than a local helper script, especially on a
@@ -362,8 +384,31 @@ def scrub_payload(body: bytes, signal: str) -> bytes:
     return _rewrite(body, {1: block}) if block else body
 
 
+def _string_kv(key: str, value: str) -> bytes:
+    return delimited(1, key.encode()) + delimited(2, delimited(1, value.encode()))
+
+
+def _renamed_resource(resource: bytes, new: str, old: str) -> bytes:
+    """Resource with service.name replaced and the old name kept as collector.renamed_from."""
+    out = bytearray()
+    for field, wire, payload, start, end in iter_fields(resource):
+        if field == 1 and wire == 2:
+            key = next((kp for kf, kw, kp, _s, _e in iter_fields(payload) if kf == 1 and kw == 2), None)
+            if key == b'service.name':
+                out += delimited(1, _string_kv('service.name', new))
+                out += delimited(1, _string_kv(RENAMED_FROM_KEY, old))
+                continue
+        out += resource[start:end]
+    return bytes(out)
+
+
+def rename_block(block: bytes, new: str, old: str) -> bytes:
+    """ResourceSpans / ResourceLogs / ResourceMetrics: field 1 is the Resource."""
+    return _rewrite(block, {1: lambda r: _renamed_resource(r, new, old)})
+
+
 def filter_payload(body: bytes, guard: RateGuard, known=KNOWN_SERVICES,
-                   blocked=BLOCKED_SERVICES) -> Decision:
+                   blocked=BLOCKED_SERVICES, renames: dict[str, str] | None = None) -> Decision:
     """Keep only named, allowed, in-budget ResourceSpans. Re-emit valid OTLP."""
     kept_counts: dict[str, int] = collections.Counter()
     dropped: dict[str, int] = collections.Counter()
@@ -384,6 +429,10 @@ def filter_payload(body: bytes, guard: RateGuard, known=KNOWN_SERVICES,
         if service in blocked:
             dropped[f'blocked:{service}'] += spans
             continue
+        new_name = (renames or {}).get(service)
+        if new_name:
+            payload = rename_block(payload, new_name, service)
+            service = new_name
         if known and service not in known:
             dropped[f'unknown:{service}'] += spans
             continue
@@ -736,6 +785,13 @@ def is_loopback(host: str) -> bool:
         return False
 
 
+def signal_guards(guard: RateGuard) -> dict[str, RateGuard]:
+    """One rate guard per signal; logs and metrics add their SIGNAL_RATE_OVERRIDES."""
+    return {'traces': guard,
+            **{sig: RateGuard(guard.per_min, {**guard.overrides, **SIGNAL_RATE_OVERRIDES.get(sig, {})})
+               for sig in ('logs', 'metrics')}}
+
+
 class Collector(ThreadingHTTPServer):
     daemon_threads = True
     allow_reuse_address = True
@@ -745,9 +801,7 @@ class Collector(ThreadingHTTPServer):
         super().__init__(address, Handler)
         self.upstreams = upstreams
         self.guard = guard
-        self.guards = {'traces': guard,
-                       'logs': RateGuard(guard.per_min, guard.overrides),
-                       'metrics': RateGuard(guard.per_min, guard.overrides)}
+        self.guards = signal_guards(guard)
         self.keys = keys
         self.dry_run = dry_run
         self.log_path = log_path
@@ -805,7 +859,7 @@ class Handler(BaseHTTPRequestHandler):
             return
         body = self.rfile.read(length)
         try:
-            decision = filter_payload(body, self.server.guards[signal])
+            decision = filter_payload(body, self.server.guards[signal], renames=SERVICE_RENAMES.get(signal))
         except ValueError:
             self._reply(400)
             return
@@ -1165,6 +1219,34 @@ def self_test() -> int:
     _oc = delimited(1, _oc_res + delimited(2, delimited(2, delimited(5, b'openclaw.model.usage'))))
     check('openclaw is an allowed service', filter_payload(_oc, RateGuard(600, {})).kept == {'openclaw': 1}, '')
 
+    # Renames (2026-10-20): the Codex desktop app reports codex-app-server and cannot set its own name.
+    def _logs_block(service: str, n: int) -> bytes:
+        res = delimited(1, delimited(1, _kv('service.name', service)))
+        recs = b''.join(delimited(2, delimited(5, delimited(1, f'r{i}'.encode()))) for i in range(n))
+        return delimited(1, res + delimited(2, recs))
+    _ren = SERVICE_RENAMES['logs']
+    d = filter_payload(_logs_block('codex-app-server', 3), RateGuard(600, {}), renames=_ren)
+    check('rename: codex-app-server logs kept as task-claude', d.kept == {'task-claude': 3}, d.kept)
+    _again = filter_payload(d.body, RateGuard(600, {}))
+    check('rename: re-emitted body parses as task-claude and keeps the old name',
+          _again.kept == {'task-claude': 3} and b'collector.renamed_from' in d.body
+          and b'codex-app-server' in d.body, _again.kept)
+    d = filter_payload(_logs_block('codex-worker', 2), RateGuard(600, {}),
+                       renames={**_ren, 'codex-worker': 'task-claude'})
+    check('rename: a blocked name stays blocked even if a rename names it',
+          d.dropped == {'blocked:codex-worker': 2} and d.body == b'', d.dropped)
+    d = filter_payload(_logs_block('codex_exec', 2), RateGuard(600, {}), renames=_ren)
+    check('rename: other names are not renamed', d.dropped == {'unknown:codex_exec': 2}, d.dropped)
+    d = filter_payload(_logs_block('codex-app-server', 2), RateGuard(600, {}))
+    check('rename: traces/metrics without a rename table leave the name alone',
+          d.dropped == {'unknown:codex-app-server': 2}, d.dropped)
+    _g = signal_guards(RateGuard(DEFAULT_RATE_PER_MIN, RATE_OVERRIDES))
+    check('logs cap for task-claude is 200/min, its traces keep the default',
+          _g['logs'].limit_for('task-claude') == 200
+          and _g['traces'].limit_for('task-claude') == DEFAULT_RATE_PER_MIN
+          and _g['logs'].limit_for('claude-code') == DEFAULT_RATE_PER_MIN,
+          {k: v.limit_for('task-claude') for k, v in _g.items()})
+
     width = max(len(n) for n, _ok, _d in checks)
     for name, ok, detail in checks:
         line = f'  {"pass" if ok else "FAIL"}  {name:{width}}'
@@ -1220,6 +1302,8 @@ def main(argv: list[str] | None = None) -> int:
     print(f'  upstreams: {", ".join(upstreams) or "(none, dry run)"}')
     print(f'  rate guard: {args.rate_per_min} spans/min per service')
     print(f'  blocked: {", ".join(BLOCKED_SERVICES)}')
+    print(f'  renames: {SERVICE_RENAMES}')
+    print(f'  per-signal caps: {SIGNAL_RATE_OVERRIDES}')
     print(f'  counts: GET http://127.0.0.1:{server.server_address[1]}/stats')
     sys.stdout.flush()
 
