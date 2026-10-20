@@ -1,5 +1,21 @@
 # SigNoz collector: what is built, what is proven, what one person still has to do
 
+> **SUPERSEDED IN PART, 2026-10-20.** The Boss Director ruled that there is **one door, not two**:
+> the patched relay at `127.0.0.1:4319` is THE collector, because it already runs under launchd and
+> has been proving 1Password robot reads there for days, so durability needs no new job.
+>
+> **`tools/otel_collector.py` is NOT DEPLOYED and will not be.** It stays in this repo as a test
+> harness: its filter logic is the same policy, its 12-check suite is useful, and it was the vehicle
+> for proving that policy end to end before any of it touched a shared file. Do not install it, and
+> do not install the LaunchAgent described below.
+>
+> The LaunchAgent install in "What is still blocked" is **CANCELLED**. The plist template,
+> `verify_durable.py` and `validate_p4.py` in `work/signoz-relay/` are kept for their checks and
+> their record, not as an install path.
+>
+> The live plan is `work/signoz-relay/APPLY.md`: the patched relay plus the CLI wrapper, applied
+> through the route Alex chooses. The SigNoz tool card waits for that same route.
+
 2026-10-20, written by Claude Code (claude-opus-5) in `~/Projects/alex-system-map`.
 Play `absence-alarms-20261020-p2-signoz-hookup`. Source of truth for the account:
 `~/Documents/Codex/2026-10-19/signoz/SIGNOZ-SETUP.md`.
