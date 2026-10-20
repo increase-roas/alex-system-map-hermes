@@ -74,6 +74,7 @@ import { LangflowPanel } from './langflow-panel';
 import { localTime } from '@/lib/local-time';
 import { ConnectorLoginsPanel } from './connector-logins-panel';
 import { CeoDashboardPanel } from './ceo-dashboard-panel';
+import { LocalFilesPanel } from './local-files-panel';
 
 const elk = new ELK();
 
@@ -110,8 +111,10 @@ async function layoutTopDown(nodes: Node[], edges: { id: string; source: string;
   });
 }
 
+const VIEW_ORDER: ExplorerView[] = ['local-files', 'ceo', 'map', 'pro', 'flow', 'langflow', 'overview', 'subsystem', 'files', 'problems', 'workflows', 'tracing', 'reliability', 'maintained', 'live', 'logins'];
+
 const VIEW_LABEL: Partial<Record<ExplorerView, string>> = {
-  map: 'Map', pro: 'Pro Map', flow: 'Flow Builder', langflow: 'Langflow', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files', problems: 'Problems', workflows: 'Workflows',
+  'local-files': 'Local files', map: 'Map', pro: 'Pro Map', flow: 'Flow Builder', langflow: 'Langflow', overview: 'Full Catalog', subsystem: 'Subsystem', files: 'Files (archive)', problems: 'Problems', workflows: 'Workflows',
   tracing: 'Tracing', reliability: 'Reliability', maintained: 'Maintained', live: 'Live', logins: 'Connector logins', ceo: 'CEO',
 };
 
@@ -119,7 +122,7 @@ export function SystemExplorer() {
   const { theme, setTheme, resolvedTheme } = useTheme();
   const [bundle, setBundle] = useState<CatalogBundle | null>(null);
   const [loadError, setLoadError] = useState<string | null>(null);
-  const [view, setView] = useState<ExplorerView>('map');
+  const [view, setView] = useState<ExplorerView>('local-files');
   const [selectedLayer, setSelectedLayer] = useState<string>('layer_01');
   const [expandedGroupId, setExpandedGroupId] = useState<string | null>(null);
   const [selectedComponent, setSelectedComponent] = useState<CatalogComponent | null>(null);
@@ -132,14 +135,20 @@ export function SystemExplorer() {
   const [edges, setEdges, onEdgesChange] = useEdgesState<Edge>([]);
 
   useEffect(() => {
+    const requested = new URLSearchParams(window.location.search).get('view');
+    if (requested && Object.prototype.hasOwnProperty.call(VIEW_LABEL, requested)) setView(requested as ExplorerView);
+  }, []);
+
+  useEffect(() => {
     async function load() {
       try {
-        const [health, catalog] = await Promise.all([
-          fetch('/api/health').then((r) => r.json()),
-          fetch('/api/catalog').then((r) => r.json()),
+        const [health, catalog] = await Promise.allSettled([
+          fetch('/api/health').then((r) => { if (!r.ok) throw new Error('Local token unavailable'); return r.json(); }),
+          fetch('/api/catalog').then((r) => { if (!r.ok) throw new Error('Archive catalog unavailable'); return r.json(); }),
         ]);
-        setLocalToken(String(health.token ?? ''));
-        setBundle(catalog as CatalogBundle);
+        if (health.status === 'fulfilled') setLocalToken(String(health.value.token ?? ''));
+        if (catalog.status === 'fulfilled') setBundle(catalog.value as CatalogBundle);
+        else setLoadError(catalog.reason instanceof Error ? catalog.reason.message : 'Archive catalog failed to load');
       } catch (error) {
         setLoadError(error instanceof Error ? error.message : 'load failed');
       }
@@ -154,6 +163,7 @@ export function SystemExplorer() {
         view === 'problems' ||
         view === 'workflows' ||
         view === 'files' ||
+        view === 'local-files' ||
         view === 'tracing' ||
         view === 'maintained' ||
         view === 'live' ||
@@ -267,6 +277,26 @@ export function SystemExplorer() {
     });
   }
 
+  function switchView(item: ExplorerView) {
+    setView(item);
+    const url = new URL(window.location.href);
+    url.searchParams.set('view', item);
+    window.history.replaceState(null, '', url);
+  }
+
+  if (view === 'local-files') {
+    return <div className="flex h-screen min-w-0 flex-col">
+      <header className="shrink-0 space-y-3 border-b px-4 py-3">
+        <div className="flex items-center justify-between gap-3">
+          <h1 className="text-base font-medium">Alex system map</h1>
+          <Button size="sm" variant="outline" onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')} aria-label="Toggle theme">{theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}</Button>
+        </div>
+        <nav className="flex flex-wrap gap-2" aria-label="Explorer views">{VIEW_ORDER.map((item) => <Button key={item} size="sm" variant={view === item ? 'default' : 'outline'} aria-pressed={view === item} onClick={() => switchView(item)}>{VIEW_LABEL[item] ?? item}</Button>)}</nav>
+      </header>
+      <main className="min-h-0 min-w-0 flex-1"><LocalFilesPanel localToken={localToken} /></main>
+    </div>;
+  }
+
   if (loadError) {
     return (
       <main className="p-6">
@@ -281,7 +311,7 @@ export function SystemExplorer() {
   }
 
   return (
-    <div className="flex h-screen flex-col">
+    <div className="flex h-screen min-w-0 flex-col">
       <header className="flex flex-wrap items-center gap-3 border-b px-4 py-3">
         <div>
           <h1 className="text-base font-medium">Alex system map</h1>
@@ -292,7 +322,7 @@ export function SystemExplorer() {
           </p>
         </div>
         <div className="flex flex-1 flex-wrap items-center gap-2">
-          <div className="relative min-w-[220px] flex-1">
+          <div className={`relative min-w-[220px] flex-1`}>
             <Search className="text-muted-foreground absolute top-2.5 left-2 size-4" />
             <Input
               className="pl-8"
@@ -303,6 +333,7 @@ export function SystemExplorer() {
           </div>
           {(
             [
+              'local-files',
               'ceo',
               'map',
               'pro',
@@ -326,7 +357,8 @@ export function SystemExplorer() {
                 aria-label={item === 'maintained' || item === 'workflows' ? item : undefined}
                 size="sm"
                 variant={view === item ? 'default' : 'outline'}
-                onClick={() => setView(item)}
+                aria-pressed={view === item}
+                onClick={() => switchView(item)}
               >
                 {VIEW_LABEL[item] ?? item}
               </Button>
@@ -372,8 +404,8 @@ export function SystemExplorer() {
       )}
 
       {/* The map and live views have their own detail panels, so the side column is dropped there. */}
-      <div className={`grid min-h-0 flex-1 grid-cols-1 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' || view === 'langflow' || view === 'ceo' ? '' : 'lg:grid-cols-[1fr_360px]'}`}>
-        <section className={`min-h-0 border-b lg:h-auto lg:border-b-0 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' || view === 'langflow' || view === 'ceo' ? 'h-[85vh]' : 'h-[72vh] lg:border-r'}`}>
+      <div className={`grid min-h-0 min-w-0 flex-1 grid-cols-1 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' || view === 'langflow' || view === 'ceo' ? '' : 'lg:grid-cols-[1fr_360px]'}`}>
+        <section className={`min-h-0 min-w-0 border-b lg:h-auto lg:border-b-0 ${view === 'map' || view === 'live' || view === 'pro' || view === 'flow' || view === 'langflow' || view === 'ceo' ? 'h-[85vh]' : 'h-[72vh] lg:border-r'}`}>
           {view === 'files' ? (
             <div className="h-full overflow-auto p-4">
               <h2 className="mb-3 font-medium">Files</h2>

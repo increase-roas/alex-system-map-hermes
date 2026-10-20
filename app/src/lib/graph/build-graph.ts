@@ -3,6 +3,7 @@ import type { Edge, Node } from '@xyflow/react';
 import type { CatalogBundle, CatalogComponent } from '@/lib/types/catalog';
 
 export type ExplorerView =
+  | 'local-files'
   | 'ceo'
   | 'map'
   | 'pro'
