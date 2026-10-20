@@ -101,9 +101,11 @@ IO_TIMEOUT = 30
 # reporting "state = running" the whole time. That is the exact silent-success shape
 # this project exists to remove, so the timeout is generous and the retry is explicit.
 HELPER_TIMEOUT = 90
-KEY_RETRIES = 3
-KEY_RETRY_WAIT = 5
 KEY_TTL = 3600
+# Backoff after a failed key read, doubling each time, so a credential problem costs
+# 1Password a handful of calls rather than one every few seconds forever.
+KEY_BACKOFF_BASE = 30
+KEY_BACKOFF_MAX = 900
 
 
 class Blocked(Exception):
@@ -330,21 +332,69 @@ def auth_for(name: str) -> str:
 
 
 class KeyCache:
+    """Holds each upstream's auth header, and refuses to hammer 1Password for it.
+
+    The backoff is the important part. The 1Password service account is shared by
+    every agent on this Mac and has a daily read cap. On 2026-10-20 this collector
+    read three secrets per launch, crashed on a slow read, and launchd's KeepAlive
+    relaunched it: the loop exhausted the account's authenticated path for everyone
+    until the reads stopped. So a failed read now blocks further attempts for an
+    exponentially growing interval, and a caller gets an immediate refusal instead
+    of a new subprocess.
+    """
+
     def __init__(self, names: list[str], ttl: int = KEY_TTL):
         self.names = names
         self.ttl = ttl
         self.lock = threading.Lock()
         self.cache: dict[str, tuple[str, float]] = {}
+        self.failures: dict[str, int] = {}
+        self.blocked_until: dict[str, float] = {}
+
+    def backoff_for(self, failures: int) -> float:
+        return min(KEY_BACKOFF_BASE * (2 ** max(failures - 1, 0)), KEY_BACKOFF_MAX)
 
     def get(self, name: str) -> str:
+        now = time.monotonic()
+        with self.lock:
+            hit = self.cache.get(name)
+            if hit and now - hit[1] < self.ttl:
+                return hit[0]
+            wait = self.blocked_until.get(name, 0.0) - now
+            if wait > 0:
+                raise Blocked(f'{name} key unavailable; not retrying for {wait:.0f}s')
+        try:
+            value = auth_for(name)
+        except Blocked:
+            with self.lock:
+                self.failures[name] = self.failures.get(name, 0) + 1
+                delay = self.backoff_for(self.failures[name])
+                self.blocked_until[name] = time.monotonic() + delay
+                count = self.failures[name]
+            print(f'  {name} key read failed ({count} in a row); holding off {delay:.0f}s '
+                  f'so 1Password is not hammered', file=sys.stderr)
+            sys.stderr.flush()
+            raise
+        with self.lock:
+            self.cache[name] = (value, time.monotonic())
+            self.failures.pop(name, None)
+            self.blocked_until.pop(name, None)
+        return value
+
+    def peek(self, name: str) -> str:
+        """Cached value only. NEVER calls 1Password, so it cannot block a request.
+
+        The request path must not wait on a credential: on 2026-10-20 a span arriving
+        while the keys were cold held the HTTP handler for 90 seconds and the sender
+        timed out. A span that cannot be forwarded right now is counted and dropped,
+        which is visible in /stats, instead of stalling whoever sent it. The
+        background warmer is the only thing that calls out to 1Password.
+        """
         with self.lock:
             hit = self.cache.get(name)
             if hit and time.monotonic() - hit[1] < self.ttl:
                 return hit[0]
-        value = auth_for(name)
-        with self.lock:
-            self.cache[name] = (value, time.monotonic())
-        return value
+        raise Blocked(f'{name} key not cached yet')
 
     def drop(self, name: str) -> None:
         with self.lock:
@@ -356,7 +406,7 @@ def forward(name: str, body: bytes, keys: KeyCache) -> int:
     from urllib.parse import urlsplit
     if urlsplit(url).hostname not in ALLOWED_HOSTS:
         raise Blocked('refused: upstream host is not in ALLOWED_HOSTS')
-    headers = {'Content-Type': 'application/x-protobuf', header: keys.get(name)}
+    headers = {'Content-Type': 'application/x-protobuf', header: keys.peek(name)}
     if name == 'langfuse':
         headers['x-langfuse-ingestion-version'] = '4'
     req = urllib.request.Request(url, data=body, headers=headers, method='POST')
@@ -518,10 +568,10 @@ def self_test() -> int:
         scope = delimited(2, b''.join(delimited(2, span(f's{i}')) for i in range(n)))
         return delimited(1, delimited(1, resource) + scope)
 
-    checks: list[tuple[str, bool]] = []
+    checks: list[tuple[str, bool, str]] = []
 
-    def check(name: str, ok: bool):
-        checks.append((name, bool(ok)))
+    def check(name: str, ok: bool, detail: str = ''):
+        checks.append((name, bool(ok), detail))
 
     guard = RateGuard(DEFAULT_RATE_PER_MIN, {})
     d = filter_payload(resource_spans('claude-code', 3), guard)
@@ -563,10 +613,66 @@ def self_test() -> int:
     check('loopback check rejects a public address', not is_loopback('8.8.8.8'))
     check('loopback check accepts 127.0.0.1', is_loopback('127.0.0.1'))
 
-    width = max(len(n) for n, _ in checks)
-    for name, ok in checks:
-        print(f'  {"pass" if ok else "FAIL"}  {name:{width}}')
-    failed = [n for n, ok in checks if not ok]
+    # The amplifier fix. These exist because on 2026-10-20 this collector exhausted the
+    # shared 1Password service account by reading keys inside a KeepAlive restart loop.
+    calls = {'n': 0}
+    real_auth = globals()['auth_for']
+
+    def counting_auth(name):
+        calls['n'] += 1
+        raise Blocked('simulated 1Password failure')
+
+    globals()['auth_for'] = counting_auth
+    try:
+        cache = KeyCache(['signoz'])
+        refusals = []
+        for _ in range(5):
+            try:
+                cache.get('signoz')
+            except Blocked as err:
+                refusals.append(str(err))
+        check('five requests cause ONE call to 1Password, not five',
+              calls['n'] == 1, f'calls made: {calls["n"]}')
+        check('later requests are refused without calling out',
+              len(refusals) == 5 and any('not retrying' in r for r in refusals[1:]),
+              f'refusals: {refusals[1:2]}')
+        check('backoff grows with consecutive failures',
+              cache.backoff_for(1) < cache.backoff_for(3) < cache.backoff_for(9))
+        check('backoff is capped', cache.backoff_for(99) == KEY_BACKOFF_MAX,
+              f'{cache.backoff_for(99)} vs {KEY_BACKOFF_MAX}')
+
+        # A key that starts working must clear the hold immediately.
+        cache2 = KeyCache(['signoz'])
+        try:
+            cache2.get('signoz')
+        except Blocked:
+            pass
+        globals()['auth_for'] = lambda name: 'test-header-value'
+        cache2.blocked_until['signoz'] = 0.0  # as if the hold had elapsed
+        check('a recovered key is cached and the failure count resets',
+              cache2.get('signoz') == 'test-header-value'
+              and 'signoz' not in cache2.failures)
+
+        # The request path must never wait on 1Password.
+        before = calls['n']
+        globals()['auth_for'] = counting_auth
+        cold = KeyCache(['signoz'])
+        try:
+            cold.peek('signoz')
+            peeked = 'returned a value it should not have'
+        except Blocked:
+            peeked = 'refused'
+        check('peek on a cold cache refuses instead of blocking', peeked == 'refused', peeked)
+        check('peek makes NO call to 1Password', calls['n'] == before,
+              f'calls before {before}, after {calls["n"]}')
+    finally:
+        globals()['auth_for'] = real_auth
+
+    width = max(len(n) for n, _ok, _d in checks)
+    for name, ok, detail in checks:
+        line = f'  {"pass" if ok else "FAIL"}  {name:{width}}'
+        print(line if ok else line + f'   <- {detail}')
+    failed = [n for n, ok, _d in checks if not ok]
     print()
     print(f'{len(checks) - len(failed)}/{len(checks)} checks passed')
     return 1 if failed else 0
@@ -596,30 +702,12 @@ def main(argv: list[str] | None = None) -> int:
 
     guard = RateGuard(args.rate_per_min, RATE_OVERRIDES)
     keys = KeyCache(upstreams)
-    if upstreams and not args.dry_run:
-        for name in upstreams:
-            # Read each key before serving, so a credential problem is loud here rather
-            # than silent at the first span. Retried, because a cold `op read` under
-            # launchd is slow rather than broken: on 2026-10-20 a single attempt killed
-            # the job twice while KeepAlive kept reporting it as running.
-            last: Blocked | None = None
-            for attempt in range(1, KEY_RETRIES + 1):
-                try:
-                    keys.get(name)
-                    last = None
-                    break
-                except Blocked as err:
-                    last = err
-                    if attempt < KEY_RETRIES:
-                        print(f'  {name} key not read on attempt {attempt} ({err}); '
-                              f'retrying in {KEY_RETRY_WAIT}s', file=sys.stderr)
-                        sys.stderr.flush()
-                        time.sleep(KEY_RETRY_WAIT)
-            if last is not None:
-                print(f'BLOCKED: cannot read the {name} key after {KEY_RETRIES} attempts: '
-                      f'{last}', file=sys.stderr)
-                return 2
-        print(f'  keys for {", ".join(upstreams)} read from 1Password (values not shown)')
+
+    # Under launchd a stop arrives as SIGTERM, not KeyboardInterrupt. shutdown() cannot
+    # be called from the serving thread, so the handler only sets this flag and the main
+    # thread closes the listener and lets in-flight requests finish. Declared here
+    # because the key-warming thread waits on it too.
+    stop = threading.Event()
 
     server = Collector(('127.0.0.1', args.port), upstreams=upstreams, guard=guard, keys=keys,
                        dry_run=args.dry_run, log_path=Path(args.log) if args.log else None)
@@ -630,10 +718,29 @@ def main(argv: list[str] | None = None) -> int:
     print(f'  counts: GET http://127.0.0.1:{server.server_address[1]}/stats')
     sys.stdout.flush()
 
-    # Under launchd a stop arrives as SIGTERM, not KeyboardInterrupt. shutdown()
-    # cannot be called from the serving thread, so the handler only sets a flag and
-    # the main thread closes the listener and lets in-flight requests finish.
-    stop = threading.Event()
+    # Keys are warmed in the BACKGROUND, after the listener is already bound. Reading
+    # them first was a design bug: on 2026-10-20 a slow `op read` under launchd held the
+    # startup path for minutes, so the port never opened and the service looked dead
+    # while the process was perfectly healthy. Binding first means /stats answers at
+    # once, a span that cannot be forwarded is counted rather than lost, and the thing
+    # is diagnosable from outside. KeyCache's backoff keeps the retries cheap.
+    def warm_keys():
+        for name in upstreams:
+            while not stop.is_set():
+                try:
+                    keys.get(name)
+                    print(f'  {name} key read from 1Password (value not shown)')
+                    sys.stdout.flush()
+                    break
+                except Blocked as err:
+                    print(f'  {name} key still unavailable: {err}', file=sys.stderr)
+                    sys.stderr.flush()
+                    if stop.wait(KEY_BACKOFF_BASE):
+                        return
+
+    if upstreams and not args.dry_run:
+        threading.Thread(target=warm_keys, daemon=True, name='warm-keys').start()
+
     previous = {}
     worker = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': 0.5})
     try:

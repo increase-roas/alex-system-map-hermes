@@ -26,6 +26,11 @@
   are written here without their leading dashes. plutil lint accepts a file that
   breaks that rule but plistlib rejects it, which is how the mistake was caught.
 
+  ThrottleInterval is 120 rather than the usual 10. On 2026-10-20 a crash loop at a
+  10 second interval exhausted the shared 1Password service account for every agent
+  on this machine. The collector no longer exits when a key read fails, so the loop
+  should not recur, but the longer interval is the second line of defence.
+
   Install, uninstall and proof: work/signoz-relay/APPLY-p4.md in
   ~/Projects/alex-system-map.
 -->
@@ -52,7 +57,7 @@
     <key>KeepAlive</key>
     <true/>
     <key>ThrottleInterval</key>
-    <integer>10</integer>
+    <integer>120</integer>
     <key>StandardOutPath</key>
     <string><HOME>/.agents/runtime/signoz-collector.out.log</string>
     <key>StandardErrorPath</key>
