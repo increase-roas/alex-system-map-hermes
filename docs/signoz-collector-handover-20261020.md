@@ -213,3 +213,73 @@ launchctl print "gui/$(id -u)/com.alex.signoz-collector" | grep -E "state|pid"
 
 Then the rest of APPLY-p4.md from step 2, which an agent can do: `verify_durable.py` needs no
 launchd write, only reads and HTTP.
+
+## Cause isolated, 2026-10-20: two separate causes, and a third problem I caused
+
+### Cause 1, the bootstrap failure: the Seatbelt sandbox blocks launchd domain writes
+
+One variable, same bytes, same label:
+
+| attempt | result |
+|---|---|
+| real plist, **inside** the Seatbelt sandbox | `Bootstrap failed: 5: Input/output error`, not registered |
+| same plist, **outside** the sandbox | loaded, `state = running`, a live pid |
+| a throwaway plist (`/usr/bin/true`, RunAtLoad false), outside the sandbox | loaded fine, so domain writes are not blocked in general |
+
+The Codex worker ran under `--approve-for-me`, which **is** a workspace-write sandbox, which is why
+it failed. So the fix for the bootstrap step is simply that it must run unsandboxed.
+
+**Correcting an earlier entry in this file:** I previously recorded "the sandbox" as ruled out,
+because the same EIO appeared with the sandbox off. That test used a **path that does not exist**,
+which fails for its own reason, so it was never a valid control. A negative control that fails twice
+over proves nothing. The sandbox was the cause all along.
+
+`EIO 5` is launchctl's generic failure here: it is returned for a missing file, for an
+already-loaded service, and for a sandbox refusal alike, so the error text carries no information
+and the cause has to be found by changing one variable at a time.
+
+### Cause 2: `op read` does not complete under real launchd
+
+With the bootstrap problem solved the job started, and then died waiting on its keys. Under launchd
+the 1Password read did not finish in 90 seconds; from a shell the same read had taken under 14.
+
+**Correcting a second earlier claim, and this one I reported twice as a cleared risk:** I said the
+1Password robot read was "proven to work with a launchd-shaped environment and no TTY". That test
+ran a child process with a scrubbed environment. **It was a simulation of launchd, not launchd.** A
+working session never proves a separate launch path is healthy, and here it did not.
+
+### Problem 3, self-inflicted: the 1Password service account stopped answering
+
+While isolating cause 2 the account stopped responding to anything authenticated:
+
+| command | result |
+|---|---|
+| `op --version` (local, no auth) | exit 0 in 0.2s |
+| `op whoami` | hangs, no answer in 25s |
+| `op vault list` | hangs, no answer in 25s |
+
+So it is not key-specific, not `HOME`, and not launchd. The authenticated path itself is hanging,
+and the most likely reason is the volume of reads I generated: every collector launch reads three
+secrets (SigNoz, plus the Langfuse public and secret halves), and with `KeepAlive` restarting a
+failing job, a crash loop multiplies that. The robot account has a documented daily cap. I stopped
+making 1Password calls rather than deepening it, so this should recover on its own; it is not
+established as a permanent fault and no key was changed.
+
+**This is a design flaw in the collector, not just an accident.** Reading every upstream's secret
+eagerly at startup, under a `KeepAlive` that relaunches on failure, makes the job an amplifier
+against its own credential source. Before this runs durably it needs: exponential backoff rather
+than a fixed five-second retry, a cap on launches per hour (`ThrottleInterval` alone is not
+enough), and lazy per-upstream reads so a failure on one does not re-read the others.
+
+### State left behind
+
+Clean. The service is **not** in the launchd domain, nothing listens on 4320, and no stray collector
+process is running. The plist remains installed but unloaded, which is inert. `otlp_relay.py` is
+still `90e6dd0a...`, `codex_traced.py` still `8eb092cc...`, no tool card placed, nothing committed in
+`~/.agents`.
+
+### What p5 inherits from this
+
+The Mac mini will hit cause 1 identically: whatever applies its LaunchAgent must be unsandboxed.
+It will hit cause 2 as well if it reads 1Password at startup the same way, and that needs solving
+before the mini is wired, not after.

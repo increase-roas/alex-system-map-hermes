@@ -94,7 +94,15 @@ RATE_OVERRIDES: dict[str, int] = {}
 
 MAX_BODY = 16 * 1024 * 1024
 IO_TIMEOUT = 30
-HELPER_TIMEOUT = 15
+# `op read` needs considerably longer than a local helper script, especially on a
+# cold start under launchd where the service account has to authenticate before the
+# first read. Measured 2026-10-20: at 15 seconds the job died twice with
+# subprocess.TimeoutExpired and only survived its third launch, while KeepAlive kept
+# reporting "state = running" the whole time. That is the exact silent-success shape
+# this project exists to remove, so the timeout is generous and the retry is explicit.
+HELPER_TIMEOUT = 90
+KEY_RETRIES = 3
+KEY_RETRY_WAIT = 5
 KEY_TTL = 3600
 
 
@@ -275,7 +283,20 @@ def filter_payload(body: bytes, guard: RateGuard, known=KNOWN_SERVICES,
 # --------------------------------------------------------------------------- upstreams
 
 def _run(cmd: list[str], env: dict | None = None) -> str:
-    proc = subprocess.run(cmd, capture_output=True, text=True, env=env, timeout=HELPER_TIMEOUT)
+    """Run a command, returning stdout. stderr is dropped: it could hold a key.
+
+    Every subprocess failure, a timeout included, becomes a Blocked carrying no
+    payload. Before this, a TimeoutExpired escaped as an unhandled traceback: it
+    killed the process and printed the command line into the job log, and KeepAlive
+    then relaunched it while still reporting "state = running".
+    """
+    try:
+        proc = subprocess.run(cmd, capture_output=True, text=True, env=env,
+                              timeout=HELPER_TIMEOUT)
+    except subprocess.TimeoutExpired:
+        raise Blocked(f'{Path(cmd[0]).name} did not answer within {HELPER_TIMEOUT}s') from None
+    except subprocess.SubprocessError:
+        raise Blocked(f'{Path(cmd[0]).name} could not be run') from None
     if proc.returncode:
         raise Blocked(f'{Path(cmd[0]).name} failed (exit {proc.returncode}); output withheld')
     return proc.stdout.strip()
@@ -577,10 +598,26 @@ def main(argv: list[str] | None = None) -> int:
     keys = KeyCache(upstreams)
     if upstreams and not args.dry_run:
         for name in upstreams:
-            try:
-                keys.get(name)  # fail fast and loudly rather than at the first span
-            except Blocked as err:
-                print(f'BLOCKED: cannot read the {name} key: {err}', file=sys.stderr)
+            # Read each key before serving, so a credential problem is loud here rather
+            # than silent at the first span. Retried, because a cold `op read` under
+            # launchd is slow rather than broken: on 2026-10-20 a single attempt killed
+            # the job twice while KeepAlive kept reporting it as running.
+            last: Blocked | None = None
+            for attempt in range(1, KEY_RETRIES + 1):
+                try:
+                    keys.get(name)
+                    last = None
+                    break
+                except Blocked as err:
+                    last = err
+                    if attempt < KEY_RETRIES:
+                        print(f'  {name} key not read on attempt {attempt} ({err}); '
+                              f'retrying in {KEY_RETRY_WAIT}s', file=sys.stderr)
+                        sys.stderr.flush()
+                        time.sleep(KEY_RETRY_WAIT)
+            if last is not None:
+                print(f'BLOCKED: cannot read the {name} key after {KEY_RETRIES} attempts: '
+                      f'{last}', file=sys.stderr)
                 return 2
         print(f'  keys for {", ".join(upstreams)} read from 1Password (values not shown)')
 
