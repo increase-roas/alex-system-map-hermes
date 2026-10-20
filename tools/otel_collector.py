@@ -59,7 +59,8 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 
 # Allowlist. The only hosts this file may reach, named here as tools/** requires.
-ALLOWED_HOSTS = ('ingest.us2.signoz.cloud', 'us.cloud.langfuse.com')
+# Langfuse removed 2026-10-20 (Alex approved: SigNoz is the only upstream).
+ALLOWED_HOSTS = ('ingest.us2.signoz.cloud',)
 
 SIGNOZ_HEADER = 'signoz-ingestion-key'
 # 1Password vault Connectors, item "SigNoz ingestion key", field credential.
@@ -67,10 +68,9 @@ SIGNOZ_OP_REF = 'op://Connectors/hfy4llw7gassge2w5xuz64kgyu/credential'
 
 UPSTREAMS = {
     # name: (url, header name). The credential route per upstream lives in auth_for():
-    # SigNoz through robot_env plus a Keychain cache, Langfuse through the existing
-    # langfuse_otel_headers.py helper, which already owns its own cache.
+    # SigNoz through robot_env plus a Keychain cache. The Langfuse upstream was removed
+    # on 2026-10-20 (Alex approved); SigNoz is the only destination.
     'signoz': ('https://ingest.us2.signoz.cloud/v1/traces', SIGNOZ_HEADER),
-    'langfuse': ('https://us.cloud.langfuse.com/api/public/otel/v1/traces', 'Authorization'),
 }
 
 # Names that are allowed through at all. Anything else is counted and dropped, so a
@@ -88,7 +88,8 @@ KNOWN_SERVICES = (
 )
 
 # Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
-# Hermes Langfuse plugin) post when their base URL points here; the body is plain OTLP.
+# Hermes Langfuse plugin) post when their base URL points here; the body is plain OTLP and
+# it is forwarded to SigNoz like any other trace. Kept after the Langfuse upstream went.
 TRACE_PATHS = ('/v1/traces', '/api/public/otel/v1/traces')
 # Logs and metrics too (2026-10-20): per SigNoz's own guides, Claude Code's main data is metrics and
 # event logs (traces are beta), Codex sends logs, Hermes sends all three. OTLP logs and metrics have
@@ -430,7 +431,6 @@ def _run(cmd: list[str], env: dict | None = None) -> str:
 # other op tool. `security` works fine under launchd and never prompts, so the common
 # path touches 1Password not at all.
 CONNECTORS = Path.home() / '.agents/tools/connectors'
-LANGFUSE_HELPER = CONNECTORS / 'langfuse_otel_headers.py'
 SECURITY = '/usr/bin/security'
 CACHE_ACCOUNT = 'connectors-sync'
 CACHE_TTL_SECONDS = 12 * 3600
@@ -540,32 +540,10 @@ def signoz_headers() -> dict:
     return headers
 
 
-def langfuse_headers() -> dict:
-    """Langfuse headers from the EXISTING helper, which already owns its own 12h cache."""
-    if not LANGFUSE_HELPER.exists():
-        raise Blocked('the Langfuse header helper is missing')
-    try:
-        proc = subprocess.run([sys.executable, '-B', str(LANGFUSE_HELPER)], capture_output=True,
-                              text=True, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
-    except subprocess.SubprocessError:
-        raise Blocked('the Langfuse header helper did not answer') from None
-    if proc.returncode:
-        raise Blocked('the Langfuse header helper would not answer')
-    try:
-        headers = json.loads(proc.stdout.strip())
-    except ValueError:
-        raise Blocked('the Langfuse header helper returned nothing usable') from None
-    if not isinstance(headers, dict) or 'Authorization' not in headers:
-        raise Blocked('the Langfuse header helper returned no Authorization')
-    return headers
-
-
 def auth_for(name: str) -> str:
     """Header VALUE for one upstream. Never print or log the return value."""
     if name == 'signoz':
         return signoz_headers()[SIGNOZ_HEADER]
-    if name == 'langfuse':
-        return langfuse_headers()['Authorization']
     raise Blocked(f'no credential route for upstream {name}')
 
 
@@ -680,8 +658,6 @@ def forward(name: str, body: bytes, keys: KeyCache, signal: str = 'traces') -> i
     if urlsplit(url).hostname not in ALLOWED_HOSTS:
         raise Blocked('refused: upstream host is not in ALLOWED_HOSTS')
     headers = {'Content-Type': 'application/x-protobuf', header: keys.peek(name)}
-    if name == 'langfuse':
-        headers['x-langfuse-ingestion-version'] = '4'
     req = urllib.request.Request(url, data=body, headers=headers, method='POST')
     try:
         with urllib.request.urlopen(req, timeout=IO_TIMEOUT) as resp:
@@ -1067,7 +1043,6 @@ def self_test() -> int:
 
         # Half one: each credential function turns a subprocess failure into Blocked.
         real_run = subprocess.run
-        real_helper = globals()['LANGFUSE_HELPER']
         real_get, real_put = globals()['_keychain_get'], globals()['_keychain_put']
         real_tok, real_load = globals()['_robot_token'], globals()['_load_op_items']
 
@@ -1092,7 +1067,6 @@ def self_test() -> int:
                 return contextlib.nullcontext({})
 
         try:
-            globals()['LANGFUSE_HELPER'] = Path(__file__)
             for label, exc in (('timeout', subprocess.TimeoutExpired(['x'], 10)),
                                ('subprocess error', subprocess.SubprocessError('x'))):
                 subprocess.run = raiser(exc)
@@ -1101,8 +1075,6 @@ def self_test() -> int:
                 check(f'_keychain_put: {label} does not escape', outcome(real_put, 'svc', {'h': 'v'}) == 'returned',
                       outcome(real_put, 'svc', {'h': 'v'}))
                 check(f'_robot_token: {label} becomes Blocked', outcome(real_tok) == 'Blocked', outcome(real_tok))
-                check(f'langfuse_headers: {label} becomes Blocked',
-                      outcome(langfuse_headers) == 'Blocked', outcome(langfuse_headers))
                 globals()['_keychain_get'] = lambda service: None
                 globals()['_keychain_put'] = lambda service, headers: None
                 globals()['_robot_token'] = lambda: 'tok'
@@ -1113,7 +1085,6 @@ def self_test() -> int:
                 globals()['_robot_token'], globals()['_load_op_items'] = real_tok, real_load
         finally:
             subprocess.run = real_run
-            globals()['LANGFUSE_HELPER'] = real_helper
             globals()['_keychain_get'], globals()['_keychain_put'] = real_get, real_put
             globals()['_robot_token'], globals()['_load_op_items'] = real_tok, real_load
     finally:
