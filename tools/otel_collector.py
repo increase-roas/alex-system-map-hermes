@@ -87,6 +87,12 @@ KNOWN_SERVICES = (
 # Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
 # Hermes Langfuse plugin) post when their base URL points here; the body is plain OTLP.
 TRACE_PATHS = ('/v1/traces', '/api/public/otel/v1/traces')
+# Logs and metrics too (2026-10-20): per SigNoz's own guides, Claude Code's main data is metrics and
+# event logs (traces are beta), Codex sends logs, Hermes sends all three. OTLP logs and metrics have
+# the same Resource -> scope -> records shape as traces, so the same filter, allowlist and per-service
+# rate guard apply; each signal gets its own guard so a chatty log stream cannot starve traces.
+SIGNAL_PATHS = {p: 'traces' for p in TRACE_PATHS}
+SIGNAL_PATHS.update({'/v1/logs': 'logs', '/v1/metrics': 'metrics'})
 
 # Never forwarded. The ChatGPT app's built-in Codex sent roughly 4.7M events a week
 # into Langfuse with no per-run session id; Alex switched it off on 2026-10-19 and the
@@ -579,8 +585,10 @@ def warm_loop(keys: KeyCache, names: list[str], stop, interval: float = KEY_REFR
             return
 
 
-def forward(name: str, body: bytes, keys: KeyCache) -> int:
+def forward(name: str, body: bytes, keys: KeyCache, signal: str = 'traces') -> int:
     url, header = UPSTREAMS[name]
+    if signal != 'traces':
+        url = url.rsplit('/v1/traces', 1)[0] + f'/v1/{signal}'
     from urllib.parse import urlsplit
     if urlsplit(url).hostname not in ALLOWED_HOSTS:
         raise Blocked('refused: upstream host is not in ALLOWED_HOSTS')
@@ -646,6 +654,9 @@ class Collector(ThreadingHTTPServer):
         super().__init__(address, Handler)
         self.upstreams = upstreams
         self.guard = guard
+        self.guards = {'traces': guard,
+                       'logs': RateGuard(guard.per_min, guard.overrides),
+                       'metrics': RateGuard(guard.per_min, guard.overrides)}
         self.keys = keys
         self.dry_run = dry_run
         self.log_path = log_path
@@ -689,7 +700,8 @@ class Handler(BaseHTTPRequestHandler):
         if not is_loopback(self.client_address[0]):
             self._reply(403)
             return
-        if self.path.split('?', 1)[0] not in TRACE_PATHS:
+        signal = SIGNAL_PATHS.get(self.path.split('?', 1)[0])
+        if not signal:
             self._reply(404)
             return
         try:
@@ -702,16 +714,21 @@ class Handler(BaseHTTPRequestHandler):
             return
         body = self.rfile.read(length)
         try:
-            decision = filter_payload(body, self.server.guard)
+            decision = filter_payload(body, self.server.guards[signal])
         except ValueError:
             self._reply(400)
             return
+        if signal != 'traces':  # counts in /stats read "logs:claude-code", "metrics:codex"
+            decision = Decision(decision.body, {f'{signal}:{k}': v for k, v in decision.kept.items()},
+                                {f'{signal}:{k}': v for k, v in decision.dropped.items()})
 
         statuses: dict[str, int] = {}
         if decision.body and not self.server.dry_run:
             for name in self.server.upstreams:
+                if name != 'signoz' and signal != 'traces':
+                    continue  # only SigNoz takes logs and metrics
                 try:
-                    statuses[name] = forward(name, decision.body, self.server.keys)
+                    statuses[name] = forward(name, decision.body, self.server.keys, signal)
                 except Blocked:
                     statuses[name] = -1
         self.server.stats.add(decision, statuses)
