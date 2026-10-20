@@ -163,6 +163,67 @@ class Blocked(Exception):
     """A step could not run. The message never carries credential text."""
 
 
+class BodyError(Exception):
+    """A request body that cannot be read; carries the HTTP status to answer with."""
+
+    def __init__(self, status: int):
+        super().__init__(status)
+        self.status = status
+
+
+def read_request_body(headers, rfile, limit: int = MAX_BODY) -> bytes:
+    """The request body, de-chunked and gunzipped, never more than `limit` bytes.
+
+    OTel JS 0.2xx (OpenClaw's diagnostics-otel, 2026-10-20) streams every export with
+    Transfer-Encoding: chunked and no Content-Length, and gzips when compression is set;
+    before this the collector answered 400 without reading the body, and the unread bytes
+    then broke the next response on the kept-alive connection ("Parse Error: Expected
+    HTTP/"). HTTP/1.1 servers must accept chunked bodies (RFC 9112 section 7.1) and the
+    OpenTelemetry Collector's OTLP receiver accepts gzip, so both are handled here.
+    """
+    if 'chunked' in (headers.get('Transfer-Encoding') or '').lower():
+        parts, total = [], 0
+        while True:
+            line = rfile.readline(1024)
+            try:
+                size = int(line.split(b';', 1)[0].strip(), 16)
+            except ValueError:
+                raise BodyError(400) from None
+            if size == 0:
+                while rfile.readline(1024) not in (b'\r\n', b'\n', b''):
+                    pass  # trailer fields, never used
+                break
+            total += size
+            if total > limit:
+                raise BodyError(413)
+            parts.append(rfile.read(size))
+            rfile.readline(1024)  # CRLF after each chunk
+        body = b''.join(parts)
+    else:
+        try:
+            length = int(headers.get('Content-Length') or 0)
+        except ValueError:
+            raise BodyError(400) from None
+        if length > limit:
+            raise BodyError(413)
+        body = rfile.read(length) if length > 0 else b''
+    if not body:
+        raise BodyError(400)
+    encoding = (headers.get('Content-Encoding') or '').strip().lower()
+    if encoding == 'gzip':
+        import zlib
+        inflater = zlib.decompressobj(16 + zlib.MAX_WBITS)
+        try:
+            body = inflater.decompress(body, limit + 1)
+        except zlib.error:
+            raise BodyError(400) from None
+        if len(body) > limit or inflater.unconsumed_tail:
+            raise BodyError(413)
+    elif encoding not in ('', 'identity'):
+        raise BodyError(415)
+    return body
+
+
 # --------------------------------------------------------------------------- protobuf
 
 def read_varint(buf: bytes, i: int) -> tuple[int, int]:
@@ -850,14 +911,12 @@ class Handler(BaseHTTPRequestHandler):
             self._reply(404)
             return
         try:
-            length = int(self.headers.get('Content-Length') or 0)
-        except ValueError:
-            self._reply(400)
+            body = read_request_body(self.headers, self.rfile)
+        except BodyError as err:
+            self.close_connection = True  # whatever was not read must not be parsed as the next request
+            self._reply(err.status)
             return
-        if length <= 0 or length > MAX_BODY:
-            self._reply(413 if length > MAX_BODY else 400)
-            return
-        body = self.rfile.read(length)
+        length = len(body)
         try:
             decision = filter_payload(body, self.server.guards[signal], renames=SERVICE_RENAMES.get(signal))
         except ValueError:
@@ -1246,6 +1305,33 @@ def self_test() -> int:
           and _g['traces'].limit_for('task-claude') == DEFAULT_RATE_PER_MIN
           and _g['logs'].limit_for('claude-code') == DEFAULT_RATE_PER_MIN,
           {k: v.limit_for('task-claude') for k, v in _g.items()})
+
+    # Request bodies (2026-10-20): OTel JS 0.2xx streams chunked and may gzip; both must be read in full.
+    import gzip as _gzip
+    import io as _io
+
+    def _body(headers, raw):
+        try:
+            return read_request_body(headers, _io.BytesIO(raw))
+        except BodyError as err:
+            return err.status
+    _pb = _oc  # a valid ExportTraceServiceRequest from the openclaw check above
+    _chunked = b''.join(b'%x\r\n%s\r\n' % (len(p), p) for p in (_pb[:7], _pb[7:])) + b'0\r\n\r\nNEXT'
+    check('body: Content-Length read as before', _body({'Content-Length': str(len(_pb))}, _pb) == _pb, '')
+    _rf = _io.BytesIO(_chunked)
+    check('body: chunked read in full, and no further',
+          read_request_body({'Transfer-Encoding': 'chunked'}, _rf) == _pb and _rf.read() == b'NEXT', '')
+    _gz = _gzip.compress(_pb)
+    check('body: gzip inflated', _body({'Content-Length': str(len(_gz)), 'Content-Encoding': 'gzip'}, _gz) == _pb, '')
+    _gzc = b'%x\r\n%s\r\n0\r\n\r\n' % (len(_gz), _gz)
+    check('body: chunked + gzip', _body({'Transfer-Encoding': 'chunked', 'Content-Encoding': 'gzip'}, _gzc) == _pb, '')
+    check('body: empty is 400', _body({}, b'') == 400, '')
+    check('body: oversized is 413', _body({'Content-Length': str(MAX_BODY + 1)}, b'') == 413, '')
+    _bomb = _gzip.compress(b'\0' * (MAX_BODY + 10))
+    check('body: gzip that inflates past the cap is 413',
+          _body({'Content-Length': str(len(_bomb)), 'Content-Encoding': 'gzip'}, _bomb) == 413, '')
+    check('body: unknown encoding is 415', _body({'Content-Length': '3', 'Content-Encoding': 'br'}, b'abc') == 415, '')
+    check('body: bad chunk size is 400', _body({'Transfer-Encoding': 'chunked'}, b'zz\r\n') == 400, '')
 
     width = max(len(n) for n, _ok, _d in checks)
     for name, ok, detail in checks:
