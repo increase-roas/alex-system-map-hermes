@@ -130,9 +130,14 @@ echo "=== STEP 5: close the op-invocation count ==="
 {
   echo "---- end invocations ----"
   echo "UTC_END:    $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
-  n=$(grep -c "  op " "$OPLOG" 2>/dev/null || echo 0)
+  # grep -c prints 0 AND exits non-zero on no match, so a `|| echo 0` appends a
+  # SECOND zero and the comparison below then takes the wrong branch over a correct
+  # count. That happened on the 2026-10-20 run: the file said OP_INVOCATIONS 0 and
+  # then concluded the opposite. Count without the fallback and compare an integer.
+  n=$(grep -cE '^[0-9]{4}-[0-9]{2}-[0-9]{2}T.*  op ' "$OPLOG"); true
+  n=$((n + 0))
   echo "OP_INVOCATIONS: $n"
-  if [ "$n" = "0" ]; then
+  if [ "$n" -eq 0 ]; then
     echo "CONCLUSION: zero op processes were spawned for the whole run, by the collector or"
     echo "            by anything else on this PATH. A macOS app-data prompt can only be"
     echo "            raised by op, so no prompt was possible. Both keys came from the"
