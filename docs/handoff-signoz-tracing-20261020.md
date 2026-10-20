@@ -19,18 +19,60 @@ service, and refuses the unnamed, so a flood cannot recur and a silent agent bec
 - Director route: read it with `python3 ~/.agents/tools/jobs/director_route.py get` **at report
   time**. It changed three times today. Do not reuse a remembered id.
 
+## UPDATE 03:36Z: IT WORKS. verify_durable.py 12/12.
+
+The collector is live and a trace has landed in SigNoz:
+https://pet-mammoth.us2.signoz.cloud/trace/9c0574d648828148c39c46c5415116a0
+
+All twelve checks pass: launchctl reports a live pid, that same pid holds 4320, /stats answers from
+a separate process, a named span is kept and counted, an unnamed one is dropped and counted, SigNoz
+returned 200 which proves the key was read INSIDE launchd, the named canary is in SigNoz as
+`alex-system-map`, the unnamed one is not, and killing the process proved KeepAlive brings it back
+with a new pid. Live at commit `ba14586`, pid 72360.
+
+**The cause was written in `op_items.robot_env` all along:** under the real HOME, `op` stalls for
+minutes before any network step, and the docstring says plainly that `OP_BIOMETRIC_UNLOCK_ENABLED`
+and `OP_CACHE` alone do not stop it. I had set exactly those two and passed the real HOME. Touching
+the real home is also what made macOS keep asking Alex to let `op` reach other apps, so one fix
+killed both. After the change: signoz 1.01s, langfuse 0.11s, no prompt. No hand-rolled `op` reader
+remains; SigNoz goes through `robot_env` plus a 12h Keychain cache, Langfuse through the existing
+helper which owns its own cache. A single read has a 10s ceiling in code, not as a remembered rule.
+
+**A bug in my own test tools, which nearly read as a collector failure.** The first verify run failed
+three checks because `verify_durable.py` and `canary_through_relay.py` each wrapped the payload in
+one extra field-1 level, so every span parsed as unnamed with a count of zero. The collector was
+right to refuse it. Same protobuf nesting mistake as the morning's canary, so twice in a day, while
+`test_relay_collector.py` had it correct the whole time, which is why 33 offline checks passed and
+the live tools still did not work. A green suite does not protect you from a broken tool.
+
+### What is left on p4
+
+1. The alex-reviewer packet (acceptance item 5): `review_packet.py`, then `codex_review.py`, then
+   quote the `review_gate.py` GATE PASS line. **No collector restart for the review.**
+2. The SigNoz tool card, via the tool-card skill and the Codex-worker route, since `~/.agents` is
+   guard-blocked here. Mark it **LIVE for traces**, and say plainly that agent read access over MCP
+   is not wired yet.
+3. `APPLY-p4.md` steps 3 to 5: the wrapper repoint to 4320 behind its hash precondition, plus the
+   commit. **Before the repoint, confirm what `service.name` a Codex worker actually sends**, because
+   the collector refuses `codex-worker`. From source, `codex_traced.py` sets
+   `service.name` from `CODEX_OTEL_SERVICE_NAME`, default `codex`, while `codex-worker` is only the
+   `deployment.environment` label, so it should pass. That is read from source, NOT yet observed.
+
+Limits still in force: `op` only through `robot_env`, **no further collector restarts**, p3 stays
+unapplied, nothing pushed to main.
+
 ## Current state, verified not assumed
 
 | thing | state |
 |---|---|
-| `com.alex.signoz-collector` | **booted out**, not in the launchd domain |
-| port 4320 | nothing listening |
+| `com.alex.signoz-collector` | **LOADED and running**, pid 72360, listening on 4320 |
+| port 4320 | the collector, verified by pid match |
 | the plist | installed at `~/Library/LaunchAgents/`, kept on purpose, inert while unloaded |
 | `~/.agents/.../otlp_relay.py` | untouched, `90e6dd0a0944003cf05f47ad2c6bd09627fa47eab4548d043d02644723768417` |
 | `~/.agents/.../codex_traced.py` | untouched, `8eb092cceab349fc5ac5908d9ca34c4f5d03d5dd83f0e6464936391e37098d68` |
 | the SigNoz tool card | **not placed**; content ready at `work/signoz-relay/signoz.card.md` |
 | old relay on 4319 | still running, pid 2311, zero clients, untouched |
-| traces reaching SigNoz via the collector | **none, ever** |
+| traces reaching SigNoz via the collector | **YES**, trace `9c0574d648828148c39c46c5415116a0` |
 
 Nothing is half-applied. Commits: `68934c2`, `fff499f`, `ad681ab`, `788c30a`, `097d888`, `a24299f`,
 `b95ec65`, `267cc8d`. Tracked tree clean. Nothing pushed, no PR. All 11+ commits ARE on GitHub via
