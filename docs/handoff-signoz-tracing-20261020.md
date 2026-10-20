@@ -39,9 +39,20 @@ of failure this whole project exists to remove, and my own tests did not catch i
 run inside one TTL.**
 
 Fix: refresh on a schedule rather than exiting after first success, and add an expiry-path case to
-the offline suite so it can never regress. The Director's hard stop forbade further mutations on
-this component today, so it is NOT fixed. Treat the collector as proven for a session, not proven
-for a week.
+the offline suite so it can never regress.
+
+**STATUS 04:0xZ: being fixed TONIGHT.** The hard stop did not trigger (it applied only if R3 failed
+a high-severity item, and R3 passed), and the Director agreed an hour-long shelf life is worse than
+unproven. An in-process subagent is making the change. Acceptance for it: the expiry-path test green
+with the suites captured first, one captured bootout and bootstrap, a live canary forwarding
+`signoz:200` with the refresh thread alive, and a cross-family `codex_review.py` PASS.
+
+**APPLY-p4 step 3, the Codex wrapper repoint, is BLOCKED until that review passes.** Named risk: if
+the wrapper pointed at the collector now, Codex traces would silently drop an hour after every
+restart. The tool card waits too, and must then describe the FIXED collector.
+
+Tickets stay in this handoff. Do NOT file them through the task-list MCP: Agent OS is Alex's
+ChatGPT build and we are read-only on it.
 
 ### Tickets from R3, which the board REFUSED to accept
 
