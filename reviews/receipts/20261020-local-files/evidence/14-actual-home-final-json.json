@@ -1,0 +1,202 @@
+{
+  "captured_at": "2026-10-20T22:13:18.267370+00:00",
+  "authenticated_refresh_status": 200,
+  "files": 3407,
+  "duplicate_groups": 799,
+  "shared_link_groups": 790,
+  "candidate_count": 0,
+  "root_states": [
+    {
+      "path": "/Users/alexlobaito/.agents/instructions",
+      "label": "Shared instructions",
+      "state": "scanned",
+      "files": 6
+    },
+    {
+      "path": "/Users/alexlobaito/.agents/skills",
+      "label": "Shared skills",
+      "state": "partial",
+      "files": 795
+    },
+    {
+      "path": "/Users/alexlobaito/.agents/tools/cards",
+      "label": "Tool cards",
+      "state": "partial",
+      "files": 868
+    },
+    {
+      "path": "/Users/alexlobaito/.agents/tools/guards",
+      "label": "Guards",
+      "state": "scanned",
+      "files": 54
+    },
+    {
+      "path": "/Users/alexlobaito/.agents/tools/unify",
+      "label": "Instruction distribution",
+      "state": "scanned",
+      "files": 48
+    },
+    {
+      "path": "/Users/alexlobaito/.agents/AGENTS.md",
+      "label": "Shared root rules",
+      "state": "missing",
+      "files": 0
+    },
+    {
+      "path": "/Users/alexlobaito/.codex/AGENTS.md",
+      "label": "Codex rules",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/.codex/config.toml",
+      "label": "Codex configuration",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/.codex/hooks",
+      "label": "Codex hooks",
+      "state": "scanned",
+      "files": 0
+    },
+    {
+      "path": "/Users/alexlobaito/.codex/skills",
+      "label": "Codex skills",
+      "state": "scanned",
+      "files": 37
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/CLAUDE.md",
+      "label": "Claude rules",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/settings.json",
+      "label": "Claude settings",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/settings.local.json",
+      "label": "Claude local settings",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/rules",
+      "label": "Claude rules directory",
+      "state": "missing",
+      "files": 0
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/skills",
+      "label": "Claude skills",
+      "state": "partial",
+      "files": 794
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/hooks",
+      "label": "Claude hooks",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/.cursor/rules",
+      "label": "Cursor rules",
+      "state": "scanned",
+      "files": 3
+    },
+    {
+      "path": "/Users/alexlobaito/.cursor/skills",
+      "label": "Cursor skills",
+      "state": "partial",
+      "files": 792
+    },
+    {
+      "path": "/Users/alexlobaito/.cursor/hooks",
+      "label": "Cursor hooks",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/AGENTS.md",
+      "label": "Home rules",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/AGENT-CONTEXT.md",
+      "label": "Stack context",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/Alex-Director/AGENTS.md",
+      "label": "Director rules",
+      "state": "scanned",
+      "files": 1
+    },
+    {
+      "path": "/Users/alexlobaito/Alex-Director/rules",
+      "label": "Director rules directory",
+      "state": "missing",
+      "files": 0
+    },
+    {
+      "path": "/Users/alexlobaito/Documents/Codex/handoffs",
+      "label": "Selected handoffs",
+      "state": "missing",
+      "files": 0
+    }
+  ],
+  "truncated": true,
+  "skipped": [
+    {
+      "reason": "aggregate source byte limit (24 MiB)",
+      "count": 4041
+    },
+    {
+      "reason": "depth limit",
+      "count": 12
+    },
+    {
+      "reason": "excluded directory",
+      "count": 309
+    },
+    {
+      "reason": "excluded file",
+      "count": 2468
+    },
+    {
+      "reason": "outside selected roots",
+      "count": 12
+    },
+    {
+      "reason": "source too_large",
+      "count": 7
+    },
+    {
+      "reason": "finding/reference output limit",
+      "count": 2786
+    }
+  ],
+  "critical_files_readable": {
+    "/.codex/AGENTS.md": true,
+    "/.codex/config.toml": true,
+    "/.claude/CLAUDE.md": true,
+    "/.claude/settings.json": true,
+    "/AGENTS.md": true,
+    "/AGENT-CONTEXT.md": true
+  },
+  "metadata_sample": {
+    "lexical_absolute": true,
+    "resolved_path_matches": true,
+    "size_matches": true,
+    "hash_matches": true,
+    "scan_time_present": true,
+    "mtime_present": true
+  },
+  "snapshot_after_scanner": true
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "check": "json_command_args",
+    "secret_withheld": true
+  },
+  {
+    "check": "toml_command_args",
+    "secret_withheld": true
+  },
+  {
+    "check": "alias_to_excluded_auth_file",
+    "excluded": true
+  }
+]

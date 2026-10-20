@@ -1,0 +1,74 @@
+F.FFFFFF.....
+======================================================================
+FAIL: test_alias_to_excluded_target_is_never_read (test_local_files.LocalFilesTests.test_alias_to_excluded_target_is_never_read)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 121, in test_alias_to_excluded_target_is_never_read
+    self.assertEqual([], idx['files'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: Lists differ: [] != [{'id': 'e8506e7a30a0439c6f5bfb95', 'path'[660 chars] []}]
+
+Second list contains 1 additional elements.
+First extra element 0:
+{'id': 'e8506e7a30a0439c6f5bfb95', 'path': '/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpdayb1ndt/.agents/harmless.md', 'real_path': '/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpdayb1ndt/.agents/auth.json', 'root': '/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpdayb1ndt/.agents', 'relative_path': 'harmless.md', 'kind': 'document', 'state': 'readable', 'bytes': 31, 'mtime': '2026-10-20T22:06:59.216365+00:00', 'sha256': 'dd76a6eabde6421aa5e976d7da0530d77852e7961d09bc6093eabe6de95ccca8', 'line_count': 1, 'is_symlink': True, 'link_target': '/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpdayb1ndt/.agents/auth.json', 'generated': False, 'generated_sources': []}
+
+Diff is 771 characters long. Set self.maxDiff to None to see it.
+
+======================================================================
+FAIL: test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials) (format='{"command":"bri')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 110, in test_command_argument_containers_withhold_arbitrary_credentials
+    self.assertNotIn(secret, screened)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture-opaque-value-723' unexpectedly found in '{"command":"[REDACTED]","args":["--api-key","fixture-opaque-value-723"]}'
+
+======================================================================
+FAIL: test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials) (format='command = "brid')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 110, in test_command_argument_containers_withhold_arbitrary_credentials
+    self.assertNotIn(secret, screened)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture-opaque-value-723' unexpectedly found in 'command = [REDACTED]\nargs = ["--api-key", "fixture-opaque-value-723"]\n'
+
+======================================================================
+FAIL: test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials) (format='command = "brid')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 110, in test_command_argument_containers_withhold_arbitrary_credentials
+    self.assertNotIn(secret, screened)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture-opaque-value-723' unexpectedly found in 'command = [REDACTED]\nargs = [\n "--api-key",\n "fixture-opaque-value-723",\n]\nsafe = "visible"\n'
+
+======================================================================
+FAIL: test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials) (format='command: bridge')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 110, in test_command_argument_containers_withhold_arbitrary_credentials
+    self.assertNotIn(secret, screened)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture-opaque-value-723' unexpectedly found in 'command: [REDACTED]\nargs:\n  - --api-key\n  - fixture-opaque-value-723\nsafe: visible\n'
+
+======================================================================
+FAIL: test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials) (format='command: bridge')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 110, in test_command_argument_containers_withhold_arbitrary_credentials
+    self.assertNotIn(secret, screened)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture-opaque-value-723' unexpectedly found in 'command: [REDACTED]\nargs: ["--api-key", "fixture-opaque-value-723"]\n'
+
+======================================================================
+FAIL: test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 115, in test_command_argument_containers_withhold_arbitrary_credentials
+    self.assertNotIn(secret, json.dumps(idx) + lf.content(idx, idx['files'][0]['id'])['content'])
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'fixture-opaque-value-723' unexpectedly found in '{"schema_version": 1, "scanned_at": "2026-10-20T22:06:59.222975+00:00", "home": "/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpjbkra2ee", "files": [{"id": "28cef28b7c2b27df56b2a02c", "path": "/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpjbkra2ee/.agents/settings.json", "real_path": "/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpjbkra2ee/.agents/settings.json", "root": "/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpjbkra2ee/.agents", "relative_path": "settings.json", "kind": "config", "state": "readable", "bytes": 68, "mtime": "2026-10-20T22:06:59.222936+00:00", "sha256": "fdc628547c7d195b4076c8ba9ef5915da4fc3275ee1ad8aeb9e2cae02c8546b7", "line_count": 1, "is_symlink": true, "link_target": "/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpjbkra2ee/.agents/settings.json", "generated": false, "generated_sources": []}], "duplicates": [], "findings": [], "references": [], "coverage": {"roots": [{"path": "/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpjbkra2ee/.agents", "label": "fixture", "state": "scanned", "files": 1}], "exclusions": ["Credential/auth/env files and stores", "Logs, sessions, transcripts, databases, runtime and memory archives", "Dependency, build, cache, backup and .git trees", "Unselected roots and symlinks escaping selected roots", "Unsupported file types; bounded depth, bytes and file count"], "limits": {"max_files": 6000, "max_depth": 12, "max_bytes": 262144}, "truncated": false, "skipped": [], "errors": []}}{"command":"[REDACTED]","args":["--api-key","fixture-opaque-value-723"]}'
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.015s
+
+FAILED (failures=7)

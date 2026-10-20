@@ -1,0 +1,46 @@
+{
+  "checks": [
+    {
+      "check": "local_index",
+      "status": 200
+    },
+    {
+      "check": "remote_host",
+      "status": 403
+    },
+    {
+      "check": "cross_site",
+      "status": 403
+    },
+    {
+      "check": "tailscale_identity",
+      "status": 403
+    },
+    {
+      "check": "arbitrary_path",
+      "status": 400
+    },
+    {
+      "check": "path_as_id",
+      "status": 404
+    },
+    {
+      "check": "refresh_no_token",
+      "status": 401
+    },
+    {
+      "check": "refresh_bad_token",
+      "status": 401
+    }
+  ],
+  "inventory": {
+    "files": 2611,
+    "duplicates": 45,
+    "findings": 522,
+    "references": 1742
+  },
+  "coverage": {
+    "roots": 24,
+    "truncated": true
+  }
+}

@@ -1,0 +1,70 @@
+EEEEE
+======================================================================
+ERROR: test_boundary_alias_cycle_broken_exclusions_and_limits (test_local_files.LocalFilesTests.test_boundary_alias_cycle_broken_exclusions_and_limits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 77, in test_boundary_alias_cycle_broken_exclusions_and_limits
+    idx = self.scan(max_bytes=100)
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 27, in scan
+    return lf.scan(self.home, roots=[(self.root, 'fixture')], **kw)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py", line 2, in scan
+    raise NotImplementedError('Local source inventory is not implemented')
+NotImplementedError: Local source inventory is not implemented
+
+======================================================================
+ERROR: test_content_changed_missing_and_unknown_id (test_local_files.LocalFilesTests.test_content_changed_missing_and_unknown_id)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 44, in test_content_changed_missing_and_unknown_id
+    idx = self.scan()
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 27, in scan
+    return lf.scan(self.home, roots=[(self.root, 'fixture')], **kw)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py", line 2, in scan
+    raise NotImplementedError('Local source inventory is not implemented')
+NotImplementedError: Local source inventory is not implemented
+
+======================================================================
+ERROR: test_exact_copies_links_generated_and_evidence (test_local_files.LocalFilesTests.test_exact_copies_links_generated_and_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 34, in test_exact_copies_links_generated_and_evidence
+    idx = self.scan()
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 27, in scan
+    return lf.scan(self.home, roots=[(self.root, 'fixture')], **kw)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py", line 2, in scan
+    raise NotImplementedError('Local source inventory is not implemented')
+NotImplementedError: Local source inventory is not implemented
+
+======================================================================
+ERROR: test_read_failure_and_retargeted_alias (test_local_files.LocalFilesTests.test_read_failure_and_retargeted_alias)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 89, in test_read_failure_and_retargeted_alias
+    idx = self.scan()
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 27, in scan
+    return lf.scan(self.home, roots=[(self.root, 'fixture')], **kw)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py", line 2, in scan
+    raise NotImplementedError('Local source inventory is not implemented')
+NotImplementedError: Local source inventory is not implemented
+
+======================================================================
+ERROR: test_secret_screening_recursive_config_and_evidence (test_local_files.LocalFilesTests.test_secret_screening_recursive_config_and_evidence)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 57, in test_secret_screening_recursive_config_and_evidence
+    idx = self.scan()
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_files.py", line 27, in scan
+    return lf.scan(self.home, roots=[(self.root, 'fixture')], **kw)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py", line 2, in scan
+    raise NotImplementedError('Local source inventory is not implemented')
+NotImplementedError: Local source inventory is not implemented
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.006s
+
+FAILED (errors=5)

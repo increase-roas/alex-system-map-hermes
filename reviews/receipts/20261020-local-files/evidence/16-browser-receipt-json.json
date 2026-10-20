@@ -1,0 +1,39 @@
+{
+  "captured_at": "2026-10-20T22:13:57.512266+00:00",
+  "browser_id": "4",
+  "tab_id": "1",
+  "preview_url": "http://127.0.0.1:3202/explorer?view=local-files",
+  "preview_session_id": 71170,
+  "provider": "Codex bundled CUA IAB",
+  "review_scope": "same-provider context-separated acceptance; formal other-family review pending",
+  "observed": {
+    "default_local_files": true,
+    "direct_url": true,
+    "actual_search_select_numbered_content": true,
+    "fixture_search_desktop_and_390px": true,
+    "exact_copy_filter_group_navigation": true,
+    "shared_link_filter_group_navigation": true,
+    "candidate_line_evidence": 4,
+    "desktop_columns": "368.625px 368.641px",
+    "narrow_body_width": 390,
+    "narrow_document_width": 390,
+    "related_generated_source_navigation": true,
+    "generated_label": true,
+    "changed_since_original_scan_warning": true,
+    "backend_fresh_browser_old_warning": true,
+    "backend_changed_flag_during_stale_test": false,
+    "config_sensitive_value_withheld": true,
+    "safe_config_value_visible": true,
+    "partial_missing_failure_coverage_visible": true,
+    "temporary_viewport_reset": true,
+    "actual_snapshot_restored": true
+  },
+  "screenshots": [
+    "desktop-candidate-evidence.jpg",
+    "narrow-candidate-evidence.jpg",
+    "desktop-stale-ui-warning.jpg",
+    "desktop-redacted-fixture.jpg",
+    "narrow-inventory.jpg"
+  ],
+  "note": "Screenshots named here contain generated fixture sources only. No real scanned source contents, tokens, or inventory index included in external-review packet."
+}
