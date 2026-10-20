@@ -270,6 +270,90 @@ class Decision:
         self.dropped = dropped
 
 
+# --------------------------------------------------------------------------- PII scrubbing
+# Alex 2026-10-20: keep full content for debugging, but customer emails and phone numbers never
+# leave this machine. SigNoz's PII guide scrubs in the collector, before export, so it happens
+# here. Strings are rewritten inside the OTLP protobuf on the paths where text lives: span names,
+# event names, status messages, log bodies, and every attribute value (nested arrays and maps too).
+# Emails keep their domain (debuggable, not identifying); phone numbers need a separator, a "+1"
+# or brackets, so bare digit runs (IDs, epoch seconds) are never touched.
+EMAIL_RE_PII = re.compile(r"[A-Za-z0-9._%+-]+@([A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.[A-Za-z]{2,})")
+PHONE_RE_PII = re.compile(r"(?<![\w+])(?:\+1[\s.-]?\d{3}[\s.-]?\d{3}[\s.-]?\d{4}|\(\d{3}\)\s?\d{3}[\s.-]?\d{4}|"
+                          r"\d{3}[.-]\d{3}[.-]\d{4}|\d{3} \d{3} \d{4})(?![\w])")
+SCRUB_STATS = collections.Counter()
+
+
+def scrub_text(raw: bytes) -> bytes:
+    try:
+        text = raw.decode('utf-8')
+    except UnicodeDecodeError:
+        return raw
+    text, n1 = EMAIL_RE_PII.subn(r'[email]@\1', text)
+    text, n2 = PHONE_RE_PII.subn('[phone]', text)
+    if n1 or n2:
+        SCRUB_STATS['email'] += n1
+        SCRUB_STATS['phone'] += n2
+        return text.encode('utf-8')
+    return raw
+
+
+def _rewrite(msg: bytes, plan: dict) -> bytes:
+    """Copy a message, passing listed length-delimited fields through their handler."""
+    out = bytearray()
+    changed = False
+    for field, wire, payload, start, end in iter_fields(msg):
+        handler = plan.get(field) if wire == 2 else None
+        if handler is None:
+            out += msg[start:end]
+            continue
+        new = handler(payload)
+        if new is payload or new == payload:
+            out += msg[start:end]
+        else:
+            changed = True
+            out += delimited(field, new)
+    return bytes(out) if changed else msg
+
+
+def _any_value(b):    # AnyValue: 1 string, 5 ArrayValue, 6 KeyValueList
+    return _rewrite(b, {1: scrub_text, 5: lambda x: _rewrite(x, {1: _any_value}),
+                        6: lambda x: _rewrite(x, {1: _key_value})})
+
+
+def _key_value(b):    # KeyValue: 2 value
+    return _rewrite(b, {2: _any_value})
+
+
+def _attrs_at(n):
+    return {n: _key_value}
+
+
+def _span(b):         # Span: 5 name, 9 attributes, 11 events, 13 links, 15 status
+    return _rewrite(b, {5: scrub_text, 9: _key_value,
+                        11: lambda x: _rewrite(x, {2: scrub_text, 3: _key_value}),
+                        13: lambda x: _rewrite(x, _attrs_at(4)),
+                        15: lambda x: _rewrite(x, {2: scrub_text})})
+
+
+def _log_record(b):   # LogRecord: 5 body, 6 attributes
+    return _rewrite(b, {5: _any_value, 6: _key_value})
+
+
+def _resource_block(record):
+    # Resource{1: attributes}; Scope{1: InstrumentationScope, 2: records}
+    return lambda b: _rewrite(b, {1: lambda r: _rewrite(r, _attrs_at(1)),
+                                  2: lambda s: _rewrite(s, {2: record})})
+
+
+SCRUBBERS = {'traces': _resource_block(_span), 'logs': _resource_block(_log_record)}
+
+
+def scrub_payload(body: bytes, signal: str) -> bytes:
+    """Mask emails and phone numbers in an OTLP export request. Metrics pass through."""
+    block = SCRUBBERS.get(signal)
+    return _rewrite(body, {1: block}) if block else body
+
+
 def filter_payload(body: bytes, guard: RateGuard, known=KNOWN_SERVICES,
                    blocked=BLOCKED_SERVICES) -> Decision:
     """Keep only named, allowed, in-budget ResourceSpans. Re-emit valid OTLP."""
@@ -722,6 +806,15 @@ class Handler(BaseHTTPRequestHandler):
             decision = Decision(decision.body, {f'{signal}:{k}': v for k, v in decision.kept.items()},
                                 {f'{signal}:{k}': v for k, v in decision.dropped.items()})
 
+        if decision.body:
+            try:
+                decision.body = scrub_payload(decision.body, signal)
+            except Exception:
+                # Never forward unscrubbed content: an unreadable payload is dropped, and counted.
+                self.server.stats.add(Decision(b'', {}, {f'scrub-failed:{signal}': 1}), {})
+                self._reply(400)
+                return
+
         statuses: dict[str, int] = {}
         if decision.body and not self.server.dry_run:
             for name in self.server.upstreams:
@@ -1022,6 +1115,22 @@ def self_test() -> int:
             globals()['_robot_token'], globals()['_load_op_items'] = real_tok, real_load
     finally:
         globals()['auth_for'] = real_auth
+
+    # PII scrubbing (2026-10-20): emails and phones masked in log bodies, attributes and span names;
+    # IDs and bare digit runs untouched; the scrubbed payload still parses and keeps its service.
+    def _kv(k, v):
+        return delimited(1, k.encode()) + delimited(2, delimited(1, v.encode()))
+    _res = delimited(1, delimited(1, _kv('service.name', 'javante')))
+    _txt = 'jane.doe@gmail.com (555) 123-4567 +1 555 987 6543 id 1792487516'
+    _rec = delimited(5, delimited(1, _txt.encode())) + delimited(6, _kv('lead.phone', '555-222-3333'))
+    _out = scrub_payload(delimited(1, _res + delimited(2, delimited(2, _rec))), 'logs')
+    check('scrub: email masked, domain kept', b'[email]@gmail.com' in _out and b'jane.doe' not in _out, _out[:80])
+    check('scrub: phone formats masked', _out.count(b'[phone]') == 3 and b'123-4567' not in _out, _out[:80])
+    check('scrub: bare digit ids untouched', b'1792487516' in _out, _out[:80])
+    _span = scrub_payload(delimited(1, _res + delimited(2, delimited(2, delimited(5, b'call bob@acme.io')))), 'traces')
+    check('scrub: span names masked', b'[email]@acme.io' in _span and b'bob@' not in _span, _span)
+    check('scrub: output still parses with its service',
+          filter_payload(_out, RateGuard(600, {})).kept == {'javante': 1}, '')
 
     width = max(len(n) for n, _ok, _d in checks)
     for name, ok, detail in checks:
