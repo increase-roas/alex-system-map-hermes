@@ -49,6 +49,7 @@ import json
 import os
 import re
 import signal
+import stat
 import subprocess
 import sys
 import threading
@@ -85,6 +86,9 @@ KNOWN_SERVICES = (
     # Claude Code sessions run from the Claude desktop app (Code tab, Cowork on this computer)
     # report as claude-code-desktop; found dropped as unknown 2026-10-20.
     'claude-code-desktop',
+    # OpenClaw gateway on the Orgo openclaw-hub computer (diagnostics-otel plugin, serviceName
+    # openclaw, which is also the plugin's own default). Added 2026-10-20, Alex approved the switch.
+    'openclaw',
 )
 
 # Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
@@ -515,8 +519,32 @@ def _keychain_raw(service: str) -> str:
     return key
 
 
+# Key-file mode, for a Linux machine with no Keychain and no robot that can see vault Connectors
+# (the Orgo computers, 2026-10-20). Set by --key-file PATH: the raw ingestion key is the whole
+# file. The file must be a regular file (no symlink), owned by the user this collector runs as,
+# with no group or other permission bits, so a key left readable by the agent is refused.
+STATIC_KEY_FILE: str | None = None
+
+
+def _key_file_raw(path: str) -> str:
+    try:
+        fd = os.open(path, os.O_RDONLY | getattr(os, 'O_NOFOLLOW', 0))
+    except OSError:
+        raise Blocked('the SigNoz key file could not be opened') from None
+    with os.fdopen(fd, 'r') as stream:
+        info = os.fstat(stream.fileno())
+        if not stat.S_ISREG(info.st_mode) or info.st_uid != os.geteuid() or info.st_mode & 0o077:
+            raise Blocked('the SigNoz key file must be a regular file, owned by this user, mode 0600 or 0400')
+        key = stream.read().strip()
+    if not key or '\n' in key or '\r' in key:
+        raise Blocked('the SigNoz key file does not hold one key')
+    return key
+
+
 def signoz_headers() -> dict:
     """SigNoz ingestion header, Keychain-cached, read through robot_env on a miss."""
+    if STATIC_KEY_FILE:
+        return {SIGNOZ_HEADER: _key_file_raw(STATIC_KEY_FILE)}
     if STATIC_KEY_SERVICE:
         return {SIGNOZ_HEADER: _keychain_raw(STATIC_KEY_SERVICE)}
     cached = _keychain_get(SIGNOZ_CACHE_SERVICE)
@@ -1106,6 +1134,37 @@ def self_test() -> int:
     check('scrub: output still parses with its service',
           filter_payload(_out, RateGuard(600, {})).kept == {'javante': 1}, '')
 
+    # Key-file mode (Orgo, 2026-10-20): an owner-only file is read; a group-readable file, a
+    # symlink, a missing file and a file with two lines are refused as Blocked; openclaw is allowed.
+    import tempfile
+    def _kf(fn, *a):
+        try:
+            return fn(*a)
+        except Blocked:
+            return 'Blocked'
+    with tempfile.TemporaryDirectory() as _d:
+        _good, _open, _two, _link = (os.path.join(_d, n) for n in ('good', 'open', 'two', 'link'))
+        for _p, _body, _mode in ((_good, 'fake-test-key\n', 0o600), (_open, 'fake-test-key', 0o640),
+                                 (_two, 'a\nb', 0o600)):
+            with open(_p, 'w') as _f:
+                _f.write(_body)
+            os.chmod(_p, _mode)
+        os.symlink(_good, _link)
+        check('key file: owner-only file read', _kf(_key_file_raw, _good) == 'fake-test-key', '')
+        check('key file: group-readable refused', _kf(_key_file_raw, _open) == 'Blocked', '')
+        check('key file: symlink refused', _kf(_key_file_raw, _link) == 'Blocked', '')
+        check('key file: missing refused', _kf(_key_file_raw, os.path.join(_d, 'none')) == 'Blocked', '')
+        check('key file: two lines refused', _kf(_key_file_raw, _two) == 'Blocked', '')
+        _saved = globals()['STATIC_KEY_FILE']
+        globals()['STATIC_KEY_FILE'] = _good
+        try:
+            check('key file: signoz_headers uses it', signoz_headers() == {SIGNOZ_HEADER: 'fake-test-key'}, '')
+        finally:
+            globals()['STATIC_KEY_FILE'] = _saved
+    _oc_res = delimited(1, delimited(1, _kv('service.name', 'openclaw')))
+    _oc = delimited(1, _oc_res + delimited(2, delimited(2, delimited(5, b'openclaw.model.usage'))))
+    check('openclaw is an allowed service', filter_payload(_oc, RateGuard(600, {})).kept == {'openclaw': 1}, '')
+
     width = max(len(n) for n, _ok, _d in checks)
     for name, ok, detail in checks:
         line = f'  {"pass" if ok else "FAIL"}  {name:{width}}'
@@ -1129,12 +1188,16 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument('--self-test', action='store_true')
     parser.add_argument('--key-keychain', default=None, metavar='SERVICE',
                         help='read the SigNoz key from this login Keychain service only (no 1Password)')
+    parser.add_argument('--key-file', default=None, metavar='PATH',
+                        help='read the SigNoz key from this owner-only file (Linux; no Keychain, no 1Password)')
     args = parser.parse_args(argv)
 
     if args.self_test:
         return self_test()
     if args.key_keychain:
         globals()['STATIC_KEY_SERVICE'] = args.key_keychain
+    if args.key_file:
+        globals()['STATIC_KEY_FILE'] = args.key_file
 
     upstreams = args.upstream or []
     if not upstreams and not args.dry_run:
