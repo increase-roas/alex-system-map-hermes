@@ -49,3 +49,7 @@ class RepairAdapter(Protocol):
 # or blocked; adapter MUST compare current changed fields with recorded applied state.
 # Check: kind, status passed|failed|unavailable, runner_id, input_digest,
 # output_digest, evidence, checked_at, limitations.
+
+# During undo recovery reconcile receives operation['recovery_phase'] == 'undo'.
+# outcome applied means the inverse landed; not_applied means original applied
+# values remain; unknown means neither is proven. Read-only, never repeats effects.
