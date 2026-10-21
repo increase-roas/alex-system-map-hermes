@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Bounded, tool-free subscribed Codex analysis. Only RepairService can freeze edits."""
 import argparse
+import copy
 import json
 import os
 from pathlib import Path
@@ -19,6 +20,17 @@ MAX_CONTEXT = 128 * 1024
 MAX_FILES = 8
 MAX_OUTPUT = 256 * 1024
 TIMEOUT = 120
+# Tool and integration feature defaults can change independently of shell access.
+# Keep this explicit so isolation is checked against native effective features.
+DISABLED_TOOL_FEATURES = (
+    'shell_tool', 'apply_patch_freeform', 'hooks', 'apps', 'multi_agent', 'multi_agent_v2',
+    'browser_use', 'browser_use_external', 'browser_use_full_cdp_access', 'computer_use',
+    'image_generation', 'view_image', 'sleep_tool', 'goals', 'workspace_dependencies',
+    'skill_search', 'plugins', 'remote_plugin', 'plugin_sharing', 'tool_suggest',
+    'code_mode_host', 'in_app_browser', 'in_app_local_automation', 'realtime_conversation',
+    'skill_mcp_dependency_install', 'tool_call_mcp_elicitation', 'unified_exec',
+    'unified_exec_tty', 'shell_snapshot', 'artifact', 'agent_message_board', 'code_mode',
+)
 
 
 def object_schema(properties):
@@ -36,10 +48,35 @@ SCHEMA = object_schema({
 })
 
 
-def provider_command(schema, output):
+def proposal_model_catalog(codex_home=None):
+    # Native model metadata only; authentication files are never opened or copied.
+    home = Path(codex_home) if codex_home is not None else Path(os.environ.get('CODEX_HOME', str(Path.home() / '.codex')))
+    try:
+        source = home / 'models_cache.json'
+        if source.stat().st_size > 4 * 1024 * 1024:
+            raise ValueError()
+        cache = json.loads(source.read_text())
+        selected = [row for row in cache['models'] if row.get('slug') == MODEL]
+        if len(selected) != 1:
+            raise ValueError()
+        model = copy.deepcopy(selected[0])
+        # rust-v0.160.0 ModelsResponse catalog grammar. Model metadata can register
+        # patch/experimental tools independently of features, so disable both.
+        model['shell_type'] = 'disabled'
+        model['apply_patch_tool_type'] = None
+        model['experimental_supported_tools'] = []
+        for key in list(model):
+            if key.startswith('include_') and key.endswith('_usage_instructions'):
+                model[key] = False
+        return {'models': [model]}
+    except (OSError, ValueError, KeyError, TypeError, AttributeError):
+        raise RepairError('ai_provider_failed', 'Subscribed model metadata is unavailable for isolated AI analysis. No source changed; refresh the native ChatGPT model catalog before trying again.', 503)
+
+
+def provider_command(schema, output, catalog):
     command = [shutil.which('codex') or 'codex', 'exec', '--ignore-user-config', '--ignore-rules', '--ephemeral', '--skip-git-repo-check', '--sandbox', 'read-only', '--model', MODEL, '--output-schema', str(schema), '--output-last-message', str(output), '--color', 'never']
-    settings = ['model_reasoning_effort="medium"', 'forced_login_method="chatgpt"', 'web_search="disabled"', 'project_doc_max_bytes=0', 'agents.enabled=false', 'features.skip_host_skill_discovery=true']
-    settings += ['features.' + feature + '=false' for feature in ['shell_tool', 'apply_patch_freeform', 'hooks', 'apps', 'multi_agent', 'multi_agent_v2']]
+    settings = ['model_catalog_json=' + json.dumps(str(catalog)), 'tools.update_plan.enabled=false', 'tools.experimental_request_user_input.enabled=false', 'model_reasoning_effort="medium"', 'forced_login_method="chatgpt"', 'web_search="disabled"', 'project_doc_max_bytes=0', 'agents.enabled=false', 'features.skip_host_skill_discovery=true']
+    settings += ['features.' + feature + '=false' for feature in DISABLED_TOOL_FEATURES]
     for setting in settings:
         command += ['-c', setting]
     return command + ['-']
@@ -116,9 +153,10 @@ class SuggestionService:
                 base = Path(temp)
                 cwd = base / 'empty'
                 cwd.mkdir(mode=0o700)
-                schema, output = base / 'schema.json', base / 'answer.json'
+                schema, output, catalog = base / 'schema.json', base / 'answer.json', base / 'models.json'
                 schema.write_text(json.dumps(SCHEMA))
-                run = subprocess.run(provider_command(schema, output), input=prompt.encode(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=cwd, env=environment, timeout=TIMEOUT)
+                catalog.write_text(json.dumps(proposal_model_catalog()))
+                run = subprocess.run(provider_command(schema, output, catalog), input=prompt.encode(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=cwd, env=environment, timeout=TIMEOUT)
                 if run.returncode or not output.is_file() or output.stat().st_size > MAX_OUTPUT:
                     raise ValueError('provider result unavailable')
                 return json.loads(output.read_text())

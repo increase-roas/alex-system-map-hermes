@@ -71,7 +71,7 @@ class AITests(unittest.TestCase):
         self.assertEqual([], list(self.service.state.glob('*.json')))
 
     def test_provider_failure_is_static_and_never_writes(self):
-        with patch('local_file_ai.subprocess.run', side_effect=OSError('sensitive raw failure')):
+        with patch('local_file_ai.proposal_model_catalog', return_value={'models': []}), patch('local_file_ai.subprocess.run', side_effect=OSError('sensitive raw failure')):
             with self.assertRaises(repairs.RepairError) as caught: self.worker.infer({'files': []})
         self.assertNotIn('sensitive', caught.exception.message)
         self.assertEqual(self.before, self.file.read_text())
@@ -80,7 +80,7 @@ class AITests(unittest.TestCase):
         with self.assertRaises(repairs.RepairError): self.worker.suggest(self.row['id'], self.row['sha256'], '0' * 24)
 
     def test_command_has_isolation_and_no_paid_fallback(self):
-        command = ai.provider_command(Path('/tmp/schema'), Path('/tmp/output'))
+        command = ai.provider_command(Path('/tmp/schema'), Path('/tmp/output'), Path('/tmp/model-catalog.json'))
         for flag in ['--ignore-user-config', '--ignore-rules', '--ephemeral', '--skip-git-repo-check', 'read-only', '--output-schema']:
             self.assertIn(flag, command)
         self.assertIn('forced_login_method="chatgpt"', command)
@@ -116,7 +116,7 @@ class AITests(unittest.TestCase):
 
     def test_provider_timeout_sanitized(self):
         import subprocess
-        with patch('local_file_ai.subprocess.run', side_effect=subprocess.TimeoutExpired('private command', 120)):
+        with patch('local_file_ai.proposal_model_catalog', return_value={'models': []}), patch('local_file_ai.subprocess.run', side_effect=subprocess.TimeoutExpired('private command', 120)):
             with self.assertRaises(repairs.RepairError) as caught: self.worker.infer({'files': []})
         self.assertEqual('ai_provider_failed', caught.exception.code)
         self.assertNotIn('private command', caught.exception.message)
@@ -155,7 +155,7 @@ class AITests(unittest.TestCase):
         self.assertEqual([], list(self.service.state.glob('*.json')))
 
     def test_failure_status_is_not_staleness(self):
-        with patch('local_file_ai.subprocess.run', side_effect=OSError('private failure')):
+        with patch('local_file_ai.proposal_model_catalog', return_value={'models': []}), patch('local_file_ai.subprocess.run', side_effect=OSError('private failure')):
             with self.assertRaises(repairs.RepairError) as caught: self.worker.infer({'files': []})
         self.assertEqual(503, caught.exception.status)
         with self.assertRaises(repairs.RepairError) as caught:
@@ -178,3 +178,56 @@ class AITests(unittest.TestCase):
             context = self.worker.context(self.row['id'], self.row['sha256'], 'f' * 24)
         self.assertEqual([str(self.file), str(shared), str(gates)], [entry['path'] for entry in context['files']])
         self.assertTrue(any('exceeded' in value for value in context['limitations']))
+
+    def test_all_tool_feature_defaults_explicitly_disabled(self):
+        expected = {
+            'shell_tool', 'apply_patch_freeform', 'hooks', 'apps', 'multi_agent', 'multi_agent_v2',
+            'browser_use', 'browser_use_external', 'browser_use_full_cdp_access', 'computer_use',
+            'image_generation', 'view_image', 'sleep_tool', 'goals', 'workspace_dependencies',
+            'skill_search', 'plugins', 'remote_plugin', 'plugin_sharing', 'tool_suggest',
+            'code_mode_host', 'in_app_browser', 'in_app_local_automation', 'realtime_conversation',
+            'skill_mcp_dependency_install', 'tool_call_mcp_elicitation', 'unified_exec',
+            'unified_exec_tty', 'shell_snapshot', 'artifact', 'agent_message_board', 'code_mode',
+        }
+        self.assertEqual(expected, set(ai.DISABLED_TOOL_FEATURES))
+        command = ai.provider_command(Path('/tmp/schema'), Path('/tmp/output'), Path('/tmp/model-catalog.json'))
+        overrides = [command[i + 1] for i, value in enumerate(command) if value == '-c']
+        for feature in expected:
+            self.assertEqual(1, overrides.count('features.' + feature + '=false'))
+        for setting in ['agents.enabled=false', 'web_search="disabled"', 'features.skip_host_skill_discovery=true', 'project_doc_max_bytes=0', 'forced_login_method="chatgpt"']:
+            self.assertIn(setting, overrides)
+
+    def test_catalog_disables_model_tools_preserving_metadata_and_live_bytes(self):
+        cache = self.home / 'codex-home'
+        cache.mkdir()
+        model = {'slug': ai.MODEL, 'display_name': 'Same subscribed model', 'shell_type': 'unified_exec', 'apply_patch_tool_type': 'freeform', 'experimental_supported_tools': ['clock', 'send_user_message_async'], 'include_skills_usage_instructions': True, 'include_apps_usage_instructions': True, 'include_plugin_usage_instructions': True, 'other_metadata': {'same': True}}
+        source = cache / 'models_cache.json'
+        source.write_text(json.dumps({'models': [model, {'slug': 'other'}]}))
+        original = source.read_bytes()
+        catalog = ai.proposal_model_catalog(cache)
+        selected = catalog['models'][0]
+        self.assertEqual('disabled', selected['shell_type'])
+        self.assertIsNone(selected['apply_patch_tool_type'])
+        self.assertEqual([], selected['experimental_supported_tools'])
+        self.assertFalse(selected['include_skills_usage_instructions'])
+        self.assertFalse(selected['include_apps_usage_instructions'])
+        self.assertFalse(selected['include_plugin_usage_instructions'])
+        self.assertEqual(model['other_metadata'], selected['other_metadata'])
+        self.assertEqual(ai.MODEL, selected['slug'])
+        self.assertEqual(original, source.read_bytes())
+        self.assertEqual(['models_cache.json'], sorted(path.name for path in cache.iterdir()))
+
+    def test_catalog_missing_model_static_failure_without_fallback(self):
+        cache = self.home / 'codex-home'
+        cache.mkdir()
+        (cache / 'models_cache.json').write_text(json.dumps({'models': [{'slug': 'other'}]}))
+        with self.assertRaises(repairs.RepairError) as caught:
+            ai.proposal_model_catalog(cache)
+        self.assertEqual(('ai_provider_failed', 503), (caught.exception.code, caught.exception.status))
+        self.assertNotIn(str(cache), caught.exception.message)
+
+    def test_command_disables_direct_nonfeature_tools_and_binds_temp_catalog(self):
+        command = ai.provider_command(Path('/tmp/schema'), Path('/tmp/output'), Path('/tmp/model-catalog.json'))
+        self.assertIn('tools.update_plan.enabled=false', command)
+        self.assertIn('tools.experimental_request_user_input.enabled=false', command)
+        self.assertIn('model_catalog_json="/tmp/model-catalog.json"', command)
