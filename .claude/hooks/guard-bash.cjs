@@ -6,7 +6,8 @@
  *
  * Blocks, each with one override env var (set by Alex in the environment that launches
  * Claude Code; an inline "VAR=1 git ..." prefix inside the command does NOT count):
- *   git push                                              ALLOW_PUSH=1
+ *   git push --force/-f/--force-with-lease/--mirror/--delete/+ref/:ref   ALLOW_PUSH=1
+ *   (a plain git push runs: Alex 2026-10-20 "Git pushes: never ask")
  *   git commit when the staged diff has credential text   ALLOW_SECRET_COMMIT=1
  *   git stash | reset --hard | clean | switch | checkout | restore
  *                                                         ALLOW_REPO_STATE_CHANGE=1
@@ -218,8 +219,13 @@ function decide(payload) {
     if (!needsRepo) continue;
     if (!inRepo(cwd)) continue; // not a git repo: allow
 
-    if (sub === 'push' && !envOn('ALLOW_PUSH')) {
-      return block('BLOCKED (guard-bash): git push. The parent session commits and Alex pushes. Override: Alex sets ALLOW_PUSH=1 in the environment that launches Claude Code.');
+    // Plain pushes run (Alex 2026-10-20: "Git pushes: never ask"; his yes 2026-10-21). Only a
+    // push that rewrites or deletes published history stops.
+    const forced = args.some((a) => a === '--force' || a.startsWith('--force-with-lease') || a === '--mirror' ||
+      a === '--delete' || a === '--prune' || (/^-[A-Za-z]+$/.test(a) && (a.includes('f') || a.includes('d'))) ||
+      (a.length > 1 && (a[0] === '+' || a[0] === ':')));
+    if (sub === 'push' && forced && !envOn('ALLOW_PUSH')) {
+      return block('BLOCKED (guard-bash): a forced or deleting git push rewrites published history. Override: Alex sets ALLOW_PUSH=1 in the environment that launches Claude Code.');
     }
 
     if (sub === 'commit' && !envOn('ALLOW_SECRET_COMMIT')) {
