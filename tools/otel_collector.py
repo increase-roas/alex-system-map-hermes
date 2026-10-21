@@ -30,6 +30,10 @@ WHAT IT DOES
    read from 1Password at run time. Never logs a key, a span body or a header.
 6. Counts kept, unnamed, blocked and throttled spans per service, so the per-service
    hourly rate can be reported without reading anything back from a vendor.
+7. Says when it is failing, and keeps what it could not send (2026-10-21, after a 12-hour
+   silent key outage): GET /health is 503 with the reason when SigNoz is not getting data,
+   a heartbeat log (service signoz-collector) goes out every 5 minutes for SigNoz to alert
+   on, and batches SigNoz could not take wait in a capped on-disk spool and are replayed.
 
 NOT DURABLE BY ITSELF. It runs in the foreground. Keeping it alive across reboots
 needs a LaunchAgent, which this project cannot write; see the handover note in
@@ -48,8 +52,11 @@ import ipaddress
 import json
 import os
 import re
+import shutil
 import signal
+import socket
 import stat
+import struct
 import subprocess
 import sys
 import threading
@@ -89,6 +96,8 @@ KNOWN_SERVICES = (
     # OpenClaw gateway on the Orgo openclaw-hub computer (diagnostics-otel plugin, serviceName
     # openclaw, which is also the plugin's own default). Added 2026-10-20, Alex approved the switch.
     'openclaw',
+    # The collector's own 5-minute heartbeat (2026-10-21), so SigNoz can alert when a collector goes dark.
+    'signoz-collector',
 )
 
 # Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
@@ -554,6 +563,21 @@ ROBOT_TOKEN_SERVICE = 'op-service-account-connectors-sync'
 # the failure mode is a modal dialog waiting on a human: it holds the prompt on screen.
 # A healthy robot call answers in about a second.
 OP_READ_TIMEOUT = 10
+# launchd gives this job PATH=/usr/bin:/bin:/usr/sbin:/sbin, and Homebrew keeps op in /opt/homebrew/bin.
+# A bare 'op' raised FileNotFoundError on every refresh once the Keychain cache expired on 2026-10-20 at
+# 15:31Z, and every batch after 16:03Z was dropped. So op is found by absolute path, PATH first.
+OP_FALLBACK_DIRS = ('/opt/homebrew/bin', '/usr/local/bin')
+
+
+def _op_bin() -> str:
+    found = shutil.which('op')
+    if found:
+        return found
+    for folder in OP_FALLBACK_DIRS:
+        candidate = os.path.join(folder, 'op')
+        if os.path.isfile(candidate) and os.access(candidate, os.X_OK):
+            return candidate
+    raise Blocked('the 1Password CLI (op) is not on PATH or in ' + ', '.join(OP_FALLBACK_DIRS))
 
 
 def _load_op_items():
@@ -661,12 +685,13 @@ def signoz_headers() -> dict:
     if cached:
         return cached
     op_items = _load_op_items()
+    op = _op_bin()
     token = _robot_token()
     with op_items.robot_env(token) as env:
         try:
-            proc = subprocess.run(['op', 'read', SIGNOZ_OP_REF], capture_output=True, text=True,
+            proc = subprocess.run([op, 'read', SIGNOZ_OP_REF], capture_output=True, text=True,
                                   env=env, stdin=subprocess.DEVNULL, timeout=OP_READ_TIMEOUT)
-        except subprocess.SubprocessError:
+        except (subprocess.SubprocessError, OSError):
             raise Blocked('op did not answer for the SigNoz key') from None
     if proc.returncode or not proc.stdout.strip():
         raise Blocked('the SigNoz key could not be read from 1Password')
@@ -810,6 +835,188 @@ def forward(name: str, body: bytes, keys: KeyCache, signal: str = 'traces') -> i
         return 0  # network failure; never surface the reason, it can carry a URL with auth
 
 
+# --------------------------------------------------------------------------- spool, heartbeat, health
+
+# 2026-10-20/21: the key failed for 12 hours and 25,267 batches were dropped, because nothing kept them
+# and nothing said so. A batch SigNoz did not take for a reason that can clear (no key, network, auth,
+# rate limit, server error) is now written here and replayed; the folder is capped, oldest out first.
+# Bodies are already PII-scrubbed when they get here. ~/.agents/runtime is git-ignored.
+SPOOL_DIR = Path.home() / '.agents/runtime/otel-spool'
+SPOOL_MAX_BYTES = 256 * 1024 * 1024
+SPOOL_REPLAY_SECONDS = 60
+SPOOL_REPLAY_BATCH = 500
+# A heartbeat log every 5 minutes, sent the same way as everything else, so SigNoz can alert on its
+# absence. Silence from claude-code-desktop is normal when Alex is away; silence from this is not.
+HEARTBEAT_SERVICE = 'signoz-collector'
+HEARTBEAT_SECONDS = 300
+# /health turns 503 when the key is missing, or sends have failed 3 times in a row with no success
+# for this long. The first HEALTH_GRACE_SECONDS after a start are spent warming the key.
+HEALTH_STALE_SECONDS = 900
+HEALTH_GRACE_SECONDS = 120
+
+
+def retryable(status: int) -> bool:
+    """-1 no key, 0 network, auth (a refreshed key fixes it), timeout, rate limit, server error."""
+    return status in (-1, 0, 401, 403, 408, 429) or status >= 500
+
+
+class Spool:
+    """Batches waiting for SigNoz, one file each: <ns>-<seq>.<upstream>.<signal>.pb."""
+
+    def __init__(self, folder: Path | None, max_bytes: int = SPOOL_MAX_BYTES):
+        self.folder = folder
+        self.max_bytes = max_bytes
+        self.lock = threading.Lock()
+        self.seq = 0
+        self.counts = collections.Counter()
+        if folder:
+            folder.mkdir(parents=True, exist_ok=True)
+            os.chmod(folder, 0o700)
+
+    def put(self, upstream: str, signal: str, body: bytes) -> bool:
+        if not self.folder:
+            return False
+        with self.lock:
+            self.seq += 1
+            name = f'{time.time_ns():020d}-{self.seq:06d}.{upstream}.{signal}.pb'
+        tmp = self.folder / f'.{name}.tmp'
+        try:
+            tmp.write_bytes(body)
+            os.replace(tmp, self.folder / name)
+        except OSError:
+            with self.lock:
+                self.counts['write-failed'] += 1
+            return False
+        with self.lock:
+            self.counts['spooled'] += 1
+        self.trim()
+        return True
+
+    def pending(self) -> list[Path]:
+        return sorted(self.folder.glob('*.pb')) if self.folder else []
+
+    def size(self) -> tuple[int, int]:
+        files = self.pending()
+        total = 0
+        for path in files:
+            try:
+                total += path.stat().st_size
+            except OSError:
+                pass
+        return len(files), total
+
+    def trim(self) -> None:
+        files = self.pending()
+        sizes = []
+        for path in files:
+            try:
+                sizes.append(path.stat().st_size)
+            except OSError:
+                sizes.append(0)
+        total = sum(sizes)
+        for path, size in zip(files, sizes):
+            if total <= self.max_bytes:
+                return
+            try:
+                path.unlink()
+            except OSError:
+                continue
+            total -= size
+            with self.lock:
+                self.counts['evicted'] += 1
+
+    def replay(self, send) -> None:
+        """Oldest first. send(upstream, signal, body) -> status. Stops at the first batch that still
+        can't go (the outage isn't over); drops one SigNoz refused for good (a bad payload)."""
+        for path in self.pending()[:SPOOL_REPLAY_BATCH]:
+            try:
+                _stamp, upstream, signal, _ext = path.name.split('.')
+                body = path.read_bytes()
+            except (ValueError, OSError):
+                continue
+            status = send(upstream, signal, body)
+            if retryable(status):
+                return
+            try:
+                path.unlink()
+            except OSError:
+                pass
+            with self.lock:
+                self.counts['replayed' if 200 <= status < 300 else f'rejected:{status}'] += 1
+
+
+def heartbeat_body(host: str, extra: dict) -> bytes:
+    """One OTLP log record from service signoz-collector (ExportLogsServiceRequest, protobuf)."""
+    now = struct.pack('<Q', time.time_ns())
+    record = b''.join([
+        varint((1 << 3) | 1) + now,                       # time_unix_nano
+        varint((11 << 3) | 1) + now,                      # observed_time_unix_nano
+        varint((2 << 3) | 0) + varint(9),                 # severity_number INFO
+        delimited(3, b'INFO'),
+        delimited(5, delimited(1, b'collector heartbeat')),
+        *(delimited(6, _string_kv(k, str(v))) for k, v in extra.items()),
+    ])
+    resource = delimited(1, _string_kv('service.name', HEARTBEAT_SERVICE)) + delimited(1, _string_kv('host.name', host))
+    return delimited(1, delimited(1, resource) + delimited(2, delimited(2, record)))
+
+
+def health(server) -> dict:
+    """What /health reports. ok is false when SigNoz is not getting the data."""
+    if server.dry_run or not server.upstreams:
+        return {'ok': True, 'problems': [], 'mode': 'dry run'}
+    problems = []
+    state = server.stats.upstream_state()
+    for name in server.upstreams:
+        st = state.get(name, {})
+        warming = time.time() - server.stats.started < HEALTH_GRACE_SECONDS and not st.get('fail_streak')
+        try:
+            server.keys.peek(name)
+        except Blocked as err:
+            if not warming:
+                problems.append(f'{name}: no key ({err})')
+        last_ok = st.get('last_ok_at')
+        if st.get('fail_streak', 0) >= 3 and (not last_ok or time.time() - last_ok > HEALTH_STALE_SECONDS):
+            problems.append(f'{name}: {st["fail_streak"]} sends failed in a row, last status '
+                            f'{st.get("last_fail_status")}, last ok {st.get("last_ok") or "never"}')
+    files, size = server.spool.size()
+    return {'ok': not problems, 'problems': problems, 'spool_files': files, 'spool_bytes': size,
+            'upstream_state': state}
+
+
+def default_host_name() -> str:
+    """A name that stays put. gethostname() on a Mac follows the network (Mac.attwifi.manager on one
+    Wi-Fi, Alexs-MacBook-Pro.local on another), which would trip a per-host alert; LocalHostName doesn't.
+    Under launchd this lookup came back empty (2026-10-21), so the LaunchAgent passes --host-name itself."""
+    if sys.platform == 'darwin':
+        try:
+            name = subprocess.run(['/usr/sbin/scutil', '--get', 'LocalHostName'], capture_output=True,
+                                  text=True, timeout=5).stdout.strip()
+            if name:
+                return name
+        except (subprocess.SubprocessError, OSError):
+            pass
+    return socket.gethostname().split('.')[0]
+
+
+def background_loop(server, stop, host: str) -> None:
+    """Heartbeat every HEARTBEAT_SECONDS, spool replay every SPOOL_REPLAY_SECONDS. Never raises."""
+    next_beat = time.monotonic()
+    while not stop.is_set():
+        try:
+            if time.monotonic() >= next_beat:
+                next_beat = time.monotonic() + HEARTBEAT_SECONDS
+                files, size = server.spool.size()
+                streak = server.stats.upstream_state().get('signoz', {}).get('fail_streak', 0)
+                body = heartbeat_body(host, {'spool.files': files, 'spool.bytes': size, 'fail_streak': streak})
+                server.deliver('logs', Decision(body, {f'logs:{HEARTBEAT_SERVICE}': 1}, {}), len(body))
+            server.replay_spool()
+        except Exception as err:  # the loop must outlive any one bad round
+            print(f'  background loop error: {type(err).__name__}', file=sys.stderr)
+            sys.stderr.flush()
+        if stop.wait(SPOOL_REPLAY_SECONDS):
+            return
+
+
 # --------------------------------------------------------------------------- server
 
 class Stats:
@@ -819,6 +1026,9 @@ class Stats:
         self.dropped = collections.Counter()
         self.upstream = collections.Counter()
         self.started = time.time()
+        # Per upstream: last success, last failure, failures in a row. /health reads these, so a dead
+        # upstream shows as a 503 instead of a process that merely looks alive.
+        self.state: dict[str, dict] = {}
 
     def add(self, decision: Decision, statuses: dict[str, int]):
         with self.lock:
@@ -826,8 +1036,22 @@ class Stats:
             self.dropped.update(decision.dropped)
             for name, status in statuses.items():
                 self.upstream[f'{name}:{status}'] += 1
+                st = self.state.setdefault(name, {'fail_streak': 0})
+                if 200 <= status < 300:
+                    st['last_ok_at'], st['fail_streak'] = time.time(), 0
+                else:
+                    st['last_fail_at'], st['last_fail_status'] = time.time(), status
+                    st['fail_streak'] += 1
+
+    def upstream_state(self) -> dict:
+        def stamp(t):
+            return time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(t)) if t else None
+        with self.lock:
+            return {name: {**st, 'last_ok': stamp(st.get('last_ok_at')), 'last_fail': stamp(st.get('last_fail_at'))}
+                    for name, st in self.state.items()}
 
     def snapshot(self) -> dict:
+        state = self.upstream_state()
         with self.lock:
             hours = max((time.time() - self.started) / 3600, 1 / 3600)
             return {
@@ -836,6 +1060,7 @@ class Stats:
                 'kept_spans_per_hour': {k: round(v / hours) for k, v in self.kept.items()},
                 'dropped_spans': dict(self.dropped),
                 'upstream_responses': dict(self.upstream),
+                'upstream_state': state,
             }
 
 
@@ -858,7 +1083,7 @@ class Collector(ThreadingHTTPServer):
     allow_reuse_address = True
 
     def __init__(self, address, *, upstreams: list[str], guard: RateGuard,
-                 keys: KeyCache, dry_run: bool, log_path: Path | None):
+                 keys: KeyCache, dry_run: bool, log_path: Path | None, spool: Spool | None = None):
         super().__init__(address, Handler)
         self.upstreams = upstreams
         self.guard = guard
@@ -867,6 +1092,40 @@ class Collector(ThreadingHTTPServer):
         self.dry_run = dry_run
         self.log_path = log_path
         self.stats = Stats()
+        self.spool = spool or Spool(None)
+
+    def deliver(self, signal: str, decision: Decision, length: int) -> tuple[dict[str, int], bool]:
+        """Forward a filtered, scrubbed batch; spool it for each upstream that could not take it now."""
+        statuses: dict[str, int] = {}
+        spooled = False
+        if decision.body and not self.dry_run:
+            for name in self.upstreams:
+                if name != 'signoz' and signal != 'traces':
+                    continue  # only SigNoz takes logs and metrics
+                try:
+                    statuses[name] = forward(name, decision.body, self.keys, signal)
+                except Blocked:
+                    statuses[name] = -1
+                if retryable(statuses[name]) and self.spool.put(name, signal, decision.body):
+                    spooled = True
+        self.stats.add(decision, statuses)
+        row = {'ts': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
+               'bytes_in': length, 'kept': decision.kept, 'dropped': decision.dropped,
+               'upstream': statuses, 'dry_run': self.dry_run}
+        if spooled:
+            row['spooled'] = True
+        self.log_row(row)
+        return statuses, spooled
+
+    def replay_spool(self) -> None:
+        def send(name: str, signal: str, body: bytes) -> int:
+            try:
+                status = forward(name, body, self.keys, signal)
+            except Blocked:
+                status = -1
+            self.stats.add(Decision(b'', {}, {}), {name: status})
+            return status
+        self.spool.replay(send)
 
     def log_row(self, row: dict) -> None:
         if not self.log_path:
@@ -892,9 +1151,15 @@ class Handler(BaseHTTPRequestHandler):
             self.wfile.write(body)
 
     def do_GET(self):
-        if self.path == '/stats':
-            body = json.dumps(self.server.stats.snapshot(), indent=2).encode()
-            self.send_response(200)
+        if self.path in ('/stats', '/health'):
+            if self.path == '/stats':
+                status, data = 200, {**self.server.stats.snapshot(),
+                                     'spool': dict(self.server.spool.counts)}
+            else:
+                data = health(self.server)
+                status = 200 if data['ok'] else 503
+            body = json.dumps(data, indent=2).encode()
+            self.send_response(status)
             self.send_header('Content-Type', 'application/json')
             self.send_header('Content-Length', str(len(body)))
             self.end_headers()
@@ -935,22 +1200,9 @@ class Handler(BaseHTTPRequestHandler):
                 self._reply(400)
                 return
 
-        statuses: dict[str, int] = {}
-        if decision.body and not self.server.dry_run:
-            for name in self.server.upstreams:
-                if name != 'signoz' and signal != 'traces':
-                    continue  # only SigNoz takes logs and metrics
-                try:
-                    statuses[name] = forward(name, decision.body, self.server.keys, signal)
-                except Blocked:
-                    statuses[name] = -1
-        self.server.stats.add(decision, statuses)
-        self.server.log_row({
-            'ts': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime()),
-            'bytes_in': length, 'kept': decision.kept, 'dropped': decision.dropped,
-            'upstream': statuses, 'dry_run': self.server.dry_run,
-        })
-        self._reply(200 if (not statuses or any(s == 200 for s in statuses.values())) else 502)
+        statuses, spooled = self.server.deliver(signal, decision, length)
+        # A spooled batch is safe and will be replayed, so the sender is told 200 and does not resend it.
+        self._reply(200 if (not statuses or spooled or any(s == 200 for s in statuses.values())) else 502)
 
 
 # --------------------------------------------------------------------------- self test
@@ -1231,6 +1483,51 @@ def self_test() -> int:
     finally:
         globals()['auth_for'] = real_auth
 
+    # launchd PATH (2026-10-21): the LaunchAgent runs with PATH=/usr/bin:/bin:/usr/sbin:/sbin and Homebrew
+    # keeps op in /opt/homebrew/bin. A bare 'op' raised FileNotFoundError on every key refresh once the
+    # Keychain cache expired (2026-10-20 15:31Z), so 25,267 batches were dropped. op is found by absolute path.
+    import tempfile
+    real_get, real_put = globals()['_keychain_get'], globals()['_keychain_put']
+    real_tok, real_load = globals()['_robot_token'], globals()['_load_op_items']
+    real_dirs, real_path = globals().get('OP_FALLBACK_DIRS', ()), os.environ.get('PATH', '')
+
+    class PathOps:
+        @staticmethod
+        def robot_env(token):
+            import contextlib
+            return contextlib.nullcontext(dict(os.environ))
+
+    def headers_outcome():
+        try:
+            return signoz_headers().get(SIGNOZ_HEADER)
+        except Blocked:
+            return 'Blocked'
+        except BaseException as err:
+            return type(err).__name__
+
+    with tempfile.TemporaryDirectory() as bindir:
+        fake_op = os.path.join(bindir, 'op')
+        with open(fake_op, 'w') as handle:
+            handle.write('#!/bin/sh\necho fake-test-key\n')
+        os.chmod(fake_op, 0o700)
+        try:
+            os.environ['PATH'] = '/usr/bin:/bin:/usr/sbin:/sbin'
+            globals()['OP_FALLBACK_DIRS'] = (bindir,)
+            globals()['_keychain_get'] = lambda service: None
+            globals()['_keychain_put'] = lambda service, headers: None
+            globals()['_robot_token'] = lambda: 'tok'
+            globals()['_load_op_items'] = lambda: PathOps
+            got = headers_outcome()
+            check('launchd PATH: op outside PATH is found and the key is read', got == 'fake-test-key', got)
+            globals()['OP_FALLBACK_DIRS'] = (os.path.join(bindir, 'missing'),)
+            got = headers_outcome()
+            check('launchd PATH: op missing everywhere is Blocked, not FileNotFoundError', got == 'Blocked', got)
+        finally:
+            os.environ['PATH'] = real_path
+            globals()['OP_FALLBACK_DIRS'] = real_dirs
+            globals()['_keychain_get'], globals()['_keychain_put'] = real_get, real_put
+            globals()['_robot_token'], globals()['_load_op_items'] = real_tok, real_load
+
     # PII scrubbing (2026-10-20): emails and phones masked in log bodies, attributes and span names;
     # IDs and bare digit runs untouched; the scrubbed payload still parses and keeps its service.
     def _kv(k, v):
@@ -1333,6 +1630,62 @@ def self_test() -> int:
     check('body: unknown encoding is 415', _body({'Content-Length': '3', 'Content-Encoding': 'br'}, b'abc') == 415, '')
     check('body: bad chunk size is 400', _body({'Transfer-Encoding': 'chunked'}, b'zz\r\n') == 400, '')
 
+    # Spool, heartbeat and health (2026-10-21): nothing SigNoz could not take is lost, a dead upstream
+    # turns /health red, and the heartbeat is a log the filter keeps under its own service.
+    import types
+    hb = heartbeat_body('test-host', {'spool.files': 0})
+    check('heartbeat: parses as a log from signoz-collector',
+          filter_payload(hb, RateGuard(600, {})).kept == {HEARTBEAT_SERVICE: 1}, '')
+    with tempfile.TemporaryDirectory() as _sd:
+        sp = Spool(Path(_sd))
+        for i in range(3):
+            sp.put('signoz', 'logs', b'batch%d' % i)
+        calls = []
+        sp.replay(lambda u, s, b: calls.append(b) or -1)
+        check('spool: an outage stops replay at the first batch and keeps all', len(calls) == 1 and sp.size()[0] == 3,
+              f'calls {len(calls)}, files {sp.size()[0]}')
+        sent = []
+        sp.replay(lambda u, s, b: sent.append((u, s, b)) or 200)
+        check('spool: replays oldest first, deletes on 200',
+              [b for _u, _s, b in sent] == [b'batch0', b'batch1', b'batch2'] and sent[0][:2] == ('signoz', 'logs')
+              and sp.size()[0] == 0 and sp.counts['replayed'] == 3, str(sent))
+        sp.put('signoz', 'traces', b'bad')
+        sp.replay(lambda u, s, b: 400)
+        check('spool: a batch SigNoz refuses for good (400) is dropped and counted',
+              sp.size()[0] == 0 and sp.counts['rejected:400'] == 1, dict(sp.counts))
+    with tempfile.TemporaryDirectory() as _sd:
+        sp = Spool(Path(_sd), max_bytes=10)
+        for body in (b'aaaaaa', b'bbbbbb', b'cccccc'):
+            sp.put('signoz', 'logs', body)
+        left = [p.read_bytes() for p in sp.pending()]
+        check('spool: over the cap the oldest go first', left == [b'cccccc'] and sp.counts['evicted'] == 2, str(left))
+    real_forward = globals()['forward']
+    try:
+        with tempfile.TemporaryDirectory() as _sd:
+            fake = types.SimpleNamespace(upstreams=['signoz'], dry_run=False, keys=KeyCache(['signoz']),
+                                         spool=Spool(Path(_sd)), stats=Stats(), log_row=lambda row: None)
+
+            def no_key(*a, **k):
+                raise Blocked('signoz key not cached yet')
+            globals()['forward'] = no_key
+            statuses, spooled = Collector.deliver(fake, 'logs', Decision(b'body', {'logs:claude-code': 1}, {}), 4)
+            check('deliver: no key is -1, spooled, and the sender gets 200',
+                  statuses == {'signoz': -1} and spooled and fake.spool.size()[0] == 1, str(statuses))
+            fake.stats.started -= 3600
+            for _ in range(3):
+                fake.stats.add(Decision(b'', {}, {}), {'signoz': -1})
+            got = health(fake)
+            check('health: no key and 3 failed sends is not ok, and says why',
+                  not got['ok'] and any('no key' in p for p in got['problems'])
+                  and any('4 sends failed in a row' in p for p in got['problems']) and got['spool_files'] == 1, str(got))
+            globals()['forward'] = lambda *a, **k: 200
+            fake.keys.cache['signoz'] = ('v', fake.keys.clock())
+            Collector.replay_spool(fake)
+            got = health(fake)
+            check('health: key back and a 200 is ok, spool drained', got['ok'] and got['spool_files'] == 0, str(got))
+    finally:
+        globals()['forward'] = real_forward
+
     width = max(len(n) for n, _ok, _d in checks)
     for name, ok, detail in checks:
         line = f'  {"pass" if ok else "FAIL"}  {name:{width}}'
@@ -1358,6 +1711,10 @@ def main(argv: list[str] | None = None) -> int:
                         help='read the SigNoz key from this login Keychain service only (no 1Password)')
     parser.add_argument('--key-file', default=None, metavar='PATH',
                         help='read the SigNoz key from this owner-only file (Linux; no Keychain, no 1Password)')
+    parser.add_argument('--spool-dir', default=str(SPOOL_DIR),
+                        help='where batches SigNoz could not take wait for replay; "" turns the spool off')
+    parser.add_argument('--host-name', default=None,
+                        help='host.name on the heartbeat (default: the Mac\'s LocalHostName, else the short hostname)')
     args = parser.parse_args(argv)
 
     if args.self_test:
@@ -1382,9 +1739,14 @@ def main(argv: list[str] | None = None) -> int:
     # because the key-warming thread waits on it too.
     stop = threading.Event()
 
+    args.host_name = args.host_name or default_host_name()
+    spool = Spool(Path(args.spool_dir) if args.spool_dir and upstreams and not args.dry_run else None)
     server = Collector(('127.0.0.1', args.port), upstreams=upstreams, guard=guard, keys=keys,
-                       dry_run=args.dry_run, log_path=Path(args.log) if args.log else None)
+                       dry_run=args.dry_run, log_path=Path(args.log) if args.log else None, spool=spool)
     print(f'  listening on 127.0.0.1:{server.server_address[1]}/v1/traces')
+    print(f'  spool: {spool.folder or "(off)"}, max {SPOOL_MAX_BYTES // (1024 * 1024)} MB; '
+          f'heartbeat every {HEARTBEAT_SECONDS}s as {HEARTBEAT_SERVICE} host {args.host_name}')
+    print(f'  health: GET http://127.0.0.1:{server.server_address[1]}/health (503 when SigNoz is not getting data)')
     print(f'  upstreams: {", ".join(upstreams) or "(none, dry run)"}')
     print(f'  rate guard: {args.rate_per_min} spans/min per service')
     print(f'  blocked: {", ".join(BLOCKED_SERVICES)}')
@@ -1401,6 +1763,8 @@ def main(argv: list[str] | None = None) -> int:
     # is diagnosable from outside. KeyCache's backoff keeps the retries cheap.
     if upstreams and not args.dry_run:
         threading.Thread(target=warm_loop, args=(keys, upstreams, stop), daemon=True, name='warm-keys').start()
+        threading.Thread(target=background_loop, args=(server, stop, args.host_name), daemon=True,
+                         name='heartbeat-spool').start()
 
     previous = {}
     worker = threading.Thread(target=server.serve_forever, kwargs={'poll_interval': 0.5})
