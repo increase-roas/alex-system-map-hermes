@@ -275,7 +275,39 @@ class RepairService:
             raise RepairError('proposal_changed', 'Frozen proposal no longer matches its fingerprint', 409)
         return value
 
-    def preview(self, file_id, expected_sha256, new_content):
+    def validate_context_fingerprints(self, bindings):
+        # Server-only AI snapshot bindings. Manual previews have no bindings.
+        if bindings is None:
+            return
+        def stale():
+            raise RepairError('stale_context', 'AI source evidence changed after analysis; request and review a fresh proposal', 409)
+        if not isinstance(bindings, list) or not 1 <= len(bindings) <= 8:
+            stale()
+        index = self.index()
+        rows = {row['id']: row for row in index['files']}
+        seen = set()
+        roots = [Path(root['path']).resolve() for root in index['coverage']['roots']]
+        for binding in bindings:
+            if not isinstance(binding, dict) or set(binding) != {'file_id', 'sha256', 'real_path'}:
+                stale()
+            if not all(isinstance(value, str) for value in binding.values()):
+                stale()
+            file_id = binding['file_id']
+            if file_id in seen or file_id not in rows or not re.fullmatch('[a-f0-9]{64}', binding['sha256']):
+                stale()
+            seen.add(file_id)
+            row = rows[file_id]
+            if row['state'] != 'readable' or row.get('real_path') != binding['real_path']:
+                stale()
+            try:
+                raw, st, real = read_source(Path(row['path']), roots, MAX_SOURCE)
+                text = raw.decode('utf-8')
+                if not stat.S_ISREG(st.st_mode) or str(real) != binding['real_path'] or sha(raw) != binding['sha256'] or screen(text)[1]:
+                    stale()
+            except (OSError, UnicodeError, RuntimeError, OverflowError):
+                stale()
+
+    def preview(self, file_id, expected_sha256, new_content, context_fingerprints=None):
         if not isinstance(new_content, str) or len(new_content.encode()) > MAX_SOURCE or '\x00' in new_content:
             raise RepairError('invalid_content', 'Proposed source must be UTF-8 text at most 64 KiB without NUL bytes', 400)
         if screen(new_content)[1]:
@@ -293,6 +325,9 @@ class RepairService:
             expires = (datetime.now(timezone.utc) + timedelta(minutes=15)).isoformat()
             generated = (self.home / '.agents' / 'instructions') in path.parents or any(r['target_id'] == file_id and r['kind'] == 'generated_from' for r in idx['references'])
             proposal = {'repair_id': repair_id, 'file_id': file_id, 'path': str(path), 'real_path': str(path.resolve()), 'before': base64.b64encode(before).decode(), 'after': base64.b64encode(after).decode(), 'before_sha256': sha(before), 'after_sha256': sha(after), 'mode': stat.S_IMODE(st.st_mode), 'created_at': created, 'expires_at': expires, 'git': info, 'generated_follow_up': generated}
+            if context_fingerprints is not None:
+                self.validate_context_fingerprints(context_fingerprints)
+                proposal['context_fingerprints'] = context_fingerprints
             digest = sha(canonical(proposal))
             self.save(repair_id, {'proposal': proposal, 'proposal_sha256': digest, 'phase': 'preview'})
             return {'repair_id': repair_id, 'file_id': file_id, 'path': str(path), 'before_sha256': sha(before), 'after_sha256': sha(after), 'proposal_sha256': digest, 'diff': ''.join(difflib.unified_diff(before.decode().splitlines(keepends=True), new_content.splitlines(keepends=True), fromfile=str(path) + ' (before)', tofile=str(path) + ' (proposed)')), 'created_at': created, 'expires_at': expires, 'generated_follow_up': generated}
@@ -456,6 +491,7 @@ class RepairService:
                 raise RepairError('stale_source', 'Source changed after preview; review a fresh proposal', 409)
             if self.backed_preimage(path, before) != p['git']:
                 raise RepairError('git_changed', 'Source repository changed after preview; review a fresh proposal', 409)
+            self.validate_context_fingerprints(p.get('context_fingerprints'))
             value['backup_path'] = self.backup(p)
             value['phase'] = 'replacing'
             self.save(repair_id, value)

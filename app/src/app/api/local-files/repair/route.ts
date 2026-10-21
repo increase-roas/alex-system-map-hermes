@@ -1,4 +1,5 @@
 import { runLocalFileRepair, type RepairRequest } from '@/lib/server/local-file-repairs';
+import { runLocalFileSuggestion, type SuggestRequest } from '@/lib/server/local-file-ai';
 import { mutationAuthError } from '@/lib/server/local-auth';
 import { isLocalRequest } from '@/lib/server/request-origin';
 
@@ -44,20 +45,23 @@ export async function POST(request: Request) {
   if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid();
   const fields = value as Record<string, unknown>;
   const keys: Record<string, string[]> = {
+    suggest: ['action', 'file_id', 'expected_sha256', 'finding_id'],
     preview: ['action', 'file_id', 'expected_sha256', 'new_content'],
     apply: ['action', 'repair_id', 'proposal_sha256'],
     undo: ['action', 'repair_id'],
   };
   if (typeof fields.action !== 'string' || !Object.hasOwn(keys, fields.action)) return invalid();
   const expected = keys[fields.action];
-  if (Object.keys(fields).length !== expected.length || expected.some((key) => typeof fields[key] !== 'string')) return invalid();
+  if (Object.keys(fields).length !== expected.length || expected.some((key) => key === 'finding_id' ? fields[key] !== null && typeof fields[key] !== 'string' : typeof fields[key] !== 'string')) return invalid();
   if (fields.action === 'preview' && (!/^[a-f0-9]{24}$/.test(String(fields.file_id)) || !/^[a-f0-9]{64}$/.test(String(fields.expected_sha256)) || Buffer.byteLength(String(fields.new_content)) > 65536)) return invalid();
-  if (fields.action !== 'preview' && !/^[a-f0-9]{32}$/.test(String(fields.repair_id))) return invalid();
+  if (fields.action === 'suggest' && (!/^[a-f0-9]{24}$/.test(String(fields.file_id)) || !/^[a-f0-9]{64}$/.test(String(fields.expected_sha256)) || (fields.finding_id !== null && !/^[a-f0-9]{24}$/.test(String(fields.finding_id))))) return invalid();
+  if (!['preview', 'suggest'].includes(String(fields.action)) && !/^[a-f0-9]{32}$/.test(String(fields.repair_id))) return invalid();
   if (fields.action === 'apply' && !/^[a-f0-9]{64}$/.test(String(fields.proposal_sha256))) return invalid();
   try {
-    const result = await runLocalFileRepair(value as RepairRequest);
+    const result = fields.action === 'suggest' ? await runLocalFileSuggestion(value as SuggestRequest) : await runLocalFileRepair(value as RepairRequest);
     return Response.json(result.data || { error: result.error, code: result.code }, { status: result.status, headers });
   } catch {
+    if (fields.action === 'suggest') return Response.json({ error: 'AI analysis is unavailable. No source changed; refresh the inventory and request a fresh analysis.', code: 'ai_unavailable' }, { status: 503, headers });
     return Response.json({ error: 'Local source repair is unavailable; inspect the inventory and private recovery state', code: 'repair_unavailable' }, { status: 409, headers });
   }
 }

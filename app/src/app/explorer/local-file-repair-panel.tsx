@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import type { LocalEvidence, LocalFileIndex, LocalFinding, LocalRepairPreview, LocalRepairResult, LocalRepairSource } from '@/lib/types/local-files';
+import type { LocalEvidence, LocalFileIndex, LocalFinding, LocalRepairPreview, LocalRepairResult, LocalRepairSource, LocalRepairSuggestion } from '@/lib/types/local-files';
 
 type Props = {
   fileId: string; localToken: string; index: LocalFileIndex; finding: LocalFinding | null;
@@ -25,25 +25,74 @@ export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpe
   const [draft, setDraft] = useState('');
   const [preview, setPreview] = useState<LocalRepairPreview | null>(null);
   const [result, setResult] = useState<LocalRepairResult | null>(null);
-  const [busy, setBusy] = useState(true);
+  const [phase, setPhase] = useState<'reading' | 'suggesting' | 'previewing' | 'applying' | 'undoing' | null>('reading');
+  const busy = phase !== null;
   const [error, setError] = useState('');
+  const [suggestionError, setSuggestionError] = useState('');
+  const [suggestion, setSuggestion] = useState<LocalRepairSuggestion | null>(null);
   const [stale, setStale] = useState(false);
+  const activeRequest = useRef<AbortController | null>(null);
+  const generation = useRef(0);
+  const automaticAttempt = useRef('');
   const dirty = Boolean(source && draft !== source.content && !result);
+  const currentState = useRef({ dirty, preview, result, stale });
+  currentState.current = { dirty, preview, result, stale };
   const locked = dirty || busy;
   useEffect(() => { onLockChange(locked); }, [locked, onLockChange]);
   useEffect(() => {
     const controller = new AbortController();
-    setBusy(true);
+    generation.current += 1;
+    activeRequest.current?.abort();
+    automaticAttempt.current = '';
+    setPhase('reading'); setSource(null); setDraft(''); setPreview(null); setResult(null);
+    setSuggestion(null); setSuggestionError(''); setError(''); setStale(false);
     repairRequest<LocalRepairSource>(`/api/local-files/repair?id=${encodeURIComponent(fileId)}`, { signal: controller.signal })
-      .then((data) => { if (!controller.signal.aborted) { setSource(data); setDraft(data.content); } })
-      .catch((e) => { if (!controller.signal.aborted) setError(e instanceof Error ? e.message : 'Source could not be opened.'); })
-      .finally(() => { if (!controller.signal.aborted) setBusy(false); });
-    return () => controller.abort();
+      .then((data) => { if (!controller.signal.aborted) { setPhase(null); setSource(data); setDraft(data.content); } })
+      .catch((e) => { if (!controller.signal.aborted) { setPhase(null); setError(e instanceof Error ? e.message : 'Source could not be opened.'); } });
+    return () => { controller.abort(); activeRequest.current?.abort(); };
   }, [fileId]);
 
-  async function post<T>(body: object): Promise<T> {
-    return repairRequest<T>('/api/local-files/repair', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Local-Token': localToken }, body: JSON.stringify(body) });
+  async function post<T>(body: object, signal: AbortSignal): Promise<T> {
+    return repairRequest<T>('/api/local-files/repair', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Local-Token': localToken }, body: JSON.stringify(body), signal });
   }
+  async function requestSuggestion(target: LocalRepairSource, findingId: string | null) {
+    if (!target.editable || !target.sha256 || !localToken || target.file_id !== fileId) return;
+    const state = currentState.current;
+    if (state.dirty || state.preview || state.result || state.stale) return;
+    const controller = new AbortController();
+    activeRequest.current?.abort(); activeRequest.current = controller;
+    const started = generation.current;
+    setPhase('suggesting'); setSuggestionError(''); setError(''); setSuggestion(null);
+    try {
+      const data = await post<LocalRepairSuggestion>({ action: 'suggest', file_id: target.file_id, expected_sha256: target.sha256, finding_id: findingId }, controller.signal);
+      if (controller.signal.aborted || generation.current !== started || currentState.current.dirty || currentState.current.result) return;
+      setSuggestion(data);
+      if (data.status === 'proposed' && data.proposed_content !== null && data.preview) {
+        setDraft(data.proposed_content); setPreview(data.preview);
+      }
+    } catch (e) {
+      if (!controller.signal.aborted && generation.current === started) {
+        setSuggestionError(e instanceof Error ? e.message : 'AI analysis could not finish.');
+        if (e instanceof RepairError && e.status === 409) { setStale(true); setPreview(null); }
+      }
+    } finally { if (!controller.signal.aborted && generation.current === started) setPhase(null); }
+  }
+  useEffect(() => {
+    if (!source || source.file_id !== fileId || !source.editable || !source.sha256 || !localToken) return;
+    const key = `${fileId}:${source.sha256}:${finding?.id ?? ''}:${localToken}`;
+    if (automaticAttempt.current === key) return;
+    automaticAttempt.current = key;
+    void requestSuggestion(source, finding?.id ?? null);
+    const request = activeRequest.current;
+    // Cancel only this analysis, never a later Apply or Undo request.
+    return () => {
+      request?.abort();
+      if (activeRequest.current === request) setPhase((current) => current === 'suggesting' ? null : current);
+    };
+    // Draft, preview and result changes must not automatically request a new proposal.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [source, fileId, localToken, finding?.id]);
+
   function showError(e: unknown) {
     setError(e instanceof Error ? e.message : 'Repair request failed.');
     if (e instanceof RepairError && e.status === 409) { setStale(true); setPreview(null); }
@@ -65,31 +114,44 @@ export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpe
     }
     parts[matchingLines[0]] = chosen.text;
     setDraft(parts.join(''));
-    setPreview(null);
+    setPreview(null); setSuggestion(null);
     setError('');
   }
   async function makePreview() {
     if (!source?.editable || !source.sha256) return;
-    setBusy(true); setError('');
+    const controller = new AbortController();
+    activeRequest.current?.abort(); activeRequest.current = controller;
+    const started = generation.current;
+    setPhase('previewing'); setError('');
     try {
-      setPreview(await post<LocalRepairPreview>({ action: 'preview', file_id: source.file_id, expected_sha256: source.sha256, new_content: draft }));
-      setStale(false);
-    } catch (e) { showError(e); }
-    finally { setBusy(false); }
+      const data = await post<LocalRepairPreview>({ action: 'preview', file_id: source.file_id, expected_sha256: source.sha256, new_content: draft }, controller.signal);
+      if (!controller.signal.aborted && generation.current === started) { setPreview(data); setStale(false); }
+    } catch (e) { if (!controller.signal.aborted && generation.current === started) showError(e); }
+    finally { if (!controller.signal.aborted && generation.current === started) setPhase(null); }
   }
   async function apply() {
     if (!preview) return;
-    setBusy(true); setError('');
-    try { setResult(await post<LocalRepairResult>({ action: 'apply', repair_id: preview.repair_id, proposal_sha256: preview.proposal_sha256 })); }
-    catch (e) { showError(e); }
-    finally { setBusy(false); }
+    const controller = new AbortController();
+    activeRequest.current?.abort(); activeRequest.current = controller;
+    const started = generation.current;
+    setPhase('applying'); setError('');
+    try {
+      const data = await post<LocalRepairResult>({ action: 'apply', repair_id: preview.repair_id, proposal_sha256: preview.proposal_sha256 }, controller.signal);
+      if (!controller.signal.aborted && generation.current === started) setResult(data);
+    } catch (e) { if (!controller.signal.aborted && generation.current === started) showError(e); }
+    finally { if (!controller.signal.aborted && generation.current === started) setPhase(null); }
   }
   async function undo() {
     if (!result) return;
-    setBusy(true); setError('');
-    try { setResult(await post<LocalRepairResult>({ action: 'undo', repair_id: result.repair_id })); }
-    catch (e) { showError(e); }
-    finally { setBusy(false); }
+    const controller = new AbortController();
+    activeRequest.current?.abort(); activeRequest.current = controller;
+    const started = generation.current;
+    setPhase('undoing'); setError('');
+    try {
+      const data = await post<LocalRepairResult>({ action: 'undo', repair_id: result.repair_id }, controller.signal);
+      if (!controller.signal.aborted && generation.current === started) setResult(data);
+    } catch (e) { if (!controller.signal.aborted && generation.current === started) showError(e); }
+    finally { if (!controller.signal.aborted && generation.current === started) setPhase(null); }
   }
   const generatedFiles = index.references.filter((r) => r.kind === 'generated_from' && r.target_id === fileId)
     .map((r) => index.files.find((f) => f.id === r.source_id)).filter((f) => f !== undefined);
@@ -97,14 +159,16 @@ export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpe
   const applied = result?.state === 'applied' || result?.state === 'applied_publish_pending';
 
   return <section id="local-file-repair" className="min-w-0 space-y-4 rounded-lg border-2 border-primary p-4 md:p-6" aria-label="Review and fix instruction source">
-    <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="text-lg font-semibold">Review &amp; fix</h3><p className="text-muted-foreground mt-1 text-sm">Edit the handwritten source, preview the exact change, then choose Apply.</p></div>
+    <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="text-lg font-semibold">Review &amp; fix</h3><p className="text-muted-foreground mt-1 text-sm">AI reviews the current source and related evidence, then proposes an exact fix for your approval.</p></div>
       <Button variant="outline" disabled={busy} onClick={onClose}>{dirty ? 'Discard draft and close' : 'Close repair'}</Button>
     </div>
-    <p className="text-sm">You choose the wording. No AI suggestion or automatic authority decision is made here.</p>
-    {finding && <div className="space-y-3 rounded border p-3"><h4 className="font-medium">Review evidence: {finding.topic}</h4><p className="text-sm">{finding.reason}</p><div className="grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div key={`${e.file_id}-${e.line}-${i}`} className="min-w-0"><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(e.file_id, e.line)}>{index.files.find((f) => f.id === e.file_id)?.path ?? e.file_id}:{e.line}</button><pre className={`${text} mt-2`}>{e.text}</pre>{source?.editable && e.file_id !== source.file_id && finding.evidence.some((target) => target.file_id === source.file_id) && <Button className="mt-2" size="sm" variant="outline" disabled={busy || Boolean(result) || dirty || stale} onClick={() => useWording(e)}>Use this wording</Button>}</div>)}</div><p className="text-muted-foreground text-sm">Use this wording replaces only one exactly matching target line. You choose which evidence wins; review the diff before Apply.</p></div>}
-    {busy && <p role="status" className="text-sm">Reading or recording repair…</p>}
-    {error && <div role="alert" className="rounded border border-red-500 p-3 text-sm"><p>{error}</p>{stale && <p className="mt-2">Your draft is preserved below. Source or proposal state changed. Copy your draft before closing, reopen the current source, then reconcile it before a new preview.</p>}<p className="mt-2">No automatic retry is made. If the request outcome is uncertain, retain this panel and its repair ID for reconciliation.</p></div>}
-    {!localToken && <p className="text-sm">Preview, Apply and Undo are unavailable because the local authorization token is missing.</p>}
+    {finding && <details className="space-y-3 rounded border p-3"><summary className="cursor-pointer font-medium">Indexed evidence: {finding.topic}</summary><p className="mt-3 text-sm">{finding.reason}</p><div className="mt-3 grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div key={`${e.file_id}-${e.line}-${i}`} className="min-w-0"><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(e.file_id, e.line)}>{index.files.find((f) => f.id === e.file_id)?.path ?? e.file_id}:{e.line}</button><pre className={`${text} mt-2`}>{e.text}</pre>{source?.editable && e.file_id !== source.file_id && finding.evidence.some((target) => target.file_id === source.file_id) && <Button className="mt-2" size="sm" variant="outline" disabled={busy || Boolean(result) || dirty || stale} onClick={() => useWording(e)}>Use this wording manually</Button>}</div>)}</div><p className="text-muted-foreground mt-3 text-sm">Optional manual shortcut: replace one exact target line with this evidence, then preview your change.</p></details>}
+    {busy && <div role="status" className="space-y-2 rounded border p-3 text-sm"><p>{phase === 'reading' ? 'Opening the current source…' : phase === 'suggesting' ? 'AI is reading the current source and bounded related context, checking conflicts, and preparing an exact proposal…' : phase === 'previewing' ? 'Validating and freezing the exact draft change…' : phase === 'applying' ? 'Applying the approved proposal and recording its publication…' : 'Restoring the recorded source and recording its publication…'}</p>{phase === 'suggesting' && <><p className="text-muted-foreground">This can take a few minutes. Source files change only after you approve the proposal.</p><Button size="sm" variant="outline" onClick={() => { activeRequest.current?.abort(); setPhase(null); setSuggestionError('Stopped waiting for AI review. No source change was requested.'); }}>Stop waiting</Button></>}</div>}
+    {suggestionError && <div role="alert" className="space-y-2 rounded border border-amber-500 p-3 text-sm"><p className="font-medium">AI proposal unavailable</p><p>{suggestionError}</p><p>No source change was requested. There is no automatic retry.</p>{stale && <p>The source or context changed. Reopen the current source before requesting a fresh proposal.</p>}</div>}
+    {suggestion && <div className="min-w-0 space-y-3 rounded border p-4" aria-label="AI source review"><h4 className="font-semibold">{suggestion.status === 'proposed' ? 'AI proposed fix' : suggestion.status === 'no_change' ? 'No change proposed' : 'A decision is needed'}</h4><p className="text-sm">{suggestion.summary}</p><p className="text-sm">{suggestion.rationale}</p>{suggestion.conflicts.map((conflict, i) => <div key={i} className="space-y-2 rounded border p-3"><p className="text-sm">{conflict.explanation}</p>{conflict.evidence.map((citation, j) => <div key={`${citation.file_id}-${citation.line}-${j}`}><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(citation.file_id, citation.line)}>{suggestion.context_files.find((f) => f.file_id === citation.file_id)?.path ?? index.files.find((f) => f.id === citation.file_id)?.path ?? citation.file_id}:{citation.line}</button><pre className={`${text} mt-2`}>{citation.quote}</pre></div>)}</div>)}<details className="rounded border p-3"><summary className="cursor-pointer text-sm font-medium">Files considered and review limits</summary><p className="mt-3 text-sm">Coverage is bounded to these current files; this review does not establish authority across the entire system.</p>{suggestion.context_files.map((f) => <div key={f.file_id} className="mt-2"><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(f.file_id)}>{f.path}</button><p className="text-muted-foreground break-all font-mono text-xs">SHA-256: {f.sha256}</p></div>)}{suggestion.limitations.map((limit, i) => <p key={i} className="mt-2 text-sm">{limit}</p>)}</details><p className="text-muted-foreground text-sm">Model: {suggestion.model}. Uses your existing ChatGPT plan allowance. Availability and usage limits apply. Reviewed {suggestion.generated_at}.</p>{suggestion.status !== 'proposed' && <p className="text-sm">There is no approvable edit. {suggestion.status === 'needs_decision' ? 'The evidence did not establish which instruction should win.' : 'The review found no justified replacement.'}</p>}</div>}
+    {source?.editable && !result && !preview && !dirty && (suggestionError || suggestion) && <Button variant="outline" disabled={busy || !localToken || stale} onClick={() => void requestSuggestion(source, finding?.id ?? null)}>Try AI again</Button>}
+    {error && <div role="alert" className="rounded border border-red-500 p-3 text-sm"><p className="mb-2 font-medium">Source repair request failed</p><p>{error}</p>{stale && <p className="mt-2">Your draft is preserved below. Source or proposal state changed. Copy your draft before closing, reopen the current source, then reconcile it before a new preview.</p>}<p className="mt-2">No automatic retry is made. If the request outcome is uncertain, retain this panel and its repair ID for reconciliation.</p></div>}
+    {!localToken && <p className="text-sm">AI review, Preview, Apply and Undo are unavailable because the local authorization token is missing.</p>}
     {source && <>
       <dl className="space-y-2 text-sm"><div><dt className="text-muted-foreground">Repair target</dt><dd className="break-all">{source.path}</dd></div><div><dt className="text-muted-foreground">Source fingerprint when opened (SHA-256)</dt><dd className="break-all">{source.sha256 ?? 'Unavailable'}</dd></div></dl>
       <p className="text-sm">{source.reason}</p>
@@ -112,10 +176,12 @@ export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpe
       {!source.editable && <p className="rounded border p-3 text-sm">Direct repair is unavailable for this file. {source.reason} No generic configuration, skill or executable-file write is offered.</p>}
       {source.editable && <>
         <details className="min-w-0 rounded border p-3"><summary className="cursor-pointer font-medium">Actual source before this proposal</summary><pre className={`${text} mt-3 max-h-[400px] overflow-y-auto`}>{source.content || '(empty file)'}</pre></details>
-        <label className="block text-sm font-medium" htmlFor="local-repair-draft">Proposed source text</label>
-        <textarea id="local-repair-draft" className="min-h-[320px] w-full min-w-0 rounded border bg-background p-3 font-mono text-sm whitespace-pre-wrap break-all focus-visible:outline-2 focus-visible:outline-offset-2" value={draft} disabled={busy || Boolean(result)} onChange={(e) => { setDraft(e.target.value); setPreview(null); }} spellCheck={false} />
+        <details className="min-w-0 space-y-3 rounded border p-3"><summary className="cursor-pointer font-medium">Edit manually (optional)</summary>
+        <label className="mt-3 block text-sm font-medium" htmlFor="local-repair-draft">Proposed source text</label>
+        <textarea id="local-repair-draft" className="min-h-[320px] w-full min-w-0 rounded border bg-background p-3 font-mono text-sm whitespace-pre-wrap break-all focus-visible:outline-2 focus-visible:outline-offset-2" value={draft} disabled={busy || Boolean(result)} onChange={(e) => { setDraft(e.target.value); setPreview(null); setSuggestion(null); }} spellCheck={false} />
         <p className="text-muted-foreground text-sm">{dirty ? 'Unsubmitted draft retained. Refresh and switching repair targets are paused until you apply or explicitly discard it.' : 'No unsubmitted draft.'} Source limit: 64 KiB.</p>
         {!result && <Button variant="outline" disabled={!dirty || busy || !localToken || stale} onClick={() => void makePreview()}>Preview exact change</Button>}
+        </details>
       </>}
     </>}
     {preview && <div className="min-w-0 space-y-3 rounded border p-4" aria-label="Frozen repair preview">
@@ -124,7 +190,7 @@ export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpe
       <pre className={`${text} max-h-[500px] overflow-y-auto`} aria-label="Exact before and after diff">{preview.diff || 'No text difference reported.'}</pre>
       <p className="text-sm">Apply writes only this frozen proposal. The server rechecks the file, existing Git backup and undo copy before replacing it.</p>
       {preview.generated_follow_up && <p className="text-sm">Generated distribution will remain pending after the source change. No settings builder runs automatically.</p>}
-      {!result && <Button disabled={busy || !localToken || stale} onClick={() => void apply()}>Apply reviewed source change</Button>}
+      {!result && <Button disabled={busy || !localToken || stale} onClick={() => void apply()}>{suggestion?.status === 'proposed' ? 'Approve proposed fix' : 'Apply reviewed source change'}</Button>}
     </div>}
     {result && <div className={`min-w-0 space-y-3 rounded border p-4 ${publishPending ? 'border-amber-500' : ''}`} role="status">
       <h4 className="font-semibold">{applied ? 'Source updated' : 'Source restored'}{publishPending ? ' · publish pending' : ''}</h4><p className="text-sm">{result.message}</p>

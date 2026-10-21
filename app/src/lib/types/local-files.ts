@@ -42,3 +42,14 @@ export type LocalRepairResult = {
   current_sha256: string; backup_path: string; commit: string | null;
   pushed: boolean; generated_follow_up: boolean; message: string;
 };
+
+export type LocalRepairCitation = { file_id: string; line: number; quote: string };
+export type LocalRepairSuggestion = {
+  status: 'proposed' | 'no_change' | 'needs_decision';
+  summary: string; rationale: string;
+  conflicts: { explanation: string; evidence: LocalRepairCitation[] }[];
+  limitations: string[];
+  context_files: { file_id: string; path: string; sha256: string }[];
+  model: string; generated_at: string;
+  proposed_content: string | null; preview: LocalRepairPreview | null;
+};
