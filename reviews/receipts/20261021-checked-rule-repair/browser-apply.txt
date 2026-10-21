@@ -1,0 +1,56 @@
+Repair verified
+
+Source updated, exact readback verified, one-path commit pushed. Undo copy verified locally; Drive cloud upload was not verified.
+
+State
+applied
+Path
+/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-l8h26kgc/.agents/instructions/shared.md
+Current SHA-256
+ee0716c29a8b9b23f8833efc05dc91cf661ab057d8fd41ae8b34fd9093bf71e2
+Undo copy
+/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-l8h26kgc/Backups/local-file-repairs/844ea4e29a184fe3b1a37182becc780c.before
+Commit
+5c1f2b70d666e9ee65d7bd3b446b3c1b0d508596
+Source readback
+Verified by server
+Push
+Confirmed by server
+Repair ID
+844ea4e29a184fe3b1a37182becc780c
+
+The undo copy is in the existing Drive backup location. Cloud upload is not verified here.
+
+Copy readback: verified
+
+Affected instruction files verified. Existing sessions were not checked for reload.
+
+/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-l8h26kgc/.codex/AGENTS.md: verified
+
+SHA-256: c14b9a4135c62941c6331f5e529bc2921e06c7d2f21615a54c834e22890eb903
+
+Exact frozen bytes and mode verified; running agents may need a new session.
+
+/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-l8h26kgc/AGENTS.md: verified
+
+SHA-256: 10027342e60d5f53450e14630fe37a24762b1cdea6315656198848fa4b84fd5f
+
+Exact frozen bytes and mode verified; running agents may need a new session.
+
+/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-l8h26kgc/.cursor/rules/agent-routing.mdc: verified
+
+SHA-256: 9109e5ea24cd61df9f747b872f99d8bddfe5e32af7d2496dcb461da4ac13f38a
+
+Exact frozen bytes and mode verified; running agents may need a new session.
+
+/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-l8h26kgc/.claude/CLAUDE.md: verified
+
+SHA-256: 49acc706782b590c02e715c5986454d1945400b6be6238fd84cdc008615baf2c
+
+Exact frozen bytes and mode verified; running agents may need a new session.
+
+Readback verifies files only. It does not prove an already-running agent reloaded instructions; start a new session where required.
+
+Undo this source change
+
+Undo is conditional: it restores the recorded before bytes only if the source and affected copies still match this repair. Refresh the inventory after reviewing the outcome.

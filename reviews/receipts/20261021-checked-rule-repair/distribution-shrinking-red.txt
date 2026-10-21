@@ -1,0 +1,27 @@
+E
+======================================================================
+ERROR: test_shrinking_preview_from_oversized_native_before_is_allowed (test_local_file_distribution.DistributionTests.test_shrinking_preview_from_oversized_native_before_is_allowed)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/local_file_distribution.py", line 131, in constraints
+    projected = native.build(baseline, rules_only=True)
+  File "/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-2bn3l4w3/.agents/tools/unify/build_instructions.py", line 240, in build
+    generated = {**instruction_docs(cfg),
+                   ~~~~~~~~~~~~~~~~^^^^^
+  File "/private/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/local-file-repairs-2bn3l4w3/.agents/tools/unify/build_instructions.py", line 226, in instruction_docs
+    raise ValueError(f"{name}: {size} bytes exceeds project_doc_max_bytes={limit}")
+ValueError: codex: 3225 bytes exceeds project_doc_max_bytes=1024
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_distribution.py", line 258, in test_shrinking_preview_from_oversized_native_before_is_allowed
+    constraints = self.service.distributor.constraints(self.file, before.encode())
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/local_file_distribution.py", line 134, in constraints
+    raise self.error('native_projection_failed', 'Current native instruction projection does not fit its configured bytes limit or cannot be built; request a shorter source through its native owner. Source is unchanged.', 422) from exc
+local_file_repairs.RepairError: Current native instruction projection does not fit its configured bytes limit or cannot be built; request a shorter source through its native owner. Source is unchanged.
+
+----------------------------------------------------------------------
+Ran 1 test in 0.388s
+
+FAILED (errors=1)

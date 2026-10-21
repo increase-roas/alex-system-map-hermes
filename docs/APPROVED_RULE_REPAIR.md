@@ -10,6 +10,8 @@ Before freezing an AI preview, plan 2-4 citation-backed multiple-choice behavior
 
 Use at most four subscribed model calls per suggest (proposal, scenario planning, before run, candidate run), bounded to existing provider invocation isolation. Increase only the existing server's total suggestion time budget to fit those calls. An interrupted request never writes a source.
 
+Supply the native instruction byte budget to the proposer and reject an oversized UTF-8 candidate before behavioral calls. Prefer concise references to canonical policy over repeated wording. The unchanged native candidate renderer remains authoritative. A baseline already over its limit must still permit a valid shrinking repair; neither config nor the platform limit is relaxed.
+
 ### Shared response fields
 
 LocalRepairChecks: {status:'passed'|'failed'|'unavailable',checked_at:string,model:string,cases:LocalRepairCase[],limitations:string[]}.
@@ -21,7 +23,7 @@ RepairService.preview gains keyword checks=None, in addition to existing context
 
 LocalRepairPreview adds checks?:LocalRepairChecks|null and distribution?:LocalRepairDistributionPlan.
 LocalRepairDistributionPlan: {status:'ready'|'not_needed'|'blocked',targets:{path:string,before_sha256:string|null,after_sha256:string,diff:string,kind:'generated'|'import',requires_new_session:boolean}[],limitations:string[]}.
-LocalRepairResult adds distribution?:{status:'verified'|'pending'|'not_needed',targets:{path:string,status:'verified'|'pending',sha256:string|null,reason:string}[],message:string}.
+LocalRepairResult adds source_verified?:boolean and distribution?:{status:'verified'|'pending'|'not_needed',targets:{path:string,status:'verified'|'pending',sha256:string|null,reason:string}[],message:string}.
 Existing state and pushed remain about source publication. generated_follow_up is true only while affected local generated copies remain pending; its previous permanent-pending behavior is superseded. Full repair verified requires source pushed and distribution verified/not_needed. File verification is not proof an already-running agent reloaded instructions.
 
 ### Distribution semantics

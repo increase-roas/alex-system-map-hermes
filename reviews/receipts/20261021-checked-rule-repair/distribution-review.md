@@ -1,0 +1,62 @@
+- VERIFIED: CURRENT FINAL VERDICT: No remaining actionable finding in the bounded distribution/data-integrity review. The final recheck below resolves the historical P2 finding; earlier failure entries document the prior version.
+- VERIFIED: Bounded distribution/data-integrity code review complete, with no actionable defect found. Same-provider, context-separated GPT-6-family review; no other-provider review was run. Canonical tree: /Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair; HEAD adac5cb536a1629bcedb5338837929d0514fb55f; comparison base 69f54df. Uncommitted/untracked implementation was included.
+- VERIFIED: Reviewed complete tools/local_file_distribution.py, tools/local_file_repairs.py, tools/test_local_file_distribution.py, relevant existing repair tests, docs/APPROVED_RULE_REPAIR.md, repository AGENTS.md, native builder build/snapshot/stage/generator_lock implementation, and the named acceptance/evidence files. The review assessed the approved frozen-source/copy contract, not unrelated AI/frontend behavior.
+- VERIFIED: Server-owned source/output mapping, alias/hardlink rejection, fixed native builder loading, rules_only projection, native input fingerprints and pre-Apply destination preflight are present (distribution.py:17-24,46-151,158-172). Only dependent outputs are selected; unchanged Claude import wrappers are included. App-owned style/config dependencies remain explicitly pending. No broad installer, config writer, roles installation or new remote consumer action is invoked by the distribution module.
+- VERIFIED: Source and output preimage bytes/modes are backed up and read back before replacement; Apply revalidates under the native generator lock, records source application before copies, retains partial recovery, publishes only the source path with normal Git hooks enabled, and derives per-copy/source verification from readback (repairs.py:347-412,422-480,507-556; distribution.py:174-245). Existing remote notes hooks are not required for direct local generation.
+- VERIFIED: Undo preflights source bytes/mode, source index, native inputs, all destination applied states and backups before its first source replacement; newer recorded destination/input drift refuses the operation. Exact preimages/modes are restored; created outputs are backed up before removal (repairs.py:558-601; distribution.py:247-301). Legacy receipts report pending distribution rather than inventing an approved copy plan (repairs.py:456-461).
+- VERIFIED: Three fresh disposable fixture tests passed in one command: python3 -B -m unittest test_local_file_distribution.DistributionTests.test_native_preview_apply_undo_exact_scoped_copies test_local_file_distribution.DistributionTests.test_partial_copy_failure_retains_recovery_without_retry test_local_file_distribution.DistributionTests.test_undo_refuses_newer_output_or_canonical_input. Tool output: exit 0; OK. The broader supplied raw logs were opened: /tmp/checked-rule-python-suite.txt contains 68 tests, OK; /tmp/distribution-focused.txt contains 12 tests, OK. Those are retained historical run evidence, not a fresh broad-suite rerun or immutable binding to this tree.
+- VERIFIED: A fresh disposable second-copy staging failure reproduced the previously self-reported partial-copy scenario: source applied/pushed; first copy applied; later copy unchanged; all original output backups present; distribution pending; replay made no uncertain write; Undo restored exact bytes. All eight predicates passed. Evidence: /tmp/checked-distribution-partial-review.json. The private fixture was cleaned by its normal tearDown; no actual agent source was mutated.
+- VERIFIED: Reopened the actual browser fixture records and independently read the private bare Git remote and current source/output/backup/config/index/dirty files. Apply commit 5c1f2b70d666e9ee65d7bd3b446b3c1b0d508596 and Undo commit fe43cc28d97d39f70f2817b31984f5695cd39d58 contain exact reviewed source bytes. Current source and all five outputs equal original fixture bytes, output backups have exact original bytes/modes, config and unrelated staged/dirty work match setup fingerprints. All ten predicates passed. Evidence: /tmp/checked-distribution-fixture-readback.json; /tmp/approved-repair-fixture-info.json; fixture state/local-file-repairs/844ea4e29a184fe3b1a37182becc780c.json.
+- VERIFIED: Source identity at final inspection:
+  - tools/local_file_distribution.py SHA256 9c639708564fe17d0e4cb51ad98ae4ad69ce8c879deed5dbb3af738a1ec1dde0
+  - tools/local_file_repairs.py SHA256 9b8d809929a3b6fd4399b524287c409ab67ce21aabfb9edd9c48ce4e4c40abce
+  - tools/test_local_file_distribution.py SHA256 96b03ba035e126a83e52c168c8dead712e6d8b2a4f2cc885cb38c90d6a95de18
+  - tools/test_local_file_repairs.py SHA256 4983a93e1e6daa31f486398d47258cc13387ff6d30027d56f16bdb0b03d62087
+- VERIFIED: Machine-checkable acceptance table (the canonical checker path was absent; used the existing identical-purpose vendored script at /Users/alexlobaito/.agents/skills/repo-conform/assets/universal-skills/verify-before-done/scripts/check_acceptance.py; no install or workaround mutation). Initial relative-path checks accidentally ran from tools/ and failed because of the cwd; absolute-path correction below passed. Tests were not repeated.
+
+| Check | Result | Detail |
+| --- | --- | --- |
+| file:/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/local_file_distribution.py non-empty | VERIFIED | 17380 bytes |
+| file:/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/local_file_repairs.py non-empty | VERIFIED | 38287 bytes |
+| json:/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/reviews/receipts/20261021-checked-rule-repair/partial-copy-failure.json | VERIFIED | valid JSON |
+| contains:/tmp/checked-rule-python-suite.txt::Ran 68 tests | VERIFIED | 1 occurrence |
+| contains:/tmp/checked-rule-python-suite.txt::OK | VERIFIED | 1 occurrence |
+| contains:/tmp/distribution-focused.txt::Ran 12 tests | VERIFIED | 1 occurrence |
+| contains:/tmp/distribution-focused.txt::OK | VERIFIED | 1 occurrence |
+| cmd:three focused disposable tests listed above | VERIFIED | exit 0; OK |
+
+- UNVERIFIED: Live agent reload, Drive cloud durability, production application, real remote consumer synchronization, and frontend/AI correctness are outside this bounded review. Existing UI evidence was read, not recreated; browser ownership remained with the primary. These limits do not block this read-only distribution review.
+
+- FAILED: Final delta review found P2 regression at tools/local_file_distribution.py:130-134,156. The new constraints() renders and validates the BEFORE source using native.build and throws native_projection_failed422 if the current instructions exceed the configured document limit. freeze() calls it before trying the candidate. Reproducible trigger: a committed/pushed disposable shared.md containing "Keep exact evidence.\n" repeated500 times, with project_doc_max_bytes=3000, repaired down to one such line. Direct native candidate build succeeds under3000 bytes, but RepairService.preview rejects422 from the BEFORE build. Source stays unchanged. The new local_file_ai.py:123 call also blocks AI proposal generation in that state. This is a regression from the prior candidate-only native validation and blocks the corrective repair itself.
+- FAILED: Minimum fix is to keep BEFORE constraints advisory for an oversized baseline and always allow the authoritative native candidate build to decide candidate admissibility. Derive a conservative shrink budget without requiring the current projection to pass, or return an explicit unavailable budget that freeze does not treat as candidate rejection. Do not bypass native candidate limits. Add one regression: an oversized current source can preview a sufficiently shortened native-valid candidate.
+- VERIFIED: The fresh disposable reproduction printed candidate_native_valid=True; preview_rejected=native_projection_failed422; source_unchanged=True. It created no live agent writes and cleaned its temporary fixture. Evidence is the review execution command/output; saved outcome /tmp/checked-distribution-oversize-review.json.
+- VERIFIED: Delta message correction at repairs.py:463-480 accurately distinguishes current source verification from a historically confirmed push. A newer source after a successful publication no longer claims "publication stopped" or retains "exact readback verified". Unavailable readback also replaces the original success message with pending verification wording.
+- VERIFIED: Constraints uses native rules_only=True BEFORE rendering; sums Codex+home UTF-8 bytes; uses source factors2 for shared and1 for codex/codex-style; strips trailing source padding, caps candidate aid at65536, and does not modify configuration or outputs. The authoritative native candidate build remains at distribution.py:169 and still enforces full limits. The issue above is excess rejection, not a limit bypass.
+- VERIFIED: All three supplied delta regressions passed freshly in a single targeted command; no broad suite rerun. The supplied red and green files were reopened.
+
+| Delta check | Result | Detail |
+| --- | --- | --- |
+| contains:/tmp/distribution-constraints-red.txt::FAILED (failures=2, errors=1) | VERIFIED | 1 occurrence |
+| contains:/tmp/distribution-constraints-green.txt::Ran 3 tests | VERIFIED | 1 occurrence |
+| contains:/tmp/distribution-constraints-green.txt::OK | VERIFIED | 1 occurrence |
+| cmd:three focused constraints/oversize/message tests | VERIFIED | exit0; OK |
+
+- FAILED: goal_not_met_yet: native-valid shrinking repairs from an oversized BEFORE source remain blocked by constraints(). No implementation edits were made by this reviewer.
+
+- VERIFIED: Delta identity: distribution.py SHA256 e508b64008629e151bac9f262397428d15a522e0d8fdecd333cf9b010955804c; repairs.py SHA256 0271cb03fcd9eb78b17fdaf6ae6e4338885e22fa357db4a559ba11dce6c8f311; test_local_file_distribution.py SHA256 f510809ebfe2ff5bf4db986d9199f84043bcb40c7e12725a95d46a04a5152aed.
+
+- VERIFIED: Final shrinking-baseline recheck resolves the P2. distribution.py:132-150 catches the native document-size failure and renders a minimal selected-source probe in memory through the same unchanged native build(rules_only=True) and doc_limit. It retains required Voice and Delegation headings for codex-style, restores native.read_src in finally, and does not write the source/config or increase any limit. Unrelated-input/native rendering failures remain422.
+- VERIFIED: No native-limit bypass: the probe uses the actual config snapshot; fingerprints of builder/config/all native sources are captured and revalidated at distribution.py:121-127,153. Candidate freeze obtains fresh input bindings under the native lock, renders the actual candidate through native.build at188, and preflights the frozen inputs/targets before approval. The probe is only a sizing aid and never becomes an installed or approved projection.
+- VERIFIED: Three targeted tests passed freshly together: shrinking preview from an oversized native BEFORE, exact shared double-projection267-byte growth budget, and oversize candidate422 with source unchanged. Supplied /tmp/distribution-shrinking-red.txt and /tmp/distribution-shrinking-green.txt were independently reopened. No broad suite was rerun.
+
+| Final delta check | Result | Detail |
+| --- | --- | --- |
+| contains:/tmp/distribution-shrinking-red.txt::FAILED (errors=1) | VERIFIED | 1 occurrence |
+| contains:/tmp/distribution-shrinking-green.txt::Ran 3 tests | VERIFIED | 1 occurrence |
+| contains:/tmp/distribution-shrinking-green.txt::OK | VERIFIED | 1 occurrence |
+| cmd:three targeted shrinking/budget/oversize tests | VERIFIED | exit0; OK |
+
+- VERIFIED: Same-provider context-separated final code review, no remaining concrete defect found. No live agent writes, model calls, implementation changes, helpers or broad test reruns were performed by this reviewer. Earlier live-reload/Drive-cloud/production scope limits still apply.
+- VERIFIED: Final reviewed identity tools/local_file_distribution.py SHA256 89a42bd96ff355dbc5266adcca9077af6dfa549efbdf5007884735cda2065d97.
+- VERIFIED: Final reviewed identity tools/local_file_repairs.py SHA256 0271cb03fcd9eb78b17fdaf6ae6e4338885e22fa357db4a559ba11dce6c8f311.
+- VERIFIED: Final reviewed identity tools/test_local_file_distribution.py SHA256 e946920c2197c00bdb32da224ac4758eac444c425a800f934edb1444ef5b7e1a.

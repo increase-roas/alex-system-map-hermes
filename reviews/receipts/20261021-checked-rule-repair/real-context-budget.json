@@ -1,0 +1,14 @@
+{
+  "target_file_id": "fb6674b04c63c40978b2bb4f",
+  "source_sha256": "d7e03cbbc0299760b91fba6a1b9604eb4f7a534641b11df33250423f3c07b96d",
+  "source_bytes": 14147,
+  "context_files": 8,
+  "context_bytes": 105038,
+  "canonical_gate_included": true,
+  "target_constraints": {
+    "max_candidate_bytes": 14414,
+    "growth_budget_bytes": 267,
+    "reason": "Current native Codex and home instruction projections use 32234 of 32768 bytes. This source affects 2 projected document(s); keep the candidate within this UTF-8 byte ceiling. Native candidate validation still applies."
+  },
+  "source_unchanged": true
+}

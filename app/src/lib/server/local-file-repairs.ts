@@ -27,10 +27,11 @@ export async function runLocalFileRepair(input: RepairRequest | SourceRequest): 
       resolve(value);
     };
     const failed = () => finish({ status: 409, code: 'repair_unavailable', error: 'Repair operation interrupted; inspect source and private recovery state before continuing' });
-    const timer = setTimeout(() => { child.kill('SIGKILL'); failed(); }, 120_000);
+    // Apply/Undo include bounded local generation, copy readback and Git publication.
+    const timer = setTimeout(() => { child.kill('SIGKILL'); failed(); }, input.action === 'apply' || input.action === 'undo' ? 300_000 : 120_000);
     child.stdout.on('data', (chunk: Buffer) => {
       output += chunk.toString();
-      if (Buffer.byteLength(output) > 512 * 1024) { child.kill('SIGKILL'); failed(); }
+      if (Buffer.byteLength(output) > 2 * 1024 * 1024) { child.kill('SIGKILL'); failed(); }
     });
     child.on('error', failed);
     child.stdin.on('error', failed);
@@ -38,7 +39,7 @@ export async function runLocalFileRepair(input: RepairRequest | SourceRequest): 
       if (code !== 0) { failed(); return; }
       try {
         const result = JSON.parse(output) as RepairResponse;
-        if (![200, 400, 409].includes(result.status) || (!result.data && !result.error)) { failed(); return; }
+        if (![200, 400, 409, 422].includes(result.status) || (!result.data && !result.error)) { failed(); return; }
         finish(result);
       } catch { failed(); }
     });

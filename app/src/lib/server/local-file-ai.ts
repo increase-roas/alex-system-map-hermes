@@ -37,10 +37,11 @@ async function launch(input: SuggestRequest): Promise<SuggestResponse> {
       try { if (child.pid && process.platform !== 'win32') process.kill(-child.pid, 'SIGKILL'); else child.kill('SIGKILL'); } catch { /* Already exited. */ }
     };
     const failed = () => finish({ status: 503, code: 'ai_unavailable', error: 'AI analysis could not finish. No source changed; request a fresh analysis when available.' });
-    const timer = setTimeout(() => { stop(); failed(); }, 135_000);
+    // Four isolated native calls may each use 120 seconds, plus process overhead.
+    const timer = setTimeout(() => { stop(); failed(); }, 510_000);
     child.stdout.on('data', (chunk: Buffer) => {
       output += chunk.toString();
-      if (Buffer.byteLength(output) > 512 * 1024) { stop(); failed(); }
+      if (Buffer.byteLength(output) > 2 * 1024 * 1024) { stop(); failed(); }
     });
     child.on('error', failed);
     child.stdin.on('error', () => { stop(); failed(); });

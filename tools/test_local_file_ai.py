@@ -22,9 +22,162 @@ class AITests(unittest.TestCase):
     def answer(self, status='proposed'):
         return {'status': status, 'summary': 'Preserve the evidence.', 'rationale': 'Clarify the existing instruction without changing authority.', 'conflicts': [{'explanation': 'The wording can be clearer.', 'evidence': [{'file_id': self.row['id'], 'line': 1, 'quote': self.before.strip()}]}], 'limitations': ['Only supplied files were reviewed.'], 'edits': [{'old_text': 'keep', 'new_text': 'preserve'}] if status == 'proposed' else []}
 
+    def passed_checks(self):
+        return {'status': 'passed', 'checked_at': 'fixture', 'model': ai.MODEL, 'cases': [], 'limitations': ['Fixture check report.']}
+
     def suggest(self, response=None):
-        with patch.object(self.worker, 'infer', return_value=response or self.answer()):
+        with patch.object(self.worker, 'infer', return_value=response or self.answer()), patch.object(self.worker, 'check', return_value=self.passed_checks()):
             return self.worker.suggest(self.row['id'], self.row['sha256'], 'f' * 24)
+
+    def test_native_target_constraints_are_in_context_and_proposer_prompt(self):
+        constraint = {'max_candidate_bytes': 100, 'growth_budget_bytes': 62, 'reason': 'Native combined instruction limit.'}
+        with patch.object(self.service.distributor, 'constraints', return_value=constraint) as constrained:
+            context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        self.assertEqual(constraint, context['target_constraints'])
+        constrained.assert_called_once_with(self.file, self.before.encode())
+        with patch.object(self.worker, 'invoke', return_value=self.answer('no_change')) as invoke:
+            self.worker.infer(context)
+        prompt = invoke.call_args.args[0]
+        self.assertIn('MUST fit', prompt)
+        self.assertIn('UTF-8', prompt)
+        self.assertIn('concise canonical references', prompt)
+        self.assertIn('REGISTERED_TARGET_CONSTRAINTS:', prompt)
+
+    def test_native_budget_rejects_before_checks_or_freeze(self):
+        constraint = {'max_candidate_bytes': len(self.before.encode()), 'growth_budget_bytes': 0, 'reason': 'No native growth room.'}
+        with patch.object(self.service.distributor, 'constraints', return_value=constraint), patch.object(self.worker, 'infer', return_value=self.answer()), patch.object(self.worker, 'check', side_effect=AssertionError('Oversized candidate reached checks')) as check, patch.object(self.service, 'preview', side_effect=AssertionError('Oversized candidate reached freeze')) as preview:
+            with self.assertRaises(repairs.RepairError) as caught:
+                self.worker.suggest(self.row['id'], self.row['sha256'], None)
+        self.assertEqual('candidate_too_large', caught.exception.code)
+        self.assertEqual(422, caught.exception.status)
+        self.assertIn('UTF-8 bytes', caught.exception.message)
+        self.assertIn('shorter', caught.exception.message)
+        self.assertFalse(check.called)
+        self.assertFalse(preview.called)
+        self.assertEqual(self.before, self.file.read_text())
+        self.assertEqual([], list(self.service.state.glob('*.json')))
+
+    def test_native_budget_exact_utf8_boundary_fits(self):
+        answer = self.answer()
+        answer['edits'][0]['new_text'] = 'préserve'
+        expected = 'Always préserve reviewed source evidence.\n'
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        context['target_constraints'] = {'max_candidate_bytes': len(expected.encode()), 'growth_budget_bytes': 5, 'reason': 'UTF-8 ceiling.'}
+        self.assertEqual(expected, self.worker.validate(answer, context))
+        context['target_constraints']['max_candidate_bytes'] -= 1
+        with self.assertRaises(repairs.RepairError) as caught:
+            self.worker.validate(answer, context)
+        self.assertEqual('candidate_too_large', caught.exception.code)
+
+    def test_full_suggestion_uses_four_isolated_calls_and_binds_passed_report(self):
+        evidence = self.answer()['conflicts'][0]['evidence']
+        cases = [{'id': purpose, 'scenario': 'Select the evidence-preserving decision for ' + purpose, 'purpose': purpose, 'choices': {'A': 'Retain source evidence.', 'B': 'Discard source evidence.', 'C': 'Invent unsupported evidence.'}, 'expected': 'A', 'rationale': 'The cited instruction retains evidence.', 'evidence': evidence} for purpose in ['fix', 'preserve']]
+        choices = {'choices': [{'id': purpose, 'choice': 'A'} for purpose in ['fix', 'preserve']]}
+        with patch.object(self.worker, 'invoke', side_effect=[self.answer(), {'cases': cases}, choices, choices]) as invoke, patch.object(self.service, 'preview', return_value={'fixture': True}) as preview:
+            result = self.worker.suggest(self.row['id'], self.row['sha256'], None)
+        self.assertEqual(4, invoke.call_count)
+        self.assertEqual('passed', result['checks']['status'])
+        self.assertEqual(result['checks'], preview.call_args.kwargs['checks'])
+        self.assertEqual(self.after, result['proposed_content'])
+        self.assertEqual('handwritten source', result['context_files'][0]['applicability']['role'])
+        self.assertEqual(self.before, self.file.read_text())
+
+    def test_unavailable_checks_never_freeze_and_no_change_skips_checks(self):
+        with patch.object(self.worker, 'infer', return_value=self.answer()), patch.object(self.worker, 'check', return_value={'status': 'unavailable', 'checked_at': 'fixture', 'model': ai.MODEL, 'cases': [], 'limitations': ['Provider unavailable.']}):
+            result = self.worker.suggest(self.row['id'], self.row['sha256'], None)
+        self.assertEqual('needs_decision', result['status'])
+        self.assertIsNone(result['preview'])
+        self.assertIsNone(result['proposed_content'])
+        self.assertEqual('unavailable', result['checks']['status'])
+        with patch.object(self.worker, 'infer', return_value=self.answer('no_change')), patch.object(self.worker, 'check', side_effect=AssertionError('No-change must not call model checks')):
+            result = self.worker.suggest(self.row['id'], self.row['sha256'], None)
+        self.assertIsNone(result['checks'])
+        self.assertEqual([], list(self.service.state.glob('*.json')))
+
+    def test_optional_screened_links_do_not_hide_canonical_or_abort_review(self):
+        import local_files
+        script = self.repo / 'tools/helper.py'
+        script.parent.mkdir()
+        script.write_text('api_key=fixture-secret\n')
+        optional = self.rules / 'optional.md'
+        optional.write_text('api_key=fixture-secret\n')
+        gates = self.repo / 'skills/alex-director/references/gates.md'
+        gates.parent.mkdir(parents=True)
+        gates.write_text("## Alex's gates (the one list)\nAsk before spending.\n")
+        self.file.write_text('Review `../tools/helper.py` and `optional.md`.\n' + self.before)
+        self.index = local_files.scan(self.home, roots=[(self.repo, 'fixture')])
+        self.index['findings'] = []
+        self.index_path.write_text(json.dumps(self.index))
+        row = next(r for r in self.index['files'] if r['path'] == str(self.file))
+        context = self.worker.context(row['id'], row['sha256'], None)
+        self.assertEqual({str(self.file), str(gates)}, {f['path'] for f in context['files']})
+        self.assertIsNotNone(context['canonical_gate_file_id'])
+        for omitted in [script, optional]:
+            self.assertTrue(any(str(omitted) in value and 'Optional' in value for value in context['limitations']))
+        self.assertNotIn('fixture-secret', json.dumps(context))
+        # A selected finding's screened peer remains required and cannot be skipped.
+        optional_id = next(r['id'] for r in self.index['files'] if r['path'] == str(optional))
+        self.index['findings'] = [{'id': 'f' * 24, 'evidence': [{'file_id': row['id']}, {'file_id': optional_id}]}]
+        self.index_path.write_text(json.dumps(self.index))
+        with self.assertRaises(repairs.RepairError):
+            self.worker.context(row['id'], row['sha256'], 'f' * 24)
+
+    def test_optional_records_cap_and_full_bound_prevent_extra_reads(self):
+        import local_files
+        peers = []
+        for i in range(6):
+            path = self.rules / ('optional-' + str(i) + '.md')
+            path.write_text('Distinct policy ' + str(i) + '.\n')
+            peers.append(path)
+        self.file.write_text('Review ' + ' '.join('`' + p.name + '`' for p in peers) + '.\n' + self.before)
+        self.index = local_files.scan(self.home, roots=[(self.repo, 'fixture')])
+        self.index['findings'] = []
+        self.index_path.write_text(json.dumps(self.index))
+        row = next(r for r in self.index['files'] if r['path'] == str(self.file))
+        with patch.object(self.worker, 'context_file', wraps=self.worker.context_file) as read:
+            context = self.worker.context(row['id'], row['sha256'], None)
+        self.assertEqual(4, len(context['files']))
+        self.assertEqual(4, read.call_count)
+        self.assertTrue(any('three' in value for value in context['limitations']))
+        with patch.object(ai, 'MAX_FILES', 1), patch.object(self.worker, 'context_file', wraps=self.worker.context_file) as read:
+            context = self.worker.context(row['id'], row['sha256'], None)
+        self.assertEqual(1, read.call_count)
+        self.assertEqual([row['id']], [f['file_id'] for f in context['files']])
+
+    def test_context_generated_relationship_uses_only_supplied_indexed_endpoints(self):
+        import local_files
+        mirror = self.rules / 'mirror.md'
+        mirror.write_text('# Generated copy\nSources: alpha.md\n' + self.before)
+        self.index = local_files.scan(self.home, roots=[(self.rules, 'fixture')])
+        self.index_path.write_text(json.dumps(self.index))
+        mirror_id = next(r['id'] for r in self.index['files'] if r['path'] == str(mirror))
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        self.assertEqual([{'source_id': mirror_id, 'target_id': self.row['id'], 'kind': 'generated_from'}], context['relationships'])
+        with patch.object(ai, 'MAX_FILES', 1):
+            bounded = self.worker.context(self.row['id'], self.row['sha256'], None)
+        self.assertEqual([], bounded['relationships'])
+
+    def test_context_owner_import_metadata_without_finding(self):
+        import local_files
+        owner = self.repo / 'owner.md'
+        owner.write_text('Owner policy.\n')
+        self.file.write_text('@../owner.md\n' + self.before)
+        self.index = local_files.scan(self.home, roots=[(self.repo, 'fixture')])
+        self.index_path.write_text(json.dumps(self.index))
+        row = next(r for r in self.index['files'] if r['path'] == str(self.file))
+        context = self.worker.context(row['id'], row['sha256'], None)
+        self.assertEqual({str(self.file), str(owner)}, {f['path'] for f in context['files']})
+        entry = next(f for f in context['files'] if f['file_id'] == row['id'])
+        self.assertEqual('import wrapper', entry['applicability']['role'])
+        self.assertIn('not established', entry['applicability']['limitations'][0])
+
+    def test_proposal_without_passed_checks_never_freezes(self):
+        with patch.object(self.worker, 'infer', return_value=self.answer()), patch.object(self.worker, 'check', return_value={'status': 'failed', 'checked_at': 'fixture', 'model': ai.MODEL, 'cases': [], 'limitations': ['Candidate failed.']}, create=True):
+            result = self.worker.suggest(self.row['id'], self.row['sha256'], 'f' * 24)
+        self.assertEqual('needs_decision', result['status'])
+        self.assertIsNone(result['preview'])
+        self.assertIsNone(result['proposed_content'])
+        self.assertEqual([], list(self.service.state.glob('*.json')))
 
     def test_context_exact_preview_without_source_write(self):
         result = self.suggest()
@@ -63,7 +216,7 @@ class AITests(unittest.TestCase):
             def change(_context):
                 path.write_text('Changed during inference\n')
                 return self.answer()
-            with patch.object(self.worker, 'infer', side_effect=change), self.assertRaises(repairs.RepairError) as caught:
+            with patch.object(self.worker, 'infer', side_effect=change), patch.object(self.worker, 'check', return_value=self.passed_checks()), self.assertRaises(repairs.RepairError) as caught:
                 self.worker.suggest(self.row['id'], self.row['sha256'], 'f' * 24)
             self.assertEqual('stale_context', caught.exception.code)
             path.write_bytes(before)
@@ -210,7 +363,7 @@ class AITests(unittest.TestCase):
             self.worker.context_file(self.index, gates_row)
         answer = self.answer()
         answer['conflicts'][0]['evidence'].append({'file_id': entry['file_id'], 'line': 5, 'quote': policy})
-        with patch.object(self.worker, 'infer', return_value=answer):
+        with patch.object(self.worker, 'infer', return_value=answer), patch.object(self.worker, 'check', return_value=self.passed_checks()):
             result = self.worker.suggest(self.row['id'], self.row['sha256'], None)
         self.assertTrue(any('Only the canonical gates section' in value for value in result['limitations']))
         gates.write_text(before + section + outside + 'Changed outside the excerpt.\n')
