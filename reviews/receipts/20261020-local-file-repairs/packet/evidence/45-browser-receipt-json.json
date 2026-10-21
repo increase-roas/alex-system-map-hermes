@@ -1,0 +1,50 @@
+{
+  "captured_at": "2026-10-21T01:01:52.662355+00:00",
+  "reviewer": "gpt-6.1-sol context-separated independent verifier",
+  "browser": {
+    "provider": "bundled CUA on Chrome",
+    "id": "1",
+    "tab_id": "513642791",
+    "url": "http://127.0.0.1:3203/explorer?view=local-files",
+    "fixture_only": true,
+    "desktop": {
+      "width": 1702
+    },
+    "narrow": {
+      "width": 390,
+      "document_scroll_width": 390
+    },
+    "viewport_reset": true
+  },
+  "observed": {
+    "source_current_text_and_both_excerpts": true,
+    "generated_owner_navigation": true,
+    "use_wording_exact_unique_line": true,
+    "unsubmitted_draft_survived_other_file_navigation": true,
+    "refresh_paused_during_dirty_draft": true,
+    "ambiguous_wording_preserved_draft": true,
+    "stale_missing_wording_preserved_draft": true,
+    "preview_source_unchanged": true,
+    "frozen_path_hash_diff_displayed": true,
+    "explicit_browser_apply_and_undo": true,
+    "publish_pending_and_restore_publish_pending_visible": true,
+    "no_ai_call": true
+  },
+  "implementation_review": {
+    "AGENTS_delta_matches_explicit_expanded_authority": true,
+    "native_hooks_preserved": true,
+    "native_rules_only_prerequisite_review_parent_owned": true,
+    "no_actual_agent_source_preview_apply_or_undo": true
+  },
+  "fixtures": {
+    "home": "/private/tmp/local-file-repairs-u82usqfm",
+    "fixture_server_3203_stopped": true,
+    "cleanup_pending_until_parent_readback_and_main3201_browser_check": true
+  },
+  "final_typecheck": {
+    "command": "cd app && ./node_modules/.bin/tsc --noEmit",
+    "exit": 0,
+    "output": "evidence/tsc-final.txt"
+  },
+  "scope_note": "Captured evidence excludes actual scanned inventory, real source contents, tokens and raw request bodies. Fixture-only source/editor screenshots and Git receipts are included."
+}

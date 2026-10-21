@@ -1,0 +1,55 @@
+{
+  "source_sha256": {
+    "tools/unify/build_instructions.py": "0ee189da821540ff086f267eca50278f9a779981599b23f8167150dcf7afcf14",
+    "tools/unify/hooks/post-commit": "3bb8b8fe2c7788b39cb1a046ca1df8b1989fb712f91eee713b89aac2c070450c",
+    "tools/unify/test_atomic_apply.py": "bdf244c74f9a64ba5c6f01a3699d9b1aa73074b844219ab7527b0d6d4ce87c18",
+    "tools/unify/test_build_cursor.py": "287d797bac45f1111325b4aa52dbdddb974080893f30e01494123c7f54e1ccff",
+    "tools/unify/test_post_commit_javar.py": "8493ee7a12214de4aa2251fd58ddf88e0b79cba46a8263695ac5b0127a783079"
+  },
+  "preimages_equal_HEAD": true,
+  "rules_only": {
+    "before_config": {
+      "sha256": "c971f28cf7ac2e5c8a904886584a19cb5c7897a093a6a197543aca8d0c2fb91d",
+      "mode": 416,
+      "inode": 243715286,
+      "device": 16777233,
+      "size": 64,
+      "mtime_ns": 1792543200567303423,
+      "ctime_ns": 1792543200567327756
+    },
+    "after_config": {
+      "sha256": "c971f28cf7ac2e5c8a904886584a19cb5c7897a093a6a197543aca8d0c2fb91d",
+      "mode": 416,
+      "inode": 243715286,
+      "device": 16777233,
+      "size": 64,
+      "mtime_ns": 1792543200567303423,
+      "ctime_ns": 1792543200567327756
+    },
+    "backups": [
+      "agent-routing.mdc.cursor.bak-20261020-204000-79a8529f7a9f421e9dc84aff76bd872e",
+      "CLAUDE.md.claude.bak-20261020-204000-79a8529f7a9f421e9dc84aff76bd872e",
+      "alex-big-brother.md.claude_style.bak-20261020-204000-79a8529f7a9f421e9dc84aff76bd872e",
+      "AGENTS.md.codex.bak-20261020-204000-79a8529f7a9f421e9dc84aff76bd872e",
+      "AGENTS.md.home_agents.bak-20261020-204000-79a8529f7a9f421e9dc84aff76bd872e"
+    ],
+    "stdout": "wrote /private/tmp/native-rule-sync-verification/disposable-home/.codex/AGENTS.md (backup in ~/Backups/unify-bak)\nwrote /private/tmp/native-rule-sync-verification/disposable-home/AGENTS.md (backup in ~/Backups/unify-bak)\nwrote /private/tmp/native-rule-sync-verification/disposable-home/.claude/CLAUDE.md (backup in ~/Backups/unify-bak)\nwrote /private/tmp/native-rule-sync-verification/disposable-home/.claude/output-styles/alex-big-brother.md (backup in ~/Backups/unify-bak)\nwrote /private/tmp/native-rule-sync-verification/disposable-home/.cursor/rules/agent-routing.mdc (backup in ~/Backups/unify-bak)\n",
+    "candidate_baseline_check": "candidate, plan, baseline exclude config"
+  },
+  "installed_hook": {
+    "link": "/Users/alexlobaito/.agents/.git/hooks/post-commit",
+    "resolved": "/Users/alexlobaito/.agents/tools/unify/hooks/post-commit",
+    "fixture_call_verified": true
+  },
+  "manual_full_apply": {
+    "config_preserved_arbitrary_values": true,
+    "config_verbosity": "low",
+    "config_mode": 416,
+    "stdout": "wrote /private/tmp/native-rule-sync-verification/disposable-home/.codex/config.toml (backup in ~/Backups/unify-bak)\n"
+  },
+  "focused_tests": {
+    "run": 4,
+    "failures": 0,
+    "errors": 0
+  }
+}

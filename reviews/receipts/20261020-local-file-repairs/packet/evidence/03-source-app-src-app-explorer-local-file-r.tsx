@@ -1,0 +1,140 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import { Button } from '@/components/ui/button';
+import type { LocalEvidence, LocalFileIndex, LocalFinding, LocalRepairPreview, LocalRepairResult, LocalRepairSource } from '@/lib/types/local-files';
+
+type Props = {
+  fileId: string; localToken: string; index: LocalFileIndex; finding: LocalFinding | null;
+  onOpenFile: (id: string, line?: number | null) => void;
+  onClose: () => void; onLockChange: (locked: boolean) => void;
+};
+class RepairError extends Error {
+  constructor(message: string, public status: number) { super(message); }
+}
+async function repairRequest<T>(url: string, options?: RequestInit): Promise<T> {
+  const response = await fetch(url, options);
+  const body = await response.json();
+  if (!response.ok) throw new RepairError(String(body.error ?? body.message ?? `Request failed (${response.status})`), response.status);
+  return body as T;
+}
+const text = 'min-w-0 rounded border bg-muted/40 p-3 font-mono text-sm whitespace-pre-wrap break-all';
+
+export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpenFile, onClose, onLockChange }: Props) {
+  const [source, setSource] = useState<LocalRepairSource | null>(null);
+  const [draft, setDraft] = useState('');
+  const [preview, setPreview] = useState<LocalRepairPreview | null>(null);
+  const [result, setResult] = useState<LocalRepairResult | null>(null);
+  const [busy, setBusy] = useState(true);
+  const [error, setError] = useState('');
+  const [stale, setStale] = useState(false);
+  const dirty = Boolean(source && draft !== source.content && !result);
+  const locked = dirty || busy;
+  useEffect(() => { onLockChange(locked); }, [locked, onLockChange]);
+  useEffect(() => {
+    const controller = new AbortController();
+    setBusy(true);
+    repairRequest<LocalRepairSource>(`/api/local-files/repair?id=${encodeURIComponent(fileId)}`, { signal: controller.signal })
+      .then((data) => { if (!controller.signal.aborted) { setSource(data); setDraft(data.content); } })
+      .catch((e) => { if (!controller.signal.aborted) setError(e instanceof Error ? e.message : 'Source could not be opened.'); })
+      .finally(() => { if (!controller.signal.aborted) setBusy(false); });
+    return () => controller.abort();
+  }, [fileId]);
+
+  async function post<T>(body: object): Promise<T> {
+    return repairRequest<T>('/api/local-files/repair', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Local-Token': localToken }, body: JSON.stringify(body) });
+  }
+  function showError(e: unknown) {
+    setError(e instanceof Error ? e.message : 'Repair request failed.');
+    if (e instanceof RepairError && e.status === 409) { setStale(true); setPreview(null); }
+  }
+  function useWording(chosen: LocalEvidence) {
+    if (!source?.editable || busy || result || dirty) return;
+    const targets = finding?.evidence.filter((e) => e.file_id === source.file_id) ?? [];
+    if (targets.length !== 1 || /[\r\n]/.test(targets[0].text) || /[\r\n]/.test(chosen.text)) {
+      setError('Choose wording needs one exact target evidence line and one replacement line. This evidence is ambiguous or spans lines. Your draft is unchanged; use the source editor to make a precise change.');
+      return;
+    }
+    // Captured separators retain every original newline byte, including mixed styles.
+    const parts = source.content.split(/(\r\n|\n|\r)/);
+    const matchingLines: number[] = [];
+    for (let i = 0; i < parts.length; i += 2) if (parts[i] === targets[0].text) matchingLines.push(i);
+    if (matchingLines.length !== 1) {
+      setError(`The target evidence line matches ${matchingLines.length} source lines. Nothing was replaced. Your draft is unchanged; compare the actual source and edit the intended line manually, or reopen fresh evidence.`);
+      return;
+    }
+    parts[matchingLines[0]] = chosen.text;
+    setDraft(parts.join(''));
+    setPreview(null);
+    setError('');
+  }
+  async function makePreview() {
+    if (!source?.editable || !source.sha256) return;
+    setBusy(true); setError('');
+    try {
+      setPreview(await post<LocalRepairPreview>({ action: 'preview', file_id: source.file_id, expected_sha256: source.sha256, new_content: draft }));
+      setStale(false);
+    } catch (e) { showError(e); }
+    finally { setBusy(false); }
+  }
+  async function apply() {
+    if (!preview) return;
+    setBusy(true); setError('');
+    try { setResult(await post<LocalRepairResult>({ action: 'apply', repair_id: preview.repair_id, proposal_sha256: preview.proposal_sha256 })); }
+    catch (e) { showError(e); }
+    finally { setBusy(false); }
+  }
+  async function undo() {
+    if (!result) return;
+    setBusy(true); setError('');
+    try { setResult(await post<LocalRepairResult>({ action: 'undo', repair_id: result.repair_id })); }
+    catch (e) { showError(e); }
+    finally { setBusy(false); }
+  }
+  const generatedFiles = index.references.filter((r) => r.kind === 'generated_from' && r.target_id === fileId)
+    .map((r) => index.files.find((f) => f.id === r.source_id)).filter((f) => f !== undefined);
+  const publishPending = result?.state === 'applied_publish_pending' || result?.state === 'undone_publish_pending';
+  const applied = result?.state === 'applied' || result?.state === 'applied_publish_pending';
+
+  return <section id="local-file-repair" className="min-w-0 space-y-4 rounded-lg border-2 border-primary p-4 md:p-6" aria-label="Review and fix instruction source">
+    <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="text-lg font-semibold">Review &amp; fix</h3><p className="text-muted-foreground mt-1 text-sm">Edit the handwritten source, preview the exact change, then choose Apply.</p></div>
+      <Button variant="outline" disabled={busy} onClick={onClose}>{dirty ? 'Discard draft and close' : 'Close repair'}</Button>
+    </div>
+    <p className="text-sm">You choose the wording. No AI suggestion or automatic authority decision is made here.</p>
+    {finding && <div className="space-y-3 rounded border p-3"><h4 className="font-medium">Review evidence: {finding.topic}</h4><p className="text-sm">{finding.reason}</p><div className="grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div key={`${e.file_id}-${e.line}-${i}`} className="min-w-0"><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(e.file_id, e.line)}>{index.files.find((f) => f.id === e.file_id)?.path ?? e.file_id}:{e.line}</button><pre className={`${text} mt-2`}>{e.text}</pre>{source?.editable && e.file_id !== source.file_id && finding.evidence.some((target) => target.file_id === source.file_id) && <Button className="mt-2" size="sm" variant="outline" disabled={busy || Boolean(result) || dirty || stale} onClick={() => useWording(e)}>Use this wording</Button>}</div>)}</div><p className="text-muted-foreground text-sm">Use this wording replaces only one exactly matching target line. You choose which evidence wins; review the diff before Apply.</p></div>}
+    {busy && <p role="status" className="text-sm">Reading or recording repair…</p>}
+    {error && <div role="alert" className="rounded border border-red-500 p-3 text-sm"><p>{error}</p>{stale && <p className="mt-2">Your draft is preserved below. Source or proposal state changed. Copy your draft before closing, reopen the current source, then reconcile it before a new preview.</p>}<p className="mt-2">No automatic retry is made. If the request outcome is uncertain, retain this panel and its repair ID for reconciliation.</p></div>}
+    {!localToken && <p className="text-sm">Preview, Apply and Undo are unavailable because the local authorization token is missing.</p>}
+    {source && <>
+      <dl className="space-y-2 text-sm"><div><dt className="text-muted-foreground">Repair target</dt><dd className="break-all">{source.path}</dd></div><div><dt className="text-muted-foreground">Source fingerprint when opened (SHA-256)</dt><dd className="break-all">{source.sha256 ?? 'Unavailable'}</dd></div></dl>
+      <p className="text-sm">{source.reason}</p>
+      {!!source.source_file_ids.length && <div className="space-y-2"><h4 className="font-medium">Open the owning source</h4><p className="text-sm">Generated files and shared links are not rewritten directly. Follow an indexed source, then use its Review &amp; fix button.</p>{source.source_file_ids.map((id) => <div key={id}><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(id)}>{index.files.find((f) => f.id === id)?.path ?? id}</button></div>)}</div>}
+      {!source.editable && <p className="rounded border p-3 text-sm">Direct repair is unavailable for this file. {source.reason} No generic configuration, skill or executable-file write is offered.</p>}
+      {source.editable && <>
+        <details className="min-w-0 rounded border p-3"><summary className="cursor-pointer font-medium">Actual source before this proposal</summary><pre className={`${text} mt-3 max-h-[400px] overflow-y-auto`}>{source.content || '(empty file)'}</pre></details>
+        <label className="block text-sm font-medium" htmlFor="local-repair-draft">Proposed source text</label>
+        <textarea id="local-repair-draft" className="min-h-[320px] w-full min-w-0 rounded border bg-background p-3 font-mono text-sm whitespace-pre-wrap break-all focus-visible:outline-2 focus-visible:outline-offset-2" value={draft} disabled={busy || Boolean(result)} onChange={(e) => { setDraft(e.target.value); setPreview(null); }} spellCheck={false} />
+        <p className="text-muted-foreground text-sm">{dirty ? 'Unsubmitted draft retained. Refresh and switching repair targets are paused until you apply or explicitly discard it.' : 'No unsubmitted draft.'} Source limit: 64 KiB.</p>
+        {!result && <Button variant="outline" disabled={!dirty || busy || !localToken || stale} onClick={() => void makePreview()}>Preview exact change</Button>}
+      </>}
+    </>}
+    {preview && <div className="min-w-0 space-y-3 rounded border p-4" aria-label="Frozen repair preview">
+      <h4 className="font-semibold">Exact proposed change</h4><p className="text-sm break-all">{preview.path}</p>
+      <dl className="space-y-2 text-sm">{[['Before SHA-256', preview.before_sha256], ['After SHA-256', preview.after_sha256], ['Proposal fingerprint', preview.proposal_sha256], ['Repair ID', preview.repair_id], ['Preview expires', preview.expires_at]].map(([label, value]) => <div key={label}><dt className="text-muted-foreground">{label}</dt><dd className="break-all">{value}</dd></div>)}</dl>
+      <pre className={`${text} max-h-[500px] overflow-y-auto`} aria-label="Exact before and after diff">{preview.diff || 'No text difference reported.'}</pre>
+      <p className="text-sm">Apply writes only this frozen proposal. The server rechecks the file, existing Git backup and undo copy before replacing it.</p>
+      {preview.generated_follow_up && <p className="text-sm">Generated distribution will remain pending after the source change. No settings builder runs automatically.</p>}
+      {!result && <Button disabled={busy || !localToken || stale} onClick={() => void apply()}>Apply reviewed source change</Button>}
+    </div>}
+    {result && <div className={`min-w-0 space-y-3 rounded border p-4 ${publishPending ? 'border-amber-500' : ''}`} role="status">
+      <h4 className="font-semibold">{applied ? 'Source updated' : 'Source restored'}{publishPending ? ' · publish pending' : ''}</h4><p className="text-sm">{result.message}</p>
+      <dl className="space-y-2 text-sm">{[['State', result.state], ['Path', result.path], ['Current SHA-256', result.current_sha256], ['Undo copy', result.backup_path], ['Commit', result.commit ?? 'Not recorded'], ['Push', result.pushed ? 'Confirmed by server' : 'Not confirmed'], ['Repair ID', result.repair_id]].map(([label, value]) => <div key={label}><dt className="text-muted-foreground">{label}</dt><dd className="break-all">{value}</dd></div>)}</dl>
+      <p className="text-sm">The undo copy is in the existing Drive backup location. Cloud upload is not verified here.</p>
+      {publishPending && <p className="text-sm font-medium">The source write happened, but its commit or push needs follow-up. Do not treat this as complete or retry automatically.</p>}
+      {result.generated_follow_up && <p className="text-sm font-medium">Generated copies: rebuild pending. This source update does not prove every contradiction is resolved.</p>}
+      {applied && <Button variant="outline" disabled={busy || !localToken} onClick={() => void undo()}>Undo this source change</Button>}
+      <p className="text-muted-foreground text-sm">Undo is conditional: it restores the recorded before text only if the source still matches this repair. Refresh the inventory after reviewing the outcome.</p>
+    </div>}
+    {!!generatedFiles.length && <div className="space-y-2"><h4 className="font-medium">Indexed generated copies affected by this source</h4>{generatedFiles.map((f) => <div key={f.id}><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(f.id)}>{f.path}</button></div>)}<p className="text-sm">These references show dependency, not a confirmed rebuild.</p></div>}
+  </section>;
+}

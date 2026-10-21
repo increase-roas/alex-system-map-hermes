@@ -1,0 +1,245 @@
+- banner:
+  - heading "Alex system map" [level=1]
+  - button "Toggle theme":
+  - navigation "Explorer views":
+    - button "Local files" [pressed]
+    - button "CEO"
+    - button "Map"
+    - button "Pro Map"
+    - button "Flow Builder"
+    - button "Langflow"
+    - button "Full Catalog"
+    - button "Subsystem"
+    - button "Files (archive)"
+    - button "Problems"
+    - button "Workflows"
+    - button "Tracing"
+    - button "Reliability"
+    - button "Maintained"
+    - button "Live"
+    - button "Connector logins"
+- main:
+  - heading "Your local agent files" [level=2]
+  - paragraph: Open the actual files behind your rules, skills, hooks and settings.
+  - paragraph: "Scan: 10/20/2026, 8:43:10 PM · 12 files in this bounded inventory"
+  - button "Refresh local scan"
+  - paragraph: Exact copies share bytes. Shared links point to the same physical file. Generated or linked files are not automatically a duplicate problem.
+  - paragraph: Possible conflicts and repeated rules are review items with source evidence. They do not decide which instruction has authority.
+  - paragraph: Partial coverage or file failures are present. Review scan scope below.
+  - region "Local file list":
+    - generic: Search file paths, types or states
+    - textbox "Search file paths, types or states":
+      - /placeholder: "For example: AGENTS.md or hooks"
+    - generic "File filters":
+      - button "All files" [pressed]
+      - button "Exact copies"
+      - button "Shared links"
+      - button "Possible conflicts"
+      - button "Repeated rules"
+    - status: 12 matching files · showing 12
+    - heading "/private/tmp/local-file-repairs-u82usqfm/.codex/AGENTS.md" [level=3]
+    - list:
+      - button "AGENTS.md rule · readable · generated":
+        - generic: AGENTS.md
+        - generic: rule · readable · generated
+    - heading "/private/tmp/local-file-repairs-u82usqfm/.agents/instructions" [level=3]
+    - list:
+      - button "alias.md rule · readable · linked file":
+        - generic: alias.md
+        - generic: rule · readable · linked file
+      - button "alpha.md rule · readable":
+        - generic: alpha.md
+        - generic: rule · readable
+      - button "ambiguous.md rule · readable":
+        - generic: ambiguous.md
+        - generic: rule · readable
+      - button "beta.md rule · readable":
+        - generic: beta.md
+        - generic: rule · readable
+      - button "generated.md rule · readable · generated":
+        - generic: generated.md
+        - generic: rule · readable · generated
+      - button "sensitive-rule.md rule · readable":
+        - generic: sensitive-rule.md
+        - generic: rule · readable
+      - button "unrelated-dirty.md rule · readable":
+        - generic: unrelated-dirty.md
+        - generic: rule · readable
+      - button "unrelated-staged.md rule · readable":
+        - generic: unrelated-staged.md
+        - generic: rule · readable
+      - button "unsupported.sh script · readable":
+        - generic: unsupported.sh
+        - generic: script · readable
+    - heading "/private/tmp/local-file-repairs-u82usqfm/.claude/rules" [level=3]
+    - list:
+      - button "publish.md rule · readable" [pressed]:
+        - generic: publish.md
+        - generic: rule · readable
+    - heading "/private/tmp/local-file-repairs-u82usqfm/.agents/skills" [level=3]
+    - list:
+      - button "managed/SKILL.md skill · readable":
+        - generic: managed/SKILL.md
+        - generic: skill · readable
+  - region "File detail and evidence":
+    - heading "publish.md" [level=3]
+    - button "Review & fix"
+    - term: Full path
+    - definition: /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md
+    - term: Resolved target
+    - definition: /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md
+    - term: Type / state
+    - definition: rule / readable
+    - term: Modified
+    - definition: 10/20/2026, 6:32:27 PM
+    - term: Size / lines
+    - definition: 38 bytes / 1 lines
+    - term: Scanned SHA-256
+    - definition: 7df9134068ae9b8efd2d0040c471a412f5ae6bdf1e29eee9dbddbf89549284d9
+    - term: Link target
+    - definition: Not a symlink
+    - term: Generated
+    - definition: Not identified as generated
+    - heading "Related files" [level=4]
+    - list
+    - paragraph: No resolved references recorded for this file.
+    - heading "Current file contents" [level=4]
+    - paragraph: "Read: 10/20/2026, 8:58:04 PM"
+    - paragraph: "Current SHA-256: 7df9134068ae9b8efd2d0040c471a412f5ae6bdf1e29eee9dbddbf89549284d9"
+    - generic "Plain text file contents":
+      - generic: "1"
+      - generic: Always keep publishing state visible.
+      - generic: "2"
+  - region "Review and fix instruction source":
+    - heading "Review & fix" [level=3]
+    - paragraph: Edit the handwritten source, preview the exact change, then choose Apply.
+    - button "Close repair"
+    - paragraph: You choose the wording. No AI suggestion or automatic authority decision is made here.
+    - term: Repair target
+    - definition: /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md
+    - term: Source fingerprint when opened (SHA-256)
+    - definition: 7df9134068ae9b8efd2d0040c471a412f5ae6bdf1e29eee9dbddbf89549284d9
+    - paragraph: Handwritten canonical source. Preview an exact edit before applying it.
+    - generic "Actual source before this proposal" [active]
+    - generic: Proposed source text
+    - textbox "Proposed source text" [disabled]: Always keep publishing failures visible.
+    - paragraph: "No unsubmitted draft. Source limit: 64 KiB."
+    - generic "Frozen repair preview":
+      - heading "Exact proposed change" [level=4]
+      - paragraph: /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md
+      - term: Before SHA-256
+      - definition: 7df9134068ae9b8efd2d0040c471a412f5ae6bdf1e29eee9dbddbf89549284d9
+      - term: After SHA-256
+      - definition: f46d1a31c177ab012d254b3b66aab5383b77860266cd8cb5db94ac0e3a87310e
+      - term: Proposal fingerprint
+      - definition: 2ef45b6aacdec2b9ac09d28d1f25f78523120810094e0fe6ccde24a06a0f93af
+      - term: Repair ID
+      - definition: 7f7b1b5df6f146afb086207b35b190db
+      - term: Preview expires
+      - definition: 2026-10-21T01:13:05.722464+00:00
+      - generic "Exact before and after diff": "--- /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md (before) +++ /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md (proposed) @@ -1 +1 @@ -Always keep publishing state visible. +Always keep publishing failures visible."
+      - paragraph: Apply writes only this frozen proposal. The server rechecks the file, existing Git backup and undo copy before replacing it.
+    - status:
+      - heading "Source restored · publish pending" [level=4]
+      - paragraph: Exact preimage restored; restoration commit or push remains pending. No publication will retry automatically. Undo copy verified locally; Drive cloud upload was not verified.
+      - term: State
+      - definition: undone_publish_pending
+      - term: Path
+      - definition: /private/tmp/local-file-repairs-u82usqfm/.claude/rules/publish.md
+      - term: Current SHA-256
+      - definition: 7df9134068ae9b8efd2d0040c471a412f5ae6bdf1e29eee9dbddbf89549284d9
+      - term: Undo copy
+      - definition: /private/tmp/local-file-repairs-u82usqfm/Backups/local-file-repairs/7f7b1b5df6f146afb086207b35b190db.before
+      - term: Commit
+      - definition: 7d70d57d3ed360433ab184d92e8dfb496cfdc654
+      - term: Push
+      - definition: Not confirmed
+      - term: Repair ID
+      - definition: 7f7b1b5df6f146afb086207b35b190db
+      - paragraph: The undo copy is in the existing Drive backup location. Cloud upload is not verified here.
+      - paragraph: The source write happened, but its commit or push needs follow-up. Do not treat this as complete or retry automatically.
+      - paragraph: "Undo is conditional: it restores the recorded before text only if the source still matches this repair. Refresh the inventory after reviewing the outcome."
+  - region "Duplicate and instruction evidence":
+    - heading "Evidence groups" [level=3]
+    - paragraph: Open a group, then follow each path to its current contents. Search also limits these groups.
+    - generic "Shared links · 2 files"
+    - 'button "Repeated rule: Exact repeated instruction Exact screened line appears in multiple paths; aliases/generated distribution may explain it. Open 3 file/line excerpts"':
+      - generic: "Repeated rule: Exact repeated instruction"
+      - paragraph: Exact screened line appears in multiple paths; aliases/generated distribution may explain it.
+      - paragraph: Open 3 file/line excerpts
+    - 'button "Repeated rule: Exact repeated instruction Exact screened line appears in multiple paths; aliases/generated distribution may explain it. Open 6 file/line excerpts"':
+      - generic: "Repeated rule: Exact repeated instruction"
+      - paragraph: Exact screened line appears in multiple paths; aliases/generated distribution may explain it.
+      - paragraph: Open 6 file/line excerpts
+    - 'button "Possible conflict: explicit opposite directive: send customer messages without explicit approval Explicit declarations differ. Candidate only: scope, dates, quotations or generated distribution may explain this; no semantic completeness or authority is inferred. Open 7 file/line excerpts"':
+      - generic: "Possible conflict: explicit opposite directive: send customer messages without explicit approval"
+      - paragraph: "Explicit declarations differ. Candidate only: scope, dates, quotations or generated distribution may explain this; no semantic completeness or authority is inferred."
+      - paragraph: Open 7 file/line excerpts
+    - paragraph: "Snapshot totals: 1 duplicate/link groups · 3 instruction review items. Groups above follow the active filter and show at most 60 of each type."
+  - generic "Scan scope, exclusions and failures · TRUNCATED"
+  - paragraph: This bounded snapshot is not an inventory of every file on the Mac.
+  - list:
+    - strong: Shared instructions
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.agents/instructions · scanned · 9 files"
+    - strong: Shared skills
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.agents/skills · scanned · 1 files"
+    - strong: Tool cards
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.agents/tools/cards · missing · 0 files"
+    - strong: Guards
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.agents/tools/guards · missing · 0 files"
+    - strong: Instruction distribution
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.agents/tools/unify · missing · 0 files"
+    - strong: Shared root rules
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.agents/AGENTS.md · missing · 0 files"
+    - strong: Codex rules
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.codex/AGENTS.md · scanned · 1 files"
+    - strong: Codex configuration
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.codex/config.toml · missing · 0 files"
+    - strong: Codex hooks
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.codex/hooks · missing · 0 files"
+    - strong: Codex skills
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.codex/skills · missing · 0 files"
+    - strong: Claude rules
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.claude/CLAUDE.md · missing · 0 files"
+    - strong: Claude settings
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.claude/settings.json · missing · 0 files"
+    - strong: Claude local settings
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.claude/settings.local.json · missing · 0 files"
+    - strong: Claude rules directory
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.claude/rules · scanned · 1 files"
+    - strong: Claude skills
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.claude/skills · missing · 0 files"
+    - strong: Claude hooks
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.claude/hooks · missing · 0 files"
+    - strong: Cursor rules
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.cursor/rules · missing · 0 files"
+    - strong: Cursor skills
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.cursor/skills · missing · 0 files"
+    - strong: Cursor hooks
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/.cursor/hooks · missing · 0 files"
+    - strong: Home rules
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/AGENTS.md · missing · 0 files"
+    - strong: Stack context
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/AGENT-CONTEXT.md · missing · 0 files"
+    - strong: Director rules
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/Alex-Director/AGENTS.md · missing · 0 files"
+    - strong: Director rules directory
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/Alex-Director/rules · missing · 0 files"
+    - strong: Selected handoffs
+    - text: ": /private/tmp/local-file-repairs-u82usqfm/Documents/Codex/handoffs · missing · 0 files"
+  - paragraph: "Limits: 6000 files · depth 12 · 262144 bytes per file."
+  - heading "Excluded" [level=4]
+  - list:
+    - listitem: Credential/auth/env files and stores
+    - listitem: Logs, sessions, transcripts, databases, runtime and memory archives
+    - listitem: Dependency, build, cache, backup and .git trees
+    - listitem: Unselected roots and symlinks escaping selected roots
+    - listitem: Unsupported file types; bounded depth, bytes and file count
+    - listitem: 24 MiB aggregate source-read budget; 48000 traversal entries
+  - heading "Skipped" [level=4]
+  - paragraph: "excluded directory: 1"
+  - heading "Scan errors" [level=4]
+  - paragraph: No scan errors reported within this scope.
+- button "Open Next.js Dev Tools":
+- alert
+- status: 1Password menu is available. Press down arrow to select.

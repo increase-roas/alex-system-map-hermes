@@ -1,0 +1,39 @@
+COMMAND: cd /Users/alexlobaito/.agents/tools/unify && python3 -m unittest test_atomic_apply test_build_cursor test_generated_bundle test_post_commit_javar test_skill_lifecycle
+EXIT: 0
+Captured completion chunk (earlier progress chunks: 60 passing dots):
+........./Users/alexlobaito/.agents/tools/unify/skill_deps.py:45: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmppz97ksko/shared/sample/SKILL.md' mode='r' encoding='utf-8'>
+  return open(p, encoding="utf-8", errors="replace").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/alexlobaito/.agents/tools/unify/skill_deps.py:45: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmppz97ksko/user/native/SKILL.md' mode='r' encoding='utf-8'>
+  return open(p, encoding="utf-8", errors="replace").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/alexlobaito/.agents/tools/unify/skill_deps.py:45: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmppz97ksko/user/sample/SKILL.md' mode='r' encoding='utf-8'>
+  return open(p, encoding="utf-8", errors="replace").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+/Users/alexlobaito/.agents/tools/unify/skill_deps.py:45: ResourceWarning: unclosed file <_io.TextIOWrapper name='/var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmppz97ksko/user/synced/id/other/SKILL.md' mode='r' encoding='utf-8'>
+  return open(p, encoding="utf-8", errors="replace").read()
+ResourceWarning: Enable tracemalloc to get the object allocation traceback
+.........
+----------------------------------------------------------------------
+Ran 78 tests in 35.647s
+
+OK
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmphn64bvxu/outputs/codex (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmphn64bvxu/outputs/home_agents (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmphn64bvxu/outputs/claude (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmphn64bvxu/outputs/claude_style (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmphn64bvxu/outputs/cursor (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmphn64bvxu/outputs/codex_config (backup in ~/Backups/unify-bak)
+already up to date
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpem1veg6h/outputs/codex (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpem1veg6h/outputs/home_agents (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpem1veg6h/outputs/claude (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpem1veg6h/outputs/claude_style (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpem1veg6h/outputs/cursor (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpsdfsu_ei/codex (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpsdfsu_ei/home_agents (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpsdfsu_ei/claude (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpsdfsu_ei/claude_style (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpsdfsu_ei/.cursor/rules/agent-routing.mdc (backup in ~/Backups/unify-bak)
+wrote /var/folders/06/qyc_28_51q39jydzk73486040000gn/T/tmpsdfsu_ei/codex_config (backup in ~/Backups/unify-bak)
+

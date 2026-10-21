@@ -1,0 +1,1248 @@
+diff --git a/AGENTS.md b/AGENTS.md
+index 2d36ffb..47ae9b0 100644
+--- a/AGENTS.md
++++ b/AGENTS.md
+@@ -19,11 +19,11 @@ Home: `~/Projects/alex-system-map`. The old path `~/Documents/Codex/2026-10-09/l
+ - Before saying done: run the acceptance check that matches the change (`tools/*_acceptance.py`), and look at the result in the browser for UI changes.
+ 
+ ## Rules
+-- **Read-only on the Mac.** Builders read Alex's files and write only inside this folder (`app/.data/`). Never edit `~/.agents`, `~/Alex-Director` or app settings from here. One exception (Alex approved, 2026-10-14): the `/waiting` page's Answer button may record Alex's answer on the task board, only by running `~/.agents/tools/board/board.py answer` from `/api/board/answer` (loopback plus local token, never for gate questions). board.py records the answer text in `~/.agents/board/progress.md`; Alex accepted that (2026-10-15). It must never appear in URLs or this app's logs.
++- **Scans are read-only on the Mac.** Scanners write their snapshots only inside this folder (`app/.data/`). Alex's Review & fix request (2026-10-20) also authorizes the explicit, previewed source-repair action described in `docs/LOCAL_FILE_REPAIRS.md`; development checks use temporary sources, never his actual agent files. App settings keep their native owner. One other exception (Alex approved, 2026-10-14): the `/waiting` page's Answer button may record Alex's answer on the task board, only by running `~/.agents/tools/board/board.py answer` from `/api/board/answer` (loopback plus local token, never for gate questions). board.py records the answer text in `~/.agents/board/progress.md`; Alex accepted that (2026-10-15). It must never appear in URLs or this app's logs.
+ - **The map never invents state.** Every node and line needs a source file. Unknown stays unknown. When two sources disagree, show a conflict; don't pick one silently.
+ - **Every claim is proven by a source (Alex, 2026-10-12).** Each Pro Map card except "not checked" (unknown) needs at least one source: a web link, or a file that exists (repo-relative or ~/ path). Observations go in `reviews/receipts/<date>-<topic>` first, then the card cites that file. Mark reasoning without a source as "not checked" instead of claiming it. `node app/src/app/explorer/pro-map-audit-check.cjs` fails on any unsourced claim; Alex's own y_ cards are reported as warnings only, never edited.
+ - **Back up before editing** a file you didn't create this session.
+ - **No branch switching, stash, reset or clean** in this folder. Use a worktree: `git worktree add ../alex-system-map-<topic> -b <topic>`. Commit as soon as a check passes.
+-- **Done needs the reviewer.** Finish with a review packet (node or task ID, the acceptance text, evidence paths, your model) for `alex-reviewer`, run by the other model family. Only the Director marks it verified.
++- **Done needs independent review.** A fresh reviewer checks the acceptance criteria, actual source and captured evidence. Prefer another model family within an already approved budget. When that would require new spend, use the available context-separated verifier and label its model family; do not make a paid review a prerequisite for work Alex has authorized. This follows Alex's 2026-10-20 replacement instructions about fixing our own rules when they impose stricter gates than his canonical gates. Director-assigned work keeps its actual mission requirements.
+ - Ask Alex before spending money, contacting anyone, or deleting data. No keys or secrets in files or chat.
+ - Say whether each thing is written, configured or seen working. No em or en dashes in anything Alex reads.
+diff --git a/app/src/app/api/local-files/repair/route.ts b/app/src/app/api/local-files/repair/route.ts
+new file mode 100644
+index 0000000..62c20cf
+--- /dev/null
++++ b/app/src/app/api/local-files/repair/route.ts
+@@ -0,0 +1,63 @@
++import { runLocalFileRepair, type RepairRequest } from '@/lib/server/local-file-repairs';
++import { mutationAuthError } from '@/lib/server/local-auth';
++import { isLocalRequest } from '@/lib/server/request-origin';
++
++export const runtime = 'nodejs';
++export const dynamic = 'force-dynamic';
++const headers = { 'Cache-Control': 'no-store' };
++const MAX_BODY = 192 * 1024;
++const invalid = () => Response.json({ error: 'Use a supported repair action with its exact named text fields', code: 'invalid_request' }, { status: 400, headers });
++
++export async function GET(request: Request) {
++  if (!isLocalRequest(request)) return Response.json({ error: 'Local source repair is available on loopback only', code: 'nonlocal' }, { status: 403, headers });
++  const url = new URL(request.url);
++  if ([...url.searchParams.keys()].some((key) => key !== 'id') || url.searchParams.getAll('id').length !== 1) return invalid();
++  const id = url.searchParams.get('id') || '';
++  if (!/^[a-f0-9]{24}$/.test(id)) return invalid();
++  try {
++    const result = await runLocalFileRepair({ action: 'source', file_id: id });
++    return Response.json(result.data || { error: result.error, code: result.code }, { status: result.status, headers });
++  } catch {
++    return Response.json({ error: 'Refresh the local inventory before reviewing this source', code: 'index_unavailable' }, { status: 409, headers });
++  }
++}
++
++export async function POST(request: Request) {
++  const denied = await mutationAuthError(request);
++  if (denied) return denied;
++  let value: unknown;
++  try {
++    if (Number(request.headers.get('content-length') || 0) > MAX_BODY) return invalid();
++    if (!request.body) return invalid();
++    const reader = request.body.getReader();
++    const chunks: Uint8Array[] = [];
++    let size = 0;
++    while (true) {
++      const item = await reader.read();
++      if (item.done) break;
++      size += item.value.byteLength;
++      if (size > MAX_BODY) { await reader.cancel(); return invalid(); }
++      chunks.push(item.value);
++    }
++    value = JSON.parse(Buffer.concat(chunks).toString('utf8'));
++  } catch { return invalid(); }
++  if (!value || typeof value !== 'object' || Array.isArray(value)) return invalid();
++  const fields = value as Record<string, unknown>;
++  const keys: Record<string, string[]> = {
++    preview: ['action', 'file_id', 'expected_sha256', 'new_content'],
++    apply: ['action', 'repair_id', 'proposal_sha256'],
++    undo: ['action', 'repair_id'],
++  };
++  if (typeof fields.action !== 'string' || !Object.hasOwn(keys, fields.action)) return invalid();
++  const expected = keys[fields.action];
++  if (Object.keys(fields).length !== expected.length || expected.some((key) => typeof fields[key] !== 'string')) return invalid();
++  if (fields.action === 'preview' && (!/^[a-f0-9]{24}$/.test(String(fields.file_id)) || !/^[a-f0-9]{64}$/.test(String(fields.expected_sha256)) || Buffer.byteLength(String(fields.new_content)) > 65536)) return invalid();
++  if (fields.action !== 'preview' && !/^[a-f0-9]{32}$/.test(String(fields.repair_id))) return invalid();
++  if (fields.action === 'apply' && !/^[a-f0-9]{64}$/.test(String(fields.proposal_sha256))) return invalid();
++  try {
++    const result = await runLocalFileRepair(value as RepairRequest);
++    return Response.json(result.data || { error: result.error, code: result.code }, { status: result.status, headers });
++  } catch {
++    return Response.json({ error: 'Local source repair is unavailable; inspect the inventory and private recovery state', code: 'repair_unavailable' }, { status: 409, headers });
++  }
++}
+diff --git a/app/src/app/explorer/local-file-repair-panel.tsx b/app/src/app/explorer/local-file-repair-panel.tsx
+new file mode 100644
+index 0000000..3a4c5e5
+--- /dev/null
++++ b/app/src/app/explorer/local-file-repair-panel.tsx
+@@ -0,0 +1,140 @@
++'use client';
++
++import { useEffect, useState } from 'react';
++import { Button } from '@/components/ui/button';
++import type { LocalEvidence, LocalFileIndex, LocalFinding, LocalRepairPreview, LocalRepairResult, LocalRepairSource } from '@/lib/types/local-files';
++
++type Props = {
++  fileId: string; localToken: string; index: LocalFileIndex; finding: LocalFinding | null;
++  onOpenFile: (id: string, line?: number | null) => void;
++  onClose: () => void; onLockChange: (locked: boolean) => void;
++};
++class RepairError extends Error {
++  constructor(message: string, public status: number) { super(message); }
++}
++async function repairRequest<T>(url: string, options?: RequestInit): Promise<T> {
++  const response = await fetch(url, options);
++  const body = await response.json();
++  if (!response.ok) throw new RepairError(String(body.error ?? body.message ?? `Request failed (${response.status})`), response.status);
++  return body as T;
++}
++const text = 'min-w-0 rounded border bg-muted/40 p-3 font-mono text-sm whitespace-pre-wrap break-all';
++
++export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpenFile, onClose, onLockChange }: Props) {
++  const [source, setSource] = useState<LocalRepairSource | null>(null);
++  const [draft, setDraft] = useState('');
++  const [preview, setPreview] = useState<LocalRepairPreview | null>(null);
++  const [result, setResult] = useState<LocalRepairResult | null>(null);
++  const [busy, setBusy] = useState(true);
++  const [error, setError] = useState('');
++  const [stale, setStale] = useState(false);
++  const dirty = Boolean(source && draft !== source.content && !result);
++  const locked = dirty || busy;
++  useEffect(() => { onLockChange(locked); }, [locked, onLockChange]);
++  useEffect(() => {
++    const controller = new AbortController();
++    setBusy(true);
++    repairRequest<LocalRepairSource>(`/api/local-files/repair?id=${encodeURIComponent(fileId)}`, { signal: controller.signal })
++      .then((data) => { if (!controller.signal.aborted) { setSource(data); setDraft(data.content); } })
++      .catch((e) => { if (!controller.signal.aborted) setError(e instanceof Error ? e.message : 'Source could not be opened.'); })
++      .finally(() => { if (!controller.signal.aborted) setBusy(false); });
++    return () => controller.abort();
++  }, [fileId]);
++
++  async function post<T>(body: object): Promise<T> {
++    return repairRequest<T>('/api/local-files/repair', { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-Local-Token': localToken }, body: JSON.stringify(body) });
++  }
++  function showError(e: unknown) {
++    setError(e instanceof Error ? e.message : 'Repair request failed.');
++    if (e instanceof RepairError && e.status === 409) { setStale(true); setPreview(null); }
++  }
++  function useWording(chosen: LocalEvidence) {
++    if (!source?.editable || busy || result || dirty) return;
++    const targets = finding?.evidence.filter((e) => e.file_id === source.file_id) ?? [];
++    if (targets.length !== 1 || /[\r\n]/.test(targets[0].text) || /[\r\n]/.test(chosen.text)) {
++      setError('Choose wording needs one exact target evidence line and one replacement line. This evidence is ambiguous or spans lines. Your draft is unchanged; use the source editor to make a precise change.');
++      return;
++    }
++    // Captured separators retain every original newline byte, including mixed styles.
++    const parts = source.content.split(/(\r\n|\n|\r)/);
++    const matchingLines: number[] = [];
++    for (let i = 0; i < parts.length; i += 2) if (parts[i] === targets[0].text) matchingLines.push(i);
++    if (matchingLines.length !== 1) {
++      setError(`The target evidence line matches ${matchingLines.length} source lines. Nothing was replaced. Your draft is unchanged; compare the actual source and edit the intended line manually, or reopen fresh evidence.`);
++      return;
++    }
++    parts[matchingLines[0]] = chosen.text;
++    setDraft(parts.join(''));
++    setPreview(null);
++    setError('');
++  }
++  async function makePreview() {
++    if (!source?.editable || !source.sha256) return;
++    setBusy(true); setError('');
++    try {
++      setPreview(await post<LocalRepairPreview>({ action: 'preview', file_id: source.file_id, expected_sha256: source.sha256, new_content: draft }));
++      setStale(false);
++    } catch (e) { showError(e); }
++    finally { setBusy(false); }
++  }
++  async function apply() {
++    if (!preview) return;
++    setBusy(true); setError('');
++    try { setResult(await post<LocalRepairResult>({ action: 'apply', repair_id: preview.repair_id, proposal_sha256: preview.proposal_sha256 })); }
++    catch (e) { showError(e); }
++    finally { setBusy(false); }
++  }
++  async function undo() {
++    if (!result) return;
++    setBusy(true); setError('');
++    try { setResult(await post<LocalRepairResult>({ action: 'undo', repair_id: result.repair_id })); }
++    catch (e) { showError(e); }
++    finally { setBusy(false); }
++  }
++  const generatedFiles = index.references.filter((r) => r.kind === 'generated_from' && r.target_id === fileId)
++    .map((r) => index.files.find((f) => f.id === r.source_id)).filter((f) => f !== undefined);
++  const publishPending = result?.state === 'applied_publish_pending' || result?.state === 'undone_publish_pending';
++  const applied = result?.state === 'applied' || result?.state === 'applied_publish_pending';
++
++  return <section id="local-file-repair" className="min-w-0 space-y-4 rounded-lg border-2 border-primary p-4 md:p-6" aria-label="Review and fix instruction source">
++    <div className="flex flex-wrap items-start justify-between gap-3"><div><h3 className="text-lg font-semibold">Review &amp; fix</h3><p className="text-muted-foreground mt-1 text-sm">Edit the handwritten source, preview the exact change, then choose Apply.</p></div>
++      <Button variant="outline" disabled={busy} onClick={onClose}>{dirty ? 'Discard draft and close' : 'Close repair'}</Button>
++    </div>
++    <p className="text-sm">You choose the wording. No AI suggestion or automatic authority decision is made here.</p>
++    {finding && <div className="space-y-3 rounded border p-3"><h4 className="font-medium">Review evidence: {finding.topic}</h4><p className="text-sm">{finding.reason}</p><div className="grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div key={`${e.file_id}-${e.line}-${i}`} className="min-w-0"><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(e.file_id, e.line)}>{index.files.find((f) => f.id === e.file_id)?.path ?? e.file_id}:{e.line}</button><pre className={`${text} mt-2`}>{e.text}</pre>{source?.editable && e.file_id !== source.file_id && finding.evidence.some((target) => target.file_id === source.file_id) && <Button className="mt-2" size="sm" variant="outline" disabled={busy || Boolean(result) || dirty || stale} onClick={() => useWording(e)}>Use this wording</Button>}</div>)}</div><p className="text-muted-foreground text-sm">Use this wording replaces only one exactly matching target line. You choose which evidence wins; review the diff before Apply.</p></div>}
++    {busy && <p role="status" className="text-sm">Reading or recording repair…</p>}
++    {error && <div role="alert" className="rounded border border-red-500 p-3 text-sm"><p>{error}</p>{stale && <p className="mt-2">Your draft is preserved below. Source or proposal state changed. Copy your draft before closing, reopen the current source, then reconcile it before a new preview.</p>}<p className="mt-2">No automatic retry is made. If the request outcome is uncertain, retain this panel and its repair ID for reconciliation.</p></div>}
++    {!localToken && <p className="text-sm">Preview, Apply and Undo are unavailable because the local authorization token is missing.</p>}
++    {source && <>
++      <dl className="space-y-2 text-sm"><div><dt className="text-muted-foreground">Repair target</dt><dd className="break-all">{source.path}</dd></div><div><dt className="text-muted-foreground">Source fingerprint when opened (SHA-256)</dt><dd className="break-all">{source.sha256 ?? 'Unavailable'}</dd></div></dl>
++      <p className="text-sm">{source.reason}</p>
++      {!!source.source_file_ids.length && <div className="space-y-2"><h4 className="font-medium">Open the owning source</h4><p className="text-sm">Generated files and shared links are not rewritten directly. Follow an indexed source, then use its Review &amp; fix button.</p>{source.source_file_ids.map((id) => <div key={id}><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(id)}>{index.files.find((f) => f.id === id)?.path ?? id}</button></div>)}</div>}
++      {!source.editable && <p className="rounded border p-3 text-sm">Direct repair is unavailable for this file. {source.reason} No generic configuration, skill or executable-file write is offered.</p>}
++      {source.editable && <>
++        <details className="min-w-0 rounded border p-3"><summary className="cursor-pointer font-medium">Actual source before this proposal</summary><pre className={`${text} mt-3 max-h-[400px] overflow-y-auto`}>{source.content || '(empty file)'}</pre></details>
++        <label className="block text-sm font-medium" htmlFor="local-repair-draft">Proposed source text</label>
++        <textarea id="local-repair-draft" className="min-h-[320px] w-full min-w-0 rounded border bg-background p-3 font-mono text-sm whitespace-pre-wrap break-all focus-visible:outline-2 focus-visible:outline-offset-2" value={draft} disabled={busy || Boolean(result)} onChange={(e) => { setDraft(e.target.value); setPreview(null); }} spellCheck={false} />
++        <p className="text-muted-foreground text-sm">{dirty ? 'Unsubmitted draft retained. Refresh and switching repair targets are paused until you apply or explicitly discard it.' : 'No unsubmitted draft.'} Source limit: 64 KiB.</p>
++        {!result && <Button variant="outline" disabled={!dirty || busy || !localToken || stale} onClick={() => void makePreview()}>Preview exact change</Button>}
++      </>}
++    </>}
++    {preview && <div className="min-w-0 space-y-3 rounded border p-4" aria-label="Frozen repair preview">
++      <h4 className="font-semibold">Exact proposed change</h4><p className="text-sm break-all">{preview.path}</p>
++      <dl className="space-y-2 text-sm">{[['Before SHA-256', preview.before_sha256], ['After SHA-256', preview.after_sha256], ['Proposal fingerprint', preview.proposal_sha256], ['Repair ID', preview.repair_id], ['Preview expires', preview.expires_at]].map(([label, value]) => <div key={label}><dt className="text-muted-foreground">{label}</dt><dd className="break-all">{value}</dd></div>)}</dl>
++      <pre className={`${text} max-h-[500px] overflow-y-auto`} aria-label="Exact before and after diff">{preview.diff || 'No text difference reported.'}</pre>
++      <p className="text-sm">Apply writes only this frozen proposal. The server rechecks the file, existing Git backup and undo copy before replacing it.</p>
++      {preview.generated_follow_up && <p className="text-sm">Generated distribution will remain pending after the source change. No settings builder runs automatically.</p>}
++      {!result && <Button disabled={busy || !localToken || stale} onClick={() => void apply()}>Apply reviewed source change</Button>}
++    </div>}
++    {result && <div className={`min-w-0 space-y-3 rounded border p-4 ${publishPending ? 'border-amber-500' : ''}`} role="status">
++      <h4 className="font-semibold">{applied ? 'Source updated' : 'Source restored'}{publishPending ? ' · publish pending' : ''}</h4><p className="text-sm">{result.message}</p>
++      <dl className="space-y-2 text-sm">{[['State', result.state], ['Path', result.path], ['Current SHA-256', result.current_sha256], ['Undo copy', result.backup_path], ['Commit', result.commit ?? 'Not recorded'], ['Push', result.pushed ? 'Confirmed by server' : 'Not confirmed'], ['Repair ID', result.repair_id]].map(([label, value]) => <div key={label}><dt className="text-muted-foreground">{label}</dt><dd className="break-all">{value}</dd></div>)}</dl>
++      <p className="text-sm">The undo copy is in the existing Drive backup location. Cloud upload is not verified here.</p>
++      {publishPending && <p className="text-sm font-medium">The source write happened, but its commit or push needs follow-up. Do not treat this as complete or retry automatically.</p>}
++      {result.generated_follow_up && <p className="text-sm font-medium">Generated copies: rebuild pending. This source update does not prove every contradiction is resolved.</p>}
++      {applied && <Button variant="outline" disabled={busy || !localToken} onClick={() => void undo()}>Undo this source change</Button>}
++      <p className="text-muted-foreground text-sm">Undo is conditional: it restores the recorded before text only if the source still matches this repair. Refresh the inventory after reviewing the outcome.</p>
++    </div>}
++    {!!generatedFiles.length && <div className="space-y-2"><h4 className="font-medium">Indexed generated copies affected by this source</h4>{generatedFiles.map((f) => <div key={f.id}><button type="button" className="text-left text-sm underline underline-offset-4 break-all" onClick={() => onOpenFile(f.id)}>{f.path}</button></div>)}<p className="text-sm">These references show dependency, not a confirmed rebuild.</p></div>}
++  </section>;
++}
+diff --git a/app/src/app/explorer/local-files-panel.tsx b/app/src/app/explorer/local-files-panel.tsx
+index df1bd4b..7a6307b 100644
+--- a/app/src/app/explorer/local-files-panel.tsx
++++ b/app/src/app/explorer/local-files-panel.tsx
+@@ -3,6 +3,7 @@
+ import { useEffect, useMemo, useState } from 'react';
+ import { Button } from '@/components/ui/button';
+ import { Input } from '@/components/ui/input';
++import { LocalFileRepairPanel } from './local-file-repair-panel';
+ import type { LocalFile, LocalFileContent, LocalFileIndex, LocalFinding } from '@/lib/types/local-files';
+ 
+ const FILTERS = ['All files', 'Exact copies', 'Shared links', 'Possible conflicts', 'Repeated rules'] as const;
+@@ -31,6 +32,8 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
+   const [contentError, setContentError] = useState('');
+   const [loadingContent, setLoadingContent] = useState(false);
+   const [focusLine, setFocusLine] = useState<number | null>(null);
++  const [repairTarget, setRepairTarget] = useState<{ fileId: string; finding: LocalFinding | null } | null>(null);
++  const [repairLocked, setRepairLocked] = useState(false);
+ 
+   async function load(refresh = false) {
+     setBusy(true); setError('');
+@@ -86,6 +89,12 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
+     setSelectedId(id); setFocusLine(line);
+     requestAnimationFrame(() => document.getElementById('local-file-detail')?.scrollIntoView({ block: 'nearest' }));
+   }
++  function reviewFile(id: string, evidence: LocalFinding | null = finding) {
++    if (repairLocked) return;
++    setRepairLocked(true);
++    setRepairTarget({ fileId: id, finding: evidence });
++    requestAnimationFrame(() => document.getElementById('local-file-repair')?.scrollIntoView({ block: 'start' }));
++  }
+   function fileLink(id: string, label?: string, line: number | null = null) {
+     return <button type="button" className={link} onClick={() => openFile(id, line)}>{label ?? filesById.get(id)?.path ?? id}{line ? `:${line}` : ''}</button>;
+   }
+@@ -98,8 +107,9 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
+             <p className="text-muted-foreground mt-1 text-sm">Open the actual files behind your rules, skills, hooks and settings.</p>
+             <p className="mt-2 text-sm">Scan: {index ? date(index.scanned_at) : 'Not loaded'}{index ? ` · ${index.files.length.toLocaleString()} files in this bounded inventory` : ''}</p>
+           </div>
+-          <Button variant="outline" disabled={busy || !localToken} onClick={() => void load(true)}>{busy ? 'Reading files…' : 'Refresh local scan'}</Button>
++          <Button variant="outline" disabled={busy || !localToken || repairLocked} onClick={() => void load(true)}>{busy ? 'Reading files…' : 'Refresh local scan'}</Button>
+         </div>
++        {repairLocked && <p className="text-sm">A repair draft or request is active. The editor stays open while you inspect other files. Apply or explicitly discard it before refreshing or opening another repair.</p>}
+         {!localToken && <p className="text-muted-foreground text-sm">Refresh is unavailable while the local authorization token is missing. Saved inventory and file reads remain available.</p>}
+         {error && <div role="alert" className={`${box} border-red-500`}><p>Local scan failed: {error}</p><p className="mt-1 text-sm">{index ? 'The previous snapshot is still shown below.' : 'Coverage is unknown until a scan loads.'}</p><Button className="mt-2" variant="outline" onClick={() => void load()}>Retry read</Button></div>}
+         {!index && !error && <p role="status">Loading local inventory…</p>}
+@@ -129,10 +139,11 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
+             <section id="local-file-detail" className="min-w-0 space-y-4" aria-label="File detail and evidence">
+               {!selected && <div className={box}><h3 className="font-medium">Select a file to read it</h3><p className="text-muted-foreground mt-2 text-sm">Choose a path on the left, or open an evidence group below. Contents are read on demand and shown as plain text.</p></div>}
+               {finding && <div className={box}><h3 className="font-semibold">{finding.topic}</h3><p className="mt-1 text-sm">{finding.reason}</p><p className="text-muted-foreground mt-2 text-sm">{finding.kind === 'conflict_candidate' ? 'Possible conflict: review both sources in context.' : 'Repeated rule: matching wording may be intentional.'}</p>
+-                <div className="mt-3 grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div className="min-w-0 rounded border p-3" key={`${e.file_id}-${e.line}-${i}`}>{fileLink(e.file_id, undefined, e.line)}<pre className="mt-2 font-mono text-sm whitespace-pre-wrap break-all">{e.line}: {e.text}</pre></div>)}</div>
++                <div className="mt-3 grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div className="min-w-0 rounded border p-3" key={`${e.file_id}-${e.line}-${i}`}>{fileLink(e.file_id, undefined, e.line)}<pre className="mt-2 font-mono text-sm whitespace-pre-wrap break-all">{e.line}: {e.text}</pre><Button className="mt-3" size="sm" variant="outline" disabled={repairLocked} onClick={() => reviewFile(e.file_id, finding)}>Review &amp; fix this source</Button></div>)}</div>
+               </div>}
+               {selected && <div className={`${box} space-y-3`}>
+                 <h3 className="font-semibold break-all">{selected.path.split('/').pop()}</h3>
++                <Button variant="outline" disabled={repairLocked} onClick={() => reviewFile(selected.id)}>Review &amp; fix</Button>
+                 <dl className="space-y-2 text-sm">{[
+                   ['Full path', selected.path], ['Resolved target', selected.real_path ?? 'Unavailable'], ['Type / state', `${selected.kind} / ${selected.state}`],
+                   ['Modified', date(selected.mtime)], ['Size / lines', `${selected.bytes ?? 'Unknown'} bytes / ${selected.line_count ?? 'Unknown'} lines`],
+@@ -155,6 +166,7 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
+               </div>}
+             </section>
+           </div>
++          {repairTarget && <LocalFileRepairPanel key={repairTarget.fileId} fileId={repairTarget.fileId} localToken={localToken} index={index} finding={repairTarget.finding} onOpenFile={openFile} onLockChange={setRepairLocked} onClose={() => { setRepairTarget(null); setRepairLocked(false); }} />}
+           <section className={`${box} space-y-4`} aria-label="Duplicate and instruction evidence">
+             <h3 className="text-lg font-medium">Evidence groups</h3>
+             <p className="text-muted-foreground text-sm">Open a group, then follow each path to its current contents. Search also limits these groups.</p>
+diff --git a/app/src/lib/server/local-file-repairs.ts b/app/src/lib/server/local-file-repairs.ts
+new file mode 100644
+index 0000000..3251654
+--- /dev/null
++++ b/app/src/lib/server/local-file-repairs.ts
+@@ -0,0 +1,47 @@
++import { spawn } from 'node:child_process';
++import path from 'node:path';
++import type { LocalRepairPreview, LocalRepairResult, LocalRepairSource } from '@/lib/types/local-files';
++import { localFileIndex } from './local-files';
++import { ensureLocalDataDir, foundationRoot, localDataDir } from './paths';
++
++export type RepairRequest =
++  | { action: 'preview'; file_id: string; expected_sha256: string; new_content: string }
++  | { action: 'apply'; repair_id: string; proposal_sha256: string }
++  | { action: 'undo'; repair_id: string };
++type SourceRequest = { action: 'source'; file_id: string };
++type RepairResponse = { status: number; data?: LocalRepairSource | LocalRepairPreview | LocalRepairResult; error?: string; code?: string };
++
++export async function runLocalFileRepair(input: RepairRequest | SourceRequest): Promise<RepairResponse> {
++  // Browser requests select only indexed IDs; root and state paths stay server-owned.
++  await localFileIndex();
++  ensureLocalDataDir();
++  const args = [path.join(foundationRoot(), 'tools', 'local_file_repairs.py'), '--index', path.join(localDataDir(), 'local-files.json'), '--state', localDataDir()];
++  return new Promise((resolve) => {
++    const child = spawn('python3', args, { stdio: ['pipe', 'pipe', 'ignore'], env: { ...process.env, PYTHONDONTWRITEBYTECODE: '1' } });
++    let output = '';
++    let settled = false;
++    const finish = (value: RepairResponse) => {
++      if (settled) return;
++      settled = true;
++      clearTimeout(timer);
++      resolve(value);
++    };
++    const failed = () => finish({ status: 409, code: 'repair_unavailable', error: 'Repair operation interrupted; inspect source and private recovery state before continuing' });
++    const timer = setTimeout(() => { child.kill('SIGKILL'); failed(); }, 120_000);
++    child.stdout.on('data', (chunk: Buffer) => {
++      output += chunk.toString();
++      if (Buffer.byteLength(output) > 512 * 1024) { child.kill('SIGKILL'); failed(); }
++    });
++    child.on('error', failed);
++    child.stdin.on('error', failed);
++    child.on('close', (code) => {
++      if (code !== 0) { failed(); return; }
++      try {
++        const result = JSON.parse(output) as RepairResponse;
++        if (![200, 400, 409].includes(result.status) || (!result.data && !result.error)) { failed(); return; }
++        finish(result);
++      } catch { failed(); }
++    });
++    child.stdin.end(JSON.stringify(input));
++  });
++}
+diff --git a/app/src/lib/types/local-files.ts b/app/src/lib/types/local-files.ts
+index 5d45449..6768cec 100644
+--- a/app/src/lib/types/local-files.ts
++++ b/app/src/lib/types/local-files.ts
+@@ -26,3 +26,19 @@ export type LocalFileContent = {
+   changed_since_scan: boolean; read_at: string; content: string; redacted: boolean; truncated: boolean;
+   error?: string;
+ };
++
++export type LocalRepairSource = {
++  file_id: string; path: string; sha256: string | null; content: string;
++  editable: boolean; reason: string; source_file_ids: string[];
++};
++export type LocalRepairPreview = {
++  repair_id: string; file_id: string; path: string; before_sha256: string;
++  after_sha256: string; proposal_sha256: string; diff: string;
++  created_at: string; expires_at: string; generated_follow_up: boolean;
++};
++export type LocalRepairResult = {
++  repair_id: string; file_id: string; path: string;
++  state: 'applied' | 'applied_publish_pending' | 'undone' | 'undone_publish_pending';
++  current_sha256: string; backup_path: string; commit: string | null;
++  pushed: boolean; generated_follow_up: boolean; message: string;
++};
+diff --git a/app/tailwind.config.ts b/app/tailwind.config.ts
+index a48b027..0b5f6f5 100644
+--- a/app/tailwind.config.ts
++++ b/app/tailwind.config.ts
+@@ -1,4 +1,5 @@
+ import type { Config } from 'tailwindcss';
++import tailwindcssAnimate from 'tailwindcss-animate';
+ 
+ export default {
+   darkMode: 'class',
+@@ -68,5 +69,5 @@ export default {
+       },
+     },
+   },
+-  plugins: [require('tailwindcss-animate')],
++  plugins: [tailwindcssAnimate],
+ } satisfies Config;
+diff --git a/docs/LOCAL_FILES.md b/docs/LOCAL_FILES.md
+index a9708a0..42b60d7 100644
+--- a/docs/LOCAL_FILES.md
++++ b/docs/LOCAL_FILES.md
+@@ -1,5 +1,7 @@
+ # Local file evidence view
+ 
++Current extension: [Review and fix local instructions](LOCAL_FILE_REPAIRS.md), requested by Alex on 2026-10-20, adds explicit reviewed source writes. The original scanner and the original eight read-only acceptance criteria below remain recorded for the initial viewer; the extension has its own six acceptance criteria. Alex's replacement instructions also supersede an unconditional paid other-family completion prerequisite; context-separated independent review remains required.
++
+ Request: Alex wants the system map to show his actual local agent files so he can inspect duplicates and contradictory instructions.
+ 
+ Scope: read-only inventory of local agent rules, skills, hook definitions/scripts, configs and selected handoffs. Never modify scanned source files. Do not change protected Pro Map owner cards, shared settings, remote machines or customer systems.
+diff --git a/docs/LOCAL_FILE_REPAIRS.md b/docs/LOCAL_FILE_REPAIRS.md
+new file mode 100644
+index 0000000..a07bc6e
+--- /dev/null
++++ b/docs/LOCAL_FILE_REPAIRS.md
+@@ -0,0 +1,29 @@
++# Review and fix local instructions
++
++Alex requested a button to fix contradictory or unnecessary local instructions (2026-10-20). This explicitly extends the earlier read-only feature: scanning stays read-only; only an explicit Apply action writes the exact reviewed source change. No paid AI run has been approved. Use the existing local request/token boundary, Python standard library and native Git. No new vendor route, dependency, background job, hook or policy guard.
++
++The initial operation is an exact text repair of handwritten Markdown rule sources. Review & fix is available from file detail and instruction evidence. Generated files navigate to indexed source references. Shared links are identified as intentional aliases; no delete or replacement of aliases. Configs, executable hooks, provider-managed files and skills needing their separate validation workflow show an explanation rather than a generic file write. Do not invent an AI recommendation: the editor starts from the actual source, with an editable proposed text and clear before/after diff.
++
++For a simple candidate, Use this wording lets Alex choose the other evidence excerpt and substitutes only the exact, uniquely matching target evidence line in a clean current draft. It preserves other bytes/newline style, refuses stale or ambiguous text and never overwrites an existing draft. This choice makes no automatic authority judgment. The existing editor remains available for more complex fixes.
++
++Editable locations: handwritten .md/.mdc/.txt sources under ~/.agents/instructions, ~/.claude/rules, ~/.cursor/rules, ~/Alex-Director/rules, plus nongenerated ~/AGENTS.md, ~/Alex-Director/AGENTS.md and ~/AGENT-CONTEXT.md. All must already be indexed, readable, within selected roots, unredacted, regular canonical files at unchanged resolved targets and at most 64 KiB. Symlink paths may navigate to the canonical source but may not be rewritten directly. No source writes during development acceptance: use private temporary home + bare Git remote fixtures.
++
++Reuse native Git for durability. Before apply, establish that the file's exact before bytes are tracked, unmodified in the index and HEAD, and HEAD equals the current branch's origin remote ref (read with Git, no force/fetch/reset/branch switching). If the preimage is not already backed off machine, return a clear actionable reason and leave source unchanged. Also save exact bytes/mode in ~/Backups/local-file-repairs (the existing Drive location), verify and fsync before replacement. This Drive copy is an undo copy; do not claim cloud upload was verified. Source CAS compares the displayed hash and the frozen preview again immediately before atomic replacement. Preserve modes, reject path/link swaps, secrets and stale proposals.
++
++After source replacement, verify exact readback, commit only that path with native git commit --only and push its current branch without force. Do not stage or commit others' work. If the commit/push fails, record and show source-applied/publish-pending, preserve recovery, never claim complete or automatically retry a side effect. An Undo action restores only the exact recorded preimage if the current file still matches the recorded applied hash, then records/commits/pushes the restoration. No automatic rollback over a third-party edit. Repeated Apply/Undo requests reconcile recorded state rather than repeat effects.
++
++Generated distribution stays explicit. The broad native build_instructions.py apply also writes app-owned Codex settings; this feature must not silently run it. The existing ~/.agents post-commit hook was found to invoke that broad operation, so the prerequisite native fix changes that hook to an explicit rules-only operation that preserves Codex config bytes. Keep normal repository hooks enabled. Their asynchronous rule/notes publication may run after the one-path commit; the file-repair response reports source updated with generated-publication verification pending. A successful push does not verify hook publication. A fresh scan updates evidence; it does not declare every contradiction resolved.
++
++API: GET /api/local-files/repair?id=<indexed id> returns LocalRepairSource; local-token POST accepts {action:'preview',file_id,expected_sha256,new_content}, {action:'apply',repair_id,proposal_sha256}, or {action:'undo',repair_id}. No client paths, commands, backup paths or arbitrary roots. Body <=192 KiB; sources <=64 KiB. Proposal/receipt bytes are private app/.data state, never raw request logs or public receipts. Every operation returns JSON with truthful state and stable errors; unavailable source is readable/actionable, stale edits 409, malformed input400, unauth401, nonlocal403. Refresh doesn't overwrite a user's unsubmitted draft.
++
++Acceptance:
++1. Review & fix opens current source text and both evidence excerpts; generated/managed/link cases route to the owner or explain why a direct write is unavailable.
++2. Preview shows the exact proposed before/after change, source path and fingerprint, and applies only that frozen proposal after explicit Apply. No AI call or implicit authority choice.
++3. Before a write, exact durable Git preimage and verified undo copy exist; file/token/path/body/secret and stale-proposal boundaries hold. Failures leave source unchanged before replacement.
++4. Apply changes one intended source, preserves mode, verifies readback, commits/pushes only it and reports any publish or generated-distribution follow-up. Retries reconcile state. Other staged/dirty work is preserved.
++5. Undo restores the bound preimage only if the applied source is unchanged; newer edits are protected. Restore/publish failure is visible.
++6. Focused real temporary Git fixtures prove apply, exact backup, remote commit/readback, undo, stale edits, symlink/managed/secret/unsupported refusal and unrelated staged/dirty preservation. One final TypeScript check and real desktop/narrow browser journey bind the final code. No actual agent source edits in acceptance.
++
++Review: context-separated independent verifier checks this change. Alex's replacement AGENTS instructions of 2026-10-20 make existing paid other-family review optional when no budget is approved; no new spend gate is inferred or bypassed. Keep earlier receipts historical and bind new evidence to this expanded acceptance.
++
++Ownership: backend owns tools/local_file_repairs.py, tools/test_local_file_repairs.py, app/src/lib/server/local-file-repairs.ts and app/src/app/api/local-files/repair/route.ts. Frontend owns app/src/app/explorer/local-file-repair-panel.tsx and local-files-panel.tsx integration. Parent owns this spec and appended repair types. Existing scanner/API behavior remains intact.
+diff --git a/tools/local_file_repairs.py b/tools/local_file_repairs.py
+new file mode 100644
+index 0000000..a6fb528
+--- /dev/null
++++ b/tools/local_file_repairs.py
+@@ -0,0 +1,550 @@
++#!/usr/bin/env python3
++"""Explicit reviewed local-source repairs. No mutation on source/preview reads."""
++import argparse
++import base64
++from contextlib import contextmanager
++from datetime import datetime, timedelta, timezone
++import difflib
++import fcntl
++import hashlib
++import ipaddress
++import json
++import os
++from pathlib import Path
++import re
++import stat
++import socket
++import subprocess
++import sys
++import tempfile
++import uuid
++from urllib.parse import urlsplit
++
++from local_files import read_source, screen
++
++MAX_SOURCE = 65536
++MAX_BODY = 192 * 1024
++
++
++class RepairError(Exception):
++    def __init__(self, code, message, status=400):
++        super().__init__(message)
++        self.code, self.message, self.status = code, message, status
++
++
++def sha(raw):
++    return hashlib.sha256(raw).hexdigest()
++
++
++def timestamp():
++    return datetime.now(timezone.utc).isoformat()
++
++
++def canonical(value):
++    return json.dumps(value, sort_keys=True, separators=(',', ':')).encode()
++
++
++def sync_dir(path):
++    fd = os.open(path, os.O_RDONLY | os.O_DIRECTORY)
++    try:
++        os.fsync(fd)
++    finally:
++        os.close(fd)
++
++
++def private_write(path, raw):
++    if path.is_symlink():
++        raise RepairError('unsafe_state', 'Repair state must be a regular private file', 409)
++    fd, temporary = tempfile.mkstemp(prefix='.repair-', dir=path.parent)
++    try:
++        with os.fdopen(fd, 'wb') as stream:
++            stream.write(raw)
++            stream.flush()
++            os.fsync(stream.fileno())
++        os.replace(temporary, path)
++        sync_dir(path.parent)
++    finally:
++        if os.path.exists(temporary):
++            os.unlink(temporary)
++
++
++class RepairService:
++    def __init__(self, home, index_path, state_dir):
++        self.home = Path(home).absolute()
++        self.index_path = Path(index_path)
++        self.state = Path(state_dir) / 'local-file-repairs'
++        fixture = os.environ.get('LOCAL_FILE_REPAIR_FIXTURE_HOME', '')
++        self.fixture = bool(fixture)
++        if self.fixture:
++            temp_roots = [Path(tempfile.gettempdir()).resolve(), Path('/tmp').resolve()]
++            actual = self.home.resolve()
++            if Path(fixture).absolute() != self.home or not any(actual != root and root in actual.parents for root in temp_roots):
++                raise RepairError('fixture_boundary', 'Fixture home must be an exact private temporary home', 400)
++            if not all(actual in p.resolve().parents for p in [self.index_path, self.state]):
++                raise RepairError('fixture_boundary', 'Fixture state must remain inside its temporary home', 400)
++        self.state.mkdir(parents=True, exist_ok=True, mode=0o700)
++        if self.state.is_symlink():
++            raise RepairError('unsafe_state', 'Repair state directory cannot be an alias', 409)
++        os.chmod(self.state, 0o700)
++
++    def index(self):
++        try:
++            index = json.loads(self.index_path.read_text())
++        except (OSError, ValueError):
++            raise RepairError('index_unavailable', 'Refresh the local-file inventory before reviewing a repair', 409)
++        if Path(index.get('home', '')).absolute() != self.home:
++            raise RepairError('index_home_mismatch', 'Local-file inventory belongs to a different home; refresh it', 409)
++        return index
++
++    def owned_path(self, path):
++        lexical = Path(path).absolute()
++        folders = [self.home / p for p in ['.agents/instructions', '.claude/rules', '.cursor/rules', 'Alex-Director/rules']]
++        singles = [self.home / p for p in ['AGENTS.md', 'AGENT-CONTEXT.md', 'Alex-Director/AGENTS.md']]
++        return lexical.suffix.lower() in {'.md', '.mdc', '.txt'} and (lexical in singles or any(root in lexical.parents for root in folders))
++
++    def canonical_path(self, path):
++        p = Path(path)
++        if not self.owned_path(p):
++            raise RepairError('unsupported_source', 'Only indexed handwritten rule sources in the listed editable locations can be repaired', 400)
++        relative = p.relative_to(self.home)
++        current = self.home
++        for component in relative.parts:
++            current = current / component
++            if current.is_symlink():
++                raise RepairError('shared_link', 'This is a shared link; open its indexed canonical source instead', 400)
++        if self.fixture and self.home.resolve() not in p.resolve().parents:
++            raise RepairError('fixture_boundary', 'Fixture source escaped its temporary home', 400)
++        return p
++
++    def inspected(self, file_id):
++        idx = self.index()
++        row = next((r for r in idx['files'] if r['id'] == file_id), None)
++        if row is None:
++            raise RepairError('unknown_file', 'Select an existing indexed file', 400)
++        path = self.canonical_path(row['path'])
++        if row['state'] != 'readable' or row['generated'] or row['kind'] in {'config', 'script', 'hook', 'skill'}:
++            raise RepairError('managed_source', 'Generated, managed, skill and executable sources require their owning workflow', 400)
++        if str(path.resolve(strict=True)) != row['real_path']:
++            raise RepairError('source_target_changed', 'The indexed source target changed; refresh the inventory', 409)
++        try:
++            raw, st, _ = read_source(path, [Path(r['path']).resolve() for r in idx['coverage']['roots']], MAX_SOURCE)
++            text = raw.decode('utf-8')
++        except (OSError, OverflowError, RuntimeError, UnicodeError):
++            raise RepairError('source_unavailable', 'Source must be readable UTF-8 and at most 64 KiB; refresh or open its owner', 400)
++        if not stat.S_ISREG(st.st_mode) or st.st_nlink != 1:
++            raise RepairError('shared_file', 'Only a regular source with one native file link can be repaired here', 400)
++        if re.search(r'(?i)\bgenerated\b|auto.generated|do not edit', text[:6000]):
++            raise RepairError('managed_source', 'This source declares generated or managed ownership; use its owner', 400)
++        if screen(text)[1]:
++            raise RepairError('redacted_source', 'This source contains screened material and cannot be edited in the generic repair editor', 400)
++        return idx, row, path, raw, st
++
++    def owner_ids(self, idx, row):
++        ids = [r['target_id'] for r in idx['references'] if r['source_id'] == row['id'] and r['kind'] in {'generated_from', 'symlink'}]
++        candidates = [r for r in idx['files'] if r['id'] != row['id'] and r['real_path'] == row['real_path']]
++        for reference in row.get('generated_sources', []):
++            # Native unify headers are relative to ~/.agents, even when their
++            # generated distribution lives in ~/.codex or another harness.
++            relative = re.sub(r'\s+\([^)]*\)\s*$', '', reference).strip()
++            target = self.home / '.agents' / relative
++            candidates += [r for r in idx['files'] if Path(r['path']) == target]
++        for candidate in candidates:
++            try:
++                if not candidate['generated']:
++                    self.canonical_path(candidate['path'])
++                    ids.append(candidate['id'])
++            except (RepairError, OSError, ValueError):
++                pass
++        # Return existing indexed, canonical editable owners only. No caller path
++        # or generated-header text can cause a file outside the index to be read.
++        result = []
++        for file_id in ids:
++            candidate = next((r for r in idx['files'] if r['id'] == file_id), None)
++            try:
++                if candidate and not candidate['generated']:
++                    self.canonical_path(candidate['path'])
++                    result.append(file_id)
++            except (RepairError, OSError, ValueError):
++                pass
++        return list(dict.fromkeys(result))
++
++    def source(self, file_id):
++        idx = self.index()
++        row = next((r for r in idx['files'] if r['id'] == file_id), None)
++        owner_ids = self.owner_ids(idx, row) if row else []
++        result = {'file_id': file_id, 'path': row['path'] if row else '', 'sha256': None, 'content': '', 'editable': False, 'reason': '', 'source_file_ids': list(dict.fromkeys(owner_ids))}
++        try:
++            _, _, _, raw, _ = self.inspected(file_id)
++            result.update(sha256=sha(raw), content=raw.decode(), editable=True, reason='Handwritten canonical source. Preview an exact edit before applying it.')
++        except (RepairError, OSError) as exc:
++            result['reason'] = exc.message if isinstance(exc, RepairError) else 'Source unavailable; refresh the inventory'
++        return result
++
++    def git(self, repo, *args, binary=False):
++        try:
++            run = subprocess.run(['git', '-C', str(repo), *args], stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, timeout=30, env={**os.environ, 'GIT_TERMINAL_PROMPT': '0', 'GIT_OPTIONAL_LOCKS': '0'})
++        except (OSError, subprocess.TimeoutExpired):
++            raise RepairError('git_unavailable', 'Native Git did not finish; source publication requires manual inspection', 409)
++        if run.returncode:
++            raise RepairError('git_failed', 'Native Git check or publication failed; inspect this source repository before retrying', 409)
++        return run.stdout if binary else run.stdout.decode('utf-8').strip()
++
++    def git_blob(self, repo, revision, relative):
++        key = revision + ':' + relative
++        size = self.git(repo, 'cat-file', '-s', key)
++        if not size.isdigit() or int(size) > MAX_SOURCE:
++            raise RepairError('git_preimage', 'Tracked source preimage is unavailable or too large', 409)
++        return self.git(repo, 'show', key, binary=True)
++
++    def repo_info(self, path):
++        repo = Path(self.git(path.parent, 'rev-parse', '--show-toplevel'))
++        if self.fixture and self.home.resolve() not in repo.resolve().parents:
++            raise RepairError('fixture_boundary', 'Fixture Git repository must be inside fixture home', 400)
++        relative = path.relative_to(repo).as_posix()
++        branch = self.git(repo, 'symbolic-ref', '--quiet', '--short', 'HEAD')
++        if not branch or branch.startswith('-'):
++            raise RepairError('git_branch', 'Source needs an attached current branch', 409)
++        head = self.git(repo, 'rev-parse', 'HEAD')
++        origin = self.git(repo, 'remote', 'get-url', 'origin')
++        if self.git(repo, 'remote', 'get-url', '--push', 'origin') != origin:
++            raise RepairError('remote_mismatch', 'Origin fetch and push destinations differ; inspect source repository publication first', 409)
++        host = urlsplit(origin).hostname if '://' in origin else (origin.split('@', 1)[-1].split(':', 1)[0] if re.match(r'^[^/@:]+@[^:]+:', origin) else None)
++        if host:
++            lowered = host.lower().rstrip('.')
++            local_host = lowered in {'localhost', 'localhost.localdomain', socket.gethostname().lower().rstrip('.'), socket.getfqdn().lower().rstrip('.')}
++            try:
++                address = ipaddress.ip_address(lowered)
++                mapped = getattr(address, 'ipv4_mapped', None)
++                local_host = local_host or address.is_loopback or address.is_unspecified or bool(mapped and mapped.is_loopback)
++            except ValueError:
++                pass
++            if local_host:
++                raise RepairError('remote_not_durable', 'Loopback or this-machine origin cannot prove off-machine durability', 409)
++        local = not (origin.startswith(('https://', 'ssh://', 'git://')) or re.match(r'^[^/@:]+@[^:]+:', origin))
++        if local:
++            local_path = Path(origin.removeprefix('file://'))
++            if not local_path.is_absolute():
++                local_path = repo / local_path
++            if not self.fixture or self.home.resolve() not in local_path.resolve().parents:
++                raise RepairError('remote_not_durable', 'Origin must be off this machine before a live source repair; push the exact preimage first', 409)
++            if self.git(local_path, 'rev-parse', '--is-bare-repository') != 'true':
++                raise RepairError('fixture_boundary', 'Fixture origin must be its private bare repository', 400)
++        return {'repo': str(repo), 'relative': relative, 'branch': branch, 'head': head, 'origin_sha256': sha(origin.encode())}
++
++    def remote_head(self, info):
++        value = self.git(Path(info['repo']), 'ls-remote', '--exit-code', 'origin', 'refs/heads/' + info['branch'])
++        rows = value.splitlines()
++        if len(rows) != 1 or not re.fullmatch(r'[a-f0-9]{40,64}', rows[0].split()[0]):
++            raise RepairError('remote_preimage', 'Origin current branch could not be verified exactly', 409)
++        return rows[0].split()[0]
++
++    def backed_preimage(self, path, raw):
++        info = self.repo_info(path)
++        repo, rel = Path(info['repo']), info['relative']
++        if self.git_blob(repo, 'HEAD', rel) != raw or self.git_blob(repo, '', rel) != raw:
++            raise RepairError('git_preimage', 'Source exact bytes must already match both Git HEAD and index; commit and push existing source edits first', 409)
++        self.git(repo, 'diff', '--quiet', '--', ':(literal)' + rel)
++        self.git(repo, 'diff', '--cached', '--quiet', 'HEAD', '--', ':(literal)' + rel)
++        if self.remote_head(info) != info['head']:
++            raise RepairError('remote_preimage', 'Push the exact current source branch before applying a repair', 409)
++        return info
++
++    @contextmanager
++    def locked(self):
++        fd = os.open(self.state / 'operation.lock', os.O_RDWR | os.O_CREAT | os.O_NOFOLLOW, 0o600)
++        try:
++            fcntl.flock(fd, fcntl.LOCK_EX)
++            yield
++        finally:
++            os.close(fd)
++
++    def save(self, repair_id, value):
++        private_write(self.state / (repair_id + '.json'), canonical(value))
++
++    def load(self, repair_id):
++        if not isinstance(repair_id, str) or not re.fullmatch(r'[a-f0-9]{32}', repair_id):
++            raise RepairError('invalid_repair', 'Select a frozen preview before applying or undoing', 400)
++        path = self.state / (repair_id + '.json')
++        try:
++            if path.is_symlink():
++                raise ValueError()
++            value = json.loads(path.read_text())
++        except (OSError, ValueError):
++            raise RepairError('unknown_repair', 'Repair preview or receipt is unavailable; create a fresh preview', 400)
++        if sha(canonical(value['proposal'])) != value['proposal_sha256']:
++            raise RepairError('proposal_changed', 'Frozen proposal no longer matches its fingerprint', 409)
++        return value
++
++    def preview(self, file_id, expected_sha256, new_content):
++        if not isinstance(new_content, str) or len(new_content.encode()) > MAX_SOURCE or '\x00' in new_content:
++            raise RepairError('invalid_content', 'Proposed source must be UTF-8 text at most 64 KiB without NUL bytes', 400)
++        if screen(new_content)[1]:
++            raise RepairError('secret_proposal', 'Proposed text contains screened credential or command material; use the source owning workflow', 400)
++        with self.locked():
++            idx, row, path, before, st = self.inspected(file_id)
++            if sha(before) != expected_sha256:
++                raise RepairError('stale_source', 'Source changed after it was displayed; reopen it before previewing', 409)
++            after = new_content.encode()
++            if before == after:
++                raise RepairError('no_change', 'Change the proposed text before creating a preview', 400)
++            info = self.backed_preimage(path, before)
++            repair_id = uuid.uuid4().hex
++            created = timestamp()
++            expires = (datetime.now(timezone.utc) + timedelta(minutes=15)).isoformat()
++            generated = (self.home / '.agents' / 'instructions') in path.parents or any(r['target_id'] == file_id and r['kind'] == 'generated_from' for r in idx['references'])
++            proposal = {'repair_id': repair_id, 'file_id': file_id, 'path': str(path), 'real_path': str(path.resolve()), 'before': base64.b64encode(before).decode(), 'after': base64.b64encode(after).decode(), 'before_sha256': sha(before), 'after_sha256': sha(after), 'mode': stat.S_IMODE(st.st_mode), 'created_at': created, 'expires_at': expires, 'git': info, 'generated_follow_up': generated}
++            digest = sha(canonical(proposal))
++            self.save(repair_id, {'proposal': proposal, 'proposal_sha256': digest, 'phase': 'preview'})
++            return {'repair_id': repair_id, 'file_id': file_id, 'path': str(path), 'before_sha256': sha(before), 'after_sha256': sha(after), 'proposal_sha256': digest, 'diff': ''.join(difflib.unified_diff(before.decode().splitlines(keepends=True), new_content.splitlines(keepends=True), fromfile=str(path) + ' (before)', tofile=str(path) + ' (proposed)')), 'created_at': created, 'expires_at': expires, 'generated_follow_up': generated}
++
++    def backup(self, proposal):
++        base = self.home / 'Backups'
++        if not base.is_dir():
++            raise RepairError('backup_unavailable', 'Existing ~/Backups Drive location is unavailable; source is unchanged', 409)
++        if self.fixture and self.home.resolve() not in base.resolve().parents:
++            raise RepairError('fixture_boundary', 'Fixture backup escaped its temporary home', 400)
++        folder = base / 'local-file-repairs'
++        folder.mkdir(mode=0o700, exist_ok=True)
++        if folder.is_symlink():
++            raise RepairError('backup_unavailable', 'Undo-copy folder must not be an unexpected alias', 409)
++        path = folder / (proposal['repair_id'] + '.before')
++        raw = base64.b64decode(proposal['before'])
++        private_write(path, raw)
++        os.chmod(path, proposal['mode'])
++        fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
++        try:
++            os.fsync(fd)
++        finally:
++            os.close(fd)
++        metadata = folder / (proposal['repair_id'] + '.json')
++        private_write(metadata, canonical({'path': proposal['path'], 'sha256': proposal['before_sha256'], 'mode': proposal['mode']}))
++        sync_dir(folder)
++        if path.read_bytes() != raw or stat.S_IMODE(path.stat().st_mode) != proposal['mode']:
++            raise RepairError('backup_unverified', 'Undo copy readback failed; source is unchanged', 409)
++        return str(path)
++
++    def replace(self, proposal, expected, replacement):
++        path = self.canonical_path(proposal['path'])
++        if str(path.resolve()) != proposal['real_path']:
++            raise RepairError('source_target_changed', 'Source target changed after preview', 409)
++        raw, st, actual = read_source(path, [self.home.resolve()], MAX_SOURCE)
++        if str(actual) != proposal['real_path']:
++            raise RepairError('source_target_changed', 'Source target changed after preview', 409)
++        if sha(raw) != expected or stat.S_IMODE(st.st_mode) != proposal['mode'] or st.st_nlink != 1:
++            raise RepairError('stale_source', 'Source contents or mode changed; source is unchanged by this request', 409)
++        # Parent descriptors refuse link swaps; CAS is checked again immediately
++        # before the same-directory atomic replacement.
++        fd = os.open('/', os.O_RDONLY | os.O_DIRECTORY)
++        temporary = '.local-repair-' + uuid.uuid4().hex
++        try:
++            for part in Path(proposal['real_path']).parts[1:-1]:
++                child = os.open(part, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW, dir_fd=fd)
++                os.close(fd)
++                fd = child
++            out = os.open(temporary, os.O_WRONLY | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, proposal['mode'], dir_fd=fd)
++            with os.fdopen(out, 'wb') as stream:
++                stream.write(replacement)
++                stream.flush()
++                os.fchmod(stream.fileno(), proposal['mode'])
++                os.fsync(stream.fileno())
++            current, current_st, current_real = read_source(path, [self.home.resolve()], MAX_SOURCE)
++            self.canonical_path(proposal['path'])
++            native = os.stat(path.name, dir_fd=fd, follow_symlinks=False)
++            if str(current_real) != proposal['real_path'] or str(path.resolve()) != proposal['real_path'] or sha(current) != expected or (native.st_dev, native.st_ino) != (st.st_dev, st.st_ino) or stat.S_IMODE(current_st.st_mode) != proposal['mode']:
++                raise RepairError('stale_source', 'Source changed immediately before replacement', 409)
++            os.replace(temporary, path.name, src_dir_fd=fd, dst_dir_fd=fd)
++            os.fsync(fd)
++        finally:
++            try:
++                os.unlink(temporary, dir_fd=fd)
++            except FileNotFoundError:
++                pass
++            os.close(fd)
++        check, _, _ = read_source(path, [self.home.resolve()], MAX_SOURCE)
++        if check != replacement:
++            raise RepairError('source_readback', 'Replacement needs manual inspection; recovery data is retained', 409)
++
++    def known_index(self, proposal, info):
++        repo, rel = Path(info['repo']), info['relative']
++        staged_hash = sha(self.git_blob(repo, '', rel))
++        entry = self.git(repo, 'ls-files', '--stage', '--', ':(literal)' + rel).split()
++        expected_mode = '100755' if proposal['mode'] & 0o111 else '100644'
++        if staged_hash not in {proposal['before_sha256'], proposal['after_sha256']} or len(entry) < 3 or entry[0] != expected_mode or entry[2] != '0':
++            raise RepairError('git_index_changed', 'Source index has newer staged contents or mode; inspect it before publication or Undo', 409)
++
++    def publish(self, proposal, value, undo=False):
++        info = self.repo_info(Path(proposal['path']))
++        if any(info[key] != proposal['git'][key] for key in ['repo', 'branch', 'origin_sha256']):
++            raise RepairError('git_branch_changed', 'Source repository or branch changed; inspect publication manually', 409)
++        expected_parent = value.get('undo_parent_head') if undo else proposal['git']['head']
++        if info['head'] != expected_parent:
++            raise RepairError('git_head_changed', 'Git HEAD changed during repair; inspect one-path publication manually', 409)
++        expected = proposal['before_sha256'] if undo else proposal['after_sha256']
++        repo, rel = Path(info['repo']), info['relative']
++        self.known_index(proposal, info)
++        path = self.canonical_path(proposal['path'])
++        raw, current_st, real = read_source(path, [self.home.resolve()], MAX_SOURCE)
++        if sha(raw) != expected or str(real) != proposal['real_path'] or stat.S_IMODE(current_st.st_mode) != proposal['mode']:
++            raise RepairError('stale_source', 'Source changed before commit; publication is pending', 409)
++        value['phase'] = 'undo_commit_started' if undo else 'commit_started'
++        self.save(proposal['repair_id'], value)
++        if sha(self.git_blob(repo, 'HEAD', rel)) != expected:
++            self.git(repo, 'commit', '--only', '-m', 'Restore reviewed local instruction' if undo else 'Repair reviewed local instruction', '--', ':(literal)' + rel)
++        commit = self.git(repo, 'rev-parse', 'HEAD')
++        if commit != expected_parent:
++            parents = self.git(repo, 'rev-list', '--parents', '-n', '1', commit).split()
++            changed = self.git(repo, 'diff-tree', '--no-commit-id', '--name-only', '-r', commit).splitlines()
++            if parents != [commit, expected_parent] or changed != [rel]:
++                raise RepairError('commit_scope', 'Commit scope or parent changed; inspect publication before pushing', 409)
++        if sha(self.git_blob(repo, 'HEAD', rel)) != expected:
++            raise RepairError('commit_readback', 'Source commit readback did not match the reviewed bytes', 409)
++        value['commit'] = commit
++        value['phase'] = 'undo_push_started' if undo else 'push_started'
++        self.save(proposal['repair_id'], value)
++        self.git(repo, 'push', '--porcelain', 'origin', commit + ':refs/heads/' + info['branch'])
++        if self.remote_head(info) != commit:
++            raise RepairError('push_readback', 'Remote commit could not be confirmed; publication remains pending', 409)
++        return commit
++
++    def result(self, value, undo, pushed, message):
++        p = value['proposal']
++        current_hash = p['before_sha256'] if undo else p['after_sha256']
++        try:
++            path = self.canonical_path(p['path'])
++            current, _, real = read_source(path, [self.home.resolve()], MAX_SOURCE)
++            if str(real) != p['real_path']:
++                raise OSError()
++            current_hash = sha(current)
++            if current_hash != (p['before_sha256'] if undo else p['after_sha256']):
++                message += ' Current source changed after replacement; publication stopped.'
++        except (RepairError, OSError, RuntimeError, OverflowError):
++            message += ' Current source readback is unavailable; fingerprint describes the recorded replacement.'
++        return {'repair_id': p['repair_id'], 'file_id': p['file_id'], 'path': p['path'], 'state': ('undone' if undo else 'applied') + ('' if pushed else '_publish_pending'), 'current_sha256': current_hash, 'backup_path': value.get('backup_path', ''), 'commit': value.get('commit'), 'pushed': pushed, 'generated_follow_up': p['generated_follow_up'], 'message': message + (' Generated-publication verification remains pending; existing repository hooks may run. This app did not directly invoke an app-settings builder.' if p['generated_follow_up'] else '') + ' Undo copy verified locally; Drive cloud upload was not verified.'}
++
++    def reconcile(self, value, undo=False):
++        if not undo and 'undo_result' in value:
++            undo = True
++        key = 'undo_result' if undo else 'result'
++        p = value['proposal']
++        expected = p['before_sha256'] if undo else p['after_sha256']
++        try:
++            path = self.canonical_path(p['path'])
++            raw, st, real = read_source(path, [self.home.resolve()], MAX_SOURCE)
++        except (RepairError, OSError, RuntimeError, OverflowError):
++            raise RepairError('repair_recovery', 'Earlier repair source is unavailable or changed; no side effect was retried', 409)
++        if sha(raw) != expected or str(real) != p['real_path'] or stat.S_IMODE(st.st_mode) != p['mode']:
++            raise RepairError('stale_source', 'Recorded repair source now has newer contents, target or mode; no side effect was retried', 409)
++        if key in value:
++            return value[key]
++        result = self.result(value, undo, False, 'Recorded source operation reconciled; publication needs manual inspection. No side effect was retried.')
++        value[key] = result
++        self.save(p['repair_id'], value)
++        return result
++
++    def apply(self, repair_id, proposal_sha256):
++        with self.locked():
++            value = self.load(repair_id)
++            if value['proposal_sha256'] != proposal_sha256:
++                raise RepairError('proposal_changed', 'Apply must name the exact reviewed proposal fingerprint', 409)
++            if value['phase'] != 'preview':
++                return self.reconcile(value)
++            p = value['proposal']
++            if datetime.now(timezone.utc) > datetime.fromisoformat(p['expires_at']):
++                raise RepairError('proposal_expired', 'Preview expired; reopen and review a fresh proposal', 409)
++            _, row, path, before, st = self.inspected(p['file_id'])
++            if str(path) != p['path'] or sha(before) != p['before_sha256'] or stat.S_IMODE(st.st_mode) != p['mode']:
++                raise RepairError('stale_source', 'Source changed after preview; review a fresh proposal', 409)
++            if self.backed_preimage(path, before) != p['git']:
++                raise RepairError('git_changed', 'Source repository changed after preview; review a fresh proposal', 409)
++            value['backup_path'] = self.backup(p)
++            value['phase'] = 'replacing'
++            self.save(repair_id, value)
++            try:
++                self.replace(p, p['before_sha256'], base64.b64decode(p['after']))
++            except RepairError as exc:
++                if exc.code in {'stale_source', 'source_target_changed', 'shared_link'}:
++                    value['phase'] = 'preview'
++                    self.save(repair_id, value)
++                raise
++            value['phase'] = 'source_applied'
++            self.save(repair_id, value)
++            try:
++                value['commit'] = self.publish(p, value)
++                result = self.result(value, False, True, 'Source updated, exact readback verified, one-path commit pushed.')
++            except (RepairError, OSError):
++                result = self.result(value, False, False, 'Source updated; commit or push is pending. Recovery is retained; inspect the repository before any manual publication.')
++            value['result'] = result
++            value['phase'] = 'applied'
++            self.save(repair_id, value)
++            return result
++
++    def undo(self, repair_id):
++        with self.locked():
++            value = self.load(repair_id)
++            if 'undo_result' in value or value['phase'].startswith('undo_'):
++                return self.reconcile(value, True)
++            if 'result' not in value:
++                raise RepairError('not_applied', 'This repair has no recorded applied source to undo', 409)
++            p = value['proposal']
++            backup = Path(value['backup_path'])
++            expected_folder = (self.home / 'Backups' / 'local-file-repairs').resolve()
++            if backup.is_symlink() or backup.parent.resolve() != expected_folder or sha(backup.read_bytes()) != p['before_sha256']:
++                raise RepairError('backup_changed', 'Exact recorded undo copy is unavailable; source is unchanged', 409)
++            path = self.canonical_path(p['path'])
++            current, _, _ = read_source(path, [self.home.resolve()], MAX_SOURCE)
++            if sha(current) != p['after_sha256']:
++                raise RepairError('stale_source', 'Source has newer edits; conditional Undo will not overwrite them', 409)
++            info = self.repo_info(path)
++            if any(info[key] != p['git'][key] for key in ['repo', 'branch', 'origin_sha256']):
++                raise RepairError('git_changed', 'Source repository changed; inspect the restoration manually', 409)
++            self.known_index(p, info)
++            value['undo_parent_head'] = info['head']
++            value['phase'] = 'undo_replacing'
++            self.save(repair_id, value)
++            self.replace(p, p['after_sha256'], backup.read_bytes())
++            value['phase'] = 'undo_source_restored'
++            value['commit'] = None
++            self.save(repair_id, value)
++            try:
++                value['commit'] = self.publish(p, value, True)
++                result = self.result(value, True, True, 'Exact preimage restored, read back, and restoration pushed.')
++            except (RepairError, OSError):
++                result = self.result(value, True, False, 'Exact preimage restored; restoration commit or push remains pending. No publication will retry automatically.')
++            value['undo_result'] = result
++            value['phase'] = 'undone'
++            self.save(repair_id, value)
++            return result
++
++
++def main():
++    parser = argparse.ArgumentParser()
++    parser.add_argument('--index', required=True)
++    parser.add_argument('--state', required=True)
++    args = parser.parse_args()
++    try:
++        raw = sys.stdin.buffer.read(MAX_BODY + 1)
++        if len(raw) > MAX_BODY:
++            raise RepairError('body_too_large', 'Repair request exceeds 192 KiB', 400)
++        request = json.loads(raw)
++        service = RepairService(Path.home(), Path(args.index), Path(args.state))
++        action = request.get('action')
++        allowed = {'source': {'action', 'file_id'}, 'preview': {'action', 'file_id', 'expected_sha256', 'new_content'}, 'apply': {'action', 'repair_id', 'proposal_sha256'}, 'undo': {'action', 'repair_id'}}
++        if action not in allowed or set(request) != allowed[action] or not all(isinstance(v, str) for v in request.values()):
++            raise RepairError('invalid_request', 'Use a supported action with its exact named text fields', 400)
++        if action == 'source':
++            result = service.source(request['file_id'])
++        elif action == 'preview':
++            result = service.preview(request['file_id'], request['expected_sha256'], request['new_content'])
++        elif action == 'apply':
++            result = service.apply(request['repair_id'], request['proposal_sha256'])
++        else:
++            result = service.undo(request['repair_id'])
++        print(json.dumps({'status': 200, 'data': result}))
++    except RepairError as exc:
++        print(json.dumps({'status': exc.status, 'error': exc.message, 'code': exc.code}))
++    except (OSError, ValueError, KeyError, TypeError, OverflowError, RuntimeError):
++        print(json.dumps({'status': 409, 'error': 'Local source repair could not finish safely; source or private recovery state needs inspection', 'code': 'repair_unavailable'}))
++
++
++if __name__ == '__main__':
++    main()
+diff --git a/tools/local_files.py b/tools/local_files.py
+index 0e7ef73..18169ea 100644
+--- a/tools/local_files.py
++++ b/tools/local_files.py
+@@ -402,7 +402,9 @@ def analyze(idx, sources):
+             m = re.search(r'(?i)\b(always|never)\s+((?:send|use|allow|execute|delete|contact|spend)\b.+?)[.!]?$', clean)
+             if m:
+                 declarations[('explicit opposite directive', re.sub(r'\s+', ' ', m.group(2).lower()).rstrip('.!'))].append((m.group(1).lower(), ev))
+-            m = re.search(r'(?i)(?:use\s+)?(.{1,90}?)\s+(?:as\s+)?the (?:only|one) memory layer', clean)
++            # This unanchored expression can backtrack at every position in
++            # ordinary prose. Its required literal is a semantics-preserving gate.
++            m = re.search(r'(?i)(?:use\s+)?(.{1,90}?)\s+(?:as\s+)?the (?:only|one) memory layer', clean) if 'memory layer' in clean.lower() else None
+             if m:
+                 value = re.sub(r'(?i)^.*\buse\s+', '', m.group(1)).lower().strip()
+                 declarations[('exclusive memory declarations', 'memory layer')].append((value, ev))
+diff --git a/tools/test_local_file_repairs.py b/tools/test_local_file_repairs.py
+new file mode 100644
+index 0000000..f7782a3
+--- /dev/null
++++ b/tools/test_local_file_repairs.py
+@@ -0,0 +1,211 @@
++import json
++import hashlib
++import os
++from pathlib import Path
++import subprocess
++import tempfile
++import unittest
++from unittest.mock import patch
++import local_files
++import local_file_repairs as repairs
++
++
++def git(repo, *args):
++    return subprocess.check_output(['git', '-C', str(repo), *args], stderr=subprocess.DEVNULL).decode().strip()
++
++
++class RepairTests(unittest.TestCase):
++    def setUp(self):
++        self.tmp = tempfile.TemporaryDirectory(prefix='local-file-repairs-')
++        self.home = Path(self.tmp.name).resolve()
++        self.repo = self.home / '.agents'
++        self.repo.mkdir()
++        self.rules = self.repo / 'instructions'
++        self.rules.mkdir()
++        self.file = self.rules / 'alpha.md'
++        self.before = 'Always keep reviewed source evidence.\n'
++        self.after = 'Always preserve reviewed source evidence.\n'
++        self.file.write_text(self.before)
++        self.file.chmod(0o640)
++        (self.rules / 'other.md').write_text('Other original\n')
++        (self.rules / 'dirty.md').write_text('Dirty original\n')
++        git(self.repo, 'init', '-b', 'main')
++        git(self.repo, 'config', 'user.email', 'fixture@example.invalid')
++        git(self.repo, 'config', 'user.name', 'Fixture')
++        git(self.repo, 'add', '.')
++        git(self.repo, 'commit', '-m', 'Fixture baseline')
++        self.remote = self.home / 'origin.git'
++        subprocess.run(['git', 'init', '--bare', str(self.remote)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
++        git(self.repo, 'remote', 'add', 'origin', str(self.remote))
++        git(self.repo, 'push', '-u', 'origin', 'main')
++        (self.home / 'Backups').mkdir()
++        self.state = self.home / 'state'
++        self.state.mkdir()
++        self.index = local_files.scan(self.home, roots=[(self.rules, 'fixture')])
++        self.index_path = self.state / 'local-files.json'
++        self.index_path.write_text(json.dumps(self.index))
++        self.row = next(r for r in self.index['files'] if r['path'] == str(self.file))
++        self.env = patch.dict(os.environ, {'LOCAL_FILE_REPAIR_FIXTURE_HOME': str(self.home)})
++        self.env.start()
++        self.service = repairs.RepairService(self.home, self.index_path, self.state)
++
++    def tearDown(self):
++        self.env.stop()
++        self.tmp.cleanup()
++
++    def preview(self):
++        return self.service.preview(self.row['id'], self.row['sha256'], self.after)
++
++    def test_apply_undo_exact_backup_remote_and_other_changes(self):
++        (self.rules / 'other.md').write_text('Other staged\n')
++        git(self.repo, 'add', 'instructions/other.md')
++        (self.rules / 'dirty.md').write_text('Other dirty\n')
++        staged = git(self.repo, 'show', ':instructions/other.md')
++        preview = self.preview()
++        self.assertIn('-Always keep', preview['diff'])
++        self.assertEqual(self.before, self.file.read_text())
++        applied = self.service.apply(preview['repair_id'], preview['proposal_sha256'])
++        self.assertEqual('applied', applied['state'])
++        self.assertTrue(applied['pushed'])
++        self.assertEqual(self.after, self.file.read_text())
++        self.assertEqual(0o640, self.file.stat().st_mode & 0o777)
++        self.assertEqual(self.before.encode(), Path(applied['backup_path']).read_bytes())
++        self.assertEqual('Always preserve reviewed source evidence.', git(self.remote, 'show', 'main:instructions/alpha.md'))
++        head = git(self.repo, 'rev-parse', 'HEAD')
++        self.assertEqual(applied, self.service.apply(preview['repair_id'], preview['proposal_sha256']))
++        self.assertEqual(head, git(self.repo, 'rev-parse', 'HEAD'))
++        undone = self.service.undo(preview['repair_id'])
++        self.assertEqual('undone', undone['state'])
++        self.assertEqual(self.before, self.file.read_text())
++        self.assertEqual('Always keep reviewed source evidence.', git(self.remote, 'show', 'main:instructions/alpha.md'))
++        self.assertEqual(staged, git(self.repo, 'show', ':instructions/other.md'))
++        self.assertEqual('Other dirty\n', (self.rules / 'dirty.md').read_text())
++        self.assertEqual(undone, self.service.undo(preview['repair_id']))
++
++    def test_stale_and_secret_proposals_never_write(self):
++        preview = self.preview()
++        self.file.write_text('Third party edit\n')
++        with self.assertRaises(repairs.RepairError) as ctx:
++            self.service.apply(preview['repair_id'], preview['proposal_sha256'])
++        self.assertEqual(409, ctx.exception.status)
++        self.assertEqual('Third party edit\n', self.file.read_text())
++        self.file.write_text(self.before)
++        with self.assertRaises(repairs.RepairError):
++            self.service.preview(self.row['id'], self.row['sha256'], 'api_key=fixture-opaque-secret\n')
++        self.assertEqual(self.before, self.file.read_text())
++
++    def test_unbacked_git_and_untracked_and_path_ownership_refused(self):
++        git(self.repo, 'remote', 'remove', 'origin')
++        with self.assertRaises(repairs.RepairError):
++            self.preview()
++        self.assertEqual(self.before, self.file.read_text())
++        self.assertFalse(self.service.source('../../etc/passwd')['editable'])
++        alias = self.rules / 'alias.md'
++        alias.symlink_to(self.file)
++        self.index = local_files.scan(self.home, roots=[(self.rules, 'fixture')])
++        self.index_path.write_text(json.dumps(self.index))
++        row = next(r for r in self.index['files'] if r['path'] == str(alias))
++        self.assertFalse(self.service.source(row['id'])['editable'])
++        self.file.write_text('<!-- GENERATED by fixture; DO NOT EDIT -->\n')
++        self.assertFalse(self.service.source(self.row['id'])['editable'])
++
++    def test_conditional_undo_and_publish_pending_do_not_retry_effects(self):
++        preview = self.preview()
++        original = self.service.publish
++        calls = []
++        def failed_publish(*args):
++            calls.append(1)
++            raise repairs.RepairError('fixture_push_failure', 'Fixture remote unavailable', 409)
++        with patch.object(self.service, 'publish', side_effect=failed_publish):
++            result = self.service.apply(preview['repair_id'], preview['proposal_sha256'])
++            self.assertEqual('applied_publish_pending', result['state'])
++            self.assertEqual(result, self.service.apply(preview['repair_id'], preview['proposal_sha256']))
++        self.assertEqual(1, len(calls))
++        self.file.write_text('Newer edit\n')
++        with self.assertRaises(repairs.RepairError):
++            self.service.undo(preview['repair_id'])
++        self.assertEqual('Newer edit\n', self.file.read_text())
++
++    def test_frozen_fingerprint_untracked_and_generated_owners(self):
++        preview = self.preview()
++        with self.assertRaises(repairs.RepairError):
++            self.service.apply(preview['repair_id'], '0' * 64)
++        untracked = self.rules / 'untracked.md'
++        untracked.write_text('Untracked rule source\n')
++        generated = self.repo / 'AGENTS.md'
++        generated.write_text('<!-- GENERATED by fixture\nSources: instructions/alpha.md\n-->\n')
++        config = self.rules / 'settings.json'
++        config.write_text('{"mode":"fixture"}')
++        self.index = local_files.scan(self.home, roots=[(self.repo, 'fixture')])
++        self.index_path.write_text(json.dumps(self.index))
++        rows = {Path(r['path']).name: r for r in self.index['files']}
++        with self.assertRaises(repairs.RepairError):
++            self.service.preview(rows['untracked.md']['id'], rows['untracked.md']['sha256'], 'Proposed untracked rule\n')
++        source = self.service.source(rows['AGENTS.md']['id'])
++        self.assertFalse(source['editable'])
++        self.assertIn(self.row['id'], source['source_file_ids'])
++        self.assertFalse(self.service.source(rows['settings.json']['id'])['editable'])
++        self.assertEqual(self.before, self.file.read_text())
++
++    def test_native_generated_header_maps_to_indexed_agents_owner(self):
++        codex = self.home / '.codex'
++        codex.mkdir()
++        generated = codex / 'AGENTS.md'
++        generated.write_text('<!-- GENERATED by tools/unify/build_instructions.py; DO NOT EDIT.\nSources: instructions/alpha.md (Voice; Delegation and model routing)\n-->\n')
++        idx = local_files.scan(self.home, roots=[(self.rules, 'instructions'), (generated, 'Codex distribution')])
++        idx['references'] = []  # Generic cross-harness resolution need not work.
++        self.index_path.write_text(json.dumps(idx))
++        row = next(r for r in idx['files'] if r['path'] == str(generated))
++        owner = self.service.source(row['id'])
++        self.assertFalse(owner['editable'])
++        self.assertEqual([self.row['id']], owner['source_file_ids'])
++        self.assertTrue(self.preview()['generated_follow_up'])
++
++    def test_replayed_receipts_refuse_newer_source_and_index(self):
++        preview = self.preview()
++        self.service.apply(preview['repair_id'], preview['proposal_sha256'])
++        self.file.write_text('Newer source contents\n')
++        with self.assertRaises(repairs.RepairError):
++            self.service.apply(preview['repair_id'], preview['proposal_sha256'])
++        self.file.write_text(self.after)
++        self.file.write_text('New staged target\n')
++        git(self.repo, 'add', 'instructions/alpha.md')
++        self.file.write_text(self.after)
++        with self.assertRaises(repairs.RepairError):
++            self.service.undo(preview['repair_id'])
++        self.assertEqual(self.after, self.file.read_text())
++        self.assertEqual('New staged target', git(self.repo, 'show', ':instructions/alpha.md'))
++
++    def test_publication_does_not_commit_intervening_target_edit(self):
++        preview = self.preview()
++        original = self.service.replace
++        def changed_after_replacement(*args):
++            original(*args)
++            self.file.write_text('Intervening source edit\n')
++        with patch.object(self.service, 'replace', side_effect=changed_after_replacement):
++            result = self.service.apply(preview['repair_id'], preview['proposal_sha256'])
++        self.assertEqual('applied_publish_pending', result['state'])
++        self.assertEqual('Intervening source edit\n', self.file.read_text())
++        self.assertEqual(hashlib.sha256(self.file.read_bytes()).hexdigest(), result['current_sha256'])
++        self.assertEqual(self.before.strip(), git(self.repo, 'show', 'HEAD:instructions/alpha.md'))
++
++    def test_loopback_origins_refused_before_network(self):
++        for origin in ['https://localhost/repo.git', 'ssh://git@127.0.0.1/repo.git', 'git://[::1]/repo.git', 'git@localhost:repo.git']:
++            git(self.repo, 'remote', 'set-url', 'origin', origin)
++            with self.assertRaises(repairs.RepairError) as ctx:
++                self.preview()
++            self.assertEqual('remote_not_durable', ctx.exception.code)
++        self.assertEqual(self.before, self.file.read_text())
++
++    def test_fixture_boundary_and_default_local_origin_refused(self):
++        with patch.dict(os.environ, {'LOCAL_FILE_REPAIR_FIXTURE_HOME': ''}):
++            unconfigured = repairs.RepairService(self.home, self.index_path, self.state)
++            with self.assertRaises(repairs.RepairError):
++                unconfigured.preview(self.row['id'], self.row['sha256'], self.after)
++        outside = Path(tempfile.gettempdir()) / 'outside-repair-state'
++        with self.assertRaises(repairs.RepairError):
++            repairs.RepairService(self.home, self.index_path, outside)
++
++
++if __name__ == '__main__':
++    unittest.main(verbosity=2)
+diff --git a/tools/test_local_files.py b/tools/test_local_files.py
+index 04d0809..cf52749 100644
+--- a/tools/test_local_files.py
++++ b/tools/test_local_files.py
+@@ -161,6 +161,15 @@ class LocalFilesTests(unittest.TestCase):
+         limited = lf.scan(self.home, roots=roots, max_files=1)
+         self.assertTrue(all(r['state'] == 'partial' for r in limited['coverage']['roots']))
+ 
++    def test_ordinary_prose_has_no_findings_and_mixed_case_memory_declarations_remain(self):
++        self.put('ordinary.md', ('ordinary prose without a declaration ' * 20 + '\n') * 100)
++        ordinary = self.scan()
++        self.assertEqual([], ordinary['findings'])
++        self.put('a.md', 'Always use Hindsight as the ONLY memory layer.\n')
++        self.put('b.md', 'Always use local files as the ONE MEMORY LAYER.\n')
++        idx = self.scan()
++        self.assertTrue(any(f['kind'] == 'conflict_candidate' and f['topic'].startswith('exclusive memory declarations') for f in idx['findings']))
++
+     def test_read_failure_and_retargeted_alias(self):
+         p = self.put('rules.md', 'source')
+         idx = self.scan()

@@ -1,0 +1,28 @@
+{
+  "native_fix_commit": "3de003ea",
+  "safe_guidance_commit": "49e76d2d",
+  "context_note_commit": "8fc83b2",
+  "evidence": [
+    {
+      "file": "suite.log",
+      "sha256": "8f63d152e0305bb72a031780f2603244ff3f54b4d56d13ea595a4ad5528a83a9",
+      "bytes": 3792
+    },
+    {
+      "file": "review.md",
+      "sha256": "5881d98dc608f8ed69fb0c5fc855fc1c7eac18fa282c805ec5f73b43e791b0f0",
+      "bytes": 3467
+    },
+    {
+      "file": "probe-results.json",
+      "sha256": "8ebd2ab540694a38c0d3bbb622485d482c4a895a7f1103f9f5ebfe53c4ccf967",
+      "bytes": 2876
+    },
+    {
+      "file": "machine-checks.md",
+      "sha256": "67a34951fe57afff9c03a0d5c482fefa133475c2cab47b3537059543cf5d6dd1",
+      "bytes": 667
+    }
+  ],
+  "review_scope": "A-D safe config behavior verified; historical complete worker mutation records not available, no claim whole workspace bytes unchanged"
+}

@@ -1,0 +1,160 @@
+{
+  "checks": [
+    {
+      "check": "source_refusal_generated.md",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": false
+    },
+    {
+      "check": "source_refusal_alias.md",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": false
+    },
+    {
+      "check": "source_refusal_sensitive-rule.md",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": false
+    },
+    {
+      "check": "source_refusal_unsupported.sh",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": false
+    },
+    {
+      "check": "generated_codex_owner",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": false
+    },
+    {
+      "check": "source_refusal_managed",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": false
+    },
+    {
+      "check": "no_token",
+      "status": 401,
+      "state": null,
+      "error": "Missing or invalid local token",
+      "editable": null
+    },
+    {
+      "check": "wrong_token",
+      "status": 401,
+      "state": null,
+      "error": "Missing or invalid local token",
+      "editable": null
+    },
+    {
+      "check": "remote_host",
+      "status": 403,
+      "state": null,
+      "error": "local access only",
+      "editable": null
+    },
+    {
+      "check": "cross_site",
+      "status": 403,
+      "state": null,
+      "error": "local access only",
+      "editable": null
+    },
+    {
+      "check": "malformed",
+      "status": 400,
+      "state": null,
+      "error": "Use a supported repair action with its exact named text fields",
+      "editable": null
+    },
+    {
+      "check": "arbitrary_path",
+      "status": 400,
+      "state": null,
+      "error": "Use a supported repair action with its exact named text fields",
+      "editable": null
+    },
+    {
+      "check": "oversized_body",
+      "status": 400,
+      "state": null,
+      "error": "Use a supported repair action with its exact named text fields",
+      "editable": null
+    },
+    {
+      "check": "new_secret",
+      "status": 400,
+      "state": null,
+      "error": "Proposed text contains screened credential or command material; use the source owning workflow",
+      "editable": null
+    },
+    {
+      "check": "stale_hash",
+      "status": 409,
+      "state": null,
+      "error": "Source changed after it was displayed; reopen it before previewing",
+      "editable": null
+    },
+    {
+      "check": "preview_valid",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": null
+    },
+    {
+      "check": "wrong_proposal_fingerprint",
+      "status": 409,
+      "state": null,
+      "error": "Apply must name the exact reviewed proposal fingerprint",
+      "editable": null
+    },
+    {
+      "check": "stale_apply",
+      "status": 409,
+      "state": null,
+      "error": "Source changed after preview; review a fresh proposal",
+      "editable": null
+    },
+    {
+      "check": "preview_valid",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": null
+    },
+    {
+      "check": "link_swap_after_preview",
+      "status": 400,
+      "state": null,
+      "error": "This is a shared link; open its indexed canonical source instead",
+      "editable": null
+    },
+    {
+      "check": "preview_valid",
+      "status": 200,
+      "state": null,
+      "error": null,
+      "editable": null
+    },
+    {
+      "check": "remote_ref_diverged",
+      "status": 409,
+      "state": null,
+      "error": "Push the exact current source branch before applying a repair",
+      "editable": null
+    }
+  ],
+  "source_unchanged": true,
+  "unrelated_work_preserved": true
+}

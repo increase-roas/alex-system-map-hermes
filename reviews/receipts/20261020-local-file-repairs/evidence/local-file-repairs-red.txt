@@ -1,0 +1,60 @@
+EEEEE
+======================================================================
+ERROR: test_apply_undo_exact_backup_remote_and_other_changes (test_local_file_repairs.RepairTests.test_apply_undo_exact_backup_remote_and_other_changes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_file_repairs.py", line 49, in setUp
+    self.service = repairs.RepairService(self.home, self.index_path, self.state)
+                   ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_file_repairs.py", line 6, in __init__
+    raise NotImplementedError('Reviewed source repairs are not implemented')
+NotImplementedError: Reviewed source repairs are not implemented
+
+======================================================================
+ERROR: test_conditional_undo_and_publish_pending_do_not_retry_effects (test_local_file_repairs.RepairTests.test_conditional_undo_and_publish_pending_do_not_retry_effects)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_file_repairs.py", line 49, in setUp
+    self.service = repairs.RepairService(self.home, self.index_path, self.state)
+                   ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_file_repairs.py", line 6, in __init__
+    raise NotImplementedError('Reviewed source repairs are not implemented')
+NotImplementedError: Reviewed source repairs are not implemented
+
+======================================================================
+ERROR: test_fixture_boundary_and_default_local_origin_refused (test_local_file_repairs.RepairTests.test_fixture_boundary_and_default_local_origin_refused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_file_repairs.py", line 49, in setUp
+    self.service = repairs.RepairService(self.home, self.index_path, self.state)
+                   ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_file_repairs.py", line 6, in __init__
+    raise NotImplementedError('Reviewed source repairs are not implemented')
+NotImplementedError: Reviewed source repairs are not implemented
+
+======================================================================
+ERROR: test_stale_and_secret_proposals_never_write (test_local_file_repairs.RepairTests.test_stale_and_secret_proposals_never_write)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_file_repairs.py", line 49, in setUp
+    self.service = repairs.RepairService(self.home, self.index_path, self.state)
+                   ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_file_repairs.py", line 6, in __init__
+    raise NotImplementedError('Reviewed source repairs are not implemented')
+NotImplementedError: Reviewed source repairs are not implemented
+
+======================================================================
+ERROR: test_unbacked_git_and_untracked_and_path_ownership_refused (test_local_file_repairs.RepairTests.test_unbacked_git_and_untracked_and_path_ownership_refused)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/test_local_file_repairs.py", line 49, in setUp
+    self.service = repairs.RepairService(self.home, self.index_path, self.state)
+                   ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_file_repairs.py", line 6, in __init__
+    raise NotImplementedError('Reviewed source repairs are not implemented')
+NotImplementedError: Reviewed source repairs are not implemented
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.914s
+
+FAILED (errors=5)

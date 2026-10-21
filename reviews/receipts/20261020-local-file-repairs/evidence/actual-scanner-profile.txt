@@ -1,0 +1,33 @@
+{"elapsed_seconds": 116.85187500000029, "files": 3403, "references": 2706, "findings": 1500, "coverage_truncated": true}
+         39327994 function calls (38178225 primitive calls) in 116.848 seconds
+
+   Ordered by: cumulative time
+   List reduced from 212 to 24 due to restriction <24>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.002    0.002  116.848  116.848 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:193(scan)
+        1    4.225    4.225   85.207   85.207 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:353(analyze)
+   912212    0.814    0.000   57.306    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/__init__.py:174(search)
+  1078567   55.309    0.000   55.309    0.000 {method 'search' of 're.Pattern' objects}
+        2    0.081    0.040   31.474   15.737 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:327(interleave)
+     9928    0.443    0.000   28.584    0.003 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:248(read_candidate)
+    82756    0.250    0.000   18.846    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:932(resolve)
+    82756    2.117    0.000   17.979    0.000 <frozen posixpath>:388(realpath)
+     3396    1.485    0.000   14.578    0.004 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:86(screen)
+   843191   14.190    0.000   14.218    0.000 {built-in method posix.lstat}
+    23933    0.039    0.000    9.852    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/re/__init__.py:183(sub)
+    23933    9.737    0.000    9.737    0.000 {method 'sub' of 're.Pattern' objects}
+   560184    0.324    0.000    5.064    0.000 <frozen _collections_abc>:1015(__iter__)
+    15817    0.065    0.000    4.911    0.000 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:28(within)
+    55345    0.089    0.000    4.846    0.000 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:29(<genexpr>)
+    46940    0.249    0.000    4.782    0.000 <frozen _collections_abc>:1025(__contains__)
+   532821    0.766    0.000    4.740    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:63(__getitem__)
+     3396    0.179    0.000    4.189    0.001 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:135(read_source)
+   561900    0.749    0.000    3.840    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:269(_from_parsed_parts)
+    61692    0.219    0.000    3.279    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:381(parent)
+   706392    0.962    0.000    3.059    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:157(with_segments)
+     9944    0.012    0.000    2.964    0.000 {built-in method builtins.next}
+    12413    0.430    0.000    2.913    0.000 /Users/alexlobaito/Documents/Codex/worktrees/system-map-local-files/tools/local_files.py:210(candidates)
+   302053    0.866    0.000    2.861    0.000 /opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/pathlib/__init__.py:341(drive)
+
+
