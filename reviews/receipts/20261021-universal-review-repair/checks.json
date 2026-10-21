@@ -1,0 +1,40 @@
+{
+  "artifact": "current reviewed implementation before browser acceptance",
+  "recorded_at": "2026-10-21T15:35:26.226163+00:00",
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B tools/run_repair_tests.py",
+      "exit_code": 0,
+      "tests": 221,
+      "skips": 0,
+      "log": "python-tests.txt"
+    },
+    {
+      "command": "node --test tools/test_local_file_repair_source.cjs tools/test_universal_repair_source.cjs",
+      "exit_code": 0,
+      "tests": 47,
+      "log": "node-tests.txt"
+    },
+    {
+      "command": "app/node_modules/.bin/tsc --noEmit",
+      "cwd": "app",
+      "exit_code": 0,
+      "output": "empty"
+    },
+    {
+      "command": "ESLINT_USE_FLAT_CONFIG=false eslint focused changed app files",
+      "cwd": "app",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 3,
+      "log": "focused-lint.txt"
+    }
+  ],
+  "independent_reviews": [
+    "core-integrity-review.json",
+    "ai-plugin-review.json"
+  ],
+  "review_model_family": "Codex GPT-6, context-separated; no paid cross-provider review",
+  "browser": "pending caller stage",
+  "actual_source_apply_count": 0
+}

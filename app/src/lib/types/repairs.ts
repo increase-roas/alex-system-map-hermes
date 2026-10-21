@@ -10,7 +10,7 @@ export type RepairTarget = {
   scope: 'local' | 'remote'; identity: Record<string, unknown>;
   capabilities: string[]; observed_at: string; evidence: string[];
   limitations: string[]; missing_capability?: string;
-  allowed_patch_paths?: string[]; content_format?: 'text' | 'json';
+  allowed_patch_paths?: string[]; content_format?: 'text' | 'json'; source_language?: string;
 };
 export type RepairOperation = {
   step_id: string; target_id: string; adapter_id: string; adapter_version: string;

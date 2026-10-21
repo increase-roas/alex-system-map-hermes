@@ -1,0 +1,12 @@
+
+/Users/alexlobaito/Documents/Codex/worktrees/system-map-universal-repair/app/src/app/explorer/local-files-panel.tsx
+  51:37  warning  React Hook useEffect has a missing dependency: 'load'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+/Users/alexlobaito/Documents/Codex/worktrees/system-map-universal-repair/app/src/app/explorer/repair-targets-panel.tsx
+  67:79  warning  The ref value 'requests.current' will likely have changed by the time this effect cleanup function runs. If this ref points to a node rendered by React, copy 'requests.current' to a variable inside the effect, and use that variable in the cleanup function  react-hooks/exhaustive-deps
+  68:6   warning  React Hook useEffect has a missing dependency: 'request'. Either include it or remove the dependency array                                                                                                                                                       react-hooks/exhaustive-deps
+
+✖ 3 problems (0 errors, 3 warnings)
+
+(node:22774) ESLintRCWarning: You are using an eslintrc configuration file, which is deprecated and support will be removed in v10.0.0. Please migrate to an eslint.config.js file. See https://eslint.org/docs/latest/use/configure/migration-guide for details. An eslintrc configuration file is used because you have the ESLINT_USE_FLAT_CONFIG environment variable set to false. If you want to use an eslint.config.js file, remove the environment variable. If you want to find the location of the eslintrc configuration file, use the --debug flag.
+(Use `node --trace-warnings ...` to show where the warning was created)

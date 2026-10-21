@@ -19,7 +19,7 @@ class DistributionTests(unittest.TestCase):
         repair_tests.RepairTests.setUp(self)
         builder = self.repo / 'tools/unify/build_instructions.py'
         builder.parent.mkdir(parents=True)
-        shutil.copyfile(Path.home() / '.agents/tools/unify/build_instructions.py', builder)
+        shutil.copyfile(Path(__file__).parent / 'fixtures/native_instruction_builder.py', builder)
         self.file = self.rules / 'shared.md'
         self.file.write_text(self.before)
         self.file.chmod(0o640)

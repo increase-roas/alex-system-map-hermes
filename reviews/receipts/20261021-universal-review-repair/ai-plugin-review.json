@@ -1,0 +1,307 @@
+{
+  "reviewer": "context-separated Codex same-family, no paid model calls",
+  "mode": "read-only source review, temp-only probes; no implementation edits or commits",
+  "reviewed_at": "2026-10-21T15:34:14.296151+00:00",
+  "artifact_sha256": {
+    "tools/repair_ai.py": "005159e14ae23e57390d80f8ad086e4a9f74f0a8fe0e6e1e810411748f8c6eee",
+    "tools/test_repair_ai.py": "dcd284c234fff15e110ab7c290876b18e1bd5b15f5dbfa980ee86b7dd9099933",
+    "tools/repair_plugin_adapters.py": "cb9b2a883154c8f019c0a7be348a91741ed4d6621432ede88739059cc5f68006",
+    "tools/test_repair_plugin_adapters.py": "4fbf0323eb9891c7a143ec29aeaabc5bbfa0ff22d9141099f2fde94b27836c3e",
+    "tools/universal_repairs.py": "df603b85cbaba6fd11485ba5d1675647178054f0c205bbbbc6ed2b639a26aa3a",
+    "tools/repair_local_adapters.py": "1c4d7e380b7067d91ea414f0a0e13a5fc2e405463349d144d7a42020e7e31db9",
+    "docs/UNIVERSAL_REVIEW_REPAIR.md": "b623984f7349ad5e2ebeb561eae76788a9f0766f3d022639a8738469da9d2468",
+    "tools/local_file_ai.py": "0ca2cb23b0dac5838b2784b80f26dc9c0c5f6d32cbc6af168e4bc582cdcb7dec",
+    "tools/test_local_file_ai.py": "f03082f0cedc35e6dfd67fb698c263ae348a52d9ee70614df8e5f40e263e2426",
+    "tools/test_repair_local_adapters.py": "25c163f037c4503af645a43e441bcfd28e8e0285d64e1ed707f3f95803a18dd6",
+    "tools/test_universal_repairs.py": "d60f45c4c6d3a578e813b2d3a702d934dbcd7bdd11f8a0f78d72db526a53d0f5"
+  },
+  "criteria": [
+    {
+      "criterion": "model_tool_free",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:40",
+        "tools/local_file_ai.py:53",
+        "tools/local_file_ai.py:78",
+        "tools/local_file_ai.py:203",
+        "/tmp/universal-final-python.txt:1"
+      ],
+      "finding": "repair_ai.invoke delegates isolated subscribed route; model catalog strips tools, feature/tools disabled, fresh empty cwd, API keys excluded."
+    },
+    {
+      "criterion": "exact_baseline_citations",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:115",
+        "tools/repair_ai.py:337",
+        "tools/repair_ai.py:395",
+        "/tmp/universal-final-python.txt:82"
+      ],
+      "finding": "Exact one-based full baseline line matching rejects bool line indices, candidate quotations and unknown IDs; changed target fix/preserve coverage required."
+    },
+    {
+      "criterion": "unique_assembled_edits",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:278",
+        "/tmp/universal-final-python.txt:93",
+        "/tmp/universal-final-python.txt:101"
+      ],
+      "finding": "Nonempty unique preimages, no overlaps/noops, reverse-span assembly preserves unchanged bytes/endings and sends complete candidate."
+    },
+    {
+      "criterion": "fix_and_preserve_semantics",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:401",
+        "tools/repair_ai.py:419",
+        "/tmp/universal-final-python.txt:84",
+        "/tmp/universal-final-python.txt:97"
+      ],
+      "finding": "Fix requires wrong known before to expected known after; preserve requires expected known both; all candidates switch together and decisions receive no key."
+    },
+    {
+      "criterion": "explicit_clarify",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:18",
+        "tools/repair_ai.py:158",
+        "tools/repair_ai.py:393",
+        "tools/repair_ai.py:421",
+        "/tmp/universal-final-python.txt:86"
+      ],
+      "finding": "Clarify is separately labeled, requires >=2 distinct exact baseline line citations, unknown before and expected known candidate, plus preservation; legacy schema unchanged."
+    },
+    {
+      "criterion": "errors_never_ambiguity_pass",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:439",
+        "/tmp/universal-final-python.txt:102",
+        "/tmp/universal-final-python.txt:106",
+        "/tmp/universal-final-python.txt:109"
+      ],
+      "finding": "Provider/parser failures clear proposals, return static unavailable diagnostics; ordinary unknown fix/preserve decisions fail."
+    },
+    {
+      "criterion": "bounded_no_truncation",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:24",
+        "tools/repair_ai.py:165",
+        "tools/test_repair_ai.py:499",
+        "/tmp/universal-final-python.txt:83",
+        "/tmp/universal-final-python.txt:103"
+      ],
+      "finding": "Separate 16 mutable+4 readonly limit; full UTF-8 serialized context bound 256KiB, excess rejected before provider, unchanged source content retained."
+    },
+    {
+      "criterion": "canonical_policy_bound",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/universal_repairs.py:95",
+        "tools/repair_local_adapters.py:402",
+        "tools/repair_local_adapters.py:445",
+        "/tmp/universal-ai-plugin-probes.json",
+        "/tmp/universal-final-ai-plugin-focused.txt",
+        "/tmp/universal-final-gates-focused.txt",
+        "/tmp/universal-final-actual-gates.json",
+        "/tmp/universal-complete-python.txt:118",
+        "/tmp/universal-complete-python.txt:199"
+      ],
+      "finding": "Exact-home cross-adapter shared/gates context read-only, includes skill_reference. Real gates projected to exact named section with preserved original lines and whole-file fingerprint; outside-section changes invalidate."
+    },
+    {
+      "criterion": "canonical_plugin_owner",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_plugin_adapters.py:62",
+        "tools/repair_plugin_adapters.py:131",
+        "/tmp/universal-final-python.txt:159"
+      ],
+      "finding": "Only registered directory marketplace owned Git sources within home are editable; cache is readback evidence, not selected repair source; aliases/provider caches rejected."
+    },
+    {
+      "criterion": "freeze_native_versions_and_publication",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_plugin_adapters.py:269",
+        "tools/repair_plugin_adapters.py:333",
+        "/tmp/universal-final-python.txt:150",
+        "/tmp/universal-plugin-multi-probe.json"
+      ],
+      "finding": "Native release metadata and shared marketplace version changes frozen before approval, both host manifests handled, one exact-path Git publication before materialization."
+    },
+    {
+      "criterion": "preapproval_no_native_plugin_calls",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_plugin_adapters.py:131",
+        "tools/repair_plugin_adapters.py:346",
+        "tools/repair_plugin_adapters.py:360",
+        "/tmp/universal-final-python.txt:153",
+        "/tmp/universal-ai-plugin-probes.json",
+        "/tmp/universal-final-ai-plugin-focused.txt"
+      ],
+      "finding": "Discover/read/prepare/preflight/backup inspect persisted registries/cache bytes only, no native plugin CLI/app-server calls. Git read-only and syntax parsers separately allowed. Stale unselected package source blocks all effects."
+    },
+    {
+      "criterion": "actual_native_fixture_forward_undo_stale",
+      "status": "VERIFIED",
+      "evidence": [
+        "/tmp/universal-complete-python.txt:155",
+        "/tmp/universal-complete-python.txt:153",
+        "/tmp/universal-complete-python.txt:154"
+      ],
+      "finding": "Current consolidated suite independently read in full: actual installed Codex+Claude temp tests pass for single and TWO packages, one shared Git publication/inverse, conditional Undo, stale-version proposal zero-cache-change. No skips."
+    },
+    {
+      "criterion": "backup_conditional_inverse",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_plugin_adapters.py:368",
+        "tools/repair_plugin_adapters.py:481",
+        "/tmp/universal-final-python.txt:154",
+        "/tmp/universal-final-python.txt:160",
+        "/tmp/universal-final-python.txt:162",
+        "/tmp/universal-plugin-multi-probe.json",
+        "/tmp/universal-final-recovery-lifecycle-focused.txt"
+      ],
+      "finding": "Backups read back; newer selected source/cache retained and blocked; stale copies backed up and inverse restores canonical baseline honestly. Fresh two-package mock-boundary repro completes/undoes all eight steps and four copies."
+    },
+    {
+      "criterion": "reconcile_forward_failure",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_plugin_adapters.py:392",
+        "tools/repair_plugin_adapters.py:461",
+        "tools/universal_repairs.py:295",
+        "/tmp/universal-plugin-forward-reconcile-probe.json",
+        "/tmp/universal-final-recovery-lifecycle-focused.txt",
+        "/tmp/universal-complete-python.txt:159",
+        "/tmp/universal-complete-python.txt:160",
+        "/tmp/universal-complete-python.txt:164"
+      ],
+      "finding": "Fresh exact injected no-effect native failure readback returns not_applied; coordinator queues and completes same approved job. Partial forward and inverse refresh skip already completed native copies; inverse publishes no extra commit."
+    },
+    {
+      "criterion": "truthful_runtime_and_stale_limits",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_plugin_adapters.py:340",
+        "tools/repair_plugin_adapters.py:431",
+        "docs/UNIVERSAL_REVIEW_REPAIR.md:21",
+        "docs/UNIVERSAL_REVIEW_REPAIR.md:62"
+      ],
+      "finding": "Receipts distinguish installed bytes from existing desktop activation; frozen preview and guide disclose inverse restores canonical bytes, not pre-existing stale inconsistencies."
+    },
+    {
+      "criterion": "isolated_native_process_lifecycle",
+      "status": "VERIFIED",
+      "finding": "Private process group per invocation; finally SIGKILLs only owned group and waits wrapper on timeout/error/success. Real disposable wrapper launches SIGTERM-ignoring child; child is absent/dead after all 3 exit modes. No model calls. Environment whitelist, command flags, bounded schema/output and static failure remain.",
+      "evidence": [
+        "tools/local_file_ai.py:204",
+        "tools/test_local_file_ai.py:518",
+        "/tmp/universal-final-recovery-lifecycle-focused.txt",
+        "/tmp/universal-complete-python.txt:32"
+      ]
+    }
+  ],
+  "machine_acceptance_table": [
+    {
+      "item": "file:tools/repair_ai.py non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "file:tools/test_repair_ai.py non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "file:tools/repair_plugin_adapters.py non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "file:tools/test_repair_plugin_adapters.py non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "file:tools/universal_repairs.py non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "file:tools/repair_local_adapters.py non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "file:docs/UNIVERSAL_REVIEW_REPAIR.md non-empty",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "json:/tmp/universal-ai-plugin-probes.json",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "json:/tmp/universal-plugin-multi-probe.json",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "json:/tmp/universal-plugin-forward-reconcile-probe.json",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "json:/tmp/universal-final-actual-gates.json",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "saved Python suite: 210 tests, OK, no skips",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "cmd output:/tmp/universal-final-ai-plugin-focused.txt",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "cmd output:/tmp/universal-final-gates-focused.txt",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "cmd output:/tmp/universal-final-recovery-lifecycle-focused.txt",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "probe readback:/tmp/universal-plugin-forward-reconcile-probe.json",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "probe readback:/tmp/universal-plugin-multi-probe.json",
+      "status": "VERIFIED"
+    },
+    {
+      "item": "current consolidated suite: 221 ok, zero skips, actual two-plugin native PASS",
+      "status": "VERIFIED"
+    }
+  ],
+  "verdict": "VERIFIED",
+  "validation_note": "Current consolidated 221-test raw output read and parsed: 221 ok, zero skips, OK footer. Additional independent temp probes and focused regression executions provide direct readback. No implementation edits/commits, no real-source Apply, no provider model call or paid fallback from verifier.",
+  "final_suite": {
+    "path": "/tmp/universal-complete-python.txt",
+    "sha256": "f0351a5a6bcec7d7b16e4e4e7cbeaea6b1c75331e96d9650e088881d79435c53",
+    "tests": 221,
+    "all_statuses": "ok",
+    "skips": 0,
+    "footer": "Ran 221 tests in 100.472s; OK",
+    "focused_pointers": {
+      "test_actual_two_plugins_share_one_publication_and_one_inverse": "/tmp/universal-complete-python.txt:155",
+      "test_actual_native_both_copies_through_coordinator_and_undo": "/tmp/universal-complete-python.txt:153",
+      "test_actual_stale_version_preproposal_leaves_cache_unchanged": "/tmp/universal-complete-python.txt:154",
+      "test_every_preapproval_phase_uses_zero_native_calls": "/tmp/universal-complete-python.txt:157",
+      "test_forward_partial_refresh_resumes_only_missing_copy": "/tmp/universal-complete-python.txt:159",
+      "test_forward_refresh_zero_effect_failure_reconciles_and_resumes": "/tmp/universal-complete-python.txt:160",
+      "test_lost_inverse_refresh_reconciles_remaining_copies_without_new_commit": "/tmp/universal-complete-python.txt:164",
+      "test_canonical_gates_excerpt_is_readonly_screened_and_full_file_bound": "/tmp/universal-complete-python.txt:118",
+      "test_provider_wrapper_descendants_stop_on_timeout_error_and_success": "/tmp/universal-complete-python.txt:32",
+      "test_cross_adapter_local_sources_include_exact_home_canonical_context": "/tmp/universal-complete-python.txt:199",
+      "test_only_continuation_ready_preflight_gets_forward_marker": "/tmp/universal-complete-python.txt:206"
+    }
+  }
+}

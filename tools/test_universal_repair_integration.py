@@ -23,7 +23,7 @@ from repair_contracts import RepairError
 from repair_local_adapters import LocalAdapter
 from repair_native_adapters import CodexAdapter
 from repair_registry import RepairRegistry
-from repair_remote_adapters import PROVIDERS, ProviderAdapter, RemoteFileAdapter
+from repair_remote_adapters import PROVIDERS, ProviderAdapter, RemoteFileAdapter, NativeProviderExchange
 from repair_remote_runner import run_request
 from universal_repairs import Coordinator
 
@@ -62,7 +62,7 @@ class FileConfigOwner:
 
 
 class HttpProviderOwner:
-    """Loopback native API fixture: disk persistence, version CAS, typed PATCH."""
+    """Actual Neon wire contract over loopback: typed update, no server CAS."""
 
     def __init__(self, path):
         self.path = path
@@ -82,14 +82,16 @@ class HttpProviderOwner:
             def do_GET(self):
                 if self.path != '/projects/fixture':
                     return self.reply(404, {})
-                self.reply(200, json.loads(owner.path.read_text()))
+                state = json.loads(owner.path.read_text())
+                self.reply(200, {'id': 'fixture', 'updated_at': state['version'], **state['config']})
 
             def do_PATCH(self):
                 body = json.loads(self.rfile.read(int(self.headers['Content-Length'])))
                 state = json.loads(owner.path.read_text())
-                if self.path != '/projects/fixture' or body['expected_version'] != state['version']:
-                    return self.reply(409, {'error': 'version_conflict'})
-                changes = body['patch']
+                if self.path != '/projects/fixture': return self.reply(404, {})
+                if set(body) != {'project_id', 'project'} or body['project_id'] != 'fixture':
+                    return self.reply(422, {'error': 'not_native_neon_payload'})
+                changes = body['project']
                 if set(changes) != {'name'} or not isinstance(changes['name'], str):
                     return self.reply(422, {'error': 'invalid_project_name'})
                 state['config'].update(changes)
@@ -107,24 +109,46 @@ class HttpProviderOwner:
         self.server.server_close()
         self.thread.join()
 
-    def exchange(self, action, target, payload=None):
-        if action == 'dry_run':
-            valid = set(payload['patch']) == {'name'} and isinstance(payload['patch']['name'], str)
-            return {'ok': valid, 'schema_revision': PROVIDERS['neon_project']['revision']}
-        if action not in ('read', 'write'):
-            raise AssertionError(action)
+    def transport(self, slug, account, payload):
+        assert account == PROVIDERS['neon_project']['account']
+        writing = slug == 'CUSTOM_NEON_MCP_UPDATE_PROJECT'
+        assert writing or slug == 'CUSTOM_NEON_MCP_DESCRIBE_PROJECT'
         request = Request('http://127.0.0.1:' + str(self.server.server_port) + '/projects/fixture',
-                          method='PATCH' if action == 'write' else 'GET',
-                          data=json.dumps(payload).encode() if action == 'write' else None,
+                          method='PATCH' if writing else 'GET',
+                          data=json.dumps(payload).encode() if writing else None,
                           headers={'Content-Type': 'application/json'})
         with urlopen(request, timeout=5) as response:
             result = json.load(response)
-        if action == 'write':
-            if self.lose_next_response:
-                self.lose_next_response = False
-                raise RepairError('remote_transport_uncertain')
-            return result
-        return {**result, 'identity': target['identity'], 'schema_revision': PROVIDERS['neon_project']['revision']}
+        if writing and self.lose_next_response:
+            self.lose_next_response = False
+            raise RepairError('remote_transport_uncertain')
+        return result
+
+    def exchange(self, action, target, payload=None):
+        # Only transport is substituted; payload construction, final GET and
+        # local serialization are the production NativeProviderExchange.
+        with patch('repair_remote_adapters.composio', side_effect=self.transport):
+            return NativeProviderExchange('neon_project')(action, target, payload)
+
+
+class NativeNeonLoopbackTests(unittest.TestCase):
+    def test_actual_native_wire_owner_roundtrip_without_fictional_server_cas(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path=Path(tmp)/'provider.json'
+            path.write_text(json.dumps({'version':'1','config':{'name':'old','other':'keep'}}))
+            owner=HttpProviderOwner(path)
+            try:
+                spec=PROVIDERS['neon_project']
+                adapter=ProviderAdapter('neon_project',exchange=owner.exchange,registrations=[{'identity':{
+                    'object_id':'fixture','project_id':'fixture','account':spec['account']}}])
+                target=adapter.discover()[0];op=adapter.prepare(target,adapter.read(target),{'patch':{'name':'new'}})
+                backup=adapter.backup(target,op,tmp);result=adapter.apply(target,op,backup)
+                self.assertTrue(adapter.verify(target,op,result)['ok'])
+                self.assertTrue(adapter.undo(target,op,backup,result)['ok'])
+                self.assertEqual(owner.writes,2)
+                self.assertEqual(json.loads(path.read_text())['config'],{'name':'old','other':'keep'})
+                self.assertIn('no server-side version condition',' '.join(result['limitations']))
+            finally: owner.close()
 
 
 class UniversalRepairIntegrationTests(unittest.TestCase):

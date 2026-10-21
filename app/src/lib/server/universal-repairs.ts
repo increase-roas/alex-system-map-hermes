@@ -28,7 +28,7 @@ export function runUniversalRepair(input: Record<string, unknown>): Promise<Repa
       if (code !== 0) return failure();
       try {
         const result = JSON.parse(output) as RepairBridgeResult;
-        if (![200, 400, 409, 422, 503].includes(result.status)) return failure();
+        if (![200, 400, 404, 409, 422, 503].includes(result.status)) return failure();
         finish(result);
       } catch { failure(); }
     });

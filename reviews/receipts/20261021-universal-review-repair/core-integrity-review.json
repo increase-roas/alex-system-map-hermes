@@ -1,0 +1,138 @@
+{
+  "status": "VERIFIED",
+  "reviewer": "context-separated Codex GPT-6 family",
+  "scope": "read-only final core local remote UI bridge acceptance review; no implementation edits",
+  "root": "/Users/alexlobaito/Documents/Codex/worktrees/system-map-universal-repair",
+  "findings": [
+    {
+      "original_finding": 1,
+      "status": "VERIFIED",
+      "criterion": "Original job survives request loss and unresolved jobs prevent replacement",
+      "evidence": "app/src/app/explorer/repair-targets-panel.tsx:107-133; tools/test_universal_repair_source.cjs; /tmp/universal-final-node.txt"
+    },
+    {
+      "original_finding": 2,
+      "status": "VERIFIED",
+      "criterion": "Composite Python credentials and fallback defaults withheld before model call",
+      "evidence": "tools/repair_local_checks.py:30-113; tools/test_repair_local_adapters.py:278; /tmp/universal-final-python.txt"
+    },
+    {
+      "original_finding": 3,
+      "status": "VERIFIED",
+      "criterion": "Portable pinned builder replaces private-home test dependency",
+      "evidence": "tools/fixtures/native_instruction_builder.json; tools/test_local_file_distribution.py:22; tools/test_repair_local_adapters.py:500"
+    },
+    {
+      "original_finding": 4,
+      "status": "VERIFIED",
+      "criterion": "Durable inverse direction and partial inverse recovery",
+      "evidence": "tools/universal_repairs.py:330-423; tools/repair_local_adapters.py:731-764; tools/test_repair_local_adapters.py:386; /tmp/universal-final-inverse-fixed.json"
+    },
+    {
+      "original_finding": 5,
+      "status": "VERIFIED",
+      "criterion": "Remote final inode/hash/mode anchor rejects intervening edits; residual final window disclosed",
+      "evidence": "tools/repair_remote_runner.py:115-137; tools/repair_remote_adapters.py:48; tools/test_repair_remote_adapters.py:50"
+    },
+    {
+      "original_finding": 6,
+      "status": "VERIFIED",
+      "criterion": "Native provider final GET and local serialization are explicitly nonconditional",
+      "evidence": "tools/repair_remote_adapters.py:44-60,436-497; tools/test_repair_remote_adapters.py:271-324"
+    },
+    {
+      "original_finding": 7,
+      "status": "VERIFIED",
+      "criterion": "Late source read success, failure and busy cleanup ignored after navigation",
+      "evidence": "app/src/app/explorer/repair-targets-panel.tsx:127-129; /tmp/universal-final-node.txt"
+    },
+    {
+      "original_finding": 8,
+      "status": "VERIFIED",
+      "criterion": "Dead nonterminal worker exposes same-job recovery",
+      "evidence": "app/src/app/explorer/repair-targets-panel.tsx:163; tools/universal_repairs.py:363-376; /tmp/universal-final-node.txt"
+    },
+    {
+      "original_finding": 9,
+      "status": "VERIFIED",
+      "criterion": "Lost push resumes exact existing forward or restoration commit",
+      "evidence": "tools/repair_local_adapters.py:911-943; tools/test_repair_local_adapters.py:341-369,449; /tmp/universal-final-python.txt"
+    },
+    {
+      "original_finding": 10,
+      "status": "VERIFIED",
+      "criterion": "Known Undo conflicts block; post-effect errors remain uncertain and reconcile inverse",
+      "evidence": "tools/repair_local_adapters.py:808-840; tools/repair_remote_adapters.py:209-217; tools/universal_repairs.py:408-419; /tmp/universal-final-inverse-fixed.json"
+    },
+    {
+      "original_finding": 11,
+      "status": "VERIFIED",
+      "criterion": "Every reviewed unchanged source and same-home canonical context are bound",
+      "evidence": "tools/universal_repairs.py:95-105,132-142,239-249,300; tools/test_universal_repairs.py:249-269,318-364"
+    },
+    {
+      "original_finding": 12,
+      "status": "VERIFIED",
+      "criterion": "CLI 404 and actionable AI 422 survive TS bridge and poller",
+      "evidence": "tools/universal_repairs.py:466-472; app/src/lib/server/universal-repairs.ts:30; /tmp/universal-final-node.txt; /tmp/universal-final-python.txt"
+    },
+    {
+      "original_finding": 13,
+      "status": "VERIFIED",
+      "criterion": "Discovery uses aggregate deadline and terminable process groups",
+      "evidence": "tools/repair_registry.py:14-51,70-108; tools/test_universal_repairs.py:407; /tmp/universal-final-python.txt"
+    },
+    {
+      "original_finding": 14,
+      "status": "VERIFIED",
+      "criterion": "Native wire fixtures use SigNoz replacement and Neon no-server-CAS semantics",
+      "evidence": "tools/test_repair_remote_adapters.py:212-269; tools/test_universal_repair_integration.py:64-151; /tmp/universal-final-python.txt"
+    }
+  ],
+  "independent_probes": [
+    {
+      "command": "PYTHONPATH=tools python3 -B -m unittest test_repair_local_adapters.LocalAdapterTests.test_coordinator_recovers_interrupted_publication_inverse test_universal_repairs.CoordinatorTests.test_cross_adapter_local_sources_include_exact_home_canonical_context -v",
+      "exit_code": 0,
+      "tests": 2,
+      "subcases": [
+        "first_member",
+        "all_members",
+        "inverse_push",
+        "unknown_member",
+        "skill",
+        "hook",
+        "executable",
+        "skill_reference"
+      ]
+    },
+    {
+      "evidence": "/tmp/universal-final-inverse-fixed.json",
+      "result": "original Coordinator reproduction now reconciles undoing then worker undone with disk Git and remote restored"
+    }
+  ],
+  "suite_evidence": {
+    "python": "/tmp/universal-final-python.txt: Ran 210 tests / OK",
+    "node": "/tmp/universal-final-node.txt: tests 47 pass 47 fail 0",
+    "tsc": "/tmp/universal-final-tsc.txt empty output only; primary owns recorded exit-status evidence"
+  },
+  "residual_limits": [
+    "Remote immediate final anchored compare followed by atomic rename is not atomic compare-and-swap; external writer in final gap can be overwritten.",
+    "Native provider lacks external conditional-write predicate; same registered object writes serialize only on this machine; observed readback does not exclude concurrent external edits.",
+    "This is fixture/local verification, not approval or proof of any real source/provider mutation."
+  ],
+  "file_sha256": {
+    "tools/universal_repairs.py": "57b7b473244f9bfb909c13e2374a4362482abdd4e5099abe538c8bb848b4324d",
+    "tools/repair_registry.py": "33e51f93277629a46e0753842dc752cfad2d412f383e2f9a4155bba1356d385c",
+    "tools/repair_local_adapters.py": "550ead7e525b04865f02ab80399e04a426ac5efc31464b8271e5189b645beb48",
+    "tools/repair_local_checks.py": "d4e9221241fd31a46fd6678dc79c1dea9c687f8065c1ce3eebab4a1b10d746be",
+    "tools/repair_remote_adapters.py": "a5e24c3bd1d10d5e27376371feeb62bfb4460463cd7289614f5a2d8d7175a0f5",
+    "tools/repair_remote_runner.py": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69",
+    "app/src/app/explorer/repair-targets-panel.tsx": "32b035cf00029abe1532c6d85be5fbe0812c620509ca9be4439dc2a042bca6b9",
+    "app/src/lib/server/universal-repairs.ts": "ffa9fcbc288cd37f2db5ff3015f1c871ce1b06d8444fd4964d877ceae00ce29a",
+    "tools/test_universal_repairs.py": "3624ad23c22661a03dc8afb684f23e6226779394306e75ee99e68339d604a48c",
+    "tools/test_repair_local_adapters.py": "934b24a4222260df5e2b5ccbf2fe62919def9e5911eef7c6319d00ec4cf1ae06",
+    "tools/test_repair_remote_adapters.py": "22051ef92c011a596e545a2f02d08c4ac008d918bf9d00380b529076c637aed0",
+    "tools/test_universal_repair_integration.py": "6dbd0fbb615301b78cdd9f5e2745d8dbb9c4cfe796db8958b52c6770c85494e0"
+  },
+  "blockers": []
+}

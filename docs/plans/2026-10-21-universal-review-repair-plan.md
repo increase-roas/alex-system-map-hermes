@@ -45,7 +45,7 @@ A local success also cannot tell him whether a remote machine or app accepted th
 **Coverage and proposal**
 
 - R1. Review & fix supports rules, hooks, skills, app settings, CLI configs, owned executable sources and registered remote file/API targets; each supported category includes discovery, proposal, tests, apply, readback and conditional Undo.
-- R2. AI creates citation-backed proposed changes and fix/preserve behavioral checks using the existing isolated subscribed model route; native checks supplement simulated choices without mislabeling simulation as live execution.
+- R2. AI creates citation-backed proposed changes and fix/preserve behavioral checks using the existing isolated subscribed model route; native checks supplement simulated choices without mislabeling simulation as live execution. A separately labeled clarification case may resolve a genuinely conflicting baseline: it cites at least two distinct current directives, observes an ambiguous before decision and a known expected candidate decision. Ordinary fix and preserve cases retain their known-answer requirements.
 - R3. The UI displays the complete immutable bundle, exact public diffs, all affected targets, checks and limitations before one approval; browser input never supplies trusted checks, commands, accounts or new targets.
 
 **Application and verification**
@@ -78,6 +78,7 @@ Provider-managed plugin/system caches remain owned by their provider; their cano
 - AE3. **Covers R6, R7.** A remote write times out after taking effect; readback establishes the exact resulting state, later targets remain untouched, and retry does not repeat the uncertain write.
 - AE4. **Covers R4, R7.** Undo encounters a later unrelated key edit; key-scoped restoration preserves it, while a changed repaired key is refused without overwriting newer work.
 - AE5. **Covers R8, R11.** The tab closes during synchronization; reopening shows the original job's evidence and truthful pending targets rather than starting another application.
+- AE6. **Covers R1, R2, R4.** An owned receipt guard or handoff rule blocks harmless work while the canonical instructions say to fix and continue. The actual canonical source is registered, the model receives the current gates as read-only context, and the proposal narrows the excess restriction while preserving spending, contact, production, deletion, security and authentic-approval boundaries. A provider-managed cache is never substituted for an owned plugin's source and native refresh.
 
 ---
 
@@ -295,7 +296,7 @@ Any needed shared-contract change returns to U1's owner before dependent work co
 - **Goal:** Deliver native app configuration and remote file/API repair through existing routes.
 - **Requirements:** R1, R4–R7, R9–R11; AE2–AE4; KTD3, KTD5–KTD7.
 - **Dependencies:** U1 shared contract; U2 exposes reusable pure local checks without owning U3 files.
-- **Files:** New `tools/repair_native_adapters.py`, `tools/repair_remote_adapters.py`, `tools/repair_remote_runner.py`, `tools/test_repair_native_adapters.py`, `tools/test_repair_remote_adapters.py`.
+- **Files:** New `tools/repair_native_adapters.py`, `tools/repair_remote_adapters.py`, `tools/repair_remote_runner.py`, `tools/repair_plugin_adapters.py`, `tools/test_repair_native_adapters.py`, `tools/test_repair_remote_adapters.py`, `tools/test_repair_plugin_adapters.py`.
 - **Approach:** Implement explicit Codex protocol calls and native inverse writes. Resolve native payload contracts through the existing registered Composio route and vendor schemas, then wrap fixed SSH/Orgo runner operations and typed provider definitions. Do not equate custom-tool metadata lookup failure with execution failure. No account or provider substitution is authorized by discovery failure. Bind each target's account, tool/schema revision, host/company/project/bank/object and owner readback; Paperclip and Hindsight config use their existing documented native exceptions.
 - **Patterns to follow:** Installed Codex app-server schemas and versioned fixture roundtrip evidence; current connector cards and provider OpenAPI/tool schemas.
 - **Execution note:** Start with the installed Codex protocol and disposable stdio fixture, then protocol-faithful SSH/API fixtures. Real systems are read-only discovery/proposal evidence under R10.
@@ -309,6 +310,7 @@ Any needed shared-contract change returns to U1's owner before dependent work co
   - Custom-tool metadata `ToolNotFound` cannot override successful actual execution evidence; corresponding target discovery still requires its exact native object and named-account readback.
   - Paperclip revision rollback uses the native endpoint when its captured revision and current state satisfy the inverse contract; test it on the disposable API fixture, never the real CEO.
   - Paperclip fixture keeps token acquisition/use on the mini side and emits only the safe projection.
+  - Owned local plugin fixture resolves its registered canonical marketplace, freezes any required release metadata change before approval, publishes exact source paths, refreshes installed Codex/Claude caches through native owners and conditionally restores the source and caches. Existing desktop runtime activation remains a separate receipt.
 - **Verification:** Native Codex and remote SSH/API boundaries are exercised, every registered category has a complete adapter lifecycle, and live read-only coverage is reported separately from fixture mutation proof.
 
 ### U4. Universal AI proposal and checks

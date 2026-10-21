@@ -46,7 +46,7 @@ test('lost approval response recovers original job after close and reopen withou
 });
 test('transient missing job keeps recovery ID and visibly waits for original job', async () => {
   const h = harness('plan-one'); h.render(); h.render();
-  h.reads.find(r => r.url === '/api/repairs/jobs/plan-one').resolve({error:'not yet visible'},404); await tick();
+  h.reads.find(r => r.url === '/api/repairs/jobs/plan-one').resolve({code:'record_unavailable',error:'Repair operation unavailable; inspect the recorded safe status.'},404); await tick();
   assert.equal(h.storage.get('universal-repair-job'),'plan-one');
   assert.match(text(h.render()),/Waiting for.*original job|Original job lookup pending/);
   assert.equal(h.reads.filter(r => r.options.method === 'POST').length,0);
@@ -65,4 +65,47 @@ test('ambiguous approval rejection retains original recovery ID', async () => {
   h.reads[2].resolve({code:'record_unavailable',error:'Operation unavailable'},409); await tick();
   assert.equal(h.storage.get('universal-repair-job'),'plan-one');
   assert.match(text(h.render()),/Original job lookup pending/);
+});
+
+const durable = (status, extra = {}) => ({schema_version:1,job_id:'original-job',plan_id:'original-job',digest:'d',status,steps:[],events:[],unknown_effect:null,updated_at:'today',...extra});
+for (const status of ['unknown', 'blocked']) test(`${status} job preserves recovery ID and blocks replacement approval`, async () => {
+  const h = harness('original-job'); h.render(); h.render(); h.reads[0].resolve({targets:[target],limitations:[]});
+  h.reads.find(r => r.url.endsWith('/jobs/original-job')).resolve(durable(status,{unknown_effect:status === 'unknown' ? 'uncertain write' : null})); await tick();
+  const tree = h.render(); assert.equal(button(tree,'Review & fix').props.disabled,true); assert.equal(button(tree,'Select all matching targets').props.disabled,true);
+  assert.equal(h.storage.get('universal-repair-job'),'original-job');
+});
+for (const outcome of ['success','failure']) test(`source navigation ignores late ${outcome}, including busy cleanup`, async () => {
+  const h = await proposed(); button(h.render(),'Read current source').props.onClick(); const old = h.reads.at(-1);
+  const props = {requestedSource:{fileId:target.id,path:'/next',nonce:1}}; h.render(props); h.render(props);
+  button(h.render(props),'Read current source').props.onClick(); const current = h.reads.at(-1);
+  if (outcome === 'success') old.resolve({target,snapshot:'STALE_PREVIOUS_SOURCE'}); else old.resolve({code:'analysis_context_changed',error:'STALE_ERROR'},409);
+  await tick(); let tree = h.render(props); assert.doesNotMatch(text(tree),/STALE_PREVIOUS_SOURCE|STALE_ERROR|Source or native version changed/); assert.equal(button(tree,'Read current source').props.disabled,true);
+  current.resolve({target,snapshot:'CURRENT_SOURCE'}); await tick(); tree = h.render(props); assert.match(text(tree),/CURRENT_SOURCE/);
+});
+for (const status of ['queued','preflight','applying','undoing']) test(`orphan ${status} offers same-job recovery without apply`, async () => {
+  const h = harness('original-job'); h.render(); h.render(); h.reads.find(r => r.url.endsWith('/jobs/original-job')).resolve(durable(status)); await tick();
+  button(h.render(),'Recover recorded job').props.onClick(); const read = h.reads.at(-1); assert.equal(read.url,'/api/repairs/jobs/original-job'); assert.deepEqual(JSON.parse(read.options.body),{action:'resume'});
+  assert.equal(h.storage.get('universal-repair-job'),'original-job'); assert.equal(h.reads.filter(r=>r.options.body && JSON.parse(r.options.body).action === 'apply').length,0);
+});
+test('AI no proposals shows failed stage and checks without stale warning or approval', async () => {
+  const h = await proposed(); nodes(h.render(),n=>n.type==='textarea')[0].props.onChange({target:{value:'try again'}}); button(h.render(),'Review & fix').props.onClick();
+  h.reads.at(-1).resolve({code:'ai_no_proposals',error:'AI returned no repair proposals.',diagnostics:{stage:'proposal_validation',reason:'empty_proposals'},checks:[{...check,status:'failed',evidence:['No proposed behavior was tested.']}],limitations:['No repair plan was created.']},422); await tick();
+  const tree = h.render(); assert.match(text(tree),/proposal validation/); assert.match(text(tree),/simulated behavior\s*:\s*failed/); assert.match(text(tree),/No repair plan was created/); assert.doesNotMatch(text(tree),/Source or native version changed/); assert.equal(button(tree,'Approve tested bundle'),undefined);
+});
+test('non-stale conflict does not claim source changed', async () => {
+  const h = await proposed(); nodes(h.render(),n=>n.type==='textarea')[0].props.onChange({target:{value:'retry'}}); button(h.render(),'Review & fix').props.onClick(); h.reads.at(-1).resolve({code:'ai_unavailable',error:'Model unavailable'},409); await tick(); assert.doesNotMatch(text(h.render()),/Source or native version changed/);
+});
+test('selecting 143 targets keeps selection visible and blocks request above batch limit', async () => {
+  const h = harness(); h.render(); h.reads[0].resolve({targets:Array.from({length:143},(_,i)=>({...target,id:`target-${i}`})),limitations:[]}); await tick(); button(h.render(),'Select all matching targets').props.onClick(); nodes(h.render(),n=>n.type==='textarea')[0].props.onChange({target:{value:'fix'}}); const tree=h.render(); assert.match(text(tree),/143\s+selected/); assert.match(text(tree),/at most\s+16/); assert.equal(button(tree,'Review & fix').props.disabled,true); button(tree,'Review & fix').props.onClick(); assert.equal(h.reads.length,1);
+});
+test('actual CLI missing-job envelope keeps original browser recovery pending', async () => {
+  const { execFile } = require('node:child_process');
+  const { promisify } = require('node:util');
+  const state = fs.mkdtempSync(path.join(require('node:os').tmpdir(),'repair-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-'));
+  try {
+    const result = await promisify(execFile)('python3',['-B','-c',"import json,sys; from unittest.mock import patch; import universal_repairs; sys.argv=['universal_repairs.py','--state',sys.argv[1]]; from io import StringIO;\nwith patch('sys.stdin',StringIO(json.dumps({'action':'job','job_id':'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'}))), patch('universal_repairs.default_registry', return_value=None): universal_repairs.main()",state],{cwd:path.resolve(__dirname),env:{...process.env,PYTHONDONTWRITEBYTECODE:'1'}});
+    const envelope = JSON.parse(result.stdout); assert.equal(envelope.status,404); assert.equal(envelope.code,'record_unavailable');
+    const h=harness('aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'); h.render(); h.render(); h.reads.find(r=>r.url.endsWith('/jobs/aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa')).resolve(envelope.data ?? {error:envelope.error,code:envelope.code},envelope.status); await tick();
+    assert.match(text(h.render()),/Original job lookup pending/); assert.equal(h.storage.get('universal-repair-job'),'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa'); assert.equal(button(h.render(),'Review & fix').props.disabled,true); assert.equal(h.reads.filter(r=>r.options.method==='POST').length,0);
+  } finally { fs.rmSync(state,{recursive:true,force:true}); }
 });

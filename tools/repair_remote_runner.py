@@ -112,12 +112,28 @@ def set_field(value, key, item):
     else: current.pop(parts[-1], None)
 
 
-def atomic_write(path, data, mode):
+def anchored_read(path):
+    # Bind bytes and metadata to one opened inode; do not follow a swapped symlink.
+    fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW)
+    with os.fdopen(fd, 'rb') as stream:
+        info = os.fstat(stream.fileno())
+        data = stream.read()
+    if not stat.S_ISREG(info.st_mode): raise RepairError('remote_stale')
+    anchor = (info.st_dev, info.st_ino, stat.S_IMODE(info.st_mode), digest(data), info.st_mtime_ns)
+    return data, info, anchor
+
+
+def atomic_write(path, data, mode, expected_anchor):
     fd, name = tempfile.mkstemp(prefix='.repair-', dir=path.parent)
     try:
         with os.fdopen(fd, 'wb') as stream:
             stream.write(data); stream.flush(); os.fsync(stream.fileno())
         os.chmod(name, mode)
+        # This is an immediate comparison followed by atomic replacement, NOT
+        # atomic compare-and-swap. An external writer can still race this window.
+        try: _, _, current_anchor = anchored_read(path)
+        except OSError: raise RepairError('remote_stale') from None
+        if current_anchor != expected_anchor: raise RepairError('remote_stale')
         os.replace(name, path)
     finally:
         if os.path.exists(name): os.unlink(name)
@@ -138,12 +154,12 @@ def run_request(request, roots=None, host=None):
                 files.extend({'root':name,'relative':item.name} for item in sorted(root.glob('*.md')) if item.is_file() and not item.is_symlink())
         return {'host':host,'files':files}
     path = resolve(request, ROOTS if roots is None else roots, host)
-    data = path.read_bytes()
-    mode = stat.S_IMODE(path.stat().st_mode)
+    data, source_info, source_anchor = anchored_read(path)
+    mode = stat.S_IMODE(source_info.st_mode)
     value = parse(path, data)
     action = request.get('action')
     snapshot = {'fingerprint': digest(data), 'mode': mode, 'projection': redact(value), 'host': host,
-                'version': str(path.stat().st_mtime_ns)}
+                'version': str(source_info.st_mtime_ns)}
     if action == 'read': return snapshot
     if action not in ('preflight', 'backup', 'apply', 'undo', 'check'): raise RepairError('remote_action_unregistered')
     patch = request.get('patch')
@@ -181,7 +197,9 @@ def run_request(request, roots=None, host=None):
         raise RepairError('remote_stale')
     if action in ('preflight','check'): return {'ok': True, 'fingerprint':snapshot['fingerprint'], 'candidate_fingerprint':digest(new_data)}
     if action == 'backup': return {'inverse':inverse, 'before_fingerprint':snapshot['fingerprint'], 'mode':mode}
-    atomic_write(path,new_data,mode)
+    # Revalidate registered path components too, before final anchored comparison.
+    resolve(request, ROOTS if roots is None else roots, host)
+    atomic_write(path,new_data,mode,source_anchor)
     back = path.read_bytes()
     if back != new_data or stat.S_IMODE(path.stat().st_mode) != mode: raise RepairError('remote_readback_failed')
     return {'ok':True, 'fingerprint':digest(back), 'projection':redact(parse(path,back)), 'mode':mode, 'host':host}

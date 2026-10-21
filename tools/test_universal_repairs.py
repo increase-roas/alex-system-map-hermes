@@ -4,7 +4,9 @@ import subprocess
 import tempfile
 import sys
 import time
-import threading
+import multiprocessing
+import os
+import fcntl
 import unittest
 from pathlib import Path
 from repair_contracts import RepairError
@@ -231,6 +233,157 @@ class CoordinatorTests(unittest.TestCase):
             service.propose(['alpha'], 'fix alpha')
         self.assertEqual(self.adapter.effects, [])
 
+    def test_only_continuation_ready_preflight_gets_forward_marker(self):
+        self.service.proposer = lambda intent, sources: {
+            'proposals': [{'target_id': source['target']['id'], 'proposal': {'text': 'new'}} for source in sources]}
+        plan = self.service.propose(['alpha', 'beta'], 'fix both')
+        frozen = self.service.checked_plan(plan['plan_id'])
+        self.assertEqual(set(frozen['reviewed_context']), {'alpha', 'beta'})
+        calls = []
+        preflight = self.adapter.preflight
+        def observed_preflight(target, operation):
+            calls.append((target['id'], operation.get('recovery_phase')))
+            return preflight(target, operation)
+        self.adapter.preflight = observed_preflight
+        verify = self.adapter.verify
+        self.adapter.verify = lambda *_: {'ok': False}
+        job = self.service.approve(plan['plan_id'], plan['digest'])
+        self.assertEqual(self.service.run_job(job['job_id'])['status'], 'blocked')
+        self.assertTrue(calls)
+        self.assertTrue(all(phase is None for _, phase in calls))
+        self.adapter.verify = verify
+        calls.clear()
+        self.service.resume(job['job_id'])
+        self.assertEqual(self.service.run_job(job['job_id'])['status'], 'completed')
+        self.assertEqual(calls, [('beta', 'forward'), ('beta', None)])
+        self.assertEqual(self.service.checked_plan(plan['plan_id']), frozen)
+        self.assertTrue(all('recovery_phase' not in operation for operation in frozen['operations']))
+
+    def test_first_blocked_undo_reconcile_keeps_inverse_direction(self):
+        plan = self.service.freeze('fix alpha', [{'target_id': 'alpha', 'proposal': {'text': 'new'}}])
+        job = self.service.approve(plan['plan_id'], plan['digest'])
+        self.service.run_job(job['job_id'])
+        (self.root / 'alpha').write_text('external')
+        self.assertEqual(self.service.undo(job['job_id'])['status'], 'blocked')
+        (self.root / 'alpha').write_text('new')
+        reopened = Coordinator(self.root / 'state', self.registry)
+        self.assertEqual(reopened.reconcile(job['job_id'])['status'], 'undoing')
+        self.assertEqual(reopened.undo(job['job_id'])['status'], 'undone')
+        self.assertEqual((self.root / 'alpha').read_text(), 'old')
+        self.assertEqual(self.adapter.effects, ['alpha', 'undo:alpha'])
+
+    def test_unchanged_reviewed_context_cannot_change_during_analysis(self):
+        def proposer(intent, sources):
+            (self.root / 'beta').write_text('changed during analysis')
+            return {'proposals': [{'target_id': 'alpha', 'proposal': {'text': 'new'}}]}
+        service = Coordinator(self.root / 'state', self.registry, proposer)
+        with self.assertRaisesRegex(RepairError, 'analysis_context_changed'):
+            service.propose(['alpha', 'beta'], 'fix alpha using beta')
+        self.assertEqual(self.adapter.effects, [])
+
+    def test_unchanged_reviewed_context_bound_before_first_effect(self):
+        service = Coordinator(self.root / 'state', self.registry, lambda *_: {
+            'proposals': [{'target_id': 'alpha', 'proposal': {'text': 'new'}}]})
+        plan = service.propose(['alpha', 'beta'], 'fix alpha using beta')
+        private = service.checked_plan(plan['plan_id'])
+        self.assertIn('beta', private['reviewed_context'])
+        self.assertNotIn('reviewed_context', plan)
+        self.assertNotIn('projection', private['reviewed_context']['beta'])
+        job = service.approve(plan['plan_id'], plan['digest'])
+        (self.root / 'beta').write_text('changed after approval')
+        self.assertEqual(service.run_job(job['job_id'])['status'], 'blocked')
+        self.assertEqual(self.adapter.effects, [])
+
+    def test_empty_ai_result_has_safe_diagnostics_and_no_plan(self):
+        service = Coordinator(self.root / 'state', self.registry, lambda *_: {
+            'proposals': [], 'diagnostics': {'stage': 'scenario', 'reason': 'schema'},
+            'checks': [{'status': 'unavailable'}], 'limitations': ['No approvable proposal was produced.']})
+        with self.assertRaisesRegex(RepairError, 'ai_no_proposals') as caught:
+            service.propose(['alpha'], 'fix alpha')
+        self.assertEqual(caught.exception.details['diagnostics'], {'stage': 'scenario', 'reason': 'schema'})
+        self.assertFalse(list((self.root / 'state' / 'plans').glob('*.json')))
+
+    def test_registered_canonical_gates_are_readonly_bound_context(self):
+        original = self.adapter.discover
+        def discover():
+            rows = original()
+            for row in rows:
+                row['category'] = 'hook'
+                row['identity'] = {'path': str(self.root / row['id']), 'home': str(self.root)}
+            for identifier, relative in [('shared', '.agents/instructions/shared.md'), ('gates', '.agents/skills/alex-director/references/gates.md')]:
+                row = dict(rows[0], id=identifier, category='rule', identity={'path': str(self.root / relative), 'home': str(self.root)})
+                if identifier == 'gates':
+                    row.update(context_only=True, capabilities=['read'], missing_capability='context_only_policy')
+                rows.append(row)
+            return rows
+        self.adapter.discover = discover
+        (self.root / 'shared').write_text('shared standing permissions')
+        (self.root / 'gates').write_text('canonical security and spending gates')
+        seen = []
+        def proposer(intent, sources):
+            seen.extend(sources)
+            return {'proposals': [{'target_id': 'alpha', 'proposal': {'text': 'new'}}]}
+        service = Coordinator(self.root / 'state', self.registry, proposer)
+        plan = service.propose(['alpha'], 'fix the hook')
+        self.assertEqual([source['target']['id'] for source in seen], ['alpha', 'shared', 'gates'])
+        self.assertTrue(all(source['context_only'] for source in seen[1:]))
+        self.assertNotIn('context_only', seen[0]['target'])
+        self.assertNotIn('context_only', seen[1]['target'])
+        self.assertEqual(seen[2]['target']['missing_capability'], 'context_only_policy')
+        with self.assertRaisesRegex(RepairError, 'target_unavailable'):
+            service.source('gates')
+        self.assertEqual(set(service.checked_plan(plan['plan_id'])['reviewed_context']), {'alpha', 'shared', 'gates'})
+        job = service.approve(plan['plan_id'], plan['digest'])
+        (self.root / 'gates').write_text('updated canonical gates')
+        self.assertEqual(service.run_job(job['job_id'])['status'], 'blocked')
+        self.assertEqual(self.adapter.effects, [])
+        service.proposer = lambda *_: {'proposals': [{'target_id': 'gates', 'proposal': {'text': 'new'}}]}
+        with self.assertRaisesRegex(RepairError, 'proposal_scope_changed'):
+            service.propose(['alpha'], 'fix the hook')
+
+    def test_cross_adapter_local_sources_include_exact_home_canonical_context(self):
+        from repair_local_adapters import LocalAdapter
+        home = self.root.resolve()
+        shared = home / '.agents/instructions/shared.md'
+        gates = home / '.agents/skills/alex-director/references/gates.md'
+        shared.parent.mkdir(parents=True)
+        gates.parent.mkdir(parents=True)
+        shared.write_text('Fix safe reversible owned changes.\n')
+        gates.write_text('Ask Alex before security changes and spending money.\n')
+        (gates.parent.parent / 'SKILL.md').write_text('# Director\nRun canonical approval gates.\n')
+        for category in ('skill', 'hook', 'executable', 'skill_reference'):
+            with self.subTest(category=category):
+                registry = RepairRegistry()
+                local = LocalAdapter(home)
+                registry.register(local)
+                class OwnedPlugin(Files):
+                    adapter_id = 'owned-plugin-fixture'
+                    def discover(plugin):
+                        row = super().discover()[0]
+                        row.update(category=category, identity={'path': str(home / 'alpha'), 'home': str(home)})
+                        return [row]
+                plugin = OwnedPlugin(home)
+                registry.register(plugin)
+                seen = []
+                def proposer(intent, sources):
+                    seen.extend(sources)
+                    return {'proposals': [{'target_id': 'alpha', 'proposal': {'text': 'new'}}]}
+                service = Coordinator(home / ('state-' + category), registry, proposer)
+                plan = service.propose(['alpha'], 'fix selected owned source')
+                self.assertEqual([source['target']['identity']['path'] for source in seen], [str(home / 'alpha'), str(shared), str(gates)])
+                self.assertEqual(seen[0]['target']['adapter_id'], 'owned-plugin-fixture')
+                self.assertTrue(all(source['target']['adapter_id'] == local.adapter_id and source['context_only'] for source in seen[1:]))
+                self.assertEqual([operation['target_id'] for operation in plan['operations']], ['alpha'])
+                self.assertEqual(len(service.checked_plan(plan['plan_id'])['reviewed_context']), 3)
+                job = service.approve(plan['plan_id'], plan['digest'])
+                gates.write_text('Updated security gate requires approval.\n')
+                self.assertEqual(service.run_job(job['job_id'])['status'], 'blocked')
+                self.assertEqual(plugin.effects, [])
+                service.proposer = lambda *_: {'proposals': [{'target_id': seen[-1]['target']['id'], 'proposal': {'text': 'new'}}]}
+                with self.assertRaisesRegex(RepairError, 'proposal_scope_changed'):
+                    service.propose(['alpha'], 'fix selected owned source')
+                gates.write_text('Ask Alex before security changes and spending money.\n')
+
     def test_public_plan_and_job_exclude_private_operation_and_backup(self):
         plan = self.plan()
         self.assertNotIn('candidate', json.dumps(plan))
@@ -243,20 +396,20 @@ class CoordinatorTests(unittest.TestCase):
 class DiscoveryAndCliTests(unittest.TestCase):
     def test_discovery_is_bounded_parallel_ordered_and_failure_isolated(self):
         registry = RepairRegistry()
-        barrier = threading.Barrier(4, timeout=2)
-        lock = threading.Lock()
-        active = 0
-        peak = 0
+        context = multiprocessing.get_context('fork')
+        barrier = context.Barrier(4, timeout=2)
+        lock = context.Lock()
+        active = context.Value('i', 0)
+        peak = context.Value('i', 0)
         class Adapter:
             version = '1'
             def __init__(self, index):
                 self.index = index
                 self.adapter_id = 'parallel_' + str(index)
             def discover(self):
-                nonlocal active, peak
                 with lock:
-                    active += 1
-                    peak = max(peak, active)
+                    active.value += 1
+                    peak.value = max(peak.value, active.value)
                 try:
                     if self.index < 4:
                         barrier.wait()
@@ -265,14 +418,43 @@ class DiscoveryAndCliTests(unittest.TestCase):
                     return [{'id': str(self.index), 'adapter_id': self.adapter_id}]
                 finally:
                     with lock:
-                        active -= 1
+                        active.value -= 1
         for index in range(6):
             registry.register(Adapter(index))
         targets = registry.discover()
-        self.assertEqual(peak, 4)
+        self.assertEqual(peak.value, 4)
         self.assertEqual([target['adapter_id'] for target in targets.values()], ['parallel_' + str(index) for index in range(6)])
         self.assertEqual(sum('missing_capability' in target for target in targets.values()), 1)
         self.assertEqual(registry.limitations, ['parallel_2: discovery_unavailable'])
+
+    def test_hanging_discovery_returns_healthy_rows_and_reaps_process_group(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            registry = RepairRegistry(discovery_timeout=.35)
+            class Hanging:
+                adapter_id = 'hanging'
+                version = '1'
+                def discover(self):
+                    with (root / 'worker.lock').open('w') as handle:
+                        fcntl.flock(handle, fcntl.LOCK_EX)
+                        (root / 'pid').write_text(str(os.getpid()))
+                        # The descendant shares the discovery process group and lock.
+                        descendant = subprocess.Popen([sys.executable, '-c', 'import time; time.sleep(60)'], pass_fds=(handle.fileno(),))
+                        time.sleep(60)
+            registry.register(Hanging())
+            registry.register(Files(root))
+            started = time.monotonic()
+            targets = registry.discover()
+            self.assertLess(time.monotonic() - started, 1.5)
+            self.assertTrue({'alpha', 'beta'}.issubset(targets))
+            self.assertEqual(sum(row.get('missing_capability') == 'discovery_unavailable' for row in targets.values()), 1)
+            pid = int((root / 'pid').read_text())
+            self.assertNotIn(pid, [child.pid for child in multiprocessing.active_children()])
+            with (root / 'worker.lock').open('w') as handle:
+                fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                fcntl.flock(handle, fcntl.LOCK_UN)
+            with self.assertRaises(ProcessLookupError):
+                os.kill(pid, 0)
 
     def test_two_target_proposal_discovers_once_before_analysis_then_once_for_freeze(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -311,6 +493,24 @@ class DiscoveryAndCliTests(unittest.TestCase):
             self.assertEqual(unavailable[0]['capabilities'], [])
             self.assertNotIn('secret-provider', json.dumps(inventory))
             self.assertTrue(inventory['limitations'])
+
+    def test_cli_missing_job_404_and_empty_ai_422_are_controlled(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            tools = Path(__file__).resolve().parent
+            driver = root / 'driver.py'
+            driver.write_text("import sys\nfrom pathlib import Path\nsys.path.insert(0," + repr(str(tools)) + ")\nimport universal_repairs as engine\nfrom test_universal_repairs import Files\nfrom repair_registry import RepairRegistry\nr=RepairRegistry();r.register(Files(Path("+repr(str(root))+")))\ndef proposer(*args):return {'proposals':[],'diagnostics':{'stage':'scenario','reason':'schema'},'checks':[{'status':'unavailable'}],'limitations':['No approvable proposal was produced.']}\nengine.service=lambda state:engine.Coordinator(state,r,proposer)\nengine.main()\n")
+            def call(payload):
+                response = subprocess.run([sys.executable, '-B', str(driver), '--state', str(root / 'state')], input=json.dumps(payload), capture_output=True, text=True, timeout=10)
+                self.assertEqual(response.returncode, 0, response.stderr)
+                return json.loads(response.stdout)
+            missing = call({'action': 'job', 'job_id': 'a' * 32})
+            self.assertEqual((missing['status'], missing['code']), (404, 'record_unavailable'))
+            empty = call({'action': 'propose', 'target_ids': ['alpha'], 'intent': 'fix alpha'})
+            self.assertEqual(empty['status'], 422)
+            self.assertEqual(empty['data']['diagnostics'], {'stage': 'scenario', 'reason': 'schema'})
+            self.assertEqual(empty['data']['checks'], [{'status': 'unavailable'}])
+            self.assertFalse(list((root / 'state' / 'plans').glob('*.json')))
 
     def test_cli_reconcile_and_resume_launch_recorded_worker_to_completion(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -387,6 +587,38 @@ class DiscoveryAndCliTests(unittest.TestCase):
 
 
 class ApiBoundaryTests(unittest.TestCase):
+    def test_bridge_preserves_missing_job_and_safe_ai_diagnostics(self):
+        project = Path(__file__).resolve().parents[1]
+        script = r"""
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const {EventEmitter}=require('node:events'),ts=require('./app/node_modules/typescript');
+let result;
+const exports={};
+const text=ts.transpileModule(fs.readFileSync('app/src/lib/server/universal-repairs.ts','utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,esModuleInterop:true}}).outputText;
+function requireModule(name){
+ if(name==='./paths')return {ensureLocalDataDir(){},foundationRoot:()=>process.cwd(),localDataDir:()=>'/tmp'};
+ if(name==='node:child_process')return {spawn(){
+  const child=new EventEmitter();child.stdout=new EventEmitter();child.stdin=new EventEmitter();child.kill=()=>{};
+  child.stdin.end=()=>process.nextTick(()=>{child.stdout.emit('data',Buffer.from(JSON.stringify(result)));child.emit('close',0)});
+  return child;
+ }};
+ return require(name);
+}
+vm.runInNewContext(text,{exports,require:requireModule,Buffer,setTimeout,clearTimeout,process,Response});
+(async()=>{
+ result={status:404,code:'record_unavailable',error:'Repair operation unavailable.'};
+ let response=await exports.repairResponse({action:'job'});
+ assert.equal(response.status,404);assert.equal((await response.json()).code,'record_unavailable');
+ result={status:422,data:{code:'ai_no_proposals',diagnostics:{stage:'scenario',reason:'schema'},checks:[{status:'unavailable'}],limitations:['No approvable proposal was produced.']}};
+ response=await exports.repairResponse({action:'propose'});
+ assert.equal(response.status,422);assert.deepEqual((await response.json()).diagnostics,{stage:'scenario',reason:'schema'});
+ console.log('bridge 404/422 contracts PASS');
+})().catch(error=>{console.error(error);process.exitCode=1});
+"""
+        result = subprocess.run(['node', '-e', script], cwd=project, capture_output=True, text=True)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('PASS', result.stdout)
+
     def test_real_auth_on_all_reads_and_actions_and_reject_browser_checks(self):
         project = Path(__file__).resolve().parents[1]
         script = r"""

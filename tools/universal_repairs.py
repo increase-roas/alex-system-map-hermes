@@ -76,11 +76,11 @@ class Coordinator:
     def source(self, target_id):
         return self._source_from_targets(target_id, self.registry.discover())
 
-    def _source_from_targets(self, target_id, targets):
+    def _source_from_targets(self, target_id, targets, context_only=False):
         if target_id not in targets:
             raise RepairError('unknown_target')
         target = targets[target_id]
-        if target.get('missing_capability'):
+        if target.get('missing_capability') and not (context_only and self.readonly_policy(target)):
             raise RepairError('target_unavailable')
         snapshot = self.registry.adapter(target['adapter_id']).read(target)
         return {'target': target, 'snapshot': {key: snapshot[key] for key in ('fingerprint', 'version', 'context_fingerprint', 'projection') if key in snapshot}}
@@ -90,10 +90,36 @@ class Coordinator:
             raise RepairError('invalid_request')
         targets = self.registry.discover()
         sources = [self._source_from_targets(identifier, targets) for identifier in target_ids]
+        # Native registrations alone establish these canonical paths. Context
+        # can explain the standing gates but never expands the editable scope.
+        homes = {source['target'].get('identity', {}).get('home')
+                  for source in sources if source['target'].get('scope') == 'local'
+                  and source['target'].get('category') in ('rule', 'skill', 'skill_reference', 'hook', 'executable')}
+        canonical = ('.agents/instructions/shared.md', '.agents/skills/alex-director/references/gates.md')
+        for relative in canonical:
+            for target in targets.values():
+                identity = target.get('identity', {})
+                home = identity.get('home')
+                if home and home in homes and target.get('scope') == 'local' and identity.get('path') == str(Path(home) / relative) and target['id'] not in target_ids and (not target.get('missing_capability') or self.readonly_policy(target)):
+                    source = self._source_from_targets(target['id'], targets, context_only=True)
+                    source['context_only'] = True
+                    sources.append(source)
         if self.proposer is None:
             raise RepairError('ai_unavailable')
         proposal = self.proposer(intent, sources)
         proposals = proposal['proposals']
+        if not proposals:
+            diagnostics = proposal.get('diagnostics', {})
+            stages = {'source', 'proposal', 'scenario', 'before', 'candidate', 'validation'}
+            reasons = {'source_boundary', 'provider_unavailable', 'schema', 'citation', 'coverage', 'bounds', 'simulation'}
+            error = RepairError('ai_no_proposals')
+            error.details = {
+                'code': error.code, 'error': 'No approvable proposal was produced.',
+                'diagnostics': {'stage': diagnostics.get('stage') if diagnostics.get('stage') in stages else 'validation',
+                                'reason': diagnostics.get('reason') if diagnostics.get('reason') in reasons else 'schema'},
+                'checks': proposal.get('checks', []), 'limitations': proposal.get('limitations', []),
+            }
+            raise error
         if any(item['target_id'] not in target_ids for item in proposals):
             raise RepairError('proposal_scope_changed')
         return self.freeze(intent, proposals, proposal.get('checks', []), proposal.get('limitations', []), {source['target']['id']: source for source in sources})
@@ -101,6 +127,19 @@ class Coordinator:
     def freeze(self, intent, proposals, checks=None, limitations=None, reviewed_sources=None):
         targets = self.registry.discover()
         groups = {}
+        reviewed_context = {}
+        snapshots = {}
+        for target_id, reviewed in (reviewed_sources or {}).items():
+            if target_id not in targets or (targets[target_id].get('missing_capability') and not (reviewed.get('context_only') and self.readonly_policy(targets[target_id]))):
+                raise RepairError('analysis_context_changed')
+            target = targets[target_id]
+            adapter = self.registry.adapter(target['adapter_id'])
+            snapshot = adapter.read(target)
+            if self.stable_target(reviewed['target']) != self.stable_target(target) or self.context_snapshot(snapshot) != self.context_snapshot(reviewed['snapshot']):
+                raise RepairError('analysis_context_changed')
+            snapshots[target_id] = snapshot
+            reviewed_context[target_id] = {'target': self.stable_target(target), 'adapter_version': adapter.version,
+                                           'snapshot_digest': digest(self.context_snapshot(snapshot))}
         for item in proposals:
             target_id = item['target_id']
             if target_id not in targets:
@@ -109,11 +148,7 @@ class Coordinator:
             if target.get('missing_capability'):
                 raise RepairError('target_unavailable')
             adapter = self.registry.adapter(target['adapter_id'])
-            snapshot = adapter.read(target)
-            if reviewed_sources is not None:
-                reviewed = reviewed_sources[target_id]
-                if self.stable_target(reviewed['target']) != self.stable_target(target) or any(snapshot.get(key) != reviewed['snapshot'].get(key) for key in ('fingerprint', 'version', 'context_fingerprint', 'projection')):
-                    raise RepairError('analysis_context_changed')
+            snapshot = snapshots[target_id] if target_id in snapshots else adapter.read(target)
             operation = adapter.prepare(target, snapshot, item['proposal'])
             operation['target_id'] = target_id
             groups.setdefault(adapter.adapter_id, []).append(operation)
@@ -131,7 +166,8 @@ class Coordinator:
         if not operations:
             raise RepairError('empty_plan')
         selected = {op['target_id']: targets[op['target_id']] for op in operations}
-        plan = dict(schema_version=1, plan_id=uuid.uuid4().hex, created_at=now(), expires_at=(datetime.now(timezone.utc) + timedelta(hours=1)).isoformat(), intent=intent, targets=selected, operations=operations, checks=checks or [], limitations=limitations or [])
+        plan = dict(schema_version=SCHEMA_VERSION, plan_id=uuid.uuid4().hex, created_at=now(), expires_at=(datetime.now(timezone.utc) + timedelta(hours=1)).isoformat(), intent=intent, targets=selected, operations=operations, checks=checks or [], limitations=limitations or [])
+        plan['reviewed_context'] = reviewed_context
         plan['digest'] = digest(plan)
         self.save('plans', plan['plan_id'], plan)
         return self.public_plan(plan)
@@ -162,7 +198,7 @@ class Coordinator:
                 raise RepairError('plan_expired')
             if any(check.get('status') != 'passed' for check in plan['checks']) or any(check.get('status') != 'passed' for op in plan['operations'] for check in op.get('checks', [])):
                 raise RepairError('checks_not_passed')
-            job = dict(schema_version=1, job_id=plan_id, plan_id=plan_id, digest=expected_digest, approval={'at': now(), 'digest': expected_digest}, status='queued', next_step=0, steps=[dict(step_id=op['step_id'], target_id=op['target_id'], phase='pending') for op in plan['operations']], events=[], unknown_effect=None, created_at=now(), updated_at=now(), barrier=False)
+            job = dict(schema_version=SCHEMA_VERSION, job_id=plan_id, plan_id=plan_id, digest=expected_digest, approval={'at': now(), 'digest': expected_digest}, status='queued', direction='forward', next_step=0, steps=[dict(step_id=op['step_id'], target_id=op['target_id'], phase='pending') for op in plan['operations']], events=[], unknown_effect=None, created_at=now(), updated_at=now(), barrier=False)
             self.save('jobs', plan_id, job)
             return self.public_job(job)
 
@@ -192,6 +228,26 @@ class Coordinator:
         # remains bound; adapters retain fingerprint/version CAS and field scope.
         return {key: value for key, value in target.items() if key not in ('observed_at', 'evidence', 'limitations', 'allowed_patch_paths', 'related_target_ids')}
 
+    @staticmethod
+    def readonly_policy(target):
+        return target.get('context_only') is True and target.get('missing_capability') == 'context_only_policy' and target.get('capabilities') == ['read']
+
+    @staticmethod
+    def context_snapshot(snapshot):
+        return {key: snapshot.get(key) for key in ('fingerprint', 'version', 'context_fingerprint', 'projection')}
+
+    def check_reviewed_context(self, plan, current, job):
+        changed = {step['target_id'] for step in job['steps'] if step['phase'] in ('applied', 'verified', 'undone')}
+        for target_id, reviewed in plan.get('reviewed_context', {}).items():
+            if target_id in changed:
+                continue
+            target = current.get(target_id)
+            if target is None or self.stable_target(target) != reviewed['target']:
+                raise RepairError('analysis_context_changed')
+            adapter = self.registry.adapter(target['adapter_id'])
+            if adapter.version != reviewed['adapter_version'] or digest(self.context_snapshot(adapter.read(target))) != reviewed['snapshot_digest']:
+                raise RepairError('analysis_context_changed')
+
     def binding(self, plan, op, current):
         target = plan['targets'][op['target_id']]
         adapter = self.registry.adapter(op['adapter_id'])
@@ -200,6 +256,9 @@ class Coordinator:
         return target, adapter
 
     def run_job(self, job_id):
+        saved = self.load('jobs', job_id)
+        if saved.get('direction') == 'inverse' and saved['status'] == 'undoing':
+            return self.undo(job_id)
         with self.lock(opaque(job_id)):
             job = self.load('jobs', job_id)
             plan = self.checked_plan(job['plan_id'], job['digest'])
@@ -236,8 +295,9 @@ class Coordinator:
                 for op, step in zip(plan['operations'], job['steps']):
                     if continuing and step['phase'] == 'ready':
                         target, adapter = self.binding(plan, op, current)
-                        if not adapter.preflight(target, op).get('ok'):
+                        if not adapter.preflight(target, dict(op, recovery_phase='forward')).get('ok'):
                             raise RepairError('stale_preflight')
+                self.check_reviewed_context(plan, current, job)
                 job['status'] = 'applying'
                 for index, (op, step) in enumerate(zip(plan['operations'], job['steps'])):
                     if step['phase'] == 'verified':
@@ -272,7 +332,8 @@ class Coordinator:
             job = self.load('jobs', job_id)
             plan = self.checked_plan(job['plan_id'], job['digest'])
             current = self.registry.discover()
-            recovering_undo = any(step['phase'] in ('undoing', 'undone') for step in job['steps'])
+            recovering_undo = job.get('direction') == 'inverse' or job.get('error') in ('undo_conflict', 'undo_uncertain') or any(step['phase'] in ('undoing', 'undone') for step in job['steps'])
+            job['direction'] = 'inverse' if recovering_undo else 'forward'
             for op, step in zip(plan['operations'], job['steps']):
                 if step['phase'] not in ('applying', 'undoing'):
                     continue
@@ -308,7 +369,7 @@ class Coordinator:
                 self.event(job, 'reconcile_required')
                 return self.public_job(job)
             if job['status'] == 'blocked':
-                inverse = job.get('error') == 'undo_conflict' or any(step['phase'] == 'undone' for step in job['steps'])
+                inverse = job.get('direction') == 'inverse' or job.get('error') == 'undo_conflict' or any(step['phase'] == 'undone' for step in job['steps'])
                 job['status'] = 'undoing' if inverse else 'queued'
                 job.pop('error', None)
                 self.event(job, 'resume_queued')
@@ -321,7 +382,7 @@ class Coordinator:
                 raise RepairError('reconcile_required')
             if job['status'] == 'undone':
                 return self.public_job(job)
-            job['status'] = 'undoing'
+            job.update(status='undoing', direction='inverse')
             self.event(job, 'undo_queued')
             return self.public_job(job)
 
@@ -337,7 +398,7 @@ class Coordinator:
                     job.update(status='unknown', unknown_effect=step['step_id'], error='undo_uncertain')
                     self.event(job, 'undo_unknown', step)
                     return self.public_job(job)
-            job['status'] = 'undoing'
+            job.update(status='undoing', direction='inverse')
             for op, step in reversed(list(zip(plan['operations'], job['steps']))):
                 if step['phase'] not in ('verified', 'applied'):
                     continue
@@ -401,11 +462,14 @@ def main():
             if result['status'] in ('queued', 'preflight', 'applying', 'undoing'):
                 child = subprocess.Popen([sys.executable, '-B', str(Path(__file__).resolve()), '--state', str(coordinator.root.resolve()), '--worker', result['job_id'], '--worker-action', worker_action], stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True, close_fds=True)
             result['worker_started'] = bool(child and child.pid)
-        else:
-            result = getattr(coordinator, action)(request['job_id'])
         print(json.dumps({'status': 200, 'data': result}))
     except Exception as error:
-        print(json.dumps({'status': 409, 'code': error.code if isinstance(error, RepairError) else 'repair_unavailable', 'error': 'Repair operation unavailable; inspect the recorded safe status.'}))
+        code = error.code if isinstance(error, RepairError) else 'repair_unavailable'
+        status = 404 if code == 'record_unavailable' else 422 if code == 'ai_no_proposals' else 409
+        result = {'status': status, 'code': code, 'error': 'Repair operation unavailable; inspect the recorded safe status.'}
+        if code == 'ai_no_proposals':
+            result['data'] = error.details
+        print(json.dumps(result))
 
 
 if __name__ == '__main__':

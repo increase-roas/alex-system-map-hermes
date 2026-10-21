@@ -1,0 +1,96 @@
+{
+  "original_verdict": "Not ready",
+  "original_run_id": "20261021-universal-final",
+  "findings": [
+    {
+      "number": 1,
+      "title": "Preserve unresolved jobs before allowing another approval",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 2,
+      "title": "CWE-200: Composite Python credentials reach model prompts",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 3,
+      "title": "Make the CI fixtures independent of Alex's home",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 4,
+      "title": "Preserve Undo direction after its first blocked step",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 5,
+      "title": "Recheck remote source before replacing candidate bytes",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": "Vendors without conditional writes retain the disclosed external concurrency limit."
+    },
+    {
+      "number": 6,
+      "title": "CAS fixture passes while native writes overwrite newer edits",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": "Vendors without conditional writes retain the disclosed external concurrency limit."
+    },
+    {
+      "number": 7,
+      "title": "Discard source reads after the source selection changes",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 8,
+      "title": "Expose recovery for a dead nonterminal worker",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 9,
+      "title": "Recover publication after its local commit succeeds",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 10,
+      "title": "Propagate uncertain Undo effects instead of reporting conflicts",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 11,
+      "title": "Freeze unchanged sources used by bundle behavior checks",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 12,
+      "title": "Return the missing-job status the recovery poller handles",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 13,
+      "title": "Bound discovery before the bridge kills every result",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    },
+    {
+      "number": 14,
+      "title": "Model SigNoz replacement semantics in the wire fixture",
+      "resolution": "Corrected and independently checked; see final review receipts.",
+      "remaining_limit": null
+    }
+  ],
+  "additional_corrections": [
+    "Exact canonical gates excerpt; cross-adapter policy context; clarify checks; plugin preapproval native side effects; whole-package source binding; multi-plugin publication inverse; partial native refresh recovery; native worker descendant cleanup."
+  ],
+  "unapplied_actionable_findings": [],
+  "settled_conflicts": [],
+  "documentation": "Implementation guide, plan, code and regression tests carry the reasoning; no duplicate learning file added."
+}

@@ -3,6 +3,8 @@ only by the approved coordinator; discovery and reads never execute writes.
 No generic API proxy, model command, credential response or blind mutation retry.
 """
 import copy
+from contextlib import contextmanager
+import fcntl
 import datetime
 import importlib.util
 import json
@@ -37,6 +39,28 @@ PROVIDERS = {
  'signoz_dashboard': {'account':SIGNOZ_READER, 'write_account':SIGNOZ_EDITOR, 'revision':'sha256:869847e1e58fb4ae3aa3155fbc382df386c89386d4529b19baa5c958cebc212d',
   'fields':{'name':str,'tags':list,'spec.display':dict,'spec.panels':dict,'spec.layouts':list,'spec.variables':list,'spec.duration':str,'spec.refreshInterval':str,'spec.links':list}},
 }
+
+
+NONCONDITIONAL_LIMIT = ('Native mutation has no server-side version condition: final GET rejects an already changed baseline; '
+                        'same registered account/object writes through this adapter are serialized on this machine only. '
+                        'An external writer or another machine can change fields between GET and mutation and be overwritten; '
+                        'readback proves observed values, not absence of concurrent edits.')
+REMOTE_FILE_LIMIT = ('Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic '
+                     'compare-and-replace here. An external edit in that remaining window can be overwritten.')
+
+
+@contextmanager
+def provider_object_lock(provider, identity):
+    # flock coordinates adapter instances and processes, not other API clients.
+    directory = Path(tempfile.gettempdir()) / ('registered-repair-locks-' + str(os.getuid()))
+    directory.mkdir(mode=0o700, exist_ok=True)
+    key = digest([provider, identity['account'], identity.get('project_id'), identity['object_id']])
+    fd = os.open(directory / (key + '.lock'), os.O_CREAT | os.O_RDWR | os.O_NOFOLLOW, 0o600)
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX)
+        yield
+    finally:
+        os.close(fd)
 
 
 def now(): return datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -126,7 +150,7 @@ class RemoteFileAdapter:
             target={'id':'remote-'+digest(identity)[:24], 'adapter_id':self.adapter_id,
                     'category':'remote_files','owner':inventory['host'],'scope':'remote','identity':identity,
                     'capabilities':['read','prepare','apply','verify','undo'],'observed_at':now(),
-                    'evidence':['registered host/root inventory'],'limitations':[],
+                    'evidence':['registered host/root inventory'],'limitations':[REMOTE_FILE_LIMIT],
                     'content_format':'text' if item['relative'].endswith('.md') else 'json'}
             if target['content_format']=='json':
                 snap=self.read(target)
@@ -151,7 +175,7 @@ class RemoteFileAdapter:
     def prepare(self,target,snapshot,proposal):
         op={'action':'remote_file_patch','selector':target['identity'], 'expected_fingerprint':snapshot['fingerprint'],
             'expected_version':snapshot['version'],'expected_mode':snapshot['mode'],'context_fingerprint':snapshot['context_fingerprint'],
-            'public_diff':'Update '+target['identity']['relative'],'checks':[]}
+            'public_diff':'Update '+target['identity']['relative'],'checks':[], 'limitations':[REMOTE_FILE_LIMIT]}
         if 'patch' in proposal:
             patch=proposal['patch']
             allowed=target.get('allowed_patch_paths',safe_paths(snapshot['projection']))
@@ -170,7 +194,9 @@ class RemoteFileAdapter:
     def verify(self,target,operation,result):
         current=self.read(target)
         ok=current['fingerprint']==result.get('fingerprint') and current['mode']==operation['expected_mode']
-        return receipt(ok,'byte_verified' if ok else 'blocked',['remote exact readback and mode'],current['fingerprint'],[check('readback',operation,['remote hash/mode readback matched' if ok else 'remote readback mismatch'],'passed' if ok else 'failed')])
+        result=receipt(ok,'byte_verified' if ok else 'blocked',['remote exact readback and mode'],current['fingerprint'],[check('readback',operation,['remote hash/mode readback matched' if ok else 'remote readback mismatch'],'passed' if ok else 'failed')])
+        result['limitations']=[REMOTE_FILE_LIMIT]
+        return result
     def reconcile(self,target,operation,backup):
         current=self.read(target)
         if operation.get('recovery_phase')=='undo':
@@ -188,7 +214,9 @@ class RemoteFileAdapter:
         except RepairError as error:
             if error.code=='remote_undo_conflict':return receipt(False,'blocked',['Changed field no longer matches recorded applied value; no inverse attempted.'])
             raise
-        return receipt(True,'undone',['conditional changed-field inverse; unrelated fields preserved'],result['fingerprint'])
+        value=receipt(True,'undone',['changed-field inverse; unrelated fields preserved at final comparison'],result['fingerprint'])
+        value['limitations']=[REMOTE_FILE_LIMIT]
+        return value
 
 
 def safe_paths(value,prefix=''):
@@ -220,7 +248,7 @@ class ProviderAdapter:
                     'owner':identity.get('company_id') or identity.get('project_id') or identity['object_id'],
                     'scope':'remote','identity':identity,'capabilities':['read','prepare','apply','verify','undo'],
                     'observed_at':now(),'evidence':['native LIST metadata identifies registered account and object; configuration not read'],
-                    'limitations':['Discovery proves listed identity only; proposal and application require fresh native configuration reads.'],
+                    'limitations':['Discovery proves listed identity only; proposal and application require fresh native configuration reads.', NONCONDITIONAL_LIMIT],
                     'content_format':'json','allowed_patch_paths':list(self.spec['fields'])}
             targets.append(target)
         return targets
@@ -259,7 +287,7 @@ class ProviderAdapter:
         operation={'action':'native_config_patch','selector':target['identity'],'patch':patch,
                    'expected_fingerprint':snapshot['fingerprint'],'expected_version':snapshot['version'],
                    'context_fingerprint':snapshot['context_fingerprint'],'schema_revision':self.spec['revision'],
-                   'inverse':inverse,'public_diff':json.dumps({'before':{k:get_field(snapshot['projection'],k) for k in patch},'after':patch},ensure_ascii=False,sort_keys=True),'checks':[]}
+                   'inverse':inverse,'limitations':[NONCONDITIONAL_LIMIT],'public_diff':json.dumps({'before':{k:get_field(snapshot['projection'],k) for k in patch},'after':patch},ensure_ascii=False,sort_keys=True),'checks':[]}
         dry=self.exchange('dry_run',target,{'patch':patch,'schema_revision':self.spec['revision']})
         if not dry.get('ok') or dry.get('schema_revision')!=self.spec['revision']: raise RepairError('provider_dry_run_failed')
         evidence=['installed native validator accepted candidate'] if self.provider=='paperclip_agent' else ['published native field contract shape accepted; no provider mutation']
@@ -285,7 +313,9 @@ class ProviderAdapter:
     def verify(self,target,operation,result):
         current=self.read(target)
         ok=all(get_field(current['projection'],key)=={'present':True,'value':value} for key,value in operation['patch'].items())
-        return receipt(ok,'effective' if ok else 'blocked',['native GET confirms requested fields'],current['fingerprint'],[check('readback',operation['patch'],['native GET changed fields matched' if ok else 'native GET changed fields mismatch'],'passed' if ok else 'failed')])
+        result=receipt(ok,'effective' if ok else 'blocked',['native GET confirms requested fields'],current['fingerprint'],[check('readback',operation['patch'],['native GET changed fields matched' if ok else 'native GET changed fields mismatch'],'passed' if ok else 'failed')])
+        result['limitations']=[NONCONDITIONAL_LIMIT]
+        return result
     def reconcile(self,target,operation,backup):
         current=self.read(target)
         if operation.get('recovery_phase')=='undo':
@@ -306,7 +336,9 @@ class ProviderAdapter:
             self.exchange('write',target,{'patch':patch,'expected_version':current['version'],'expected_fingerprint':current['fingerprint']})
         restored=self.read(target)
         ok=all(get_field(restored['projection'],key)==item for key,item in backup['inverse'].items())
-        return receipt(ok,'undone' if ok else 'blocked',['conditional native inverse; unrelated settings preserved'],restored['fingerprint'])
+        result=receipt(ok,'undone' if ok else 'blocked',['fresh baseline checked; native inverse readback matched' if ok else 'inverse readback mismatch'],restored['fingerprint'])
+        result['limitations']=[NONCONDITIONAL_LIMIT]
+        return result
 
 # Fixed mini-local API program. The credential is acquired and used on the mini;
 # only declared projections and revision IDs leave it. No URL/path/command input.
@@ -402,6 +434,14 @@ class NativeProviderExchange:
         except BaseException: raise RepairError('hindsight_native_failed') from None
 
     def __call__(self,action,target,payload=None):
+        if action in ('write', 'rollback'):
+            with provider_object_lock(self.provider, target['identity']):
+                result = self.execute(action, target, payload)
+                result['limitations'] = [NONCONDITIONAL_LIMIT]
+                return result
+        return self.execute(action, target, payload)
+
+    def execute(self,action,target,payload=None):
         payload=payload or {}
         if action=='discover': return self.discover()
         identity=target['identity']; object_id=identity['object_id']

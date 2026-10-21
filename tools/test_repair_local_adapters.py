@@ -6,6 +6,7 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from repair_contracts import RepairError
 from repair_local_adapters import LocalAdapter, register_adapters
@@ -171,8 +172,8 @@ class LocalAdapterTests(unittest.TestCase):
             link = self.home / runtime / 'skills/ours'; link.parent.mkdir(parents=True); link.symlink_to(path.parent)
         target, op = self.operation(path, {'candidate': path.read_text().replace('Original', 'Changed')})
         kinds = {c['kind'] for c in op['checks']}
-        self.assertIn('structural', kinds)
-        self.assertIn('lifecycle', kinds)
+        self.assertIn('syntax', kinds)
+        self.assertIn('owner_lifecycle', kinds)
         backup, applied = self.lifecycle(target, op)
         self.assertTrue((self.home / '.claude/skills/ours').is_symlink())
         self.assertIn('runtime', ' '.join(self.adapter.verify(target, op, applied)['limitations']).lower())
@@ -219,6 +220,285 @@ class LocalAdapterTests(unittest.TestCase):
         self.assertEqual('undone', service.undo(job['job_id'])['status'])
         self.assertEqual({'version': 1, 'hooks': {}, 'other': 7}, json.loads(path.read_text()))
 
+    def test_python_guard_runtime_values_stay_exact_and_repairable(self):
+        before = ("import os\n"
+                  "token = os.getenv('SERVICE_TOKEN')\n"
+                  "command = os.getenv('COMMAND_NAME', 'python3 canonical.py')\n"
+                  "request = {'token': token, 'command': command}\n"
+                  "timeout = 30\n")
+        path = self.put('.agents/tools/guards/pre_tool_guard.py', before)
+        target = self.target(path)
+        self.assertNotIn('missing_capability', target)
+        self.assertEqual('py', target['source_language'])
+        self.assertEqual(before, self.adapter.read(target)['projection']['content'])
+        target, op = self.operation(path, {'candidate': before.replace('timeout = 30', 'timeout = 40')})
+        self.assertEqual('syntax', op['checks'][0]['kind'])
+        backup, applied = self.lifecycle(target, op)
+        self.assertTrue(self.adapter.undo(target, op, backup, applied)['ok'])
+        self.assertEqual(before, path.read_text())
+        self.put('.agents/skills/ours/SKILL.md', '---\nname: ours\ndescription: Do a job.\n---\nUse the script.\n')
+        skill_script = self.put('.agents/skills/ours/scripts/guard.py', before)
+        self.assertEqual('py', self.target(skill_script)['source_language'])
+        self.assertEqual(before, self.adapter.read(self.target(skill_script))['projection']['content'])
+
+    def test_python_actual_credential_literal_withheld_and_no_secret_preimage(self):
+        secret = 'opaque-private-literal-723'
+        path = self.put('.agents/tools/guards/pre_tool_guard.py', "token = " + repr(secret) + "\n")
+        target = self.target(path)
+        self.assertEqual('safe_text_projection', target['missing_capability'])
+        self.assertNotIn(secret, json.dumps(self.adapter.read(target)))
+        with self.assertRaises(RepairError):
+            self.operation(path, {'candidate': "token = None\n"})
+        self.assertFalse((self.home / 'Backups/universal-repairs').exists())
+        clean = self.put('.agents/tools/unify/check.py', "token = None\n")
+        with self.assertRaises(RepairError):
+            self.operation(clean, {'candidate': "token = " + repr(secret) + "\n"})
+        self.assertEqual("token = None\n", clean.read_text())
+
+    def test_python_owner_projection_inspects_literals_not_variable_names(self):
+        from repair_local_checks import python_source_projection
+        safe = ["token = os.getenv('TOKEN')\n", "data = {'Authorization': token, 'command': command}\n",
+                "pattern = re.compile(r'api[_-]?key|token|password')\n", "error = 'token missing'\n",
+                "headers = {'Authorization': 'Bearer ' + token}\n",
+                "schema = {'token': {'type': 'string'}}\n", "token, command = os.getenv('TOKEN'), 'echo ready'\n"]
+        unsafe = ["value = 'sk-proj-' + 'fixtureOnlyCredential723'\n",  # known complete literal below is checked separately
+                  "api_key = 'opaque-private-value'\n", "data = {'apiKey': 'opaque-private-value'}\n",
+                  "request(token='opaque-private-value')\n", "command = 'API_KEY=opaque-private-value python3 run.py'\n",
+                  "value = 'sk-proj-fixtureOnlyCredential723'\n"]
+        # Composite stored credentials are inspected structurally, without eval.
+        for source in safe:
+            self.assertEqual((source, False), python_source_projection(source))
+        for source in unsafe:
+            projected, withheld = python_source_projection(source)
+            self.assertTrue(withheld)
+            self.assertNotIn('opaque-private-value', projected)
+            self.assertNotIn('sk-proj-fixtureOnlyCredential723', projected)
+        self.assertTrue(python_source_projection('def broken(:\n')[1])
+
+    def test_composite_credentials_never_reach_first_ai_prompt(self):
+        import repair_ai
+        secrets = ["password = 'synthetic-' + 'private-value'\n",
+                   "password = f'synthetic-private-{value}'\n",
+                   "password = os.getenv('PASSWORD', 'synthetic-private-value')\n",
+                   "password = settings.get('password', default='synthetic-private-value')\n"]
+        for source in secrets:
+            path = self.put('.agents/tools/guards/pre_tool_guard.py', source)
+            target = self.target(path)
+            self.assertEqual('safe_text_projection', target.get('missing_capability'))
+            snapshot = self.adapter.read(target)
+            self.assertNotIn('synthetic-private', json.dumps(snapshot))
+            with patch.object(repair_ai, 'invoke', side_effect=RuntimeError('stop before provider')) as invoke:
+                repair_ai.propose_repair('Review registered source.', [{'target': target, 'snapshot': snapshot}])
+            for call in invoke.call_args_list:
+                self.assertNotIn('synthetic-private', call.args[0])
+        path.write_text("password = os.getenv('PASSWORD')\n")
+        target = self.target(path)
+        with patch.object(repair_ai, 'invoke', side_effect=RuntimeError('stop before provider')) as invoke:
+            repair_ai.propose_repair('Review registered source.', [{'target': target, 'snapshot': self.adapter.read(target)}])
+        self.assertEqual(1, invoke.call_count)
+        self.assertIn("os.getenv('PASSWORD')", invoke.call_args.args[0])
+
+    def test_canonical_guard_and_owned_skill_reference_discovery(self):
+        paths = [self.put('.agents/tools/guards/composio_guard.py', 'value = 1\n'),
+                 self.put('.agents/tools/guards/context_watch.py', 'value = 1\n'),
+                 self.put('.agents/tools/guards/own.go', 'package guard\nfunc Check() {}\n')]
+        self.put('.agents/skills/ours/SKILL.md', '---\nname: ours\ndescription: Owned.\n---\nRead `references/guide.md`.\n')
+        reference = self.put('.agents/skills/ours/references/guide.md', 'Read the source.\n')
+        self.put('.agents/skills/alex-director/SKILL.md', '---\nname: alex-director\ndescription: Director.\n---\nRead gates.\n')
+        gates = self.put('.agents/skills/alex-director/references/gates.md', 'Alex gate context.\n')
+        self.put('.agents/tools/guards/generated/skip.py', 'value = 1\n')
+        self.put('.agents/tools/guards/cache.py', '# GENERATED BY native owner\n')
+        linked = self.home / '.agents/tools/guards/link.py'; linked.symlink_to(paths[0])
+        rows = self.adapter.discover(); by_path = {r['identity']['path']: r for r in rows}
+        for path in paths:
+            self.assertEqual(path.suffix[1:], by_path[str(path)]['content_language'])
+        self.assertIn(str(reference), by_path)
+        self.assertEqual(['read'], by_path[str(gates)]['capabilities'])
+        with self.assertRaises(RepairError):
+            self.adapter.prepare(by_path[str(gates)], self.adapter.read(by_path[str(gates)]), {'candidate': 'Changed policy.\n'})
+        self.assertNotIn(str(linked), by_path)
+        self.assertFalse(any('/generated/' in p or p.endswith('/cache.py') for p in by_path))
+        expected = 'passed' if shutil.which('gofmt') else 'unavailable'
+        self.assertEqual(expected, syntax_check(paths[-1].read_text(), 'go')['status'])
+        if shutil.which('gofmt'):
+            self.assertEqual('failed', syntax_check('package broken\nfunc (', 'go')['status'])
+
+    def test_canonical_gates_excerpt_is_readonly_screened_and_full_file_bound(self):
+        import repair_ai
+        from repair_local_adapters import sha
+        skill = self.put('.agents/skills/alex-director/SKILL.md', '---\nname: alex-director\ndescription: Director.\n---\nRead gates.\n')
+        source = ("# Policy context\npassword = 'synthetic-private-outside'\n"
+                  "## Alex's gates (the one list)\nAsk Alex before spending money.\n"
+                  "## Historical examples\ncommand = run-private-example\n")
+        gates = self.put('.agents/skills/alex-director/references/gates.md', source)
+        target = self.target(gates)
+        self.assertEqual('context_only_policy', target['missing_capability'])
+        snapshot = self.adapter.read(target)
+        projected = snapshot['projection']['content']
+        self.assertNotIn('synthetic-private-outside', json.dumps(snapshot))
+        self.assertNotIn('run-private-example', json.dumps(snapshot))
+        self.assertEqual(source.splitlines().index('Ask Alex before spending money.'), projected.splitlines().index('Ask Alex before spending money.'))
+        self.assertEqual(len(source.splitlines()), len(projected.splitlines()))
+        self.assertEqual(sha(gates.read_bytes()), snapshot['whole_file_sha256'])
+        self.assertIn('other sections are not reviewed', ' '.join(target['limitations']))
+        self.assertIn('blank-padded', ' '.join(target['limitations']))
+        with patch.object(repair_ai, 'invoke', side_effect=RuntimeError('stop before provider')) as invoke:
+            repair_ai.propose_repair('Review policy context.', [{'target': target, 'snapshot': snapshot}])
+        self.assertEqual(1, invoke.call_count)
+        self.assertNotIn('synthetic-private-outside', invoke.call_args.args[0])
+        self.assertNotIn('run-private-example', invoke.call_args.args[0])
+        with self.assertRaises(RepairError):
+            self.adapter.prepare(target, snapshot, {'candidate': projected + 'Altered gates.\n'})
+        original_fingerprint = snapshot['fingerprint']
+        gates.write_text(source.replace('synthetic-private-outside', 'synthetic-private-changed'))
+        changed = self.adapter.read(target)
+        self.assertEqual(projected, changed['projection']['content'])
+        self.assertNotEqual(original_fingerprint, changed['fingerprint'])
+        self.assertNotEqual(snapshot['whole_file_sha256'], changed['whole_file_sha256'])
+        other = self.put('.agents/skills/alex-director/references/other-policy.md', source)
+        other_target = self.target(other)
+        self.assertEqual('safe_text_projection', other_target['missing_capability'])
+        self.assertNotIn('synthetic-private-outside', json.dumps(self.adapter.read(other_target)))
+        gates.write_text(source.replace('Ask Alex before spending money.', 'password = "synthetic-private-inside"'))
+        self.assertEqual('safe_text_projection', self.target(gates)['missing_capability'])
+        self.assertNotIn('synthetic-private-inside', json.dumps(self.adapter.read(self.target(gates))))
+
+    def publication_fixture(self):
+        repo = self.home / '.cursor'; repo.mkdir()
+        path = self.put('.cursor/cli-config.json', '{"model":"before"}\n')
+        git(repo, 'init', '-b', 'main'); git(repo, 'config', 'user.email', 'fixture@example.invalid'); git(repo, 'config', 'user.name', 'Fixture')
+        git(repo, 'add', '.'); git(repo, 'commit', '-m', 'baseline')
+        remote = self.home / 'remote.git'
+        subprocess.run(['git', 'init', '--bare', str(remote)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        git(repo, 'remote', 'add', 'origin', str(remote)); git(repo, 'push', '-u', 'origin', 'main')
+        target, op = self.operation(path, {'patch': {'model': 'after'}})
+        targets = {t['id']: t for t in self.adapter.discover()}
+        ops = self.adapter.prepare_bundle([op], targets)
+        backups = [self.adapter.backup(targets[o['target_id']], o, str(self.home / 'state')) for o in ops]
+        self.adapter.apply(target, ops[0], backups[0])
+        return repo, remote, path, targets[ops[-1]['target_id']], ops[-1], backups[-1]
+
+    def test_existing_own_commit_push_retry_and_lost_response(self):
+        repo, remote, path, target, op, backup = self.publication_fixture()
+        native = self.adapter.git
+        def fail_push(root, *args, **kwargs):
+            if args[0] == 'push':
+                raise RepairError('synthetic_push_failure')
+            return native(root, *args, **kwargs)
+        with patch.object(self.adapter, 'git', side_effect=fail_push):
+            with self.assertRaises(RepairError):
+                self.adapter.apply(target, op, backup)
+        own = git(repo, 'rev-parse', 'HEAD')
+        self.assertNotEqual(own, git(remote, 'rev-parse', 'main'))
+        self.assertEqual('not_applied', self.adapter.reconcile(target, op, backup)['outcome'])
+        result = self.adapter.apply(target, op, backup)
+        self.assertEqual(own, result['commit'])
+        self.assertEqual(own, git(remote, 'rev-parse', 'main'))
+        def lost_push(root, *args, **kwargs):
+            result = native(root, *args, **kwargs)
+            if args[0] == 'push':
+                raise RepairError('synthetic_lost_response')
+            return result
+        with patch.object(self.adapter, 'git', side_effect=lost_push):
+            with self.assertRaises(RepairError):
+                self.adapter.undo(target, op, backup, result)
+        inverse = git(repo, 'rev-parse', 'HEAD')
+        self.assertEqual('before', json.loads(path.read_text())['model'])
+        self.assertEqual('applied', self.adapter.reconcile_undo(target, op, backup)['outcome'])
+        self.assertTrue(self.adapter.undo(target, op, backup, result)['ok'])
+        self.assertEqual(inverse, git(repo, 'rev-parse', 'HEAD'))
+
+    def test_restore_readback_failure_propagates_for_inverse_reconcile(self):
+        repo, remote, path, target, op, backup = self.publication_fixture()
+        result = self.adapter.apply(target, op, backup)
+        native = self.adapter.restore_one
+        def restored_then_lost(*args, **kwargs):
+            self.assertTrue(native(*args, **kwargs))
+            raise RepairError('synthetic_restoration_response_lost')
+        with patch.object(self.adapter, 'restore_one', side_effect=restored_then_lost):
+            with self.assertRaises(RepairError):
+                self.adapter.undo(target, op, backup, result)
+        self.assertEqual('before', json.loads(path.read_text())['model'])
+        self.assertEqual('not_applied', self.adapter.reconcile_undo(target, op, backup)['outcome'])
+        self.assertTrue(self.adapter.undo(target, op, backup, result)['ok'])
+        self.assertEqual(git(repo, 'rev-parse', 'HEAD'), git(remote, 'rev-parse', 'main'))
+
+    def test_coordinator_recovers_interrupted_publication_inverse(self):
+        from repair_registry import RepairRegistry
+        from universal_repairs import Coordinator
+        original_home = self.home
+        for failure in ('first_member', 'all_members', 'inverse_push', 'unknown_member'):
+            with self.subTest(failure=failure):
+                self.home = original_home / failure; self.home.mkdir()
+                (self.home / 'Backups').mkdir()
+                self.adapter = LocalAdapter(self.home)
+                repo = self.home / '.cursor'; repo.mkdir()
+                model = self.put('.cursor/cli-config.json', '{"model":"before","unrelated":7}\n')
+                hook = self.put('.cursor/hooks.json', '{"version":1,"hooks":{},"unrelated":8}\n')
+                git(repo, 'init', '-b', 'main'); git(repo, 'config', 'user.email', 'fixture@example.invalid'); git(repo, 'config', 'user.name', 'Fixture')
+                git(repo, 'add', '.'); git(repo, 'commit', '-m', 'baseline')
+                remote = self.home / 'remote.git'
+                subprocess.run(['git', 'init', '--bare', str(remote)], check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+                git(repo, 'remote', 'add', 'origin', str(remote)); git(repo, 'push', '-u', 'origin', 'main')
+                registry = RepairRegistry(); registry.register(self.adapter)
+                service = Coordinator(self.home / 'coordinator', registry)
+                plan = service.freeze('repair two native sources', [
+                    {'target_id': self.target(model)['id'], 'proposal': {'patch': {'model': 'after'}}},
+                    {'target_id': self.target(hook)['id'], 'proposal': {'patch': {'hooks.beforeSubmitPrompt': [{'command': 'python3 owned.py'}]}}}])
+                job = service.approve(plan['plan_id'], plan['digest']); job_id = job['job_id']
+                self.assertEqual('completed', service.run_job(job_id)['status'])
+                forward_head = git(repo, 'rev-parse', 'HEAD')
+                native_restore = self.adapter.restore_one; restored = []
+                def restore_then_interrupt(*args, **kwargs):
+                    outcome = native_restore(*args, **kwargs)
+                    restored.append(args[1]['selector']['path'])
+                    if len(restored) == (2 if failure == 'all_members' else 1):
+                        raise RepairError('synthetic_member_restoration_response_lost')
+                    return outcome
+                native_git = self.adapter.git
+                def fail_inverse_push(root, *args, **kwargs):
+                    if args[0] == 'push':
+                        raise RepairError('synthetic_inverse_push_failure')
+                    return native_git(root, *args, **kwargs)
+                with patch.object(self.adapter, 'git', side_effect=fail_inverse_push) if failure == 'inverse_push' else patch.object(self.adapter, 'restore_one', side_effect=restore_then_interrupt):
+                    self.assertEqual('unknown', service.undo(job_id)['status'])
+                interrupted_head = git(repo, 'rev-parse', 'HEAD')
+                self.assertEqual(forward_head, git(remote, 'rev-parse', 'main'))
+                if failure == 'unknown_member':
+                    model.write_text('{"model":"newer-human-value","unrelated":77}\n')
+                    before = {p: p.read_bytes() for p in (model, hook)}
+                    self.assertEqual('unknown', service.reconcile(job_id)['status'])
+                    self.assertEqual('unknown', service.resume(job_id)['status'])
+                    self.assertEqual(before, {p: p.read_bytes() for p in (model, hook)})
+                    self.assertEqual(interrupted_head, git(repo, 'rev-parse', 'HEAD'))
+                    continue
+                self.assertEqual('undoing', service.reconcile(job_id)['status'])
+                self.assertEqual('undoing', service.resume(job_id)['status'])
+                self.assertEqual('undone', service.run_job(job_id)['status'])
+                self.assertEqual({'model': 'before', 'unrelated': 7}, json.loads(model.read_text()))
+                self.assertEqual({'version': 1, 'hooks': {}, 'unrelated': 8}, json.loads(hook.read_text()))
+                self.assertEqual(git(repo, 'rev-parse', 'HEAD'), git(remote, 'rev-parse', 'main'))
+                if failure == 'inverse_push':
+                    self.assertEqual(interrupted_head, git(repo, 'rev-parse', 'HEAD'))
+                self.assertEqual('1', git(repo, 'rev-list', '--count', forward_head + '..HEAD'))
+
+    def test_inverse_commit_pending_push_is_retried_without_new_commit(self):
+        repo, remote, path, target, op, backup = self.publication_fixture()
+        result = self.adapter.apply(target, op, backup)
+        native = self.adapter.git
+        def fail_push(root, *args, **kwargs):
+            if args[0] == 'push':
+                raise RepairError('synthetic_push_failure')
+            return native(root, *args, **kwargs)
+        with patch.object(self.adapter, 'git', side_effect=fail_push):
+            with self.assertRaises(RepairError):
+                self.adapter.undo(target, op, backup, result)
+        inverse = git(repo, 'rev-parse', 'HEAD')
+        self.assertEqual('not_applied', self.adapter.reconcile_undo(target, op, backup)['outcome'])
+        self.assertTrue(self.adapter.undo(target, op, backup, result)['ok'])
+        self.assertEqual(inverse, git(repo, 'rev-parse', 'HEAD'))
+        self.assertEqual(inverse, git(remote, 'rev-parse', 'main'))
+
     def test_python_shell_js_syntax_and_executable_lifecycle(self):
         for suffix, good, bad in [('py', 'value = 3\n', 'def broken(:\n'), ('sh', '#!/bin/sh\necho good\n', 'if then\n'), ('js', 'const value = 3;\n', 'const = ;\n')]:
             self.assertEqual('passed', syntax_check(good, suffix)['status'])
@@ -260,7 +540,7 @@ class LocalAdapterTests(unittest.TestCase):
             self.put('.agents/instructions/' + name, 'Original ' + name + '\n')
         self.put('.agents/instructions/codex-style.md', '## Voice\nPlain\n## Delegation and model routing\nRoute\n')
         builder = self.home / '.agents/tools/unify/build_instructions.py'; builder.parent.mkdir(parents=True)
-        shutil.copyfile(Path.home() / '.agents/tools/unify/build_instructions.py', builder)
+        shutil.copyfile(Path(__file__).parent / 'fixtures/native_instruction_builder.py', builder)
         self.put('.codex/config.toml', 'model = "fixture"\n')
         for directory in ('.claude/output-styles', '.cursor/rules'):
             (self.home / directory).mkdir(parents=True)

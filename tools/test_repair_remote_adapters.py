@@ -47,6 +47,52 @@ class RunnerTests(unittest.TestCase):
         self.assertEqual(json.loads(self.path.read_text())['other'], 2)
         self.assertEqual(json.loads(self.path.read_text())['apiKey'], 'PRIVATE')
 
+    def test_parse_interleaving_rejects_unrelated_edit_for_apply_and_undo(self):
+        import repair_remote_runner as runner
+        original_parse = runner.parse
+        for action in ('apply', 'undo'):
+            with self.subTest(action=action):
+                self.path.write_text('{"model":"old","other":1}')
+                before = self.request('read')
+                op = {'patch': {'model': 'new'}, 'expected_fingerprint': before['fingerprint'], 'expected_mode': before['mode']}
+                backup = self.request('backup', **op)
+                if action == 'undo': self.request('apply', **op)
+                calls = []
+                def interleave(path, data):
+                    calls.append(1)
+                    if len(calls) == 2:
+                        state = json.loads(path.read_text()); state['other'] = 2
+                        path.write_text(json.dumps(state))
+                    return original_parse(path, data)
+                with patch.object(runner, 'parse', side_effect=interleave):
+                    with self.assertRaises(RepairError) as caught:
+                        self.request(action, **dict(op, inverse=backup['inverse']))
+                self.assertEqual(caught.exception.code, 'remote_stale')
+                self.assertEqual(json.loads(self.path.read_text())['other'], 2)
+                self.assertEqual(json.loads(self.path.read_text())['model'], 'new' if action == 'undo' else 'old')
+
+    def test_final_source_anchor_rejects_same_bytes_new_inode_and_mode_change(self):
+        import repair_remote_runner as runner
+        original_parse = runner.parse
+        for change in ('inode', 'mode'):
+            with self.subTest(change=change):
+                self.path.write_text('{"model":"old","other":1}'); self.path.chmod(0o640)
+                before = self.request('read'); calls = []
+                def interleave(path, data):
+                    calls.append(1)
+                    if len(calls) == 2:
+                        if change == 'mode': path.chmod(0o600)
+                        else:
+                            replacement = path.with_suffix('.replacement')
+                            replacement.write_bytes(path.read_bytes()); replacement.chmod(0o640)
+                            os.replace(replacement, path)
+                    return original_parse(path, data)
+                with patch.object(runner, 'parse', side_effect=interleave):
+                    with self.assertRaises(RepairError) as caught:
+                        self.request('apply', patch={'model':'new'}, expected_fingerprint=before['fingerprint'], expected_mode=before['mode'])
+                self.assertEqual(caught.exception.code,'remote_stale')
+                self.assertEqual(json.loads(self.path.read_text())['model'],'old')
+
     def test_cas_mode_host_escape_and_symlink(self):
         before = self.request('read')
         for req in [dict(self.base, host='wrong', action='read'), dict(self.base, relative='../x', action='read')]:
@@ -168,6 +214,16 @@ class NativeProviderWireTests(unittest.TestCase):
             with self.subTest(provider=provider):
                 spec=PROVIDERS[provider];field=next(iter(spec['fields']));writes=[]
                 state={'id':'fixture',field:'old','unrelated':'keep','updated_at':'v1'}
+                if provider == 'signoz_alert':
+                    field = 'annotations.summary'
+                    state.update({'alert':'old','condition':{'thresholds':{'critical':7},'query':'preserve query'},
+                                  'annotations':{'summary':'old','description':'preserve description','runbook':'preserve URL'},
+                                  'evaluation':{'interval':'1m'},'labels':{'team':'ops'}})
+                elif provider == 'signoz_dashboard':
+                    field = 'spec.duration'
+                    state.update({'name':'old','tags':['keep'], 'spec':{'duration':'old','panels':{'a':{'query':'keep'}},
+                                  'display':{'title':'keep'},'variables':[{'name':'service'}], 'customSibling':{'keep':True}}})
+                original = copy.deepcopy(state)
                 identity={'object_id':'fixture','account':spec['account'],'project_id':'project'}
                 native=NativeProviderExchange(provider)
                 def cli(slug,account,payload):
@@ -179,7 +235,12 @@ class NativeProviderWireTests(unittest.TestCase):
                         if kind=='branch':self.assertEqual(payload['branch_id'],'fixture')
                     else:
                         self.assertEqual(payload.get('ruleId') or payload.get('id'),'fixture');body=payload
-                    state.update(body);state['updated_at']='v'+str(len(writes)+1);return {'ok':True}
+                    if provider.startswith('signoz_'):
+                        # Native UPDATE replaces the complete writable object.
+                        replacement = {k:v for k,v in body.items() if k not in ('ruleId','id')}
+                        state.clear();state.update({'id':'fixture', **replacement})
+                    else: state.update(body)
+                    state['updated_at']='v'+str(len(writes)+1);return {'ok':True}
                 def bank(method,bank_id=None,body=None):
                     if bank_id is None:return {'banks':[{'bank_id':'fixture'}]}
                     if method=='GET':return {'bank_id':'fixture','config':dict(state),'overrides':{}}
@@ -189,9 +250,76 @@ class NativeProviderWireTests(unittest.TestCase):
                     target=adapter.discover()[0];op=adapter.prepare(target,adapter.read(target),{'patch':{field:'new'}})
                     backup=adapter.backup(target,op,tmp);applied=adapter.apply(target,op,backup)
                     self.assertTrue(adapter.verify(target,op,applied)['ok'])
-                    state['unrelated']='changed'
+                    if provider.startswith('signoz_'):
+                        sibling = 'annotations' if provider == 'signoz_alert' else 'spec'
+                        for key, value in original[sibling].items():
+                            if key != field.split('.')[-1]: self.assertEqual(state[sibling][key], value)
+                        preserved = ('condition','evaluation','labels') if provider == 'signoz_alert' else ('name','tags')
+                        for key in preserved: self.assertEqual(state[key], original[key])
+                        state[sibling]['externalSibling'] = 'changed'
+                    else: state['unrelated']='changed'
                     self.assertTrue(adapter.undo(target,op,backup,applied)['ok'])
-                    self.assertEqual(state[field],'old');self.assertEqual(state['unrelated'],'changed');self.assertEqual(len(writes),2)
+                    from repair_remote_runner import get_field
+                    self.assertEqual(get_field(state, field)['value'],'old')
+                    if provider.startswith('signoz_'):
+                        self.assertEqual(state[sibling]['externalSibling'], 'changed')
+                        for key, value in original[sibling].items(): self.assertEqual(state[sibling][key], value)
+                        for key in preserved: self.assertEqual(state[key], original[key])
+                    else: self.assertEqual(state['unrelated'],'changed')
+                    self.assertEqual(len(writes),2)
+
+    def test_native_same_object_writers_serialize_and_second_baseline_is_stale(self):
+        spec = PROVIDERS['neon_project']
+        state = {'id':'fixture', 'name':'old', 'updated_at':'v1'}
+        entered_write = threading.Event(); release_write = threading.Event(); second_started = threading.Event()
+        calls = []; outcomes = []
+        identity = {'object_id':'fixture','project_id':'fixture','account':spec['account']}
+        def transport(slug, account, payload):
+            self.assertEqual(account, spec['account'])
+            if 'DESCRIBE' in slug:
+                calls.append('get'); return copy.deepcopy(state)
+            calls.append('write'); entered_write.set()
+            self.assertTrue(release_write.wait(3))
+            self.assertEqual(set(payload), {'project_id','project'})
+            state.update(payload['project']);state['updated_at']='v2';return {}
+        first = NativeProviderExchange('neon_project'); second = NativeProviderExchange('neon_project')
+        from repair_remote_runner import digest
+        payload = {'patch':{'name':'new'}, 'expected_version':'v1', 'expected_fingerprint':digest({'config':state,'version':'v1'})}
+        def write(native, started=None):
+            if started: started.set()
+            try: outcomes.append(native('write', {'identity':identity}, payload))
+            except RepairError as error: outcomes.append(error.code)
+        with patch('repair_remote_adapters.composio', side_effect=transport):
+            a=threading.Thread(target=write,args=(first,)); b=threading.Thread(target=write,args=(second,second_started))
+            a.start();self.assertTrue(entered_write.wait(3));b.start();self.assertTrue(second_started.wait(3))
+            # First native write holds the OS lock while its API response is pending.
+            self.assertEqual(calls, ['get','write'])
+            release_write.set();a.join(3);b.join(3)
+        self.assertFalse(a.is_alive() or b.is_alive())
+        self.assertEqual(calls, ['get','write','get'])
+        self.assertIn('provider_stale', outcomes)
+        self.assertEqual(state['name'], 'new')
+
+    def test_external_edit_after_final_get_is_honestly_nonconditional(self):
+        spec = PROVIDERS['neon_project']; state = {'id':'fixture','name':'old','updated_at':'v1','other':'keep'}
+        writes=[]
+        def transport(slug, account, payload):
+            if 'DESCRIBE' in slug: return copy.deepcopy(state)
+            # Independent client writes after final GET. Native Neon mutation
+            # contains no version predicate and therefore can overwrite it.
+            state['name']='external edit';state['updated_at']='external-version'
+            writes.append(copy.deepcopy(payload));state.update(payload['project']);state['updated_at']='v2';return {}
+        native=NativeProviderExchange('neon_project')
+        adapter=ProviderAdapter('neon_project',exchange=native,registrations=[{'identity':{'object_id':'fixture','project_id':'fixture','account':spec['account']}}])
+        with patch('repair_remote_adapters.composio',side_effect=transport):
+            target=adapter.discover()[0];op=adapter.prepare(target,adapter.read(target),{'patch':{'name':'new'}})
+            backup=adapter.backup(target,op,'unused');applied=adapter.apply(target,op,backup)
+            verified=adapter.verify(target,op,applied)
+        self.assertEqual(writes,[{'project_id':'fixture','project':{'name':'new'}}])
+        self.assertEqual(state['name'],'new');self.assertEqual(state['other'],'keep')
+        self.assertTrue(verified['ok'])
+        for item in (target,op,applied,verified):
+            self.assertIn('no server-side version condition', ' '.join(item['limitations']))
 
 
 class ProviderTests(unittest.TestCase):
@@ -270,6 +398,29 @@ class ProviderTests(unittest.TestCase):
         state['name']='updated after preview'
         with self.assertRaises(RepairError):adapter.preflight(selected,operation)
         self.assertEqual(calls.count('read'),3)
+
+    def test_native_read_rejects_mismatched_identity_with_valid_schema(self):
+        spec=PROVIDERS['neon_project']
+        registration={'object_id':'fixture','identity':{'object_id':'fixture','account':spec['account']}}
+        def exchange(action,target,payload=None):
+            return {'identity':dict(target['identity'],object_id='different-object'),
+                    'config':{'name':'old'},'version':'v1','schema_revision':spec['revision']}
+        adapter=ProviderAdapter('neon_project',exchange=exchange,registrations=[registration])
+        target=adapter.discover()[0]
+        with self.assertRaises(RepairError) as caught:adapter.read(target)
+        self.assertEqual(caught.exception.code,'provider_identity_mismatch')
+
+    def test_allowed_typed_field_rejects_embedded_credential_value(self):
+        spec=PROVIDERS['paperclip_agent']
+        registration={'object_id':'fixture','identity':{'object_id':'fixture','account':spec['account']}}
+        def exchange(action,target,payload=None):
+            return {'identity':target['identity'],'config':{'adapterConfig':{'promptTemplate':'existing instructions'}},
+                    'version':'v1','schema_revision':spec['revision']}
+        adapter=ProviderAdapter('paperclip_agent',exchange=exchange,registrations=[registration])
+        target=adapter.discover()[0];snapshot=adapter.read(target)
+        with self.assertRaises(RepairError) as caught:
+            adapter.prepare(target,snapshot,{'patch':{'adapterConfig.promptTemplate':'Authorization: Bearer syntheticcredentialvalue12345'}})
+        self.assertEqual(caught.exception.code,'provider_secret_patch')
 
     def test_stale_schema_identity_and_secret_patch_rejected(self):
         spec=PROVIDERS['neon_project']
