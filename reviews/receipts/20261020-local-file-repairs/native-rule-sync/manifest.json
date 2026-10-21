@@ -22,7 +22,19 @@
       "file": "machine-checks.md",
       "sha256": "67a34951fe57afff9c03a0d5c482fefa133475c2cab47b3537059543cf5d6dd1",
       "bytes": 667
+    },
+    {
+      "file": "probe.py",
+      "sha256": "b7ce3559f1a7fe0967d8f42f74938fc325fdb1c15ef821351d15c0a5dffdd4e7",
+      "bytes": 5370
+    },
+    {
+      "file": "acceptance.txt",
+      "sha256": "aa7d514684013ccec8a88f3c26f85d2d7866902a1d096067ef7bff7657e522a7",
+      "bytes": 531
     }
   ],
-  "review_scope": "A-D safe config behavior verified; historical complete worker mutation records not available, no claim whole workspace bytes unchanged"
+  "review_scope": "A-D safe config behavior verified; historical complete worker mutation records not available, no claim whole workspace bytes unchanged",
+  "historical_probe_note": "probe.py is the exact historical procedure, contains only synthetic fixture values and local paths, and was not rerun during archival. Its HEAD preimage comparison refers to the original pre-fix execution context.",
+  "acceptance_note": "acceptance.txt preserves the original proposed criteria, not the final verdict. review.md is authoritative: A-D verified; complete historical E mutation provenance was unavailable."
 }
