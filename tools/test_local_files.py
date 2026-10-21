@@ -26,6 +26,19 @@ class LocalFilesTests(unittest.TestCase):
     def scan(self, **kw):
         return lf.scan(self.home, roots=[(self.root, 'fixture')], **kw)
 
+    def test_native_hook_cli_inventory_and_ownership_provenance(self):
+        for relative in ('.codex/hooks.json', '.cursor/hooks.json', '.cursor/cli-config.json', '.claude/settings.json'):
+            path = self.home / relative
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text('{"hooks":{},"version":1}')
+        index = lf.scan(self.home)
+        rows = {row['path']: row for row in index['files']}
+        for relative in ('.codex/hooks.json', '.cursor/hooks.json', '.cursor/cli-config.json', '.claude/settings.json'):
+            self.assertIn(str(self.home / relative), rows)
+        self.assertEqual('hook', rows[str(self.home / '.cursor/hooks.json')]['kind'])
+        self.assertEqual('config', rows[str(self.home / '.cursor/cli-config.json')]['kind'])
+        self.assertEqual('native-owner', rows[str(self.home / '.cursor/hooks.json')]['repair_owner'])
+
     def test_exact_copies_links_generated_and_evidence(self):
         a = self.put('instructions/a.md', 'Always use Hindsight as the only memory layer.\nNever send customer emails.\n')
         self.put('instructions/b.md', a.read_text())

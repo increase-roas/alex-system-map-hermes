@@ -31,7 +31,7 @@ def within(path, roots):
 
 
 def selected_roots(home):
-    entries = [('.agents/instructions', 'Shared instructions'), ('.agents/skills', 'Shared skills'), ('.agents/tools/cards', 'Tool cards'), ('.agents/tools/guards', 'Guards'), ('.agents/tools/unify', 'Instruction distribution'), ('.agents/AGENTS.md', 'Shared root rules'), ('.codex/AGENTS.md', 'Codex rules'), ('.codex/config.toml', 'Codex configuration'), ('.codex/hooks', 'Codex hooks'), ('.codex/skills', 'Codex skills'), ('.claude/CLAUDE.md', 'Claude rules'), ('.claude/settings.json', 'Claude settings'), ('.claude/settings.local.json', 'Claude local settings'), ('.claude/rules', 'Claude rules directory'), ('.claude/skills', 'Claude skills'), ('.claude/hooks', 'Claude hooks'), ('.cursor/rules', 'Cursor rules'), ('.cursor/skills', 'Cursor skills'), ('.cursor/hooks', 'Cursor hooks'), ('AGENTS.md', 'Home rules'), ('AGENT-CONTEXT.md', 'Stack context'), ('Alex-Director/AGENTS.md', 'Director rules'), ('Alex-Director/rules', 'Director rules directory'), ('Documents/Codex/handoffs', 'Selected handoffs')]
+    entries = [('.agents/instructions', 'Shared instructions'), ('.agents/skills', 'Shared skills'), ('.agents/tools/cards', 'Tool cards'), ('.agents/tools/guards', 'Guards'), ('.agents/tools/unify', 'Instruction distribution'), ('.agents/AGENTS.md', 'Shared root rules'), ('.codex/AGENTS.md', 'Codex rules'), ('.codex/config.toml', 'Codex configuration'), ('.codex/hooks', 'Codex hooks'), ('.codex/hooks.json', 'Codex native hooks'), ('.codex/skills', 'Codex skills'), ('.claude/CLAUDE.md', 'Claude rules'), ('.claude/settings.json', 'Claude settings'), ('.claude/settings.local.json', 'Claude local settings'), ('.claude/rules', 'Claude rules directory'), ('.claude/skills', 'Claude skills'), ('.claude/hooks', 'Claude hooks'), ('.cursor/rules', 'Cursor rules'), ('.cursor/skills', 'Cursor skills'), ('.cursor/hooks', 'Cursor hooks'), ('.cursor/hooks.json', 'Cursor native hooks'), ('.cursor/cli-config.json', 'Cursor CLI configuration'), ('AGENTS.md', 'Home rules'), ('AGENT-CONTEXT.md', 'Stack context'), ('Alex-Director/AGENTS.md', 'Director rules'), ('Alex-Director/rules', 'Director rules directory'), ('Documents/Codex/handoffs', 'Selected handoffs')]
     return [(home / p, label) for p, label in entries]
 
 
@@ -190,7 +190,7 @@ def kind(path):
     lower = str(path).lower()
     if path.name == 'SKILL.md' or '/skills/' in lower:
         return 'skill'
-    if '/hooks/' in lower or '/guards/' in lower:
+    if path.name == 'hooks.json' or '/hooks/' in lower or '/guards/' in lower:
         return 'hook'
     if 'handoff' in lower:
         return 'handoff'
@@ -304,6 +304,10 @@ def scan(home=None, roots=None, max_files=6000, max_depth=12, max_bytes=262144):
             if row['generated']:
                 matches = re.findall(r'(?im)^\s*(?:Sources?|Generated from):\s*(.+)', header)
                 row['generated_sources'] = [v.strip(' `') for m in matches for v in m.split(',') if v.strip()]
+            native_files = {'.claude/settings.json', '.claude/settings.local.json', '.cursor/cli-config.json', '.cursor/hooks.json', '.codex/hooks.json', '.codex/config.toml'}
+            relative = p.relative_to(home).as_posix() if home in p.parents else ''
+            row['repair_owner'] = 'native-owner' if relative in native_files else ('generated-owner' if row['generated'] else 'canonical-link-owner' if row['is_symlink'] else 'source-owner')
+            row['canonical_owner_path'] = str(real)
             sources[row['id']] = screened
         except FileNotFoundError:
             row['state'] = 'missing'
