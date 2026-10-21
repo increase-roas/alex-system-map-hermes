@@ -44,6 +44,34 @@ class ChecksTests(unittest.TestCase):
         self.assertEqual('Ask before any work.\nKeep source evidence.\n', self.context['files'][0]['content'])
         self.assertIn('simulated', report['limitations'][0])
 
+    def test_planner_numbered_sources_preserve_blank_unicode_and_decision_raw(self):
+        self.context['files'][0]['content'] += '\nUnicode café α.\n'
+        original = copy.deepcopy(self.context)
+        report, calls = self.run_fixture()
+        self.assertEqual('passed', report['status'])
+        payload = json.loads(calls[0][0].split('EVIDENCE_JSON:\n', 1)[1])
+        source = payload['context']['files'][0]
+        self.assertNotIn('content', source)
+        self.assertEqual([{'line': 1, 'text': 'Ask before any work.', 'ending': '\n'}, {'line': 2, 'text': 'Keep source evidence.', 'ending': '\n'}, {'line': 3, 'text': '', 'ending': '\n'}, {'line': 4, 'text': 'Unicode café α.', 'ending': '\n'}], source['source_lines'])
+        self.assertIn('unprefixed text', calls[0][0])
+        self.assertEqual(original, self.context)
+        baseline = json.loads(calls[1][0].split('EVIDENCE_JSON:\n', 1)[1])
+        self.assertEqual(original, baseline['instructions'])
+        self.assertNotIn('source_lines', baseline['instructions']['files'][0])
+
+    def test_check_failures_report_stage_and_exact_citation_problem(self):
+        wrong_line = copy.deepcopy(self.cases)
+        wrong_line[0]['evidence'][0]['line'] = 2
+        report, calls = self.run_fixture(plan={'cases': wrong_line})
+        self.assertEqual('unavailable', report['status'])
+        self.assertIn('Planning failed: case 1 citation 1 does not match its exact one-based source line.', report['limitations'][-1])
+        self.assertEqual(1, len(calls))
+        for stage, kwargs in [('Planning', {'plan': RepairError('ai_provider_failed', 'PRIVATE_PROVIDER_DETAIL', 503)}), ('Before', {'before': {}}), ('Candidate', {'after': {}})]:
+            report, _ = self.run_fixture(**kwargs)
+            self.assertEqual('unavailable', report['status'])
+            self.assertTrue(report['limitations'][-1].startswith(stage + ' '))
+            self.assertNotIn('PRIVATE_PROVIDER_DETAIL', str(report))
+
     def test_unknown_is_recorded_and_fails_in_either_run(self):
         unknown = {'choices': [{'id': 'own', 'choice': 'unknown'}, {'id': 'spend', 'choice': 'B'}]}
         for before, after in [(unknown, None), (None, unknown)]:

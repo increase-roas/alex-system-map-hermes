@@ -1,0 +1,58 @@
+EEEEF
+======================================================================
+ERROR: test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits (test_local_file_ai.AITests.test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits) (raw='Keep café.\n\nLast.\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in <genexpr>
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+                                           ~~~~^^^^^^^^^^
+KeyError: 'ending'
+
+======================================================================
+ERROR: test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits (test_local_file_ai.AITests.test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits) (raw='Keep café.\r\n\r\nLast.\r\n')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in <genexpr>
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+                                           ~~~~^^^^^^^^^^
+KeyError: 'ending'
+
+======================================================================
+ERROR: test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits (test_local_file_ai.AITests.test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits) (raw='Keep café.\n\nLast.')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in <genexpr>
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+                                           ~~~~^^^^^^^^^^
+KeyError: 'ending'
+
+======================================================================
+ERROR: test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits (test_local_file_ai.AITests.test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits) (raw='Keep café.\r\n\nLast.\r')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 85, in <genexpr>
+    reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+                                           ~~~~^^^^^^^^^^
+KeyError: 'ending'
+
+======================================================================
+FAIL: test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits (test_local_file_ai.AITests.test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_ai.py", line 93, in test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits
+    self.assertEqual(len(variants), len(set(rendered)))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 4 != 1
+
+----------------------------------------------------------------------
+Ran 1 test in 0.207s
+
+FAILED (failures=1, errors=4)

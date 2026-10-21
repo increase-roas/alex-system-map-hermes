@@ -69,6 +69,48 @@ class AITests(unittest.TestCase):
             self.worker.validate(answer, context)
         self.assertEqual('candidate_too_large', caught.exception.code)
 
+    def test_numbered_line_endings_distinguish_and_reconstruct_exact_multiline_edits(self):
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        variants = ['Keep café.\n\nLast.\n', 'Keep café.\r\n\r\nLast.\r\n', 'Keep café.\n\nLast.', 'Keep café.\r\n\nLast.\r']
+        rendered = []
+        for raw in variants:
+            with self.subTest(raw=raw):
+                context['files'][0]['content'] = raw
+                with patch.object(self.worker, 'invoke', return_value=self.answer('no_change')) as invoke:
+                    self.worker.infer(context)
+                prompt = invoke.call_args.args[0]
+                payload = json.loads(prompt.split('EVIDENCE_JSON:\n', 1)[1])
+                source = payload['files'][0]
+                rendered.append(json.dumps(source['source_lines']))
+                reconstructed = ''.join(line['text'] + line['ending'] for line in source['source_lines'])
+                self.assertEqual(raw, reconstructed)
+                self.assertEqual(raw, context['files'][0]['content'])
+                self.assertIn('text + ending', prompt)
+                answer = self.answer()
+                answer['conflicts'][0]['evidence'][0].update(line=1, quote='Keep café.')
+                answer['edits'] = [{'old_text': reconstructed, 'new_text': reconstructed.replace('Keep', 'Preserve', 1)}]
+                self.assertEqual(raw.replace('Keep', 'Preserve', 1), self.worker.validate(answer, context))
+        self.assertEqual(len(variants), len(set(rendered)))
+
+    def test_proposer_numbered_sources_preserve_raw_context_and_strict_citations(self):
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        context['files'][0]['content'] = 'First café α.\r\n\r\nLast exact line.\n'
+        original = copy.deepcopy(context)
+        with patch.object(self.worker, 'invoke', return_value=self.answer('no_change')) as invoke:
+            self.worker.infer(context)
+        prompt = invoke.call_args.args[0]
+        payload = json.loads(prompt.split('EVIDENCE_JSON:\n', 1)[1])
+        source = payload['files'][0]
+        self.assertNotIn('content', source)
+        self.assertEqual([{'line': 1, 'text': 'First café α.', 'ending': '\r\n'}, {'line': 2, 'text': '', 'ending': '\r\n'}, {'line': 3, 'text': 'Last exact line.', 'ending': '\n'}], source['source_lines'])
+        self.assertIn('unprefixed text', prompt)
+        self.assertEqual(original, context)
+        answer = self.answer()
+        answer['conflicts'][0]['evidence'][0].update(line=2, quote='First café α.')
+        with self.assertRaises(repairs.RepairError) as caught:
+            self.worker.validate(answer, context)
+        self.assertEqual('invalid_ai_proposal', caught.exception.code)
+
     def test_full_suggestion_uses_four_isolated_calls_and_binds_passed_report(self):
         evidence = self.answer()['conflicts'][0]['evidence']
         cases = [{'id': purpose, 'scenario': 'Select the evidence-preserving decision for ' + purpose, 'purpose': purpose, 'choices': {'A': 'Retain source evidence.', 'B': 'Discard source evidence.', 'C': 'Invent unsupported evidence.'}, 'expected': 'A', 'rationale': 'The cited instruction retains evidence.', 'evidence': evidence} for purpose in ['fix', 'preserve']]

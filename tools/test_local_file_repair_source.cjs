@@ -141,12 +141,12 @@ function nodes(node, predicate) {
 function button(tree, label) { return nodes(tree, (n) => n.type === 'button' && visibleText(n) === label)[0]; }
 const checks = (status = 'passed') => ({ status, checked_at: 'today', model: 'native', limitations: ['Simulated choices only'], cases: [{ id: 'preserve', scenario: 'Keep protected scope', purpose: 'preserve', choices: { A: 'Keep scope', B: 'Expand scope', C: 'Ignore scope' }, expected: 'A', before: 'B', after: status === 'passed' ? 'A' : 'B', status, rationale: 'Keep the cited scope', evidence: [{ file_id: 'A', line: 2, quote: 'Protected scope' }] }] });
 const preview = (status = 'passed') => ({ repair_id: 'repair', proposal_sha256: 'proposal', path: '/source/A', diff: '-old\n+new', before_sha256: 'old', after_sha256: 'new', checks: checks(status), distribution: { status: 'ready', targets: [{ path: '/copy/AGENTS.md', before_sha256: 'old', after_sha256: 'new', diff: '-copy old\n+copy new', kind: 'generated', requires_new_session: true }], limitations: ['Only dependent copies'] } });
-async function proposed(status = 'passed') {
+async function proposed(status = 'passed', overrides = {}) {
   const panel = harness({ localToken: 'test' });
   panel.render();
   panel.reads[0].resolve({ ...source('A'), editable: true, sha256: 'old' });
   await tick(); panel.render();
-  panel.reads[1].resolve({ status: 'proposed', summary: 'Fix', rationale: 'Reason', conflicts: [], limitations: [], context_files: [{ file_id: 'A', path: '/source/A', sha256: 'old', applicability: { role: 'canonical', scope: 'project only', activation: 'when loaded', limitations: ['No blanket authority'] } }], model: 'native', generated_at: 'today', proposed_content: 'new text', checks: checks(status), preview: preview(status) });
+  panel.reads[1].resolve({ status: 'proposed', summary: 'Fix', rationale: 'Reason', conflicts: [], limitations: [], context_files: [{ file_id: 'A', path: '/source/A', sha256: 'old', applicability: { role: 'canonical', scope: 'project only', activation: 'when loaded', limitations: ['No blanket authority'] } }], model: 'native', generated_at: 'today', proposed_content: 'new text', checks: checks(status), preview: preview(status), ...overrides });
   await tick();
   return panel;
 }
@@ -222,4 +222,20 @@ test('repair adapter preserves actionable 422 preview validation responses', asy
   vm.runInNewContext(adapter, context, { filename: adapterPath });
   const result = await context.exports.runLocalFileRepair({ action: 'preview', file_id: 'A', expected_sha256: 'old', new_content: 'candidate' });
   assert.deepEqual(JSON.parse(JSON.stringify(result)), expected);
+});
+
+for (const [status, heading, explanation] of [
+  ['unavailable', 'AI checks could not finish', 'The behavioral checks could not complete; request a fresh analysis.'],
+  ['failed', 'AI checks failed', 'The candidate did not pass the behavioral checks; request a fresh analysis.'],
+]) test(`${status} checks explain the actual nonapprovable outcome`, async () => {
+  const panel = await proposed(status, { status: 'needs_decision', proposed_content: null, preview: null, checks: { ...checks(status), cases: [] }, conflicts: [{ explanation: 'Three citation-backed conflicts found', evidence: [{ file_id: 'A', line: 1, quote: 'Current rule' }] }] });
+  const tree = panel.render(); const text = visibleText(tree);
+  assert.ok(text.includes(heading), heading); assert.ok(text.includes(explanation), explanation);
+  assert.doesNotMatch(text, /A decision is needed|which instruction should win/);
+  assert.equal(button(tree, 'Approve proposed fix'), undefined);
+});
+test('authority decision wording remains when no behavioral check result exists', async () => {
+  const panel = await proposed('passed', { status: 'needs_decision', proposed_content: null, preview: null, checks: null });
+  const text = visibleText(panel.render());
+  assert.match(text, /A decision is needed/); assert.match(text, /which instruction should win/);
 });

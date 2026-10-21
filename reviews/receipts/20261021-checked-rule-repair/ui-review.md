@@ -80,3 +80,24 @@
   ```
 
 - VERIFIED: Final UI/API review remains accepted. No unresolved finding in this unit. No broad check rerun, helper, model call, browser operation, project edit, or live-source write was performed in this final rename review. Same-provider context-separated review.
+
+- VERIFIED: Focused failure-path wording review on recreated worktree HEAD `3abfa21` plus the panel/test edits. `local-file-repair-panel.tsx:187` prioritizes behavioral-check status in the heading: unavailable says `AI checks could not finish`, failed says `AI checks failed`. The nonapprovable explanation accurately names incomplete or failed checks and offers a fresh analysis. Authority ambiguity wording appears only for needs_decision with no check report. Existing cited conflicts, evidence, check limitations, manual access and approval predicates are unchanged. Empty cases arrays render safely without offering an AI approval. No unresolved defect found in this delta.
+
+- VERIFIED: Inspected all three new behavior tests in `tools/test_local_file_repair_source.cjs`: unavailable and failed needs_decision responses with cases=[] require the matching heading/explanation, reject authority-winner language and expose no approval button; the null-check ambiguity case retains decision wording. Independently ran the actual component suite once with the requested external TypeScript path; no browser, model, helper, live-file write, or broad suite ran.
+
+  | Failure-path delta acceptance | Status | Evidence |
+  |---|---|---|
+  | Unavailable checks explain unavailable testing, not authority ambiguity | VERIFIED | actual component scenario test passed |
+  | Failed checks explain rejected testing, not authority ambiguity | VERIFIED | actual component scenario test passed |
+  | Null check result retains authority decision wording | VERIFIED | actual component scenario test passed |
+  | Existing approval/cancellation/manual/readback behavior remains covered | VERIFIED | actual current component suite, exit 0, 21 pass, 0 fail |
+
+- VERIFIED: Fresh command record `/tmp/checked-ui-failure-path-component.json` includes exact command/cwd/environment, stdout/stderr, exit 0 and current panel/test hashes. Tool execution chunk `3632bf` independently records the same 21 passing cases. The older 18-test receipt is historical and is superseded for this component delta by this fresh record. This subreview does not claim a fresh TypeScript/lint run or real-browser failure-state capture.
+
+- VERIFIED: Current failure-path delta hashes:
+  ```text
+  app/src/app/explorer/local-file-repair-panel.tsx 1746e1603d7893f6285caf8c3506ea36e30fa49cf72d8d42d5e4a506f69b4236
+  tools/test_local_file_repair_source.cjs 0e234bb9172384732ebb19a9d7264813e75fba555c184dbb6e4af05caee1e06e
+  ```
+
+- VERIFIED: Focused final UI failure-path delta accepted with no unresolved findings. Same-provider, separated-context review. Earlier full-unit evidence remains as recorded; current acceptance here is source inspection plus the independently executed 21-case component suite.
