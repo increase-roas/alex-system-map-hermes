@@ -1,0 +1,82 @@
+{
+  "repair_id": "4b3f17b53590447b934b5172ceace762",
+  "proposal_sha256": "4c5628b7c880251579b73a016f588a61b9a9fa9cbc6fea1dfd78f88d757969a8",
+  "phase": "preview",
+  "actual_rule_apply_performed": false,
+  "source_before_sha256": "d7e03cbbc0299760b91fba6a1b9604eb4f7a534641b11df33250423f3c07b96d",
+  "source_after_sha256": "4a5c78856fd5368838b725d3c6d0637a20df0c700fceee6b98c8ad3db3508fa7",
+  "source_before_bytes": 14147,
+  "source_after_bytes": 14273,
+  "checks_status": "passed",
+  "cases": [
+    {
+      "id": "global-skill-edit",
+      "purpose": "fix",
+      "before": "B",
+      "after": "B",
+      "expected": "B",
+      "status": "passed"
+    },
+    {
+      "id": "own-stack-security-setting",
+      "purpose": "fix",
+      "before": "A",
+      "after": "A",
+      "expected": "A",
+      "status": "passed"
+    },
+    {
+      "id": "cloud-iam-reservation",
+      "purpose": "preserve",
+      "before": "C",
+      "after": "C",
+      "expected": "C",
+      "status": "passed"
+    },
+    {
+      "id": "client-production-boundary",
+      "purpose": "preserve",
+      "before": "B",
+      "after": "B",
+      "expected": "B",
+      "status": "passed"
+    }
+  ],
+  "baseline_already_passed": true,
+  "context_bindings": 8,
+  "distribution_status": "ready",
+  "targets": [
+    {
+      "path": "/Users/alexlobaito/.codex/AGENTS.md",
+      "kind": "generated",
+      "before_sha256": "ec3d2e81df4dc7533e9e849ab599d9b837125eeaec289c8fff32e3d6c222dffc",
+      "after_sha256": "8eadcc60a0e1b081ae4f4f6c700fc67a96adc8fa013d734d528832a19a31fb48",
+      "has_byte_diff": true
+    },
+    {
+      "path": "/Users/alexlobaito/AGENTS.md",
+      "kind": "generated",
+      "before_sha256": "3712d6d6a81df7b34ed0bcd2675f6f9d8b063ae7fae34586c118931ddcc1028a",
+      "after_sha256": "dd3c5866e4f2548ca703e4b2b0914043a51ff37dc72a7ef7c108963fb31323ef",
+      "has_byte_diff": true
+    },
+    {
+      "path": "/Users/alexlobaito/.cursor/rules/agent-routing.mdc",
+      "kind": "generated",
+      "before_sha256": "ded63369519ad1e56e1b3946bdeee123106869fee21baaa1408ec47c1eb066f7",
+      "after_sha256": "dfead1a9344401e1bfcc637eaf63380b3423fb792e991fd43736873045e0f425",
+      "has_byte_diff": true
+    },
+    {
+      "path": "/Users/alexlobaito/.claude/CLAUDE.md",
+      "kind": "import",
+      "before_sha256": "49acc706782b590c02e715c5986454d1945400b6be6238fd84cdc008615baf2c",
+      "after_sha256": "49acc706782b590c02e715c5986454d1945400b6be6238fd84cdc008615baf2c",
+      "has_byte_diff": false
+    }
+  ],
+  "expires_at": "2026-10-21T06:35:32.069867+00:00",
+  "actual_source_copy_and_config_changes": [],
+  "browser_approve_enabled": true,
+  "browser_error_logs": []
+}
