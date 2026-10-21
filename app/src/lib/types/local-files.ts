@@ -26,3 +26,19 @@ export type LocalFileContent = {
   changed_since_scan: boolean; read_at: string; content: string; redacted: boolean; truncated: boolean;
   error?: string;
 };
+
+export type LocalRepairSource = {
+  file_id: string; path: string; sha256: string | null; content: string;
+  editable: boolean; reason: string; source_file_ids: string[];
+};
+export type LocalRepairPreview = {
+  repair_id: string; file_id: string; path: string; before_sha256: string;
+  after_sha256: string; proposal_sha256: string; diff: string;
+  created_at: string; expires_at: string; generated_follow_up: boolean;
+};
+export type LocalRepairResult = {
+  repair_id: string; file_id: string; path: string;
+  state: 'applied' | 'applied_publish_pending' | 'undone' | 'undone_publish_pending';
+  current_sha256: string; backup_path: string; commit: string | null;
+  pushed: boolean; generated_follow_up: boolean; message: string;
+};

@@ -1,5 +1,7 @@
 # Local file evidence view
 
+Current extension: [Review and fix local instructions](LOCAL_FILE_REPAIRS.md), requested by Alex on 2026-10-20, adds explicit reviewed source writes. The original scanner and the original eight read-only acceptance criteria below remain recorded for the initial viewer; the extension has its own six acceptance criteria. Alex's replacement instructions also supersede an unconditional paid other-family completion prerequisite; context-separated independent review remains required.
+
 Request: Alex wants the system map to show his actual local agent files so he can inspect duplicates and contradictory instructions.
 
 Scope: read-only inventory of local agent rules, skills, hook definitions/scripts, configs and selected handoffs. Never modify scanned source files. Do not change protected Pro Map owner cards, shared settings, remote machines or customer systems.

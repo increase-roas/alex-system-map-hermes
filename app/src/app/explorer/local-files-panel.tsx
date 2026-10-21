@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import { LocalFileRepairPanel } from './local-file-repair-panel';
 import type { LocalFile, LocalFileContent, LocalFileIndex, LocalFinding } from '@/lib/types/local-files';
 
 const FILTERS = ['All files', 'Exact copies', 'Shared links', 'Possible conflicts', 'Repeated rules'] as const;
@@ -31,6 +32,8 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
   const [contentError, setContentError] = useState('');
   const [loadingContent, setLoadingContent] = useState(false);
   const [focusLine, setFocusLine] = useState<number | null>(null);
+  const [repairTarget, setRepairTarget] = useState<{ fileId: string; finding: LocalFinding | null } | null>(null);
+  const [repairLocked, setRepairLocked] = useState(false);
 
   async function load(refresh = false) {
     setBusy(true); setError('');
@@ -86,6 +89,12 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
     setSelectedId(id); setFocusLine(line);
     requestAnimationFrame(() => document.getElementById('local-file-detail')?.scrollIntoView({ block: 'nearest' }));
   }
+  function reviewFile(id: string, evidence: LocalFinding | null = finding) {
+    if (repairLocked) return;
+    setRepairLocked(true);
+    setRepairTarget({ fileId: id, finding: evidence });
+    requestAnimationFrame(() => document.getElementById('local-file-repair')?.scrollIntoView({ block: 'start' }));
+  }
   function fileLink(id: string, label?: string, line: number | null = null) {
     return <button type="button" className={link} onClick={() => openFile(id, line)}>{label ?? filesById.get(id)?.path ?? id}{line ? `:${line}` : ''}</button>;
   }
@@ -98,8 +107,9 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
             <p className="text-muted-foreground mt-1 text-sm">Open the actual files behind your rules, skills, hooks and settings.</p>
             <p className="mt-2 text-sm">Scan: {index ? date(index.scanned_at) : 'Not loaded'}{index ? ` · ${index.files.length.toLocaleString()} files in this bounded inventory` : ''}</p>
           </div>
-          <Button variant="outline" disabled={busy || !localToken} onClick={() => void load(true)}>{busy ? 'Reading files…' : 'Refresh local scan'}</Button>
+          <Button variant="outline" disabled={busy || !localToken || repairLocked} onClick={() => void load(true)}>{busy ? 'Reading files…' : 'Refresh local scan'}</Button>
         </div>
+        {repairLocked && <p className="text-sm">A repair draft or request is active. The editor stays open while you inspect other files. Apply or explicitly discard it before refreshing or opening another repair.</p>}
         {!localToken && <p className="text-muted-foreground text-sm">Refresh is unavailable while the local authorization token is missing. Saved inventory and file reads remain available.</p>}
         {error && <div role="alert" className={`${box} border-red-500`}><p>Local scan failed: {error}</p><p className="mt-1 text-sm">{index ? 'The previous snapshot is still shown below.' : 'Coverage is unknown until a scan loads.'}</p><Button className="mt-2" variant="outline" onClick={() => void load()}>Retry read</Button></div>}
         {!index && !error && <p role="status">Loading local inventory…</p>}
@@ -129,10 +139,11 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
             <section id="local-file-detail" className="min-w-0 space-y-4" aria-label="File detail and evidence">
               {!selected && <div className={box}><h3 className="font-medium">Select a file to read it</h3><p className="text-muted-foreground mt-2 text-sm">Choose a path on the left, or open an evidence group below. Contents are read on demand and shown as plain text.</p></div>}
               {finding && <div className={box}><h3 className="font-semibold">{finding.topic}</h3><p className="mt-1 text-sm">{finding.reason}</p><p className="text-muted-foreground mt-2 text-sm">{finding.kind === 'conflict_candidate' ? 'Possible conflict: review both sources in context.' : 'Repeated rule: matching wording may be intentional.'}</p>
-                <div className="mt-3 grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div className="min-w-0 rounded border p-3" key={`${e.file_id}-${e.line}-${i}`}>{fileLink(e.file_id, undefined, e.line)}<pre className="mt-2 font-mono text-sm whitespace-pre-wrap break-all">{e.line}: {e.text}</pre></div>)}</div>
+                <div className="mt-3 grid min-w-0 gap-3 md:grid-cols-2">{finding.evidence.map((e, i) => <div className="min-w-0 rounded border p-3" key={`${e.file_id}-${e.line}-${i}`}>{fileLink(e.file_id, undefined, e.line)}<pre className="mt-2 font-mono text-sm whitespace-pre-wrap break-all">{e.line}: {e.text}</pre><Button className="mt-3" size="sm" variant="outline" disabled={repairLocked} onClick={() => reviewFile(e.file_id, finding)}>Review &amp; fix this source</Button></div>)}</div>
               </div>}
               {selected && <div className={`${box} space-y-3`}>
                 <h3 className="font-semibold break-all">{selected.path.split('/').pop()}</h3>
+                <Button variant="outline" disabled={repairLocked} onClick={() => reviewFile(selected.id)}>Review &amp; fix</Button>
                 <dl className="space-y-2 text-sm">{[
                   ['Full path', selected.path], ['Resolved target', selected.real_path ?? 'Unavailable'], ['Type / state', `${selected.kind} / ${selected.state}`],
                   ['Modified', date(selected.mtime)], ['Size / lines', `${selected.bytes ?? 'Unknown'} bytes / ${selected.line_count ?? 'Unknown'} lines`],
@@ -155,6 +166,7 @@ export function LocalFilesPanel({ localToken }: { localToken: string }) {
               </div>}
             </section>
           </div>
+          {repairTarget && <LocalFileRepairPanel key={repairTarget.fileId} fileId={repairTarget.fileId} localToken={localToken} index={index} finding={repairTarget.finding} onOpenFile={openFile} onLockChange={setRepairLocked} onClose={() => { setRepairTarget(null); setRepairLocked(false); }} />}
           <section className={`${box} space-y-4`} aria-label="Duplicate and instruction evidence">
             <h3 className="text-lg font-medium">Evidence groups</h3>
             <p className="text-muted-foreground text-sm">Open a group, then follow each path to its current contents. Search also limits these groups.</p>
