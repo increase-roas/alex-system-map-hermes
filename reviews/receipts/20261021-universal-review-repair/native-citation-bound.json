@@ -1,0 +1,28 @@
+{
+  "status": "local-tested",
+  "result": "37 tests passed; previous35 AST-identical; two added",
+  "red": "Missing minItems raised KeyError in new schema-contract regression",
+  "green": "37 tests passed",
+  "schema": "AI-local CASE evidence minItems1 maxItems12; PLAN cases minItems2 maxItems4; legacy schemas unchanged; proposal evidence minItems1/maxItems12",
+  "prompt": "Explicit1-12 exact baseline citations per case; concise coverage across changed targets; explicit1-12 exact baseline citations per proposal",
+  "actual_capture": {
+    "path": "/tmp/universal-browser-data/model-responses.json",
+    "case_citations": [
+      2,
+      14
+    ],
+    "rejected": true,
+    "reason": "case evidence",
+    "method": "Reconstructed exact citation line context from captured quotes solely to isolate count-bound failure; no quotes truncated or repaired"
+  },
+  "model_calls_made": 0,
+  "files": {
+    "tools/repair_ai.py": "62dec32c6565b996edeb3306401e46b3f193309791499b26224844737f9599da",
+    "tools/test_repair_ai.py": "68d084fde764b647037dcee8b36734f0653f3abd2483b219af90e860e181fa25"
+  },
+  "acceptance": [
+    "file: tools/repair_ai.py",
+    "file: tools/test_repair_ai.py",
+    "cmd: PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tools -p test_repair_ai.py"
+  ]
+}

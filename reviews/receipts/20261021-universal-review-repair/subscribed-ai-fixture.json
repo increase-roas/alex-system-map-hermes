@@ -1,0 +1,41 @@
+{
+  "fixture_only": true,
+  "actual_source_apply": false,
+  "elapsed_seconds": 33,
+  "native_model_calls": 4,
+  "result": {
+    "proposals": [
+      {
+        "target_id": "fixture-settings",
+        "proposal": {
+          "patch": {
+            "enabled": true
+          }
+        }
+      }
+    ],
+    "checks": [
+      {
+        "kind": "simulated_behavior",
+        "status": "passed",
+        "runner_id": "universal-ai:gpt-6.1-sol",
+        "input_digest": "fd96650e3b79975d689e92ad817dfcd25bb811dba4cc9c2817fb77e2b010ebad",
+        "output_digest": "8090b772a4920ffbcf3a691b45082ad13d24bb9cd66ea6cb92cce4cf9d8dafde",
+        "evidence": [
+          "{\"proposal_evidence\": [{\"file_id\": \"fixture-settings\", \"line\": 2, \"quote\": \"  \\\"enabled\\\": false,\"}], \"target_id\": \"fixture-settings\"}",
+          "{\"after\": \"A\", \"before\": \"B\", \"choices\": {\"A\": \"Enable the feature and preserve evidence.\", \"B\": \"Disable the feature and preserve evidence.\", \"C\": \"Enable the feature and discard evidence.\"}, \"evidence\": [{\"file_id\": \"fixture-settings\", \"line\": 2, \"quote\": \"  \\\"enabled\\\": false,\"}, {\"file_id\": \"fixture-settings\", \"line\": 3, \"quote\": \"  \\\"preserve_evidence\\\": true\"}], \"expected\": \"A\", \"id\": \"fix-feature-and-evidence\", \"purpose\": \"fix\", \"rationale\": \"The before sources select B; the candidate sources select A. This checks the changed feature setting together with the evidence setting.\", \"scenario\": \"An application reads the currently supplied configuration to determine whether the disposable feature is enabled and whether evidence preservation is requested. What does the configuration direct?\", \"status\": \"passed\"}",
+          "{\"after\": \"B\", \"before\": \"B\", \"choices\": {\"A\": \"Discard evidence.\", \"B\": \"Preserve evidence.\", \"C\": \"Leave evidence preservation unspecified.\"}, \"evidence\": [{\"file_id\": \"fixture-settings\", \"line\": 2, \"quote\": \"  \\\"enabled\\\": false,\"}, {\"file_id\": \"fixture-settings\", \"line\": 3, \"quote\": \"  \\\"preserve_evidence\\\": true\"}], \"expected\": \"B\", \"id\": \"preserve-evidence-directive\", \"purpose\": \"preserve\", \"rationale\": \"Both the before and candidate sources select B. The feature-setting change leaves the explicit evidence-preservation directive intact.\", \"scenario\": \"A configuration reader evaluates feature availability separately from evidence preservation. Regardless of the availability result, what evidence-preservation directive does the currently supplied configuration contain?\", \"status\": \"passed\"}"
+        ],
+        "checked_at": "2026-10-21T07:19:55.789769+00:00",
+        "limitations": [
+          "Behavior checks simulate choices from bounded source projections; they do not execute code or prove live runtime acceptance.",
+          "Native syntax, owner lifecycle and dry-run checks must be supplied separately by the registered adapters."
+        ]
+      }
+    ],
+    "limitations": [
+      "Behavior checks simulate choices from bounded source projections; they do not execute code or prove live runtime acceptance.",
+      "Native syntax, owner lifecycle and dry-run checks must be supplied separately by the registered adapters."
+    ]
+  }
+}

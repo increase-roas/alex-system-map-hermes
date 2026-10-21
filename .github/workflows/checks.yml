@@ -1,0 +1,37 @@
+name: checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+jobs:
+  app:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+          cache-dependency-path: app/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+      - name: Lint
+        run: pnpm run lint
+      - name: Type check
+        run: pnpm exec tsc --noEmit
+      - name: Build test server
+        run: pnpm exec next build --no-lint
+      - name: Check scripts
+        run: |
+          set -euo pipefail
+          for f in src/app/explorer/*.check.mts; do
+            node "$f"
+          done

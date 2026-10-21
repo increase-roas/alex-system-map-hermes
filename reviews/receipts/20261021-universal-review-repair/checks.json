@@ -1,0 +1,58 @@
+{
+  "artifact": "reviewed implementation with completed browser acceptance",
+  "recorded_at": "2026-10-21T16:03:56.344932+00:00",
+  "checks": [
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B tools/run_repair_tests.py",
+      "exit_code": 0,
+      "tests": 221,
+      "skips": 0,
+      "log": "python-tests.txt"
+    },
+    {
+      "command": "node --test tools/test_local_file_repair_source.cjs tools/test_universal_repair_source.cjs",
+      "exit_code": 0,
+      "tests": 47,
+      "log": "node-tests.txt"
+    },
+    {
+      "command": "app/node_modules/.bin/tsc --noEmit",
+      "cwd": "app",
+      "exit_code": 0,
+      "output": "empty"
+    },
+    {
+      "command": "ESLINT_USE_FLAT_CONFIG=false eslint focused changed app files",
+      "cwd": "app",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 3,
+      "log": "focused-lint.txt"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tools -p test_repair_ai.py",
+      "exit_code": 0,
+      "tests": 37,
+      "skips": 0,
+      "scope": "AI schema/prompt follow-up after actual native browser result",
+      "log": "ai-followup-tests.txt"
+    }
+  ],
+  "independent_reviews": [
+    "core-integrity-review.json",
+    "ai-plugin-review.json",
+    "citation-review.json",
+    "browser-review.json"
+  ],
+  "review_model_family": "Codex GPT-6, context-separated; no paid cross-provider review",
+  "browser": {
+    "result": "VERIFIED",
+    "journey": "browser-journey.json",
+    "independent_review": "browser-review.json",
+    "real_source_apply": false,
+    "fixture_approval_apply_reopen_undo": true,
+    "real_proposal": "real-rule-proposal.json"
+  },
+  "actual_source_apply_count": 0,
+  "implementation_head": "9ef5a27142cc8996755a305905a87a3234e40a26"
+}

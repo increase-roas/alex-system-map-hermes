@@ -1,0 +1,57 @@
+{
+  "evidence_origin": "Existing completed tool results from this builder conversation, copied without rerunning checks.",
+  "cwd": "/Users/alexlobaito/Documents/Codex/worktrees/system-map-universal-repair/app",
+  "checks_rerun_for_packaging": false,
+  "build": {
+    "command": "./node_modules/.bin/next build --no-lint",
+    "session_id": 78052,
+    "exit_code": 0,
+    "chunks": [
+      {
+        "chunk_id": "739731",
+        "output": " ⚠ Linting is disabled.\n   ▲ Next.js 15.5.25\n\n   Creating an optimized production build ...\n"
+      },
+      {
+        "chunk_id": "f59f34",
+        "output": " ✓ Compiled successfully in 8.3s\n   Checking validity of types ...\n   Collecting page data ...\n   Generating static pages (0/20) ...\n   Generating static pages (5/20) \r\n   Generating static pages (10/20) \r\n   Generating static pages (15/20) \r\n ✓ Generating static pages (20/20)\n   Finalizing page optimization ...\n   Collecting build traces ...\n\nRoute (app)                                   Size  First Load JS\n┌ ○ /                                        212 B         106 kB\n├ ○ /_not-found                            1.03 kB         103 kB\n├ ƒ /api/board                               221 B         103 kB\n├ ƒ /api/board/answer                        221 B         103 kB\n├ ƒ /api/catalog                             221 B         103 kB\n├ ƒ /api/catalog/edit                        221 B         103 kB\n├ ƒ /api/catalog/edit/state                  221 B         103 kB\n├ ƒ /api/ceo-dashboard                       221 B         103 kB\n├ ƒ /api/connector-logins                    221 B         103 kB\n├ ƒ /api/disabled-ai                         221 B         103 kB\n├ ƒ /api/generate-text                       221 B         103 kB\n├ ƒ /api/health                              221 B         103 kB\n├ ƒ /api/langflow/components                 221 B         103 kB\n├ ƒ /api/langflow/flows                      221 B         103 kB\n├ ƒ /api/langflow/flows/[flowId]             221 B         103 kB\n├ ƒ /api/langflow/flows/[flowId]/export      221 B         103 kB\n├ ƒ /api/langflow/flows/[flowId]/langflow    221 B         103 kB\n├ ƒ /api/langflow/flows/[flowId]/runs        221 B         103 kB\n├ ƒ /api/langflow/runs/[runId]/stop          221 B         103 kB\n├ ƒ /api/langflow/starters                   221 B         103 kB\n├ ƒ /api/langflow/status                     221 B         103 kB\n├ ƒ /api/langfuse/traces                     221 B         103 kB\n├ ƒ /api/live-setup                          221 B         103 kB\n├ ƒ /api/local-files                         221 B         103 kB\n├ ƒ /api/local-files/repair                  221 B         103 kB\n├ ƒ /api/org-map                             221 B         103 kB\n├ ƒ /api/presentation                        221 B         103 kB\n├ ƒ /api/reliability/status                  221 B         103 kB\n├ ƒ /api/repairs                             221 B         103 kB\n├ ƒ /api/repairs/jobs/[jobId]                221 B         103 kB\n├ ƒ /api/review-queue                        221 B         103 kB\n├ ƒ /api/sources/[sourceId]                  221 B         103 kB\n├ ƒ /api/sync/status                         221 B         103 kB\n├ ƒ /api/traces                              221 B         103 kB\n├ ƒ /api/traces/[traceId]                    221 B         103 kB\n├ ƒ /api/workflow                            221 B         103 kB\n├ ƒ /api/workflow/events/[jobId]             221 B         103 kB\n├ ƒ /api/workflow/recover/[jobId]            221 B         103 kB\n├ ƒ /api/workflow/templates                  221 B         103 kB\n├ ○ /explorer                               757 kB         862 kB\n├ ○ /queue                                  1.4 kB         107 kB\n└ ○ /waiting                               1.76 kB         108 kB\n+ First Load JS shared by all               102 kB\n  ├ chunks/8159-60766208b0026388.js        46.1 kB\n  ├ chunks/867f9a38-1d8a9b5eccbe427b.js    54.3 kB\n  └ other shared chunks (total)            2.03 kB\n\n\nƒ Middleware                               33.5 kB\n\n○  (Static)   prerendered as static content\nƒ  (Dynamic)  server-rendered on demand\n\n"
+      },
+      {
+        "chunk_id": "771812",
+        "output": "",
+        "exit_code": 0
+      }
+    ]
+  },
+  "typecheck": {
+    "command": "./node_modules/.bin/tsc --noEmit",
+    "session_id": 9553,
+    "exit_code": 0,
+    "chunks": [
+      {
+        "chunk_id": "351d03",
+        "output": ""
+      },
+      {
+        "chunk_id": "27834c",
+        "output": "",
+        "exit_code": 0
+      }
+    ]
+  },
+  "check_scripts": {
+    "command": "python3 - <<'PY'\nimport os,subprocess,tempfile,pathlib,sys\nwith tempfile.TemporaryDirectory(prefix='app-ci-empty-home-') as home:\n env=dict(os.environ,HOME=home,PYTHONDONTWRITEBYTECODE='1')\n for script in sorted(pathlib.Path('src/app/explorer').glob('*.check.mts')):\n  result=subprocess.run(['node',str(script)],env=env,text=True,capture_output=True,timeout=120)\n  print(str(script)+': exit '+str(result.returncode))\n  print(result.stdout)\n  if result.stderr:print(result.stderr)\n  if result.returncode:sys.exit(result.returncode)\n print('All existing check scripts passed with an empty HOME.')\nPY",
+    "session_id": 5239,
+    "exit_code": 0,
+    "chunks": [
+      {
+        "chunk_id": "c4a772",
+        "output": ""
+      },
+      {
+        "chunk_id": "d01360",
+        "output": "src/app/explorer/board-answer.check.mts: exit 0\n✔ lists waiting questions and marks gates (769.809833ms)\n✔ rejects a POST without the local token (5.35875ms)\n✔ refuses to answer a gate item (6.339875ms)\n✔ answer round-trips through board.py (77.1695ms)\n✔ never treats an unrelated server as the test server (4.195917ms)\nℹ tests 5\nℹ suites 0\nℹ pass 5\nℹ fail 0\nℹ cancelled 0\nℹ skipped 0\nℹ todo 0\nℹ duration_ms 888.006375\n\nsrc/app/explorer/board-gate.check.mts: exit 0\nPASS unmarked is a gate: May I proceed with the previously discussed action now?\nPASS unmarked is a gate: Should I tell Robert that the appointment is confirmed for tomorrow?\nPASS unmarked is a gate: Which layout do you prefer for the map header, the left one or the top one?\nPASS gate: dashboard-ok: Charge the card 50 dollars?\nPASS gate: dashboard-ok: Contact Jane by SMS?\nPASS gate: dashboard-ok: Erase the backup?\nPASS gate: dashboard-ok: Proceed?\nPASS gate: dashboard-ok: Can we charge the client card for the next month of hosting fees?\nPASS gate: dashboard-ok: Should I reach out to the vendor rep about the integration timeline?\nPASS gate: dashboard-ok: OK to erase the old export folder now that the new one is verified?\nPASS plain design question is answerable\nPASS missing question is a gate\nPASS a note does not reset the waiting start\nPASS tag is hidden from Alex\nPASS no blocked line means unknown, not progressed\n\nsrc/app/explorer/ceo-dashboard.check.mts: exit 0\nPASS open tickets blocked on or owned by alex (board.py rule)\nPASS deep link comes from the ticket text, trailing dot trimmed\nPASS no link in the source means null, never a guessed homepage\nPASS explicit link field wins\nPASS agent button prompt names the ticket and the gates\nPASS board counts by status\nPASS badges per owner, busiest first, unowned skipped\nPASS mission status as written; template comment ignored\nPASS missing STATUS line is unknown\nPASS parity: first table only\nPASS parity verdicts\nPASS missing parity table is null (unknown)\nPASS correction item\nPASS session item\nPASS bad line skipped\nPASS newest progress first\nPASS freshness\nPASS unknown states name the ticket that wires them\nPASS empty STATUS stays unknown, never borrows the next line\nPASS empty PRIORITY is null\nPASS rows with alerts first\nPASS null figures are left out, never 0\nPASS a real 0 from the source is shown\nPASS unknown keeps its reason\nPASS missing or bad snapshot is unknown\nPASS null service record is unknown, no crash\nPASS services array is unknown\nPASS service-level alerts are shown even when the top-level list misses them\nPASS empty services is unknown, not an all-clear\nPASS non-list alerts is unknown\nPASS service without an alerts list is unknown\nPASS wrong-type or nonfinite figure makes the section unknown\nPASS a missing figure or a real 0 is still fine\n\nsrc/app/explorer/connector-logins.check.mts: exit 0\nPASS only ACTIVE is healthy\nPASS bad count per toolkit\nPASS toolkits with dead logins sort first: gmail,zoom,apify\nPASS Not ACTIVE only hides healthy rows\nPASS Not ACTIVE only drops all-healthy toolkits\nPASS filter matches the card name\nPASS filter matches the alias\nPASS alias first, then word id\nPASS all-good headline\nPASS bad headline carries the fix\nPASS fix wording matches the alarm\n\nsrc/app/explorer/flow-node-kit.check.mts: exit 0\nPASS all 15 Agentflow node types\nPASS Judge, Compare, Promote, Route to customer\nPASS GEPA preset passes: \nPASS routing preset passes: \nPASS GEPA feedback loop: explicit single-port IDs pass\nPASS Lead routing (if/else): explicit single-port IDs pass\nPASS missing Judge score output is flagged instead of Flow check OK\nPASS missing single input is flagged\nPASS arrow from a terminal node is flagged\nPASS arrow into Start is flagged\nPASS Promote reachable around the yes is flagged\nPASS Promote after a \"no\" is flagged\nPASS spend tool reachable from the safe branch is flagged\nPASS huge loop limit is flagged\nPASS unbounded cycle is flagged\nPASS unreachable node is flagged\nPASS Compare without the live baseline is flagged\nPASS Tool without card is flagged\nPASS agent with tools without a customer route is flagged\nPASS two Starts flagged\nPASS agent on the \"unknown\" branch is flagged\nPASS made-up effect is flagged\nPASS agent that can spend before any yes is flagged\nPASS HTTP DELETE without approval is flagged\nPASS agent whose tools can spend but says write is flagged\nPASS unknown agent tool is flagged\nPASS unknown standalone tool is flagged and gated\nPASS nonexistent nested flow is flagged and gated\nPASS nested flow that can spend must say so\nPASS unregistered script is flagged and gated\nPASS registered read-only script passes\nPASS newline in arguments is refused and gated\nPASS shell symbols refused\nPASS gate check is write, not read\nPASS GEPA with Claude counts as spend and is gated\nPASS unknown flag refused\nPASS tools/gate.py check \"\" -> needs --plan\nPASS tools/gate.py check \"--plan p.json\" -> needs --action\nPASS tools/dashboard.py \"--client example-tree-co\" -> needs --out\nPASS gepa/gepa.py loop \"--rounds 3\" -> needs --job\nPASS tools/metrics.py \"\" -> needs a customer folder\nPASS tools/score_customer.py \"customers/x --all\" -> use only one of\nPASS tools/scan_customer.py \"--all --all\" -> given twice\nPASS dashboard \"--out --help\" -> needs a value\nPASS dashboard \"--out report.html --today 2026-99-99\" -> --today needs a valid value\nPASS dashboard \"--out report.html --today 2026-02-30\" -> --today needs a valid value\nPASS dashboard \"--out -x.html\" -> needs a value\nPASS valid dashboard command passes\n\nAll existing check scripts passed with an empty HOME.\n",
+        "exit_code": 0
+      }
+    ]
+  }
+}

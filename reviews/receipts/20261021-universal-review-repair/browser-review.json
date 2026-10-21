@@ -1,0 +1,100 @@
+{
+  "status": "VERIFIED",
+  "scope": "bounded independent browser artifact and actual state readback; no implementation/source edits or native/model calls",
+  "fixture_job_id": "3ac31caac14f4336a9a7fcc7ea95e826",
+  "real_rule_plan_id": "2eed09fdad8b439183f49f3aabdfe8cf",
+  "acceptance": [
+    {
+      "status": "VERIFIED",
+      "item": "One approved deterministic fixture job with two steps, completed then reversed to undone",
+      "evidence": [
+        "/private/tmp/universal-browser-data/state/jobs/3ac31caac14f4336a9a7fcc7ea95e826.json",
+        "reviews/receipts/20261021-universal-review-repair/browser-fixture-job.json"
+      ]
+    },
+    {
+      "status": "VERIFIED",
+      "item": "One provider Apply and one Undo effect; latest journal hash matches restored provider store",
+      "evidence": [
+        "/private/tmp/universal-browser-data/journal.jsonl",
+        "/private/tmp/universal-browser-data/provider.json",
+        "reviews/receipts/20261021-universal-review-repair/browser-effect-readback.json"
+      ]
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Local hidden value and unrelated fields preserved; local configuration exactly equals fixture bootstrap baseline",
+      "evidence": [
+        "/private/tmp/universal-browser-data/home/.cursor/cli-config.json",
+        "/tmp/universal-browser-fixture.py:23"
+      ]
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Reload uses original job ID with no extra effects",
+      "evidence": [
+        "/private/tmp/universal-browser-data/journal.jsonl rows 123-144"
+      ]
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Four captured proposal/scenario/before/candidate results use unstubbed production invoke route",
+      "evidence": [
+        "/private/tmp/universal-browser-data/model-responses.json",
+        "/tmp/universal-browser-fixture.py:53-63",
+        "tools/repair_ai.py:42-44"
+      ],
+      "limitation": "Source and capture provenance consistent; no served-model attestation claimed."
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Real rule plan freezes clarify unknown to A, two known preservation cases, source plus four derived operations and two publications",
+      "evidence": [
+        "reviews/receipts/20261021-universal-review-repair/real-rule-proposal.json",
+        "app/.data/universal-repairs/plans/2eed09fdad8b439183f49f3aabdfe8cf.json"
+      ]
+    },
+    {
+      "status": "VERIFIED",
+      "item": "All five actual source files still match frozen preimage hashes; actual app job directory empty",
+      "evidence": [
+        "app/.data/universal-repairs/jobs",
+        "app/.data/universal-repairs/plans/2eed09fdad8b439183f49f3aabdfe8cf.json"
+      ]
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Desktop screenshot inspected at1440x1000; narrow screenshot inspected at390x844 and visually wraps within viewport",
+      "evidence": [
+        "reviews/receipts/20261021-universal-review-repair/browser-real-proposal-desktop.png",
+        "reviews/receipts/20261021-universal-review-repair/browser-fixture-narrow.png"
+      ],
+      "recorded_measurement": {
+        "page_scroll_width": 390,
+        "provenance": "captured browser-journey.json measurement; no fresh DOM query"
+      }
+    }
+  ],
+  "primary_record_only": {
+    "ui_approval_clicks": 1,
+    "note": "Exact click count is primary CUA record; independent proof establishes one durable approved job and effect counts."
+  },
+  "limitations": [
+    "Fixture HTTP mutation is not production provider mutation proof.",
+    "Real rule proposal remains read-only; no actual source Apply jobs.",
+    "Simulated choices and syntax/lifecycle do not prove live guard execution or app reload.",
+    "Narrow image has JPEG encoding despite .png extension; file utility and sips read it as390x844."
+  ],
+  "sha256": {
+    "reviews/receipts/20261021-universal-review-repair/browser-journey.json": "273a9a7cdd59a487a6e675ee5644d4fff6c0615918d72d59ffd85c2b8694cace",
+    "reviews/receipts/20261021-universal-review-repair/browser-fixture-plan.json": "c1cfc14084bf8bd67b96ccbf210ed570a6be0c7ba92521e66469073c6ad96bac",
+    "reviews/receipts/20261021-universal-review-repair/browser-fixture-job.json": "ee912d250b5302345c41050107c89d254ba17a1ca49419ee1f688c83222ab5ec",
+    "reviews/receipts/20261021-universal-review-repair/browser-effect-readback.json": "08bd88337baa6afea50619e52eb9adfab2179848310eca892a3f63727521e969",
+    "reviews/receipts/20261021-universal-review-repair/real-rule-proposal.json": "9ef35ea57212efba718d2c4528fd5f69b969eb781a92fb379a110faf4b9652e4",
+    "reviews/receipts/20261021-universal-review-repair/browser-real-proposal-desktop.png": "27ed6a7ed3479a11134b22bd617e5e04ada7b0ddec7bbfab62265c8b30753f41",
+    "reviews/receipts/20261021-universal-review-repair/browser-fixture-narrow.png": "92a81a9b29f437c7f9a2eabc1f2c516b6bcfd35a27a6bb71a5189e6ec4d9439d",
+    "/private/tmp/universal-browser-data/journal.jsonl": "1882ed2ebdd24c6714893c44cbd9e90d9885d9a568f36734a3d55ef2703ea12a",
+    "/private/tmp/universal-browser-data/model-responses.json": "4cc102261cb82d9da5a0ab356574143bcbf219ba42b5f9a612beaa1c64ffb528"
+  },
+  "blockers": []
+}

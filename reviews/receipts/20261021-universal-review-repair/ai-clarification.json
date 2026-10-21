@@ -1,0 +1,27 @@
+{
+  "status": "local-tested",
+  "test_result": "35 tests passed; previous 31 AST-identical; four added",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tools -p test_repair_ai.py",
+  "contract": {
+    "purpose": "clarify in AI-local CASE/PLAN copies only; legacy schemas unchanged",
+    "citations": "At least two distinct exact baseline source lines; strict quote validation unchanged",
+    "planner": "Explicit opposing directives in same scope, never missing facts or insufficient evidence",
+    "before": "Valid model answer unknown only",
+    "after": "Known expected A/B/C only",
+    "preserve": "Known same expected choice in both, unchanged",
+    "ordinary_fix": "Known different baseline and known expected candidate, unchanged",
+    "coverage": "At least fix or clarify plus preserve globally and per changed target",
+    "evidence": "Clarify outcomes include baseline_ambiguous boolean; existing simulation-only limitations retained",
+    "failure": "Provider/parser failure stays unavailable with no proposals"
+  },
+  "model_calls_made": 0,
+  "files": {
+    "tools/repair_ai.py": "005159e14ae23e57390d80f8ad086e4a9f74f0a8fe0e6e1e810411748f8c6eee",
+    "tools/test_repair_ai.py": "dcd284c234fff15e110ab7c290876b18e1bd5b15f5dbfa980ee86b7dd9099933"
+  },
+  "acceptance": [
+    "file: tools/repair_ai.py",
+    "file: tools/test_repair_ai.py",
+    "cmd: PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tools -p test_repair_ai.py"
+  ]
+}

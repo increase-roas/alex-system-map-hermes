@@ -1,0 +1,128 @@
+{
+  "schema_version": 1,
+  "job_id": "3ac31caac14f4336a9a7fcc7ea95e826",
+  "plan_id": "3ac31caac14f4336a9a7fcc7ea95e826",
+  "digest": "73c031dafe7eeb6ce77fa93838ef939b48e6f3ef099174bbfd31de255a37ff06",
+  "status": "undone",
+  "next_step": 2,
+  "unknown_effect": null,
+  "created_at": "2026-10-21T15:47:51.131839+00:00",
+  "updated_at": "2026-10-21T15:50:33.186673+00:00",
+  "steps": [
+    {
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f",
+      "target_id": "local-file-741331f3f0ed5e3347c5c3db",
+      "phase": "undone",
+      "receipt": {
+        "checks": [],
+        "evidence": [
+          "Conditional changed-field inverse compared and read back."
+        ],
+        "limitations": [
+          "Unrelated newer JSON keys preserved; runtime reload unobserved."
+        ],
+        "ok": true,
+        "state": "undone"
+      }
+    },
+    {
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da",
+      "target_id": "provider-b56a711237c1c919ccda298f",
+      "phase": "undone",
+      "receipt": {
+        "checks": [],
+        "evidence": [
+          "fresh baseline checked; native inverse readback matched"
+        ],
+        "fingerprint": "d43c46b56b77e384d34d2fd5776c732b39cd51c2906914c80aee018252220507",
+        "limitations": [
+          "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+        ],
+        "ok": true,
+        "state": "undone"
+      }
+    }
+  ],
+  "events": [
+    {
+      "at": "2026-10-21T15:47:51.175306+00:00",
+      "phase": "preflight"
+    },
+    {
+      "at": "2026-10-21T15:47:51.177830+00:00",
+      "phase": "backed_up",
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f"
+    },
+    {
+      "at": "2026-10-21T15:47:51.178783+00:00",
+      "phase": "backed_up",
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da"
+    },
+    {
+      "at": "2026-10-21T15:47:51.179125+00:00",
+      "phase": "barrier_complete"
+    },
+    {
+      "at": "2026-10-21T15:47:51.180155+00:00",
+      "phase": "intent",
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f"
+    },
+    {
+      "at": "2026-10-21T15:47:51.181681+00:00",
+      "phase": "applied",
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f"
+    },
+    {
+      "at": "2026-10-21T15:47:51.182379+00:00",
+      "phase": "verified",
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f"
+    },
+    {
+      "at": "2026-10-21T15:47:51.182637+00:00",
+      "phase": "intent",
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da"
+    },
+    {
+      "at": "2026-10-21T15:47:51.183888+00:00",
+      "phase": "applied",
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da"
+    },
+    {
+      "at": "2026-10-21T15:47:51.184869+00:00",
+      "phase": "verified",
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da"
+    },
+    {
+      "at": "2026-10-21T15:47:51.185254+00:00",
+      "phase": "completed"
+    },
+    {
+      "at": "2026-10-21T15:50:33.156704+00:00",
+      "phase": "undo_queued"
+    },
+    {
+      "at": "2026-10-21T15:50:33.181161+00:00",
+      "phase": "undo_intent",
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da"
+    },
+    {
+      "at": "2026-10-21T15:50:33.184205+00:00",
+      "phase": "undone",
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da"
+    },
+    {
+      "at": "2026-10-21T15:50:33.184619+00:00",
+      "phase": "undo_intent",
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f"
+    },
+    {
+      "at": "2026-10-21T15:50:33.186214+00:00",
+      "phase": "undone",
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f"
+    },
+    {
+      "at": "2026-10-21T15:50:33.186673+00:00",
+      "phase": "undone"
+    }
+  ]
+}

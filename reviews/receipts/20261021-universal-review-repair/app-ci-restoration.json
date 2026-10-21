@@ -1,0 +1,30 @@
+{
+  "status": "verified-ready-to-push",
+  "root_cause": "GitHub main protection requires app from GitHub Actions, while main contains no workflow to emit app. Restoring the historical workflow exposed its live tasks.json/native ~/.agents handler dependency; the test now pins native source and uses synthetic temporary data.",
+  "required_context": "app",
+  "protection_changed": false,
+  "lint_source_commit": "9d3e5d692c1eae63b1c6321526ff687340faf756",
+  "historical_workflow_commit": "e502e4f0ffb95b1513f5da4045833104dbef435a",
+  "checks": {
+    "full_app_lint": {
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 157
+    },
+    "production_build": {
+      "exit_code": 0
+    },
+    "typescript": {
+      "exit_code": 0
+    },
+    "legacy_check_scripts": {
+      "scripts": 5,
+      "exit_code": 0,
+      "environment": "empty HOME"
+    }
+  },
+  "native_evidence": "app-ci-native-checks.json",
+  "independent_review": "app-ci-review.json",
+  "source": "https://docs.github.com/en/pull-requests/how-tos/merge-and-close-pull-requests/troubleshooting-required-status-checks",
+  "captured_at": "2026-10-21T16:18:22.931853+00:00"
+}

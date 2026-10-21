@@ -1,0 +1,36 @@
+{
+  "status": "local-tested",
+  "test_result": "35 tests passed; 34 previous test methods retained; one realistic lifecycle regression added",
+  "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tools -p test_local_file_ai.py",
+  "red": "New realistic test failed in timeout, error and success modes: Provider descendant survived invocation cleanup.",
+  "green": "35 tests passed after process-group lifecycle correction.",
+  "test_oracle": {
+    "method": "test_provider_wrapper_descendants_stop_on_timeout_error_and_success",
+    "wrapper": "Disposable Python process launches child and waits for child-written PID file, then sleeps/exits nonzero/exits success",
+    "child": "Disposable Python process ignores SIGTERM and sleeps; no external work",
+    "probe": "After invocation, /bin/ps -p childPID -o stat= must show absent or dead zombie, never a running/sleeping child; timeout<=2 seconds",
+    "cleanup": "Test finally SIGKILLs only fixture child if necessary; temporary directory removed"
+  },
+  "implementation": {
+    "session": "Popen start_new_session=True; private process group per invocation",
+    "timeout_seconds": 120,
+    "cleanup": "finally killpg(run.pid, SIGKILL), ignore nonexistent group, wait() reaps wrapper on every invocation exit",
+    "unchanged": "Stripped environment, tool-free provider flags, same subscribed model, no paid fallback, bounded output/schema, static ai_provider_failed HTTP503"
+  },
+  "existing_tests_adjusted_only_for_mock_api": [
+    "test_provider_failure_is_static_and_never_writes",
+    "test_provider_timeout_sanitized",
+    "test_failure_status_is_not_staleness",
+    "test_authority_header_is_server_metadata_not_embedded_file_instructions"
+  ],
+  "model_calls_made": 0,
+  "files": {
+    "tools/local_file_ai.py": "0ca2cb23b0dac5838b2784b80f26dc9c0c5f6d32cbc6af168e4bc582cdcb7dec",
+    "tools/test_local_file_ai.py": "f03082f0cedc35e6dfd67fb698c263ae348a52d9ee70614df8e5f40e263e2426"
+  },
+  "acceptance": [
+    "file: tools/local_file_ai.py",
+    "file: tools/test_local_file_ai.py",
+    "cmd: PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s tools -p test_local_file_ai.py"
+  ]
+}

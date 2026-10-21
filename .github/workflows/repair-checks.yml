@@ -1,0 +1,33 @@
+name: Repair checks
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  repair-checks:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: pnpm/action-setup@v4
+        with:
+          version: '10.18.3'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: pnpm
+          cache-dependency-path: app/pnpm-lock.yaml
+      - run: pnpm install --frozen-lockfile
+        working-directory: app
+      - run: python3 -B tools/run_repair_tests.py
+      - run: node --test tools/test_local_file_repair_source.cjs tools/test_universal_repair_source.cjs
+      - run: pnpm exec tsc --noEmit
+        working-directory: app
+      - run: pnpm exec eslint src/app/explorer/repair-targets-panel.tsx src/app/explorer/local-files-panel.tsx src/app/api/repairs/route.ts 'src/app/api/repairs/jobs/[jobId]/route.ts' src/lib/server/universal-repairs.ts src/lib/types/repairs.ts
+        working-directory: app
+        env:
+          ESLINT_USE_FLAT_CONFIG: 'false'

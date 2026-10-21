@@ -1,0 +1,989 @@
+{
+  "observed_at": "2026-10-21T15:33:07.793434+00:00",
+  "mode": "real-read-only",
+  "source_apply_count": 0,
+  "target_count": 489,
+  "categories": {
+    "rule": 6,
+    "skill": 73,
+    "skill_reference": 228,
+    "executable": 123,
+    "app_settings": 3,
+    "cli_config": 1,
+    "hook": 3,
+    "distribution": 5,
+    "publication": 3,
+    "remote_files": 6,
+    "paperclip_agent": 7,
+    "neon_project": 1,
+    "neon_branch": 3,
+    "hindsight_bank": 3,
+    "signoz_alert": 16,
+    "signoz_dashboard": 4,
+    "plugin_metadata": 3,
+    "plugin_sync": 1
+  },
+  "adapter_limitations": [],
+  "registered_target_evidence": [
+    {
+      "id": "local-file-fb6674b04c63c40978b2bb4f",
+      "adapter_id": "local-owner",
+      "category": "rule",
+      "owner": "native-instruction-builder",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/.agents/instructions/shared.md",
+        "home": "/Users/alexlobaito"
+      },
+      "observed_at": "2026-10-21T15:22:55.240669+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    },
+    {
+      "id": "local-file-1aee380240f9506e859ba303",
+      "adapter_id": "local-owner",
+      "category": "executable",
+      "owner": "registered-agent-tools",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/.agents/tools/guards/composio_guard.py",
+        "home": "/Users/alexlobaito"
+      },
+      "observed_at": "2026-10-21T15:22:55.434062+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    },
+    {
+      "id": "local-file-e6c9e78a86d20914e882e6fd",
+      "adapter_id": "local-owner",
+      "category": "executable",
+      "owner": "registered-agent-tools",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/.agents/tools/guards/context_watch.py",
+        "home": "/Users/alexlobaito"
+      },
+      "observed_at": "2026-10-21T15:22:55.434079+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    },
+    {
+      "id": "remote-3218233c23912145a4e47433",
+      "adapter_id": "remote_file_ssh",
+      "category": "remote_files",
+      "owner": "Sashas-Mac-mini.local",
+      "scope": "remote",
+      "identity": {
+        "host": "Sashas-Mac-mini.local",
+        "transport": "ssh",
+        "host_id": null,
+        "account": "agency-mini",
+        "tool_contract_hash": "ssh-json-stdin-v1",
+        "root": "claude",
+        "relative": "settings.json",
+        "runner_revision": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69"
+      },
+      "observed_at": "2026-10-21T15:22:55.674809+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic compare-and-replace here. An external edit in that remaining window can be overwritten."
+      ]
+    },
+    {
+      "id": "remote-ee63844a4723536a07291e21",
+      "adapter_id": "remote_file_ssh",
+      "category": "remote_files",
+      "owner": "Sashas-Mac-mini.local",
+      "scope": "remote",
+      "identity": {
+        "host": "Sashas-Mac-mini.local",
+        "transport": "ssh",
+        "host_id": null,
+        "account": "agency-mini",
+        "tool_contract_hash": "ssh-json-stdin-v1",
+        "root": "codex",
+        "relative": "AGENTS.md",
+        "runner_revision": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69"
+      },
+      "observed_at": "2026-10-21T15:22:55.998700+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic compare-and-replace here. An external edit in that remaining window can be overwritten."
+      ]
+    },
+    {
+      "id": "remote-78893d167f82fbe63255549e",
+      "adapter_id": "remote_file_ssh",
+      "category": "remote_files",
+      "owner": "Sashas-Mac-mini.local",
+      "scope": "remote",
+      "identity": {
+        "host": "Sashas-Mac-mini.local",
+        "transport": "ssh",
+        "host_id": null,
+        "account": "agency-mini",
+        "tool_contract_hash": "ssh-json-stdin-v1",
+        "root": "hermes",
+        "relative": "AGENTS.md",
+        "runner_revision": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69"
+      },
+      "observed_at": "2026-10-21T15:22:55.998753+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic compare-and-replace here. An external edit in that remaining window can be overwritten."
+      ]
+    },
+    {
+      "id": "remote-15885b5df291549e3f4b75bb",
+      "adapter_id": "remote_file_ssh",
+      "category": "remote_files",
+      "owner": "Sashas-Mac-mini.local",
+      "scope": "remote",
+      "identity": {
+        "host": "Sashas-Mac-mini.local",
+        "transport": "ssh",
+        "host_id": null,
+        "account": "agency-mini",
+        "tool_contract_hash": "ssh-json-stdin-v1",
+        "root": "hermes",
+        "relative": "config.yaml",
+        "runner_revision": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69"
+      },
+      "observed_at": "2026-10-21T15:22:55.998784+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic compare-and-replace here. An external edit in that remaining window can be overwritten."
+      ]
+    },
+    {
+      "id": "remote-07dbb54a1270c4fc0bf0e984",
+      "adapter_id": "remote_file_orgo_d9b475e2-47b2-46d4-b8eb-102564f93283",
+      "category": "remote_files",
+      "owner": "orgo-desktop",
+      "scope": "remote",
+      "identity": {
+        "host": "orgo-desktop",
+        "transport": "orgo",
+        "host_id": "d9b475e2-47b2-46d4-b8eb-102564f93283",
+        "account": "ca_33sT2QgdT6_Y",
+        "tool_contract_hash": "c462b2c733fbf369e3a5e559d21331f65449b5ac2ea26e6f94ef4f50154195df",
+        "root": "hermes",
+        "relative": "config.yaml",
+        "runner_revision": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69"
+      },
+      "observed_at": "2026-10-21T15:22:59.365993+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic compare-and-replace here. An external edit in that remaining window can be overwritten."
+      ]
+    },
+    {
+      "id": "remote-1790c4524a78e9499f199bd5",
+      "adapter_id": "remote_file_orgo_6fbffd8c-65b1-4f2e-993e-f283532109bf",
+      "category": "remote_files",
+      "owner": "orgo-desktop",
+      "scope": "remote",
+      "identity": {
+        "host": "orgo-desktop",
+        "transport": "orgo",
+        "host_id": "6fbffd8c-65b1-4f2e-993e-f283532109bf",
+        "account": "ca_33sT2QgdT6_Y",
+        "tool_contract_hash": "c462b2c733fbf369e3a5e559d21331f65449b5ac2ea26e6f94ef4f50154195df",
+        "root": "openclaw",
+        "relative": "openclaw.json",
+        "runner_revision": "a673ec0c52a81a7cfdf17da174a84c2f73ee539eb224116d7607cb6824f8db69"
+      },
+      "observed_at": "2026-10-21T15:22:58.879342+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Final inode/hash/mode comparison precedes atomic file replacement; the OS provides no atomic compare-and-replace here. An external edit in that remaining window can be overwritten."
+      ]
+    },
+    {
+      "id": "provider-b76fad99e6ac8ca8e017f79d",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "bd19e4b4-e2f4-4694-b984-0299d00666e9",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096728+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-c70fc73fd3f60aea5bdd1d3e",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "2a232363-e70b-4d79-9d2e-56afbb0eb0a9",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096880+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-b2546e76de8b7e2694e76ee1",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "443142f4-02a4-443b-a1f6-09249cbfe48a",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096894+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-1c79a3011489e579b8571523",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "e72281f5-234f-495c-9013-8f02a92633f8",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096900+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-b0a3abbc3c8b9c9fb8910e05",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "7ec726c8-7daf-4f51-bf14-435a9c7a8a1a",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096911+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-5890e6afd9213e0f0c63cb27",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "ff4c2629-22ee-4220-87d2-399f302423b3",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096921+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-808608a616a3ee7e05086cca",
+      "adapter_id": "provider_paperclip_agent",
+      "category": "paperclip_agent",
+      "owner": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "agency-mini:board",
+        "object_id": "1201d0e4-20bb-4b01-b91e-dd19d8e93fe1",
+        "company_id": "22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "schema_hash": "87e860ff72be52e281c6adeb4a5b9d5257c19e5e2edc1668338ee14c4e93401d",
+        "provider": "paperclip_agent",
+        "schema_revision": "paperclip-updateAgentSchema-2026.1012.0",
+        "write_account": "agency-mini:board"
+      },
+      "observed_at": "2026-10-21T15:22:57.096929+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-09d44a147f4aab1c52ebb8e9",
+      "adapter_id": "provider_neon_project",
+      "category": "neon_project",
+      "owner": "twilight-glade-11976094",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_neon_mcp_dusk-glor",
+        "object_id": "twilight-glade-11976094",
+        "project_id": "twilight-glade-11976094",
+        "provider": "neon_project",
+        "schema_revision": "sha256:a906871af95dbe41286dca5065d98bfa14c6aacae969b2dfe6cc8e5b0724334d",
+        "write_account": "custom_neon_mcp_dusk-glor"
+      },
+      "observed_at": "2026-10-21T15:22:59.795688+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-c5fd1ee87eb747ca9bb14cc6",
+      "adapter_id": "provider_neon_branch",
+      "category": "neon_branch",
+      "owner": "twilight-glade-11976094",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_neon_mcp_dusk-glor",
+        "object_id": "br-plain-term-b47dgm5b",
+        "project_id": "twilight-glade-11976094",
+        "provider": "neon_branch",
+        "schema_revision": "sha256:a57a64671e79eb399fb559fbb0db21b6be75bef09371ab8a06e4c6104442d880",
+        "write_account": "custom_neon_mcp_dusk-glor"
+      },
+      "observed_at": "2026-10-21T15:23:05.828164+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-accf16c60187ba7a516af3ba",
+      "adapter_id": "provider_neon_branch",
+      "category": "neon_branch",
+      "owner": "twilight-glade-11976094",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_neon_mcp_dusk-glor",
+        "object_id": "br-flat-rice-b4ujaa1z",
+        "project_id": "twilight-glade-11976094",
+        "provider": "neon_branch",
+        "schema_revision": "sha256:a57a64671e79eb399fb559fbb0db21b6be75bef09371ab8a06e4c6104442d880",
+        "write_account": "custom_neon_mcp_dusk-glor"
+      },
+      "observed_at": "2026-10-21T15:23:05.828283+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-ea61371bc348ce88642c6bd6",
+      "adapter_id": "provider_neon_branch",
+      "category": "neon_branch",
+      "owner": "twilight-glade-11976094",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_neon_mcp_dusk-glor",
+        "object_id": "br-long-hall-b4cel7bg",
+        "project_id": "twilight-glade-11976094",
+        "provider": "neon_branch",
+        "schema_revision": "sha256:a57a64671e79eb399fb559fbb0db21b6be75bef09371ab8a06e4c6104442d880",
+        "write_account": "custom_neon_mcp_dusk-glor"
+      },
+      "observed_at": "2026-10-21T15:23:05.828290+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-9cccfcb3b6f41b04f2614f7c",
+      "adapter_id": "provider_hindsight_bank",
+      "category": "hindsight_bank",
+      "owner": "alex-agents",
+      "scope": "remote",
+      "identity": {
+        "account": "hindsight-admin:Alexander",
+        "object_id": "alex-agents",
+        "provider": "hindsight_bank",
+        "schema_revision": "hindsight-bank-config-updates-v1",
+        "write_account": "hindsight-admin:Alexander"
+      },
+      "observed_at": "2026-10-21T15:23:01.717265+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-3c653dd2fba7bc087f393770",
+      "adapter_id": "provider_hindsight_bank",
+      "category": "hindsight_bank",
+      "owner": "sales",
+      "scope": "remote",
+      "identity": {
+        "account": "hindsight-admin:Alexander",
+        "object_id": "sales",
+        "provider": "hindsight_bank",
+        "schema_revision": "hindsight-bank-config-updates-v1",
+        "write_account": "hindsight-admin:Alexander"
+      },
+      "observed_at": "2026-10-21T15:23:01.717323+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-7411a34712532d30450614df",
+      "adapter_id": "provider_hindsight_bank",
+      "category": "hindsight_bank",
+      "owner": "paperclip::22eb3ea5-8bb2-4768-a97c-de624fac5699",
+      "scope": "remote",
+      "identity": {
+        "account": "hindsight-admin:Alexander",
+        "object_id": "paperclip::22eb3ea5-8bb2-4768-a97c-de624fac5699",
+        "provider": "hindsight_bank",
+        "schema_revision": "hindsight-bank-config-updates-v1",
+        "write_account": "hindsight-admin:Alexander"
+      },
+      "observed_at": "2026-10-21T15:23:01.717341+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-d6218eea64828a5bdf7b9ee7",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a156e5-821d-76cf-a80d-c926c4606e11",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a156e5-821d-76cf-a80d-c926c4606e11",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802522+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-353378e6736027c3ea2fd942",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a156e6-3d8d-7ba4-997a-d540375201fb",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a156e6-3d8d-7ba4-997a-d540375201fb",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802657+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-e2823c4cfb73154b7bbe2092",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15976-8b49-7122-a616-e93014d70a44",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15976-8b49-7122-a616-e93014d70a44",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802665+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-5ceb867ddbd62327094f98c6",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15976-c4bc-780d-a554-9f7c0c56954f",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15976-c4bc-780d-a554-9f7c0c56954f",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802672+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-c608ffbbda6497bd673b804b",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15977-a735-7d23-9066-7ab599d95247",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15977-a735-7d23-9066-7ab599d95247",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802679+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-2a82fb811dee2ac98cf39705",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15978-4ca7-70e1-877b-368fad289f1d",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15978-4ca7-70e1-877b-368fad289f1d",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802683+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-e9a17246c9afbb3f8c484023",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15978-bd9d-7661-ad55-6e67326c57da",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15978-bd9d-7661-ad55-6e67326c57da",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802690+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-34390c4d483f5a24fdbb8a23",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15979-2cda-70d3-b856-b871fd6d9c09",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15979-2cda-70d3-b856-b871fd6d9c09",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802695+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-8d3a6a163246f263ed91f49b",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15980-73b6-724c-85a4-4c67e3240473",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15980-73b6-724c-85a4-4c67e3240473",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802702+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-ee85a66bbfc5f90bc0b3ff12",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a159e2-3450-711b-b228-621ab20e3f9e",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a159e2-3450-711b-b228-621ab20e3f9e",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802706+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-0d1ed48a19ba955becd77784",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a159e6-a001-784e-821c-6f6ebd1746fb",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a159e6-a001-784e-821c-6f6ebd1746fb",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802710+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-541370e73123fbc0889ad19a",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15c89-bf77-7460-92ba-61e7860e6bcf",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15c89-bf77-7460-92ba-61e7860e6bcf",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802715+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-3da3b4dccc06b5ea0a0b150f",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15cc7-6861-77f3-91f0-8fcea6e79267",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15cc7-6861-77f3-91f0-8fcea6e79267",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802719+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-430a1dffdabea03a6fbe8285",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15cf9-75f8-769d-b478-b70f8905160b",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15cf9-75f8-769d-b478-b70f8905160b",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802728+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-eda8c1b72d72446f76ee84b0",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15d1c-c11b-7351-a18a-463e7c31fbe4",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15d1c-c11b-7351-a18a-463e7c31fbe4",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802733+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-b563603f4345dc1769fa8808",
+      "adapter_id": "provider_signoz_alert",
+      "category": "signoz_alert",
+      "owner": "01a15d5d-60c7-7541-b0e6-9f6486454764",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a15d5d-60c7-7541-b0e6-9f6486454764",
+        "provider": "signoz_alert",
+        "schema_revision": "sha256:af38b8a3c771ebacc1e064b031eab8ec27eef7b2714a003c39219b7887c737cb",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:04.802736+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-0f987ee627e3447ae2956979",
+      "adapter_id": "provider_signoz_dashboard",
+      "category": "signoz_dashboard",
+      "owner": "01a158ac-eb29-7247-bbe9-2bc69fa681d9",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a158ac-eb29-7247-bbe9-2bc69fa681d9",
+        "native_schema_version": "v6",
+        "provider": "signoz_dashboard",
+        "schema_revision": "sha256:869847e1e58fb4ae3aa3155fbc382df386c89386d4529b19baa5c958cebc212d",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:06.078876+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-20f242214562f7459bd30c95",
+      "adapter_id": "provider_signoz_dashboard",
+      "category": "signoz_dashboard",
+      "owner": "01a158ac-6f73-7588-9621-6748f2b76529",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a158ac-6f73-7588-9621-6748f2b76529",
+        "native_schema_version": "v6",
+        "provider": "signoz_dashboard",
+        "schema_revision": "sha256:869847e1e58fb4ae3aa3155fbc382df386c89386d4529b19baa5c958cebc212d",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:06.079003+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-a1bb1b95b218e32bbe05caa6",
+      "adapter_id": "provider_signoz_dashboard",
+      "category": "signoz_dashboard",
+      "owner": "01a158ab-9f35-7151-9e33-461519d4caa8",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a158ab-9f35-7151-9e33-461519d4caa8",
+        "native_schema_version": "v6",
+        "provider": "signoz_dashboard",
+        "schema_revision": "sha256:869847e1e58fb4ae3aa3155fbc382df386c89386d4529b19baa5c958cebc212d",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:06.079013+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "provider-4bfc4d7fb09a840a8b169c73",
+      "adapter_id": "provider_signoz_dashboard",
+      "category": "signoz_dashboard",
+      "owner": "01a158aa-c973-7e84-bad3-d4d5a2885054",
+      "scope": "remote",
+      "identity": {
+        "account": "custom_signoz_mcp_vest-chott",
+        "object_id": "01a158aa-c973-7e84-bad3-d4d5a2885054",
+        "native_schema_version": "v6",
+        "provider": "signoz_dashboard",
+        "schema_revision": "sha256:869847e1e58fb4ae3aa3155fbc382df386c89386d4529b19baa5c958cebc212d",
+        "write_account": "custom_signoz_mcp_burnt-valmy"
+      },
+      "observed_at": "2026-10-21T15:23:06.079021+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ]
+    },
+    {
+      "id": "local-file-87d3e268933dea24f7da975a",
+      "adapter_id": "owned-plugin",
+      "category": "plugin_metadata",
+      "owner": "owned-plugin-source",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/.claude-plugin/marketplace.json",
+        "home": "/Users/alexlobaito"
+      },
+      "observed_at": "2026-10-21T15:23:02.863369+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    },
+    {
+      "id": "local-file-150c750dde35b939b7e53fad",
+      "adapter_id": "owned-plugin",
+      "category": "plugin_metadata",
+      "owner": "owned-plugin-source",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/alex-agent-suite/.claude-plugin/plugin.json",
+        "home": "/Users/alexlobaito"
+      },
+      "observed_at": "2026-10-21T15:23:02.945625+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    },
+    {
+      "id": "local-file-0cf6e0007d04fbde455de146",
+      "adapter_id": "owned-plugin",
+      "category": "plugin_metadata",
+      "owner": "owned-plugin-source",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/alex-agent-suite/.codex-plugin/plugin.json",
+        "home": "/Users/alexlobaito"
+      },
+      "observed_at": "2026-10-21T15:23:02.945646+00:00",
+      "missing_capability": "safe_text_projection",
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    },
+    {
+      "id": "local-file-f1596043f2a0aa1228fe19d1",
+      "adapter_id": "owned-plugin",
+      "category": "plugin_sync",
+      "owner": "native-plugin-install",
+      "scope": "local",
+      "identity": {
+        "path": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/alex-agent-suite/.native-materialization",
+        "home": "/Users/alexlobaito",
+        "package": {
+          "key": "alex-agent-suite@alex-agent-suite-local",
+          "name": "alex-agent-suite",
+          "marketplace": "alex-agent-suite-local",
+          "marketplace_path": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/.claude-plugin/marketplace.json",
+          "root": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/alex-agent-suite",
+          "manifest": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace/alex-agent-suite/.claude-plugin/plugin.json",
+          "repo": "/Users/alexlobaito/Documents/Codex/2026-10-14/plugin-creator-plugin-plugin-connector-1p-2/outputs/alex-agent-suite-marketplace"
+        }
+      },
+      "observed_at": "2026-10-21T15:23:02.946917+00:00",
+      "missing_capability": null,
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ]
+    }
+  ],
+  "canonical_gates_context": "actual-gates-context.json",
+  "limits": [
+    "Discovery establishes registered identities, not runtime adoption or successful writes.",
+    "Secret-bearing targets can remain unavailable; target count is not writable-target count."
+  ]
+}

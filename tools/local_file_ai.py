@@ -7,6 +7,7 @@ import os
 from pathlib import Path
 import re
 import shutil
+import signal
 import stat
 import subprocess
 import sys
@@ -213,7 +214,18 @@ REGISTERED_TARGET_CONSTRAINTS: ''' + json.dumps(context.get('target_constraints'
                 schema, output, catalog = base / 'schema.json', base / 'answer.json', base / 'models.json'
                 schema.write_text(json.dumps(response_schema))
                 catalog.write_text(json.dumps(proposal_model_catalog()))
-                run = subprocess.run(provider_command(schema, output, catalog), input=prompt.encode(), stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=cwd, env=environment, timeout=TIMEOUT)
+                run = subprocess.Popen(provider_command(schema, output, catalog), stdin=subprocess.PIPE, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, cwd=cwd, env=environment, start_new_session=True)
+                try:
+                    run.communicate(input=prompt.encode(), timeout=TIMEOUT)
+                finally:
+                    # Native wrappers can leave children behind even on success.
+                    # This private session belongs only to this invocation; kill
+                    # its whole group before reaping the wrapper on every exit.
+                    try:
+                        os.killpg(run.pid, signal.SIGKILL)
+                    except ProcessLookupError:
+                        pass
+                    run.wait()
                 if run.returncode or not output.is_file() or output.stat().st_size > MAX_OUTPUT:
                     raise ValueError('provider result unavailable')
                 return json.loads(output.read_text())

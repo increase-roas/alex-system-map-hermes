@@ -1,0 +1,87 @@
+{
+  "forward_status": "completed",
+  "undo_status": "undone",
+  "undo_error": null,
+  "actions": [
+    "replace",
+    "replace",
+    "replace",
+    "replace",
+    "replace",
+    "publish",
+    "plugin_materialize",
+    "plugin_materialize"
+  ],
+  "source_after_undo": {
+    "toy": "ALPHA",
+    "second": "ALPHA"
+  },
+  "installed_after_undo": {
+    "codex": {
+      "toy": "1.0.0",
+      "second": "1.0.0"
+    },
+    "claude": {
+      "toy": "1.0.0",
+      "second": "1.0.0"
+    }
+  },
+  "step_states": [
+    {
+      "action": "replace",
+      "package": null,
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "replace",
+      "package": null,
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "replace",
+      "package": null,
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "replace",
+      "package": null,
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "replace",
+      "package": null,
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "publish",
+      "package": null,
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "plugin_materialize",
+      "package": "second",
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    },
+    {
+      "action": "plugin_materialize",
+      "package": "toy",
+      "phase": "undone",
+      "outcome": null,
+      "receipt_state": "undone"
+    }
+  ]
+}
