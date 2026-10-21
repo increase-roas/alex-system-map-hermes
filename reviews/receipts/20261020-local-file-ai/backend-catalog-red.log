@@ -1,0 +1,31 @@
+EEE
+======================================================================
+ERROR: test_catalog_disables_model_tools_preserving_metadata_and_live_bytes (test_local_file_ai.AITests.test_catalog_disables_model_tools_preserving_metadata_and_live_bytes)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-ai-repair/tools/test_local_file_ai.py", line 207, in test_catalog_disables_model_tools_preserving_metadata_and_live_bytes
+    catalog = ai.proposal_model_catalog(cache)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'local_file_ai' has no attribute 'proposal_model_catalog'
+
+======================================================================
+ERROR: test_catalog_missing_model_static_failure_without_fallback (test_local_file_ai.AITests.test_catalog_missing_model_static_failure_without_fallback)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-ai-repair/tools/test_local_file_ai.py", line 225, in test_catalog_missing_model_static_failure_without_fallback
+    ai.proposal_model_catalog(cache)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: module 'local_file_ai' has no attribute 'proposal_model_catalog'
+
+======================================================================
+ERROR: test_command_disables_direct_nonfeature_tools_and_binds_temp_catalog (test_local_file_ai.AITests.test_command_disables_direct_nonfeature_tools_and_binds_temp_catalog)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-ai-repair/tools/test_local_file_ai.py", line 230, in test_command_disables_direct_nonfeature_tools_and_binds_temp_catalog
+    command = ai.provider_command(Path('/tmp/schema'), Path('/tmp/output'), Path('/tmp/model-catalog.json'))
+TypeError: provider_command() takes 2 positional arguments but 3 were given
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.624s
+
+FAILED (errors=3)
