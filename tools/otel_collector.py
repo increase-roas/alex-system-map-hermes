@@ -98,6 +98,11 @@ KNOWN_SERVICES = (
     'openclaw',
     # The collector's own 5-minute heartbeat (2026-10-21), so SigNoz can alert when a collector goes dark.
     'signoz-collector',
+    # Paperclip's agent-observability connection test (service.name paperclip-observability-test, set in
+    # @paperclipai/server/dist/services/agent-observability-test.js:54). Added 2026-10-21 on the Mac mini copy: the
+    # export arrives through otel.increaseroas.com behind Access, and without this the test span was accepted at the
+    # door and dropped here, so nothing proved the last hop. Real agent runs send as claude-code or codex/task-claude.
+    'paperclip-observability-test',
 )
 
 # Paths accepted. /api/public/otel/v1/traces is where Langfuse SDK v3 based senders (the
@@ -123,7 +128,8 @@ BLOCKED_SERVICES = ('codex-worker',)
 # still stopping a runaway. A service that legitimately needs more should be raised
 # here deliberately, with the reason, rather than the cap being removed.
 DEFAULT_RATE_PER_MIN = 600
-RATE_OVERRIDES: dict[str, int] = {}
+# paperclip: agent runs burst past 600/min (Mac mini, 2026-10-20); SigNoz's 1 GiB/day cap still applies.
+RATE_OVERRIDES: dict[str, int] = {'paperclip': 3000}
 
 # Per-signal caps that apply on top of RATE_OVERRIDES for one signal only.
 # task-claude logs (the Codex desktop app, below): measured 2026-10-20 on a count-only listener
@@ -886,8 +892,15 @@ class Spool:
         self.seq = 0
         self.counts = collections.Counter()
         if folder:
-            folder.mkdir(parents=True, exist_ok=True)
-            os.chmod(folder, 0o700)
+            # A folder that can't be made (an Orgo service user has HOME=/nonexistent) turns the spool off
+            # instead of stopping the collector; /stats shows spool dir-failed.
+            try:
+                folder.mkdir(parents=True, exist_ok=True)
+                os.chmod(folder, 0o700)
+            except OSError:
+                self.folder = None
+                self.counts['dir-failed'] += 1
+                print(f'  spool folder {folder} could not be made; spool off', file=sys.stderr)
 
     def put(self, upstream: str, signal: str, body: bytes) -> bool:
         if not self.folder:
@@ -1681,6 +1694,15 @@ def self_test() -> int:
             sp.put('signoz', 'logs', body)
         left = [p.read_bytes() for p in sp.pending()]
         check('spool: over the cap the oldest go first', left == [b'cccccc'] and sp.counts['evicted'] == 2, str(left))
+    with tempfile.TemporaryDirectory() as _sd:
+        blocked = Path(_sd) / 'file'
+        blocked.write_text('x')
+        sp = Spool(blocked / 'spool')  # a path under a regular file can't be made
+        check('spool: a folder that cannot be made turns the spool off, the collector keeps running',
+              sp.folder is None and sp.counts['dir-failed'] == 1 and sp.put('signoz', 'logs', b'x') is False,
+              dict(sp.counts))
+    check('paperclip-observability-test is an allowed service; paperclip has its 3000/min cap',
+          'paperclip-observability-test' in KNOWN_SERVICES and RATE_OVERRIDES.get('paperclip') == 3000, '')
     real_forward = globals()['forward']
     try:
         with tempfile.TemporaryDirectory() as _sd:
