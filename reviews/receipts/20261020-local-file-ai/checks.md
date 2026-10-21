@@ -36,3 +36,5 @@ Verdict: VERIFIED for all six frozen feature criteria.
 
 
 Acceptance helper note: requested ~/.agents/skills/verify-before-done/scripts/check_acceptance.py is absent. The same installed script at ~/.agents/skills/repo-conform/assets/universal-skills/verify-before-done/scripts/check_acceptance.py was used; no skill/path changes were made.
+
+Runtime cleanup note: the owned app startup regenerated tracked tools/__pycache__ bytecode and created untracked local_files.cpython-314.pyc. Those runtime artifacts were reported to the primary for restoration/removal; this verifier did not alter implementation/source files to clean them. The owned server/tab/viewport and disposable synthetic HOME are cleaned.
