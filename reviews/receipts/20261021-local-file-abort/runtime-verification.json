@@ -1,0 +1,106 @@
+{
+  "url": "http://127.0.0.1:3201/explorer?view=local-files",
+  "checks": [
+    {
+      "name": "actual_source_open",
+      "dom": {
+        "alert": null,
+        "obsoleteVisible": false,
+        "opening": false,
+        "overlay": false,
+        "ownerHeadings": [
+          "Open the owning source"
+        ],
+        "repairVisible": true,
+        "sourcePath": "/Users/alexlobaito/.codex/AGENTS.md"
+      }
+    },
+    {
+      "name": "pending_read_then_navigation_then_late_success",
+      "requests": [
+        {
+          "requestId": "interception-job-260.0",
+          "method": "GET",
+          "path": "/api/local-files/repair"
+        },
+        {
+          "requestId": "interception-job-261.0",
+          "method": "GET",
+          "path": "/api/local-files/repair"
+        }
+      ],
+      "fulfillResults": [
+        {},
+        {}
+      ],
+      "dom": {
+        "alert": null,
+        "obsoleteVisible": false,
+        "opening": false,
+        "overlay": false,
+        "ownerHeadings": [],
+        "repairVisible": false,
+        "sourcePath": null
+      },
+      "errors": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    },
+    {
+      "name": "synthetic_source_read_error",
+      "requestCount": 2,
+      "responseCode": 500,
+      "fulfillResults": [
+        {},
+        {}
+      ],
+      "dom": {
+        "alert": "Source repair request failedSynthetic read failure for regression verificationNo automatic retry is made. If the request outcome is uncertain, retain this panel and its repair ID for reconciliation.",
+        "obsoleteVisible": false,
+        "opening": false,
+        "overlay": false,
+        "ownerHeadings": [],
+        "repairVisible": true,
+        "sourcePath": null
+      },
+      "errors": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    },
+    {
+      "name": "real_source_restored",
+      "dom": {
+        "alert": null,
+        "obsoleteVisible": false,
+        "opening": false,
+        "overlay": false,
+        "ownerHeadings": [
+          "Open the owning source"
+        ],
+        "repairVisible": true,
+        "sourcePath": "/Users/alexlobaito/.codex/AGENTS.md"
+      },
+      "errors": {
+        "result": {
+          "type": "object",
+          "value": []
+        }
+      }
+    }
+  ],
+  "cleanup": {
+    "interceptionCleared": {},
+    "listenersRemoved": {
+      "result": {
+        "type": "boolean",
+        "value": true
+      }
+    }
+  }
+}

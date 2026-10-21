@@ -1,0 +1,35 @@
+{
+  "scope": "independent verifier access attempt; no UI or network mutations performed",
+  "records": [
+    {
+      "tool": "mcp__cua_repl.js",
+      "code": "var tab = await cua.getTab('1', { browser: 'iab' });",
+      "raw_result": "Browser is not available: iab"
+    },
+    {
+      "tool": "mcp__cua_repl.js",
+      "code": "await cua.getState();",
+      "sanitized_raw_result": {
+        "browsers": [
+          {
+            "family": "chrome",
+            "id": "2",
+            "name": "Chrome",
+            "profileName": "alexx",
+            "type": "extension"
+          },
+          {
+            "family": "chrome",
+            "id": "1",
+            "name": "Chrome",
+            "profileName": "increaseroas.com",
+            "type": "extension"
+          }
+        ]
+      },
+      "redaction": "Apps, unrelated tabs and browser metadata omitted. No IAB browser was returned."
+    }
+  ],
+  "status": "UNVERIFIED",
+  "blocker": "IAB unavailable in verifier CUA context; primary retains runtime ownership"
+}
