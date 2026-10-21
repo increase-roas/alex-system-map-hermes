@@ -2,6 +2,7 @@
 """Explicit reviewed local-source repairs. No mutation on source/preview reads."""
 import argparse
 import base64
+import copy
 from contextlib import contextmanager
 from datetime import datetime, timedelta, timezone
 import difflib
@@ -21,6 +22,7 @@ import uuid
 from urllib.parse import urlsplit
 
 from local_files import canonical_gates_section, read_source, screen
+from local_file_distribution import Distribution
 
 MAX_SOURCE = 65536
 MAX_BODY = 192 * 1024
@@ -86,6 +88,7 @@ class RepairService:
         if self.state.is_symlink():
             raise RepairError('unsafe_state', 'Repair state directory cannot be an alias', 409)
         os.chmod(self.state, 0o700)
+        self.distributor = Distribution(self.home, RepairError)
 
     def index(self):
         try:
@@ -309,7 +312,7 @@ class RepairService:
             except (OSError, UnicodeError, RuntimeError, OverflowError):
                 stale()
 
-    def preview(self, file_id, expected_sha256, new_content, context_fingerprints=None):
+    def preview(self, file_id, expected_sha256, new_content, context_fingerprints=None, *, checks=None):
         if not isinstance(new_content, str) or len(new_content.encode()) > MAX_SOURCE or '\x00' in new_content:
             raise RepairError('invalid_content', 'Proposed source must be UTF-8 text at most 64 KiB without NUL bytes', 400)
         if screen(new_content)[1]:
@@ -330,9 +333,16 @@ class RepairService:
             if context_fingerprints is not None:
                 self.validate_context_fingerprints(context_fingerprints)
                 proposal['context_fingerprints'] = context_fingerprints
+            if checks is not None:
+                if not isinstance(checks, dict) or checks.get('status') != 'passed':
+                    raise RepairError('checks_not_passed', 'AI preview requires passed behavioral checks', 409)
+                proposal['checks'] = copy.deepcopy(checks)
+            proposal['distribution'] = self.distributor.freeze(path, after)
+            proposal['generated_follow_up'] = proposal['distribution']['status'] != 'not_needed'
+            generated = proposal['generated_follow_up']
             digest = sha(canonical(proposal))
             self.save(repair_id, {'proposal': proposal, 'proposal_sha256': digest, 'phase': 'preview'})
-            return {'repair_id': repair_id, 'file_id': file_id, 'path': str(path), 'before_sha256': sha(before), 'after_sha256': sha(after), 'proposal_sha256': digest, 'diff': ''.join(difflib.unified_diff(before.decode().splitlines(keepends=True), new_content.splitlines(keepends=True), fromfile=str(path) + ' (before)', tofile=str(path) + ' (proposed)')), 'created_at': created, 'expires_at': expires, 'generated_follow_up': generated}
+            return {'repair_id': repair_id, 'file_id': file_id, 'path': str(path), 'before_sha256': sha(before), 'after_sha256': sha(after), 'proposal_sha256': digest, 'diff': ''.join(difflib.unified_diff(before.decode().splitlines(keepends=True), new_content.splitlines(keepends=True), fromfile=str(path) + ' (before)', tofile=str(path) + ' (proposed)')), 'created_at': created, 'expires_at': expires, 'generated_follow_up': generated, 'checks': proposal.get('checks'), 'distribution': self.distributor.public(proposal['distribution'])}
 
     def backup(self, proposal):
         base = self.home / 'Backups'
@@ -443,20 +453,32 @@ class RepairService:
             raise RepairError('push_readback', 'Remote commit could not be confirmed; publication remains pending', 409)
         return commit
 
+    def distribution_plan(self, value):
+        # Receipts from the earlier source-only flow have no frozen copy plan.
+        # They cannot retroactively authorize generation or claim synchronization.
+        return value.get('distribution_state', value['proposal'].get('distribution', {
+            'status': 'blocked', 'targets': [], 'inputs': [],
+            'limitations': ['This earlier receipt has no approved generated-output projection; distribution remains pending.']}))
+
     def result(self, value, undo, pushed, message):
         p = value['proposal']
         current_hash = p['before_sha256'] if undo else p['after_sha256']
+        source_verified = False
         try:
             path = self.canonical_path(p['path'])
-            current, _, real = read_source(path, [self.home.resolve()], MAX_SOURCE)
+            current, current_st, real = read_source(path, [self.home.resolve()], MAX_SOURCE)
             if str(real) != p['real_path']:
                 raise OSError()
             current_hash = sha(current)
-            if current_hash != (p['before_sha256'] if undo else p['after_sha256']):
-                message += ' Current source changed after replacement; publication stopped.'
+            source_verified = current_hash == (p['before_sha256'] if undo else p['after_sha256']) and stat.S_IMODE(current_st.st_mode) == p['mode']
+            if not source_verified:
+                message = ('Source changed after confirmed publication; the recorded one-path commit was pushed, and current source verification is pending.' if pushed else 'Source has newer contents or mode after replacement; publication and current source verification remain pending.')
         except (RepairError, OSError, RuntimeError, OverflowError):
-            message += ' Current source readback is unavailable; fingerprint describes the recorded replacement.'
-        return {'repair_id': p['repair_id'], 'file_id': p['file_id'], 'path': p['path'], 'state': ('undone' if undo else 'applied') + ('' if pushed else '_publish_pending'), 'current_sha256': current_hash, 'backup_path': value.get('backup_path', ''), 'commit': value.get('commit'), 'pushed': pushed, 'generated_follow_up': p['generated_follow_up'], 'message': message + (' Generated-publication verification remains pending; existing repository hooks may run. This app did not directly invoke an app-settings builder.' if p['generated_follow_up'] else '') + ' Undo copy verified locally; Drive cloud upload was not verified.'}
+            message = ('Source publication was confirmed, but current source readback is unavailable; current verification is pending.' if pushed else 'Current source readback and publication are pending; recovery is retained.')
+        plan = self.distribution_plan(value)
+        distribution = self.distributor.observe(plan, undo, record=not undo)
+        return {'repair_id': p['repair_id'], 'file_id': p['file_id'], 'path': p['path'], 'state': ('undone' if undo else 'applied') + ('' if pushed else '_publish_pending'), 'current_sha256': current_hash, 'backup_path': value.get('backup_path', ''), 'commit': value.get('commit'), 'pushed': pushed, 'source_verified': source_verified, 'generated_follow_up': distribution['status'] == 'pending', 'distribution': distribution, 'message': message + ' Undo copy verified locally; Drive cloud upload was not verified.'}
+
 
     def reconcile(self, value, undo=False):
         if not undo and 'undo_result' in value:
@@ -472,7 +494,11 @@ class RepairService:
         if sha(raw) != expected or str(real) != p['real_path'] or stat.S_IMODE(st.st_mode) != p['mode']:
             raise RepairError('stale_source', 'Recorded repair source now has newer contents, target or mode; no side effect was retried', 409)
         if key in value:
-            return value[key]
+            cached = value[key]
+            cached['distribution'] = self.distributor.observe(self.distribution_plan(value), undo)
+            cached['source_verified'] = True
+            cached['generated_follow_up'] = cached['distribution']['status'] == 'pending'
+            return cached
         result = self.result(value, undo, False, 'Recorded source operation reconciled; publication needs manual inspection. No side effect was retried.')
         value[key] = result
         self.save(p['repair_id'], value)
@@ -494,18 +520,31 @@ class RepairService:
             if self.backed_preimage(path, before) != p['git']:
                 raise RepairError('git_changed', 'Source repository changed after preview; review a fresh proposal', 409)
             self.validate_context_fingerprints(p.get('context_fingerprints'))
-            value['backup_path'] = self.backup(p)
-            value['phase'] = 'replacing'
-            self.save(repair_id, value)
-            try:
-                self.replace(p, p['before_sha256'], base64.b64decode(p['after']))
-            except RepairError as exc:
-                if exc.code in {'stale_source', 'source_target_changed', 'shared_link'}:
-                    value['phase'] = 'preview'
+            value['distribution_state'] = copy.deepcopy(self.distribution_plan(value))
+            plan = value['distribution_state']
+            with self.distributor.locked(plan):
+                self.distributor.preflight(plan)
+                value['backup_path'] = self.backup(p)
+                self.distributor.backup(plan, Path(value['backup_path']).parent, repair_id)
+                self.distributor.preflight(plan)
+                value['phase'] = 'replacing'
+                self.save(repair_id, value)
+                try:
+                    self.replace(p, p['before_sha256'], base64.b64decode(p['after']))
+                except RepairError as exc:
+                    if exc.code in {'stale_source', 'source_target_changed', 'shared_link'}:
+                        value['phase'] = 'preview'
+                        self.save(repair_id, value)
+                    raise
+                value['phase'] = 'source_applied'
+                self.save(repair_id, value)
+                try:
+                    self.distributor.install(plan, p['path'], p['after_sha256'], lambda: self.save(repair_id, value))
+                except (RepairError, OSError, RuntimeError):
+                    # Source was applied. Retain all recovery and continue scoped
+                    # publication independently; do not retry uncertain copy writes.
+                    value['distribution_error'] = True
                     self.save(repair_id, value)
-                raise
-            value['phase'] = 'source_applied'
-            self.save(repair_id, value)
             try:
                 value['commit'] = self.publish(p, value)
                 result = self.result(value, False, True, 'Source updated, exact readback verified, one-path commit pushed.')
@@ -529,20 +568,28 @@ class RepairService:
             if backup.is_symlink() or backup.parent.resolve() != expected_folder or sha(backup.read_bytes()) != p['before_sha256']:
                 raise RepairError('backup_changed', 'Exact recorded undo copy is unavailable; source is unchanged', 409)
             path = self.canonical_path(p['path'])
-            current, _, _ = read_source(path, [self.home.resolve()], MAX_SOURCE)
-            if sha(current) != p['after_sha256']:
+            current, current_st, _ = read_source(path, [self.home.resolve()], MAX_SOURCE)
+            if sha(current) != p['after_sha256'] or stat.S_IMODE(current_st.st_mode) != p['mode']:
                 raise RepairError('stale_source', 'Source has newer edits; conditional Undo will not overwrite them', 409)
             info = self.repo_info(path)
             if any(info[key] != p['git'][key] for key in ['repo', 'branch', 'origin_sha256']):
                 raise RepairError('git_changed', 'Source repository changed; inspect the restoration manually', 409)
             self.known_index(p, info)
-            value['undo_parent_head'] = info['head']
-            value['phase'] = 'undo_replacing'
-            self.save(repair_id, value)
-            self.replace(p, p['after_sha256'], backup.read_bytes())
-            value['phase'] = 'undo_source_restored'
-            value['commit'] = None
-            self.save(repair_id, value)
+            plan = self.distribution_plan(value)
+            with self.distributor.locked(plan):
+                self.distributor.preflight_undo(plan, p['path'], p['after_sha256'])
+                value['undo_parent_head'] = info['head']
+                value['phase'] = 'undo_replacing'
+                self.save(repair_id, value)
+                self.replace(p, p['after_sha256'], backup.read_bytes())
+                value['phase'] = 'undo_source_restored'
+                value['commit'] = None
+                self.save(repair_id, value)
+                try:
+                    self.distributor.restore(plan, p['path'], p['before_sha256'], backup.parent, repair_id, lambda: self.save(repair_id, value))
+                except (RepairError, OSError, RuntimeError):
+                    value['undo_distribution_error'] = True
+                    self.save(repair_id, value)
             try:
                 value['commit'] = self.publish(p, value, True)
                 result = self.result(value, True, True, 'Exact preimage restored, read back, and restoration pushed.')

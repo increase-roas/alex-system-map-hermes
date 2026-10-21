@@ -6,7 +6,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 const { test } = require('node:test');
-const ts = require('../app/node_modules/typescript');
+const ts = require(process.env.LOCAL_REPAIR_TYPESCRIPT || '../app/node_modules/typescript');
 
 const filename = path.resolve(__dirname, '../app/src/app/explorer/local-file-repair-panel.tsx');
 const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
@@ -14,7 +14,7 @@ const compiled = ts.transpileModule(fs.readFileSync(filename, 'utf8'), {
 }).outputText;
 const tick = () => new Promise((resolve) => setImmediate(resolve));
 
-function harness() {
+function harness(overrides = {}) {
   let cursor = 0;
   const slots = [], effects = [], reads = [], writes = [];
   const hooks = {
@@ -33,7 +33,7 @@ function harness() {
       }
     },
   };
-  const jsx = (type, props) => ({ type, props });
+  const jsx = (type, props) => typeof type === 'function' ? type(props) : ({ type, props });
   const context = {
     exports: {}, AbortController, Error,
     require(name) {
@@ -55,7 +55,7 @@ function harness() {
     },
   };
   vm.runInNewContext(compiled, context, { filename });
-  const props = { localToken: '', index: { references: [], files: [] }, finding: null, onOpenFile() {}, onClose() {}, onLockChange() {} };
+  const props = { localToken: '', index: { references: [], files: [] }, finding: null, onOpenFile() {}, onClose() {}, onLockChange() {}, ...overrides };
   return {
     reads, writes,
     render(fileId = 'A') {
@@ -131,4 +131,95 @@ test('a current source read failure remains visible', async () => {
   assert.match(text, /Source repair request failed/);
   assert.match(text, /source permission denied/);
   assert.doesNotMatch(text, /Opening the current source/);
+});
+
+function nodes(node, predicate) {
+  if (!node || typeof node !== 'object') return [];
+  if (Array.isArray(node)) return node.flatMap((child) => nodes(child, predicate));
+  return [...(predicate(node) ? [node] : []), ...nodes(node.props?.children, predicate)];
+}
+function button(tree, label) { return nodes(tree, (n) => n.type === 'button' && visibleText(n) === label)[0]; }
+const checks = (status = 'passed') => ({ status, checked_at: 'today', model: 'native', limitations: ['Simulated choices only'], cases: [{ id: 'preserve', scenario: 'Keep protected scope', purpose: 'preserve', choices: { A: 'Keep scope', B: 'Expand scope', C: 'Ignore scope' }, expected: 'A', before: 'B', after: status === 'passed' ? 'A' : 'B', status, rationale: 'Keep the cited scope', evidence: [{ file_id: 'A', line: 2, quote: 'Protected scope' }] }] });
+const preview = (status = 'passed') => ({ repair_id: 'repair', proposal_sha256: 'proposal', path: '/source/A', diff: '-old\n+new', before_sha256: 'old', after_sha256: 'new', checks: checks(status), distribution: { status: 'ready', targets: [{ path: '/copy/AGENTS.md', before_sha256: 'old', after_sha256: 'new', diff: '-copy old\n+copy new', kind: 'generated', requires_new_session: true }], limitations: ['Only dependent copies'] } });
+async function proposed(status = 'passed') {
+  const panel = harness({ localToken: 'test' });
+  panel.render();
+  panel.reads[0].resolve({ ...source('A'), editable: true, sha256: 'old' });
+  await tick(); panel.render();
+  panel.reads[1].resolve({ status: 'proposed', summary: 'Fix', rationale: 'Reason', conflicts: [], limitations: [], context_files: [{ file_id: 'A', path: '/source/A', sha256: 'old', applicability: { role: 'canonical', scope: 'project only', activation: 'when loaded', limitations: ['No blanket authority'] } }], model: 'native', generated_at: 'today', proposed_content: 'new text', checks: checks(status), preview: preview(status) });
+  await tick();
+  return panel;
+}
+test('checked preview shows scenarios, choices, outcomes, scope and affected-copy diff', async () => {
+  const panel = await proposed();
+  const tree = panel.render(); const text = visibleText(tree);
+  for (const expected of ['Keep protected scope', 'Keep scope', 'Expand scope', 'Ignore scope', 'Before: B', 'After: A', 'Expected: A', 'project only', 'when loaded', 'No blanket authority', '/copy/AGENTS.md', '-copy old', 'Simulated choices only']) assert.ok(text.includes(expected), expected);
+  assert.equal(button(tree, 'Approve proposed fix').props.disabled, false);
+});
+for (const status of ['failed', 'unavailable']) test(`${status} checks cannot offer an approvable AI proposal`, async () => {
+  const panel = await proposed(status); const tree = panel.render();
+  assert.ok(visibleText(tree).includes(status));
+  assert.ok(!button(tree, 'Approve proposed fix') || button(tree, 'Approve proposed fix').props.disabled);
+});
+test('manual editing invalidates the checked preview and labels manual preview untested', async () => {
+  const panel = await proposed();
+  nodes(panel.render(), (n) => n.type === 'textarea')[0].props.onChange({ target: { value: 'manual text' } });
+  let tree = panel.render();
+  assert.equal(button(tree, 'Approve proposed fix'), undefined);
+  button(tree, 'Preview exact change').props.onClick();
+  panel.reads[2].resolve({ ...preview(), checks: null }); await tick(); tree = panel.render();
+  assert.match(visibleText(tree), /Manual draft.*not.*AI/i);
+});
+for (const [distribution, pushed, verified] of [['verified', true, true], ['not_needed', true, true], ['pending', true, false], ['verified', false, false], [undefined, true, false]]) {
+  test(`result ${distribution}/${pushed} reports truthful verification`, async () => {
+    const panel = await proposed(); button(panel.render(), 'Approve proposed fix').props.onClick();
+    panel.reads[2].resolve({ repair_id: 'repair', state: 'applied', path: '/source/A', current_sha256: 'new', source_verified: true, pushed, generated_follow_up: distribution === 'pending', message: 'Recorded', distribution: distribution && { status: distribution, targets: [{ path: '/copy/AGENTS.md', status: distribution, sha256: 'new', reason: 'Readback checked' }], message: 'Copy readback' } });
+    await tick(); const text = visibleText(panel.render());
+    assert.equal(text.includes('Repair verified'), verified);
+    assert.match(text, /already-running|running agent/);
+    if (distribution) { assert.match(text, /Readback checked/); assert.match(text, /Copy readback/); }
+  });
+}
+
+test('Undo displays restored source and each copy readback without claiming active adoption', async () => {
+  const panel = await proposed(); button(panel.render(), 'Approve proposed fix').props.onClick();
+  panel.reads[2].resolve({ repair_id: 'repair', state: 'applied', path: '/source/A', source_verified: true, pushed: true, distribution: { status: 'verified', targets: [], message: 'Copies checked' } });
+  await tick(); button(panel.render(), 'Undo this source change').props.onClick();
+  panel.reads[3].resolve({ repair_id: 'repair', state: 'undone', path: '/source/A', source_verified: true, pushed: true, current_sha256: 'old', distribution: { status: 'verified', targets: [{ path: '/copy/AGENTS.md', status: 'verified', sha256: 'old', reason: 'Exact preimage restored' }], message: 'Restored copies checked' } });
+  await tick(); const tree = panel.render(); const text = visibleText(tree);
+  assert.match(text, /Undo verified/); assert.match(text, /Exact preimage restored/); assert.match(text, /already-running agent/);
+  assert.equal(button(tree, 'Undo this source change'), undefined);
+});
+
+for (const sourceVerified of [false, undefined]) test(`source readback ${sourceVerified} cannot claim verified`, async () => {
+  const panel = await proposed(); button(panel.render(), 'Approve proposed fix').props.onClick();
+  panel.reads[2].resolve({ repair_id: 'repair', state: 'applied', path: '/source/A', current_sha256: 'new', source_verified: sourceVerified, pushed: true, generated_follow_up: false, message: 'Published', distribution: { status: 'verified', targets: [], message: 'Copies checked' } });
+  await tick(); const text = visibleText(panel.render());
+  assert.doesNotMatch(text, /Repair verified/);
+  assert.match(text, /follow-up pending/);
+  assert.match(text, /Source readback/);
+});
+
+test('repair adapter preserves actionable 422 preview validation responses', async () => {
+  const { EventEmitter } = require('node:events');
+  const adapterPath = path.resolve(__dirname, '../app/src/lib/server/local-file-repairs.ts');
+  const adapter = ts.transpileModule(fs.readFileSync(adapterPath, 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS } }).outputText;
+  const expected = { status: 422, code: 'native_projection_failed', error: 'Generated output exceeds the 64 KiB byte ceiling; shorten this rule source.' };
+  const context = {
+    exports: {}, process, Buffer, setTimeout, clearTimeout,
+    require(name) {
+      if (name === 'node:path') return { default: path };
+      if (name === './local-files') return { localFileIndex: async () => ({}) };
+      if (name === './paths') return { ensureLocalDataDir() {}, foundationRoot: () => '/fixture', localDataDir: () => '/fixture/state' };
+      if (name === 'node:child_process') return { spawn() {
+        const child = new EventEmitter(); child.stdout = new EventEmitter(); child.stdin = new EventEmitter(); child.kill = () => {};
+        child.stdin.end = () => { child.stdout.emit('data', Buffer.from(JSON.stringify(expected))); child.emit('close', 0); };
+        return child;
+      } };
+      throw new Error(`Unexpected adapter import: ${name}`);
+    },
+  };
+  vm.runInNewContext(adapter, context, { filename: adapterPath });
+  const result = await context.exports.runLocalFileRepair({ action: 'preview', file_id: 'A', expected_sha256: 'old', new_content: 'candidate' });
+  assert.deepEqual(JSON.parse(JSON.stringify(result)), expected);
 });

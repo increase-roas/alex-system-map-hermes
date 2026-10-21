@@ -1,0 +1,17 @@
+{
+  "command": [
+    "python3",
+    "-B",
+    "-m",
+    "unittest",
+    "discover",
+    "-s",
+    "tools",
+    "-p",
+    "test_local_file*.py"
+  ],
+  "cwd": "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair",
+  "exit_code": 0,
+  "stdout": "",
+  "stderr": "............................................................................\n----------------------------------------------------------------------\nRan 76 tests in 33.473s\n\nOK\n"
+}
