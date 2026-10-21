@@ -40,16 +40,17 @@ export function LocalFileRepairPanel({ fileId, localToken, index, finding, onOpe
   const locked = dirty || busy;
   useEffect(() => { onLockChange(locked); }, [locked, onLockChange]);
   useEffect(() => {
-    const controller = new AbortController();
+    // This bounded local read can finish after cleanup; ignore obsolete results.
+    let ignored = false;
     generation.current += 1;
     activeRequest.current?.abort();
     automaticAttempt.current = '';
     setPhase('reading'); setSource(null); setDraft(''); setPreview(null); setResult(null);
     setSuggestion(null); setSuggestionError(''); setError(''); setStale(false);
-    repairRequest<LocalRepairSource>(`/api/local-files/repair?id=${encodeURIComponent(fileId)}`, { signal: controller.signal })
-      .then((data) => { if (!controller.signal.aborted) { setPhase(null); setSource(data); setDraft(data.content); } })
-      .catch((e) => { if (!controller.signal.aborted) { setPhase(null); setError(e instanceof Error ? e.message : 'Source could not be opened.'); } });
-    return () => { controller.abort(); activeRequest.current?.abort(); };
+    repairRequest<LocalRepairSource>(`/api/local-files/repair?id=${encodeURIComponent(fileId)}`)
+      .then((data) => { if (!ignored) { setPhase(null); setSource(data); setDraft(data.content); } })
+      .catch((e) => { if (!ignored) { setPhase(null); setError(e instanceof Error ? e.message : 'Source could not be opened.'); } });
+    return () => { ignored = true; activeRequest.current?.abort(); };
   }, [fileId]);
 
   async function post<T>(body: object, signal: AbortSignal): Promise<T> {
