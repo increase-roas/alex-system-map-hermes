@@ -1,0 +1,97 @@
+{
+  "reviewed_at": "2026-10-21T15:42:41.070635+00:00",
+  "mode": "read-only independent same-family context-separated verifier; temp-only evidence outputs",
+  "verdict": "VERIFIED",
+  "criteria": [
+    {
+      "criterion": "case_evidence_schema_1_to_12",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:20",
+        "/tmp/universal-final-citation-oracle.json"
+      ],
+      "finding": "AI-local CASE and PLAN item evidence schema minItems1 maxItems12 match unchanged validator cap."
+    },
+    {
+      "criterion": "case_count_schema_2_to_4",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:23",
+        "/tmp/universal-final-citation-oracle.json"
+      ],
+      "finding": "PLAN cases schema minItems2 maxItems4 match unchanged runtime bounds."
+    },
+    {
+      "criterion": "every_proposal_variant_1_to_12",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:234",
+        "/tmp/universal-final-citation-oracle.json"
+      ],
+      "finding": "Each generated text/JSON proposal variant has evidence minItems1 maxItems12."
+    },
+    {
+      "criterion": "explicit_prompt_bounds",
+      "status": "VERIFIED",
+      "evidence": [
+        "tools/repair_ai.py:388",
+        "tools/repair_ai.py:395",
+        "/tmp/universal-final-citation-focused.txt"
+      ],
+      "finding": "Proposal prompt explicitly1-12 citations/proposal; scenario prompt explicitly1-12 citations/case and two to four scenarios; target coverage preserved."
+    },
+    {
+      "criterion": "validator_not_weakened_no_truncation_retry",
+      "status": "VERIFIED",
+      "evidence": [
+        "/tmp/universal-final-citation-oracle.json",
+        "tools/test_repair_ai.py:613"
+      ],
+      "finding": "validate_cases AST identical to HEAD; propose_repair AST identical except prompt string literals, ruling out new truncation/retry/control-flow paths."
+    },
+    {
+      "criterion": "legacy_unchanged",
+      "status": "VERIFIED",
+      "evidence": [
+        "/tmp/universal-final-citation-oracle.json"
+      ],
+      "finding": "Fresh import snapshots prove legacy CASE and PLAN unchanged; all35 prior test methods AST-identical."
+    },
+    {
+      "criterion": "recorded_14_still_rejected",
+      "status": "VERIFIED",
+      "evidence": [
+        "/tmp/universal-browser-data/model-responses.json",
+        "/tmp/universal-final-citation-oracle.json"
+      ],
+      "finding": "Captured counts2,14. Against quotation-consistent reconstructed baseline,14 rejects case evidence; captured plan remains unchanged. This isolates structural count cause, not fresh live-source quotation proof."
+    },
+    {
+      "criterion": "focused_regressions",
+      "status": "VERIFIED",
+      "evidence": [
+        "/tmp/universal-final-citation-37-tests.txt"
+      ],
+      "finding": "Complete affected AI module independently rerun:37 passed, zero skips, exit0. No provider/model call or source Apply."
+    }
+  ],
+  "source_sha256": {
+    "tools/repair_ai.py": "62dec32c6565b996edeb3306401e46b3f193309791499b26224844737f9599da",
+    "tools/test_repair_ai.py": "68d084fde764b647037dcee8b36734f0653f3abd2483b219af90e860e181fa25",
+    "tools/local_file_checks.py": "21bb0e409b2fd8f37d2e027f7dd959a7186a5838b847af059a84624e96d08c93",
+    "/tmp/universal-browser-data/model-responses.json": "e198e979afc9a84c1b5f841d2039aa6b8ccc78282ba6c97458a7cc8cc59c8ab2"
+  },
+  "execution": {
+    "focused_tests_rerun": 37,
+    "focused_log_sha256": "a9f774bfca639e2d404bd339b3f25b6829c250ba2ee06432e9751a20223ac84d",
+    "previous_test_methods_ast_identical": 35,
+    "full37_suite_claim": "Independent verifier reran complete affected AI module:37 passed, zero skips, exit0.",
+    "provider_calls": 0,
+    "source_apply": false,
+    "focused_log": "/tmp/universal-final-citation-37-tests.txt"
+  },
+  "limitations": [
+    "Browser/native model rerun is pending; local schema contract verification is not browser success.",
+    "Earlier provider timeout cause remains unproven and is outside this bounded count-contract correction."
+  ]
+}

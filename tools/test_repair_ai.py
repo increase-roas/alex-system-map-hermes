@@ -591,5 +591,41 @@ class RepairAITests(unittest.TestCase):
         self.assertNotIn('PRIVATE-PROVIDER-FAILURE', json.dumps(result))
 
 
+    def test_ai_schema_matches_case_and_citation_bounds_without_legacy_mutation(self):
+        import local_file_checks
+        evidence = repair_ai.CASE['properties']['evidence']
+        self.assertEqual((1, 12), (evidence['minItems'], evidence['maxItems']))
+        cases = repair_ai.PLAN['properties']['cases']
+        self.assertEqual((2, 4), (cases['minItems'], cases['maxItems']))
+        self.assertEqual(evidence, cases['items']['properties']['evidence'])
+        self.assertNotIn('minItems', local_file_checks.CASE['properties']['evidence'])
+        self.assertNotIn('maxItems', local_file_checks.CASE['properties']['evidence'])
+        result, calls = self.fixture()
+        self.assertEqual(2, len(result['proposals']))
+        self.assertIn('1-12 exact baseline citations per case', calls[1])
+        self.assertIn('1-12 exact baseline citations per proposal', calls[0])
+        _, targets = repair_ai.source_context([source('one')])
+        variants = repair_ai.proposal_schema(targets)['properties']['proposals']['items']['anyOf']
+        for variant in variants:
+            evidence = variant['properties']['evidence']
+            self.assertEqual((1, 12), (evidence['minItems'], evidence['maxItems']))
+
+    def test_fourteen_exact_citations_remain_rejected_without_truncation(self):
+        lines = ['Directive ' + str(i) for i in range(1, 15)]
+        context = {'files': [{'file_id': 'one', 'content': '\n'.join(lines)}]}
+        citations = [{'file_id': 'one', 'line': i, 'quote': text} for i, text in enumerate(lines, 1)]
+        def case(purpose, evidence):
+            return {'id': purpose, 'purpose': purpose, 'scenario': 'Behavior of cited directives.',
+                    'choices': {'A': 'Allow.', 'B': 'Require approval.', 'C': 'Unknown.'},
+                    'expected': 'A', 'rationale': 'Exact baseline evidence.', 'evidence': evidence}
+        plan = {'cases': [case('fix', citations[:2]), case('preserve', citations)]}
+        with self.assertRaisesRegex(ValueError, '^case evidence$'):
+            repair_ai.validate_cases(plan, context)
+        self.assertEqual(14, len(plan['cases'][1]['evidence']))
+        valid = copy.deepcopy(plan)
+        valid['cases'][1]['evidence'] = valid['cases'][1]['evidence'][:12]
+        self.assertEqual(2, len(repair_ai.validate_cases(valid, context)))
+
+
 if __name__ == '__main__':
     unittest.main()

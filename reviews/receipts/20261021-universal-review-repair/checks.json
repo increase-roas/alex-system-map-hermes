@@ -28,11 +28,20 @@
       "errors": 0,
       "warnings": 3,
       "log": "focused-lint.txt"
+    },
+    {
+      "command": "python3 -B -m unittest discover -s tools -p test_repair_ai.py",
+      "exit_code": 0,
+      "tests": 37,
+      "skips": 0,
+      "scope": "AI schema/prompt follow-up after actual native browser result",
+      "log": "ai-followup-tests.txt"
     }
   ],
   "independent_reviews": [
     "core-integrity-review.json",
-    "ai-plugin-review.json"
+    "ai-plugin-review.json",
+    "citation-review.json"
   ],
   "review_model_family": "Codex GPT-6, context-separated; no paid cross-provider review",
   "browser": "pending caller stage",
