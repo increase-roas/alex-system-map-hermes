@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "plan_id": "3ac31caac14f4336a9a7fcc7ea95e826",
+  "digest": "73c031dafe7eeb6ce77fa93838ef939b48e6f3ef099174bbfd31de255a37ff06",
+  "created_at": "2026-10-21T15:45:28.279650+00:00",
+  "expires_at": "2026-10-21T16:45:28.279670+00:00",
+  "intent": "For both selected FIXTURE targets, use fixture-new model instead of fixture-old. Change Cursor model and Hindsight retain_mission only. Preserve every other setting.",
+  "checks": [
+    {
+      "checked_at": "2026-10-21T15:45:28.239968+00:00",
+      "evidence": [
+        "{\"proposal_evidence\": [{\"file_id\": \"local-file-741331f3f0ed5e3347c5c3db\", \"line\": 2, \"quote\": \"  \\\"model\\\": \\\"fixture-old\\\"\"}], \"target_id\": \"local-file-741331f3f0ed5e3347c5c3db\"}",
+        "{\"proposal_evidence\": [{\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 13, \"quote\": \"  \\\"retain_mission\\\": \\\"Use fixture-old model.\\\"\"}], \"target_id\": \"provider-b56a711237c1c919ccda298f\"}",
+        "{\"after\": \"B\", \"before\": \"A\", \"choices\": {\"A\": \"Both use fixture-old.\", \"B\": \"Both use fixture-new.\", \"C\": \"They use different models.\"}, \"evidence\": [{\"file_id\": \"local-file-741331f3f0ed5e3347c5c3db\", \"line\": 2, \"quote\": \"  \\\"model\\\": \\\"fixture-old\\\"\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 13, \"quote\": \"  \\\"retain_mission\\\": \\\"Use fixture-old model.\\\"\"}], \"expected\": \"B\", \"id\": \"fix-model-pair\", \"purpose\": \"fix\", \"rationale\": \"The baseline directs both operations to fixture-old, yielding A. The candidate directs both to fixture-new, yielding B. This checks the two changed targets together.\", \"scenario\": \"A simulated Cursor invocation reads its configured model, while a Hindsight retention operation follows retain_mission. Which model does each source direct them to use?\", \"status\": \"passed\"}",
+        "{\"after\": \"A\", \"before\": \"A\", \"choices\": {\"A\": \"No; both explicitly select the same model.\", \"B\": \"Yes; they explicitly select different models.\", \"C\": \"One source leaves model selection unspecified.\"}, \"evidence\": [{\"file_id\": \"local-file-741331f3f0ed5e3347c5c3db\", \"line\": 2, \"quote\": \"  \\\"model\\\": \\\"fixture-old\\\"\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 13, \"quote\": \"  \\\"retain_mission\\\": \\\"Use fixture-old model.\\\"\"}], \"expected\": \"A\", \"id\": \"preserve-model-agreement\", \"purpose\": \"preserve\", \"rationale\": \"Both baseline sources explicitly select the same model. Both candidate sources also explicitly select the same model, preserving agreement across the changed targets.\", \"scenario\": \"A simulator compares Cursor's configured model with the model named by Hindsight retain_mission. Does either source direct a different model from the other?\", \"status\": \"passed\"}",
+        "{\"after\": \"C\", \"before\": \"C\", \"choices\": {\"A\": \"All dispositions are 3, labels are empty, recall alone is enabled, both missions preserve existing information, and extraction is concise.\", \"B\": \"All dispositions are 3, labels are empty, recall and retain are enabled, both missions preserve existing information, and extraction is verbose.\", \"C\": \"All dispositions are 3, labels are empty, recall and retain are enabled, observations preserve unrelated settings, reflection keeps existing facts, and extraction is concise.\"}, \"evidence\": [{\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 2, \"quote\": \"  \\\"disposition_empathy\\\": 3,\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 3, \"quote\": \"  \\\"disposition_literalism\\\": 3,\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 4, \"quote\": \"  \\\"disposition_skepticism\\\": 3,\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 5, \"quote\": \"  \\\"entity_labels\\\": {},\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 6, \"quote\": \"  \\\"mcp_enabled_tools\\\": [\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 7, \"quote\": \"    \\\"recall\\\",\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 8, \"quote\": \"    \\\"retain\\\"\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 9, \"quote\": \"  ],\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 10, \"quote\": \"  \\\"observations_mission\\\": \\\"Preserve every unrelated setting.\\\",\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 11, \"quote\": \"  \\\"reflect_mission\\\": \\\"Keep existing facts.\\\",\"}, {\"file_id\": \"provider-b56a711237c1c919ccda298f\", \"line\": 12, \"quote\": \"  \\\"retain_extraction_mode\\\": \\\"concise\\\",\"}], \"expected\": \"C\", \"id\": \"preserve-other-bank-settings\", \"purpose\": \"preserve\", \"rationale\": \"Both configurations retain every listed setting unchanged, yielding C. The alternatives detect unintended changes to enabled tools or extraction mode.\", \"scenario\": \"A simulator reads Hindsight's dispositions, entity labels, enabled MCP tools, observations mission, reflection mission, and extraction mode. Which configuration does it find?\", \"status\": \"passed\"}"
+      ],
+      "input_digest": "43d44e247b57943daa5ea420615550b2793bb0bac73880f50351ed8f74d32104",
+      "kind": "simulated_behavior",
+      "limitations": [
+        "Behavior checks simulate choices from bounded source projections; they do not execute code or prove live runtime acceptance.",
+        "Native syntax, owner lifecycle and dry-run checks must be supplied separately by the registered adapters."
+      ],
+      "output_digest": "a4ce582d70f138e1a5626be5635e9fc66a4e5127a6153fb1d1b179fb49d0d0e8",
+      "runner_id": "universal-ai:gpt-6.1-sol",
+      "status": "passed"
+    }
+  ],
+  "limitations": [
+    "Behavior checks simulate choices from bounded source projections; they do not execute code or prove live runtime acceptance.",
+    "Native syntax, owner lifecycle and dry-run checks must be supplied separately by the registered adapters."
+  ],
+  "targets": [
+    {
+      "adapter_id": "local-owner",
+      "allowed_patch_paths": [
+        "model"
+      ],
+      "capabilities": [
+        "read",
+        "prepare",
+        "preflight",
+        "backup",
+        "apply",
+        "verify",
+        "reconcile",
+        "undo"
+      ],
+      "category": "cli_config",
+      "content_format": "json",
+      "evidence": [
+        "/private/tmp/universal-browser-data/home/.cursor/cli-config.json"
+      ],
+      "id": "local-file-741331f3f0ed5e3347c5c3db",
+      "identity": {
+        "home": "/private/tmp/universal-browser-data/home",
+        "path": "/private/tmp/universal-browser-data/home/.cursor/cli-config.json"
+      },
+      "limitations": [
+        "Runtime discovery, effective precedence and reload are not inferred from file bytes."
+      ],
+      "observed_at": "2026-10-21T15:45:28.245994+00:00",
+      "owner": "FIXTURE Cursor CLI",
+      "scope": "local"
+    },
+    {
+      "adapter_id": "provider_hindsight_bank",
+      "allowed_patch_paths": [
+        "retain_mission",
+        "observations_mission",
+        "reflect_mission",
+        "disposition_skepticism",
+        "disposition_literalism",
+        "disposition_empathy",
+        "retain_extraction_mode",
+        "entity_labels",
+        "mcp_enabled_tools"
+      ],
+      "capabilities": [
+        "read",
+        "prepare",
+        "apply",
+        "verify",
+        "undo"
+      ],
+      "category": "hindsight_bank",
+      "content_format": "json",
+      "evidence": [
+        "Disposable HTTP store /private/tmp/universal-browser-data/provider.json"
+      ],
+      "id": "provider-b56a711237c1c919ccda298f",
+      "identity": {
+        "account": "hindsight-admin:Alexander",
+        "fixture_path": "/private/tmp/universal-browser-data/provider.json",
+        "object_id": "FIXTURE-browser-bank",
+        "provider": "hindsight_bank",
+        "schema_revision": "hindsight-bank-config-updates-v1",
+        "write_account": "hindsight-admin:Alexander"
+      },
+      "limitations": [
+        "Discovery proves listed identity only; proposal and application require fresh native configuration reads.",
+        "Native mutation has no server-side version condition: final GET rejects an already changed baseline; same registered account/object writes through this adapter are serialized on this machine only. An external writer or another machine can change fields between GET and mutation and be overwritten; readback proves observed values, not absence of concurrent edits."
+      ],
+      "observed_at": "2026-10-21T15:45:28.246229+00:00",
+      "owner": "FIXTURE Hindsight HTTP store",
+      "scope": "remote"
+    }
+  ],
+  "operations": [
+    {
+      "step_id": "a7bc1229be4144b8a8a5698ef593426f",
+      "target_id": "local-file-741331f3f0ed5e3347c5c3db",
+      "adapter_id": "local-owner",
+      "adapter_version": "1",
+      "action": "patch",
+      "public_diff": "{\"after\": {\"model\": \"fixture-new\"}, \"before\": {\"model\": \"fixture-old\"}}",
+      "checks": [
+        {
+          "checked_at": "2026-10-21T15:45:28.265207+00:00",
+          "evidence": [
+            "Strict native JSON and supported configuration shape parsed; no CLI startup or hook execution."
+          ],
+          "input_digest": "fafb66312022862ccf39921bfe3791f7c68f6fc25a6901be174be67375fb8a4c",
+          "kind": "syntax",
+          "limitations": [
+            "File parsing proves configured values; active precedence, trust and runtime reload remain unobserved."
+          ],
+          "output_digest": "58bde4b9246bd7c6ed47a0dd1237b0103e7276b7149e52ab1c02f57cc73cc060",
+          "runner_id": "FIXTURE Cursor CLI.json-settings-contract.2026-10-21",
+          "status": "passed"
+        }
+      ],
+      "expected_fingerprint": "4d6166b8081a5001a27a2f26b5b3f3fd296962a941ae6851931ffddfa4025f03",
+      "expected_version": "1"
+    },
+    {
+      "step_id": "6164c6d358314f5cb4ee5c97815d82da",
+      "target_id": "provider-b56a711237c1c919ccda298f",
+      "adapter_id": "provider_hindsight_bank",
+      "adapter_version": "1",
+      "action": "native_config_patch",
+      "public_diff": "{\"after\": {\"retain_mission\": \"Use fixture-new model.\"}, \"before\": {\"retain_mission\": {\"present\": true, \"value\": \"Use fixture-old model.\"}}}",
+      "checks": [
+        {
+          "checked_at": "2026-10-21T15:45:28.265253+00:00",
+          "evidence": [
+            "published native field contract shape accepted; no provider mutation"
+          ],
+          "input_digest": "09e3d42d9cf9e83efcfaa0d8c98ffffefaf69e7217ce1459b74515173aadf7de",
+          "kind": "syntax",
+          "limitations": [
+            "Provider has no mutation-free acceptance endpoint on this registered route; exact effect requires native GET readback after approval."
+          ],
+          "output_digest": "aa977084232d9597d546668ee4b2c04a5190706095e2e479142400daf78d829e",
+          "runner_id": "registered-native-v1",
+          "status": "passed"
+        }
+      ],
+      "expected_fingerprint": "0c5be42a4e19f46a85ce3bd67b5a6cec681d47b1de17750f601fba11c4613073",
+      "expected_version": "1"
+    }
+  ]
+}

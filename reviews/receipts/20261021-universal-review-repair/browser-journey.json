@@ -1,0 +1,42 @@
+{
+  "fixture_job_id": "3ac31caac14f4336a9a7fcc7ea95e826",
+  "one_approved_job": true,
+  "job_status": "undone",
+  "all_steps_undone": true,
+  "local_restored": true,
+  "hidden_local_value_preserved": true,
+  "unrelated_local_preserved": true,
+  "provider_restored": true,
+  "unrelated_provider_preserved": true,
+  "provider_version": 3,
+  "provider_mutation_count": 2,
+  "reopened_same_job_id": true,
+  "approval_clicks_in_recorded_journey": 1,
+  "model_stages_completed": 4,
+  "real_rule_plan_id": "2eed09fdad8b439183f49f3aabdfe8cf",
+  "actual_source_apply_jobs": 0,
+  "desktop": {
+    "viewport": 1440,
+    "panel_width": 1377
+  },
+  "narrow": {
+    "viewport": 390,
+    "panel_width": 343,
+    "page_scroll_width": 390
+  },
+  "browser_error_logs": [],
+  "evidence": [
+    "browser-fixture-proposal.png",
+    "browser-fixture-completed.png",
+    "browser-fixture-narrow.png",
+    "browser-fixture-undo-desktop.png",
+    "browser-real-proposal-desktop.png",
+    "browser-real-proposal-narrow.png"
+  ],
+  "limitations": [
+    "Fixture HTTP store is not production provider mutation proof.",
+    "Real rule proposal is read-only; no actual source or production Apply.",
+    "Simulation and syntax/lifecycle checks do not prove a live guard execution or app reload.",
+    "Browser viewport override was ineffective for desktop; documented tab CDP emulation established actual 1440px viewport. Overrides will be cleared after testing."
+  ]
+}

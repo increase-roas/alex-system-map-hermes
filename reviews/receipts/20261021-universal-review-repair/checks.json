@@ -1,6 +1,6 @@
 {
-  "artifact": "current reviewed implementation before browser acceptance",
-  "recorded_at": "2026-10-21T15:35:26.226163+00:00",
+  "artifact": "reviewed implementation with completed browser acceptance",
+  "recorded_at": "2026-10-21T16:03:56.344932+00:00",
   "checks": [
     {
       "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B tools/run_repair_tests.py",
@@ -41,9 +41,18 @@
   "independent_reviews": [
     "core-integrity-review.json",
     "ai-plugin-review.json",
-    "citation-review.json"
+    "citation-review.json",
+    "browser-review.json"
   ],
   "review_model_family": "Codex GPT-6, context-separated; no paid cross-provider review",
-  "browser": "pending caller stage",
-  "actual_source_apply_count": 0
+  "browser": {
+    "result": "VERIFIED",
+    "journey": "browser-journey.json",
+    "independent_review": "browser-review.json",
+    "real_source_apply": false,
+    "fixture_approval_apply_reopen_undo": true,
+    "real_proposal": "real-rule-proposal.json"
+  },
+  "actual_source_apply_count": 0,
+  "implementation_head": "9ef5a27142cc8996755a305905a87a3234e40a26"
 }
