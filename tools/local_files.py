@@ -13,7 +13,8 @@ import sys
 
 EXCLUDED_DIRS = {'.git', 'node_modules', 'vendor', 'dist', 'build', '.next', '__pycache__', 'logs', 'sessions', 'transcripts', 'runtime', 'credentials', 'secrets', 'backups', 'cache', '.cache', 'memories'}
 EXTENSIONS = {'.md', '.mdc', '.txt', '.json', '.toml', '.yaml', '.yml', '.py', '.sh', '.js', '.ts'}
-SENSITIVE = re.compile(r'(?i)(secret|password|passwd|credential|token|api.?key|authorization|private.?key|client.?secret|access.?key|connection.?string|database.?url|dsn|cookie|command|script|headers?|env|args|arguments)')
+# Description is metadata, not a script key; its value still passes content screening.
+SENSITIVE = re.compile(r'(?i)^(?!description$).*(secret|password|passwd|credential|token|api.?key|authorization|private.?key|client.?secret|access.?key|connection.?string|database.?url|dsn|cookie|command|script|headers?|env|args|arguments)')
 EXCLUSIONS = ['Credential/auth/env files and stores', 'Logs, sessions, transcripts, databases, runtime and memory archives', 'Dependency, build, cache, backup and .git trees', 'Unselected roots and symlinks escaping selected roots', 'Unsupported file types; bounded depth, bytes and file count']
 
 
@@ -104,7 +105,7 @@ def screen(text):
     edits = [(a, b) for a, b in edits if not any(c < a and b <= d for c, d in edits)]
     for start, end in sorted(edits, reverse=True):
         text = text[:start] + '"[REDACTED]"' + '\n' * text[start:end].count('\n') + text[end:]
-    text = re.sub(r'(?im)^(\s*[\w.-]*(?:command|script|headers?|env)[\w.-]*\s*[:=]\s*).+$', r'\1[REDACTED]', text)
+    text = re.sub(r'(?im)^(\s*(?!description\s*[:=])[\w.-]*(?:command|script|headers?|env)[\w.-]*\s*[:=]\s*).+$', r'\1[REDACTED]', text)
     text = re.sub(r'(?im)^(.*?\b(?:export\s+)?[\w.-]*(?:secret|password|passwd|token|api[_-]?key|authorization|credential|private[_-]?key|database[_-]?url|dsn|cookie)[\w.-]*\s*[:=]\s*).+$', r'\1[REDACTED]', text)
     text = re.sub(r'(?i)(\b(?:token|secret|password|api[_-]?key|authorization)\s*[:=]\s*)(?:"[^"\n]*"|\x27[^\x27\n]*\x27|[^\s,;]+)', r'\1[REDACTED]', text)
     text = re.sub(r'(?im)^.*(?:\bcurl\b|\bwget\b|\bAuthorization\s*:|\bBearer\s+).+$', '[REDACTED command or authorization]', text)

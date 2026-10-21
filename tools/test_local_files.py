@@ -115,6 +115,33 @@ class LocalFilesTests(unittest.TestCase):
         idx = self.scan()
         self.assertNotIn(secret, json.dumps(idx) + lf.content(idx, idx['files'][0]['id'])['content'])
 
+    def test_description_metadata_is_visible_but_sensitive_values_stay_screened(self):
+        fixtures = [
+            '---\ndescription: Route tasks to the appropriate agent.\nalwaysApply: true\n---\n',
+            '{"description":"Route tasks to the appropriate agent."}',
+            'description = "Route tasks to the appropriate agent."\n',
+            'Description: Route tasks to the appropriate agent.\n',
+            'description:\n  Route tasks to the appropriate agent.\n',
+        ]
+        for text in fixtures:
+            with self.subTest(format=text):
+                self.assertEqual((text, False), lf.screen(text))
+        secret = 'sk-proj-fixtureOnlyNotARealCredential723'
+        for text in [f'description: {secret}\n', f'{{"description":"{secret}"}}',
+                     f'description = "{secret}"\n',
+                     'description: curl https://example.com\n']:
+            with self.subTest(sensitive_description=text):
+                screened, redacted = lf.screen(text)
+                self.assertTrue(redacted)
+                self.assertNotIn(secret, screened)
+                self.assertNotIn('curl', screened)
+        for key in ['script', 'scripts', 'command', 'commands', 'args', 'arguments',
+                    'description_script', 'descriptionCommand', 'api_key']:
+            with self.subTest(sensitive_key=key):
+                screened, redacted = lf.screen(f'{key}: opaque-fixture-value\n')
+                self.assertTrue(redacted)
+                self.assertNotIn('opaque-fixture-value', screened)
+
     def test_alias_to_excluded_target_is_never_read(self):
         target = self.put('auth.json', '{"safe":"fixture-private-auth"}')
         (self.root / 'harmless.md').symlink_to(target)
