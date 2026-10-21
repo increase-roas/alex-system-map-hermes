@@ -1,0 +1,91 @@
+{
+  "status": "VERIFIED",
+  "scope": "bounded CI restoration diff and native fixture review; independently ran only board-answer with empty HOME; no implementation changes, commit, push or live mutations",
+  "acceptance": [
+    {
+      "status": "VERIFIED",
+      "item": "Restored app job retains full lint and TypeScript checks, adds production Next build, executes all five MTS scripts fail-fast",
+      "evidence": [
+        ".github/workflows/checks.yml",
+        "git show e502e4f:.github/workflows/checks.yml"
+      ],
+      "details": "No continue-on-error or conditional skip. Separate full lint precedes next build --no-lint."
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Board-answer auth, gate refusal, native answer roundtrip, log privacy and wrong-server assertions retained",
+      "evidence": [
+        "git diff HEAD -- app/src/app/explorer/board-answer.check.mts",
+        "app/src/app/explorer/board-answer.check.mts"
+      ],
+      "details": "Only live-board mtime sentinel replaced by synthetic independent sentinel; added fixture provenance hashes."
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Portable temporary HOME, board, native handler and local data; commits and remote reads disabled",
+      "evidence": [
+        "app/src/app/explorer/board-answer.check.mts:50",
+        "app/src/lib/server/paths.ts:49",
+        "tools/fixtures/board-answer/board/board.py:53",
+        "tools/fixtures/board-answer/board/board.py:747"
+      ],
+      "details": "Random loopback port and unique waiting ticket required before token/POST; cleanup only created temporary root."
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Native handler and helper exactly match pinned provenance and current native source bytes; fixture directory contains code and provenance only",
+      "evidence": [
+        "tools/fixtures/board-answer/provenance.json",
+        "tools/fixtures/board-answer/board/board.py",
+        "tools/fixtures/board-answer/lib/short_output.py"
+      ],
+      "hashes": {
+        "board/board.py": "5beed5df4c2bfcc68e10b50a4ed5a499f4a787d676871615a27fb01acc1606ab",
+        "lib/short_output.py": "0934b500f68362686399fcc4857f1b6c2af072a6f6ef525ad645360ce0631490"
+      },
+      "details": "No copied board data; source inspection and scans found no email or credential-shaped literals."
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Independent board-answer run passes5/5 using empty HOME",
+      "evidence": [
+        "/tmp/universal-ci-board-answer-verifier.txt"
+      ],
+      "command": "HOME=<new temporary directory> node src/app/explorer/board-answer.check.mts",
+      "exit_code": 0
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Existing builder native build, typecheck and all five check scripts have captured exit0 outputs",
+      "evidence": [
+        "/tmp/universal-ci-builder-evidence.json"
+      ],
+      "grade": "Captured builder tool output reopened; independently reran only affected board-answer test."
+    },
+    {
+      "status": "VERIFIED",
+      "item": "Full lint output reopened; historical CJS exceptions exact9d3e5d6; JSX apostrophe only",
+      "evidence": [
+        "/tmp/universal-restored-app-lint.txt",
+        "git show 9d3e5d6:app/.eslintrc.json",
+        "git diff HEAD -- app/src/app/explorer/pro-map-panel.tsx"
+      ],
+      "lint_warnings": 157
+    }
+  ],
+  "limitations": [
+    "This verifies workflow source and local execution; fresh GitHub Actions app status is not yet claimed.",
+    "Pinned board fixture intentionally represents legacy native board answer implementation with synthetic legacy-schema data; no actual board used."
+  ],
+  "reviewed_file_sha256": {
+    ".github/workflows/checks.yml": "f9bdaf9cd1dc2b179f58dd0766969c9d3d11847bf15d7b10d6e2712a86d922d4",
+    "app/src/app/explorer/board-answer.check.mts": "f7e481365aeaa35f8e0d41534503b5daec022bb78c7a68fb4f0317518f119eab",
+    "app/.eslintrc.json": "3f733751f8c1072b16877e1d7b3812b610cd7c33b9405c7adc65c793b91b7cba",
+    "app/src/app/explorer/pro-map-panel.tsx": "01c526336f122520a86ef9daba8a7cf10eb82c713b73a55555546b0f86977b43",
+    "tools/fixtures/board-answer/provenance.json": "44508a60e8328f3d51eaac57b94bd7887de2e0b5ed12c71edd5e093cbc8e2637",
+    "tools/fixtures/board-answer/board/board.py": "5beed5df4c2bfcc68e10b50a4ed5a499f4a787d676871615a27fb01acc1606ab",
+    "tools/fixtures/board-answer/lib/short_output.py": "0934b500f68362686399fcc4857f1b6c2af072a6f6ef525ad645360ce0631490"
+  },
+  "defects": [],
+  "blockers": []
+}

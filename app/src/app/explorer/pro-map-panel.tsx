@@ -287,7 +287,7 @@ function ExampleView({ e }: { e: Example }) {
 function StickyNote({ notes }: { notes: { text: string; src: string }[] }) {
   return (
     <div data-testid="sticky-note" className="mt-2 rounded-md border border-yellow-400/60 bg-yellow-200/90 p-2.5 text-[12px] leading-snug text-yellow-950 shadow-sm" style={{ transform: 'rotate(-0.4deg)' }}>
-      <div className="mb-1 text-[10px] font-bold uppercase tracking-wide">Sticky note: don't forget</div>
+      <div className="mb-1 text-[10px] font-bold uppercase tracking-wide">Sticky note: don&apos;t forget</div>
       {notes.map((s) => (
         <div key={s.text} className="mt-1">
           {s.text} <a href={s.src} target="_blank" rel="noreferrer" className="underline opacity-70">source</a>

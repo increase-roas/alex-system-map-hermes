@@ -1,4 +1,4 @@
-// Round-trip test for the "Waiting on you" panel. Runs against a TEMP copy of the board, never the live one.
+// Round-trip test for the "Waiting on you" panel. Uses synthetic TEMP board data and pinned native board.py.
 // Needs `npm run build` first. Run from the repo root: node app/src/app/explorer/board-answer.check.mts
 import assert from 'node:assert/strict';
 import { spawn } from 'node:child_process';
@@ -10,7 +10,7 @@ import path from 'node:path';
 import { after, before, test } from 'node:test';
 
 const APP = path.resolve(path.dirname(new URL(import.meta.url).pathname), '..', '..', '..');
-const LIVE = path.join(os.homedir(), '.agents', 'board', 'tasks.json');
+const NATIVE = path.resolve(APP, '..', 'tools', 'fixtures', 'board-answer');
 // OS-assigned free port, so the test can never reach a running dashboard.
 const PORT = await new Promise<number>((resolve, reject) => {
   const probe = net.createServer().listen(0, '127.0.0.1', () => {
@@ -23,40 +23,51 @@ const BASE = `http://127.0.0.1:${PORT}`;
 const FIXTURE = `test-q-${crypto.randomBytes(6).toString('hex')}`;
 const root = fs.mkdtempSync(path.join(os.tmpdir(), 'board-test-'));
 const boardDir = path.join(root, 'board');
+// Separate synthetic home/sentinel: no test or backend needs the user's board.
+const fixtureHome = path.join(root, 'home');
+const untouched = path.join(fixtureHome, '.agents', 'board', 'tasks.json');
 let server;
 let exited = false;
 let serverOutput = '';
 
 before(async () => {
   fs.mkdirSync(boardDir);
-  const board = JSON.parse(fs.readFileSync(LIVE, 'utf8'));
-  board.tickets.push(
-    { id: FIXTURE, mission: Object.keys(board.missions)[0], title: 'Map header layout',
+  fs.mkdirSync(path.dirname(untouched), { recursive: true });
+  fs.writeFileSync(untouched, JSON.stringify({ missions: {}, tickets: [] }));
+  const provenance = JSON.parse(fs.readFileSync(path.join(NATIVE, 'provenance.json'), 'utf8'));
+  for (const [relative, entry] of Object.entries(provenance.files)) {
+    assert.equal(crypto.createHash('sha256').update(fs.readFileSync(path.join(NATIVE, relative))).digest('hex'), entry.sha256);
+  }
+  const board = { missions: { fixture: { title: 'Disposable dashboard test', status: 'draft' } }, tickets: [
+    { id: FIXTURE, mission: 'fixture', title: 'Map header layout',
       status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'dashboard-ok: Which layout do you prefer for the map header, the left one or the top one?',
       updated: '2026-10-14T00:00:00Z', progressed: '2026-10-14T00:00:00Z', proof: [] },
-    { id: 'test-gate-1', mission: Object.keys(board.missions)[0], title: 'Raise ad budget',
+    { id: 'test-gate-1', mission: 'fixture', title: 'Raise ad budget',
       status: 'blocked', blocked_on: 'alex', owner: 'claude-code:test', need: 'dashboard-ok: Spend $50 more per day?',
       updated: '2026-10-14T00:00:00Z', progressed: '2026-10-14T00:00:00Z', proof: [] },
-  );
+  ] };
   fs.writeFileSync(path.join(boardDir, 'tasks.json'), JSON.stringify(board, null, 1));
   fs.writeFileSync(path.join(boardDir, 'progress.md'), '');
   server = spawn(path.join(APP, 'node_modules', '.bin', 'next'), ['start', '--hostname', '127.0.0.1', '-p', String(PORT)], {
     cwd: APP,
-    env: { ...process.env, AGENTS_BOARD_DIR: boardDir, LOCAL_DATA_DIR: path.join(root, 'data') },
+    env: { ...process.env, HOME: fixtureHome, AGENTS_BOARD_DIR: boardDir,
+      AGENTS_BOARD_SCRIPT: path.join(NATIVE, 'board', 'board.py'), AGENTS_BOARD_COMMIT: '0',
+      AGENTS_BOARD_NO_COMMIT: '1', AGENTS_BOARD_REMOTE: '0', PYTHONDONTWRITEBYTECODE: '1',
+      LOCAL_DATA_DIR: path.join(root, 'data') },
     stdio: ['ignore', 'pipe', 'pipe'],
   });
   server.stdout.on('data', (d) => { serverOutput += d; });
   server.stderr.on('data', (d) => { serverOutput += d; });
   server.on('exit', () => { exited = true; });
   for (let i = 0; i < 60; i++) {
-    if (exited) throw new Error('test server exited before it was ready');
+    if (exited) throw new Error('test server exited before it was ready: ' + serverOutput);
     try {
       const res = await fetch(`${BASE}/api/board`);
       if (res.ok && (await res.json()).waiting.some((w) => w.id === FIXTURE)) return;
     } catch {}
     await new Promise((r) => setTimeout(r, 500));
   }
-  throw new Error('server did not start');
+  throw new Error('server did not start: ' + serverOutput);
 });
 
 after(() => {
@@ -96,7 +107,7 @@ test('refuses to answer a gate item', async () => {
 });
 
 test('answer round-trips through board.py', async () => {
-  const before = fs.statSync(LIVE).mtimeMs;
+  const before = fs.statSync(untouched).mtimeMs;
   const { token } = await view();
   const res = await post({ id: FIXTURE, text: 'Blue please' }, token);
   assert.equal(res.status, 200, await res.clone().text());
@@ -108,7 +119,7 @@ test('answer round-trips through board.py', async () => {
   const v = await view();
   assert.ok(!v.waiting.some((w) => w.id === FIXTURE));
   assert.equal(v.answered[0].answer.text, 'Blue please');
-  assert.equal(fs.statSync(LIVE).mtimeMs, before, 'live board must not change');
+  assert.equal(fs.statSync(untouched).mtimeMs, before, 'separate board sentinel must not change');
   assert.ok(!serverOutput.includes('Blue please'), 'answer text must not reach server logs');
 });
 
