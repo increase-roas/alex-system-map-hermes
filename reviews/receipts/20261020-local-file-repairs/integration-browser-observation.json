@@ -1,0 +1,24 @@
+{
+  "ui": {
+    "correctCanonicalTarget": true,
+    "noAiLabel": true,
+    "sourceFingerprintShown": true,
+    "sourceTextLoaded": true,
+    "previewDisabled": true,
+    "applyButtons": 0
+  },
+  "repair_requests": [
+    {
+      "method": "GET",
+      "path": "/api/local-files/repair"
+    },
+    {
+      "method": "GET",
+      "path": "/api/local-files/repair"
+    }
+  ],
+  "no_preview_apply_undo_post": true,
+  "browser_id": "1",
+  "tab_id": "513642791",
+  "url": "http://127.0.0.1:3201/explorer?view=local-files"
+}
