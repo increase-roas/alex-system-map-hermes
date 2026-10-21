@@ -20,7 +20,7 @@ import tempfile
 import uuid
 from urllib.parse import urlsplit
 
-from local_files import read_source, screen
+from local_files import canonical_gates_section, read_source, screen
 
 MAX_SOURCE = 65536
 MAX_BODY = 192 * 1024
@@ -302,6 +302,8 @@ class RepairService:
             try:
                 raw, st, real = read_source(Path(row['path']), roots, MAX_SOURCE)
                 text = raw.decode('utf-8')
+                if Path(row['path']) == self.home / '.agents/skills/alex-director/references/gates.md':
+                    text, _ = canonical_gates_section(text)
                 if not stat.S_ISREG(st.st_mode) or str(real) != binding['real_path'] or sha(raw) != binding['sha256'] or screen(text)[1]:
                     stale()
             except (OSError, UnicodeError, RuntimeError, OverflowError):

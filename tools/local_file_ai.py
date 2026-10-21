@@ -12,7 +12,7 @@ import subprocess
 import sys
 import tempfile
 
-from local_files import read_source, screen
+from local_files import canonical_gates_section, read_source, screen
 from local_file_repairs import RepairService, RepairError, MAX_BODY, MAX_SOURCE, sha, timestamp
 
 MODEL = 'gpt-6.1-sol'
@@ -86,7 +86,7 @@ class SuggestionService:
     def __init__(self, repairs):
         self.repairs = repairs
 
-    def context_file(self, index, row):
+    def context_file(self, index, row, gates_excerpt=False):
         if row['state'] != 'readable' or not row.get('real_path'):
             raise RepairError('context_unavailable', 'Related source is unavailable; refresh the inventory', 503)
         path = Path(row['path'])
@@ -97,9 +97,17 @@ class SuggestionService:
             text = raw.decode('utf-8')
         except (OSError, UnicodeError, RuntimeError, OverflowError):
             raise RepairError('context_unavailable', 'Related source must be readable bounded UTF-8 text', 503)
+        limitation = None
+        if gates_excerpt:
+            text, excerpted = canonical_gates_section(text)
+            if excerpted:
+                limitation = "Only the canonical gates section Alex's gates (the one list) is supplied from " + row['path'] + '; other sections are not reviewed. Omitted lines are blank-padded to preserve original citation line numbers. The fingerprint binds the whole file.'
         if not stat.S_ISREG(st.st_mode) or screen(text)[1]:
             raise RepairError('context_unavailable', 'Related source contains screened or unsupported material', 503)
-        return {'file_id': row['id'], 'path': row['path'], 'sha256': sha(raw), 'real_path': str(path.resolve(strict=True)), 'content': text}
+        entry = {'file_id': row['id'], 'path': row['path'], 'sha256': sha(raw), 'real_path': str(path.resolve(strict=True)), 'content': text}
+        if limitation:
+            entry['limitation'] = limitation
+        return entry
 
     def context(self, file_id, expected, finding_id):
         index, row, _, raw, _ = self.repairs.inspected(file_id)
@@ -129,7 +137,8 @@ class SuggestionService:
             if item not in rows:
                 raise RepairError('context_unavailable', 'Finding references an unavailable indexed source', 503)
             try:
-                entry = self.context_file(index, rows[item])
+                gates_excerpt = item != file_id and Path(rows[item]['path']) == self.repairs.home / '.agents/skills/alex-director/references/gates.md'
+                entry = self.context_file(index, rows[item], gates_excerpt=gates_excerpt)
             except (RepairError, OSError):
                 if item not in canonical_ids or item == file_id:
                     raise
@@ -140,6 +149,8 @@ class SuggestionService:
                 limitations.append(('Canonical authority evidence exceeded the context bound: ' + entry['path']) if item in canonical_ids else 'Some related files exceeded the eight-file or 128 KiB context bound.')
                 continue
             files.append(entry)
+            if entry.get('limitation'):
+                limitations.append(entry['limitation'])
             size += length
         return {'target_file_id': file_id, 'files': files, 'limitations': list(dict.fromkeys(limitations))}
 

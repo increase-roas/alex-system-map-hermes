@@ -179,6 +179,58 @@ class AITests(unittest.TestCase):
         self.assertEqual([str(self.file), str(shared), str(gates)], [entry['path'] for entry in context['files']])
         self.assertTrue(any('exceeded' in value for value in context['limitations']))
 
+    def test_canonical_gates_excerpt_preserves_lines_hash_and_screening(self):
+        gates = self.repo / 'skills/alex-director/references/gates.md'
+        gates.parent.mkdir(parents=True)
+        policy = 'Ask Alex before spending money.'
+        before = '# Gates\nIntroduction.\n\n'
+        section = "## Alex's gates (the one list)\n" + policy + '\n### Detail\nKeep this policy detail.\n'
+        outside = '## Examples\n{"authorization":"fixture-outside-value"}\n'
+        gates.write_text(before + section + outside)
+        import local_files
+        self.index = local_files.scan(self.home, roots=[(self.repo, 'fixture')])
+        self.index_path.write_text(json.dumps(self.index))
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        entry = next(f for f in context['files'] if f['path'] == str(gates))
+        self.assertEqual('\n' * 3 + section + '\n' * 2, entry['content'])
+        self.assertEqual(policy, entry['content'].splitlines()[4])
+        self.assertEqual(repairs.sha(gates.read_bytes()), entry['sha256'])
+        self.assertEqual(str(gates.resolve()), entry['real_path'])
+        self.assertNotIn('fixture-outside-value', json.dumps(context))
+        gates_row = next(row for row in self.index['files'] if row['path'] == str(gates))
+        with self.assertRaises(repairs.RepairError):
+            self.worker.context_file(self.index, gates_row)
+        answer = self.answer()
+        answer['conflicts'][0]['evidence'].append({'file_id': entry['file_id'], 'line': 5, 'quote': policy})
+        with patch.object(self.worker, 'infer', return_value=answer):
+            result = self.worker.suggest(self.row['id'], self.row['sha256'], None)
+        self.assertTrue(any('Only the canonical gates section' in value for value in result['limitations']))
+        gates.write_text(before + section + outside + 'Changed outside the excerpt.\n')
+        preview = result['preview']
+        with self.assertRaises(repairs.RepairError) as caught:
+            self.service.apply(preview['repair_id'], preview['proposal_sha256'])
+        self.assertEqual('stale_context', caught.exception.code)
+        gates.write_text(before + section + 'api_key=fixture-inside-value\n' + outside)
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        self.assertNotIn(str(gates), [f['path'] for f in context['files']])
+        self.assertTrue(any('unavailable or screened' in value for value in context['limitations']))
+        self.assertNotIn('fixture-inside-value', json.dumps(context))
+        binding = {'file_id': entry['file_id'], 'sha256': repairs.sha(gates.read_bytes()), 'real_path': entry['real_path']}
+        with self.assertRaises(repairs.RepairError):
+            self.service.validate_context_fingerprints([binding])
+        gates.write_text('Policy without the exact heading.\napi_key=fixture-fallback-value\n')
+        context = self.worker.context(self.row['id'], self.row['sha256'], None)
+        self.assertNotIn(str(gates), [f['path'] for f in context['files']])
+        binding['sha256'] = repairs.sha(gates.read_bytes())
+        with self.assertRaises(repairs.RepairError):
+            self.service.validate_context_fingerprints([binding])
+
+    def test_noncanonical_peer_with_gates_heading_still_screens_whole_file(self):
+        self.peer.write_text("## Alex's gates (the one list)\nSafe policy.\n## Examples\napi_key=fixture-peer-value\n")
+        with self.assertRaises(repairs.RepairError) as caught:
+            self.worker.context(self.row['id'], self.row['sha256'], 'f' * 24)
+        self.assertEqual('context_unavailable', caught.exception.code)
+
     def test_all_tool_feature_defaults_explicitly_disabled(self):
         expected = {
             'shell_tool', 'apply_patch_freeform', 'hooks', 'apps', 'multi_agent', 'multi_agent_v2',

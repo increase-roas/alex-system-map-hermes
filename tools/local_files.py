@@ -84,6 +84,16 @@ def screen_assignment_containers(text):
     return text
 
 
+def canonical_gates_section(text):
+    """Select the named policy section, preserving original citation line numbers."""
+    lines = text.splitlines(keepends=True)
+    start = next((i for i, line in enumerate(lines) if line.rstrip('\r\n') == "## Alex's gates (the one list)"), None)
+    if start is None:
+        return text, False
+    end = next((i for i in range(start + 1, len(lines)) if re.match(r'^##(?:[ \t]+|$)', lines[i])), len(lines))
+    return ''.join(line if start <= i < end else '\n' for i, line in enumerate(lines)), True
+
+
 def screen(text):
     original = text
     text = screen_assignment_containers(text)
