@@ -559,6 +559,9 @@ CACHE_ACCOUNT = 'connectors-sync'
 CACHE_TTL_SECONDS = 12 * 3600
 SIGNOZ_CACHE_SERVICE = 'signoz-ingestion-header-cache'
 ROBOT_TOKEN_SERVICE = 'op-service-account-connectors-sync'
+# The LaunchAgent names the Keychain item that holds the robot token in its EnvironmentVariables (a
+# reference, never the token), so the job's own plist says where its credential comes from (2026-10-21).
+ROBOT_TOKEN_ENV = 'SIGNOZ_ROBOT_TOKEN_SERVICE'
 # A single read gets a SHORT ceiling on purpose. A long one is worse than useless when
 # the failure mode is a modal dialog waiting on a human: it holds the prompt on screen.
 # A healthy robot call answers in about a second.
@@ -623,10 +626,23 @@ def _keychain_put(service: str, headers: dict) -> None:
         pass  # best effort: the key is already read, a missed cache write only costs a re-read
 
 
+def robot_token_service() -> str:
+    return os.environ.get(ROBOT_TOKEN_ENV) or ROBOT_TOKEN_SERVICE
+
+
+def robot_token_present() -> bool:
+    """Is the referenced Keychain item there? Attributes only; the token is never read here."""
+    try:
+        return subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT, '-s', robot_token_service()],
+                              capture_output=True, timeout=OP_READ_TIMEOUT).returncode == 0
+    except (subprocess.SubprocessError, OSError):
+        return False
+
+
 def _robot_token() -> str:
     try:
         proc = subprocess.run([SECURITY, 'find-generic-password', '-a', CACHE_ACCOUNT,
-                               '-s', ROBOT_TOKEN_SERVICE, '-w'], capture_output=True, text=True,
+                               '-s', robot_token_service(), '-w'], capture_output=True, text=True,
                               timeout=OP_READ_TIMEOUT)
     except subprocess.SubprocessError:
         raise Blocked('the robot service-account token could not be read') from None
@@ -979,8 +995,14 @@ def health(server) -> dict:
             problems.append(f'{name}: {st["fail_streak"]} sends failed in a row, last status '
                             f'{st.get("last_fail_status")}, last ok {st.get("last_ok") or "never"}')
     files, size = server.spool.size()
+    route = 'key file' if STATIC_KEY_FILE else 'keychain key' if STATIC_KEY_SERVICE else '1Password robot'
+    key_route = {'route': route}
+    if route == '1Password robot':
+        key_route.update({'robot_token_service': robot_token_service(),
+                          'robot_token_from': 'plist' if os.environ.get(ROBOT_TOKEN_ENV) else 'code default',
+                          'robot_token_present': robot_token_present()})
     return {'ok': not problems, 'problems': problems, 'spool_files': files, 'spool_bytes': size,
-            'upstream_state': state}
+            'key_route': key_route, 'upstream_state': state}
 
 
 def default_host_name() -> str:
@@ -1685,6 +1707,31 @@ def self_test() -> int:
             check('health: key back and a 200 is ok, spool drained', got['ok'] and got['spool_files'] == 0, str(got))
     finally:
         globals()['forward'] = real_forward
+
+    # The plist names the robot token's Keychain item (2026-10-21); the reader asks security(1) for that item.
+    real_run, real_env = subprocess.run, os.environ.get(ROBOT_TOKEN_ENV)
+    seen_args = []
+
+    def fake_security(args, **kwargs):
+        seen_args.append(args)
+        return types.SimpleNamespace(returncode=0, stdout='fake-token\n')
+    try:
+        subprocess.run = fake_security
+        os.environ[ROBOT_TOKEN_ENV] = 'plist-named-item'
+        got = _robot_token()
+        check('robot token: the Keychain item named in the plist is the one read',
+              got == 'fake-token' and seen_args and seen_args[-1][seen_args[-1].index('-s') + 1] == 'plist-named-item',
+              str(seen_args[-1:]))
+        os.environ.pop(ROBOT_TOKEN_ENV)
+        _robot_token()
+        check('robot token: no plist entry falls back to the code default',
+              seen_args[-1][seen_args[-1].index('-s') + 1] == ROBOT_TOKEN_SERVICE, str(seen_args[-1:]))
+    finally:
+        subprocess.run = real_run
+        if real_env is None:
+            os.environ.pop(ROBOT_TOKEN_ENV, None)
+        else:
+            os.environ[ROBOT_TOKEN_ENV] = real_env
 
     width = max(len(n) for n, _ok, _d in checks)
     for name, ok, detail in checks:
