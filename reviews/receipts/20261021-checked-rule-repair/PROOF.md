@@ -4,8 +4,8 @@ Implemented for Alex's 2026-10-21 request. Development acceptance changed dispos
 
 ## Observed outcomes
 
-- Python: 76 tests passed, exit 0. Raw command and output: `python-suite.json`.
-- Component/API behavior: 18 tests passed, exit 0. `component-check.json` covers cancellation, source switching, invalidated manual edits, failed checks, honest pending states, exact verification predicates and actionable 422 responses.
+- Python: 80 tests passed, exit 0. Raw command and output: `python-suite.json`.
+- Component/API behavior: 21 tests passed, exit 0. `component-check.json` covers cancellation, source switching, invalidated manual edits, failed checks, honest pending states, exact verification predicates, actionable 422 responses and accurate failed/unavailable-check wording.
 - TypeScript: exit 0 in `typecheck.json`. Scoped ESLint: exit 0 in `lint.json`, using installed ESLint's native legacy-config selector for the existing `.eslintrc.json`. No lint rules were disabled. Its deprecation notice is retained.
 - Real subscribed Codex produced a synthetic contradiction repair and four checked scenarios. `fixture-ai-checks.json` contains the results. All four before decisions also matched the expected choices, so this proves checked preservation, not a measured behavioral improvement.
 - Desktop and narrow browser journeys used the actual HTTP repair route/backend against a disposable home and bare Git remote. One approval updated the source, three generated files, verified the unchanged Claude import, preserved modes/unrelated staged and dirty work, and pushed the exact one-path source commit. `apply-readback.json` contains ten independently checked predicates.
@@ -33,3 +33,9 @@ The synthetic proposal was produced by four real native subscribed model calls. 
 Behavioral checks are bounded simulated decisions, with model-planned expectations. They do not prove universal rule consistency or live agent/tool behavior. Context is bounded to eight files / 128 KiB. File hashes do not prove already-running agents loaded the new text; start new sessions where indicated. Only registered native dependents are installed. App-owned Codex settings, unrelated role artifacts and remote machine publication retain their native owners and remain explicitly pending if relevant. Drive undo bytes are verified locally; cloud upload is not claimed. No actual agent-rule Apply was part of acceptance.
 
 The canonical dashboard's final live read-only proposal and integration proof are recorded separately after integration. `reviewed-source-sha256.json` identifies the implementation bytes checked here.
+
+## Real-input follow-up
+
+An initial live run returned a valid contradiction analysis but unavailable behavioral checks, with no preview or writes. Its raw failed plan was not retained, so that exact failure remains unproven. One controlled diagnostic proposer call independently reproduced off-by-one source citations; production validation correctly rejected them. A diagnostic-only copy with uniquely located citations allowed a single planner call to be inspected; its four cases validated. No diagnostic correction was accepted by production or applied to a source. Private raw diagnostic data remains outside this receipt.
+
+The follow-up supplies explicitly numbered source lines with original per-line endings to the proposer and planner, preserves strict raw citation matching and unchanged raw decision inputs, and makes check failures identify their stage. LF, CRLF, mixed endings and no final newline remain distinguishable and reconstruct exact original spans. Failed/unavailable tests now explain that outcome without claiming Alex must decide which rule wins. Normal hooks, native size limits and frozen approval semantics are unchanged.

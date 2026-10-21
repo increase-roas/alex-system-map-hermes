@@ -1,0 +1,14 @@
+F
+======================================================================
+FAIL: test_planner_numbered_sources_preserve_blank_unicode_and_decision_raw (test_local_file_checks.ChecksTests.test_planner_numbered_sources_preserve_blank_unicode_and_decision_raw)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/alexlobaito/Documents/Codex/worktrees/system-map-approved-repair/tools/test_local_file_checks.py", line 54, in test_planner_numbered_sources_preserve_blank_unicode_and_decision_raw
+    self.assertNotIn('content', source)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^
+AssertionError: 'content' unexpectedly found in {'file_id': 'target', 'content': 'Ask before any work.\nKeep source evidence.\n\nUnicode café α.\n'}
+
+----------------------------------------------------------------------
+Ran 1 test in 0.002s
+
+FAILED (failures=1)

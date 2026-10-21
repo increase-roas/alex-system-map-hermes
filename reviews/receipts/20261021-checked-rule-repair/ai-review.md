@@ -44,3 +44,41 @@
   - tools/local_file_ai.py: 91e3366ad7f0a9c43390b74d9ce14545e038fa6e3581b6a0add8a3390d6c8c4a
   - tools/test_local_file_ai.py: 5437b5cb1971cab05618156c4276d07e851f22b918fed70e1904b3e5c547133b
   - tools/local_file_distribution.py: 89a42bd96ff355dbc5266adcca9077af6dfa549efbdf5007884735cda2065d97
+
+- VERIFIED: Final numbered-source delta reviewed against recreated worktree HEAD 3abfa21e381d0c393e4a2dc082ffada68c3d5767 and the four current changed AI/check/test files. No live model calls, real source edits, helpers or suite repetition.
+- VERIFIED: Prompt-only source_lines is deep-copied, numbers blank/Unicode source lines consistently with raw validation, and replaces content only for proposer/planner. Baseline and candidate decisions keep raw context; scenario payloads still omit expected labels/rationales/citations. Strict wrong-line validation remains. Evidence: tools/local_file_checks.py:21-26,33-75,89-120; tools/local_file_ai.py:191-198,241-247.
+- VERIFIED: Controlled failure reporting names Planning/Before/Candidate, distinguishes provider failure from malformed output, and exposes only fixed PlanValidationError reasons with positional case/citation numbers. Provider/model details are not copied. A failed plan remains unavailable/nonapprovable. Evidence: tools/local_file_checks.py:29-75,91-120; tools/test_local_file_checks.py:62-73.
+- VERIFIED: Ran four focused tests for proposer numbering/raw-context preservation, planner numbering/raw decision input, stage/citation failure reporting and unchanged answer-key separation. Exit 0, 4 tests passed. Raw output: /tmp/checked-ai-numbered-delta-tests.txt. Opened the owner's red log and both green logs (33 AI and 8 checks), without repeating those suites.
+
+  | Numbered-source acceptance | Result |
+  |---|---|
+  | Prompt-only deep copy, correct blank/Unicode line numbering | VERIFIED |
+  | Strict citation rejection and raw answer-key-free decision runs | VERIFIED |
+  | Controlled stage-specific failure messages | VERIFIED |
+  | Exact multiline edit information and newline-style preservation available to proposer | FAILED |
+
+- FAILED: P2, tools/local_file_checks.py:25, used by tools/local_file_ai.py:197. Replacing raw content with splitlines() discards original LF/CRLF/mixed terminators and final-newline state. The proposer is still required to emit exact old_text spans and preserve newline style, but no remaining field exposes these original separators. A multiline CRLF source and its LF counterpart now produce the same source_lines prompt representation; a normally LF-joined multiline old_text fails exact matching against the CRLF source. This is a reliability regression from the previous raw-content prompt. Strict validation prevents an unsupported write, but a valid reviewable multiline repair can fail because necessary source information was removed. Minimum fix: add prompt-only original line terminators, or equivalent unambiguous newline metadata including mixed endings/final-newline state, and test reconstructing an exact CRLF multiline old_text without weakening raw validation. Deterministic read-only proof: /tmp/checked-ai-numbered-eol-probe.txt (same_prompt_source_view=True, lf_multiline_old_text_matches_crlf=False, raw_sources_differ=True).
+- VERIFIED: Independently parsed saved diagnosis context.json and proposal.json under /tmp/checked-real-agent-debug/diagnosis-_gou2xrc. Three fresh proposer citations supplied lines 64/65/66 while exact quotations occur at 63/64/65, respectively. diagnosis.json/failure-trace.txt identify proposal validation failure; saved planner-diagnosis.json says valid:true,cases:4. This supports a fresh proposer off-by-one diagnosis only. The original historical planner-failure cause remains UNVERIFIED and is not claimed diagnosed.
+- VERIFIED: Final reviewed byte hashes for this delta:
+  - tools/local_file_ai.py: 9aaba481a61543370341540bf6e4e959eec33dab1e8a27a32a20d2908778d104
+  - tools/local_file_checks.py: de751254357da6f90b0acca739cc4dac862e079a5374a735e30494d17fb26f2d
+  - tools/test_local_file_ai.py: 3ad8a3956ba88f91173bb5da86d2347fa4c2625c3df02807e9a752b7ca0814a9
+  - tools/test_local_file_checks.py: 90097d73e94a259f1f278209cbbb71464fc26395e8285e9902017b50489c3357
+- goal_not_met_yet: Proposer lacks original newline separators needed for exact multiline replacements; preserve that information and add a focused CRLF reconstruction check.
+
+- VERIFIED: Final P2 re-review closes the original-line-ending finding. tools/local_file_checks.py:21-28 now pairs splitlines(keepends=True) with splitlines() and emits each original ending separately from citable text. tools/local_file_ai.py:192 explicitly instructs exact multiline reconstruction as text + ending; planner prompt says ending is outside the quote. This preserves LF, CRLF, mixed separators, blank lines, Unicode and absent final newline without changing raw context or the strict citation validator.
+- VERIFIED: Independently ran five focused tests on final bytes: exact multiline reconstruction/validation across four newline variants, proposer raw-context preservation/wrong-line rejection, planner numbering/raw decision input, controlled failure messages and hidden-answer-key decision separation. All 5 passed, exit 0. Raw log: /tmp/checked-ai-endings-recheck.txt. Opened /tmp/checked-real-agent-debug/line-endings-red.txt and line-endings-proof.json; independently recomputed all four proof hashes and each matched current working bytes. No live model/source writes or broad suite rerun.
+
+  | Final P2 acceptance | Result |
+  |---|---|
+  | LF/CRLF/mixed/no-final-newline views remain distinct and reconstruct exact source | VERIFIED |
+  | Reconstructed multiline old_text validates without weakening raw validation | VERIFIED |
+  | Numbered prompts preserve raw context, decision input and answer-key separation | VERIFIED |
+  | Stage/citation errors stay controlled and nonapprovable | VERIFIED |
+  | Four final file hashes match the frozen owner proof | VERIFIED |
+
+- VERIFIED: No remaining concrete in-scope code finding. The prior P2 and its goal_not_met_yet status are superseded by this verified fix. The historical original planner cause remains unproven; only the saved fresh proposer off-by-one was established. Final reviewed byte hashes:
+  - tools/local_file_ai.py: 6fa9321410952d36acf972da4668a0b1afa108cbfde6d774bc7dd6cd32f4abc9
+  - tools/local_file_checks.py: 21bb0e409b2fd8f37d2e027f7dd959a7186a5838b847af059a84624e96d08c93
+  - tools/test_local_file_ai.py: 6cfcc268cbe1f05b8b801ded21e886b81546672a7eda19a3fc6529608a2486b5
+  - tools/test_local_file_checks.py: 08cdd0cc2bc99621ffaec5926cc46d78f3da587c38c7745fdcb61860103f8327
