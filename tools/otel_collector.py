@@ -98,6 +98,9 @@ KNOWN_SERVICES = (
     'openclaw',
     # The collector's own 5-minute heartbeat (2026-10-21), so SigNoz can alert when a collector goes dark.
     'signoz-collector',
+    # Background job runs from ~/.agents/tools/jobs/runs.py, one log per run (2026-10-21), so SigNoz can alert when a
+    # job such as the auto-push goes quiet.
+    'agent-jobs',
     # Paperclip's agent-observability connection test (service.name paperclip-observability-test, set in
     # @paperclipai/server/dist/services/agent-observability-test.js:54). Added 2026-10-21 on the Mac mini copy: the
     # export arrives through otel.increaseroas.com behind Access, and without this the test span was accepted at the
