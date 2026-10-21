@@ -161,6 +161,15 @@ class LocalFilesTests(unittest.TestCase):
         limited = lf.scan(self.home, roots=roots, max_files=1)
         self.assertTrue(all(r['state'] == 'partial' for r in limited['coverage']['roots']))
 
+    def test_ordinary_prose_has_no_findings_and_mixed_case_memory_declarations_remain(self):
+        self.put('ordinary.md', ('ordinary prose without a declaration ' * 20 + '\n') * 100)
+        ordinary = self.scan()
+        self.assertEqual([], ordinary['findings'])
+        self.put('a.md', 'Always use Hindsight as the ONLY memory layer.\n')
+        self.put('b.md', 'Always use local files as the ONE MEMORY LAYER.\n')
+        idx = self.scan()
+        self.assertTrue(any(f['kind'] == 'conflict_candidate' and f['topic'].startswith('exclusive memory declarations') for f in idx['findings']))
+
     def test_read_failure_and_retargeted_alias(self):
         p = self.put('rules.md', 'source')
         idx = self.scan()

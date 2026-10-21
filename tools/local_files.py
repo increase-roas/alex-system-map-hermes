@@ -402,7 +402,9 @@ def analyze(idx, sources):
             m = re.search(r'(?i)\b(always|never)\s+((?:send|use|allow|execute|delete|contact|spend)\b.+?)[.!]?$', clean)
             if m:
                 declarations[('explicit opposite directive', re.sub(r'\s+', ' ', m.group(2).lower()).rstrip('.!'))].append((m.group(1).lower(), ev))
-            m = re.search(r'(?i)(?:use\s+)?(.{1,90}?)\s+(?:as\s+)?the (?:only|one) memory layer', clean)
+            # This unanchored expression can backtrack at every position in
+            # ordinary prose. Its required literal is a semantics-preserving gate.
+            m = re.search(r'(?i)(?:use\s+)?(.{1,90}?)\s+(?:as\s+)?the (?:only|one) memory layer', clean) if 'memory layer' in clean.lower() else None
             if m:
                 value = re.sub(r'(?i)^.*\buse\s+', '', m.group(1)).lower().strip()
                 declarations[('exclusive memory declarations', 'memory layer')].append((value, ev))
