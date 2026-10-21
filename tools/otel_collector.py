@@ -1549,7 +1549,11 @@ def self_test() -> int:
             handle.write('#!/bin/sh\necho fake-test-key\n')
         os.chmod(fake_op, 0o700)
         try:
-            os.environ['PATH'] = '/usr/bin:/bin:/usr/sbin:/sbin'
+            # An empty folder as PATH: op is not on it anywhere. launchd's /usr/bin:/bin would do on a Mac, but on
+            # Linux (Orgo) op is /usr/bin/op, which made this check read the real op (2026-10-21).
+            empty = os.path.join(bindir, 'empty-path')
+            os.makedirs(empty)
+            os.environ['PATH'] = empty
             globals()['OP_FALLBACK_DIRS'] = (bindir,)
             globals()['_keychain_get'] = lambda service: None
             globals()['_keychain_put'] = lambda service, headers: None
