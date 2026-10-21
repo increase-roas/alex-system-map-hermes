@@ -1,0 +1,20 @@
+Browser tab: 2, Title: "127.0.0.1:3202/explorer", URL: "http://127.0.0.1:3202/explorer".
+The following is a diff from the previous accessibility tree with ~ and + representing changed and added elements, respectively. Removed elements are summarized by ID range.
+Removed element IDs: 240, 249
++		249 text A repair draft or request is active. The editor stays open while you inspect other files. Apply or explicitly discard it before refreshing or opening another repair. Exact copies share bytes. Shared links point to the same physical file. Generated or linked files are not automatically a duplicate problem. Possible conflicts and repeated rules are review items with source evidence. They do not decide which instruction has authority. Partial coverage or file failures are present. Review scan scope below.
++			250 container
++				251 text AI is reading the current source and bounded related context, checking conflicts, and preparing an exact proposal… This can take a few minutes. Source files change only after you approve the proposal.
++				252 button Stop waiting
++			253 definition list
++				254 container Repair target
++					255 text Repair target
++				256 text /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions/alpha.md
++				257 container Source fingerprint when opened (SHA-256)
++					258 text Source fingerprint when opened (SHA-256)
++				259 text b6e914233e9a984de1b4a39eaa815e054a652d6631dac656fc4afdc4ae14ad9f
++			260 text Handwritten canonical source. Preview an exact edit before applying it.
++			261 button (collapsed) Actual source before this proposal, Secondary Actions: Expand
++				262 text Actual source before this proposal
++			263 button (collapsed) Edit manually (optional), Secondary Actions: Expand
++				264 text Edit manually (optional)
+The focused UI element is 1 AXWebArea 127.0.0.1:3202/explorer

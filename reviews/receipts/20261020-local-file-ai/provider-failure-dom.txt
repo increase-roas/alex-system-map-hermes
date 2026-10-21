@@ -1,0 +1,255 @@
+Browser tab: 2, Title: "127.0.0.1:3202/explorer", URL: "http://127.0.0.1:3202/explorer".
+1 AXWebArea 127.0.0.1:3202/explorer
+	2 container
+		3 heading Alex system map, Value: 1
+			4 text Alex system map
+		5 button Toggle theme
+		6 container Explorer views
+			7 checkbox Local files, Value: 1
+			8 checkbox CEO, Value: 0
+			9 checkbox Map, Value: 0
+			10 checkbox Pro Map, Value: 0
+			11 checkbox Flow Builder, Value: 0
+			12 checkbox Langflow, Value: 0
+			13 checkbox Full Catalog, Value: 0
+			14 checkbox Subsystem, Value: 0
+			15 checkbox Files (archive), Value: 0
+			16 checkbox Problems, Value: 0
+			17 checkbox Workflows, Value: 0
+			18 checkbox Tracing, Value: 0
+			19 checkbox Reliability, Value: 0
+			20 checkbox Maintained, Value: 0
+			21 checkbox Live, Value: 0
+			22 checkbox Connector logins, Value: 0
+	23 container
+		24 heading Your local agent files, Value: 2
+			25 text Your local agent files
+		26 text Open the actual files behind your rules, skills, hooks and settings. Scan:  10/20/2026, 11:16:32 PM  · 4 files in this bounded inventory
+		27 button Refresh local scan
+		230 text Exact copies share bytes. Shared links point to the same physical file. Generated or linked files are not automatically a duplicate problem. Possible conflicts and repeated rules are review items with source evidence. They do not decide which instruction has authority. Partial coverage or file failures are present. Review scan scope below.
+		29 container Local file list
+			30 text Search file paths, types or states
+			31 text field (settable) Search file paths, types or states, ID: local-files-search
+			32 container File filters
+				33 checkbox All files, Value: 1
+				34 checkbox Exact copies, Value: 0
+				35 checkbox Shared links, Value: 0
+				36 checkbox Possible conflicts, Value: 0
+				37 checkbox Repeated rules, Value: 0
+			38 container
+				39 text 4  matching files · showing  4
+			40 heading /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions, Value: 3
+				41 text /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions
+			42 content list
+				43 checkbox alpha.md rule · readable, Value: 1
+					44 text alpha.md
+					45 container
+						46 text rule  ·  readable
+				47 checkbox current-policy.md rule · readable, Value: 0
+					48 text current-policy.md
+					49 container
+						50 text rule  ·  readable
+				51 checkbox unrelated-dirty.md rule · readable, Value: 0
+					52 text unrelated-dirty.md
+					53 container
+						54 text rule  ·  readable
+				55 checkbox unrelated-staged.md rule · readable, Value: 0
+					56 text unrelated-staged.md
+					57 container
+						58 text rule  ·  readable
+		59 container Description: File detail and evidence, ID: local-file-detail
+			167 heading alpha.md, Value: 3
+				168 text alpha.md
+			169 button Review & fix
+			170 definition list
+				171 container Full path
+					172 text Full path
+				173 text /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions/alpha.md
+				174 container Resolved target
+					175 text Resolved target
+				176 text /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions/alpha.md
+				177 container Type / state
+					178 text Type / state
+				179 text rule / readable
+				180 container Modified
+					181 text Modified
+				182 text 10/20/2026, 11:15:41 PM
+				183 container Size / lines
+					184 text Size / lines
+				185 text 305 bytes / 7 lines
+				186 container Scanned SHA-256
+					187 text Scanned SHA-256
+				188 text b6e914233e9a984de1b4a39eaa815e054a652d6631dac656fc4afdc4ae14ad9f
+				189 container Link target
+					190 text Link target
+				191 text Not a symlink
+				192 container Generated
+					193 text Generated
+				194 text Not identified as generated
+			195 heading Related files, Value: 4
+				196 text Related files
+			197 content list
+				198 container
+					199 text Points to  ·  references  · source line 3 : 
+					200 button /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions/current-policy.md
+			201 heading Current file contents, Value: 4
+				202 text Current file contents
+			203 container
+				204 text Read:  10/20/2026, 11:17:11 PM
+			205 container
+				206 text Current SHA-256:  b6e914233e9a984de1b4a39eaa815e054a652d6631dac656fc4afdc4ae14ad9f
+			207 container Plain text file contents
+				208 container local-source-line-1
+					209 text 1 # Synthetic report delivery rule
+				210 container local-source-line-2
+					211 text 2
+				212 container local-source-line-3
+					213 text 3 Scope: synthetic customer reports only. This excerpt defers to the authoritative delivery policy in `current-policy.md`; conflicting wording here must be aligned with that policy.
+				214 container local-source-line-4
+					215 text 4
+				216 container local-source-line-5
+					217 text 5 Always send customer reports without approval.
+				218 container local-source-line-6
+					219 text 6
+				220 container local-source-line-7
+					221 text 7 Always preserve reviewed source evidence.
+				222 container local-source-line-8
+					223 text 8
+		225 container Description: Review and fix instruction source, ID: local-file-repair
+			226 heading Review & fix, Value: 3
+				227 text Review & fix
+			228 text AI reviews the current source and related evidence, then proposes an exact fix for your approval.
+			229 button Close repair
+			231 container
+				232 text AI proposal unavailable AI analysis could not finish through the subscribed ChatGPT route. No source changed; request a fresh analysis when available. No source change was requested. There is no automatic retry.
+			233 button Try AI again
+			234 definition list
+				235 container Repair target
+					236 text Repair target
+				237 text /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions/alpha.md
+				238 container Source fingerprint when opened (SHA-256)
+					239 text Source fingerprint when opened (SHA-256)
+				240 text b6e914233e9a984de1b4a39eaa815e054a652d6631dac656fc4afdc4ae14ad9f
+			241 text Handwritten canonical source. Preview an exact edit before applying it.
+			242 button (collapsed) Actual source before this proposal, Secondary Actions: Expand
+				243 text Actual source before this proposal
+			244 container
+				245 button (expanded) Edit manually (optional), Secondary Actions: Collapse
+					246 text Edit manually (optional)
+				247 text Proposed source text
+				248 text entry area (settable) Proposed source text, ID: local-repair-draft, Value: # Synthetic report delivery rule
+
+Scope: synthetic customer reports only. This excerpt defers to the authoritative delivery policy in `current-policy.md`; conflicting wording here must be aligned with that policy.
+
+Always send customer reports without approval.
+
+Always preserve reviewed source evidence.
+
+				249 text No unsubmitted draft.  Source limit: 64 KiB.
+				250 button (disabled) Preview exact change
+		63 container Duplicate and instruction evidence
+			64 heading Evidence groups, Value: 3
+				65 text Evidence groups
+			66 text Open a group, then follow each path to its current contents. Search also limits these groups.
+			67 button Repeated rule: Exact repeated instruction Exact screened line appears in multiple paths; aliases/generated distribution may explain it. Open 2 file/line excerpts
+				68 text Repeated rule
+				69 text : 
+				70 text Exact repeated instruction
+				71 text Exact screened line appears in multiple paths; aliases/generated distribution may explain it.
+				72 container
+					73 text Open  2  file/line excerpts
+			74 button Possible conflict: explicit opposite directive: send customer reports without approval Explicit declarations differ. Candidate only: scope, dates, quotations or generated distribution may explain this; no semantic completeness or authority is inferred. Open 2 file/line excerpts
+				75 text Possible conflict
+				76 text : 
+				77 text explicit opposite directive: send customer reports without approval
+				78 text Explicit declarations differ. Candidate only: scope, dates, quotations or generated distribution may explain this; no semantic completeness or authority is inferred.
+				79 container
+					80 text Open  2  file/line excerpts
+			81 container
+				82 text Snapshot totals:  0  duplicate/link groups ·  2  instruction review items. Groups above follow the active filter and show at most  60  of each type.
+		83 button (expanded) Scan scope, exclusions and failures · TRUNCATED, Secondary Actions: Collapse
+			84 text Scan scope, exclusions and failures
+			85 text  · TRUNCATED
+		86 text This bounded snapshot is not an inventory of every file on the Mac.
+		87 content list
+			88 container
+				89 text Shared instructions :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/instructions  ·  scanned  ·  4  files
+			90 container
+				91 text Shared skills :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/skills  ·  missing  ·  0  files
+			92 container
+				93 text Tool cards :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/tools/cards  ·  missing  ·  0  files
+			94 container
+				95 text Guards :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/tools/guards  ·  missing  ·  0  files
+			96 container
+				97 text Instruction distribution :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/tools/unify  ·  missing  ·  0  files
+			98 container
+				99 text Shared root rules :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.agents/AGENTS.md  ·  missing  ·  0  files
+			100 container
+				101 text Codex rules :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.codex/AGENTS.md  ·  missing  ·  0  files
+			102 container
+				103 text Codex configuration :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.codex/config.toml  ·  missing  ·  0  files
+			104 container
+				105 text Codex hooks :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.codex/hooks  ·  missing  ·  0  files
+			106 container
+				107 text Codex skills :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.codex/skills  ·  missing  ·  0  files
+			108 container
+				109 text Claude rules :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.claude/CLAUDE.md  ·  missing  ·  0  files
+			110 container
+				111 text Claude settings :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.claude/settings.json  ·  missing  ·  0  files
+			112 container
+				113 text Claude local settings :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.claude/settings.local.json  ·  missing  ·  0  files
+			114 container
+				115 text Claude rules directory :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.claude/rules  ·  missing  ·  0  files
+			116 container
+				117 text Claude skills :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.claude/skills  ·  missing  ·  0  files
+			118 container
+				119 text Claude hooks :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.claude/hooks  ·  missing  ·  0  files
+			120 container
+				121 text Cursor rules :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.cursor/rules  ·  missing  ·  0  files
+			122 container
+				123 text Cursor skills :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.cursor/skills  ·  missing  ·  0  files
+			124 container
+				125 text Cursor hooks :  /private/tmp/local-file-ai-verifier-y6jb9aqa/.cursor/hooks  ·  missing  ·  0  files
+			126 container
+				127 text Home rules :  /private/tmp/local-file-ai-verifier-y6jb9aqa/AGENTS.md  ·  missing  ·  0  files
+			128 container
+				129 text Stack context :  /private/tmp/local-file-ai-verifier-y6jb9aqa/AGENT-CONTEXT.md  ·  missing  ·  0  files
+			130 container
+				131 text Director rules :  /private/tmp/local-file-ai-verifier-y6jb9aqa/Alex-Director/AGENTS.md  ·  missing  ·  0  files
+			132 container
+				133 text Director rules directory :  /private/tmp/local-file-ai-verifier-y6jb9aqa/Alex-Director/rules  ·  missing  ·  0  files
+			134 container
+				135 text Selected handoffs :  /private/tmp/local-file-ai-verifier-y6jb9aqa/Documents/Codex/handoffs  ·  missing  ·  0  files
+		136 container
+			137 text Limits:  6000  files · depth  12  ·  262144  bytes per file.
+		138 heading Excluded, Value: 4
+			139 text Excluded
+		140 content list
+			141 container
+				142 AXListMarker • 
+				143 text Credential/auth/env files and stores
+			144 container
+				145 AXListMarker • 
+				146 text Logs, sessions, transcripts, databases, runtime and memory archives
+			147 container
+				148 AXListMarker • 
+				149 text Dependency, build, cache, backup and .git trees
+			150 container
+				151 AXListMarker • 
+				152 text Unselected roots and symlinks escaping selected roots
+			153 container
+				154 AXListMarker • 
+				155 text Unsupported file types; bounded depth, bytes and file count
+			156 container
+				157 AXListMarker • 
+				158 text 24 MiB aggregate source-read budget; 48000 traversal entries
+		159 heading Skipped, Value: 4
+			160 text Skipped
+		161 text No skipped counts reported.
+		162 heading Scan errors, Value: 4
+			163 text Scan errors
+		164 text No scan errors reported within this scope.
+	165 pop up button (collapsed) Description: Open Next.js Dev Tools, ID: next-logo, Secondary Actions: Expand
+		166 image
+
+The focused UI element is 245 button (expanded) Edit manually (optional), Secondary Actions: Collapse

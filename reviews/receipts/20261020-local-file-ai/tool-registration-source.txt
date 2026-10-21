@@ -1,0 +1,177 @@
+Source: https://raw.githubusercontent.com/openai/codex/rust-v0.160.0/codex-rs/core/src/tools/spec_plan.rs
+Pinned upstream tag: rust-v0.160.0
+License: https://github.com/openai/codex/blob/rust-v0.160.0/LICENSE
+
+1078: #[instrument(level = "trace", skip_all)]
+1079: fn add_shell_tools(context: &CoreToolPlanContext<'_>, registry: &mut ToolRegistry) {
+1080:     let turn_context = context.turn_context;
+1081:     let features = turn_context.config.features.get();
+1082:     let environment_mode = tool_environment_mode(context.environments);
+1083:     if !environment_mode.has_environment()
+1084:         || !features.enabled(Feature::ShellTool)
+1085:         || matches!(context.model_info.shell_type, ConfigShellToolType::Disabled)
+1086:     {
+1087:         return;
+1088:     }
+1089: 
+1090:     let allow_login_shell = any_environment_allows_login_shell(context.environments);
+1091:     if context.tool_policy.require_unified_exec && !features.enabled(Feature::UnifiedExec) {
+1092:         return;
+1093:     }
+1094:     let exec_permission_approvals_enabled = features.enabled(Feature::ExecPermissionApprovals)
+1095:         && context.tool_policy.expose_additional_permissions;
+1096:     let include_environment_id = matches!(environment_mode, ToolEnvironmentMode::Multiple);
+1097:     let options = ExecCommandHandlerOptions {
+1098:         allow_login_shell,
+1099:         allow_tty: features.enabled(Feature::UnifiedExecTty),
+1100:         exec_permission_approvals_enabled,
+1101:         include_environment_id,
+1102:         include_shell_parameter: unified_exec_should_include_shell_parameter(
+1103:             turn_context,
+1104:             context.environments,
+1105:         ),
+1106:         include_windows_shell_guidance: should_include_windows_shell_guidance(context.environments),
+1107:     };
+1108:     if features.enabled(Feature::UnifiedExec) {
+1109:         registry.add(ExecCommandHandler::new(options));
+1110:         registry.add(WriteStdinHandler);
+1111:     } else {
+1112:         // Managed requirements are the only configuration path that can keep
+1113:         // unified exec disabled. Preserve command execution without exposing a
+1114:         // resumable process or write_stdin authority prohibited by policy.
+1115:         registry.add(ExecCommandHandler::one_shot(options));
+1116:     }
+1117: }
+
+1147: #[instrument(level = "trace", skip_all)]
+1148: fn add_core_utility_tools(context: &CoreToolPlanContext<'_>, registry: &mut ToolRegistry) {
+1149:     let turn_context = context.turn_context;
+1150:     let features = turn_context.config.features.get();
+1151:     let environment_mode = tool_environment_mode(context.environments);
+1152: 
+1153:     if turn_context.config.update_plan_enabled {
+1154:         registry.add(PlanHandler);
+1155:     }
+1156: 
+1157:     if features.enabled(Feature::DeferredExecutor) {
+1158:         registry.add(
+1159:             context
+1160:                 .wait_for_environment_tool_config
+1161:                 .map(Arc::as_ref)
+1162:                 .map_or_else(
+1163:                     WaitForEnvironmentHandler::default,
+1164:                     WaitForEnvironmentHandler::new,
+1165:                 ),
+1166:         );
+1167:     }
+1168: 
+1169:     if turn_context.config.experimental_request_user_input_enabled {
+1170:         registry.add_with_exposure(
+1171:             RequestUserInputHandler {
+1172:                 available_modes: request_user_input_available_modes(features),
+1173:             },
+1174:             ToolExposure::DirectModelOnly,
+1175:         );
+1176:     }
+1177: 
+
+1178:     if !turn_context.session_source.is_non_root_agent()
+1179:         && context
+1180:             .model_info
+1181:             .experimental_supported_tools
+1182:             .iter()
+1183:             // Existing model catalogs still advertise the previous name.
+1184:             .any(|tool| {
+1185:                 matches!(
+1186:                     tool.as_str(),
+1187:                     "request_user_input_async" | "send_user_message_async"
+1188:                 )
+1189:             })
+1190:     {
+1191:         let model_messages = ResolvedModelMessages::from_model(context.model_info);
+1192:         registry.add_with_exposure(
+1193:             RequestUserInputAsyncHandler {
+1194:                 description: model_messages
+1195:                     .request_user_input_async_description()
+1196:                     .to_string(),
+1197:                 parameters: model_messages
+1198:                     .request_user_input_async_parameters_override()
+1199:                     .map(str::to_owned),
+1200:             },
+1201:             ToolExposure::DirectModelOnly,
+1202:         );
+1203:     }
+1204: 
+1205:     if !turn_context.session_source.is_non_root_agent()
+1206:         && (features.enabled(Feature::SendMessageToUserAsync)
+1207:             || context
+1208:                 .model_info
+1209:                 .experimental_supported_tools
+1210:                 .iter()
+1211:                 .any(|tool| tool == "send_message_to_user_async"))
+1212:     {
+1213:         registry.add_with_exposure(SendMessageToUserAsyncHandler, ToolExposure::DirectModelOnly);
+1214:     }
+1215: 
+1216:     if environment_mode.has_environment() && features.enabled(Feature::RequestPermissionsTool) {
+1217:         registry.add(RequestPermissionsHandler);
+1218:     }
+1219: 
+1220:     if features.enabled(Feature::TokenBudget) {
+1221:         registry.add_with_exposure(NewContextWindowHandler, ToolExposure::DirectModelOnly);
+1222:         registry.add(GetContextRemainingHandler);
+1223:     }
+1224: 
+1225:     let current_time_reminder_enabled = features.enabled(Feature::CurrentTimeReminder);
+1226:     let model_has_clock = context
+1227:         .model_info
+1228:         .experimental_supported_tools
+1229:         .iter()
+1230:         .any(|tool| tool == "clock");
+1231:     if current_time_reminder_enabled || model_has_clock {
+1232:         registry.add(CurrentTimeHandler);
+1233:     }
+1234:     if features.enabled(Feature::SleepTool)
+1235:         && match turn_context.config.sleep_tool_mode {
+1236:             SleepToolMode::AlwaysOn => true,
+1237:             SleepToolMode::ModelDriven => {
+1238:                 if current_time_reminder_enabled {
+1239:                     turn_context
+1240:                         .config
+1241:                         .current_time_reminder
+1242:                         .as_ref()
+1243:                         .is_some_and(|config| config.sleep_tool)
+1244:                 } else {
+1245:                     model_has_clock
+1246:                 }
+1247:             }
+1248:         }
+1249:     {
+1250:         registry.add(SleepHandler);
+1251:     }
+1252: 
+
+1269:     if environment_mode.has_environment() && context.model_info.apply_patch_tool_type.is_some() {
+1270:         let include_environment_id = matches!(environment_mode, ToolEnvironmentMode::Multiple);
+1271:         registry.add(ApplyPatchHandler::new(include_environment_id));
+1272:     }
+1273: 
+1274:     if context
+1275:         .model_info
+1276:         .experimental_supported_tools
+1277:         .iter()
+1278:         .any(|tool| tool == "test_sync_tool")
+1279:     {
+1280:         registry.add(TestSyncHandler);
+1281:     }
+1282: 
+1283:     if environment_mode.has_environment() && features.enabled(Feature::ViewImage) {
+1284:         let include_environment_id = matches!(environment_mode, ToolEnvironmentMode::Multiple);
+1285:         registry.add(ViewImageHandler::new(ViewImageToolOptions {
+1286:             can_request_original_image_detail: can_request_original_image_detail(
+1287:                 context.model_info,
+1288:             ),
+1289:             unified_image_budget: unified_image_budget_enabled(
+1290:                 &turn_context.config.features,
+1291:                 context.model_info,
+

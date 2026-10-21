@@ -1,0 +1,71 @@
+Source: https://raw.githubusercontent.com/openai/codex/rust-v0.160.0/codex-rs/protocol/src/openai_models.rs
+Pinned upstream tag: rust-v0.160.0
+License: https://github.com/openai/codex/blob/rust-v0.160.0/LICENSE
+
+309:     Display,
+310:     Hash,
+311: )]
+312: #[serde(rename_all = "snake_case")]
+313: #[strum(serialize_all = "snake_case")]
+314: pub enum ConfigShellToolType {
+315:     #[serde(alias = "default", alias = "local", alias = "shell_command")]
+316:     UnifiedExec,
+317:     Disabled,
+318: }
+319: 
+320: #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq, Hash, TS, JsonSchema)]
+321: #[serde(rename_all = "snake_case")]
+322: pub enum ApplyPatchToolType {
+323:     Freeform,
+324: }
+
+402: /// Model metadata returned by the Codex backend `/models` endpoint.
+403: #[derive(Debug, Serialize, Deserialize, Clone, PartialEq, Eq, TS, JsonSchema)]
+404: pub struct ModelInfo {
+405:     /// Model-owned approval coverage. Absent preserves legacy settings; an empty map disables
+406:     /// ordinary Guardian review. Keys are computer_use, shell, file_changes, mcp, network,
+407:     /// and permissions. This does not override mandatory safety or administrator requirements.
+408:     #[serde(default, skip_serializing_if = "Option::is_none")]
+409:     pub guardian: Option<GuardianModelPolicy>,
+410:     pub slug: String,
+411:     pub display_name: String,
+412:     pub description: Option<String>,
+413:     #[serde(default, skip_serializing_if = "Option::is_none")]
+414:     pub default_reasoning_level: Option<ReasoningEffort>,
+415:     pub supported_reasoning_levels: Vec<ReasoningEffortPreset>,
+416:     pub shell_type: ConfigShellToolType,
+417:     pub visibility: ModelVisibility,
+418:     pub supported_in_api: bool,
+
+440:     pub supports_reasoning_summary_parameter: bool,
+441:     #[serde(default)]
+442:     pub default_reasoning_summary: ReasoningSummary,
+443:     pub support_verbosity: bool,
+444:     pub default_verbosity: Option<Verbosity>,
+445:     pub apply_patch_tool_type: Option<ApplyPatchToolType>,
+446:     #[serde(default)]
+447:     pub web_search_tool_type: WebSearchToolType,
+448:     pub truncation_policy: TruncationPolicyConfig,
+449:     #[serde(default)]
+450:     pub supports_image_detail_original: bool,
+451:     #[serde(default, skip_serializing_if = "Option::is_none")]
+452:     pub context_window: Option<i64>,
+453:     /// Maximum context window allowed for config overrides.
+454:     #[serde(default, skip_serializing_if = "Option::is_none")]
+455:     pub max_context_window: Option<i64>,
+456:     /// Token threshold for automatic compaction. When omitted, core derives it
+457:     /// from `context_window` (90%). When provided, core clamps it to 90% of the
+458:     /// context window when available.
+459:     #[serde(default, skip_serializing_if = "Option::is_none")]
+460:     pub auto_compact_token_limit: Option<i64>,
+461:     /// Opaque identifier for compaction-compatible model configurations.
+462:     #[serde(default, skip_serializing_if = "Option::is_none")]
+463:     pub comp_hash: Option<String>,
+464:     /// Percentage of the context window considered usable for inputs, after
+465:     /// reserving headroom for system prompts, tool overhead, and model output.
+466:     #[serde(default = "default_effective_context_window_percent")]
+467:     pub effective_context_window_percent: i64,
+468:     pub experimental_supported_tools: Vec<String>,
+469:     /// Input modalities accepted by the backend for this model.
+470:     #[serde(default = "default_input_modalities")]
+

@@ -1,0 +1,22 @@
+const fs=require('node:fs'),vm=require('node:vm'),path=require('node:path'),{EventEmitter}=require('node:events');
+const ts=require('../../../app/node_modules/typescript');
+const source=fs.readFileSync('app/src/lib/server/local-file-ai.ts','utf8');
+const children=[];
+const spawn=()=>{const child=new EventEmitter(); child.stdout=new EventEmitter();child.stdin=new EventEmitter();child.stdin.end=()=>{};child.pid=undefined;children.push(child);return child;};
+const testExports={};
+const context={exports:testExports,require:(name)=>name==='node:child_process'?{spawn}:name==='node:path'?path:name==='./local-files'?{localFileIndex:async()=>({})}:name==='./paths'?{ensureLocalDataDir:()=>{},foundationRoot:()=>'/private/tmp/fixture',localDataDir:()=>'/private/tmp/state'}:(()=>{throw Error(name)})(),process:{platform:process.platform,env:{}},Buffer,Promise,Map,JSON,Error,setTimeout:(fn,ms)=>setTimeout(fn,ms).unref(),clearTimeout};
+context.globalThis=context;
+vm.runInNewContext(ts.transpileModule(source,{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2020,esModuleInterop:true}}).outputText,context);
+(async()=>{
+ const input={action:'suggest',file_id:'a'.repeat(24),expected_sha256:'b'.repeat(64),finding_id:null};
+ const one=testExports.runLocalFileSuggestion(input),two=testExports.runLocalFileSuggestion({...input});
+ if(one!==two)throw Error('same request not deduplicated');
+ await new Promise(setImmediate);
+ if(children.length!==1)throw Error('duplicate provider spawn');
+ children[0].stdout.emit('data',Buffer.from(JSON.stringify({status:503,error:'fixture failure'})));children[0].emit('close',0);
+ await one;
+ const retry=testExports.runLocalFileSuggestion(input);await new Promise(setImmediate);
+ if(children.length!==2)throw Error('explicit retry blocked');
+ children[1].stdout.emit('data',Buffer.from(JSON.stringify({status:200,data:{status:'no_change'}})));children[1].emit('close',0);await retry;
+ console.log(JSON.stringify({same_key_one_launch:true,failed_request_cleared:true,explicit_retry_new_launch:true,real_provider_calls:0},null,2));
+})().catch(e=>{console.error(e.message);process.exitCode=1;});

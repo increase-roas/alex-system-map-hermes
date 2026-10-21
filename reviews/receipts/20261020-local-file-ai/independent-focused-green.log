@@ -1,0 +1,40 @@
+test_ai_context_unchanged_apply_undo_and_applied_replay (test_local_file_ai.AITests.test_ai_context_unchanged_apply_undo_and_applied_replay) ... ok
+test_ai_preview_context_bound_until_apply (test_local_file_ai.AITests.test_ai_preview_context_bound_until_apply) ... ok
+test_canonical_evidence_precedes_optional_peers (test_local_file_ai.AITests.test_canonical_evidence_precedes_optional_peers) ... ok
+test_command_has_isolation_and_no_paid_fallback (test_local_file_ai.AITests.test_command_has_isolation_and_no_paid_fallback) ... ok
+test_context_canonical_shared_rules_and_size_limit (test_local_file_ai.AITests.test_context_canonical_shared_rules_and_size_limit) ... ok
+test_context_exact_preview_without_source_write (test_local_file_ai.AITests.test_context_exact_preview_without_source_write) ... ok
+test_context_is_validated_at_freeze (test_local_file_ai.AITests.test_context_is_validated_at_freeze) ... ok
+test_failure_status_is_not_staleness (test_local_file_ai.AITests.test_failure_status_is_not_staleness) ... ok
+test_invalid_citations_and_edits_and_secrets_never_write (test_local_file_ai.AITests.test_invalid_citations_and_edits_and_secrets_never_write) ... ok
+test_malformed_provider_result_and_overlapping_occurrences (test_local_file_ai.AITests.test_malformed_provider_result_and_overlapping_occurrences) ... ok
+test_no_change_and_needs_decision_never_preview (test_local_file_ai.AITests.test_no_change_and_needs_decision_never_preview) ... ok
+test_provider_failure_is_static_and_never_writes (test_local_file_ai.AITests.test_provider_failure_is_static_and_never_writes) ... ok
+test_provider_timeout_sanitized (test_local_file_ai.AITests.test_provider_timeout_sanitized) ... ok
+test_stale_target_and_context_never_preview (test_local_file_ai.AITests.test_stale_target_and_context_never_preview) ... ok
+test_unknown_or_unrelated_finding_rejected (test_local_file_ai.AITests.test_unknown_or_unrelated_finding_rejected) ... ok
+test_apply_undo_exact_backup_remote_and_other_changes (test_local_file_repairs.RepairTests.test_apply_undo_exact_backup_remote_and_other_changes) ... ok
+test_conditional_undo_and_publish_pending_do_not_retry_effects (test_local_file_repairs.RepairTests.test_conditional_undo_and_publish_pending_do_not_retry_effects) ... ok
+test_fixture_boundary_and_default_local_origin_refused (test_local_file_repairs.RepairTests.test_fixture_boundary_and_default_local_origin_refused) ... ok
+test_frozen_fingerprint_untracked_and_generated_owners (test_local_file_repairs.RepairTests.test_frozen_fingerprint_untracked_and_generated_owners) ... ok
+test_loopback_origins_refused_before_network (test_local_file_repairs.RepairTests.test_loopback_origins_refused_before_network) ... ok
+test_native_generated_header_maps_to_indexed_agents_owner (test_local_file_repairs.RepairTests.test_native_generated_header_maps_to_indexed_agents_owner) ... ok
+test_publication_does_not_commit_intervening_target_edit (test_local_file_repairs.RepairTests.test_publication_does_not_commit_intervening_target_edit) ... ok
+test_replayed_receipts_refuse_newer_source_and_index (test_local_file_repairs.RepairTests.test_replayed_receipts_refuse_newer_source_and_index) ... ok
+test_stale_and_secret_proposals_never_write (test_local_file_repairs.RepairTests.test_stale_and_secret_proposals_never_write) ... ok
+test_unbacked_git_and_untracked_and_path_ownership_refused (test_local_file_repairs.RepairTests.test_unbacked_git_and_untracked_and_path_ownership_refused) ... ok
+test_alias_to_excluded_target_is_never_read (test_local_files.LocalFilesTests.test_alias_to_excluded_target_is_never_read) ... ok
+test_boundary_alias_cycle_broken_exclusions_and_limits (test_local_files.LocalFilesTests.test_boundary_alias_cycle_broken_exclusions_and_limits) ... ok
+test_command_argument_containers_withhold_arbitrary_credentials (test_local_files.LocalFilesTests.test_command_argument_containers_withhold_arbitrary_credentials) ... ok
+test_content_changed_missing_and_unknown_id (test_local_files.LocalFilesTests.test_content_changed_missing_and_unknown_id) ... ok
+test_exact_copies_links_generated_and_evidence (test_local_files.LocalFilesTests.test_exact_copies_links_generated_and_evidence) ... ok
+test_fair_roots_prioritize_harness_rules_with_hard_aggregate_budget (test_local_files.LocalFilesTests.test_fair_roots_prioritize_harness_rules_with_hard_aggregate_budget) ... ok
+test_multiline_secret_sections_and_line_proof (test_local_files.LocalFilesTests.test_multiline_secret_sections_and_line_proof) ... ok
+test_ordinary_prose_has_no_findings_and_mixed_case_memory_declarations_remain (test_local_files.LocalFilesTests.test_ordinary_prose_has_no_findings_and_mixed_case_memory_declarations_remain) ... ok
+test_read_failure_and_retargeted_alias (test_local_files.LocalFilesTests.test_read_failure_and_retargeted_alias) ... ok
+test_secret_screening_recursive_config_and_evidence (test_local_files.LocalFilesTests.test_secret_screening_recursive_config_and_evidence) ... ok
+
+----------------------------------------------------------------------
+Ran 35 tests in 14.828s
+
+OK

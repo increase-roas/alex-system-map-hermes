@@ -1,0 +1,55 @@
+{
+  "missing_auth": {
+    "status": 401,
+    "code": null,
+    "source_unchanged": true
+  },
+  "nonlocal_origin": {
+    "status": 403,
+    "code": null,
+    "source_unchanged": true
+  },
+  "client_prompt_refused": {
+    "status": 400,
+    "code": "invalid_request",
+    "source_unchanged": true
+  },
+  "client_path_refused": {
+    "status": 400,
+    "code": "invalid_request",
+    "source_unchanged": true
+  },
+  "client_content_refused": {
+    "status": 400,
+    "code": "invalid_request",
+    "source_unchanged": true
+  },
+  "unknown_finding": {
+    "status": 400,
+    "code": "unknown_finding",
+    "source_unchanged": true
+  },
+  "stale_target": {
+    "status": 409,
+    "code": "stale_source",
+    "source_unchanged": true
+  },
+  "missing_fingerprint": {
+    "status": 400,
+    "code": "invalid_request",
+    "source_unchanged": true
+  },
+  "peer_changed_after_preview": {
+    "status": 409,
+    "code": "stale_context",
+    "source_unchanged": true,
+    "no_backup_or_write_started": true
+  },
+  "model_proposal_quality": {
+    "minimal_exact_expected_edit": true,
+    "bound_files": 2,
+    "source_unchanged_before_explicit_approval": true,
+    "repair_id": "089a21008da84f99ab97bf5a55b40e36",
+    "proposal_sha256": "cf5910e0cbe3e2483cd58a77ae80490ab26024e4aac45feca83e8d5eeac01294"
+  }
+}
