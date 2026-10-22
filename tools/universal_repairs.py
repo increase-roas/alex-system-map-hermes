@@ -15,6 +15,7 @@ import uuid
 from contextlib import contextmanager
 from repair_contracts import RepairError, SCHEMA_VERSION
 from repair_registry import default_registry
+from repair_guidance import collect_guidance, validate_guidance, public_guidance
 
 
 def now():
@@ -32,10 +33,11 @@ def opaque(value):
 
 
 class Coordinator:
-    def __init__(self, state_dir, registry, proposer=None):
+    def __init__(self, state_dir, registry, proposer=None, require_guidance=False):
         self.root = Path(state_dir)
         self.registry = registry
         self.proposer = proposer
+        self.require_guidance = require_guidance
         for folder in (self.root, self.root / 'plans', self.root / 'jobs', self.root / 'backups'):
             folder.mkdir(parents=True, exist_ok=True, mode=0o700)
             folder.chmod(0o700)
@@ -90,12 +92,15 @@ class Coordinator:
             raise RepairError('invalid_request')
         targets = self.registry.discover()
         sources = [self._source_from_targets(identifier, targets) for identifier in target_ids]
-        # Native registrations alone establish these canonical paths. Context
-        # can explain the standing gates but never expands the editable scope.
         homes = {source['target'].get('identity', {}).get('home')
                   for source in sources if source['target'].get('scope') == 'local'
                   and source['target'].get('category') in ('rule', 'skill', 'skill_reference', 'hook', 'executable')}
         canonical = ('.agents/instructions/shared.md', '.agents/skills/alex-director/references/gates.md')
+        for target in targets.values():
+            identity = target.get('identity', {})
+            home = identity.get('home')
+            if home and target.get('scope') == 'local' and target.get('owner') == 'native-instruction-builder' and identity.get('path') == str(Path(home) / canonical[0]):
+                homes.add(home)
         for relative in canonical:
             for target in targets.values():
                 identity = target.get('identity', {})
@@ -106,12 +111,18 @@ class Coordinator:
                     sources.append(source)
         if self.proposer is None:
             raise RepairError('ai_unavailable')
-        proposal = self.proposer(intent, sources)
+        guidance = None
+        if self.require_guidance:
+            try:
+                guidance = collect_guidance([source for source in sources if not source.get('context_only')])
+            except Exception:
+                raise RepairError('guidance_unavailable') from None
+        proposal = self.proposer(intent, sources, guidance=guidance) if self.require_guidance else self.proposer(intent, sources)
         proposals = proposal['proposals']
         if not proposals:
             diagnostics = proposal.get('diagnostics', {})
-            stages = {'source', 'proposal', 'scenario', 'before', 'candidate', 'validation'}
-            reasons = {'source_boundary', 'provider_unavailable', 'schema', 'citation', 'coverage', 'bounds', 'simulation'}
+            stages = {'source', 'guidance', 'proposal', 'scenario', 'before', 'candidate', 'validation', 'assessment'}
+            reasons = {'source_boundary', 'provider_unavailable', 'schema', 'citation', 'coverage', 'bounds', 'simulation', 'unsupported', 'guidance_stale'}
             error = RepairError('ai_no_proposals')
             error.details = {
                 'code': error.code, 'error': 'No approvable proposal was produced.',
@@ -119,12 +130,17 @@ class Coordinator:
                                 'reason': diagnostics.get('reason') if diagnostics.get('reason') in reasons else 'schema'},
                 'checks': proposal.get('checks', []), 'limitations': proposal.get('limitations', []),
             }
+            if guidance is not None:
+                error.details.update(guidance=public_guidance(guidance), rationales=proposal.get('rationales', []),
+                                     guidance_assessment=proposal.get('guidance_assessment', {'status': 'unavailable', 'findings': [], 'limitations': ['Documentary assessment unavailable.']}))
             raise error
         if any(item['target_id'] not in target_ids for item in proposals):
             raise RepairError('proposal_scope_changed')
-        return self.freeze(intent, proposals, proposal.get('checks', []), proposal.get('limitations', []), {source['target']['id']: source for source in sources})
+        return self.freeze(intent, proposals, proposal.get('checks', []), proposal.get('limitations', []), {source['target']['id']: source for source in sources}, guidance=guidance, rationales=proposal.get('rationales'), guidance_assessment=proposal.get('guidance_assessment'))
 
-    def freeze(self, intent, proposals, checks=None, limitations=None, reviewed_sources=None):
+    def freeze(self, intent, proposals, checks=None, limitations=None, reviewed_sources=None, guidance=None, rationales=None, guidance_assessment=None):
+        if self.require_guidance or guidance is not None:
+            rationales = self.validate_grounding(guidance, rationales, guidance_assessment, [item['target_id'] for item in proposals], checks or [])
         targets = self.registry.discover()
         groups = {}
         reviewed_context = {}
@@ -167,10 +183,30 @@ class Coordinator:
             raise RepairError('empty_plan')
         selected = {op['target_id']: targets[op['target_id']] for op in operations}
         plan = dict(schema_version=SCHEMA_VERSION, plan_id=uuid.uuid4().hex, created_at=now(), expires_at=(datetime.now(timezone.utc) + timedelta(hours=1)).isoformat(), intent=intent, targets=selected, operations=operations, checks=checks or [], limitations=limitations or [])
+        if guidance is not None:
+            plan.update(guidance=copy.deepcopy(guidance), rationales=copy.deepcopy(rationales), guidance_assessment=copy.deepcopy(guidance_assessment),
+                        proposal_target_ids=[item['target_id'] for item in proposals])
+            plan['expires_at'] = min(datetime.fromisoformat(plan['expires_at']), datetime.fromisoformat(guidance['expires_at'].replace('Z', '+00:00'))).isoformat()
         plan['reviewed_context'] = reviewed_context
         plan['digest'] = digest(plan)
         self.save('plans', plan['plan_id'], plan)
         return self.public_plan(plan)
+
+    def validate_grounding(self, guidance, rationales, assessment, target_ids, checks):
+        if guidance is None: raise RepairError('guidance_required')
+        try:
+            from repair_ai import validate_rationales, validate_assessment
+            validate_guidance(guidance, [row['target_id'] for row in guidance['coverage']])
+            if not isinstance(rationales, list) or len(rationales) != len(target_ids): raise ValueError('rationales')
+            normalized = validate_rationales({'proposals': [{'target_id': row['target_id'], 'rationale': copy.deepcopy(row)} for row in rationales]}, guidance, target_ids)
+            if not isinstance(assessment, dict) or set(assessment) != {'status', 'findings', 'limitations'}: raise ValueError('assessment')
+            checked = validate_assessment({'findings': assessment['findings'], 'limitations': assessment['limitations']}, target_ids)
+            if assessment['status'] != 'passed' or checked['status'] != 'passed': raise ValueError('assessment')
+            if not any(row.get('kind') == 'guidance_support' and row.get('status') == 'passed' for row in checks): raise ValueError('assessment')
+            return normalized
+        except Exception as error:
+            code = 'guidance_stale' if type(error) is ValueError and str(error) == 'guidance_stale' else 'guidance_invalid'
+            raise RepairError(code) from None
 
     def checked_plan(self, plan_id, expected_digest=None):
         plan = self.load('plans', plan_id)
@@ -183,7 +219,10 @@ class Coordinator:
 
     def public_plan(self, plan):
         fields = ('step_id', 'target_id', 'adapter_id', 'adapter_version', 'action', 'public_diff', 'checks', 'expected_fingerprint', 'expected_version')
-        return {**{k: plan[k] for k in ('schema_version', 'plan_id', 'digest', 'created_at', 'expires_at', 'intent', 'checks', 'limitations')}, 'targets': list(plan['targets'].values()), 'operations': [{k: op[k] for k in fields if k in op} for op in plan['operations']]}
+        result = {**{k: plan[k] for k in ('schema_version', 'plan_id', 'digest', 'created_at', 'expires_at', 'intent', 'checks', 'limitations')}, 'targets': list(plan['targets'].values()), 'operations': [{k: op[k] for k in fields if k in op} for op in plan['operations']]}
+        if 'guidance' in plan:
+            result.update(guidance=public_guidance(plan['guidance']), rationales=copy.deepcopy(plan['rationales']), guidance_assessment=copy.deepcopy(plan['guidance_assessment']), proposal_target_ids=list(plan['proposal_target_ids']))
+        return result
 
     def get_plan(self, plan_id):
         return self.public_plan(self.checked_plan(plan_id))
@@ -194,6 +233,8 @@ class Coordinator:
             path = self.root / 'jobs' / (opaque(plan_id) + '.json')
             if path.exists():
                 return self.get_job(plan_id)
+            if self.require_guidance or 'guidance' in plan:
+                self.validate_grounding(plan.get('guidance'), plan.get('rationales'), plan.get('guidance_assessment'), plan.get('proposal_target_ids', []), plan['checks'])
             if datetime.fromisoformat(plan['expires_at']) < datetime.now(timezone.utc):
                 raise RepairError('plan_expired')
             if any(check.get('status') != 'passed' for check in plan['checks']) or any(check.get('status') != 'passed' for op in plan['operations'] for check in op.get('checks', [])):
@@ -426,7 +467,7 @@ class Coordinator:
 
 def service(state):
     from repair_ai import propose_repair
-    return Coordinator(state, default_registry(), propose_repair)
+    return Coordinator(state, default_registry(), propose_repair, require_guidance=True)
 
 
 def main():

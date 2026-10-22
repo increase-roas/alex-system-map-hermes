@@ -1,0 +1,43 @@
+{
+  "stage": "simplify",
+  "mode": "pipeline",
+  "reviewed_head": "ad669c3",
+  "reviewers": [
+    "reuse",
+    "quality",
+    "efficiency",
+    "test-value",
+    "comments"
+  ],
+  "applied": {
+    "reuse": 0,
+    "quality": 0,
+    "efficiency": 0,
+    "tests": 0,
+    "comments": 11
+  },
+  "skipped": [
+    {
+      "category": "quality",
+      "reason": "Named helper extraction is optional; existing protected approval behavior remains unchanged."
+    },
+    {
+      "category": "efficiency",
+      "reason": "Prompt projection changes were not proven to preserve assessment output semantics."
+    },
+    {
+      "category": "comments",
+      "reason": "Registered root-enum note describes the external remote protocol and remains applicable."
+    }
+  ],
+  "checks": {
+    "typescript": "passed",
+    "lint": "passed",
+    "prior_backend": "244 passed; affected coordinator suite subsequently 31 passed",
+    "prior_ui": "57 passed"
+  },
+  "protected_tests": "unchanged",
+  "behavior_changes": "none",
+  "release_review": "not completed",
+  "browser": "pending"
+}

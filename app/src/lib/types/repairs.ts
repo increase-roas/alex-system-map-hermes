@@ -1,6 +1,6 @@
 /** Public wire schema v1. Browser submits IDs and intent only. */
 export type RepairCheck = {
-  kind: 'simulated_behavior' | 'syntax' | 'owner_lifecycle' | 'native_dry_run' | 'readback' | 'runtime';
+  kind: 'guidance_support' | 'simulated_behavior' | 'syntax' | 'owner_lifecycle' | 'native_dry_run' | 'readback' | 'runtime';
   status: 'passed' | 'failed' | 'unavailable'; runner_id: string;
   input_digest?: string; output_digest?: string; evidence: string[];
   checked_at?: string; limitations: string[];
@@ -17,8 +17,29 @@ export type RepairOperation = {
   action: string; public_diff: string; checks: RepairCheck[];
   expected_fingerprint?: string; expected_version?: string;
 };
-export type RepairPlan = {
+export type RepairGuidance = {
+  schema_version: 1; retrieved_at: string; expires_at: string; route: string;
+  sources: { id: string; url: string; title: string; publisher: string; content_sha256: string;
+    version: string | null; publication_date: string | null; crawl_status: 'crawled' | 'cached' | 'unknown';
+    retrieved_at: string; passages: { id: string; text: string }[]; target_ids: string[] }[];
+  coverage: { target_id: string; source_ids: string[]; status: 'available' | 'unavailable'; limitations: string[] }[];
+  limitations: string[];
+};
+export type RepairRationale = {
+  target_id: string; diagnosis: string; recommendation: string;
+  practice_kind: 'native_contract' | 'vendor_recommendation' | 'alex_policy' | 'inference';
+  applicability: string; guidance_evidence: { source_id: string; passage_id: string; quote: string }[];
+  alternatives: { option: string; why_rejected: string }[]; limitations: string[];
+};
+export type RepairGuidanceAssessment = {
+  status: 'passed' | 'failed' | 'unavailable';
+  findings: { target_id: string; status: 'supported' | 'unsupported' | 'uncertain'; reason: string }[];
+  limitations: string[];
+};
+export type RepairResearch = { guidance?: RepairGuidance; rationales?: RepairRationale[]; guidance_assessment?: RepairGuidanceAssessment };
+export type RepairPlan = RepairResearch & {
   schema_version: 1; plan_id: string; digest: string; created_at: string;
+  proposal_target_ids?: string[];
   expires_at: string; intent: string; targets: RepairTarget[];
   operations: RepairOperation[]; checks: RepairCheck[]; limitations: string[];
 };

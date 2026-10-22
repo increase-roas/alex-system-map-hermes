@@ -4,6 +4,21 @@ import unittest
 from unittest.mock import patch
 
 import repair_ai
+import repair_guidance
+
+
+def guidance_packet(ids):
+    sources = [source(identifier) for identifier in ids]
+    for item in sources: item["target"]["owner"] = "codex"
+    doc = repair_guidance.DOCS["codex-config"]
+    body = {"results": [{"url": doc["url"], "text": "Configuration settings direct the agent behavior. Use new behavior while preserving evidence in the configuration. This documentation describes configuration behavior and does not establish deployed runtime acceptance or the installed product version. CAPTURE_TAIL_EVIDENCE"}], "statuses": [{"id": doc["url"], "status": "success", "source": "crawled"}]}
+    with patch.object(repair_guidance, "_retrieve", return_value=body):
+        return repair_guidance.collect_guidance(sources)
+
+
+def rationale(identifier, packet):
+    document = packet["sources"][0]
+    return {"target_id": identifier, "diagnosis": "The local source still directs old behavior.", "recommendation": "Direct new behavior and preserve evidence.", "practice_kind": "inference", "applicability": "Configuration guidance applies; version is unknown.", "guidance_evidence": [{"source_id": document["id"], "passage_id": document["passages"][0]["id"], "quote": "Use new behavior while preserving evidence"}], "alternatives": [{"option": "Keep old behavior", "why_rejected": "Leaves the stated discrepancy."}], "limitations": ["Document version is unknown; runtime acceptance is not established."]}
 
 
 def source(identifier, category='rule', content='Old behavior.\nKeep evidence.\n'):
@@ -15,10 +30,13 @@ def source(identifier, category='rule', content='Old behavior.\nKeep evidence.\n
 
 
 class RepairAITests(unittest.TestCase):
-    def fixture(self, sources=None, mutate=None, after='A', mutate_cases=None, before='B'):
+    def fixture(self, sources=None, mutate=None, after='A', mutate_cases=None, before='B', guidance=None, assessment='supported', mutate_rationale=None, assessment_response=None):
         sources = sources or [source('one'), source('two')]
         proposals = [{'target_id': s['target']['id'], 'proposal': {'candidate': 'New behavior.\nKeep evidence.\n'},
                       'evidence': [{'file_id': s['target']['id'], 'line': 1, 'quote': 'Old behavior.'}]} for s in sources]
+        if guidance is not None and guidance['sources']:
+            for item in proposals: item['rationale'] = rationale(item['target_id'], guidance)
+            if mutate_rationale: mutate_rationale(proposals[0]['rationale'])
         if mutate:
             mutate(proposals)
         cases = [{'id': 'fix', 'purpose': 'fix', 'scenario': 'Both sources must permit new behavior.',
@@ -38,13 +56,87 @@ class RepairAITests(unittest.TestCase):
                 return {'proposals': proposals, 'limitations': []}
             if len(calls) == 2:
                 return {'cases': cases}
+            if len(calls) == 5:
+                if assessment_response is not None:
+                    if isinstance(assessment_response, Exception): raise assessment_response
+                    return assessment_response(json.loads(prompt.split('EVIDENCE_JSON:\n')[1]))
+                return {'findings': [{'target_id': item['target_id'], 'status': assessment, 'reason': 'The actual candidate follows the cited inference.'} for item in proposals], 'limitations': ['No live runtime acceptance.']}
             payload = json.loads(prompt.split('EVIDENCE_JSON:\n')[1])
             self.assertEqual({'id', 'scenario', 'choices'}, set(payload['scenarios'][0]))
-            changed = all('New behavior.' in f['content'] for f in payload['instructions']['files'])
+            changed = all('New behavior.' in f['content'] or 'Never use new behavior.' in f['content'] for f in payload['instructions']['files'])
             return {'choices': [{'id': 'fix', 'choice': after if changed else before}, {'id': 'preserve', 'choice': 'B'}]}
         with patch.object(repair_ai, 'invoke', side_effect=invoke):
-            result = repair_ai.propose_repair('Use new behavior in both sources; preserve evidence.', sources)
+            result = repair_ai.propose_repair('Use new behavior in both sources; preserve evidence.', sources, **({'guidance': guidance} if guidance is not None else {}))
         return result, calls
+
+    def test_researched_proposal_has_separate_exact_candidate_assessment(self):
+        result, calls = self.fixture(guidance=guidance_packet(['one', 'two']))
+        self.assertEqual(5, len(calls))
+        self.assertEqual('passed', result['guidance_assessment']['status'])
+        self.assertEqual(2, len(result['rationales']))
+        payload = json.loads(calls[4].split('EVIDENCE_JSON:\n')[1])
+        self.assertEqual('New behavior.\nKeep evidence.\n', payload['candidates']['one'])
+        self.assertEqual('Old behavior.\nKeep evidence.\n', payload['context']['files'][0]['content'])
+        self.assertEqual('guidance_support', result['checks'][1]['kind'])
+
+    def test_guidance_citations_cannot_be_forged(self):
+        for field, value in [('quote', 'Invented quotation'), ('source_id', 'invented'), ('passage_id', 'invented')]:
+            result, calls = self.fixture(guidance=guidance_packet(['one', 'two']), mutate_rationale=lambda r: r['guidance_evidence'][0].update({field: value}))
+            self.assertEqual([], result['proposals'])
+            self.assertEqual('citation', result['diagnostics']['reason'])
+            self.assertEqual(1, len(calls))
+
+    def test_unsupported_or_uncertain_actual_patch_cannot_be_approved(self):
+        for status in ['unsupported', 'uncertain']:
+            result, calls = self.fixture(guidance=guidance_packet(['one', 'two']), assessment=status)
+            self.assertEqual([], result['proposals'])
+            self.assertEqual('failed', result['guidance_assessment']['status'])
+            self.assertEqual('assessment', result['diagnostics']['stage'])
+
+    def test_correct_rationale_with_opposite_patch_is_rejected_by_fresh_assessment(self):
+        def assess(payload):
+            self.assertIn('Direct new behavior', payload['rationales'][0]['recommendation'])
+            self.assertTrue(payload['candidates']['one'].startswith('Never use new behavior.'))
+            return {'findings': [{'target_id': identifier, 'status': 'unsupported', 'reason': 'Actual candidate contradicts the rationale and quoted practice.'} for identifier in payload['candidates']], 'limitations': []}
+        result, calls = self.fixture(guidance=guidance_packet(['one', 'two']),
+            mutate=lambda proposals: proposals[0]['proposal'].update(candidate='Never use new behavior.\nKeep evidence.\n'), assessment_response=assess)
+        self.assertEqual(5, len(calls))
+        self.assertEqual([], result['proposals'])
+        self.assertEqual('failed', result['guidance_assessment']['status'])
+
+    def test_assessment_failure_malformed_or_incomplete_has_no_proposals(self):
+        for response in [RuntimeError('private provider detail'), lambda _: {},
+                         lambda _: {'findings': [], 'limitations': []},
+                         lambda _: {'findings': [{'target_id': 'one', 'status': 'supported', 'reason': 'ok'}] * 2, 'limitations': []}]:
+            result, calls = self.fixture(guidance=guidance_packet(['one', 'two']), assessment_response=response)
+            self.assertEqual([], result['proposals'])
+            self.assertEqual('unavailable', result['guidance_assessment']['status'])
+            self.assertEqual('assessment', result['diagnostics']['stage'])
+            self.assertNotIn('private provider detail', json.dumps(result))
+
+    def test_wrong_target_document_and_missing_guidance_cannot_support_change(self):
+        packet = guidance_packet(['one', 'two'])
+        packet['sources'][0]['target_ids'] = ['two']
+        packet['coverage'][0].update(source_ids=[], status='unavailable', limitations=['Unavailable'])
+        result, calls = self.fixture(guidance=packet)
+        self.assertEqual([], result['proposals'])
+        self.assertEqual('coverage', result['diagnostics']['reason'])
+        self.assertEqual(1, len(calls))
+        packet['sources'] = []
+        for row in packet['coverage']: row.update(source_ids=[], status='unavailable', limitations=['Unavailable'])
+        result, calls = self.fixture(guidance=packet)
+        self.assertEqual([], calls)
+        self.assertEqual([], result['proposals'])
+        self.assertEqual('guidance', result['diagnostics']['stage'])
+
+    def test_unknown_version_is_explicit_and_document_quotations_are_bounded(self):
+        packet = guidance_packet(['one', 'two'])
+        result, _ = self.fixture(guidance=packet)
+        self.assertTrue(any('version is unknown' in item for item in result['rationales'][0]['limitations']))
+        long_quote = packet['sources'][0]['passages'][0]['text']
+        result, _ = self.fixture(guidance=packet, mutate_rationale=lambda r: r['guidance_evidence'][0].update(quote=long_quote))
+        self.assertEqual([], result['proposals'])
+        self.assertEqual('citation', result['diagnostics']['reason'])
 
     def test_bundle_substitutes_all_candidates_and_binds_evidence(self):
         result, calls = self.fixture()
@@ -54,6 +146,12 @@ class RepairAITests(unittest.TestCase):
         self.assertTrue(all(c['input_digest'] and c['output_digest'] for c in result['checks']))
         candidate = json.loads(calls[-1].split('EVIDENCE_JSON:\n')[1])
         self.assertTrue(all(f['content'].startswith('New behavior.') for f in candidate['instructions']['files']))
+
+    def test_server_adds_version_gap_when_model_omits_it(self):
+        result, _ = self.fixture(guidance=guidance_packet(['one', 'two']),
+                                 mutate_rationale=lambda item: item['limitations'].clear())
+        self.assertTrue(any('no installed product-version match was established' in item
+                            for item in result['rationales'][0]['limitations']))
 
     def test_categories_use_identical_citation_and_behavior_boundary(self):
         for category in ['rule', 'skill', 'hook', 'app_settings', 'cli_config', 'executable', 'remote_file', 'provider_api']:

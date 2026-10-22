@@ -24,7 +24,7 @@ execution: code
 ### Summary
 
 Expand the existing Review & fix panel from instruction text to hooks, skills, app settings, CLI configuration and owned executables, plus Alex's remote systems.
-AI proposes a concrete repair and tests its intended and preserved behavior before approval.
+AI researches applicable official guidance, diagnoses the source problem, proposes a concrete repair and tests its intended and preserved behavior before approval.
 One approval applies the exact reviewed bundle through each source's owner, synchronizes its registered destinations, verifies each affected target and offers a conditional Undo.
 The existing rule-repair contract in `docs/APPROVED_RULE_REPAIR.md` remains authoritative for its category.
 
@@ -41,6 +41,12 @@ A local success also cannot tell him whether a remote machine or app accepted th
 - **Every affected destination needs its own proof.** Governs R6. (session-settled: user-directed — chosen over treating a local pass as remote proof: copies and runtimes can disagree.)
 
 ### Requirements
+
+The 2026-10-21 source-grounding correction adds R12-R14; R1-R11 and the user-approved approval, ownership and verification decisions remain in force.
+
+- R12. Before proposing a repair, retrieve current applicable official guidance through the existing Composio route and show its exact source, retrieval/crawl evidence, relevant product/version and any applicability gap.
+- R13. Explain each proposed fix using the actual source diagnosis, documented practice, why it fits this target and a rejected alternative; distinguish vendor requirements, recommendations, Alex policy and inference.
+- R14. Bind the guidance, citations, assessment and limitations into the tested bundle; unavailable or unsupported research cannot appear as a verified source-backed fix, and an existing approved job retains its recovery and Undo path.
 
 **Coverage and proposal**
 
@@ -107,7 +113,7 @@ No actual remote/provider write was tested in research.
 - KTD2. **Freeze adapter operations rather than AI commands.** The model returns typed proposals over redacted source projections; fixed server code resolves operations, tests and destinations. The digest includes exact operations and checks, so changing a draft invalidates approval. Governs R2, R3, R9. (session-settled: user-directed — chosen over editing wording by hand: the approval must refer to the AI-tested repair.)
 - KTD3. **Use native configuration APIs where they exist.** Codex uses `config/read` and `config/batchWrite` with explicit `filePath`, `expectedVersion`, key paths, merge strategy and `reloadUserConfig`; inspect `okOverridden` and effective readback. Other JSON configuration owners use narrow key patches over freshly parsed state, preserving secret and unknown fields. Governs R4, R6. (session-settled: user-directed — chosen over blind config replacement: writes must respect the owning application.)
 - KTD4. **One ordered transaction spans adapters, without pretending it is atomic.** Validate and back up all steps before mutation, record intent before each effect, persist observed results afterward, and stop at uncertainty. Source distribution and source publication are explicit steps with independent outcomes. For several approved files in one Git repository, publish one commit containing exactly the approved path set after all local writes and readbacks; do not iterate legacy single-path commits against stale HEAD. Project all candidate canonical instruction changes together and freeze the union of dependent outputs once, so separate projections cannot overwrite one another. Governs R5–R8.
-- KTD5. **Remote files use a fixed JSON-stdin runner.** SSH uses the registered `agency-mini` alias; Orgo uses the existing named Composio login and exact fixed host IDs. The reviewed runner receives typed relative selectors and bytes, rejects escapes/links, and implements read, preflight, backup, atomic CAS apply, native check and conditional inverse. No model-generated shell reaches the transport. Governs R1, R4, R9.
+- KTD5. **Remote files use a fixed JSON-stdin runner.** SSH uses the registered `agency-mini` alias; Orgo uses the existing named Composio login and exact fixed host IDs. The reviewed runner receives typed relative selectors and bytes, rejects escapes/links, and implements read, preflight, backup, anchored final comparison, atomic replacement, native check and conditional inverse; the comparison/replacement window remains explicit. No model-generated shell reaches the transport. Governs R1, R4, R9.
 - KTD6. **Provider configuration uses typed native operations through the current route.** Registered adapters bind account, object, tool/schema revision and exact fields; Composio `execute --dry-run` validates the provider payload and account without writing, followed after approval by write and native readback. Paperclip uses its card's existing mini-local SSH/REST exception with the token remaining on the mini. Hindsight bank config uses the existing card-documented admin REST helper and its scoped key acquisition; the Composio shared-memory route remains separate and no new config writer or key is invented. Conditional inverse requires captured fields and a current-state match. Governs R1, R4–R7, R9.
 - KTD7. **Target evidence is a first-class receipt.** A local file hash cannot advance a remote target or runtime to verified; each adapter emits fresh target identity, readback fingerprint, native check and reload limitation. Governs R6, R11. (session-settled: user-directed — chosen over local-pass-as-remote-proof: Alex needs evidence from every affected destination.)
 - KTD8. **Keep durable job state private and reuse existing authentication.** Opaque plan/job IDs and a digest are the only browser mutation inputs; the server resolves targets and native actions. Job status never exposes preimages, credentials or raw provider errors. Governs R3, R8.
@@ -397,3 +403,67 @@ No `release:validate` script exists in the inspected app manifest; use the liste
 - Installed Codex `app-server generate-json-schema --experimental` protocol, inspected 2026-10-21: `config/read`, `config/batchWrite`, explicit path/version/reload, override metadata, `hooks/list` and named skill toggles. Temporary-home write/stale/readback/inverse was proven; a current desktop daemon socket was not proven.
 - Existing shared skill lifecycle contract and connector cards, inspected 2026-10-21: canonical skill ownership, native lifecycle checks, named logins and provider-specific gates. Historical connection records alone do not prove fresh reachability.
 - [Orgo MCP documentation](https://docs.orgo.ai/guides/mcp), [SigNoz MCP documentation](https://signoz.io/docs/ai/signoz-mcp-server.md), and the current Paperclip instance OpenAPI: native provider contracts inform KTD5–KTD6; each adapter rechecks its installed tool/schema before freezing a proposal.
+
+
+---
+
+## Source-grounding correction, 2026-10-21
+
+Alex's clarification: a repair should follow the documented right approach, as the Pro Map cites its reference practices, instead of merely making existing local rules internally consistent. This is a user-directed product correction. Existing actual-source proposals remain unapproved during development.
+
+### First proof and scope
+
+Extend the current proposal path and existing Composio research route. Keep the native owners, one immutable approval, copy synchronization and target-specific verification. First prove a real, read-only rule repair whose recommendation has exact local evidence, applicable official guidance and a separately labeled assessment. Exercise Apply/Undo only on disposable targets. Do not edit any Pro Map card, add a new search service, vector store, agent framework or paid research product, or treat a recommendation as authorization to change the real agent setup.
+
+### Decisions and data contract
+
+- KTD9. Retrieve guidance on the server before drafting candidates, over giving the proposal model tools or allowing it to invent links. Use known product/category identities for public requests; never send source contents, intent, credentials, local paths, account IDs or client data to search. This implements R12-R14 and preserves KTD2. Runtime retrieval owns the source provenance; web text remains untrusted data.
+- KTD10. Keep official documentation, recommended engineering patterns, Alex policy and reasoning distinct. A valid link proves access to its content, not that the proposed change follows it or works in this setup. A separate tool-free assessment checks the exact baseline-to-candidate edits against both the proposed rationale and captured passages; a supported explanation paired with an opposite or unrelated patch must fail. Missing version information stays unknown. This implements R13 and R6.
+- KTD11. Freeze a normalized guidance packet and per-target rationale with the existing digest. Source timestamps and hashes support freshness; fresh retrieval and confirmed live crawl are separate facts. A plan cannot outlive the captured guidance's usable window. Existing approved jobs remain replayable and undoable; older unapproved plans need a fresh researched proposal. This implements R3, R8 and R14.
+
+The guidance packet contains a version, retrieval and expiry times, fixed route/account, registered source records and target coverage. Each source has an opaque ID, canonical HTTPS URL, title, publisher, document version/date when stated, fetch/crawl status, exact content digest and bounded passages. Per-target rationale contains the diagnosis, recommended approach, practice classification, applicability, exact source references, a rejected alternative and remaining verification. Raw pages and secret-bearing context are not public preview fields. Public excerpts remain short; source links open the original reference.
+
+The reader uses the current documented Composio CLI, including its large-output file envelope. Resolve output files only within its actual temporary output directory, with bounded reads and valid returned source identities. A successful envelope without supporting content is not successful research. Exact official domains and registered document identities reject forged links or an unrelated document masquerading as target guidance. Initial coverage must include every existing registered owner family; missing support is displayed explicitly rather than advertised as researched.
+
+The AI keeps exact baseline-file citations separate from guidance citations. The candidate and scenario stages receive the applicable guidance. Before/candidate behavior simulations continue to answer what the configured sources direct, so an external recommendation cannot silently override the baseline. The additional guidance-assessment stage checks documentary support, preserves canonical Alex gates, and reports uncertainty rather than upgrading it to proof. Native parsing, generation, provider acceptance and runtime behavior retain their separate existing checks and limits.
+
+```mermaid
+flowchart LR
+  T[Registered targets and safe local evidence] --> G[Server retrieves applicable official guidance]
+  G --> P[Tool-free diagnosis and proposed repair]
+  P --> A[Guidance assessment and behavior/native checks]
+  A --> F[Frozen sources, rationale and exact repair]
+  F --> U[One approval]
+  U --> N[Existing native owners, sync, verification and Undo]
+```
+
+### U6. Retrieve and normalize applicable guidance
+
+- **Requirements:** R12-R14; KTD9-KTD11.
+- **Files:** `tools/repair_guidance.py`, its registered source catalog, `tools/test_repair_guidance.py` and bounded retrieval fixtures.
+- **Approach:** Reuse the existing named-account Composio documentation route; retrieve official reference content for the selected product/category without private search inputs. Capture exact provenance and bounded relevant passages, source/version gaps and explicit unavailable coverage. Cache or store only within the existing private repair-state lifecycle; no new daemon or database.
+- **Test scenarios:** A selected hook obtains its official hook reference and relevant guidance; unrelated or forged URLs cannot become cited sources; large-output envelopes are read safely and outside/symlinked paths fail; malformed, partial or failed provider data cannot become verified guidance; version/date absence is represented honestly; public requests never include source text, intent, paths, account IDs or secret values; per-request bounds remain explicit without silently dropping selected targets.
+- **Execution note:** Test retrieval and normalization against representative recorded wire envelopes before the live public-doc read.
+
+### U7. Ground, assess and freeze the proposed fix
+
+- **Requirements:** R2, R3, R6, R8, R12-R14; KTD2 and KTD9-KTD11.
+- **Files:** `tools/repair_ai.py`, `tools/universal_repairs.py`, their existing tests, and the repair bridge timeout only if required by the bounded research/assessment phases.
+- **Approach:** Pass validated guidance into candidate/scenario generation; require per-target diagnosis, applicability, exact document support and a rejected alternative. Assess the repair separately against captured guidance. Bind results to the existing digest/public preview and expiry. Preserve all native owner checks, exact baseline context, job replay/recovery, publication and conditional Undo.
+- **Test scenarios:** A real quoted passage supports a relevant correction; genuine documentation plus a correct rationale paired with an opposite candidate patch must fail; invented quotes, wrong-source IDs, wrong-target coverage and an unsupported or uncertain assessment produce an explicit diagnostic with no approvable source-backed bundle; local-file and doc citations cannot substitute for one another; changing a source/rationale changes the digest; stale guidance cannot authorize a new repair; existing approved jobs still resume/Undo; ordinary fix/preserve and clarified-conflict cases retain their meaning; secret and source-size boundaries remain intact.
+- **Execution note:** Extend the current proposal/coordinator tests with a failing source-grounding regression before changing behavior.
+
+### U8. Show why this is the right fix
+
+- **Requirements:** R3, R6, R11-R14; KTD7 and KTD9-KTD11.
+- **Files:** `app/src/lib/types/repairs.ts`, `app/src/app/explorer/repair-targets-panel.tsx`, `tools/test_universal_repair_source.cjs`, `docs/UNIVERSAL_REVIEW_REPAIR.md` and delivery receipts.
+- **Approach:** Place the diagnosis, documented approach, applicability, alternatives, direct source links and evidence status beside the exact diff before approval. Present useful plain-language progress/errors for retrieval and assessment. Keep one existing approval action and the original durable job behavior; do not add a new approval or obscure a missing source behind a passing syntax check.
+- **Test scenarios:** The preview visibly links official guidance and explains the fix/rejected alternative; unknown version and unavailable research are readable; local/remote runtime limitations remain visible; approval still submits only the frozen identifiers; stale responses cannot replace the current researched bundle; desktop and narrow views retain usable source links, diff and approval.
+
+### Verification and completion for this correction
+
+The confidence review must check product/category/version applicability, private-input isolation, source/rationale binding, unavailable-source behavior and the preservation of existing approved-job recovery. Independent document and code reviews examine these requirements. Run one meaningful check per changed layer and preserve existing regression coverage. Fresh browser evidence must show the normal dashboard's actual-file diagnosis with current official citations and its proposed fix. A separate verifier checks the cited passages, frozen packet and unchanged real preimages. Actual agent-source application remains Alex's action; a source-backed recommendation and behavior simulation never become a claim of a live hook repair.
+
+### Research and limitations
+
+Current official content was retrieved through Exa via the existing Composio account on 2026-10-21; per-URL statuses reported successful live crawls. Relevant references: [Claude Code hooks](https://code.claude.com/docs/en/hooks), [Building effective agents](https://www.anthropic.com/engineering/building-effective-agents), and [Effective harnesses for long-running agents](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents). These establish native hook control semantics, simple composable workflows and evidence from end-to-end testing; they do not prescribe Alex's private approval policy. The Pro Map's existing grades and dated local receipts remain historical judgments, not fresh vendor or runtime proof. Current source retrieval must be repeated inside a real Review & fix request, not merely embedded as this plan's background research.

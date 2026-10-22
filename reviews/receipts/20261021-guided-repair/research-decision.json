@@ -1,0 +1,14 @@
+{
+  "source": "owner, in chat 2026-10-21",
+  "words": "ya we always research before making a decision for fix",
+  "rule": "When choosing a repair, research the applicable authoritative guidance before drafting or selecting the fix, because internal consistency alone does not establish correctness.",
+  "owner": "Review & fix proposal pipeline",
+  "implementation": "Coordinator.propose collects guidance before propose_repair; tests preserve ordering and missing-guidance diagnostics.",
+  "proof": [
+    "tools/test_universal_repairs.py",
+    "tools/test_repair_ai.py",
+    "reviews/receipts/20261021-guided-repair/native-opposite-patch.json"
+  ],
+  "status": "implemented; actual-source research, simulation, documentary support and desktop/narrow preview verified on task server",
+  "promotion_target": "Review & fix documentation and regression tests; no global agent-instruction changes in this task"
+}

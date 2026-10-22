@@ -1,0 +1,29 @@
+{
+  "unit": "U7",
+  "behavior_changed": true,
+  "builder_red_evidence": [
+    "18362f missing grounding API",
+    "61f441 missing production research/old approval rejection",
+    "2993cc owner-expanded approval initially guidance_invalid"
+  ],
+  "red_witness": "builder reported; primary did not witness initial RED",
+  "primary_verification": {
+    "command": "PYTHONDONTWRITEBYTECODE=1 python3 -B tools/run_repair_tests.py",
+    "exit_code": 0,
+    "tests": 244,
+    "skips": 0,
+    "duration_seconds": 123.794
+  },
+  "native_counterexample": "native-opposite-patch.json",
+  "scope": [
+    "tools/repair_ai.py",
+    "tools/test_repair_ai.py",
+    "tools/universal_repairs.py",
+    "tools/test_universal_repairs.py",
+    "app/src/lib/server/universal-repairs.ts"
+  ],
+  "limitations": [
+    "Simulation and documentary assessment do not prove native runtime acceptance.",
+    "No actual rules/settings/provider object was repaired."
+  ]
+}

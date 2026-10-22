@@ -1,0 +1,44 @@
+{
+  "unit": "U8",
+  "behavior_changed": true,
+  "existing_tests_inspected": [
+    "tools/test_universal_repair_source.cjs"
+  ],
+  "tests_added_or_changed": [
+    "tools/test_universal_repair_source.cjs"
+  ],
+  "red_evidence": "Builder reported 0fffbf: 26 passed/9 failed before UI implementation. Primary observed public proposal_target_ids KeyError in owner-expanded regression before projection fix.",
+  "primary_checks": [
+    {
+      "command": "node --test tools/test_local_file_repair_source.cjs tools/test_universal_repair_source.cjs",
+      "exit_code": 0,
+      "passed": 57,
+      "skips": 0
+    },
+    {
+      "command": "./node_modules/.bin/next build",
+      "exit_code": 0,
+      "types": "passed",
+      "lint": "separate"
+    },
+    {
+      "command": "ESLINT_USE_FLAT_CONFIG=false ./node_modules/.bin/eslint .",
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 157
+    },
+    {
+      "command": "PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=tools python3 -B -m unittest test_universal_repairs.CoordinatorTests",
+      "exit_code": 0,
+      "tests": 23
+    }
+  ],
+  "lint_note": "Native build generated ignored next-env.d.ts with triple-slash references; app/.eslintignore excludes that generated file rather than editing framework output.",
+  "remaining_caller_checks": [
+    "independent review",
+    "desktop/narrow real browser",
+    "normal-dashboard actual-source proposal",
+    "PR/CI and delivery"
+  ],
+  "no_live_repairs": true
+}

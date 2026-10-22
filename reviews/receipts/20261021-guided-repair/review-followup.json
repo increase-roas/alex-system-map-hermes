@@ -1,0 +1,45 @@
+{
+  "review_run": "20261021-224045-df05521e",
+  "reviewed_head": "caebee52cbba1467908d1bd15795fb0df42cef09",
+  "confirmed_finding": {
+    "id": 1,
+    "subject": "Healthy official guidance discarded with one explicit document failure",
+    "fixed_in": "d5828bd",
+    "primary_red": "Mixed-success regression failed: healthy coverage was unavailable.",
+    "primary_green": "10 guidance tests passed, exit 0."
+  },
+  "simulation_diagnosis": {
+    "source": "Actual owner-projected shared rules and canonical gates, read-only",
+    "before": "Existing production simulator chose A despite opposing source directives.",
+    "changed_variable": "Same simulation prompt gains a general rule: unresolved same-scope opposing directives produce unknown; explicit precedence remains authoritative. No answer key is supplied.",
+    "native_oracle": {
+      "existing": {
+        "choices": [
+          {
+            "id": "receipt-refusal",
+            "choice": "A"
+          }
+        ]
+      },
+      "explicit_conflict_semantics": {
+        "choices": [
+          {
+            "id": "receipt-refusal",
+            "choice": "unknown"
+          }
+        ]
+      }
+    },
+    "production_change": "3571d71",
+    "contract": "Existing clarify requires unknown before and expected after; ordinary fix and preserve predicates unchanged.",
+    "test_first_exception": "Direct native behavior oracle used instead of a test asserting prompt wording.",
+    "primary_focused_tests": "45 repair AI tests passed, exit 0.",
+    "fresh_verifier": "Separate gpt-6.1-sol context inspected exact follow-up code and reported no defects. Serving-model identity is not independently verified.",
+    "limits": [
+      "A sampled model decision is not a runtime guarantee.",
+      "No actual source repair applied."
+    ]
+  },
+  "test_coverage_followup": "Added an unknown-version regression that clears model-supplied limitations before checking the server-added installed-version gap.",
+  "unapplied_actionable_findings": []
+}

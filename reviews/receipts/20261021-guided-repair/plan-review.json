@@ -1,0 +1,40 @@
+{
+  "status": "complete",
+  "artifact_path": "docs/plans/2026-10-21-universal-review-repair-plan.md",
+  "active_units": [
+    "U6",
+    "U7",
+    "U8"
+  ],
+  "depth": "Standard correction to completed broad plan",
+  "confidence": {
+    "source_retrieval": 4,
+    "private_input_boundary": 4,
+    "exact_patch_support": 4,
+    "freeze_and_recovery": 5,
+    "approval_UI": 4
+  },
+  "documentation_review": {
+    "reviewers": [
+      "coherence-reviewer",
+      "feasibility-reviewer",
+      "design-lens-reviewer",
+      "security-lens-reviewer",
+      "scope-guardian-reviewer",
+      "adversarial-document-reviewer"
+    ],
+    "applied_fixes": [
+      {
+        "issue": "Genuine guidance and a supported rationale could accompany an opposite patch",
+        "change": "Explicit edit-to-claim assessment and wrong-patch negative regression added to KTD10/U7",
+        "primary_evidence": "Plan KTD10 formerly specified rationale-only documentary assessment"
+      }
+    ],
+    "remaining_actionable": [],
+    "model_family": "Codex GPT-6, separate contexts",
+    "peer_outcome": "in-process-fallback",
+    "cross_provider": "not run; no new paid-review authorization and repo permits context-separated available review"
+  },
+  "plan_sha256": "d1d3e945ddab5941cb02ec2da3de83a1a39f92c5c83d2c71335b5f9ecb653662",
+  "real_source_apply": false
+}

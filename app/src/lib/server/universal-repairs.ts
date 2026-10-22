@@ -17,7 +17,7 @@ export function runUniversalRepair(input: Record<string, unknown>): Promise<Repa
     };
     const failure = () => finish({ status: 503, code: 'repair_unavailable', error: 'Repair status unavailable. Reopen the recorded job before another action.' });
     // Effects run in a detached Python worker and survive bridge/HTTP loss.
-    const timer = setTimeout(() => { child.kill(); failure(); }, input.action === 'propose' ? 510_000 : 60_000);
+    const timer = setTimeout(() => { child.kill(); failure(); }, input.action === 'propose' ? 750_000 : 60_000);
     child.stdout.on('data', (chunk: Buffer) => {
       output += chunk.toString();
       if (Buffer.byteLength(output) > 2 * 1024 * 1024) { child.kill(); failure(); }

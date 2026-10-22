@@ -1,0 +1,275 @@
+{
+  "schema_version": 1,
+  "documents": [
+    {
+      "id": "claude-hooks",
+      "url": "https://code.claude.com/docs/en/hooks",
+      "title": "Hooks reference",
+      "publisher": "Anthropic",
+      "terms": [
+        "permissionDecision",
+        "exit code",
+        "PreToolUse",
+        "deny",
+        "matcher",
+        "input",
+        "hooks"
+      ]
+    },
+    {
+      "id": "claude-memory",
+      "url": "https://code.claude.com/docs/en/memory",
+      "title": "Manage Claude memory",
+      "publisher": "Anthropic",
+      "terms": [
+        "precedence",
+        "scope",
+        "conflict",
+        "import",
+        "CLAUDE.md",
+        "instructions"
+      ]
+    },
+    {
+      "id": "claude-skills",
+      "url": "https://code.claude.com/docs/en/skills",
+      "title": "Extend Claude with skills",
+      "publisher": "Anthropic",
+      "terms": [
+        "skill",
+        "description",
+        "SKILL.md"
+      ]
+    },
+    {
+      "id": "claude-settings",
+      "url": "https://code.claude.com/docs/en/settings",
+      "title": "Claude Code settings",
+      "publisher": "Anthropic",
+      "terms": [
+        "settings",
+        "configuration"
+      ]
+    },
+    {
+      "id": "claude-plugins",
+      "url": "https://code.claude.com/docs/en/plugins-reference",
+      "title": "Plugins reference",
+      "publisher": "Anthropic",
+      "terms": [
+        "plugin",
+        "manifest",
+        "hooks"
+      ]
+    },
+    {
+      "id": "codex-instructions",
+      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "title": "Custom instructions with AGENTS.md",
+      "publisher": "OpenAI",
+      "terms": [
+        "precedence",
+        "scope",
+        "conflict",
+        "AGENTS.override.md",
+        "AGENTS.md",
+        "instructions"
+      ]
+    },
+    {
+      "id": "codex-skills",
+      "url": "https://developers.openai.com/codex/skills",
+      "title": "Agent skills",
+      "publisher": "OpenAI",
+      "terms": [
+        "skill",
+        "SKILL.md",
+        "description"
+      ]
+    },
+    {
+      "id": "codex-config",
+      "url": "https://developers.openai.com/codex/config-reference",
+      "title": "Configuration reference",
+      "publisher": "OpenAI",
+      "terms": [
+        "configuration",
+        "config",
+        "model"
+      ]
+    },
+    {
+      "id": "cursor-hooks",
+      "url": "https://cursor.com/docs/agent/hooks",
+      "title": "Cursor hooks",
+      "publisher": "Cursor",
+      "terms": [
+        "hooks",
+        "configuration",
+        "input"
+      ]
+    },
+    {
+      "id": "cursor-cli",
+      "url": "https://cursor.com/docs/cli/reference/configuration",
+      "title": "Cursor CLI configuration",
+      "publisher": "Cursor",
+      "terms": [
+        "configuration",
+        "model"
+      ]
+    },
+    {
+      "id": "paperclip",
+      "url": "https://github.com/paperclipai/paperclip/blob/master/doc/SPEC-implementation.md",
+      "title": "Paperclip V1 implementation and agent configuration contract",
+      "publisher": "Paperclip",
+      "terms": [
+        "adapter_config",
+        "runtime_config",
+        "heartbeat scheduling",
+        "PATCH /agents",
+        "configuration",
+        "adapter"
+      ]
+    },
+    {
+      "id": "neon",
+      "url": "https://neon.com/docs/manage/projects",
+      "title": "Manage Neon projects",
+      "publisher": "Neon",
+      "terms": [
+        "project",
+        "history",
+        "settings"
+      ]
+    },
+    {
+      "id": "neon-branches",
+      "url": "https://neon.com/docs/manage/branches",
+      "title": "Manage Neon branches",
+      "publisher": "Neon",
+      "terms": [
+        "branch",
+        "protected"
+      ]
+    },
+    {
+      "id": "hindsight",
+      "url": "https://hindsight.vectorize.io/developer/api/memory-banks",
+      "title": "Bank configuration",
+      "publisher": "Vectorize",
+      "terms": [
+        "retain_mission",
+        "retain_extraction_mode",
+        "disposition_skepticism",
+        "configuration",
+        "bank"
+      ]
+    },
+    {
+      "id": "signoz-alerts",
+      "url": "https://signoz.io/docs/alerts/",
+      "title": "SigNoz alerts",
+      "publisher": "SigNoz",
+      "terms": [
+        "alert",
+        "threshold",
+        "evaluation"
+      ]
+    },
+    {
+      "id": "signoz-dashboards",
+      "url": "https://signoz.io/docs/userguide/manage-dashboards-and-panels/",
+      "title": "Manage dashboards and panels",
+      "publisher": "SigNoz",
+      "terms": [
+        "dashboard",
+        "panel"
+      ]
+    },
+    {
+      "id": "hermes",
+      "url": "https://github.com/NousResearch/hermes-agent/blob/main/AGENTS.md",
+      "title": "Hermes agent instructions",
+      "publisher": "Nous Research",
+      "terms": [
+        "instructions",
+        "configuration",
+        "agent"
+      ]
+    },
+    {
+      "id": "orgo",
+      "url": "https://docs.orgo.ai/introduction",
+      "title": "Orgo documentation",
+      "publisher": "Orgo",
+      "terms": [
+        "computer",
+        "environment",
+        "machine"
+      ]
+    },
+    {
+      "id": "agent-patterns",
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "title": "Building effective agents",
+      "publisher": "Anthropic",
+      "terms": [
+        "changed since",
+        "managed agents",
+        "simplest",
+        "evaluation",
+        "feedback",
+        "simplicity",
+        "workflow",
+        "agent"
+      ]
+    },
+    {
+      "id": "codex-hooks",
+      "url": "https://developers.openai.com/codex/hooks",
+      "title": "Codex hooks",
+      "publisher": "OpenAI",
+      "terms": [
+        "permission",
+        "exit code",
+        "hook",
+        "input"
+      ]
+    },
+    {
+      "id": "codex-plugins",
+      "url": "https://developers.openai.com/codex/plugins",
+      "title": "Codex plugins",
+      "publisher": "OpenAI",
+      "terms": [
+        "plugin",
+        "manifest",
+        "skill"
+      ]
+    },
+    {
+      "id": "cursor-rules",
+      "url": "https://cursor.com/docs/context/rules",
+      "title": "Cursor rules",
+      "publisher": "Cursor",
+      "terms": [
+        "scope",
+        "rules",
+        "instructions"
+      ]
+    },
+    {
+      "id": "git",
+      "url": "https://git-scm.com/docs/git-commit",
+      "title": "Git commit reference",
+      "publisher": "Git",
+      "terms": [
+        "commit",
+        "path",
+        "index"
+      ]
+    }
+  ]
+}

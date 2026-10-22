@@ -1,0 +1,22 @@
+{
+  "reviewer": "adversarial",
+  "findings": [
+    {
+      "title": "Assess the actual patch, not only its explanation",
+      "severity": "P2",
+      "section": "KTD10 and U7 - Ground, assess and freeze the proposed fix",
+      "why_it_matters": "A proposal can cite a genuine applicable passage and accurately explain the documented approach while its exact patch implements a different behavior. For example, a hook explanation can correctly describe the documented exit-code semantics while the edited branch returns the blocking value for the very operation the repair should permit. Documentary support for the rationale would pass, and simulations that establish what the candidate directs do not independently establish that the changed behavior implements the documented recommendation. The current acceptance list can therefore approve a well-cited but incorrect repair, which is the failure this correction is meant to eliminate.",
+      "finding_type": "omission",
+      "autofix_class": "gated_auto",
+      "confidence": 75,
+      "evidence": [
+        "A separate tool-free assessment checks the proposed rationale against the captured passages.",
+        "Before/candidate behavior simulations continue to answer what the configured sources direct, so an external recommendation cannot silently override the baseline.",
+        "A real quoted passage supports a relevant correction; invented quotes, wrong-source IDs, wrong-target coverage and an unsupported or uncertain assessment produce an explicit diagnostic with no approvable source-backed bundle"
+      ],
+      "suggested_fix": "Require the separate assessment to receive the exact frozen before/candidate operations, scoped source context, intent and captured passages. It must assess whether each material edit actually implements the claimed documented recommendation and intended correction while preserving Alex policy, rather than merely whether the explanation is supported. Bind this edit-to-claim assessment into the digest and block an approvable source-backed bundle on mismatch or uncertainty. Add an adversarial regression with real applicable citations and a supported rationale but an opposite or unrelated candidate edit; it must fail even when citation, syntax and configuration-behavior checks pass."
+    }
+  ],
+  "residual_risks": [],
+  "deferred_questions": []
+}

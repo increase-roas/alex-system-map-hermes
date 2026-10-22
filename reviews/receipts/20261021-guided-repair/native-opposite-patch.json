@@ -1,0 +1,34 @@
+{
+  "test": "Real native AI documentary assessment rejects an opposite patch with a correct rationale",
+  "native_calls": 1,
+  "prior_stages": "Controlled synthetic fixtures; not native behavior proof",
+  "approvable_proposals": 0,
+  "assessment": {
+    "status": "failed",
+    "findings": [
+      {
+        "target_id": "u6-live-hook",
+        "status": "unsupported",
+        "reason": "The exact patch replaces baseline decision:\"block\" with permissionDecision:\"allow\", reversing the decision despite the stated intent to preserve denial. The captured vendor contract explicitly maps \"block\" to \"deny\"; it supports the schema migration but contradicts the chosen value. The unchanged comment provides no justification. No context_only canonical Alex gates were supplied to establish a separate policy basis for allowing the action."
+      }
+    ],
+    "limitations": [
+      "Documentary assessment only; no runtime acceptance was tested or established.",
+      "Installed product version and document version are unknown; snapshot fingerprints and schema revisions do not establish compatibility.",
+      "Documentary assessment is not live runtime acceptance."
+    ]
+  },
+  "diagnostics": {
+    "stage": "assessment",
+    "reason": "unsupported"
+  },
+  "source_url": "https://code.claude.com/docs/en/hooks",
+  "live_source_status": "crawled",
+  "actual_candidate_decision": "allow",
+  "claimed_intended_decision": "deny",
+  "no_live_source_writes": true,
+  "requested_model": "gpt-6.1-sol",
+  "served_model": "unverified",
+  "native_route": "isolated subscribed Codex, tool-free",
+  "primary_checked": true
+}

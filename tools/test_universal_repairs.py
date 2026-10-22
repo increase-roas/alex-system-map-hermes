@@ -1,5 +1,6 @@
 """Disposable native-boundary fixtures for the durable coordinator."""
 import json
+from datetime import datetime, timedelta, timezone
 import subprocess
 import tempfile
 import sys
@@ -11,7 +12,9 @@ import unittest
 from pathlib import Path
 from repair_contracts import RepairError
 from repair_registry import RepairRegistry
-from universal_repairs import Coordinator
+from universal_repairs import Coordinator, digest
+from unittest.mock import patch
+from test_repair_ai import guidance_packet, rationale
 
 
 class Files:
@@ -100,6 +103,123 @@ class CoordinatorTests(unittest.TestCase):
     def job(self):
         plan = self.plan()
         return self.service.approve(plan['plan_id'], plan['digest'])
+
+    def test_production_research_precedes_proposer_and_excludes_context(self):
+        original = self.adapter.discover
+        def discover():
+            rows = original()
+            for row in rows:
+                row.update(category='hook', identity={'path': str(self.root / row['id']), 'home': str(self.root)})
+            rows.append(dict(rows[0], id='gates', category='rule', identity={'path': str(self.root / '.agents/skills/alex-director/references/gates.md'), 'home': str(self.root)}))
+            return rows
+        self.adapter.discover = discover
+        (self.root / 'gates').write_text('canonical security and spending gates')
+        packet = guidance_packet(['alpha'])
+        events = []
+        def collect(sources):
+            events.append('research')
+            self.assertEqual(['alpha'], [row['target']['id'] for row in sources])
+            return packet
+        def proposer(intent, sources, guidance):
+            events.append('proposal')
+            self.assertEqual(['alpha', 'gates'], [row['target']['id'] for row in sources])
+            self.assertTrue(sources[1]['context_only'])
+            self.assertEqual(packet, guidance)
+            return {'proposals': [{'target_id': 'alpha', 'proposal': {'text': 'new'}}],
+                    'checks': [{'kind': 'guidance_support', 'status': 'passed'}],
+                    'rationales': [rationale('alpha', packet)],
+                    'guidance_assessment': {'status': 'passed', 'findings': [{'target_id': 'alpha', 'status': 'supported', 'reason': 'Candidate follows the practice.'}], 'limitations': []}}
+        service = Coordinator(self.root / 'researched', self.registry, proposer, require_guidance=True)
+        with patch('universal_repairs.collect_guidance', side_effect=collect):
+            plan = service.propose(['alpha'], 'fix alpha')
+        self.assertEqual(['research', 'proposal'], events)
+        self.assertEqual('passed', plan['guidance_assessment']['status'])
+        self.assertLessEqual(plan['expires_at'], packet['expires_at'])
+        stored = service.load('plans', plan['plan_id'])
+        self.assertGreater(len(stored['guidance']['sources'][0]['passages'][0]['text'].split()), 24)
+        self.assertNotIn('CAPTURE_TAIL_EVIDENCE', json.dumps(plan))
+        self.assertLessEqual(len(plan['guidance']['sources'][0]['passages'][0]['text'].split()), 24)
+
+    def test_production_rejects_old_unapproved_but_preserves_approved_recovery(self):
+        old = self.plan()
+        self.service.require_guidance = True
+        with self.assertRaisesRegex(RepairError, 'guidance_required'):
+            self.service.approve(old['plan_id'], old['digest'])
+        self.service.require_guidance = False
+        approved = self.service.approve(old['plan_id'], old['digest'])
+        self.service.require_guidance = True
+        self.assertEqual(approved['job_id'], self.service.approve(old['plan_id'], old['digest'])['job_id'])
+        self.assertEqual('completed', self.service.run_job(approved['job_id'])['status'])
+        self.service.queue_undo(approved['job_id'])
+        self.assertEqual('undone', self.service.undo(approved['job_id'])['status'])
+
+    def researched_plan(self):
+        packet = guidance_packet(['alpha'])
+        plan = self.service.freeze('fix alpha', [{'target_id': 'alpha', 'proposal': {'text': 'new'}}],
+            checks=[{'kind': 'guidance_support', 'status': 'passed'}], guidance=packet,
+            rationales=[rationale('alpha', packet)], guidance_assessment={'status': 'passed', 'findings': [{'target_id': 'alpha', 'status': 'supported', 'reason': 'Supports the exact candidate.'}], 'limitations': []})
+        return plan
+
+    def age_researched_plan(self, plan):
+        stored = self.service.load('plans', plan['plan_id'])
+        moment = datetime.now(timezone.utc)
+        old = (moment - timedelta(hours=2)).isoformat()
+        expiry = (moment - timedelta(hours=1)).isoformat()
+        stored['guidance'].update(retrieved_at=old, expires_at=expiry)
+        for row in stored['guidance']['sources']: row['retrieved_at'] = old
+        stored['expires_at'] = expiry
+        stored.pop('digest')
+        stored['digest'] = digest(stored)
+        self.service.save('plans', stored['plan_id'], stored)
+        return stored
+
+    def test_guidance_expiry_blocks_new_approval_and_digest_binds_all_grounding(self):
+        for section in ['guidance', 'rationales', 'guidance_assessment']:
+            plan = self.researched_plan()
+            stored = self.service.load('plans', plan['plan_id'])
+            if section == 'guidance': stored[section]['sources'][0]['passages'][0]['text'] += 'tamper'
+            elif section == 'rationales': stored[section][0]['diagnosis'] += 'tamper'
+            else: stored[section]['findings'][0]['reason'] += 'tamper'
+            self.service.save('plans', plan['plan_id'], stored)
+            with self.assertRaisesRegex(RepairError, 'plan_digest_changed'):
+                self.service.approve(plan['plan_id'], plan['digest'])
+        stale = self.age_researched_plan(self.researched_plan())
+        with self.assertRaisesRegex(RepairError, 'guidance_stale'):
+            self.service.approve(stale['plan_id'], stale['digest'])
+        self.assertLessEqual(len(self.service.get_plan(stale['plan_id'])['guidance']['sources'][0]['passages'][0]['text'].split()), 24)
+
+    def test_expired_research_keeps_approved_resume_reconcile_and_undo(self):
+        plan = self.researched_plan()
+        job = self.service.approve(plan['plan_id'], plan['digest'])
+        # Advance only the freshness clock used by research validation. The
+        # frozen digest and approval stay exactly as originally approved.
+        with patch('universal_repairs.validate_guidance', side_effect=ValueError('guidance_stale')):
+            self.assertEqual(job['job_id'], self.service.approve(plan['plan_id'], plan['digest'])['job_id'])
+            self.adapter.lose_response = 'alpha'
+            self.assertEqual('unknown', self.service.run_job(job['job_id'])['status'])
+            self.assertEqual('queued', self.service.reconcile(job['job_id'])['status'])
+            self.adapter.lose_response = None
+            self.assertEqual('queued', self.service.resume(job['job_id'])['status'])
+            self.assertEqual('completed', self.service.run_job(job['job_id'])['status'])
+            self.service.queue_undo(job['job_id'])
+            self.assertEqual('undone', self.service.undo(job['job_id'])['status'])
+
+    def test_owner_generated_distribution_targets_keep_exact_proposal_coverage(self):
+        class DistributingFiles(Files):
+            def prepare_bundle(self, operations, targets):
+                return operations + [dict(operations[0], target_id='beta')]
+        registry = RepairRegistry()
+        registry.register(DistributingFiles(self.root))
+        packet = guidance_packet(['alpha'])
+        service = Coordinator(self.root / 'distribution', registry, require_guidance=True)
+        plan = service.freeze('fix alpha and distribute', [{'target_id': 'alpha', 'proposal': {'text': 'new'}}],
+            checks=[{'kind': 'guidance_support', 'status': 'passed'}], guidance=packet,
+            rationales=[rationale('alpha', packet)], guidance_assessment={'status': 'passed', 'findings': [{'target_id': 'alpha', 'status': 'supported', 'reason': 'Exact proposed source follows the practice.'}], 'limitations': []})
+        self.assertEqual({'alpha', 'beta'}, {row['target_id'] for row in plan['operations']})
+        self.assertEqual(['alpha'], plan['proposal_target_ids'])
+        job = service.approve(plan['plan_id'], plan['digest'])
+        self.assertEqual('completed', service.run_job(job['job_id'])['status'])
+        self.assertEqual('new', (self.root / 'beta').read_text())
 
     def test_last_backup_failure_has_zero_effects_and_safe_error(self):
         job = self.job()
@@ -351,7 +471,7 @@ class CoordinatorTests(unittest.TestCase):
         shared.write_text('Fix safe reversible owned changes.\n')
         gates.write_text('Ask Alex before security changes and spending money.\n')
         (gates.parent.parent / 'SKILL.md').write_text('# Director\nRun canonical approval gates.\n')
-        for category in ('skill', 'hook', 'executable', 'skill_reference'):
+        for category in ('skill', 'hook', 'executable', 'skill_reference', 'app_settings', 'remote_files', 'paperclip_agent'):
             with self.subTest(category=category):
                 registry = RepairRegistry()
                 local = LocalAdapter(home)
@@ -361,6 +481,8 @@ class CoordinatorTests(unittest.TestCase):
                     def discover(plugin):
                         row = super().discover()[0]
                         row.update(category=category, identity={'path': str(home / 'alpha'), 'home': str(home)})
+                        if category in ('remote_files', 'paperclip_agent'):
+                            row.update(scope='remote', identity={'object': 'alpha'})
                         return [row]
                 plugin = OwnedPlugin(home)
                 registry.register(plugin)
@@ -370,7 +492,9 @@ class CoordinatorTests(unittest.TestCase):
                     return {'proposals': [{'target_id': 'alpha', 'proposal': {'text': 'new'}}]}
                 service = Coordinator(home / ('state-' + category), registry, proposer)
                 plan = service.propose(['alpha'], 'fix selected owned source')
-                self.assertEqual([source['target']['identity']['path'] for source in seen], [str(home / 'alpha'), str(shared), str(gates)])
+                expected_identity = {'object': 'alpha'} if category in ('remote_files', 'paperclip_agent') else {'path': str(home / 'alpha'), 'home': str(home)}
+                self.assertEqual(seen[0]['target']['identity'], expected_identity)
+                self.assertEqual([source['target']['identity']['path'] for source in seen[1:]], [str(shared), str(gates)])
                 self.assertEqual(seen[0]['target']['adapter_id'], 'owned-plugin-fixture')
                 self.assertTrue(all(source['target']['adapter_id'] == local.adapter_id and source['context_only'] for source in seen[1:]))
                 self.assertEqual([operation['target_id'] for operation in plan['operations']], ['alpha'])

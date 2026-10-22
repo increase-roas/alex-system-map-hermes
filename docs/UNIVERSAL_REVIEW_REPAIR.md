@@ -47,11 +47,23 @@ Skill references and owned plugin sources receive that same local policy context
 
 Whole secret-bearing files are not sent to the model or backed up into proposal state. JSON inverse data contains only changed nonsecret fields. Typed leaf patches preserve excluded siblings. The generic file viewer's broad command masking is unchanged; hook owners use a credential-aware projection that retains canonical executable field names as data.
 
+## Official guidance and the explanation preview
+
+Before proposing changes, the server retrieves applicable official sources through the existing named Composio route and a fixed source catalog. Search requests use public product/category identities, never private source contents, repair intent, local paths, account IDs, credentials or client data. Retrieved web text is untrusted evidence. The proposal and documentary assessment models have no tool authority.
+
+The preview puts each original proposed source's diagnosis, recommended fix, applicability, practice kind and rejected alternative before the affected-target list. Native contracts, vendor recommendations, Alex policy and inference retain distinct labels. Direct links come from the captured catalog, with short exact quotes. Full captured passages remain private; the browser receives bounded excerpts and rationale quotes of at most 24 words. Baseline local-file citations establish the diagnosed source behavior separately from documentary citations.
+
+Source provenance includes retrieval time, content hash, publication date when known, document version when known, and the retrieval service's crawl status. A fresh retrieval is not necessarily a live crawl. Unknown versions and missing installed-version matches stay unknown. A captured official page does not establish complete field coverage: Paperclip's exact configuration specification covers only part of the allowed fields. Applicability and coverage limitations remain visible.
+
+Evidence advances through separate stages: documentary assessment checks whether the exact candidate follows the captured guidance; behavior simulation tests modeled choices; native checks test only their stated syntax or owner acceptance scope; source/copy readback, effective settings, runtime activation and publication each require their own receipts. Passing documentation or simulation does not prove a hook executed, an app reloaded or a real destination accepted a change. Unsupported or unavailable guidance/assessment is visible without an approval action.
+
+The private guidance packet, exact source IDs/passages, rationale, independent assessment and limitations bind into the existing immutable plan digest. The plan cannot outlive the guidance window. The public server-derived `proposal_target_ids` identifies original proposed sources so generated copies and publication targets do not require invented rationales. Unresearched legacy plans require a fresh review. These preview changes preserve the single existing approval, which still sends only `action`, `plan_id` and `digest`.
+
 ## Approval, effects and recovery
 
 Private state lives under `app/.data/universal-repairs`. Plans bind exact operations, target identities, adapter versions, source/native versions, projections, checks and expiry. Public previews omit private candidates and recovery data except for the exact safe diff. Editing an intent or rereading changed source invalidates the preview.
 
-One approval creates a deterministic job whose ID equals the plan ID. The panel stores that ID before sending the short keepalive request. Reopening performs a read of that original job. Repeating the same approval resolves the same job instead of minting another effect. Definitive pre-job rejection permits a new proposal; a lost response remains a recovery lookup.
+One approval creates a deterministic job whose ID equals the plan ID. The panel stores that ID before sending the short keepalive request. Reopening performs a read of that original job. Repeating the same approval resolves the same job instead of minting another effect. Definitive pre-job expiry, failed-check and `guidance_required`, `guidance_stale` or `guidance_invalid` rejections clear pending lookup and the saved ID, and explain that a fresh review is needed. Existing approved-job replay is resolved before guidance expiry checks. Definitive pre-job rejection permits a new proposal; a lost response remains a recovery lookup.
 
 Before the first effect, all steps pass preflight and all required preimages are captured and read back. Real local file preimages use the existing Drive-backed `~/Backups/universal-repairs` location; a local Drive-folder readback is not proof that cloud upload finished. Native settings use changed-key inverse data rather than full secret-bearing configuration copies.
 

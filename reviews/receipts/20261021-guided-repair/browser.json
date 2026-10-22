@@ -1,0 +1,167 @@
+{
+  "observed_at": "2026-10-22T03:10:01.635711+00:00",
+  "commit": "3571d71253bfd06d87729eb43e77538b56cca627",
+  "server": "http://127.0.0.1:3202/explorer?view=local-files",
+  "driver": "Host-native CUA in-app browser",
+  "route_result": "PASS",
+  "desktop": {
+    "width": 1440,
+    "horizontal_overflow": false
+  },
+  "narrow": {
+    "width": 390,
+    "horizontal_overflow": false
+  },
+  "console_errors_observed": 0,
+  "actual_source": "~/.agents/instructions/shared.md",
+  "actual_contradiction": "Cause-level repair required at line 3; tool-switch workaround directed at line 42.",
+  "research_before_choice": true,
+  "plan_id": "e6ff78fe7f5a4b639ba6ca84e4432a3d",
+  "plan_digest": "56bf8bcf4ea38c832c08e6b3573f6667d95405319503a33313462f07db9d0ec2",
+  "checks": [
+    {
+      "kind": "simulated_behavior",
+      "status": "passed"
+    },
+    {
+      "kind": "guidance_support",
+      "status": "passed"
+    }
+  ],
+  "scenarios": [
+    {
+      "id": "receipt-guard-conflict",
+      "purpose": "clarify",
+      "before": "unknown",
+      "after": "A",
+      "expected": "A",
+      "status": "passed"
+    },
+    {
+      "id": "preserve-boundaries",
+      "purpose": "preserve",
+      "before": "B",
+      "after": "B",
+      "expected": "B",
+      "status": "passed"
+    },
+    {
+      "id": "preserve-evidence-and-reporting",
+      "purpose": "preserve",
+      "before": "C",
+      "after": "C",
+      "expected": "C",
+      "status": "passed"
+    }
+  ],
+  "affected_targets": 7,
+  "operation_checks": [
+    {
+      "action": "replace",
+      "checks": [
+        {
+          "kind": "syntax",
+          "status": "passed"
+        },
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "replace",
+      "checks": [
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "replace",
+      "checks": [
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "replace",
+      "checks": [
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "replace",
+      "checks": [
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "publish",
+      "checks": [
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "action": "publish",
+      "checks": [
+        {
+          "kind": "owner_lifecycle",
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "url": "https://www.anthropic.com/engineering/building-effective-agents",
+      "retrieved_at": "2026-10-22T03:06:04.660633+00:00",
+      "crawl_status": "crawled",
+      "version": null
+    },
+    {
+      "url": "https://code.claude.com/docs/en/memory",
+      "retrieved_at": "2026-10-22T03:06:04.660633+00:00",
+      "crawl_status": "crawled",
+      "version": null
+    },
+    {
+      "url": "https://developers.openai.com/codex/guides/agents-md",
+      "retrieved_at": "2026-10-22T03:06:04.660633+00:00",
+      "crawl_status": "crawled",
+      "version": null
+    },
+    {
+      "url": "https://cursor.com/docs/context/rules",
+      "retrieved_at": "2026-10-22T03:06:04.660633+00:00",
+      "crawl_status": "crawled",
+      "version": null
+    }
+  ],
+  "approval_button_enabled": true,
+  "actual_apply": false,
+  "actual_undo": false,
+  "checked_source_preimages_unchanged": 5,
+  "jobs_created": 0,
+  "screenshots": [
+    "researched-repair-desktop.png",
+    "researched-repair-narrow.png"
+  ],
+  "limits": [
+    "This proves a real read-only AI proposal and rendered approval preview, not a repair of the actual guard or runtime.",
+    "Real Apply and Undo remain unexercised by development; disposable coordinator/adapter fixtures cover effects.",
+    "Normal 3201 checkout delivery is separate evidence."
+  ]
+}
