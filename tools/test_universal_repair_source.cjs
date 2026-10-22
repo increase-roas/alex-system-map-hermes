@@ -18,6 +18,19 @@ function harness(saved = null) {
 function nodes(n, predicate) { if (!n || typeof n !== 'object') return []; if (Array.isArray(n)) return n.flatMap(x => nodes(x,predicate)); return [...(predicate(n) ? [n] : []), ...nodes(n.props?.children,predicate)]; }
 function text(n) { if (n == null || typeof n === 'boolean') return ''; if (Array.isArray(n)) return n.map(text).join(' '); return typeof n === 'object' ? text(n.props?.children) : String(n); }
 const button = (tree, name) => nodes(tree,n => n.type === 'button' && text(n) === name)[0];
+
+test('actual hook profile shows executable tests separately from simulation', async () => {
+  const h = harness(); h.render();
+  const hook = {...target, hook_behavior_profile:'receipt-store-v1', hook_hosts:[{runtime:'claude',config_target_id:'config',registration_digest:'proof'}]};
+  h.reads[0].resolve({targets:[hook],limitations:[]}); await tick();
+  assert.match(text(h.render()),/Actual hook code/);
+  button(h.render(),'Inspect blocking hook').props.onClick();
+  button(h.render(),'Review & fix').props.onClick();
+  h.reads.at(-1).resolve({...plan, targets:[hook], operations:[{...plan.operations[0], checks:[{kind:'native_behavior',status:'passed',runner_id:'fixed-hook',evidence:['Harmless source read: before deny; proposed allow.'],limitations:['Live activation unobserved.']}]}]});
+  await tick(); const result=text(h.render());
+  assert.match(result,/Executable hook tests/); assert.match(result,/before deny; proposed allow/);
+  assert.match(result,/Live activation unobserved/);
+});
 const target = { id: 'skill:one', adapter_id: 'skills', category: 'skill', owner: 'Skill owner', scope: 'remote', identity: { object_id: 'actual-object' }, capabilities: ['propose','apply','undo'], observed_at: '2026-10-21T10:00:00Z', evidence: ['readback:1'], limitations: ['Runtime discovery separate'] };
 const check = { kind: 'simulated_behavior', status: 'passed', runner_id: 'model', evidence: ['case:1'], limitations: ['Simulation only'] };
 const guidance = { schema_version:1, retrieved_at:'2026-10-21T10:00:00Z', expires_at:'2099-01-01', route:'official reader', sources:[{id:'doc-one',url:'https://code.claude.com/docs/en/hooks',title:'Hooks reference',publisher:'Anthropic',content_sha256:'sha256-proof',version:null,publication_date:null,crawl_status:'cached',retrieved_at:'2026-10-21T10:00:00Z',passages:[{id:'p-one',text:'Exit code 2 blocks the action.'}],target_ids:[target.id]}], coverage:[{target_id:target.id,source_ids:['doc-one'],status:'available',limitations:[]}],limitations:[] };

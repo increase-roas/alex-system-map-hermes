@@ -1,6 +1,6 @@
 /** Public wire schema v1. Browser submits IDs and intent only. */
 export type RepairCheck = {
-  kind: 'guidance_support' | 'simulated_behavior' | 'syntax' | 'owner_lifecycle' | 'native_dry_run' | 'readback' | 'runtime';
+  kind: 'guidance_support' | 'simulated_behavior' | 'native_behavior' | 'syntax' | 'owner_lifecycle' | 'native_dry_run' | 'readback' | 'runtime';
   status: 'passed' | 'failed' | 'unavailable'; runner_id: string;
   input_digest?: string; output_digest?: string; evidence: string[];
   checked_at?: string; limitations: string[];
@@ -11,6 +11,8 @@ export type RepairTarget = {
   capabilities: string[]; observed_at: string; evidence: string[];
   limitations: string[]; missing_capability?: string;
   allowed_patch_paths?: string[]; content_format?: 'text' | 'json'; source_language?: string;
+  related_target_ids?: string[]; hook_behavior_profile?: string;
+  hook_hosts?: { runtime: string; config_target_id: string; registration_digest: string }[];
 };
 export type RepairOperation = {
   step_id: string; target_id: string; adapter_id: string; adapter_version: string;

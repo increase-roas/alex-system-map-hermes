@@ -137,6 +137,65 @@ class LocalAdapterTests(unittest.TestCase):
         script.write_text('value = 2\n')
         self.assertFalse(self.adapter.preflight(target, op)['ok'])
 
+    def test_receipt_hook_is_a_registered_source_with_installed_hosts(self):
+        guard = self.put('.agents/tools/approvals/receipt_store_guard.py', 'def reason(payload):\n    return None\n')
+        wrapper = self.put('.agents/tools/guards/composio_guard.py', 'def local_receipt_reason(payload):\n    import receipt_store_guard\n    return receipt_store_guard.reason(payload)\n')
+        config = self.put('.claude/settings.json', json.dumps({'hooks': {'PreToolUse': [{'hooks': [{'type': 'command', 'command': 'python3 ' + str(wrapper)}]}]}}))
+        target = self.target(guard)
+        self.assertEqual('receipt-store-v1', target['hook_behavior_profile'])
+        self.assertEqual(['claude'], [host['runtime'] for host in target['hook_hosts']])
+        self.assertIn(self.target(config)['id'], target['related_target_ids'])
+        self.assertIn(target['id'], self.target(config)['related_target_ids'])
+        before = target['hook_hosts']
+        wrapper.write_text(wrapper.read_text() + '# changed registration code\n')
+        self.assertNotEqual(before, self.target(guard)['hook_hosts'])
+        wrapper.write_text('# receipt_store_guard.reason(payload)\n')
+        self.assertEqual([], self.target(guard)['hook_hosts'])
+        wrapper.write_text('def local_receipt_reason(payload):\n    import receipt_store_guard\n    receipt_store_guard=other\n    return receipt_store_guard.reason(payload)\n')
+        self.assertEqual([], self.target(guard)['hook_hosts'])
+
+    def test_python_parser_token_pattern_is_source_but_credential_values_are_withheld(self):
+        from repair_local_checks import python_source_projection
+        source = 'import re\nTOKEN = re.compile(r"[a-z]+")\n'
+        self.assertEqual((source, False), python_source_projection(source))
+        source = 'import re\ntokens = [value] + re.findall(r"[a-z]+", value)\n'
+        self.assertEqual((source, False), python_source_projection(source))
+        source = 'import re\nTOKEN = re.compile(r"[a-z]+", re.M)\n'
+        self.assertEqual((source, False), python_source_projection(source))
+        for source in ('TOKEN = "private-fixture-value"\n',
+                       'import re\nTOKEN = re.compile("sk-proj-1234567890private")\n',
+                       'import re\ntokens = re.findall("[a-z]+", "private-fixture-value")\n',
+                       'import re\nre = arbitrary\nTOKEN = re.compile("private-fixture-value")\n'):
+            self.assertTrue(python_source_projection(source)[1])
+
+    def test_regex_projection_rejects_mutation_and_shadowed_imports(self):
+        from repair_local_checks import python_source_projection
+        for change in ('re.compile = lambda value: value', 'class re: pass',
+                       'def re(): pass', 'from other import re', 'import other as re',
+                       'setattr(re, "compile", arbitrary)', 'alias = re',
+                       'import re as alias\nalias.compile = arbitrary',
+                       're.__dict__["compile"] = lambda value: value',
+                       're.__setattr__("compile", lambda value: value)',
+                       're.__dict__.update(compile=lambda value: value)'):
+            source = 'import re\n' + change + '\nTOKEN = re.compile("opaque-private-value")\n'
+            with self.subTest(change=change):
+                self.assertTrue(python_source_projection(source)[1])
+
+    def test_script_and_hook_config_apply_in_source_order_for_either_selection(self):
+        for script_first in (False, True):
+            with self.subTest(script_first=script_first):
+                script = self.put('.agents/tools/unify/check.py', 'value = 1\n')
+                config = self.put('.cursor/hooks.json', json.dumps({'version': 1, 'hooks': {'beforeSubmitPrompt': [{'command': 'python3 ' + str(script), 'timeout': 5}]}}))
+                st, so = self.operation(script, {'candidate': 'value = 2\n'})
+                ct, co = self.operation(config, {'patch': {'hooks.beforeSubmitPrompt.0.timeout': 10}})
+                targets = {target['id']: target for target in self.adapter.discover()}
+                bundle = self.adapter.prepare_bundle([so, co] if script_first else [co, so], targets)
+                self.assertEqual(str(script), bundle[0]['selector']['path'])
+                backups = [self.adapter.backup(targets[op['target_id']], op, str(self.home / 'state')) for op in bundle]
+                for op, backup in zip(bundle, backups):
+                    result = self.adapter.apply(targets[op['target_id']], op, backup)
+                    self.assertTrue(self.adapter.verify(targets[op['target_id']], op, result)['ok'])
+
     def test_hook_command_private_assignments_and_query_credentials_hidden(self):
         path = self.put('.cursor/hooks.json', json.dumps({'version': 1, 'hooks': {'beforeSubmitPrompt': [{'command': 'CUSTOM_ENV=opaque-private python3 canonical.py'}, {'command': 'curl https://example.invalid/check?key=opaque-query'}]}}))
         snapshot = self.adapter.read(self.target(path))

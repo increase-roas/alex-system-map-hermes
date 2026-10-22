@@ -45,7 +45,7 @@ Each review accepts at most 16 editable targets and four read-only context sourc
 
 Skill references and owned plugin sources receive that same local policy context across source owners. The exact registered gates reference supplies only its canonical named section, blank-padding omitted lines to preserve citations; the fingerprint still binds the entire file. An identically named section in another file receives no special treatment. Each AI call owns an isolated process group, which is stopped and reaped on completion or timeout.
 
-Whole secret-bearing files are not sent to the model or backed up into proposal state. JSON inverse data contains only changed nonsecret fields. Typed leaf patches preserve excluded siblings. The generic file viewer's broad command masking is unchanged; hook owners use a credential-aware projection that retains canonical executable field names as data.
+Whole secret-bearing files are not sent to the model or backed up into proposal state. JSON inverse data contains only changed nonsecret fields. Typed leaf patches preserve excluded siblings. The generic file viewer's broad command masking is unchanged; hook owners use a credential-aware projection that retains canonical executable field names as data. The registered receipt-store hook additionally has a fixed, isolated executable before/candidate profile and canonical regression suite, described in `docs/HOOK_REPAIR_PREVIEW.md`. These results are distinct from simulation and live harness activation.
 
 ## Official guidance and the explanation preview
 

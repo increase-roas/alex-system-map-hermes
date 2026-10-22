@@ -117,6 +117,14 @@ class Coordinator:
                 guidance = collect_guidance([source for source in sources if not source.get('context_only')])
             except Exception:
                 raise RepairError('guidance_unavailable') from None
+        for source in sources:
+            if source['target'].get('hook_behavior_profile') == 'receipt-store-v1':
+                from repair_hook_checks import run_receipt_checks
+                text = source['snapshot']['projection']
+                if isinstance(text, dict):
+                    text = text['content']
+                owner = self.registry.adapter(source['target']['adapter_id'])
+                source['native_baseline'] = run_receipt_checks(text, text, owner.hook_regressions())
         proposal = self.proposer(intent, sources, guidance=guidance) if self.require_guidance else self.proposer(intent, sources)
         proposals = proposal['proposals']
         if not proposals:

@@ -2,8 +2,10 @@
 
 Only canonical sources are editable. Generated copies and Git publication are
 explicit appended targets, frozen once per bundle. No model-supplied command is
-run; source checks parse private temporary bytes. Runtime evidence stays pending.
+run. Source checks parse temporary bytes; the receipt profile also executes
+copied bytes under native confinement. Live runtime evidence stays pending.
 """
+import ast
 import copy
 from datetime import datetime, timezone
 import difflib
@@ -26,7 +28,29 @@ from repair_local_checks import check, run_checks, load_json, python_source_proj
 MAX_BYTES = 262144
 SOURCE_LANGUAGES = frozenset(('py', 'sh', 'bash', 'zsh', 'js', 'cjs', 'mjs', 'go'))
 EXECUTABLES = ('tools/unify/build_instructions.py', 'tools/unify/check.py', 'tools/unify/skill_lifecycle.py',
-               'tools/unify/validate_docs.py', 'tools/guards/pre_tool_guard.py', 'tools/guards/commit_checked.py')
+               'tools/unify/validate_docs.py', 'tools/guards/pre_tool_guard.py', 'tools/guards/commit_checked.py',
+               'tools/approvals/receipt_store_guard.py')
+RECEIPT_SOURCE = '.agents/tools/approvals/receipt_store_guard.py'
+
+
+def imported_call(source, module, member, function=None):
+    """Inspect import/call syntax only; comments and strings prove no linkage."""
+    try:
+        tree = ast.parse(source)
+    except (SyntaxError, ValueError, TypeError):
+        return False
+    roots = [node for node in tree.body if isinstance(node, ast.FunctionDef) and node.name == function] if function else [tree]
+    for root in roots:
+        aliases = {alias.asname or alias.name for node in ast.walk(root) if isinstance(node, ast.Import)
+                   for alias in node.names if alias.name == module}
+        aliases -= {node.id for node in ast.walk(root) if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del))}
+        aliases -= {node.arg for node in ast.walk(root) if isinstance(node, ast.arg)}
+        aliases -= {node.name for node in ast.walk(root) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef))}
+        if any(isinstance(node, ast.Call) and isinstance(node.func, ast.Attribute)
+               and isinstance(node.func.value, ast.Name) and node.func.value.id in aliases and node.func.attr == member
+               for node in ast.walk(root)):
+            return True
+    return False
 CLAUDE_KEYS = ('model', 'outputStyle', 'language', 'alwaysThinkingEnabled', 'effortLevel', 'spinnerTipsEnabled')
 CURSOR_KEYS = ('model',)
 JSON_OWNERS = {'.claude/settings.json': ('app_settings', 'claude', CLAUDE_KEYS + ('hooks',)),
@@ -248,6 +272,11 @@ class LocalAdapter:
             for runtime in ('.claude', '.cursor'):
                 link = self.home / runtime / 'skills' / folder.name
                 inputs[str(link)] = {'exists': link.exists() or link.is_symlink(), 'link': os.readlink(link) if link.is_symlink() else None}
+        if target and target.get('hook_behavior_profile') == 'receipt-store-v1':
+            runner = Path(__file__).with_name('repair_hook_checks.py')
+            inputs['hook_behavior_runner'] = sha(runner.read_bytes())
+            for name in ('test_receipt_store_guard_narrow.py', 'approval_check.py'):
+                inputs['hook_regression_' + name] = self.state(self.home / '.agents/tools/approvals' / name, True)[1]
         return sha(canonical({'version': self.version, 'home': str(self.home), 'inputs': inputs}))
 
     def row(self, path, category, owner, **extra):
@@ -373,6 +402,31 @@ class LocalAdapter:
                     row['limitations'].append('External or shell-expanded hook programs require separate runtime evidence.')
                 except (RepairError, OSError, ValueError):
                     row['related_target_ids'] = []
+        receipt = next((row for row in rows if row['identity'].get('path') == str(self.home / RECEIPT_SOURCE)), None)
+        if receipt:
+            receipt.update(hook_behavior_profile='receipt-store-v1', hook_hosts=[], related_target_ids=[])
+            wrapper = self.home / '.agents/tools/guards/composio_guard.py'
+            try:
+                linked = imported_call(self.state(wrapper)[0].decode(), 'receipt_store_guard', 'reason', 'local_receipt_reason')
+                for relative, runtime, wrapper_name in (
+                    ('.claude/settings.json', 'claude', 'composio_guard.py'),
+                    ('.claude/settings.local.json', 'claude', 'composio_guard.py'),
+                    ('.codex/hooks.json', 'codex', 'codex_composio_guard.py'),
+                    ('.cursor/hooks.json', 'cursor', 'cursor_composio_guard.py')):
+                    config = next((row for row in rows if row['identity'].get('path') == str(self.home / relative)), None)
+                    program = self.home / '.agents/tools/guards' / wrapper_name
+                    if not linked or not config or str(program) not in self.hook_scripts(load_json(self.state(config['identity']['path'])[0]), rows):
+                        continue
+                    if runtime != 'claude' and not imported_call(self.state(program)[0].decode(), 'composio_guard', 'local_receipt_reason'):
+                        continue
+                    states = {str(path): self.state(path)[1] for path in (wrapper, program, Path(config['identity']['path']))}
+                    receipt['hook_hosts'].append({'runtime': runtime, 'config_target_id': config['id'],
+                                                  'registration_digest': sha(canonical(states))})
+                    receipt['related_target_ids'].append(config['id'])
+                    config.setdefault('related_target_ids', []).append(receipt['id'])
+            except (RepairError, OSError, ValueError, UnicodeError):
+                receipt['limitations'].append('Installed hook import/configuration chain could not be established.')
+            receipt['limitations'].append('Executable checks run copied hook code in isolated fixtures; live host activation remains unobserved.')
         self._targets = {row['id']: row for row in rows}
         return rows
 
@@ -509,7 +563,35 @@ class LocalAdapter:
             op['resource_inputs'] = [{'path': str(path.parent / reference), 'state': self.state(path.parent / reference)[1]} for reference in sorted(references)]
         if any(c['status'] != 'passed' for c in op['checks']):
             raise RepairError('candidate_check_failed')
+        if target.get('hook_behavior_profile') == 'receipt-store-v1':
+            from repair_hook_checks import run_receipt_checks
+            op['checks'].append(run_receipt_checks(before, candidate, self.hook_regressions()))
         return op
+
+    def hook_regressions(self):
+        path = self.home / '.agents/tools/approvals/test_receipt_store_guard_narrow.py'
+        if not path.exists():
+            return None
+        source = self.state(path)[0].decode()
+        if python_source_projection(source)[1]:
+            raise RepairError('screened_hook_regressions')
+        sources = {path.name: source}
+        # The canonical regression suite needs only the checker's ID_RE. Capture
+        # that exact pure constant, without importing credentials or the issuer.
+        tree = ast.parse(self.state(path.parent / 'approval_check.py')[0].decode())
+        assignments = [node for node in tree.body if isinstance(node, ast.Assign)
+                       and len(node.targets) == 1 and isinstance(node.targets[0], ast.Name)
+                       and node.targets[0].id == 'ID_RE']
+        if len(assignments) != 1:
+            raise RepairError('hook_regression_contract_changed')
+        call = assignments[0].value
+        if not (isinstance(call, ast.Call) and isinstance(call.func, ast.Attribute)
+                and isinstance(call.func.value, ast.Name) and call.func.value.id == 're'
+                and call.func.attr == 'compile' and len(call.args) == 1 and not call.keywords
+                and isinstance(call.args[0], ast.Constant) and isinstance(call.args[0].value, str)):
+            raise RepairError('hook_regression_contract_changed')
+        sources['approval_check.py'] = 'import re\n' + ast.unparse(assignments[0]) + '\n'
+        return sources
 
     def sensitive_value(self, value):
         if safe_json_projection(value) != value:
@@ -534,6 +616,12 @@ class LocalAdapter:
         rule_ops = [op for op in own if targets[op['target_id']]['category'] == 'rule']
         if rule_ops:
             self.freeze_rules(rule_ops, own, targets)
+        # Install a selected source before settings that refer to its new bytes.
+        own.sort(key=lambda op: targets[op['target_id']]['category'] in ('hook', 'app_settings'))
+        candidates = {op['selector']['path']: sha(self.candidate_bytes(op, self.state(op['selector']['path'], True)[0]))
+                      for op in own}
+        for op in own:
+            op.setdefault('native_candidates', {}).update(candidates)
         groups = {}
         for op in own:
             path = Path(op['selector']['path'])

@@ -1,4 +1,4 @@
-"""Fixed checks on candidate bytes. Never runs a hook or executable candidate."""
+"""Parsing and source projection checks. Copied execution lives in repair_hook_checks."""
 import ast
 from datetime import datetime, timezone
 import hashlib
@@ -20,6 +20,8 @@ from local_files import screen
 _CREDENTIAL_SHAPE = re.compile(r'-----BEGIN [^-]*(?:PRIVATE KEY|CERTIFICATE)-----|\b(?:sk-(?:proj-|ant-)?[A-Za-z0-9_-]{10,}|gh[pousr]_[A-Za-z0-9_]{10,}|github_pat_[A-Za-z0-9_]{10,}|xox[baprs]-[A-Za-z0-9-]{10,}|AKIA[A-Z0-9]{16}|eyJ[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+\.[A-Za-z0-9_-]+)\b|https?://[^\s/@:]+:[^\s/@]+@')
 _SENSITIVE_BINDING = re.compile(r'(?:^|_)(?:api_key|access_key|access_token|refresh_token|auth_token|client_secret|secret_key|password|passwd|credential|credentials|token|tokens|secret|private_key|cookie|authorization|dsn|database_url|connection_string)$')
 _INLINE_CREDENTIAL = re.compile(r'(?i)\b(?:[\w-]*[_-])?(?:api[_-]?key|access[_-]?token|refresh[_-]?token|token|secret|password|passwd|authorization|client[_-]?secret)\s*[:=]\s*["\']?([A-Za-z0-9_./+~=-]{3,})|\bBearer\s+([A-Za-z0-9_./+~=-]{3,})|--(?:api[-_]key|token|password|secret)\s+["\']?([A-Za-z0-9_./+~=-]{3,})|[?&](?:key|token|password|secret|api[_-]?key)=([^\s&#"\']+)')
+REGEX_CALLS = frozenset(('compile', 'findall', 'finditer', 'match', 'fullmatch', 'search', 'split', 'sub', 'subn', 'escape'))
+REGEX_FLAGS = frozenset(('A', 'ASCII', 'I', 'IGNORECASE', 'L', 'LOCALE', 'M', 'MULTILINE', 'S', 'DOTALL', 'U', 'UNICODE', 'X', 'VERBOSE', 'NOFLAG', 'DEBUG'))
 
 
 def _sensitive_binding(name):
@@ -80,8 +82,45 @@ def python_source_projection(source):
     except (SyntaxError, ValueError, TypeError):
         return screen(source)[0], True
     private = False
+    regex_modules = {alias.asname or alias.name for node in ast.walk(tree) if isinstance(node, ast.Import)
+                     for alias in node.names if alias.name == 're'}
+    rebound = {node.id for node in ast.walk(tree) if isinstance(node, ast.Name) and isinstance(node.ctx, (ast.Store, ast.Del))}
+    rebound.update(node.arg for node in ast.walk(tree) if isinstance(node, ast.arg))
+    rebound.update(node.name for node in ast.walk(tree) if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef, ast.ClassDef)))
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Import, ast.ImportFrom)):
+            rebound.update(alias.asname or alias.name.split('.')[0] for alias in node.names
+                           if not (isinstance(node, ast.Import) and alias.name == 're'))
+    # Module attributes are shared across aliases. Any mutation or escaping
+    # module reference invalidates the parser-pattern exemption for all aliases.
+    parents = {child: node for node in ast.walk(tree) for child in ast.iter_child_nodes(node)}
+    mutable = any(isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name)
+                  and node.value.id in regex_modules
+                  and not (isinstance(node.ctx, ast.Load) and (node.attr in REGEX_FLAGS or node.attr in REGEX_CALLS
+                           and isinstance(parents.get(node), ast.Call) and parents[node].func is node))
+                  or isinstance(node, ast.Name) and isinstance(node.ctx, ast.Load) and node.id in regex_modules
+                  and not (isinstance(parents.get(node), ast.Attribute) and parents[node].value is node)
+                  for node in ast.walk(tree))
+    dynamic = any(isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+                  and node.func.id in ('exec', 'eval', 'globals', 'locals', 'vars', '__import__') for node in ast.walk(tree))
+    if mutable or dynamic:
+        regex_modules.clear()
+    regex_modules -= rebound
+    def stored_literals(value):
+        if (isinstance(value, ast.Call) and isinstance(value.func, ast.Attribute)
+                and isinstance(value.func.value, ast.Name) and value.func.value.id in regex_modules
+                and value.func.attr in ('compile', 'findall', 'finditer', 'match', 'fullmatch', 'search', 'split', 'sub', 'subn')):
+            return [text for child in value.args[1:] + [kw.value for kw in value.keywords if kw.arg != 'pattern']
+                    for text in stored_literals(child)]
+        if isinstance(value, ast.BinOp):
+            return stored_literals(value.left) + stored_literals(value.right)
+        if isinstance(value, (ast.List, ast.Tuple, ast.Set)):
+            return [text for child in value.elts for text in stored_literals(child)]
+        return _literal_strings(value)
     def bound(names, value):
-        return any(_sensitive_binding(name) for name in names) and any(text.strip() and text.strip().lower() not in ('bearer', 'basic') for text in _literal_strings(value))
+        # Lexical token patterns are parser syntax, not stored credentials.
+        # Every literal is still independently screened for credential material.
+        return any(_sensitive_binding(name) for name in names) and any(text.strip() and text.strip().lower() not in ('bearer', 'basic') for text in stored_literals(value))
     def assignment(target, value):
         if isinstance(target, (ast.Tuple, ast.List)) and isinstance(value, (ast.Tuple, ast.List)) and len(target.elts) == len(value.elts):
             return any(assignment(left, right) for left, right in zip(target.elts, value.elts))
